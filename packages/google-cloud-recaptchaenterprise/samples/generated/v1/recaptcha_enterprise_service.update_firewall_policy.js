@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_AnnotateAssessment_async]
+function main(firewallPolicy) {
+  // [START recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_UpdateFirewallPolicy_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,34 +29,14 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the Assessment, in the format
-   *  `projects/{project}/assessments/{assessment}`.
+   *  Required. The policy to update.
    */
-  // const name = 'abc123'
+  // const firewallPolicy = {}
   /**
-   *  Optional. The annotation that will be assigned to the Event. This field can
-   *  be left empty to provide reasons that apply to an event without concluding
-   *  whether the event is legitimate or fraudulent.
+   *  Optional. The mask to control which fields of the policy get updated. If
+   *  the mask is not present, all fields will be updated.
    */
-  // const annotation = {}
-  /**
-   *  Optional. Optional reasons for the annotation that will be assigned to the
-   *  Event.
-   */
-  // const reasons = [1,2,3,4]
-  /**
-   *  Optional. Unique stable hashed user identifier to apply to the assessment.
-   *  This is an alternative to setting the hashed_account_id in
-   *  CreateAssessment, for example when the account identifier is not yet known
-   *  in the initial request. It is recommended that the identifier is hashed
-   *  using hmac-sha256 with stable secret.
-   */
-  // const hashedAccountId = Buffer.from('string')
-  /**
-   *  Optional. If the assessment is part of a payment transaction, provide
-   *  details on payment lifecycle events that occur in the transaction.
-   */
-  // const transactionEvent = {}
+  // const updateMask = {}
 
   // Imports the Recaptchaenterprise library
   const {RecaptchaEnterpriseServiceClient} = require('@google-cloud/recaptcha-enterprise').v1;
@@ -64,19 +44,19 @@ function main(name) {
   // Instantiates a client
   const recaptchaenterpriseClient = new RecaptchaEnterpriseServiceClient();
 
-  async function callAnnotateAssessment() {
+  async function callUpdateFirewallPolicy() {
     // Construct request
     const request = {
-      name,
+      firewallPolicy,
     };
 
     // Run request
-    const response = await recaptchaenterpriseClient.annotateAssessment(request);
+    const response = await recaptchaenterpriseClient.updateFirewallPolicy(request);
     console.log(response);
   }
 
-  callAnnotateAssessment();
-  // [END recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_AnnotateAssessment_async]
+  callUpdateFirewallPolicy();
+  // [END recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_UpdateFirewallPolicy_async]
 }
 
 process.on('unhandledRejection', err => {

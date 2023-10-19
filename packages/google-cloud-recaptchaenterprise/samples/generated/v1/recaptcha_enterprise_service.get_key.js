@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. The name of the requested key, in the format
-   *  "projects/{project}/keys/{key}".
+   *  `projects/{project}/keys/{key}`.
    */
   // const name = 'abc123'
 

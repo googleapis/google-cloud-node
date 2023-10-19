@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(project) {
-  // [START recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_SearchRelatedAccountGroupMemberships_async]
+function main(parent) {
+  // [START recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListFirewallPolicies_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,30 +29,18 @@ function main(project) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the project to search related account group
-   *  memberships from. Specify the project name in the following format:
+   *  Required. The name of the project to list the policies for, in the format
    *  `projects/{project}`.
    */
-  // const project = 'my-project'
+  // const parent = 'abc123'
   /**
-   *  Optional. The unique stable hashed user identifier used to search
-   *  connections. The identifier should correspond to a `hashed_account_id`
-   *  provided in a previous `CreateAssessment` or `AnnotateAssessment` call.
-   */
-  // const hashedAccountId = Buffer.from('string')
-  /**
-   *  Optional. The maximum number of groups to return. The service might return
-   *  fewer than this value. If unspecified, at most 50 groups are returned. The
-   *  maximum value is 1000; values above 1000 are coerced to 1000.
+   *  Optional. The maximum number of policies to return. Default is 10. Max
+   *  limit is 1000.
    */
   // const pageSize = 1234
   /**
-   *  Optional. A page token, received from a previous
-   *  `SearchRelatedAccountGroupMemberships` call. Provide this to retrieve the
-   *  subsequent page.
-   *  When paginating, all other parameters provided to
-   *  `SearchRelatedAccountGroupMemberships` must match the call that provided
-   *  the page token.
+   *  Optional. The next_page_token value returned from a previous.
+   *  ListFirewallPoliciesRequest, if any.
    */
   // const pageToken = 'abc123'
 
@@ -62,21 +50,21 @@ function main(project) {
   // Instantiates a client
   const recaptchaenterpriseClient = new RecaptchaEnterpriseServiceClient();
 
-  async function callSearchRelatedAccountGroupMemberships() {
+  async function callListFirewallPolicies() {
     // Construct request
     const request = {
-      project,
+      parent,
     };
 
     // Run request
-    const iterable = await recaptchaenterpriseClient.searchRelatedAccountGroupMembershipsAsync(request);
+    const iterable = await recaptchaenterpriseClient.listFirewallPoliciesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
   }
 
-  callSearchRelatedAccountGroupMemberships();
-  // [END recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_SearchRelatedAccountGroupMemberships_async]
+  callListFirewallPolicies();
+  // [END recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListFirewallPolicies_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -429,6 +429,171 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService|createFirewallPolicy}.
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @typedef CreateFirewallPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.recaptchaenterprise.v1.FirewallPolicy} [response] FirewallPolicy
+                         */
+    
+                        /**
+                         * Calls CreateFirewallPolicy.
+                         * @function createFirewallPolicy
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @instance
+                         * @param {google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest} request CreateFirewallPolicyRequest message or plain object
+                         * @param {google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.CreateFirewallPolicyCallback} callback Node-style callback called with the error, if any, and FirewallPolicy
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RecaptchaEnterpriseService.prototype.createFirewallPolicy = function createFirewallPolicy(request, callback) {
+                            return this.rpcCall(createFirewallPolicy, $root.google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest, $root.google.cloud.recaptchaenterprise.v1.FirewallPolicy, request, callback);
+                        }, "name", { value: "CreateFirewallPolicy" });
+    
+                        /**
+                         * Calls CreateFirewallPolicy.
+                         * @function createFirewallPolicy
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @instance
+                         * @param {google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest} request CreateFirewallPolicyRequest message or plain object
+                         * @returns {Promise<google.cloud.recaptchaenterprise.v1.FirewallPolicy>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService|listFirewallPolicies}.
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @typedef ListFirewallPoliciesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse} [response] ListFirewallPoliciesResponse
+                         */
+    
+                        /**
+                         * Calls ListFirewallPolicies.
+                         * @function listFirewallPolicies
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @instance
+                         * @param {google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest} request ListFirewallPoliciesRequest message or plain object
+                         * @param {google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.ListFirewallPoliciesCallback} callback Node-style callback called with the error, if any, and ListFirewallPoliciesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RecaptchaEnterpriseService.prototype.listFirewallPolicies = function listFirewallPolicies(request, callback) {
+                            return this.rpcCall(listFirewallPolicies, $root.google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest, $root.google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse, request, callback);
+                        }, "name", { value: "ListFirewallPolicies" });
+    
+                        /**
+                         * Calls ListFirewallPolicies.
+                         * @function listFirewallPolicies
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @instance
+                         * @param {google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest} request ListFirewallPoliciesRequest message or plain object
+                         * @returns {Promise<google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService|getFirewallPolicy}.
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @typedef GetFirewallPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.recaptchaenterprise.v1.FirewallPolicy} [response] FirewallPolicy
+                         */
+    
+                        /**
+                         * Calls GetFirewallPolicy.
+                         * @function getFirewallPolicy
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @instance
+                         * @param {google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest} request GetFirewallPolicyRequest message or plain object
+                         * @param {google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.GetFirewallPolicyCallback} callback Node-style callback called with the error, if any, and FirewallPolicy
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RecaptchaEnterpriseService.prototype.getFirewallPolicy = function getFirewallPolicy(request, callback) {
+                            return this.rpcCall(getFirewallPolicy, $root.google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest, $root.google.cloud.recaptchaenterprise.v1.FirewallPolicy, request, callback);
+                        }, "name", { value: "GetFirewallPolicy" });
+    
+                        /**
+                         * Calls GetFirewallPolicy.
+                         * @function getFirewallPolicy
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @instance
+                         * @param {google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest} request GetFirewallPolicyRequest message or plain object
+                         * @returns {Promise<google.cloud.recaptchaenterprise.v1.FirewallPolicy>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService|updateFirewallPolicy}.
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @typedef UpdateFirewallPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.recaptchaenterprise.v1.FirewallPolicy} [response] FirewallPolicy
+                         */
+    
+                        /**
+                         * Calls UpdateFirewallPolicy.
+                         * @function updateFirewallPolicy
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @instance
+                         * @param {google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest} request UpdateFirewallPolicyRequest message or plain object
+                         * @param {google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.UpdateFirewallPolicyCallback} callback Node-style callback called with the error, if any, and FirewallPolicy
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RecaptchaEnterpriseService.prototype.updateFirewallPolicy = function updateFirewallPolicy(request, callback) {
+                            return this.rpcCall(updateFirewallPolicy, $root.google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest, $root.google.cloud.recaptchaenterprise.v1.FirewallPolicy, request, callback);
+                        }, "name", { value: "UpdateFirewallPolicy" });
+    
+                        /**
+                         * Calls UpdateFirewallPolicy.
+                         * @function updateFirewallPolicy
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @instance
+                         * @param {google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest} request UpdateFirewallPolicyRequest message or plain object
+                         * @returns {Promise<google.cloud.recaptchaenterprise.v1.FirewallPolicy>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService|deleteFirewallPolicy}.
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @typedef DeleteFirewallPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteFirewallPolicy.
+                         * @function deleteFirewallPolicy
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @instance
+                         * @param {google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest} request DeleteFirewallPolicyRequest message or plain object
+                         * @param {google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.DeleteFirewallPolicyCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RecaptchaEnterpriseService.prototype.deleteFirewallPolicy = function deleteFirewallPolicy(request, callback) {
+                            return this.rpcCall(deleteFirewallPolicy, $root.google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteFirewallPolicy" });
+    
+                        /**
+                         * Calls DeleteFirewallPolicy.
+                         * @function deleteFirewallPolicy
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @instance
+                         * @param {google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest} request DeleteFirewallPolicyRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService|listRelatedAccountGroups}.
                          * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
                          * @typedef ListRelatedAccountGroupsCallback
@@ -2900,7 +3065,9 @@
                          * @property {google.cloud.recaptchaenterprise.v1.IAccountVerificationInfo|null} [accountVerification] Assessment accountVerification
                          * @property {google.cloud.recaptchaenterprise.v1.IAccountDefenderAssessment|null} [accountDefenderAssessment] Assessment accountDefenderAssessment
                          * @property {google.cloud.recaptchaenterprise.v1.IPrivatePasswordLeakVerification|null} [privatePasswordLeakVerification] Assessment privatePasswordLeakVerification
+                         * @property {google.cloud.recaptchaenterprise.v1.IFirewallPolicyAssessment|null} [firewallPolicyAssessment] Assessment firewallPolicyAssessment
                          * @property {google.cloud.recaptchaenterprise.v1.IFraudPreventionAssessment|null} [fraudPreventionAssessment] Assessment fraudPreventionAssessment
+                         * @property {google.cloud.recaptchaenterprise.v1.IFraudSignals|null} [fraudSignals] Assessment fraudSignals
                          */
     
                         /**
@@ -2975,12 +3142,28 @@
                         Assessment.prototype.privatePasswordLeakVerification = null;
     
                         /**
+                         * Assessment firewallPolicyAssessment.
+                         * @member {google.cloud.recaptchaenterprise.v1.IFirewallPolicyAssessment|null|undefined} firewallPolicyAssessment
+                         * @memberof google.cloud.recaptchaenterprise.v1.Assessment
+                         * @instance
+                         */
+                        Assessment.prototype.firewallPolicyAssessment = null;
+    
+                        /**
                          * Assessment fraudPreventionAssessment.
                          * @member {google.cloud.recaptchaenterprise.v1.IFraudPreventionAssessment|null|undefined} fraudPreventionAssessment
                          * @memberof google.cloud.recaptchaenterprise.v1.Assessment
                          * @instance
                          */
                         Assessment.prototype.fraudPreventionAssessment = null;
+    
+                        /**
+                         * Assessment fraudSignals.
+                         * @member {google.cloud.recaptchaenterprise.v1.IFraudSignals|null|undefined} fraudSignals
+                         * @memberof google.cloud.recaptchaenterprise.v1.Assessment
+                         * @instance
+                         */
+                        Assessment.prototype.fraudSignals = null;
     
                         /**
                          * Creates a new Assessment instance using the specified properties.
@@ -3020,8 +3203,12 @@
                                 $root.google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.encode(message.accountDefenderAssessment, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.privatePasswordLeakVerification != null && Object.hasOwnProperty.call(message, "privatePasswordLeakVerification"))
                                 $root.google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification.encode(message.privatePasswordLeakVerification, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.firewallPolicyAssessment != null && Object.hasOwnProperty.call(message, "firewallPolicyAssessment"))
+                                $root.google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment.encode(message.firewallPolicyAssessment, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             if (message.fraudPreventionAssessment != null && Object.hasOwnProperty.call(message, "fraudPreventionAssessment"))
                                 $root.google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.encode(message.fraudPreventionAssessment, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.fraudSignals != null && Object.hasOwnProperty.call(message, "fraudSignals"))
+                                $root.google.cloud.recaptchaenterprise.v1.FraudSignals.encode(message.fraudSignals, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             return writer;
                         };
     
@@ -3084,8 +3271,16 @@
                                         message.privatePasswordLeakVerification = $root.google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 10: {
+                                        message.firewallPolicyAssessment = $root.google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 11: {
                                         message.fraudPreventionAssessment = $root.google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 13: {
+                                        message.fraudSignals = $root.google.cloud.recaptchaenterprise.v1.FraudSignals.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -3156,10 +3351,20 @@
                                 if (error)
                                     return "privatePasswordLeakVerification." + error;
                             }
+                            if (message.firewallPolicyAssessment != null && message.hasOwnProperty("firewallPolicyAssessment")) {
+                                var error = $root.google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment.verify(message.firewallPolicyAssessment);
+                                if (error)
+                                    return "firewallPolicyAssessment." + error;
+                            }
                             if (message.fraudPreventionAssessment != null && message.hasOwnProperty("fraudPreventionAssessment")) {
                                 var error = $root.google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.verify(message.fraudPreventionAssessment);
                                 if (error)
                                     return "fraudPreventionAssessment." + error;
+                            }
+                            if (message.fraudSignals != null && message.hasOwnProperty("fraudSignals")) {
+                                var error = $root.google.cloud.recaptchaenterprise.v1.FraudSignals.verify(message.fraudSignals);
+                                if (error)
+                                    return "fraudSignals." + error;
                             }
                             return null;
                         };
@@ -3208,10 +3413,20 @@
                                     throw TypeError(".google.cloud.recaptchaenterprise.v1.Assessment.privatePasswordLeakVerification: object expected");
                                 message.privatePasswordLeakVerification = $root.google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification.fromObject(object.privatePasswordLeakVerification);
                             }
+                            if (object.firewallPolicyAssessment != null) {
+                                if (typeof object.firewallPolicyAssessment !== "object")
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.Assessment.firewallPolicyAssessment: object expected");
+                                message.firewallPolicyAssessment = $root.google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment.fromObject(object.firewallPolicyAssessment);
+                            }
                             if (object.fraudPreventionAssessment != null) {
                                 if (typeof object.fraudPreventionAssessment !== "object")
                                     throw TypeError(".google.cloud.recaptchaenterprise.v1.Assessment.fraudPreventionAssessment: object expected");
                                 message.fraudPreventionAssessment = $root.google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.fromObject(object.fraudPreventionAssessment);
+                            }
+                            if (object.fraudSignals != null) {
+                                if (typeof object.fraudSignals !== "object")
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.Assessment.fraudSignals: object expected");
+                                message.fraudSignals = $root.google.cloud.recaptchaenterprise.v1.FraudSignals.fromObject(object.fraudSignals);
                             }
                             return message;
                         };
@@ -3237,7 +3452,9 @@
                                 object.accountVerification = null;
                                 object.accountDefenderAssessment = null;
                                 object.privatePasswordLeakVerification = null;
+                                object.firewallPolicyAssessment = null;
                                 object.fraudPreventionAssessment = null;
+                                object.fraudSignals = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -3253,8 +3470,12 @@
                                 object.accountDefenderAssessment = $root.google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.toObject(message.accountDefenderAssessment, options);
                             if (message.privatePasswordLeakVerification != null && message.hasOwnProperty("privatePasswordLeakVerification"))
                                 object.privatePasswordLeakVerification = $root.google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification.toObject(message.privatePasswordLeakVerification, options);
+                            if (message.firewallPolicyAssessment != null && message.hasOwnProperty("firewallPolicyAssessment"))
+                                object.firewallPolicyAssessment = $root.google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment.toObject(message.firewallPolicyAssessment, options);
                             if (message.fraudPreventionAssessment != null && message.hasOwnProperty("fraudPreventionAssessment"))
                                 object.fraudPreventionAssessment = $root.google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.toObject(message.fraudPreventionAssessment, options);
+                            if (message.fraudSignals != null && message.hasOwnProperty("fraudSignals"))
+                                object.fraudSignals = $root.google.cloud.recaptchaenterprise.v1.FraudSignals.toObject(message.fraudSignals, options);
                             return object;
                         };
     
@@ -3299,6 +3520,12 @@
                          * @property {string|null} [userIpAddress] Event userIpAddress
                          * @property {string|null} [expectedAction] Event expectedAction
                          * @property {Uint8Array|null} [hashedAccountId] Event hashedAccountId
+                         * @property {boolean|null} [express] Event express
+                         * @property {string|null} [requestedUri] Event requestedUri
+                         * @property {boolean|null} [wafTokenAssessment] Event wafTokenAssessment
+                         * @property {string|null} [ja3] Event ja3
+                         * @property {Array.<string>|null} [headers] Event headers
+                         * @property {boolean|null} [firewallPolicyEvaluation] Event firewallPolicyEvaluation
                          * @property {google.cloud.recaptchaenterprise.v1.ITransactionData|null} [transactionData] Event transactionData
                          */
     
@@ -3311,6 +3538,7 @@
                          * @param {google.cloud.recaptchaenterprise.v1.IEvent=} [properties] Properties to set
                          */
                         function Event(properties) {
+                            this.headers = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -3366,6 +3594,54 @@
                         Event.prototype.hashedAccountId = $util.newBuffer([]);
     
                         /**
+                         * Event express.
+                         * @member {boolean} express
+                         * @memberof google.cloud.recaptchaenterprise.v1.Event
+                         * @instance
+                         */
+                        Event.prototype.express = false;
+    
+                        /**
+                         * Event requestedUri.
+                         * @member {string} requestedUri
+                         * @memberof google.cloud.recaptchaenterprise.v1.Event
+                         * @instance
+                         */
+                        Event.prototype.requestedUri = "";
+    
+                        /**
+                         * Event wafTokenAssessment.
+                         * @member {boolean} wafTokenAssessment
+                         * @memberof google.cloud.recaptchaenterprise.v1.Event
+                         * @instance
+                         */
+                        Event.prototype.wafTokenAssessment = false;
+    
+                        /**
+                         * Event ja3.
+                         * @member {string} ja3
+                         * @memberof google.cloud.recaptchaenterprise.v1.Event
+                         * @instance
+                         */
+                        Event.prototype.ja3 = "";
+    
+                        /**
+                         * Event headers.
+                         * @member {Array.<string>} headers
+                         * @memberof google.cloud.recaptchaenterprise.v1.Event
+                         * @instance
+                         */
+                        Event.prototype.headers = $util.emptyArray;
+    
+                        /**
+                         * Event firewallPolicyEvaluation.
+                         * @member {boolean} firewallPolicyEvaluation
+                         * @memberof google.cloud.recaptchaenterprise.v1.Event
+                         * @instance
+                         */
+                        Event.prototype.firewallPolicyEvaluation = false;
+    
+                        /**
                          * Event transactionData.
                          * @member {google.cloud.recaptchaenterprise.v1.ITransactionData|null|undefined} transactionData
                          * @memberof google.cloud.recaptchaenterprise.v1.Event
@@ -3409,8 +3685,21 @@
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.expectedAction);
                             if (message.hashedAccountId != null && Object.hasOwnProperty.call(message, "hashedAccountId"))
                                 writer.uint32(/* id 6, wireType 2 =*/50).bytes(message.hashedAccountId);
+                            if (message.requestedUri != null && Object.hasOwnProperty.call(message, "requestedUri"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.requestedUri);
+                            if (message.wafTokenAssessment != null && Object.hasOwnProperty.call(message, "wafTokenAssessment"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.wafTokenAssessment);
+                            if (message.ja3 != null && Object.hasOwnProperty.call(message, "ja3"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.ja3);
+                            if (message.headers != null && message.headers.length)
+                                for (var i = 0; i < message.headers.length; ++i)
+                                    writer.uint32(/* id 11, wireType 2 =*/90).string(message.headers[i]);
+                            if (message.firewallPolicyEvaluation != null && Object.hasOwnProperty.call(message, "firewallPolicyEvaluation"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).bool(message.firewallPolicyEvaluation);
                             if (message.transactionData != null && Object.hasOwnProperty.call(message, "transactionData"))
                                 $root.google.cloud.recaptchaenterprise.v1.TransactionData.encode(message.transactionData, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.express != null && Object.hasOwnProperty.call(message, "express"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).bool(message.express);
                             return writer;
                         };
     
@@ -3467,6 +3756,32 @@
                                     }
                                 case 6: {
                                         message.hashedAccountId = reader.bytes();
+                                        break;
+                                    }
+                                case 14: {
+                                        message.express = reader.bool();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.requestedUri = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.wafTokenAssessment = reader.bool();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.ja3 = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        if (!(message.headers && message.headers.length))
+                                            message.headers = [];
+                                        message.headers.push(reader.string());
+                                        break;
+                                    }
+                                case 12: {
+                                        message.firewallPolicyEvaluation = reader.bool();
                                         break;
                                     }
                                 case 13: {
@@ -3526,6 +3841,28 @@
                             if (message.hashedAccountId != null && message.hasOwnProperty("hashedAccountId"))
                                 if (!(message.hashedAccountId && typeof message.hashedAccountId.length === "number" || $util.isString(message.hashedAccountId)))
                                     return "hashedAccountId: buffer expected";
+                            if (message.express != null && message.hasOwnProperty("express"))
+                                if (typeof message.express !== "boolean")
+                                    return "express: boolean expected";
+                            if (message.requestedUri != null && message.hasOwnProperty("requestedUri"))
+                                if (!$util.isString(message.requestedUri))
+                                    return "requestedUri: string expected";
+                            if (message.wafTokenAssessment != null && message.hasOwnProperty("wafTokenAssessment"))
+                                if (typeof message.wafTokenAssessment !== "boolean")
+                                    return "wafTokenAssessment: boolean expected";
+                            if (message.ja3 != null && message.hasOwnProperty("ja3"))
+                                if (!$util.isString(message.ja3))
+                                    return "ja3: string expected";
+                            if (message.headers != null && message.hasOwnProperty("headers")) {
+                                if (!Array.isArray(message.headers))
+                                    return "headers: array expected";
+                                for (var i = 0; i < message.headers.length; ++i)
+                                    if (!$util.isString(message.headers[i]))
+                                        return "headers: string[] expected";
+                            }
+                            if (message.firewallPolicyEvaluation != null && message.hasOwnProperty("firewallPolicyEvaluation"))
+                                if (typeof message.firewallPolicyEvaluation !== "boolean")
+                                    return "firewallPolicyEvaluation: boolean expected";
                             if (message.transactionData != null && message.hasOwnProperty("transactionData")) {
                                 var error = $root.google.cloud.recaptchaenterprise.v1.TransactionData.verify(message.transactionData);
                                 if (error)
@@ -3561,6 +3898,23 @@
                                     $util.base64.decode(object.hashedAccountId, message.hashedAccountId = $util.newBuffer($util.base64.length(object.hashedAccountId)), 0);
                                 else if (object.hashedAccountId.length >= 0)
                                     message.hashedAccountId = object.hashedAccountId;
+                            if (object.express != null)
+                                message.express = Boolean(object.express);
+                            if (object.requestedUri != null)
+                                message.requestedUri = String(object.requestedUri);
+                            if (object.wafTokenAssessment != null)
+                                message.wafTokenAssessment = Boolean(object.wafTokenAssessment);
+                            if (object.ja3 != null)
+                                message.ja3 = String(object.ja3);
+                            if (object.headers) {
+                                if (!Array.isArray(object.headers))
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.Event.headers: array expected");
+                                message.headers = [];
+                                for (var i = 0; i < object.headers.length; ++i)
+                                    message.headers[i] = String(object.headers[i]);
+                            }
+                            if (object.firewallPolicyEvaluation != null)
+                                message.firewallPolicyEvaluation = Boolean(object.firewallPolicyEvaluation);
                             if (object.transactionData != null) {
                                 if (typeof object.transactionData !== "object")
                                     throw TypeError(".google.cloud.recaptchaenterprise.v1.Event.transactionData: object expected");
@@ -3582,6 +3936,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.headers = [];
                             if (options.defaults) {
                                 object.token = "";
                                 object.siteKey = "";
@@ -3595,7 +3951,12 @@
                                     if (options.bytes !== Array)
                                         object.hashedAccountId = $util.newBuffer(object.hashedAccountId);
                                 }
+                                object.requestedUri = "";
+                                object.wafTokenAssessment = false;
+                                object.ja3 = "";
+                                object.firewallPolicyEvaluation = false;
                                 object.transactionData = null;
+                                object.express = false;
                             }
                             if (message.token != null && message.hasOwnProperty("token"))
                                 object.token = message.token;
@@ -3609,8 +3970,23 @@
                                 object.expectedAction = message.expectedAction;
                             if (message.hashedAccountId != null && message.hasOwnProperty("hashedAccountId"))
                                 object.hashedAccountId = options.bytes === String ? $util.base64.encode(message.hashedAccountId, 0, message.hashedAccountId.length) : options.bytes === Array ? Array.prototype.slice.call(message.hashedAccountId) : message.hashedAccountId;
+                            if (message.requestedUri != null && message.hasOwnProperty("requestedUri"))
+                                object.requestedUri = message.requestedUri;
+                            if (message.wafTokenAssessment != null && message.hasOwnProperty("wafTokenAssessment"))
+                                object.wafTokenAssessment = message.wafTokenAssessment;
+                            if (message.ja3 != null && message.hasOwnProperty("ja3"))
+                                object.ja3 = message.ja3;
+                            if (message.headers && message.headers.length) {
+                                object.headers = [];
+                                for (var j = 0; j < message.headers.length; ++j)
+                                    object.headers[j] = message.headers[j];
+                            }
+                            if (message.firewallPolicyEvaluation != null && message.hasOwnProperty("firewallPolicyEvaluation"))
+                                object.firewallPolicyEvaluation = message.firewallPolicyEvaluation;
                             if (message.transactionData != null && message.hasOwnProperty("transactionData"))
                                 object.transactionData = $root.google.cloud.recaptchaenterprise.v1.TransactionData.toObject(message.transactionData, options);
+                            if (message.express != null && message.hasOwnProperty("express"))
+                                object.express = message.express;
                             return object;
                         };
     
@@ -5443,6 +5819,7 @@
                          * @interface IRiskAnalysis
                          * @property {number|null} [score] RiskAnalysis score
                          * @property {Array.<google.cloud.recaptchaenterprise.v1.RiskAnalysis.ClassificationReason>|null} [reasons] RiskAnalysis reasons
+                         * @property {Array.<string>|null} [extendedVerdictReasons] RiskAnalysis extendedVerdictReasons
                          */
     
                         /**
@@ -5455,6 +5832,7 @@
                          */
                         function RiskAnalysis(properties) {
                             this.reasons = [];
+                            this.extendedVerdictReasons = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -5476,6 +5854,14 @@
                          * @instance
                          */
                         RiskAnalysis.prototype.reasons = $util.emptyArray;
+    
+                        /**
+                         * RiskAnalysis extendedVerdictReasons.
+                         * @member {Array.<string>} extendedVerdictReasons
+                         * @memberof google.cloud.recaptchaenterprise.v1.RiskAnalysis
+                         * @instance
+                         */
+                        RiskAnalysis.prototype.extendedVerdictReasons = $util.emptyArray;
     
                         /**
                          * Creates a new RiskAnalysis instance using the specified properties.
@@ -5509,6 +5895,9 @@
                                     writer.int32(message.reasons[i]);
                                 writer.ldelim();
                             }
+                            if (message.extendedVerdictReasons != null && message.extendedVerdictReasons.length)
+                                for (var i = 0; i < message.extendedVerdictReasons.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.extendedVerdictReasons[i]);
                             return writer;
                         };
     
@@ -5556,6 +5945,12 @@
                                                 message.reasons.push(reader.int32());
                                         } else
                                             message.reasons.push(reader.int32());
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.extendedVerdictReasons && message.extendedVerdictReasons.length))
+                                            message.extendedVerdictReasons = [];
+                                        message.extendedVerdictReasons.push(reader.string());
                                         break;
                                     }
                                 default:
@@ -5613,6 +6008,13 @@
                                     case 7:
                                         break;
                                     }
+                            }
+                            if (message.extendedVerdictReasons != null && message.hasOwnProperty("extendedVerdictReasons")) {
+                                if (!Array.isArray(message.extendedVerdictReasons))
+                                    return "extendedVerdictReasons: array expected";
+                                for (var i = 0; i < message.extendedVerdictReasons.length; ++i)
+                                    if (!$util.isString(message.extendedVerdictReasons[i]))
+                                        return "extendedVerdictReasons: string[] expected";
                             }
                             return null;
                         };
@@ -5676,6 +6078,13 @@
                                         break;
                                     }
                             }
+                            if (object.extendedVerdictReasons) {
+                                if (!Array.isArray(object.extendedVerdictReasons))
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.RiskAnalysis.extendedVerdictReasons: array expected");
+                                message.extendedVerdictReasons = [];
+                                for (var i = 0; i < object.extendedVerdictReasons.length; ++i)
+                                    message.extendedVerdictReasons[i] = String(object.extendedVerdictReasons[i]);
+                            }
                             return message;
                         };
     
@@ -5692,8 +6101,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.reasons = [];
+                                object.extendedVerdictReasons = [];
+                            }
                             if (options.defaults)
                                 object.score = 0;
                             if (message.score != null && message.hasOwnProperty("score"))
@@ -5702,6 +6113,11 @@
                                 object.reasons = [];
                                 for (var j = 0; j < message.reasons.length; ++j)
                                     object.reasons[j] = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.RiskAnalysis.ClassificationReason[message.reasons[j]] === undefined ? message.reasons[j] : $root.google.cloud.recaptchaenterprise.v1.RiskAnalysis.ClassificationReason[message.reasons[j]] : message.reasons[j];
+                            }
+                            if (message.extendedVerdictReasons && message.extendedVerdictReasons.length) {
+                                object.extendedVerdictReasons = [];
+                                for (var j = 0; j < message.extendedVerdictReasons.length; ++j)
+                                    object.extendedVerdictReasons[j] = message.extendedVerdictReasons[j];
                             }
                             return object;
                         };
@@ -6185,6 +6601,7 @@
                          * @property {number|null} [transactionRisk] FraudPreventionAssessment transactionRisk
                          * @property {google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.IStolenInstrumentVerdict|null} [stolenInstrumentVerdict] FraudPreventionAssessment stolenInstrumentVerdict
                          * @property {google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.ICardTestingVerdict|null} [cardTestingVerdict] FraudPreventionAssessment cardTestingVerdict
+                         * @property {google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.IBehavioralTrustVerdict|null} [behavioralTrustVerdict] FraudPreventionAssessment behavioralTrustVerdict
                          */
     
                         /**
@@ -6227,6 +6644,14 @@
                         FraudPreventionAssessment.prototype.cardTestingVerdict = null;
     
                         /**
+                         * FraudPreventionAssessment behavioralTrustVerdict.
+                         * @member {google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.IBehavioralTrustVerdict|null|undefined} behavioralTrustVerdict
+                         * @memberof google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment
+                         * @instance
+                         */
+                        FraudPreventionAssessment.prototype.behavioralTrustVerdict = null;
+    
+                        /**
                          * Creates a new FraudPreventionAssessment instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment
@@ -6256,6 +6681,8 @@
                                 $root.google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.StolenInstrumentVerdict.encode(message.stolenInstrumentVerdict, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.cardTestingVerdict != null && Object.hasOwnProperty.call(message, "cardTestingVerdict"))
                                 $root.google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.CardTestingVerdict.encode(message.cardTestingVerdict, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.behavioralTrustVerdict != null && Object.hasOwnProperty.call(message, "behavioralTrustVerdict"))
+                                $root.google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict.encode(message.behavioralTrustVerdict, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -6300,6 +6727,10 @@
                                     }
                                 case 3: {
                                         message.cardTestingVerdict = $root.google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.CardTestingVerdict.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.behavioralTrustVerdict = $root.google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -6350,6 +6781,11 @@
                                 if (error)
                                     return "cardTestingVerdict." + error;
                             }
+                            if (message.behavioralTrustVerdict != null && message.hasOwnProperty("behavioralTrustVerdict")) {
+                                var error = $root.google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict.verify(message.behavioralTrustVerdict);
+                                if (error)
+                                    return "behavioralTrustVerdict." + error;
+                            }
                             return null;
                         };
     
@@ -6377,6 +6813,11 @@
                                     throw TypeError(".google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.cardTestingVerdict: object expected");
                                 message.cardTestingVerdict = $root.google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.CardTestingVerdict.fromObject(object.cardTestingVerdict);
                             }
+                            if (object.behavioralTrustVerdict != null) {
+                                if (typeof object.behavioralTrustVerdict !== "object")
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.behavioralTrustVerdict: object expected");
+                                message.behavioralTrustVerdict = $root.google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict.fromObject(object.behavioralTrustVerdict);
+                            }
                             return message;
                         };
     
@@ -6397,6 +6838,7 @@
                                 object.transactionRisk = 0;
                                 object.stolenInstrumentVerdict = null;
                                 object.cardTestingVerdict = null;
+                                object.behavioralTrustVerdict = null;
                             }
                             if (message.transactionRisk != null && message.hasOwnProperty("transactionRisk"))
                                 object.transactionRisk = options.json && !isFinite(message.transactionRisk) ? String(message.transactionRisk) : message.transactionRisk;
@@ -6404,6 +6846,8 @@
                                 object.stolenInstrumentVerdict = $root.google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.StolenInstrumentVerdict.toObject(message.stolenInstrumentVerdict, options);
                             if (message.cardTestingVerdict != null && message.hasOwnProperty("cardTestingVerdict"))
                                 object.cardTestingVerdict = $root.google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.CardTestingVerdict.toObject(message.cardTestingVerdict, options);
+                            if (message.behavioralTrustVerdict != null && message.hasOwnProperty("behavioralTrustVerdict"))
+                                object.behavioralTrustVerdict = $root.google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict.toObject(message.behavioralTrustVerdict, options);
                             return object;
                         };
     
@@ -6839,7 +7283,948 @@
                             return CardTestingVerdict;
                         })();
     
+                        FraudPreventionAssessment.BehavioralTrustVerdict = (function() {
+    
+                            /**
+                             * Properties of a BehavioralTrustVerdict.
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment
+                             * @interface IBehavioralTrustVerdict
+                             * @property {number|null} [trust] BehavioralTrustVerdict trust
+                             */
+    
+                            /**
+                             * Constructs a new BehavioralTrustVerdict.
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment
+                             * @classdesc Represents a BehavioralTrustVerdict.
+                             * @implements IBehavioralTrustVerdict
+                             * @constructor
+                             * @param {google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.IBehavioralTrustVerdict=} [properties] Properties to set
+                             */
+                            function BehavioralTrustVerdict(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * BehavioralTrustVerdict trust.
+                             * @member {number} trust
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @instance
+                             */
+                            BehavioralTrustVerdict.prototype.trust = 0;
+    
+                            /**
+                             * Creates a new BehavioralTrustVerdict instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.IBehavioralTrustVerdict=} [properties] Properties to set
+                             * @returns {google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict} BehavioralTrustVerdict instance
+                             */
+                            BehavioralTrustVerdict.create = function create(properties) {
+                                return new BehavioralTrustVerdict(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified BehavioralTrustVerdict message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.IBehavioralTrustVerdict} message BehavioralTrustVerdict message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BehavioralTrustVerdict.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.trust != null && Object.hasOwnProperty.call(message, "trust"))
+                                    writer.uint32(/* id 1, wireType 5 =*/13).float(message.trust);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified BehavioralTrustVerdict message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.IBehavioralTrustVerdict} message BehavioralTrustVerdict message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BehavioralTrustVerdict.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a BehavioralTrustVerdict message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict} BehavioralTrustVerdict
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BehavioralTrustVerdict.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.trust = reader.float();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a BehavioralTrustVerdict message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict} BehavioralTrustVerdict
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BehavioralTrustVerdict.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a BehavioralTrustVerdict message.
+                             * @function verify
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            BehavioralTrustVerdict.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.trust != null && message.hasOwnProperty("trust"))
+                                    if (typeof message.trust !== "number")
+                                        return "trust: number expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a BehavioralTrustVerdict message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict} BehavioralTrustVerdict
+                             */
+                            BehavioralTrustVerdict.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict)
+                                    return object;
+                                var message = new $root.google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict();
+                                if (object.trust != null)
+                                    message.trust = Number(object.trust);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a BehavioralTrustVerdict message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict} message BehavioralTrustVerdict
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            BehavioralTrustVerdict.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.trust = 0;
+                                if (message.trust != null && message.hasOwnProperty("trust"))
+                                    object.trust = options.json && !isFinite(message.trust) ? String(message.trust) : message.trust;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this BehavioralTrustVerdict to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            BehavioralTrustVerdict.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for BehavioralTrustVerdict
+                             * @function getTypeUrl
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            BehavioralTrustVerdict.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict";
+                            };
+    
+                            return BehavioralTrustVerdict;
+                        })();
+    
                         return FraudPreventionAssessment;
+                    })();
+    
+                    v1.FraudSignals = (function() {
+    
+                        /**
+                         * Properties of a FraudSignals.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IFraudSignals
+                         * @property {google.cloud.recaptchaenterprise.v1.FraudSignals.IUserSignals|null} [userSignals] FraudSignals userSignals
+                         * @property {google.cloud.recaptchaenterprise.v1.FraudSignals.ICardSignals|null} [cardSignals] FraudSignals cardSignals
+                         */
+    
+                        /**
+                         * Constructs a new FraudSignals.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a FraudSignals.
+                         * @implements IFraudSignals
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IFraudSignals=} [properties] Properties to set
+                         */
+                        function FraudSignals(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FraudSignals userSignals.
+                         * @member {google.cloud.recaptchaenterprise.v1.FraudSignals.IUserSignals|null|undefined} userSignals
+                         * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals
+                         * @instance
+                         */
+                        FraudSignals.prototype.userSignals = null;
+    
+                        /**
+                         * FraudSignals cardSignals.
+                         * @member {google.cloud.recaptchaenterprise.v1.FraudSignals.ICardSignals|null|undefined} cardSignals
+                         * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals
+                         * @instance
+                         */
+                        FraudSignals.prototype.cardSignals = null;
+    
+                        /**
+                         * Creates a new FraudSignals instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IFraudSignals=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.FraudSignals} FraudSignals instance
+                         */
+                        FraudSignals.create = function create(properties) {
+                            return new FraudSignals(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FraudSignals message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FraudSignals.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IFraudSignals} message FraudSignals message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FraudSignals.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.userSignals != null && Object.hasOwnProperty.call(message, "userSignals"))
+                                $root.google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals.encode(message.userSignals, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.cardSignals != null && Object.hasOwnProperty.call(message, "cardSignals"))
+                                $root.google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals.encode(message.cardSignals, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FraudSignals message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FraudSignals.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IFraudSignals} message FraudSignals message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FraudSignals.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FraudSignals message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.FraudSignals} FraudSignals
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FraudSignals.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.FraudSignals();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.userSignals = $root.google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.cardSignals = $root.google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FraudSignals message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.FraudSignals} FraudSignals
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FraudSignals.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FraudSignals message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FraudSignals.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.userSignals != null && message.hasOwnProperty("userSignals")) {
+                                var error = $root.google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals.verify(message.userSignals);
+                                if (error)
+                                    return "userSignals." + error;
+                            }
+                            if (message.cardSignals != null && message.hasOwnProperty("cardSignals")) {
+                                var error = $root.google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals.verify(message.cardSignals);
+                                if (error)
+                                    return "cardSignals." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FraudSignals message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.FraudSignals} FraudSignals
+                         */
+                        FraudSignals.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.FraudSignals)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.FraudSignals();
+                            if (object.userSignals != null) {
+                                if (typeof object.userSignals !== "object")
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.FraudSignals.userSignals: object expected");
+                                message.userSignals = $root.google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals.fromObject(object.userSignals);
+                            }
+                            if (object.cardSignals != null) {
+                                if (typeof object.cardSignals !== "object")
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.FraudSignals.cardSignals: object expected");
+                                message.cardSignals = $root.google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals.fromObject(object.cardSignals);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FraudSignals message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.FraudSignals} message FraudSignals
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FraudSignals.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.userSignals = null;
+                                object.cardSignals = null;
+                            }
+                            if (message.userSignals != null && message.hasOwnProperty("userSignals"))
+                                object.userSignals = $root.google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals.toObject(message.userSignals, options);
+                            if (message.cardSignals != null && message.hasOwnProperty("cardSignals"))
+                                object.cardSignals = $root.google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals.toObject(message.cardSignals, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FraudSignals to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FraudSignals.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FraudSignals
+                         * @function getTypeUrl
+                         * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FraudSignals.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.FraudSignals";
+                        };
+    
+                        FraudSignals.UserSignals = (function() {
+    
+                            /**
+                             * Properties of a UserSignals.
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals
+                             * @interface IUserSignals
+                             * @property {number|null} [activeDaysLowerBound] UserSignals activeDaysLowerBound
+                             * @property {number|null} [syntheticRisk] UserSignals syntheticRisk
+                             */
+    
+                            /**
+                             * Constructs a new UserSignals.
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals
+                             * @classdesc Represents a UserSignals.
+                             * @implements IUserSignals
+                             * @constructor
+                             * @param {google.cloud.recaptchaenterprise.v1.FraudSignals.IUserSignals=} [properties] Properties to set
+                             */
+                            function UserSignals(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UserSignals activeDaysLowerBound.
+                             * @member {number} activeDaysLowerBound
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals
+                             * @instance
+                             */
+                            UserSignals.prototype.activeDaysLowerBound = 0;
+    
+                            /**
+                             * UserSignals syntheticRisk.
+                             * @member {number} syntheticRisk
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals
+                             * @instance
+                             */
+                            UserSignals.prototype.syntheticRisk = 0;
+    
+                            /**
+                             * Creates a new UserSignals instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FraudSignals.IUserSignals=} [properties] Properties to set
+                             * @returns {google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals} UserSignals instance
+                             */
+                            UserSignals.create = function create(properties) {
+                                return new UserSignals(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UserSignals message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FraudSignals.IUserSignals} message UserSignals message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UserSignals.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.activeDaysLowerBound != null && Object.hasOwnProperty.call(message, "activeDaysLowerBound"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.activeDaysLowerBound);
+                                if (message.syntheticRisk != null && Object.hasOwnProperty.call(message, "syntheticRisk"))
+                                    writer.uint32(/* id 2, wireType 5 =*/21).float(message.syntheticRisk);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UserSignals message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FraudSignals.IUserSignals} message UserSignals message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UserSignals.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a UserSignals message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals} UserSignals
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UserSignals.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.activeDaysLowerBound = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.syntheticRisk = reader.float();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a UserSignals message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals} UserSignals
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UserSignals.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a UserSignals message.
+                             * @function verify
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UserSignals.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.activeDaysLowerBound != null && message.hasOwnProperty("activeDaysLowerBound"))
+                                    if (!$util.isInteger(message.activeDaysLowerBound))
+                                        return "activeDaysLowerBound: integer expected";
+                                if (message.syntheticRisk != null && message.hasOwnProperty("syntheticRisk"))
+                                    if (typeof message.syntheticRisk !== "number")
+                                        return "syntheticRisk: number expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a UserSignals message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals} UserSignals
+                             */
+                            UserSignals.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals)
+                                    return object;
+                                var message = new $root.google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals();
+                                if (object.activeDaysLowerBound != null)
+                                    message.activeDaysLowerBound = object.activeDaysLowerBound | 0;
+                                if (object.syntheticRisk != null)
+                                    message.syntheticRisk = Number(object.syntheticRisk);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a UserSignals message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals} message UserSignals
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UserSignals.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.activeDaysLowerBound = 0;
+                                    object.syntheticRisk = 0;
+                                }
+                                if (message.activeDaysLowerBound != null && message.hasOwnProperty("activeDaysLowerBound"))
+                                    object.activeDaysLowerBound = message.activeDaysLowerBound;
+                                if (message.syntheticRisk != null && message.hasOwnProperty("syntheticRisk"))
+                                    object.syntheticRisk = options.json && !isFinite(message.syntheticRisk) ? String(message.syntheticRisk) : message.syntheticRisk;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UserSignals to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UserSignals.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for UserSignals
+                             * @function getTypeUrl
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UserSignals.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals";
+                            };
+    
+                            return UserSignals;
+                        })();
+    
+                        FraudSignals.CardSignals = (function() {
+    
+                            /**
+                             * Properties of a CardSignals.
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals
+                             * @interface ICardSignals
+                             * @property {Array.<google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals.CardLabel>|null} [cardLabels] CardSignals cardLabels
+                             */
+    
+                            /**
+                             * Constructs a new CardSignals.
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals
+                             * @classdesc Represents a CardSignals.
+                             * @implements ICardSignals
+                             * @constructor
+                             * @param {google.cloud.recaptchaenterprise.v1.FraudSignals.ICardSignals=} [properties] Properties to set
+                             */
+                            function CardSignals(properties) {
+                                this.cardLabels = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CardSignals cardLabels.
+                             * @member {Array.<google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals.CardLabel>} cardLabels
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals
+                             * @instance
+                             */
+                            CardSignals.prototype.cardLabels = $util.emptyArray;
+    
+                            /**
+                             * Creates a new CardSignals instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FraudSignals.ICardSignals=} [properties] Properties to set
+                             * @returns {google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals} CardSignals instance
+                             */
+                            CardSignals.create = function create(properties) {
+                                return new CardSignals(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CardSignals message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FraudSignals.ICardSignals} message CardSignals message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CardSignals.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.cardLabels != null && message.cardLabels.length) {
+                                    writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                                    for (var i = 0; i < message.cardLabels.length; ++i)
+                                        writer.int32(message.cardLabels[i]);
+                                    writer.ldelim();
+                                }
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CardSignals message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FraudSignals.ICardSignals} message CardSignals message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CardSignals.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CardSignals message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals} CardSignals
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CardSignals.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.cardLabels && message.cardLabels.length))
+                                                message.cardLabels = [];
+                                            if ((tag & 7) === 2) {
+                                                var end2 = reader.uint32() + reader.pos;
+                                                while (reader.pos < end2)
+                                                    message.cardLabels.push(reader.int32());
+                                            } else
+                                                message.cardLabels.push(reader.int32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CardSignals message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals} CardSignals
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CardSignals.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CardSignals message.
+                             * @function verify
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CardSignals.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.cardLabels != null && message.hasOwnProperty("cardLabels")) {
+                                    if (!Array.isArray(message.cardLabels))
+                                        return "cardLabels: array expected";
+                                    for (var i = 0; i < message.cardLabels.length; ++i)
+                                        switch (message.cardLabels[i]) {
+                                        default:
+                                            return "cardLabels: enum value[] expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                            break;
+                                        }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CardSignals message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals} CardSignals
+                             */
+                            CardSignals.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals)
+                                    return object;
+                                var message = new $root.google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals();
+                                if (object.cardLabels) {
+                                    if (!Array.isArray(object.cardLabels))
+                                        throw TypeError(".google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals.cardLabels: array expected");
+                                    message.cardLabels = [];
+                                    for (var i = 0; i < object.cardLabels.length; ++i)
+                                        switch (object.cardLabels[i]) {
+                                        default:
+                                            if (typeof object.cardLabels[i] === "number") {
+                                                message.cardLabels[i] = object.cardLabels[i];
+                                                break;
+                                            }
+                                        case "CARD_LABEL_UNSPECIFIED":
+                                        case 0:
+                                            message.cardLabels[i] = 0;
+                                            break;
+                                        case "PREPAID":
+                                        case 1:
+                                            message.cardLabels[i] = 1;
+                                            break;
+                                        case "VIRTUAL":
+                                        case 2:
+                                            message.cardLabels[i] = 2;
+                                            break;
+                                        case "UNEXPECTED_LOCATION":
+                                        case 3:
+                                            message.cardLabels[i] = 3;
+                                            break;
+                                        }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CardSignals message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals} message CardSignals
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CardSignals.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.cardLabels = [];
+                                if (message.cardLabels && message.cardLabels.length) {
+                                    object.cardLabels = [];
+                                    for (var j = 0; j < message.cardLabels.length; ++j)
+                                        object.cardLabels[j] = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals.CardLabel[message.cardLabels[j]] === undefined ? message.cardLabels[j] : $root.google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals.CardLabel[message.cardLabels[j]] : message.cardLabels[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CardSignals to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CardSignals.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CardSignals
+                             * @function getTypeUrl
+                             * @memberof google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CardSignals.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals";
+                            };
+    
+                            /**
+                             * CardLabel enum.
+                             * @name google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals.CardLabel
+                             * @enum {number}
+                             * @property {number} CARD_LABEL_UNSPECIFIED=0 CARD_LABEL_UNSPECIFIED value
+                             * @property {number} PREPAID=1 PREPAID value
+                             * @property {number} VIRTUAL=2 VIRTUAL value
+                             * @property {number} UNEXPECTED_LOCATION=3 UNEXPECTED_LOCATION value
+                             */
+                            CardSignals.CardLabel = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "CARD_LABEL_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "PREPAID"] = 1;
+                                values[valuesById[2] = "VIRTUAL"] = 2;
+                                values[valuesById[3] = "UNEXPECTED_LOCATION"] = 3;
+                                return values;
+                            })();
+    
+                            return CardSignals;
+                        })();
+    
+                        return FraudSignals;
                     })();
     
                     v1.AccountDefenderAssessment = (function() {
@@ -8697,6 +10082,1379 @@
                         };
     
                         return DeleteKeyRequest;
+                    })();
+    
+                    v1.CreateFirewallPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateFirewallPolicyRequest.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface ICreateFirewallPolicyRequest
+                         * @property {string|null} [parent] CreateFirewallPolicyRequest parent
+                         * @property {google.cloud.recaptchaenterprise.v1.IFirewallPolicy|null} [firewallPolicy] CreateFirewallPolicyRequest firewallPolicy
+                         */
+    
+                        /**
+                         * Constructs a new CreateFirewallPolicyRequest.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a CreateFirewallPolicyRequest.
+                         * @implements ICreateFirewallPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest=} [properties] Properties to set
+                         */
+                        function CreateFirewallPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateFirewallPolicyRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest
+                         * @instance
+                         */
+                        CreateFirewallPolicyRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateFirewallPolicyRequest firewallPolicy.
+                         * @member {google.cloud.recaptchaenterprise.v1.IFirewallPolicy|null|undefined} firewallPolicy
+                         * @memberof google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest
+                         * @instance
+                         */
+                        CreateFirewallPolicyRequest.prototype.firewallPolicy = null;
+    
+                        /**
+                         * Creates a new CreateFirewallPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest} CreateFirewallPolicyRequest instance
+                         */
+                        CreateFirewallPolicyRequest.create = function create(properties) {
+                            return new CreateFirewallPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateFirewallPolicyRequest message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest} message CreateFirewallPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateFirewallPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.firewallPolicy != null && Object.hasOwnProperty.call(message, "firewallPolicy"))
+                                $root.google.cloud.recaptchaenterprise.v1.FirewallPolicy.encode(message.firewallPolicy, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateFirewallPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest} message CreateFirewallPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateFirewallPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateFirewallPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest} CreateFirewallPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateFirewallPolicyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.firewallPolicy = $root.google.cloud.recaptchaenterprise.v1.FirewallPolicy.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateFirewallPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest} CreateFirewallPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateFirewallPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateFirewallPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateFirewallPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.firewallPolicy != null && message.hasOwnProperty("firewallPolicy")) {
+                                var error = $root.google.cloud.recaptchaenterprise.v1.FirewallPolicy.verify(message.firewallPolicy);
+                                if (error)
+                                    return "firewallPolicy." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateFirewallPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest} CreateFirewallPolicyRequest
+                         */
+                        CreateFirewallPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.firewallPolicy != null) {
+                                if (typeof object.firewallPolicy !== "object")
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest.firewallPolicy: object expected");
+                                message.firewallPolicy = $root.google.cloud.recaptchaenterprise.v1.FirewallPolicy.fromObject(object.firewallPolicy);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateFirewallPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest} message CreateFirewallPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateFirewallPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.firewallPolicy = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.firewallPolicy != null && message.hasOwnProperty("firewallPolicy"))
+                                object.firewallPolicy = $root.google.cloud.recaptchaenterprise.v1.FirewallPolicy.toObject(message.firewallPolicy, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateFirewallPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateFirewallPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateFirewallPolicyRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateFirewallPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest";
+                        };
+    
+                        return CreateFirewallPolicyRequest;
+                    })();
+    
+                    v1.ListFirewallPoliciesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListFirewallPoliciesRequest.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IListFirewallPoliciesRequest
+                         * @property {string|null} [parent] ListFirewallPoliciesRequest parent
+                         * @property {number|null} [pageSize] ListFirewallPoliciesRequest pageSize
+                         * @property {string|null} [pageToken] ListFirewallPoliciesRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListFirewallPoliciesRequest.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a ListFirewallPoliciesRequest.
+                         * @implements IListFirewallPoliciesRequest
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest=} [properties] Properties to set
+                         */
+                        function ListFirewallPoliciesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListFirewallPoliciesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest
+                         * @instance
+                         */
+                        ListFirewallPoliciesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListFirewallPoliciesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest
+                         * @instance
+                         */
+                        ListFirewallPoliciesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListFirewallPoliciesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest
+                         * @instance
+                         */
+                        ListFirewallPoliciesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListFirewallPoliciesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest} ListFirewallPoliciesRequest instance
+                         */
+                        ListFirewallPoliciesRequest.create = function create(properties) {
+                            return new ListFirewallPoliciesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListFirewallPoliciesRequest message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest} message ListFirewallPoliciesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListFirewallPoliciesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListFirewallPoliciesRequest message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest} message ListFirewallPoliciesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListFirewallPoliciesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListFirewallPoliciesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest} ListFirewallPoliciesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListFirewallPoliciesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListFirewallPoliciesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest} ListFirewallPoliciesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListFirewallPoliciesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListFirewallPoliciesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListFirewallPoliciesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListFirewallPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest} ListFirewallPoliciesRequest
+                         */
+                        ListFirewallPoliciesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListFirewallPoliciesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest} message ListFirewallPoliciesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListFirewallPoliciesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListFirewallPoliciesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListFirewallPoliciesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListFirewallPoliciesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListFirewallPoliciesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest";
+                        };
+    
+                        return ListFirewallPoliciesRequest;
+                    })();
+    
+                    v1.ListFirewallPoliciesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListFirewallPoliciesResponse.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IListFirewallPoliciesResponse
+                         * @property {Array.<google.cloud.recaptchaenterprise.v1.IFirewallPolicy>|null} [firewallPolicies] ListFirewallPoliciesResponse firewallPolicies
+                         * @property {string|null} [nextPageToken] ListFirewallPoliciesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListFirewallPoliciesResponse.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a ListFirewallPoliciesResponse.
+                         * @implements IListFirewallPoliciesResponse
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse=} [properties] Properties to set
+                         */
+                        function ListFirewallPoliciesResponse(properties) {
+                            this.firewallPolicies = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListFirewallPoliciesResponse firewallPolicies.
+                         * @member {Array.<google.cloud.recaptchaenterprise.v1.IFirewallPolicy>} firewallPolicies
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse
+                         * @instance
+                         */
+                        ListFirewallPoliciesResponse.prototype.firewallPolicies = $util.emptyArray;
+    
+                        /**
+                         * ListFirewallPoliciesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse
+                         * @instance
+                         */
+                        ListFirewallPoliciesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListFirewallPoliciesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse} ListFirewallPoliciesResponse instance
+                         */
+                        ListFirewallPoliciesResponse.create = function create(properties) {
+                            return new ListFirewallPoliciesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListFirewallPoliciesResponse message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse} message ListFirewallPoliciesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListFirewallPoliciesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.firewallPolicies != null && message.firewallPolicies.length)
+                                for (var i = 0; i < message.firewallPolicies.length; ++i)
+                                    $root.google.cloud.recaptchaenterprise.v1.FirewallPolicy.encode(message.firewallPolicies[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListFirewallPoliciesResponse message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse} message ListFirewallPoliciesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListFirewallPoliciesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListFirewallPoliciesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse} ListFirewallPoliciesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListFirewallPoliciesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.firewallPolicies && message.firewallPolicies.length))
+                                            message.firewallPolicies = [];
+                                        message.firewallPolicies.push($root.google.cloud.recaptchaenterprise.v1.FirewallPolicy.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListFirewallPoliciesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse} ListFirewallPoliciesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListFirewallPoliciesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListFirewallPoliciesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListFirewallPoliciesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.firewallPolicies != null && message.hasOwnProperty("firewallPolicies")) {
+                                if (!Array.isArray(message.firewallPolicies))
+                                    return "firewallPolicies: array expected";
+                                for (var i = 0; i < message.firewallPolicies.length; ++i) {
+                                    var error = $root.google.cloud.recaptchaenterprise.v1.FirewallPolicy.verify(message.firewallPolicies[i]);
+                                    if (error)
+                                        return "firewallPolicies." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListFirewallPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse} ListFirewallPoliciesResponse
+                         */
+                        ListFirewallPoliciesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse();
+                            if (object.firewallPolicies) {
+                                if (!Array.isArray(object.firewallPolicies))
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse.firewallPolicies: array expected");
+                                message.firewallPolicies = [];
+                                for (var i = 0; i < object.firewallPolicies.length; ++i) {
+                                    if (typeof object.firewallPolicies[i] !== "object")
+                                        throw TypeError(".google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse.firewallPolicies: object expected");
+                                    message.firewallPolicies[i] = $root.google.cloud.recaptchaenterprise.v1.FirewallPolicy.fromObject(object.firewallPolicies[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListFirewallPoliciesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse} message ListFirewallPoliciesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListFirewallPoliciesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.firewallPolicies = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.firewallPolicies && message.firewallPolicies.length) {
+                                object.firewallPolicies = [];
+                                for (var j = 0; j < message.firewallPolicies.length; ++j)
+                                    object.firewallPolicies[j] = $root.google.cloud.recaptchaenterprise.v1.FirewallPolicy.toObject(message.firewallPolicies[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListFirewallPoliciesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListFirewallPoliciesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListFirewallPoliciesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListFirewallPoliciesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse";
+                        };
+    
+                        return ListFirewallPoliciesResponse;
+                    })();
+    
+                    v1.GetFirewallPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of a GetFirewallPolicyRequest.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IGetFirewallPolicyRequest
+                         * @property {string|null} [name] GetFirewallPolicyRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetFirewallPolicyRequest.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a GetFirewallPolicyRequest.
+                         * @implements IGetFirewallPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest=} [properties] Properties to set
+                         */
+                        function GetFirewallPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetFirewallPolicyRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest
+                         * @instance
+                         */
+                        GetFirewallPolicyRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetFirewallPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest} GetFirewallPolicyRequest instance
+                         */
+                        GetFirewallPolicyRequest.create = function create(properties) {
+                            return new GetFirewallPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetFirewallPolicyRequest message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest} message GetFirewallPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetFirewallPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetFirewallPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest} message GetFirewallPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetFirewallPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetFirewallPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest} GetFirewallPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetFirewallPolicyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetFirewallPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest} GetFirewallPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetFirewallPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetFirewallPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetFirewallPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetFirewallPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest} GetFirewallPolicyRequest
+                         */
+                        GetFirewallPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetFirewallPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest} message GetFirewallPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetFirewallPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetFirewallPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetFirewallPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetFirewallPolicyRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetFirewallPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest";
+                        };
+    
+                        return GetFirewallPolicyRequest;
+                    })();
+    
+                    v1.UpdateFirewallPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateFirewallPolicyRequest.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IUpdateFirewallPolicyRequest
+                         * @property {google.cloud.recaptchaenterprise.v1.IFirewallPolicy|null} [firewallPolicy] UpdateFirewallPolicyRequest firewallPolicy
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateFirewallPolicyRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateFirewallPolicyRequest.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents an UpdateFirewallPolicyRequest.
+                         * @implements IUpdateFirewallPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest=} [properties] Properties to set
+                         */
+                        function UpdateFirewallPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateFirewallPolicyRequest firewallPolicy.
+                         * @member {google.cloud.recaptchaenterprise.v1.IFirewallPolicy|null|undefined} firewallPolicy
+                         * @memberof google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest
+                         * @instance
+                         */
+                        UpdateFirewallPolicyRequest.prototype.firewallPolicy = null;
+    
+                        /**
+                         * UpdateFirewallPolicyRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest
+                         * @instance
+                         */
+                        UpdateFirewallPolicyRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateFirewallPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest} UpdateFirewallPolicyRequest instance
+                         */
+                        UpdateFirewallPolicyRequest.create = function create(properties) {
+                            return new UpdateFirewallPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateFirewallPolicyRequest message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest} message UpdateFirewallPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateFirewallPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.firewallPolicy != null && Object.hasOwnProperty.call(message, "firewallPolicy"))
+                                $root.google.cloud.recaptchaenterprise.v1.FirewallPolicy.encode(message.firewallPolicy, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateFirewallPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest} message UpdateFirewallPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateFirewallPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateFirewallPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest} UpdateFirewallPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateFirewallPolicyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.firewallPolicy = $root.google.cloud.recaptchaenterprise.v1.FirewallPolicy.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateFirewallPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest} UpdateFirewallPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateFirewallPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateFirewallPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateFirewallPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.firewallPolicy != null && message.hasOwnProperty("firewallPolicy")) {
+                                var error = $root.google.cloud.recaptchaenterprise.v1.FirewallPolicy.verify(message.firewallPolicy);
+                                if (error)
+                                    return "firewallPolicy." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateFirewallPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest} UpdateFirewallPolicyRequest
+                         */
+                        UpdateFirewallPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest();
+                            if (object.firewallPolicy != null) {
+                                if (typeof object.firewallPolicy !== "object")
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest.firewallPolicy: object expected");
+                                message.firewallPolicy = $root.google.cloud.recaptchaenterprise.v1.FirewallPolicy.fromObject(object.firewallPolicy);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateFirewallPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest} message UpdateFirewallPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateFirewallPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.firewallPolicy = null;
+                                object.updateMask = null;
+                            }
+                            if (message.firewallPolicy != null && message.hasOwnProperty("firewallPolicy"))
+                                object.firewallPolicy = $root.google.cloud.recaptchaenterprise.v1.FirewallPolicy.toObject(message.firewallPolicy, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateFirewallPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateFirewallPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateFirewallPolicyRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateFirewallPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest";
+                        };
+    
+                        return UpdateFirewallPolicyRequest;
+                    })();
+    
+                    v1.DeleteFirewallPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteFirewallPolicyRequest.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IDeleteFirewallPolicyRequest
+                         * @property {string|null} [name] DeleteFirewallPolicyRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteFirewallPolicyRequest.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a DeleteFirewallPolicyRequest.
+                         * @implements IDeleteFirewallPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest=} [properties] Properties to set
+                         */
+                        function DeleteFirewallPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteFirewallPolicyRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest
+                         * @instance
+                         */
+                        DeleteFirewallPolicyRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteFirewallPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest} DeleteFirewallPolicyRequest instance
+                         */
+                        DeleteFirewallPolicyRequest.create = function create(properties) {
+                            return new DeleteFirewallPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteFirewallPolicyRequest message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest} message DeleteFirewallPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteFirewallPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteFirewallPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest} message DeleteFirewallPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteFirewallPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteFirewallPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest} DeleteFirewallPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteFirewallPolicyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteFirewallPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest} DeleteFirewallPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteFirewallPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteFirewallPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteFirewallPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteFirewallPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest} DeleteFirewallPolicyRequest
+                         */
+                        DeleteFirewallPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteFirewallPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest} message DeleteFirewallPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteFirewallPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteFirewallPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteFirewallPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteFirewallPolicyRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteFirewallPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest";
+                        };
+    
+                        return DeleteFirewallPolicyRequest;
                     })();
     
                     v1.MigrateKeyRequest = (function() {
@@ -10824,6 +13582,7 @@
                          * @interface IAndroidKeySettings
                          * @property {boolean|null} [allowAllPackageNames] AndroidKeySettings allowAllPackageNames
                          * @property {Array.<string>|null} [allowedPackageNames] AndroidKeySettings allowedPackageNames
+                         * @property {boolean|null} [supportNonGoogleAppStoreDistribution] AndroidKeySettings supportNonGoogleAppStoreDistribution
                          */
     
                         /**
@@ -10859,6 +13618,14 @@
                         AndroidKeySettings.prototype.allowedPackageNames = $util.emptyArray;
     
                         /**
+                         * AndroidKeySettings supportNonGoogleAppStoreDistribution.
+                         * @member {boolean} supportNonGoogleAppStoreDistribution
+                         * @memberof google.cloud.recaptchaenterprise.v1.AndroidKeySettings
+                         * @instance
+                         */
+                        AndroidKeySettings.prototype.supportNonGoogleAppStoreDistribution = false;
+    
+                        /**
                          * Creates a new AndroidKeySettings instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.recaptchaenterprise.v1.AndroidKeySettings
@@ -10887,6 +13654,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.allowedPackageNames[i]);
                             if (message.allowAllPackageNames != null && Object.hasOwnProperty.call(message, "allowAllPackageNames"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.allowAllPackageNames);
+                            if (message.supportNonGoogleAppStoreDistribution != null && Object.hasOwnProperty.call(message, "supportNonGoogleAppStoreDistribution"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.supportNonGoogleAppStoreDistribution);
                             return writer;
                         };
     
@@ -10929,6 +13698,10 @@
                                         if (!(message.allowedPackageNames && message.allowedPackageNames.length))
                                             message.allowedPackageNames = [];
                                         message.allowedPackageNames.push(reader.string());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.supportNonGoogleAppStoreDistribution = reader.bool();
                                         break;
                                     }
                                 default:
@@ -10976,6 +13749,9 @@
                                     if (!$util.isString(message.allowedPackageNames[i]))
                                         return "allowedPackageNames: string[] expected";
                             }
+                            if (message.supportNonGoogleAppStoreDistribution != null && message.hasOwnProperty("supportNonGoogleAppStoreDistribution"))
+                                if (typeof message.supportNonGoogleAppStoreDistribution !== "boolean")
+                                    return "supportNonGoogleAppStoreDistribution: boolean expected";
                             return null;
                         };
     
@@ -11000,6 +13776,8 @@
                                 for (var i = 0; i < object.allowedPackageNames.length; ++i)
                                     message.allowedPackageNames[i] = String(object.allowedPackageNames[i]);
                             }
+                            if (object.supportNonGoogleAppStoreDistribution != null)
+                                message.supportNonGoogleAppStoreDistribution = Boolean(object.supportNonGoogleAppStoreDistribution);
                             return message;
                         };
     
@@ -11018,8 +13796,10 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.allowedPackageNames = [];
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.allowAllPackageNames = false;
+                                object.supportNonGoogleAppStoreDistribution = false;
+                            }
                             if (message.allowedPackageNames && message.allowedPackageNames.length) {
                                 object.allowedPackageNames = [];
                                 for (var j = 0; j < message.allowedPackageNames.length; ++j)
@@ -11027,6 +13807,8 @@
                             }
                             if (message.allowAllPackageNames != null && message.hasOwnProperty("allowAllPackageNames"))
                                 object.allowAllPackageNames = message.allowAllPackageNames;
+                            if (message.supportNonGoogleAppStoreDistribution != null && message.hasOwnProperty("supportNonGoogleAppStoreDistribution"))
+                                object.supportNonGoogleAppStoreDistribution = message.supportNonGoogleAppStoreDistribution;
                             return object;
                         };
     
@@ -11067,6 +13849,7 @@
                          * @interface IIOSKeySettings
                          * @property {boolean|null} [allowAllBundleIds] IOSKeySettings allowAllBundleIds
                          * @property {Array.<string>|null} [allowedBundleIds] IOSKeySettings allowedBundleIds
+                         * @property {google.cloud.recaptchaenterprise.v1.IAppleDeveloperId|null} [appleDeveloperId] IOSKeySettings appleDeveloperId
                          */
     
                         /**
@@ -11102,6 +13885,14 @@
                         IOSKeySettings.prototype.allowedBundleIds = $util.emptyArray;
     
                         /**
+                         * IOSKeySettings appleDeveloperId.
+                         * @member {google.cloud.recaptchaenterprise.v1.IAppleDeveloperId|null|undefined} appleDeveloperId
+                         * @memberof google.cloud.recaptchaenterprise.v1.IOSKeySettings
+                         * @instance
+                         */
+                        IOSKeySettings.prototype.appleDeveloperId = null;
+    
+                        /**
                          * Creates a new IOSKeySettings instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.recaptchaenterprise.v1.IOSKeySettings
@@ -11130,6 +13921,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.allowedBundleIds[i]);
                             if (message.allowAllBundleIds != null && Object.hasOwnProperty.call(message, "allowAllBundleIds"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.allowAllBundleIds);
+                            if (message.appleDeveloperId != null && Object.hasOwnProperty.call(message, "appleDeveloperId"))
+                                $root.google.cloud.recaptchaenterprise.v1.AppleDeveloperId.encode(message.appleDeveloperId, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -11172,6 +13965,10 @@
                                         if (!(message.allowedBundleIds && message.allowedBundleIds.length))
                                             message.allowedBundleIds = [];
                                         message.allowedBundleIds.push(reader.string());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.appleDeveloperId = $root.google.cloud.recaptchaenterprise.v1.AppleDeveloperId.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -11219,6 +14016,11 @@
                                     if (!$util.isString(message.allowedBundleIds[i]))
                                         return "allowedBundleIds: string[] expected";
                             }
+                            if (message.appleDeveloperId != null && message.hasOwnProperty("appleDeveloperId")) {
+                                var error = $root.google.cloud.recaptchaenterprise.v1.AppleDeveloperId.verify(message.appleDeveloperId);
+                                if (error)
+                                    return "appleDeveloperId." + error;
+                            }
                             return null;
                         };
     
@@ -11243,6 +14045,11 @@
                                 for (var i = 0; i < object.allowedBundleIds.length; ++i)
                                     message.allowedBundleIds[i] = String(object.allowedBundleIds[i]);
                             }
+                            if (object.appleDeveloperId != null) {
+                                if (typeof object.appleDeveloperId !== "object")
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.IOSKeySettings.appleDeveloperId: object expected");
+                                message.appleDeveloperId = $root.google.cloud.recaptchaenterprise.v1.AppleDeveloperId.fromObject(object.appleDeveloperId);
+                            }
                             return message;
                         };
     
@@ -11261,8 +14068,10 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.allowedBundleIds = [];
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.allowAllBundleIds = false;
+                                object.appleDeveloperId = null;
+                            }
                             if (message.allowedBundleIds && message.allowedBundleIds.length) {
                                 object.allowedBundleIds = [];
                                 for (var j = 0; j < message.allowedBundleIds.length; ++j)
@@ -11270,6 +14079,8 @@
                             }
                             if (message.allowAllBundleIds != null && message.hasOwnProperty("allowAllBundleIds"))
                                 object.allowAllBundleIds = message.allowAllBundleIds;
+                            if (message.appleDeveloperId != null && message.hasOwnProperty("appleDeveloperId"))
+                                object.appleDeveloperId = $root.google.cloud.recaptchaenterprise.v1.AppleDeveloperId.toObject(message.appleDeveloperId, options);
                             return object;
                         };
     
@@ -11300,6 +14111,256 @@
                         };
     
                         return IOSKeySettings;
+                    })();
+    
+                    v1.AppleDeveloperId = (function() {
+    
+                        /**
+                         * Properties of an AppleDeveloperId.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IAppleDeveloperId
+                         * @property {string|null} [privateKey] AppleDeveloperId privateKey
+                         * @property {string|null} [keyId] AppleDeveloperId keyId
+                         * @property {string|null} [teamId] AppleDeveloperId teamId
+                         */
+    
+                        /**
+                         * Constructs a new AppleDeveloperId.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents an AppleDeveloperId.
+                         * @implements IAppleDeveloperId
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IAppleDeveloperId=} [properties] Properties to set
+                         */
+                        function AppleDeveloperId(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AppleDeveloperId privateKey.
+                         * @member {string} privateKey
+                         * @memberof google.cloud.recaptchaenterprise.v1.AppleDeveloperId
+                         * @instance
+                         */
+                        AppleDeveloperId.prototype.privateKey = "";
+    
+                        /**
+                         * AppleDeveloperId keyId.
+                         * @member {string} keyId
+                         * @memberof google.cloud.recaptchaenterprise.v1.AppleDeveloperId
+                         * @instance
+                         */
+                        AppleDeveloperId.prototype.keyId = "";
+    
+                        /**
+                         * AppleDeveloperId teamId.
+                         * @member {string} teamId
+                         * @memberof google.cloud.recaptchaenterprise.v1.AppleDeveloperId
+                         * @instance
+                         */
+                        AppleDeveloperId.prototype.teamId = "";
+    
+                        /**
+                         * Creates a new AppleDeveloperId instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.AppleDeveloperId
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IAppleDeveloperId=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.AppleDeveloperId} AppleDeveloperId instance
+                         */
+                        AppleDeveloperId.create = function create(properties) {
+                            return new AppleDeveloperId(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AppleDeveloperId message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.AppleDeveloperId.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.AppleDeveloperId
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IAppleDeveloperId} message AppleDeveloperId message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AppleDeveloperId.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.privateKey != null && Object.hasOwnProperty.call(message, "privateKey"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.privateKey);
+                            if (message.keyId != null && Object.hasOwnProperty.call(message, "keyId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.keyId);
+                            if (message.teamId != null && Object.hasOwnProperty.call(message, "teamId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.teamId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AppleDeveloperId message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.AppleDeveloperId.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.AppleDeveloperId
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IAppleDeveloperId} message AppleDeveloperId message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AppleDeveloperId.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AppleDeveloperId message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.AppleDeveloperId
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.AppleDeveloperId} AppleDeveloperId
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AppleDeveloperId.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.AppleDeveloperId();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.privateKey = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.keyId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.teamId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AppleDeveloperId message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.AppleDeveloperId
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.AppleDeveloperId} AppleDeveloperId
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AppleDeveloperId.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AppleDeveloperId message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.AppleDeveloperId
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AppleDeveloperId.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.privateKey != null && message.hasOwnProperty("privateKey"))
+                                if (!$util.isString(message.privateKey))
+                                    return "privateKey: string expected";
+                            if (message.keyId != null && message.hasOwnProperty("keyId"))
+                                if (!$util.isString(message.keyId))
+                                    return "keyId: string expected";
+                            if (message.teamId != null && message.hasOwnProperty("teamId"))
+                                if (!$util.isString(message.teamId))
+                                    return "teamId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AppleDeveloperId message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.AppleDeveloperId
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.AppleDeveloperId} AppleDeveloperId
+                         */
+                        AppleDeveloperId.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.AppleDeveloperId)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.AppleDeveloperId();
+                            if (object.privateKey != null)
+                                message.privateKey = String(object.privateKey);
+                            if (object.keyId != null)
+                                message.keyId = String(object.keyId);
+                            if (object.teamId != null)
+                                message.teamId = String(object.teamId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AppleDeveloperId message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.AppleDeveloperId
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.AppleDeveloperId} message AppleDeveloperId
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AppleDeveloperId.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.privateKey = "";
+                                object.keyId = "";
+                                object.teamId = "";
+                            }
+                            if (message.privateKey != null && message.hasOwnProperty("privateKey"))
+                                object.privateKey = message.privateKey;
+                            if (message.keyId != null && message.hasOwnProperty("keyId"))
+                                object.keyId = message.keyId;
+                            if (message.teamId != null && message.hasOwnProperty("teamId"))
+                                object.teamId = message.teamId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AppleDeveloperId to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.AppleDeveloperId
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AppleDeveloperId.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AppleDeveloperId
+                         * @function getTypeUrl
+                         * @memberof google.cloud.recaptchaenterprise.v1.AppleDeveloperId
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AppleDeveloperId.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.AppleDeveloperId";
+                        };
+    
+                        return AppleDeveloperId;
                     })();
     
                     v1.ScoreDistribution = (function() {
@@ -12154,6 +15215,1883 @@
                         };
     
                         return ChallengeMetrics;
+                    })();
+    
+                    v1.FirewallPolicyAssessment = (function() {
+    
+                        /**
+                         * Properties of a FirewallPolicyAssessment.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IFirewallPolicyAssessment
+                         * @property {google.rpc.IStatus|null} [error] FirewallPolicyAssessment error
+                         * @property {google.cloud.recaptchaenterprise.v1.IFirewallPolicy|null} [firewallPolicy] FirewallPolicyAssessment firewallPolicy
+                         */
+    
+                        /**
+                         * Constructs a new FirewallPolicyAssessment.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a FirewallPolicyAssessment.
+                         * @implements IFirewallPolicyAssessment
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IFirewallPolicyAssessment=} [properties] Properties to set
+                         */
+                        function FirewallPolicyAssessment(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FirewallPolicyAssessment error.
+                         * @member {google.rpc.IStatus|null|undefined} error
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment
+                         * @instance
+                         */
+                        FirewallPolicyAssessment.prototype.error = null;
+    
+                        /**
+                         * FirewallPolicyAssessment firewallPolicy.
+                         * @member {google.cloud.recaptchaenterprise.v1.IFirewallPolicy|null|undefined} firewallPolicy
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment
+                         * @instance
+                         */
+                        FirewallPolicyAssessment.prototype.firewallPolicy = null;
+    
+                        /**
+                         * Creates a new FirewallPolicyAssessment instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IFirewallPolicyAssessment=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment} FirewallPolicyAssessment instance
+                         */
+                        FirewallPolicyAssessment.create = function create(properties) {
+                            return new FirewallPolicyAssessment(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FirewallPolicyAssessment message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IFirewallPolicyAssessment} message FirewallPolicyAssessment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FirewallPolicyAssessment.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                                $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.firewallPolicy != null && Object.hasOwnProperty.call(message, "firewallPolicy"))
+                                $root.google.cloud.recaptchaenterprise.v1.FirewallPolicy.encode(message.firewallPolicy, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FirewallPolicyAssessment message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IFirewallPolicyAssessment} message FirewallPolicyAssessment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FirewallPolicyAssessment.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FirewallPolicyAssessment message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment} FirewallPolicyAssessment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FirewallPolicyAssessment.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 5: {
+                                        message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.firewallPolicy = $root.google.cloud.recaptchaenterprise.v1.FirewallPolicy.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FirewallPolicyAssessment message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment} FirewallPolicyAssessment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FirewallPolicyAssessment.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FirewallPolicyAssessment message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FirewallPolicyAssessment.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.error != null && message.hasOwnProperty("error")) {
+                                var error = $root.google.rpc.Status.verify(message.error);
+                                if (error)
+                                    return "error." + error;
+                            }
+                            if (message.firewallPolicy != null && message.hasOwnProperty("firewallPolicy")) {
+                                var error = $root.google.cloud.recaptchaenterprise.v1.FirewallPolicy.verify(message.firewallPolicy);
+                                if (error)
+                                    return "firewallPolicy." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FirewallPolicyAssessment message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment} FirewallPolicyAssessment
+                         */
+                        FirewallPolicyAssessment.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment();
+                            if (object.error != null) {
+                                if (typeof object.error !== "object")
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment.error: object expected");
+                                message.error = $root.google.rpc.Status.fromObject(object.error);
+                            }
+                            if (object.firewallPolicy != null) {
+                                if (typeof object.firewallPolicy !== "object")
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment.firewallPolicy: object expected");
+                                message.firewallPolicy = $root.google.cloud.recaptchaenterprise.v1.FirewallPolicy.fromObject(object.firewallPolicy);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FirewallPolicyAssessment message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment} message FirewallPolicyAssessment
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FirewallPolicyAssessment.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.error = null;
+                                object.firewallPolicy = null;
+                            }
+                            if (message.error != null && message.hasOwnProperty("error"))
+                                object.error = $root.google.rpc.Status.toObject(message.error, options);
+                            if (message.firewallPolicy != null && message.hasOwnProperty("firewallPolicy"))
+                                object.firewallPolicy = $root.google.cloud.recaptchaenterprise.v1.FirewallPolicy.toObject(message.firewallPolicy, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FirewallPolicyAssessment to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FirewallPolicyAssessment.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FirewallPolicyAssessment
+                         * @function getTypeUrl
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FirewallPolicyAssessment.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment";
+                        };
+    
+                        return FirewallPolicyAssessment;
+                    })();
+    
+                    v1.FirewallAction = (function() {
+    
+                        /**
+                         * Properties of a FirewallAction.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IFirewallAction
+                         * @property {google.cloud.recaptchaenterprise.v1.FirewallAction.IAllowAction|null} [allow] FirewallAction allow
+                         * @property {google.cloud.recaptchaenterprise.v1.FirewallAction.IBlockAction|null} [block] FirewallAction block
+                         * @property {google.cloud.recaptchaenterprise.v1.FirewallAction.IRedirectAction|null} [redirect] FirewallAction redirect
+                         * @property {google.cloud.recaptchaenterprise.v1.FirewallAction.ISubstituteAction|null} [substitute] FirewallAction substitute
+                         * @property {google.cloud.recaptchaenterprise.v1.FirewallAction.ISetHeaderAction|null} [setHeader] FirewallAction setHeader
+                         */
+    
+                        /**
+                         * Constructs a new FirewallAction.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a FirewallAction.
+                         * @implements IFirewallAction
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IFirewallAction=} [properties] Properties to set
+                         */
+                        function FirewallAction(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FirewallAction allow.
+                         * @member {google.cloud.recaptchaenterprise.v1.FirewallAction.IAllowAction|null|undefined} allow
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction
+                         * @instance
+                         */
+                        FirewallAction.prototype.allow = null;
+    
+                        /**
+                         * FirewallAction block.
+                         * @member {google.cloud.recaptchaenterprise.v1.FirewallAction.IBlockAction|null|undefined} block
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction
+                         * @instance
+                         */
+                        FirewallAction.prototype.block = null;
+    
+                        /**
+                         * FirewallAction redirect.
+                         * @member {google.cloud.recaptchaenterprise.v1.FirewallAction.IRedirectAction|null|undefined} redirect
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction
+                         * @instance
+                         */
+                        FirewallAction.prototype.redirect = null;
+    
+                        /**
+                         * FirewallAction substitute.
+                         * @member {google.cloud.recaptchaenterprise.v1.FirewallAction.ISubstituteAction|null|undefined} substitute
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction
+                         * @instance
+                         */
+                        FirewallAction.prototype.substitute = null;
+    
+                        /**
+                         * FirewallAction setHeader.
+                         * @member {google.cloud.recaptchaenterprise.v1.FirewallAction.ISetHeaderAction|null|undefined} setHeader
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction
+                         * @instance
+                         */
+                        FirewallAction.prototype.setHeader = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * FirewallAction firewallActionOneof.
+                         * @member {"allow"|"block"|"redirect"|"substitute"|"setHeader"|undefined} firewallActionOneof
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction
+                         * @instance
+                         */
+                        Object.defineProperty(FirewallAction.prototype, "firewallActionOneof", {
+                            get: $util.oneOfGetter($oneOfFields = ["allow", "block", "redirect", "substitute", "setHeader"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new FirewallAction instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IFirewallAction=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.FirewallAction} FirewallAction instance
+                         */
+                        FirewallAction.create = function create(properties) {
+                            return new FirewallAction(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FirewallAction message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallAction.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IFirewallAction} message FirewallAction message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FirewallAction.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.allow != null && Object.hasOwnProperty.call(message, "allow"))
+                                $root.google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction.encode(message.allow, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.block != null && Object.hasOwnProperty.call(message, "block"))
+                                $root.google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction.encode(message.block, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.substitute != null && Object.hasOwnProperty.call(message, "substitute"))
+                                $root.google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction.encode(message.substitute, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.setHeader != null && Object.hasOwnProperty.call(message, "setHeader"))
+                                $root.google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction.encode(message.setHeader, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.redirect != null && Object.hasOwnProperty.call(message, "redirect"))
+                                $root.google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction.encode(message.redirect, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FirewallAction message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallAction.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IFirewallAction} message FirewallAction message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FirewallAction.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FirewallAction message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.FirewallAction} FirewallAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FirewallAction.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.FirewallAction();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.allow = $root.google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.block = $root.google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.redirect = $root.google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.substitute = $root.google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.setHeader = $root.google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FirewallAction message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.FirewallAction} FirewallAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FirewallAction.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FirewallAction message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FirewallAction.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.allow != null && message.hasOwnProperty("allow")) {
+                                properties.firewallActionOneof = 1;
+                                {
+                                    var error = $root.google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction.verify(message.allow);
+                                    if (error)
+                                        return "allow." + error;
+                                }
+                            }
+                            if (message.block != null && message.hasOwnProperty("block")) {
+                                if (properties.firewallActionOneof === 1)
+                                    return "firewallActionOneof: multiple values";
+                                properties.firewallActionOneof = 1;
+                                {
+                                    var error = $root.google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction.verify(message.block);
+                                    if (error)
+                                        return "block." + error;
+                                }
+                            }
+                            if (message.redirect != null && message.hasOwnProperty("redirect")) {
+                                if (properties.firewallActionOneof === 1)
+                                    return "firewallActionOneof: multiple values";
+                                properties.firewallActionOneof = 1;
+                                {
+                                    var error = $root.google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction.verify(message.redirect);
+                                    if (error)
+                                        return "redirect." + error;
+                                }
+                            }
+                            if (message.substitute != null && message.hasOwnProperty("substitute")) {
+                                if (properties.firewallActionOneof === 1)
+                                    return "firewallActionOneof: multiple values";
+                                properties.firewallActionOneof = 1;
+                                {
+                                    var error = $root.google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction.verify(message.substitute);
+                                    if (error)
+                                        return "substitute." + error;
+                                }
+                            }
+                            if (message.setHeader != null && message.hasOwnProperty("setHeader")) {
+                                if (properties.firewallActionOneof === 1)
+                                    return "firewallActionOneof: multiple values";
+                                properties.firewallActionOneof = 1;
+                                {
+                                    var error = $root.google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction.verify(message.setHeader);
+                                    if (error)
+                                        return "setHeader." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FirewallAction message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.FirewallAction} FirewallAction
+                         */
+                        FirewallAction.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.FirewallAction)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.FirewallAction();
+                            if (object.allow != null) {
+                                if (typeof object.allow !== "object")
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.FirewallAction.allow: object expected");
+                                message.allow = $root.google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction.fromObject(object.allow);
+                            }
+                            if (object.block != null) {
+                                if (typeof object.block !== "object")
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.FirewallAction.block: object expected");
+                                message.block = $root.google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction.fromObject(object.block);
+                            }
+                            if (object.redirect != null) {
+                                if (typeof object.redirect !== "object")
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.FirewallAction.redirect: object expected");
+                                message.redirect = $root.google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction.fromObject(object.redirect);
+                            }
+                            if (object.substitute != null) {
+                                if (typeof object.substitute !== "object")
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.FirewallAction.substitute: object expected");
+                                message.substitute = $root.google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction.fromObject(object.substitute);
+                            }
+                            if (object.setHeader != null) {
+                                if (typeof object.setHeader !== "object")
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.FirewallAction.setHeader: object expected");
+                                message.setHeader = $root.google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction.fromObject(object.setHeader);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FirewallAction message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.FirewallAction} message FirewallAction
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FirewallAction.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.allow != null && message.hasOwnProperty("allow")) {
+                                object.allow = $root.google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction.toObject(message.allow, options);
+                                if (options.oneofs)
+                                    object.firewallActionOneof = "allow";
+                            }
+                            if (message.block != null && message.hasOwnProperty("block")) {
+                                object.block = $root.google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction.toObject(message.block, options);
+                                if (options.oneofs)
+                                    object.firewallActionOneof = "block";
+                            }
+                            if (message.substitute != null && message.hasOwnProperty("substitute")) {
+                                object.substitute = $root.google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction.toObject(message.substitute, options);
+                                if (options.oneofs)
+                                    object.firewallActionOneof = "substitute";
+                            }
+                            if (message.setHeader != null && message.hasOwnProperty("setHeader")) {
+                                object.setHeader = $root.google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction.toObject(message.setHeader, options);
+                                if (options.oneofs)
+                                    object.firewallActionOneof = "setHeader";
+                            }
+                            if (message.redirect != null && message.hasOwnProperty("redirect")) {
+                                object.redirect = $root.google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction.toObject(message.redirect, options);
+                                if (options.oneofs)
+                                    object.firewallActionOneof = "redirect";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FirewallAction to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FirewallAction.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FirewallAction
+                         * @function getTypeUrl
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FirewallAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.FirewallAction";
+                        };
+    
+                        FirewallAction.AllowAction = (function() {
+    
+                            /**
+                             * Properties of an AllowAction.
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction
+                             * @interface IAllowAction
+                             */
+    
+                            /**
+                             * Constructs a new AllowAction.
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction
+                             * @classdesc Represents an AllowAction.
+                             * @implements IAllowAction
+                             * @constructor
+                             * @param {google.cloud.recaptchaenterprise.v1.FirewallAction.IAllowAction=} [properties] Properties to set
+                             */
+                            function AllowAction(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new AllowAction instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FirewallAction.IAllowAction=} [properties] Properties to set
+                             * @returns {google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction} AllowAction instance
+                             */
+                            AllowAction.create = function create(properties) {
+                                return new AllowAction(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AllowAction message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FirewallAction.IAllowAction} message AllowAction message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AllowAction.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AllowAction message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FirewallAction.IAllowAction} message AllowAction message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AllowAction.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AllowAction message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction} AllowAction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AllowAction.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AllowAction message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction} AllowAction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AllowAction.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AllowAction message.
+                             * @function verify
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AllowAction.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AllowAction message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction} AllowAction
+                             */
+                            AllowAction.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction)
+                                    return object;
+                                return new $root.google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction();
+                            };
+    
+                            /**
+                             * Creates a plain object from an AllowAction message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction} message AllowAction
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AllowAction.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this AllowAction to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AllowAction.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AllowAction
+                             * @function getTypeUrl
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AllowAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction";
+                            };
+    
+                            return AllowAction;
+                        })();
+    
+                        FirewallAction.BlockAction = (function() {
+    
+                            /**
+                             * Properties of a BlockAction.
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction
+                             * @interface IBlockAction
+                             */
+    
+                            /**
+                             * Constructs a new BlockAction.
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction
+                             * @classdesc Represents a BlockAction.
+                             * @implements IBlockAction
+                             * @constructor
+                             * @param {google.cloud.recaptchaenterprise.v1.FirewallAction.IBlockAction=} [properties] Properties to set
+                             */
+                            function BlockAction(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new BlockAction instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FirewallAction.IBlockAction=} [properties] Properties to set
+                             * @returns {google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction} BlockAction instance
+                             */
+                            BlockAction.create = function create(properties) {
+                                return new BlockAction(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified BlockAction message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FirewallAction.IBlockAction} message BlockAction message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BlockAction.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified BlockAction message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FirewallAction.IBlockAction} message BlockAction message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BlockAction.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a BlockAction message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction} BlockAction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BlockAction.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a BlockAction message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction} BlockAction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BlockAction.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a BlockAction message.
+                             * @function verify
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            BlockAction.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a BlockAction message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction} BlockAction
+                             */
+                            BlockAction.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction)
+                                    return object;
+                                return new $root.google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction();
+                            };
+    
+                            /**
+                             * Creates a plain object from a BlockAction message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction} message BlockAction
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            BlockAction.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this BlockAction to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            BlockAction.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for BlockAction
+                             * @function getTypeUrl
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            BlockAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction";
+                            };
+    
+                            return BlockAction;
+                        })();
+    
+                        FirewallAction.RedirectAction = (function() {
+    
+                            /**
+                             * Properties of a RedirectAction.
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction
+                             * @interface IRedirectAction
+                             */
+    
+                            /**
+                             * Constructs a new RedirectAction.
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction
+                             * @classdesc Represents a RedirectAction.
+                             * @implements IRedirectAction
+                             * @constructor
+                             * @param {google.cloud.recaptchaenterprise.v1.FirewallAction.IRedirectAction=} [properties] Properties to set
+                             */
+                            function RedirectAction(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new RedirectAction instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FirewallAction.IRedirectAction=} [properties] Properties to set
+                             * @returns {google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction} RedirectAction instance
+                             */
+                            RedirectAction.create = function create(properties) {
+                                return new RedirectAction(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RedirectAction message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FirewallAction.IRedirectAction} message RedirectAction message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RedirectAction.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RedirectAction message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FirewallAction.IRedirectAction} message RedirectAction message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RedirectAction.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RedirectAction message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction} RedirectAction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RedirectAction.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RedirectAction message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction} RedirectAction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RedirectAction.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RedirectAction message.
+                             * @function verify
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RedirectAction.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RedirectAction message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction} RedirectAction
+                             */
+                            RedirectAction.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction)
+                                    return object;
+                                return new $root.google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction();
+                            };
+    
+                            /**
+                             * Creates a plain object from a RedirectAction message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction} message RedirectAction
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RedirectAction.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this RedirectAction to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RedirectAction.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RedirectAction
+                             * @function getTypeUrl
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RedirectAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction";
+                            };
+    
+                            return RedirectAction;
+                        })();
+    
+                        FirewallAction.SubstituteAction = (function() {
+    
+                            /**
+                             * Properties of a SubstituteAction.
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction
+                             * @interface ISubstituteAction
+                             * @property {string|null} [path] SubstituteAction path
+                             */
+    
+                            /**
+                             * Constructs a new SubstituteAction.
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction
+                             * @classdesc Represents a SubstituteAction.
+                             * @implements ISubstituteAction
+                             * @constructor
+                             * @param {google.cloud.recaptchaenterprise.v1.FirewallAction.ISubstituteAction=} [properties] Properties to set
+                             */
+                            function SubstituteAction(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SubstituteAction path.
+                             * @member {string} path
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction
+                             * @instance
+                             */
+                            SubstituteAction.prototype.path = "";
+    
+                            /**
+                             * Creates a new SubstituteAction instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FirewallAction.ISubstituteAction=} [properties] Properties to set
+                             * @returns {google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction} SubstituteAction instance
+                             */
+                            SubstituteAction.create = function create(properties) {
+                                return new SubstituteAction(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SubstituteAction message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FirewallAction.ISubstituteAction} message SubstituteAction message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SubstituteAction.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.path != null && Object.hasOwnProperty.call(message, "path"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.path);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SubstituteAction message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FirewallAction.ISubstituteAction} message SubstituteAction message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SubstituteAction.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SubstituteAction message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction} SubstituteAction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SubstituteAction.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.path = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SubstituteAction message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction} SubstituteAction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SubstituteAction.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SubstituteAction message.
+                             * @function verify
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SubstituteAction.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.path != null && message.hasOwnProperty("path"))
+                                    if (!$util.isString(message.path))
+                                        return "path: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SubstituteAction message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction} SubstituteAction
+                             */
+                            SubstituteAction.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction)
+                                    return object;
+                                var message = new $root.google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction();
+                                if (object.path != null)
+                                    message.path = String(object.path);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SubstituteAction message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction} message SubstituteAction
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SubstituteAction.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.path = "";
+                                if (message.path != null && message.hasOwnProperty("path"))
+                                    object.path = message.path;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SubstituteAction to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SubstituteAction.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SubstituteAction
+                             * @function getTypeUrl
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SubstituteAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction";
+                            };
+    
+                            return SubstituteAction;
+                        })();
+    
+                        FirewallAction.SetHeaderAction = (function() {
+    
+                            /**
+                             * Properties of a SetHeaderAction.
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction
+                             * @interface ISetHeaderAction
+                             * @property {string|null} [key] SetHeaderAction key
+                             * @property {string|null} [value] SetHeaderAction value
+                             */
+    
+                            /**
+                             * Constructs a new SetHeaderAction.
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction
+                             * @classdesc Represents a SetHeaderAction.
+                             * @implements ISetHeaderAction
+                             * @constructor
+                             * @param {google.cloud.recaptchaenterprise.v1.FirewallAction.ISetHeaderAction=} [properties] Properties to set
+                             */
+                            function SetHeaderAction(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SetHeaderAction key.
+                             * @member {string} key
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction
+                             * @instance
+                             */
+                            SetHeaderAction.prototype.key = "";
+    
+                            /**
+                             * SetHeaderAction value.
+                             * @member {string} value
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction
+                             * @instance
+                             */
+                            SetHeaderAction.prototype.value = "";
+    
+                            /**
+                             * Creates a new SetHeaderAction instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FirewallAction.ISetHeaderAction=} [properties] Properties to set
+                             * @returns {google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction} SetHeaderAction instance
+                             */
+                            SetHeaderAction.create = function create(properties) {
+                                return new SetHeaderAction(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SetHeaderAction message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FirewallAction.ISetHeaderAction} message SetHeaderAction message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SetHeaderAction.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
+                                if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SetHeaderAction message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FirewallAction.ISetHeaderAction} message SetHeaderAction message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SetHeaderAction.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SetHeaderAction message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction} SetHeaderAction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SetHeaderAction.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.key = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.value = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SetHeaderAction message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction} SetHeaderAction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SetHeaderAction.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SetHeaderAction message.
+                             * @function verify
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SetHeaderAction.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.key != null && message.hasOwnProperty("key"))
+                                    if (!$util.isString(message.key))
+                                        return "key: string expected";
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    if (!$util.isString(message.value))
+                                        return "value: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SetHeaderAction message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction} SetHeaderAction
+                             */
+                            SetHeaderAction.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction)
+                                    return object;
+                                var message = new $root.google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction();
+                                if (object.key != null)
+                                    message.key = String(object.key);
+                                if (object.value != null)
+                                    message.value = String(object.value);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SetHeaderAction message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction} message SetHeaderAction
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SetHeaderAction.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.key = "";
+                                    object.value = "";
+                                }
+                                if (message.key != null && message.hasOwnProperty("key"))
+                                    object.key = message.key;
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    object.value = message.value;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SetHeaderAction to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SetHeaderAction.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SetHeaderAction
+                             * @function getTypeUrl
+                             * @memberof google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SetHeaderAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction";
+                            };
+    
+                            return SetHeaderAction;
+                        })();
+    
+                        return FirewallAction;
+                    })();
+    
+                    v1.FirewallPolicy = (function() {
+    
+                        /**
+                         * Properties of a FirewallPolicy.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IFirewallPolicy
+                         * @property {string|null} [name] FirewallPolicy name
+                         * @property {string|null} [description] FirewallPolicy description
+                         * @property {string|null} [path] FirewallPolicy path
+                         * @property {string|null} [condition] FirewallPolicy condition
+                         * @property {Array.<google.cloud.recaptchaenterprise.v1.IFirewallAction>|null} [actions] FirewallPolicy actions
+                         */
+    
+                        /**
+                         * Constructs a new FirewallPolicy.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a FirewallPolicy.
+                         * @implements IFirewallPolicy
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IFirewallPolicy=} [properties] Properties to set
+                         */
+                        function FirewallPolicy(properties) {
+                            this.actions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FirewallPolicy name.
+                         * @member {string} name
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallPolicy
+                         * @instance
+                         */
+                        FirewallPolicy.prototype.name = "";
+    
+                        /**
+                         * FirewallPolicy description.
+                         * @member {string} description
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallPolicy
+                         * @instance
+                         */
+                        FirewallPolicy.prototype.description = "";
+    
+                        /**
+                         * FirewallPolicy path.
+                         * @member {string} path
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallPolicy
+                         * @instance
+                         */
+                        FirewallPolicy.prototype.path = "";
+    
+                        /**
+                         * FirewallPolicy condition.
+                         * @member {string} condition
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallPolicy
+                         * @instance
+                         */
+                        FirewallPolicy.prototype.condition = "";
+    
+                        /**
+                         * FirewallPolicy actions.
+                         * @member {Array.<google.cloud.recaptchaenterprise.v1.IFirewallAction>} actions
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallPolicy
+                         * @instance
+                         */
+                        FirewallPolicy.prototype.actions = $util.emptyArray;
+    
+                        /**
+                         * Creates a new FirewallPolicy instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallPolicy
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IFirewallPolicy=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.FirewallPolicy} FirewallPolicy instance
+                         */
+                        FirewallPolicy.create = function create(properties) {
+                            return new FirewallPolicy(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FirewallPolicy message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallPolicy.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallPolicy
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IFirewallPolicy} message FirewallPolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FirewallPolicy.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                            if (message.path != null && Object.hasOwnProperty.call(message, "path"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.path);
+                            if (message.condition != null && Object.hasOwnProperty.call(message, "condition"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.condition);
+                            if (message.actions != null && message.actions.length)
+                                for (var i = 0; i < message.actions.length; ++i)
+                                    $root.google.cloud.recaptchaenterprise.v1.FirewallAction.encode(message.actions[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FirewallPolicy message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallPolicy.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallPolicy
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IFirewallPolicy} message FirewallPolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FirewallPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FirewallPolicy message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallPolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.FirewallPolicy} FirewallPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FirewallPolicy.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.FirewallPolicy();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.path = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.condition = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.actions && message.actions.length))
+                                            message.actions = [];
+                                        message.actions.push($root.google.cloud.recaptchaenterprise.v1.FirewallAction.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FirewallPolicy message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallPolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.FirewallPolicy} FirewallPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FirewallPolicy.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FirewallPolicy message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallPolicy
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FirewallPolicy.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.path != null && message.hasOwnProperty("path"))
+                                if (!$util.isString(message.path))
+                                    return "path: string expected";
+                            if (message.condition != null && message.hasOwnProperty("condition"))
+                                if (!$util.isString(message.condition))
+                                    return "condition: string expected";
+                            if (message.actions != null && message.hasOwnProperty("actions")) {
+                                if (!Array.isArray(message.actions))
+                                    return "actions: array expected";
+                                for (var i = 0; i < message.actions.length; ++i) {
+                                    var error = $root.google.cloud.recaptchaenterprise.v1.FirewallAction.verify(message.actions[i]);
+                                    if (error)
+                                        return "actions." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FirewallPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallPolicy
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.FirewallPolicy} FirewallPolicy
+                         */
+                        FirewallPolicy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.FirewallPolicy)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.FirewallPolicy();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.path != null)
+                                message.path = String(object.path);
+                            if (object.condition != null)
+                                message.condition = String(object.condition);
+                            if (object.actions) {
+                                if (!Array.isArray(object.actions))
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.FirewallPolicy.actions: array expected");
+                                message.actions = [];
+                                for (var i = 0; i < object.actions.length; ++i) {
+                                    if (typeof object.actions[i] !== "object")
+                                        throw TypeError(".google.cloud.recaptchaenterprise.v1.FirewallPolicy.actions: object expected");
+                                    message.actions[i] = $root.google.cloud.recaptchaenterprise.v1.FirewallAction.fromObject(object.actions[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FirewallPolicy message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallPolicy
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.FirewallPolicy} message FirewallPolicy
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FirewallPolicy.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.actions = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.description = "";
+                                object.path = "";
+                                object.condition = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.path != null && message.hasOwnProperty("path"))
+                                object.path = message.path;
+                            if (message.condition != null && message.hasOwnProperty("condition"))
+                                object.condition = message.condition;
+                            if (message.actions && message.actions.length) {
+                                object.actions = [];
+                                for (var j = 0; j < message.actions.length; ++j)
+                                    object.actions[j] = $root.google.cloud.recaptchaenterprise.v1.FirewallAction.toObject(message.actions[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FirewallPolicy to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallPolicy
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FirewallPolicy.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FirewallPolicy
+                         * @function getTypeUrl
+                         * @memberof google.cloud.recaptchaenterprise.v1.FirewallPolicy
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FirewallPolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.FirewallPolicy";
+                        };
+    
+                        return FirewallPolicy;
                     })();
     
                     v1.ListRelatedAccountGroupMembershipsRequest = (function() {
@@ -14273,6 +19211,7 @@
                                     return "wafService: enum value expected";
                                 case 0:
                                 case 1:
+                                case 3:
                                     break;
                                 }
                             if (message.wafFeature != null && message.hasOwnProperty("wafFeature"))
@@ -14283,6 +19222,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 5:
                                     break;
                                 }
                             return null;
@@ -14315,6 +19255,10 @@
                             case 1:
                                 message.wafService = 1;
                                 break;
+                            case "FASTLY":
+                            case 3:
+                                message.wafService = 3;
+                                break;
                             }
                             switch (object.wafFeature) {
                             default:
@@ -14338,6 +19282,10 @@
                             case "ACTION_TOKEN":
                             case 3:
                                 message.wafFeature = 3;
+                                break;
+                            case "EXPRESS":
+                            case 5:
+                                message.wafFeature = 5;
                                 break;
                             }
                             return message;
@@ -14401,6 +19349,7 @@
                          * @property {number} CHALLENGE_PAGE=1 CHALLENGE_PAGE value
                          * @property {number} SESSION_TOKEN=2 SESSION_TOKEN value
                          * @property {number} ACTION_TOKEN=3 ACTION_TOKEN value
+                         * @property {number} EXPRESS=5 EXPRESS value
                          */
                         WafSettings.WafFeature = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -14408,6 +19357,7 @@
                             values[valuesById[1] = "CHALLENGE_PAGE"] = 1;
                             values[valuesById[2] = "SESSION_TOKEN"] = 2;
                             values[valuesById[3] = "ACTION_TOKEN"] = 3;
+                            values[valuesById[5] = "EXPRESS"] = 5;
                             return values;
                         })();
     
@@ -14417,11 +19367,13 @@
                          * @enum {number}
                          * @property {number} WAF_SERVICE_UNSPECIFIED=0 WAF_SERVICE_UNSPECIFIED value
                          * @property {number} CA=1 CA value
+                         * @property {number} FASTLY=3 FASTLY value
                          */
                         WafSettings.WafService = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "WAF_SERVICE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "CA"] = 1;
+                            values[valuesById[3] = "FASTLY"] = 3;
                             return values;
                         })();
     
@@ -19173,6 +24125,7 @@
                          * @property {number|null} [transactionRisk] FraudPreventionAssessment transactionRisk
                          * @property {google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.IStolenInstrumentVerdict|null} [stolenInstrumentVerdict] FraudPreventionAssessment stolenInstrumentVerdict
                          * @property {google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.ICardTestingVerdict|null} [cardTestingVerdict] FraudPreventionAssessment cardTestingVerdict
+                         * @property {google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.IBehavioralTrustVerdict|null} [behavioralTrustVerdict] FraudPreventionAssessment behavioralTrustVerdict
                          */
     
                         /**
@@ -19215,6 +24168,14 @@
                         FraudPreventionAssessment.prototype.cardTestingVerdict = null;
     
                         /**
+                         * FraudPreventionAssessment behavioralTrustVerdict.
+                         * @member {google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.IBehavioralTrustVerdict|null|undefined} behavioralTrustVerdict
+                         * @memberof google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment
+                         * @instance
+                         */
+                        FraudPreventionAssessment.prototype.behavioralTrustVerdict = null;
+    
+                        /**
                          * Creates a new FraudPreventionAssessment instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment
@@ -19244,6 +24205,8 @@
                                 $root.google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.StolenInstrumentVerdict.encode(message.stolenInstrumentVerdict, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.cardTestingVerdict != null && Object.hasOwnProperty.call(message, "cardTestingVerdict"))
                                 $root.google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.CardTestingVerdict.encode(message.cardTestingVerdict, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.behavioralTrustVerdict != null && Object.hasOwnProperty.call(message, "behavioralTrustVerdict"))
+                                $root.google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict.encode(message.behavioralTrustVerdict, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -19288,6 +24251,10 @@
                                     }
                                 case 3: {
                                         message.cardTestingVerdict = $root.google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.CardTestingVerdict.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.behavioralTrustVerdict = $root.google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -19338,6 +24305,11 @@
                                 if (error)
                                     return "cardTestingVerdict." + error;
                             }
+                            if (message.behavioralTrustVerdict != null && message.hasOwnProperty("behavioralTrustVerdict")) {
+                                var error = $root.google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict.verify(message.behavioralTrustVerdict);
+                                if (error)
+                                    return "behavioralTrustVerdict." + error;
+                            }
                             return null;
                         };
     
@@ -19365,6 +24337,11 @@
                                     throw TypeError(".google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.cardTestingVerdict: object expected");
                                 message.cardTestingVerdict = $root.google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.CardTestingVerdict.fromObject(object.cardTestingVerdict);
                             }
+                            if (object.behavioralTrustVerdict != null) {
+                                if (typeof object.behavioralTrustVerdict !== "object")
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.behavioralTrustVerdict: object expected");
+                                message.behavioralTrustVerdict = $root.google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict.fromObject(object.behavioralTrustVerdict);
+                            }
                             return message;
                         };
     
@@ -19385,6 +24362,7 @@
                                 object.transactionRisk = 0;
                                 object.stolenInstrumentVerdict = null;
                                 object.cardTestingVerdict = null;
+                                object.behavioralTrustVerdict = null;
                             }
                             if (message.transactionRisk != null && message.hasOwnProperty("transactionRisk"))
                                 object.transactionRisk = options.json && !isFinite(message.transactionRisk) ? String(message.transactionRisk) : message.transactionRisk;
@@ -19392,6 +24370,8 @@
                                 object.stolenInstrumentVerdict = $root.google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.StolenInstrumentVerdict.toObject(message.stolenInstrumentVerdict, options);
                             if (message.cardTestingVerdict != null && message.hasOwnProperty("cardTestingVerdict"))
                                 object.cardTestingVerdict = $root.google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.CardTestingVerdict.toObject(message.cardTestingVerdict, options);
+                            if (message.behavioralTrustVerdict != null && message.hasOwnProperty("behavioralTrustVerdict"))
+                                object.behavioralTrustVerdict = $root.google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict.toObject(message.behavioralTrustVerdict, options);
                             return object;
                         };
     
@@ -19825,6 +24805,209 @@
                             };
     
                             return CardTestingVerdict;
+                        })();
+    
+                        FraudPreventionAssessment.BehavioralTrustVerdict = (function() {
+    
+                            /**
+                             * Properties of a BehavioralTrustVerdict.
+                             * @memberof google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment
+                             * @interface IBehavioralTrustVerdict
+                             * @property {number|null} [trust] BehavioralTrustVerdict trust
+                             */
+    
+                            /**
+                             * Constructs a new BehavioralTrustVerdict.
+                             * @memberof google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment
+                             * @classdesc Represents a BehavioralTrustVerdict.
+                             * @implements IBehavioralTrustVerdict
+                             * @constructor
+                             * @param {google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.IBehavioralTrustVerdict=} [properties] Properties to set
+                             */
+                            function BehavioralTrustVerdict(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * BehavioralTrustVerdict trust.
+                             * @member {number} trust
+                             * @memberof google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @instance
+                             */
+                            BehavioralTrustVerdict.prototype.trust = 0;
+    
+                            /**
+                             * Creates a new BehavioralTrustVerdict instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.IBehavioralTrustVerdict=} [properties] Properties to set
+                             * @returns {google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict} BehavioralTrustVerdict instance
+                             */
+                            BehavioralTrustVerdict.create = function create(properties) {
+                                return new BehavioralTrustVerdict(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified BehavioralTrustVerdict message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.IBehavioralTrustVerdict} message BehavioralTrustVerdict message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BehavioralTrustVerdict.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.trust != null && Object.hasOwnProperty.call(message, "trust"))
+                                    writer.uint32(/* id 1, wireType 5 =*/13).float(message.trust);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified BehavioralTrustVerdict message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.IBehavioralTrustVerdict} message BehavioralTrustVerdict message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BehavioralTrustVerdict.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a BehavioralTrustVerdict message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict} BehavioralTrustVerdict
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BehavioralTrustVerdict.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.trust = reader.float();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a BehavioralTrustVerdict message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict} BehavioralTrustVerdict
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BehavioralTrustVerdict.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a BehavioralTrustVerdict message.
+                             * @function verify
+                             * @memberof google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            BehavioralTrustVerdict.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.trust != null && message.hasOwnProperty("trust"))
+                                    if (typeof message.trust !== "number")
+                                        return "trust: number expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a BehavioralTrustVerdict message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict} BehavioralTrustVerdict
+                             */
+                            BehavioralTrustVerdict.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict)
+                                    return object;
+                                var message = new $root.google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict();
+                                if (object.trust != null)
+                                    message.trust = Number(object.trust);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a BehavioralTrustVerdict message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict} message BehavioralTrustVerdict
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            BehavioralTrustVerdict.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.trust = 0;
+                                if (message.trust != null && message.hasOwnProperty("trust"))
+                                    object.trust = options.json && !isFinite(message.trust) ? String(message.trust) : message.trust;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this BehavioralTrustVerdict to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            BehavioralTrustVerdict.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for BehavioralTrustVerdict
+                             * @function getTypeUrl
+                             * @memberof google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            BehavioralTrustVerdict.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict";
+                            };
+    
+                            return BehavioralTrustVerdict;
                         })();
     
                         return FraudPreventionAssessment;
@@ -35915,7 +41098,527 @@
                 return Timestamp;
             })();
     
+            protobuf.Any = (function() {
+    
+                /**
+                 * Properties of an Any.
+                 * @memberof google.protobuf
+                 * @interface IAny
+                 * @property {string|null} [type_url] Any type_url
+                 * @property {Uint8Array|null} [value] Any value
+                 */
+    
+                /**
+                 * Constructs a new Any.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Any.
+                 * @implements IAny
+                 * @constructor
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 */
+                function Any(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Any type_url.
+                 * @member {string} type_url
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.type_url = "";
+    
+                /**
+                 * Any value.
+                 * @member {Uint8Array} value
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.value = $util.newBuffer([]);
+    
+                /**
+                 * Creates a new Any instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 * @returns {google.protobuf.Any} Any instance
+                 */
+                Any.create = function create(properties) {
+                    return new Any(properties);
+                };
+    
+                /**
+                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type_url = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.value = reader.bytes();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Any message.
+                 * @function verify
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Any.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        if (!$util.isString(message.type_url))
+                            return "type_url: string expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
+                            return "value: buffer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Any} Any
+                 */
+                Any.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Any)
+                        return object;
+                    var message = new $root.google.protobuf.Any();
+                    if (object.type_url != null)
+                        message.type_url = String(object.type_url);
+                    if (object.value != null)
+                        if (typeof object.value === "string")
+                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
+                        else if (object.value.length >= 0)
+                            message.value = object.value;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Any message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.Any} message Any
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Any.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type_url = "";
+                        if (options.bytes === String)
+                            object.value = "";
+                        else {
+                            object.value = [];
+                            if (options.bytes !== Array)
+                                object.value = $util.newBuffer(object.value);
+                        }
+                    }
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        object.type_url = message.type_url;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Any to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Any.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Any
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Any.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Any";
+                };
+    
+                return Any;
+            })();
+    
             return protobuf;
+        })();
+    
+        google.rpc = (function() {
+    
+            /**
+             * Namespace rpc.
+             * @memberof google
+             * @namespace
+             */
+            var rpc = {};
+    
+            rpc.Status = (function() {
+    
+                /**
+                 * Properties of a Status.
+                 * @memberof google.rpc
+                 * @interface IStatus
+                 * @property {number|null} [code] Status code
+                 * @property {string|null} [message] Status message
+                 * @property {Array.<google.protobuf.IAny>|null} [details] Status details
+                 */
+    
+                /**
+                 * Constructs a new Status.
+                 * @memberof google.rpc
+                 * @classdesc Represents a Status.
+                 * @implements IStatus
+                 * @constructor
+                 * @param {google.rpc.IStatus=} [properties] Properties to set
+                 */
+                function Status(properties) {
+                    this.details = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Status code.
+                 * @member {number} code
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.code = 0;
+    
+                /**
+                 * Status message.
+                 * @member {string} message
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.message = "";
+    
+                /**
+                 * Status details.
+                 * @member {Array.<google.protobuf.IAny>} details
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.details = $util.emptyArray;
+    
+                /**
+                 * Creates a new Status instance using the specified properties.
+                 * @function create
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus=} [properties] Properties to set
+                 * @returns {google.rpc.Status} Status instance
+                 */
+                Status.create = function create(properties) {
+                    return new Status(properties);
+                };
+    
+                /**
+                 * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus} message Status message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Status.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
+                    if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
+                    if (message.details != null && message.details.length)
+                        for (var i = 0; i < message.details.length; ++i)
+                            $root.google.protobuf.Any.encode(message.details[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus} message Status message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Status.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Status message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.rpc.Status} Status
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Status.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.code = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.message = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.details && message.details.length))
+                                    message.details = [];
+                                message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Status message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.rpc.Status} Status
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Status.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Status message.
+                 * @function verify
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Status.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.code != null && message.hasOwnProperty("code"))
+                        if (!$util.isInteger(message.code))
+                            return "code: integer expected";
+                    if (message.message != null && message.hasOwnProperty("message"))
+                        if (!$util.isString(message.message))
+                            return "message: string expected";
+                    if (message.details != null && message.hasOwnProperty("details")) {
+                        if (!Array.isArray(message.details))
+                            return "details: array expected";
+                        for (var i = 0; i < message.details.length; ++i) {
+                            var error = $root.google.protobuf.Any.verify(message.details[i]);
+                            if (error)
+                                return "details." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Status message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.rpc.Status} Status
+                 */
+                Status.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.rpc.Status)
+                        return object;
+                    var message = new $root.google.rpc.Status();
+                    if (object.code != null)
+                        message.code = object.code | 0;
+                    if (object.message != null)
+                        message.message = String(object.message);
+                    if (object.details) {
+                        if (!Array.isArray(object.details))
+                            throw TypeError(".google.rpc.Status.details: array expected");
+                        message.details = [];
+                        for (var i = 0; i < object.details.length; ++i) {
+                            if (typeof object.details[i] !== "object")
+                                throw TypeError(".google.rpc.Status.details: object expected");
+                            message.details[i] = $root.google.protobuf.Any.fromObject(object.details[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Status message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.Status} message Status
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Status.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.details = [];
+                    if (options.defaults) {
+                        object.code = 0;
+                        object.message = "";
+                    }
+                    if (message.code != null && message.hasOwnProperty("code"))
+                        object.code = message.code;
+                    if (message.message != null && message.hasOwnProperty("message"))
+                        object.message = message.message;
+                    if (message.details && message.details.length) {
+                        object.details = [];
+                        for (var j = 0; j < message.details.length; ++j)
+                            object.details[j] = $root.google.protobuf.Any.toObject(message.details[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Status to JSON.
+                 * @function toJSON
+                 * @memberof google.rpc.Status
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Status.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Status
+                 * @function getTypeUrl
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Status.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.rpc.Status";
+                };
+    
+                return Status;
+            })();
+    
+            return rpc;
         })();
     
         return google;
