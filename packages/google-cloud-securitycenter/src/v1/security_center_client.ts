@@ -509,6 +509,7 @@ export class SecurityCenterClient {
       'setMute',
       'setIamPolicy',
       'testIamPermissions',
+      'simulateSecurityHealthAnalyticsCustomModule',
       'updateExternalSystem',
       'updateFinding',
       'updateMuteConfig',
@@ -2582,6 +2583,114 @@ export class SecurityCenterClient {
       });
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);
+  }
+  /**
+   * Simulates a given SecurityHealthAnalyticsCustomModule and Resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The relative resource name of the organization, project, or
+   *   folder. See:
+   *   https://cloud.google.com/apis/design/resource_names#relative_resource_name
+   *   An example is:
+   *   "organizations/{organization_id}".
+   * @param {google.cloud.securitycenter.v1.CustomConfig} request.customConfig
+   *   Required. The user specified custom configuration to test.
+   * @param {google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest.SimulatedResource} request.resource
+   *   Required. Resource data to simulate custom module against.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse|SimulateSecurityHealthAnalyticsCustomModuleResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.simulate_security_health_analytics_custom_module.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_SimulateSecurityHealthAnalyticsCustomModule_async
+   */
+  simulateSecurityHealthAnalyticsCustomModule(
+    request?: protos.google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleResponse,
+      (
+        | protos.google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  simulateSecurityHealthAnalyticsCustomModule(
+    request: protos.google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleResponse,
+      | protos.google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  simulateSecurityHealthAnalyticsCustomModule(
+    request: protos.google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleResponse,
+      | protos.google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  simulateSecurityHealthAnalyticsCustomModule(
+    request?: protos.google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleResponse,
+          | protos.google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleResponse,
+      | protos.google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleResponse,
+      (
+        | protos.google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.simulateSecurityHealthAnalyticsCustomModule(
+      request,
+      options,
+      callback
+    );
   }
   /**
    * Updates external system. This is for a given finding.

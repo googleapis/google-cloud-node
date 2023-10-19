@@ -2927,6 +2927,148 @@ describe('v1.SecurityCenterClient', () => {
     });
   });
 
+  describe('simulateSecurityHealthAnalyticsCustomModule', () => {
+    it('invokes simulateSecurityHealthAnalyticsCustomModule without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse()
+      );
+      client.innerApiCalls.simulateSecurityHealthAnalyticsCustomModule =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.simulateSecurityHealthAnalyticsCustomModule(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .simulateSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .simulateSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes simulateSecurityHealthAnalyticsCustomModule without error using callback', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse()
+      );
+      client.innerApiCalls.simulateSecurityHealthAnalyticsCustomModule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.simulateSecurityHealthAnalyticsCustomModule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .simulateSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .simulateSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes simulateSecurityHealthAnalyticsCustomModule with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.simulateSecurityHealthAnalyticsCustomModule =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.simulateSecurityHealthAnalyticsCustomModule(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls
+          .simulateSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .simulateSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes simulateSecurityHealthAnalyticsCustomModule with closed client', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.simulateSecurityHealthAnalyticsCustomModule(request),
+        expectedError
+      );
+    });
+  });
+
   describe('updateExternalSystem', () => {
     it('invokes updateExternalSystem without error', async () => {
       const client = new securitycenterModule.v1.SecurityCenterClient({
