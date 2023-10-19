@@ -26,7 +26,7 @@ import {
   PackageJson,
   util,
 } from './util';
-import {getRuntimeTrackingString} from '../util';
+import {getRuntimeTrackingString, getUserAgentString} from '../util';
 
 export const DEFAULT_PROJECT_ID_TOKEN = '{{projectId}}';
 
@@ -242,7 +242,7 @@ export class Service {
     delete reqOpts.interceptors_;
 
     const pkg = this.packageJson;
-    let userAgent = util.getUserAgentFromPackageJson(pkg);
+    let userAgent = getUserAgentString();
     if (this.providedUserAgent) {
       userAgent = `${this.providedUserAgent} ${userAgent}`;
     }

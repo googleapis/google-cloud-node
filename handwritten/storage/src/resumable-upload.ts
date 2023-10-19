@@ -26,7 +26,7 @@ import {Readable, Writable, WritableOptions} from 'stream';
 import retry = require('async-retry');
 import {RetryOptions, PreconditionOptions} from './storage';
 import * as uuid from 'uuid';
-import {getRuntimeTrackingString} from './util';
+import {getRuntimeTrackingString, getUserAgentString} from './util';
 import {GCCL_GCS_CMD_KEY} from './nodejs-common/util';
 
 const NOT_FOUND_STATUS_CODE = 404;
@@ -612,6 +612,7 @@ export class Upload extends Writable {
       ),
       data: metadata,
       headers: {
+        'User-Agent': getUserAgentString(),
         'x-goog-api-client': googAPIClient,
         ...headers,
       },
@@ -787,6 +788,7 @@ export class Upload extends Writable {
     }
 
     const headers: GaxiosOptions['headers'] = {
+      'User-Agent': getUserAgentString(),
       'x-goog-api-client': googAPIClient,
     };
 
@@ -936,6 +938,7 @@ export class Upload extends Writable {
       headers: {
         'Content-Length': 0,
         'Content-Range': 'bytes */*',
+        'User-Agent': getUserAgentString(),
         'x-goog-api-client': googAPIClient,
       },
     };

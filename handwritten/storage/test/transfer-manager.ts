@@ -443,6 +443,7 @@ describe('Transfer Manager', () => {
       const headersToAdd = {
         'Content-Type': 'foo/bar',
         'x-goog-meta-foo': 'foobar',
+        'User-Agent': 'barfoo',
       };
 
       mockGeneratorFunction = (bucket, fileName, uploadId, partsMap) => {
@@ -497,7 +498,7 @@ describe('Transfer Manager', () => {
     });
 
     it('should set the appropriate `GCCL_GCS_CMD_KEY`', async () => {
-      let called = true;
+      let called = false;
       class TestAuthClient extends AuthClient {
         async getAccessToken() {
           return {token: '', res: undefined};
@@ -516,6 +517,44 @@ describe('Transfer Manager', () => {
             opts.headers['x-goog-api-client'],
             /gccl-gcs-cmd\/tm.upload_sharded/
           );
+
+          return {
+            data: Buffer.from(
+              `<InitiateMultipartUploadResult>
+                <UploadId>1</UploadId>
+              </InitiateMultipartUploadResult>`
+            ),
+            headers: {},
+          } as GaxiosResponse;
+        }
+      }
+
+      transferManager.bucket.storage.authClient = new GoogleAuth({
+        authClient: new TestAuthClient(),
+      });
+
+      await transferManager.uploadFileInChunks(filePath);
+
+      assert(called);
+    });
+
+    it('should set User-Agent correctly based on package.json', async () => {
+      let called = false;
+      class TestAuthClient extends AuthClient {
+        async getAccessToken() {
+          return {token: '', res: undefined};
+        }
+
+        async getRequestHeaders() {
+          return {};
+        }
+
+        async request(opts: GaxiosOptions) {
+          called = true;
+
+          assert(opts.headers);
+          assert('User-Agent' in opts.headers);
+          assert.match(opts.headers['User-Agent'], /gcloud-node/);
 
           return {
             data: Buffer.from(

@@ -32,7 +32,7 @@ import {teenyRequest} from 'teeny-request';
 import {Interceptor} from './service-object';
 import * as uuid from 'uuid';
 import {DEFAULT_PROJECT_ID_TOKEN} from './service';
-import {getRuntimeTrackingString} from '../util';
+import {getRuntimeTrackingString, getUserAgentString} from '../util';
 
 const packageJson = require('../../../package.json');
 
@@ -1002,20 +1002,6 @@ export class Util {
   }
 
   /**
-   * Create a properly-formatted User-Agent string from a package.json file.
-   *
-   * @param {object} packageJson - A module's package.json file.
-   * @return {string} userAgent - The formatted User-Agent string.
-   */
-  getUserAgentFromPackageJson(packageJson: PackageJson) {
-    const hyphenatedPackageName = packageJson.name
-      .replace('@google-cloud', 'gcloud-node') // For legacy purposes.
-      .replace('/', '-'); // For UA spec-compliance purposes.
-
-    return hyphenatedPackageName + '/' + packageJson.version;
-  }
-
-  /**
    * Given two parameters, figure out if this is either:
    *  - Just a callback function
    *  - An options object, and then a callback function
@@ -1033,7 +1019,7 @@ export class Util {
 
   _getDefaultHeaders(gcclGcsCmd?: string) {
     const headers = {
-      'User-Agent': util.getUserAgentFromPackageJson(packageJson),
+      'User-Agent': getUserAgentString(),
       'x-goog-api-client': `${getRuntimeTrackingString()} gccl/${
         packageJson.version
       } gccl-invocation-id/${uuid.v4()}`,

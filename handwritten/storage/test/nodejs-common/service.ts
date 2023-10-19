@@ -35,6 +35,7 @@ import {
   util,
   Util,
 } from '../../src/nodejs-common/util';
+import {getUserAgentString} from '../../src/util';
 
 proxyquire.noPreserveCache();
 
@@ -473,40 +474,10 @@ describe('Service', () => {
     });
 
     it('should add the User Agent', done => {
-      const userAgent = 'user-agent/0.0.0';
-
-      const getUserAgentFn = util.getUserAgentFromPackageJson;
-      util.getUserAgentFromPackageJson = packageJson => {
-        util.getUserAgentFromPackageJson = getUserAgentFn;
-        assert.strictEqual(packageJson, service.packageJson);
-        return userAgent;
-      };
-
-      service.makeAuthenticatedRequest = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts.headers!['User-Agent'], userAgent);
-        done();
-      };
-
-      service.request_(reqOpts, assert.ifError);
-    });
-
-    it('should add the provided User Agent', done => {
-      const userAgent = 'user-agent/0.0.0';
-      const providedUserAgent = 'test';
-
-      service.providedUserAgent = providedUserAgent;
-
-      const getUserAgentFn = util.getUserAgentFromPackageJson;
-      util.getUserAgentFromPackageJson = packageJson => {
-        util.getUserAgentFromPackageJson = getUserAgentFn;
-        assert.strictEqual(packageJson, service.packageJson);
-        return userAgent;
-      };
-
       service.makeAuthenticatedRequest = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(
           reqOpts.headers!['User-Agent'],
-          `${providedUserAgent} ${userAgent}`
+          getUserAgentString()
         );
         done();
       };

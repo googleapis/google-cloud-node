@@ -1869,17 +1869,6 @@ describe('common/util', () => {
     });
   });
 
-  describe('getUserAgentFromPackageJson', () => {
-    it('should format a User Agent string from a package.json', () => {
-      const userAgent = util.getUserAgentFromPackageJson({
-        name: '@google-cloud/storage',
-        version: '0.1.0',
-      });
-
-      assert.strictEqual(userAgent, 'gcloud-node-storage/0.1.0');
-    });
-  });
-
   describe('maybeOptionsOrCallback', () => {
     it('should allow passing just a callback', () => {
       const optionsOrCallback = () => {};

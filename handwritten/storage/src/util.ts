@@ -192,6 +192,19 @@ export function getRuntimeTrackingString(): string {
   }
 }
 
+/**
+ * Looks at package.json and creates the user-agent string to be applied to request headers.
+ * @returns {string} user agent string.
+ */
+export function getUserAgentString(): string {
+  const pkg = require('../../package.json');
+  const hyphenatedPackageName = pkg.name
+    .replace('@google-cloud', 'gcloud-node') // For legacy purposes.
+    .replace('/', '-'); // For UA spec-compliance purposes.
+
+  return hyphenatedPackageName + '/' + pkg.version;
+}
+
 export class PassThroughShim extends PassThrough {
   private shouldEmitReading = true;
   private shouldEmitWriting = true;

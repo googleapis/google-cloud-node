@@ -27,7 +27,7 @@ import {ApiError} from './nodejs-common';
 import {GaxiosResponse, Headers} from 'gaxios';
 import {createHash} from 'crypto';
 import {GCCL_GCS_CMD_KEY} from './nodejs-common/util';
-import {getRuntimeTrackingString} from './util';
+import {getRuntimeTrackingString, getUserAgentString} from './util';
 
 const packageJson = require('../../package.json');
 
@@ -205,6 +205,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
 
   #setGoogApiClientHeaders(headers: Headers = {}): Headers {
     let headerFound = false;
+    let userAgentFound = false;
 
     for (const [key, value] of Object.entries(headers)) {
       if (key.toLocaleLowerCase().trim() === 'x-goog-api-client') {
@@ -216,7 +217,8 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
             key
           ] = `${value} gccl-gcs-cmd/${GCCL_GCS_CMD_FEATURE.UPLOAD_SHARDED}`;
         }
-        break;
+      } else if (key.toLocaleLowerCase().trim() === 'user-agent') {
+        userAgentFound = true;
       }
     }
 
@@ -225,6 +227,11 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
       headers['x-goog-api-client'] = `${getRuntimeTrackingString()} gccl/${
         packageJson.version
       } gccl-gcs-cmd/${GCCL_GCS_CMD_FEATURE.UPLOAD_SHARDED}`;
+    }
+
+    // If the User-Agent isn't present, add it
+    if (!userAgentFound) {
+      headers['User-Agent'] = getUserAgentString();
     }
 
     return headers;
