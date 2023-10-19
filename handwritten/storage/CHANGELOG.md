@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [7.3.1](https://github.com/googleapis/nodejs-storage/compare/v7.3.0...v7.3.1) (2023-10-19)
+
+
+### Bug Fixes
+
+* Add user-agent header to transfer manager and resumable upload ([#2334](https://github.com/googleapis/nodejs-storage/issues/2334)) ([0520867](https://github.com/googleapis/nodejs-storage/commit/0520867e51a2758ddf2773c0d910c937d55e21b1))
+* **deps:** Update dependency retry-request to v7 ([#2327](https://github.com/googleapis/nodejs-storage/issues/2327)) ([f20ef3c](https://github.com/googleapis/nodejs-storage/commit/f20ef3cb7bf8cbdda988e792edc7abd9a1b516f1))
+* Destroy sockets to stop memory leaking when stream errors ([#2336](https://github.com/googleapis/nodejs-storage/issues/2336)) ([04939ee](https://github.com/googleapis/nodejs-storage/commit/04939ee4976581cc4168943f0c578bc49458cff7))
+
 ## [7.3.0](https://github.com/googleapis/nodejs-storage/compare/v7.2.0...v7.3.0) (2023-10-11)
 
 
