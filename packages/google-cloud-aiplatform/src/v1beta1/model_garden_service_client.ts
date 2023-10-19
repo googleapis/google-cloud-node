@@ -23,12 +23,14 @@ import type {
   CallOptions,
   Descriptors,
   ClientOptions,
+  PaginationCallback,
+  GaxCall,
   IamClient,
   IamProtos,
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -211,6 +213,9 @@ export class ModelGardenServiceClient {
       datasetPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}'
       ),
+      datasetVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/datasets/{dataset}/datasetVersions/{dataset_version}'
+      ),
       deploymentResourcePoolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}'
       ),
@@ -325,6 +330,17 @@ export class ModelGardenServiceClient {
       ),
     };
 
+    // Some of the methods on this service return "paged" results,
+    // (e.g. 50 results at a time, with tokens to get subsequent
+    // pages). Denote the keys used for pagination and results.
+    this.descriptors.page = {
+      listPublisherModels: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'publisherModels'
+      ),
+    };
+
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.aiplatform.v1beta1.ModelGardenService',
@@ -375,7 +391,10 @@ export class ModelGardenServiceClient {
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const modelGardenServiceStubMethods = ['getPublisherModel'];
+    const modelGardenServiceStubMethods = [
+      'getPublisherModel',
+      'listPublisherModels',
+    ];
     for (const methodName of modelGardenServiceStubMethods) {
       const callPromise = this.modelGardenServiceStub.then(
         stub =>
@@ -391,7 +410,7 @@ export class ModelGardenServiceClient {
         }
       );
 
-      const descriptor = undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -562,6 +581,243 @@ export class ModelGardenServiceClient {
     return this.innerApiCalls.getPublisherModel(request, options, callback);
   }
 
+  /**
+   * Lists publisher models in Model Garden.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the Publisher from which to list the PublisherModels.
+   *   Format: `publishers/{publisher}`
+   * @param {string} [request.filter]
+   *   Optional. The standard list filter.
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.aiplatform.v1beta1.ListPublisherModelsResponse.next_page_token|ListPublisherModelsResponse.next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.aiplatform.v1beta1.ModelGardenService.ListPublisherModels|ModelGardenService.ListPublisherModels}
+   *   call.
+   * @param {google.cloud.aiplatform.v1beta1.PublisherModelView} [request.view]
+   *   Optional. PublisherModel view specifying which fields to read.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields to order by, sorted in ascending
+   *   order. Use "desc" after a field name for descending.
+   * @param {string} [request.languageCode]
+   *   Optional. The IETF BCP-47 language code representing the language in which
+   *   the publisher models' text information should be written in (see go/bcp47).
+   *   If not set, by default English (en).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.PublisherModel|PublisherModel}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listPublisherModelsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listPublisherModels(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListPublisherModelsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IPublisherModel[],
+      protos.google.cloud.aiplatform.v1beta1.IListPublisherModelsRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.IListPublisherModelsResponse,
+    ]
+  >;
+  listPublisherModels(
+    request: protos.google.cloud.aiplatform.v1beta1.IListPublisherModelsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListPublisherModelsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListPublisherModelsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IPublisherModel
+    >
+  ): void;
+  listPublisherModels(
+    request: protos.google.cloud.aiplatform.v1beta1.IListPublisherModelsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListPublisherModelsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListPublisherModelsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IPublisherModel
+    >
+  ): void;
+  listPublisherModels(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListPublisherModelsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListPublisherModelsRequest,
+          | protos.google.cloud.aiplatform.v1beta1.IListPublisherModelsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1beta1.IPublisherModel
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListPublisherModelsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListPublisherModelsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IPublisherModel
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IPublisherModel[],
+      protos.google.cloud.aiplatform.v1beta1.IListPublisherModelsRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.IListPublisherModelsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listPublisherModels(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the Publisher from which to list the PublisherModels.
+   *   Format: `publishers/{publisher}`
+   * @param {string} [request.filter]
+   *   Optional. The standard list filter.
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.aiplatform.v1beta1.ListPublisherModelsResponse.next_page_token|ListPublisherModelsResponse.next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.aiplatform.v1beta1.ModelGardenService.ListPublisherModels|ModelGardenService.ListPublisherModels}
+   *   call.
+   * @param {google.cloud.aiplatform.v1beta1.PublisherModelView} [request.view]
+   *   Optional. PublisherModel view specifying which fields to read.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields to order by, sorted in ascending
+   *   order. Use "desc" after a field name for descending.
+   * @param {string} [request.languageCode]
+   *   Optional. The IETF BCP-47 language code representing the language in which
+   *   the publisher models' text information should be written in (see go/bcp47).
+   *   If not set, by default English (en).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.PublisherModel|PublisherModel} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listPublisherModelsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listPublisherModelsStream(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListPublisherModelsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listPublisherModels'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listPublisherModels.createStream(
+      this.innerApiCalls.listPublisherModels as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listPublisherModels`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the Publisher from which to list the PublisherModels.
+   *   Format: `publishers/{publisher}`
+   * @param {string} [request.filter]
+   *   Optional. The standard list filter.
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.aiplatform.v1beta1.ListPublisherModelsResponse.next_page_token|ListPublisherModelsResponse.next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.aiplatform.v1beta1.ModelGardenService.ListPublisherModels|ModelGardenService.ListPublisherModels}
+   *   call.
+   * @param {google.cloud.aiplatform.v1beta1.PublisherModelView} [request.view]
+   *   Optional. PublisherModel view specifying which fields to read.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields to order by, sorted in ascending
+   *   order. Use "desc" after a field name for descending.
+   * @param {string} [request.languageCode]
+   *   Optional. The IETF BCP-47 language code representing the language in which
+   *   the publisher models' text information should be written in (see go/bcp47).
+   *   If not set, by default English (en).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.aiplatform.v1beta1.PublisherModel|PublisherModel}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/model_garden_service.list_publisher_models.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_ModelGardenService_ListPublisherModels_async
+   */
+  listPublisherModelsAsync(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListPublisherModelsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IPublisherModel> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listPublisherModels'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listPublisherModels.asyncIterate(
+      this.innerApiCalls['listPublisherModels'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IPublisherModel>;
+  }
   /**
    * Gets the access control policy for a resource. Returns an empty policy
    * if the resource exists and does not have a policy set.
@@ -1366,6 +1622,81 @@ export class ModelGardenServiceClient {
    */
   matchDatasetFromDatasetName(datasetName: string) {
     return this.pathTemplates.datasetPathTemplate.match(datasetName).dataset;
+  }
+
+  /**
+   * Return a fully-qualified datasetVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} dataset
+   * @param {string} dataset_version
+   * @returns {string} Resource name string.
+   */
+  datasetVersionPath(
+    project: string,
+    location: string,
+    dataset: string,
+    datasetVersion: string
+  ) {
+    return this.pathTemplates.datasetVersionPathTemplate.render({
+      project: project,
+      location: location,
+      dataset: dataset,
+      dataset_version: datasetVersion,
+    });
+  }
+
+  /**
+   * Parse the project from DatasetVersion resource.
+   *
+   * @param {string} datasetVersionName
+   *   A fully-qualified path representing DatasetVersion resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDatasetVersionName(datasetVersionName: string) {
+    return this.pathTemplates.datasetVersionPathTemplate.match(
+      datasetVersionName
+    ).project;
+  }
+
+  /**
+   * Parse the location from DatasetVersion resource.
+   *
+   * @param {string} datasetVersionName
+   *   A fully-qualified path representing DatasetVersion resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDatasetVersionName(datasetVersionName: string) {
+    return this.pathTemplates.datasetVersionPathTemplate.match(
+      datasetVersionName
+    ).location;
+  }
+
+  /**
+   * Parse the dataset from DatasetVersion resource.
+   *
+   * @param {string} datasetVersionName
+   *   A fully-qualified path representing DatasetVersion resource.
+   * @returns {string} A string representing the dataset.
+   */
+  matchDatasetFromDatasetVersionName(datasetVersionName: string) {
+    return this.pathTemplates.datasetVersionPathTemplate.match(
+      datasetVersionName
+    ).dataset;
+  }
+
+  /**
+   * Parse the dataset_version from DatasetVersion resource.
+   *
+   * @param {string} datasetVersionName
+   *   A fully-qualified path representing DatasetVersion resource.
+   * @returns {string} A string representing the dataset_version.
+   */
+  matchDatasetVersionFromDatasetVersionName(datasetVersionName: string) {
+    return this.pathTemplates.datasetVersionPathTemplate.match(
+      datasetVersionName
+    ).dataset_version;
   }
 
   /**
