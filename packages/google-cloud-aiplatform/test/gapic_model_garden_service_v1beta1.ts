@@ -23,6 +23,8 @@ import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
 import * as modelgardenserviceModule from '../src';
 
+import {PassThrough} from 'stream';
+
 import {protobuf, IamProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
@@ -62,6 +64,44 @@ function stubSimpleCallWithCallback<ResponseType>(
   return error
     ? sinon.stub().callsArgWith(2, error)
     : sinon.stub().callsArgWith(2, null, response);
+}
+
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+    }
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
+    });
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
 }
 
 function stubAsyncIterationCall<ResponseType>(
@@ -326,6 +366,345 @@ describe('v1beta1.ModelGardenServiceClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getPublisherModel(request), expectedError);
+    });
+  });
+
+  describe('listPublisherModels', () => {
+    it('invokes listPublisherModels without error', async () => {
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListPublisherModelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListPublisherModelsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.PublisherModel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.PublisherModel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.PublisherModel()
+        ),
+      ];
+      client.innerApiCalls.listPublisherModels =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listPublisherModels(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listPublisherModels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPublisherModels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listPublisherModels without error using callback', async () => {
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListPublisherModelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListPublisherModelsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.PublisherModel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.PublisherModel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.PublisherModel()
+        ),
+      ];
+      client.innerApiCalls.listPublisherModels =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listPublisherModels(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.aiplatform.v1beta1.IPublisherModel[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listPublisherModels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPublisherModels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listPublisherModels with error', async () => {
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListPublisherModelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListPublisherModelsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listPublisherModels = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listPublisherModels(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listPublisherModels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPublisherModels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listPublisherModelsStream without error', async () => {
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListPublisherModelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListPublisherModelsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.PublisherModel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.PublisherModel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.PublisherModel()
+        ),
+      ];
+      client.descriptors.page.listPublisherModels.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listPublisherModelsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.PublisherModel[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.aiplatform.v1beta1.PublisherModel) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listPublisherModels.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listPublisherModels, request)
+      );
+      assert(
+        (client.descriptors.page.listPublisherModels.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listPublisherModelsStream with error', async () => {
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListPublisherModelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListPublisherModelsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listPublisherModels.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listPublisherModelsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.PublisherModel[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.aiplatform.v1beta1.PublisherModel) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listPublisherModels.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listPublisherModels, request)
+      );
+      assert(
+        (client.descriptors.page.listPublisherModels.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listPublisherModels without error', async () => {
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListPublisherModelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListPublisherModelsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.PublisherModel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.PublisherModel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.PublisherModel()
+        ),
+      ];
+      client.descriptors.page.listPublisherModels.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1beta1.IPublisherModel[] =
+        [];
+      const iterable = client.listPublisherModelsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listPublisherModels.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listPublisherModels.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listPublisherModels with error', async () => {
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListPublisherModelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListPublisherModelsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listPublisherModels.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listPublisherModelsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.IPublisherModel[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listPublisherModels.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listPublisherModels.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
     });
   });
   describe('getIamPolicy', () => {
@@ -1532,6 +1911,84 @@ describe('v1beta1.ModelGardenServiceClient', () => {
         assert.strictEqual(result, 'datasetValue');
         assert(
           (client.pathTemplates.datasetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('datasetVersion', () => {
+      const fakePath = '/rendered/path/datasetVersion';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        dataset: 'datasetValue',
+        dataset_version: 'datasetVersionValue',
+      };
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.datasetVersionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.datasetVersionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('datasetVersionPath', () => {
+        const result = client.datasetVersionPath(
+          'projectValue',
+          'locationValue',
+          'datasetValue',
+          'datasetVersionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.datasetVersionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromDatasetVersionName', () => {
+        const result = client.matchProjectFromDatasetVersionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromDatasetVersionName', () => {
+        const result = client.matchLocationFromDatasetVersionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDatasetFromDatasetVersionName', () => {
+        const result = client.matchDatasetFromDatasetVersionName(fakePath);
+        assert.strictEqual(result, 'datasetValue');
+        assert(
+          (client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDatasetVersionFromDatasetVersionName', () => {
+        const result =
+          client.matchDatasetVersionFromDatasetVersionName(fakePath);
+        assert.strictEqual(result, 'datasetVersionValue');
+        assert(
+          (client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

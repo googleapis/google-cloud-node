@@ -30,7 +30,7 @@ function main(parent, assessment) {
    */
   /**
    *  Required. The name of the project in which the assessment will be created,
-   *  in the format "projects/{project_number}".
+   *  in the format `projects/{project_number}`.
    */
   // const parent = 'abc123'
   /**

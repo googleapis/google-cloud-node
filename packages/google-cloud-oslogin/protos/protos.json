@@ -589,13 +589,19 @@
                           "options": {
                             "(google.api.http).post": "/v1beta/{parent=users/*/projects/*/zones/*}:signSshPublicKey",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta/{parent=users/*/projects/*/locations/*}:signSshPublicKey",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "parent,ssh_public_key"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1beta/{parent=users/*/projects/*/zones/*}:signSshPublicKey",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1beta/{parent=users/*/projects/*/locations/*}:signSshPublicKey",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
