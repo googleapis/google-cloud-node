@@ -3874,6 +3874,9 @@ export namespace google {
                     /** Runnable barrier */
                     barrier?: (google.cloud.batch.v1.Runnable.IBarrier|null);
 
+                    /** Runnable displayName */
+                    displayName?: (string|null);
+
                     /** Runnable ignoreExitStatus */
                     ignoreExitStatus?: (boolean|null);
 
@@ -3910,6 +3913,9 @@ export namespace google {
 
                     /** Runnable barrier. */
                     public barrier?: (google.cloud.batch.v1.Runnable.IBarrier|null);
+
+                    /** Runnable displayName. */
+                    public displayName: string;
 
                     /** Runnable ignoreExitStatus. */
                     public ignoreExitStatus: boolean;
