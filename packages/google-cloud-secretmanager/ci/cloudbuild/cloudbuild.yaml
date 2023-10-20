@@ -54,5 +54,5 @@ logsBucket: 'gs://${_LOGS_BUCKET}/logs/nodejs-libs/${REPO_NAME}/${_TRIGGER_SOURC
 serviceAccount: 'projects/long-door-651/serviceAccounts/kokoro-system-test@long-door-651.iam.gserviceaccount.com'
 
 steps:
-  - name: 'node:19'
+  - name: 'node:21'
     entrypoint: 'ci/cloudbuild/test.sh'
