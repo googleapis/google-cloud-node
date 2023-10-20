@@ -2173,8 +2173,14 @@ class File extends ServiceObject<File, FileMetadata> {
         .on('end', () => {
           // In the case of an empty file no data will be received before the end event fires
           if (!receivedData) {
-            fs.openSync(destination, 'w');
-            callback(null, Buffer.alloc(0));
+            const data = Buffer.alloc(0);
+
+            try {
+              fs.writeFileSync(destination, data);
+              callback(null, data);
+            } catch (e) {
+              callback(e as Error, data);
+            }
           }
         });
     } else {
