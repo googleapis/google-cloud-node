@@ -46,6 +46,7 @@
   * [Security_center.set_finding_state](#security_center.set_finding_state)
   * [Security_center.set_iam_policy](#security_center.set_iam_policy)
   * [Security_center.set_mute](#security_center.set_mute)
+  * [Security_center.simulate_security_health_analytics_custom_module](#security_center.simulate_security_health_analytics_custom_module)
   * [Security_center.test_iam_permissions](#security_center.test_iam_permissions)
   * [Security_center.update_big_query_export](#security_center.update_big_query_export)
   * [Security_center.update_external_system](#security_center.update_external_system)
@@ -685,6 +686,23 @@ __Usage:__
 
 
 `node packages/google-cloud-securitycenter/samples/generated/v1/security_center.set_mute.js`
+
+
+-----
+
+
+
+
+### Security_center.simulate_security_health_analytics_custom_module
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.simulate_security_health_analytics_custom_module.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.simulate_security_health_analytics_custom_module.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-securitycenter/samples/generated/v1/security_center.simulate_security_health_analytics_custom_module.js`
 
 
 -----

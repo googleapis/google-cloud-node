@@ -12249,6 +12249,7 @@ export namespace google {
                     TYPE_PROCESS_ABORTED = 4,
                     TYPE_RESTRICTION_VIOLATED = 5,
                     TYPE_RESOURCE_DELETED = 6,
+                    TYPE_ROLLOUT_UPDATE = 7,
                     TYPE_RENDER_STATUES_CHANGE = 2
                 }
 

@@ -30165,6 +30165,7 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
                                 case 2:
                                     break;
                                 }
@@ -30217,6 +30218,10 @@
                             case "TYPE_RESOURCE_DELETED":
                             case 6:
                                 message.type = 6;
+                                break;
+                            case "TYPE_ROLLOUT_UPDATE":
+                            case 7:
+                                message.type = 7;
                                 break;
                             case "TYPE_RENDER_STATUES_CHANGE":
                             case 2:
@@ -30292,6 +30297,7 @@
                      * @property {number} TYPE_PROCESS_ABORTED=4 TYPE_PROCESS_ABORTED value
                      * @property {number} TYPE_RESTRICTION_VIOLATED=5 TYPE_RESTRICTION_VIOLATED value
                      * @property {number} TYPE_RESOURCE_DELETED=6 TYPE_RESOURCE_DELETED value
+                     * @property {number} TYPE_ROLLOUT_UPDATE=7 TYPE_ROLLOUT_UPDATE value
                      * @property {number} TYPE_RENDER_STATUES_CHANGE=2 TYPE_RENDER_STATUES_CHANGE value
                      */
                     v1.Type = (function() {
@@ -30302,6 +30308,7 @@
                         values[valuesById[4] = "TYPE_PROCESS_ABORTED"] = 4;
                         values[valuesById[5] = "TYPE_RESTRICTION_VIOLATED"] = 5;
                         values[valuesById[6] = "TYPE_RESOURCE_DELETED"] = 6;
+                        values[valuesById[7] = "TYPE_ROLLOUT_UPDATE"] = 7;
                         values[valuesById[2] = "TYPE_RENDER_STATUES_CHANGE"] = 2;
                         return values;
                     })();
@@ -30555,6 +30562,7 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
                                 case 2:
                                     break;
                                 }
@@ -30615,6 +30623,10 @@
                             case "TYPE_RESOURCE_DELETED":
                             case 6:
                                 message.type = 6;
+                                break;
+                            case "TYPE_ROLLOUT_UPDATE":
+                            case 7:
+                                message.type = 7;
                                 break;
                             case "TYPE_RENDER_STATUES_CHANGE":
                             case 2:
@@ -30869,6 +30881,7 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
                                 case 2:
                                     break;
                                 }
@@ -30921,6 +30934,10 @@
                             case "TYPE_RESOURCE_DELETED":
                             case 6:
                                 message.type = 6;
+                                break;
+                            case "TYPE_ROLLOUT_UPDATE":
+                            case 7:
+                                message.type = 7;
                                 break;
                             case "TYPE_RENDER_STATUES_CHANGE":
                             case 2:
@@ -31441,6 +31458,7 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
                                 case 2:
                                     break;
                                 }
@@ -31500,6 +31518,10 @@
                             case "TYPE_RESOURCE_DELETED":
                             case 6:
                                 message.type = 6;
+                                break;
+                            case "TYPE_ROLLOUT_UPDATE":
+                            case 7:
+                                message.type = 7;
                                 break;
                             case "TYPE_RENDER_STATUES_CHANGE":
                             case 2:
@@ -31753,6 +31775,7 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
                                 case 2:
                                     break;
                                 }
@@ -31805,6 +31828,10 @@
                             case "TYPE_RESOURCE_DELETED":
                             case 6:
                                 message.type = 6;
+                                break;
+                            case "TYPE_ROLLOUT_UPDATE":
+                            case 7:
+                                message.type = 7;
                                 break;
                             case "TYPE_RENDER_STATUES_CHANGE":
                             case 2:
