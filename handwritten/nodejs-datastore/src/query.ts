@@ -22,6 +22,7 @@ import {EntityFilter, isFilter, AllowedFilterValueType} from './filter';
 import {Transaction} from './transaction';
 import {CallOptions} from 'google-gax';
 import {RunQueryStreamOptions} from '../src/request';
+import * as gaxInstance from 'google-gax';
 
 export type Operator =
   | '='
@@ -223,7 +224,8 @@ class Query {
     value?: AllowedFilterValueType<T>
   ): Query {
     if (arguments.length > 1) {
-      process.emitWarning(
+      gaxInstance.warn(
+        'filter',
         'Providing Filter objects like Composite Filter or Property Filter is recommended when using .filter'
       );
     }
