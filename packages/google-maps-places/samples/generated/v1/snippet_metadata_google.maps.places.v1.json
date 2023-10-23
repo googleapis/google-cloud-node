@@ -12,6 +12,78 @@
     },
     "snippets": [
         {
+            "regionTag": "places_v1_generated_Places_SearchNearby_async",
+            "title": "Places searchNearby Sample",
+            "origin": "API_DEFINITION",
+            "description": " Search for places near locations.",
+            "canonical": true,
+            "file": "places.search_nearby.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 138,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SearchNearby",
+                "fullName": "google.maps.places.v1.Places.SearchNearby",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "language_code",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region_code",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "included_types",
+                        "type": "TYPE_STRING[]"
+                    },
+                    {
+                        "name": "excluded_types",
+                        "type": "TYPE_STRING[]"
+                    },
+                    {
+                        "name": "included_primary_types",
+                        "type": "TYPE_STRING[]"
+                    },
+                    {
+                        "name": "excluded_primary_types",
+                        "type": "TYPE_STRING[]"
+                    },
+                    {
+                        "name": "max_result_count",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "location_restriction",
+                        "type": ".google.maps.places.v1.SearchNearbyRequest.LocationRestriction"
+                    },
+                    {
+                        "name": "rank_preference",
+                        "type": ".google.maps.places.v1.SearchNearbyRequest.RankPreference"
+                    }
+                ],
+                "resultType": ".google.maps.places.v1.SearchNearbyResponse",
+                "client": {
+                    "shortName": "PlacesClient",
+                    "fullName": "google.maps.places.v1.PlacesClient"
+                },
+                "method": {
+                    "shortName": "SearchNearby",
+                    "fullName": "google.maps.places.v1.Places.SearchNearby",
+                    "service": {
+                        "shortName": "Places",
+                        "fullName": "google.maps.places.v1.Places"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "places_v1_generated_Places_SearchText_async",
             "title": "Places searchText Sample",
             "origin": "API_DEFINITION",
@@ -22,7 +94,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 125,
+                    "end": 126,
                     "type": "FULL"
                 }
             ],
@@ -48,20 +120,12 @@
                         "type": ".google.maps.places.v1.SearchTextRequest.RankPreference"
                     },
                     {
-                        "name": "location",
-                        "type": ".google.maps.places.v1.SearchTextRequest.Location"
-                    },
-                    {
                         "name": "included_type",
                         "type": "TYPE_STRING"
                     },
                     {
                         "name": "open_now",
                         "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "price_range",
-                        "type": ".google.maps.places.v1.Int32Range"
                     },
                     {
                         "name": "min_rating",
@@ -96,6 +160,106 @@
                 "method": {
                     "shortName": "SearchText",
                     "fullName": "google.maps.places.v1.Places.SearchText",
+                    "service": {
+                        "shortName": "Places",
+                        "fullName": "google.maps.places.v1.Places"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "places_v1_generated_Places_GetPhotoMedia_async",
+            "title": "Places getPhotoMedia Sample",
+            "origin": "API_DEFINITION",
+            "description": " Get a photo media with a photo reference string.",
+            "canonical": true,
+            "file": "places.get_photo_media.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 88,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetPhotoMedia",
+                "fullName": "google.maps.places.v1.Places.GetPhotoMedia",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "max_width_px",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "max_height_px",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "skip_http_redirect",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.maps.places.v1.PhotoMedia",
+                "client": {
+                    "shortName": "PlacesClient",
+                    "fullName": "google.maps.places.v1.PlacesClient"
+                },
+                "method": {
+                    "shortName": "GetPhotoMedia",
+                    "fullName": "google.maps.places.v1.Places.GetPhotoMedia",
+                    "service": {
+                        "shortName": "Places",
+                        "fullName": "google.maps.places.v1.Places"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "places_v1_generated_Places_GetPlace_async",
+            "title": "Places getPlace Sample",
+            "origin": "API_DEFINITION",
+            "description": " Get a Place with a place id (in a name) string.",
+            "canonical": true,
+            "file": "places.get_place.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 71,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetPlace",
+                "fullName": "google.maps.places.v1.Places.GetPlace",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "language_code",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region_code",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.maps.places.v1.Place",
+                "client": {
+                    "shortName": "PlacesClient",
+                    "fullName": "google.maps.places.v1.PlacesClient"
+                },
+                "method": {
+                    "shortName": "GetPlace",
+                    "fullName": "google.maps.places.v1.Places.GetPlace",
                     "service": {
                         "shortName": "Places",
                         "fullName": "google.maps.places.v1.Places"

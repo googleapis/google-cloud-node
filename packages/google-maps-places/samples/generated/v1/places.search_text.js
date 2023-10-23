@@ -43,8 +43,9 @@ function main(textQuery) {
   // const languageCode = 'abc123'
   /**
    *  The Unicode country/region code (CLDR) of the location where the
-   *  request is coming from. It is used to display the place details, like
-   *  region-specific place name, if available.
+   *  request is coming from. This parameter is used to display the place
+   *  details, like region-specific place name, if available. The parameter can
+   *  affect results based on applicable law.
    *  For more information, see
    *  http://www.unicode.org/reports/tr35/#unicode_region_subtag.
    *  Note that 3-digit region codes are not currently supported.
@@ -68,7 +69,7 @@ function main(textQuery) {
   /**
    *  Filter out results whose average user rating is strictly less than this
    *  limit. A valid value must be an float between 0 and 5 (inclusively) at a
-   *  0.5 cadence i.e. `[0, 0.5, 1.0, ... , 5.0]` inclusively. This is to keep
+   *  0.5 cadence i.e. 0, 0.5, 1.0, ... , 5.0  inclusively. This is to keep
    *  parity with LocalRefinement_UserRating. The input rating will round up to
    *  the nearest 0.5(ceiling). For instance, a rating of 0.6 will eliminate all
    *  results with a less than 1.0 rating.
