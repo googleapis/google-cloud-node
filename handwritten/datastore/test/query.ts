@@ -206,6 +206,29 @@ describe('Query', () => {
   });
 
   describe('filter', () => {
+    it('should issue a warning when a Filter instance is not provided', done => {
+      const onWarning = (warning: {message: unknown}) => {
+        assert.strictEqual(
+          warning.message,
+          'Providing Filter objects like Composite Filter or Property Filter is recommended when using .filter'
+        );
+        process.removeListener('warning', onWarning);
+        done();
+      };
+      process.on('warning', onWarning);
+      new Query(['kind1']).filter('name', 'Stephen');
+    });
+    it('should not issue a warning again when a Filter instance is not provided', done => {
+      const onWarning = () => {
+        assert.fail();
+      };
+      process.on('warning', onWarning);
+      new Query(['kind1']).filter('name', 'Stephen');
+      setImmediate(() => {
+        process.removeListener('warning', onWarning);
+        done();
+      });
+    });
     it('should support filtering', () => {
       const now = new Date();
       const query = new Query(['kind1']).filter('date', '<=', now);
@@ -292,18 +315,6 @@ describe('Query', () => {
       assert.strictEqual(filter.op, '=');
       assert.strictEqual(filter.val, 'Stephen');
     });
-  });
-  it('should issue a warning when a Filter instance is not provided', done => {
-    const onWarning = (warning: {message: unknown}) => {
-      assert.strictEqual(
-        warning.message,
-        'Providing Filter objects like Composite Filter or Property Filter is recommended when using .filter'
-      );
-      process.removeListener('warning', onWarning);
-      done();
-    };
-    process.on('warning', onWarning);
-    new Query(['kind1']).filter('name', 'Stephen');
   });
   describe('filter with Filter class', () => {
     it('should support filter with Filter', () => {
