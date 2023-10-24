@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v4.0.1...recaptcha-enterprise-v4.1.0) (2023-10-24)
+
+
+### Features
+
+* [recaptchaenterprise] FirewallPolicy CRUD API ([#4730](https://github.com/googleapis/google-cloud-node/issues/4730)) ([e8c5c14](https://github.com/googleapis/google-cloud-node/commit/e8c5c14e31881d7899e99fa5cfbe862999b8c880))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v4.0.0...recaptcha-enterprise-v4.0.1) (2023-09-06)
 
 
