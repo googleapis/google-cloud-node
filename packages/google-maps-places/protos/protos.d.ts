@@ -234,109 +234,109 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
-        /** Properties of a Date. */
-        interface IDate {
+        /** Properties of a Money. */
+        interface IMoney {
 
-            /** Date year */
-            year?: (number|null);
+            /** Money currencyCode */
+            currencyCode?: (string|null);
 
-            /** Date month */
-            month?: (number|null);
+            /** Money units */
+            units?: (number|Long|string|null);
 
-            /** Date day */
-            day?: (number|null);
+            /** Money nanos */
+            nanos?: (number|null);
         }
 
-        /** Represents a Date. */
-        class Date implements IDate {
+        /** Represents a Money. */
+        class Money implements IMoney {
 
             /**
-             * Constructs a new Date.
+             * Constructs a new Money.
              * @param [properties] Properties to set
              */
-            constructor(properties?: google.type.IDate);
+            constructor(properties?: google.type.IMoney);
 
-            /** Date year. */
-            public year: number;
+            /** Money currencyCode. */
+            public currencyCode: string;
 
-            /** Date month. */
-            public month: number;
+            /** Money units. */
+            public units: (number|Long|string);
 
-            /** Date day. */
-            public day: number;
+            /** Money nanos. */
+            public nanos: number;
 
             /**
-             * Creates a new Date instance using the specified properties.
+             * Creates a new Money instance using the specified properties.
              * @param [properties] Properties to set
-             * @returns Date instance
+             * @returns Money instance
              */
-            public static create(properties?: google.type.IDate): google.type.Date;
+            public static create(properties?: google.type.IMoney): google.type.Money;
 
             /**
-             * Encodes the specified Date message. Does not implicitly {@link google.type.Date.verify|verify} messages.
-             * @param message Date message or plain object to encode
+             * Encodes the specified Money message. Does not implicitly {@link google.type.Money.verify|verify} messages.
+             * @param message Money message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: google.type.IDate, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: google.type.IMoney, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified Date message, length delimited. Does not implicitly {@link google.type.Date.verify|verify} messages.
-             * @param message Date message or plain object to encode
+             * Encodes the specified Money message, length delimited. Does not implicitly {@link google.type.Money.verify|verify} messages.
+             * @param message Money message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: google.type.IDate, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: google.type.IMoney, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Decodes a Date message from the specified reader or buffer.
+             * Decodes a Money message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
-             * @returns Date
+             * @returns Money
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Date;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Money;
 
             /**
-             * Decodes a Date message from the specified reader or buffer, length delimited.
+             * Decodes a Money message from the specified reader or buffer, length delimited.
              * @param reader Reader or buffer to decode from
-             * @returns Date
+             * @returns Money
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Date;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Money;
 
             /**
-             * Verifies a Date message.
+             * Verifies a Money message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
             public static verify(message: { [k: string]: any }): (string|null);
 
             /**
-             * Creates a Date message from a plain object. Also converts values to their respective internal types.
+             * Creates a Money message from a plain object. Also converts values to their respective internal types.
              * @param object Plain object
-             * @returns Date
+             * @returns Money
              */
-            public static fromObject(object: { [k: string]: any }): google.type.Date;
+            public static fromObject(object: { [k: string]: any }): google.type.Money;
 
             /**
-             * Creates a plain object from a Date message. Also converts values to other types if specified.
-             * @param message Date
+             * Creates a plain object from a Money message. Also converts values to other types if specified.
+             * @param message Money
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: google.type.Date, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: google.type.Money, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
-             * Converts this Date to JSON.
+             * Converts this Money to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
 
             /**
-             * Gets the default type url for Date
+             * Gets the default type url for Money
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -445,6 +445,115 @@ export namespace google {
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
+
+        /** Properties of a Date. */
+        interface IDate {
+
+            /** Date year */
+            year?: (number|null);
+
+            /** Date month */
+            month?: (number|null);
+
+            /** Date day */
+            day?: (number|null);
+        }
+
+        /** Represents a Date. */
+        class Date implements IDate {
+
+            /**
+             * Constructs a new Date.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.IDate);
+
+            /** Date year. */
+            public year: number;
+
+            /** Date month. */
+            public month: number;
+
+            /** Date day. */
+            public day: number;
+
+            /**
+             * Creates a new Date instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Date instance
+             */
+            public static create(properties?: google.type.IDate): google.type.Date;
+
+            /**
+             * Encodes the specified Date message. Does not implicitly {@link google.type.Date.verify|verify} messages.
+             * @param message Date message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.IDate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Date message, length delimited. Does not implicitly {@link google.type.Date.verify|verify} messages.
+             * @param message Date message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.IDate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Date message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Date
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Date;
+
+            /**
+             * Decodes a Date message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Date
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Date;
+
+            /**
+             * Verifies a Date message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Date message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Date
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.Date;
+
+            /**
+             * Creates a plain object from a Date message. Also converts values to other types if specified.
+             * @param message Date
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.Date, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Date to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Date
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
     }
 
     /** Namespace maps. */
@@ -455,6 +564,603 @@ export namespace google {
 
             /** Namespace v1. */
             namespace v1 {
+
+                /** Properties of an AuthorAttribution. */
+                interface IAuthorAttribution {
+
+                    /** AuthorAttribution displayName */
+                    displayName?: (string|null);
+
+                    /** AuthorAttribution uri */
+                    uri?: (string|null);
+
+                    /** AuthorAttribution photoUri */
+                    photoUri?: (string|null);
+                }
+
+                /** Represents an AuthorAttribution. */
+                class AuthorAttribution implements IAuthorAttribution {
+
+                    /**
+                     * Constructs a new AuthorAttribution.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.places.v1.IAuthorAttribution);
+
+                    /** AuthorAttribution displayName. */
+                    public displayName: string;
+
+                    /** AuthorAttribution uri. */
+                    public uri: string;
+
+                    /** AuthorAttribution photoUri. */
+                    public photoUri: string;
+
+                    /**
+                     * Creates a new AuthorAttribution instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AuthorAttribution instance
+                     */
+                    public static create(properties?: google.maps.places.v1.IAuthorAttribution): google.maps.places.v1.AuthorAttribution;
+
+                    /**
+                     * Encodes the specified AuthorAttribution message. Does not implicitly {@link google.maps.places.v1.AuthorAttribution.verify|verify} messages.
+                     * @param message AuthorAttribution message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.places.v1.IAuthorAttribution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AuthorAttribution message, length delimited. Does not implicitly {@link google.maps.places.v1.AuthorAttribution.verify|verify} messages.
+                     * @param message AuthorAttribution message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.places.v1.IAuthorAttribution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AuthorAttribution message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AuthorAttribution
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.AuthorAttribution;
+
+                    /**
+                     * Decodes an AuthorAttribution message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AuthorAttribution
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.AuthorAttribution;
+
+                    /**
+                     * Verifies an AuthorAttribution message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AuthorAttribution message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AuthorAttribution
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.AuthorAttribution;
+
+                    /**
+                     * Creates a plain object from an AuthorAttribution message. Also converts values to other types if specified.
+                     * @param message AuthorAttribution
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.places.v1.AuthorAttribution, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AuthorAttribution to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AuthorAttribution
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a EVChargeOptions. */
+                interface IEVChargeOptions {
+
+                    /** EVChargeOptions connectorCount */
+                    connectorCount?: (number|null);
+
+                    /** EVChargeOptions connectorAggregation */
+                    connectorAggregation?: (google.maps.places.v1.EVChargeOptions.IConnectorAggregation[]|null);
+                }
+
+                /** Represents a EVChargeOptions. */
+                class EVChargeOptions implements IEVChargeOptions {
+
+                    /**
+                     * Constructs a new EVChargeOptions.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.places.v1.IEVChargeOptions);
+
+                    /** EVChargeOptions connectorCount. */
+                    public connectorCount: number;
+
+                    /** EVChargeOptions connectorAggregation. */
+                    public connectorAggregation: google.maps.places.v1.EVChargeOptions.IConnectorAggregation[];
+
+                    /**
+                     * Creates a new EVChargeOptions instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EVChargeOptions instance
+                     */
+                    public static create(properties?: google.maps.places.v1.IEVChargeOptions): google.maps.places.v1.EVChargeOptions;
+
+                    /**
+                     * Encodes the specified EVChargeOptions message. Does not implicitly {@link google.maps.places.v1.EVChargeOptions.verify|verify} messages.
+                     * @param message EVChargeOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.places.v1.IEVChargeOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EVChargeOptions message, length delimited. Does not implicitly {@link google.maps.places.v1.EVChargeOptions.verify|verify} messages.
+                     * @param message EVChargeOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.places.v1.IEVChargeOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a EVChargeOptions message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EVChargeOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.EVChargeOptions;
+
+                    /**
+                     * Decodes a EVChargeOptions message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EVChargeOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.EVChargeOptions;
+
+                    /**
+                     * Verifies a EVChargeOptions message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a EVChargeOptions message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EVChargeOptions
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.EVChargeOptions;
+
+                    /**
+                     * Creates a plain object from a EVChargeOptions message. Also converts values to other types if specified.
+                     * @param message EVChargeOptions
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.places.v1.EVChargeOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EVChargeOptions to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EVChargeOptions
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace EVChargeOptions {
+
+                    /** Properties of a ConnectorAggregation. */
+                    interface IConnectorAggregation {
+
+                        /** ConnectorAggregation type */
+                        type?: (google.maps.places.v1.EVConnectorType|keyof typeof google.maps.places.v1.EVConnectorType|null);
+
+                        /** ConnectorAggregation maxChargeRateKw */
+                        maxChargeRateKw?: (number|null);
+
+                        /** ConnectorAggregation count */
+                        count?: (number|null);
+
+                        /** ConnectorAggregation availableCount */
+                        availableCount?: (number|null);
+
+                        /** ConnectorAggregation outOfServiceCount */
+                        outOfServiceCount?: (number|null);
+
+                        /** ConnectorAggregation availabilityLastUpdateTime */
+                        availabilityLastUpdateTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a ConnectorAggregation. */
+                    class ConnectorAggregation implements IConnectorAggregation {
+
+                        /**
+                         * Constructs a new ConnectorAggregation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.maps.places.v1.EVChargeOptions.IConnectorAggregation);
+
+                        /** ConnectorAggregation type. */
+                        public type: (google.maps.places.v1.EVConnectorType|keyof typeof google.maps.places.v1.EVConnectorType);
+
+                        /** ConnectorAggregation maxChargeRateKw. */
+                        public maxChargeRateKw: number;
+
+                        /** ConnectorAggregation count. */
+                        public count: number;
+
+                        /** ConnectorAggregation availableCount. */
+                        public availableCount?: (number|null);
+
+                        /** ConnectorAggregation outOfServiceCount. */
+                        public outOfServiceCount?: (number|null);
+
+                        /** ConnectorAggregation availabilityLastUpdateTime. */
+                        public availabilityLastUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ConnectorAggregation _availableCount. */
+                        public _availableCount?: "availableCount";
+
+                        /** ConnectorAggregation _outOfServiceCount. */
+                        public _outOfServiceCount?: "outOfServiceCount";
+
+                        /**
+                         * Creates a new ConnectorAggregation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConnectorAggregation instance
+                         */
+                        public static create(properties?: google.maps.places.v1.EVChargeOptions.IConnectorAggregation): google.maps.places.v1.EVChargeOptions.ConnectorAggregation;
+
+                        /**
+                         * Encodes the specified ConnectorAggregation message. Does not implicitly {@link google.maps.places.v1.EVChargeOptions.ConnectorAggregation.verify|verify} messages.
+                         * @param message ConnectorAggregation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.maps.places.v1.EVChargeOptions.IConnectorAggregation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConnectorAggregation message, length delimited. Does not implicitly {@link google.maps.places.v1.EVChargeOptions.ConnectorAggregation.verify|verify} messages.
+                         * @param message ConnectorAggregation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.maps.places.v1.EVChargeOptions.IConnectorAggregation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConnectorAggregation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConnectorAggregation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.EVChargeOptions.ConnectorAggregation;
+
+                        /**
+                         * Decodes a ConnectorAggregation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConnectorAggregation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.EVChargeOptions.ConnectorAggregation;
+
+                        /**
+                         * Verifies a ConnectorAggregation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConnectorAggregation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConnectorAggregation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.maps.places.v1.EVChargeOptions.ConnectorAggregation;
+
+                        /**
+                         * Creates a plain object from a ConnectorAggregation message. Also converts values to other types if specified.
+                         * @param message ConnectorAggregation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.maps.places.v1.EVChargeOptions.ConnectorAggregation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConnectorAggregation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ConnectorAggregation
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** EVConnectorType enum. */
+                enum EVConnectorType {
+                    EV_CONNECTOR_TYPE_UNSPECIFIED = 0,
+                    EV_CONNECTOR_TYPE_OTHER = 1,
+                    EV_CONNECTOR_TYPE_J1772 = 2,
+                    EV_CONNECTOR_TYPE_TYPE_2 = 3,
+                    EV_CONNECTOR_TYPE_CHADEMO = 4,
+                    EV_CONNECTOR_TYPE_CCS_COMBO_1 = 5,
+                    EV_CONNECTOR_TYPE_CCS_COMBO_2 = 6,
+                    EV_CONNECTOR_TYPE_TESLA = 7,
+                    EV_CONNECTOR_TYPE_UNSPECIFIED_GB_T = 8,
+                    EV_CONNECTOR_TYPE_UNSPECIFIED_WALL_OUTLET = 9
+                }
+
+                /** Properties of a FuelOptions. */
+                interface IFuelOptions {
+
+                    /** FuelOptions fuelPrices */
+                    fuelPrices?: (google.maps.places.v1.FuelOptions.IFuelPrice[]|null);
+                }
+
+                /** Represents a FuelOptions. */
+                class FuelOptions implements IFuelOptions {
+
+                    /**
+                     * Constructs a new FuelOptions.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.places.v1.IFuelOptions);
+
+                    /** FuelOptions fuelPrices. */
+                    public fuelPrices: google.maps.places.v1.FuelOptions.IFuelPrice[];
+
+                    /**
+                     * Creates a new FuelOptions instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FuelOptions instance
+                     */
+                    public static create(properties?: google.maps.places.v1.IFuelOptions): google.maps.places.v1.FuelOptions;
+
+                    /**
+                     * Encodes the specified FuelOptions message. Does not implicitly {@link google.maps.places.v1.FuelOptions.verify|verify} messages.
+                     * @param message FuelOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.places.v1.IFuelOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FuelOptions message, length delimited. Does not implicitly {@link google.maps.places.v1.FuelOptions.verify|verify} messages.
+                     * @param message FuelOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.places.v1.IFuelOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FuelOptions message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FuelOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.FuelOptions;
+
+                    /**
+                     * Decodes a FuelOptions message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FuelOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.FuelOptions;
+
+                    /**
+                     * Verifies a FuelOptions message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FuelOptions message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FuelOptions
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.FuelOptions;
+
+                    /**
+                     * Creates a plain object from a FuelOptions message. Also converts values to other types if specified.
+                     * @param message FuelOptions
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.places.v1.FuelOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FuelOptions to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FuelOptions
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FuelOptions {
+
+                    /** Properties of a FuelPrice. */
+                    interface IFuelPrice {
+
+                        /** FuelPrice type */
+                        type?: (google.maps.places.v1.FuelOptions.FuelPrice.FuelType|keyof typeof google.maps.places.v1.FuelOptions.FuelPrice.FuelType|null);
+
+                        /** FuelPrice price */
+                        price?: (google.type.IMoney|null);
+
+                        /** FuelPrice updateTime */
+                        updateTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a FuelPrice. */
+                    class FuelPrice implements IFuelPrice {
+
+                        /**
+                         * Constructs a new FuelPrice.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.maps.places.v1.FuelOptions.IFuelPrice);
+
+                        /** FuelPrice type. */
+                        public type: (google.maps.places.v1.FuelOptions.FuelPrice.FuelType|keyof typeof google.maps.places.v1.FuelOptions.FuelPrice.FuelType);
+
+                        /** FuelPrice price. */
+                        public price?: (google.type.IMoney|null);
+
+                        /** FuelPrice updateTime. */
+                        public updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new FuelPrice instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FuelPrice instance
+                         */
+                        public static create(properties?: google.maps.places.v1.FuelOptions.IFuelPrice): google.maps.places.v1.FuelOptions.FuelPrice;
+
+                        /**
+                         * Encodes the specified FuelPrice message. Does not implicitly {@link google.maps.places.v1.FuelOptions.FuelPrice.verify|verify} messages.
+                         * @param message FuelPrice message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.maps.places.v1.FuelOptions.IFuelPrice, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FuelPrice message, length delimited. Does not implicitly {@link google.maps.places.v1.FuelOptions.FuelPrice.verify|verify} messages.
+                         * @param message FuelPrice message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.maps.places.v1.FuelOptions.IFuelPrice, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FuelPrice message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FuelPrice
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.FuelOptions.FuelPrice;
+
+                        /**
+                         * Decodes a FuelPrice message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FuelPrice
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.FuelOptions.FuelPrice;
+
+                        /**
+                         * Verifies a FuelPrice message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FuelPrice message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FuelPrice
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.maps.places.v1.FuelOptions.FuelPrice;
+
+                        /**
+                         * Creates a plain object from a FuelPrice message. Also converts values to other types if specified.
+                         * @param message FuelPrice
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.maps.places.v1.FuelOptions.FuelPrice, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FuelPrice to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FuelPrice
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace FuelPrice {
+
+                        /** FuelType enum. */
+                        enum FuelType {
+                            FUEL_TYPE_UNSPECIFIED = 0,
+                            DIESEL = 1,
+                            REGULAR_UNLEADED = 2,
+                            MIDGRADE = 3,
+                            PREMIUM = 4,
+                            SP91 = 5,
+                            SP91_E10 = 6,
+                            SP92 = 7,
+                            SP95 = 8,
+                            SP95_E10 = 9,
+                            SP98 = 10,
+                            SP99 = 11,
+                            SP100 = 12,
+                            LPG = 13,
+                            E80 = 14,
+                            E85 = 15,
+                            METHANE = 16,
+                            BIO_DIESEL = 17,
+                            TRUCK_DIESEL = 18
+                        }
+                    }
+                }
 
                 /** Properties of a Circle. */
                 interface ICircle {
@@ -559,8 +1265,126 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a Photo. */
+                interface IPhoto {
+
+                    /** Photo name */
+                    name?: (string|null);
+
+                    /** Photo widthPx */
+                    widthPx?: (number|null);
+
+                    /** Photo heightPx */
+                    heightPx?: (number|null);
+
+                    /** Photo authorAttributions */
+                    authorAttributions?: (google.maps.places.v1.IAuthorAttribution[]|null);
+                }
+
+                /** Represents a Photo. */
+                class Photo implements IPhoto {
+
+                    /**
+                     * Constructs a new Photo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.places.v1.IPhoto);
+
+                    /** Photo name. */
+                    public name: string;
+
+                    /** Photo widthPx. */
+                    public widthPx: number;
+
+                    /** Photo heightPx. */
+                    public heightPx: number;
+
+                    /** Photo authorAttributions. */
+                    public authorAttributions: google.maps.places.v1.IAuthorAttribution[];
+
+                    /**
+                     * Creates a new Photo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Photo instance
+                     */
+                    public static create(properties?: google.maps.places.v1.IPhoto): google.maps.places.v1.Photo;
+
+                    /**
+                     * Encodes the specified Photo message. Does not implicitly {@link google.maps.places.v1.Photo.verify|verify} messages.
+                     * @param message Photo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.places.v1.IPhoto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Photo message, length delimited. Does not implicitly {@link google.maps.places.v1.Photo.verify|verify} messages.
+                     * @param message Photo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.places.v1.IPhoto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Photo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Photo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.Photo;
+
+                    /**
+                     * Decodes a Photo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Photo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.Photo;
+
+                    /**
+                     * Verifies a Photo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Photo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Photo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.Photo;
+
+                    /**
+                     * Creates a plain object from a Photo message. Also converts values to other types if specified.
+                     * @param message Photo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.places.v1.Photo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Photo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Photo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Place. */
                 interface IPlace {
+
+                    /** Place name */
+                    name?: (string|null);
 
                     /** Place id */
                     id?: (string|null);
@@ -602,13 +1426,16 @@ export namespace google {
                     websiteUri?: (string|null);
 
                     /** Place reviews */
-                    reviews?: (google.maps.places.v1.Place.IReview[]|null);
+                    reviews?: (google.maps.places.v1.IReview[]|null);
 
-                    /** Place openingHours */
-                    openingHours?: (google.maps.places.v1.Place.IOpeningHours|null);
+                    /** Place regularOpeningHours */
+                    regularOpeningHours?: (google.maps.places.v1.Place.IOpeningHours|null);
 
                     /** Place utcOffsetMinutes */
                     utcOffsetMinutes?: (number|null);
+
+                    /** Place photos */
+                    photos?: (google.maps.places.v1.IPhoto[]|null);
 
                     /** Place adrFormatAddress */
                     adrFormatAddress?: (string|null);
@@ -643,9 +1470,6 @@ export namespace google {
                     /** Place curbsidePickup */
                     curbsidePickup?: (boolean|null);
 
-                    /** Place wheelchairAccessibleEntrance */
-                    wheelchairAccessibleEntrance?: (boolean|null);
-
                     /** Place reservable */
                     reservable?: (boolean|null);
 
@@ -676,11 +1500,62 @@ export namespace google {
                     /** Place currentSecondaryOpeningHours */
                     currentSecondaryOpeningHours?: (google.maps.places.v1.Place.IOpeningHours[]|null);
 
-                    /** Place secondaryOpeningHours */
-                    secondaryOpeningHours?: (google.maps.places.v1.Place.IOpeningHours[]|null);
+                    /** Place regularSecondaryOpeningHours */
+                    regularSecondaryOpeningHours?: (google.maps.places.v1.Place.IOpeningHours[]|null);
 
                     /** Place editorialSummary */
-                    editorialSummary?: (google.maps.places.v1.Place.IEditorialSummary|null);
+                    editorialSummary?: (google.type.ILocalizedText|null);
+
+                    /** Place outdoorSeating */
+                    outdoorSeating?: (boolean|null);
+
+                    /** Place liveMusic */
+                    liveMusic?: (boolean|null);
+
+                    /** Place menuForChildren */
+                    menuForChildren?: (boolean|null);
+
+                    /** Place servesCocktails */
+                    servesCocktails?: (boolean|null);
+
+                    /** Place servesDessert */
+                    servesDessert?: (boolean|null);
+
+                    /** Place servesCoffee */
+                    servesCoffee?: (boolean|null);
+
+                    /** Place goodForChildren */
+                    goodForChildren?: (boolean|null);
+
+                    /** Place allowsDogs */
+                    allowsDogs?: (boolean|null);
+
+                    /** Place restroom */
+                    restroom?: (boolean|null);
+
+                    /** Place goodForGroups */
+                    goodForGroups?: (boolean|null);
+
+                    /** Place goodForWatchingSports */
+                    goodForWatchingSports?: (boolean|null);
+
+                    /** Place paymentOptions */
+                    paymentOptions?: (google.maps.places.v1.Place.IPaymentOptions|null);
+
+                    /** Place parkingOptions */
+                    parkingOptions?: (google.maps.places.v1.Place.IParkingOptions|null);
+
+                    /** Place subDestinations */
+                    subDestinations?: (google.maps.places.v1.Place.ISubDestination[]|null);
+
+                    /** Place accessibilityOptions */
+                    accessibilityOptions?: (google.maps.places.v1.Place.IAccessibilityOptions|null);
+
+                    /** Place fuelOptions */
+                    fuelOptions?: (google.maps.places.v1.IFuelOptions|null);
+
+                    /** Place evChargeOptions */
+                    evChargeOptions?: (google.maps.places.v1.IEVChargeOptions|null);
                 }
 
                 /** Represents a Place. */
@@ -691,6 +1566,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.maps.places.v1.IPlace);
+
+                    /** Place name. */
+                    public name: string;
 
                     /** Place id. */
                     public id: string;
@@ -732,13 +1610,16 @@ export namespace google {
                     public websiteUri: string;
 
                     /** Place reviews. */
-                    public reviews: google.maps.places.v1.Place.IReview[];
+                    public reviews: google.maps.places.v1.IReview[];
 
-                    /** Place openingHours. */
-                    public openingHours?: (google.maps.places.v1.Place.IOpeningHours|null);
+                    /** Place regularOpeningHours. */
+                    public regularOpeningHours?: (google.maps.places.v1.Place.IOpeningHours|null);
 
                     /** Place utcOffsetMinutes. */
-                    public utcOffsetMinutes: number;
+                    public utcOffsetMinutes?: (number|null);
+
+                    /** Place photos. */
+                    public photos: google.maps.places.v1.IPhoto[];
 
                     /** Place adrFormatAddress. */
                     public adrFormatAddress: string;
@@ -753,7 +1634,7 @@ export namespace google {
                     public attributions: google.maps.places.v1.Place.IAttribution[];
 
                     /** Place userRatingCount. */
-                    public userRatingCount: number;
+                    public userRatingCount?: (number|null);
 
                     /** Place iconMaskBaseUri. */
                     public iconMaskBaseUri: string;
@@ -772,9 +1653,6 @@ export namespace google {
 
                     /** Place curbsidePickup. */
                     public curbsidePickup?: (boolean|null);
-
-                    /** Place wheelchairAccessibleEntrance. */
-                    public wheelchairAccessibleEntrance?: (boolean|null);
 
                     /** Place reservable. */
                     public reservable?: (boolean|null);
@@ -806,11 +1684,68 @@ export namespace google {
                     /** Place currentSecondaryOpeningHours. */
                     public currentSecondaryOpeningHours: google.maps.places.v1.Place.IOpeningHours[];
 
-                    /** Place secondaryOpeningHours. */
-                    public secondaryOpeningHours: google.maps.places.v1.Place.IOpeningHours[];
+                    /** Place regularSecondaryOpeningHours. */
+                    public regularSecondaryOpeningHours: google.maps.places.v1.Place.IOpeningHours[];
 
                     /** Place editorialSummary. */
-                    public editorialSummary?: (google.maps.places.v1.Place.IEditorialSummary|null);
+                    public editorialSummary?: (google.type.ILocalizedText|null);
+
+                    /** Place outdoorSeating. */
+                    public outdoorSeating?: (boolean|null);
+
+                    /** Place liveMusic. */
+                    public liveMusic?: (boolean|null);
+
+                    /** Place menuForChildren. */
+                    public menuForChildren?: (boolean|null);
+
+                    /** Place servesCocktails. */
+                    public servesCocktails?: (boolean|null);
+
+                    /** Place servesDessert. */
+                    public servesDessert?: (boolean|null);
+
+                    /** Place servesCoffee. */
+                    public servesCoffee?: (boolean|null);
+
+                    /** Place goodForChildren. */
+                    public goodForChildren?: (boolean|null);
+
+                    /** Place allowsDogs. */
+                    public allowsDogs?: (boolean|null);
+
+                    /** Place restroom. */
+                    public restroom?: (boolean|null);
+
+                    /** Place goodForGroups. */
+                    public goodForGroups?: (boolean|null);
+
+                    /** Place goodForWatchingSports. */
+                    public goodForWatchingSports?: (boolean|null);
+
+                    /** Place paymentOptions. */
+                    public paymentOptions?: (google.maps.places.v1.Place.IPaymentOptions|null);
+
+                    /** Place parkingOptions. */
+                    public parkingOptions?: (google.maps.places.v1.Place.IParkingOptions|null);
+
+                    /** Place subDestinations. */
+                    public subDestinations: google.maps.places.v1.Place.ISubDestination[];
+
+                    /** Place accessibilityOptions. */
+                    public accessibilityOptions?: (google.maps.places.v1.Place.IAccessibilityOptions|null);
+
+                    /** Place fuelOptions. */
+                    public fuelOptions?: (google.maps.places.v1.IFuelOptions|null);
+
+                    /** Place evChargeOptions. */
+                    public evChargeOptions?: (google.maps.places.v1.IEVChargeOptions|null);
+
+                    /** Place _utcOffsetMinutes. */
+                    public _utcOffsetMinutes?: "utcOffsetMinutes";
+
+                    /** Place _userRatingCount. */
+                    public _userRatingCount?: "userRatingCount";
 
                     /** Place _takeout. */
                     public _takeout?: "takeout";
@@ -823,9 +1758,6 @@ export namespace google {
 
                     /** Place _curbsidePickup. */
                     public _curbsidePickup?: "curbsidePickup";
-
-                    /** Place _wheelchairAccessibleEntrance. */
-                    public _wheelchairAccessibleEntrance?: "wheelchairAccessibleEntrance";
 
                     /** Place _reservable. */
                     public _reservable?: "reservable";
@@ -850,6 +1782,42 @@ export namespace google {
 
                     /** Place _servesVegetarianFood. */
                     public _servesVegetarianFood?: "servesVegetarianFood";
+
+                    /** Place _outdoorSeating. */
+                    public _outdoorSeating?: "outdoorSeating";
+
+                    /** Place _liveMusic. */
+                    public _liveMusic?: "liveMusic";
+
+                    /** Place _menuForChildren. */
+                    public _menuForChildren?: "menuForChildren";
+
+                    /** Place _servesCocktails. */
+                    public _servesCocktails?: "servesCocktails";
+
+                    /** Place _servesDessert. */
+                    public _servesDessert?: "servesDessert";
+
+                    /** Place _servesCoffee. */
+                    public _servesCoffee?: "servesCoffee";
+
+                    /** Place _goodForChildren. */
+                    public _goodForChildren?: "goodForChildren";
+
+                    /** Place _allowsDogs. */
+                    public _allowsDogs?: "allowsDogs";
+
+                    /** Place _restroom. */
+                    public _restroom?: "restroom";
+
+                    /** Place _goodForGroups. */
+                    public _goodForGroups?: "goodForGroups";
+
+                    /** Place _goodForWatchingSports. */
+                    public _goodForWatchingSports?: "goodForWatchingSports";
+
+                    /** Place _accessibilityOptions. */
+                    public _accessibilityOptions?: "accessibilityOptions";
 
                     /**
                      * Creates a new Place instance using the specified properties.
@@ -1149,151 +2117,6 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
-                    /** Properties of a Review. */
-                    interface IReview {
-
-                        /** Review publishTime */
-                        publishTime?: (google.protobuf.ITimestamp|null);
-
-                        /** Review relativePublishTimeDescription */
-                        relativePublishTimeDescription?: (string|null);
-
-                        /** Review text */
-                        text?: (google.type.ILocalizedText|null);
-
-                        /** Review author */
-                        author?: (string|null);
-
-                        /** Review authorUri */
-                        authorUri?: (string|null);
-
-                        /** Review authorPhotoUri */
-                        authorPhotoUri?: (string|null);
-
-                        /** Review rating */
-                        rating?: (number|null);
-
-                        /** Review originalLanguageCode */
-                        originalLanguageCode?: (string|null);
-
-                        /** Review translated */
-                        translated?: (boolean|null);
-                    }
-
-                    /** Represents a Review. */
-                    class Review implements IReview {
-
-                        /**
-                         * Constructs a new Review.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.maps.places.v1.Place.IReview);
-
-                        /** Review publishTime. */
-                        public publishTime?: (google.protobuf.ITimestamp|null);
-
-                        /** Review relativePublishTimeDescription. */
-                        public relativePublishTimeDescription: string;
-
-                        /** Review text. */
-                        public text?: (google.type.ILocalizedText|null);
-
-                        /** Review author. */
-                        public author: string;
-
-                        /** Review authorUri. */
-                        public authorUri: string;
-
-                        /** Review authorPhotoUri. */
-                        public authorPhotoUri: string;
-
-                        /** Review rating. */
-                        public rating: number;
-
-                        /** Review originalLanguageCode. */
-                        public originalLanguageCode: string;
-
-                        /** Review translated. */
-                        public translated: boolean;
-
-                        /**
-                         * Creates a new Review instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns Review instance
-                         */
-                        public static create(properties?: google.maps.places.v1.Place.IReview): google.maps.places.v1.Place.Review;
-
-                        /**
-                         * Encodes the specified Review message. Does not implicitly {@link google.maps.places.v1.Place.Review.verify|verify} messages.
-                         * @param message Review message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.maps.places.v1.Place.IReview, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified Review message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.Review.verify|verify} messages.
-                         * @param message Review message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.maps.places.v1.Place.IReview, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a Review message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns Review
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.Place.Review;
-
-                        /**
-                         * Decodes a Review message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns Review
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.Place.Review;
-
-                        /**
-                         * Verifies a Review message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a Review message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns Review
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.maps.places.v1.Place.Review;
-
-                        /**
-                         * Creates a plain object from a Review message. Also converts values to other types if specified.
-                         * @param message Review
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.maps.places.v1.Place.Review, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this Review to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for Review
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
                     /** Properties of an OpeningHours. */
                     interface IOpeningHours {
 
@@ -1301,13 +2124,13 @@ export namespace google {
                         openNow?: (boolean|null);
 
                         /** OpeningHours periods */
-                        periods?: (google.maps.places.v1.Place.OpeningHours.IOpeningHoursPeriod[]|null);
+                        periods?: (google.maps.places.v1.Place.OpeningHours.IPeriod[]|null);
 
                         /** OpeningHours weekdayDescriptions */
                         weekdayDescriptions?: (string[]|null);
 
-                        /** OpeningHours secondaryHourType */
-                        secondaryHourType?: (google.maps.places.v1.Place.OpeningHours.SecondaryHourType|keyof typeof google.maps.places.v1.Place.OpeningHours.SecondaryHourType|null);
+                        /** OpeningHours secondaryHoursType */
+                        secondaryHoursType?: (google.maps.places.v1.Place.OpeningHours.SecondaryHoursType|keyof typeof google.maps.places.v1.Place.OpeningHours.SecondaryHoursType|null);
 
                         /** OpeningHours specialDays */
                         specialDays?: (google.maps.places.v1.Place.OpeningHours.ISpecialDay[]|null);
@@ -1323,19 +2146,22 @@ export namespace google {
                         constructor(properties?: google.maps.places.v1.Place.IOpeningHours);
 
                         /** OpeningHours openNow. */
-                        public openNow: boolean;
+                        public openNow?: (boolean|null);
 
                         /** OpeningHours periods. */
-                        public periods: google.maps.places.v1.Place.OpeningHours.IOpeningHoursPeriod[];
+                        public periods: google.maps.places.v1.Place.OpeningHours.IPeriod[];
 
                         /** OpeningHours weekdayDescriptions. */
                         public weekdayDescriptions: string[];
 
-                        /** OpeningHours secondaryHourType. */
-                        public secondaryHourType: (google.maps.places.v1.Place.OpeningHours.SecondaryHourType|keyof typeof google.maps.places.v1.Place.OpeningHours.SecondaryHourType);
+                        /** OpeningHours secondaryHoursType. */
+                        public secondaryHoursType: (google.maps.places.v1.Place.OpeningHours.SecondaryHoursType|keyof typeof google.maps.places.v1.Place.OpeningHours.SecondaryHoursType);
 
                         /** OpeningHours specialDays. */
                         public specialDays: google.maps.places.v1.Place.OpeningHours.ISpecialDay[];
+
+                        /** OpeningHours _openNow. */
+                        public _openNow?: "openNow";
 
                         /**
                          * Creates a new OpeningHours instance using the specified properties.
@@ -1417,241 +2243,235 @@ export namespace google {
 
                     namespace OpeningHours {
 
-                        /** Properties of an OpeningHoursPeriod. */
-                        interface IOpeningHoursPeriod {
+                        /** Properties of a Period. */
+                        interface IPeriod {
 
-                            /** OpeningHoursPeriod open */
-                            open?: (google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.IOpeningHoursPoint|null);
+                            /** Period open */
+                            open?: (google.maps.places.v1.Place.OpeningHours.Period.IPoint|null);
 
-                            /** OpeningHoursPeriod close */
-                            close?: (google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.IOpeningHoursPoint|null);
+                            /** Period close */
+                            close?: (google.maps.places.v1.Place.OpeningHours.Period.IPoint|null);
                         }
 
-                        /** Represents an OpeningHoursPeriod. */
-                        class OpeningHoursPeriod implements IOpeningHoursPeriod {
+                        /** Represents a Period. */
+                        class Period implements IPeriod {
 
                             /**
-                             * Constructs a new OpeningHoursPeriod.
+                             * Constructs a new Period.
                              * @param [properties] Properties to set
                              */
-                            constructor(properties?: google.maps.places.v1.Place.OpeningHours.IOpeningHoursPeriod);
+                            constructor(properties?: google.maps.places.v1.Place.OpeningHours.IPeriod);
 
-                            /** OpeningHoursPeriod open. */
-                            public open?: (google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.IOpeningHoursPoint|null);
+                            /** Period open. */
+                            public open?: (google.maps.places.v1.Place.OpeningHours.Period.IPoint|null);
 
-                            /** OpeningHoursPeriod close. */
-                            public close?: (google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.IOpeningHoursPoint|null);
+                            /** Period close. */
+                            public close?: (google.maps.places.v1.Place.OpeningHours.Period.IPoint|null);
 
                             /**
-                             * Creates a new OpeningHoursPeriod instance using the specified properties.
+                             * Creates a new Period instance using the specified properties.
                              * @param [properties] Properties to set
-                             * @returns OpeningHoursPeriod instance
+                             * @returns Period instance
                              */
-                            public static create(properties?: google.maps.places.v1.Place.OpeningHours.IOpeningHoursPeriod): google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod;
+                            public static create(properties?: google.maps.places.v1.Place.OpeningHours.IPeriod): google.maps.places.v1.Place.OpeningHours.Period;
 
                             /**
-                             * Encodes the specified OpeningHoursPeriod message. Does not implicitly {@link google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.verify|verify} messages.
-                             * @param message OpeningHoursPeriod message or plain object to encode
+                             * Encodes the specified Period message. Does not implicitly {@link google.maps.places.v1.Place.OpeningHours.Period.verify|verify} messages.
+                             * @param message Period message or plain object to encode
                              * @param [writer] Writer to encode to
                              * @returns Writer
                              */
-                            public static encode(message: google.maps.places.v1.Place.OpeningHours.IOpeningHoursPeriod, writer?: $protobuf.Writer): $protobuf.Writer;
+                            public static encode(message: google.maps.places.v1.Place.OpeningHours.IPeriod, writer?: $protobuf.Writer): $protobuf.Writer;
 
                             /**
-                             * Encodes the specified OpeningHoursPeriod message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.verify|verify} messages.
-                             * @param message OpeningHoursPeriod message or plain object to encode
+                             * Encodes the specified Period message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.OpeningHours.Period.verify|verify} messages.
+                             * @param message Period message or plain object to encode
                              * @param [writer] Writer to encode to
                              * @returns Writer
                              */
-                            public static encodeDelimited(message: google.maps.places.v1.Place.OpeningHours.IOpeningHoursPeriod, writer?: $protobuf.Writer): $protobuf.Writer;
+                            public static encodeDelimited(message: google.maps.places.v1.Place.OpeningHours.IPeriod, writer?: $protobuf.Writer): $protobuf.Writer;
 
                             /**
-                             * Decodes an OpeningHoursPeriod message from the specified reader or buffer.
+                             * Decodes a Period message from the specified reader or buffer.
                              * @param reader Reader or buffer to decode from
                              * @param [length] Message length if known beforehand
-                             * @returns OpeningHoursPeriod
+                             * @returns Period
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod;
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.Place.OpeningHours.Period;
 
                             /**
-                             * Decodes an OpeningHoursPeriod message from the specified reader or buffer, length delimited.
+                             * Decodes a Period message from the specified reader or buffer, length delimited.
                              * @param reader Reader or buffer to decode from
-                             * @returns OpeningHoursPeriod
+                             * @returns Period
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod;
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.Place.OpeningHours.Period;
 
                             /**
-                             * Verifies an OpeningHoursPeriod message.
+                             * Verifies a Period message.
                              * @param message Plain object to verify
                              * @returns `null` if valid, otherwise the reason why it is not
                              */
                             public static verify(message: { [k: string]: any }): (string|null);
 
                             /**
-                             * Creates an OpeningHoursPeriod message from a plain object. Also converts values to their respective internal types.
+                             * Creates a Period message from a plain object. Also converts values to their respective internal types.
                              * @param object Plain object
-                             * @returns OpeningHoursPeriod
+                             * @returns Period
                              */
-                            public static fromObject(object: { [k: string]: any }): google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod;
+                            public static fromObject(object: { [k: string]: any }): google.maps.places.v1.Place.OpeningHours.Period;
 
                             /**
-                             * Creates a plain object from an OpeningHoursPeriod message. Also converts values to other types if specified.
-                             * @param message OpeningHoursPeriod
+                             * Creates a plain object from a Period message. Also converts values to other types if specified.
+                             * @param message Period
                              * @param [options] Conversion options
                              * @returns Plain object
                              */
-                            public static toObject(message: google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                            public static toObject(message: google.maps.places.v1.Place.OpeningHours.Period, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                             /**
-                             * Converts this OpeningHoursPeriod to JSON.
+                             * Converts this Period to JSON.
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
 
                             /**
-                             * Gets the default type url for OpeningHoursPeriod
+                             * Gets the default type url for Period
                              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                              * @returns The default type url
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
-                        namespace OpeningHoursPeriod {
+                        namespace Period {
 
-                            /** Properties of an OpeningHoursPoint. */
-                            interface IOpeningHoursPoint {
+                            /** Properties of a Point. */
+                            interface IPoint {
 
-                                /** OpeningHoursPoint day */
+                                /** Point day */
                                 day?: (number|null);
 
-                                /** OpeningHoursPoint hour */
+                                /** Point hour */
                                 hour?: (number|null);
 
-                                /** OpeningHoursPoint minute */
+                                /** Point minute */
                                 minute?: (number|null);
 
-                                /** OpeningHoursPoint dateDeprecated */
-                                dateDeprecated?: (string|null);
-
-                                /** OpeningHoursPoint date */
+                                /** Point date */
                                 date?: (google.type.IDate|null);
 
-                                /** OpeningHoursPoint truncated */
+                                /** Point truncated */
                                 truncated?: (boolean|null);
                             }
 
-                            /** Represents an OpeningHoursPoint. */
-                            class OpeningHoursPoint implements IOpeningHoursPoint {
+                            /** Represents a Point. */
+                            class Point implements IPoint {
 
                                 /**
-                                 * Constructs a new OpeningHoursPoint.
+                                 * Constructs a new Point.
                                  * @param [properties] Properties to set
                                  */
-                                constructor(properties?: google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.IOpeningHoursPoint);
+                                constructor(properties?: google.maps.places.v1.Place.OpeningHours.Period.IPoint);
 
-                                /** OpeningHoursPoint day. */
+                                /** Point day. */
                                 public day?: (number|null);
 
-                                /** OpeningHoursPoint hour. */
+                                /** Point hour. */
                                 public hour?: (number|null);
 
-                                /** OpeningHoursPoint minute. */
+                                /** Point minute. */
                                 public minute?: (number|null);
 
-                                /** OpeningHoursPoint dateDeprecated. */
-                                public dateDeprecated: string;
-
-                                /** OpeningHoursPoint date. */
+                                /** Point date. */
                                 public date?: (google.type.IDate|null);
 
-                                /** OpeningHoursPoint truncated. */
+                                /** Point truncated. */
                                 public truncated: boolean;
 
-                                /** OpeningHoursPoint _day. */
+                                /** Point _day. */
                                 public _day?: "day";
 
-                                /** OpeningHoursPoint _hour. */
+                                /** Point _hour. */
                                 public _hour?: "hour";
 
-                                /** OpeningHoursPoint _minute. */
+                                /** Point _minute. */
                                 public _minute?: "minute";
 
                                 /**
-                                 * Creates a new OpeningHoursPoint instance using the specified properties.
+                                 * Creates a new Point instance using the specified properties.
                                  * @param [properties] Properties to set
-                                 * @returns OpeningHoursPoint instance
+                                 * @returns Point instance
                                  */
-                                public static create(properties?: google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.IOpeningHoursPoint): google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint;
+                                public static create(properties?: google.maps.places.v1.Place.OpeningHours.Period.IPoint): google.maps.places.v1.Place.OpeningHours.Period.Point;
 
                                 /**
-                                 * Encodes the specified OpeningHoursPoint message. Does not implicitly {@link google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint.verify|verify} messages.
-                                 * @param message OpeningHoursPoint message or plain object to encode
+                                 * Encodes the specified Point message. Does not implicitly {@link google.maps.places.v1.Place.OpeningHours.Period.Point.verify|verify} messages.
+                                 * @param message Point message or plain object to encode
                                  * @param [writer] Writer to encode to
                                  * @returns Writer
                                  */
-                                public static encode(message: google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.IOpeningHoursPoint, writer?: $protobuf.Writer): $protobuf.Writer;
+                                public static encode(message: google.maps.places.v1.Place.OpeningHours.Period.IPoint, writer?: $protobuf.Writer): $protobuf.Writer;
 
                                 /**
-                                 * Encodes the specified OpeningHoursPoint message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint.verify|verify} messages.
-                                 * @param message OpeningHoursPoint message or plain object to encode
+                                 * Encodes the specified Point message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.OpeningHours.Period.Point.verify|verify} messages.
+                                 * @param message Point message or plain object to encode
                                  * @param [writer] Writer to encode to
                                  * @returns Writer
                                  */
-                                public static encodeDelimited(message: google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.IOpeningHoursPoint, writer?: $protobuf.Writer): $protobuf.Writer;
+                                public static encodeDelimited(message: google.maps.places.v1.Place.OpeningHours.Period.IPoint, writer?: $protobuf.Writer): $protobuf.Writer;
 
                                 /**
-                                 * Decodes an OpeningHoursPoint message from the specified reader or buffer.
+                                 * Decodes a Point message from the specified reader or buffer.
                                  * @param reader Reader or buffer to decode from
                                  * @param [length] Message length if known beforehand
-                                 * @returns OpeningHoursPoint
+                                 * @returns Point
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint;
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.Place.OpeningHours.Period.Point;
 
                                 /**
-                                 * Decodes an OpeningHoursPoint message from the specified reader or buffer, length delimited.
+                                 * Decodes a Point message from the specified reader or buffer, length delimited.
                                  * @param reader Reader or buffer to decode from
-                                 * @returns OpeningHoursPoint
+                                 * @returns Point
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint;
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.Place.OpeningHours.Period.Point;
 
                                 /**
-                                 * Verifies an OpeningHoursPoint message.
+                                 * Verifies a Point message.
                                  * @param message Plain object to verify
                                  * @returns `null` if valid, otherwise the reason why it is not
                                  */
                                 public static verify(message: { [k: string]: any }): (string|null);
 
                                 /**
-                                 * Creates an OpeningHoursPoint message from a plain object. Also converts values to their respective internal types.
+                                 * Creates a Point message from a plain object. Also converts values to their respective internal types.
                                  * @param object Plain object
-                                 * @returns OpeningHoursPoint
+                                 * @returns Point
                                  */
-                                public static fromObject(object: { [k: string]: any }): google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint;
+                                public static fromObject(object: { [k: string]: any }): google.maps.places.v1.Place.OpeningHours.Period.Point;
 
                                 /**
-                                 * Creates a plain object from an OpeningHoursPoint message. Also converts values to other types if specified.
-                                 * @param message OpeningHoursPoint
+                                 * Creates a plain object from a Point message. Also converts values to other types if specified.
+                                 * @param message Point
                                  * @param [options] Conversion options
                                  * @returns Plain object
                                  */
-                                public static toObject(message: google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                                public static toObject(message: google.maps.places.v1.Place.OpeningHours.Period.Point, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                                 /**
-                                 * Converts this OpeningHoursPoint to JSON.
+                                 * Converts this Point to JSON.
                                  * @returns JSON object
                                  */
                                 public toJSON(): { [k: string]: any };
 
                                 /**
-                                 * Gets the default type url for OpeningHoursPoint
+                                 * Gets the default type url for Point
                                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                                  * @returns The default type url
                                  */
@@ -1659,9 +2479,9 @@ export namespace google {
                             }
                         }
 
-                        /** SecondaryHourType enum. */
-                        enum SecondaryHourType {
-                            SECONDARY_HOUR_TYPE_UNSPECIFIED = 0,
+                        /** SecondaryHoursType enum. */
+                        enum SecondaryHoursType {
+                            SECONDARY_HOURS_TYPE_UNSPECIFIED = 0,
                             DRIVE_THROUGH = 1,
                             HAPPY_HOUR = 2,
                             DELIVERY = 3,
@@ -1886,97 +2706,484 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
-                    /** Properties of an EditorialSummary. */
-                    interface IEditorialSummary {
+                    /** Properties of a PaymentOptions. */
+                    interface IPaymentOptions {
 
-                        /** EditorialSummary overview */
-                        overview?: (google.type.ILocalizedText|null);
+                        /** PaymentOptions acceptsCreditCards */
+                        acceptsCreditCards?: (boolean|null);
+
+                        /** PaymentOptions acceptsDebitCards */
+                        acceptsDebitCards?: (boolean|null);
+
+                        /** PaymentOptions acceptsCashOnly */
+                        acceptsCashOnly?: (boolean|null);
+
+                        /** PaymentOptions acceptsNfc */
+                        acceptsNfc?: (boolean|null);
                     }
 
-                    /** Represents an EditorialSummary. */
-                    class EditorialSummary implements IEditorialSummary {
+                    /** Represents a PaymentOptions. */
+                    class PaymentOptions implements IPaymentOptions {
 
                         /**
-                         * Constructs a new EditorialSummary.
+                         * Constructs a new PaymentOptions.
                          * @param [properties] Properties to set
                          */
-                        constructor(properties?: google.maps.places.v1.Place.IEditorialSummary);
+                        constructor(properties?: google.maps.places.v1.Place.IPaymentOptions);
 
-                        /** EditorialSummary overview. */
-                        public overview?: (google.type.ILocalizedText|null);
+                        /** PaymentOptions acceptsCreditCards. */
+                        public acceptsCreditCards?: (boolean|null);
+
+                        /** PaymentOptions acceptsDebitCards. */
+                        public acceptsDebitCards?: (boolean|null);
+
+                        /** PaymentOptions acceptsCashOnly. */
+                        public acceptsCashOnly?: (boolean|null);
+
+                        /** PaymentOptions acceptsNfc. */
+                        public acceptsNfc?: (boolean|null);
+
+                        /** PaymentOptions _acceptsCreditCards. */
+                        public _acceptsCreditCards?: "acceptsCreditCards";
+
+                        /** PaymentOptions _acceptsDebitCards. */
+                        public _acceptsDebitCards?: "acceptsDebitCards";
+
+                        /** PaymentOptions _acceptsCashOnly. */
+                        public _acceptsCashOnly?: "acceptsCashOnly";
+
+                        /** PaymentOptions _acceptsNfc. */
+                        public _acceptsNfc?: "acceptsNfc";
 
                         /**
-                         * Creates a new EditorialSummary instance using the specified properties.
+                         * Creates a new PaymentOptions instance using the specified properties.
                          * @param [properties] Properties to set
-                         * @returns EditorialSummary instance
+                         * @returns PaymentOptions instance
                          */
-                        public static create(properties?: google.maps.places.v1.Place.IEditorialSummary): google.maps.places.v1.Place.EditorialSummary;
+                        public static create(properties?: google.maps.places.v1.Place.IPaymentOptions): google.maps.places.v1.Place.PaymentOptions;
 
                         /**
-                         * Encodes the specified EditorialSummary message. Does not implicitly {@link google.maps.places.v1.Place.EditorialSummary.verify|verify} messages.
-                         * @param message EditorialSummary message or plain object to encode
+                         * Encodes the specified PaymentOptions message. Does not implicitly {@link google.maps.places.v1.Place.PaymentOptions.verify|verify} messages.
+                         * @param message PaymentOptions message or plain object to encode
                          * @param [writer] Writer to encode to
                          * @returns Writer
                          */
-                        public static encode(message: google.maps.places.v1.Place.IEditorialSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+                        public static encode(message: google.maps.places.v1.Place.IPaymentOptions, writer?: $protobuf.Writer): $protobuf.Writer;
 
                         /**
-                         * Encodes the specified EditorialSummary message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.EditorialSummary.verify|verify} messages.
-                         * @param message EditorialSummary message or plain object to encode
+                         * Encodes the specified PaymentOptions message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.PaymentOptions.verify|verify} messages.
+                         * @param message PaymentOptions message or plain object to encode
                          * @param [writer] Writer to encode to
                          * @returns Writer
                          */
-                        public static encodeDelimited(message: google.maps.places.v1.Place.IEditorialSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+                        public static encodeDelimited(message: google.maps.places.v1.Place.IPaymentOptions, writer?: $protobuf.Writer): $protobuf.Writer;
 
                         /**
-                         * Decodes an EditorialSummary message from the specified reader or buffer.
+                         * Decodes a PaymentOptions message from the specified reader or buffer.
                          * @param reader Reader or buffer to decode from
                          * @param [length] Message length if known beforehand
-                         * @returns EditorialSummary
+                         * @returns PaymentOptions
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.Place.EditorialSummary;
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.Place.PaymentOptions;
 
                         /**
-                         * Decodes an EditorialSummary message from the specified reader or buffer, length delimited.
+                         * Decodes a PaymentOptions message from the specified reader or buffer, length delimited.
                          * @param reader Reader or buffer to decode from
-                         * @returns EditorialSummary
+                         * @returns PaymentOptions
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.Place.EditorialSummary;
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.Place.PaymentOptions;
 
                         /**
-                         * Verifies an EditorialSummary message.
+                         * Verifies a PaymentOptions message.
                          * @param message Plain object to verify
                          * @returns `null` if valid, otherwise the reason why it is not
                          */
                         public static verify(message: { [k: string]: any }): (string|null);
 
                         /**
-                         * Creates an EditorialSummary message from a plain object. Also converts values to their respective internal types.
+                         * Creates a PaymentOptions message from a plain object. Also converts values to their respective internal types.
                          * @param object Plain object
-                         * @returns EditorialSummary
+                         * @returns PaymentOptions
                          */
-                        public static fromObject(object: { [k: string]: any }): google.maps.places.v1.Place.EditorialSummary;
+                        public static fromObject(object: { [k: string]: any }): google.maps.places.v1.Place.PaymentOptions;
 
                         /**
-                         * Creates a plain object from an EditorialSummary message. Also converts values to other types if specified.
-                         * @param message EditorialSummary
+                         * Creates a plain object from a PaymentOptions message. Also converts values to other types if specified.
+                         * @param message PaymentOptions
                          * @param [options] Conversion options
                          * @returns Plain object
                          */
-                        public static toObject(message: google.maps.places.v1.Place.EditorialSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                        public static toObject(message: google.maps.places.v1.Place.PaymentOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                         /**
-                         * Converts this EditorialSummary to JSON.
+                         * Converts this PaymentOptions to JSON.
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
 
                         /**
-                         * Gets the default type url for EditorialSummary
+                         * Gets the default type url for PaymentOptions
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ParkingOptions. */
+                    interface IParkingOptions {
+
+                        /** ParkingOptions freeParkingLot */
+                        freeParkingLot?: (boolean|null);
+
+                        /** ParkingOptions paidParkingLot */
+                        paidParkingLot?: (boolean|null);
+
+                        /** ParkingOptions freeStreetParking */
+                        freeStreetParking?: (boolean|null);
+
+                        /** ParkingOptions paidStreetParking */
+                        paidStreetParking?: (boolean|null);
+
+                        /** ParkingOptions valetParking */
+                        valetParking?: (boolean|null);
+
+                        /** ParkingOptions freeGarageParking */
+                        freeGarageParking?: (boolean|null);
+
+                        /** ParkingOptions paidGarageParking */
+                        paidGarageParking?: (boolean|null);
+                    }
+
+                    /** Represents a ParkingOptions. */
+                    class ParkingOptions implements IParkingOptions {
+
+                        /**
+                         * Constructs a new ParkingOptions.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.maps.places.v1.Place.IParkingOptions);
+
+                        /** ParkingOptions freeParkingLot. */
+                        public freeParkingLot?: (boolean|null);
+
+                        /** ParkingOptions paidParkingLot. */
+                        public paidParkingLot?: (boolean|null);
+
+                        /** ParkingOptions freeStreetParking. */
+                        public freeStreetParking?: (boolean|null);
+
+                        /** ParkingOptions paidStreetParking. */
+                        public paidStreetParking?: (boolean|null);
+
+                        /** ParkingOptions valetParking. */
+                        public valetParking?: (boolean|null);
+
+                        /** ParkingOptions freeGarageParking. */
+                        public freeGarageParking?: (boolean|null);
+
+                        /** ParkingOptions paidGarageParking. */
+                        public paidGarageParking?: (boolean|null);
+
+                        /** ParkingOptions _freeParkingLot. */
+                        public _freeParkingLot?: "freeParkingLot";
+
+                        /** ParkingOptions _paidParkingLot. */
+                        public _paidParkingLot?: "paidParkingLot";
+
+                        /** ParkingOptions _freeStreetParking. */
+                        public _freeStreetParking?: "freeStreetParking";
+
+                        /** ParkingOptions _paidStreetParking. */
+                        public _paidStreetParking?: "paidStreetParking";
+
+                        /** ParkingOptions _valetParking. */
+                        public _valetParking?: "valetParking";
+
+                        /** ParkingOptions _freeGarageParking. */
+                        public _freeGarageParking?: "freeGarageParking";
+
+                        /** ParkingOptions _paidGarageParking. */
+                        public _paidGarageParking?: "paidGarageParking";
+
+                        /**
+                         * Creates a new ParkingOptions instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ParkingOptions instance
+                         */
+                        public static create(properties?: google.maps.places.v1.Place.IParkingOptions): google.maps.places.v1.Place.ParkingOptions;
+
+                        /**
+                         * Encodes the specified ParkingOptions message. Does not implicitly {@link google.maps.places.v1.Place.ParkingOptions.verify|verify} messages.
+                         * @param message ParkingOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.maps.places.v1.Place.IParkingOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ParkingOptions message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.ParkingOptions.verify|verify} messages.
+                         * @param message ParkingOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.maps.places.v1.Place.IParkingOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ParkingOptions message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ParkingOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.Place.ParkingOptions;
+
+                        /**
+                         * Decodes a ParkingOptions message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ParkingOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.Place.ParkingOptions;
+
+                        /**
+                         * Verifies a ParkingOptions message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ParkingOptions message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ParkingOptions
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.maps.places.v1.Place.ParkingOptions;
+
+                        /**
+                         * Creates a plain object from a ParkingOptions message. Also converts values to other types if specified.
+                         * @param message ParkingOptions
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.maps.places.v1.Place.ParkingOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ParkingOptions to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ParkingOptions
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SubDestination. */
+                    interface ISubDestination {
+
+                        /** SubDestination name */
+                        name?: (string|null);
+
+                        /** SubDestination id */
+                        id?: (string|null);
+                    }
+
+                    /** Represents a SubDestination. */
+                    class SubDestination implements ISubDestination {
+
+                        /**
+                         * Constructs a new SubDestination.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.maps.places.v1.Place.ISubDestination);
+
+                        /** SubDestination name. */
+                        public name: string;
+
+                        /** SubDestination id. */
+                        public id: string;
+
+                        /**
+                         * Creates a new SubDestination instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SubDestination instance
+                         */
+                        public static create(properties?: google.maps.places.v1.Place.ISubDestination): google.maps.places.v1.Place.SubDestination;
+
+                        /**
+                         * Encodes the specified SubDestination message. Does not implicitly {@link google.maps.places.v1.Place.SubDestination.verify|verify} messages.
+                         * @param message SubDestination message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.maps.places.v1.Place.ISubDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SubDestination message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.SubDestination.verify|verify} messages.
+                         * @param message SubDestination message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.maps.places.v1.Place.ISubDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SubDestination message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SubDestination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.Place.SubDestination;
+
+                        /**
+                         * Decodes a SubDestination message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SubDestination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.Place.SubDestination;
+
+                        /**
+                         * Verifies a SubDestination message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SubDestination message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SubDestination
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.maps.places.v1.Place.SubDestination;
+
+                        /**
+                         * Creates a plain object from a SubDestination message. Also converts values to other types if specified.
+                         * @param message SubDestination
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.maps.places.v1.Place.SubDestination, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SubDestination to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SubDestination
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AccessibilityOptions. */
+                    interface IAccessibilityOptions {
+
+                        /** AccessibilityOptions wheelchairAccessibleEntrance */
+                        wheelchairAccessibleEntrance?: (boolean|null);
+                    }
+
+                    /** Represents an AccessibilityOptions. */
+                    class AccessibilityOptions implements IAccessibilityOptions {
+
+                        /**
+                         * Constructs a new AccessibilityOptions.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.maps.places.v1.Place.IAccessibilityOptions);
+
+                        /** AccessibilityOptions wheelchairAccessibleEntrance. */
+                        public wheelchairAccessibleEntrance?: (boolean|null);
+
+                        /** AccessibilityOptions _wheelchairAccessibleEntrance. */
+                        public _wheelchairAccessibleEntrance?: "wheelchairAccessibleEntrance";
+
+                        /**
+                         * Creates a new AccessibilityOptions instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AccessibilityOptions instance
+                         */
+                        public static create(properties?: google.maps.places.v1.Place.IAccessibilityOptions): google.maps.places.v1.Place.AccessibilityOptions;
+
+                        /**
+                         * Encodes the specified AccessibilityOptions message. Does not implicitly {@link google.maps.places.v1.Place.AccessibilityOptions.verify|verify} messages.
+                         * @param message AccessibilityOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.maps.places.v1.Place.IAccessibilityOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AccessibilityOptions message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.AccessibilityOptions.verify|verify} messages.
+                         * @param message AccessibilityOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.maps.places.v1.Place.IAccessibilityOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AccessibilityOptions message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AccessibilityOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.Place.AccessibilityOptions;
+
+                        /**
+                         * Decodes an AccessibilityOptions message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AccessibilityOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.Place.AccessibilityOptions;
+
+                        /**
+                         * Verifies an AccessibilityOptions message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AccessibilityOptions message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AccessibilityOptions
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.maps.places.v1.Place.AccessibilityOptions;
+
+                        /**
+                         * Creates a plain object from an AccessibilityOptions message. Also converts values to other types if specified.
+                         * @param message AccessibilityOptions
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.maps.places.v1.Place.AccessibilityOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AccessibilityOptions to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AccessibilityOptions
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -1987,11 +3194,144 @@ export namespace google {
                 /** PriceLevel enum. */
                 enum PriceLevel {
                     PRICE_LEVEL_UNSPECIFIED = 0,
-                    FREE = 1,
-                    INEXPENSIVE = 2,
-                    MODERATE = 3,
-                    EXPENSIVE = 4,
-                    VERY_EXPENSIVE = 5
+                    PRICE_LEVEL_FREE = 1,
+                    PRICE_LEVEL_INEXPENSIVE = 2,
+                    PRICE_LEVEL_MODERATE = 3,
+                    PRICE_LEVEL_EXPENSIVE = 4,
+                    PRICE_LEVEL_VERY_EXPENSIVE = 5
+                }
+
+                /** Properties of a Review. */
+                interface IReview {
+
+                    /** Review name */
+                    name?: (string|null);
+
+                    /** Review relativePublishTimeDescription */
+                    relativePublishTimeDescription?: (string|null);
+
+                    /** Review text */
+                    text?: (google.type.ILocalizedText|null);
+
+                    /** Review originalText */
+                    originalText?: (google.type.ILocalizedText|null);
+
+                    /** Review rating */
+                    rating?: (number|null);
+
+                    /** Review authorAttribution */
+                    authorAttribution?: (google.maps.places.v1.IAuthorAttribution|null);
+
+                    /** Review publishTime */
+                    publishTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a Review. */
+                class Review implements IReview {
+
+                    /**
+                     * Constructs a new Review.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.places.v1.IReview);
+
+                    /** Review name. */
+                    public name: string;
+
+                    /** Review relativePublishTimeDescription. */
+                    public relativePublishTimeDescription: string;
+
+                    /** Review text. */
+                    public text?: (google.type.ILocalizedText|null);
+
+                    /** Review originalText. */
+                    public originalText?: (google.type.ILocalizedText|null);
+
+                    /** Review rating. */
+                    public rating: number;
+
+                    /** Review authorAttribution. */
+                    public authorAttribution?: (google.maps.places.v1.IAuthorAttribution|null);
+
+                    /** Review publishTime. */
+                    public publishTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new Review instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Review instance
+                     */
+                    public static create(properties?: google.maps.places.v1.IReview): google.maps.places.v1.Review;
+
+                    /**
+                     * Encodes the specified Review message. Does not implicitly {@link google.maps.places.v1.Review.verify|verify} messages.
+                     * @param message Review message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.places.v1.IReview, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Review message, length delimited. Does not implicitly {@link google.maps.places.v1.Review.verify|verify} messages.
+                     * @param message Review message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.places.v1.IReview, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Review message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Review
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.Review;
+
+                    /**
+                     * Decodes a Review message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Review
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.Review;
+
+                    /**
+                     * Verifies a Review message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Review message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Review
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.Review;
+
+                    /**
+                     * Creates a plain object from a Review message. Also converts values to other types if specified.
+                     * @param message Review
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.places.v1.Review, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Review to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Review
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Represents a Places */
@@ -2015,6 +3355,20 @@ export namespace google {
                     public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Places;
 
                     /**
+                     * Calls SearchNearby.
+                     * @param request SearchNearbyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SearchNearbyResponse
+                     */
+                    public searchNearby(request: google.maps.places.v1.ISearchNearbyRequest, callback: google.maps.places.v1.Places.SearchNearbyCallback): void;
+
+                    /**
+                     * Calls SearchNearby.
+                     * @param request SearchNearbyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public searchNearby(request: google.maps.places.v1.ISearchNearbyRequest): Promise<google.maps.places.v1.SearchNearbyResponse>;
+
+                    /**
                      * Calls SearchText.
                      * @param request SearchTextRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and SearchTextResponse
@@ -2027,9 +3381,44 @@ export namespace google {
                      * @returns Promise
                      */
                     public searchText(request: google.maps.places.v1.ISearchTextRequest): Promise<google.maps.places.v1.SearchTextResponse>;
+
+                    /**
+                     * Calls GetPhotoMedia.
+                     * @param request GetPhotoMediaRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PhotoMedia
+                     */
+                    public getPhotoMedia(request: google.maps.places.v1.IGetPhotoMediaRequest, callback: google.maps.places.v1.Places.GetPhotoMediaCallback): void;
+
+                    /**
+                     * Calls GetPhotoMedia.
+                     * @param request GetPhotoMediaRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getPhotoMedia(request: google.maps.places.v1.IGetPhotoMediaRequest): Promise<google.maps.places.v1.PhotoMedia>;
+
+                    /**
+                     * Calls GetPlace.
+                     * @param request GetPlaceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Place
+                     */
+                    public getPlace(request: google.maps.places.v1.IGetPlaceRequest, callback: google.maps.places.v1.Places.GetPlaceCallback): void;
+
+                    /**
+                     * Calls GetPlace.
+                     * @param request GetPlaceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getPlace(request: google.maps.places.v1.IGetPlaceRequest): Promise<google.maps.places.v1.Place>;
                 }
 
                 namespace Places {
+
+                    /**
+                     * Callback as used by {@link google.maps.places.v1.Places|searchNearby}.
+                     * @param error Error, if any
+                     * @param [response] SearchNearbyResponse
+                     */
+                    type SearchNearbyCallback = (error: (Error|null), response?: google.maps.places.v1.SearchNearbyResponse) => void;
 
                     /**
                      * Callback as used by {@link google.maps.places.v1.Places|searchText}.
@@ -2037,111 +3426,368 @@ export namespace google {
                      * @param [response] SearchTextResponse
                      */
                     type SearchTextCallback = (error: (Error|null), response?: google.maps.places.v1.SearchTextResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.maps.places.v1.Places|getPhotoMedia}.
+                     * @param error Error, if any
+                     * @param [response] PhotoMedia
+                     */
+                    type GetPhotoMediaCallback = (error: (Error|null), response?: google.maps.places.v1.PhotoMedia) => void;
+
+                    /**
+                     * Callback as used by {@link google.maps.places.v1.Places|getPlace}.
+                     * @param error Error, if any
+                     * @param [response] Place
+                     */
+                    type GetPlaceCallback = (error: (Error|null), response?: google.maps.places.v1.Place) => void;
                 }
 
-                /** Properties of an Int32Range. */
-                interface IInt32Range {
+                /** Properties of a SearchNearbyRequest. */
+                interface ISearchNearbyRequest {
 
-                    /** Int32Range min */
-                    min?: (number|null);
+                    /** SearchNearbyRequest languageCode */
+                    languageCode?: (string|null);
 
-                    /** Int32Range max */
-                    max?: (number|null);
+                    /** SearchNearbyRequest regionCode */
+                    regionCode?: (string|null);
+
+                    /** SearchNearbyRequest includedTypes */
+                    includedTypes?: (string[]|null);
+
+                    /** SearchNearbyRequest excludedTypes */
+                    excludedTypes?: (string[]|null);
+
+                    /** SearchNearbyRequest includedPrimaryTypes */
+                    includedPrimaryTypes?: (string[]|null);
+
+                    /** SearchNearbyRequest excludedPrimaryTypes */
+                    excludedPrimaryTypes?: (string[]|null);
+
+                    /** SearchNearbyRequest maxResultCount */
+                    maxResultCount?: (number|null);
+
+                    /** SearchNearbyRequest locationRestriction */
+                    locationRestriction?: (google.maps.places.v1.SearchNearbyRequest.ILocationRestriction|null);
+
+                    /** SearchNearbyRequest rankPreference */
+                    rankPreference?: (google.maps.places.v1.SearchNearbyRequest.RankPreference|keyof typeof google.maps.places.v1.SearchNearbyRequest.RankPreference|null);
                 }
 
-                /** Represents an Int32Range. */
-                class Int32Range implements IInt32Range {
+                /** Represents a SearchNearbyRequest. */
+                class SearchNearbyRequest implements ISearchNearbyRequest {
 
                     /**
-                     * Constructs a new Int32Range.
+                     * Constructs a new SearchNearbyRequest.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.maps.places.v1.IInt32Range);
+                    constructor(properties?: google.maps.places.v1.ISearchNearbyRequest);
 
-                    /** Int32Range min. */
-                    public min?: (number|null);
+                    /** SearchNearbyRequest languageCode. */
+                    public languageCode: string;
 
-                    /** Int32Range max. */
-                    public max?: (number|null);
+                    /** SearchNearbyRequest regionCode. */
+                    public regionCode: string;
 
-                    /** Int32Range _min. */
-                    public _min?: "min";
+                    /** SearchNearbyRequest includedTypes. */
+                    public includedTypes: string[];
 
-                    /** Int32Range _max. */
-                    public _max?: "max";
+                    /** SearchNearbyRequest excludedTypes. */
+                    public excludedTypes: string[];
+
+                    /** SearchNearbyRequest includedPrimaryTypes. */
+                    public includedPrimaryTypes: string[];
+
+                    /** SearchNearbyRequest excludedPrimaryTypes. */
+                    public excludedPrimaryTypes: string[];
+
+                    /** SearchNearbyRequest maxResultCount. */
+                    public maxResultCount: number;
+
+                    /** SearchNearbyRequest locationRestriction. */
+                    public locationRestriction?: (google.maps.places.v1.SearchNearbyRequest.ILocationRestriction|null);
+
+                    /** SearchNearbyRequest rankPreference. */
+                    public rankPreference: (google.maps.places.v1.SearchNearbyRequest.RankPreference|keyof typeof google.maps.places.v1.SearchNearbyRequest.RankPreference);
 
                     /**
-                     * Creates a new Int32Range instance using the specified properties.
+                     * Creates a new SearchNearbyRequest instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns Int32Range instance
+                     * @returns SearchNearbyRequest instance
                      */
-                    public static create(properties?: google.maps.places.v1.IInt32Range): google.maps.places.v1.Int32Range;
+                    public static create(properties?: google.maps.places.v1.ISearchNearbyRequest): google.maps.places.v1.SearchNearbyRequest;
 
                     /**
-                     * Encodes the specified Int32Range message. Does not implicitly {@link google.maps.places.v1.Int32Range.verify|verify} messages.
-                     * @param message Int32Range message or plain object to encode
+                     * Encodes the specified SearchNearbyRequest message. Does not implicitly {@link google.maps.places.v1.SearchNearbyRequest.verify|verify} messages.
+                     * @param message SearchNearbyRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.maps.places.v1.IInt32Range, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.maps.places.v1.ISearchNearbyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified Int32Range message, length delimited. Does not implicitly {@link google.maps.places.v1.Int32Range.verify|verify} messages.
-                     * @param message Int32Range message or plain object to encode
+                     * Encodes the specified SearchNearbyRequest message, length delimited. Does not implicitly {@link google.maps.places.v1.SearchNearbyRequest.verify|verify} messages.
+                     * @param message SearchNearbyRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.maps.places.v1.IInt32Range, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.maps.places.v1.ISearchNearbyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes an Int32Range message from the specified reader or buffer.
+                     * Decodes a SearchNearbyRequest message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns Int32Range
+                     * @returns SearchNearbyRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.Int32Range;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.SearchNearbyRequest;
 
                     /**
-                     * Decodes an Int32Range message from the specified reader or buffer, length delimited.
+                     * Decodes a SearchNearbyRequest message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns Int32Range
+                     * @returns SearchNearbyRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.Int32Range;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.SearchNearbyRequest;
 
                     /**
-                     * Verifies an Int32Range message.
+                     * Verifies a SearchNearbyRequest message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates an Int32Range message from a plain object. Also converts values to their respective internal types.
+                     * Creates a SearchNearbyRequest message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns Int32Range
+                     * @returns SearchNearbyRequest
                      */
-                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.Int32Range;
+                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.SearchNearbyRequest;
 
                     /**
-                     * Creates a plain object from an Int32Range message. Also converts values to other types if specified.
-                     * @param message Int32Range
+                     * Creates a plain object from a SearchNearbyRequest message. Also converts values to other types if specified.
+                     * @param message SearchNearbyRequest
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.maps.places.v1.Int32Range, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.maps.places.v1.SearchNearbyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this Int32Range to JSON.
+                     * Converts this SearchNearbyRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
 
                     /**
-                     * Gets the default type url for Int32Range
+                     * Gets the default type url for SearchNearbyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SearchNearbyRequest {
+
+                    /** Properties of a LocationRestriction. */
+                    interface ILocationRestriction {
+
+                        /** LocationRestriction circle */
+                        circle?: (google.maps.places.v1.ICircle|null);
+                    }
+
+                    /** Represents a LocationRestriction. */
+                    class LocationRestriction implements ILocationRestriction {
+
+                        /**
+                         * Constructs a new LocationRestriction.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.maps.places.v1.SearchNearbyRequest.ILocationRestriction);
+
+                        /** LocationRestriction circle. */
+                        public circle?: (google.maps.places.v1.ICircle|null);
+
+                        /** LocationRestriction type. */
+                        public type?: "circle";
+
+                        /**
+                         * Creates a new LocationRestriction instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LocationRestriction instance
+                         */
+                        public static create(properties?: google.maps.places.v1.SearchNearbyRequest.ILocationRestriction): google.maps.places.v1.SearchNearbyRequest.LocationRestriction;
+
+                        /**
+                         * Encodes the specified LocationRestriction message. Does not implicitly {@link google.maps.places.v1.SearchNearbyRequest.LocationRestriction.verify|verify} messages.
+                         * @param message LocationRestriction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.maps.places.v1.SearchNearbyRequest.ILocationRestriction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LocationRestriction message, length delimited. Does not implicitly {@link google.maps.places.v1.SearchNearbyRequest.LocationRestriction.verify|verify} messages.
+                         * @param message LocationRestriction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.maps.places.v1.SearchNearbyRequest.ILocationRestriction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LocationRestriction message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LocationRestriction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.SearchNearbyRequest.LocationRestriction;
+
+                        /**
+                         * Decodes a LocationRestriction message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LocationRestriction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.SearchNearbyRequest.LocationRestriction;
+
+                        /**
+                         * Verifies a LocationRestriction message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LocationRestriction message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LocationRestriction
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.maps.places.v1.SearchNearbyRequest.LocationRestriction;
+
+                        /**
+                         * Creates a plain object from a LocationRestriction message. Also converts values to other types if specified.
+                         * @param message LocationRestriction
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.maps.places.v1.SearchNearbyRequest.LocationRestriction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LocationRestriction to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LocationRestriction
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** RankPreference enum. */
+                    enum RankPreference {
+                        RANK_PREFERENCE_UNSPECIFIED = 0,
+                        DISTANCE = 1,
+                        POPULARITY = 2
+                    }
+                }
+
+                /** Properties of a SearchNearbyResponse. */
+                interface ISearchNearbyResponse {
+
+                    /** SearchNearbyResponse places */
+                    places?: (google.maps.places.v1.IPlace[]|null);
+                }
+
+                /** Represents a SearchNearbyResponse. */
+                class SearchNearbyResponse implements ISearchNearbyResponse {
+
+                    /**
+                     * Constructs a new SearchNearbyResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.places.v1.ISearchNearbyResponse);
+
+                    /** SearchNearbyResponse places. */
+                    public places: google.maps.places.v1.IPlace[];
+
+                    /**
+                     * Creates a new SearchNearbyResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchNearbyResponse instance
+                     */
+                    public static create(properties?: google.maps.places.v1.ISearchNearbyResponse): google.maps.places.v1.SearchNearbyResponse;
+
+                    /**
+                     * Encodes the specified SearchNearbyResponse message. Does not implicitly {@link google.maps.places.v1.SearchNearbyResponse.verify|verify} messages.
+                     * @param message SearchNearbyResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.places.v1.ISearchNearbyResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchNearbyResponse message, length delimited. Does not implicitly {@link google.maps.places.v1.SearchNearbyResponse.verify|verify} messages.
+                     * @param message SearchNearbyResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.places.v1.ISearchNearbyResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchNearbyResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchNearbyResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.SearchNearbyResponse;
+
+                    /**
+                     * Decodes a SearchNearbyResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchNearbyResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.SearchNearbyResponse;
+
+                    /**
+                     * Verifies a SearchNearbyResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchNearbyResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchNearbyResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.SearchNearbyResponse;
+
+                    /**
+                     * Creates a plain object from a SearchNearbyResponse message. Also converts values to other types if specified.
+                     * @param message SearchNearbyResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.places.v1.SearchNearbyResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchNearbyResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchNearbyResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -2163,17 +3809,11 @@ export namespace google {
                     /** SearchTextRequest rankPreference */
                     rankPreference?: (google.maps.places.v1.SearchTextRequest.RankPreference|keyof typeof google.maps.places.v1.SearchTextRequest.RankPreference|null);
 
-                    /** SearchTextRequest location */
-                    location?: (google.maps.places.v1.SearchTextRequest.ILocation|null);
-
                     /** SearchTextRequest includedType */
                     includedType?: (string|null);
 
                     /** SearchTextRequest openNow */
                     openNow?: (boolean|null);
-
-                    /** SearchTextRequest priceRange */
-                    priceRange?: (google.maps.places.v1.IInt32Range|null);
 
                     /** SearchTextRequest minRating */
                     minRating?: (number|null);
@@ -2215,17 +3855,11 @@ export namespace google {
                     /** SearchTextRequest rankPreference. */
                     public rankPreference: (google.maps.places.v1.SearchTextRequest.RankPreference|keyof typeof google.maps.places.v1.SearchTextRequest.RankPreference);
 
-                    /** SearchTextRequest location. */
-                    public location?: (google.maps.places.v1.SearchTextRequest.ILocation|null);
-
                     /** SearchTextRequest includedType. */
                     public includedType: string;
 
                     /** SearchTextRequest openNow. */
                     public openNow: boolean;
-
-                    /** SearchTextRequest priceRange. */
-                    public priceRange?: (google.maps.places.v1.IInt32Range|null);
 
                     /** SearchTextRequest minRating. */
                     public minRating: number;
@@ -2330,112 +3964,6 @@ export namespace google {
                         RANK_PREFERENCE_UNSPECIFIED = 0,
                         DISTANCE = 1,
                         RELEVANCE = 2
-                    }
-
-                    /** Properties of a Location. */
-                    interface ILocation {
-
-                        /** Location rectangle */
-                        rectangle?: (google.geo.type.IViewport|null);
-
-                        /** Location strictRestriction */
-                        strictRestriction?: (boolean|null);
-                    }
-
-                    /** Represents a Location. */
-                    class Location implements ILocation {
-
-                        /**
-                         * Constructs a new Location.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.maps.places.v1.SearchTextRequest.ILocation);
-
-                        /** Location rectangle. */
-                        public rectangle?: (google.geo.type.IViewport|null);
-
-                        /** Location strictRestriction. */
-                        public strictRestriction: boolean;
-
-                        /** Location type. */
-                        public type?: "rectangle";
-
-                        /**
-                         * Creates a new Location instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns Location instance
-                         */
-                        public static create(properties?: google.maps.places.v1.SearchTextRequest.ILocation): google.maps.places.v1.SearchTextRequest.Location;
-
-                        /**
-                         * Encodes the specified Location message. Does not implicitly {@link google.maps.places.v1.SearchTextRequest.Location.verify|verify} messages.
-                         * @param message Location message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.maps.places.v1.SearchTextRequest.ILocation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified Location message, length delimited. Does not implicitly {@link google.maps.places.v1.SearchTextRequest.Location.verify|verify} messages.
-                         * @param message Location message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.maps.places.v1.SearchTextRequest.ILocation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a Location message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns Location
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.SearchTextRequest.Location;
-
-                        /**
-                         * Decodes a Location message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns Location
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.SearchTextRequest.Location;
-
-                        /**
-                         * Verifies a Location message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a Location message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns Location
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.maps.places.v1.SearchTextRequest.Location;
-
-                        /**
-                         * Creates a plain object from a Location message. Also converts values to other types if specified.
-                         * @param message Location
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.maps.places.v1.SearchTextRequest.Location, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this Location to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for Location
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a LocationBias. */
@@ -2741,6 +4269,333 @@ export namespace google {
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
+
+                /** Properties of a GetPhotoMediaRequest. */
+                interface IGetPhotoMediaRequest {
+
+                    /** GetPhotoMediaRequest name */
+                    name?: (string|null);
+
+                    /** GetPhotoMediaRequest maxWidthPx */
+                    maxWidthPx?: (number|null);
+
+                    /** GetPhotoMediaRequest maxHeightPx */
+                    maxHeightPx?: (number|null);
+
+                    /** GetPhotoMediaRequest skipHttpRedirect */
+                    skipHttpRedirect?: (boolean|null);
+                }
+
+                /** Represents a GetPhotoMediaRequest. */
+                class GetPhotoMediaRequest implements IGetPhotoMediaRequest {
+
+                    /**
+                     * Constructs a new GetPhotoMediaRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.places.v1.IGetPhotoMediaRequest);
+
+                    /** GetPhotoMediaRequest name. */
+                    public name: string;
+
+                    /** GetPhotoMediaRequest maxWidthPx. */
+                    public maxWidthPx: number;
+
+                    /** GetPhotoMediaRequest maxHeightPx. */
+                    public maxHeightPx: number;
+
+                    /** GetPhotoMediaRequest skipHttpRedirect. */
+                    public skipHttpRedirect: boolean;
+
+                    /**
+                     * Creates a new GetPhotoMediaRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetPhotoMediaRequest instance
+                     */
+                    public static create(properties?: google.maps.places.v1.IGetPhotoMediaRequest): google.maps.places.v1.GetPhotoMediaRequest;
+
+                    /**
+                     * Encodes the specified GetPhotoMediaRequest message. Does not implicitly {@link google.maps.places.v1.GetPhotoMediaRequest.verify|verify} messages.
+                     * @param message GetPhotoMediaRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.places.v1.IGetPhotoMediaRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetPhotoMediaRequest message, length delimited. Does not implicitly {@link google.maps.places.v1.GetPhotoMediaRequest.verify|verify} messages.
+                     * @param message GetPhotoMediaRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.places.v1.IGetPhotoMediaRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetPhotoMediaRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetPhotoMediaRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.GetPhotoMediaRequest;
+
+                    /**
+                     * Decodes a GetPhotoMediaRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetPhotoMediaRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.GetPhotoMediaRequest;
+
+                    /**
+                     * Verifies a GetPhotoMediaRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetPhotoMediaRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetPhotoMediaRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.GetPhotoMediaRequest;
+
+                    /**
+                     * Creates a plain object from a GetPhotoMediaRequest message. Also converts values to other types if specified.
+                     * @param message GetPhotoMediaRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.places.v1.GetPhotoMediaRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetPhotoMediaRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetPhotoMediaRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PhotoMedia. */
+                interface IPhotoMedia {
+
+                    /** PhotoMedia name */
+                    name?: (string|null);
+
+                    /** PhotoMedia photoUri */
+                    photoUri?: (string|null);
+                }
+
+                /** Represents a PhotoMedia. */
+                class PhotoMedia implements IPhotoMedia {
+
+                    /**
+                     * Constructs a new PhotoMedia.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.places.v1.IPhotoMedia);
+
+                    /** PhotoMedia name. */
+                    public name: string;
+
+                    /** PhotoMedia photoUri. */
+                    public photoUri: string;
+
+                    /**
+                     * Creates a new PhotoMedia instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PhotoMedia instance
+                     */
+                    public static create(properties?: google.maps.places.v1.IPhotoMedia): google.maps.places.v1.PhotoMedia;
+
+                    /**
+                     * Encodes the specified PhotoMedia message. Does not implicitly {@link google.maps.places.v1.PhotoMedia.verify|verify} messages.
+                     * @param message PhotoMedia message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.places.v1.IPhotoMedia, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PhotoMedia message, length delimited. Does not implicitly {@link google.maps.places.v1.PhotoMedia.verify|verify} messages.
+                     * @param message PhotoMedia message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.places.v1.IPhotoMedia, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PhotoMedia message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PhotoMedia
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.PhotoMedia;
+
+                    /**
+                     * Decodes a PhotoMedia message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PhotoMedia
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.PhotoMedia;
+
+                    /**
+                     * Verifies a PhotoMedia message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PhotoMedia message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PhotoMedia
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.PhotoMedia;
+
+                    /**
+                     * Creates a plain object from a PhotoMedia message. Also converts values to other types if specified.
+                     * @param message PhotoMedia
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.places.v1.PhotoMedia, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PhotoMedia to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PhotoMedia
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetPlaceRequest. */
+                interface IGetPlaceRequest {
+
+                    /** GetPlaceRequest name */
+                    name?: (string|null);
+
+                    /** GetPlaceRequest languageCode */
+                    languageCode?: (string|null);
+
+                    /** GetPlaceRequest regionCode */
+                    regionCode?: (string|null);
+                }
+
+                /** Represents a GetPlaceRequest. */
+                class GetPlaceRequest implements IGetPlaceRequest {
+
+                    /**
+                     * Constructs a new GetPlaceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.places.v1.IGetPlaceRequest);
+
+                    /** GetPlaceRequest name. */
+                    public name: string;
+
+                    /** GetPlaceRequest languageCode. */
+                    public languageCode: string;
+
+                    /** GetPlaceRequest regionCode. */
+                    public regionCode: string;
+
+                    /**
+                     * Creates a new GetPlaceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetPlaceRequest instance
+                     */
+                    public static create(properties?: google.maps.places.v1.IGetPlaceRequest): google.maps.places.v1.GetPlaceRequest;
+
+                    /**
+                     * Encodes the specified GetPlaceRequest message. Does not implicitly {@link google.maps.places.v1.GetPlaceRequest.verify|verify} messages.
+                     * @param message GetPlaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.places.v1.IGetPlaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetPlaceRequest message, length delimited. Does not implicitly {@link google.maps.places.v1.GetPlaceRequest.verify|verify} messages.
+                     * @param message GetPlaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.places.v1.IGetPlaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetPlaceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetPlaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.GetPlaceRequest;
+
+                    /**
+                     * Decodes a GetPlaceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetPlaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.GetPlaceRequest;
+
+                    /**
+                     * Verifies a GetPlaceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetPlaceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetPlaceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.GetPlaceRequest;
+
+                    /**
+                     * Creates a plain object from a GetPlaceRequest message. Also converts values to other types if specified.
+                     * @param message GetPlaceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.places.v1.GetPlaceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetPlaceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetPlaceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
             }
         }
     }
@@ -2758,6 +4613,258 @@ export namespace google {
             IMMUTABLE = 5,
             UNORDERED_LIST = 6,
             NON_EMPTY_DEFAULT = 7
+        }
+
+        /** Properties of a ResourceDescriptor. */
+        interface IResourceDescriptor {
+
+            /** ResourceDescriptor type */
+            type?: (string|null);
+
+            /** ResourceDescriptor pattern */
+            pattern?: (string[]|null);
+
+            /** ResourceDescriptor nameField */
+            nameField?: (string|null);
+
+            /** ResourceDescriptor history */
+            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
+
+            /** ResourceDescriptor plural */
+            plural?: (string|null);
+
+            /** ResourceDescriptor singular */
+            singular?: (string|null);
+
+            /** ResourceDescriptor style */
+            style?: (google.api.ResourceDescriptor.Style[]|null);
+        }
+
+        /** Represents a ResourceDescriptor. */
+        class ResourceDescriptor implements IResourceDescriptor {
+
+            /**
+             * Constructs a new ResourceDescriptor.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceDescriptor);
+
+            /** ResourceDescriptor type. */
+            public type: string;
+
+            /** ResourceDescriptor pattern. */
+            public pattern: string[];
+
+            /** ResourceDescriptor nameField. */
+            public nameField: string;
+
+            /** ResourceDescriptor history. */
+            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
+
+            /** ResourceDescriptor plural. */
+            public plural: string;
+
+            /** ResourceDescriptor singular. */
+            public singular: string;
+
+            /** ResourceDescriptor style. */
+            public style: google.api.ResourceDescriptor.Style[];
+
+            /**
+             * Creates a new ResourceDescriptor instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceDescriptor instance
+             */
+            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
+
+            /**
+             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
+
+            /**
+             * Verifies a ResourceDescriptor message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceDescriptor
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
+
+            /**
+             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+             * @param message ResourceDescriptor
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceDescriptor to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ResourceDescriptor
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace ResourceDescriptor {
+
+            /** History enum. */
+            enum History {
+                HISTORY_UNSPECIFIED = 0,
+                ORIGINALLY_SINGLE_PATTERN = 1,
+                FUTURE_MULTI_PATTERN = 2
+            }
+
+            /** Style enum. */
+            enum Style {
+                STYLE_UNSPECIFIED = 0,
+                DECLARATIVE_FRIENDLY = 1
+            }
+        }
+
+        /** Properties of a ResourceReference. */
+        interface IResourceReference {
+
+            /** ResourceReference type */
+            type?: (string|null);
+
+            /** ResourceReference childType */
+            childType?: (string|null);
+        }
+
+        /** Represents a ResourceReference. */
+        class ResourceReference implements IResourceReference {
+
+            /**
+             * Constructs a new ResourceReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceReference);
+
+            /** ResourceReference type. */
+            public type: string;
+
+            /** ResourceReference childType. */
+            public childType: string;
+
+            /**
+             * Creates a new ResourceReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceReference instance
+             */
+            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
+
+            /**
+             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
+
+            /**
+             * Verifies a ResourceReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
+
+            /**
+             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+             * @param message ResourceReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ResourceReference
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a Http. */
@@ -6224,6 +8331,9 @@ export namespace google {
 
             /** FileOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** FileOptions .google.api.resourceDefinition */
+            ".google.api.resourceDefinition"?: (google.api.IResourceDescriptor[]|null);
         }
 
         /** Represents a FileOptions. */
@@ -6406,6 +8516,9 @@ export namespace google {
 
             /** MessageOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** MessageOptions .google.api.resource */
+            ".google.api.resource"?: (google.api.IResourceDescriptor|null);
         }
 
         /** Represents a MessageOptions. */
@@ -6551,6 +8664,9 @@ export namespace google {
 
             /** FieldOptions .google.api.fieldBehavior */
             ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
+
+            /** FieldOptions .google.api.resourceReference */
+            ".google.api.resourceReference"?: (google.api.IResourceReference|null);
         }
 
         /** Represents a FieldOptions. */
