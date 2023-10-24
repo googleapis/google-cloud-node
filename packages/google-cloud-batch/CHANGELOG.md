@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.3.0...batch-v1.4.0) (2023-10-24)
+
+
+### Features
+
+* [batch] expose display_name to batch v1 API ([#4742](https://github.com/googleapis/google-cloud-node/issues/4742)) ([d02570b](https://github.com/googleapis/google-cloud-node/commit/d02570b8c4d5c8b99e94f88ef05692b39e21d1d1))
+
 ## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.2.0...batch-v1.3.0) (2023-10-18)
 
 
