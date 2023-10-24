@@ -35,15 +35,18 @@ type Middleware = ReturnType<typeof commonMiddleware.express.makeMiddleware>;
 
 export async function makeMiddleware(
   logger: winston.Logger,
-  transport: LoggingWinston
+  transport: LoggingWinston,
+  skipParentEntryForCloudRun?: boolean
 ): Promise<Middleware>;
 export async function makeMiddleware(
   logger: winston.Logger,
-  options?: Options
+  options?: Options,
+  skipParentEntryForCloudRun?: boolean
 ): Promise<Middleware>;
 export async function makeMiddleware(
   logger: winston.Logger,
-  optionsOrTransport?: Options | LoggingWinston
+  optionsOrTransport?: Options | LoggingWinston,
+  skipParentEntryForCloudRun?: boolean
 ): Promise<Middleware> {
   let transport: LoggingWinston;
 
@@ -79,8 +82,15 @@ export async function makeMiddleware(
   // parent request log entry that all the request specific logs ("app logs")
   // will nest under. GAE and GCF generate the parent request logs
   // automatically.
+  // Cloud Run also generates the parent request log automatically, but skipping
+  // the parent request entry has to be explicity enabled until the next major
+  // release in which we can change the default behavior.
   let emitRequestLogEntry;
-  if (env !== GCPEnv.APP_ENGINE && env !== GCPEnv.CLOUD_FUNCTIONS) {
+  if (
+    env !== GCPEnv.APP_ENGINE &&
+    env !== GCPEnv.CLOUD_FUNCTIONS &&
+    (env !== GCPEnv.CLOUD_RUN || !skipParentEntryForCloudRun)
+  ) {
     const requestLogName = Log.formatName_(
       projectId,
       `${transport.common.logName}${REQUEST_LOG_SUFFIX}`
