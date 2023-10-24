@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [7.3.2](https://github.com/googleapis/nodejs-storage/compare/v7.3.1...v7.3.2) (2023-10-24)
+
+
+### Bug Fixes
+
+* Close Open Handle for Empty Objects ([#2338](https://github.com/googleapis/nodejs-storage/issues/2338)) ([c51cd94](https://github.com/googleapis/nodejs-storage/commit/c51cd946171e8749453eef080d2853d31a6e72c8))
+
 ## [7.3.1](https://github.com/googleapis/nodejs-storage/compare/v7.3.0...v7.3.1) (2023-10-19)
 
 
