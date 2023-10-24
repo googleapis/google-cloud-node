@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v3.0.1...deploy-v3.1.0) (2023-10-24)
+
+
+### Features
+
+* [deploy] added platform log RolloutUpdateEvent ([#4748](https://github.com/googleapis/google-cloud-node/issues/4748)) ([56d6889](https://github.com/googleapis/google-cloud-node/commit/56d688930012a4495b17a4df9ec1a40cabcb2979))
+
 ## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/deploy-v3.0.0...deploy-v3.0.1) (2023-09-06)
 
 

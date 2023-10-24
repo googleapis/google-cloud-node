@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/places-v1.0.1...places-v1.1.0) (2023-10-24)
+
+
+### Features
+
+* [places] new features for Places GA ([#4756](https://github.com/googleapis/google-cloud-node/issues/4756)) ([5430bbf](https://github.com/googleapis/google-cloud-node/commit/5430bbfac12cac791e96e3411165d3f1d1ada3ae))
+
 ## [1.0.1](https://github.com/googleapis/google-cloud-node/compare/places-v1.0.0...places-v1.0.1) (2023-09-06)
 
 
