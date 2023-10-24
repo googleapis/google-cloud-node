@@ -26,15 +26,23 @@ import * as ent from 'ent';
 import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
 import {CredentialBody} from 'google-auth-library';
 import * as r from 'teeny-request';
-import * as retryRequest from 'retry-request';
+import retryRequest from 'retry-request';
 import {Duplex, DuplexOptions, Readable, Transform, Writable} from 'stream';
 import {teenyRequest} from 'teeny-request';
-import {Interceptor} from './service-object';
+import {Interceptor} from './service-object.js';
 import * as uuid from 'uuid';
-import {DEFAULT_PROJECT_ID_TOKEN} from './service';
-import {getRuntimeTrackingString, getUserAgentString} from '../util';
+import {DEFAULT_PROJECT_ID_TOKEN} from './service.js';
+import {
+  getModuleFormat,
+  getRuntimeTrackingString,
+  getUserAgentString,
+} from '../util.js';
+import duplexify from 'duplexify';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import {getPackageJSON} from '../package-json-helper.cjs';
 
-const packageJson = require('../../../package.json');
+const packageJson = getPackageJSON();
 
 /**
  * A unique symbol for providing a `gccl-gcs-cmd` value
@@ -43,9 +51,6 @@ const packageJson = require('../../../package.json');
  * E.g. the `V` in `X-Goog-API-Client: gccl-gcs-cmd/V`
  **/
 export const GCCL_GCS_CMD_KEY = Symbol.for('GCCL_GCS_CMD');
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const duplexify: DuplexifyConstructor = require('duplexify');
 
 const requestDefaults: r.CoreOptions = {
   timeout: 60000,
@@ -922,7 +927,7 @@ export class Util {
       dup.setReadable(requestStream);
     } else {
       // Streaming writable HTTP requests cannot be retried.
-      requestStream = options.request!(reqOpts);
+      requestStream = (options.request as unknown as Function)!(reqOpts);
       dup.setWritable(requestStream);
     }
 
@@ -1022,7 +1027,7 @@ export class Util {
       'User-Agent': getUserAgentString(),
       'x-goog-api-client': `${getRuntimeTrackingString()} gccl/${
         packageJson.version
-      } gccl-invocation-id/${uuid.v4()}`,
+      }-${getModuleFormat()} gccl-invocation-id/${uuid.v4()}`,
     };
 
     if (gcclGcsCmd) {

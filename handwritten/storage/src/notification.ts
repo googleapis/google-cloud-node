@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {BaseMetadata, ServiceObject} from './nodejs-common';
-import {ResponseBody} from './nodejs-common/util';
+import {BaseMetadata, ServiceObject} from './nodejs-common/index.js';
+import {ResponseBody} from './nodejs-common/util.js';
 import {promisifyAll} from '@google-cloud/promisify';
 
-import {Bucket} from './bucket';
+import {Bucket} from './bucket.js';
 
 export interface DeleteNotificationOptions {
   userProject?: string;

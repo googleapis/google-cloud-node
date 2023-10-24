@@ -23,48 +23,51 @@ import {
   ServiceObject,
   SetMetadataResponse,
   util,
-} from './nodejs-common';
-import {RequestResponse} from './nodejs-common/service-object';
+} from './nodejs-common/index.js';
+import {RequestResponse} from './nodejs-common/service-object.js';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as fs from 'fs';
 import * as http from 'http';
 import * as mime from 'mime-types';
 import * as path from 'path';
-import * as pLimit from 'p-limit';
+import pLimit from 'p-limit';
 import {promisify} from 'util';
-import retry = require('async-retry');
-import {convertObjKeysToSnakeCase} from './util';
+import AsyncRetry from 'async-retry';
+import {convertObjKeysToSnakeCase} from './util.js';
 
-import {Acl, AclMetadata} from './acl';
-import {Channel} from './channel';
+import {Acl, AclMetadata} from './acl.js';
+import {Channel} from './channel.js';
 import {
   File,
   FileOptions,
   CreateResumableUploadOptions,
   CreateWriteStreamOptions,
   FileMetadata,
-} from './file';
-import {Iam} from './iam';
-import {Notification, NotificationMetadata} from './notification';
+} from './file.js';
+import {Iam} from './iam.js';
+import {Notification, NotificationMetadata} from './notification.js';
 import {
   Storage,
   Cors,
   PreconditionOptions,
   IdempotencyStrategy,
   BucketOptions,
-} from './storage';
+} from './storage.js';
 import {
   GetSignedUrlResponse,
   GetSignedUrlCallback,
   SignerGetSignedUrlConfig,
   URLSigner,
   Query,
-} from './signer';
+} from './signer.js';
 import {Readable} from 'stream';
-import {CRC32CValidatorGenerator} from './crc32c';
+import {CRC32CValidatorGenerator} from './crc32c.js';
 import {URL} from 'url';
-import {BaseMetadata, SetMetadataOptions} from './nodejs-common/service-object';
+import {
+  BaseMetadata,
+  SetMetadataOptions,
+} from './nodejs-common/service-object.js';
 
 interface SourceObject {
   name: string;
@@ -4255,7 +4258,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     callback?: UploadCallback
   ): Promise<UploadResponse> | void {
     const upload = (numberOfRetries: number | undefined) => {
-      const returnValue = retry(
+      const returnValue = AsyncRetry(
         async (bail: (err: Error) => void) => {
           await new Promise<void>((resolve, reject) => {
             if (

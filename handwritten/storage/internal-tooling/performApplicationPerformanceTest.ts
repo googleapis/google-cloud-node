@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-const yargs = require('yargs');
+import yargs from 'yargs';
 import {promises as fsp, rmSync} from 'fs';
 import {
   Bucket,
@@ -22,9 +22,8 @@ import {
   DownloadResponse,
   UploadOptions,
   UploadResponse,
-} from '../src';
+} from '../src/index.js';
 import {performance} from 'perf_hooks';
-// eslint-disable-next-line node/no-unsupported-features/node-builtins
 import {parentPort} from 'worker_threads';
 import {
   NODE_DEFAULT_HIGHWATER_MARK_BYTES,
@@ -35,7 +34,7 @@ import {
   performanceTestCommand,
   getLowHighFileSize,
   PERFORMANCE_TEST_TYPES,
-} from './performanceUtils';
+} from './performanceUtils.js';
 
 const TEST_NAME_STRING = 'nodejs-perf-metrics-application';
 
@@ -54,7 +53,10 @@ const argv = yargs(process.argv.slice(2))
 async function main() {
   let result: TestResult | undefined = undefined;
 
-  ({bucket} = await performanceTestSetup(argv.project!, argv.bucket!));
+  ({bucket} = await performanceTestSetup(
+    argv.project! as string,
+    argv.bucket! as string
+  ));
 
   switch (argv.test_type) {
     case PERFORMANCE_TEST_TYPES.APPLICATION_UPLOAD_MULTIPLE_OBJECTS:
@@ -107,9 +109,9 @@ async function downloadInParallel(bucket: Bucket, options: DownloadOptions) {
 async function performWriteTest(): Promise<TestResult> {
   await bucket.deleteFiles(); //start clean
 
-  const fileSizeRange = getLowHighFileSize(argv.object_size);
+  const fileSizeRange = getLowHighFileSize(argv.object_size as string);
   const creationInfo = generateRandomDirectoryStructure(
-    argv.num_objects,
+    argv.num_objects as number,
     TEST_NAME_STRING,
     fileSizeRange.low,
     fileSizeRange.high
@@ -133,7 +135,7 @@ async function performWriteTest(): Promise<TestResult> {
     cpuTimeUs: -1,
     status: 'OK',
     chunkSize: creationInfo.totalSizeInBytes,
-    workers: argv.workers,
+    workers: argv.workers as number,
     library: 'nodejs',
     transferSize: creationInfo.totalSizeInBytes,
     transferOffset: 0,
@@ -148,10 +150,10 @@ async function performWriteTest(): Promise<TestResult> {
  * @returns {Promise<TestResult>} Promise that resolves to an array of test results for the iteration.
  */
 async function performReadTest(): Promise<TestResult> {
-  const fileSizeRange = getLowHighFileSize(argv.object_size);
+  const fileSizeRange = getLowHighFileSize(argv.object_size as string);
   await bucket.deleteFiles(); // start clean
   const creationInfo = generateRandomDirectoryStructure(
-    argv.num_objects,
+    argv.num_objects as number,
     TEST_NAME_STRING,
     fileSizeRange.low,
     fileSizeRange.high
@@ -173,7 +175,7 @@ async function performReadTest(): Promise<TestResult> {
     cpuTimeUs: -1,
     status: 'OK',
     chunkSize: creationInfo.totalSizeInBytes,
-    workers: argv.workers,
+    workers: argv.workers as number,
     library: 'nodejs',
     transferSize: creationInfo.totalSizeInBytes,
     transferOffset: 0,

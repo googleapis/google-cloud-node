@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as assert from 'assert';
+import assert from 'assert';
 import {describe, it, beforeEach, before, afterEach, after} from 'mocha';
 import * as crypto from 'crypto';
 import * as mockery from 'mockery';
-import * as nock from 'nock';
+import nock from 'nock';
 import * as path from 'path';
 import * as sinon from 'sinon';
 import {Readable, Writable} from 'stream';
@@ -27,15 +27,16 @@ import {
   AUTO_RETRY_DEFAULT,
   MAX_RETRY_DEFAULT,
   RETRYABLE_ERR_FN_DEFAULT,
-} from '../src/storage';
+} from '../src/storage.js';
 
 import {
   ApiError,
   CreateUriCallback,
   PROTOCOL_REGEX,
-} from '../src/resumable-upload';
+} from '../src/resumable-upload.js';
 import {GaxiosOptions, GaxiosError, GaxiosResponse} from 'gaxios';
-import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util';
+import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util.js';
+import {getDirName} from '../src/util.js';
 
 nock.disableNetConnect();
 
@@ -92,10 +93,10 @@ describe('resumable-upload', () => {
     retryableErrorFn: RETRYABLE_ERR_FN_DEFAULT,
   };
   let REQ_OPTS: GaxiosOptions;
-  const keyFile = path.join(__dirname, '../../test/fixtures/keys.json');
+  const keyFile = path.join(getDirName(), '../../../test/fixtures/keys.json');
 
   before(() => {
-    mockery.registerMock('abort-controller', {default: AbortController});
+    mockery.registerMock('abort-controller', AbortController);
     mockery.enable({useCleanCache: true, warnOnUnregistered: false});
     upload = require('../src/resumable-upload').upload;
   });

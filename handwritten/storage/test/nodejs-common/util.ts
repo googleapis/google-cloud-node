@@ -18,7 +18,7 @@ import {
   MissingProjectIdError,
   replaceProjectIdToken,
 } from '@google-cloud/projectify';
-import * as assert from 'assert';
+import assert from 'assert';
 import {describe, it, before, beforeEach, afterEach} from 'mocha';
 import {
   AuthClient,
@@ -27,9 +27,9 @@ import {
   OAuth2Client,
 } from 'google-auth-library';
 import * as nock from 'nock';
-import * as proxyquire from 'proxyquire';
+import proxyquire from 'proxyquire';
 import * as r from 'teeny-request';
-import * as retryRequest from 'retry-request';
+import retryRequest from 'retry-request';
 import * as sinon from 'sinon';
 import * as stream from 'stream';
 import {teenyRequest} from 'teeny-request';
@@ -39,7 +39,6 @@ import {
   ApiError,
   DecorateRequestOptions,
   Duplexify,
-  DuplexifyConstructor,
   GCCL_GCS_CMD_KEY,
   GoogleErrorBody,
   GoogleInnerError,
@@ -47,11 +46,9 @@ import {
   MakeRequestConfig,
   ParsedHttpRespMessage,
   Util,
-} from '../../src/nodejs-common/util';
-import {DEFAULT_PROJECT_ID_TOKEN} from '../../src/nodejs-common/service';
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const duplexify: DuplexifyConstructor = require('duplexify');
+} from '../../src/nodejs-common/util.js';
+import {DEFAULT_PROJECT_ID_TOKEN} from '../../src/nodejs-common/service.js';
+import duplexify from 'duplexify';
 
 nock.disableNetConnect();
 

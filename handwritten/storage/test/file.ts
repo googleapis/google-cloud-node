@@ -20,16 +20,16 @@ import {
   ServiceObject,
   ServiceObjectConfig,
   util,
-} from '../src/nodejs-common';
+} from '../src/nodejs-common/index.js';
 import {describe, it, before, beforeEach, afterEach} from 'mocha';
 import {PromisifyAllOptions} from '@google-cloud/promisify';
 import {Readable, PassThrough, Stream, Duplex, Transform} from 'stream';
-import * as assert from 'assert';
+import assert from 'assert';
 import * as crypto from 'crypto';
-import * as duplexify from 'duplexify';
+import duplexify from 'duplexify';
 import * as fs from 'fs';
-import * as proxyquire from 'proxyquire';
-import * as resumableUpload from '../src/resumable-upload';
+import proxyquire from 'proxyquire';
+import * as resumableUpload from '../src/resumable-upload.js';
 import * as sinon from 'sinon';
 import * as tmp from 'tmp';
 import * as zlib from 'zlib';
@@ -44,7 +44,7 @@ import {
   GetSignedUrlConfig,
   GenerateSignedPostPolicyV2Options,
   CRC32C,
-} from '../src';
+} from '../src/index.js';
 import {
   SignedPostPolicyV4Output,
   GenerateSignedPostPolicyV4Options,
@@ -52,14 +52,14 @@ import {
   MoveOptions,
   FileExceptionMessages,
   FileMetadata,
-} from '../src/file';
-import {ExceptionMessages, IdempotencyStrategy} from '../src/storage';
-import {formatAsUTCISO} from '../src/util';
+} from '../src/file.js';
+import {ExceptionMessages, IdempotencyStrategy} from '../src/storage.js';
+import {formatAsUTCISO} from '../src/util.js';
 import {
   BaseMetadata,
   SetMetadataOptions,
-} from '../src/nodejs-common/service-object';
-import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util';
+} from '../src/nodejs-common/service-object.js';
+import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util.js';
 
 class HTTPError extends Error {
   code: number;

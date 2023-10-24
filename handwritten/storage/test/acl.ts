@@ -12,10 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {DecorateRequestOptions, util} from '../src/nodejs-common';
-import * as assert from 'assert';
+import {DecorateRequestOptions, util} from '../src/nodejs-common/index.js';
+import assert from 'assert';
 import {describe, it, before, beforeEach} from 'mocha';
-import * as proxyquire from 'proxyquire';
+import proxyquire from 'proxyquire';
+import {Storage} from '../src/storage.js';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let Acl: any;
@@ -31,8 +32,6 @@ describe('storage/acl', () => {
     },
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const {Storage} = require('../src');
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let acl: any;
 

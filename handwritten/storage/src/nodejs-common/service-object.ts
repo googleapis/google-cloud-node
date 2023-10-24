@@ -17,14 +17,14 @@ import {promisifyAll} from '@google-cloud/promisify';
 import {EventEmitter} from 'events';
 import * as r from 'teeny-request';
 
-import {StreamRequestOptions} from '.';
+import {StreamRequestOptions} from './service.js';
 import {
   ApiError,
   BodyResponseCallback,
   DecorateRequestOptions,
   ResponseBody,
   util,
-} from './util';
+} from './util.js';
 
 export type RequestResponse = [unknown, r.Response];
 

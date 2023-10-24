@@ -12,11 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {BodyResponseCallback, DecorateRequestOptions} from './nodejs-common';
+import {
+  BodyResponseCallback,
+  DecorateRequestOptions,
+} from './nodejs-common/index.js';
 import {promisifyAll} from '@google-cloud/promisify';
 
-import {Bucket} from './bucket';
-import {normalize} from './util';
+import {Bucket} from './bucket.js';
+import {normalize} from './util.js';
 
 export interface GetPolicyOptions {
   userProject?: string;

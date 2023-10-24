@@ -15,7 +15,7 @@
  */
 import * as testFile from '../test-data/retryStrategyTestData.json';
 import {executeScenario, RetryTestCase} from '../conformanceCommon';
-import * as assert from 'assert';
+import assert from 'assert';
 
 const SCENARIO_NUMBER_TO_TEST = 2;
 const retryTestCase: RetryTestCase | undefined = testFile.retryTests.find(

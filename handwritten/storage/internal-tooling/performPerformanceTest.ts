@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-const yargs = require('yargs');
+import yargs from 'yargs';
 import {performance} from 'perf_hooks';
-// eslint-disable-next-line node/no-unsupported-features/node-builtins
 import {parentPort} from 'worker_threads';
 import * as path from 'path';
 import {
@@ -30,8 +29,9 @@ import {
   performanceTestSetup,
   PERFORMANCE_TEST_TYPES,
   TestResult,
-} from './performanceUtils';
-import {Bucket} from '../src';
+} from './performanceUtils.js';
+import {Bucket} from '../src/index.js';
+import {getDirName} from '../src/util.js';
 
 const TEST_NAME_STRING = 'nodejs-perf-metrics';
 const DEFAULT_NUMBER_OF_WRITES = 1;
@@ -52,7 +52,10 @@ const argv = yargs(process.argv.slice(2))
 async function main() {
   let results: TestResult[] = [];
 
-  ({bucket} = await performanceTestSetup(argv.project!, argv.bucket!));
+  ({bucket} = await performanceTestSetup(
+    argv.project! as string,
+    argv.bucket! as string
+  ));
 
   switch (argv.test_type) {
     case PERFORMANCE_TEST_TYPES.WRITE_ONE_READ_THREE:
@@ -75,21 +78,21 @@ async function main() {
  */
 async function performRangedReadTest(): Promise<TestResult[]> {
   const results: TestResult[] = [];
-  const fileSizeRange = getLowHighFileSize(argv.object_size);
+  const fileSizeRange = getLowHighFileSize(argv.object_size as string);
   const fileName = generateRandomFileName(TEST_NAME_STRING);
   generateRandomFile(
     fileName,
     fileSizeRange.low,
     fileSizeRange.high,
-    __dirname
+    getDirName()
   );
   const file = bucket.file(`${fileName}`);
   const destinationFileName = generateRandomFileName(TEST_NAME_STRING);
-  const destination = path.join(__dirname, destinationFileName);
+  const destination = path.join(getDirName(), destinationFileName);
 
   const iterationResult: TestResult = {
     op: 'READ[0]',
-    objectSize: argv.range_read_size,
+    objectSize: argv.range_read_size as number,
     appBufferSize: NODE_DEFAULT_HIGHWATER_MARK_BYTES,
     crc32cEnabled: false,
     md5Enabled: false,
@@ -97,22 +100,22 @@ async function performRangedReadTest(): Promise<TestResult[]> {
     elapsedTimeUs: 0,
     cpuTimeUs: -1,
     status: 'OK',
-    chunkSize: argv.range_read_size,
-    workers: argv.workers,
+    chunkSize: argv.range_read_size as number,
+    workers: argv.workers as number,
     library: 'nodejs',
-    transferSize: argv.range_read_size,
+    transferSize: argv.range_read_size as number,
     transferOffset: 0,
     bucketName: bucket.name,
   };
 
-  await bucket.upload(`${__dirname}/${fileName}`);
+  await bucket.upload(`${getDirName()}/${fileName}`);
   cleanupFile(fileName);
 
   for (let i = 0; i < DEFAULT_RANGE_READS; i++) {
     const start = performance.now();
     await file.download({
       start: 0,
-      end: argv.range_read_size,
+      end: argv.range_read_size as number,
       destination,
     });
     const end = performance.now();
@@ -132,14 +135,14 @@ async function performRangedReadTest(): Promise<TestResult[]> {
  */
 async function performWriteReadTest(): Promise<TestResult[]> {
   const results: TestResult[] = [];
-  const fileSizeRange = getLowHighFileSize(argv.object_size);
+  const fileSizeRange = getLowHighFileSize(argv.object_size as string);
   const fileName = generateRandomFileName(TEST_NAME_STRING);
   const file = bucket.file(`${fileName}`);
   const sizeInBytes = generateRandomFile(
     fileName,
     fileSizeRange.low,
     fileSizeRange.high,
-    __dirname
+    getDirName()
   );
 
   for (let j = 0; j < DEFAULT_NUMBER_OF_WRITES; j++) {
@@ -157,7 +160,7 @@ async function performWriteReadTest(): Promise<TestResult[]> {
       cpuTimeUs: -1,
       status: 'OK',
       chunkSize: sizeInBytes,
-      workers: argv.workers,
+      workers: argv.workers as number,
       library: 'nodejs',
       transferSize: sizeInBytes,
       transferOffset: 0,
@@ -165,7 +168,7 @@ async function performWriteReadTest(): Promise<TestResult[]> {
     };
 
     start = performance.now();
-    await bucket.upload(`${__dirname}/${fileName}`, {validation: checkType});
+    await bucket.upload(`${getDirName()}/${fileName}`, {validation: checkType});
     end = performance.now();
 
     iterationResult.elapsedTimeUs = Math.round((end - start) * 1000);
@@ -184,7 +187,7 @@ async function performWriteReadTest(): Promise<TestResult[]> {
     cpuTimeUs: -1,
     status: 'OK',
     chunkSize: sizeInBytes,
-    workers: argv.workers,
+    workers: argv.workers as number,
     library: 'nodejs',
     transferSize: sizeInBytes,
     transferOffset: 0,
@@ -196,7 +199,7 @@ async function performWriteReadTest(): Promise<TestResult[]> {
     let end = 0;
 
     const destinationFileName = generateRandomFileName(TEST_NAME_STRING);
-    const destination = path.join(__dirname, destinationFileName);
+    const destination = path.join(getDirName(), destinationFileName);
 
     start = performance.now();
     await file.download({validation: checkType, destination});

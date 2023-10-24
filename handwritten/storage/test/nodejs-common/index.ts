@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import * as assert from 'assert';
+import assert from 'assert';
 import {describe, it} from 'mocha';
-import {Service, ServiceObject, util} from '../../src/nodejs-common';
+import {Service, ServiceObject, util} from '../../src/nodejs-common/index.js';
 
 describe('common', () => {
   it('should correctly export the common modules', () => {

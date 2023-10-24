@@ -18,8 +18,8 @@ import {
   CRC32C_EXTENSIONS,
   CRC32C_EXTENSION_TABLE,
   CRC32C_EXCEPTION_MESSAGES,
-} from '../src';
-import * as assert from 'assert';
+} from '../src/index.js';
+import assert from 'assert';
 import {join} from 'path';
 import {tmpdir} from 'os';
 import * as fs from 'fs';

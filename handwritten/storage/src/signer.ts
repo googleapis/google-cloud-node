@@ -15,8 +15,8 @@
 import * as crypto from 'crypto';
 import * as http from 'http';
 import * as url from 'url';
-import {ExceptionMessages} from './storage';
-import {encodeURI, qsStringify, objectEntries, formatAsUTCISO} from './util';
+import {ExceptionMessages} from './storage.js';
+import {encodeURI, qsStringify, objectEntries, formatAsUTCISO} from './util.js';
 
 interface GetCredentialsResponse {
   client_email?: string;

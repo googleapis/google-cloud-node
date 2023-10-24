@@ -1,0 +1,19 @@
+{
+  "extends": "./node_modules/gts/tsconfig-google.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "build/cjs",
+    "resolveJsonModule": true,
+    "sourceMap": false,
+    "esModuleInterop": true,
+  },
+  "include": [
+    "src/*.ts",
+    "src/*.cjs",
+    "test/**/*.ts",
+    "system-test/*.ts",
+    "conformance-test/*.ts",
+    "conformance-test/scenarios/*.ts",
+    "internal-tooling/*.ts"
+  ]
+}

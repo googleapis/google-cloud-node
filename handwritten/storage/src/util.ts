@@ -12,8 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import * as path from 'path';
 import * as querystring from 'querystring';
 import {PassThrough} from 'stream';
+import * as url from 'url';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import {getPackageJSON} from './package-json-helper.cjs';
+
+// Done to avoid a problem with mangling of identifiers when using esModuleInterop
+const fileURLToPath = url.fileURLToPath;
+const isEsm = true;
 
 export function normalize<T = {}, U = Function>(
   optionsOrCallback?: T | U,
@@ -197,12 +206,29 @@ export function getRuntimeTrackingString(): string {
  * @returns {string} user agent string.
  */
 export function getUserAgentString(): string {
-  const pkg = require('../../package.json');
+  const pkg = getPackageJSON();
   const hyphenatedPackageName = pkg.name
     .replace('@google-cloud', 'gcloud-node') // For legacy purposes.
     .replace('/', '-'); // For UA spec-compliance purposes.
 
   return hyphenatedPackageName + '/' + pkg.version;
+}
+
+export function getDirName() {
+  let dirToUse = '';
+  try {
+    dirToUse = __dirname;
+  } catch (e) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    dirToUse = path.dirname(fileURLToPath(import.meta.url));
+  }
+
+  return dirToUse;
+}
+
+export function getModuleFormat() {
+  return isEsm ? 'ESM' : 'CJS';
 }
 
 export class PassThroughShim extends PassThrough {

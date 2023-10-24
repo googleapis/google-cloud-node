@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import {ApiError} from '../src/nodejs-common';
 import {
+  ApiError,
   Bucket,
   File,
   CRC32C,
@@ -28,16 +27,18 @@ import {
   UploadOptions,
   TransferManager,
   Storage,
-} from '../src';
-import * as assert from 'assert';
+  DownloadResponse,
+} from '../src/index.js';
+import assert from 'assert';
 import * as path from 'path';
-import * as fs from 'fs';
-import * as fsp from 'fs/promises';
-import * as sinon from 'sinon';
 import {GaxiosOptions, GaxiosResponse} from 'gaxios';
-import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util';
+import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util.js';
 import {AuthClient, GoogleAuth} from 'google-auth-library';
 import {tmpdir} from 'os';
+import fs from 'fs';
+import {promises as fsp, Stats} from 'fs';
+
+import * as sinon from 'sinon';
 
 describe('Transfer Manager', () => {
   const BUCKET_NAME = 'test-bucket';
@@ -85,7 +86,7 @@ describe('Transfer Manager', () => {
         isDirectory: () => {
           return false;
         },
-      } as fs.Stats);
+      } as Stats);
     });
 
     it('calls upload with the provided file paths', async () => {
@@ -240,7 +241,7 @@ describe('Transfer Manager', () => {
     beforeEach(() => {
       sandbox.stub(fsp, 'open').resolves({
         close: () => Promise.resolve(),
-        write: (buffer: any) => Promise.resolve({buffer}),
+        write: (buffer: unknown) => Promise.resolve({buffer}),
       } as fsp.FileHandle);
 
       file = new File(bucket, 'some-large-file');
@@ -267,7 +268,7 @@ describe('Transfer Manager', () => {
     it('should call fromFile when validation is set to crc32c', async () => {
       let callCount = 0;
       file.download = () => {
-        return Promise.resolve([Buffer.alloc(0)]);
+        return Promise.resolve([Buffer.alloc(0)]) as Promise<DownloadResponse>;
       };
       CRC32C.fromFile = () => {
         callCount++;

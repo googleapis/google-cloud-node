@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-const yargs = require('yargs');
+import yargs from 'yargs';
 import {appendFile} from 'fs/promises';
-// eslint-disable-next-line node/no-unsupported-features/node-builtins
 import {Worker} from 'worker_threads';
 import {
   convertToCloudMonitoringFormat,
@@ -24,13 +23,14 @@ import {
   log,
   performanceTestCommand,
   PERFORMANCE_TEST_TYPES,
-} from './performanceUtils';
+} from './performanceUtils.js';
+import {getDirName} from '../src/util.js';
 
 const argv = yargs(process.argv.slice(2))
   .command(performanceTestCommand)
   .parseSync();
 
-let iterationsRemaining = argv.samples;
+let iterationsRemaining: number = argv.samples as number;
 
 /**
  * Main entry point for performing a Write 1 Read 3 performance measurement test.
@@ -39,11 +39,11 @@ let iterationsRemaining = argv.samples;
  * specified by the iterations parameter or 100 if not specified.
  */
 function main() {
-  let numThreads = argv.workers;
+  let numThreads: number = argv.workers as number;
   if (numThreads > iterationsRemaining) {
     log(
       `${numThreads} is greater than number of iterations (${iterationsRemaining}). Using ${iterationsRemaining} threads instead.`,
-      argv.debug
+      argv.debug as boolean
     );
     numThreads = iterationsRemaining;
   }
@@ -63,14 +63,14 @@ function createWorker() {
   iterationsRemaining--;
   log(
     `Starting new iteration. Current iterations remaining: ${iterationsRemaining}`,
-    argv.debug
+    argv.debug as boolean
   );
   let testPath = '';
   if (
     argv.test_type === PERFORMANCE_TEST_TYPES.WRITE_ONE_READ_THREE ||
     argv.test_type === PERFORMANCE_TEST_TYPES.RANGE_READ
   ) {
-    testPath = `${__dirname}/performPerformanceTest.js`;
+    testPath = `${getDirName()}/performPerformanceTest.js`;
   } else if (
     argv.test_type ===
       PERFORMANCE_TEST_TYPES.TRANSFER_MANAGER_UPLOAD_MANY_FILES ||
@@ -79,7 +79,7 @@ function createWorker() {
     argv.test_type ===
       PERFORMANCE_TEST_TYPES.TRANSFER_MANAGER_DOWNLOAD_MANY_FILES
   ) {
-    testPath = `${__dirname}/performTransferManagerTest.js`;
+    testPath = `${getDirName()}/performTransferManagerTest.js`;
   } else if (
     argv.test_type ===
       PERFORMANCE_TEST_TYPES.APPLICATION_UPLOAD_MULTIPLE_OBJECTS ||
@@ -87,7 +87,7 @@ function createWorker() {
     argv.test_type ===
       PERFORMANCE_TEST_TYPES.APPLICATION_DOWNLOAD_MULTIPLE_OBJECTS
   ) {
-    testPath = `${__dirname}/performApplicationPerformanceTest.js`;
+    testPath = `${getDirName()}/performApplicationPerformanceTest.js`;
   }
 
   const w = new Worker(testPath, {
@@ -95,7 +95,7 @@ function createWorker() {
   });
 
   w.on('message', data => {
-    log('Successfully completed iteration.', argv.debug);
+    log('Successfully completed iteration.', argv.debug as boolean);
     recordResult(data);
     if (iterationsRemaining > 0) {
       createWorker();
@@ -123,7 +123,7 @@ async function recordResult(results: TestResult[] | TestResult) {
     resultsToAppend
   )) {
     argv.file_name
-      ? await appendFile(argv.file_name, `${outputString}\n`)
+      ? await appendFile(argv.file_name as string, `${outputString}\n`)
       : log(outputString, true);
   }
 }

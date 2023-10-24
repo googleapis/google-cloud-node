@@ -21,14 +21,14 @@ import {
   ServiceObject,
   SetMetadataResponse,
   util,
-} from './nodejs-common';
+} from './nodejs-common/index.js';
 import {promisifyAll} from '@google-cloud/promisify';
 
-import compressible = require('compressible');
+import compressible from 'compressible';
 import * as crypto from 'crypto';
 import * as fs from 'fs';
-import * as mime from 'mime';
-import * as resumableUpload from './resumable-upload';
+import mime from 'mime';
+import * as resumableUpload from './resumable-upload.js';
 import {
   Writable,
   Readable,
@@ -45,9 +45,9 @@ import {
   IdempotencyStrategy,
   PreconditionOptions,
   Storage,
-} from './storage';
-import {AvailableServiceObjectMethods, Bucket} from './bucket';
-import {Acl, AclMetadata} from './acl';
+} from './storage.js';
+import {AvailableServiceObjectMethods, Bucket} from './bucket.js';
+import {Acl, AclMetadata} from './acl.js';
 import {
   GetSignedUrlResponse,
   SigningError,
@@ -55,35 +55,33 @@ import {
   URLSigner,
   SignerGetSignedUrlConfig,
   Query,
-} from './signer';
+} from './signer.js';
 import {
   ResponseBody,
   ApiError,
   Duplexify,
-  DuplexifyConstructor,
   GCCL_GCS_CMD_KEY,
-} from './nodejs-common/util';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const duplexify: DuplexifyConstructor = require('duplexify');
+} from './nodejs-common/util.js';
+import duplexify from 'duplexify';
 import {
   normalize,
   objectKeyToLowercase,
   unicodeJSONStringify,
   formatAsUTCISO,
   PassThroughShim,
-} from './util';
-import {CRC32CValidatorGenerator} from './crc32c';
-import {HashStreamValidator} from './hash-stream-validator';
+} from './util.js';
+import {CRC32CValidatorGenerator} from './crc32c.js';
+import {HashStreamValidator} from './hash-stream-validator.js';
 import {URL} from 'url';
 
-import retry = require('async-retry');
+import AsyncRetry from 'async-retry';
 import {
   BaseMetadata,
   DeleteCallback,
   DeleteOptions,
   RequestResponse,
   SetMetadataOptions,
-} from './nodejs-common/service-object';
+} from './nodejs-common/service-object.js';
 import * as r from 'teeny-request';
 
 export type GetExpirationDateResponse = [Date];
@@ -3665,7 +3663,7 @@ class File extends ServiceObject<File, FileMetadata> {
     ) {
       maxRetries = 0;
     }
-    const returnValue = retry(
+    const returnValue = AsyncRetry(
       async (bail: (err: Error) => void) => {
         return new Promise<void>((resolve, reject) => {
           if (maxRetries === 0) {

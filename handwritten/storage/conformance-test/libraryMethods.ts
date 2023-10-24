@@ -21,6 +21,7 @@ import {
   deleteTestFile,
 } from './testBenchUtil';
 import * as uuid from 'uuid';
+import {getDirName} from '../src/util.js';
 
 const FILE_SIZE_BYTES = 9 * 1024 * 1024;
 const CHUNK_SIZE_BYTES = 2 * 1024 * 1024;
@@ -390,7 +391,10 @@ export async function bucketSetStorageClass(options: ConformanceTestOptions) {
 export async function bucketUploadResumableInstancePrecondition(
   options: ConformanceTestOptions
 ) {
-  const filePath = path.join(__dirname, `test-data/tmp-${uuid.v4()}.txt`);
+  const filePath = path.join(
+    getDirName(),
+    `../conformance-test/test-data/tmp-${uuid.v4()}.txt`
+  );
   createTestFileFromBuffer(FILE_SIZE_BYTES, filePath);
   if (options.bucket!.instancePreconditionOpts) {
     options.bucket!.instancePreconditionOpts.ifGenerationMatch = 0;
@@ -405,7 +409,10 @@ export async function bucketUploadResumableInstancePrecondition(
 }
 
 export async function bucketUploadResumable(options: ConformanceTestOptions) {
-  const filePath = path.join(__dirname, `test-data/tmp-${uuid.v4()}.txt`);
+  const filePath = path.join(
+    getDirName(),
+    `../conformance-test/test-data/tmp-${uuid.v4()}.txt`
+  );
   createTestFileFromBuffer(FILE_SIZE_BYTES, filePath);
   if (options.preconditionRequired) {
     await options.bucket!.upload(filePath, {
@@ -433,8 +440,8 @@ export async function bucketUploadMultipartInstancePrecondition(
   }
   await options.bucket!.upload(
     path.join(
-      __dirname,
-      '../../conformance-test/test-data/retryStrategyTestData.json'
+      getDirName(),
+      '../../../conformance-test/test-data/retryStrategyTestData.json'
     ),
     {resumable: false}
   );
@@ -448,16 +455,16 @@ export async function bucketUploadMultipart(options: ConformanceTestOptions) {
   if (options.preconditionRequired) {
     await options.bucket!.upload(
       path.join(
-        __dirname,
-        '../../conformance-test/test-data/retryStrategyTestData.json'
+        getDirName(),
+        '../../../conformance-test/test-data/retryStrategyTestData.json'
       ),
       {resumable: false, preconditionOpts: {ifGenerationMatch: 0}}
     );
   } else {
     await options.bucket!.upload(
       path.join(
-        __dirname,
-        '../../conformance-test/test-data/retryStrategyTestData.json'
+        getDirName(),
+        '../../../conformance-test/test-data/retryStrategyTestData.json'
       ),
       {resumable: false}
     );

@@ -17,7 +17,7 @@ import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
 import * as r from 'teeny-request';
 import * as uuid from 'uuid';
 
-import {Interceptor} from './service-object';
+import {Interceptor} from './service-object.js';
 import {
   BodyResponseCallback,
   DecorateRequestOptions,
@@ -25,8 +25,12 @@ import {
   MakeAuthenticatedRequest,
   PackageJson,
   util,
-} from './util';
-import {getRuntimeTrackingString, getUserAgentString} from '../util';
+} from './util.js';
+import {
+  getRuntimeTrackingString,
+  getUserAgentString,
+  getModuleFormat,
+} from '../util.js';
 
 export const DEFAULT_PROJECT_ID_TOKEN = '{{projectId}}';
 
@@ -251,7 +255,7 @@ export class Service {
       'User-Agent': userAgent,
       'x-goog-api-client': `${getRuntimeTrackingString()} gccl/${
         pkg.version
-      } gccl-invocation-id/${uuid.v4()}`,
+      }-${getModuleFormat()} gccl-invocation-id/${uuid.v4()}`,
     };
 
     if (reqOpts[GCCL_GCS_CMD_KEY]) {

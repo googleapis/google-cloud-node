@@ -14,22 +14,25 @@
  * limitations under the License.
  */
 
-import {Bucket, UploadOptions, UploadResponse} from './bucket';
-import {DownloadOptions, DownloadResponse, File} from './file';
-import * as pLimit from 'p-limit';
+import {Bucket, UploadOptions, UploadResponse} from './bucket.js';
+import {DownloadOptions, DownloadResponse, File} from './file.js';
+import pLimit from 'p-limit';
 import * as path from 'path';
 import {createReadStream, promises as fsp} from 'fs';
-import {CRC32C} from './crc32c';
+import {CRC32C} from './crc32c.js';
 import {GoogleAuth} from 'google-auth-library';
 import {XMLParser, XMLBuilder} from 'fast-xml-parser';
-import * as retry from 'async-retry';
-import {ApiError} from './nodejs-common';
+import AsyncRetry from 'async-retry';
+import {ApiError} from './nodejs-common/index.js';
 import {GaxiosResponse, Headers} from 'gaxios';
 import {createHash} from 'crypto';
-import {GCCL_GCS_CMD_KEY} from './nodejs-common/util';
-import {getRuntimeTrackingString, getUserAgentString} from './util';
+import {GCCL_GCS_CMD_KEY} from './nodejs-common/util.js';
+import {getRuntimeTrackingString, getUserAgentString} from './util.js';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import {getPackageJSON} from './package-json-helper.cjs';
 
-const packageJson = require('../../package.json');
+const packageJson = getPackageJSON();
 
 /**
  * Default number of concurrently executing promises to use when calling uploadManyFiles.
@@ -244,7 +247,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
    */
   async initiateUpload(headers: Headers = {}): Promise<void> {
     const url = `${this.baseUrl}?uploads`;
-    return retry(async bail => {
+    return AsyncRetry(async bail => {
       try {
         const res = await this.authClient.request({
           headers: this.#setGoogApiClientHeaders(headers),
@@ -287,7 +290,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
       };
     }
 
-    return retry(async bail => {
+    return AsyncRetry(async bail => {
       try {
         const res = await this.authClient.request({
           url,
@@ -322,7 +325,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     const body = `<CompleteMultipartUpload>${this.xmlBuilder.build(
       parts
     )}</CompleteMultipartUpload>`;
-    return retry(async bail => {
+    return AsyncRetry(async bail => {
       try {
         const res = await this.authClient.request({
           headers: this.#setGoogApiClientHeaders(),
@@ -349,7 +352,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
    */
   async abortUpload(): Promise<void> {
     const url = `${this.baseUrl}?uploadId=${this.uploadId}`;
-    return retry(async bail => {
+    return AsyncRetry(async bail => {
       try {
         const res = await this.authClient.request({
           url,

@@ -18,21 +18,24 @@ import {
   Service,
   ServiceConfig,
   util,
-} from '../src/nodejs-common';
+} from '../src/nodejs-common/index.js';
 import {PromisifyAllOptions} from '@google-cloud/promisify';
-import * as assert from 'assert';
+import assert from 'assert';
 import {describe, it, before, beforeEach, after, afterEach} from 'mocha';
-import * as proxyquire from 'proxyquire';
+import proxyquire from 'proxyquire';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import {Bucket, CRC32C_DEFAULT_VALIDATOR_GENERATOR} from '../src';
-import {GetFilesOptions} from '../src/bucket';
-import sinon = require('sinon');
-import {HmacKey} from '../src/hmacKey';
+import {Bucket, CRC32C_DEFAULT_VALIDATOR_GENERATOR} from '../src/index.js';
+import {GetFilesOptions} from '../src/bucket.js';
+import * as sinon from 'sinon';
+import {HmacKey} from '../src/hmacKey.js';
 import {
   HmacKeyResourceResponse,
   PROTOCOL_REGEX,
   StorageExceptionMessages,
-} from '../src/storage';
+} from '../src/storage.js';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import {getPackageJSON} from '../src/package-json-helper.cjs';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const hmacKeyModule = require('../src/hmacKey');
@@ -142,7 +145,7 @@ describe('Storage', () => {
       assert.deepStrictEqual(
         calledWith.packageJson,
         // eslint-disable-next-line @typescript-eslint/no-var-requires
-        require('../../package.json')
+        getPackageJSON()
       );
     });
 

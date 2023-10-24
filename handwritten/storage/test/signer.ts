@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-import * as assert from 'assert';
+import assert from 'assert';
 import * as crypto from 'crypto';
 import * as sinon from 'sinon';
 import {describe, it, beforeEach, afterEach} from 'mocha';
@@ -27,9 +27,9 @@ import {
   GetSignedUrlConfigInternal,
   Query,
   SignerExceptionMessages,
-} from '../src/signer';
-import {encodeURI, formatAsUTCISO, qsStringify} from '../src/util';
-import {ExceptionMessages} from '../src/storage';
+} from '../src/signer.js';
+import {encodeURI, formatAsUTCISO, qsStringify} from '../src/util.js';
+import {ExceptionMessages} from '../src/storage.js';
 import {OutgoingHttpHeaders} from 'http';
 
 interface SignedUrlArgs {

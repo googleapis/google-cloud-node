@@ -20,7 +20,7 @@ export {
   ServiceConfig,
   ServiceOptions,
   StreamRequestOptions,
-} from './service';
+} from './service.js';
 
 export {
   BaseMetadata,
@@ -37,7 +37,7 @@ export {
   ServiceObjectConfig,
   ServiceObjectParent,
   SetMetadataResponse,
-} from './service-object';
+} from './service-object.js';
 
 export {
   Abortable,
@@ -47,4 +47,4 @@ export {
   DecorateRequestOptions,
   ResponseBody,
   util,
-} from './util';
+} from './util.js';

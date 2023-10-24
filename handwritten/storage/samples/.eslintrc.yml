@@ -1,3 +1,4 @@
 ---
 rules:
   no-console: off
+  no-undef: off

@@ -27,6 +27,7 @@ import {
   GenerateSignedPostPolicyV4Options,
 } from '../src/';
 import * as url from 'url';
+import {getDirName} from '../src/util.js';
 
 export enum UrlStyle {
   PATH_STYLE = 'PATH_STYLE',
@@ -88,7 +89,10 @@ interface BucketAction {
 }
 
 const testFile = fs.readFileSync(
-  path.join(__dirname, '../../conformance-test/test-data/v4SignedUrl.json'),
+  path.join(
+    getDirName(),
+    '../../../conformance-test/test-data/v4SignedUrl.json'
+  ),
   'utf-8'
 );
 
@@ -99,8 +103,8 @@ const v4SignedPolicyCases: V4SignedPolicyTestCase[] =
   testCases.postPolicyV4Tests;
 
 const SERVICE_ACCOUNT = path.join(
-  __dirname,
-  '../../conformance-test/fixtures/signing-service-account.json'
+  getDirName(),
+  '../../../conformance-test/fixtures/signing-service-account.json'
 );
 
 const storage = new Storage({keyFilename: SERVICE_ACCOUNT});
@@ -192,7 +196,7 @@ describe('v4 conformance test', () => {
           expires,
         };
 
-        const conditions = [];
+        const conditions: (string | number)[][] = [];
         if (input.conditions) {
           if (input.conditions.startsWith) {
             const variable = input.conditions.startsWith[0];

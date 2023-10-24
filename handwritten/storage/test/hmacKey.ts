@@ -13,11 +13,11 @@
 // limitations under the License.
 
 import * as sinon from 'sinon';
-import * as proxyquire from 'proxyquire';
-import * as assert from 'assert';
+import proxyquire from 'proxyquire';
+import assert from 'assert';
 import {describe, it, beforeEach, afterEach} from 'mocha';
-import {util, ServiceObject} from '../src/nodejs-common';
-import {HmacKeyMetadata, IdempotencyStrategy} from '../src';
+import {util, ServiceObject} from '../src/nodejs-common/index.js';
+import {HmacKeyMetadata, IdempotencyStrategy} from '../src/index.js';
 
 const sandbox = sinon.createSandbox();
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

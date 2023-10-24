@@ -15,10 +15,10 @@
  */
 
 import {before, describe, it} from 'mocha';
-import * as assert from 'assert';
+import assert from 'assert';
 import * as http from 'http';
 
-import * as common from '../src/nodejs-common';
+import * as common from '../src/nodejs-common/index.js';
 
 describe('Common', () => {
   const MOCK_HOST_PORT = 8118;

@@ -12,29 +12,31 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as assert from 'assert';
-import {describe, it, before, beforeEach, after, afterEach} from 'mocha';
+import assert from 'assert';
+import {after, afterEach, before, beforeEach, describe, it} from 'mocha';
 import * as crypto from 'crypto';
 import * as fs from 'fs';
 import fetch from 'node-fetch';
-import * as FormData from 'form-data';
-import * as pLimit from 'p-limit';
+import FormData from 'form-data';
+import pLimit from 'p-limit';
 import {promisify} from 'util';
 import * as path from 'path';
 import * as tmp from 'tmp';
 import * as uuid from 'uuid';
-import {ApiError} from '../src/nodejs-common';
+import {ApiError} from '../src/nodejs-common/index.js';
 import {
-  Storage,
-  Bucket,
-  File,
   AccessControlObject,
-  Notification,
-  DeleteBucketCallback,
+  Bucket,
   CRC32C,
+  DeleteBucketCallback,
+  File,
+  IdempotencyStrategy,
+  LifecycleRule,
+  Notification,
+  Storage,
   UploadOptions,
-} from '../src';
-import * as nock from 'nock';
+} from '../src/index.js';
+import nock from 'nock';
 import {Transform} from 'stream';
 import {gzipSync} from 'zlib';
 
@@ -42,8 +44,7 @@ interface ErrorCallbackFunction {
   (err: Error | null): void;
 }
 import {PubSub, Subscription, Topic} from '@google-cloud/pubsub';
-import {LifecycleRule} from '../src/bucket';
-import {IdempotencyStrategy} from '../src/storage';
+import {getDirName} from '../src/util.js';
 
 class HTTPError extends Error {
   code: number;
@@ -87,19 +88,25 @@ describe('storage', () => {
   const FILES: {[index: string]: any} = {
     logo: {
       path: path.join(
-        __dirname,
-        '../../system-test/data/CloudPlatform_128px_Retina.png'
+        getDirName(),
+        '../../../system-test/data/CloudPlatform_128px_Retina.png'
       ),
     },
     big: {
-      path: path.join(__dirname, '../../system-test/data/three-mb-file.tif'),
+      path: path.join(
+        getDirName(),
+        '../../../system-test/data/three-mb-file.tif'
+      ),
       hash: undefined,
     },
     html: {
-      path: path.join(__dirname, '../../system-test/data/long-html-file.html'),
+      path: path.join(
+        getDirName(),
+        '../../../system-test/data/long-html-file.html'
+      ),
     },
     empty: {
-      path: path.join(__dirname, '../../system-test/data/empty-file.txt'),
+      path: path.join(getDirName(), '../../../system-test/data/empty-file.txt'),
     },
   };
 
@@ -150,10 +157,7 @@ describe('storage', () => {
     beforeEach(() => {
       delete process.env.GOOGLE_APPLICATION_CREDENTIALS;
       delete process.env.GOOGLE_CLOUD_PROJECT;
-      delete require.cache[require.resolve('../src')];
 
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      const {Storage} = require('../src');
       storageWithoutAuth = new Storage({
         retryOptions: {
           idempotencyStrategy: IdempotencyStrategy.RetryAlways,
@@ -1689,12 +1693,14 @@ describe('storage', () => {
               // for the key file.
               let key2 = process.env.GCN_STORAGE_2ND_PROJECT_KEY;
               if (key2 && key2.charAt(0) === '.') {
-                key2 = `${__dirname}/../../${key2}`;
+                key2 = `${getDirName()}/../../../${key2}`;
               }
 
               // Get the service account for the "second" account (the
               // one that will read the requester pays file).
-              const clientEmail = require(key2!).client_email;
+              const clientEmail = JSON.parse(
+                fs.readFileSync(key2!, 'utf-8')
+              ).client_email;
 
               policy.bindings.push({
                 role: 'roles/storage.admin',

@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-import * as assert from 'assert';
+import assert from 'assert';
 import {describe, it, before, beforeEach, after} from 'mocha';
-import * as proxyquire from 'proxyquire';
+import proxyquire from 'proxyquire';
 import {Request} from 'teeny-request';
 import {AuthClient, GoogleAuth, OAuth2Client} from 'google-auth-library';
 
-import {Interceptor} from '../../src/nodejs-common';
+import {Interceptor} from '../../src/nodejs-common/index.js';
 import {
   DEFAULT_PROJECT_ID_TOKEN,
   ServiceConfig,
   ServiceOptions,
-} from '../../src/nodejs-common/service';
+} from '../../src/nodejs-common/service.js';
 import {
   BodyResponseCallback,
   DecorateRequestOptions,
@@ -34,8 +34,8 @@ import {
   MakeAuthenticatedRequestFactoryConfig,
   util,
   Util,
-} from '../../src/nodejs-common/util';
-import {getUserAgentString} from '../../src/util';
+} from '../../src/nodejs-common/util.js';
+import {getUserAgentString, getModuleFormat} from '../../src/util.js';
 
 proxyquire.noPreserveCache();
 
@@ -489,7 +489,9 @@ describe('Service', () => {
       service.makeAuthenticatedRequest = (reqOpts: DecorateRequestOptions) => {
         const pkg = service.packageJson;
         const r = new RegExp(
-          `^gl-node/${process.versions.node} gccl/${pkg.version} gccl-invocation-id/(?<gcclInvocationId>[^W]+)$`
+          `^gl-node/${process.versions.node} gccl/${
+            pkg.version
+          }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>[^W]+)$`
         );
         assert.ok(r.test(reqOpts.headers!['x-goog-api-client']));
         done();
@@ -503,7 +505,9 @@ describe('Service', () => {
       service.makeAuthenticatedRequest = (reqOpts: DecorateRequestOptions) => {
         const pkg = service.packageJson;
         const r = new RegExp(
-          `^gl-node/${process.versions.node} gccl/${pkg.version} gccl-invocation-id/(?<gcclInvocationId>[^W]+) gccl-gcs-cmd/${expected}$`
+          `^gl-node/${process.versions.node} gccl/${
+            pkg.version
+          }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>[^W]+) gccl-gcs-cmd/${expected}$`
         );
         assert.ok(r.test(reqOpts.headers!['x-goog-api-client']));
         done();

@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {BaseMetadata, ServiceObject, util} from './nodejs-common';
+import {BaseMetadata, ServiceObject, util} from './nodejs-common/index.js';
 import {promisifyAll} from '@google-cloud/promisify';
 
-import {Storage} from './storage';
+import {Storage} from './storage.js';
 
 export interface StopCallback {
   (err: Error | null, apiResponse?: unknown): void;

@@ -18,12 +18,12 @@ import {
   ServiceObject,
   ServiceObjectConfig,
   util,
-} from '../src/nodejs-common';
-import * as assert from 'assert';
+} from '../src/nodejs-common/index.js';
+import assert from 'assert';
 import {describe, it, before, beforeEach} from 'mocha';
-import * as proxyquire from 'proxyquire';
+import proxyquire from 'proxyquire';
 
-import {Bucket} from '../src';
+import {Bucket} from '../src/index.js';
 
 class FakeServiceObject extends ServiceObject<FakeServiceObject, BaseMetadata> {
   calledWith_: IArguments;

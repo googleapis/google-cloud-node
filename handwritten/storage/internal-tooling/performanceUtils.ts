@@ -17,8 +17,9 @@
 import {execSync} from 'child_process';
 import {mkdirSync, mkdtempSync, unlinkSync} from 'fs';
 import * as path from 'path';
-import yargs = require('yargs');
-import {Bucket, Storage, TransferManager} from '../src';
+import * as yargs from 'yargs';
+import {Bucket, Storage, TransferManager} from '../src/index.js';
+import {getDirName} from '../src/util.js';
 
 export const NODE_DEFAULT_HIGHWATER_MARK_BYTES = 16384;
 export const DEFAULT_DIRECTORY_PROBABILITY = 0.1;
@@ -287,7 +288,7 @@ export function generateRandomDirectoryStructure(
  */
 export function cleanupFile(
   fileName: string,
-  directoryName: string = __dirname
+  directoryName: string = getDirName()
 ): void {
   unlinkSync(`${directoryName}/${fileName}`);
 }

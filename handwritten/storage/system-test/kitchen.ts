@@ -20,7 +20,7 @@ import * as tmp from 'tmp';
 import * as crypto from 'crypto';
 import * as os from 'os';
 import {Readable} from 'stream';
-import {createURI, ErrorWithCode, upload} from '../src/resumable-upload';
+import {createURI, ErrorWithCode, upload} from '../src/resumable-upload.js';
 import {
   RETRY_DELAY_MULTIPLIER_DEFAULT,
   TOTAL_TIMEOUT_DEFAULT,
@@ -28,7 +28,7 @@ import {
   AUTO_RETRY_DEFAULT,
   MAX_RETRY_DEFAULT,
   RETRYABLE_ERR_FN_DEFAULT,
-} from '../src/storage';
+} from '../src/storage.js';
 
 const bucketName = process.env.BUCKET_NAME || 'gcs-resumable-upload-test';
 tmp.setGracefulCleanup();
