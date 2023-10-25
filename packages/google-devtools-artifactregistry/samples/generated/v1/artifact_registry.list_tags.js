@@ -29,7 +29,9 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The name of the parent resource whose tags will be listed.
+   *  The name of the parent package whose tags will be listed.
+   *  For example:
+   *  `projects/p1/locations/us-central1/repositories/repo1/packages/pkg1`.
    */
   // const parent = 'abc123'
   /**
