@@ -5,6 +5,143 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "5430bbfac12cac791e96e3411165d3f1d1ada3ae",
+          "message": "[places] new features for Places GA",
+          "issues": [
+            "4756"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/places",
+      "id": "2ea2b650-959e-4398-9c3c-82c7de53bc23",
+      "createTime": "2023-10-24T16:52:09.248Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ed25f958cde497f8df502a2796eb8bd46a676f16",
+          "message": "[securitycenter] Add SimulateSecurityHealthAnalyticsCustomModule API for testing SHA custom module",
+          "issues": [
+            "4749"
+          ]
+        }
+      ],
+      "version": "8.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "d820a6f0-14c9-40f8-91a0-ed896416ffca",
+      "createTime": "2023-10-24T16:52:09.232Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e8c5c14e31881d7899e99fa5cfbe862999b8c880",
+          "message": "[recaptchaenterprise] FirewallPolicy CRUD API",
+          "issues": [
+            "4730"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "ea88d02f-281c-4731-ae29-22a70895c21a",
+      "createTime": "2023-10-24T16:52:09.224Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d119ad98bb991b88d1f56a517888446275a6d49a",
+          "message": "[oslogin] location-based HTTP binding for SignSshPublicKey",
+          "issues": [
+            "4741"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-login",
+      "id": "7036de54-0c89-4f1f-8c74-b045059c4b8d",
+      "createTime": "2023-10-24T16:52:09.214Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "56d688930012a4495b17a4df9ec1a40cabcb2979",
+          "message": "[deploy] added platform log RolloutUpdateEvent",
+          "issues": [
+            "4748"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/deploy",
+      "id": "980a2501-9420-4f8d-a198-73940d647542",
+      "createTime": "2023-10-24T16:52:09.207Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d02570b8c4d5c8b99e94f88ef05692b39e21d1d1",
+          "message": "[batch] expose display_name to batch v1 API",
+          "issues": [
+            "4742"
+          ]
+        }
+      ],
+      "version": "1.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "be021fef-9aac-49be-b494-988a971d20b3",
+      "createTime": "2023-10-24T16:52:09.199Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a515212494f629c171a6a038136a20aaefe3d1cc",
+          "message": "Add DatasetVersion and dataset version RPCs to DatasetService",
+          "issues": [
+            "4726"
+          ]
+        }
+      ],
+      "version": "3.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "7a2c7b8b-2d70-4ec0-a2cb-0059afcb03e9",
+      "createTime": "2023-10-24T16:52:09.190Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e61a513a706e87d0ef03668875d3583d3aca29a4",
+          "message": "[analytics-admin] delete `BatchDeleteUserLinks`, `DeleteUserLink`, `BatchUpdateUserLinks`, `UpdateUserLink`, `BatchCreateUserLinks`, `CreateUserLink`, `AuditUserLinks`, `ListUserLinks`, `BatchGetUserLinks`, `GetUserLink` from the Admin API v1 alp...",
+          "issues": [
+            "4751"
+          ],
+          "breakingChangeNote": "[analytics-admin] delete `BatchDeleteUserLinks`, `DeleteUserLink`, `BatchUpdateUserLinks`, `UpdateUserLink`, `BatchCreateUserLinks`, `CreateUserLink`, `AuditUserLinks`, `ListUserLinks`, `BatchGetUserLinks`, `GetUserLink` from the Admin API v1 alp... ([#4751](https://github.com/googleapis/google-cloud-node/issues/4751))"
+        }
+      ],
+      "version": "7.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/admin",
+      "id": "5f1f1466-faa0-42f8-8db3-21a3d38cf6df",
+      "createTime": "2023-10-24T16:52:09.179Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "81cca6072dab3c753db27fab7dbf08d13196e087",
           "message": "[artifactregistry] make repositories required in ListRepositoriesRequest",
           "issues": [
@@ -19684,5 +19821,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-10-18T09:49:03.040Z"
+  "updateTime": "2023-10-24T16:52:09.248Z"
 }

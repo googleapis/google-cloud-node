@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/os-login-v5.2.0...os-login-v5.3.0) (2023-10-24)
+
+
+### Features
+
+* [oslogin] location-based HTTP binding for SignSshPublicKey ([#4741](https://github.com/googleapis/google-cloud-node/issues/4741)) ([d119ad9](https://github.com/googleapis/google-cloud-node/commit/d119ad98bb991b88d1f56a517888446275a6d49a))
+
 ## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/os-login-v5.1.0...os-login-v5.2.0) (2023-10-18)
 
 

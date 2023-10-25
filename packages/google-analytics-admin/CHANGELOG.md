@@ -1,5 +1,16 @@
 # Changelog
 
+## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/admin-v6.0.0...admin-v7.0.0) (2023-10-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* [analytics-admin] delete `BatchDeleteUserLinks`, `DeleteUserLink`, `BatchUpdateUserLinks`, `UpdateUserLink`, `BatchCreateUserLinks`, `CreateUserLink`, `AuditUserLinks`, `ListUserLinks`, `BatchGetUserLinks`, `GetUserLink` from the Admin API v1 alp... ([#4751](https://github.com/googleapis/google-cloud-node/issues/4751))
+
+### Bug Fixes
+
+* [analytics-admin] delete `BatchDeleteUserLinks`, `DeleteUserLink`, `BatchUpdateUserLinks`, `UpdateUserLink`, `BatchCreateUserLinks`, `CreateUserLink`, `AuditUserLinks`, `ListUserLinks`, `BatchGetUserLinks`, `GetUserLink` from the Admin API v1 alp... ([#4751](https://github.com/googleapis/google-cloud-node/issues/4751)) ([e61a513](https://github.com/googleapis/google-cloud-node/commit/e61a513a706e87d0ef03668875d3583d3aca29a4))
+
 ## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/admin-v5.0.0...admin-v6.0.0) (2023-09-06)
 
 
