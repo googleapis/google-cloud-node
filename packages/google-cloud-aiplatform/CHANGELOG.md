@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.3.0...aiplatform-v3.4.0) (2023-10-24)
+
+
+### Features
+
+* Add DatasetVersion and dataset version RPCs to DatasetService ([#4726](https://github.com/googleapis/google-cloud-node/issues/4726)) ([a515212](https://github.com/googleapis/google-cloud-node/commit/a515212494f629c171a6a038136a20aaefe3d1cc))
+
 ## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.2.0...aiplatform-v3.3.0) (2023-10-18)
 
 
