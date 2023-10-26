@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START dataform_v1beta1_generated_Dataform_ListRepositories_async]
+function main(workflowConfig) {
+  // [START dataform_v1beta1_generated_Dataform_UpdateWorkflowConfig_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,33 +29,14 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The location in which to list repositories. Must be in the format
-   *  `projects/* /locations/*`.
+   *  Optional. Specifies the fields to be updated in the workflow config. If
+   *  left unset, all fields will be updated.
    */
-  // const parent = 'abc123'
+  // const updateMask = {}
   /**
-   *  Optional. Maximum number of repositories to return. The server may return
-   *  fewer items than requested. If unspecified, the server will pick an
-   *  appropriate default.
+   *  Required. The workflow config to update.
    */
-  // const pageSize = 1234
-  /**
-   *  Optional. Page token received from a previous `ListRepositories` call.
-   *  Provide this to retrieve the subsequent page.
-   *  When paginating, all other parameters provided to `ListRepositories`
-   *  must match the call that provided the page token.
-   */
-  // const pageToken = 'abc123'
-  /**
-   *  Optional. This field only supports ordering by `name`. If unspecified, the
-   *  server will choose the ordering. If specified, the default order is
-   *  ascending for the `name` field.
-   */
-  // const orderBy = 'abc123'
-  /**
-   *  Optional. Filter for the returned list.
-   */
-  // const filter = 'abc123'
+  // const workflowConfig = {}
 
   // Imports the Dataform library
   const {DataformClient} = require('@google-cloud/dataform').v1beta1;
@@ -63,21 +44,19 @@ function main(parent) {
   // Instantiates a client
   const dataformClient = new DataformClient();
 
-  async function callListRepositories() {
+  async function callUpdateWorkflowConfig() {
     // Construct request
     const request = {
-      parent,
+      workflowConfig,
     };
 
     // Run request
-    const iterable = await dataformClient.listRepositoriesAsync(request);
-    for await (const response of iterable) {
-        console.log(response);
-    }
+    const response = await dataformClient.updateWorkflowConfig(request);
+    console.log(response);
   }
 
-  callListRepositories();
-  // [END dataform_v1beta1_generated_Dataform_ListRepositories_async]
+  callUpdateWorkflowConfig();
+  // [END dataform_v1beta1_generated_Dataform_UpdateWorkflowConfig_async]
 }
 
 process.on('unhandledRejection', err => {

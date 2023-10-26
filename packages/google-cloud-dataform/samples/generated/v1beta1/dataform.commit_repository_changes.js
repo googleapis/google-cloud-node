@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START dataform_v1beta1_generated_Dataform_ListRepositories_async]
+function main(name, commitMetadata) {
+  // [START dataform_v1beta1_generated_Dataform_CommitRepositoryChanges_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,33 +29,24 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The location in which to list repositories. Must be in the format
-   *  `projects/* /locations/*`.
+   *  Required. The repository's name.
    */
-  // const parent = 'abc123'
+  // const name = 'abc123'
   /**
-   *  Optional. Maximum number of repositories to return. The server may return
-   *  fewer items than requested. If unspecified, the server will pick an
-   *  appropriate default.
+   *  Required. The changes to commit to the repository.
    */
-  // const pageSize = 1234
+  // const commitMetadata = {}
   /**
-   *  Optional. Page token received from a previous `ListRepositories` call.
-   *  Provide this to retrieve the subsequent page.
-   *  When paginating, all other parameters provided to `ListRepositories`
-   *  must match the call that provided the page token.
+   *  Optional. The commit SHA which must be the repository's current HEAD before
+   *  applying this commit; otherwise this request will fail. If unset, no
+   *  validation on the current HEAD commit SHA is performed.
    */
-  // const pageToken = 'abc123'
+  // const requiredHeadCommitSha = 'abc123'
   /**
-   *  Optional. This field only supports ordering by `name`. If unspecified, the
-   *  server will choose the ordering. If specified, the default order is
-   *  ascending for the `name` field.
+   *  A map to the path of the file to the operation. The path is the full file
+   *  path including filename, from repository root.
    */
-  // const orderBy = 'abc123'
-  /**
-   *  Optional. Filter for the returned list.
-   */
-  // const filter = 'abc123'
+  // const fileOperations = [1,2,3,4]
 
   // Imports the Dataform library
   const {DataformClient} = require('@google-cloud/dataform').v1beta1;
@@ -63,21 +54,20 @@ function main(parent) {
   // Instantiates a client
   const dataformClient = new DataformClient();
 
-  async function callListRepositories() {
+  async function callCommitRepositoryChanges() {
     // Construct request
     const request = {
-      parent,
+      name,
+      commitMetadata,
     };
 
     // Run request
-    const iterable = await dataformClient.listRepositoriesAsync(request);
-    for await (const response of iterable) {
-        console.log(response);
-    }
+    const response = await dataformClient.commitRepositoryChanges(request);
+    console.log(response);
   }
 
-  callListRepositories();
-  // [END dataform_v1beta1_generated_Dataform_ListRepositories_async]
+  callCommitRepositoryChanges();
+  // [END dataform_v1beta1_generated_Dataform_CommitRepositoryChanges_async]
 }
 
 process.on('unhandledRejection', err => {
