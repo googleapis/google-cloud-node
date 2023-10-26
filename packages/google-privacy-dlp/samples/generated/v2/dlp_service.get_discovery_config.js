@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START dlp_v2_generated_DlpService_GetDeidentifyTemplate_async]
+  // [START dlp_v2_generated_DlpService_GetDiscoveryConfig_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,9 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name of the organization and deidentify template to be
-   *  read, for example `organizations/433245324/deidentifyTemplates/432452342`
-   *  or projects/project-id/deidentifyTemplates/432452342.
+   *  Required. Resource name of the project and the configuration, for example
+   *  `projects/dlp-test-project/discoveryConfigs/53234423`.
    */
   // const name = 'abc123'
 
@@ -41,19 +40,19 @@ function main(name) {
   // Instantiates a client
   const dlpClient = new DlpServiceClient();
 
-  async function callGetDeidentifyTemplate() {
+  async function callGetDiscoveryConfig() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const response = await dlpClient.getDeidentifyTemplate(request);
+    const response = await dlpClient.getDiscoveryConfig(request);
     console.log(response);
   }
 
-  callGetDeidentifyTemplate();
-  // [END dlp_v2_generated_DlpService_GetDeidentifyTemplate_async]
+  callGetDiscoveryConfig();
+  // [END dlp_v2_generated_DlpService_GetDiscoveryConfig_async]
 }
 
 process.on('unhandledRejection', err => {

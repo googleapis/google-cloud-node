@@ -83,8 +83,8 @@ function main(parent) {
   // const type = {}
   /**
    *  Comma separated list of fields to order by,
-   *  followed by `asc` or `desc` postfix. This list is case-insensitive,
-   *  default sorting order is ascending, redundant space characters are
+   *  followed by `asc` or `desc` postfix. This list is case insensitive. The
+   *  default sorting order is ascending. Redundant space characters are
    *  insignificant.
    *  Example: `name asc, end_time asc, create_time desc`
    *  Supported fields are:
