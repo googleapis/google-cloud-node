@@ -33,13 +33,13 @@ function main(workspace, path, newPath) {
    */
   // const workspace = 'abc123'
   /**
-   *  Required. The directory's full path including directory name, relative to the
-   *  workspace root.
+   *  Required. The directory's full path including directory name, relative to
+   *  the workspace root.
    */
   // const path = 'abc123'
   /**
-   *  Required. The new path for the directory including directory name, rooted at
-   *  workspace root.
+   *  Required. The new path for the directory including directory name, rooted
+   *  at workspace root.
    */
   // const newPath = 'abc123'
 

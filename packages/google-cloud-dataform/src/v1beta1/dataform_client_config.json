@@ -40,6 +40,26 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "CommitRepositoryChanges": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ReadRepositoryFile": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "QueryRepositoryDirectoryContents": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "FetchRepositoryHistory": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ComputeRepositoryAccessTokenStatus": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "FetchRemoteBranches": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
@@ -124,6 +144,26 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "ListReleaseConfigs": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetReleaseConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateReleaseConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateReleaseConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteReleaseConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "ListCompilationResults": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
@@ -137,6 +177,26 @@
           "retry_params_name": "default"
         },
         "QueryCompilationResultActions": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListWorkflowConfigs": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetWorkflowConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateWorkflowConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateWorkflowConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteWorkflowConfig": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },

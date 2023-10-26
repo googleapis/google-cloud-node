@@ -192,8 +192,14 @@ export class DlpServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      discoveryConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/discoveryConfigs/{discovery_config}'
+      ),
       findingPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/findings/{finding}'
+      ),
+      locationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}'
       ),
       organizationPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}'
@@ -280,6 +286,11 @@ export class DlpServiceClient {
         'nextPageToken',
         'jobTriggers'
       ),
+      listDiscoveryConfigs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'discoveryConfigs'
+      ),
       listDlpJobs: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -364,6 +375,11 @@ export class DlpServiceClient {
       'listJobTriggers',
       'deleteJobTrigger',
       'activateJobTrigger',
+      'createDiscoveryConfig',
+      'updateDiscoveryConfig',
+      'getDiscoveryConfig',
+      'listDiscoveryConfigs',
+      'deleteDiscoveryConfig',
       'createDlpJob',
       'listDlpJobs',
       'getDlpJob',
@@ -1188,8 +1204,8 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of organization and inspectTemplate to be updated, for
-   *   example `organizations/433245324/inspectTemplates/432452342` or
+   *   Required. Resource name of organization and inspectTemplate to be updated,
+   *   for example `organizations/433245324/inspectTemplates/432452342` or
    *   projects/project-id/inspectTemplates/432452342.
    * @param {google.privacy.dlp.v2.InspectTemplate} request.inspectTemplate
    *   New InspectTemplate value.
@@ -1285,8 +1301,8 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of the organization and inspectTemplate to be read, for
-   *   example `organizations/433245324/inspectTemplates/432452342` or
+   *   Required. Resource name of the organization and inspectTemplate to be read,
+   *   for example `organizations/433245324/inspectTemplates/432452342` or
    *   projects/project-id/inspectTemplates/432452342.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1378,9 +1394,9 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of the organization and inspectTemplate to be deleted, for
-   *   example `organizations/433245324/inspectTemplates/432452342` or
-   *   projects/project-id/inspectTemplates/432452342.
+   *   Required. Resource name of the organization and inspectTemplate to be
+   *   deleted, for example `organizations/433245324/inspectTemplates/432452342`
+   *   or projects/project-id/inspectTemplates/432452342.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1597,8 +1613,9 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of organization and deidentify template to be updated, for
-   *   example `organizations/433245324/deidentifyTemplates/432452342` or
+   *   Required. Resource name of organization and deidentify template to be
+   *   updated, for example
+   *   `organizations/433245324/deidentifyTemplates/432452342` or
    *   projects/project-id/deidentifyTemplates/432452342.
    * @param {google.privacy.dlp.v2.DeidentifyTemplate} request.deidentifyTemplate
    *   New DeidentifyTemplate value.
@@ -1699,9 +1716,9 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of the organization and deidentify template to be read, for
-   *   example `organizations/433245324/deidentifyTemplates/432452342` or
-   *   projects/project-id/deidentifyTemplates/432452342.
+   *   Required. Resource name of the organization and deidentify template to be
+   *   read, for example `organizations/433245324/deidentifyTemplates/432452342`
+   *   or projects/project-id/deidentifyTemplates/432452342.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1793,8 +1810,9 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of the organization and deidentify template to be deleted,
-   *   for example `organizations/433245324/deidentifyTemplates/432452342` or
+   *   Required. Resource name of the organization and deidentify template to be
+   *   deleted, for example
+   *   `organizations/433245324/deidentifyTemplates/432452342` or
    *   projects/project-id/deidentifyTemplates/432452342.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2091,8 +2109,8 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of the trigger to execute a hybrid inspect on, for example
-   *   `projects/dlp-test-project/jobTriggers/53234423`.
+   *   Required. Resource name of the trigger to execute a hybrid inspect on, for
+   *   example `projects/dlp-test-project/jobTriggers/53234423`.
    * @param {google.privacy.dlp.v2.HybridContentItem} request.hybridItem
    *   The item to inspect.
    * @param {object} [options]
@@ -2443,6 +2461,389 @@ export class DlpServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.activateJobTrigger(request, options, callback);
+  }
+  /**
+   * Creates a config for discovery to scan and profile storage.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent resource name.
+   *
+   *   The format of this value is as follows:
+   *   `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *
+   *   The following example `parent` string specifies a parent project with the
+   *   identifier `example-project`, and specifies the `europe-west3` location
+   *   for processing data:
+   *
+   *       parent=projects/example-project/locations/europe-west3
+   * @param {google.privacy.dlp.v2.DiscoveryConfig} request.discoveryConfig
+   *   Required. The DiscoveryConfig to create.
+   * @param {string} request.configId
+   *   The config ID can contain uppercase and lowercase letters,
+   *   numbers, and hyphens; that is, it must match the regular
+   *   expression: `[a-zA-Z\d-_]+`. The maximum length is 100
+   *   characters. Can be empty to allow the system to generate one.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.DiscoveryConfig|DiscoveryConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/dlp_service.create_discovery_config.js</caption>
+   * region_tag:dlp_v2_generated_DlpService_CreateDiscoveryConfig_async
+   */
+  createDiscoveryConfig(
+    request?: protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IDiscoveryConfig,
+      protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  createDiscoveryConfig(
+    request: protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IDiscoveryConfig,
+      | protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createDiscoveryConfig(
+    request: protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IDiscoveryConfig,
+      | protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createDiscoveryConfig(
+    request?: protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.privacy.dlp.v2.IDiscoveryConfig,
+          | protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.privacy.dlp.v2.IDiscoveryConfig,
+      | protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IDiscoveryConfig,
+      protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createDiscoveryConfig(request, options, callback);
+  }
+  /**
+   * Updates a discovery configuration.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the project and the configuration, for example
+   *   `projects/dlp-test-project/discoveryConfigs/53234423`.
+   * @param {google.privacy.dlp.v2.DiscoveryConfig} request.discoveryConfig
+   *   Required. New DiscoveryConfig value.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Mask to control which fields get updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.DiscoveryConfig|DiscoveryConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/dlp_service.update_discovery_config.js</caption>
+   * region_tag:dlp_v2_generated_DlpService_UpdateDiscoveryConfig_async
+   */
+  updateDiscoveryConfig(
+    request?: protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IDiscoveryConfig,
+      protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateDiscoveryConfig(
+    request: protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IDiscoveryConfig,
+      | protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateDiscoveryConfig(
+    request: protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IDiscoveryConfig,
+      | protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateDiscoveryConfig(
+    request?: protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.privacy.dlp.v2.IDiscoveryConfig,
+          | protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.privacy.dlp.v2.IDiscoveryConfig,
+      | protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IDiscoveryConfig,
+      protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateDiscoveryConfig(request, options, callback);
+  }
+  /**
+   * Gets a discovery configuration.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the project and the configuration, for example
+   *   `projects/dlp-test-project/discoveryConfigs/53234423`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.DiscoveryConfig|DiscoveryConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/dlp_service.get_discovery_config.js</caption>
+   * region_tag:dlp_v2_generated_DlpService_GetDiscoveryConfig_async
+   */
+  getDiscoveryConfig(
+    request?: protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IDiscoveryConfig,
+      protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getDiscoveryConfig(
+    request: protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IDiscoveryConfig,
+      | protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getDiscoveryConfig(
+    request: protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IDiscoveryConfig,
+      | protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getDiscoveryConfig(
+    request?: protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.privacy.dlp.v2.IDiscoveryConfig,
+          | protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.privacy.dlp.v2.IDiscoveryConfig,
+      | protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IDiscoveryConfig,
+      protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getDiscoveryConfig(request, options, callback);
+  }
+  /**
+   * Deletes a discovery configuration.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the project and the config, for example
+   *   `projects/dlp-test-project/discoveryConfigs/53234423`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/dlp_service.delete_discovery_config.js</caption>
+   * region_tag:dlp_v2_generated_DlpService_DeleteDiscoveryConfig_async
+   */
+  deleteDiscoveryConfig(
+    request?: protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteDiscoveryConfig(
+    request: protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteDiscoveryConfig(
+    request: protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteDiscoveryConfig(
+    request?: protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteDiscoveryConfig(request, options, callback);
   }
   /**
    * Creates a new job to inspect storage or calculate risk metrics.
@@ -2944,8 +3345,8 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of organization and storedInfoType to be updated, for
-   *   example `organizations/433245324/storedInfoTypes/432452342` or
+   *   Required. Resource name of organization and storedInfoType to be updated,
+   *   for example `organizations/433245324/storedInfoTypes/432452342` or
    *   projects/project-id/storedInfoTypes/432452342.
    * @param {google.privacy.dlp.v2.StoredInfoTypeConfig} request.config
    *   Updated configuration for the storedInfoType. If not provided, a new
@@ -3044,8 +3445,8 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of the organization and storedInfoType to be read, for
-   *   example `organizations/433245324/storedInfoTypes/432452342` or
+   *   Required. Resource name of the organization and storedInfoType to be read,
+   *   for example `organizations/433245324/storedInfoTypes/432452342` or
    *   projects/project-id/storedInfoTypes/432452342.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -3132,8 +3533,8 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of the organization and storedInfoType to be deleted, for
-   *   example `organizations/433245324/storedInfoTypes/432452342` or
+   *   Required. Resource name of the organization and storedInfoType to be
+   *   deleted, for example `organizations/433245324/storedInfoTypes/432452342` or
    *   projects/project-id/storedInfoTypes/432452342.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -3226,8 +3627,8 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of the job to execute a hybrid inspect on, for example
-   *   `projects/dlp-test-project/dlpJob/53234423`.
+   *   Required. Resource name of the job to execute a hybrid inspect on, for
+   *   example `projects/dlp-test-project/dlpJob/53234423`.
    * @param {google.privacy.dlp.v2.HybridContentItem} request.hybridItem
    *   The item to inspect.
    * @param {object} [options]
@@ -3425,15 +3826,15 @@ export class DlpServiceClient {
    *
    *       parent=projects/example-project/locations/europe-west3
    * @param {string} request.pageToken
-   *   Page token to continue retrieval. Comes from previous call
+   *   Page token to continue retrieval. Comes from the previous call
    *   to `ListInspectTemplates`.
    * @param {number} request.pageSize
-   *   Size of the page, can be limited by the server. If zero server returns
-   *   a page of max size 100.
+   *   Size of the page. This value can be limited by the server. If zero server
+   *   returns a page of max size 100.
    * @param {string} request.orderBy
    *   Comma separated list of fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case-insensitive,
-   *   default sorting order is ascending, redundant space characters are
+   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+   *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
    *
    *   Example: `name asc,update_time, create_time desc`
@@ -3559,15 +3960,15 @@ export class DlpServiceClient {
    *
    *       parent=projects/example-project/locations/europe-west3
    * @param {string} request.pageToken
-   *   Page token to continue retrieval. Comes from previous call
+   *   Page token to continue retrieval. Comes from the previous call
    *   to `ListInspectTemplates`.
    * @param {number} request.pageSize
-   *   Size of the page, can be limited by the server. If zero server returns
-   *   a page of max size 100.
+   *   Size of the page. This value can be limited by the server. If zero server
+   *   returns a page of max size 100.
    * @param {string} request.orderBy
    *   Comma separated list of fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case-insensitive,
-   *   default sorting order is ascending, redundant space characters are
+   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+   *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
    *
    *   Example: `name asc,update_time, create_time desc`
@@ -3641,15 +4042,15 @@ export class DlpServiceClient {
    *
    *       parent=projects/example-project/locations/europe-west3
    * @param {string} request.pageToken
-   *   Page token to continue retrieval. Comes from previous call
+   *   Page token to continue retrieval. Comes from the previous call
    *   to `ListInspectTemplates`.
    * @param {number} request.pageSize
-   *   Size of the page, can be limited by the server. If zero server returns
-   *   a page of max size 100.
+   *   Size of the page. This value can be limited by the server. If zero server
+   *   returns a page of max size 100.
    * @param {string} request.orderBy
    *   Comma separated list of fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case-insensitive,
-   *   default sorting order is ascending, redundant space characters are
+   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+   *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
    *
    *   Example: `name asc,update_time, create_time desc`
@@ -3724,15 +4125,15 @@ export class DlpServiceClient {
    *
    *       parent=projects/example-project/locations/europe-west3
    * @param {string} request.pageToken
-   *   Page token to continue retrieval. Comes from previous call
+   *   Page token to continue retrieval. Comes from the previous call
    *   to `ListDeidentifyTemplates`.
    * @param {number} request.pageSize
-   *   Size of the page, can be limited by the server. If zero server returns
-   *   a page of max size 100.
+   *   Size of the page. This value can be limited by the server. If zero server
+   *   returns a page of max size 100.
    * @param {string} request.orderBy
    *   Comma separated list of fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case-insensitive,
-   *   default sorting order is ascending, redundant space characters are
+   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+   *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
    *
    *   Example: `name asc,update_time, create_time desc`
@@ -3862,15 +4263,15 @@ export class DlpServiceClient {
    *
    *       parent=projects/example-project/locations/europe-west3
    * @param {string} request.pageToken
-   *   Page token to continue retrieval. Comes from previous call
+   *   Page token to continue retrieval. Comes from the previous call
    *   to `ListDeidentifyTemplates`.
    * @param {number} request.pageSize
-   *   Size of the page, can be limited by the server. If zero server returns
-   *   a page of max size 100.
+   *   Size of the page. This value can be limited by the server. If zero server
+   *   returns a page of max size 100.
    * @param {string} request.orderBy
    *   Comma separated list of fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case-insensitive,
-   *   default sorting order is ascending, redundant space characters are
+   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+   *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
    *
    *   Example: `name asc,update_time, create_time desc`
@@ -3944,15 +4345,15 @@ export class DlpServiceClient {
    *
    *       parent=projects/example-project/locations/europe-west3
    * @param {string} request.pageToken
-   *   Page token to continue retrieval. Comes from previous call
+   *   Page token to continue retrieval. Comes from the previous call
    *   to `ListDeidentifyTemplates`.
    * @param {number} request.pageSize
-   *   Size of the page, can be limited by the server. If zero server returns
-   *   a page of max size 100.
+   *   Size of the page. This value can be limited by the server. If zero server
+   *   returns a page of max size 100.
    * @param {string} request.orderBy
    *   Comma separated list of fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case-insensitive,
-   *   default sorting order is ascending, redundant space characters are
+   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+   *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
    *
    *   Example: `name asc,update_time, create_time desc`
@@ -4022,15 +4423,15 @@ export class DlpServiceClient {
    *
    *       parent=projects/example-project/locations/europe-west3
    * @param {string} request.pageToken
-   *   Page token to continue retrieval. Comes from previous call
+   *   Page token to continue retrieval. Comes from the previous call
    *   to ListJobTriggers. `order_by` field must not
    *   change for subsequent calls.
    * @param {number} request.pageSize
-   *   Size of the page, can be limited by a server.
+   *   Size of the page. This value can be limited by a server.
    * @param {string} request.orderBy
    *   Comma separated list of triggeredJob fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case-insensitive,
-   *   default sorting order is ascending, redundant space characters are
+   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+   *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
    *
    *   Example: `name asc,update_time, create_time desc`
@@ -4175,15 +4576,15 @@ export class DlpServiceClient {
    *
    *       parent=projects/example-project/locations/europe-west3
    * @param {string} request.pageToken
-   *   Page token to continue retrieval. Comes from previous call
+   *   Page token to continue retrieval. Comes from the previous call
    *   to ListJobTriggers. `order_by` field must not
    *   change for subsequent calls.
    * @param {number} request.pageSize
-   *   Size of the page, can be limited by a server.
+   *   Size of the page. This value can be limited by a server.
    * @param {string} request.orderBy
    *   Comma separated list of triggeredJob fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case-insensitive,
-   *   default sorting order is ascending, redundant space characters are
+   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+   *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
    *
    *   Example: `name asc,update_time, create_time desc`
@@ -4282,15 +4683,15 @@ export class DlpServiceClient {
    *
    *       parent=projects/example-project/locations/europe-west3
    * @param {string} request.pageToken
-   *   Page token to continue retrieval. Comes from previous call
+   *   Page token to continue retrieval. Comes from the previous call
    *   to ListJobTriggers. `order_by` field must not
    *   change for subsequent calls.
    * @param {number} request.pageSize
-   *   Size of the page, can be limited by a server.
+   *   Size of the page. This value can be limited by a server.
    * @param {string} request.orderBy
    *   Comma separated list of triggeredJob fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case-insensitive,
-   *   default sorting order is ascending, redundant space characters are
+   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+   *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
    *
    *   Example: `name asc,update_time, create_time desc`
@@ -4366,6 +4767,264 @@ export class DlpServiceClient {
     ) as AsyncIterable<protos.google.privacy.dlp.v2.IJobTrigger>;
   }
   /**
+   * Lists discovery configurations.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent resource name.
+   *
+   *   The format of this value is as follows:
+   *   `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *
+   *   The following example `parent` string specifies a parent project with the
+   *   identifier `example-project`, and specifies the `europe-west3` location
+   *   for processing data:
+   *
+   *       parent=projects/example-project/locations/europe-west3
+   * @param {string} request.pageToken
+   *   Page token to continue retrieval. Comes from the previous call
+   *   to ListDiscoveryConfigs. `order_by` field must not
+   *   change for subsequent calls.
+   * @param {number} request.pageSize
+   *   Size of the page. This value can be limited by a server.
+   * @param {string} request.orderBy
+   *   Comma separated list of config fields to order by,
+   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+   *   default sorting order is ascending. Redundant space characters are
+   *   insignificant.
+   *
+   *   Example: `name asc,update_time, create_time desc`
+   *
+   *   Supported fields are:
+   *
+   *   - `last_run_time`: corresponds to the last time the DiscoveryConfig ran.
+   *   - `name`: corresponds to the DiscoveryConfig's name.
+   *   - `status`: corresponds to DiscoveryConfig's status.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.DiscoveryConfig|DiscoveryConfig}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listDiscoveryConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listDiscoveryConfigs(
+    request?: protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IDiscoveryConfig[],
+      protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest | null,
+      protos.google.privacy.dlp.v2.IListDiscoveryConfigsResponse,
+    ]
+  >;
+  listDiscoveryConfigs(
+    request: protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
+      | protos.google.privacy.dlp.v2.IListDiscoveryConfigsResponse
+      | null
+      | undefined,
+      protos.google.privacy.dlp.v2.IDiscoveryConfig
+    >
+  ): void;
+  listDiscoveryConfigs(
+    request: protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
+    callback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
+      | protos.google.privacy.dlp.v2.IListDiscoveryConfigsResponse
+      | null
+      | undefined,
+      protos.google.privacy.dlp.v2.IDiscoveryConfig
+    >
+  ): void;
+  listDiscoveryConfigs(
+    request?: protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
+          | protos.google.privacy.dlp.v2.IListDiscoveryConfigsResponse
+          | null
+          | undefined,
+          protos.google.privacy.dlp.v2.IDiscoveryConfig
+        >,
+    callback?: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
+      | protos.google.privacy.dlp.v2.IListDiscoveryConfigsResponse
+      | null
+      | undefined,
+      protos.google.privacy.dlp.v2.IDiscoveryConfig
+    >
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IDiscoveryConfig[],
+      protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest | null,
+      protos.google.privacy.dlp.v2.IListDiscoveryConfigsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listDiscoveryConfigs(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent resource name.
+   *
+   *   The format of this value is as follows:
+   *   `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *
+   *   The following example `parent` string specifies a parent project with the
+   *   identifier `example-project`, and specifies the `europe-west3` location
+   *   for processing data:
+   *
+   *       parent=projects/example-project/locations/europe-west3
+   * @param {string} request.pageToken
+   *   Page token to continue retrieval. Comes from the previous call
+   *   to ListDiscoveryConfigs. `order_by` field must not
+   *   change for subsequent calls.
+   * @param {number} request.pageSize
+   *   Size of the page. This value can be limited by a server.
+   * @param {string} request.orderBy
+   *   Comma separated list of config fields to order by,
+   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+   *   default sorting order is ascending. Redundant space characters are
+   *   insignificant.
+   *
+   *   Example: `name asc,update_time, create_time desc`
+   *
+   *   Supported fields are:
+   *
+   *   - `last_run_time`: corresponds to the last time the DiscoveryConfig ran.
+   *   - `name`: corresponds to the DiscoveryConfig's name.
+   *   - `status`: corresponds to DiscoveryConfig's status.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.DiscoveryConfig|DiscoveryConfig} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listDiscoveryConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listDiscoveryConfigsStream(
+    request?: protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listDiscoveryConfigs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listDiscoveryConfigs.createStream(
+      this.innerApiCalls.listDiscoveryConfigs as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listDiscoveryConfigs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent resource name.
+   *
+   *   The format of this value is as follows:
+   *   `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *
+   *   The following example `parent` string specifies a parent project with the
+   *   identifier `example-project`, and specifies the `europe-west3` location
+   *   for processing data:
+   *
+   *       parent=projects/example-project/locations/europe-west3
+   * @param {string} request.pageToken
+   *   Page token to continue retrieval. Comes from the previous call
+   *   to ListDiscoveryConfigs. `order_by` field must not
+   *   change for subsequent calls.
+   * @param {number} request.pageSize
+   *   Size of the page. This value can be limited by a server.
+   * @param {string} request.orderBy
+   *   Comma separated list of config fields to order by,
+   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+   *   default sorting order is ascending. Redundant space characters are
+   *   insignificant.
+   *
+   *   Example: `name asc,update_time, create_time desc`
+   *
+   *   Supported fields are:
+   *
+   *   - `last_run_time`: corresponds to the last time the DiscoveryConfig ran.
+   *   - `name`: corresponds to the DiscoveryConfig's name.
+   *   - `status`: corresponds to DiscoveryConfig's status.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.privacy.dlp.v2.DiscoveryConfig|DiscoveryConfig}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/dlp_service.list_discovery_configs.js</caption>
+   * region_tag:dlp_v2_generated_DlpService_ListDiscoveryConfigs_async
+   */
+  listDiscoveryConfigsAsync(
+    request?: protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.privacy.dlp.v2.IDiscoveryConfig> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listDiscoveryConfigs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listDiscoveryConfigs.asyncIterate(
+      this.innerApiCalls['listDiscoveryConfigs'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.privacy.dlp.v2.IDiscoveryConfig>;
+  }
+  /**
    * Lists DlpJobs that match the specified filter in the request.
    * See https://cloud.google.com/dlp/docs/inspecting-storage and
    * https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
@@ -4426,8 +5085,8 @@ export class DlpServiceClient {
    *   The type of job. Defaults to `DlpJobType.INSPECT`
    * @param {string} request.orderBy
    *   Comma separated list of fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case-insensitive,
-   *   default sorting order is ascending, redundant space characters are
+   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+   *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
    *
    *   Example: `name asc, end_time asc, create_time desc`
@@ -4577,8 +5236,8 @@ export class DlpServiceClient {
    *   The type of job. Defaults to `DlpJobType.INSPECT`
    * @param {string} request.orderBy
    *   Comma separated list of fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case-insensitive,
-   *   default sorting order is ascending, redundant space characters are
+   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+   *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
    *
    *   Example: `name asc, end_time asc, create_time desc`
@@ -4684,8 +5343,8 @@ export class DlpServiceClient {
    *   The type of job. Defaults to `DlpJobType.INSPECT`
    * @param {string} request.orderBy
    *   Comma separated list of fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case-insensitive,
-   *   default sorting order is ascending, redundant space characters are
+   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+   *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
    *
    *   Example: `name asc, end_time asc, create_time desc`
@@ -4756,15 +5415,15 @@ export class DlpServiceClient {
    *
    *       parent=projects/example-project/locations/europe-west3
    * @param {string} request.pageToken
-   *   Page token to continue retrieval. Comes from previous call
+   *   Page token to continue retrieval. Comes from the previous call
    *   to `ListStoredInfoTypes`.
    * @param {number} request.pageSize
-   *   Size of the page, can be limited by the server. If zero server returns
-   *   a page of max size 100.
+   *   Size of the page. This value can be limited by the server. If zero server
+   *   returns a page of max size 100.
    * @param {string} request.orderBy
    *   Comma separated list of fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case-insensitive,
-   *   default sorting order is ascending, redundant space characters are
+   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+   *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
    *
    *   Example: `name asc, display_name, create_time desc`
@@ -4887,15 +5546,15 @@ export class DlpServiceClient {
    *
    *       parent=projects/example-project/locations/europe-west3
    * @param {string} request.pageToken
-   *   Page token to continue retrieval. Comes from previous call
+   *   Page token to continue retrieval. Comes from the previous call
    *   to `ListStoredInfoTypes`.
    * @param {number} request.pageSize
-   *   Size of the page, can be limited by the server. If zero server returns
-   *   a page of max size 100.
+   *   Size of the page. This value can be limited by the server. If zero server
+   *   returns a page of max size 100.
    * @param {string} request.orderBy
    *   Comma separated list of fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case-insensitive,
-   *   default sorting order is ascending, redundant space characters are
+   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+   *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
    *
    *   Example: `name asc, display_name, create_time desc`
@@ -4966,15 +5625,15 @@ export class DlpServiceClient {
    *
    *       parent=projects/example-project/locations/europe-west3
    * @param {string} request.pageToken
-   *   Page token to continue retrieval. Comes from previous call
+   *   Page token to continue retrieval. Comes from the previous call
    *   to `ListStoredInfoTypes`.
    * @param {number} request.pageSize
-   *   Size of the page, can be limited by the server. If zero server returns
-   *   a page of max size 100.
+   *   Size of the page. This value can be limited by the server. If zero server
+   *   returns a page of max size 100.
    * @param {string} request.orderBy
    *   Comma separated list of fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case-insensitive,
-   *   default sorting order is ascending, redundant space characters are
+   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+   *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
    *
    *   Example: `name asc, display_name, create_time desc`
@@ -5104,6 +5763,65 @@ export class DlpServiceClient {
   // --------------------
 
   /**
+   * Return a fully-qualified discoveryConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} discovery_config
+   * @returns {string} Resource name string.
+   */
+  discoveryConfigPath(
+    project: string,
+    location: string,
+    discoveryConfig: string
+  ) {
+    return this.pathTemplates.discoveryConfigPathTemplate.render({
+      project: project,
+      location: location,
+      discovery_config: discoveryConfig,
+    });
+  }
+
+  /**
+   * Parse the project from DiscoveryConfig resource.
+   *
+   * @param {string} discoveryConfigName
+   *   A fully-qualified path representing DiscoveryConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDiscoveryConfigName(discoveryConfigName: string) {
+    return this.pathTemplates.discoveryConfigPathTemplate.match(
+      discoveryConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from DiscoveryConfig resource.
+   *
+   * @param {string} discoveryConfigName
+   *   A fully-qualified path representing DiscoveryConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDiscoveryConfigName(discoveryConfigName: string) {
+    return this.pathTemplates.discoveryConfigPathTemplate.match(
+      discoveryConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the discovery_config from DiscoveryConfig resource.
+   *
+   * @param {string} discoveryConfigName
+   *   A fully-qualified path representing DiscoveryConfig resource.
+   * @returns {string} A string representing the discovery_config.
+   */
+  matchDiscoveryConfigFromDiscoveryConfigName(discoveryConfigName: string) {
+    return this.pathTemplates.discoveryConfigPathTemplate.match(
+      discoveryConfigName
+    ).discovery_config;
+  }
+
+  /**
    * Return a fully-qualified finding resource name string.
    *
    * @param {string} project
@@ -5150,6 +5868,42 @@ export class DlpServiceClient {
    */
   matchFindingFromFindingName(findingName: string) {
     return this.pathTemplates.findingPathTemplate.match(findingName).finding;
+  }
+
+  /**
+   * Return a fully-qualified location resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  locationPath(project: string, location: string) {
+    return this.pathTemplates.locationPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).project;
+  }
+
+  /**
+   * Parse the location from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).location;
   }
 
   /**

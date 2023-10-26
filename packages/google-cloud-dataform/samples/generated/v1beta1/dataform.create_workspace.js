@@ -29,8 +29,8 @@ function main(parent, workspace, workspaceId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The repository in which to create the workspace. Must be in the format
-   *  `projects/* /locations/* /repositories/*`.
+   *  Required. The repository in which to create the workspace. Must be in the
+   *  format `projects/* /locations/* /repositories/*`.
    */
   // const parent = 'abc123'
   /**
@@ -38,8 +38,8 @@ function main(parent, workspace, workspaceId) {
    */
   // const workspace = {}
   /**
-   *  Required. The ID to use for the workspace, which will become the final component of
-   *  the workspace's resource name.
+   *  Required. The ID to use for the workspace, which will become the final
+   *  component of the workspace's resource name.
    */
   // const workspaceId = 'abc123'
 
