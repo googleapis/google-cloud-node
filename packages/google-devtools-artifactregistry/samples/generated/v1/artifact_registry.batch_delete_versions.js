@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START dlp_v2_generated_DlpService_GetDeidentifyTemplate_async]
+function main(names) {
+  // [START artifactregistry_v1_generated_ArtifactRegistry_BatchDeleteVersions_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,31 +29,39 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name of the organization and deidentify template to be
-   *  read, for example `organizations/433245324/deidentifyTemplates/432452342`
-   *  or projects/project-id/deidentifyTemplates/432452342.
+   *  The name of the repository holding all requested versions.
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
+  /**
+   *  Required. The names of the versions to delete.
+   *  A maximum of 10000 versions can be deleted in a batch.
+   */
+  // const names = ['abc','def']
+  /**
+   *  If true, the request is performed without deleting data, following AIP-163.
+   */
+  // const validateOnly = true
 
-  // Imports the Dlp library
-  const {DlpServiceClient} = require('@google-cloud/dlp').v2;
+  // Imports the Artifactregistry library
+  const {ArtifactRegistryClient} = require('@google-cloud/artifact-registry').v1;
 
   // Instantiates a client
-  const dlpClient = new DlpServiceClient();
+  const artifactregistryClient = new ArtifactRegistryClient();
 
-  async function callGetDeidentifyTemplate() {
+  async function callBatchDeleteVersions() {
     // Construct request
     const request = {
-      name,
+      names,
     };
 
     // Run request
-    const response = await dlpClient.getDeidentifyTemplate(request);
+    const [operation] = await artifactregistryClient.batchDeleteVersions(request);
+    const [response] = await operation.promise();
     console.log(response);
   }
 
-  callGetDeidentifyTemplate();
-  // [END dlp_v2_generated_DlpService_GetDeidentifyTemplate_async]
+  callBatchDeleteVersions();
+  // [END artifactregistry_v1_generated_ArtifactRegistry_BatchDeleteVersions_async]
 }
 
 process.on('unhandledRejection', err => {

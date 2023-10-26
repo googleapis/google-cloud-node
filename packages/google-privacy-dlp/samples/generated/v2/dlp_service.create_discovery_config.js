@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START dlp_v2_generated_DlpService_GetDeidentifyTemplate_async]
+function main(parent, discoveryConfig) {
+  // [START dlp_v2_generated_DlpService_CreateDiscoveryConfig_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,11 +29,26 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name of the organization and deidentify template to be
-   *  read, for example `organizations/433245324/deidentifyTemplates/432452342`
-   *  or projects/project-id/deidentifyTemplates/432452342.
+   *  Required. Parent resource name.
+   *  The format of this value is as follows:
+   *  `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *  The following example `parent` string specifies a parent project with the
+   *  identifier `example-project`, and specifies the `europe-west3` location
+   *  for processing data:
+   *      parent=projects/example-project/locations/europe-west3
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
+  /**
+   *  Required. The DiscoveryConfig to create.
+   */
+  // const discoveryConfig = {}
+  /**
+   *  The config ID can contain uppercase and lowercase letters,
+   *  numbers, and hyphens; that is, it must match the regular
+   *  expression: `[a-zA-Z\d-_]+`. The maximum length is 100
+   *  characters. Can be empty to allow the system to generate one.
+   */
+  // const configId = 'abc123'
 
   // Imports the Dlp library
   const {DlpServiceClient} = require('@google-cloud/dlp').v2;
@@ -41,19 +56,20 @@ function main(name) {
   // Instantiates a client
   const dlpClient = new DlpServiceClient();
 
-  async function callGetDeidentifyTemplate() {
+  async function callCreateDiscoveryConfig() {
     // Construct request
     const request = {
-      name,
+      parent,
+      discoveryConfig,
     };
 
     // Run request
-    const response = await dlpClient.getDeidentifyTemplate(request);
+    const response = await dlpClient.createDiscoveryConfig(request);
     console.log(response);
   }
 
-  callGetDeidentifyTemplate();
-  // [END dlp_v2_generated_DlpService_GetDeidentifyTemplate_async]
+  callCreateDiscoveryConfig();
+  // [END dlp_v2_generated_DlpService_CreateDiscoveryConfig_async]
 }
 
 process.on('unhandledRejection', err => {

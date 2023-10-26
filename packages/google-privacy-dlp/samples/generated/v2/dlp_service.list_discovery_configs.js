@@ -21,7 +21,7 @@
 'use strict';
 
 function main(parent) {
-  // [START dlp_v2_generated_DlpService_ListDeidentifyTemplates_async]
+  // [START dlp_v2_generated_DlpService_ListDiscoveryConfigs_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -30,17 +30,8 @@ function main(parent) {
    */
   /**
    *  Required. Parent resource name.
-   *  The format of this value varies depending on the scope of the request
-   *  (project or organization) and whether you have specified a processing
-   *  location (https://cloud.google.com/dlp/docs/specifying-location):
-   *  + Projects scope, location specified:<br/>
-   *    `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *  + Projects scope, no location specified (defaults to global):<br/>
-   *    `projects/`<var>PROJECT_ID</var>
-   *  + Organizations scope, location specified:<br/>
-   *    `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *  + Organizations scope, no location specified (defaults to global):<br/>
-   *    `organizations/`<var>ORG_ID</var>
+   *  The format of this value is as follows:
+   *  `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
    *  The following example `parent` string specifies a parent project with the
    *  identifier `example-project`, and specifies the `europe-west3` location
    *  for processing data:
@@ -49,25 +40,24 @@ function main(parent) {
   // const parent = 'abc123'
   /**
    *  Page token to continue retrieval. Comes from the previous call
-   *  to `ListDeidentifyTemplates`.
+   *  to ListDiscoveryConfigs. `order_by` field must not
+   *  change for subsequent calls.
    */
   // const pageToken = 'abc123'
   /**
-   *  Size of the page. This value can be limited by the server. If zero server
-   *  returns a page of max size 100.
+   *  Size of the page. This value can be limited by a server.
    */
   // const pageSize = 1234
   /**
-   *  Comma separated list of fields to order by,
+   *  Comma separated list of config fields to order by,
    *  followed by `asc` or `desc` postfix. This list is case insensitive. The
    *  default sorting order is ascending. Redundant space characters are
    *  insignificant.
    *  Example: `name asc,update_time, create_time desc`
    *  Supported fields are:
-   *  - `create_time`: corresponds to the time the template was created.
-   *  - `update_time`: corresponds to the time the template was last updated.
-   *  - `name`: corresponds to the template's name.
-   *  - `display_name`: corresponds to the template's display name.
+   *  - `last_run_time`: corresponds to the last time the DiscoveryConfig ran.
+   *  - `name`: corresponds to the DiscoveryConfig's name.
+   *  - `status`: corresponds to DiscoveryConfig's status.
    */
   // const orderBy = 'abc123'
 
@@ -77,21 +67,21 @@ function main(parent) {
   // Instantiates a client
   const dlpClient = new DlpServiceClient();
 
-  async function callListDeidentifyTemplates() {
+  async function callListDiscoveryConfigs() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = await dlpClient.listDeidentifyTemplatesAsync(request);
+    const iterable = await dlpClient.listDiscoveryConfigsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
   }
 
-  callListDeidentifyTemplates();
-  // [END dlp_v2_generated_DlpService_ListDeidentifyTemplates_async]
+  callListDiscoveryConfigs();
+  // [END dlp_v2_generated_DlpService_ListDiscoveryConfigs_async]
 }
 
 process.on('unhandledRejection', err => {

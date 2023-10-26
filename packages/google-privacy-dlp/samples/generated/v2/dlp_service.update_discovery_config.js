@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START dlp_v2_generated_DlpService_GetDeidentifyTemplate_async]
+function main(name, discoveryConfig) {
+  // [START dlp_v2_generated_DlpService_UpdateDiscoveryConfig_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,11 +29,18 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name of the organization and deidentify template to be
-   *  read, for example `organizations/433245324/deidentifyTemplates/432452342`
-   *  or projects/project-id/deidentifyTemplates/432452342.
+   *  Required. Resource name of the project and the configuration, for example
+   *  `projects/dlp-test-project/discoveryConfigs/53234423`.
    */
   // const name = 'abc123'
+  /**
+   *  Required. New DiscoveryConfig value.
+   */
+  // const discoveryConfig = {}
+  /**
+   *  Mask to control which fields get updated.
+   */
+  // const updateMask = {}
 
   // Imports the Dlp library
   const {DlpServiceClient} = require('@google-cloud/dlp').v2;
@@ -41,19 +48,20 @@ function main(name) {
   // Instantiates a client
   const dlpClient = new DlpServiceClient();
 
-  async function callGetDeidentifyTemplate() {
+  async function callUpdateDiscoveryConfig() {
     // Construct request
     const request = {
       name,
+      discoveryConfig,
     };
 
     // Run request
-    const response = await dlpClient.getDeidentifyTemplate(request);
+    const response = await dlpClient.updateDiscoveryConfig(request);
     console.log(response);
   }
 
-  callGetDeidentifyTemplate();
-  // [END dlp_v2_generated_DlpService_GetDeidentifyTemplate_async]
+  callUpdateDiscoveryConfig();
+  // [END dlp_v2_generated_DlpService_UpdateDiscoveryConfig_async]
 }
 
 process.on('unhandledRejection', err => {
