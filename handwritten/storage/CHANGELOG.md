@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [7.4.0](https://github.com/googleapis/nodejs-storage/compare/v7.3.2...v7.4.0) (2023-10-24)
+
+
+### Features
+
+* Support building in CJS and ESM formats ([#2296](https://github.com/googleapis/nodejs-storage/issues/2296)) ([c848076](https://github.com/googleapis/nodejs-storage/commit/c84807662839b3671230a50b2a0c6f7a6efef528))
+
 ## [7.3.2](https://github.com/googleapis/nodejs-storage/compare/v7.3.1...v7.3.2) (2023-10-24)
 
 
