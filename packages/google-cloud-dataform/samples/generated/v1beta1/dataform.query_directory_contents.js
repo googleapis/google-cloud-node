@@ -33,8 +33,8 @@ function main(workspace) {
    */
   // const workspace = 'abc123'
   /**
-   *  Optional. The directory's full path including directory name, relative to the
-   *  workspace root. If left unset, the workspace root is used.
+   *  Optional. The directory's full path including directory name, relative to
+   *  the workspace root. If left unset, the workspace root is used.
    */
   // const path = 'abc123'
   /**
@@ -44,8 +44,8 @@ function main(workspace) {
    */
   // const pageSize = 1234
   /**
-   *  Optional. Page token received from a previous `QueryDirectoryContents` call.
-   *  Provide this to retrieve the subsequent page.
+   *  Optional. Page token received from a previous `QueryDirectoryContents`
+   *  call. Provide this to retrieve the subsequent page.
    *  When paginating, all other parameters provided to
    *  `QueryDirectoryContents` must match the call that provided the page
    *  token.

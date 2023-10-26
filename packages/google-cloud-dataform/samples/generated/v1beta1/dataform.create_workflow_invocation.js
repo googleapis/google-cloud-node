@@ -29,8 +29,8 @@ function main(parent, workflowInvocation) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The repository in which to create the workflow invocation. Must be in the
-   *  format `projects/* /locations/* /repositories/*`.
+   *  Required. The repository in which to create the workflow invocation. Must
+   *  be in the format `projects/* /locations/* /repositories/*`.
    */
   // const parent = 'abc123'
   /**

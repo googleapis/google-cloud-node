@@ -33,13 +33,13 @@ function main(name, author) {
    */
   // const name = 'abc123'
   /**
-   *  Optional. The name of the branch in the Git remote from which to pull commits.
-   *  If left unset, the repository's default branch name will be used.
+   *  Optional. The name of the branch in the Git remote from which to pull
+   *  commits. If left unset, the repository's default branch name will be used.
    */
   // const remoteBranch = 'abc123'
   /**
-   *  Required. The author of any merge commit which may be created as a result of merging
-   *  fetched Git commits into this workspace.
+   *  Required. The author of any merge commit which may be created as a result
+   *  of merging fetched Git commits into this workspace.
    */
   // const author = {}
 
