@@ -21,7 +21,7 @@
 'use strict';
 
 function main(parent) {
-  // [START dataform_v1beta1_generated_Dataform_ListRepositories_async]
+  // [START dataform_v1beta1_generated_Dataform_ListWorkflowConfigs_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,33 +29,23 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The location in which to list repositories. Must be in the format
-   *  `projects/* /locations/*`.
+   *  Required. The repository in which to list workflow configs. Must be in the
+   *  format `projects/* /locations/* /repositories/*`.
    */
   // const parent = 'abc123'
   /**
-   *  Optional. Maximum number of repositories to return. The server may return
-   *  fewer items than requested. If unspecified, the server will pick an
+   *  Optional. Maximum number of workflow configs to return. The server may
+   *  return fewer items than requested. If unspecified, the server will pick an
    *  appropriate default.
    */
   // const pageSize = 1234
   /**
-   *  Optional. Page token received from a previous `ListRepositories` call.
+   *  Optional. Page token received from a previous `ListWorkflowConfigs` call.
    *  Provide this to retrieve the subsequent page.
-   *  When paginating, all other parameters provided to `ListRepositories`
+   *  When paginating, all other parameters provided to `ListWorkflowConfigs`
    *  must match the call that provided the page token.
    */
   // const pageToken = 'abc123'
-  /**
-   *  Optional. This field only supports ordering by `name`. If unspecified, the
-   *  server will choose the ordering. If specified, the default order is
-   *  ascending for the `name` field.
-   */
-  // const orderBy = 'abc123'
-  /**
-   *  Optional. Filter for the returned list.
-   */
-  // const filter = 'abc123'
 
   // Imports the Dataform library
   const {DataformClient} = require('@google-cloud/dataform').v1beta1;
@@ -63,21 +53,21 @@ function main(parent) {
   // Instantiates a client
   const dataformClient = new DataformClient();
 
-  async function callListRepositories() {
+  async function callListWorkflowConfigs() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = await dataformClient.listRepositoriesAsync(request);
+    const iterable = await dataformClient.listWorkflowConfigsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
   }
 
-  callListRepositories();
-  // [END dataform_v1beta1_generated_Dataform_ListRepositories_async]
+  callListWorkflowConfigs();
+  // [END dataform_v1beta1_generated_Dataform_ListWorkflowConfigs_async]
 }
 
 process.on('unhandledRejection', err => {
