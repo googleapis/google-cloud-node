@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, repositoryId, repository) {
-  // [START artifactregistry_v1_generated_ArtifactRegistry_CreateRepository_async]
+function main(names) {
+  // [START artifactregistry_v1_generated_ArtifactRegistry_BatchDeleteVersions_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,18 +29,18 @@ function main(parent, repositoryId, repository) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the parent resource where the repository will be
-   *  created.
+   *  The name of the repository holding all requested versions.
    */
   // const parent = 'abc123'
   /**
-   *  Required. The repository id to use for this repository.
+   *  Required. The names of the versions to delete.
+   *  A maximum of 10000 versions can be deleted in a batch.
    */
-  // const repositoryId = 'abc123'
+  // const names = ['abc','def']
   /**
-   *  Required. The repository to be created.
+   *  If true, the request is performed without deleting data, following AIP-163.
    */
-  // const repository = {}
+  // const validateOnly = true
 
   // Imports the Artifactregistry library
   const {ArtifactRegistryClient} = require('@google-cloud/artifact-registry').v1;
@@ -48,22 +48,20 @@ function main(parent, repositoryId, repository) {
   // Instantiates a client
   const artifactregistryClient = new ArtifactRegistryClient();
 
-  async function callCreateRepository() {
+  async function callBatchDeleteVersions() {
     // Construct request
     const request = {
-      parent,
-      repositoryId,
-      repository,
+      names,
     };
 
     // Run request
-    const [operation] = await artifactregistryClient.createRepository(request);
+    const [operation] = await artifactregistryClient.batchDeleteVersions(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callCreateRepository();
-  // [END artifactregistry_v1_generated_ArtifactRegistry_CreateRepository_async]
+  callBatchDeleteVersions();
+  // [END artifactregistry_v1_generated_ArtifactRegistry_BatchDeleteVersions_async]
 }
 
 process.on('unhandledRejection', err => {
