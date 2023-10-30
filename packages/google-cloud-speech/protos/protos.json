@@ -3415,6 +3415,33 @@
                         }
                       }
                     },
+                    "TranscriptNormalization": {
+                      "fields": {
+                        "entries": {
+                          "rule": "repeated",
+                          "type": "Entry",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "Entry": {
+                          "fields": {
+                            "search": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "replace": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "caseSensitive": {
+                              "type": "bool",
+                              "id": 3
+                            }
+                          }
+                        }
+                      }
+                    },
                     "SpeechAdaptation": {
                       "fields": {
                         "phraseSets": {
@@ -3494,6 +3521,13 @@
                         "adaptation": {
                           "type": "SpeechAdaptation",
                           "id": 6
+                        },
+                        "transcriptNormalization": {
+                          "type": "TranscriptNormalization",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -3794,12 +3828,32 @@
                         }
                       }
                     },
-                    "BatchRecognizeFileResult": {
+                    "CloudStorageResult": {
                       "fields": {
                         "uri": {
                           "type": "string",
                           "id": 1
-                        },
+                        }
+                      }
+                    },
+                    "InlineResult": {
+                      "fields": {
+                        "transcript": {
+                          "type": "BatchRecognizeResults",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "BatchRecognizeFileResult": {
+                      "oneofs": {
+                        "result": {
+                          "oneof": [
+                            "cloudStorageResult",
+                            "inlineResult"
+                          ]
+                        }
+                      },
+                      "fields": {
                         "error": {
                           "type": "google.rpc.Status",
                           "id": 2
@@ -3808,9 +3862,27 @@
                           "type": "RecognitionResponseMetadata",
                           "id": 3
                         },
+                        "cloudStorageResult": {
+                          "type": "CloudStorageResult",
+                          "id": 5
+                        },
+                        "inlineResult": {
+                          "type": "InlineResult",
+                          "id": 6
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
                         "transcript": {
                           "type": "BatchRecognizeResults",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "deprecated": true
+                          }
                         }
                       }
                     },

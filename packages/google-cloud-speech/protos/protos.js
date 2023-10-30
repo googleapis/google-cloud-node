@@ -28702,6 +28702,480 @@
                         return RecognitionFeatures;
                     })();
     
+                    v2.TranscriptNormalization = (function() {
+    
+                        /**
+                         * Properties of a TranscriptNormalization.
+                         * @memberof google.cloud.speech.v2
+                         * @interface ITranscriptNormalization
+                         * @property {Array.<google.cloud.speech.v2.TranscriptNormalization.IEntry>|null} [entries] TranscriptNormalization entries
+                         */
+    
+                        /**
+                         * Constructs a new TranscriptNormalization.
+                         * @memberof google.cloud.speech.v2
+                         * @classdesc Represents a TranscriptNormalization.
+                         * @implements ITranscriptNormalization
+                         * @constructor
+                         * @param {google.cloud.speech.v2.ITranscriptNormalization=} [properties] Properties to set
+                         */
+                        function TranscriptNormalization(properties) {
+                            this.entries = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TranscriptNormalization entries.
+                         * @member {Array.<google.cloud.speech.v2.TranscriptNormalization.IEntry>} entries
+                         * @memberof google.cloud.speech.v2.TranscriptNormalization
+                         * @instance
+                         */
+                        TranscriptNormalization.prototype.entries = $util.emptyArray;
+    
+                        /**
+                         * Creates a new TranscriptNormalization instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v2.TranscriptNormalization
+                         * @static
+                         * @param {google.cloud.speech.v2.ITranscriptNormalization=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v2.TranscriptNormalization} TranscriptNormalization instance
+                         */
+                        TranscriptNormalization.create = function create(properties) {
+                            return new TranscriptNormalization(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TranscriptNormalization message. Does not implicitly {@link google.cloud.speech.v2.TranscriptNormalization.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v2.TranscriptNormalization
+                         * @static
+                         * @param {google.cloud.speech.v2.ITranscriptNormalization} message TranscriptNormalization message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TranscriptNormalization.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.entries != null && message.entries.length)
+                                for (var i = 0; i < message.entries.length; ++i)
+                                    $root.google.cloud.speech.v2.TranscriptNormalization.Entry.encode(message.entries[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TranscriptNormalization message, length delimited. Does not implicitly {@link google.cloud.speech.v2.TranscriptNormalization.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v2.TranscriptNormalization
+                         * @static
+                         * @param {google.cloud.speech.v2.ITranscriptNormalization} message TranscriptNormalization message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TranscriptNormalization.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TranscriptNormalization message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v2.TranscriptNormalization
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v2.TranscriptNormalization} TranscriptNormalization
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TranscriptNormalization.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v2.TranscriptNormalization();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.entries && message.entries.length))
+                                            message.entries = [];
+                                        message.entries.push($root.google.cloud.speech.v2.TranscriptNormalization.Entry.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TranscriptNormalization message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v2.TranscriptNormalization
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v2.TranscriptNormalization} TranscriptNormalization
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TranscriptNormalization.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TranscriptNormalization message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v2.TranscriptNormalization
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TranscriptNormalization.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.entries != null && message.hasOwnProperty("entries")) {
+                                if (!Array.isArray(message.entries))
+                                    return "entries: array expected";
+                                for (var i = 0; i < message.entries.length; ++i) {
+                                    var error = $root.google.cloud.speech.v2.TranscriptNormalization.Entry.verify(message.entries[i]);
+                                    if (error)
+                                        return "entries." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TranscriptNormalization message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v2.TranscriptNormalization
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v2.TranscriptNormalization} TranscriptNormalization
+                         */
+                        TranscriptNormalization.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v2.TranscriptNormalization)
+                                return object;
+                            var message = new $root.google.cloud.speech.v2.TranscriptNormalization();
+                            if (object.entries) {
+                                if (!Array.isArray(object.entries))
+                                    throw TypeError(".google.cloud.speech.v2.TranscriptNormalization.entries: array expected");
+                                message.entries = [];
+                                for (var i = 0; i < object.entries.length; ++i) {
+                                    if (typeof object.entries[i] !== "object")
+                                        throw TypeError(".google.cloud.speech.v2.TranscriptNormalization.entries: object expected");
+                                    message.entries[i] = $root.google.cloud.speech.v2.TranscriptNormalization.Entry.fromObject(object.entries[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TranscriptNormalization message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v2.TranscriptNormalization
+                         * @static
+                         * @param {google.cloud.speech.v2.TranscriptNormalization} message TranscriptNormalization
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TranscriptNormalization.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.entries = [];
+                            if (message.entries && message.entries.length) {
+                                object.entries = [];
+                                for (var j = 0; j < message.entries.length; ++j)
+                                    object.entries[j] = $root.google.cloud.speech.v2.TranscriptNormalization.Entry.toObject(message.entries[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TranscriptNormalization to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v2.TranscriptNormalization
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TranscriptNormalization.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TranscriptNormalization
+                         * @function getTypeUrl
+                         * @memberof google.cloud.speech.v2.TranscriptNormalization
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TranscriptNormalization.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.speech.v2.TranscriptNormalization";
+                        };
+    
+                        TranscriptNormalization.Entry = (function() {
+    
+                            /**
+                             * Properties of an Entry.
+                             * @memberof google.cloud.speech.v2.TranscriptNormalization
+                             * @interface IEntry
+                             * @property {string|null} [search] Entry search
+                             * @property {string|null} [replace] Entry replace
+                             * @property {boolean|null} [caseSensitive] Entry caseSensitive
+                             */
+    
+                            /**
+                             * Constructs a new Entry.
+                             * @memberof google.cloud.speech.v2.TranscriptNormalization
+                             * @classdesc Represents an Entry.
+                             * @implements IEntry
+                             * @constructor
+                             * @param {google.cloud.speech.v2.TranscriptNormalization.IEntry=} [properties] Properties to set
+                             */
+                            function Entry(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Entry search.
+                             * @member {string} search
+                             * @memberof google.cloud.speech.v2.TranscriptNormalization.Entry
+                             * @instance
+                             */
+                            Entry.prototype.search = "";
+    
+                            /**
+                             * Entry replace.
+                             * @member {string} replace
+                             * @memberof google.cloud.speech.v2.TranscriptNormalization.Entry
+                             * @instance
+                             */
+                            Entry.prototype.replace = "";
+    
+                            /**
+                             * Entry caseSensitive.
+                             * @member {boolean} caseSensitive
+                             * @memberof google.cloud.speech.v2.TranscriptNormalization.Entry
+                             * @instance
+                             */
+                            Entry.prototype.caseSensitive = false;
+    
+                            /**
+                             * Creates a new Entry instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.speech.v2.TranscriptNormalization.Entry
+                             * @static
+                             * @param {google.cloud.speech.v2.TranscriptNormalization.IEntry=} [properties] Properties to set
+                             * @returns {google.cloud.speech.v2.TranscriptNormalization.Entry} Entry instance
+                             */
+                            Entry.create = function create(properties) {
+                                return new Entry(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Entry message. Does not implicitly {@link google.cloud.speech.v2.TranscriptNormalization.Entry.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.speech.v2.TranscriptNormalization.Entry
+                             * @static
+                             * @param {google.cloud.speech.v2.TranscriptNormalization.IEntry} message Entry message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Entry.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.search != null && Object.hasOwnProperty.call(message, "search"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.search);
+                                if (message.replace != null && Object.hasOwnProperty.call(message, "replace"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.replace);
+                                if (message.caseSensitive != null && Object.hasOwnProperty.call(message, "caseSensitive"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.caseSensitive);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Entry message, length delimited. Does not implicitly {@link google.cloud.speech.v2.TranscriptNormalization.Entry.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.speech.v2.TranscriptNormalization.Entry
+                             * @static
+                             * @param {google.cloud.speech.v2.TranscriptNormalization.IEntry} message Entry message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Entry.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an Entry message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.speech.v2.TranscriptNormalization.Entry
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.speech.v2.TranscriptNormalization.Entry} Entry
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Entry.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v2.TranscriptNormalization.Entry();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.search = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.replace = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.caseSensitive = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an Entry message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.speech.v2.TranscriptNormalization.Entry
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.speech.v2.TranscriptNormalization.Entry} Entry
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Entry.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an Entry message.
+                             * @function verify
+                             * @memberof google.cloud.speech.v2.TranscriptNormalization.Entry
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Entry.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.search != null && message.hasOwnProperty("search"))
+                                    if (!$util.isString(message.search))
+                                        return "search: string expected";
+                                if (message.replace != null && message.hasOwnProperty("replace"))
+                                    if (!$util.isString(message.replace))
+                                        return "replace: string expected";
+                                if (message.caseSensitive != null && message.hasOwnProperty("caseSensitive"))
+                                    if (typeof message.caseSensitive !== "boolean")
+                                        return "caseSensitive: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an Entry message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.speech.v2.TranscriptNormalization.Entry
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.speech.v2.TranscriptNormalization.Entry} Entry
+                             */
+                            Entry.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.speech.v2.TranscriptNormalization.Entry)
+                                    return object;
+                                var message = new $root.google.cloud.speech.v2.TranscriptNormalization.Entry();
+                                if (object.search != null)
+                                    message.search = String(object.search);
+                                if (object.replace != null)
+                                    message.replace = String(object.replace);
+                                if (object.caseSensitive != null)
+                                    message.caseSensitive = Boolean(object.caseSensitive);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an Entry message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.speech.v2.TranscriptNormalization.Entry
+                             * @static
+                             * @param {google.cloud.speech.v2.TranscriptNormalization.Entry} message Entry
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Entry.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.search = "";
+                                    object.replace = "";
+                                    object.caseSensitive = false;
+                                }
+                                if (message.search != null && message.hasOwnProperty("search"))
+                                    object.search = message.search;
+                                if (message.replace != null && message.hasOwnProperty("replace"))
+                                    object.replace = message.replace;
+                                if (message.caseSensitive != null && message.hasOwnProperty("caseSensitive"))
+                                    object.caseSensitive = message.caseSensitive;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Entry to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.speech.v2.TranscriptNormalization.Entry
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Entry.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Entry
+                             * @function getTypeUrl
+                             * @memberof google.cloud.speech.v2.TranscriptNormalization.Entry
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Entry.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.speech.v2.TranscriptNormalization.Entry";
+                            };
+    
+                            return Entry;
+                        })();
+    
+                        return TranscriptNormalization;
+                    })();
+    
                     v2.SpeechAdaptation = (function() {
     
                         /**
@@ -29239,6 +29713,7 @@
                          * @property {Array.<string>|null} [languageCodes] RecognitionConfig languageCodes
                          * @property {google.cloud.speech.v2.IRecognitionFeatures|null} [features] RecognitionConfig features
                          * @property {google.cloud.speech.v2.ISpeechAdaptation|null} [adaptation] RecognitionConfig adaptation
+                         * @property {google.cloud.speech.v2.ITranscriptNormalization|null} [transcriptNormalization] RecognitionConfig transcriptNormalization
                          */
     
                         /**
@@ -29305,6 +29780,14 @@
                          */
                         RecognitionConfig.prototype.adaptation = null;
     
+                        /**
+                         * RecognitionConfig transcriptNormalization.
+                         * @member {google.cloud.speech.v2.ITranscriptNormalization|null|undefined} transcriptNormalization
+                         * @memberof google.cloud.speech.v2.RecognitionConfig
+                         * @instance
+                         */
+                        RecognitionConfig.prototype.transcriptNormalization = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -29356,6 +29839,8 @@
                             if (message.languageCodes != null && message.languageCodes.length)
                                 for (var i = 0; i < message.languageCodes.length; ++i)
                                     writer.uint32(/* id 10, wireType 2 =*/82).string(message.languageCodes[i]);
+                            if (message.transcriptNormalization != null && Object.hasOwnProperty.call(message, "transcriptNormalization"))
+                                $root.google.cloud.speech.v2.TranscriptNormalization.encode(message.transcriptNormalization, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             return writer;
                         };
     
@@ -29414,6 +29899,10 @@
                                     }
                                 case 6: {
                                         message.adaptation = $root.google.cloud.speech.v2.SpeechAdaptation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 11: {
+                                        message.transcriptNormalization = $root.google.cloud.speech.v2.TranscriptNormalization.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -29490,6 +29979,11 @@
                                 if (error)
                                     return "adaptation." + error;
                             }
+                            if (message.transcriptNormalization != null && message.hasOwnProperty("transcriptNormalization")) {
+                                var error = $root.google.cloud.speech.v2.TranscriptNormalization.verify(message.transcriptNormalization);
+                                if (error)
+                                    return "transcriptNormalization." + error;
+                            }
                             return null;
                         };
     
@@ -29534,6 +30028,11 @@
                                     throw TypeError(".google.cloud.speech.v2.RecognitionConfig.adaptation: object expected");
                                 message.adaptation = $root.google.cloud.speech.v2.SpeechAdaptation.fromObject(object.adaptation);
                             }
+                            if (object.transcriptNormalization != null) {
+                                if (typeof object.transcriptNormalization !== "object")
+                                    throw TypeError(".google.cloud.speech.v2.RecognitionConfig.transcriptNormalization: object expected");
+                                message.transcriptNormalization = $root.google.cloud.speech.v2.TranscriptNormalization.fromObject(object.transcriptNormalization);
+                            }
                             return message;
                         };
     
@@ -29556,6 +30055,7 @@
                                 object.features = null;
                                 object.adaptation = null;
                                 object.model = "";
+                                object.transcriptNormalization = null;
                             }
                             if (message.features != null && message.hasOwnProperty("features"))
                                 object.features = $root.google.cloud.speech.v2.RecognitionFeatures.toObject(message.features, options);
@@ -29578,6 +30078,8 @@
                                 for (var j = 0; j < message.languageCodes.length; ++j)
                                     object.languageCodes[j] = message.languageCodes[j];
                             }
+                            if (message.transcriptNormalization != null && message.hasOwnProperty("transcriptNormalization"))
+                                object.transcriptNormalization = $root.google.cloud.speech.v2.TranscriptNormalization.toObject(message.transcriptNormalization, options);
                             return object;
                         };
     
@@ -33879,15 +34381,428 @@
                         return BatchRecognizeResults;
                     })();
     
+                    v2.CloudStorageResult = (function() {
+    
+                        /**
+                         * Properties of a CloudStorageResult.
+                         * @memberof google.cloud.speech.v2
+                         * @interface ICloudStorageResult
+                         * @property {string|null} [uri] CloudStorageResult uri
+                         */
+    
+                        /**
+                         * Constructs a new CloudStorageResult.
+                         * @memberof google.cloud.speech.v2
+                         * @classdesc Represents a CloudStorageResult.
+                         * @implements ICloudStorageResult
+                         * @constructor
+                         * @param {google.cloud.speech.v2.ICloudStorageResult=} [properties] Properties to set
+                         */
+                        function CloudStorageResult(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CloudStorageResult uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.speech.v2.CloudStorageResult
+                         * @instance
+                         */
+                        CloudStorageResult.prototype.uri = "";
+    
+                        /**
+                         * Creates a new CloudStorageResult instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v2.CloudStorageResult
+                         * @static
+                         * @param {google.cloud.speech.v2.ICloudStorageResult=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v2.CloudStorageResult} CloudStorageResult instance
+                         */
+                        CloudStorageResult.create = function create(properties) {
+                            return new CloudStorageResult(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CloudStorageResult message. Does not implicitly {@link google.cloud.speech.v2.CloudStorageResult.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v2.CloudStorageResult
+                         * @static
+                         * @param {google.cloud.speech.v2.ICloudStorageResult} message CloudStorageResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloudStorageResult.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CloudStorageResult message, length delimited. Does not implicitly {@link google.cloud.speech.v2.CloudStorageResult.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v2.CloudStorageResult
+                         * @static
+                         * @param {google.cloud.speech.v2.ICloudStorageResult} message CloudStorageResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloudStorageResult.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CloudStorageResult message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v2.CloudStorageResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v2.CloudStorageResult} CloudStorageResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloudStorageResult.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v2.CloudStorageResult();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CloudStorageResult message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v2.CloudStorageResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v2.CloudStorageResult} CloudStorageResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloudStorageResult.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CloudStorageResult message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v2.CloudStorageResult
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CloudStorageResult.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CloudStorageResult message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v2.CloudStorageResult
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v2.CloudStorageResult} CloudStorageResult
+                         */
+                        CloudStorageResult.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v2.CloudStorageResult)
+                                return object;
+                            var message = new $root.google.cloud.speech.v2.CloudStorageResult();
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CloudStorageResult message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v2.CloudStorageResult
+                         * @static
+                         * @param {google.cloud.speech.v2.CloudStorageResult} message CloudStorageResult
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CloudStorageResult.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.uri = "";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CloudStorageResult to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v2.CloudStorageResult
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CloudStorageResult.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CloudStorageResult
+                         * @function getTypeUrl
+                         * @memberof google.cloud.speech.v2.CloudStorageResult
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CloudStorageResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.speech.v2.CloudStorageResult";
+                        };
+    
+                        return CloudStorageResult;
+                    })();
+    
+                    v2.InlineResult = (function() {
+    
+                        /**
+                         * Properties of an InlineResult.
+                         * @memberof google.cloud.speech.v2
+                         * @interface IInlineResult
+                         * @property {google.cloud.speech.v2.IBatchRecognizeResults|null} [transcript] InlineResult transcript
+                         */
+    
+                        /**
+                         * Constructs a new InlineResult.
+                         * @memberof google.cloud.speech.v2
+                         * @classdesc Represents an InlineResult.
+                         * @implements IInlineResult
+                         * @constructor
+                         * @param {google.cloud.speech.v2.IInlineResult=} [properties] Properties to set
+                         */
+                        function InlineResult(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * InlineResult transcript.
+                         * @member {google.cloud.speech.v2.IBatchRecognizeResults|null|undefined} transcript
+                         * @memberof google.cloud.speech.v2.InlineResult
+                         * @instance
+                         */
+                        InlineResult.prototype.transcript = null;
+    
+                        /**
+                         * Creates a new InlineResult instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v2.InlineResult
+                         * @static
+                         * @param {google.cloud.speech.v2.IInlineResult=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v2.InlineResult} InlineResult instance
+                         */
+                        InlineResult.create = function create(properties) {
+                            return new InlineResult(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified InlineResult message. Does not implicitly {@link google.cloud.speech.v2.InlineResult.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v2.InlineResult
+                         * @static
+                         * @param {google.cloud.speech.v2.IInlineResult} message InlineResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InlineResult.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.transcript != null && Object.hasOwnProperty.call(message, "transcript"))
+                                $root.google.cloud.speech.v2.BatchRecognizeResults.encode(message.transcript, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified InlineResult message, length delimited. Does not implicitly {@link google.cloud.speech.v2.InlineResult.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v2.InlineResult
+                         * @static
+                         * @param {google.cloud.speech.v2.IInlineResult} message InlineResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InlineResult.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an InlineResult message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v2.InlineResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v2.InlineResult} InlineResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InlineResult.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v2.InlineResult();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.transcript = $root.google.cloud.speech.v2.BatchRecognizeResults.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an InlineResult message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v2.InlineResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v2.InlineResult} InlineResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InlineResult.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an InlineResult message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v2.InlineResult
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        InlineResult.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.transcript != null && message.hasOwnProperty("transcript")) {
+                                var error = $root.google.cloud.speech.v2.BatchRecognizeResults.verify(message.transcript);
+                                if (error)
+                                    return "transcript." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an InlineResult message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v2.InlineResult
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v2.InlineResult} InlineResult
+                         */
+                        InlineResult.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v2.InlineResult)
+                                return object;
+                            var message = new $root.google.cloud.speech.v2.InlineResult();
+                            if (object.transcript != null) {
+                                if (typeof object.transcript !== "object")
+                                    throw TypeError(".google.cloud.speech.v2.InlineResult.transcript: object expected");
+                                message.transcript = $root.google.cloud.speech.v2.BatchRecognizeResults.fromObject(object.transcript);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an InlineResult message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v2.InlineResult
+                         * @static
+                         * @param {google.cloud.speech.v2.InlineResult} message InlineResult
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        InlineResult.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.transcript = null;
+                            if (message.transcript != null && message.hasOwnProperty("transcript"))
+                                object.transcript = $root.google.cloud.speech.v2.BatchRecognizeResults.toObject(message.transcript, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this InlineResult to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v2.InlineResult
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        InlineResult.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for InlineResult
+                         * @function getTypeUrl
+                         * @memberof google.cloud.speech.v2.InlineResult
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        InlineResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.speech.v2.InlineResult";
+                        };
+    
+                        return InlineResult;
+                    })();
+    
                     v2.BatchRecognizeFileResult = (function() {
     
                         /**
                          * Properties of a BatchRecognizeFileResult.
                          * @memberof google.cloud.speech.v2
                          * @interface IBatchRecognizeFileResult
-                         * @property {string|null} [uri] BatchRecognizeFileResult uri
                          * @property {google.rpc.IStatus|null} [error] BatchRecognizeFileResult error
                          * @property {google.cloud.speech.v2.IRecognitionResponseMetadata|null} [metadata] BatchRecognizeFileResult metadata
+                         * @property {google.cloud.speech.v2.ICloudStorageResult|null} [cloudStorageResult] BatchRecognizeFileResult cloudStorageResult
+                         * @property {google.cloud.speech.v2.IInlineResult|null} [inlineResult] BatchRecognizeFileResult inlineResult
+                         * @property {string|null} [uri] BatchRecognizeFileResult uri
                          * @property {google.cloud.speech.v2.IBatchRecognizeResults|null} [transcript] BatchRecognizeFileResult transcript
                          */
     
@@ -33907,14 +34822,6 @@
                         }
     
                         /**
-                         * BatchRecognizeFileResult uri.
-                         * @member {string} uri
-                         * @memberof google.cloud.speech.v2.BatchRecognizeFileResult
-                         * @instance
-                         */
-                        BatchRecognizeFileResult.prototype.uri = "";
-    
-                        /**
                          * BatchRecognizeFileResult error.
                          * @member {google.rpc.IStatus|null|undefined} error
                          * @memberof google.cloud.speech.v2.BatchRecognizeFileResult
@@ -33931,12 +34838,50 @@
                         BatchRecognizeFileResult.prototype.metadata = null;
     
                         /**
+                         * BatchRecognizeFileResult cloudStorageResult.
+                         * @member {google.cloud.speech.v2.ICloudStorageResult|null|undefined} cloudStorageResult
+                         * @memberof google.cloud.speech.v2.BatchRecognizeFileResult
+                         * @instance
+                         */
+                        BatchRecognizeFileResult.prototype.cloudStorageResult = null;
+    
+                        /**
+                         * BatchRecognizeFileResult inlineResult.
+                         * @member {google.cloud.speech.v2.IInlineResult|null|undefined} inlineResult
+                         * @memberof google.cloud.speech.v2.BatchRecognizeFileResult
+                         * @instance
+                         */
+                        BatchRecognizeFileResult.prototype.inlineResult = null;
+    
+                        /**
+                         * BatchRecognizeFileResult uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.speech.v2.BatchRecognizeFileResult
+                         * @instance
+                         */
+                        BatchRecognizeFileResult.prototype.uri = "";
+    
+                        /**
                          * BatchRecognizeFileResult transcript.
                          * @member {google.cloud.speech.v2.IBatchRecognizeResults|null|undefined} transcript
                          * @memberof google.cloud.speech.v2.BatchRecognizeFileResult
                          * @instance
                          */
                         BatchRecognizeFileResult.prototype.transcript = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * BatchRecognizeFileResult result.
+                         * @member {"cloudStorageResult"|"inlineResult"|undefined} result
+                         * @memberof google.cloud.speech.v2.BatchRecognizeFileResult
+                         * @instance
+                         */
+                        Object.defineProperty(BatchRecognizeFileResult.prototype, "result", {
+                            get: $util.oneOfGetter($oneOfFields = ["cloudStorageResult", "inlineResult"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new BatchRecognizeFileResult instance using the specified properties.
@@ -33970,6 +34915,10 @@
                                 $root.google.cloud.speech.v2.RecognitionResponseMetadata.encode(message.metadata, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.transcript != null && Object.hasOwnProperty.call(message, "transcript"))
                                 $root.google.cloud.speech.v2.BatchRecognizeResults.encode(message.transcript, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.cloudStorageResult != null && Object.hasOwnProperty.call(message, "cloudStorageResult"))
+                                $root.google.cloud.speech.v2.CloudStorageResult.encode(message.cloudStorageResult, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.inlineResult != null && Object.hasOwnProperty.call(message, "inlineResult"))
+                                $root.google.cloud.speech.v2.InlineResult.encode(message.inlineResult, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -34004,16 +34953,24 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1: {
-                                        message.uri = reader.string();
-                                        break;
-                                    }
                                 case 2: {
                                         message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 3: {
                                         message.metadata = $root.google.cloud.speech.v2.RecognitionResponseMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.cloudStorageResult = $root.google.cloud.speech.v2.CloudStorageResult.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.inlineResult = $root.google.cloud.speech.v2.InlineResult.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 1: {
+                                        message.uri = reader.string();
                                         break;
                                     }
                                 case 4: {
@@ -34055,9 +35012,7 @@
                         BatchRecognizeFileResult.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
-                            if (message.uri != null && message.hasOwnProperty("uri"))
-                                if (!$util.isString(message.uri))
-                                    return "uri: string expected";
+                            var properties = {};
                             if (message.error != null && message.hasOwnProperty("error")) {
                                 var error = $root.google.rpc.Status.verify(message.error);
                                 if (error)
@@ -34068,6 +35023,27 @@
                                 if (error)
                                     return "metadata." + error;
                             }
+                            if (message.cloudStorageResult != null && message.hasOwnProperty("cloudStorageResult")) {
+                                properties.result = 1;
+                                {
+                                    var error = $root.google.cloud.speech.v2.CloudStorageResult.verify(message.cloudStorageResult);
+                                    if (error)
+                                        return "cloudStorageResult." + error;
+                                }
+                            }
+                            if (message.inlineResult != null && message.hasOwnProperty("inlineResult")) {
+                                if (properties.result === 1)
+                                    return "result: multiple values";
+                                properties.result = 1;
+                                {
+                                    var error = $root.google.cloud.speech.v2.InlineResult.verify(message.inlineResult);
+                                    if (error)
+                                        return "inlineResult." + error;
+                                }
+                            }
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
                             if (message.transcript != null && message.hasOwnProperty("transcript")) {
                                 var error = $root.google.cloud.speech.v2.BatchRecognizeResults.verify(message.transcript);
                                 if (error)
@@ -34088,8 +35064,6 @@
                             if (object instanceof $root.google.cloud.speech.v2.BatchRecognizeFileResult)
                                 return object;
                             var message = new $root.google.cloud.speech.v2.BatchRecognizeFileResult();
-                            if (object.uri != null)
-                                message.uri = String(object.uri);
                             if (object.error != null) {
                                 if (typeof object.error !== "object")
                                     throw TypeError(".google.cloud.speech.v2.BatchRecognizeFileResult.error: object expected");
@@ -34100,6 +35074,18 @@
                                     throw TypeError(".google.cloud.speech.v2.BatchRecognizeFileResult.metadata: object expected");
                                 message.metadata = $root.google.cloud.speech.v2.RecognitionResponseMetadata.fromObject(object.metadata);
                             }
+                            if (object.cloudStorageResult != null) {
+                                if (typeof object.cloudStorageResult !== "object")
+                                    throw TypeError(".google.cloud.speech.v2.BatchRecognizeFileResult.cloudStorageResult: object expected");
+                                message.cloudStorageResult = $root.google.cloud.speech.v2.CloudStorageResult.fromObject(object.cloudStorageResult);
+                            }
+                            if (object.inlineResult != null) {
+                                if (typeof object.inlineResult !== "object")
+                                    throw TypeError(".google.cloud.speech.v2.BatchRecognizeFileResult.inlineResult: object expected");
+                                message.inlineResult = $root.google.cloud.speech.v2.InlineResult.fromObject(object.inlineResult);
+                            }
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
                             if (object.transcript != null) {
                                 if (typeof object.transcript !== "object")
                                     throw TypeError(".google.cloud.speech.v2.BatchRecognizeFileResult.transcript: object expected");
@@ -34135,6 +35121,16 @@
                                 object.metadata = $root.google.cloud.speech.v2.RecognitionResponseMetadata.toObject(message.metadata, options);
                             if (message.transcript != null && message.hasOwnProperty("transcript"))
                                 object.transcript = $root.google.cloud.speech.v2.BatchRecognizeResults.toObject(message.transcript, options);
+                            if (message.cloudStorageResult != null && message.hasOwnProperty("cloudStorageResult")) {
+                                object.cloudStorageResult = $root.google.cloud.speech.v2.CloudStorageResult.toObject(message.cloudStorageResult, options);
+                                if (options.oneofs)
+                                    object.result = "cloudStorageResult";
+                            }
+                            if (message.inlineResult != null && message.hasOwnProperty("inlineResult")) {
+                                object.inlineResult = $root.google.cloud.speech.v2.InlineResult.toObject(message.inlineResult, options);
+                                if (options.oneofs)
+                                    object.result = "inlineResult";
+                            }
                             return object;
                         };
     

@@ -11726,6 +11726,215 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a TranscriptNormalization. */
+                interface ITranscriptNormalization {
+
+                    /** TranscriptNormalization entries */
+                    entries?: (google.cloud.speech.v2.TranscriptNormalization.IEntry[]|null);
+                }
+
+                /** Represents a TranscriptNormalization. */
+                class TranscriptNormalization implements ITranscriptNormalization {
+
+                    /**
+                     * Constructs a new TranscriptNormalization.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.speech.v2.ITranscriptNormalization);
+
+                    /** TranscriptNormalization entries. */
+                    public entries: google.cloud.speech.v2.TranscriptNormalization.IEntry[];
+
+                    /**
+                     * Creates a new TranscriptNormalization instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TranscriptNormalization instance
+                     */
+                    public static create(properties?: google.cloud.speech.v2.ITranscriptNormalization): google.cloud.speech.v2.TranscriptNormalization;
+
+                    /**
+                     * Encodes the specified TranscriptNormalization message. Does not implicitly {@link google.cloud.speech.v2.TranscriptNormalization.verify|verify} messages.
+                     * @param message TranscriptNormalization message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.speech.v2.ITranscriptNormalization, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TranscriptNormalization message, length delimited. Does not implicitly {@link google.cloud.speech.v2.TranscriptNormalization.verify|verify} messages.
+                     * @param message TranscriptNormalization message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.speech.v2.ITranscriptNormalization, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TranscriptNormalization message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TranscriptNormalization
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.speech.v2.TranscriptNormalization;
+
+                    /**
+                     * Decodes a TranscriptNormalization message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TranscriptNormalization
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.speech.v2.TranscriptNormalization;
+
+                    /**
+                     * Verifies a TranscriptNormalization message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TranscriptNormalization message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TranscriptNormalization
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.speech.v2.TranscriptNormalization;
+
+                    /**
+                     * Creates a plain object from a TranscriptNormalization message. Also converts values to other types if specified.
+                     * @param message TranscriptNormalization
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.speech.v2.TranscriptNormalization, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TranscriptNormalization to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TranscriptNormalization
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace TranscriptNormalization {
+
+                    /** Properties of an Entry. */
+                    interface IEntry {
+
+                        /** Entry search */
+                        search?: (string|null);
+
+                        /** Entry replace */
+                        replace?: (string|null);
+
+                        /** Entry caseSensitive */
+                        caseSensitive?: (boolean|null);
+                    }
+
+                    /** Represents an Entry. */
+                    class Entry implements IEntry {
+
+                        /**
+                         * Constructs a new Entry.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.speech.v2.TranscriptNormalization.IEntry);
+
+                        /** Entry search. */
+                        public search: string;
+
+                        /** Entry replace. */
+                        public replace: string;
+
+                        /** Entry caseSensitive. */
+                        public caseSensitive: boolean;
+
+                        /**
+                         * Creates a new Entry instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Entry instance
+                         */
+                        public static create(properties?: google.cloud.speech.v2.TranscriptNormalization.IEntry): google.cloud.speech.v2.TranscriptNormalization.Entry;
+
+                        /**
+                         * Encodes the specified Entry message. Does not implicitly {@link google.cloud.speech.v2.TranscriptNormalization.Entry.verify|verify} messages.
+                         * @param message Entry message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.speech.v2.TranscriptNormalization.IEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Entry message, length delimited. Does not implicitly {@link google.cloud.speech.v2.TranscriptNormalization.Entry.verify|verify} messages.
+                         * @param message Entry message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.speech.v2.TranscriptNormalization.IEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Entry message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Entry
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.speech.v2.TranscriptNormalization.Entry;
+
+                        /**
+                         * Decodes an Entry message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Entry
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.speech.v2.TranscriptNormalization.Entry;
+
+                        /**
+                         * Verifies an Entry message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Entry message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Entry
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.speech.v2.TranscriptNormalization.Entry;
+
+                        /**
+                         * Creates a plain object from an Entry message. Also converts values to other types if specified.
+                         * @param message Entry
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.speech.v2.TranscriptNormalization.Entry, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Entry to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Entry
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
                 /** Properties of a SpeechAdaptation. */
                 interface ISpeechAdaptation {
 
@@ -11958,6 +12167,9 @@ export namespace google {
 
                     /** RecognitionConfig adaptation */
                     adaptation?: (google.cloud.speech.v2.ISpeechAdaptation|null);
+
+                    /** RecognitionConfig transcriptNormalization */
+                    transcriptNormalization?: (google.cloud.speech.v2.ITranscriptNormalization|null);
                 }
 
                 /** Represents a RecognitionConfig. */
@@ -11986,6 +12198,9 @@ export namespace google {
 
                     /** RecognitionConfig adaptation. */
                     public adaptation?: (google.cloud.speech.v2.ISpeechAdaptation|null);
+
+                    /** RecognitionConfig transcriptNormalization. */
+                    public transcriptNormalization?: (google.cloud.speech.v2.ITranscriptNormalization|null);
 
                     /** RecognitionConfig decodingConfig. */
                     public decodingConfig?: ("autoDecodingConfig"|"explicitDecodingConfig");
@@ -13809,17 +14024,217 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a CloudStorageResult. */
+                interface ICloudStorageResult {
+
+                    /** CloudStorageResult uri */
+                    uri?: (string|null);
+                }
+
+                /** Represents a CloudStorageResult. */
+                class CloudStorageResult implements ICloudStorageResult {
+
+                    /**
+                     * Constructs a new CloudStorageResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.speech.v2.ICloudStorageResult);
+
+                    /** CloudStorageResult uri. */
+                    public uri: string;
+
+                    /**
+                     * Creates a new CloudStorageResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloudStorageResult instance
+                     */
+                    public static create(properties?: google.cloud.speech.v2.ICloudStorageResult): google.cloud.speech.v2.CloudStorageResult;
+
+                    /**
+                     * Encodes the specified CloudStorageResult message. Does not implicitly {@link google.cloud.speech.v2.CloudStorageResult.verify|verify} messages.
+                     * @param message CloudStorageResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.speech.v2.ICloudStorageResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloudStorageResult message, length delimited. Does not implicitly {@link google.cloud.speech.v2.CloudStorageResult.verify|verify} messages.
+                     * @param message CloudStorageResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.speech.v2.ICloudStorageResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloudStorageResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloudStorageResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.speech.v2.CloudStorageResult;
+
+                    /**
+                     * Decodes a CloudStorageResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloudStorageResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.speech.v2.CloudStorageResult;
+
+                    /**
+                     * Verifies a CloudStorageResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloudStorageResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloudStorageResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.speech.v2.CloudStorageResult;
+
+                    /**
+                     * Creates a plain object from a CloudStorageResult message. Also converts values to other types if specified.
+                     * @param message CloudStorageResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.speech.v2.CloudStorageResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloudStorageResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloudStorageResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an InlineResult. */
+                interface IInlineResult {
+
+                    /** InlineResult transcript */
+                    transcript?: (google.cloud.speech.v2.IBatchRecognizeResults|null);
+                }
+
+                /** Represents an InlineResult. */
+                class InlineResult implements IInlineResult {
+
+                    /**
+                     * Constructs a new InlineResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.speech.v2.IInlineResult);
+
+                    /** InlineResult transcript. */
+                    public transcript?: (google.cloud.speech.v2.IBatchRecognizeResults|null);
+
+                    /**
+                     * Creates a new InlineResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InlineResult instance
+                     */
+                    public static create(properties?: google.cloud.speech.v2.IInlineResult): google.cloud.speech.v2.InlineResult;
+
+                    /**
+                     * Encodes the specified InlineResult message. Does not implicitly {@link google.cloud.speech.v2.InlineResult.verify|verify} messages.
+                     * @param message InlineResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.speech.v2.IInlineResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InlineResult message, length delimited. Does not implicitly {@link google.cloud.speech.v2.InlineResult.verify|verify} messages.
+                     * @param message InlineResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.speech.v2.IInlineResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InlineResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InlineResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.speech.v2.InlineResult;
+
+                    /**
+                     * Decodes an InlineResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InlineResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.speech.v2.InlineResult;
+
+                    /**
+                     * Verifies an InlineResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InlineResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InlineResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.speech.v2.InlineResult;
+
+                    /**
+                     * Creates a plain object from an InlineResult message. Also converts values to other types if specified.
+                     * @param message InlineResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.speech.v2.InlineResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InlineResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InlineResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a BatchRecognizeFileResult. */
                 interface IBatchRecognizeFileResult {
-
-                    /** BatchRecognizeFileResult uri */
-                    uri?: (string|null);
 
                     /** BatchRecognizeFileResult error */
                     error?: (google.rpc.IStatus|null);
 
                     /** BatchRecognizeFileResult metadata */
                     metadata?: (google.cloud.speech.v2.IRecognitionResponseMetadata|null);
+
+                    /** BatchRecognizeFileResult cloudStorageResult */
+                    cloudStorageResult?: (google.cloud.speech.v2.ICloudStorageResult|null);
+
+                    /** BatchRecognizeFileResult inlineResult */
+                    inlineResult?: (google.cloud.speech.v2.IInlineResult|null);
+
+                    /** BatchRecognizeFileResult uri */
+                    uri?: (string|null);
 
                     /** BatchRecognizeFileResult transcript */
                     transcript?: (google.cloud.speech.v2.IBatchRecognizeResults|null);
@@ -13834,17 +14249,26 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.speech.v2.IBatchRecognizeFileResult);
 
-                    /** BatchRecognizeFileResult uri. */
-                    public uri: string;
-
                     /** BatchRecognizeFileResult error. */
                     public error?: (google.rpc.IStatus|null);
 
                     /** BatchRecognizeFileResult metadata. */
                     public metadata?: (google.cloud.speech.v2.IRecognitionResponseMetadata|null);
 
+                    /** BatchRecognizeFileResult cloudStorageResult. */
+                    public cloudStorageResult?: (google.cloud.speech.v2.ICloudStorageResult|null);
+
+                    /** BatchRecognizeFileResult inlineResult. */
+                    public inlineResult?: (google.cloud.speech.v2.IInlineResult|null);
+
+                    /** BatchRecognizeFileResult uri. */
+                    public uri: string;
+
                     /** BatchRecognizeFileResult transcript. */
                     public transcript?: (google.cloud.speech.v2.IBatchRecognizeResults|null);
+
+                    /** BatchRecognizeFileResult result. */
+                    public result?: ("cloudStorageResult"|"inlineResult");
 
                     /**
                      * Creates a new BatchRecognizeFileResult instance using the specified properties.
