@@ -15,7 +15,7 @@
     "test": "mocha system-test --timeout 600000"
   },
   "dependencies": {
-    "@google-cloud/logging-bunyan": "^5.0.0",
+    "@google-cloud/logging-bunyan": "^5.0.1",
     "bunyan": "^1.8.12",
     "express": "^4.16.3",
     "yargs": "^16.0.0"

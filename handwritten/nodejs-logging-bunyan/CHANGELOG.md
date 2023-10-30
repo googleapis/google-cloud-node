@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+## [5.0.1](https://github.com/googleapis/nodejs-logging-bunyan/compare/v5.0.0...v5.0.1) (2023-10-30)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @google-cloud/logging to v11 ([d740098](https://github.com/googleapis/nodejs-logging-bunyan/commit/d74009850b316d57a686637f3b0242fa72339000))
+
 ## [5.0.0](https://github.com/googleapis/nodejs-logging-bunyan/compare/v4.2.2...v5.0.0) (2023-08-10)
 
 
