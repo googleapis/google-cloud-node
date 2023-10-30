@@ -1103,6 +1103,10 @@
                     "soleTenantConfig": {
                       "type": "SoleTenantConfig",
                       "id": 42
+                    },
+                    "resourceManagerTags": {
+                      "type": "ResourceManagerTags",
+                      "id": 45
                     }
                   }
                 },
@@ -2254,6 +2258,10 @@
                     "networkTags": {
                       "type": "NetworkTags",
                       "id": 1
+                    },
+                    "resourceManagerTags": {
+                      "type": "ResourceManagerTags",
+                      "id": 2
                     }
                   }
                 },
@@ -2493,6 +2501,10 @@
                     "desiredK8sBetaApis": {
                       "type": "K8sBetaAPIConfig",
                       "id": 131
+                    },
+                    "desiredNodePoolAutoConfigResourceManagerTags": {
+                      "type": "ResourceManagerTags",
+                      "id": 136
                     }
                   }
                 },
@@ -2658,7 +2670,8 @@
                         "SET_NODE_POOL_SIZE": 14,
                         "SET_NETWORK_POLICY": 15,
                         "SET_MAINTENANCE_POLICY": 16,
-                        "RESIZE_CLUSTER": 18
+                        "RESIZE_CLUSTER": 18,
+                        "FLEET_FEATURE_UPGRADE": 19
                       }
                     }
                   }
@@ -2950,6 +2963,10 @@
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
+                    },
+                    "resourceManagerTags": {
+                      "type": "ResourceManagerTags",
+                      "id": 39
                     }
                   }
                 },
@@ -5627,6 +5644,15 @@
                   "fields": {
                     "localSsdCount": {
                       "type": "int32",
+                      "id": 1
+                    }
+                  }
+                },
+                "ResourceManagerTags": {
+                  "fields": {
+                    "tags": {
+                      "keyType": "string",
+                      "type": "string",
                       "id": 1
                     }
                   }

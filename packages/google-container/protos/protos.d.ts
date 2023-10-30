@@ -1209,6 +1209,9 @@ export namespace google {
 
                 /** NodeConfig soleTenantConfig */
                 soleTenantConfig?: (google.container.v1.ISoleTenantConfig|null);
+
+                /** NodeConfig resourceManagerTags */
+                resourceManagerTags?: (google.container.v1.IResourceManagerTags|null);
             }
 
             /** Represents a NodeConfig. */
@@ -1321,6 +1324,9 @@ export namespace google {
 
                 /** NodeConfig soleTenantConfig. */
                 public soleTenantConfig?: (google.container.v1.ISoleTenantConfig|null);
+
+                /** NodeConfig resourceManagerTags. */
+                public resourceManagerTags?: (google.container.v1.IResourceManagerTags|null);
 
                 /** NodeConfig _fastSocket. */
                 public _fastSocket?: "fastSocket";
@@ -6517,6 +6523,9 @@ export namespace google {
 
                 /** NodePoolAutoConfig networkTags */
                 networkTags?: (google.container.v1.INetworkTags|null);
+
+                /** NodePoolAutoConfig resourceManagerTags */
+                resourceManagerTags?: (google.container.v1.IResourceManagerTags|null);
             }
 
             /** Represents a NodePoolAutoConfig. */
@@ -6530,6 +6539,9 @@ export namespace google {
 
                 /** NodePoolAutoConfig networkTags. */
                 public networkTags?: (google.container.v1.INetworkTags|null);
+
+                /** NodePoolAutoConfig resourceManagerTags. */
+                public resourceManagerTags?: (google.container.v1.IResourceManagerTags|null);
 
                 /**
                  * Creates a new NodePoolAutoConfig instance using the specified properties.
@@ -6958,6 +6970,9 @@ export namespace google {
 
                 /** ClusterUpdate desiredK8sBetaApis */
                 desiredK8sBetaApis?: (google.container.v1.IK8sBetaAPIConfig|null);
+
+                /** ClusterUpdate desiredNodePoolAutoConfigResourceManagerTags */
+                desiredNodePoolAutoConfigResourceManagerTags?: (google.container.v1.IResourceManagerTags|null);
             }
 
             /** Represents a ClusterUpdate. */
@@ -7115,6 +7130,9 @@ export namespace google {
 
                 /** ClusterUpdate desiredK8sBetaApis. */
                 public desiredK8sBetaApis?: (google.container.v1.IK8sBetaAPIConfig|null);
+
+                /** ClusterUpdate desiredNodePoolAutoConfigResourceManagerTags. */
+                public desiredNodePoolAutoConfigResourceManagerTags?: (google.container.v1.IResourceManagerTags|null);
 
                 /** ClusterUpdate _desiredEnablePrivateEndpoint. */
                 public _desiredEnablePrivateEndpoint?: "desiredEnablePrivateEndpoint";
@@ -7617,7 +7635,8 @@ export namespace google {
                     SET_NODE_POOL_SIZE = 14,
                     SET_NETWORK_POLICY = 15,
                     SET_MAINTENANCE_POLICY = 16,
-                    RESIZE_CLUSTER = 18
+                    RESIZE_CLUSTER = 18,
+                    FLEET_FEATURE_UPGRADE = 19
                 }
             }
 
@@ -8291,6 +8310,9 @@ export namespace google {
 
                 /** UpdateNodePoolRequest diskSizeGb */
                 diskSizeGb?: (number|Long|string|null);
+
+                /** UpdateNodePoolRequest resourceManagerTags */
+                resourceManagerTags?: (google.container.v1.IResourceManagerTags|null);
             }
 
             /** Represents an UpdateNodePoolRequest. */
@@ -8382,6 +8404,9 @@ export namespace google {
 
                 /** UpdateNodePoolRequest diskSizeGb. */
                 public diskSizeGb: (number|Long|string);
+
+                /** UpdateNodePoolRequest resourceManagerTags. */
+                public resourceManagerTags?: (google.container.v1.IResourceManagerTags|null);
 
                 /**
                  * Creates a new UpdateNodePoolRequest instance using the specified properties.
@@ -21102,6 +21127,103 @@ export namespace google {
 
                 /**
                  * Gets the default type url for EphemeralStorageLocalSsdConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ResourceManagerTags. */
+            interface IResourceManagerTags {
+
+                /** ResourceManagerTags tags */
+                tags?: ({ [k: string]: string }|null);
+            }
+
+            /** Represents a ResourceManagerTags. */
+            class ResourceManagerTags implements IResourceManagerTags {
+
+                /**
+                 * Constructs a new ResourceManagerTags.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.IResourceManagerTags);
+
+                /** ResourceManagerTags tags. */
+                public tags: { [k: string]: string };
+
+                /**
+                 * Creates a new ResourceManagerTags instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ResourceManagerTags instance
+                 */
+                public static create(properties?: google.container.v1.IResourceManagerTags): google.container.v1.ResourceManagerTags;
+
+                /**
+                 * Encodes the specified ResourceManagerTags message. Does not implicitly {@link google.container.v1.ResourceManagerTags.verify|verify} messages.
+                 * @param message ResourceManagerTags message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.IResourceManagerTags, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ResourceManagerTags message, length delimited. Does not implicitly {@link google.container.v1.ResourceManagerTags.verify|verify} messages.
+                 * @param message ResourceManagerTags message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.IResourceManagerTags, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ResourceManagerTags message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ResourceManagerTags
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.ResourceManagerTags;
+
+                /**
+                 * Decodes a ResourceManagerTags message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ResourceManagerTags
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.ResourceManagerTags;
+
+                /**
+                 * Verifies a ResourceManagerTags message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ResourceManagerTags message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ResourceManagerTags
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.ResourceManagerTags;
+
+                /**
+                 * Creates a plain object from a ResourceManagerTags message. Also converts values to other types if specified.
+                 * @param message ResourceManagerTags
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.ResourceManagerTags, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ResourceManagerTags to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ResourceManagerTags
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
