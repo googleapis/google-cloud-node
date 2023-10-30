@@ -22326,6 +22326,9 @@ export namespace google {
                 /** NodeConfig hostMaintenancePolicy */
                 hostMaintenancePolicy?: (google.container.v1beta1.IHostMaintenancePolicy|null);
 
+                /** NodeConfig resourceManagerTags */
+                resourceManagerTags?: (google.container.v1beta1.IResourceManagerTags|null);
+
                 /** NodeConfig enableConfidentialStorage */
                 enableConfidentialStorage?: (boolean|null);
             }
@@ -22446,6 +22449,9 @@ export namespace google {
 
                 /** NodeConfig hostMaintenancePolicy. */
                 public hostMaintenancePolicy?: (google.container.v1beta1.IHostMaintenancePolicy|null);
+
+                /** NodeConfig resourceManagerTags. */
+                public resourceManagerTags?: (google.container.v1beta1.IResourceManagerTags|null);
 
                 /** NodeConfig enableConfidentialStorage. */
                 public enableConfidentialStorage: boolean;
@@ -24065,6 +24071,9 @@ export namespace google {
 
                 /** HostMaintenancePolicy maintenanceInterval */
                 maintenanceInterval?: (google.container.v1beta1.HostMaintenancePolicy.MaintenanceInterval|keyof typeof google.container.v1beta1.HostMaintenancePolicy.MaintenanceInterval|null);
+
+                /** HostMaintenancePolicy opportunisticMaintenanceStrategy */
+                opportunisticMaintenanceStrategy?: (google.container.v1beta1.HostMaintenancePolicy.IOpportunisticMaintenanceStrategy|null);
             }
 
             /** Represents a HostMaintenancePolicy. */
@@ -24079,8 +24088,14 @@ export namespace google {
                 /** HostMaintenancePolicy maintenanceInterval. */
                 public maintenanceInterval?: (google.container.v1beta1.HostMaintenancePolicy.MaintenanceInterval|keyof typeof google.container.v1beta1.HostMaintenancePolicy.MaintenanceInterval|null);
 
+                /** HostMaintenancePolicy opportunisticMaintenanceStrategy. */
+                public opportunisticMaintenanceStrategy?: (google.container.v1beta1.HostMaintenancePolicy.IOpportunisticMaintenanceStrategy|null);
+
                 /** HostMaintenancePolicy _maintenanceInterval. */
                 public _maintenanceInterval?: "maintenanceInterval";
+
+                /** HostMaintenancePolicy maintenanceStrategy. */
+                public maintenanceStrategy?: "opportunisticMaintenanceStrategy";
 
                 /**
                  * Creates a new HostMaintenancePolicy instance using the specified properties.
@@ -24167,6 +24182,124 @@ export namespace google {
                     MAINTENANCE_INTERVAL_UNSPECIFIED = 0,
                     AS_NEEDED = 1,
                     PERIODIC = 2
+                }
+
+                /** Properties of an OpportunisticMaintenanceStrategy. */
+                interface IOpportunisticMaintenanceStrategy {
+
+                    /** OpportunisticMaintenanceStrategy nodeIdleTimeWindow */
+                    nodeIdleTimeWindow?: (google.protobuf.IDuration|null);
+
+                    /** OpportunisticMaintenanceStrategy maintenanceAvailabilityWindow */
+                    maintenanceAvailabilityWindow?: (google.protobuf.IDuration|null);
+
+                    /** OpportunisticMaintenanceStrategy minNodesPerPool */
+                    minNodesPerPool?: (number|Long|string|null);
+                }
+
+                /** Represents an OpportunisticMaintenanceStrategy. */
+                class OpportunisticMaintenanceStrategy implements IOpportunisticMaintenanceStrategy {
+
+                    /**
+                     * Constructs a new OpportunisticMaintenanceStrategy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.container.v1beta1.HostMaintenancePolicy.IOpportunisticMaintenanceStrategy);
+
+                    /** OpportunisticMaintenanceStrategy nodeIdleTimeWindow. */
+                    public nodeIdleTimeWindow?: (google.protobuf.IDuration|null);
+
+                    /** OpportunisticMaintenanceStrategy maintenanceAvailabilityWindow. */
+                    public maintenanceAvailabilityWindow?: (google.protobuf.IDuration|null);
+
+                    /** OpportunisticMaintenanceStrategy minNodesPerPool. */
+                    public minNodesPerPool?: (number|Long|string|null);
+
+                    /** OpportunisticMaintenanceStrategy _nodeIdleTimeWindow. */
+                    public _nodeIdleTimeWindow?: "nodeIdleTimeWindow";
+
+                    /** OpportunisticMaintenanceStrategy _maintenanceAvailabilityWindow. */
+                    public _maintenanceAvailabilityWindow?: "maintenanceAvailabilityWindow";
+
+                    /** OpportunisticMaintenanceStrategy _minNodesPerPool. */
+                    public _minNodesPerPool?: "minNodesPerPool";
+
+                    /**
+                     * Creates a new OpportunisticMaintenanceStrategy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OpportunisticMaintenanceStrategy instance
+                     */
+                    public static create(properties?: google.container.v1beta1.HostMaintenancePolicy.IOpportunisticMaintenanceStrategy): google.container.v1beta1.HostMaintenancePolicy.OpportunisticMaintenanceStrategy;
+
+                    /**
+                     * Encodes the specified OpportunisticMaintenanceStrategy message. Does not implicitly {@link google.container.v1beta1.HostMaintenancePolicy.OpportunisticMaintenanceStrategy.verify|verify} messages.
+                     * @param message OpportunisticMaintenanceStrategy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.container.v1beta1.HostMaintenancePolicy.IOpportunisticMaintenanceStrategy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OpportunisticMaintenanceStrategy message, length delimited. Does not implicitly {@link google.container.v1beta1.HostMaintenancePolicy.OpportunisticMaintenanceStrategy.verify|verify} messages.
+                     * @param message OpportunisticMaintenanceStrategy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.container.v1beta1.HostMaintenancePolicy.IOpportunisticMaintenanceStrategy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OpportunisticMaintenanceStrategy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OpportunisticMaintenanceStrategy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.HostMaintenancePolicy.OpportunisticMaintenanceStrategy;
+
+                    /**
+                     * Decodes an OpportunisticMaintenanceStrategy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OpportunisticMaintenanceStrategy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.HostMaintenancePolicy.OpportunisticMaintenanceStrategy;
+
+                    /**
+                     * Verifies an OpportunisticMaintenanceStrategy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OpportunisticMaintenanceStrategy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OpportunisticMaintenanceStrategy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.container.v1beta1.HostMaintenancePolicy.OpportunisticMaintenanceStrategy;
+
+                    /**
+                     * Creates a plain object from an OpportunisticMaintenanceStrategy message. Also converts values to other types if specified.
+                     * @param message OpportunisticMaintenanceStrategy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.container.v1beta1.HostMaintenancePolicy.OpportunisticMaintenanceStrategy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OpportunisticMaintenanceStrategy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OpportunisticMaintenanceStrategy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
 
@@ -29113,6 +29246,9 @@ export namespace google {
 
                 /** NodePoolAutoConfig networkTags */
                 networkTags?: (google.container.v1beta1.INetworkTags|null);
+
+                /** NodePoolAutoConfig resourceManagerTags */
+                resourceManagerTags?: (google.container.v1beta1.IResourceManagerTags|null);
             }
 
             /** Represents a NodePoolAutoConfig. */
@@ -29126,6 +29262,9 @@ export namespace google {
 
                 /** NodePoolAutoConfig networkTags. */
                 public networkTags?: (google.container.v1beta1.INetworkTags|null);
+
+                /** NodePoolAutoConfig resourceManagerTags. */
+                public resourceManagerTags?: (google.container.v1beta1.IResourceManagerTags|null);
 
                 /**
                  * Creates a new NodePoolAutoConfig instance using the specified properties.
@@ -29378,6 +29517,12 @@ export namespace google {
 
                 /** ClusterUpdate desiredHostMaintenancePolicy */
                 desiredHostMaintenancePolicy?: (google.container.v1beta1.IHostMaintenancePolicy|null);
+
+                /** ClusterUpdate desiredNodePoolAutoConfigResourceManagerTags */
+                desiredNodePoolAutoConfigResourceManagerTags?: (google.container.v1beta1.IResourceManagerTags|null);
+
+                /** ClusterUpdate desiredInTransitEncryptionConfig */
+                desiredInTransitEncryptionConfig?: (google.container.v1beta1.InTransitEncryptionConfig|keyof typeof google.container.v1beta1.InTransitEncryptionConfig|null);
             }
 
             /** Represents a ClusterUpdate. */
@@ -29560,6 +29705,12 @@ export namespace google {
                 /** ClusterUpdate desiredHostMaintenancePolicy. */
                 public desiredHostMaintenancePolicy?: (google.container.v1beta1.IHostMaintenancePolicy|null);
 
+                /** ClusterUpdate desiredNodePoolAutoConfigResourceManagerTags. */
+                public desiredNodePoolAutoConfigResourceManagerTags?: (google.container.v1beta1.IResourceManagerTags|null);
+
+                /** ClusterUpdate desiredInTransitEncryptionConfig. */
+                public desiredInTransitEncryptionConfig?: (google.container.v1beta1.InTransitEncryptionConfig|keyof typeof google.container.v1beta1.InTransitEncryptionConfig|null);
+
                 /** ClusterUpdate _desiredEnablePrivateEndpoint. */
                 public _desiredEnablePrivateEndpoint?: "desiredEnablePrivateEndpoint";
 
@@ -29568,6 +29719,9 @@ export namespace google {
 
                 /** ClusterUpdate _desiredEnableFqdnNetworkPolicy. */
                 public _desiredEnableFqdnNetworkPolicy?: "desiredEnableFqdnNetworkPolicy";
+
+                /** ClusterUpdate _desiredInTransitEncryptionConfig. */
+                public _desiredInTransitEncryptionConfig?: "desiredInTransitEncryptionConfig";
 
                 /**
                  * Creates a new ClusterUpdate instance using the specified properties.
@@ -30064,7 +30218,8 @@ export namespace google {
                     SET_NODE_POOL_SIZE = 14,
                     SET_NETWORK_POLICY = 15,
                     SET_MAINTENANCE_POLICY = 16,
-                    RESIZE_CLUSTER = 18
+                    RESIZE_CLUSTER = 18,
+                    FLEET_FEATURE_UPGRADE = 19
                 }
             }
 
@@ -30738,6 +30893,9 @@ export namespace google {
 
                 /** UpdateNodePoolRequest diskSizeGb */
                 diskSizeGb?: (number|Long|string|null);
+
+                /** UpdateNodePoolRequest resourceManagerTags */
+                resourceManagerTags?: (google.container.v1beta1.IResourceManagerTags|null);
             }
 
             /** Represents an UpdateNodePoolRequest. */
@@ -30829,6 +30987,9 @@ export namespace google {
 
                 /** UpdateNodePoolRequest diskSizeGb. */
                 public diskSizeGb: (number|Long|string);
+
+                /** UpdateNodePoolRequest resourceManagerTags. */
+                public resourceManagerTags?: (google.container.v1beta1.IResourceManagerTags|null);
 
                 /**
                  * Creates a new UpdateNodePoolRequest instance using the specified properties.
@@ -34592,6 +34753,7 @@ export namespace google {
                             UPDATE_STARTED = 1,
                             CREATING_GREEN_POOL = 2,
                             CORDONING_BLUE_POOL = 3,
+                            WAITING_TO_DRAIN_BLUE_POOL = 8,
                             DRAINING_BLUE_POOL = 4,
                             NODE_POOL_SOAKING = 5,
                             DELETING_BLUE_POOL = 6,
@@ -38486,6 +38648,9 @@ export namespace google {
 
                 /** NetworkConfig enableFqdnNetworkPolicy */
                 enableFqdnNetworkPolicy?: (boolean|null);
+
+                /** NetworkConfig inTransitEncryptionConfig */
+                inTransitEncryptionConfig?: (google.container.v1beta1.InTransitEncryptionConfig|keyof typeof google.container.v1beta1.InTransitEncryptionConfig|null);
             }
 
             /** Represents a NetworkConfig. */
@@ -38536,8 +38701,14 @@ export namespace google {
                 /** NetworkConfig enableFqdnNetworkPolicy. */
                 public enableFqdnNetworkPolicy?: (boolean|null);
 
+                /** NetworkConfig inTransitEncryptionConfig. */
+                public inTransitEncryptionConfig?: (google.container.v1beta1.InTransitEncryptionConfig|keyof typeof google.container.v1beta1.InTransitEncryptionConfig|null);
+
                 /** NetworkConfig _enableFqdnNetworkPolicy. */
                 public _enableFqdnNetworkPolicy?: "enableFqdnNetworkPolicy";
+
+                /** NetworkConfig _inTransitEncryptionConfig. */
+                public _inTransitEncryptionConfig?: "inTransitEncryptionConfig";
 
                 /**
                  * Creates a new NetworkConfig instance using the specified properties.
@@ -44431,6 +44602,110 @@ export namespace google {
                 STACK_TYPE_UNSPECIFIED = 0,
                 IPV4 = 1,
                 IPV4_IPV6 = 2
+            }
+
+            /** Properties of a ResourceManagerTags. */
+            interface IResourceManagerTags {
+
+                /** ResourceManagerTags tags */
+                tags?: ({ [k: string]: string }|null);
+            }
+
+            /** Represents a ResourceManagerTags. */
+            class ResourceManagerTags implements IResourceManagerTags {
+
+                /**
+                 * Constructs a new ResourceManagerTags.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IResourceManagerTags);
+
+                /** ResourceManagerTags tags. */
+                public tags: { [k: string]: string };
+
+                /**
+                 * Creates a new ResourceManagerTags instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ResourceManagerTags instance
+                 */
+                public static create(properties?: google.container.v1beta1.IResourceManagerTags): google.container.v1beta1.ResourceManagerTags;
+
+                /**
+                 * Encodes the specified ResourceManagerTags message. Does not implicitly {@link google.container.v1beta1.ResourceManagerTags.verify|verify} messages.
+                 * @param message ResourceManagerTags message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IResourceManagerTags, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ResourceManagerTags message, length delimited. Does not implicitly {@link google.container.v1beta1.ResourceManagerTags.verify|verify} messages.
+                 * @param message ResourceManagerTags message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IResourceManagerTags, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ResourceManagerTags message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ResourceManagerTags
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.ResourceManagerTags;
+
+                /**
+                 * Decodes a ResourceManagerTags message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ResourceManagerTags
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.ResourceManagerTags;
+
+                /**
+                 * Verifies a ResourceManagerTags message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ResourceManagerTags message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ResourceManagerTags
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.ResourceManagerTags;
+
+                /**
+                 * Creates a plain object from a ResourceManagerTags message. Also converts values to other types if specified.
+                 * @param message ResourceManagerTags
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.ResourceManagerTags, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ResourceManagerTags to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ResourceManagerTags
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** InTransitEncryptionConfig enum. */
+            enum InTransitEncryptionConfig {
+                IN_TRANSIT_ENCRYPTION_CONFIG_UNSPECIFIED = 0,
+                IN_TRANSIT_ENCRYPTION_DISABLED = 1,
+                IN_TRANSIT_ENCRYPTION_INTER_NODE_TRANSPARENT = 2
             }
         }
     }

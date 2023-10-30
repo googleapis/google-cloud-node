@@ -6702,6 +6702,10 @@
                       "type": "HostMaintenancePolicy",
                       "id": 44
                     },
+                    "resourceManagerTags": {
+                      "type": "ResourceManagerTags",
+                      "id": 45
+                    },
                     "enableConfidentialStorage": {
                       "type": "bool",
                       "id": 46,
@@ -7010,6 +7014,11 @@
                       "oneof": [
                         "maintenanceInterval"
                       ]
+                    },
+                    "maintenanceStrategy": {
+                      "oneof": [
+                        "opportunisticMaintenanceStrategy"
+                      ]
                     }
                   },
                   "fields": {
@@ -7019,6 +7028,10 @@
                       "options": {
                         "proto3_optional": true
                       }
+                    },
+                    "opportunisticMaintenanceStrategy": {
+                      "type": "OpportunisticMaintenanceStrategy",
+                      "id": 2
                     }
                   },
                   "nested": {
@@ -7027,6 +7040,48 @@
                         "MAINTENANCE_INTERVAL_UNSPECIFIED": 0,
                         "AS_NEEDED": 1,
                         "PERIODIC": 2
+                      }
+                    },
+                    "OpportunisticMaintenanceStrategy": {
+                      "oneofs": {
+                        "_nodeIdleTimeWindow": {
+                          "oneof": [
+                            "nodeIdleTimeWindow"
+                          ]
+                        },
+                        "_maintenanceAvailabilityWindow": {
+                          "oneof": [
+                            "maintenanceAvailabilityWindow"
+                          ]
+                        },
+                        "_minNodesPerPool": {
+                          "oneof": [
+                            "minNodesPerPool"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "nodeIdleTimeWindow": {
+                          "type": "google.protobuf.Duration",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maintenanceAvailabilityWindow": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "minNodesPerPool": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
                       }
                     }
                   }
@@ -8206,6 +8261,10 @@
                     "networkTags": {
                       "type": "NetworkTags",
                       "id": 1
+                    },
+                    "resourceManagerTags": {
+                      "type": "ResourceManagerTags",
+                      "id": 2
                     }
                   }
                 },
@@ -8224,6 +8283,11 @@
                     "_desiredEnableFqdnNetworkPolicy": {
                       "oneof": [
                         "desiredEnableFqdnNetworkPolicy"
+                      ]
+                    },
+                    "_desiredInTransitEncryptionConfig": {
+                      "oneof": [
+                        "desiredInTransitEncryptionConfig"
                       ]
                     }
                   },
@@ -8466,6 +8530,17 @@
                     "desiredHostMaintenancePolicy": {
                       "type": "HostMaintenancePolicy",
                       "id": 132
+                    },
+                    "desiredNodePoolAutoConfigResourceManagerTags": {
+                      "type": "ResourceManagerTags",
+                      "id": 136
+                    },
+                    "desiredInTransitEncryptionConfig": {
+                      "type": "InTransitEncryptionConfig",
+                      "id": 137,
+                      "options": {
+                        "proto3_optional": true
+                      }
                     }
                   }
                 },
@@ -8631,7 +8706,8 @@
                         "SET_NODE_POOL_SIZE": 14,
                         "SET_NETWORK_POLICY": 15,
                         "SET_MAINTENANCE_POLICY": 16,
-                        "RESIZE_CLUSTER": 18
+                        "RESIZE_CLUSTER": 18,
+                        "FLEET_FEATURE_UPGRADE": 19
                       }
                     }
                   }
@@ -8935,6 +9011,10 @@
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
+                    },
+                    "resourceManagerTags": {
+                      "type": "ResourceManagerTags",
+                      "id": 39
                     }
                   }
                 },
@@ -9936,6 +10016,7 @@
                                 "UPDATE_STARTED": 1,
                                 "CREATING_GREEN_POOL": 2,
                                 "CORDONING_BLUE_POOL": 3,
+                                "WAITING_TO_DRAIN_BLUE_POOL": 8,
                                 "DRAINING_BLUE_POOL": 4,
                                 "NODE_POOL_SOAKING": 5,
                                 "DELETING_BLUE_POOL": 6,
@@ -10887,6 +10968,11 @@
                       "oneof": [
                         "enableFqdnNetworkPolicy"
                       ]
+                    },
+                    "_inTransitEncryptionConfig": {
+                      "oneof": [
+                        "inTransitEncryptionConfig"
+                      ]
                     }
                   },
                   "fields": {
@@ -10941,6 +11027,13 @@
                     "enableFqdnNetworkPolicy": {
                       "type": "bool",
                       "id": 19,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "inTransitEncryptionConfig": {
+                      "type": "InTransitEncryptionConfig",
+                      "id": 20,
                       "options": {
                         "proto3_optional": true
                       }
@@ -11856,6 +11949,22 @@
                     "STACK_TYPE_UNSPECIFIED": 0,
                     "IPV4": 1,
                     "IPV4_IPV6": 2
+                  }
+                },
+                "ResourceManagerTags": {
+                  "fields": {
+                    "tags": {
+                      "keyType": "string",
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
+                "InTransitEncryptionConfig": {
+                  "values": {
+                    "IN_TRANSIT_ENCRYPTION_CONFIG_UNSPECIFIED": 0,
+                    "IN_TRANSIT_ENCRYPTION_DISABLED": 1,
+                    "IN_TRANSIT_ENCRYPTION_INTER_NODE_TRANSPARENT": 2
                   }
                 }
               }
