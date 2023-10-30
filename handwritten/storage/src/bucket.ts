@@ -291,6 +291,8 @@ export interface BucketMetadata extends BaseMetadata {
   autoclass?: {
     enabled?: boolean;
     toggleTime?: string;
+    terminalStorageClass?: string;
+    terminalStorageClassUpdateTime?: string;
   };
   billing?: {
     requesterPays?: boolean;

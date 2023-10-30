@@ -37,7 +37,12 @@ function main(bucketName = 'my-bucket') {
   async function getAutoclass() {
     const [metadata] = await storage.bucket(bucketName).getMetadata();
     console.log(
-      `Autoclass enabled is set to ${metadata.autoclass.enabled} for ${metadata.name} at ${metadata.autoclass.toggleTime}.`
+      `Autoclass is ${
+        metadata.autoclass.enabled ? 'enabled' : 'disabled'
+      } for ${metadata.name} at ${metadata.autoclass.toggleTime}.
+   Autoclass terminal storage class is last updated to ${
+     metadata.autoclass.terminalStorageClass
+   } at ${metadata.autoclass.terminalStorageClassUpdateTime}.`
     );
   }
 

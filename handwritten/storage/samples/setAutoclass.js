@@ -14,13 +14,20 @@
  * limitations under the License.
  */
 
-function main(bucketName = 'my-bucket', toggle = false) {
+function main(
+  bucketName = 'my-bucket',
+  toggle = true,
+  terminalStorageClass = 'ARCHIVE'
+) {
   // [START storage_set_autoclass]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
   // The ID of your GCS bucket
   // const bucketName = 'your-unique-bucket-name';
+
+  // The terminal storage class to be set on your GCS bucket. Valid values are NEARLINE and ARCHIVE.
+  // const terminalStorageClass = 'NEARLINE';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -29,17 +36,19 @@ function main(bucketName = 'my-bucket', toggle = false) {
   const storage = new Storage();
 
   async function setAutoclass() {
-    // Disables Autoclass for a bucket.
-    // Note: Only patch requests that disable autoclass are currently supported.
-    // To enable autoclass, you must set it at bucket creation time.
+    // Configure the Autoclass setting for a bucket.
+    // terminalStorageClass field is optional and defaults to NEARLINE if not otherwise specified.
+    // Valid terminalStorageClass values are NEARLINE and ARCHIVE.
     const [metadata] = await storage.bucket(bucketName).setMetadata({
       autoclass: {
         enabled: toggle,
+        terminalStorageClass,
       },
     });
 
-    console.log(`Autoclass enabled is set to ${metadata.autoclass.enabled} for 
-          ${metadata.name} at ${metadata.autoclass.toggleTime}.`);
+    console.log(
+      `Autoclass terminal storage class is ${metadata.autoclass.terminalStorageClass}.`
+    );
   }
 
   setAutoclass().catch(console.error);

@@ -530,7 +530,6 @@ describe('file', () => {
     });
 
     it('should copy file with old versions', async () => {
-      console.log('bucket: ', bucketNameWithVersioning);
       const destFileName = 'file-two.txt';
       const [files] = await bucketWithVersioning.getFiles({versions: true});
       const generation = files[0].metadata.generation;

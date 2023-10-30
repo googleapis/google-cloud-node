@@ -1061,11 +1061,13 @@ describe('storage', () => {
       const [bucket] = await storage.createBucket(generateName(), {
         autoclass: {
           enabled: true,
+          terminalStorageClass: 'ARCHIVE',
         },
       });
       let [metadata] = await bucket.getMetadata();
       const timestampEnabled = metadata!.autoclass!.toggleTime;
       assert.strictEqual(metadata!.autoclass!.enabled, true);
+      assert.strictEqual(metadata!.autoclass?.terminalStorageClass, 'ARCHIVE');
       [metadata] = await bucket.setMetadata({
         autoclass: {
           enabled: false,

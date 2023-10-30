@@ -111,6 +111,7 @@ export interface CustomPlacementConfig {
 
 export interface AutoclassConfig {
   enabled?: boolean;
+  terminalStorageClass?: 'NEARLINE' | 'ARCHIVE';
 }
 
 export interface CreateBucketRequest {
@@ -853,6 +854,8 @@ export class Storage extends Service {
    * @property {boolean} [archive=false] Specify the storage class as Archive.
    * @property {object} [autoclass.enabled=false] Specify whether Autoclass is
    *     enabled for the bucket.
+   * @property {object} [autoclass.terminalStorageClass='NEARLINE'] The storage class that objects in an Autoclass bucket eventually transition to if
+   *     they are not read for a certain length of time. Valid values are NEARLINE and ARCHIVE.
    * @property {boolean} [coldline=false] Specify the storage class as Coldline.
    * @property {Cors[]} [cors=[]] Specify the CORS configuration to use.
    * @property {CustomPlacementConfig} [customPlacementConfig={}] Specify the bucket's regions for dual-region buckets.
