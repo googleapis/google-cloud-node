@@ -40688,6 +40688,14 @@
                           "type": "ExplanationSpecOverride",
                           "id": 5
                         },
+                        "concurrentExplanationSpecOverride": {
+                          "keyType": "string",
+                          "type": "ExplanationSpecOverride",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "deployedModelId": {
                           "type": "string",
                           "id": 3
@@ -40701,6 +40709,11 @@
                           "type": "Explanation",
                           "id": 1
                         },
+                        "concurrentExplanations": {
+                          "keyType": "string",
+                          "type": "ConcurrentExplanation",
+                          "id": 4
+                        },
                         "deployedModelId": {
                           "type": "string",
                           "id": 2
@@ -40709,6 +40722,17 @@
                           "rule": "repeated",
                           "type": "google.protobuf.Value",
                           "id": 3
+                        }
+                      },
+                      "nested": {
+                        "ConcurrentExplanation": {
+                          "fields": {
+                            "explanations": {
+                              "rule": "repeated",
+                              "type": "Explanation",
+                              "id": 1
+                            }
+                          }
                         }
                       }
                     },
