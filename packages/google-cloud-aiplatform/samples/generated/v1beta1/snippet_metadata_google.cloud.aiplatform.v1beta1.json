@@ -9558,7 +9558,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 94,
+                    "end": 103,
                     "type": "FULL"
                 }
             ],
@@ -9582,6 +9582,10 @@
                     {
                         "name": "explanation_spec_override",
                         "type": ".google.cloud.aiplatform.v1beta1.ExplanationSpecOverride"
+                    },
+                    {
+                        "name": "concurrent_explanation_spec_override",
+                        "type": "TYPE_MESSAGE[]"
                     },
                     {
                         "name": "deployed_model_id",
