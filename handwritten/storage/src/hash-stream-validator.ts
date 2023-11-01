@@ -27,7 +27,9 @@ interface HashStreamValidatorOptions {
   crc32c: boolean;
   /** Enables MD5 calculation. To validate a provided value use `md5Expected`. */
   md5: boolean;
-  /** Set a custom CRC32C generator */
+  /** A CRC32C instance for validation. To validate a provided value use `crc32cExpected`. */
+  crc32cInstance: CRC32CValidator;
+  /** Set a custom CRC32C generator. Used if `crc32cInstance` has not been provided. */
   crc32cGenerator: CRC32CValidatorGenerator;
   /** Sets the expected CRC32C value to verify once all data has been consumed. Also sets the `crc32c` option to `true` */
   crc32cExpected?: string;
@@ -57,15 +59,26 @@ class HashStreamValidator extends Transform {
     this.md5Expected = options.md5Expected;
 
     if (this.crc32cEnabled) {
-      const crc32cGenerator =
-        options.crc32cGenerator || CRC32C_DEFAULT_VALIDATOR_GENERATOR;
+      if (options.crc32cInstance) {
+        this.#crc32cHash = options.crc32cInstance;
+      } else {
+        const crc32cGenerator =
+          options.crc32cGenerator || CRC32C_DEFAULT_VALIDATOR_GENERATOR;
 
-      this.#crc32cHash = crc32cGenerator();
+        this.#crc32cHash = crc32cGenerator();
+      }
     }
 
     if (this.md5Enabled) {
       this.#md5Hash = createHash('md5');
     }
+  }
+
+  /**
+   * Return the current CRC32C value, if available.
+   */
+  get crc32c() {
+    return this.#crc32cHash?.toString();
   }
 
   _flush(callback: (error?: Error | null | undefined) => void) {

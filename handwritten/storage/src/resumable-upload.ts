@@ -26,12 +26,13 @@ import {Readable, Writable, WritableOptions} from 'stream';
 import AsyncRetry from 'async-retry';
 import {RetryOptions, PreconditionOptions} from './storage.js';
 import * as uuid from 'uuid';
-import {GCCL_GCS_CMD_KEY} from './nodejs-common/util.js';
 import {
   getRuntimeTrackingString,
   getModuleFormat,
   getUserAgentString,
 } from './util.js';
+import {GCCL_GCS_CMD_KEY} from './nodejs-common/util.js';
+import {FileMetadata} from './file.js';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import {getPackageJSON} from './package-json-helper.cjs';
@@ -49,7 +50,6 @@ export interface ErrorWithCode extends Error {
 }
 
 export type CreateUriCallback = (err: Error | null, uri?: string) => void;
-
 export interface Encryption {
   key: {};
   hash: {};
@@ -132,6 +132,20 @@ export interface UploadConfig extends Pick<WritableOptions, 'highWaterMark'> {
   generation?: number;
 
   /**
+   * Set to `true` if the upload is only a subset of the overall object to upload.
+   * This can be used when planning to continue the upload an object in another
+   * session.
+   *
+   * **Must be used with {@link UploadConfig.chunkSize} != `0`**.
+   *
+   * If this is a continuation of a previous upload, {@link UploadConfig.offset}
+   * should be set.
+   *
+   * @see {@link checkUploadStatus} for checking the status of an existing upload.
+   */
+  isPartialUpload?: boolean;
+
+  /**
    * A customer-supplied encryption key. See
    * https://cloud.google.com/storage/docs/encryption#customer-supplied.
    */
@@ -151,9 +165,19 @@ export interface UploadConfig extends Pick<WritableOptions, 'highWaterMark'> {
   metadata?: ConfigMetadata;
 
   /**
-   * The starting byte of the upload stream, for resuming an interrupted upload.
-   * See
-   * https://cloud.google.com/storage/docs/json_api/v1/how-tos/resumable-upload#resume-upload.
+   * The starting byte in relation to the final uploaded object.
+   * **Must be used with {@link UploadConfig.uri}**.
+   *
+   * If resuming an interrupted stream, do not supply this argument unless you
+   * know the exact number of bytes the service has AND the provided stream's
+   * first byte is a continuation from that provided offset. If resuming an
+   * interrupted stream and this option has not been provided, we will treat
+   * the provided upload stream as the object to upload - where the first byte
+   * of the upload stream is the first byte of the object to upload; skipping
+   * any bytes that are already present on the server.
+   *
+   * @see {@link checkUploadStatus} for checking the status of an existing upload.
+   * @see {@link https://cloud.google.com/storage/docs/json_api/v1/how-tos/resumable-upload#resume-upload.}
    */
   offset?: number;
 
@@ -188,6 +212,14 @@ export interface UploadConfig extends Pick<WritableOptions, 'highWaterMark'> {
   /**
    * If you already have a resumable URI from a previously-created resumable
    * upload, just pass it in here and we'll use that.
+   *
+   * If resuming an interrupted stream and the {@link UploadConfig.offset}
+   * option has not been provided, we will treat the provided upload stream as
+   * the object to upload - where the first byte of the upload stream is the
+   * first byte of the object to upload; skipping any bytes that are already
+   * present on the server.
+   *
+   * @see {@link checkUploadStatus} for checking the status of an existing upload.
    */
   uri?: string;
 
@@ -210,7 +242,8 @@ export interface ConfigMetadata {
   [key: string]: any;
 
   /**
-   * Set the length of the file being uploaded.
+   * Set the length of the object being uploaded. If uploading a partial
+   * object, this is the overall size of the finalized object.
    */
   contentLength?: number;
 
@@ -227,6 +260,15 @@ export interface GoogleInnerError {
 export interface ApiError extends Error {
   code?: number;
   errors?: GoogleInnerError[];
+}
+
+export interface CheckUploadStatusConfig {
+  /**
+   * Set to `false` to disable retries within this method.
+   *
+   * @defaultValue `true`
+   */
+  retry?: boolean;
 }
 
 export class Upload extends Writable {
@@ -266,10 +308,12 @@ export class Upload extends Writable {
   contentLength: number | '*';
   retryOptions: RetryOptions;
   timeOfFirstRequest: number;
+  isPartialUpload: boolean;
+
   private currentInvocationId = {
+    checkUploadStatus: uuid.v4(),
     chunk: uuid.v4(),
     uri: uuid.v4(),
-    offset: uuid.v4(),
   };
   /**
    * A cache of buffers written to this instance, ready for consuming
@@ -292,6 +336,18 @@ export class Upload extends Writable {
 
     if (!cfg.bucket || !cfg.file) {
       throw new Error('A bucket and file name are required');
+    }
+
+    if (cfg.offset && !cfg.uri) {
+      throw new RangeError(
+        'Cannot provide an `offset` without providing a `uri`'
+      );
+    }
+
+    if (cfg.isPartialUpload && !cfg.chunkSize) {
+      throw new RangeError(
+        'Cannot set `isPartialUpload` without providing a `chunkSize`'
+      );
     }
 
     cfg.authConfig = cfg.authConfig || {};
@@ -329,6 +385,7 @@ export class Upload extends Writable {
     this.userProject = cfg.userProject;
     this.chunkSize = cfg.chunkSize;
     this.retryOptions = cfg.retryOptions;
+    this.isPartialUpload = cfg.isPartialUpload ?? false;
 
     if (cfg.key) {
       const base64Key = Buffer.from(cfg.key).toString('base64');
@@ -345,7 +402,12 @@ export class Upload extends Writable {
     const autoRetry = cfg.retryOptions.autoRetry;
     this.uriProvidedManually = !!cfg.uri;
     this.uri = cfg.uri;
-    this.numBytesWritten = 0;
+
+    if (this.offset) {
+      // we're resuming an incomplete upload
+      this.numBytesWritten = this.offset;
+    }
+
     this.numRetries = 0; // counter for number of retries currently executed
     if (!autoRetry) {
       cfg.retryOptions.maxRetries = 0;
@@ -480,7 +542,6 @@ export class Upload extends Writable {
    * Retrieves data from upstream's buffer.
    *
    * @param limit The maximum amount to return from the buffer.
-   * @returns The data requested.
    */
   private *pullFromChunkBuffer(limit: number) {
     while (limit) {
@@ -688,16 +749,17 @@ export class Upload extends Writable {
 
     this.uri = uri;
     this.offset = 0;
+
+    // emit the newly generated URI for future reuse, if necessary.
+    this.emit('uri', uri);
+
     return uri;
   }
 
   private async continueUploading() {
-    if (typeof this.offset === 'number') {
-      this.startUploading();
-      return;
-    }
-    await this.getAndSetOffset();
-    this.startUploading();
+    this.offset ?? (await this.getAndSetOffset());
+
+    return this.startUploading();
   }
 
   async startUploading() {
@@ -806,11 +868,12 @@ export class Upload extends Writable {
       // We need to know how much data is available upstream to set the `Content-Range` header.
       // https://cloud.google.com/storage/docs/performing-resumable-uploads#chunked-upload
       for await (const chunk of this.upstreamIterator(expectedUploadSize)) {
-        // This will conveniently track and keep the size of the buffers
+        // This will conveniently track and keep the size of the buffers.
+        // We will reach either the expected upload size or the remainder of the stream.
         this.#addLocalBufferCache(chunk);
       }
 
-      // We hit either the expected upload size or the remainder
+      // This is the sum from the `#addLocalBufferCache` calls
       const bytesToUpload = this.localWriteCacheByteLength;
 
       // Important: we want to know if the upstream has ended and the queue is empty before
@@ -822,9 +885,12 @@ export class Upload extends Writable {
 
       let totalObjectSize = this.contentLength;
 
-      if (typeof this.contentLength !== 'number' && isLastChunkOfUpload) {
-        // Let's let the server know this is the last chunk since
-        // we didn't know the content-length beforehand.
+      if (
+        typeof this.contentLength !== 'number' &&
+        isLastChunkOfUpload &&
+        !this.isPartialUpload
+      ) {
+        // Let's let the server know this is the last chunk of the object since we didn't set it before.
         totalObjectSize = bytesToUpload + this.numBytesWritten;
       }
 
@@ -852,7 +918,7 @@ export class Upload extends Writable {
       const resp = await this.makeRequestStream(reqOpts);
       if (resp) {
         responseReceived = true;
-        this.responseHandler(resp);
+        await this.responseHandler(resp);
       }
     } catch (e) {
       const err = e as ApiError;
@@ -871,7 +937,7 @@ export class Upload extends Writable {
 
   // Process the API response to look for errors that came in
   // the response body.
-  private responseHandler(resp: GaxiosResponse) {
+  private async responseHandler(resp: GaxiosResponse) {
     if (resp.data.error) {
       this.destroy(resp.data.error);
       return;
@@ -880,10 +946,22 @@ export class Upload extends Writable {
     // At this point we can safely create a new id for the chunk
     this.currentInvocationId.chunk = uuid.v4();
 
+    const moreDataToUpload = await this.waitForNextChunk();
+
     const shouldContinueWithNextMultiChunkRequest =
       this.chunkSize &&
       resp.status === RESUMABLE_INCOMPLETE_STATUS_CODE &&
-      resp.headers.range;
+      resp.headers.range &&
+      moreDataToUpload;
+
+    /**
+     * This is true when we're expecting to upload more data in a future request,
+     * yet the upstream for the upload session has been exhausted.
+     */
+    const shouldContinueUploadInAnotherRequest =
+      this.isPartialUpload &&
+      resp.status === RESUMABLE_INCOMPLETE_STATUS_CODE &&
+      !moreDataToUpload;
 
     if (shouldContinueWithNextMultiChunkRequest) {
       // Use the upper value in this header to determine where to start the next chunk.
@@ -908,7 +986,10 @@ export class Upload extends Writable {
 
       // continue uploading next chunk
       this.continueUploading();
-    } else if (!this.isSuccessfulResponse(resp.status)) {
+    } else if (
+      !this.isSuccessfulResponse(resp.status) &&
+      !shouldContinueUploadInAnotherRequest
+    ) {
       const err: ApiError = new Error('Upload failed');
       err.code = resp.status;
       err.name = 'Upload failed';
@@ -932,11 +1013,19 @@ export class Upload extends Writable {
     }
   }
 
-  private async getAndSetOffset() {
+  /**
+   * Check the status of an existing resumable upload.
+   *
+   * @param cfg A configuration to use. `uri` is required.
+   * @returns the current upload status
+   */
+  async checkUploadStatus(
+    config: CheckUploadStatusConfig = {}
+  ): Promise<GaxiosResponse<FileMetadata | void>> {
     let googAPIClient = `${getRuntimeTrackingString()} gccl/${
       packageJson.version
     }-${getModuleFormat()} gccl-invocation-id/${
-      this.currentInvocationId.offset
+      this.currentInvocationId.checkUploadStatus
     }`;
 
     if (this.#gcclGcsCmd) {
@@ -945,7 +1034,7 @@ export class Upload extends Writable {
 
     const opts: GaxiosOptions = {
       method: 'PUT',
-      url: this.uri!,
+      url: this.uri,
       headers: {
         'Content-Length': 0,
         'Content-Range': 'bytes */*',
@@ -953,14 +1042,43 @@ export class Upload extends Writable {
         'x-goog-api-client': googAPIClient,
       },
     };
+
     try {
       const resp = await this.makeRequest(opts);
+
       // Successfully got the offset we can now create a new offset invocation id
-      this.currentInvocationId.offset = uuid.v4();
+      this.currentInvocationId.checkUploadStatus = uuid.v4();
+
+      return resp;
+    } catch (e) {
+      if (
+        config.retry === false ||
+        !(e instanceof Error) ||
+        !this.retryOptions.retryableErrorFn!(e)
+      ) {
+        throw e;
+      }
+
+      const retryDelay = this.getRetryDelay();
+
+      if (retryDelay <= 0) {
+        throw e;
+      }
+
+      await new Promise(res => setTimeout(res, retryDelay));
+
+      return this.checkUploadStatus(config);
+    }
+  }
+
+  private async getAndSetOffset() {
+    try {
+      // we want to handle retries in this method.
+      const resp = await this.checkUploadStatus({retry: false});
+
       if (resp.status === RESUMABLE_INCOMPLETE_STATUS_CODE) {
-        if (resp.headers.range) {
-          const range = resp.headers.range as string;
-          this.offset = Number(range.split('-')[1]) + 1;
+        if (typeof resp.headers.range === 'string') {
+          this.offset = Number(resp.headers.range.split('-')[1]) + 1;
           return;
         }
       }
@@ -1107,7 +1225,10 @@ export class Upload extends Writable {
   }
 
   /**
-   * @returns {number} the amount of time to wait before retrying the request
+   * The amount of time to wait before retrying the request, in milliseconds.
+   * If negative, do not retry.
+   *
+   * @returns the amount of time to wait, in milliseconds.
    */
   private getRetryDelay(): number {
     const randomMs = Math.round(Math.random() * 1000);
@@ -1159,4 +1280,18 @@ export function createURI(
     return up.createURI();
   }
   up.createURI().then(r => callback(null, r), callback);
+}
+
+/**
+ * Check the status of an existing resumable upload.
+ *
+ * @param cfg A configuration to use. `uri` is required.
+ * @returns the current upload status
+ */
+export function checkUploadStatus(
+  cfg: UploadConfig & Required<Pick<UploadConfig, 'uri'>>
+) {
+  const up = new Upload(cfg);
+
+  return up.checkUploadStatus();
 }
