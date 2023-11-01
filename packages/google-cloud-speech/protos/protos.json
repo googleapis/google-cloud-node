@@ -239,6 +239,13 @@
                           "type": "SpeechAdaptation",
                           "id": 20
                         },
+                        "transcriptNormalization": {
+                          "type": "TranscriptNormalization",
+                          "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "speechContexts": {
                           "rule": "repeated",
                           "type": "SpeechContext",
@@ -292,6 +299,7 @@
                             "AMR_WB": 5,
                             "OGG_OPUS": 6,
                             "SPEEX_WITH_HEADER_BYTE": 7,
+                            "MP3": 8,
                             "WEBM_OPUS": 9
                           }
                         }
@@ -646,6 +654,14 @@
                           "type": "int32",
                           "id": 5,
                           "options": {
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "speakerLabel": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
@@ -761,6 +777,33 @@
                               "rule": "repeated",
                               "type": "string",
                               "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "TranscriptNormalization": {
+                      "fields": {
+                        "entries": {
+                          "rule": "repeated",
+                          "type": "Entry",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "Entry": {
+                          "fields": {
+                            "search": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "replace": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "caseSensitive": {
+                              "type": "bool",
+                              "id": 3
                             }
                           }
                         }
