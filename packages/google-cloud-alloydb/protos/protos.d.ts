@@ -8111,6 +8111,9 @@ export namespace google {
 
                     /** GenerateClientCertificateRequest publicKey */
                     publicKey?: (string|null);
+
+                    /** GenerateClientCertificateRequest useMetadataExchange */
+                    useMetadataExchange?: (boolean|null);
                 }
 
                 /** Represents a GenerateClientCertificateRequest. */
@@ -8133,6 +8136,9 @@ export namespace google {
 
                     /** GenerateClientCertificateRequest publicKey. */
                     public publicKey: string;
+
+                    /** GenerateClientCertificateRequest useMetadataExchange. */
+                    public useMetadataExchange: boolean;
 
                     /**
                      * Creates a new GenerateClientCertificateRequest instance using the specified properties.
