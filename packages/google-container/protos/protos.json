@@ -8110,6 +8110,10 @@
                     "securityPostureConfig": {
                       "type": "SecurityPostureConfig",
                       "id": 145
+                    },
+                    "enterpriseConfig": {
+                      "type": "EnterpriseConfig",
+                      "id": 149
                     }
                   },
                   "nested": {
@@ -11983,6 +11987,26 @@
                       "keyType": "string",
                       "type": "string",
                       "id": 1
+                    }
+                  }
+                },
+                "EnterpriseConfig": {
+                  "fields": {
+                    "clusterTier": {
+                      "type": "ClusterTier",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "ClusterTier": {
+                      "values": {
+                        "CLUSTER_TIER_UNSPECIFIED": 0,
+                        "STANDARD": 1,
+                        "ENTERPRISE": 2
+                      }
                     }
                   }
                 },
