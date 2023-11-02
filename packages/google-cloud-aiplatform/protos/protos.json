@@ -29000,7 +29000,7 @@
                             "(google.api.http).body": "feature",
                             "(google.api.method_signature)": "parent,feature,feature_id",
                             "(google.longrunning.operation_info).response_type": "Feature",
-                            "(google.longrunning.operation_info).metadata_type": "CreateRegistryFeatureOperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "CreateFeatureOperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -29015,7 +29015,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "Feature",
-                                "metadata_type": "CreateRegistryFeatureOperationMetadata"
+                                "metadata_type": "CreateFeatureOperationMetadata"
                               }
                             }
                           ]
