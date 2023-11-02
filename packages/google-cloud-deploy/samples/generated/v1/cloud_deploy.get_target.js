@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. Name of the `Target`. Format must be
-   *  projects/{project_id}/locations/{location_name}/targets/{target_name}.
+   *  `projects/{project_id}/locations/{location_name}/targets/{target_name}`.
    */
   // const name = 'abc123'
 
