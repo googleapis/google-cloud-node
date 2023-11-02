@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, releaseId, release) {
-  // [START clouddeploy_v1_generated_CloudDeploy_CreateRelease_async]
+function main(name) {
+  // [START clouddeploy_v1_generated_CloudDeploy_DeleteAutomation_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,24 +29,15 @@ function main(parent, releaseId, release) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent collection in which the `Release` should be created.
-   *  Format should be
-   *  `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
+   *  Required. The name of the `Automation` to delete. Format should be
+   *  `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}/automations/{automation_name}`.
    */
-  // const parent = 'abc123'
-  /**
-   *  Required. ID of the `Release`.
-   */
-  // const releaseId = 'abc123'
-  /**
-   *  Required. The `Release` to create.
-   */
-  // const release = {}
+  // const name = 'abc123'
   /**
    *  Optional. A request ID to identify requests. Specify a unique request ID
    *  so that if you must retry your request, the server will know to ignore
    *  the request if it has already been completed. The server will guarantee
-   *  that for at least 60 minutes since the first request.
+   *  that for at least 60 minutes after the first request.
    *  For example, consider a situation where you make an initial request and the
    *  request times out. If you make the request again with the same request ID,
    *  the server can check if original operation with the same request ID was
@@ -57,10 +48,22 @@ function main(parent, releaseId, release) {
    */
   // const requestId = 'abc123'
   /**
-   *  Optional. If set to true, the request is validated and the user is provided
-   *  with an expected result, but no actual change is made.
+   *  Optional. If set to true, then deleting an already deleted or non-existing
+   *  `Automation` will succeed.
+   */
+  // const allowMissing = true
+  /**
+   *  Optional. If set, validate the request and verify whether the resource
+   *  exists, but do not actually post it.
    */
   // const validateOnly = true
+  /**
+   *  Optional. The weak etag of the request.
+   *  This checksum is computed by the server based on the value of other
+   *  fields, and may be sent on update and delete requests to ensure the
+   *  client has an up-to-date value before proceeding.
+   */
+  // const etag = 'abc123'
 
   // Imports the Deploy library
   const {CloudDeployClient} = require('@google-cloud/deploy').v1;
@@ -68,22 +71,20 @@ function main(parent, releaseId, release) {
   // Instantiates a client
   const deployClient = new CloudDeployClient();
 
-  async function callCreateRelease() {
+  async function callDeleteAutomation() {
     // Construct request
     const request = {
-      parent,
-      releaseId,
-      release,
+      name,
     };
 
     // Run request
-    const [operation] = await deployClient.createRelease(request);
+    const [operation] = await deployClient.deleteAutomation(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callCreateRelease();
-  // [END clouddeploy_v1_generated_CloudDeploy_CreateRelease_async]
+  callDeleteAutomation();
+  // [END clouddeploy_v1_generated_CloudDeploy_DeleteAutomation_async]
 }
 
 process.on('unhandledRejection', err => {

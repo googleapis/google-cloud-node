@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, releaseId, release) {
-  // [START clouddeploy_v1_generated_CloudDeploy_CreateRelease_async]
+function main(parent) {
+  // [START clouddeploy_v1_generated_CloudDeploy_ListAutomations_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,38 +29,34 @@ function main(parent, releaseId, release) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent collection in which the `Release` should be created.
-   *  Format should be
+   *  Required. The parent, which owns this collection of automations. Format
+   *  must be
    *  `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
    */
   // const parent = 'abc123'
   /**
-   *  Required. ID of the `Release`.
+   *  The maximum number of automations to return. The service may return
+   *  fewer than this value. If unspecified, at most 50 automations will
+   *  be returned. The maximum value is 1000; values above 1000 will be set
+   *  to 1000.
    */
-  // const releaseId = 'abc123'
+  // const pageSize = 1234
   /**
-   *  Required. The `Release` to create.
+   *  A page token, received from a previous `ListAutomations` call.
+   *  Provide this to retrieve the subsequent page.
+   *  When paginating, all other provided parameters match
+   *  the call that provided the page token.
    */
-  // const release = {}
+  // const pageToken = 'abc123'
   /**
-   *  Optional. A request ID to identify requests. Specify a unique request ID
-   *  so that if you must retry your request, the server will know to ignore
-   *  the request if it has already been completed. The server will guarantee
-   *  that for at least 60 minutes since the first request.
-   *  For example, consider a situation where you make an initial request and the
-   *  request times out. If you make the request again with the same request ID,
-   *  the server can check if original operation with the same request ID was
-   *  received, and if so, will ignore the second request. This prevents clients
-   *  from accidentally creating duplicate commitments.
-   *  The request ID must be a valid UUID with the exception that zero UUID is
-   *  not supported (00000000-0000-0000-0000-000000000000).
+   *  Filter automations to be returned. All fields can be used in the
+   *  filter.
    */
-  // const requestId = 'abc123'
+  // const filter = 'abc123'
   /**
-   *  Optional. If set to true, the request is validated and the user is provided
-   *  with an expected result, but no actual change is made.
+   *  Field to sort by.
    */
-  // const validateOnly = true
+  // const orderBy = 'abc123'
 
   // Imports the Deploy library
   const {CloudDeployClient} = require('@google-cloud/deploy').v1;
@@ -68,22 +64,21 @@ function main(parent, releaseId, release) {
   // Instantiates a client
   const deployClient = new CloudDeployClient();
 
-  async function callCreateRelease() {
+  async function callListAutomations() {
     // Construct request
     const request = {
       parent,
-      releaseId,
-      release,
     };
 
     // Run request
-    const [operation] = await deployClient.createRelease(request);
-    const [response] = await operation.promise();
-    console.log(response);
+    const iterable = await deployClient.listAutomationsAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callCreateRelease();
-  // [END clouddeploy_v1_generated_CloudDeploy_CreateRelease_async]
+  callListAutomations();
+  // [END clouddeploy_v1_generated_CloudDeploy_ListAutomations_async]
 }
 
 process.on('unhandledRejection', err => {

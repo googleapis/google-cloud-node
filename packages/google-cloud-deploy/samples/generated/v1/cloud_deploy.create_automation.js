@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, releaseId, release) {
-  // [START clouddeploy_v1_generated_CloudDeploy_CreateRelease_async]
+function main(parent, automationId, automation) {
+  // [START clouddeploy_v1_generated_CloudDeploy_CreateAutomation_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,19 +29,19 @@ function main(parent, releaseId, release) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent collection in which the `Release` should be created.
-   *  Format should be
+   *  Required. The parent collection in which the `Automation` should be
+   *  created. Format should be
    *  `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
    */
   // const parent = 'abc123'
   /**
-   *  Required. ID of the `Release`.
+   *  Required. ID of the `Automation`.
    */
-  // const releaseId = 'abc123'
+  // const automationId = 'abc123'
   /**
-   *  Required. The `Release` to create.
+   *  Required. The `Automation` to create.
    */
-  // const release = {}
+  // const automation = {}
   /**
    *  Optional. A request ID to identify requests. Specify a unique request ID
    *  so that if you must retry your request, the server will know to ignore
@@ -68,22 +68,22 @@ function main(parent, releaseId, release) {
   // Instantiates a client
   const deployClient = new CloudDeployClient();
 
-  async function callCreateRelease() {
+  async function callCreateAutomation() {
     // Construct request
     const request = {
       parent,
-      releaseId,
-      release,
+      automationId,
+      automation,
     };
 
     // Run request
-    const [operation] = await deployClient.createRelease(request);
+    const [operation] = await deployClient.createAutomation(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callCreateRelease();
-  // [END clouddeploy_v1_generated_CloudDeploy_CreateRelease_async]
+  callCreateAutomation();
+  // [END clouddeploy_v1_generated_CloudDeploy_CreateAutomation_async]
 }
 
 process.on('unhandledRejection', err => {

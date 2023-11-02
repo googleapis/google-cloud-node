@@ -30,8 +30,7 @@ function main(rollout, phaseId, jobId) {
    */
   /**
    *  Required. Name of the Rollout. Format is
-   *  projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/
-   *  releases/{release}/rollouts/{rollout}.
+   *  `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/{rollout}`.
    */
   // const rollout = 'abc123'
   /**

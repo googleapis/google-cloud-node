@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, releaseId, release) {
-  // [START clouddeploy_v1_generated_CloudDeploy_CreateRelease_async]
+function main(updateMask, automation) {
+  // [START clouddeploy_v1_generated_CloudDeploy_UpdateAutomation_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,19 +29,17 @@ function main(parent, releaseId, release) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent collection in which the `Release` should be created.
-   *  Format should be
-   *  `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
+   *  Required. Field mask is used to specify the fields to be overwritten in the
+   *  `Automation` resource by the update.
+   *  The fields specified in the update_mask are relative to the resource, not
+   *  the full request. A field will be overwritten if it is in the mask. If the
+   *  user does not provide a mask then all fields will be overwritten.
    */
-  // const parent = 'abc123'
+  // const updateMask = {}
   /**
-   *  Required. ID of the `Release`.
+   *  Required. The `Automation` to update.
    */
-  // const releaseId = 'abc123'
-  /**
-   *  Required. The `Release` to create.
-   */
-  // const release = {}
+  // const automation = {}
   /**
    *  Optional. A request ID to identify requests. Specify a unique request ID
    *  so that if you must retry your request, the server will know to ignore
@@ -57,6 +55,11 @@ function main(parent, releaseId, release) {
    */
   // const requestId = 'abc123'
   /**
+   *  Optional. If set to true, updating a `Automation` that does not exist will
+   *  result in the creation of a new `Automation`.
+   */
+  // const allowMissing = true
+  /**
    *  Optional. If set to true, the request is validated and the user is provided
    *  with an expected result, but no actual change is made.
    */
@@ -68,22 +71,21 @@ function main(parent, releaseId, release) {
   // Instantiates a client
   const deployClient = new CloudDeployClient();
 
-  async function callCreateRelease() {
+  async function callUpdateAutomation() {
     // Construct request
     const request = {
-      parent,
-      releaseId,
-      release,
+      updateMask,
+      automation,
     };
 
     // Run request
-    const [operation] = await deployClient.createRelease(request);
+    const [operation] = await deployClient.updateAutomation(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callCreateRelease();
-  // [END clouddeploy_v1_generated_CloudDeploy_CreateRelease_async]
+  callUpdateAutomation();
+  // [END clouddeploy_v1_generated_CloudDeploy_UpdateAutomation_async]
 }
 
 process.on('unhandledRejection', err => {
