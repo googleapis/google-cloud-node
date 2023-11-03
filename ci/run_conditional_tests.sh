@@ -62,6 +62,8 @@ if [[ "${changed}" -eq 0 ]]; then
     echo "no change detected in ci"
 else
     echo "change detected in ci, we should test everything"
+    echo "result of git diff ${GIT_DIFF_ARG} ci:"
+    git diff ${GIT_DIFF_ARG} ci
     GIT_DIFF_ARG=""
 fi
 
