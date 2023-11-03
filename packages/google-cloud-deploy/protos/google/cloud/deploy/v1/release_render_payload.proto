@@ -16,6 +16,8 @@ syntax = "proto3";
 
 package google.cloud.deploy.v1;
 
+import "google/cloud/deploy/v1/cloud_deploy.proto";
+
 option go_package = "cloud.google.com/go/deploy/apiv1/deploypb;deploypb";
 option java_multiple_files = true;
 option java_outer_classname = "ReleaseRenderPayloadProto";
@@ -28,6 +30,9 @@ message ReleaseRenderEvent {
   // details as rendering progresses through render states.
   string message = 1;
 
-  // The name of the `Release`.
+  // The name of the release.
   string release = 2;
+
+  // The state of the release render.
+  Release.RenderState release_render_state = 3;
 }
