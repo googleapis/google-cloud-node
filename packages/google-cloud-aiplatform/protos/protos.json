@@ -29000,7 +29000,7 @@
                             "(google.api.http).body": "feature",
                             "(google.api.method_signature)": "parent,feature,feature_id",
                             "(google.longrunning.operation_info).response_type": "Feature",
-                            "(google.longrunning.operation_info).metadata_type": "CreateRegistryFeatureOperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "CreateFeatureOperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -29015,7 +29015,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "Feature",
-                                "metadata_type": "CreateRegistryFeatureOperationMetadata"
+                                "metadata_type": "CreateFeatureOperationMetadata"
                               }
                             }
                           ]
@@ -40688,6 +40688,14 @@
                           "type": "ExplanationSpecOverride",
                           "id": 5
                         },
+                        "concurrentExplanationSpecOverride": {
+                          "keyType": "string",
+                          "type": "ExplanationSpecOverride",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "deployedModelId": {
                           "type": "string",
                           "id": 3
@@ -40701,6 +40709,11 @@
                           "type": "Explanation",
                           "id": 1
                         },
+                        "concurrentExplanations": {
+                          "keyType": "string",
+                          "type": "ConcurrentExplanation",
+                          "id": 4
+                        },
                         "deployedModelId": {
                           "type": "string",
                           "id": 2
@@ -40709,6 +40722,17 @@
                           "rule": "repeated",
                           "type": "google.protobuf.Value",
                           "id": 3
+                        }
+                      },
+                      "nested": {
+                        "ConcurrentExplanation": {
+                          "fields": {
+                            "explanations": {
+                              "rule": "repeated",
+                              "type": "Explanation",
+                              "id": 1
+                            }
+                          }
                         }
                       }
                     },

@@ -1643,7 +1643,7 @@ export class FeatureRegistryServiceClient {
       '.google.cloud.aiplatform.v1beta1.Feature'
     ) as gax.protobuf.Type;
     const createFeatureMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.CreateRegistryFeatureOperationMetadata'
+      '.google.cloud.aiplatform.v1beta1.CreateFeatureOperationMetadata'
     ) as gax.protobuf.Type;
     const updateFeatureResponse = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1beta1.Feature'
@@ -2502,7 +2502,7 @@ export class FeatureRegistryServiceClient {
     [
       LROperation<
         protos.google.cloud.aiplatform.v1beta1.IFeature,
-        protos.google.cloud.aiplatform.v1beta1.ICreateRegistryFeatureOperationMetadata
+        protos.google.cloud.aiplatform.v1beta1.ICreateFeatureOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
@@ -2514,7 +2514,7 @@ export class FeatureRegistryServiceClient {
     callback: Callback<
       LROperation<
         protos.google.cloud.aiplatform.v1beta1.IFeature,
-        protos.google.cloud.aiplatform.v1beta1.ICreateRegistryFeatureOperationMetadata
+        protos.google.cloud.aiplatform.v1beta1.ICreateFeatureOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -2525,7 +2525,7 @@ export class FeatureRegistryServiceClient {
     callback: Callback<
       LROperation<
         protos.google.cloud.aiplatform.v1beta1.IFeature,
-        protos.google.cloud.aiplatform.v1beta1.ICreateRegistryFeatureOperationMetadata
+        protos.google.cloud.aiplatform.v1beta1.ICreateFeatureOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -2538,7 +2538,7 @@ export class FeatureRegistryServiceClient {
       | Callback<
           LROperation<
             protos.google.cloud.aiplatform.v1beta1.IFeature,
-            protos.google.cloud.aiplatform.v1beta1.ICreateRegistryFeatureOperationMetadata
+            protos.google.cloud.aiplatform.v1beta1.ICreateFeatureOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
@@ -2546,7 +2546,7 @@ export class FeatureRegistryServiceClient {
     callback?: Callback<
       LROperation<
         protos.google.cloud.aiplatform.v1beta1.IFeature,
-        protos.google.cloud.aiplatform.v1beta1.ICreateRegistryFeatureOperationMetadata
+        protos.google.cloud.aiplatform.v1beta1.ICreateFeatureOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -2555,7 +2555,7 @@ export class FeatureRegistryServiceClient {
     [
       LROperation<
         protos.google.cloud.aiplatform.v1beta1.IFeature,
-        protos.google.cloud.aiplatform.v1beta1.ICreateRegistryFeatureOperationMetadata
+        protos.google.cloud.aiplatform.v1beta1.ICreateFeatureOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
@@ -2595,7 +2595,7 @@ export class FeatureRegistryServiceClient {
   ): Promise<
     LROperation<
       protos.google.cloud.aiplatform.v1beta1.Feature,
-      protos.google.cloud.aiplatform.v1beta1.CreateRegistryFeatureOperationMetadata
+      protos.google.cloud.aiplatform.v1beta1.CreateFeatureOperationMetadata
     >
   > {
     const request =
@@ -2610,7 +2610,7 @@ export class FeatureRegistryServiceClient {
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1beta1.Feature,
-      protos.google.cloud.aiplatform.v1beta1.CreateRegistryFeatureOperationMetadata
+      protos.google.cloud.aiplatform.v1beta1.CreateFeatureOperationMetadata
     >;
   }
   /**
