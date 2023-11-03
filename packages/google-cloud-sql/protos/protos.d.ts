@@ -11695,6 +11695,14 @@ export namespace google {
                     }
                 }
 
+                /** ExternalSyncParallelLevel enum. */
+                enum ExternalSyncParallelLevel {
+                    EXTERNAL_SYNC_PARALLEL_LEVEL_UNSPECIFIED = 0,
+                    MIN = 1,
+                    OPTIMAL = 2,
+                    MAX = 3
+                }
+
                 /** Properties of a SqlInstancesGetDiskShrinkConfigRequest. */
                 interface ISqlInstancesGetDiskShrinkConfigRequest {
 
@@ -11957,7 +11965,7 @@ export namespace google {
                     mysqlSyncConfig?: (google.cloud.sql.v1.IMySqlSyncConfig|null);
 
                     /** SqlInstancesStartExternalSyncRequest syncParallelLevel */
-                    syncParallelLevel?: (google.cloud.sql.v1.SqlInstancesStartExternalSyncRequest.ExternalSyncParallelLevel|keyof typeof google.cloud.sql.v1.SqlInstancesStartExternalSyncRequest.ExternalSyncParallelLevel|null);
+                    syncParallelLevel?: (google.cloud.sql.v1.ExternalSyncParallelLevel|keyof typeof google.cloud.sql.v1.ExternalSyncParallelLevel|null);
                 }
 
                 /** Represents a SqlInstancesStartExternalSyncRequest. */
@@ -11985,7 +11993,7 @@ export namespace google {
                     public mysqlSyncConfig?: (google.cloud.sql.v1.IMySqlSyncConfig|null);
 
                     /** SqlInstancesStartExternalSyncRequest syncParallelLevel. */
-                    public syncParallelLevel: (google.cloud.sql.v1.SqlInstancesStartExternalSyncRequest.ExternalSyncParallelLevel|keyof typeof google.cloud.sql.v1.SqlInstancesStartExternalSyncRequest.ExternalSyncParallelLevel);
+                    public syncParallelLevel: (google.cloud.sql.v1.ExternalSyncParallelLevel|keyof typeof google.cloud.sql.v1.ExternalSyncParallelLevel);
 
                     /** SqlInstancesStartExternalSyncRequest syncConfig. */
                     public syncConfig?: "mysqlSyncConfig";
@@ -12066,17 +12074,6 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace SqlInstancesStartExternalSyncRequest {
-
-                    /** ExternalSyncParallelLevel enum. */
-                    enum ExternalSyncParallelLevel {
-                        EXTERNAL_SYNC_PARALLEL_LEVEL_UNSPECIFIED = 0,
-                        MIN = 1,
-                        OPTIMAL = 2,
-                        MAX = 3
-                    }
                 }
 
                 /** Properties of a SqlInstancesResetReplicaSizeRequest. */
@@ -14185,6 +14182,9 @@ export namespace google {
 
                     /** DatabaseInstance dnsName */
                     dnsName?: (string|null);
+
+                    /** DatabaseInstance primaryDnsName */
+                    primaryDnsName?: (string|null);
                 }
 
                 /** Represents a DatabaseInstance. */
@@ -14310,6 +14310,9 @@ export namespace google {
                     /** DatabaseInstance dnsName. */
                     public dnsName?: (string|null);
 
+                    /** DatabaseInstance primaryDnsName. */
+                    public primaryDnsName?: (string|null);
+
                     /** DatabaseInstance _outOfDiskReport. */
                     public _outOfDiskReport?: "outOfDiskReport";
 
@@ -14318,6 +14321,9 @@ export namespace google {
 
                     /** DatabaseInstance _dnsName. */
                     public _dnsName?: "dnsName";
+
+                    /** DatabaseInstance _primaryDnsName. */
+                    public _primaryDnsName?: "primaryDnsName";
 
                     /**
                      * Creates a new DatabaseInstance instance using the specified properties.
@@ -15655,7 +15661,8 @@ export namespace google {
                         INSUFFICIENT_GCS_PERMISSIONS = 31,
                         INVALID_FILE_INFO = 32,
                         UNSUPPORTED_DATABASE_SETTINGS = 33,
-                        MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE = 34
+                        MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE = 34,
+                        LOCAL_INFILE_OFF = 35
                     }
                 }
 
@@ -24017,6 +24024,14 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** ExternalSyncParallelLevel enum. */
+                enum ExternalSyncParallelLevel {
+                    EXTERNAL_SYNC_PARALLEL_LEVEL_UNSPECIFIED = 0,
+                    MIN = 1,
+                    OPTIMAL = 2,
+                    MAX = 3
+                }
+
                 /** Properties of a SqlInstancesVerifyExternalSyncSettingsRequest. */
                 interface ISqlInstancesVerifyExternalSyncSettingsRequest {
 
@@ -24176,7 +24191,7 @@ export namespace google {
                     mysqlSyncConfig?: (google.cloud.sql.v1beta4.IMySqlSyncConfig|null);
 
                     /** SqlInstancesStartExternalSyncRequest syncParallelLevel */
-                    syncParallelLevel?: (google.cloud.sql.v1beta4.SqlInstancesStartExternalSyncRequest.ExternalSyncParallelLevel|keyof typeof google.cloud.sql.v1beta4.SqlInstancesStartExternalSyncRequest.ExternalSyncParallelLevel|null);
+                    syncParallelLevel?: (google.cloud.sql.v1beta4.ExternalSyncParallelLevel|keyof typeof google.cloud.sql.v1beta4.ExternalSyncParallelLevel|null);
                 }
 
                 /** Represents a SqlInstancesStartExternalSyncRequest. */
@@ -24204,7 +24219,7 @@ export namespace google {
                     public mysqlSyncConfig?: (google.cloud.sql.v1beta4.IMySqlSyncConfig|null);
 
                     /** SqlInstancesStartExternalSyncRequest syncParallelLevel. */
-                    public syncParallelLevel: (google.cloud.sql.v1beta4.SqlInstancesStartExternalSyncRequest.ExternalSyncParallelLevel|keyof typeof google.cloud.sql.v1beta4.SqlInstancesStartExternalSyncRequest.ExternalSyncParallelLevel);
+                    public syncParallelLevel: (google.cloud.sql.v1beta4.ExternalSyncParallelLevel|keyof typeof google.cloud.sql.v1beta4.ExternalSyncParallelLevel);
 
                     /** SqlInstancesStartExternalSyncRequest syncConfig. */
                     public syncConfig?: "mysqlSyncConfig";
@@ -24285,17 +24300,6 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace SqlInstancesStartExternalSyncRequest {
-
-                    /** ExternalSyncParallelLevel enum. */
-                    enum ExternalSyncParallelLevel {
-                        EXTERNAL_SYNC_PARALLEL_LEVEL_UNSPECIFIED = 0,
-                        MIN = 1,
-                        OPTIMAL = 2,
-                        MAX = 3
-                    }
                 }
 
                 /** Properties of a SqlInstancesResetReplicaSizeRequest. */
@@ -27399,6 +27403,9 @@ export namespace google {
 
                     /** DatabaseInstance dnsName */
                     dnsName?: (string|null);
+
+                    /** DatabaseInstance primaryDnsName */
+                    primaryDnsName?: (string|null);
                 }
 
                 /** Represents a DatabaseInstance. */
@@ -27524,6 +27531,9 @@ export namespace google {
                     /** DatabaseInstance dnsName. */
                     public dnsName?: (string|null);
 
+                    /** DatabaseInstance primaryDnsName. */
+                    public primaryDnsName?: (string|null);
+
                     /** DatabaseInstance _outOfDiskReport. */
                     public _outOfDiskReport?: "outOfDiskReport";
 
@@ -27532,6 +27542,9 @@ export namespace google {
 
                     /** DatabaseInstance _dnsName. */
                     public _dnsName?: "dnsName";
+
+                    /** DatabaseInstance _primaryDnsName. */
+                    public _primaryDnsName?: "primaryDnsName";
 
                     /**
                      * Creates a new DatabaseInstance instance using the specified properties.
@@ -31453,7 +31466,8 @@ export namespace google {
                         INSUFFICIENT_GCS_PERMISSIONS = 31,
                         INVALID_FILE_INFO = 32,
                         UNSUPPORTED_DATABASE_SETTINGS = 33,
-                        MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE = 34
+                        MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE = 34,
+                        LOCAL_INFILE_OFF = 35
                     }
                 }
 
