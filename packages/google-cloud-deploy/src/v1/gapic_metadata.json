@@ -15,6 +15,11 @@
                 "getDeliveryPipeline"
               ]
             },
+            "RollbackTarget": {
+              "methods": [
+                "rollbackTarget"
+              ]
+            },
             "GetTarget": {
               "methods": [
                 "getTarget"
@@ -75,6 +80,21 @@
                 "getConfig"
               ]
             },
+            "GetAutomation": {
+              "methods": [
+                "getAutomation"
+              ]
+            },
+            "GetAutomationRun": {
+              "methods": [
+                "getAutomationRun"
+              ]
+            },
+            "CancelAutomationRun": {
+              "methods": [
+                "cancelAutomationRun"
+              ]
+            },
             "CreateDeliveryPipeline": {
               "methods": [
                 "createDeliveryPipeline"
@@ -115,6 +135,21 @@
                 "createRollout"
               ]
             },
+            "CreateAutomation": {
+              "methods": [
+                "createAutomation"
+              ]
+            },
+            "UpdateAutomation": {
+              "methods": [
+                "updateAutomation"
+              ]
+            },
+            "DeleteAutomation": {
+              "methods": [
+                "deleteAutomation"
+              ]
+            },
             "ListDeliveryPipelines": {
               "methods": [
                 "listDeliveryPipelines",
@@ -148,6 +183,20 @@
                 "listJobRuns",
                 "listJobRunsStream",
                 "listJobRunsAsync"
+              ]
+            },
+            "ListAutomations": {
+              "methods": [
+                "listAutomations",
+                "listAutomationsStream",
+                "listAutomationsAsync"
+              ]
+            },
+            "ListAutomationRuns": {
+              "methods": [
+                "listAutomationRuns",
+                "listAutomationRunsStream",
+                "listAutomationRunsAsync"
               ]
             }
           }
@@ -160,6 +209,11 @@
                 "getDeliveryPipeline"
               ]
             },
+            "RollbackTarget": {
+              "methods": [
+                "rollbackTarget"
+              ]
+            },
             "GetTarget": {
               "methods": [
                 "getTarget"
@@ -220,6 +274,21 @@
                 "getConfig"
               ]
             },
+            "GetAutomation": {
+              "methods": [
+                "getAutomation"
+              ]
+            },
+            "GetAutomationRun": {
+              "methods": [
+                "getAutomationRun"
+              ]
+            },
+            "CancelAutomationRun": {
+              "methods": [
+                "cancelAutomationRun"
+              ]
+            },
             "CreateDeliveryPipeline": {
               "methods": [
                 "createDeliveryPipeline"
@@ -260,6 +329,21 @@
                 "createRollout"
               ]
             },
+            "CreateAutomation": {
+              "methods": [
+                "createAutomation"
+              ]
+            },
+            "UpdateAutomation": {
+              "methods": [
+                "updateAutomation"
+              ]
+            },
+            "DeleteAutomation": {
+              "methods": [
+                "deleteAutomation"
+              ]
+            },
             "ListDeliveryPipelines": {
               "methods": [
                 "listDeliveryPipelines",
@@ -293,6 +377,20 @@
                 "listJobRuns",
                 "listJobRunsStream",
                 "listJobRunsAsync"
+              ]
+            },
+            "ListAutomations": {
+              "methods": [
+                "listAutomations",
+                "listAutomationsStream",
+                "listAutomationsAsync"
+              ]
+            },
+            "ListAutomationRuns": {
+              "methods": [
+                "listAutomationRuns",
+                "listAutomationRunsStream",
+                "listAutomationRunsAsync"
               ]
             }
           }
