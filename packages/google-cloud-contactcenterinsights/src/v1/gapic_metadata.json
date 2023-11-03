@@ -150,6 +150,11 @@
                 "bulkAnalyzeConversations"
               ]
             },
+            "BulkDeleteConversations": {
+              "methods": [
+                "bulkDeleteConversations"
+              ]
+            },
             "IngestConversations": {
               "methods": [
                 "ingestConversations"
@@ -351,6 +356,11 @@
             "BulkAnalyzeConversations": {
               "methods": [
                 "bulkAnalyzeConversations"
+              ]
+            },
+            "BulkDeleteConversations": {
+              "methods": [
+                "bulkDeleteConversations"
               ]
             },
             "IngestConversations": {

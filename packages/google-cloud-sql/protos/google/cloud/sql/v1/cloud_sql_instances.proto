@@ -593,6 +593,21 @@ message BackupReencryptionConfig {
   optional BackupType backup_type = 2;
 }
 
+// External Sync parallel level.
+enum ExternalSyncParallelLevel {
+  // Unknown sync parallel level. Will be defaulted to OPTIMAL.
+  EXTERNAL_SYNC_PARALLEL_LEVEL_UNSPECIFIED = 0;
+
+  // Minimal parallel level.
+  MIN = 1;
+
+  // Optimal parallel level.
+  OPTIMAL = 2;
+
+  // Maximum parallel level.
+  MAX = 3;
+}
+
 // Instance get disk shrink config request.
 message SqlInstancesGetDiskShrinkConfigRequest {
   // Cloud SQL instance ID. This does not include the project ID.
@@ -641,21 +656,6 @@ message SqlInstancesVerifyExternalSyncSettingsRequest {
 
 // Instance start external sync request.
 message SqlInstancesStartExternalSyncRequest {
-  // External Sync parallel level.
-  enum ExternalSyncParallelLevel {
-    // Unknown sync parallel level. Will be defaulted to OPTIMAL.
-    EXTERNAL_SYNC_PARALLEL_LEVEL_UNSPECIFIED = 0;
-
-    // Minimal parallel level.
-    MIN = 1;
-
-    // Optimal parallel level.
-    OPTIMAL = 2;
-
-    // Maximum parallel level.
-    MAX = 3;
-  }
-
   // Cloud SQL instance ID. This does not include the project ID.
   string instance = 1;
 
@@ -1119,6 +1119,10 @@ message DatabaseInstance {
 
   // Output only. The dns name of the instance.
   optional string dns_name = 49 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The dns name of the primary instance in a replication group.
+  optional string primary_dns_name = 51
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Reschedule options for maintenance windows.
@@ -1334,6 +1338,9 @@ message SqlExternalSyncSettingError {
     // The replication user is missing parallel import specific privileges.
     // (e.g. LOCK TABLES) for MySQL.
     MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE = 34;
+
+    // The global variable local_infile is off on external server replica.
+    LOCAL_INFILE_OFF = 35;
   }
 
   // Can be `sql#externalSyncSettingError` or

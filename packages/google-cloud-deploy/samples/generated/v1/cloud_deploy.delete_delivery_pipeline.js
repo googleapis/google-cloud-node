@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. The name of the `DeliveryPipeline` to delete. Format should be
-   *  projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}.
+   *  `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
    */
   // const name = 'abc123'
   /**
