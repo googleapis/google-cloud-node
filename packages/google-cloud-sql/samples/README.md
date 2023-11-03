@@ -34,6 +34,7 @@
   * [Sql_instances_service.failover](#sql_instances_service.failover)
   * [Sql_instances_service.get](#sql_instances_service.get)
   * [Sql_instances_service.get_disk_shrink_config](#sql_instances_service.get_disk_shrink_config)
+  * [Sql_instances_service.get_latest_recovery_time](#sql_instances_service.get_latest_recovery_time)
   * [Sql_instances_service.import](#sql_instances_service.import)
   * [Sql_instances_service.insert](#sql_instances_service.insert)
   * [Sql_instances_service.list](#sql_instances_service.list)
@@ -89,6 +90,7 @@
   * [Sql_instances_service.failover](#sql_instances_service.failover)
   * [Sql_instances_service.get](#sql_instances_service.get)
   * [Sql_instances_service.get_disk_shrink_config](#sql_instances_service.get_disk_shrink_config)
+  * [Sql_instances_service.get_latest_recovery_time](#sql_instances_service.get_latest_recovery_time)
   * [Sql_instances_service.import](#sql_instances_service.import)
   * [Sql_instances_service.insert](#sql_instances_service.insert)
   * [Sql_instances_service.list](#sql_instances_service.list)
@@ -506,6 +508,23 @@ __Usage:__
 
 
 `node packages/google-cloud-sql/samples/generated/v1/sql_instances_service.get_disk_shrink_config.js`
+
+
+-----
+
+
+
+
+### Sql_instances_service.get_latest_recovery_time
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.get_latest_recovery_time.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.get_latest_recovery_time.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-sql/samples/generated/v1/sql_instances_service.get_latest_recovery_time.js`
 
 
 -----
@@ -1441,6 +1460,23 @@ __Usage:__
 
 
 `node packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.get_disk_shrink_config.js`
+
+
+-----
+
+
+
+
+### Sql_instances_service.get_latest_recovery_time
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.get_latest_recovery_time.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.get_latest_recovery_time.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.get_latest_recovery_time.js`
 
 
 -----

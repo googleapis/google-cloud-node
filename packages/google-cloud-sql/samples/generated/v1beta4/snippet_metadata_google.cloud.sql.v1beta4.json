@@ -1865,7 +1865,7 @@
                     },
                     {
                         "name": "sync_parallel_level",
-                        "type": ".google.cloud.sql.v1beta4.SqlInstancesStartExternalSyncRequest.ExternalSyncParallelLevel"
+                        "type": ".google.cloud.sql.v1beta4.ExternalSyncParallelLevel"
                     }
                 ],
                 "resultType": ".google.cloud.sql.v1beta4.Operation",
