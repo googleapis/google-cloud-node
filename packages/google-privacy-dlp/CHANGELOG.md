@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.0.1...dlp-v5.1.0) (2023-11-03)
+
+
+### Features
+
+* [dlp] Introduce Discovery API protos and methods ([#4761](https://github.com/googleapis/google-cloud-node/issues/4761)) ([692e10f](https://github.com/googleapis/google-cloud-node/commit/692e10f7734a4d2bf6b94fb46e5656b16ea54685))
+
 ## [5.0.1](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.0.0...dlp-v5.0.1) (2023-09-06)
 
 

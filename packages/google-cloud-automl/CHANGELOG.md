@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+## [4.0.3](https://github.com/googleapis/google-cloud-node/compare/automl-v4.0.2...automl-v4.0.3) (2023-11-03)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency mathjs to v12 ([#4765](https://github.com/googleapis/google-cloud-node/issues/4765)) ([e1ca310](https://github.com/googleapis/google-cloud-node/commit/e1ca3103786e35ee41710aebd4b216a7d33a5115))
+
 ## [4.0.2](https://github.com/googleapis/google-cloud-node/compare/automl-v4.0.1...automl-v4.0.2) (2023-09-19)
 
 

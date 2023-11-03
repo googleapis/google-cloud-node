@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.3.0...container-v5.4.0) (2023-11-03)
+
+
+### Features
+
+* [container] add ResourceManagerTags API to attach tags on the underlying Compute Engine VMs of GKE Nodes which can be used to selectively enforce Cloud Firewall network firewall policies ([0bccdc4](https://github.com/googleapis/google-cloud-node/commit/0bccdc4c9704a108cde379e8066965b016b91d2f))
+* [container] add ResourceManagerTags API to attach tags on the underlying Compute Engine VMs of GKE Nodes which can be used to selectively enforce Cloud Firewall network firewall policies ([0bccdc4](https://github.com/googleapis/google-cloud-node/commit/0bccdc4c9704a108cde379e8066965b016b91d2f))
+* [container] added EnterpriseConfig ([0bccdc4](https://github.com/googleapis/google-cloud-node/commit/0bccdc4c9704a108cde379e8066965b016b91d2f))
+* [container] added EnterpriseConfig ([#4774](https://github.com/googleapis/google-cloud-node/issues/4774)) ([0bccdc4](https://github.com/googleapis/google-cloud-node/commit/0bccdc4c9704a108cde379e8066965b016b91d2f))
+* Add a new cluster field for the cluster tier of GKE clusters ([0bccdc4](https://github.com/googleapis/google-cloud-node/commit/0bccdc4c9704a108cde379e8066965b016b91d2f))
+* Add a new cluster field for the cluster tier of GKE clusters ([0bccdc4](https://github.com/googleapis/google-cloud-node/commit/0bccdc4c9704a108cde379e8066965b016b91d2f))
+
 ## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.2.0...container-v5.3.0) (2023-09-19)
 
 

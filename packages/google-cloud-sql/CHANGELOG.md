@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.1.0...sql-v0.2.0) (2023-11-03)
+
+
+### Features
+
+* [sql] a new value `LOCAL_INFILE_OFF` is added to enum `SqlExternalSyncSettingErrorType` ([#4728](https://github.com/googleapis/google-cloud-node/issues/4728)) ([b71e06c](https://github.com/googleapis/google-cloud-node/commit/b71e06c8c53f7425a6fe5ac265d7d278e15b5499))
+
 ## 0.1.0 (2023-09-06)
 
 
