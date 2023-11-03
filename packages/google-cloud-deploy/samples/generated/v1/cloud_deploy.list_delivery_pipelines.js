@@ -30,7 +30,7 @@ function main(parent) {
    */
   /**
    *  Required. The parent, which owns this collection of pipelines. Format must
-   *  be projects/{project_id}/locations/{location_name}.
+   *  be `projects/{project_id}/locations/{location_name}`.
    */
   // const parent = 'abc123'
   /**

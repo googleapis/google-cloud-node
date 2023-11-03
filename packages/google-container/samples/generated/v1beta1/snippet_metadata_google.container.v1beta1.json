@@ -230,7 +230,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 178,
+                    "end": 184,
                     "type": "FULL"
                 }
             ],
@@ -346,6 +346,10 @@
                     {
                         "name": "disk_size_gb",
                         "type": "TYPE_INT64"
+                    },
+                    {
+                        "name": "resource_manager_tags",
+                        "type": ".google.container.v1beta1.ResourceManagerTags"
                     }
                 ],
                 "resultType": ".google.container.v1beta1.Operation",
