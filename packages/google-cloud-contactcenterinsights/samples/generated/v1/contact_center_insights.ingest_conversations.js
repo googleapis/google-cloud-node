@@ -45,6 +45,16 @@ function main(parent) {
    *  Configuration that applies to all conversations.
    */
   // const conversationConfig = {}
+  /**
+   *  Optional. DLP settings for transcript redaction. Optional, will default to
+   *  the config specified in Settings.
+   */
+  // const redactionConfig = {}
+  /**
+   *  Optional. Default Speech-to-Text configuration. Optional, will default to
+   *  the config specified in Settings.
+   */
+  // const speechConfig = {}
 
   // Imports the Contactcenterinsights library
   const {ContactCenterInsightsClient} = require('@google-cloud/contact-center-insights').v1;
