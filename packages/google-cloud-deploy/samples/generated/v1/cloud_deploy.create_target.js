@@ -31,7 +31,7 @@ function main(parent, targetId, target) {
   /**
    *  Required. The parent collection in which the `Target` should be created.
    *  Format should be
-   *  projects/{project_id}/locations/{location_name}.
+   *  `projects/{project_id}/locations/{location_name}`.
    */
   // const parent = 'abc123'
   /**

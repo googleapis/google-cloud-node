@@ -152,6 +152,12 @@ function main(projectId, zone, clusterId, nodePoolId, nodeVersion, imageType) {
    *  node pool to the specified disk size.
    */
   // const diskSizeGb = 1234
+  /**
+   *  Desired resource manager tag keys and values to be attached to the nodes
+   *  for managing Compute Engine firewalls using Network Firewall Policies.
+   *  Existing tags will be replaced with new values.
+   */
+  // const resourceManagerTags = {}
 
   // Imports the Container library
   const {ClusterManagerClient} = require('@google-cloud/container').v1beta1;
