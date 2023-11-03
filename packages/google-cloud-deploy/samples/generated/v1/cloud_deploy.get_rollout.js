@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. Name of the `Rollout`. Format must be
-   *  projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}/releases/{release_name}/rollouts/{rollout_name}.
+   *  `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}/releases/{release_name}/rollouts/{rollout_name}`.
    */
   // const name = 'abc123'
 
