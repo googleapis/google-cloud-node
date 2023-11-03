@@ -15,7 +15,6 @@
 'use strict';
 
 async function main(projectId, location) {
-  // [START workflows_quickstart]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -32,7 +31,6 @@ async function main(projectId, location) {
     }
   }
   listWorkflows();
-  // [END workflows_quickstart]
 }
 
 process.on('unhandledRejection', (err) => {
