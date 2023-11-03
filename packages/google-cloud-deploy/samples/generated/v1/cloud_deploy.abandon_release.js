@@ -30,8 +30,7 @@ function main(name) {
    */
   /**
    *  Required. Name of the Release. Format is
-   *  projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/
-   *  releases/{release}.
+   *  `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}`.
    */
   // const name = 'abc123'
 

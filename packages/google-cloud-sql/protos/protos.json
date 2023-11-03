@@ -2950,6 +2950,14 @@
                         }
                       }
                     },
+                    "ExternalSyncParallelLevel": {
+                      "values": {
+                        "EXTERNAL_SYNC_PARALLEL_LEVEL_UNSPECIFIED": 0,
+                        "MIN": 1,
+                        "OPTIMAL": 2,
+                        "MAX": 3
+                      }
+                    },
                     "SqlInstancesGetDiskShrinkConfigRequest": {
                       "fields": {
                         "instance": {
@@ -3046,16 +3054,6 @@
                           "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "ExternalSyncParallelLevel": {
-                          "values": {
-                            "EXTERNAL_SYNC_PARALLEL_LEVEL_UNSPECIFIED": 0,
-                            "MIN": 1,
-                            "OPTIMAL": 2,
-                            "MAX": 3
                           }
                         }
                       }
@@ -3341,6 +3339,11 @@
                           "oneof": [
                             "dnsName"
                           ]
+                        },
+                        "_primaryDnsName": {
+                          "oneof": [
+                            "primaryDnsName"
+                          ]
                         }
                       },
                       "fields": {
@@ -3524,6 +3527,14 @@
                         "dnsName": {
                           "type": "string",
                           "id": 49,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "primaryDnsName": {
+                          "type": "string",
+                          "id": 51,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
@@ -3799,7 +3810,8 @@
                             "INSUFFICIENT_GCS_PERMISSIONS": 31,
                             "INVALID_FILE_INFO": 32,
                             "UNSUPPORTED_DATABASE_SETTINGS": 33,
-                            "MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE": 34
+                            "MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE": 34,
+                            "LOCAL_INFILE_OFF": 35
                           }
                         }
                       }
@@ -5898,6 +5910,14 @@
                         }
                       }
                     },
+                    "ExternalSyncParallelLevel": {
+                      "values": {
+                        "EXTERNAL_SYNC_PARALLEL_LEVEL_UNSPECIFIED": 0,
+                        "MIN": 1,
+                        "OPTIMAL": 2,
+                        "MAX": 3
+                      }
+                    },
                     "SqlInstancesVerifyExternalSyncSettingsRequest": {
                       "oneofs": {
                         "syncConfig": {
@@ -5982,16 +6002,6 @@
                           "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "ExternalSyncParallelLevel": {
-                          "values": {
-                            "EXTERNAL_SYNC_PARALLEL_LEVEL_UNSPECIFIED": 0,
-                            "MIN": 1,
-                            "OPTIMAL": 2,
-                            "MAX": 3
                           }
                         }
                       }
@@ -6552,6 +6562,11 @@
                           "oneof": [
                             "dnsName"
                           ]
+                        },
+                        "_primaryDnsName": {
+                          "oneof": [
+                            "primaryDnsName"
+                          ]
                         }
                       },
                       "fields": {
@@ -6735,6 +6750,14 @@
                         "dnsName": {
                           "type": "string",
                           "id": 49,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "primaryDnsName": {
+                          "type": "string",
+                          "id": 51,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
@@ -7452,7 +7475,8 @@
                             "INSUFFICIENT_GCS_PERMISSIONS": 31,
                             "INVALID_FILE_INFO": 32,
                             "UNSUPPORTED_DATABASE_SETTINGS": 33,
-                            "MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE": 34
+                            "MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE": 34,
+                            "LOCAL_INFILE_OFF": 35
                           }
                         }
                       }
