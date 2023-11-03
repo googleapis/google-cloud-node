@@ -29,8 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name of the organization and inspectTemplate to be read, for
-   *  example `organizations/433245324/inspectTemplates/432452342` or
+   *  Required. Resource name of the organization and inspectTemplate to be read,
+   *  for example `organizations/433245324/inspectTemplates/432452342` or
    *  projects/project-id/inspectTemplates/432452342.
    */
   // const name = 'abc123'

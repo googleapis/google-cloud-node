@@ -30,8 +30,7 @@ function main(name) {
    */
   /**
    *  Required. Name of the `JobRun`. Format must be
-   *  projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/
-   *  releases/{release}/rollouts/{rollout}/jobRuns/{jobRun}.
+   *  `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/{rollout}/jobRuns/{jobRun}`.
    */
   // const name = 'abc123'
 

@@ -33,8 +33,8 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  Optional. Full file paths to reset back to their committed state including filename,
-   *  rooted at workspace root. If left empty, all files will be reset.
+   *  Optional. Full file paths to reset back to their committed state including
+   *  filename, rooted at workspace root. If left empty, all files will be reset.
    */
   // const paths = ['abc','def']
   /**

@@ -33,22 +33,23 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  Optional. Maximum number of compilation results to return. The server may return
-   *  fewer items than requested. If unspecified, the server will pick an
+   *  Optional. Maximum number of compilation results to return. The server may
+   *  return fewer items than requested. If unspecified, the server will pick an
    *  appropriate default.
    */
   // const pageSize = 1234
   /**
-   *  Optional. Page token received from a previous `QueryCompilationResultActions` call.
-   *  Provide this to retrieve the subsequent page.
+   *  Optional. Page token received from a previous
+   *  `QueryCompilationResultActions` call. Provide this to retrieve the
+   *  subsequent page.
    *  When paginating, all other parameters provided to
    *  `QueryCompilationResultActions` must match the call that provided the page
    *  token.
    */
   // const pageToken = 'abc123'
   /**
-   *  Optional. Optional filter for the returned list. Filtering is only currently
-   *  supported on the `file_path` field.
+   *  Optional. Optional filter for the returned list. Filtering is only
+   *  currently supported on the `file_path` field.
    */
   // const filter = 'abc123'
 

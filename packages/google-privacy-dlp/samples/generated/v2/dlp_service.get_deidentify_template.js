@@ -29,9 +29,9 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name of the organization and deidentify template to be read, for
-   *  example `organizations/433245324/deidentifyTemplates/432452342` or
-   *  projects/project-id/deidentifyTemplates/432452342.
+   *  Required. Resource name of the organization and deidentify template to be
+   *  read, for example `organizations/433245324/deidentifyTemplates/432452342`
+   *  or projects/project-id/deidentifyTemplates/432452342.
    */
   // const name = 'abc123'
 

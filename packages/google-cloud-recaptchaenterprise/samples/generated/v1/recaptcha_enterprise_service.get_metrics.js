@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. The name of the requested metrics, in the format
-   *  "projects/{project}/keys/{key}/metrics".
+   *  `projects/{project}/keys/{key}/metrics`.
    */
   // const name = 'abc123'
 

@@ -48,19 +48,19 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  Page token to continue retrieval. Comes from previous call
+   *  Page token to continue retrieval. Comes from the previous call
    *  to `ListDeidentifyTemplates`.
    */
   // const pageToken = 'abc123'
   /**
-   *  Size of the page, can be limited by the server. If zero server returns
-   *  a page of max size 100.
+   *  Size of the page. This value can be limited by the server. If zero server
+   *  returns a page of max size 100.
    */
   // const pageSize = 1234
   /**
    *  Comma separated list of fields to order by,
-   *  followed by `asc` or `desc` postfix. This list is case-insensitive,
-   *  default sorting order is ascending, redundant space characters are
+   *  followed by `asc` or `desc` postfix. This list is case insensitive. The
+   *  default sorting order is ascending. Redundant space characters are
    *  insignificant.
    *  Example: `name asc,update_time, create_time desc`
    *  Supported fields are:

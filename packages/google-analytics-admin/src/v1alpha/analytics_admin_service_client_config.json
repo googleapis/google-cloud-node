@@ -88,56 +88,6 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
-        "GetUserLink": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
-        },
-        "BatchGetUserLinks": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
-        },
-        "ListUserLinks": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
-        },
-        "AuditUserLinks": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
-        },
-        "CreateUserLink": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
-        },
-        "BatchCreateUserLinks": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
-        },
-        "UpdateUserLink": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
-        },
-        "BatchUpdateUserLinks": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
-        },
-        "DeleteUserLink": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
-        },
-        "BatchDeleteUserLinks": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
-        },
         "CreateFirebaseLink": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
@@ -669,6 +619,56 @@
           "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
         },
         "DeleteEventCreateRule": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "UpdateDataRedactionSettings": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "GetDataRedactionSettings": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "CreateRollupProperty": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "GetRollupPropertySourceLink": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "ListRollupPropertySourceLinks": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "CreateRollupPropertySourceLink": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "DeleteRollupPropertySourceLink": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "CreateSubproperty": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "DeleteSubpropertyEventFilter": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "CreateSubpropertyEventFilter": {
           "timeout_millis": 60000,
           "retry_codes_name": "unknown_unavailable",
           "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"

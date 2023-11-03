@@ -130,6 +130,31 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "CreateDiscoveryConfig": {
+          "timeout_millis": 300000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateDiscoveryConfig": {
+          "timeout_millis": 300000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetDiscoveryConfig": {
+          "timeout_millis": 300000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "ListDiscoveryConfigs": {
+          "timeout_millis": 300000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteDiscoveryConfig": {
+          "timeout_millis": 300000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
         "CreateDlpJob": {
           "timeout_millis": 300000,
           "retry_codes_name": "non_idempotent",

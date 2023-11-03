@@ -7737,6 +7737,20 @@ export namespace google {
                     public testIamPermissions(request: google.iam.v1.ITestIamPermissionsRequest): Promise<google.iam.v1.TestIamPermissionsResponse>;
 
                     /**
+                     * Calls SimulateSecurityHealthAnalyticsCustomModule.
+                     * @param request SimulateSecurityHealthAnalyticsCustomModuleRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SimulateSecurityHealthAnalyticsCustomModuleResponse
+                     */
+                    public simulateSecurityHealthAnalyticsCustomModule(request: google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest, callback: google.cloud.securitycenter.v1.SecurityCenter.SimulateSecurityHealthAnalyticsCustomModuleCallback): void;
+
+                    /**
+                     * Calls SimulateSecurityHealthAnalyticsCustomModule.
+                     * @param request SimulateSecurityHealthAnalyticsCustomModuleRequest message or plain object
+                     * @returns Promise
+                     */
+                    public simulateSecurityHealthAnalyticsCustomModule(request: google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest): Promise<google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse>;
+
+                    /**
                      * Calls UpdateExternalSystem.
                      * @param request UpdateExternalSystemRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ExternalSystem
@@ -8130,6 +8144,13 @@ export namespace google {
                      * @param [response] TestIamPermissionsResponse
                      */
                     type TestIamPermissionsCallback = (error: (Error|null), response?: google.iam.v1.TestIamPermissionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter|simulateSecurityHealthAnalyticsCustomModule}.
+                     * @param error Error, if any
+                     * @param [response] SimulateSecurityHealthAnalyticsCustomModuleResponse
+                     */
+                    type SimulateSecurityHealthAnalyticsCustomModuleCallback = (error: (Error|null), response?: google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter|updateExternalSystem}.
@@ -12985,6 +13006,439 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SimulateSecurityHealthAnalyticsCustomModuleRequest. */
+                interface ISimulateSecurityHealthAnalyticsCustomModuleRequest {
+
+                    /** SimulateSecurityHealthAnalyticsCustomModuleRequest parent */
+                    parent?: (string|null);
+
+                    /** SimulateSecurityHealthAnalyticsCustomModuleRequest customConfig */
+                    customConfig?: (google.cloud.securitycenter.v1.ICustomConfig|null);
+
+                    /** SimulateSecurityHealthAnalyticsCustomModuleRequest resource */
+                    resource?: (google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest.ISimulatedResource|null);
+                }
+
+                /** Represents a SimulateSecurityHealthAnalyticsCustomModuleRequest. */
+                class SimulateSecurityHealthAnalyticsCustomModuleRequest implements ISimulateSecurityHealthAnalyticsCustomModuleRequest {
+
+                    /**
+                     * Constructs a new SimulateSecurityHealthAnalyticsCustomModuleRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest);
+
+                    /** SimulateSecurityHealthAnalyticsCustomModuleRequest parent. */
+                    public parent: string;
+
+                    /** SimulateSecurityHealthAnalyticsCustomModuleRequest customConfig. */
+                    public customConfig?: (google.cloud.securitycenter.v1.ICustomConfig|null);
+
+                    /** SimulateSecurityHealthAnalyticsCustomModuleRequest resource. */
+                    public resource?: (google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest.ISimulatedResource|null);
+
+                    /**
+                     * Creates a new SimulateSecurityHealthAnalyticsCustomModuleRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SimulateSecurityHealthAnalyticsCustomModuleRequest instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest): google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest;
+
+                    /**
+                     * Encodes the specified SimulateSecurityHealthAnalyticsCustomModuleRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest.verify|verify} messages.
+                     * @param message SimulateSecurityHealthAnalyticsCustomModuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SimulateSecurityHealthAnalyticsCustomModuleRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest.verify|verify} messages.
+                     * @param message SimulateSecurityHealthAnalyticsCustomModuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SimulateSecurityHealthAnalyticsCustomModuleRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SimulateSecurityHealthAnalyticsCustomModuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest;
+
+                    /**
+                     * Decodes a SimulateSecurityHealthAnalyticsCustomModuleRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SimulateSecurityHealthAnalyticsCustomModuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest;
+
+                    /**
+                     * Verifies a SimulateSecurityHealthAnalyticsCustomModuleRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SimulateSecurityHealthAnalyticsCustomModuleRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SimulateSecurityHealthAnalyticsCustomModuleRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest;
+
+                    /**
+                     * Creates a plain object from a SimulateSecurityHealthAnalyticsCustomModuleRequest message. Also converts values to other types if specified.
+                     * @param message SimulateSecurityHealthAnalyticsCustomModuleRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SimulateSecurityHealthAnalyticsCustomModuleRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SimulateSecurityHealthAnalyticsCustomModuleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SimulateSecurityHealthAnalyticsCustomModuleRequest {
+
+                    /** Properties of a SimulatedResource. */
+                    interface ISimulatedResource {
+
+                        /** SimulatedResource resourceType */
+                        resourceType?: (string|null);
+
+                        /** SimulatedResource resourceData */
+                        resourceData?: (google.protobuf.IStruct|null);
+
+                        /** SimulatedResource iamPolicyData */
+                        iamPolicyData?: (google.iam.v1.IPolicy|null);
+                    }
+
+                    /** Represents a SimulatedResource. */
+                    class SimulatedResource implements ISimulatedResource {
+
+                        /**
+                         * Constructs a new SimulatedResource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest.ISimulatedResource);
+
+                        /** SimulatedResource resourceType. */
+                        public resourceType: string;
+
+                        /** SimulatedResource resourceData. */
+                        public resourceData?: (google.protobuf.IStruct|null);
+
+                        /** SimulatedResource iamPolicyData. */
+                        public iamPolicyData?: (google.iam.v1.IPolicy|null);
+
+                        /**
+                         * Creates a new SimulatedResource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SimulatedResource instance
+                         */
+                        public static create(properties?: google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest.ISimulatedResource): google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest.SimulatedResource;
+
+                        /**
+                         * Encodes the specified SimulatedResource message. Does not implicitly {@link google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest.SimulatedResource.verify|verify} messages.
+                         * @param message SimulatedResource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest.ISimulatedResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SimulatedResource message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest.SimulatedResource.verify|verify} messages.
+                         * @param message SimulatedResource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest.ISimulatedResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SimulatedResource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SimulatedResource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest.SimulatedResource;
+
+                        /**
+                         * Decodes a SimulatedResource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SimulatedResource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest.SimulatedResource;
+
+                        /**
+                         * Verifies a SimulatedResource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SimulatedResource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SimulatedResource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest.SimulatedResource;
+
+                        /**
+                         * Creates a plain object from a SimulatedResource message. Also converts values to other types if specified.
+                         * @param message SimulatedResource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest.SimulatedResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SimulatedResource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SimulatedResource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a SimulateSecurityHealthAnalyticsCustomModuleResponse. */
+                interface ISimulateSecurityHealthAnalyticsCustomModuleResponse {
+
+                    /** SimulateSecurityHealthAnalyticsCustomModuleResponse result */
+                    result?: (google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse.ISimulatedResult|null);
+                }
+
+                /** Represents a SimulateSecurityHealthAnalyticsCustomModuleResponse. */
+                class SimulateSecurityHealthAnalyticsCustomModuleResponse implements ISimulateSecurityHealthAnalyticsCustomModuleResponse {
+
+                    /**
+                     * Constructs a new SimulateSecurityHealthAnalyticsCustomModuleResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleResponse);
+
+                    /** SimulateSecurityHealthAnalyticsCustomModuleResponse result. */
+                    public result?: (google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse.ISimulatedResult|null);
+
+                    /**
+                     * Creates a new SimulateSecurityHealthAnalyticsCustomModuleResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SimulateSecurityHealthAnalyticsCustomModuleResponse instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleResponse): google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse;
+
+                    /**
+                     * Encodes the specified SimulateSecurityHealthAnalyticsCustomModuleResponse message. Does not implicitly {@link google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse.verify|verify} messages.
+                     * @param message SimulateSecurityHealthAnalyticsCustomModuleResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SimulateSecurityHealthAnalyticsCustomModuleResponse message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse.verify|verify} messages.
+                     * @param message SimulateSecurityHealthAnalyticsCustomModuleResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SimulateSecurityHealthAnalyticsCustomModuleResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SimulateSecurityHealthAnalyticsCustomModuleResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse;
+
+                    /**
+                     * Decodes a SimulateSecurityHealthAnalyticsCustomModuleResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SimulateSecurityHealthAnalyticsCustomModuleResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse;
+
+                    /**
+                     * Verifies a SimulateSecurityHealthAnalyticsCustomModuleResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SimulateSecurityHealthAnalyticsCustomModuleResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SimulateSecurityHealthAnalyticsCustomModuleResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse;
+
+                    /**
+                     * Creates a plain object from a SimulateSecurityHealthAnalyticsCustomModuleResponse message. Also converts values to other types if specified.
+                     * @param message SimulateSecurityHealthAnalyticsCustomModuleResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SimulateSecurityHealthAnalyticsCustomModuleResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SimulateSecurityHealthAnalyticsCustomModuleResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SimulateSecurityHealthAnalyticsCustomModuleResponse {
+
+                    /** Properties of a SimulatedResult. */
+                    interface ISimulatedResult {
+
+                        /** SimulatedResult finding */
+                        finding?: (google.cloud.securitycenter.v1.IFinding|null);
+
+                        /** SimulatedResult noViolation */
+                        noViolation?: (google.protobuf.IEmpty|null);
+
+                        /** SimulatedResult error */
+                        error?: (google.rpc.IStatus|null);
+                    }
+
+                    /** Represents a SimulatedResult. */
+                    class SimulatedResult implements ISimulatedResult {
+
+                        /**
+                         * Constructs a new SimulatedResult.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse.ISimulatedResult);
+
+                        /** SimulatedResult finding. */
+                        public finding?: (google.cloud.securitycenter.v1.IFinding|null);
+
+                        /** SimulatedResult noViolation. */
+                        public noViolation?: (google.protobuf.IEmpty|null);
+
+                        /** SimulatedResult error. */
+                        public error?: (google.rpc.IStatus|null);
+
+                        /** SimulatedResult result. */
+                        public result?: ("finding"|"noViolation"|"error");
+
+                        /**
+                         * Creates a new SimulatedResult instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SimulatedResult instance
+                         */
+                        public static create(properties?: google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse.ISimulatedResult): google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse.SimulatedResult;
+
+                        /**
+                         * Encodes the specified SimulatedResult message. Does not implicitly {@link google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse.SimulatedResult.verify|verify} messages.
+                         * @param message SimulatedResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse.ISimulatedResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SimulatedResult message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse.SimulatedResult.verify|verify} messages.
+                         * @param message SimulatedResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse.ISimulatedResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SimulatedResult message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SimulatedResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse.SimulatedResult;
+
+                        /**
+                         * Decodes a SimulatedResult message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SimulatedResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse.SimulatedResult;
+
+                        /**
+                         * Verifies a SimulatedResult message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SimulatedResult message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SimulatedResult
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse.SimulatedResult;
+
+                        /**
+                         * Creates a plain object from a SimulatedResult message. Also converts values to other types if specified.
+                         * @param message SimulatedResult
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse.SimulatedResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SimulatedResult to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SimulatedResult
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of an UpdateExternalSystemRequest. */

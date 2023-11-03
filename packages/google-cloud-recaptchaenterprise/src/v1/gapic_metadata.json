@@ -55,11 +55,38 @@
                 "getMetrics"
               ]
             },
+            "CreateFirewallPolicy": {
+              "methods": [
+                "createFirewallPolicy"
+              ]
+            },
+            "GetFirewallPolicy": {
+              "methods": [
+                "getFirewallPolicy"
+              ]
+            },
+            "UpdateFirewallPolicy": {
+              "methods": [
+                "updateFirewallPolicy"
+              ]
+            },
+            "DeleteFirewallPolicy": {
+              "methods": [
+                "deleteFirewallPolicy"
+              ]
+            },
             "ListKeys": {
               "methods": [
                 "listKeys",
                 "listKeysStream",
                 "listKeysAsync"
+              ]
+            },
+            "ListFirewallPolicies": {
+              "methods": [
+                "listFirewallPolicies",
+                "listFirewallPoliciesStream",
+                "listFirewallPoliciesAsync"
               ]
             },
             "ListRelatedAccountGroups": {
@@ -133,11 +160,38 @@
                 "getMetrics"
               ]
             },
+            "CreateFirewallPolicy": {
+              "methods": [
+                "createFirewallPolicy"
+              ]
+            },
+            "GetFirewallPolicy": {
+              "methods": [
+                "getFirewallPolicy"
+              ]
+            },
+            "UpdateFirewallPolicy": {
+              "methods": [
+                "updateFirewallPolicy"
+              ]
+            },
+            "DeleteFirewallPolicy": {
+              "methods": [
+                "deleteFirewallPolicy"
+              ]
+            },
             "ListKeys": {
               "methods": [
                 "listKeys",
                 "listKeysStream",
                 "listKeysAsync"
+              ]
+            },
+            "ListFirewallPolicies": {
+              "methods": [
+                "listFirewallPolicies",
+                "listFirewallPoliciesStream",
+                "listFirewallPoliciesAsync"
               ]
             },
             "ListRelatedAccountGroups": {

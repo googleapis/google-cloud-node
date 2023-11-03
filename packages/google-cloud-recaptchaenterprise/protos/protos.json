@@ -210,6 +210,100 @@
                             }
                           ]
                         },
+                        "CreateFirewallPolicy": {
+                          "requestType": "CreateFirewallPolicyRequest",
+                          "responseType": "FirewallPolicy",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*}/firewallpolicies",
+                            "(google.api.http).body": "firewall_policy",
+                            "(google.api.method_signature)": "parent,firewall_policy"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*}/firewallpolicies",
+                                "body": "firewall_policy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,firewall_policy"
+                            }
+                          ]
+                        },
+                        "ListFirewallPolicies": {
+                          "requestType": "ListFirewallPoliciesRequest",
+                          "responseType": "ListFirewallPoliciesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*}/firewallpolicies",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*}/firewallpolicies"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetFirewallPolicy": {
+                          "requestType": "GetFirewallPolicyRequest",
+                          "responseType": "FirewallPolicy",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/firewallpolicies/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/firewallpolicies/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateFirewallPolicy": {
+                          "requestType": "UpdateFirewallPolicyRequest",
+                          "responseType": "FirewallPolicy",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{firewall_policy.name=projects/*/firewallpolicies/*}",
+                            "(google.api.http).body": "firewall_policy",
+                            "(google.api.method_signature)": "firewall_policy,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{firewall_policy.name=projects/*/firewallpolicies/*}",
+                                "body": "firewall_policy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "firewall_policy,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteFirewallPolicy": {
+                          "requestType": "DeleteFirewallPolicyRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/firewallpolicies/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/firewallpolicies/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "ListRelatedAccountGroups": {
                           "requestType": "ListRelatedAccountGroupsRequest",
                           "responseType": "ListRelatedAccountGroupsResponse",
@@ -579,9 +673,20 @@
                           "type": "PrivatePasswordLeakVerification",
                           "id": 8
                         },
+                        "firewallPolicyAssessment": {
+                          "type": "FirewallPolicyAssessment",
+                          "id": 10
+                        },
                         "fraudPreventionAssessment": {
                           "type": "FraudPreventionAssessment",
                           "id": 11
+                        },
+                        "fraudSignals": {
+                          "type": "FraudSignals",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -625,6 +730,49 @@
                         "hashedAccountId": {
                           "type": "bytes",
                           "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "express": {
+                          "type": "bool",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "requestedUri": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "wafTokenAssessment": {
+                          "type": "bool",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "ja3": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "headers": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "firewallPolicyEvaluation": {
+                          "type": "bool",
+                          "id": 12,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -815,6 +963,11 @@
                           "rule": "repeated",
                           "type": "ClassificationReason",
                           "id": 2
+                        },
+                        "extendedVerdictReasons": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
                         }
                       },
                       "nested": {
@@ -890,6 +1043,10 @@
                         "cardTestingVerdict": {
                           "type": "CardTestingVerdict",
                           "id": 3
+                        },
+                        "behavioralTrustVerdict": {
+                          "type": "BehavioralTrustVerdict",
+                          "id": 4
                         }
                       },
                       "nested": {
@@ -906,6 +1063,74 @@
                             "risk": {
                               "type": "float",
                               "id": 1
+                            }
+                          }
+                        },
+                        "BehavioralTrustVerdict": {
+                          "fields": {
+                            "trust": {
+                              "type": "float",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "FraudSignals": {
+                      "fields": {
+                        "userSignals": {
+                          "type": "UserSignals",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "cardSignals": {
+                          "type": "CardSignals",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "UserSignals": {
+                          "fields": {
+                            "activeDaysLowerBound": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "syntheticRisk": {
+                              "type": "float",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "CardSignals": {
+                          "fields": {
+                            "cardLabels": {
+                              "rule": "repeated",
+                              "type": "CardLabel",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "CardLabel": {
+                              "values": {
+                                "CARD_LABEL_UNSPECIFIED": 0,
+                                "PREPAID": 1,
+                                "VIRTUAL": 2,
+                                "UNEXPECTED_LOCATION": 3
+                              }
                             }
                           }
                         }
@@ -1039,6 +1264,106 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "recaptchaenterprise.googleapis.com/Key"
+                          }
+                        }
+                      }
+                    },
+                    "CreateFirewallPolicyRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
+                        },
+                        "firewallPolicy": {
+                          "type": "FirewallPolicy",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListFirewallPoliciesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListFirewallPoliciesResponse": {
+                      "fields": {
+                        "firewallPolicies": {
+                          "rule": "repeated",
+                          "type": "FirewallPolicy",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetFirewallPolicyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recaptchaenterprise.googleapis.com/FirewallPolicy"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateFirewallPolicyRequest": {
+                      "fields": {
+                        "firewallPolicy": {
+                          "type": "FirewallPolicy",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteFirewallPolicyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recaptchaenterprise.googleapis.com/FirewallPolicy"
                           }
                         }
                       }
@@ -1245,6 +1570,10 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 1
+                        },
+                        "supportNonGoogleAppStoreDistribution": {
+                          "type": "bool",
+                          "id": 3
                         }
                       }
                     },
@@ -1258,6 +1587,35 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 1
+                        },
+                        "appleDeveloperId": {
+                          "type": "AppleDeveloperId",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "AppleDeveloperId": {
+                      "fields": {
+                        "privateKey": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "keyId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "teamId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -1300,6 +1658,116 @@
                         "passedCount": {
                           "type": "int64",
                           "id": 4
+                        }
+                      }
+                    },
+                    "FirewallPolicyAssessment": {
+                      "fields": {
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 5
+                        },
+                        "firewallPolicy": {
+                          "type": "FirewallPolicy",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "FirewallAction": {
+                      "oneofs": {
+                        "firewallActionOneof": {
+                          "oneof": [
+                            "allow",
+                            "block",
+                            "redirect",
+                            "substitute",
+                            "setHeader"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "allow": {
+                          "type": "AllowAction",
+                          "id": 1
+                        },
+                        "block": {
+                          "type": "BlockAction",
+                          "id": 2
+                        },
+                        "redirect": {
+                          "type": "RedirectAction",
+                          "id": 5
+                        },
+                        "substitute": {
+                          "type": "SubstituteAction",
+                          "id": 3
+                        },
+                        "setHeader": {
+                          "type": "SetHeaderAction",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "AllowAction": {
+                          "fields": {}
+                        },
+                        "BlockAction": {
+                          "fields": {}
+                        },
+                        "RedirectAction": {
+                          "fields": {}
+                        },
+                        "SubstituteAction": {
+                          "fields": {
+                            "path": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "SetHeaderAction": {
+                          "fields": {
+                            "key": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "value": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "FirewallPolicy": {
+                      "options": {
+                        "(google.api.resource).type": "recaptchaenterprise.googleapis.com/FirewallPolicy",
+                        "(google.api.resource).pattern": "projects/{project}/firewallpolicies/{firewallpolicy}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "path": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "condition": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "actions": {
+                          "rule": "repeated",
+                          "type": "FirewallAction",
+                          "id": 6
                         }
                       }
                     },
@@ -1486,13 +1954,15 @@
                             "WAF_FEATURE_UNSPECIFIED": 0,
                             "CHALLENGE_PAGE": 1,
                             "SESSION_TOKEN": 2,
-                            "ACTION_TOKEN": 3
+                            "ACTION_TOKEN": 3,
+                            "EXPRESS": 5
                           }
                         },
                         "WafService": {
                           "values": {
                             "WAF_SERVICE_UNSPECIFIED": 0,
-                            "CA": 1
+                            "CA": 1,
+                            "FASTLY": 3
                           }
                         }
                       }
@@ -2085,6 +2555,10 @@
                         "cardTestingVerdict": {
                           "type": "CardTestingVerdict",
                           "id": 3
+                        },
+                        "behavioralTrustVerdict": {
+                          "type": "BehavioralTrustVerdict",
+                          "id": 4
                         }
                       },
                       "nested": {
@@ -2099,6 +2573,14 @@
                         "CardTestingVerdict": {
                           "fields": {
                             "risk": {
+                              "type": "float",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "BehavioralTrustVerdict": {
+                          "fields": {
+                            "trust": {
                               "type": "float",
                               "id": 1
                             }
@@ -3598,6 +4080,47 @@
                 "nanos": {
                   "type": "int32",
                   "id": 2
+                }
+              }
+            },
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
+                }
+              }
+            }
+          }
+        },
+        "rpc": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
+            "java_multiple_files": true,
+            "java_outer_classname": "StatusProto",
+            "java_package": "com.google.rpc",
+            "objc_class_prefix": "RPC"
+          },
+          "nested": {
+            "Status": {
+              "fields": {
+                "code": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "message": {
+                  "type": "string",
+                  "id": 2
+                },
+                "details": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Any",
+                  "id": 3
                 }
               }
             }
