@@ -21,7 +21,7 @@
 'use strict';
 
 function main(parent) {
-  // [START contactcenterinsights_v1_generated_ContactCenterInsights_IngestConversations_async]
+  // [START contactcenterinsights_v1_generated_ContactCenterInsights_BulkDeleteConversations_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,32 +29,26 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  A cloud storage bucket source. Note that any previously ingested objects
-   *  from the source will be skipped to avoid duplication.
-   */
-  // const gcsSource = {}
-  /**
-   *  Configuration for when `source` contains conversation transcripts.
-   */
-  // const transcriptObjectConfig = {}
-  /**
-   *  Required. The parent resource for new conversations.
+   *  Required. The parent resource to create analyses in.
+   *  Format:
+   *  projects/{project}/locations/{location}
    */
   // const parent = 'abc123'
   /**
-   *  Configuration that applies to all conversations.
+   *  Filter used to select the subset of conversations to analyze.
    */
-  // const conversationConfig = {}
+  // const filter = 'abc123'
   /**
-   *  Optional. DLP settings for transcript redaction. Optional, will default to
-   *  the config specified in Settings.
+   *  Maximum number of conversations to delete. The default is 1000. It can be
+   *  changed by setting the `max_delete_count` field.
    */
-  // const redactionConfig = {}
+  // const maxDeleteCount = 1234
   /**
-   *  Optional. Default Speech-to-Text configuration. Optional, will default to
-   *  the config specified in Settings.
+   *  If set to true, all of this conversation's analyses will also be deleted.
+   *  Otherwise, the request will only succeed if the conversation has no
+   *  analyses.
    */
-  // const speechConfig = {}
+  // const force = true
 
   // Imports the Contactcenterinsights library
   const {ContactCenterInsightsClient} = require('@google-cloud/contact-center-insights').v1;
@@ -62,20 +56,20 @@ function main(parent) {
   // Instantiates a client
   const contactcenterinsightsClient = new ContactCenterInsightsClient();
 
-  async function callIngestConversations() {
+  async function callBulkDeleteConversations() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const [operation] = await contactcenterinsightsClient.ingestConversations(request);
+    const [operation] = await contactcenterinsightsClient.bulkDeleteConversations(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callIngestConversations();
-  // [END contactcenterinsights_v1_generated_ContactCenterInsights_IngestConversations_async]
+  callBulkDeleteConversations();
+  // [END contactcenterinsights_v1_generated_ContactCenterInsights_BulkDeleteConversations_async]
 }
 
 process.on('unhandledRejection', err => {

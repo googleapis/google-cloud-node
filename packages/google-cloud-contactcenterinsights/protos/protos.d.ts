@@ -201,6 +201,20 @@ export namespace google {
                     public bulkAnalyzeConversations(request: google.cloud.contactcenterinsights.v1.IBulkAnalyzeConversationsRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls BulkDeleteConversations.
+                     * @param request BulkDeleteConversationsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public bulkDeleteConversations(request: google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.BulkDeleteConversationsCallback): void;
+
+                    /**
+                     * Calls BulkDeleteConversations.
+                     * @param request BulkDeleteConversationsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public bulkDeleteConversations(request: google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls IngestConversations.
                      * @param request IngestConversationsRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -657,6 +671,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type BulkAnalyzeConversationsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|bulkDeleteConversations}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type BulkDeleteConversationsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|ingestConversations}.
@@ -2322,6 +2343,12 @@ export namespace google {
 
                     /** IngestConversationsRequest conversationConfig */
                     conversationConfig?: (google.cloud.contactcenterinsights.v1.IngestConversationsRequest.IConversationConfig|null);
+
+                    /** IngestConversationsRequest redactionConfig */
+                    redactionConfig?: (google.cloud.contactcenterinsights.v1.IRedactionConfig|null);
+
+                    /** IngestConversationsRequest speechConfig */
+                    speechConfig?: (google.cloud.contactcenterinsights.v1.ISpeechConfig|null);
                 }
 
                 /** Represents an IngestConversationsRequest. */
@@ -2344,6 +2371,12 @@ export namespace google {
 
                     /** IngestConversationsRequest conversationConfig. */
                     public conversationConfig?: (google.cloud.contactcenterinsights.v1.IngestConversationsRequest.IConversationConfig|null);
+
+                    /** IngestConversationsRequest redactionConfig. */
+                    public redactionConfig?: (google.cloud.contactcenterinsights.v1.IRedactionConfig|null);
+
+                    /** IngestConversationsRequest speechConfig. */
+                    public speechConfig?: (google.cloud.contactcenterinsights.v1.ISpeechConfig|null);
 
                     /** IngestConversationsRequest source. */
                     public source?: "gcsSource";
@@ -2436,6 +2469,9 @@ export namespace google {
 
                         /** GcsSource bucketUri */
                         bucketUri?: (string|null);
+
+                        /** GcsSource bucketObjectType */
+                        bucketObjectType?: (google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource.BucketObjectType|keyof typeof google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource.BucketObjectType|null);
                     }
 
                     /** Represents a GcsSource. */
@@ -2449,6 +2485,9 @@ export namespace google {
 
                         /** GcsSource bucketUri. */
                         public bucketUri: string;
+
+                        /** GcsSource bucketObjectType. */
+                        public bucketObjectType: (google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource.BucketObjectType|keyof typeof google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource.BucketObjectType);
 
                         /**
                          * Creates a new GcsSource instance using the specified properties.
@@ -2526,6 +2565,16 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace GcsSource {
+
+                        /** BucketObjectType enum. */
+                        enum BucketObjectType {
+                            BUCKET_OBJECT_TYPE_UNSPECIFIED = 0,
+                            TRANSCRIPT = 1,
+                            AUDIO = 2
+                        }
                     }
 
                     /** Properties of a TranscriptObjectConfig. */
@@ -2630,6 +2679,12 @@ export namespace google {
 
                         /** ConversationConfig agentId */
                         agentId?: (string|null);
+
+                        /** ConversationConfig agentChannel */
+                        agentChannel?: (number|null);
+
+                        /** ConversationConfig customerChannel */
+                        customerChannel?: (number|null);
                     }
 
                     /** Represents a ConversationConfig. */
@@ -2643,6 +2698,12 @@ export namespace google {
 
                         /** ConversationConfig agentId. */
                         public agentId: string;
+
+                        /** ConversationConfig agentChannel. */
+                        public agentChannel: number;
+
+                        /** ConversationConfig customerChannel. */
+                        public customerChannel: number;
 
                         /**
                          * Creates a new ConversationConfig instance using the specified properties.
@@ -3703,6 +3764,9 @@ export namespace google {
 
                     /** BulkAnalyzeConversationsMetadata totalRequestedAnalysesCount */
                     totalRequestedAnalysesCount?: (number|null);
+
+                    /** BulkAnalyzeConversationsMetadata partialErrors */
+                    partialErrors?: (google.rpc.IStatus[]|null);
                 }
 
                 /** Represents a BulkAnalyzeConversationsMetadata. */
@@ -3731,6 +3795,9 @@ export namespace google {
 
                     /** BulkAnalyzeConversationsMetadata totalRequestedAnalysesCount. */
                     public totalRequestedAnalysesCount: number;
+
+                    /** BulkAnalyzeConversationsMetadata partialErrors. */
+                    public partialErrors: google.rpc.IStatus[];
 
                     /**
                      * Creates a new BulkAnalyzeConversationsMetadata instance using the specified properties.
@@ -3907,6 +3974,327 @@ export namespace google {
 
                     /**
                      * Gets the default type url for BulkAnalyzeConversationsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BulkDeleteConversationsRequest. */
+                interface IBulkDeleteConversationsRequest {
+
+                    /** BulkDeleteConversationsRequest parent */
+                    parent?: (string|null);
+
+                    /** BulkDeleteConversationsRequest filter */
+                    filter?: (string|null);
+
+                    /** BulkDeleteConversationsRequest maxDeleteCount */
+                    maxDeleteCount?: (number|null);
+
+                    /** BulkDeleteConversationsRequest force */
+                    force?: (boolean|null);
+                }
+
+                /** Represents a BulkDeleteConversationsRequest. */
+                class BulkDeleteConversationsRequest implements IBulkDeleteConversationsRequest {
+
+                    /**
+                     * Constructs a new BulkDeleteConversationsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsRequest);
+
+                    /** BulkDeleteConversationsRequest parent. */
+                    public parent: string;
+
+                    /** BulkDeleteConversationsRequest filter. */
+                    public filter: string;
+
+                    /** BulkDeleteConversationsRequest maxDeleteCount. */
+                    public maxDeleteCount: number;
+
+                    /** BulkDeleteConversationsRequest force. */
+                    public force: boolean;
+
+                    /**
+                     * Creates a new BulkDeleteConversationsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BulkDeleteConversationsRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsRequest): google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest;
+
+                    /**
+                     * Encodes the specified BulkDeleteConversationsRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest.verify|verify} messages.
+                     * @param message BulkDeleteConversationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BulkDeleteConversationsRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest.verify|verify} messages.
+                     * @param message BulkDeleteConversationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BulkDeleteConversationsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BulkDeleteConversationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest;
+
+                    /**
+                     * Decodes a BulkDeleteConversationsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BulkDeleteConversationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest;
+
+                    /**
+                     * Verifies a BulkDeleteConversationsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BulkDeleteConversationsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BulkDeleteConversationsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest;
+
+                    /**
+                     * Creates a plain object from a BulkDeleteConversationsRequest message. Also converts values to other types if specified.
+                     * @param message BulkDeleteConversationsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BulkDeleteConversationsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BulkDeleteConversationsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BulkDeleteConversationsMetadata. */
+                interface IBulkDeleteConversationsMetadata {
+
+                    /** BulkDeleteConversationsMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BulkDeleteConversationsMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BulkDeleteConversationsMetadata request */
+                    request?: (google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsRequest|null);
+
+                    /** BulkDeleteConversationsMetadata partialErrors */
+                    partialErrors?: (google.rpc.IStatus[]|null);
+                }
+
+                /** Represents a BulkDeleteConversationsMetadata. */
+                class BulkDeleteConversationsMetadata implements IBulkDeleteConversationsMetadata {
+
+                    /**
+                     * Constructs a new BulkDeleteConversationsMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsMetadata);
+
+                    /** BulkDeleteConversationsMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BulkDeleteConversationsMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BulkDeleteConversationsMetadata request. */
+                    public request?: (google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsRequest|null);
+
+                    /** BulkDeleteConversationsMetadata partialErrors. */
+                    public partialErrors: google.rpc.IStatus[];
+
+                    /**
+                     * Creates a new BulkDeleteConversationsMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BulkDeleteConversationsMetadata instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsMetadata): google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata;
+
+                    /**
+                     * Encodes the specified BulkDeleteConversationsMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata.verify|verify} messages.
+                     * @param message BulkDeleteConversationsMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BulkDeleteConversationsMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata.verify|verify} messages.
+                     * @param message BulkDeleteConversationsMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BulkDeleteConversationsMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BulkDeleteConversationsMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata;
+
+                    /**
+                     * Decodes a BulkDeleteConversationsMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BulkDeleteConversationsMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata;
+
+                    /**
+                     * Verifies a BulkDeleteConversationsMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BulkDeleteConversationsMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BulkDeleteConversationsMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata;
+
+                    /**
+                     * Creates a plain object from a BulkDeleteConversationsMetadata message. Also converts values to other types if specified.
+                     * @param message BulkDeleteConversationsMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BulkDeleteConversationsMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BulkDeleteConversationsMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BulkDeleteConversationsResponse. */
+                interface IBulkDeleteConversationsResponse {
+                }
+
+                /** Represents a BulkDeleteConversationsResponse. */
+                class BulkDeleteConversationsResponse implements IBulkDeleteConversationsResponse {
+
+                    /**
+                     * Constructs a new BulkDeleteConversationsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsResponse);
+
+                    /**
+                     * Creates a new BulkDeleteConversationsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BulkDeleteConversationsResponse instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsResponse): google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse;
+
+                    /**
+                     * Encodes the specified BulkDeleteConversationsResponse message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse.verify|verify} messages.
+                     * @param message BulkDeleteConversationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BulkDeleteConversationsResponse message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse.verify|verify} messages.
+                     * @param message BulkDeleteConversationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BulkDeleteConversationsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BulkDeleteConversationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse;
+
+                    /**
+                     * Decodes a BulkDeleteConversationsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BulkDeleteConversationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse;
+
+                    /**
+                     * Verifies a BulkDeleteConversationsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BulkDeleteConversationsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BulkDeleteConversationsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse;
+
+                    /**
+                     * Creates a plain object from a BulkDeleteConversationsResponse message. Also converts values to other types if specified.
+                     * @param message BulkDeleteConversationsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BulkDeleteConversationsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BulkDeleteConversationsResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
