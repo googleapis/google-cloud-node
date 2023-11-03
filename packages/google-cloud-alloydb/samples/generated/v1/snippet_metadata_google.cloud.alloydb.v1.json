@@ -1286,7 +1286,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 80,
+                    "end": 86,
                     "type": "FULL"
                 }
             ],
@@ -1310,6 +1310,10 @@
                     {
                         "name": "public_key",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "use_metadata_exchange",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.cloud.alloydb.v1.GenerateClientCertificateResponse",
