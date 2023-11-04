@@ -27056,7 +27056,8 @@
                       "oneofs": {
                         "storageType": {
                           "oneof": [
-                            "bigtable"
+                            "bigtable",
+                            "optimized"
                           ]
                         }
                       },
@@ -27064,6 +27065,10 @@
                         "bigtable": {
                           "type": "Bigtable",
                           "id": 8
+                        },
+                        "optimized": {
+                          "type": "Optimized",
+                          "id": 12
                         },
                         "name": {
                           "type": "string",
@@ -27162,11 +27167,28 @@
                             }
                           }
                         },
+                        "Optimized": {
+                          "fields": {}
+                        },
                         "DedicatedServingEndpoint": {
                           "fields": {
                             "publicEndpointDomainName": {
                               "type": "string",
                               "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "privateServiceConnectConfig": {
+                              "type": "PrivateServiceConnectConfig",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "serviceAttachment": {
+                              "type": "string",
+                              "id": 4,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
@@ -27190,6 +27212,22 @@
                             "STABLE": 1,
                             "UPDATING": 2
                           }
+                        }
+                      }
+                    },
+                    "PrivateServiceConnectConfig": {
+                      "fields": {
+                        "enablePrivateServiceConnect": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "projectAllowlist": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -32098,22 +32136,6 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
-                        }
-                      }
-                    },
-                    "PrivateServiceConnectConfig": {
-                      "fields": {
-                        "enablePrivateServiceConnect": {
-                          "type": "bool",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "projectAllowlist": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 2
                         }
                       }
                     },
