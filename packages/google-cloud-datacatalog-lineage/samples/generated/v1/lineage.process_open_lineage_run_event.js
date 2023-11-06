@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(run) {
-  // [START datalineage_v1_generated_Lineage_UpdateRun_async]
+function main(parent, openLineage) {
+  // [START datalineage_v1_generated_Lineage_ProcessOpenLineageRunEvent_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,21 +29,21 @@ function main(run) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The lineage run to update.
-   *  The run's `name` field is used to identify the run to update.
-   *  Format:
-   *  `projects/{project}/locations/{location}/processes/{process}/runs/{run}`.
+   *  Required. The name of the project and its location that should own the
+   *  process, run, and lineage event.
    */
-  // const run = {}
+  // const parent = 'abc123'
   /**
-   *  The list of fields to update. Currently not used. The whole message is
-   *  updated.
+   *  Required. OpenLineage message following OpenLineage format:
+   *  https://github.com/OpenLineage/OpenLineage/blob/main/spec/OpenLineage.json
    */
-  // const updateMask = {}
+  // const openLineage = {}
   /**
-   *  If set to true and the run is not found, the request creates it.
+   *  A unique identifier for this request. Restricted to 36 ASCII characters.
+   *  A random UUID is recommended. This request is idempotent only if a
+   *  `request_id` is provided.
    */
-  // const allowMissing = true
+  // const requestId = 'abc123'
 
   // Imports the Lineage library
   const {LineageClient} = require('@google-cloud/lineage').v1;
@@ -51,19 +51,20 @@ function main(run) {
   // Instantiates a client
   const lineageClient = new LineageClient();
 
-  async function callUpdateRun() {
+  async function callProcessOpenLineageRunEvent() {
     // Construct request
     const request = {
-      run,
+      parent,
+      openLineage,
     };
 
     // Run request
-    const response = await lineageClient.updateRun(request);
+    const response = await lineageClient.processOpenLineageRunEvent(request);
     console.log(response);
   }
 
-  callUpdateRun();
-  // [END datalineage_v1_generated_Lineage_UpdateRun_async]
+  callProcessOpenLineageRunEvent();
+  // [END datalineage_v1_generated_Lineage_ProcessOpenLineageRunEvent_async]
 }
 
 process.on('unhandledRejection', err => {

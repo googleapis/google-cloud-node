@@ -25,6 +25,7 @@
   * [Lineage.list_lineage_events](#lineage.list_lineage_events)
   * [Lineage.list_processes](#lineage.list_processes)
   * [Lineage.list_runs](#lineage.list_runs)
+  * [Lineage.process_open_lineage_run_event](#lineage.process_open_lineage_run_event)
   * [Lineage.search_links](#lineage.search_links)
   * [Lineage.update_process](#lineage.update_process)
   * [Lineage.update_run](#lineage.update_run)
@@ -259,6 +260,23 @@ __Usage:__
 
 
 `node packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.list_runs.js`
+
+
+-----
+
+
+
+
+### Lineage.process_open_lineage_run_event
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.process_open_lineage_run_event.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.process_open_lineage_run_event.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.process_open_lineage_run_event.js`
 
 
 -----

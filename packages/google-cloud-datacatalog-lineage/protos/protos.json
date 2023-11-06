@@ -25,6 +25,26 @@
                             "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
                           },
                           "methods": {
+                            "ProcessOpenLineageRunEvent": {
+                              "requestType": "ProcessOpenLineageRunEventRequest",
+                              "responseType": "ProcessOpenLineageRunEventResponse",
+                              "options": {
+                                "(google.api.http).post": "/v1/{parent=projects/*/locations/*}:processOpenLineageRunEvent",
+                                "(google.api.http).body": "open_lineage",
+                                "(google.api.method_signature)": "parent,open_lineage"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{parent=projects/*/locations/*}:processOpenLineageRunEvent",
+                                    "body": "open_lineage"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,open_lineage"
+                                }
+                              ]
+                            },
                             "CreateProcess": {
                               "requestType": "CreateProcessRequest",
                               "responseType": "Process",
@@ -461,7 +481,7 @@
                               "type": "google.protobuf.Timestamp",
                               "id": 6,
                               "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
+                                "(google.api.field_behavior)": "REQUIRED"
                               }
                             },
                             "endTime": {
@@ -560,7 +580,56 @@
                             "Type": {
                               "values": {
                                 "TYPE_UNSPECIFIED": 0,
-                                "DELETE": 1
+                                "DELETE": 1,
+                                "CREATE": 2
+                              }
+                            }
+                          }
+                        },
+                        "ProcessOpenLineageRunEventRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "openLineage": {
+                              "type": "google.protobuf.Struct",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "ProcessOpenLineageRunEventResponse": {
+                          "fields": {
+                            "process": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "datalineage.googleapis.com/Process"
+                              }
+                            },
+                            "run": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.resource_reference).type": "datalineage.googleapis.com/Run"
+                              }
+                            },
+                            "lineageEvents": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.resource_reference).type": "datalineage.googleapis.com/LineageEvent"
                               }
                             }
                           }
@@ -703,6 +772,10 @@
                             "updateMask": {
                               "type": "google.protobuf.FieldMask",
                               "id": 2
+                            },
+                            "allowMissing": {
+                              "type": "bool",
+                              "id": 3
                             }
                           }
                         },
@@ -1031,7 +1104,8 @@
                                 "BIGQUERY": 2,
                                 "DATA_FUSION": 3,
                                 "COMPOSER": 4,
-                                "LOOKER_STUDIO": 5
+                                "LOOKER_STUDIO": 5,
+                                "DATAPROC": 6
                               }
                             }
                           }
