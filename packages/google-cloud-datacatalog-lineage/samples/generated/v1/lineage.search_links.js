@@ -29,7 +29,7 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The project and location you want search in the format `projects/* /locations/*`
+   *  Required. The project and location you want search in.
    */
   // const parent = 'abc123'
   /**
