@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.4.0...aiplatform-v3.5.0) (2023-11-03)
+
+
+### Features
+
+* Adding new fields for concurrent explanations ([489e188](https://github.com/googleapis/google-cloud-node/commit/489e188d97af302f96299a5b40eb5e07020972fc))
+
+
+### Bug Fixes
+
+* **aiplatform/v1beta1:** Change CreateFeature metadata ([#4782](https://github.com/googleapis/google-cloud-node/issues/4782)) ([489e188](https://github.com/googleapis/google-cloud-node/commit/489e188d97af302f96299a5b40eb5e07020972fc))
+
 ## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.3.0...aiplatform-v3.4.0) (2023-10-24)
 
 
