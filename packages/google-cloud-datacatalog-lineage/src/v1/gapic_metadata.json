@@ -10,6 +10,11 @@
         "grpc": {
           "libraryClient": "LineageClient",
           "rpcs": {
+            "ProcessOpenLineageRunEvent": {
+              "methods": [
+                "processOpenLineageRunEvent"
+              ]
+            },
             "CreateProcess": {
               "methods": [
                 "createProcess"
@@ -105,6 +110,11 @@
         "grpc-fallback": {
           "libraryClient": "LineageClient",
           "rpcs": {
+            "ProcessOpenLineageRunEvent": {
+              "methods": [
+                "processOpenLineageRunEvent"
+              ]
+            },
             "CreateProcess": {
               "methods": [
                 "createProcess"

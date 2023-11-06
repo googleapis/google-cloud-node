@@ -50,6 +50,20 @@ export namespace google {
                         public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Lineage;
 
                         /**
+                         * Calls ProcessOpenLineageRunEvent.
+                         * @param request ProcessOpenLineageRunEventRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ProcessOpenLineageRunEventResponse
+                         */
+                        public processOpenLineageRunEvent(request: google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventRequest, callback: google.cloud.datacatalog.lineage.v1.Lineage.ProcessOpenLineageRunEventCallback): void;
+
+                        /**
+                         * Calls ProcessOpenLineageRunEvent.
+                         * @param request ProcessOpenLineageRunEventRequest message or plain object
+                         * @returns Promise
+                         */
+                        public processOpenLineageRunEvent(request: google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventRequest): Promise<google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventResponse>;
+
+                        /**
                          * Calls CreateProcess.
                          * @param request CreateProcessRequest message or plain object
                          * @param callback Node-style callback called with the error, if any, and Process
@@ -275,6 +289,13 @@ export namespace google {
                     }
 
                     namespace Lineage {
+
+                        /**
+                         * Callback as used by {@link google.cloud.datacatalog.lineage.v1.Lineage|processOpenLineageRunEvent}.
+                         * @param error Error, if any
+                         * @param [response] ProcessOpenLineageRunEventResponse
+                         */
+                        type ProcessOpenLineageRunEventCallback = (error: (Error|null), response?: google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventResponse) => void;
 
                         /**
                          * Callback as used by {@link google.cloud.datacatalog.lineage.v1.Lineage|createProcess}.
@@ -1099,8 +1120,227 @@ export namespace google {
                         /** Type enum. */
                         enum Type {
                             TYPE_UNSPECIFIED = 0,
-                            DELETE = 1
+                            DELETE = 1,
+                            CREATE = 2
                         }
+                    }
+
+                    /** Properties of a ProcessOpenLineageRunEventRequest. */
+                    interface IProcessOpenLineageRunEventRequest {
+
+                        /** ProcessOpenLineageRunEventRequest parent */
+                        parent?: (string|null);
+
+                        /** ProcessOpenLineageRunEventRequest openLineage */
+                        openLineage?: (google.protobuf.IStruct|null);
+
+                        /** ProcessOpenLineageRunEventRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents a ProcessOpenLineageRunEventRequest. */
+                    class ProcessOpenLineageRunEventRequest implements IProcessOpenLineageRunEventRequest {
+
+                        /**
+                         * Constructs a new ProcessOpenLineageRunEventRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventRequest);
+
+                        /** ProcessOpenLineageRunEventRequest parent. */
+                        public parent: string;
+
+                        /** ProcessOpenLineageRunEventRequest openLineage. */
+                        public openLineage?: (google.protobuf.IStruct|null);
+
+                        /** ProcessOpenLineageRunEventRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new ProcessOpenLineageRunEventRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ProcessOpenLineageRunEventRequest instance
+                         */
+                        public static create(properties?: google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventRequest): google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest;
+
+                        /**
+                         * Encodes the specified ProcessOpenLineageRunEventRequest message. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest.verify|verify} messages.
+                         * @param message ProcessOpenLineageRunEventRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ProcessOpenLineageRunEventRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest.verify|verify} messages.
+                         * @param message ProcessOpenLineageRunEventRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ProcessOpenLineageRunEventRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ProcessOpenLineageRunEventRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest;
+
+                        /**
+                         * Decodes a ProcessOpenLineageRunEventRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ProcessOpenLineageRunEventRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest;
+
+                        /**
+                         * Verifies a ProcessOpenLineageRunEventRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ProcessOpenLineageRunEventRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ProcessOpenLineageRunEventRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest;
+
+                        /**
+                         * Creates a plain object from a ProcessOpenLineageRunEventRequest message. Also converts values to other types if specified.
+                         * @param message ProcessOpenLineageRunEventRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ProcessOpenLineageRunEventRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ProcessOpenLineageRunEventRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ProcessOpenLineageRunEventResponse. */
+                    interface IProcessOpenLineageRunEventResponse {
+
+                        /** ProcessOpenLineageRunEventResponse process */
+                        process?: (string|null);
+
+                        /** ProcessOpenLineageRunEventResponse run */
+                        run?: (string|null);
+
+                        /** ProcessOpenLineageRunEventResponse lineageEvents */
+                        lineageEvents?: (string[]|null);
+                    }
+
+                    /** Represents a ProcessOpenLineageRunEventResponse. */
+                    class ProcessOpenLineageRunEventResponse implements IProcessOpenLineageRunEventResponse {
+
+                        /**
+                         * Constructs a new ProcessOpenLineageRunEventResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventResponse);
+
+                        /** ProcessOpenLineageRunEventResponse process. */
+                        public process: string;
+
+                        /** ProcessOpenLineageRunEventResponse run. */
+                        public run: string;
+
+                        /** ProcessOpenLineageRunEventResponse lineageEvents. */
+                        public lineageEvents: string[];
+
+                        /**
+                         * Creates a new ProcessOpenLineageRunEventResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ProcessOpenLineageRunEventResponse instance
+                         */
+                        public static create(properties?: google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventResponse): google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventResponse;
+
+                        /**
+                         * Encodes the specified ProcessOpenLineageRunEventResponse message. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventResponse.verify|verify} messages.
+                         * @param message ProcessOpenLineageRunEventResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ProcessOpenLineageRunEventResponse message, length delimited. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventResponse.verify|verify} messages.
+                         * @param message ProcessOpenLineageRunEventResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ProcessOpenLineageRunEventResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ProcessOpenLineageRunEventResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventResponse;
+
+                        /**
+                         * Decodes a ProcessOpenLineageRunEventResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ProcessOpenLineageRunEventResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventResponse;
+
+                        /**
+                         * Verifies a ProcessOpenLineageRunEventResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ProcessOpenLineageRunEventResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ProcessOpenLineageRunEventResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventResponse;
+
+                        /**
+                         * Creates a plain object from a ProcessOpenLineageRunEventResponse message. Also converts values to other types if specified.
+                         * @param message ProcessOpenLineageRunEventResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ProcessOpenLineageRunEventResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ProcessOpenLineageRunEventResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a CreateProcessRequest. */
@@ -1850,6 +2090,9 @@ export namespace google {
 
                         /** UpdateRunRequest updateMask */
                         updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /** UpdateRunRequest allowMissing */
+                        allowMissing?: (boolean|null);
                     }
 
                     /** Represents an UpdateRunRequest. */
@@ -1866,6 +2109,9 @@ export namespace google {
 
                         /** UpdateRunRequest updateMask. */
                         public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /** UpdateRunRequest allowMissing. */
+                        public allowMissing: boolean;
 
                         /**
                          * Creates a new UpdateRunRequest instance using the specified properties.
@@ -3768,7 +4014,8 @@ export namespace google {
                             BIGQUERY = 2,
                             DATA_FUSION = 3,
                             COMPOSER = 4,
-                            LOOKER_STUDIO = 5
+                            LOOKER_STUDIO = 5,
+                            DATAPROC = 6
                         }
                     }
                 }

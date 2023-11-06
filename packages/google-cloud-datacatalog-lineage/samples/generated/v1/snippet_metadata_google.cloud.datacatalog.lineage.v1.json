@@ -12,6 +12,54 @@
     },
     "snippets": [
         {
+            "regionTag": "datalineage_v1_generated_Lineage_ProcessOpenLineageRunEvent_async",
+            "title": "Lineage processOpenLineageRunEvent Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates new lineage events together with their parents: process and run. Updates the process and run if they already exist. Mapped from Open Lineage specification: https://github.com/OpenLineage/OpenLineage/blob/main/spec/OpenLineage.json.",
+            "canonical": true,
+            "file": "lineage.process_open_lineage_run_event.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 66,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ProcessOpenLineageRunEvent",
+                "fullName": "google.cloud.datacatalog.lineage.v1.Lineage.ProcessOpenLineageRunEvent",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "open_lineage",
+                        "type": ".google.protobuf.Struct"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventResponse",
+                "client": {
+                    "shortName": "LineageClient",
+                    "fullName": "google.cloud.datacatalog.lineage.v1.LineageClient"
+                },
+                "method": {
+                    "shortName": "ProcessOpenLineageRunEvent",
+                    "fullName": "google.cloud.datacatalog.lineage.v1.Lineage.ProcessOpenLineageRunEvent",
+                    "service": {
+                        "shortName": "Lineage",
+                        "fullName": "google.cloud.datacatalog.lineage.v1.Lineage"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "datalineage_v1_generated_Lineage_CreateProcess_async",
             "title": "Lineage createProcess Sample",
             "origin": "API_DEFINITION",
@@ -298,7 +346,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 61,
+                    "end": 65,
                     "type": "FULL"
                 }
             ],
@@ -314,6 +362,10 @@
                     {
                         "name": "update_mask",
                         "type": ".google.protobuf.FieldMask"
+                    },
+                    {
+                        "name": "allow_missing",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.cloud.datacatalog.lineage.v1.Run",
