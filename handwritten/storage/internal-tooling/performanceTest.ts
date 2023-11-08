@@ -60,6 +60,7 @@ function main() {
  * When the worker passes back the results, they are appended to the results file.
  */
 function createWorker() {
+  const dirName = getDirName().replace('/src', '/internal-tooling');
   iterationsRemaining--;
   log(
     `Starting new iteration. Current iterations remaining: ${iterationsRemaining}`,
@@ -70,7 +71,7 @@ function createWorker() {
     argv.test_type === PERFORMANCE_TEST_TYPES.WRITE_ONE_READ_THREE ||
     argv.test_type === PERFORMANCE_TEST_TYPES.RANGE_READ
   ) {
-    testPath = `${getDirName()}/performPerformanceTest.js`;
+    testPath = `${dirName}/performPerformanceTest.js`;
   } else if (
     argv.test_type ===
       PERFORMANCE_TEST_TYPES.TRANSFER_MANAGER_UPLOAD_MANY_FILES ||
@@ -79,7 +80,7 @@ function createWorker() {
     argv.test_type ===
       PERFORMANCE_TEST_TYPES.TRANSFER_MANAGER_DOWNLOAD_MANY_FILES
   ) {
-    testPath = `${getDirName()}/performTransferManagerTest.js`;
+    testPath = `${dirName}/performTransferManagerTest.js`;
   } else if (
     argv.test_type ===
       PERFORMANCE_TEST_TYPES.APPLICATION_UPLOAD_MULTIPLE_OBJECTS ||
@@ -87,7 +88,7 @@ function createWorker() {
     argv.test_type ===
       PERFORMANCE_TEST_TYPES.APPLICATION_DOWNLOAD_MULTIPLE_OBJECTS
   ) {
-    testPath = `${getDirName()}/performApplicationPerformanceTest.js`;
+    testPath = `${dirName}/performApplicationPerformanceTest.js`;
   }
 
   const w = new Worker(testPath, {
