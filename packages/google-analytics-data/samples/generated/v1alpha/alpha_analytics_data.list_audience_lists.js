@@ -30,19 +30,19 @@ function main(parent) {
    */
   /**
    *  Required. All audience lists for this property will be listed in the
-   *  response. Format: `properties/{propertyId}`
+   *  response. Format: `properties/{property}`
    */
   // const parent = 'abc123'
   /**
-   *  The maximum number of audience lists to return. The service may return
-   *  fewer than this value. If unspecified, at most 200 audience lists will be
-   *  returned. The maximum value is 1000 (higher values will be coerced to the
-   *  maximum).
+   *  Optional. The maximum number of audience lists to return. The service may
+   *  return fewer than this value. If unspecified, at most 200 audience lists
+   *  will be returned. The maximum value is 1000 (higher values will be coerced
+   *  to the maximum).
    */
   // const pageSize = 1234
   /**
-   *  A page token, received from a previous `ListAudienceLists` call. Provide
-   *  this to retrieve the subsequent page.
+   *  Optional. A page token, received from a previous `ListAudienceLists` call.
+   *  Provide this to retrieve the subsequent page.
    *  When paginating, all other parameters provided to `ListAudienceLists` must
    *  match the call that provided the page token.
    */

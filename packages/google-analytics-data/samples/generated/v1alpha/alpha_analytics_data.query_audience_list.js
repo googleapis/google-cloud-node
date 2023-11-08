@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main() {
+function main(name) {
   // [START analyticsdata_v1alpha_generated_AlphaAnalyticsData_QueryAudienceList_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -29,12 +29,13 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The name of the audience list to retrieve users from.
-   *  Format: `properties/{propertyId}/audienceLists/{audienceListId}`
+   *  Required. The name of the audience list to retrieve users from.
+   *  Format: `properties/{property}/audienceLists/{audience_list}`
    */
   // const name = 'abc123'
   /**
-   *  The row count of the start row. The first row is counted as row 0.
+   *  Optional. The row count of the start row. The first row is counted as row
+   *  0.
    *  When paging, the first request does not specify offset; or equivalently,
    *  sets offset to 0; the first request returns the first `limit` of rows. The
    *  second request sets offset to the `limit` of the first request; the second
@@ -44,9 +45,9 @@ function main() {
    */
   // const offset = 1234
   /**
-   *  The number of rows to return. If unspecified, 10,000 rows are returned. The
-   *  API returns a maximum of 250,000 rows per request, no matter how many you
-   *  ask for. `limit` must be positive.
+   *  Optional. The number of rows to return. If unspecified, 10,000 rows are
+   *  returned. The API returns a maximum of 250,000 rows per request, no matter
+   *  how many you ask for. `limit` must be positive.
    *  The API can also return fewer rows than the requested `limit`, if there
    *  aren't as many dimension values as the `limit`.
    *  To learn more about this pagination parameter, see
@@ -63,6 +64,7 @@ function main() {
   async function callQueryAudienceList() {
     // Construct request
     const request = {
+      name,
     };
 
     // Run request
