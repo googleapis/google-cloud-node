@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [7.6.0](https://github.com/googleapis/nodejs-storage/compare/v7.5.0...v7.6.0) (2023-11-08)
+
+
+### Features
+
+* Resume Resumable Uploads ([#2333](https://github.com/googleapis/nodejs-storage/issues/2333)) ([2ba4009](https://github.com/googleapis/nodejs-storage/commit/2ba4009e599c5690c51849f307199be3452d3b07))
+
 ## [7.5.0](https://github.com/googleapis/nodejs-storage/compare/v7.4.0...v7.5.0) (2023-10-30)
 
 
