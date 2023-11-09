@@ -16,10 +16,11 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as v1 from './v1';
-const EdgeNetworkClient = v1.EdgeNetworkClient;
-type EdgeNetworkClient = v1.EdgeNetworkClient;
-export {v1, EdgeNetworkClient};
-export default {v1, EdgeNetworkClient};
-import * as protos from '../protos/protos';
-export {protos}
+/* eslint-disable node/no-missing-require, no-unused-vars */
+const edgenetwork = require('@google-cloud/edgenetwork');
+
+function main() {
+  const edgeNetworkClient = new edgenetwork.EdgeNetworkClient();
+}
+
+main();
