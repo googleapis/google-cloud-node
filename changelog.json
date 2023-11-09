@@ -5,6 +5,57 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "6e2643f2d758a87f3367101d8f2cfafa3d6adeb6",
+          "message": "Initial release of @google-cloud/edgenetwork",
+          "issues": [
+            "4806"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgenetwork",
+      "id": "c61df490-8a97-4e48-80d1-3a8228abfacc",
+      "createTime": "2023-11-09T23:58:19.637Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a2ffd6d854a6882e7d1f4226735654b66fd6937e",
+          "message": "Add open lineage support",
+          "issues": [
+            "4793"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/lineage",
+      "id": "e057fbbf-0979-484e-bb43-68b518c7bf4b",
+      "createTime": "2023-11-09T23:58:19.629Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "61cb5c91e054639da95268ab13ae99f909d261c8",
+          "message": "Add Optimized to FeatureOnlineStore",
+          "issues": [
+            "4790"
+          ]
+        }
+      ],
+      "version": "3.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "d604748c-cb2a-4e9a-a56e-d449b1900efc",
+      "createTime": "2023-11-09T23:58:19.620Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "692e10f7734a4d2bf6b94fb46e5656b16ea54685",
           "message": "[dlp] Introduce Discovery API protos and methods",
           "issues": [
@@ -20104,5 +20155,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-11-03T21:03:58.656Z"
+  "updateTime": "2023-11-09T23:58:19.637Z"
 }

@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.5.0...aiplatform-v3.6.0) (2023-11-09)
+
+
+### Features
+
+* Add Optimized to FeatureOnlineStore ([#4790](https://github.com/googleapis/google-cloud-node/issues/4790)) ([61cb5c9](https://github.com/googleapis/google-cloud-node/commit/61cb5c91e054639da95268ab13ae99f909d261c8))
+
 ## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.4.0...aiplatform-v3.5.0) (2023-11-03)
 
 
