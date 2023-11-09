@@ -64,26 +64,9 @@ npm install @google-cloud/edgenetwork
  * TODO(developer): Uncomment these variables before running the sample.
  */
 /**
- *  Required. Parent value for ListRoutersRequest
+ *  Required. Parent value for ListZonesRequest
  */
-// const parent = 'abc123'
-/**
- *  Requested page size. Server may return fewer items than requested.
- *  If unspecified, server will pick an appropriate default.
- */
-// const pageSize = 1234
-/**
- *  A token identifying a page of results the server should return.
- */
-// const pageToken = 'abc123'
-/**
- *  Filtering results
- */
-// const filter = 'abc123'
-/**
- *  Hint for how to order the results
- */
-// const orderBy = 'abc123'
+// const parent = 'projects/your-project/locations/your-location'
 
 // Imports the Edgenetwork library
 const {EdgeNetworkClient} = require('@google-cloud/edgenetwork').v1;
@@ -91,20 +74,20 @@ const {EdgeNetworkClient} = require('@google-cloud/edgenetwork').v1;
 // Instantiates a client
 const edgenetworkClient = new EdgeNetworkClient();
 
-async function callListRouters() {
+async function callListZones() {
   // Construct request
   const request = {
     parent,
   };
 
   // Run request
-  const iterable = await edgenetworkClient.listRoutersAsync(request);
+  const iterable = await edgenetworkClient.listZonesAsync(request);
   for await (const response of iterable) {
     console.log(response);
   }
 }
 
-callListRouters();
+callListZones();
 
 ```
 
