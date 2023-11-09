@@ -100,7 +100,7 @@ async function callListRouters() {
   // Run request
   const iterable = await edgenetworkClient.listRoutersAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
