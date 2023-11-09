@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,8 +18,8 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {Client} = require('@google-cloud/edgenetwork').v1;
-const edgenetworkClient = new Client();
+const {EdgeNetworkClient} = require('@google-cloud/edgenetwork').v1;
+const edgenetworkClient = new EdgeNetworkClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
