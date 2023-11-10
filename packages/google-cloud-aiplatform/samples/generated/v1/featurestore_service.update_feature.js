@@ -33,6 +33,7 @@ function main(feature) {
    *  updated.
    *  Format:
    *  `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}`
+   *  `projects/{project}/locations/{location}/featureGroups/{feature_group}/features/{feature}`
    */
   // const feature = {}
   /**
@@ -46,7 +47,7 @@ function main(feature) {
    *  Updatable fields:
    *    * `description`
    *    * `labels`
-   *    * `disable_monitoring`
+   *    * `disable_monitoring` (Not supported for FeatureRegistry Feature)
    */
   // const updateMask = {}
 

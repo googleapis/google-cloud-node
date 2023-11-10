@@ -511,6 +511,12 @@ export class ScheduleServiceClient {
               post: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',
             },
             {
+              post: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}:cancel',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',
             },
             {
@@ -727,6 +733,14 @@ export class ScheduleServiceClient {
             },
             {
               delete:
+                '/ui/{name=projects/*/locations/*/extensionControllers/*}/operations',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/extensions/*}/operations',
+            },
+            {
+              delete:
                 '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}',
             },
             {
@@ -813,6 +827,22 @@ export class ScheduleServiceClient {
             {
               delete:
                 '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
             {delete: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
             {
@@ -1005,6 +1035,12 @@ export class ScheduleServiceClient {
             },
             {get: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}'},
             {
+              get: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}',
+            },
+            {
               get: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}',
             },
             {
@@ -1064,6 +1100,18 @@ export class ScheduleServiceClient {
             },
             {
               get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
             },
             {get: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
             {
@@ -1211,6 +1259,10 @@ export class ScheduleServiceClient {
             {get: '/ui/{name=projects/*/locations/*/edgeDevices/*}/operations'},
             {get: '/ui/{name=projects/*/locations/*/endpoints/*}/operations'},
             {
+              get: '/ui/{name=projects/*/locations/*/extensionControllers/*}/operations',
+            },
+            {get: '/ui/{name=projects/*/locations/*/extensions/*}/operations'},
+            {
               get: '/ui/{name=projects/*/locations/*/featurestores/*}/operations',
             },
             {
@@ -1268,6 +1320,18 @@ export class ScheduleServiceClient {
             },
             {
               get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
             },
             {get: '/v1beta1/{name=projects/*/locations/*}/operations'},
             {
@@ -1419,6 +1483,12 @@ export class ScheduleServiceClient {
               post: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',
             },
             {
+              post: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}:wait',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}:wait',
             },
             {
@@ -1486,6 +1556,18 @@ export class ScheduleServiceClient {
             },
             {
               post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
             },
             {post: '/v1beta1/{name=projects/*/locations/*/operations/*}:wait'},
             {

@@ -19,6 +19,9 @@
 import {
   DatasetServiceClient,
   EndpointServiceClient,
+  FeatureOnlineStoreAdminServiceClient,
+  FeatureOnlineStoreServiceClient,
+  FeatureRegistryServiceClient,
   FeaturestoreOnlineServingServiceClient,
   FeaturestoreServiceClient,
   IndexEndpointServiceClient,
@@ -42,6 +45,21 @@ function doStuffWithDatasetServiceClient(client: DatasetServiceClient) {
   client.close();
 }
 function doStuffWithEndpointServiceClient(client: EndpointServiceClient) {
+  client.close();
+}
+function doStuffWithFeatureOnlineStoreAdminServiceClient(
+  client: FeatureOnlineStoreAdminServiceClient
+) {
+  client.close();
+}
+function doStuffWithFeatureOnlineStoreServiceClient(
+  client: FeatureOnlineStoreServiceClient
+) {
+  client.close();
+}
+function doStuffWithFeatureRegistryServiceClient(
+  client: FeatureRegistryServiceClient
+) {
   client.close();
 }
 function doStuffWithFeaturestoreOnlineServingServiceClient(
@@ -108,6 +126,18 @@ function main() {
   // check that the client instance can be created
   const endpointServiceClient = new EndpointServiceClient();
   doStuffWithEndpointServiceClient(endpointServiceClient);
+  // check that the client instance can be created
+  const featureOnlineStoreAdminServiceClient =
+    new FeatureOnlineStoreAdminServiceClient();
+  doStuffWithFeatureOnlineStoreAdminServiceClient(
+    featureOnlineStoreAdminServiceClient
+  );
+  // check that the client instance can be created
+  const featureOnlineStoreServiceClient = new FeatureOnlineStoreServiceClient();
+  doStuffWithFeatureOnlineStoreServiceClient(featureOnlineStoreServiceClient);
+  // check that the client instance can be created
+  const featureRegistryServiceClient = new FeatureRegistryServiceClient();
+  doStuffWithFeatureRegistryServiceClient(featureRegistryServiceClient);
   // check that the client instance can be created
   const featurestoreOnlineServingServiceClient =
     new FeaturestoreOnlineServingServiceClient();

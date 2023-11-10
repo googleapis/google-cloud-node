@@ -2353,6 +2353,11 @@
                 "deletePipelineJob"
               ]
             },
+            "BatchDeletePipelineJobs": {
+              "methods": [
+                "batchDeletePipelineJobs"
+              ]
+            },
             "ListTrainingPipelines": {
               "methods": [
                 "listTrainingPipelines",
@@ -2410,6 +2415,11 @@
             "DeletePipelineJob": {
               "methods": [
                 "deletePipelineJob"
+              ]
+            },
+            "BatchDeletePipelineJobs": {
+              "methods": [
+                "batchDeletePipelineJobs"
               ]
             },
             "ListTrainingPipelines": {
