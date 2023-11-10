@@ -114,7 +114,8 @@ export function getCurrentTraceFromAgent() {
  *     automatically, but you may optionally specify a specific monitored
  *     resource. For more information, see the
  *     [official documentation]{@link
- * https://cloud.google.com/logging/docs/api/reference/rest/v2/MonitoredResource}
+ * https://cloud.google.com/monitoring/api/ref_v3/rpc/google.api#google.api.MonitoredResource}
+ *
  * @param {object} [options.serviceContext] For logged errors, we provide this
  *     as the service context. For more information see
  *     [this guide]{@link
@@ -283,7 +284,7 @@ export class LoggingBunyan extends Writable {
 
     // If the record contains a httpRequest property, provide it on the entry
     // metadata. This allows Stackdriver to use request log formatting.
-    // https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#HttpRequest
+    // https://cloud.google.com/logging/docs/reference/v2/rpc/google.logging.type#google.logging.type.HttpRequest
     // Note that the httpRequest field must properly validate as a HttpRequest
     // proto message, or the log entry would be rejected by the API. We do no
     // validation here.
