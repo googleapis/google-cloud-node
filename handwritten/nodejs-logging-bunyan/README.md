@@ -143,7 +143,7 @@ startServer();
 
 ### Error Reporting
 
-Any `Error` objects you log at severity `error` or higher can automatically be picked up by [Cloud Error Reporting][error-reporting] if you have specified a `serviceContext.service` when instantiating a `LoggingBunyan` instance:
+Any `Error` objects you log at severity `error` or higher can automatically be picked up by [Cloud Error Reporting](https://cloud.google.com/error-reporting/) if you have specified a `serviceContext.service` when instantiating a `LoggingBunyan` instance:
 
 ```javascript
 const loggingBunyan = new LoggingBunyan({
@@ -158,14 +158,14 @@ const loggingBunyan = new LoggingBunyan({
 
 It is an error to specify a `serviceContext` but not specify `serviceContext.service`.
 
-Make sure to add logs to your [uncaught exception][uncaught] and [unhandled rejection][unhandled] handlers if you want to see those errors too.
+Make sure to add logs to your [uncaught exception](https://nodejs.org/api/process.html#process_event_uncaughtexception) and [unhandled rejection](https://nodejs.org/api/process.html#process_event_unhandledrejection) handlers if you want to see those errors too.
 
 You may also want to see the [@google-cloud/error-reporting][@google-cloud/error-reporting] module which provides direct access to the Error Reporting API.
 
 ### LogEntry Labels
 
 If the bunyan log record contains a label property where all the values are strings, we automatically promote that
-property to be the [`LogEntry.labels`](https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry) value rather
+property to be the [`LogEntry.labels`](https://cloud.google.com/logging/docs/reference/v2/rpc/google.logging.v2#logentry) value rather
 than being one of the properties in the `payload` fields. This makes it easier to filter the logs in the UI using the labels.
 
 ```javascript
@@ -176,7 +176,7 @@ All the label values must be strings for this automatic promotion to work. Other
 
 ### Formatting Request Logs
 
-To format your request logs you can provide a `httpRequest` property on the bunyan metadata you provide along with the log message. We will treat this as the [`HttpRequest`][http-request-message] message and Cloud logging will show this as a request log. Example:
+To format your request logs you can provide a `httpRequest` property on the bunyan metadata you provide along with the log message. We will treat this as the [`HttpRequest`](https://cloud.google.com/logging/docs/reference/v2/rpc/google.logging.type#google.logging.type.HttpRequest) message and Cloud logging will show this as a request log. Example:
 
 ![Request Log Example](https://raw.githubusercontent.com/googleapis/nodejs-logging-bunyan/master/doc/images/request-log.png)
 
@@ -192,7 +192,7 @@ logger.info({
 }, req.path);
 ```
 
-The `httpRequest` property must be a properly formatted [`HttpRequest`][http-request-message] message. (Note: the linked protobuf documentation shows `snake_case` property names, but in JavaScript one needs to provide property names in `camelCase`.)
+The `httpRequest` property must be a properly formatted [`HttpRequest`](https://cloud.google.com/logging/docs/reference/v2/rpc/google.logging.type#google.logging.type.HttpRequest) message. (Note: the linked protobuf documentation shows `snake_case` property names, but in JavaScript one needs to provide property names in `camelCase`.)
 
 ### Correlating Logs with Traces
 
