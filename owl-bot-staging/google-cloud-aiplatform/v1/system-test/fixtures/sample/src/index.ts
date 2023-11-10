@@ -16,13 +16,22 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {DatasetServiceClient, EndpointServiceClient, FeaturestoreOnlineServingServiceClient, FeaturestoreServiceClient, IndexEndpointServiceClient, IndexServiceClient, JobServiceClient, MatchServiceClient, MetadataServiceClient, MigrationServiceClient, ModelGardenServiceClient, ModelServiceClient, PipelineServiceClient, PredictionServiceClient, ScheduleServiceClient, SpecialistPoolServiceClient, TensorboardServiceClient, VizierServiceClient} from '@google-cloud/aiplatform';
+import {DatasetServiceClient, EndpointServiceClient, FeatureOnlineStoreAdminServiceClient, FeatureOnlineStoreServiceClient, FeatureRegistryServiceClient, FeaturestoreOnlineServingServiceClient, FeaturestoreServiceClient, IndexEndpointServiceClient, IndexServiceClient, JobServiceClient, MatchServiceClient, MetadataServiceClient, MigrationServiceClient, ModelGardenServiceClient, ModelServiceClient, PipelineServiceClient, PredictionServiceClient, ScheduleServiceClient, SpecialistPoolServiceClient, TensorboardServiceClient, VizierServiceClient} from '@google-cloud/aiplatform';
 
 // check that the client class type name can be used
 function doStuffWithDatasetServiceClient(client: DatasetServiceClient) {
   client.close();
 }
 function doStuffWithEndpointServiceClient(client: EndpointServiceClient) {
+  client.close();
+}
+function doStuffWithFeatureOnlineStoreAdminServiceClient(client: FeatureOnlineStoreAdminServiceClient) {
+  client.close();
+}
+function doStuffWithFeatureOnlineStoreServiceClient(client: FeatureOnlineStoreServiceClient) {
+  client.close();
+}
+function doStuffWithFeatureRegistryServiceClient(client: FeatureRegistryServiceClient) {
   client.close();
 }
 function doStuffWithFeaturestoreOnlineServingServiceClient(client: FeaturestoreOnlineServingServiceClient) {
@@ -81,6 +90,15 @@ function main() {
   // check that the client instance can be created
   const endpointServiceClient = new EndpointServiceClient();
   doStuffWithEndpointServiceClient(endpointServiceClient);
+  // check that the client instance can be created
+  const featureOnlineStoreAdminServiceClient = new FeatureOnlineStoreAdminServiceClient();
+  doStuffWithFeatureOnlineStoreAdminServiceClient(featureOnlineStoreAdminServiceClient);
+  // check that the client instance can be created
+  const featureOnlineStoreServiceClient = new FeatureOnlineStoreServiceClient();
+  doStuffWithFeatureOnlineStoreServiceClient(featureOnlineStoreServiceClient);
+  // check that the client instance can be created
+  const featureRegistryServiceClient = new FeatureRegistryServiceClient();
+  doStuffWithFeatureRegistryServiceClient(featureRegistryServiceClient);
   // check that the client instance can be created
   const featurestoreOnlineServingServiceClient = new FeaturestoreOnlineServingServiceClient();
   doStuffWithFeaturestoreOnlineServingServiceClient(featurestoreOnlineServingServiceClient);

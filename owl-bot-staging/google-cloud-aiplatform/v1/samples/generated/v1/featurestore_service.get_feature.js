@@ -30,8 +30,10 @@ function main(name) {
    */
   /**
    *  Required. The name of the Feature resource.
-   *  Format:
+   *  Format for entity_type as parent:
    *  `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`
+   *  Format for feature_group as parent:
+   *  `projects/{project}/locations/{location}/featureGroups/{feature_group}`
    */
   // const name = 'abc123'
 
