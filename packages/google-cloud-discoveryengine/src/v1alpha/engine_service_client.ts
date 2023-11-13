@@ -25,26 +25,29 @@ import type {
   ClientOptions,
   GrpcClientOptions,
   LROperation,
+  PaginationCallback,
+  GaxCall,
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
- * `src/v1alpha/site_search_engine_service_client_config.json`.
+ * `src/v1alpha/engine_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './site_search_engine_service_client_config.json';
+import * as gapicConfig from './engine_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing site search related resources.
+ *  Service for managing {@link protos.google.cloud.discoveryengine.v1alpha.Engine|Engine}
+ *  configuration.
  * @class
  * @memberof v1alpha
  */
-export class SiteSearchEngineServiceClient {
+export class EngineServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -64,10 +67,10 @@ export class SiteSearchEngineServiceClient {
   locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  siteSearchEngineServiceStub?: Promise<{[name: string]: Function}>;
+  engineServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of SiteSearchEngineServiceClient.
+   * Construct an instance of EngineServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -102,7 +105,7 @@ export class SiteSearchEngineServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new SiteSearchEngineServiceClient({fallback: true}, gax);
+   *     const client = new EngineServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -110,8 +113,7 @@ export class SiteSearchEngineServiceClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof SiteSearchEngineServiceClient;
+    const staticMembers = this.constructor as typeof EngineServiceClient;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     this._providedCustomServicePath = !!(
@@ -186,6 +188,9 @@ export class SiteSearchEngineServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      collectionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}'
+      ),
       enginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}'
       ),
@@ -205,10 +210,6 @@ export class SiteSearchEngineServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}'
         ),
-      projectLocationCollectionDataStoreSiteSearchEnginePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine'
-        ),
       projectLocationDataStorePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataStores/{data_store}'
       ),
@@ -224,10 +225,17 @@ export class SiteSearchEngineServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/schemas/{schema}'
         ),
-      projectLocationDataStoreSiteSearchEnginePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine'
-        ),
+    };
+
+    // Some of the methods on this service return "paged" results,
+    // (e.g. 50 results at a time, with tokens to get subsequent
+    // pages). Denote the keys used for pagination and results.
+    this.descriptors.page = {
+      listEngines: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'engines'
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
@@ -322,24 +330,46 @@ export class SiteSearchEngineServiceClient {
     this.operationsClient = this._gaxModule
       .lro(lroOptions)
       .operationsClient(opts);
-    const recrawlUrisResponse = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1alpha.RecrawlUrisResponse'
+    const createEngineResponse = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1alpha.Engine'
     ) as gax.protobuf.Type;
-    const recrawlUrisMetadata = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1alpha.RecrawlUrisMetadata'
+    const createEngineMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1alpha.CreateEngineMetadata'
+    ) as gax.protobuf.Type;
+    const deleteEngineResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteEngineMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1alpha.DeleteEngineMetadata'
+    ) as gax.protobuf.Type;
+    const tuneEngineResponse = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1alpha.TuneEngineResponse'
+    ) as gax.protobuf.Type;
+    const tuneEngineMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1alpha.TuneEngineMetadata'
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
-      recrawlUris: new this._gaxModule.LongrunningDescriptor(
+      createEngine: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        recrawlUrisResponse.decode.bind(recrawlUrisResponse),
-        recrawlUrisMetadata.decode.bind(recrawlUrisMetadata)
+        createEngineResponse.decode.bind(createEngineResponse),
+        createEngineMetadata.decode.bind(createEngineMetadata)
+      ),
+      deleteEngine: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteEngineResponse.decode.bind(deleteEngineResponse),
+        deleteEngineMetadata.decode.bind(deleteEngineMetadata)
+      ),
+      tuneEngine: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        tuneEngineResponse.decode.bind(tuneEngineResponse),
+        tuneEngineMetadata.decode.bind(tuneEngineMetadata)
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.discoveryengine.v1alpha.SiteSearchEngineService',
+      'google.cloud.discoveryengine.v1alpha.EngineService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -367,29 +397,38 @@ export class SiteSearchEngineServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.siteSearchEngineServiceStub) {
-      return this.siteSearchEngineServiceStub;
+    if (this.engineServiceStub) {
+      return this.engineServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.discoveryengine.v1alpha.SiteSearchEngineService.
-    this.siteSearchEngineServiceStub = this._gaxGrpc.createStub(
+    // google.cloud.discoveryengine.v1alpha.EngineService.
+    this.engineServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.discoveryengine.v1alpha.SiteSearchEngineService'
+            'google.cloud.discoveryengine.v1alpha.EngineService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.discoveryengine.v1alpha
-            .SiteSearchEngineService,
+            .EngineService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const siteSearchEngineServiceStubMethods = ['recrawlUris'];
-    for (const methodName of siteSearchEngineServiceStubMethods) {
-      const callPromise = this.siteSearchEngineServiceStub.then(
+    const engineServiceStubMethods = [
+      'createEngine',
+      'deleteEngine',
+      'updateEngine',
+      'getEngine',
+      'listEngines',
+      'pauseEngine',
+      'resumeEngine',
+      'tuneEngine',
+    ];
+    for (const methodName of engineServiceStubMethods) {
+      const callPromise = this.engineServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -403,7 +442,10 @@ export class SiteSearchEngineServiceClient {
         }
       );
 
-      const descriptor = this.descriptors.longrunning[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        this.descriptors.longrunning[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -414,7 +456,7 @@ export class SiteSearchEngineServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.siteSearchEngineServiceStub;
+    return this.engineServiceStub;
   }
 
   /**
@@ -470,22 +512,429 @@ export class SiteSearchEngineServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-
   /**
-   * Request on-demand recrawl for a list of URIs.
+   * Updates an {@link protos.google.cloud.discoveryengine.v1alpha.Engine|Engine}
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.siteSearchEngine
-   *   Required. Full resource name of the
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.SiteSearchEngine|SiteSearchEngine},
-   *   such as
-   *   `projects/* /locations/* /collections/* /dataStores/* /siteSearchEngine`.
-   * @param {string[]} request.uris
-   *   Required. List of URIs to crawl. At most 10K URIs are supported, otherwise
-   *   an INVALID_ARGUMENT error is thrown. Each URI should match at least one
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.TargetSite|TargetSite} in
-   *   `site_search_engine`.
+   * @param {google.cloud.discoveryengine.v1alpha.Engine} request.engine
+   *   Required. The {@link protos.google.cloud.discoveryengine.v1alpha.Engine|Engine} to
+   *   update.
+   *
+   *   If the caller does not have permission to update the
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.Engine|Engine}, regardless of
+   *   whether or not it exists, a PERMISSION_DENIED error is returned.
+   *
+   *   If the {@link protos.google.cloud.discoveryengine.v1alpha.Engine|Engine} to update does
+   *   not exist, a NOT_FOUND error is returned.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Indicates which fields in the provided
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.Engine|Engine} to update.
+   *
+   *   If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
+   *   is returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1alpha.Engine|Engine}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/engine_service.update_engine.js</caption>
+   * region_tag:discoveryengine_v1alpha_generated_EngineService_UpdateEngine_async
+   */
+  updateEngine(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IUpdateEngineRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1alpha.IEngine,
+      (
+        | protos.google.cloud.discoveryengine.v1alpha.IUpdateEngineRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateEngine(
+    request: protos.google.cloud.discoveryengine.v1alpha.IUpdateEngineRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1alpha.IEngine,
+      | protos.google.cloud.discoveryengine.v1alpha.IUpdateEngineRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateEngine(
+    request: protos.google.cloud.discoveryengine.v1alpha.IUpdateEngineRequest,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1alpha.IEngine,
+      | protos.google.cloud.discoveryengine.v1alpha.IUpdateEngineRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateEngine(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IUpdateEngineRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.discoveryengine.v1alpha.IEngine,
+          | protos.google.cloud.discoveryengine.v1alpha.IUpdateEngineRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.discoveryengine.v1alpha.IEngine,
+      | protos.google.cloud.discoveryengine.v1alpha.IUpdateEngineRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1alpha.IEngine,
+      (
+        | protos.google.cloud.discoveryengine.v1alpha.IUpdateEngineRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'engine.name': request.engine!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateEngine(request, options, callback);
+  }
+  /**
+   * Gets a {@link protos.google.cloud.discoveryengine.v1alpha.Engine|Engine}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Full resource name of
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.Engine|Engine}, such as
+   *   `projects/{project}/locations/{location}/collections/{collection_id}/engines/{engine_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1alpha.Engine|Engine}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/engine_service.get_engine.js</caption>
+   * region_tag:discoveryengine_v1alpha_generated_EngineService_GetEngine_async
+   */
+  getEngine(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IGetEngineRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1alpha.IEngine,
+      protos.google.cloud.discoveryengine.v1alpha.IGetEngineRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getEngine(
+    request: protos.google.cloud.discoveryengine.v1alpha.IGetEngineRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1alpha.IEngine,
+      | protos.google.cloud.discoveryengine.v1alpha.IGetEngineRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getEngine(
+    request: protos.google.cloud.discoveryengine.v1alpha.IGetEngineRequest,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1alpha.IEngine,
+      | protos.google.cloud.discoveryengine.v1alpha.IGetEngineRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getEngine(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IGetEngineRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.discoveryengine.v1alpha.IEngine,
+          | protos.google.cloud.discoveryengine.v1alpha.IGetEngineRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.discoveryengine.v1alpha.IEngine,
+      | protos.google.cloud.discoveryengine.v1alpha.IGetEngineRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1alpha.IEngine,
+      protos.google.cloud.discoveryengine.v1alpha.IGetEngineRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getEngine(request, options, callback);
+  }
+  /**
+   * Pauses the training of an existing engine. Only applicable if
+   * {@link protos.|solution_type} is
+   * {@link protos.google.cloud.discoveryengine.v1alpha.SolutionType.SOLUTION_TYPE_RECOMMENDATION|SOLUTION_TYPE_RECOMMENDATION}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the engine to pause.
+   *   Format:
+   *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1alpha.Engine|Engine}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/engine_service.pause_engine.js</caption>
+   * region_tag:discoveryengine_v1alpha_generated_EngineService_PauseEngine_async
+   */
+  pauseEngine(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IPauseEngineRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1alpha.IEngine,
+      (
+        | protos.google.cloud.discoveryengine.v1alpha.IPauseEngineRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  pauseEngine(
+    request: protos.google.cloud.discoveryengine.v1alpha.IPauseEngineRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1alpha.IEngine,
+      | protos.google.cloud.discoveryengine.v1alpha.IPauseEngineRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  pauseEngine(
+    request: protos.google.cloud.discoveryengine.v1alpha.IPauseEngineRequest,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1alpha.IEngine,
+      | protos.google.cloud.discoveryengine.v1alpha.IPauseEngineRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  pauseEngine(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IPauseEngineRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.discoveryengine.v1alpha.IEngine,
+          | protos.google.cloud.discoveryengine.v1alpha.IPauseEngineRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.discoveryengine.v1alpha.IEngine,
+      | protos.google.cloud.discoveryengine.v1alpha.IPauseEngineRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1alpha.IEngine,
+      (
+        | protos.google.cloud.discoveryengine.v1alpha.IPauseEngineRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.pauseEngine(request, options, callback);
+  }
+  /**
+   * Resumes the training of an existing engine. Only applicable if
+   * {@link protos.|solution_type} is
+   * {@link protos.google.cloud.discoveryengine.v1alpha.SolutionType.SOLUTION_TYPE_RECOMMENDATION|SOLUTION_TYPE_RECOMMENDATION}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the engine to resume.
+   *   Format:
+   *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1alpha.Engine|Engine}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/engine_service.resume_engine.js</caption>
+   * region_tag:discoveryengine_v1alpha_generated_EngineService_ResumeEngine_async
+   */
+  resumeEngine(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IResumeEngineRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1alpha.IEngine,
+      (
+        | protos.google.cloud.discoveryengine.v1alpha.IResumeEngineRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  resumeEngine(
+    request: protos.google.cloud.discoveryengine.v1alpha.IResumeEngineRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1alpha.IEngine,
+      | protos.google.cloud.discoveryengine.v1alpha.IResumeEngineRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  resumeEngine(
+    request: protos.google.cloud.discoveryengine.v1alpha.IResumeEngineRequest,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1alpha.IEngine,
+      | protos.google.cloud.discoveryengine.v1alpha.IResumeEngineRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  resumeEngine(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IResumeEngineRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.discoveryengine.v1alpha.IEngine,
+          | protos.google.cloud.discoveryengine.v1alpha.IResumeEngineRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.discoveryengine.v1alpha.IEngine,
+      | protos.google.cloud.discoveryengine.v1alpha.IResumeEngineRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1alpha.IEngine,
+      (
+        | protos.google.cloud.discoveryengine.v1alpha.IResumeEngineRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.resumeEngine(request, options, callback);
+  }
+
+  /**
+   * Creates a {@link protos.google.cloud.discoveryengine.v1alpha.Engine|Engine}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name, such as
+   *   `projects/{project}/locations/{location}/collections/{collection}`.
+   * @param {google.cloud.discoveryengine.v1alpha.Engine} request.engine
+   *   Required. The {@link protos.google.cloud.discoveryengine.v1alpha.Engine|Engine} to
+   *   create.
+   * @param {string} request.engineId
+   *   Required. The ID to use for the
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.Engine|Engine}, which will become
+   *   the final component of the
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.Engine|Engine}'s resource name.
+   *
+   *   This field must conform to [RFC-1034](https://tools.ietf.org/html/rfc1034)
+   *   standard with a length limit of 63 characters. Otherwise, an
+   *   INVALID_ARGUMENT error is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -494,61 +943,61 @@ export class SiteSearchEngineServiceClient {
    *   you can `await` for.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/site_search_engine_service.recrawl_uris.js</caption>
-   * region_tag:discoveryengine_v1alpha_generated_SiteSearchEngineService_RecrawlUris_async
+   * @example <caption>include:samples/generated/v1alpha/engine_service.create_engine.js</caption>
+   * region_tag:discoveryengine_v1alpha_generated_EngineService_CreateEngine_async
    */
-  recrawlUris(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IRecrawlUrisRequest,
+  createEngine(
+    request?: protos.google.cloud.discoveryengine.v1alpha.ICreateEngineRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.discoveryengine.v1alpha.IRecrawlUrisResponse,
-        protos.google.cloud.discoveryengine.v1alpha.IRecrawlUrisMetadata
+        protos.google.cloud.discoveryengine.v1alpha.IEngine,
+        protos.google.cloud.discoveryengine.v1alpha.ICreateEngineMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
     ]
   >;
-  recrawlUris(
-    request: protos.google.cloud.discoveryengine.v1alpha.IRecrawlUrisRequest,
+  createEngine(
+    request: protos.google.cloud.discoveryengine.v1alpha.ICreateEngineRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.discoveryengine.v1alpha.IRecrawlUrisResponse,
-        protos.google.cloud.discoveryengine.v1alpha.IRecrawlUrisMetadata
+        protos.google.cloud.discoveryengine.v1alpha.IEngine,
+        protos.google.cloud.discoveryengine.v1alpha.ICreateEngineMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  recrawlUris(
-    request: protos.google.cloud.discoveryengine.v1alpha.IRecrawlUrisRequest,
+  createEngine(
+    request: protos.google.cloud.discoveryengine.v1alpha.ICreateEngineRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.discoveryengine.v1alpha.IRecrawlUrisResponse,
-        protos.google.cloud.discoveryengine.v1alpha.IRecrawlUrisMetadata
+        protos.google.cloud.discoveryengine.v1alpha.IEngine,
+        protos.google.cloud.discoveryengine.v1alpha.ICreateEngineMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  recrawlUris(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IRecrawlUrisRequest,
+  createEngine(
+    request?: protos.google.cloud.discoveryengine.v1alpha.ICreateEngineRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.discoveryengine.v1alpha.IRecrawlUrisResponse,
-            protos.google.cloud.discoveryengine.v1alpha.IRecrawlUrisMetadata
+            protos.google.cloud.discoveryengine.v1alpha.IEngine,
+            protos.google.cloud.discoveryengine.v1alpha.ICreateEngineMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.discoveryengine.v1alpha.IRecrawlUrisResponse,
-        protos.google.cloud.discoveryengine.v1alpha.IRecrawlUrisMetadata
+        protos.google.cloud.discoveryengine.v1alpha.IEngine,
+        protos.google.cloud.discoveryengine.v1alpha.ICreateEngineMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -556,8 +1005,8 @@ export class SiteSearchEngineServiceClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.discoveryengine.v1alpha.IRecrawlUrisResponse,
-        protos.google.cloud.discoveryengine.v1alpha.IRecrawlUrisMetadata
+        protos.google.cloud.discoveryengine.v1alpha.IEngine,
+        protos.google.cloud.discoveryengine.v1alpha.ICreateEngineMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
@@ -576,28 +1025,28 @@ export class SiteSearchEngineServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        site_search_engine: request.siteSearchEngine ?? '',
+        parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.recrawlUris(request, options, callback);
+    return this.innerApiCalls.createEngine(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by `recrawlUris()`.
+   * Check the status of the long running operation returned by `createEngine()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/site_search_engine_service.recrawl_uris.js</caption>
-   * region_tag:discoveryengine_v1alpha_generated_SiteSearchEngineService_RecrawlUris_async
+   * @example <caption>include:samples/generated/v1alpha/engine_service.create_engine.js</caption>
+   * region_tag:discoveryengine_v1alpha_generated_EngineService_CreateEngine_async
    */
-  async checkRecrawlUrisProgress(
+  async checkCreateEngineProgress(
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.discoveryengine.v1alpha.RecrawlUrisResponse,
-      protos.google.cloud.discoveryengine.v1alpha.RecrawlUrisMetadata
+      protos.google.cloud.discoveryengine.v1alpha.Engine,
+      protos.google.cloud.discoveryengine.v1alpha.CreateEngineMetadata
     >
   > {
     const request =
@@ -607,13 +1056,496 @@ export class SiteSearchEngineServiceClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
-      this.descriptors.longrunning.recrawlUris,
+      this.descriptors.longrunning.createEngine,
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.discoveryengine.v1alpha.RecrawlUrisResponse,
-      protos.google.cloud.discoveryengine.v1alpha.RecrawlUrisMetadata
+      protos.google.cloud.discoveryengine.v1alpha.Engine,
+      protos.google.cloud.discoveryengine.v1alpha.CreateEngineMetadata
     >;
+  }
+  /**
+   * Deletes a {@link protos.google.cloud.discoveryengine.v1alpha.Engine|Engine}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Full resource name of
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.Engine|Engine}, such as
+   *   `projects/{project}/locations/{location}/collections/{collection_id}/engines/{engine_id}`.
+   *
+   *   If the caller does not have permission to delete the
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.Engine|Engine}, regardless of
+   *   whether or not it exists, a PERMISSION_DENIED error is returned.
+   *
+   *   If the {@link protos.google.cloud.discoveryengine.v1alpha.Engine|Engine} to delete does
+   *   not exist, a NOT_FOUND error is returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/engine_service.delete_engine.js</caption>
+   * region_tag:discoveryengine_v1alpha_generated_EngineService_DeleteEngine_async
+   */
+  deleteEngine(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IDeleteEngineRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.discoveryengine.v1alpha.IDeleteEngineMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteEngine(
+    request: protos.google.cloud.discoveryengine.v1alpha.IDeleteEngineRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.discoveryengine.v1alpha.IDeleteEngineMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteEngine(
+    request: protos.google.cloud.discoveryengine.v1alpha.IDeleteEngineRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.discoveryengine.v1alpha.IDeleteEngineMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteEngine(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IDeleteEngineRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.discoveryengine.v1alpha.IDeleteEngineMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.discoveryengine.v1alpha.IDeleteEngineMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.discoveryengine.v1alpha.IDeleteEngineMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteEngine(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteEngine()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/engine_service.delete_engine.js</caption>
+   * region_tag:discoveryengine_v1alpha_generated_EngineService_DeleteEngine_async
+   */
+  async checkDeleteEngineProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.discoveryengine.v1alpha.DeleteEngineMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteEngine,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.discoveryengine.v1alpha.DeleteEngineMetadata
+    >;
+  }
+  /**
+   * Tunes an existing engine. Only applicable if {@link protos.|solution_type} is
+   * {@link protos.google.cloud.discoveryengine.v1alpha.SolutionType.SOLUTION_TYPE_RECOMMENDATION|SOLUTION_TYPE_RECOMMENDATION}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the engine to tune.
+   *   Format:
+   *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/engine_service.tune_engine.js</caption>
+   * region_tag:discoveryengine_v1alpha_generated_EngineService_TuneEngine_async
+   */
+  tuneEngine(
+    request?: protos.google.cloud.discoveryengine.v1alpha.ITuneEngineRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1alpha.ITuneEngineResponse,
+        protos.google.cloud.discoveryengine.v1alpha.ITuneEngineMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  tuneEngine(
+    request: protos.google.cloud.discoveryengine.v1alpha.ITuneEngineRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1alpha.ITuneEngineResponse,
+        protos.google.cloud.discoveryengine.v1alpha.ITuneEngineMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  tuneEngine(
+    request: protos.google.cloud.discoveryengine.v1alpha.ITuneEngineRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1alpha.ITuneEngineResponse,
+        protos.google.cloud.discoveryengine.v1alpha.ITuneEngineMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  tuneEngine(
+    request?: protos.google.cloud.discoveryengine.v1alpha.ITuneEngineRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1alpha.ITuneEngineResponse,
+            protos.google.cloud.discoveryengine.v1alpha.ITuneEngineMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1alpha.ITuneEngineResponse,
+        protos.google.cloud.discoveryengine.v1alpha.ITuneEngineMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1alpha.ITuneEngineResponse,
+        protos.google.cloud.discoveryengine.v1alpha.ITuneEngineMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.tuneEngine(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `tuneEngine()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/engine_service.tune_engine.js</caption>
+   * region_tag:discoveryengine_v1alpha_generated_EngineService_TuneEngine_async
+   */
+  async checkTuneEngineProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.discoveryengine.v1alpha.TuneEngineResponse,
+      protos.google.cloud.discoveryengine.v1alpha.TuneEngineMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.tuneEngine,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.discoveryengine.v1alpha.TuneEngineResponse,
+      protos.google.cloud.discoveryengine.v1alpha.TuneEngineMetadata
+    >;
+  }
+  /**
+   * Lists all the {@link protos.google.cloud.discoveryengine.v1alpha.Engine|Engine}s
+   * associated with the project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name, such as
+   *   `projects/{project}/locations/{location}/collections/{collection_id}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Not supported.
+   * @param {string} [request.pageToken]
+   *   Optional. Not supported.
+   * @param {string} [request.filter]
+   *   Optional. Filter by solution type. For example:
+   *   solution_type=SOLUTION_TYPE_SEARCH
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.discoveryengine.v1alpha.Engine|Engine}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listEnginesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listEngines(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IListEnginesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1alpha.IEngine[],
+      protos.google.cloud.discoveryengine.v1alpha.IListEnginesRequest | null,
+      protos.google.cloud.discoveryengine.v1alpha.IListEnginesResponse,
+    ]
+  >;
+  listEngines(
+    request: protos.google.cloud.discoveryengine.v1alpha.IListEnginesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.discoveryengine.v1alpha.IListEnginesRequest,
+      | protos.google.cloud.discoveryengine.v1alpha.IListEnginesResponse
+      | null
+      | undefined,
+      protos.google.cloud.discoveryengine.v1alpha.IEngine
+    >
+  ): void;
+  listEngines(
+    request: protos.google.cloud.discoveryengine.v1alpha.IListEnginesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.discoveryengine.v1alpha.IListEnginesRequest,
+      | protos.google.cloud.discoveryengine.v1alpha.IListEnginesResponse
+      | null
+      | undefined,
+      protos.google.cloud.discoveryengine.v1alpha.IEngine
+    >
+  ): void;
+  listEngines(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IListEnginesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.discoveryengine.v1alpha.IListEnginesRequest,
+          | protos.google.cloud.discoveryengine.v1alpha.IListEnginesResponse
+          | null
+          | undefined,
+          protos.google.cloud.discoveryengine.v1alpha.IEngine
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.discoveryengine.v1alpha.IListEnginesRequest,
+      | protos.google.cloud.discoveryengine.v1alpha.IListEnginesResponse
+      | null
+      | undefined,
+      protos.google.cloud.discoveryengine.v1alpha.IEngine
+    >
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1alpha.IEngine[],
+      protos.google.cloud.discoveryengine.v1alpha.IListEnginesRequest | null,
+      protos.google.cloud.discoveryengine.v1alpha.IListEnginesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listEngines(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name, such as
+   *   `projects/{project}/locations/{location}/collections/{collection_id}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Not supported.
+   * @param {string} [request.pageToken]
+   *   Optional. Not supported.
+   * @param {string} [request.filter]
+   *   Optional. Filter by solution type. For example:
+   *   solution_type=SOLUTION_TYPE_SEARCH
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.discoveryengine.v1alpha.Engine|Engine} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listEnginesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listEnginesStream(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IListEnginesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listEngines'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listEngines.createStream(
+      this.innerApiCalls.listEngines as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listEngines`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name, such as
+   *   `projects/{project}/locations/{location}/collections/{collection_id}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Not supported.
+   * @param {string} [request.pageToken]
+   *   Optional. Not supported.
+   * @param {string} [request.filter]
+   *   Optional. Filter by solution type. For example:
+   *   solution_type=SOLUTION_TYPE_SEARCH
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.Engine|Engine}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/engine_service.list_engines.js</caption>
+   * region_tag:discoveryengine_v1alpha_generated_EngineService_ListEngines_async
+   */
+  listEnginesAsync(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IListEnginesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.discoveryengine.v1alpha.IEngine> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listEngines'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listEngines.asyncIterate(
+      this.innerApiCalls['listEngines'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.discoveryengine.v1alpha.IEngine>;
   }
   /**
    * Gets information about a location.
@@ -871,6 +1803,58 @@ export class SiteSearchEngineServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified collection resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @returns {string} Resource name string.
+   */
+  collectionPath(project: string, location: string, collection: string) {
+    return this.pathTemplates.collectionPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+    });
+  }
+
+  /**
+   * Parse the project from Collection resource.
+   *
+   * @param {string} collectionName
+   *   A fully-qualified path representing Collection resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCollectionName(collectionName: string) {
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Collection resource.
+   *
+   * @param {string} collectionName
+   *   A fully-qualified path representing Collection resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCollectionName(collectionName: string) {
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .location;
+  }
+
+  /**
+   * Parse the collection from Collection resource.
+   *
+   * @param {string} collectionName
+   *   A fully-qualified path representing Collection resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromCollectionName(collectionName: string) {
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .collection;
+  }
 
   /**
    * Return a fully-qualified engine resource name string.
@@ -1352,91 +2336,6 @@ export class SiteSearchEngineServiceClient {
   }
 
   /**
-   * Return a fully-qualified projectLocationCollectionDataStoreSiteSearchEngine resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} collection
-   * @param {string} data_store
-   * @returns {string} Resource name string.
-   */
-  projectLocationCollectionDataStoreSiteSearchEnginePath(
-    project: string,
-    location: string,
-    collection: string,
-    dataStore: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        data_store: dataStore,
-      }
-    );
-  }
-
-  /**
-   * Parse the project from ProjectLocationCollectionDataStoreSiteSearchEngine resource.
-   *
-   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineName
-   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineName(
-    projectLocationCollectionDataStoreSiteSearchEngineName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineName
-    ).project;
-  }
-
-  /**
-   * Parse the location from ProjectLocationCollectionDataStoreSiteSearchEngine resource.
-   *
-   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineName
-   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineName(
-    projectLocationCollectionDataStoreSiteSearchEngineName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineName
-    ).location;
-  }
-
-  /**
-   * Parse the collection from ProjectLocationCollectionDataStoreSiteSearchEngine resource.
-   *
-   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineName
-   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine resource.
-   * @returns {string} A string representing the collection.
-   */
-  matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineName(
-    projectLocationCollectionDataStoreSiteSearchEngineName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineName
-    ).collection;
-  }
-
-  /**
-   * Parse the data_store from ProjectLocationCollectionDataStoreSiteSearchEngine resource.
-   *
-   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineName
-   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine resource.
-   * @returns {string} A string representing the data_store.
-   */
-  matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineName(
-    projectLocationCollectionDataStoreSiteSearchEngineName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineName
-    ).data_store;
-  }
-
-  /**
    * Return a fully-qualified projectLocationDataStore resource name string.
    *
    * @param {string} project
@@ -1775,81 +2674,14 @@ export class SiteSearchEngineServiceClient {
   }
 
   /**
-   * Return a fully-qualified projectLocationDataStoreSiteSearchEngine resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} data_store
-   * @returns {string} Resource name string.
-   */
-  projectLocationDataStoreSiteSearchEnginePath(
-    project: string,
-    location: string,
-    dataStore: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        data_store: dataStore,
-      }
-    );
-  }
-
-  /**
-   * Parse the project from ProjectLocationDataStoreSiteSearchEngine resource.
-   *
-   * @param {string} projectLocationDataStoreSiteSearchEngineName
-   *   A fully-qualified path representing project_location_data_store_siteSearchEngine resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectLocationDataStoreSiteSearchEngineName(
-    projectLocationDataStoreSiteSearchEngineName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match(
-      projectLocationDataStoreSiteSearchEngineName
-    ).project;
-  }
-
-  /**
-   * Parse the location from ProjectLocationDataStoreSiteSearchEngine resource.
-   *
-   * @param {string} projectLocationDataStoreSiteSearchEngineName
-   *   A fully-qualified path representing project_location_data_store_siteSearchEngine resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromProjectLocationDataStoreSiteSearchEngineName(
-    projectLocationDataStoreSiteSearchEngineName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match(
-      projectLocationDataStoreSiteSearchEngineName
-    ).location;
-  }
-
-  /**
-   * Parse the data_store from ProjectLocationDataStoreSiteSearchEngine resource.
-   *
-   * @param {string} projectLocationDataStoreSiteSearchEngineName
-   *   A fully-qualified path representing project_location_data_store_siteSearchEngine resource.
-   * @returns {string} A string representing the data_store.
-   */
-  matchDataStoreFromProjectLocationDataStoreSiteSearchEngineName(
-    projectLocationDataStoreSiteSearchEngineName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match(
-      projectLocationDataStoreSiteSearchEngineName
-    ).data_store;
-  }
-
-  /**
    * Terminate the gRPC channel and close the client.
    *
    * The client will no longer be usable and all future behavior is undefined.
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.siteSearchEngineServiceStub && !this._terminated) {
-      return this.siteSearchEngineServiceStub.then(stub => {
+    if (this.engineServiceStub && !this._terminated) {
+      return this.engineServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

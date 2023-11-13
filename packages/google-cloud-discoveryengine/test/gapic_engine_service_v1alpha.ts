@@ -21,7 +21,9 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as usereventserviceModule from '../src';
+import * as engineserviceModule from '../src';
+
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -101,6 +103,44 @@ function stubLongRunningCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+    }
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
+    });
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
+}
+
 function stubAsyncIterationCall<ResponseType>(
   responses?: ResponseType[],
   error?: Error
@@ -124,67 +164,66 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1alpha.UserEventServiceClient', () => {
+describe('v1alpha.EngineServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
       const servicePath =
-        usereventserviceModule.v1alpha.UserEventServiceClient.servicePath;
+        engineserviceModule.v1alpha.EngineServiceClient.servicePath;
       assert(servicePath);
     });
 
     it('has apiEndpoint', () => {
       const apiEndpoint =
-        usereventserviceModule.v1alpha.UserEventServiceClient.apiEndpoint;
+        engineserviceModule.v1alpha.EngineServiceClient.apiEndpoint;
       assert(apiEndpoint);
     });
 
     it('has port', () => {
-      const port = usereventserviceModule.v1alpha.UserEventServiceClient.port;
+      const port = engineserviceModule.v1alpha.EngineServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client =
-        new usereventserviceModule.v1alpha.UserEventServiceClient();
+      const client = new engineserviceModule.v1alpha.EngineServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         fallback: true,
       });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert.strictEqual(client.userEventServiceStub, undefined);
+      assert.strictEqual(client.engineServiceStub, undefined);
       await client.initialize();
-      assert(client.userEventServiceStub);
+      assert(client.engineServiceStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
-      assert(client.userEventServiceStub);
+      assert(client.engineServiceStub);
       client.close().then(() => {
         done();
       });
     });
 
     it('has close method for the non-initialized client', done => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert.strictEqual(client.userEventServiceStub, undefined);
+      assert.strictEqual(client.engineServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -192,7 +231,7 @@ describe('v1alpha.UserEventServiceClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -204,7 +243,7 @@ describe('v1alpha.UserEventServiceClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -225,64 +264,66 @@ describe('v1alpha.UserEventServiceClient', () => {
     });
   });
 
-  describe('writeUserEvent', () => {
-    it('invokes writeUserEvent without error', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+  describe('updateEngine', () => {
+    it('invokes updateEngine without error', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.WriteUserEventRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.UpdateEngineRequest()
       );
+      request.engine ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.WriteUserEventRequest',
-        ['parent']
+        '.google.cloud.discoveryengine.v1alpha.UpdateEngineRequest',
+        ['engine', 'name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.engine.name = defaultValue1;
+      const expectedHeaderRequestParams = `engine.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.UserEvent()
+        new protos.google.cloud.discoveryengine.v1alpha.Engine()
       );
-      client.innerApiCalls.writeUserEvent = stubSimpleCall(expectedResponse);
-      const [response] = await client.writeUserEvent(request);
+      client.innerApiCalls.updateEngine = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateEngine(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.writeUserEvent as SinonStub
+        client.innerApiCalls.updateEngine as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.writeUserEvent as SinonStub
+        client.innerApiCalls.updateEngine as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes writeUserEvent without error using callback', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+    it('invokes updateEngine without error using callback', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.WriteUserEventRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.UpdateEngineRequest()
       );
+      request.engine ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.WriteUserEventRequest',
-        ['parent']
+        '.google.cloud.discoveryengine.v1alpha.UpdateEngineRequest',
+        ['engine', 'name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.engine.name = defaultValue1;
+      const expectedHeaderRequestParams = `engine.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.UserEvent()
+        new protos.google.cloud.discoveryengine.v1alpha.Engine()
       );
-      client.innerApiCalls.writeUserEvent =
+      client.innerApiCalls.updateEngine =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.writeUserEvent(
+        client.updateEngine(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1alpha.IUserEvent | null
+            result?: protos.google.cloud.discoveryengine.v1alpha.IEngine | null
           ) => {
             if (err) {
               reject(err);
@@ -295,122 +336,127 @@ describe('v1alpha.UserEventServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.writeUserEvent as SinonStub
+        client.innerApiCalls.updateEngine as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.writeUserEvent as SinonStub
+        client.innerApiCalls.updateEngine as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes writeUserEvent with error', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+    it('invokes updateEngine with error', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.WriteUserEventRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.UpdateEngineRequest()
       );
+      request.engine ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.WriteUserEventRequest',
-        ['parent']
+        '.google.cloud.discoveryengine.v1alpha.UpdateEngineRequest',
+        ['engine', 'name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.engine.name = defaultValue1;
+      const expectedHeaderRequestParams = `engine.name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.writeUserEvent = stubSimpleCall(
+      client.innerApiCalls.updateEngine = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.writeUserEvent(request), expectedError);
+      await assert.rejects(client.updateEngine(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.writeUserEvent as SinonStub
+        client.innerApiCalls.updateEngine as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.writeUserEvent as SinonStub
+        client.innerApiCalls.updateEngine as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes writeUserEvent with closed client', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+    it('invokes updateEngine with closed client', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.WriteUserEventRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.UpdateEngineRequest()
       );
+      request.engine ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.WriteUserEventRequest',
-        ['parent']
+        '.google.cloud.discoveryengine.v1alpha.UpdateEngineRequest',
+        ['engine', 'name']
       );
-      request.parent = defaultValue1;
+      request.engine.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.writeUserEvent(request), expectedError);
+      await assert.rejects(client.updateEngine(request), expectedError);
     });
   });
 
-  describe('collectUserEvent', () => {
-    it('invokes collectUserEvent without error', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+  describe('getEngine', () => {
+    it('invokes getEngine without error', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.CollectUserEventRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.GetEngineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.CollectUserEventRequest',
-        ['parent']
+        '.google.cloud.discoveryengine.v1alpha.GetEngineRequest',
+        ['name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.api.HttpBody()
+        new protos.google.cloud.discoveryengine.v1alpha.Engine()
       );
-      client.innerApiCalls.collectUserEvent = stubSimpleCall(expectedResponse);
-      const [response] = await client.collectUserEvent(request);
+      client.innerApiCalls.getEngine = stubSimpleCall(expectedResponse);
+      const [response] = await client.getEngine(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.collectUserEvent as SinonStub
+        client.innerApiCalls.getEngine as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.collectUserEvent as SinonStub
+        client.innerApiCalls.getEngine as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes collectUserEvent without error using callback', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+    it('invokes getEngine without error using callback', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.CollectUserEventRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.GetEngineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.CollectUserEventRequest',
-        ['parent']
+        '.google.cloud.discoveryengine.v1alpha.GetEngineRequest',
+        ['name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.api.HttpBody()
+        new protos.google.cloud.discoveryengine.v1alpha.Engine()
       );
-      client.innerApiCalls.collectUserEvent =
+      client.innerApiCalls.getEngine =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.collectUserEvent(
+        client.getEngine(
           request,
-          (err?: Error | null, result?: protos.google.api.IHttpBody | null) => {
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.discoveryengine.v1alpha.IEngine | null
+          ) => {
             if (err) {
               reject(err);
             } else {
@@ -422,111 +468,335 @@ describe('v1alpha.UserEventServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.collectUserEvent as SinonStub
+        client.innerApiCalls.getEngine as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.collectUserEvent as SinonStub
+        client.innerApiCalls.getEngine as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes collectUserEvent with error', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+    it('invokes getEngine with error', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.CollectUserEventRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.GetEngineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.CollectUserEventRequest',
-        ['parent']
+        '.google.cloud.discoveryengine.v1alpha.GetEngineRequest',
+        ['name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.collectUserEvent = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.collectUserEvent(request), expectedError);
+      client.innerApiCalls.getEngine = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.getEngine(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.collectUserEvent as SinonStub
+        client.innerApiCalls.getEngine as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.collectUserEvent as SinonStub
+        client.innerApiCalls.getEngine as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes collectUserEvent with closed client', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+    it('invokes getEngine with closed client', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.CollectUserEventRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.GetEngineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.CollectUserEventRequest',
-        ['parent']
+        '.google.cloud.discoveryengine.v1alpha.GetEngineRequest',
+        ['name']
       );
-      request.parent = defaultValue1;
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.collectUserEvent(request), expectedError);
+      await assert.rejects(client.getEngine(request), expectedError);
     });
   });
 
-  describe('purgeUserEvents', () => {
-    it('invokes purgeUserEvents without error', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+  describe('pauseEngine', () => {
+    it('invokes pauseEngine without error', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.PurgeUserEventsRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.PauseEngineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.PurgeUserEventsRequest',
-        ['parent']
+        '.google.cloud.discoveryengine.v1alpha.PauseEngineRequest',
+        ['name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
+        new protos.google.cloud.discoveryengine.v1alpha.Engine()
       );
-      client.innerApiCalls.purgeUserEvents =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.purgeUserEvents(request);
-      const [response] = await operation.promise();
+      client.innerApiCalls.pauseEngine = stubSimpleCall(expectedResponse);
+      const [response] = await client.pauseEngine(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.purgeUserEvents as SinonStub
+        client.innerApiCalls.pauseEngine as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.purgeUserEvents as SinonStub
+        client.innerApiCalls.pauseEngine as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes purgeUserEvents without error using callback', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+    it('invokes pauseEngine without error using callback', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.PurgeUserEventsRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.PauseEngineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.PurgeUserEventsRequest',
+        '.google.cloud.discoveryengine.v1alpha.PauseEngineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.Engine()
+      );
+      client.innerApiCalls.pauseEngine =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.pauseEngine(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.discoveryengine.v1alpha.IEngine | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.pauseEngine as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.pauseEngine as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes pauseEngine with error', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.PauseEngineRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.PauseEngineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.pauseEngine = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.pauseEngine(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.pauseEngine as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.pauseEngine as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes pauseEngine with closed client', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.PauseEngineRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.PauseEngineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.pauseEngine(request), expectedError);
+    });
+  });
+
+  describe('resumeEngine', () => {
+    it('invokes resumeEngine without error', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ResumeEngineRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ResumeEngineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.Engine()
+      );
+      client.innerApiCalls.resumeEngine = stubSimpleCall(expectedResponse);
+      const [response] = await client.resumeEngine(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.resumeEngine as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resumeEngine as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes resumeEngine without error using callback', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ResumeEngineRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ResumeEngineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.Engine()
+      );
+      client.innerApiCalls.resumeEngine =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.resumeEngine(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.discoveryengine.v1alpha.IEngine | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.resumeEngine as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resumeEngine as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes resumeEngine with error', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ResumeEngineRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ResumeEngineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.resumeEngine = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.resumeEngine(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.resumeEngine as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resumeEngine as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes resumeEngine with closed client', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ResumeEngineRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ResumeEngineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.resumeEngine(request), expectedError);
+    });
+  });
+
+  describe('createEngine', () => {
+    it('invokes createEngine without error', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.CreateEngineRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.CreateEngineRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -534,16 +804,48 @@ describe('v1alpha.UserEventServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.purgeUserEvents =
+      client.innerApiCalls.createEngine = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createEngine(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createEngine as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createEngine as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createEngine without error using callback', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.CreateEngineRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.CreateEngineRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createEngine =
         stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.purgeUserEvents(
+        client.createEngine(
           request,
           (
             err?: Error | null,
             result?: LROperation<
-              protos.google.cloud.discoveryengine.v1alpha.IPurgeUserEventsResponse,
-              protos.google.cloud.discoveryengine.v1alpha.IPurgeUserEventsMetadata
+              protos.google.cloud.discoveryengine.v1alpha.IEngine,
+              protos.google.cloud.discoveryengine.v1alpha.ICreateEngineMetadata
             > | null
           ) => {
             if (err) {
@@ -555,87 +857,87 @@ describe('v1alpha.UserEventServiceClient', () => {
         );
       });
       const operation = (await promise) as LROperation<
-        protos.google.cloud.discoveryengine.v1alpha.IPurgeUserEventsResponse,
-        protos.google.cloud.discoveryengine.v1alpha.IPurgeUserEventsMetadata
+        protos.google.cloud.discoveryengine.v1alpha.IEngine,
+        protos.google.cloud.discoveryengine.v1alpha.ICreateEngineMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.purgeUserEvents as SinonStub
+        client.innerApiCalls.createEngine as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.purgeUserEvents as SinonStub
+        client.innerApiCalls.createEngine as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes purgeUserEvents with call error', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+    it('invokes createEngine with call error', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.PurgeUserEventsRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.CreateEngineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.PurgeUserEventsRequest',
+        '.google.cloud.discoveryengine.v1alpha.CreateEngineRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.purgeUserEvents = stubLongRunningCall(
+      client.innerApiCalls.createEngine = stubLongRunningCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.purgeUserEvents(request), expectedError);
+      await assert.rejects(client.createEngine(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.purgeUserEvents as SinonStub
+        client.innerApiCalls.createEngine as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.purgeUserEvents as SinonStub
+        client.innerApiCalls.createEngine as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes purgeUserEvents with LRO error', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+    it('invokes createEngine with LRO error', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.PurgeUserEventsRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.CreateEngineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.PurgeUserEventsRequest',
+        '.google.cloud.discoveryengine.v1alpha.CreateEngineRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.purgeUserEvents = stubLongRunningCall(
+      client.innerApiCalls.createEngine = stubLongRunningCall(
         undefined,
         undefined,
         expectedError
       );
-      const [operation] = await client.purgeUserEvents(request);
+      const [operation] = await client.createEngine(request);
       await assert.rejects(operation.promise(), expectedError);
       const actualRequest = (
-        client.innerApiCalls.purgeUserEvents as SinonStub
+        client.innerApiCalls.createEngine as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.purgeUserEvents as SinonStub
+        client.innerApiCalls.createEngine as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes checkPurgeUserEventsProgress without error', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+    it('invokes checkCreateEngineProgress without error', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -648,7 +950,7 @@ describe('v1alpha.UserEventServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkPurgeUserEventsProgress(
+      const decodedOperation = await client.checkCreateEngineProgress(
         expectedResponse.name
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
@@ -656,8 +958,8 @@ describe('v1alpha.UserEventServiceClient', () => {
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
 
-    it('invokes checkPurgeUserEventsProgress with error', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+    it('invokes checkCreateEngineProgress with error', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -668,76 +970,72 @@ describe('v1alpha.UserEventServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(
-        client.checkPurgeUserEventsProgress(''),
-        expectedError
-      );
+      await assert.rejects(client.checkCreateEngineProgress(''), expectedError);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
-  describe('importUserEvents', () => {
-    it('invokes importUserEvents without error', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+  describe('deleteEngine', () => {
+    it('invokes deleteEngine without error', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ImportUserEventsRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.DeleteEngineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ImportUserEventsRequest',
-        ['parent']
+        '.google.cloud.discoveryengine.v1alpha.DeleteEngineRequest',
+        ['name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.importUserEvents =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.importUserEvents(request);
+      client.innerApiCalls.deleteEngine = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteEngine(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.importUserEvents as SinonStub
+        client.innerApiCalls.deleteEngine as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.importUserEvents as SinonStub
+        client.innerApiCalls.deleteEngine as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes importUserEvents without error using callback', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+    it('invokes deleteEngine without error using callback', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ImportUserEventsRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.DeleteEngineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ImportUserEventsRequest',
-        ['parent']
+        '.google.cloud.discoveryengine.v1alpha.DeleteEngineRequest',
+        ['name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.importUserEvents =
+      client.innerApiCalls.deleteEngine =
         stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.importUserEvents(
+        client.deleteEngine(
           request,
           (
             err?: Error | null,
             result?: LROperation<
-              protos.google.cloud.discoveryengine.v1alpha.IImportUserEventsResponse,
-              protos.google.cloud.discoveryengine.v1alpha.IImportUserEventsMetadata
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.discoveryengine.v1alpha.IDeleteEngineMetadata
             > | null
           ) => {
             if (err) {
@@ -749,87 +1047,87 @@ describe('v1alpha.UserEventServiceClient', () => {
         );
       });
       const operation = (await promise) as LROperation<
-        protos.google.cloud.discoveryengine.v1alpha.IImportUserEventsResponse,
-        protos.google.cloud.discoveryengine.v1alpha.IImportUserEventsMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.discoveryengine.v1alpha.IDeleteEngineMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.importUserEvents as SinonStub
+        client.innerApiCalls.deleteEngine as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.importUserEvents as SinonStub
+        client.innerApiCalls.deleteEngine as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes importUserEvents with call error', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+    it('invokes deleteEngine with call error', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ImportUserEventsRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.DeleteEngineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ImportUserEventsRequest',
-        ['parent']
+        '.google.cloud.discoveryengine.v1alpha.DeleteEngineRequest',
+        ['name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.importUserEvents = stubLongRunningCall(
+      client.innerApiCalls.deleteEngine = stubLongRunningCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.importUserEvents(request), expectedError);
+      await assert.rejects(client.deleteEngine(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.importUserEvents as SinonStub
+        client.innerApiCalls.deleteEngine as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.importUserEvents as SinonStub
+        client.innerApiCalls.deleteEngine as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes importUserEvents with LRO error', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+    it('invokes deleteEngine with LRO error', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ImportUserEventsRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.DeleteEngineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ImportUserEventsRequest',
-        ['parent']
+        '.google.cloud.discoveryengine.v1alpha.DeleteEngineRequest',
+        ['name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.importUserEvents = stubLongRunningCall(
+      client.innerApiCalls.deleteEngine = stubLongRunningCall(
         undefined,
         undefined,
         expectedError
       );
-      const [operation] = await client.importUserEvents(request);
+      const [operation] = await client.deleteEngine(request);
       await assert.rejects(operation.promise(), expectedError);
       const actualRequest = (
-        client.innerApiCalls.importUserEvents as SinonStub
+        client.innerApiCalls.deleteEngine as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.importUserEvents as SinonStub
+        client.innerApiCalls.deleteEngine as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes checkImportUserEventsProgress without error', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+    it('invokes checkDeleteEngineProgress without error', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -842,7 +1140,7 @@ describe('v1alpha.UserEventServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkImportUserEventsProgress(
+      const decodedOperation = await client.checkDeleteEngineProgress(
         expectedResponse.name
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
@@ -850,8 +1148,8 @@ describe('v1alpha.UserEventServiceClient', () => {
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
 
-    it('invokes checkImportUserEventsProgress with error', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+    it('invokes checkDeleteEngineProgress with error', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -862,16 +1160,538 @@ describe('v1alpha.UserEventServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(
-        client.checkImportUserEventsProgress(''),
+      await assert.rejects(client.checkDeleteEngineProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('tuneEngine', () => {
+    it('invokes tuneEngine without error', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.TuneEngineRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.TuneEngineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.tuneEngine = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.tuneEngine(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.tuneEngine as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.tuneEngine as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes tuneEngine without error using callback', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.TuneEngineRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.TuneEngineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.tuneEngine =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.tuneEngine(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.discoveryengine.v1alpha.ITuneEngineResponse,
+              protos.google.cloud.discoveryengine.v1alpha.ITuneEngineMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.discoveryengine.v1alpha.ITuneEngineResponse,
+        protos.google.cloud.discoveryengine.v1alpha.ITuneEngineMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.tuneEngine as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.tuneEngine as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes tuneEngine with call error', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.TuneEngineRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.TuneEngineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.tuneEngine = stubLongRunningCall(
+        undefined,
         expectedError
       );
+      await assert.rejects(client.tuneEngine(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.tuneEngine as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.tuneEngine as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes tuneEngine with LRO error', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.TuneEngineRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.TuneEngineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.tuneEngine = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.tuneEngine(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.tuneEngine as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.tuneEngine as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkTuneEngineProgress without error', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkTuneEngineProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkTuneEngineProgress with error', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkTuneEngineProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('listEngines', () => {
+    it('invokes listEngines without error', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ListEnginesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ListEnginesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.Engine()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.Engine()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.Engine()
+        ),
+      ];
+      client.innerApiCalls.listEngines = stubSimpleCall(expectedResponse);
+      const [response] = await client.listEngines(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listEngines as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listEngines as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listEngines without error using callback', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ListEnginesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ListEnginesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.Engine()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.Engine()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.Engine()
+        ),
+      ];
+      client.innerApiCalls.listEngines =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listEngines(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.discoveryengine.v1alpha.IEngine[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listEngines as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listEngines as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listEngines with error', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ListEnginesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ListEnginesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listEngines = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listEngines(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listEngines as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listEngines as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listEnginesStream without error', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ListEnginesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ListEnginesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.Engine()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.Engine()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.Engine()
+        ),
+      ];
+      client.descriptors.page.listEngines.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listEnginesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.discoveryengine.v1alpha.Engine[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.discoveryengine.v1alpha.Engine) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listEngines.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listEngines, request)
+      );
+      assert(
+        (client.descriptors.page.listEngines.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listEnginesStream with error', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ListEnginesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ListEnginesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listEngines.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.listEnginesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.discoveryengine.v1alpha.Engine[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.discoveryengine.v1alpha.Engine) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listEngines.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listEngines, request)
+      );
+      assert(
+        (client.descriptors.page.listEngines.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listEngines without error', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ListEnginesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ListEnginesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.Engine()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.Engine()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.Engine()
+        ),
+      ];
+      client.descriptors.page.listEngines.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.discoveryengine.v1alpha.IEngine[] =
+        [];
+      const iterable = client.listEnginesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (client.descriptors.page.listEngines.asyncIterate as SinonStub).getCall(
+          0
+        ).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listEngines.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listEngines with error', async () => {
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ListEnginesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ListEnginesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listEngines.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
+      const iterable = client.listEnginesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.discoveryengine.v1alpha.IEngine[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (client.descriptors.page.listEngines.asyncIterate as SinonStub).getCall(
+          0
+        ).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listEngines.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -901,7 +1721,7 @@ describe('v1alpha.UserEventServiceClient', () => {
       );
     });
     it('invokes getLocation without error using callback', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -945,7 +1765,7 @@ describe('v1alpha.UserEventServiceClient', () => {
       assert((client.locationsClient.getLocation as SinonStub).getCall(0));
     });
     it('invokes getLocation with error', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -980,7 +1800,7 @@ describe('v1alpha.UserEventServiceClient', () => {
   });
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1028,7 +1848,7 @@ describe('v1alpha.UserEventServiceClient', () => {
       );
     });
     it('uses async iteration with listLocations with error', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1069,7 +1889,7 @@ describe('v1alpha.UserEventServiceClient', () => {
   });
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1090,7 +1910,7 @@ describe('v1alpha.UserEventServiceClient', () => {
       );
     });
     it('invokes getOperation without error using callback', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1124,7 +1944,7 @@ describe('v1alpha.UserEventServiceClient', () => {
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
     it('invokes getOperation with error', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1148,7 +1968,7 @@ describe('v1alpha.UserEventServiceClient', () => {
   });
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1170,7 +1990,7 @@ describe('v1alpha.UserEventServiceClient', () => {
       );
     });
     it('invokes cancelOperation without error using callback', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1204,7 +2024,7 @@ describe('v1alpha.UserEventServiceClient', () => {
       assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
     });
     it('invokes cancelOperation with error', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1228,7 +2048,7 @@ describe('v1alpha.UserEventServiceClient', () => {
   });
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1250,7 +2070,7 @@ describe('v1alpha.UserEventServiceClient', () => {
       );
     });
     it('invokes deleteOperation without error using callback', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1284,7 +2104,7 @@ describe('v1alpha.UserEventServiceClient', () => {
       assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
     });
     it('invokes deleteOperation with error', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1308,7 +2128,7 @@ describe('v1alpha.UserEventServiceClient', () => {
   });
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1344,7 +2164,7 @@ describe('v1alpha.UserEventServiceClient', () => {
       );
     });
     it('uses async iteration with listOperations with error', async () => {
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1374,6 +2194,70 @@ describe('v1alpha.UserEventServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('collection', () => {
+      const fakePath = '/rendered/path/collection';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+      };
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.collectionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.collectionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('collectionPath', () => {
+        const result = client.collectionPath(
+          'projectValue',
+          'locationValue',
+          'collectionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.collectionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromCollectionName', () => {
+        const result = client.matchProjectFromCollectionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.collectionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromCollectionName', () => {
+        const result = client.matchLocationFromCollectionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.collectionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCollectionFromCollectionName', () => {
+        const result = client.matchCollectionFromCollectionName(fakePath);
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (client.pathTemplates.collectionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('engine', () => {
       const fakePath = '/rendered/path/engine';
       const expectedParameters = {
@@ -1382,7 +2266,7 @@ describe('v1alpha.UserEventServiceClient', () => {
         collection: 'collectionValue',
         engine: 'engineValue',
       };
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1458,7 +2342,7 @@ describe('v1alpha.UserEventServiceClient', () => {
         collection: 'collectionValue',
         data_store: 'dataStoreValue',
       };
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1562,7 +2446,7 @@ describe('v1alpha.UserEventServiceClient', () => {
         branch: 'branchValue',
         document: 'documentValue',
       };
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1707,7 +2591,7 @@ describe('v1alpha.UserEventServiceClient', () => {
         data_store: 'dataStoreValue',
         conversation: 'conversationValue',
       };
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1834,7 +2718,7 @@ describe('v1alpha.UserEventServiceClient', () => {
         data_store: 'dataStoreValue',
         schema: 'schemaValue',
       };
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1957,7 +2841,7 @@ describe('v1alpha.UserEventServiceClient', () => {
         location: 'locationValue',
         data_store: 'dataStoreValue',
       };
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2038,7 +2922,7 @@ describe('v1alpha.UserEventServiceClient', () => {
         branch: 'branchValue',
         document: 'documentValue',
       };
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2162,7 +3046,7 @@ describe('v1alpha.UserEventServiceClient', () => {
         data_store: 'dataStoreValue',
         conversation: 'conversationValue',
       };
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2268,7 +3152,7 @@ describe('v1alpha.UserEventServiceClient', () => {
         data_store: 'dataStoreValue',
         schema: 'schemaValue',
       };
-      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+      const client = new engineserviceModule.v1alpha.EngineServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
