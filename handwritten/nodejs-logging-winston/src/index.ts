@@ -229,16 +229,16 @@ export class LoggingWinston extends TransportStream {
 
 // LOGGING_TRACE_KEY is Cloud Logging specific and has the format:
 // logging.googleapis.com/trace
-// For more information, see: https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#FIELDS.trace
+// For more information, see: https://cloud.google.com/logging/docs/reference/v2/rpc/google.logging.v2#logentry
 export const LOGGING_TRACE_KEY = COMMON_TRACE_KEY;
 
 // LOGGING_SPAN_KEY is Cloud Logging specific and has the format:
 // logging.googleapis.com/spanId
-// For more information, see: https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#FIELDS.span_id
+// For more information, see: https://cloud.google.com/logging/docs/reference/v2/rpc/google.logging.v2#logentry
 export const LOGGING_SPAN_KEY = COMMON_SPAN_KEY;
 
 // LOGGING_SAMPLED_KEY is Cloud Logging specific and has the format:
 // logging.googleapis.com/trace_sampled
 // The value of this field must be either true or false. For more information,
-// see traceSampled on the LogEntry page:	https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#FIELDS.trace_sampled
+// see traceSampled on the LogEntry page:	https://cloud.google.com/logging/docs/reference/v2/rpc/google.logging.v2#logentry
 export const LOGGING_SAMPLED_KEY = COMMON_SAMPLED_KEY;
