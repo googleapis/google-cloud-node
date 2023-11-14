@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. The audience list resource name.
-   *  Format: `properties/{propertyId}/audienceLists/{audienceListId}`
+   *  Format: `properties/{property}/audienceLists/{audience_list}`
    */
   // const name = 'abc123'
 

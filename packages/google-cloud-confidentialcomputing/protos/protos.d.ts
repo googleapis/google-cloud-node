@@ -100,6 +100,12 @@ export namespace google {
                     ECDSA_P256_SHA256 = 3
                 }
 
+                /** TokenType enum. */
+                enum TokenType {
+                    TOKEN_TYPE_UNSPECIFIED = 0,
+                    TOKEN_TYPE_OIDC = 1
+                }
+
                 /** Properties of a Challenge. */
                 interface IChallenge {
 
@@ -653,6 +659,9 @@ export namespace google {
 
                     /** TokenOptions nonce */
                     nonce?: (string[]|null);
+
+                    /** TokenOptions tokenType */
+                    tokenType?: (google.cloud.confidentialcomputing.v1.TokenType|keyof typeof google.cloud.confidentialcomputing.v1.TokenType|null);
                 }
 
                 /** Represents a TokenOptions. */
@@ -669,6 +678,9 @@ export namespace google {
 
                     /** TokenOptions nonce. */
                     public nonce: string[];
+
+                    /** TokenOptions tokenType. */
+                    public tokenType: (google.cloud.confidentialcomputing.v1.TokenType|keyof typeof google.cloud.confidentialcomputing.v1.TokenType);
 
                     /**
                      * Creates a new TokenOptions instance using the specified properties.

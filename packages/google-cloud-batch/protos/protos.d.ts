@@ -6709,6 +6709,9 @@ export namespace google {
 
                     /** LogsPolicy logsPath */
                     logsPath?: (string|null);
+
+                    /** LogsPolicy cloudLoggingOption */
+                    cloudLoggingOption?: (google.cloud.batch.v1alpha.LogsPolicy.ICloudLoggingOption|null);
                 }
 
                 /** Represents a LogsPolicy. */
@@ -6725,6 +6728,9 @@ export namespace google {
 
                     /** LogsPolicy logsPath. */
                     public logsPath: string;
+
+                    /** LogsPolicy cloudLoggingOption. */
+                    public cloudLoggingOption?: (google.cloud.batch.v1alpha.LogsPolicy.ICloudLoggingOption|null);
 
                     /**
                      * Creates a new LogsPolicy instance using the specified properties.
@@ -6805,6 +6811,103 @@ export namespace google {
                 }
 
                 namespace LogsPolicy {
+
+                    /** Properties of a CloudLoggingOption. */
+                    interface ICloudLoggingOption {
+
+                        /** CloudLoggingOption useGenericTaskMonitoredResource */
+                        useGenericTaskMonitoredResource?: (boolean|null);
+                    }
+
+                    /** Represents a CloudLoggingOption. */
+                    class CloudLoggingOption implements ICloudLoggingOption {
+
+                        /**
+                         * Constructs a new CloudLoggingOption.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.batch.v1alpha.LogsPolicy.ICloudLoggingOption);
+
+                        /** CloudLoggingOption useGenericTaskMonitoredResource. */
+                        public useGenericTaskMonitoredResource: boolean;
+
+                        /**
+                         * Creates a new CloudLoggingOption instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CloudLoggingOption instance
+                         */
+                        public static create(properties?: google.cloud.batch.v1alpha.LogsPolicy.ICloudLoggingOption): google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption;
+
+                        /**
+                         * Encodes the specified CloudLoggingOption message. Does not implicitly {@link google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption.verify|verify} messages.
+                         * @param message CloudLoggingOption message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.batch.v1alpha.LogsPolicy.ICloudLoggingOption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CloudLoggingOption message, length delimited. Does not implicitly {@link google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption.verify|verify} messages.
+                         * @param message CloudLoggingOption message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.batch.v1alpha.LogsPolicy.ICloudLoggingOption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CloudLoggingOption message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CloudLoggingOption
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption;
+
+                        /**
+                         * Decodes a CloudLoggingOption message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CloudLoggingOption
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption;
+
+                        /**
+                         * Verifies a CloudLoggingOption message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CloudLoggingOption message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CloudLoggingOption
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption;
+
+                        /**
+                         * Creates a plain object from a CloudLoggingOption message. Also converts values to other types if specified.
+                         * @param message CloudLoggingOption
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CloudLoggingOption to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CloudLoggingOption
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
 
                     /** Destination enum. */
                     enum Destination {

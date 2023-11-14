@@ -9591,12 +9591,32 @@ export namespace google {
             /** Namespace v1alpha. */
             namespace v1alpha {
 
+                /** IndustryVertical enum. */
+                enum IndustryVertical {
+                    INDUSTRY_VERTICAL_UNSPECIFIED = 0,
+                    GENERIC = 1,
+                    MEDIA = 2
+                }
+
                 /** SolutionType enum. */
                 enum SolutionType {
                     SOLUTION_TYPE_UNSPECIFIED = 0,
                     SOLUTION_TYPE_RECOMMENDATION = 1,
                     SOLUTION_TYPE_SEARCH = 2,
                     SOLUTION_TYPE_CHAT = 3
+                }
+
+                /** SearchTier enum. */
+                enum SearchTier {
+                    SEARCH_TIER_UNSPECIFIED = 0,
+                    SEARCH_TIER_STANDARD = 1,
+                    SEARCH_TIER_ENTERPRISE = 2
+                }
+
+                /** SearchAddOn enum. */
+                enum SearchAddOn {
+                    SEARCH_ADD_ON_UNSPECIFIED = 0,
+                    SEARCH_ADD_ON_LLM = 1
                 }
 
                 /** Properties of an Interval. */
@@ -15203,6 +15223,1115 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a DataStore. */
+                interface IDataStore {
+
+                    /** DataStore name */
+                    name?: (string|null);
+
+                    /** DataStore displayName */
+                    displayName?: (string|null);
+
+                    /** DataStore industryVertical */
+                    industryVertical?: (google.cloud.discoveryengine.v1alpha.IndustryVertical|keyof typeof google.cloud.discoveryengine.v1alpha.IndustryVertical|null);
+
+                    /** DataStore solutionTypes */
+                    solutionTypes?: (google.cloud.discoveryengine.v1alpha.SolutionType[]|null);
+
+                    /** DataStore defaultSchemaId */
+                    defaultSchemaId?: (string|null);
+
+                    /** DataStore contentConfig */
+                    contentConfig?: (google.cloud.discoveryengine.v1alpha.DataStore.ContentConfig|keyof typeof google.cloud.discoveryengine.v1alpha.DataStore.ContentConfig|null);
+
+                    /** DataStore createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a DataStore. */
+                class DataStore implements IDataStore {
+
+                    /**
+                     * Constructs a new DataStore.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1alpha.IDataStore);
+
+                    /** DataStore name. */
+                    public name: string;
+
+                    /** DataStore displayName. */
+                    public displayName: string;
+
+                    /** DataStore industryVertical. */
+                    public industryVertical: (google.cloud.discoveryengine.v1alpha.IndustryVertical|keyof typeof google.cloud.discoveryengine.v1alpha.IndustryVertical);
+
+                    /** DataStore solutionTypes. */
+                    public solutionTypes: google.cloud.discoveryengine.v1alpha.SolutionType[];
+
+                    /** DataStore defaultSchemaId. */
+                    public defaultSchemaId: string;
+
+                    /** DataStore contentConfig. */
+                    public contentConfig: (google.cloud.discoveryengine.v1alpha.DataStore.ContentConfig|keyof typeof google.cloud.discoveryengine.v1alpha.DataStore.ContentConfig);
+
+                    /** DataStore createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new DataStore instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataStore instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1alpha.IDataStore): google.cloud.discoveryengine.v1alpha.DataStore;
+
+                    /**
+                     * Encodes the specified DataStore message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.DataStore.verify|verify} messages.
+                     * @param message DataStore message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1alpha.IDataStore, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataStore message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.DataStore.verify|verify} messages.
+                     * @param message DataStore message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.IDataStore, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataStore message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataStore
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.DataStore;
+
+                    /**
+                     * Decodes a DataStore message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataStore
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.DataStore;
+
+                    /**
+                     * Verifies a DataStore message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataStore message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataStore
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.DataStore;
+
+                    /**
+                     * Creates a plain object from a DataStore message. Also converts values to other types if specified.
+                     * @param message DataStore
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1alpha.DataStore, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataStore to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataStore
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DataStore {
+
+                    /** ContentConfig enum. */
+                    enum ContentConfig {
+                        CONTENT_CONFIG_UNSPECIFIED = 0,
+                        NO_CONTENT = 1,
+                        CONTENT_REQUIRED = 2,
+                        PUBLIC_WEBSITE = 3
+                    }
+                }
+
+                /** Represents a DataStoreService */
+                class DataStoreService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new DataStoreService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new DataStoreService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): DataStoreService;
+
+                    /**
+                     * Calls CreateDataStore.
+                     * @param request CreateDataStoreRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createDataStore(request: google.cloud.discoveryengine.v1alpha.ICreateDataStoreRequest, callback: google.cloud.discoveryengine.v1alpha.DataStoreService.CreateDataStoreCallback): void;
+
+                    /**
+                     * Calls CreateDataStore.
+                     * @param request CreateDataStoreRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createDataStore(request: google.cloud.discoveryengine.v1alpha.ICreateDataStoreRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetDataStore.
+                     * @param request GetDataStoreRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DataStore
+                     */
+                    public getDataStore(request: google.cloud.discoveryengine.v1alpha.IGetDataStoreRequest, callback: google.cloud.discoveryengine.v1alpha.DataStoreService.GetDataStoreCallback): void;
+
+                    /**
+                     * Calls GetDataStore.
+                     * @param request GetDataStoreRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDataStore(request: google.cloud.discoveryengine.v1alpha.IGetDataStoreRequest): Promise<google.cloud.discoveryengine.v1alpha.DataStore>;
+
+                    /**
+                     * Calls ListDataStores.
+                     * @param request ListDataStoresRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListDataStoresResponse
+                     */
+                    public listDataStores(request: google.cloud.discoveryengine.v1alpha.IListDataStoresRequest, callback: google.cloud.discoveryengine.v1alpha.DataStoreService.ListDataStoresCallback): void;
+
+                    /**
+                     * Calls ListDataStores.
+                     * @param request ListDataStoresRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listDataStores(request: google.cloud.discoveryengine.v1alpha.IListDataStoresRequest): Promise<google.cloud.discoveryengine.v1alpha.ListDataStoresResponse>;
+
+                    /**
+                     * Calls DeleteDataStore.
+                     * @param request DeleteDataStoreRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteDataStore(request: google.cloud.discoveryengine.v1alpha.IDeleteDataStoreRequest, callback: google.cloud.discoveryengine.v1alpha.DataStoreService.DeleteDataStoreCallback): void;
+
+                    /**
+                     * Calls DeleteDataStore.
+                     * @param request DeleteDataStoreRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteDataStore(request: google.cloud.discoveryengine.v1alpha.IDeleteDataStoreRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateDataStore.
+                     * @param request UpdateDataStoreRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DataStore
+                     */
+                    public updateDataStore(request: google.cloud.discoveryengine.v1alpha.IUpdateDataStoreRequest, callback: google.cloud.discoveryengine.v1alpha.DataStoreService.UpdateDataStoreCallback): void;
+
+                    /**
+                     * Calls UpdateDataStore.
+                     * @param request UpdateDataStoreRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateDataStore(request: google.cloud.discoveryengine.v1alpha.IUpdateDataStoreRequest): Promise<google.cloud.discoveryengine.v1alpha.DataStore>;
+                }
+
+                namespace DataStoreService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1alpha.DataStoreService|createDataStore}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateDataStoreCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1alpha.DataStoreService|getDataStore}.
+                     * @param error Error, if any
+                     * @param [response] DataStore
+                     */
+                    type GetDataStoreCallback = (error: (Error|null), response?: google.cloud.discoveryengine.v1alpha.DataStore) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1alpha.DataStoreService|listDataStores}.
+                     * @param error Error, if any
+                     * @param [response] ListDataStoresResponse
+                     */
+                    type ListDataStoresCallback = (error: (Error|null), response?: google.cloud.discoveryengine.v1alpha.ListDataStoresResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1alpha.DataStoreService|deleteDataStore}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteDataStoreCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1alpha.DataStoreService|updateDataStore}.
+                     * @param error Error, if any
+                     * @param [response] DataStore
+                     */
+                    type UpdateDataStoreCallback = (error: (Error|null), response?: google.cloud.discoveryengine.v1alpha.DataStore) => void;
+                }
+
+                /** Properties of a CreateDataStoreRequest. */
+                interface ICreateDataStoreRequest {
+
+                    /** CreateDataStoreRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateDataStoreRequest dataStore */
+                    dataStore?: (google.cloud.discoveryengine.v1alpha.IDataStore|null);
+
+                    /** CreateDataStoreRequest dataStoreId */
+                    dataStoreId?: (string|null);
+
+                    /** CreateDataStoreRequest createAdvancedSiteSearch */
+                    createAdvancedSiteSearch?: (boolean|null);
+                }
+
+                /** Represents a CreateDataStoreRequest. */
+                class CreateDataStoreRequest implements ICreateDataStoreRequest {
+
+                    /**
+                     * Constructs a new CreateDataStoreRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1alpha.ICreateDataStoreRequest);
+
+                    /** CreateDataStoreRequest parent. */
+                    public parent: string;
+
+                    /** CreateDataStoreRequest dataStore. */
+                    public dataStore?: (google.cloud.discoveryengine.v1alpha.IDataStore|null);
+
+                    /** CreateDataStoreRequest dataStoreId. */
+                    public dataStoreId: string;
+
+                    /** CreateDataStoreRequest createAdvancedSiteSearch. */
+                    public createAdvancedSiteSearch: boolean;
+
+                    /**
+                     * Creates a new CreateDataStoreRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateDataStoreRequest instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1alpha.ICreateDataStoreRequest): google.cloud.discoveryengine.v1alpha.CreateDataStoreRequest;
+
+                    /**
+                     * Encodes the specified CreateDataStoreRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.CreateDataStoreRequest.verify|verify} messages.
+                     * @param message CreateDataStoreRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1alpha.ICreateDataStoreRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateDataStoreRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.CreateDataStoreRequest.verify|verify} messages.
+                     * @param message CreateDataStoreRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.ICreateDataStoreRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateDataStoreRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateDataStoreRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.CreateDataStoreRequest;
+
+                    /**
+                     * Decodes a CreateDataStoreRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateDataStoreRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.CreateDataStoreRequest;
+
+                    /**
+                     * Verifies a CreateDataStoreRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateDataStoreRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateDataStoreRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.CreateDataStoreRequest;
+
+                    /**
+                     * Creates a plain object from a CreateDataStoreRequest message. Also converts values to other types if specified.
+                     * @param message CreateDataStoreRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1alpha.CreateDataStoreRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateDataStoreRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateDataStoreRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetDataStoreRequest. */
+                interface IGetDataStoreRequest {
+
+                    /** GetDataStoreRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDataStoreRequest. */
+                class GetDataStoreRequest implements IGetDataStoreRequest {
+
+                    /**
+                     * Constructs a new GetDataStoreRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1alpha.IGetDataStoreRequest);
+
+                    /** GetDataStoreRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDataStoreRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDataStoreRequest instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1alpha.IGetDataStoreRequest): google.cloud.discoveryengine.v1alpha.GetDataStoreRequest;
+
+                    /**
+                     * Encodes the specified GetDataStoreRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.GetDataStoreRequest.verify|verify} messages.
+                     * @param message GetDataStoreRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1alpha.IGetDataStoreRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDataStoreRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.GetDataStoreRequest.verify|verify} messages.
+                     * @param message GetDataStoreRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.IGetDataStoreRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDataStoreRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDataStoreRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.GetDataStoreRequest;
+
+                    /**
+                     * Decodes a GetDataStoreRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDataStoreRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.GetDataStoreRequest;
+
+                    /**
+                     * Verifies a GetDataStoreRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDataStoreRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDataStoreRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.GetDataStoreRequest;
+
+                    /**
+                     * Creates a plain object from a GetDataStoreRequest message. Also converts values to other types if specified.
+                     * @param message GetDataStoreRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1alpha.GetDataStoreRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDataStoreRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDataStoreRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateDataStoreMetadata. */
+                interface ICreateDataStoreMetadata {
+
+                    /** CreateDataStoreMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CreateDataStoreMetadata updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a CreateDataStoreMetadata. */
+                class CreateDataStoreMetadata implements ICreateDataStoreMetadata {
+
+                    /**
+                     * Constructs a new CreateDataStoreMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1alpha.ICreateDataStoreMetadata);
+
+                    /** CreateDataStoreMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CreateDataStoreMetadata updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new CreateDataStoreMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateDataStoreMetadata instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1alpha.ICreateDataStoreMetadata): google.cloud.discoveryengine.v1alpha.CreateDataStoreMetadata;
+
+                    /**
+                     * Encodes the specified CreateDataStoreMetadata message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.CreateDataStoreMetadata.verify|verify} messages.
+                     * @param message CreateDataStoreMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1alpha.ICreateDataStoreMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateDataStoreMetadata message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.CreateDataStoreMetadata.verify|verify} messages.
+                     * @param message CreateDataStoreMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.ICreateDataStoreMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateDataStoreMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateDataStoreMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.CreateDataStoreMetadata;
+
+                    /**
+                     * Decodes a CreateDataStoreMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateDataStoreMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.CreateDataStoreMetadata;
+
+                    /**
+                     * Verifies a CreateDataStoreMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateDataStoreMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateDataStoreMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.CreateDataStoreMetadata;
+
+                    /**
+                     * Creates a plain object from a CreateDataStoreMetadata message. Also converts values to other types if specified.
+                     * @param message CreateDataStoreMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1alpha.CreateDataStoreMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateDataStoreMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateDataStoreMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDataStoresRequest. */
+                interface IListDataStoresRequest {
+
+                    /** ListDataStoresRequest parent */
+                    parent?: (string|null);
+
+                    /** ListDataStoresRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListDataStoresRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListDataStoresRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListDataStoresRequest. */
+                class ListDataStoresRequest implements IListDataStoresRequest {
+
+                    /**
+                     * Constructs a new ListDataStoresRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1alpha.IListDataStoresRequest);
+
+                    /** ListDataStoresRequest parent. */
+                    public parent: string;
+
+                    /** ListDataStoresRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListDataStoresRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListDataStoresRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListDataStoresRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDataStoresRequest instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1alpha.IListDataStoresRequest): google.cloud.discoveryengine.v1alpha.ListDataStoresRequest;
+
+                    /**
+                     * Encodes the specified ListDataStoresRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.ListDataStoresRequest.verify|verify} messages.
+                     * @param message ListDataStoresRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1alpha.IListDataStoresRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDataStoresRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.ListDataStoresRequest.verify|verify} messages.
+                     * @param message ListDataStoresRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.IListDataStoresRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDataStoresRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDataStoresRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.ListDataStoresRequest;
+
+                    /**
+                     * Decodes a ListDataStoresRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDataStoresRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.ListDataStoresRequest;
+
+                    /**
+                     * Verifies a ListDataStoresRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDataStoresRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDataStoresRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.ListDataStoresRequest;
+
+                    /**
+                     * Creates a plain object from a ListDataStoresRequest message. Also converts values to other types if specified.
+                     * @param message ListDataStoresRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1alpha.ListDataStoresRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDataStoresRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDataStoresRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDataStoresResponse. */
+                interface IListDataStoresResponse {
+
+                    /** ListDataStoresResponse dataStores */
+                    dataStores?: (google.cloud.discoveryengine.v1alpha.IDataStore[]|null);
+
+                    /** ListDataStoresResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListDataStoresResponse. */
+                class ListDataStoresResponse implements IListDataStoresResponse {
+
+                    /**
+                     * Constructs a new ListDataStoresResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1alpha.IListDataStoresResponse);
+
+                    /** ListDataStoresResponse dataStores. */
+                    public dataStores: google.cloud.discoveryengine.v1alpha.IDataStore[];
+
+                    /** ListDataStoresResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListDataStoresResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDataStoresResponse instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1alpha.IListDataStoresResponse): google.cloud.discoveryengine.v1alpha.ListDataStoresResponse;
+
+                    /**
+                     * Encodes the specified ListDataStoresResponse message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.ListDataStoresResponse.verify|verify} messages.
+                     * @param message ListDataStoresResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1alpha.IListDataStoresResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDataStoresResponse message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.ListDataStoresResponse.verify|verify} messages.
+                     * @param message ListDataStoresResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.IListDataStoresResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDataStoresResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDataStoresResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.ListDataStoresResponse;
+
+                    /**
+                     * Decodes a ListDataStoresResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDataStoresResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.ListDataStoresResponse;
+
+                    /**
+                     * Verifies a ListDataStoresResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDataStoresResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDataStoresResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.ListDataStoresResponse;
+
+                    /**
+                     * Creates a plain object from a ListDataStoresResponse message. Also converts values to other types if specified.
+                     * @param message ListDataStoresResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1alpha.ListDataStoresResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDataStoresResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDataStoresResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteDataStoreRequest. */
+                interface IDeleteDataStoreRequest {
+
+                    /** DeleteDataStoreRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteDataStoreRequest. */
+                class DeleteDataStoreRequest implements IDeleteDataStoreRequest {
+
+                    /**
+                     * Constructs a new DeleteDataStoreRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1alpha.IDeleteDataStoreRequest);
+
+                    /** DeleteDataStoreRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteDataStoreRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteDataStoreRequest instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1alpha.IDeleteDataStoreRequest): google.cloud.discoveryengine.v1alpha.DeleteDataStoreRequest;
+
+                    /**
+                     * Encodes the specified DeleteDataStoreRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.DeleteDataStoreRequest.verify|verify} messages.
+                     * @param message DeleteDataStoreRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1alpha.IDeleteDataStoreRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteDataStoreRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.DeleteDataStoreRequest.verify|verify} messages.
+                     * @param message DeleteDataStoreRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.IDeleteDataStoreRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteDataStoreRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteDataStoreRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.DeleteDataStoreRequest;
+
+                    /**
+                     * Decodes a DeleteDataStoreRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteDataStoreRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.DeleteDataStoreRequest;
+
+                    /**
+                     * Verifies a DeleteDataStoreRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteDataStoreRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteDataStoreRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.DeleteDataStoreRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteDataStoreRequest message. Also converts values to other types if specified.
+                     * @param message DeleteDataStoreRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1alpha.DeleteDataStoreRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteDataStoreRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteDataStoreRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateDataStoreRequest. */
+                interface IUpdateDataStoreRequest {
+
+                    /** UpdateDataStoreRequest dataStore */
+                    dataStore?: (google.cloud.discoveryengine.v1alpha.IDataStore|null);
+
+                    /** UpdateDataStoreRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateDataStoreRequest. */
+                class UpdateDataStoreRequest implements IUpdateDataStoreRequest {
+
+                    /**
+                     * Constructs a new UpdateDataStoreRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1alpha.IUpdateDataStoreRequest);
+
+                    /** UpdateDataStoreRequest dataStore. */
+                    public dataStore?: (google.cloud.discoveryengine.v1alpha.IDataStore|null);
+
+                    /** UpdateDataStoreRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateDataStoreRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateDataStoreRequest instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1alpha.IUpdateDataStoreRequest): google.cloud.discoveryengine.v1alpha.UpdateDataStoreRequest;
+
+                    /**
+                     * Encodes the specified UpdateDataStoreRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.UpdateDataStoreRequest.verify|verify} messages.
+                     * @param message UpdateDataStoreRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1alpha.IUpdateDataStoreRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateDataStoreRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.UpdateDataStoreRequest.verify|verify} messages.
+                     * @param message UpdateDataStoreRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.IUpdateDataStoreRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateDataStoreRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateDataStoreRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.UpdateDataStoreRequest;
+
+                    /**
+                     * Decodes an UpdateDataStoreRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateDataStoreRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.UpdateDataStoreRequest;
+
+                    /**
+                     * Verifies an UpdateDataStoreRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateDataStoreRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateDataStoreRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.UpdateDataStoreRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateDataStoreRequest message. Also converts values to other types if specified.
+                     * @param message UpdateDataStoreRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1alpha.UpdateDataStoreRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateDataStoreRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateDataStoreRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteDataStoreMetadata. */
+                interface IDeleteDataStoreMetadata {
+
+                    /** DeleteDataStoreMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeleteDataStoreMetadata updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a DeleteDataStoreMetadata. */
+                class DeleteDataStoreMetadata implements IDeleteDataStoreMetadata {
+
+                    /**
+                     * Constructs a new DeleteDataStoreMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1alpha.IDeleteDataStoreMetadata);
+
+                    /** DeleteDataStoreMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeleteDataStoreMetadata updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new DeleteDataStoreMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteDataStoreMetadata instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1alpha.IDeleteDataStoreMetadata): google.cloud.discoveryengine.v1alpha.DeleteDataStoreMetadata;
+
+                    /**
+                     * Encodes the specified DeleteDataStoreMetadata message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.DeleteDataStoreMetadata.verify|verify} messages.
+                     * @param message DeleteDataStoreMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1alpha.IDeleteDataStoreMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteDataStoreMetadata message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.DeleteDataStoreMetadata.verify|verify} messages.
+                     * @param message DeleteDataStoreMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.IDeleteDataStoreMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteDataStoreMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteDataStoreMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.DeleteDataStoreMetadata;
+
+                    /**
+                     * Decodes a DeleteDataStoreMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteDataStoreMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.DeleteDataStoreMetadata;
+
+                    /**
+                     * Verifies a DeleteDataStoreMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteDataStoreMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteDataStoreMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.DeleteDataStoreMetadata;
+
+                    /**
+                     * Creates a plain object from a DeleteDataStoreMetadata message. Also converts values to other types if specified.
+                     * @param message DeleteDataStoreMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1alpha.DeleteDataStoreMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteDataStoreMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteDataStoreMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents a DocumentService */
                 class DocumentService extends $protobuf.rpc.Service {
 
@@ -18910,6 +20039,2655 @@ export namespace google {
 
                     /**
                      * Gets the default type url for PurgeDocumentsMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an Engine. */
+                interface IEngine {
+
+                    /** Engine similarDocumentsConfig */
+                    similarDocumentsConfig?: (google.cloud.discoveryengine.v1alpha.Engine.ISimilarDocumentsEngineConfig|null);
+
+                    /** Engine chatEngineConfig */
+                    chatEngineConfig?: (google.cloud.discoveryengine.v1alpha.Engine.IChatEngineConfig|null);
+
+                    /** Engine searchEngineConfig */
+                    searchEngineConfig?: (google.cloud.discoveryengine.v1alpha.Engine.ISearchEngineConfig|null);
+
+                    /** Engine mediaRecommendationEngineConfig */
+                    mediaRecommendationEngineConfig?: (google.cloud.discoveryengine.v1alpha.Engine.IMediaRecommendationEngineConfig|null);
+
+                    /** Engine recommendationMetadata */
+                    recommendationMetadata?: (google.cloud.discoveryengine.v1alpha.Engine.IRecommendationMetadata|null);
+
+                    /** Engine chatEngineMetadata */
+                    chatEngineMetadata?: (google.cloud.discoveryengine.v1alpha.Engine.IChatEngineMetadata|null);
+
+                    /** Engine name */
+                    name?: (string|null);
+
+                    /** Engine displayName */
+                    displayName?: (string|null);
+
+                    /** Engine createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Engine updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Engine dataStoreIds */
+                    dataStoreIds?: (string[]|null);
+
+                    /** Engine solutionType */
+                    solutionType?: (google.cloud.discoveryengine.v1alpha.SolutionType|keyof typeof google.cloud.discoveryengine.v1alpha.SolutionType|null);
+
+                    /** Engine industryVertical */
+                    industryVertical?: (google.cloud.discoveryengine.v1alpha.IndustryVertical|keyof typeof google.cloud.discoveryengine.v1alpha.IndustryVertical|null);
+
+                    /** Engine commonConfig */
+                    commonConfig?: (google.cloud.discoveryengine.v1alpha.Engine.ICommonConfig|null);
+                }
+
+                /** Represents an Engine. */
+                class Engine implements IEngine {
+
+                    /**
+                     * Constructs a new Engine.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1alpha.IEngine);
+
+                    /** Engine similarDocumentsConfig. */
+                    public similarDocumentsConfig?: (google.cloud.discoveryengine.v1alpha.Engine.ISimilarDocumentsEngineConfig|null);
+
+                    /** Engine chatEngineConfig. */
+                    public chatEngineConfig?: (google.cloud.discoveryengine.v1alpha.Engine.IChatEngineConfig|null);
+
+                    /** Engine searchEngineConfig. */
+                    public searchEngineConfig?: (google.cloud.discoveryengine.v1alpha.Engine.ISearchEngineConfig|null);
+
+                    /** Engine mediaRecommendationEngineConfig. */
+                    public mediaRecommendationEngineConfig?: (google.cloud.discoveryengine.v1alpha.Engine.IMediaRecommendationEngineConfig|null);
+
+                    /** Engine recommendationMetadata. */
+                    public recommendationMetadata?: (google.cloud.discoveryengine.v1alpha.Engine.IRecommendationMetadata|null);
+
+                    /** Engine chatEngineMetadata. */
+                    public chatEngineMetadata?: (google.cloud.discoveryengine.v1alpha.Engine.IChatEngineMetadata|null);
+
+                    /** Engine name. */
+                    public name: string;
+
+                    /** Engine displayName. */
+                    public displayName: string;
+
+                    /** Engine createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Engine updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Engine dataStoreIds. */
+                    public dataStoreIds: string[];
+
+                    /** Engine solutionType. */
+                    public solutionType: (google.cloud.discoveryengine.v1alpha.SolutionType|keyof typeof google.cloud.discoveryengine.v1alpha.SolutionType);
+
+                    /** Engine industryVertical. */
+                    public industryVertical: (google.cloud.discoveryengine.v1alpha.IndustryVertical|keyof typeof google.cloud.discoveryengine.v1alpha.IndustryVertical);
+
+                    /** Engine commonConfig. */
+                    public commonConfig?: (google.cloud.discoveryengine.v1alpha.Engine.ICommonConfig|null);
+
+                    /** Engine engineConfig. */
+                    public engineConfig?: ("similarDocumentsConfig"|"chatEngineConfig"|"searchEngineConfig"|"mediaRecommendationEngineConfig");
+
+                    /** Engine engineMetadata. */
+                    public engineMetadata?: ("recommendationMetadata"|"chatEngineMetadata");
+
+                    /**
+                     * Creates a new Engine instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Engine instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1alpha.IEngine): google.cloud.discoveryengine.v1alpha.Engine;
+
+                    /**
+                     * Encodes the specified Engine message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.Engine.verify|verify} messages.
+                     * @param message Engine message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1alpha.IEngine, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Engine message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.Engine.verify|verify} messages.
+                     * @param message Engine message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.IEngine, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Engine message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Engine
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.Engine;
+
+                    /**
+                     * Decodes an Engine message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Engine
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.Engine;
+
+                    /**
+                     * Verifies an Engine message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Engine message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Engine
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.Engine;
+
+                    /**
+                     * Creates a plain object from an Engine message. Also converts values to other types if specified.
+                     * @param message Engine
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1alpha.Engine, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Engine to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Engine
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Engine {
+
+                    /** Properties of a SearchEngineConfig. */
+                    interface ISearchEngineConfig {
+
+                        /** SearchEngineConfig searchTier */
+                        searchTier?: (google.cloud.discoveryengine.v1alpha.SearchTier|keyof typeof google.cloud.discoveryengine.v1alpha.SearchTier|null);
+
+                        /** SearchEngineConfig searchAddOns */
+                        searchAddOns?: (google.cloud.discoveryengine.v1alpha.SearchAddOn[]|null);
+                    }
+
+                    /** Represents a SearchEngineConfig. */
+                    class SearchEngineConfig implements ISearchEngineConfig {
+
+                        /**
+                         * Constructs a new SearchEngineConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.discoveryengine.v1alpha.Engine.ISearchEngineConfig);
+
+                        /** SearchEngineConfig searchTier. */
+                        public searchTier: (google.cloud.discoveryengine.v1alpha.SearchTier|keyof typeof google.cloud.discoveryengine.v1alpha.SearchTier);
+
+                        /** SearchEngineConfig searchAddOns. */
+                        public searchAddOns: google.cloud.discoveryengine.v1alpha.SearchAddOn[];
+
+                        /**
+                         * Creates a new SearchEngineConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SearchEngineConfig instance
+                         */
+                        public static create(properties?: google.cloud.discoveryengine.v1alpha.Engine.ISearchEngineConfig): google.cloud.discoveryengine.v1alpha.Engine.SearchEngineConfig;
+
+                        /**
+                         * Encodes the specified SearchEngineConfig message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.Engine.SearchEngineConfig.verify|verify} messages.
+                         * @param message SearchEngineConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.discoveryengine.v1alpha.Engine.ISearchEngineConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SearchEngineConfig message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.Engine.SearchEngineConfig.verify|verify} messages.
+                         * @param message SearchEngineConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.Engine.ISearchEngineConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SearchEngineConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SearchEngineConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.Engine.SearchEngineConfig;
+
+                        /**
+                         * Decodes a SearchEngineConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SearchEngineConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.Engine.SearchEngineConfig;
+
+                        /**
+                         * Verifies a SearchEngineConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SearchEngineConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SearchEngineConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.Engine.SearchEngineConfig;
+
+                        /**
+                         * Creates a plain object from a SearchEngineConfig message. Also converts values to other types if specified.
+                         * @param message SearchEngineConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.discoveryengine.v1alpha.Engine.SearchEngineConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SearchEngineConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SearchEngineConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SimilarDocumentsEngineConfig. */
+                    interface ISimilarDocumentsEngineConfig {
+                    }
+
+                    /** Represents a SimilarDocumentsEngineConfig. */
+                    class SimilarDocumentsEngineConfig implements ISimilarDocumentsEngineConfig {
+
+                        /**
+                         * Constructs a new SimilarDocumentsEngineConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.discoveryengine.v1alpha.Engine.ISimilarDocumentsEngineConfig);
+
+                        /**
+                         * Creates a new SimilarDocumentsEngineConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SimilarDocumentsEngineConfig instance
+                         */
+                        public static create(properties?: google.cloud.discoveryengine.v1alpha.Engine.ISimilarDocumentsEngineConfig): google.cloud.discoveryengine.v1alpha.Engine.SimilarDocumentsEngineConfig;
+
+                        /**
+                         * Encodes the specified SimilarDocumentsEngineConfig message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.Engine.SimilarDocumentsEngineConfig.verify|verify} messages.
+                         * @param message SimilarDocumentsEngineConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.discoveryengine.v1alpha.Engine.ISimilarDocumentsEngineConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SimilarDocumentsEngineConfig message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.Engine.SimilarDocumentsEngineConfig.verify|verify} messages.
+                         * @param message SimilarDocumentsEngineConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.Engine.ISimilarDocumentsEngineConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SimilarDocumentsEngineConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SimilarDocumentsEngineConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.Engine.SimilarDocumentsEngineConfig;
+
+                        /**
+                         * Decodes a SimilarDocumentsEngineConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SimilarDocumentsEngineConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.Engine.SimilarDocumentsEngineConfig;
+
+                        /**
+                         * Verifies a SimilarDocumentsEngineConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SimilarDocumentsEngineConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SimilarDocumentsEngineConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.Engine.SimilarDocumentsEngineConfig;
+
+                        /**
+                         * Creates a plain object from a SimilarDocumentsEngineConfig message. Also converts values to other types if specified.
+                         * @param message SimilarDocumentsEngineConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.discoveryengine.v1alpha.Engine.SimilarDocumentsEngineConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SimilarDocumentsEngineConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SimilarDocumentsEngineConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a MediaRecommendationEngineConfig. */
+                    interface IMediaRecommendationEngineConfig {
+
+                        /** MediaRecommendationEngineConfig type */
+                        type?: (string|null);
+
+                        /** MediaRecommendationEngineConfig optimizationObjective */
+                        optimizationObjective?: (string|null);
+
+                        /** MediaRecommendationEngineConfig optimizationObjectiveConfig */
+                        optimizationObjectiveConfig?: (google.cloud.discoveryengine.v1alpha.Engine.MediaRecommendationEngineConfig.IOptimizationObjectiveConfig|null);
+
+                        /** MediaRecommendationEngineConfig trainingState */
+                        trainingState?: (google.cloud.discoveryengine.v1alpha.Engine.MediaRecommendationEngineConfig.TrainingState|keyof typeof google.cloud.discoveryengine.v1alpha.Engine.MediaRecommendationEngineConfig.TrainingState|null);
+                    }
+
+                    /** Represents a MediaRecommendationEngineConfig. */
+                    class MediaRecommendationEngineConfig implements IMediaRecommendationEngineConfig {
+
+                        /**
+                         * Constructs a new MediaRecommendationEngineConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.discoveryengine.v1alpha.Engine.IMediaRecommendationEngineConfig);
+
+                        /** MediaRecommendationEngineConfig type. */
+                        public type: string;
+
+                        /** MediaRecommendationEngineConfig optimizationObjective. */
+                        public optimizationObjective: string;
+
+                        /** MediaRecommendationEngineConfig optimizationObjectiveConfig. */
+                        public optimizationObjectiveConfig?: (google.cloud.discoveryengine.v1alpha.Engine.MediaRecommendationEngineConfig.IOptimizationObjectiveConfig|null);
+
+                        /** MediaRecommendationEngineConfig trainingState. */
+                        public trainingState: (google.cloud.discoveryengine.v1alpha.Engine.MediaRecommendationEngineConfig.TrainingState|keyof typeof google.cloud.discoveryengine.v1alpha.Engine.MediaRecommendationEngineConfig.TrainingState);
+
+                        /**
+                         * Creates a new MediaRecommendationEngineConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MediaRecommendationEngineConfig instance
+                         */
+                        public static create(properties?: google.cloud.discoveryengine.v1alpha.Engine.IMediaRecommendationEngineConfig): google.cloud.discoveryengine.v1alpha.Engine.MediaRecommendationEngineConfig;
+
+                        /**
+                         * Encodes the specified MediaRecommendationEngineConfig message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.Engine.MediaRecommendationEngineConfig.verify|verify} messages.
+                         * @param message MediaRecommendationEngineConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.discoveryengine.v1alpha.Engine.IMediaRecommendationEngineConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MediaRecommendationEngineConfig message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.Engine.MediaRecommendationEngineConfig.verify|verify} messages.
+                         * @param message MediaRecommendationEngineConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.Engine.IMediaRecommendationEngineConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MediaRecommendationEngineConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MediaRecommendationEngineConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.Engine.MediaRecommendationEngineConfig;
+
+                        /**
+                         * Decodes a MediaRecommendationEngineConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MediaRecommendationEngineConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.Engine.MediaRecommendationEngineConfig;
+
+                        /**
+                         * Verifies a MediaRecommendationEngineConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MediaRecommendationEngineConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MediaRecommendationEngineConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.Engine.MediaRecommendationEngineConfig;
+
+                        /**
+                         * Creates a plain object from a MediaRecommendationEngineConfig message. Also converts values to other types if specified.
+                         * @param message MediaRecommendationEngineConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.discoveryengine.v1alpha.Engine.MediaRecommendationEngineConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MediaRecommendationEngineConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MediaRecommendationEngineConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace MediaRecommendationEngineConfig {
+
+                        /** Properties of an OptimizationObjectiveConfig. */
+                        interface IOptimizationObjectiveConfig {
+
+                            /** OptimizationObjectiveConfig targetField */
+                            targetField?: (string|null);
+
+                            /** OptimizationObjectiveConfig targetFieldValueFloat */
+                            targetFieldValueFloat?: (number|null);
+                        }
+
+                        /** Represents an OptimizationObjectiveConfig. */
+                        class OptimizationObjectiveConfig implements IOptimizationObjectiveConfig {
+
+                            /**
+                             * Constructs a new OptimizationObjectiveConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.discoveryengine.v1alpha.Engine.MediaRecommendationEngineConfig.IOptimizationObjectiveConfig);
+
+                            /** OptimizationObjectiveConfig targetField. */
+                            public targetField: string;
+
+                            /** OptimizationObjectiveConfig targetFieldValueFloat. */
+                            public targetFieldValueFloat: number;
+
+                            /**
+                             * Creates a new OptimizationObjectiveConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns OptimizationObjectiveConfig instance
+                             */
+                            public static create(properties?: google.cloud.discoveryengine.v1alpha.Engine.MediaRecommendationEngineConfig.IOptimizationObjectiveConfig): google.cloud.discoveryengine.v1alpha.Engine.MediaRecommendationEngineConfig.OptimizationObjectiveConfig;
+
+                            /**
+                             * Encodes the specified OptimizationObjectiveConfig message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.Engine.MediaRecommendationEngineConfig.OptimizationObjectiveConfig.verify|verify} messages.
+                             * @param message OptimizationObjectiveConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.discoveryengine.v1alpha.Engine.MediaRecommendationEngineConfig.IOptimizationObjectiveConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified OptimizationObjectiveConfig message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.Engine.MediaRecommendationEngineConfig.OptimizationObjectiveConfig.verify|verify} messages.
+                             * @param message OptimizationObjectiveConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.Engine.MediaRecommendationEngineConfig.IOptimizationObjectiveConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an OptimizationObjectiveConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns OptimizationObjectiveConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.Engine.MediaRecommendationEngineConfig.OptimizationObjectiveConfig;
+
+                            /**
+                             * Decodes an OptimizationObjectiveConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns OptimizationObjectiveConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.Engine.MediaRecommendationEngineConfig.OptimizationObjectiveConfig;
+
+                            /**
+                             * Verifies an OptimizationObjectiveConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an OptimizationObjectiveConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns OptimizationObjectiveConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.Engine.MediaRecommendationEngineConfig.OptimizationObjectiveConfig;
+
+                            /**
+                             * Creates a plain object from an OptimizationObjectiveConfig message. Also converts values to other types if specified.
+                             * @param message OptimizationObjectiveConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.discoveryengine.v1alpha.Engine.MediaRecommendationEngineConfig.OptimizationObjectiveConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this OptimizationObjectiveConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for OptimizationObjectiveConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** TrainingState enum. */
+                        enum TrainingState {
+                            TRAINING_STATE_UNSPECIFIED = 0,
+                            PAUSED = 1,
+                            TRAINING = 2
+                        }
+                    }
+
+                    /** Properties of a ChatEngineConfig. */
+                    interface IChatEngineConfig {
+
+                        /** ChatEngineConfig agentCreationConfig */
+                        agentCreationConfig?: (google.cloud.discoveryengine.v1alpha.Engine.ChatEngineConfig.IAgentCreationConfig|null);
+
+                        /** ChatEngineConfig dialogflowAgentToLink */
+                        dialogflowAgentToLink?: (string|null);
+                    }
+
+                    /** Represents a ChatEngineConfig. */
+                    class ChatEngineConfig implements IChatEngineConfig {
+
+                        /**
+                         * Constructs a new ChatEngineConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.discoveryengine.v1alpha.Engine.IChatEngineConfig);
+
+                        /** ChatEngineConfig agentCreationConfig. */
+                        public agentCreationConfig?: (google.cloud.discoveryengine.v1alpha.Engine.ChatEngineConfig.IAgentCreationConfig|null);
+
+                        /** ChatEngineConfig dialogflowAgentToLink. */
+                        public dialogflowAgentToLink: string;
+
+                        /**
+                         * Creates a new ChatEngineConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ChatEngineConfig instance
+                         */
+                        public static create(properties?: google.cloud.discoveryengine.v1alpha.Engine.IChatEngineConfig): google.cloud.discoveryengine.v1alpha.Engine.ChatEngineConfig;
+
+                        /**
+                         * Encodes the specified ChatEngineConfig message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.Engine.ChatEngineConfig.verify|verify} messages.
+                         * @param message ChatEngineConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.discoveryengine.v1alpha.Engine.IChatEngineConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ChatEngineConfig message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.Engine.ChatEngineConfig.verify|verify} messages.
+                         * @param message ChatEngineConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.Engine.IChatEngineConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ChatEngineConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ChatEngineConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.Engine.ChatEngineConfig;
+
+                        /**
+                         * Decodes a ChatEngineConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ChatEngineConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.Engine.ChatEngineConfig;
+
+                        /**
+                         * Verifies a ChatEngineConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ChatEngineConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ChatEngineConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.Engine.ChatEngineConfig;
+
+                        /**
+                         * Creates a plain object from a ChatEngineConfig message. Also converts values to other types if specified.
+                         * @param message ChatEngineConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.discoveryengine.v1alpha.Engine.ChatEngineConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ChatEngineConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ChatEngineConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ChatEngineConfig {
+
+                        /** Properties of an AgentCreationConfig. */
+                        interface IAgentCreationConfig {
+
+                            /** AgentCreationConfig business */
+                            business?: (string|null);
+
+                            /** AgentCreationConfig defaultLanguageCode */
+                            defaultLanguageCode?: (string|null);
+
+                            /** AgentCreationConfig timeZone */
+                            timeZone?: (string|null);
+                        }
+
+                        /** Represents an AgentCreationConfig. */
+                        class AgentCreationConfig implements IAgentCreationConfig {
+
+                            /**
+                             * Constructs a new AgentCreationConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.discoveryengine.v1alpha.Engine.ChatEngineConfig.IAgentCreationConfig);
+
+                            /** AgentCreationConfig business. */
+                            public business: string;
+
+                            /** AgentCreationConfig defaultLanguageCode. */
+                            public defaultLanguageCode: string;
+
+                            /** AgentCreationConfig timeZone. */
+                            public timeZone: string;
+
+                            /**
+                             * Creates a new AgentCreationConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns AgentCreationConfig instance
+                             */
+                            public static create(properties?: google.cloud.discoveryengine.v1alpha.Engine.ChatEngineConfig.IAgentCreationConfig): google.cloud.discoveryengine.v1alpha.Engine.ChatEngineConfig.AgentCreationConfig;
+
+                            /**
+                             * Encodes the specified AgentCreationConfig message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.Engine.ChatEngineConfig.AgentCreationConfig.verify|verify} messages.
+                             * @param message AgentCreationConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.discoveryengine.v1alpha.Engine.ChatEngineConfig.IAgentCreationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified AgentCreationConfig message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.Engine.ChatEngineConfig.AgentCreationConfig.verify|verify} messages.
+                             * @param message AgentCreationConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.Engine.ChatEngineConfig.IAgentCreationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an AgentCreationConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns AgentCreationConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.Engine.ChatEngineConfig.AgentCreationConfig;
+
+                            /**
+                             * Decodes an AgentCreationConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns AgentCreationConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.Engine.ChatEngineConfig.AgentCreationConfig;
+
+                            /**
+                             * Verifies an AgentCreationConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an AgentCreationConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns AgentCreationConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.Engine.ChatEngineConfig.AgentCreationConfig;
+
+                            /**
+                             * Creates a plain object from an AgentCreationConfig message. Also converts values to other types if specified.
+                             * @param message AgentCreationConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.discoveryengine.v1alpha.Engine.ChatEngineConfig.AgentCreationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this AgentCreationConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for AgentCreationConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a CommonConfig. */
+                    interface ICommonConfig {
+
+                        /** CommonConfig companyName */
+                        companyName?: (string|null);
+                    }
+
+                    /** Represents a CommonConfig. */
+                    class CommonConfig implements ICommonConfig {
+
+                        /**
+                         * Constructs a new CommonConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.discoveryengine.v1alpha.Engine.ICommonConfig);
+
+                        /** CommonConfig companyName. */
+                        public companyName: string;
+
+                        /**
+                         * Creates a new CommonConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CommonConfig instance
+                         */
+                        public static create(properties?: google.cloud.discoveryengine.v1alpha.Engine.ICommonConfig): google.cloud.discoveryengine.v1alpha.Engine.CommonConfig;
+
+                        /**
+                         * Encodes the specified CommonConfig message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.Engine.CommonConfig.verify|verify} messages.
+                         * @param message CommonConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.discoveryengine.v1alpha.Engine.ICommonConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CommonConfig message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.Engine.CommonConfig.verify|verify} messages.
+                         * @param message CommonConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.Engine.ICommonConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CommonConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CommonConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.Engine.CommonConfig;
+
+                        /**
+                         * Decodes a CommonConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CommonConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.Engine.CommonConfig;
+
+                        /**
+                         * Verifies a CommonConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CommonConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CommonConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.Engine.CommonConfig;
+
+                        /**
+                         * Creates a plain object from a CommonConfig message. Also converts values to other types if specified.
+                         * @param message CommonConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.discoveryengine.v1alpha.Engine.CommonConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CommonConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CommonConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RecommendationMetadata. */
+                    interface IRecommendationMetadata {
+
+                        /** RecommendationMetadata servingState */
+                        servingState?: (google.cloud.discoveryengine.v1alpha.Engine.RecommendationMetadata.ServingState|keyof typeof google.cloud.discoveryengine.v1alpha.Engine.RecommendationMetadata.ServingState|null);
+
+                        /** RecommendationMetadata dataState */
+                        dataState?: (google.cloud.discoveryengine.v1alpha.Engine.RecommendationMetadata.DataState|keyof typeof google.cloud.discoveryengine.v1alpha.Engine.RecommendationMetadata.DataState|null);
+
+                        /** RecommendationMetadata lastTuneTime */
+                        lastTuneTime?: (google.protobuf.ITimestamp|null);
+
+                        /** RecommendationMetadata tuningOperation */
+                        tuningOperation?: (string|null);
+                    }
+
+                    /** Represents a RecommendationMetadata. */
+                    class RecommendationMetadata implements IRecommendationMetadata {
+
+                        /**
+                         * Constructs a new RecommendationMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.discoveryengine.v1alpha.Engine.IRecommendationMetadata);
+
+                        /** RecommendationMetadata servingState. */
+                        public servingState: (google.cloud.discoveryengine.v1alpha.Engine.RecommendationMetadata.ServingState|keyof typeof google.cloud.discoveryengine.v1alpha.Engine.RecommendationMetadata.ServingState);
+
+                        /** RecommendationMetadata dataState. */
+                        public dataState: (google.cloud.discoveryengine.v1alpha.Engine.RecommendationMetadata.DataState|keyof typeof google.cloud.discoveryengine.v1alpha.Engine.RecommendationMetadata.DataState);
+
+                        /** RecommendationMetadata lastTuneTime. */
+                        public lastTuneTime?: (google.protobuf.ITimestamp|null);
+
+                        /** RecommendationMetadata tuningOperation. */
+                        public tuningOperation: string;
+
+                        /**
+                         * Creates a new RecommendationMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RecommendationMetadata instance
+                         */
+                        public static create(properties?: google.cloud.discoveryengine.v1alpha.Engine.IRecommendationMetadata): google.cloud.discoveryengine.v1alpha.Engine.RecommendationMetadata;
+
+                        /**
+                         * Encodes the specified RecommendationMetadata message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.Engine.RecommendationMetadata.verify|verify} messages.
+                         * @param message RecommendationMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.discoveryengine.v1alpha.Engine.IRecommendationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RecommendationMetadata message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.Engine.RecommendationMetadata.verify|verify} messages.
+                         * @param message RecommendationMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.Engine.IRecommendationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RecommendationMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RecommendationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.Engine.RecommendationMetadata;
+
+                        /**
+                         * Decodes a RecommendationMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RecommendationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.Engine.RecommendationMetadata;
+
+                        /**
+                         * Verifies a RecommendationMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RecommendationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RecommendationMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.Engine.RecommendationMetadata;
+
+                        /**
+                         * Creates a plain object from a RecommendationMetadata message. Also converts values to other types if specified.
+                         * @param message RecommendationMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.discoveryengine.v1alpha.Engine.RecommendationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RecommendationMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RecommendationMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace RecommendationMetadata {
+
+                        /** ServingState enum. */
+                        enum ServingState {
+                            SERVING_STATE_UNSPECIFIED = 0,
+                            INACTIVE = 1,
+                            ACTIVE = 2,
+                            TUNED = 3
+                        }
+
+                        /** DataState enum. */
+                        enum DataState {
+                            DATA_STATE_UNSPECIFIED = 0,
+                            DATA_OK = 1,
+                            DATA_ERROR = 2
+                        }
+                    }
+
+                    /** Properties of a ChatEngineMetadata. */
+                    interface IChatEngineMetadata {
+
+                        /** ChatEngineMetadata dialogflowAgent */
+                        dialogflowAgent?: (string|null);
+                    }
+
+                    /** Represents a ChatEngineMetadata. */
+                    class ChatEngineMetadata implements IChatEngineMetadata {
+
+                        /**
+                         * Constructs a new ChatEngineMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.discoveryengine.v1alpha.Engine.IChatEngineMetadata);
+
+                        /** ChatEngineMetadata dialogflowAgent. */
+                        public dialogflowAgent: string;
+
+                        /**
+                         * Creates a new ChatEngineMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ChatEngineMetadata instance
+                         */
+                        public static create(properties?: google.cloud.discoveryengine.v1alpha.Engine.IChatEngineMetadata): google.cloud.discoveryengine.v1alpha.Engine.ChatEngineMetadata;
+
+                        /**
+                         * Encodes the specified ChatEngineMetadata message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.Engine.ChatEngineMetadata.verify|verify} messages.
+                         * @param message ChatEngineMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.discoveryengine.v1alpha.Engine.IChatEngineMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ChatEngineMetadata message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.Engine.ChatEngineMetadata.verify|verify} messages.
+                         * @param message ChatEngineMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.Engine.IChatEngineMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ChatEngineMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ChatEngineMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.Engine.ChatEngineMetadata;
+
+                        /**
+                         * Decodes a ChatEngineMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ChatEngineMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.Engine.ChatEngineMetadata;
+
+                        /**
+                         * Verifies a ChatEngineMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ChatEngineMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ChatEngineMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.Engine.ChatEngineMetadata;
+
+                        /**
+                         * Creates a plain object from a ChatEngineMetadata message. Also converts values to other types if specified.
+                         * @param message ChatEngineMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.discoveryengine.v1alpha.Engine.ChatEngineMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ChatEngineMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ChatEngineMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Represents an EngineService */
+                class EngineService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new EngineService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new EngineService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): EngineService;
+
+                    /**
+                     * Calls CreateEngine.
+                     * @param request CreateEngineRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createEngine(request: google.cloud.discoveryengine.v1alpha.ICreateEngineRequest, callback: google.cloud.discoveryengine.v1alpha.EngineService.CreateEngineCallback): void;
+
+                    /**
+                     * Calls CreateEngine.
+                     * @param request CreateEngineRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createEngine(request: google.cloud.discoveryengine.v1alpha.ICreateEngineRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteEngine.
+                     * @param request DeleteEngineRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteEngine(request: google.cloud.discoveryengine.v1alpha.IDeleteEngineRequest, callback: google.cloud.discoveryengine.v1alpha.EngineService.DeleteEngineCallback): void;
+
+                    /**
+                     * Calls DeleteEngine.
+                     * @param request DeleteEngineRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteEngine(request: google.cloud.discoveryengine.v1alpha.IDeleteEngineRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateEngine.
+                     * @param request UpdateEngineRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Engine
+                     */
+                    public updateEngine(request: google.cloud.discoveryengine.v1alpha.IUpdateEngineRequest, callback: google.cloud.discoveryengine.v1alpha.EngineService.UpdateEngineCallback): void;
+
+                    /**
+                     * Calls UpdateEngine.
+                     * @param request UpdateEngineRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateEngine(request: google.cloud.discoveryengine.v1alpha.IUpdateEngineRequest): Promise<google.cloud.discoveryengine.v1alpha.Engine>;
+
+                    /**
+                     * Calls GetEngine.
+                     * @param request GetEngineRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Engine
+                     */
+                    public getEngine(request: google.cloud.discoveryengine.v1alpha.IGetEngineRequest, callback: google.cloud.discoveryengine.v1alpha.EngineService.GetEngineCallback): void;
+
+                    /**
+                     * Calls GetEngine.
+                     * @param request GetEngineRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getEngine(request: google.cloud.discoveryengine.v1alpha.IGetEngineRequest): Promise<google.cloud.discoveryengine.v1alpha.Engine>;
+
+                    /**
+                     * Calls ListEngines.
+                     * @param request ListEnginesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListEnginesResponse
+                     */
+                    public listEngines(request: google.cloud.discoveryengine.v1alpha.IListEnginesRequest, callback: google.cloud.discoveryengine.v1alpha.EngineService.ListEnginesCallback): void;
+
+                    /**
+                     * Calls ListEngines.
+                     * @param request ListEnginesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listEngines(request: google.cloud.discoveryengine.v1alpha.IListEnginesRequest): Promise<google.cloud.discoveryengine.v1alpha.ListEnginesResponse>;
+
+                    /**
+                     * Calls PauseEngine.
+                     * @param request PauseEngineRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Engine
+                     */
+                    public pauseEngine(request: google.cloud.discoveryengine.v1alpha.IPauseEngineRequest, callback: google.cloud.discoveryengine.v1alpha.EngineService.PauseEngineCallback): void;
+
+                    /**
+                     * Calls PauseEngine.
+                     * @param request PauseEngineRequest message or plain object
+                     * @returns Promise
+                     */
+                    public pauseEngine(request: google.cloud.discoveryengine.v1alpha.IPauseEngineRequest): Promise<google.cloud.discoveryengine.v1alpha.Engine>;
+
+                    /**
+                     * Calls ResumeEngine.
+                     * @param request ResumeEngineRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Engine
+                     */
+                    public resumeEngine(request: google.cloud.discoveryengine.v1alpha.IResumeEngineRequest, callback: google.cloud.discoveryengine.v1alpha.EngineService.ResumeEngineCallback): void;
+
+                    /**
+                     * Calls ResumeEngine.
+                     * @param request ResumeEngineRequest message or plain object
+                     * @returns Promise
+                     */
+                    public resumeEngine(request: google.cloud.discoveryengine.v1alpha.IResumeEngineRequest): Promise<google.cloud.discoveryengine.v1alpha.Engine>;
+
+                    /**
+                     * Calls TuneEngine.
+                     * @param request TuneEngineRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public tuneEngine(request: google.cloud.discoveryengine.v1alpha.ITuneEngineRequest, callback: google.cloud.discoveryengine.v1alpha.EngineService.TuneEngineCallback): void;
+
+                    /**
+                     * Calls TuneEngine.
+                     * @param request TuneEngineRequest message or plain object
+                     * @returns Promise
+                     */
+                    public tuneEngine(request: google.cloud.discoveryengine.v1alpha.ITuneEngineRequest): Promise<google.longrunning.Operation>;
+                }
+
+                namespace EngineService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1alpha.EngineService|createEngine}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateEngineCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1alpha.EngineService|deleteEngine}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteEngineCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1alpha.EngineService|updateEngine}.
+                     * @param error Error, if any
+                     * @param [response] Engine
+                     */
+                    type UpdateEngineCallback = (error: (Error|null), response?: google.cloud.discoveryengine.v1alpha.Engine) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1alpha.EngineService|getEngine}.
+                     * @param error Error, if any
+                     * @param [response] Engine
+                     */
+                    type GetEngineCallback = (error: (Error|null), response?: google.cloud.discoveryengine.v1alpha.Engine) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1alpha.EngineService|listEngines}.
+                     * @param error Error, if any
+                     * @param [response] ListEnginesResponse
+                     */
+                    type ListEnginesCallback = (error: (Error|null), response?: google.cloud.discoveryengine.v1alpha.ListEnginesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1alpha.EngineService|pauseEngine}.
+                     * @param error Error, if any
+                     * @param [response] Engine
+                     */
+                    type PauseEngineCallback = (error: (Error|null), response?: google.cloud.discoveryengine.v1alpha.Engine) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1alpha.EngineService|resumeEngine}.
+                     * @param error Error, if any
+                     * @param [response] Engine
+                     */
+                    type ResumeEngineCallback = (error: (Error|null), response?: google.cloud.discoveryengine.v1alpha.Engine) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1alpha.EngineService|tuneEngine}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type TuneEngineCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                }
+
+                /** Properties of a CreateEngineRequest. */
+                interface ICreateEngineRequest {
+
+                    /** CreateEngineRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateEngineRequest engine */
+                    engine?: (google.cloud.discoveryengine.v1alpha.IEngine|null);
+
+                    /** CreateEngineRequest engineId */
+                    engineId?: (string|null);
+                }
+
+                /** Represents a CreateEngineRequest. */
+                class CreateEngineRequest implements ICreateEngineRequest {
+
+                    /**
+                     * Constructs a new CreateEngineRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1alpha.ICreateEngineRequest);
+
+                    /** CreateEngineRequest parent. */
+                    public parent: string;
+
+                    /** CreateEngineRequest engine. */
+                    public engine?: (google.cloud.discoveryengine.v1alpha.IEngine|null);
+
+                    /** CreateEngineRequest engineId. */
+                    public engineId: string;
+
+                    /**
+                     * Creates a new CreateEngineRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateEngineRequest instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1alpha.ICreateEngineRequest): google.cloud.discoveryengine.v1alpha.CreateEngineRequest;
+
+                    /**
+                     * Encodes the specified CreateEngineRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.CreateEngineRequest.verify|verify} messages.
+                     * @param message CreateEngineRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1alpha.ICreateEngineRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateEngineRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.CreateEngineRequest.verify|verify} messages.
+                     * @param message CreateEngineRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.ICreateEngineRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateEngineRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateEngineRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.CreateEngineRequest;
+
+                    /**
+                     * Decodes a CreateEngineRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateEngineRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.CreateEngineRequest;
+
+                    /**
+                     * Verifies a CreateEngineRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateEngineRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateEngineRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.CreateEngineRequest;
+
+                    /**
+                     * Creates a plain object from a CreateEngineRequest message. Also converts values to other types if specified.
+                     * @param message CreateEngineRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1alpha.CreateEngineRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateEngineRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateEngineRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateEngineMetadata. */
+                interface ICreateEngineMetadata {
+
+                    /** CreateEngineMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CreateEngineMetadata updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a CreateEngineMetadata. */
+                class CreateEngineMetadata implements ICreateEngineMetadata {
+
+                    /**
+                     * Constructs a new CreateEngineMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1alpha.ICreateEngineMetadata);
+
+                    /** CreateEngineMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CreateEngineMetadata updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new CreateEngineMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateEngineMetadata instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1alpha.ICreateEngineMetadata): google.cloud.discoveryengine.v1alpha.CreateEngineMetadata;
+
+                    /**
+                     * Encodes the specified CreateEngineMetadata message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.CreateEngineMetadata.verify|verify} messages.
+                     * @param message CreateEngineMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1alpha.ICreateEngineMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateEngineMetadata message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.CreateEngineMetadata.verify|verify} messages.
+                     * @param message CreateEngineMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.ICreateEngineMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateEngineMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateEngineMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.CreateEngineMetadata;
+
+                    /**
+                     * Decodes a CreateEngineMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateEngineMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.CreateEngineMetadata;
+
+                    /**
+                     * Verifies a CreateEngineMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateEngineMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateEngineMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.CreateEngineMetadata;
+
+                    /**
+                     * Creates a plain object from a CreateEngineMetadata message. Also converts values to other types if specified.
+                     * @param message CreateEngineMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1alpha.CreateEngineMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateEngineMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateEngineMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteEngineRequest. */
+                interface IDeleteEngineRequest {
+
+                    /** DeleteEngineRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteEngineRequest. */
+                class DeleteEngineRequest implements IDeleteEngineRequest {
+
+                    /**
+                     * Constructs a new DeleteEngineRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1alpha.IDeleteEngineRequest);
+
+                    /** DeleteEngineRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteEngineRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteEngineRequest instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1alpha.IDeleteEngineRequest): google.cloud.discoveryengine.v1alpha.DeleteEngineRequest;
+
+                    /**
+                     * Encodes the specified DeleteEngineRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.DeleteEngineRequest.verify|verify} messages.
+                     * @param message DeleteEngineRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1alpha.IDeleteEngineRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteEngineRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.DeleteEngineRequest.verify|verify} messages.
+                     * @param message DeleteEngineRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.IDeleteEngineRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteEngineRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteEngineRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.DeleteEngineRequest;
+
+                    /**
+                     * Decodes a DeleteEngineRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteEngineRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.DeleteEngineRequest;
+
+                    /**
+                     * Verifies a DeleteEngineRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteEngineRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteEngineRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.DeleteEngineRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteEngineRequest message. Also converts values to other types if specified.
+                     * @param message DeleteEngineRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1alpha.DeleteEngineRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteEngineRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteEngineRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteEngineMetadata. */
+                interface IDeleteEngineMetadata {
+
+                    /** DeleteEngineMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeleteEngineMetadata updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a DeleteEngineMetadata. */
+                class DeleteEngineMetadata implements IDeleteEngineMetadata {
+
+                    /**
+                     * Constructs a new DeleteEngineMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1alpha.IDeleteEngineMetadata);
+
+                    /** DeleteEngineMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeleteEngineMetadata updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new DeleteEngineMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteEngineMetadata instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1alpha.IDeleteEngineMetadata): google.cloud.discoveryengine.v1alpha.DeleteEngineMetadata;
+
+                    /**
+                     * Encodes the specified DeleteEngineMetadata message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.DeleteEngineMetadata.verify|verify} messages.
+                     * @param message DeleteEngineMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1alpha.IDeleteEngineMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteEngineMetadata message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.DeleteEngineMetadata.verify|verify} messages.
+                     * @param message DeleteEngineMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.IDeleteEngineMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteEngineMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteEngineMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.DeleteEngineMetadata;
+
+                    /**
+                     * Decodes a DeleteEngineMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteEngineMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.DeleteEngineMetadata;
+
+                    /**
+                     * Verifies a DeleteEngineMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteEngineMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteEngineMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.DeleteEngineMetadata;
+
+                    /**
+                     * Creates a plain object from a DeleteEngineMetadata message. Also converts values to other types if specified.
+                     * @param message DeleteEngineMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1alpha.DeleteEngineMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteEngineMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteEngineMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetEngineRequest. */
+                interface IGetEngineRequest {
+
+                    /** GetEngineRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetEngineRequest. */
+                class GetEngineRequest implements IGetEngineRequest {
+
+                    /**
+                     * Constructs a new GetEngineRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1alpha.IGetEngineRequest);
+
+                    /** GetEngineRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetEngineRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetEngineRequest instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1alpha.IGetEngineRequest): google.cloud.discoveryengine.v1alpha.GetEngineRequest;
+
+                    /**
+                     * Encodes the specified GetEngineRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.GetEngineRequest.verify|verify} messages.
+                     * @param message GetEngineRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1alpha.IGetEngineRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetEngineRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.GetEngineRequest.verify|verify} messages.
+                     * @param message GetEngineRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.IGetEngineRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetEngineRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetEngineRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.GetEngineRequest;
+
+                    /**
+                     * Decodes a GetEngineRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetEngineRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.GetEngineRequest;
+
+                    /**
+                     * Verifies a GetEngineRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetEngineRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetEngineRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.GetEngineRequest;
+
+                    /**
+                     * Creates a plain object from a GetEngineRequest message. Also converts values to other types if specified.
+                     * @param message GetEngineRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1alpha.GetEngineRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetEngineRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetEngineRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListEnginesRequest. */
+                interface IListEnginesRequest {
+
+                    /** ListEnginesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListEnginesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListEnginesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListEnginesRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListEnginesRequest. */
+                class ListEnginesRequest implements IListEnginesRequest {
+
+                    /**
+                     * Constructs a new ListEnginesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1alpha.IListEnginesRequest);
+
+                    /** ListEnginesRequest parent. */
+                    public parent: string;
+
+                    /** ListEnginesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListEnginesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListEnginesRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListEnginesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListEnginesRequest instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1alpha.IListEnginesRequest): google.cloud.discoveryengine.v1alpha.ListEnginesRequest;
+
+                    /**
+                     * Encodes the specified ListEnginesRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.ListEnginesRequest.verify|verify} messages.
+                     * @param message ListEnginesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1alpha.IListEnginesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListEnginesRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.ListEnginesRequest.verify|verify} messages.
+                     * @param message ListEnginesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.IListEnginesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListEnginesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListEnginesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.ListEnginesRequest;
+
+                    /**
+                     * Decodes a ListEnginesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListEnginesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.ListEnginesRequest;
+
+                    /**
+                     * Verifies a ListEnginesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListEnginesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListEnginesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.ListEnginesRequest;
+
+                    /**
+                     * Creates a plain object from a ListEnginesRequest message. Also converts values to other types if specified.
+                     * @param message ListEnginesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1alpha.ListEnginesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListEnginesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListEnginesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListEnginesResponse. */
+                interface IListEnginesResponse {
+
+                    /** ListEnginesResponse engines */
+                    engines?: (google.cloud.discoveryengine.v1alpha.IEngine[]|null);
+
+                    /** ListEnginesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListEnginesResponse. */
+                class ListEnginesResponse implements IListEnginesResponse {
+
+                    /**
+                     * Constructs a new ListEnginesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1alpha.IListEnginesResponse);
+
+                    /** ListEnginesResponse engines. */
+                    public engines: google.cloud.discoveryengine.v1alpha.IEngine[];
+
+                    /** ListEnginesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListEnginesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListEnginesResponse instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1alpha.IListEnginesResponse): google.cloud.discoveryengine.v1alpha.ListEnginesResponse;
+
+                    /**
+                     * Encodes the specified ListEnginesResponse message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.ListEnginesResponse.verify|verify} messages.
+                     * @param message ListEnginesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1alpha.IListEnginesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListEnginesResponse message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.ListEnginesResponse.verify|verify} messages.
+                     * @param message ListEnginesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.IListEnginesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListEnginesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListEnginesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.ListEnginesResponse;
+
+                    /**
+                     * Decodes a ListEnginesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListEnginesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.ListEnginesResponse;
+
+                    /**
+                     * Verifies a ListEnginesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListEnginesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListEnginesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.ListEnginesResponse;
+
+                    /**
+                     * Creates a plain object from a ListEnginesResponse message. Also converts values to other types if specified.
+                     * @param message ListEnginesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1alpha.ListEnginesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListEnginesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListEnginesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateEngineRequest. */
+                interface IUpdateEngineRequest {
+
+                    /** UpdateEngineRequest engine */
+                    engine?: (google.cloud.discoveryengine.v1alpha.IEngine|null);
+
+                    /** UpdateEngineRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateEngineRequest. */
+                class UpdateEngineRequest implements IUpdateEngineRequest {
+
+                    /**
+                     * Constructs a new UpdateEngineRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1alpha.IUpdateEngineRequest);
+
+                    /** UpdateEngineRequest engine. */
+                    public engine?: (google.cloud.discoveryengine.v1alpha.IEngine|null);
+
+                    /** UpdateEngineRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateEngineRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateEngineRequest instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1alpha.IUpdateEngineRequest): google.cloud.discoveryengine.v1alpha.UpdateEngineRequest;
+
+                    /**
+                     * Encodes the specified UpdateEngineRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.UpdateEngineRequest.verify|verify} messages.
+                     * @param message UpdateEngineRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1alpha.IUpdateEngineRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateEngineRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.UpdateEngineRequest.verify|verify} messages.
+                     * @param message UpdateEngineRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.IUpdateEngineRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateEngineRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateEngineRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.UpdateEngineRequest;
+
+                    /**
+                     * Decodes an UpdateEngineRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateEngineRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.UpdateEngineRequest;
+
+                    /**
+                     * Verifies an UpdateEngineRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateEngineRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateEngineRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.UpdateEngineRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateEngineRequest message. Also converts values to other types if specified.
+                     * @param message UpdateEngineRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1alpha.UpdateEngineRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateEngineRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateEngineRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PauseEngineRequest. */
+                interface IPauseEngineRequest {
+
+                    /** PauseEngineRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a PauseEngineRequest. */
+                class PauseEngineRequest implements IPauseEngineRequest {
+
+                    /**
+                     * Constructs a new PauseEngineRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1alpha.IPauseEngineRequest);
+
+                    /** PauseEngineRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new PauseEngineRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PauseEngineRequest instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1alpha.IPauseEngineRequest): google.cloud.discoveryengine.v1alpha.PauseEngineRequest;
+
+                    /**
+                     * Encodes the specified PauseEngineRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.PauseEngineRequest.verify|verify} messages.
+                     * @param message PauseEngineRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1alpha.IPauseEngineRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PauseEngineRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.PauseEngineRequest.verify|verify} messages.
+                     * @param message PauseEngineRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.IPauseEngineRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PauseEngineRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PauseEngineRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.PauseEngineRequest;
+
+                    /**
+                     * Decodes a PauseEngineRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PauseEngineRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.PauseEngineRequest;
+
+                    /**
+                     * Verifies a PauseEngineRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PauseEngineRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PauseEngineRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.PauseEngineRequest;
+
+                    /**
+                     * Creates a plain object from a PauseEngineRequest message. Also converts values to other types if specified.
+                     * @param message PauseEngineRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1alpha.PauseEngineRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PauseEngineRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PauseEngineRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ResumeEngineRequest. */
+                interface IResumeEngineRequest {
+
+                    /** ResumeEngineRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a ResumeEngineRequest. */
+                class ResumeEngineRequest implements IResumeEngineRequest {
+
+                    /**
+                     * Constructs a new ResumeEngineRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1alpha.IResumeEngineRequest);
+
+                    /** ResumeEngineRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new ResumeEngineRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResumeEngineRequest instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1alpha.IResumeEngineRequest): google.cloud.discoveryengine.v1alpha.ResumeEngineRequest;
+
+                    /**
+                     * Encodes the specified ResumeEngineRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.ResumeEngineRequest.verify|verify} messages.
+                     * @param message ResumeEngineRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1alpha.IResumeEngineRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResumeEngineRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.ResumeEngineRequest.verify|verify} messages.
+                     * @param message ResumeEngineRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.IResumeEngineRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResumeEngineRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResumeEngineRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.ResumeEngineRequest;
+
+                    /**
+                     * Decodes a ResumeEngineRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResumeEngineRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.ResumeEngineRequest;
+
+                    /**
+                     * Verifies a ResumeEngineRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResumeEngineRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResumeEngineRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.ResumeEngineRequest;
+
+                    /**
+                     * Creates a plain object from a ResumeEngineRequest message. Also converts values to other types if specified.
+                     * @param message ResumeEngineRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1alpha.ResumeEngineRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResumeEngineRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResumeEngineRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TuneEngineRequest. */
+                interface ITuneEngineRequest {
+
+                    /** TuneEngineRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a TuneEngineRequest. */
+                class TuneEngineRequest implements ITuneEngineRequest {
+
+                    /**
+                     * Constructs a new TuneEngineRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1alpha.ITuneEngineRequest);
+
+                    /** TuneEngineRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new TuneEngineRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TuneEngineRequest instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1alpha.ITuneEngineRequest): google.cloud.discoveryengine.v1alpha.TuneEngineRequest;
+
+                    /**
+                     * Encodes the specified TuneEngineRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.TuneEngineRequest.verify|verify} messages.
+                     * @param message TuneEngineRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1alpha.ITuneEngineRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TuneEngineRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.TuneEngineRequest.verify|verify} messages.
+                     * @param message TuneEngineRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.ITuneEngineRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TuneEngineRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TuneEngineRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.TuneEngineRequest;
+
+                    /**
+                     * Decodes a TuneEngineRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TuneEngineRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.TuneEngineRequest;
+
+                    /**
+                     * Verifies a TuneEngineRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TuneEngineRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TuneEngineRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.TuneEngineRequest;
+
+                    /**
+                     * Creates a plain object from a TuneEngineRequest message. Also converts values to other types if specified.
+                     * @param message TuneEngineRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1alpha.TuneEngineRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TuneEngineRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TuneEngineRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TuneEngineMetadata. */
+                interface ITuneEngineMetadata {
+
+                    /** TuneEngineMetadata engine */
+                    engine?: (string|null);
+                }
+
+                /** Represents a TuneEngineMetadata. */
+                class TuneEngineMetadata implements ITuneEngineMetadata {
+
+                    /**
+                     * Constructs a new TuneEngineMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1alpha.ITuneEngineMetadata);
+
+                    /** TuneEngineMetadata engine. */
+                    public engine: string;
+
+                    /**
+                     * Creates a new TuneEngineMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TuneEngineMetadata instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1alpha.ITuneEngineMetadata): google.cloud.discoveryengine.v1alpha.TuneEngineMetadata;
+
+                    /**
+                     * Encodes the specified TuneEngineMetadata message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.TuneEngineMetadata.verify|verify} messages.
+                     * @param message TuneEngineMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1alpha.ITuneEngineMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TuneEngineMetadata message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.TuneEngineMetadata.verify|verify} messages.
+                     * @param message TuneEngineMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.ITuneEngineMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TuneEngineMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TuneEngineMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.TuneEngineMetadata;
+
+                    /**
+                     * Decodes a TuneEngineMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TuneEngineMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.TuneEngineMetadata;
+
+                    /**
+                     * Verifies a TuneEngineMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TuneEngineMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TuneEngineMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.TuneEngineMetadata;
+
+                    /**
+                     * Creates a plain object from a TuneEngineMetadata message. Also converts values to other types if specified.
+                     * @param message TuneEngineMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1alpha.TuneEngineMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TuneEngineMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TuneEngineMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TuneEngineResponse. */
+                interface ITuneEngineResponse {
+                }
+
+                /** Represents a TuneEngineResponse. */
+                class TuneEngineResponse implements ITuneEngineResponse {
+
+                    /**
+                     * Constructs a new TuneEngineResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1alpha.ITuneEngineResponse);
+
+                    /**
+                     * Creates a new TuneEngineResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TuneEngineResponse instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1alpha.ITuneEngineResponse): google.cloud.discoveryengine.v1alpha.TuneEngineResponse;
+
+                    /**
+                     * Encodes the specified TuneEngineResponse message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.TuneEngineResponse.verify|verify} messages.
+                     * @param message TuneEngineResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1alpha.ITuneEngineResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TuneEngineResponse message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.TuneEngineResponse.verify|verify} messages.
+                     * @param message TuneEngineResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.ITuneEngineResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TuneEngineResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TuneEngineResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.TuneEngineResponse;
+
+                    /**
+                     * Decodes a TuneEngineResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TuneEngineResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.TuneEngineResponse;
+
+                    /**
+                     * Verifies a TuneEngineResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TuneEngineResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TuneEngineResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.TuneEngineResponse;
+
+                    /**
+                     * Creates a plain object from a TuneEngineResponse message. Also converts values to other types if specified.
+                     * @param message TuneEngineResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1alpha.TuneEngineResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TuneEngineResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TuneEngineResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

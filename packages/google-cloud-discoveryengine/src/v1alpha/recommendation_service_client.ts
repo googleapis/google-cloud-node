@@ -183,6 +183,13 @@ export class RecommendationServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      enginePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}'
+      ),
+      projectLocationCollectionDataStorePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}'
+        ),
       projectLocationCollectionDataStoreBranchDocumentPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}'
@@ -203,6 +210,9 @@ export class RecommendationServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/servingConfigs/{serving_config}'
         ),
+      projectLocationDataStorePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}'
+      ),
       projectLocationDataStoreBranchDocumentPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}'
@@ -360,11 +370,17 @@ export class RecommendationServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.servingConfig
-   *   Required. Full resource name of the format:
+   *   Required. Full resource name of a
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.ServingConfig|ServingConfig}:
+   *   `projects/* /locations/global/collections/* /engines/* /servingConfigs/*`, or
    *   `projects/* /locations/global/collections/* /dataStores/* /servingConfigs/*`
    *
-   *   Before you can request recommendations from your model, you must create at
-   *   least one serving config  for it.
+   *   One default serving config is created along with your recommendation engine
+   *   creation. The engine ID will be used as the ID of the default serving
+   *   config. For example, for Engine
+   *   `projects/* /locations/global/collections/* /engines/my-engine`, you can use
+   *   `projects/* /locations/global/collections/* /engines/my-engine/servingConfigs/my-engine`
+   *   for your {@link protos.|Recommend} requests.
    * @param {google.cloud.discoveryengine.v1alpha.UserEvent} request.userEvent
    *   Required. Context about the user, what they are looking at and what action
    *   they took to trigger the Recommend request. Note that this user event
@@ -631,6 +647,158 @@ export class RecommendationServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified engine resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} engine
+   * @returns {string} Resource name string.
+   */
+  enginePath(
+    project: string,
+    location: string,
+    collection: string,
+    engine: string
+  ) {
+    return this.pathTemplates.enginePathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      engine: engine,
+    });
+  }
+
+  /**
+   * Parse the project from Engine resource.
+   *
+   * @param {string} engineName
+   *   A fully-qualified path representing Engine resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEngineName(engineName: string) {
+    return this.pathTemplates.enginePathTemplate.match(engineName).project;
+  }
+
+  /**
+   * Parse the location from Engine resource.
+   *
+   * @param {string} engineName
+   *   A fully-qualified path representing Engine resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEngineName(engineName: string) {
+    return this.pathTemplates.enginePathTemplate.match(engineName).location;
+  }
+
+  /**
+   * Parse the collection from Engine resource.
+   *
+   * @param {string} engineName
+   *   A fully-qualified path representing Engine resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromEngineName(engineName: string) {
+    return this.pathTemplates.enginePathTemplate.match(engineName).collection;
+  }
+
+  /**
+   * Parse the engine from Engine resource.
+   *
+   * @param {string} engineName
+   *   A fully-qualified path representing Engine resource.
+   * @returns {string} A string representing the engine.
+   */
+  matchEngineFromEngineName(engineName: string) {
+    return this.pathTemplates.enginePathTemplate.match(engineName).engine;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionDataStore resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStorePath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStore resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreName
+   *   A fully-qualified path representing project_location_collection_data_store resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreName(
+    projectLocationCollectionDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
+      projectLocationCollectionDataStoreName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStore resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreName
+   *   A fully-qualified path representing project_location_collection_data_store resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreName(
+    projectLocationCollectionDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
+      projectLocationCollectionDataStoreName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStore resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreName
+   *   A fully-qualified path representing project_location_collection_data_store resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreName(
+    projectLocationCollectionDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
+      projectLocationCollectionDataStoreName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStore resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreName
+   *   A fully-qualified path representing project_location_collection_data_store resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreName(
+    projectLocationCollectionDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
+      projectLocationCollectionDataStoreName
+    ).data_store;
+  }
 
   /**
    * Return a fully-qualified projectLocationCollectionDataStoreBranchDocument resource name string.
@@ -1163,6 +1331,71 @@ export class RecommendationServiceClient {
     return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match(
       projectLocationCollectionEngineServingConfigName
     ).serving_config;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationDataStore resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStorePath(
+    project: string,
+    location: string,
+    dataStore: string
+  ) {
+    return this.pathTemplates.projectLocationDataStorePathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStore resource.
+   *
+   * @param {string} projectLocationDataStoreName
+   *   A fully-qualified path representing project_location_data_store resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreName(
+    projectLocationDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStorePathTemplate.match(
+      projectLocationDataStoreName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStore resource.
+   *
+   * @param {string} projectLocationDataStoreName
+   *   A fully-qualified path representing project_location_data_store resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreName(
+    projectLocationDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStorePathTemplate.match(
+      projectLocationDataStoreName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStore resource.
+   *
+   * @param {string} projectLocationDataStoreName
+   *   A fully-qualified path representing project_location_data_store resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreName(
+    projectLocationDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStorePathTemplate.match(
+      projectLocationDataStoreName
+    ).data_store;
   }
 
   /**
