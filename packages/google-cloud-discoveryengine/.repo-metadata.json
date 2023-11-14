@@ -1,7 +1,7 @@
 {
   "name": "discoveryengine",
   "name_pretty": "Discovery Engine API",
-  "product_documentation": "cloud.google.com/discovery-engine/",
+  "product_documentation": "https://cloud.google.com/generative-ai-app-builder/docs",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/discoveryengine/latest",
   "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
   "release_level": "preview",
@@ -9,7 +9,7 @@
   "repo": "googleapis/google-cloud-node",
   "distribution_name": "@google-cloud/discoveryengine",
   "api_id": "discoveryengine.googleapis.com",
-  "default_version": "v1",
+  "default_version": "v1alpha",
   "requires_billing": true,
   "library_type": "GAPIC_AUTO",
   "api_shortname": "discoveryengine"
