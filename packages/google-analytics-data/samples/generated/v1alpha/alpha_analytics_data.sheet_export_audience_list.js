@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START analyticsdata_v1alpha_generated_AlphaAnalyticsData_QueryAudienceList_async]
+  // [START analyticsdata_v1alpha_generated_AlphaAnalyticsData_SheetExportAudienceList_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -61,19 +61,19 @@ function main(name) {
   // Instantiates a client
   const dataClient = new AlphaAnalyticsDataClient();
 
-  async function callQueryAudienceList() {
+  async function callSheetExportAudienceList() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const response = await dataClient.queryAudienceList(request);
+    const response = await dataClient.sheetExportAudienceList(request);
     console.log(response);
   }
 
-  callQueryAudienceList();
-  // [END analyticsdata_v1alpha_generated_AlphaAnalyticsData_QueryAudienceList_async]
+  callSheetExportAudienceList();
+  // [END analyticsdata_v1alpha_generated_AlphaAnalyticsData_SheetExportAudienceList_async]
 }
 
 process.on('unhandledRejection', err => {

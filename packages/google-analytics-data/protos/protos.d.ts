@@ -3890,6 +3890,20 @@ export namespace google {
                     public queryAudienceList(request: google.analytics.data.v1alpha.IQueryAudienceListRequest): Promise<google.analytics.data.v1alpha.QueryAudienceListResponse>;
 
                     /**
+                     * Calls SheetExportAudienceList.
+                     * @param request SheetExportAudienceListRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SheetExportAudienceListResponse
+                     */
+                    public sheetExportAudienceList(request: google.analytics.data.v1alpha.ISheetExportAudienceListRequest, callback: google.analytics.data.v1alpha.AlphaAnalyticsData.SheetExportAudienceListCallback): void;
+
+                    /**
+                     * Calls SheetExportAudienceList.
+                     * @param request SheetExportAudienceListRequest message or plain object
+                     * @returns Promise
+                     */
+                    public sheetExportAudienceList(request: google.analytics.data.v1alpha.ISheetExportAudienceListRequest): Promise<google.analytics.data.v1alpha.SheetExportAudienceListResponse>;
+
+                    /**
                      * Calls GetAudienceList.
                      * @param request GetAudienceListRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and AudienceList
@@ -3940,6 +3954,13 @@ export namespace google {
                      * @param [response] QueryAudienceListResponse
                      */
                     type QueryAudienceListCallback = (error: (Error|null), response?: google.analytics.data.v1alpha.QueryAudienceListResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.data.v1alpha.AlphaAnalyticsData|sheetExportAudienceList}.
+                     * @param error Error, if any
+                     * @param [response] SheetExportAudienceListResponse
+                     */
+                    type SheetExportAudienceListCallback = (error: (Error|null), response?: google.analytics.data.v1alpha.SheetExportAudienceListResponse) => void;
 
                     /**
                      * Callback as used by {@link google.analytics.data.v1alpha.AlphaAnalyticsData|getAudienceList}.
@@ -4391,6 +4412,15 @@ export namespace google {
 
                     /** AudienceList beginCreatingTime */
                     beginCreatingTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AudienceList creationQuotaTokensCharged */
+                    creationQuotaTokensCharged?: (number|null);
+
+                    /** AudienceList rowCount */
+                    rowCount?: (number|null);
+
+                    /** AudienceList errorMessage */
+                    errorMessage?: (string|null);
                 }
 
                 /** Represents an AudienceList. */
@@ -4420,11 +4450,26 @@ export namespace google {
                     /** AudienceList beginCreatingTime. */
                     public beginCreatingTime?: (google.protobuf.ITimestamp|null);
 
+                    /** AudienceList creationQuotaTokensCharged. */
+                    public creationQuotaTokensCharged: number;
+
+                    /** AudienceList rowCount. */
+                    public rowCount?: (number|null);
+
+                    /** AudienceList errorMessage. */
+                    public errorMessage?: (string|null);
+
                     /** AudienceList _state. */
                     public _state?: "state";
 
                     /** AudienceList _beginCreatingTime. */
                     public _beginCreatingTime?: "beginCreatingTime";
+
+                    /** AudienceList _rowCount. */
+                    public _rowCount?: "rowCount";
+
+                    /** AudienceList _errorMessage. */
+                    public _errorMessage?: "errorMessage";
 
                     /**
                      * Creates a new AudienceList instance using the specified properties.
@@ -4824,6 +4869,242 @@ export namespace google {
 
                     /**
                      * Gets the default type url for QueryAudienceListResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SheetExportAudienceListRequest. */
+                interface ISheetExportAudienceListRequest {
+
+                    /** SheetExportAudienceListRequest name */
+                    name?: (string|null);
+
+                    /** SheetExportAudienceListRequest offset */
+                    offset?: (number|Long|string|null);
+
+                    /** SheetExportAudienceListRequest limit */
+                    limit?: (number|Long|string|null);
+                }
+
+                /** Represents a SheetExportAudienceListRequest. */
+                class SheetExportAudienceListRequest implements ISheetExportAudienceListRequest {
+
+                    /**
+                     * Constructs a new SheetExportAudienceListRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1alpha.ISheetExportAudienceListRequest);
+
+                    /** SheetExportAudienceListRequest name. */
+                    public name: string;
+
+                    /** SheetExportAudienceListRequest offset. */
+                    public offset: (number|Long|string);
+
+                    /** SheetExportAudienceListRequest limit. */
+                    public limit: (number|Long|string);
+
+                    /**
+                     * Creates a new SheetExportAudienceListRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SheetExportAudienceListRequest instance
+                     */
+                    public static create(properties?: google.analytics.data.v1alpha.ISheetExportAudienceListRequest): google.analytics.data.v1alpha.SheetExportAudienceListRequest;
+
+                    /**
+                     * Encodes the specified SheetExportAudienceListRequest message. Does not implicitly {@link google.analytics.data.v1alpha.SheetExportAudienceListRequest.verify|verify} messages.
+                     * @param message SheetExportAudienceListRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1alpha.ISheetExportAudienceListRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SheetExportAudienceListRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.SheetExportAudienceListRequest.verify|verify} messages.
+                     * @param message SheetExportAudienceListRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1alpha.ISheetExportAudienceListRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SheetExportAudienceListRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SheetExportAudienceListRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1alpha.SheetExportAudienceListRequest;
+
+                    /**
+                     * Decodes a SheetExportAudienceListRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SheetExportAudienceListRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1alpha.SheetExportAudienceListRequest;
+
+                    /**
+                     * Verifies a SheetExportAudienceListRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SheetExportAudienceListRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SheetExportAudienceListRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1alpha.SheetExportAudienceListRequest;
+
+                    /**
+                     * Creates a plain object from a SheetExportAudienceListRequest message. Also converts values to other types if specified.
+                     * @param message SheetExportAudienceListRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1alpha.SheetExportAudienceListRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SheetExportAudienceListRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SheetExportAudienceListRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SheetExportAudienceListResponse. */
+                interface ISheetExportAudienceListResponse {
+
+                    /** SheetExportAudienceListResponse spreadsheetUri */
+                    spreadsheetUri?: (string|null);
+
+                    /** SheetExportAudienceListResponse spreadsheetId */
+                    spreadsheetId?: (string|null);
+
+                    /** SheetExportAudienceListResponse rowCount */
+                    rowCount?: (number|null);
+
+                    /** SheetExportAudienceListResponse audienceList */
+                    audienceList?: (google.analytics.data.v1alpha.IAudienceList|null);
+                }
+
+                /** Represents a SheetExportAudienceListResponse. */
+                class SheetExportAudienceListResponse implements ISheetExportAudienceListResponse {
+
+                    /**
+                     * Constructs a new SheetExportAudienceListResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1alpha.ISheetExportAudienceListResponse);
+
+                    /** SheetExportAudienceListResponse spreadsheetUri. */
+                    public spreadsheetUri?: (string|null);
+
+                    /** SheetExportAudienceListResponse spreadsheetId. */
+                    public spreadsheetId?: (string|null);
+
+                    /** SheetExportAudienceListResponse rowCount. */
+                    public rowCount?: (number|null);
+
+                    /** SheetExportAudienceListResponse audienceList. */
+                    public audienceList?: (google.analytics.data.v1alpha.IAudienceList|null);
+
+                    /** SheetExportAudienceListResponse _spreadsheetUri. */
+                    public _spreadsheetUri?: "spreadsheetUri";
+
+                    /** SheetExportAudienceListResponse _spreadsheetId. */
+                    public _spreadsheetId?: "spreadsheetId";
+
+                    /** SheetExportAudienceListResponse _rowCount. */
+                    public _rowCount?: "rowCount";
+
+                    /** SheetExportAudienceListResponse _audienceList. */
+                    public _audienceList?: "audienceList";
+
+                    /**
+                     * Creates a new SheetExportAudienceListResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SheetExportAudienceListResponse instance
+                     */
+                    public static create(properties?: google.analytics.data.v1alpha.ISheetExportAudienceListResponse): google.analytics.data.v1alpha.SheetExportAudienceListResponse;
+
+                    /**
+                     * Encodes the specified SheetExportAudienceListResponse message. Does not implicitly {@link google.analytics.data.v1alpha.SheetExportAudienceListResponse.verify|verify} messages.
+                     * @param message SheetExportAudienceListResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1alpha.ISheetExportAudienceListResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SheetExportAudienceListResponse message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.SheetExportAudienceListResponse.verify|verify} messages.
+                     * @param message SheetExportAudienceListResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1alpha.ISheetExportAudienceListResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SheetExportAudienceListResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SheetExportAudienceListResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1alpha.SheetExportAudienceListResponse;
+
+                    /**
+                     * Decodes a SheetExportAudienceListResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SheetExportAudienceListResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1alpha.SheetExportAudienceListResponse;
+
+                    /**
+                     * Verifies a SheetExportAudienceListResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SheetExportAudienceListResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SheetExportAudienceListResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1alpha.SheetExportAudienceListResponse;
+
+                    /**
+                     * Creates a plain object from a SheetExportAudienceListResponse message. Also converts values to other types if specified.
+                     * @param message SheetExportAudienceListResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1alpha.SheetExportAudienceListResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SheetExportAudienceListResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SheetExportAudienceListResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
