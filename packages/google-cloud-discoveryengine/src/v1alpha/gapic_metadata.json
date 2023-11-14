@@ -107,6 +107,74 @@
         }
       }
     },
+    "DataStoreService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataStoreServiceClient",
+          "rpcs": {
+            "GetDataStore": {
+              "methods": [
+                "getDataStore"
+              ]
+            },
+            "UpdateDataStore": {
+              "methods": [
+                "updateDataStore"
+              ]
+            },
+            "CreateDataStore": {
+              "methods": [
+                "createDataStore"
+              ]
+            },
+            "DeleteDataStore": {
+              "methods": [
+                "deleteDataStore"
+              ]
+            },
+            "ListDataStores": {
+              "methods": [
+                "listDataStores",
+                "listDataStoresStream",
+                "listDataStoresAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataStoreServiceClient",
+          "rpcs": {
+            "GetDataStore": {
+              "methods": [
+                "getDataStore"
+              ]
+            },
+            "UpdateDataStore": {
+              "methods": [
+                "updateDataStore"
+              ]
+            },
+            "CreateDataStore": {
+              "methods": [
+                "createDataStore"
+              ]
+            },
+            "DeleteDataStore": {
+              "methods": [
+                "deleteDataStore"
+              ]
+            },
+            "ListDataStores": {
+              "methods": [
+                "listDataStores",
+                "listDataStoresStream",
+                "listDataStoresAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "DocumentService": {
       "clients": {
         "grpc": {
@@ -189,6 +257,104 @@
                 "listDocuments",
                 "listDocumentsStream",
                 "listDocumentsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "EngineService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "EngineServiceClient",
+          "rpcs": {
+            "UpdateEngine": {
+              "methods": [
+                "updateEngine"
+              ]
+            },
+            "GetEngine": {
+              "methods": [
+                "getEngine"
+              ]
+            },
+            "PauseEngine": {
+              "methods": [
+                "pauseEngine"
+              ]
+            },
+            "ResumeEngine": {
+              "methods": [
+                "resumeEngine"
+              ]
+            },
+            "CreateEngine": {
+              "methods": [
+                "createEngine"
+              ]
+            },
+            "DeleteEngine": {
+              "methods": [
+                "deleteEngine"
+              ]
+            },
+            "TuneEngine": {
+              "methods": [
+                "tuneEngine"
+              ]
+            },
+            "ListEngines": {
+              "methods": [
+                "listEngines",
+                "listEnginesStream",
+                "listEnginesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "EngineServiceClient",
+          "rpcs": {
+            "UpdateEngine": {
+              "methods": [
+                "updateEngine"
+              ]
+            },
+            "GetEngine": {
+              "methods": [
+                "getEngine"
+              ]
+            },
+            "PauseEngine": {
+              "methods": [
+                "pauseEngine"
+              ]
+            },
+            "ResumeEngine": {
+              "methods": [
+                "resumeEngine"
+              ]
+            },
+            "CreateEngine": {
+              "methods": [
+                "createEngine"
+              ]
+            },
+            "DeleteEngine": {
+              "methods": [
+                "deleteEngine"
+              ]
+            },
+            "TuneEngine": {
+              "methods": [
+                "tuneEngine"
+              ]
+            },
+            "ListEngines": {
+              "methods": [
+                "listEngines",
+                "listEnginesStream",
+                "listEnginesAsync"
               ]
             }
           }

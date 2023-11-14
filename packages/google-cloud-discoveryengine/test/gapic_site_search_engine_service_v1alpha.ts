@@ -998,6 +998,189 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('engine', () => {
+      const fakePath = '/rendered/path/engine';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+        engine: 'engineValue',
+      };
+      const client =
+        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.enginePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.enginePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('enginePath', () => {
+        const result = client.enginePath(
+          'projectValue',
+          'locationValue',
+          'collectionValue',
+          'engineValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.enginePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromEngineName', () => {
+        const result = client.matchProjectFromEngineName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.enginePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromEngineName', () => {
+        const result = client.matchLocationFromEngineName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.enginePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCollectionFromEngineName', () => {
+        const result = client.matchCollectionFromEngineName(fakePath);
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (client.pathTemplates.enginePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEngineFromEngineName', () => {
+        const result = client.matchEngineFromEngineName(fakePath);
+        assert.strictEqual(result, 'engineValue');
+        assert(
+          (client.pathTemplates.enginePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationCollectionDataStore', () => {
+      const fakePath = '/rendered/path/projectLocationCollectionDataStore';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+        data_store: 'dataStoreValue',
+      };
+      const client =
+        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.projectLocationCollectionDataStorePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationCollectionDataStorePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationCollectionDataStorePath', () => {
+        const result = client.projectLocationCollectionDataStorePath(
+          'projectValue',
+          'locationValue',
+          'collectionValue',
+          'dataStoreValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationCollectionDataStorePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationCollectionDataStoreName', () => {
+        const result =
+          client.matchProjectFromProjectLocationCollectionDataStoreName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationCollectionDataStorePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationCollectionDataStoreName', () => {
+        const result =
+          client.matchLocationFromProjectLocationCollectionDataStoreName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationCollectionDataStorePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCollectionFromProjectLocationCollectionDataStoreName', () => {
+        const result =
+          client.matchCollectionFromProjectLocationCollectionDataStoreName(
+            fakePath
+          );
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationCollectionDataStorePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationCollectionDataStoreName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationCollectionDataStoreName(
+            fakePath
+          );
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationCollectionDataStorePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('projectLocationCollectionDataStoreBranchDocument', () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionDataStoreBranchDocument';
@@ -1509,6 +1692,88 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
           (
             client.pathTemplates
               .projectLocationCollectionDataStoreSiteSearchEnginePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationDataStore', () => {
+      const fakePath = '/rendered/path/projectLocationDataStore';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        data_store: 'dataStoreValue',
+      };
+      const client =
+        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.projectLocationDataStorePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectLocationDataStorePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationDataStorePath', () => {
+        const result = client.projectLocationDataStorePath(
+          'projectValue',
+          'locationValue',
+          'dataStoreValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationDataStorePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationDataStoreName', () => {
+        const result =
+          client.matchProjectFromProjectLocationDataStoreName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationDataStorePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationDataStoreName', () => {
+        const result =
+          client.matchLocationFromProjectLocationDataStoreName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationDataStorePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationDataStoreName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationDataStoreName(fakePath);
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationDataStorePathTemplate
               .match as SinonStub
           )
             .getCall(-1)
