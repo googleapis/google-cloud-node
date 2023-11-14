@@ -47,6 +47,7 @@
   "../../protos/google/cloud/aiplatform/v1/job_service.proto",
   "../../protos/google/cloud/aiplatform/v1/job_state.proto",
   "../../protos/google/cloud/aiplatform/v1/lineage_subgraph.proto",
+  "../../protos/google/cloud/aiplatform/v1/llm_utility_service.proto",
   "../../protos/google/cloud/aiplatform/v1/machine_resources.proto",
   "../../protos/google/cloud/aiplatform/v1/manual_batch_tuning_parameters.proto",
   "../../protos/google/cloud/aiplatform/v1/match_service.proto",
