@@ -1879,6 +1879,34 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
+                        },
+                        "deploymentTimeout": {
+                          "type": "google.protobuf.Duration",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "sharedMemorySizeMb": {
+                          "type": "int64",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "startupProbe": {
+                          "type": "Probe",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "healthProbe": {
+                          "type": "Probe",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         }
                       }
                     },
@@ -1910,6 +1938,40 @@
                             "BQML": 3,
                             "MODEL_GARDEN": 4,
                             "GENIE": 5
+                          }
+                        }
+                      }
+                    },
+                    "Probe": {
+                      "oneofs": {
+                        "probeType": {
+                          "oneof": [
+                            "exec"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "exec": {
+                          "type": "ExecAction",
+                          "id": 1
+                        },
+                        "periodSeconds": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "timeoutSeconds": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "ExecAction": {
+                          "fields": {
+                            "command": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            }
                           }
                         }
                       }
@@ -49295,18 +49357,6 @@
                 }
               }
             },
-            "Any": {
-              "fields": {
-                "type_url": {
-                  "type": "string",
-                  "id": 1
-                },
-                "value": {
-                  "type": "bytes",
-                  "id": 2
-                }
-              }
-            },
             "Duration": {
               "fields": {
                 "seconds": {
@@ -49315,6 +49365,18 @@
                 },
                 "nanos": {
                   "type": "int32",
+                  "id": 2
+                }
+              }
+            },
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
                   "id": 2
                 }
               }
