@@ -1,0 +1,6 @@
+[
+  "../../protos/google/cloud/batch/v1alpha/batch.proto",
+  "../../protos/google/cloud/batch/v1alpha/job.proto",
+  "../../protos/google/cloud/batch/v1alpha/task.proto",
+  "../../protos/google/cloud/batch/v1alpha/volume.proto"
+]
