@@ -27,6 +27,7 @@ import {
   IndexEndpointServiceClient,
   IndexServiceClient,
   JobServiceClient,
+  LlmUtilityServiceClient,
   MatchServiceClient,
   MetadataServiceClient,
   MigrationServiceClient,
@@ -81,6 +82,9 @@ function doStuffWithIndexServiceClient(client: IndexServiceClient) {
   client.close();
 }
 function doStuffWithJobServiceClient(client: JobServiceClient) {
+  client.close();
+}
+function doStuffWithLlmUtilityServiceClient(client: LlmUtilityServiceClient) {
   client.close();
 }
 function doStuffWithMatchServiceClient(client: MatchServiceClient) {
@@ -156,6 +160,9 @@ function main() {
   // check that the client instance can be created
   const jobServiceClient = new JobServiceClient();
   doStuffWithJobServiceClient(jobServiceClient);
+  // check that the client instance can be created
+  const llmUtilityServiceClient = new LlmUtilityServiceClient();
+  doStuffWithLlmUtilityServiceClient(llmUtilityServiceClient);
   // check that the client instance can be created
   const matchServiceClient = new MatchServiceClient();
   doStuffWithMatchServiceClient(matchServiceClient);
