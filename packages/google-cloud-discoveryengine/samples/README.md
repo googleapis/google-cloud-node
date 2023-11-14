@@ -1361,4 +1361,4 @@ __Usage:__
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=samples/README.md
-[product-docs]: cloud.google.com/discovery-engine/
+[product-docs]: https://cloud.google.com/generative-ai-app-builder/docs

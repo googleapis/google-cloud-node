@@ -20,18 +20,24 @@ import * as v1 from './v1';
 import * as v1alpha from './v1alpha';
 import * as v1beta from './v1beta';
 
-const CompletionServiceClient = v1.CompletionServiceClient;
-type CompletionServiceClient = v1.CompletionServiceClient;
-const ConversationalSearchServiceClient = v1.ConversationalSearchServiceClient;
-type ConversationalSearchServiceClient = v1.ConversationalSearchServiceClient;
-const DocumentServiceClient = v1.DocumentServiceClient;
-type DocumentServiceClient = v1.DocumentServiceClient;
-const SchemaServiceClient = v1.SchemaServiceClient;
-type SchemaServiceClient = v1.SchemaServiceClient;
-const SearchServiceClient = v1.SearchServiceClient;
-type SearchServiceClient = v1.SearchServiceClient;
-const UserEventServiceClient = v1.UserEventServiceClient;
-type UserEventServiceClient = v1.UserEventServiceClient;
+const CompletionServiceClient = v1alpha.CompletionServiceClient;
+type CompletionServiceClient = v1alpha.CompletionServiceClient;
+const ConversationalSearchServiceClient =
+  v1alpha.ConversationalSearchServiceClient;
+type ConversationalSearchServiceClient =
+  v1alpha.ConversationalSearchServiceClient;
+const DocumentServiceClient = v1alpha.DocumentServiceClient;
+type DocumentServiceClient = v1alpha.DocumentServiceClient;
+const RecommendationServiceClient = v1alpha.RecommendationServiceClient;
+type RecommendationServiceClient = v1alpha.RecommendationServiceClient;
+const SchemaServiceClient = v1alpha.SchemaServiceClient;
+type SchemaServiceClient = v1alpha.SchemaServiceClient;
+const SearchServiceClient = v1alpha.SearchServiceClient;
+type SearchServiceClient = v1alpha.SearchServiceClient;
+const SiteSearchEngineServiceClient = v1alpha.SiteSearchEngineServiceClient;
+type SiteSearchEngineServiceClient = v1alpha.SiteSearchEngineServiceClient;
+const UserEventServiceClient = v1alpha.UserEventServiceClient;
+type UserEventServiceClient = v1alpha.UserEventServiceClient;
 
 export {
   v1,
@@ -40,8 +46,10 @@ export {
   CompletionServiceClient,
   ConversationalSearchServiceClient,
   DocumentServiceClient,
+  RecommendationServiceClient,
   SchemaServiceClient,
   SearchServiceClient,
+  SiteSearchEngineServiceClient,
   UserEventServiceClient,
 };
 export default {
@@ -51,8 +59,10 @@ export default {
   CompletionServiceClient,
   ConversationalSearchServiceClient,
   DocumentServiceClient,
+  RecommendationServiceClient,
   SchemaServiceClient,
   SearchServiceClient,
+  SiteSearchEngineServiceClient,
   UserEventServiceClient,
 };
 import * as protos from '../protos/protos';
