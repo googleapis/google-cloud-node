@@ -16,9 +16,9 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
-import * as v2 from './v2/index.js';
-import * as v2beta2 from './v2beta2/index.js';
-import * as v2beta3 from './v2beta3/index.js';
+import * as v2 from './v2.js';
+import * as v2beta2 from './v2beta2.js';
+import * as v2beta3 from './v2beta3.js';
 
 const CloudTasksClient = v2.CloudTasksClient;
 type CloudTasksClient = v2.CloudTasksClient;
