@@ -59,11 +59,11 @@ const ScheduleServiceClient = v1.ScheduleServiceClient;
 type ScheduleServiceClient = v1.ScheduleServiceClient;
 const featureOnlineStoreAdminServiceClient = v1.FeatureOnlineStoreAdminServiceClient();
 type FeatureOnlineStoreAdminServiceClient = v1.FeatureOnlineStoreAdminServiceClient();
-const featureOnlineStoreServiceClient = v1.FeatureOnlineStoreServiceClient();
+const FeatureOnlineStoreServiceClient = v1.FeatureOnlineStoreServiceClient();
 type FeatureOnlineStoreServiceClient = v1.FeatureOnlineStoreServiceClient();
-const featureRegistryServiceClient = v1.FeatureRegistryServiceClient();
+const FeatureRegistryServiceClient = v1.FeatureRegistryServiceClient();
 type FeatureRegistryServiceClient = v1.FeatureRegistryServiceClient();
-const llmUtilityServiceClient = v1.LlmUtilityServiceClient();
+const LlmUtilityServiceClient = v1.LlmUtilityServiceClient();
 type LlmUtilityServiceClient = v1.LlmUtilityServiceClient();
 
 export {
