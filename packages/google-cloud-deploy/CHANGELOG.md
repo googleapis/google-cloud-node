@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v3.1.0...deploy-v3.2.0) (2023-11-03)
+
+
+### Features
+
+* [deploy] add Automation API and Rollback API ([#4787](https://github.com/googleapis/google-cloud-node/issues/4787)) ([c2f34cd](https://github.com/googleapis/google-cloud-node/commit/c2f34cd5f7a3a8a99b2c56348f0f48a41fb4d32e))
+
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v3.0.1...deploy-v3.1.0) (2023-10-24)
+
+
+### Features
+
+* [deploy] added platform log RolloutUpdateEvent ([#4748](https://github.com/googleapis/google-cloud-node/issues/4748)) ([56d6889](https://github.com/googleapis/google-cloud-node/commit/56d688930012a4495b17a4df9ec1a40cabcb2979))
+
 ## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/deploy-v3.0.0...deploy-v3.0.1) (2023-09-06)
 
 

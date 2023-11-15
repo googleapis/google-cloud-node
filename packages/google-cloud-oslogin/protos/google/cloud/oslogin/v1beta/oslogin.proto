@@ -121,6 +121,10 @@ service OsLoginService {
     option (google.api.http) = {
       post: "/v1beta/{parent=users/*/projects/*/zones/*}:signSshPublicKey"
       body: "*"
+      additional_bindings {
+        post: "/v1beta/{parent=users/*/projects/*/locations/*}:signSshPublicKey"
+        body: "*"
+      }
     };
     option (google.api.method_signature) = "parent,ssh_public_key";
   }
@@ -278,6 +282,9 @@ message SecurityKey {
     // The Web Authentication protocol type.
     WebAuthn web_authn = 4;
   }
+
+  // The security key nickname explicitly set by the user.
+  optional string device_nickname = 5;
 }
 
 // Security key information specific to the U2F protocol.

@@ -30,7 +30,7 @@ function main(parent) {
    */
   /**
    *  Required. The name of the project to list related account groups from, in
-   *  the format "projects/{project}".
+   *  the format `projects/{project}`.
    */
   // const parent = 'abc123'
   /**

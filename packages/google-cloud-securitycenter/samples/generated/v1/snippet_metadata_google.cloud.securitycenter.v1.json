@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-securitycenter",
-        "version": "8.0.1",
+        "version": "8.1.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -1504,6 +1504,54 @@
                 "method": {
                     "shortName": "TestIamPermissions",
                     "fullName": "google.cloud.securitycenter.v1.SecurityCenter.TestIamPermissions",
+                    "service": {
+                        "shortName": "SecurityCenter",
+                        "fullName": "google.cloud.securitycenter.v1.SecurityCenter"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "securitycenter_v1_generated_SecurityCenter_SimulateSecurityHealthAnalyticsCustomModule_async",
+            "title": "SecurityCenter simulateSecurityHealthAnalyticsCustomModule Sample",
+            "origin": "API_DEFINITION",
+            "description": " Simulates a given SecurityHealthAnalyticsCustomModule and Resource.",
+            "canonical": true,
+            "file": "security_center.simulate_security_health_analytics_custom_module.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SimulateSecurityHealthAnalyticsCustomModule",
+                "fullName": "google.cloud.securitycenter.v1.SecurityCenter.SimulateSecurityHealthAnalyticsCustomModule",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "custom_config",
+                        "type": ".google.cloud.securitycenter.v1.CustomConfig"
+                    },
+                    {
+                        "name": "resource",
+                        "type": ".google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest.SimulatedResource"
+                    }
+                ],
+                "resultType": ".google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse",
+                "client": {
+                    "shortName": "SecurityCenterClient",
+                    "fullName": "google.cloud.securitycenter.v1.SecurityCenterClient"
+                },
+                "method": {
+                    "shortName": "SimulateSecurityHealthAnalyticsCustomModule",
+                    "fullName": "google.cloud.securitycenter.v1.SecurityCenter.SimulateSecurityHealthAnalyticsCustomModule",
                     "service": {
                         "shortName": "SecurityCenter",
                         "fullName": "google.cloud.securitycenter.v1.SecurityCenter"

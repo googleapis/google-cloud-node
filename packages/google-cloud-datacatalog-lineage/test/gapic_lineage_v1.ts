@@ -257,6 +257,143 @@ describe('v1.LineageClient', () => {
     });
   });
 
+  describe('processOpenLineageRunEvent', () => {
+    it('invokes processOpenLineageRunEvent without error', async () => {
+      const client = new lineageModule.v1.LineageClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventResponse()
+      );
+      client.innerApiCalls.processOpenLineageRunEvent =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.processOpenLineageRunEvent(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.processOpenLineageRunEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.processOpenLineageRunEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes processOpenLineageRunEvent without error using callback', async () => {
+      const client = new lineageModule.v1.LineageClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventResponse()
+      );
+      client.innerApiCalls.processOpenLineageRunEvent =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.processOpenLineageRunEvent(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.processOpenLineageRunEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.processOpenLineageRunEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes processOpenLineageRunEvent with error', async () => {
+      const client = new lineageModule.v1.LineageClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.processOpenLineageRunEvent = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.processOpenLineageRunEvent(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.processOpenLineageRunEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.processOpenLineageRunEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes processOpenLineageRunEvent with closed client', async () => {
+      const client = new lineageModule.v1.LineageClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.processOpenLineageRunEvent(request),
+        expectedError
+      );
+    });
+  });
+
   describe('createProcess', () => {
     it('invokes createProcess without error', async () => {
       const client = new lineageModule.v1.LineageClient({

@@ -173,6 +173,10 @@
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
+        "SimulateSecurityHealthAnalyticsCustomModule": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "UpdateExternalSystem": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

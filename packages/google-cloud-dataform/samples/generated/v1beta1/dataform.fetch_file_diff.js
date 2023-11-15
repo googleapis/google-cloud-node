@@ -33,7 +33,8 @@ function main(workspace, path) {
    */
   // const workspace = 'abc123'
   /**
-   *  Required. The file's full path including filename, relative to the workspace root.
+   *  Required. The file's full path including filename, relative to the
+   *  workspace root.
    */
   // const path = 'abc123'
 

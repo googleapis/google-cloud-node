@@ -30,7 +30,7 @@ function main(key) {
    */
   /**
    *  Required. The public key name linked to the requested secret key in the
-   *  format "projects/{project}/keys/{key}".
+   *  format `projects/{project}/keys/{key}`.
    */
   // const key = 'abc123'
 

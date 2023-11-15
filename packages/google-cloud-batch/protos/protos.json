@@ -708,6 +708,13 @@
                               "rule": "repeated",
                               "type": "AttachedDisk",
                               "id": 6
+                            },
+                            "reservation": {
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -951,6 +958,13 @@
                         "barrier": {
                           "type": "Barrier",
                           "id": 6
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "ignoreExitStatus": {
                           "type": "bool",
@@ -1688,9 +1702,27 @@
                         "logsPath": {
                           "type": "string",
                           "id": 2
+                        },
+                        "cloudLoggingOption": {
+                          "type": "CloudLoggingOption",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
+                        "CloudLoggingOption": {
+                          "fields": {
+                            "useGenericTaskMonitoredResource": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
                         "Destination": {
                           "values": {
                             "DESTINATION_UNSPECIFIED": 0,
@@ -2031,7 +2063,10 @@
                             },
                             "reservation": {
                               "type": "string",
-                              "id": 7
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },

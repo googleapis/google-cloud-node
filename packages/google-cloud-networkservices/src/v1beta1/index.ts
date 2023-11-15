@@ -16,4 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+export {DepServiceClient} from './dep_service_client';
 export {NetworkServicesClient} from './network_services_client';

@@ -1440,6 +1440,9 @@ export namespace google {
 
                         /** Consumer endpointUri */
                         endpointUri?: (string|null);
+
+                        /** Consumer endpointLocation */
+                        endpointLocation?: (string|null);
                     }
 
                     /** Represents a Consumer. */
@@ -1456,6 +1459,9 @@ export namespace google {
 
                         /** Consumer endpointUri. */
                         public endpointUri: string;
+
+                        /** Consumer endpointLocation. */
+                        public endpointLocation: string;
 
                         /** Consumer vpcResource. */
                         public vpcResource?: "subnetwork";
@@ -8596,6 +8602,9 @@ export namespace google {
 
                         /** Consumer endpointUri */
                         endpointUri?: (string|null);
+
+                        /** Consumer endpointLocation */
+                        endpointLocation?: (string|null);
                     }
 
                     /** Represents a Consumer. */
@@ -8612,6 +8621,9 @@ export namespace google {
 
                         /** Consumer endpointUri. */
                         public endpointUri: string;
+
+                        /** Consumer endpointLocation. */
+                        public endpointLocation: string;
 
                         /** Consumer vpcResource. */
                         public vpcResource?: "subnetwork";
@@ -15953,6 +15965,9 @@ export namespace google {
 
                         /** Consumer endpointUri */
                         endpointUri?: (string|null);
+
+                        /** Consumer endpointLocation */
+                        endpointLocation?: (string|null);
                     }
 
                     /** Represents a Consumer. */
@@ -15969,6 +15984,9 @@ export namespace google {
 
                         /** Consumer endpointUri. */
                         public endpointUri: string;
+
+                        /** Consumer endpointLocation. */
+                        public endpointLocation: string;
 
                         /** Consumer vpcResource. */
                         public vpcResource?: "subnetwork";

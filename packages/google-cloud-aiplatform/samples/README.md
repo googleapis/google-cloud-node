@@ -13,16 +13,21 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Dataset_service.create_dataset](#dataset_service.create_dataset)
+  * [Dataset_service.create_dataset_version](#dataset_service.create_dataset_version)
   * [Dataset_service.delete_dataset](#dataset_service.delete_dataset)
+  * [Dataset_service.delete_dataset_version](#dataset_service.delete_dataset_version)
   * [Dataset_service.delete_saved_query](#dataset_service.delete_saved_query)
   * [Dataset_service.export_data](#dataset_service.export_data)
   * [Dataset_service.get_annotation_spec](#dataset_service.get_annotation_spec)
   * [Dataset_service.get_dataset](#dataset_service.get_dataset)
+  * [Dataset_service.get_dataset_version](#dataset_service.get_dataset_version)
   * [Dataset_service.import_data](#dataset_service.import_data)
   * [Dataset_service.list_annotations](#dataset_service.list_annotations)
   * [Dataset_service.list_data_items](#dataset_service.list_data_items)
+  * [Dataset_service.list_dataset_versions](#dataset_service.list_dataset_versions)
   * [Dataset_service.list_datasets](#dataset_service.list_datasets)
   * [Dataset_service.list_saved_queries](#dataset_service.list_saved_queries)
+  * [Dataset_service.restore_dataset_version](#dataset_service.restore_dataset_version)
   * [Dataset_service.search_data_items](#dataset_service.search_data_items)
   * [Dataset_service.update_dataset](#dataset_service.update_dataset)
   * [Endpoint_service.create_endpoint](#endpoint_service.create_endpoint)
@@ -234,16 +239,21 @@
   * [Vizier_service.stop_trial](#vizier_service.stop_trial)
   * [Vizier_service.suggest_trials](#vizier_service.suggest_trials)
   * [Dataset_service.create_dataset](#dataset_service.create_dataset)
+  * [Dataset_service.create_dataset_version](#dataset_service.create_dataset_version)
   * [Dataset_service.delete_dataset](#dataset_service.delete_dataset)
+  * [Dataset_service.delete_dataset_version](#dataset_service.delete_dataset_version)
   * [Dataset_service.delete_saved_query](#dataset_service.delete_saved_query)
   * [Dataset_service.export_data](#dataset_service.export_data)
   * [Dataset_service.get_annotation_spec](#dataset_service.get_annotation_spec)
   * [Dataset_service.get_dataset](#dataset_service.get_dataset)
+  * [Dataset_service.get_dataset_version](#dataset_service.get_dataset_version)
   * [Dataset_service.import_data](#dataset_service.import_data)
   * [Dataset_service.list_annotations](#dataset_service.list_annotations)
   * [Dataset_service.list_data_items](#dataset_service.list_data_items)
+  * [Dataset_service.list_dataset_versions](#dataset_service.list_dataset_versions)
   * [Dataset_service.list_datasets](#dataset_service.list_datasets)
   * [Dataset_service.list_saved_queries](#dataset_service.list_saved_queries)
+  * [Dataset_service.restore_dataset_version](#dataset_service.restore_dataset_version)
   * [Dataset_service.search_data_items](#dataset_service.search_data_items)
   * [Dataset_service.update_dataset](#dataset_service.update_dataset)
   * [Deployment_resource_pool_service.create_deployment_resource_pool](#deployment_resource_pool_service.create_deployment_resource_pool)
@@ -259,6 +269,31 @@
   * [Endpoint_service.mutate_deployed_model](#endpoint_service.mutate_deployed_model)
   * [Endpoint_service.undeploy_model](#endpoint_service.undeploy_model)
   * [Endpoint_service.update_endpoint](#endpoint_service.update_endpoint)
+  * [Feature_online_store_admin_service.create_feature_online_store](#feature_online_store_admin_service.create_feature_online_store)
+  * [Feature_online_store_admin_service.create_feature_view](#feature_online_store_admin_service.create_feature_view)
+  * [Feature_online_store_admin_service.delete_feature_online_store](#feature_online_store_admin_service.delete_feature_online_store)
+  * [Feature_online_store_admin_service.delete_feature_view](#feature_online_store_admin_service.delete_feature_view)
+  * [Feature_online_store_admin_service.get_feature_online_store](#feature_online_store_admin_service.get_feature_online_store)
+  * [Feature_online_store_admin_service.get_feature_view](#feature_online_store_admin_service.get_feature_view)
+  * [Feature_online_store_admin_service.get_feature_view_sync](#feature_online_store_admin_service.get_feature_view_sync)
+  * [Feature_online_store_admin_service.list_feature_online_stores](#feature_online_store_admin_service.list_feature_online_stores)
+  * [Feature_online_store_admin_service.list_feature_view_syncs](#feature_online_store_admin_service.list_feature_view_syncs)
+  * [Feature_online_store_admin_service.list_feature_views](#feature_online_store_admin_service.list_feature_views)
+  * [Feature_online_store_admin_service.sync_feature_view](#feature_online_store_admin_service.sync_feature_view)
+  * [Feature_online_store_admin_service.update_feature_online_store](#feature_online_store_admin_service.update_feature_online_store)
+  * [Feature_online_store_admin_service.update_feature_view](#feature_online_store_admin_service.update_feature_view)
+  * [Feature_online_store_service.fetch_feature_values](#feature_online_store_service.fetch_feature_values)
+  * [Feature_online_store_service.search_nearest_entities](#feature_online_store_service.search_nearest_entities)
+  * [Feature_registry_service.create_feature](#feature_registry_service.create_feature)
+  * [Feature_registry_service.create_feature_group](#feature_registry_service.create_feature_group)
+  * [Feature_registry_service.delete_feature](#feature_registry_service.delete_feature)
+  * [Feature_registry_service.delete_feature_group](#feature_registry_service.delete_feature_group)
+  * [Feature_registry_service.get_feature](#feature_registry_service.get_feature)
+  * [Feature_registry_service.get_feature_group](#feature_registry_service.get_feature_group)
+  * [Feature_registry_service.list_feature_groups](#feature_registry_service.list_feature_groups)
+  * [Feature_registry_service.list_features](#feature_registry_service.list_features)
+  * [Feature_registry_service.update_feature](#feature_registry_service.update_feature)
+  * [Feature_registry_service.update_feature_group](#feature_registry_service.update_feature_group)
   * [Featurestore_online_serving_service.read_feature_values](#featurestore_online_serving_service.read_feature_values)
   * [Featurestore_online_serving_service.streaming_read_feature_values](#featurestore_online_serving_service.streaming_read_feature_values)
   * [Featurestore_online_serving_service.write_feature_values](#featurestore_online_serving_service.write_feature_values)
@@ -370,6 +405,7 @@
   * [Migration_service.batch_migrate_resources](#migration_service.batch_migrate_resources)
   * [Migration_service.search_migratable_resources](#migration_service.search_migratable_resources)
   * [Model_garden_service.get_publisher_model](#model_garden_service.get_publisher_model)
+  * [Model_garden_service.list_publisher_models](#model_garden_service.list_publisher_models)
   * [Model_service.batch_import_evaluated_annotations](#model_service.batch_import_evaluated_annotations)
   * [Model_service.batch_import_model_evaluation_slices](#model_service.batch_import_model_evaluation_slices)
   * [Model_service.copy_model](#model_service.copy_model)
@@ -499,6 +535,23 @@ __Usage:__
 
 
 
+### Dataset_service.create_dataset_version
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.create_dataset_version.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.create_dataset_version.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.create_dataset_version.js`
+
+
+-----
+
+
+
+
 ### Dataset_service.delete_dataset
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.delete_dataset.js).
@@ -509,6 +562,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.delete_dataset.js`
+
+
+-----
+
+
+
+
+### Dataset_service.delete_dataset_version
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.delete_dataset_version.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.delete_dataset_version.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.delete_dataset_version.js`
 
 
 -----
@@ -584,6 +654,23 @@ __Usage:__
 
 
 
+### Dataset_service.get_dataset_version
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.get_dataset_version.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.get_dataset_version.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.get_dataset_version.js`
+
+
+-----
+
+
+
+
 ### Dataset_service.import_data
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.import_data.js).
@@ -635,6 +722,23 @@ __Usage:__
 
 
 
+### Dataset_service.list_dataset_versions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.list_dataset_versions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.list_dataset_versions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.list_dataset_versions.js`
+
+
+-----
+
+
+
+
 ### Dataset_service.list_datasets
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.list_datasets.js).
@@ -662,6 +766,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.list_saved_queries.js`
+
+
+-----
+
+
+
+
+### Dataset_service.restore_dataset_version
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.restore_dataset_version.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.restore_dataset_version.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.restore_dataset_version.js`
 
 
 -----
@@ -4256,6 +4377,23 @@ __Usage:__
 
 
 
+### Dataset_service.create_dataset_version
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.create_dataset_version.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.create_dataset_version.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.create_dataset_version.js`
+
+
+-----
+
+
+
+
 ### Dataset_service.delete_dataset
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.delete_dataset.js).
@@ -4266,6 +4404,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.delete_dataset.js`
+
+
+-----
+
+
+
+
+### Dataset_service.delete_dataset_version
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.delete_dataset_version.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.delete_dataset_version.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.delete_dataset_version.js`
 
 
 -----
@@ -4341,6 +4496,23 @@ __Usage:__
 
 
 
+### Dataset_service.get_dataset_version
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.get_dataset_version.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.get_dataset_version.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.get_dataset_version.js`
+
+
+-----
+
+
+
+
 ### Dataset_service.import_data
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.import_data.js).
@@ -4392,6 +4564,23 @@ __Usage:__
 
 
 
+### Dataset_service.list_dataset_versions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.list_dataset_versions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.list_dataset_versions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.list_dataset_versions.js`
+
+
+-----
+
+
+
+
 ### Dataset_service.list_datasets
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.list_datasets.js).
@@ -4419,6 +4608,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.list_saved_queries.js`
+
+
+-----
+
+
+
+
+### Dataset_service.restore_dataset_version
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.restore_dataset_version.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.restore_dataset_version.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.restore_dataset_version.js`
 
 
 -----
@@ -4674,6 +4880,431 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.update_endpoint.js`
+
+
+-----
+
+
+
+
+### Feature_online_store_admin_service.create_feature_online_store
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.create_feature_online_store.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.create_feature_online_store.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.create_feature_online_store.js`
+
+
+-----
+
+
+
+
+### Feature_online_store_admin_service.create_feature_view
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.create_feature_view.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.create_feature_view.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.create_feature_view.js`
+
+
+-----
+
+
+
+
+### Feature_online_store_admin_service.delete_feature_online_store
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.delete_feature_online_store.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.delete_feature_online_store.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.delete_feature_online_store.js`
+
+
+-----
+
+
+
+
+### Feature_online_store_admin_service.delete_feature_view
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.delete_feature_view.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.delete_feature_view.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.delete_feature_view.js`
+
+
+-----
+
+
+
+
+### Feature_online_store_admin_service.get_feature_online_store
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.get_feature_online_store.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.get_feature_online_store.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.get_feature_online_store.js`
+
+
+-----
+
+
+
+
+### Feature_online_store_admin_service.get_feature_view
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.get_feature_view.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.get_feature_view.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.get_feature_view.js`
+
+
+-----
+
+
+
+
+### Feature_online_store_admin_service.get_feature_view_sync
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.get_feature_view_sync.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.get_feature_view_sync.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.get_feature_view_sync.js`
+
+
+-----
+
+
+
+
+### Feature_online_store_admin_service.list_feature_online_stores
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.list_feature_online_stores.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.list_feature_online_stores.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.list_feature_online_stores.js`
+
+
+-----
+
+
+
+
+### Feature_online_store_admin_service.list_feature_view_syncs
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.list_feature_view_syncs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.list_feature_view_syncs.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.list_feature_view_syncs.js`
+
+
+-----
+
+
+
+
+### Feature_online_store_admin_service.list_feature_views
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.list_feature_views.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.list_feature_views.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.list_feature_views.js`
+
+
+-----
+
+
+
+
+### Feature_online_store_admin_service.sync_feature_view
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.sync_feature_view.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.sync_feature_view.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.sync_feature_view.js`
+
+
+-----
+
+
+
+
+### Feature_online_store_admin_service.update_feature_online_store
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.update_feature_online_store.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.update_feature_online_store.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.update_feature_online_store.js`
+
+
+-----
+
+
+
+
+### Feature_online_store_admin_service.update_feature_view
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.update_feature_view.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.update_feature_view.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.update_feature_view.js`
+
+
+-----
+
+
+
+
+### Feature_online_store_service.fetch_feature_values
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_service.fetch_feature_values.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_service.fetch_feature_values.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_service.fetch_feature_values.js`
+
+
+-----
+
+
+
+
+### Feature_online_store_service.search_nearest_entities
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_service.search_nearest_entities.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_service.search_nearest_entities.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_service.search_nearest_entities.js`
+
+
+-----
+
+
+
+
+### Feature_registry_service.create_feature
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature.js`
+
+
+-----
+
+
+
+
+### Feature_registry_service.create_feature_group
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature_group.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature_group.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature_group.js`
+
+
+-----
+
+
+
+
+### Feature_registry_service.delete_feature
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.delete_feature.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.delete_feature.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.delete_feature.js`
+
+
+-----
+
+
+
+
+### Feature_registry_service.delete_feature_group
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.delete_feature_group.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.delete_feature_group.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.delete_feature_group.js`
+
+
+-----
+
+
+
+
+### Feature_registry_service.get_feature
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature.js`
+
+
+-----
+
+
+
+
+### Feature_registry_service.get_feature_group
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature_group.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature_group.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature_group.js`
+
+
+-----
+
+
+
+
+### Feature_registry_service.list_feature_groups
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_feature_groups.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_feature_groups.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_feature_groups.js`
+
+
+-----
+
+
+
+
+### Feature_registry_service.list_features
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_features.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_features.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_features.js`
+
+
+-----
+
+
+
+
+### Feature_registry_service.update_feature
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.update_feature.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.update_feature.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.update_feature.js`
+
+
+-----
+
+
+
+
+### Feature_registry_service.update_feature_group
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.update_feature_group.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.update_feature_group.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.update_feature_group.js`
 
 
 -----
@@ -6561,6 +7192,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.get_publisher_model.js`
+
+
+-----
+
+
+
+
+### Model_garden_service.list_publisher_models
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.list_publisher_models.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.list_publisher_models.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.list_publisher_models.js`
 
 
 -----

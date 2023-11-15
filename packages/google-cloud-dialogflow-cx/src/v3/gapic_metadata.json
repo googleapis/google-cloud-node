@@ -624,6 +624,16 @@
                 "deleteIntent"
               ]
             },
+            "ImportIntents": {
+              "methods": [
+                "importIntents"
+              ]
+            },
+            "ExportIntents": {
+              "methods": [
+                "exportIntents"
+              ]
+            },
             "ListIntents": {
               "methods": [
                 "listIntents",
@@ -654,6 +664,16 @@
             "DeleteIntent": {
               "methods": [
                 "deleteIntent"
+              ]
+            },
+            "ImportIntents": {
+              "methods": [
+                "importIntents"
+              ]
+            },
+            "ExportIntents": {
+              "methods": [
+                "exportIntents"
               ]
             },
             "ListIntents": {

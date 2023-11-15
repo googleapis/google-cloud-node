@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v4.1.0...dialogflow-cx-v4.2.0) (2023-10-18)
+
+
+### Features
+
+* [dialogflow-cx] add support for AdvancedSettings ([#4718](https://github.com/googleapis/google-cloud-node/issues/4718)) ([b94abd9](https://github.com/googleapis/google-cloud-node/commit/b94abd9db50cd9291727f961ca7acf1089047727))
+
 ## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v4.0.0...dialogflow-cx-v4.1.0) (2023-09-06)
 
 

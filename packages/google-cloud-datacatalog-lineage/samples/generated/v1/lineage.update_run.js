@@ -40,6 +40,10 @@ function main(run) {
    *  updated.
    */
   // const updateMask = {}
+  /**
+   *  If set to true and the run is not found, the request creates it.
+   */
+  // const allowMissing = true
 
   // Imports the Lineage library
   const {LineageClient} = require('@google-cloud/lineage').v1;

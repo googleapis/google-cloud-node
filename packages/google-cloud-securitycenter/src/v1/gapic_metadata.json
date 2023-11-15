@@ -110,6 +110,11 @@
                 "testIamPermissions"
               ]
             },
+            "SimulateSecurityHealthAnalyticsCustomModule": {
+              "methods": [
+                "simulateSecurityHealthAnalyticsCustomModule"
+              ]
+            },
             "UpdateExternalSystem": {
               "methods": [
                 "updateExternalSystem"
@@ -355,6 +360,11 @@
             "TestIamPermissions": {
               "methods": [
                 "testIamPermissions"
+              ]
+            },
+            "SimulateSecurityHealthAnalyticsCustomModule": {
+              "methods": [
+                "simulateSecurityHealthAnalyticsCustomModule"
               ]
             },
             "UpdateExternalSystem": {

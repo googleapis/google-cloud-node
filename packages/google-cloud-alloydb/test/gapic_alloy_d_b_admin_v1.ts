@@ -650,6 +650,273 @@ describe('v1.AlloyDBAdminClient', () => {
     });
   });
 
+  describe('generateClientCertificate', () => {
+    it('invokes generateClientCertificate without error', async () => {
+      const client = new alloydbadminModule.v1.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1.GenerateClientCertificateRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.alloydb.v1.GenerateClientCertificateRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1.GenerateClientCertificateResponse()
+      );
+      client.innerApiCalls.generateClientCertificate =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.generateClientCertificate(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.generateClientCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generateClientCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes generateClientCertificate without error using callback', async () => {
+      const client = new alloydbadminModule.v1.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1.GenerateClientCertificateRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.alloydb.v1.GenerateClientCertificateRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1.GenerateClientCertificateResponse()
+      );
+      client.innerApiCalls.generateClientCertificate =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.generateClientCertificate(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.alloydb.v1.IGenerateClientCertificateResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.generateClientCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generateClientCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes generateClientCertificate with error', async () => {
+      const client = new alloydbadminModule.v1.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1.GenerateClientCertificateRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.alloydb.v1.GenerateClientCertificateRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.generateClientCertificate = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.generateClientCertificate(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.generateClientCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generateClientCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes generateClientCertificate with closed client', async () => {
+      const client = new alloydbadminModule.v1.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1.GenerateClientCertificateRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.alloydb.v1.GenerateClientCertificateRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.generateClientCertificate(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('getConnectionInfo', () => {
+    it('invokes getConnectionInfo without error', async () => {
+      const client = new alloydbadminModule.v1.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1.GetConnectionInfoRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.alloydb.v1.GetConnectionInfoRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1.ConnectionInfo()
+      );
+      client.innerApiCalls.getConnectionInfo = stubSimpleCall(expectedResponse);
+      const [response] = await client.getConnectionInfo(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getConnectionInfo as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConnectionInfo as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getConnectionInfo without error using callback', async () => {
+      const client = new alloydbadminModule.v1.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1.GetConnectionInfoRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.alloydb.v1.GetConnectionInfoRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1.ConnectionInfo()
+      );
+      client.innerApiCalls.getConnectionInfo =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getConnectionInfo(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.alloydb.v1.IConnectionInfo | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getConnectionInfo as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConnectionInfo as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getConnectionInfo with error', async () => {
+      const client = new alloydbadminModule.v1.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1.GetConnectionInfoRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.alloydb.v1.GetConnectionInfoRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getConnectionInfo = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getConnectionInfo(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getConnectionInfo as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConnectionInfo as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getConnectionInfo with closed client', async () => {
+      const client = new alloydbadminModule.v1.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1.GetConnectionInfoRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.alloydb.v1.GetConnectionInfoRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getConnectionInfo(request), expectedError);
+    });
+  });
+
   describe('getUser', () => {
     it('invokes getUser without error', async () => {
       const client = new alloydbadminModule.v1.AlloyDBAdminClient({
@@ -6974,6 +7241,82 @@ describe('v1.AlloyDBAdminClient', () => {
         assert.strictEqual(result, 'clusterValue');
         assert(
           (client.pathTemplates.clusterPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('connectionInfo', () => {
+      const fakePath = '/rendered/path/connectionInfo';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        cluster: 'clusterValue',
+        instance: 'instanceValue',
+      };
+      const client = new alloydbadminModule.v1.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.connectionInfoPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.connectionInfoPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('connectionInfoPath', () => {
+        const result = client.connectionInfoPath(
+          'projectValue',
+          'locationValue',
+          'clusterValue',
+          'instanceValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.connectionInfoPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromConnectionInfoName', () => {
+        const result = client.matchProjectFromConnectionInfoName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.connectionInfoPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromConnectionInfoName', () => {
+        const result = client.matchLocationFromConnectionInfoName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.connectionInfoPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchClusterFromConnectionInfoName', () => {
+        const result = client.matchClusterFromConnectionInfoName(fakePath);
+        assert.strictEqual(result, 'clusterValue');
+        assert(
+          (client.pathTemplates.connectionInfoPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchInstanceFromConnectionInfoName', () => {
+        const result = client.matchInstanceFromConnectionInfoName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.connectionInfoPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

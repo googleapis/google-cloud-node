@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-sql",
-        "version": "0.1.0",
+        "version": "0.2.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -1865,7 +1865,7 @@
                     },
                     {
                         "name": "sync_parallel_level",
-                        "type": ".google.cloud.sql.v1beta4.SqlInstancesStartExternalSyncRequest.ExternalSyncParallelLevel"
+                        "type": ".google.cloud.sql.v1beta4.ExternalSyncParallelLevel"
                     }
                 ],
                 "resultType": ".google.cloud.sql.v1beta4.Operation",
@@ -2012,6 +2012,50 @@
                 "method": {
                     "shortName": "ResetReplicaSize",
                     "fullName": "google.cloud.sql.v1beta4.SqlInstancesService.ResetReplicaSize",
+                    "service": {
+                        "shortName": "SqlInstancesService",
+                        "fullName": "google.cloud.sql.v1beta4.SqlInstancesService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "sqladmin_v1beta4_generated_SqlInstancesService_GetLatestRecoveryTime_async",
+            "title": "SqlBackupRunsService getLatestRecoveryTime Sample",
+            "origin": "API_DEFINITION",
+            "description": " Get Latest Recovery Time for a given instance.",
+            "canonical": true,
+            "file": "sql_instances_service.get_latest_recovery_time.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetLatestRecoveryTime",
+                "fullName": "google.cloud.sql.v1beta4.SqlInstancesService.GetLatestRecoveryTime",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "instance",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.sql.v1beta4.SqlInstancesGetLatestRecoveryTimeResponse",
+                "client": {
+                    "shortName": "SqlInstancesServiceClient",
+                    "fullName": "google.cloud.sql.v1beta4.SqlInstancesServiceClient"
+                },
+                "method": {
+                    "shortName": "GetLatestRecoveryTime",
+                    "fullName": "google.cloud.sql.v1beta4.SqlInstancesService.GetLatestRecoveryTime",
                     "service": {
                         "shortName": "SqlInstancesService",
                         "fullName": "google.cloud.sql.v1beta4.SqlInstancesService"

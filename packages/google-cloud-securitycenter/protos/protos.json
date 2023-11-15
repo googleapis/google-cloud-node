@@ -2635,6 +2635,38 @@
                             }
                           ]
                         },
+                        "SimulateSecurityHealthAnalyticsCustomModule": {
+                          "requestType": "SimulateSecurityHealthAnalyticsCustomModuleRequest",
+                          "responseType": "SimulateSecurityHealthAnalyticsCustomModuleResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=organizations/*/securityHealthAnalyticsSettings}/customModules:simulate",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*/securityHealthAnalyticsSettings}/customModules:simulate",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "parent,custom_config,resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=organizations/*/securityHealthAnalyticsSettings}/customModules:simulate",
+                                "body": "*",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1/{parent=folders/*/securityHealthAnalyticsSettings}/customModules:simulate",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1/{parent=projects/*/securityHealthAnalyticsSettings}/customModules:simulate",
+                                    "body": "*"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,custom_config,resource"
+                            }
+                          ]
+                        },
                         "UpdateExternalSystem": {
                           "requestType": "UpdateExternalSystemRequest",
                           "responseType": "ExternalSystem",
@@ -3863,6 +3895,93 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Organization"
+                          }
+                        }
+                      }
+                    },
+                    "SimulateSecurityHealthAnalyticsCustomModuleRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "customConfig": {
+                          "type": "CustomConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "SimulatedResource",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SimulatedResource": {
+                          "fields": {
+                            "resourceType": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "resourceData": {
+                              "type": "google.protobuf.Struct",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "iamPolicyData": {
+                              "type": "google.iam.v1.Policy",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "SimulateSecurityHealthAnalyticsCustomModuleResponse": {
+                      "fields": {
+                        "result": {
+                          "type": "SimulatedResult",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "SimulatedResult": {
+                          "oneofs": {
+                            "result": {
+                              "oneof": [
+                                "finding",
+                                "noViolation",
+                                "error"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "finding": {
+                              "type": "Finding",
+                              "id": 1
+                            },
+                            "noViolation": {
+                              "type": "google.protobuf.Empty",
+                              "id": 2
+                            },
+                            "error": {
+                              "type": "google.rpc.Status",
+                              "id": 3
+                            }
                           }
                         }
                       }

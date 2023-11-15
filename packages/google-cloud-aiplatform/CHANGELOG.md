@@ -1,5 +1,39 @@
 # Changelog
 
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.5.0...aiplatform-v3.6.0) (2023-11-09)
+
+
+### Features
+
+* Add Optimized to FeatureOnlineStore ([#4790](https://github.com/googleapis/google-cloud-node/issues/4790)) ([61cb5c9](https://github.com/googleapis/google-cloud-node/commit/61cb5c91e054639da95268ab13ae99f909d261c8))
+
+## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.4.0...aiplatform-v3.5.0) (2023-11-03)
+
+
+### Features
+
+* Adding new fields for concurrent explanations ([489e188](https://github.com/googleapis/google-cloud-node/commit/489e188d97af302f96299a5b40eb5e07020972fc))
+
+
+### Bug Fixes
+
+* **aiplatform/v1beta1:** Change CreateFeature metadata ([#4782](https://github.com/googleapis/google-cloud-node/issues/4782)) ([489e188](https://github.com/googleapis/google-cloud-node/commit/489e188d97af302f96299a5b40eb5e07020972fc))
+
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.3.0...aiplatform-v3.4.0) (2023-10-24)
+
+
+### Features
+
+* Add DatasetVersion and dataset version RPCs to DatasetService ([#4726](https://github.com/googleapis/google-cloud-node/issues/4726)) ([a515212](https://github.com/googleapis/google-cloud-node/commit/a515212494f629c171a6a038136a20aaefe3d1cc))
+
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.2.0...aiplatform-v3.3.0) (2023-10-18)
+
+
+### Features
+
+* Add dedicated_serving_endpoint ([#4722](https://github.com/googleapis/google-cloud-node/issues/4722)) ([b01c920](https://github.com/googleapis/google-cloud-node/commit/b01c920a996dfc8a3f21d0433f756985edf46b34))
+* Add feature.proto ([#4713](https://github.com/googleapis/google-cloud-node/issues/4713)) ([0490f66](https://github.com/googleapis/google-cloud-node/commit/0490f6644994992176c4d960ea1d29402cfae305))
+
 ## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.1.0...aiplatform-v3.2.0) (2023-09-11)
 
 

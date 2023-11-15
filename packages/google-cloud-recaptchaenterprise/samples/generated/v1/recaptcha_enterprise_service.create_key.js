@@ -30,7 +30,7 @@ function main(parent, key) {
    */
   /**
    *  Required. The name of the project in which the key will be created, in the
-   *  format "projects/{project}".
+   *  format `projects/{project}`.
    */
   // const parent = 'abc123'
   /**

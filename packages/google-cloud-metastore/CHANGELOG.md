@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-metastore-v4.0.1...dataproc-metastore-v4.1.0) (2023-10-18)
+
+
+### Features
+
+* [metastore] added EndpointLocation (v1, v1beta, v1alpha) ([#4712](https://github.com/googleapis/google-cloud-node/issues/4712)) ([b3aa512](https://github.com/googleapis/google-cloud-node/commit/b3aa512c92c9da6866c9ae22bf607b858ea8f5cf))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/dataproc-metastore-v4.0.0...dataproc-metastore-v4.0.1) (2023-09-06)
 
 

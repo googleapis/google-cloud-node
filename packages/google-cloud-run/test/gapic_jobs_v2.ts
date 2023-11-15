@@ -272,12 +272,9 @@ describe('v2.JobsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.GetJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.run.v2.GetJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}/**
+      request.name = 'projects/value/locations/value/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.run.v2.Job()
       );
@@ -303,12 +300,9 @@ describe('v2.JobsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.GetJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.run.v2.GetJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}/**
+      request.name = 'projects/value/locations/value/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.run.v2.Job()
       );
@@ -350,12 +344,9 @@ describe('v2.JobsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.GetJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.run.v2.GetJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}/**
+      request.name = 'projects/value/locations/value/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.getJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getJob(request), expectedError);
@@ -378,11 +369,8 @@ describe('v2.JobsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.GetJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.run.v2.GetJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
+      // path template: projects/*/locations/{location=*}/**
+      request.name = 'projects/value/locations/value/value';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getJob(request), expectedError);
@@ -790,12 +778,9 @@ describe('v2.JobsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.CreateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.run.v2.CreateJobRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -822,12 +807,9 @@ describe('v2.JobsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.CreateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.run.v2.CreateJobRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -876,12 +858,9 @@ describe('v2.JobsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.CreateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.run.v2.CreateJobRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.createJob = stubLongRunningCall(
         undefined,
@@ -907,12 +886,9 @@ describe('v2.JobsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.CreateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.run.v2.CreateJobRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.createJob = stubLongRunningCall(
         undefined,
@@ -980,13 +956,10 @@ describe('v2.JobsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.UpdateJobRequest()
       );
-      request.job ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.run.v2.UpdateJobRequest',
-        ['job', 'name']
-      );
-      request.job.name = defaultValue1;
-      const expectedHeaderRequestParams = `job.name=${defaultValue1}`;
+      request.job = {};
+      // path template: projects/*/locations/{location=*}/**
+      request.job.name = 'projects/value/locations/value/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1013,13 +986,10 @@ describe('v2.JobsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.UpdateJobRequest()
       );
-      request.job ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.run.v2.UpdateJobRequest',
-        ['job', 'name']
-      );
-      request.job.name = defaultValue1;
-      const expectedHeaderRequestParams = `job.name=${defaultValue1}`;
+      request.job = {};
+      // path template: projects/*/locations/{location=*}/**
+      request.job.name = 'projects/value/locations/value/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1068,13 +1038,10 @@ describe('v2.JobsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.UpdateJobRequest()
       );
-      request.job ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.run.v2.UpdateJobRequest',
-        ['job', 'name']
-      );
-      request.job.name = defaultValue1;
-      const expectedHeaderRequestParams = `job.name=${defaultValue1}`;
+      request.job = {};
+      // path template: projects/*/locations/{location=*}/**
+      request.job.name = 'projects/value/locations/value/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.updateJob = stubLongRunningCall(
         undefined,
@@ -1100,13 +1067,10 @@ describe('v2.JobsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.UpdateJobRequest()
       );
-      request.job ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.run.v2.UpdateJobRequest',
-        ['job', 'name']
-      );
-      request.job.name = defaultValue1;
-      const expectedHeaderRequestParams = `job.name=${defaultValue1}`;
+      request.job = {};
+      // path template: projects/*/locations/{location=*}/**
+      request.job.name = 'projects/value/locations/value/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.updateJob = stubLongRunningCall(
         undefined,
@@ -1174,12 +1138,9 @@ describe('v2.JobsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.DeleteJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.run.v2.DeleteJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}/**
+      request.name = 'projects/value/locations/value/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1206,12 +1167,9 @@ describe('v2.JobsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.DeleteJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.run.v2.DeleteJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}/**
+      request.name = 'projects/value/locations/value/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1260,12 +1218,9 @@ describe('v2.JobsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.DeleteJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.run.v2.DeleteJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}/**
+      request.name = 'projects/value/locations/value/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteJob = stubLongRunningCall(
         undefined,
@@ -1291,12 +1246,9 @@ describe('v2.JobsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.DeleteJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.run.v2.DeleteJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}/**
+      request.name = 'projects/value/locations/value/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteJob = stubLongRunningCall(
         undefined,
@@ -1364,12 +1316,9 @@ describe('v2.JobsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.RunJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.run.v2.RunJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}/**
+      request.name = 'projects/value/locations/value/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1396,12 +1345,9 @@ describe('v2.JobsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.RunJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.run.v2.RunJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}/**
+      request.name = 'projects/value/locations/value/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1450,12 +1396,9 @@ describe('v2.JobsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.RunJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.run.v2.RunJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}/**
+      request.name = 'projects/value/locations/value/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.runJob = stubLongRunningCall(
         undefined,
@@ -1481,12 +1424,9 @@ describe('v2.JobsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.RunJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.run.v2.RunJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}/**
+      request.name = 'projects/value/locations/value/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.runJob = stubLongRunningCall(
         undefined,
@@ -1554,12 +1494,9 @@ describe('v2.JobsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.run.v2.ListJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.run.v2.Job()),
         generateSampleMessage(new protos.google.cloud.run.v2.Job()),
@@ -1587,12 +1524,9 @@ describe('v2.JobsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.run.v2.ListJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.run.v2.Job()),
         generateSampleMessage(new protos.google.cloud.run.v2.Job()),
@@ -1636,12 +1570,9 @@ describe('v2.JobsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.run.v2.ListJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.listJobs = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listJobs(request), expectedError);
@@ -1664,12 +1595,9 @@ describe('v2.JobsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.run.v2.ListJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.run.v2.Job()),
         generateSampleMessage(new protos.google.cloud.run.v2.Job()),
@@ -1715,12 +1643,9 @@ describe('v2.JobsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.run.v2.ListJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.descriptors.page.listJobs.createStream = stubPageStreamingCall(
         undefined,
@@ -1763,12 +1688,9 @@ describe('v2.JobsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.run.v2.ListJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.run.v2.Job()),
         generateSampleMessage(new protos.google.cloud.run.v2.Job()),
@@ -1805,12 +1727,9 @@ describe('v2.JobsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.run.v2.ListJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.descriptors.page.listJobs.asyncIterate = stubAsyncIterationCall(
         undefined,

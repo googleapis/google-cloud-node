@@ -663,6 +663,9 @@ export namespace google {
 
                     /** StorageSource generation */
                     generation?: (number|Long|string|null);
+
+                    /** StorageSource sourceFetcher */
+                    sourceFetcher?: (google.devtools.cloudbuild.v1.StorageSource.SourceFetcher|keyof typeof google.devtools.cloudbuild.v1.StorageSource.SourceFetcher|null);
                 }
 
                 /** Represents a StorageSource. */
@@ -682,6 +685,9 @@ export namespace google {
 
                     /** StorageSource generation. */
                     public generation: (number|Long|string);
+
+                    /** StorageSource sourceFetcher. */
+                    public sourceFetcher: (google.devtools.cloudbuild.v1.StorageSource.SourceFetcher|keyof typeof google.devtools.cloudbuild.v1.StorageSource.SourceFetcher);
 
                     /**
                      * Creates a new StorageSource instance using the specified properties.
@@ -759,6 +765,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace StorageSource {
+
+                    /** SourceFetcher enum. */
+                    enum SourceFetcher {
+                        SOURCE_FETCHER_UNSPECIFIED = 0,
+                        GSUTIL = 1,
+                        GCS_FETCHER = 2
+                    }
                 }
 
                 /** Properties of a GitSource. */

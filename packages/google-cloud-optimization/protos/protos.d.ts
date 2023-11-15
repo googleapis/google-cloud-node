@@ -2941,11 +2941,129 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a RouteModifiers. */
+                interface IRouteModifiers {
+
+                    /** RouteModifiers avoidTolls */
+                    avoidTolls?: (boolean|null);
+
+                    /** RouteModifiers avoidHighways */
+                    avoidHighways?: (boolean|null);
+
+                    /** RouteModifiers avoidFerries */
+                    avoidFerries?: (boolean|null);
+
+                    /** RouteModifiers avoidIndoor */
+                    avoidIndoor?: (boolean|null);
+                }
+
+                /** Represents a RouteModifiers. */
+                class RouteModifiers implements IRouteModifiers {
+
+                    /**
+                     * Constructs a new RouteModifiers.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.optimization.v1.IRouteModifiers);
+
+                    /** RouteModifiers avoidTolls. */
+                    public avoidTolls: boolean;
+
+                    /** RouteModifiers avoidHighways. */
+                    public avoidHighways: boolean;
+
+                    /** RouteModifiers avoidFerries. */
+                    public avoidFerries: boolean;
+
+                    /** RouteModifiers avoidIndoor. */
+                    public avoidIndoor: boolean;
+
+                    /**
+                     * Creates a new RouteModifiers instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RouteModifiers instance
+                     */
+                    public static create(properties?: google.cloud.optimization.v1.IRouteModifiers): google.cloud.optimization.v1.RouteModifiers;
+
+                    /**
+                     * Encodes the specified RouteModifiers message. Does not implicitly {@link google.cloud.optimization.v1.RouteModifiers.verify|verify} messages.
+                     * @param message RouteModifiers message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.optimization.v1.IRouteModifiers, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RouteModifiers message, length delimited. Does not implicitly {@link google.cloud.optimization.v1.RouteModifiers.verify|verify} messages.
+                     * @param message RouteModifiers message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.optimization.v1.IRouteModifiers, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RouteModifiers message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RouteModifiers
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.optimization.v1.RouteModifiers;
+
+                    /**
+                     * Decodes a RouteModifiers message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RouteModifiers
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.optimization.v1.RouteModifiers;
+
+                    /**
+                     * Verifies a RouteModifiers message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RouteModifiers message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RouteModifiers
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.optimization.v1.RouteModifiers;
+
+                    /**
+                     * Creates a plain object from a RouteModifiers message. Also converts values to other types if specified.
+                     * @param message RouteModifiers
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.optimization.v1.RouteModifiers, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RouteModifiers to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RouteModifiers
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Vehicle. */
                 interface IVehicle {
 
                     /** Vehicle travelMode */
                     travelMode?: (google.cloud.optimization.v1.Vehicle.TravelMode|keyof typeof google.cloud.optimization.v1.Vehicle.TravelMode|null);
+
+                    /** Vehicle routeModifiers */
+                    routeModifiers?: (google.cloud.optimization.v1.IRouteModifiers|null);
 
                     /** Vehicle startLocation */
                     startLocation?: (google.type.ILatLng|null);
@@ -3040,6 +3158,9 @@ export namespace google {
 
                     /** Vehicle travelMode. */
                     public travelMode: (google.cloud.optimization.v1.Vehicle.TravelMode|keyof typeof google.cloud.optimization.v1.Vehicle.TravelMode);
+
+                    /** Vehicle routeModifiers. */
+                    public routeModifiers?: (google.cloud.optimization.v1.IRouteModifiers|null);
 
                     /** Vehicle startLocation. */
                     public startLocation?: (google.type.ILatLng|null);

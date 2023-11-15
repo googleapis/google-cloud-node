@@ -5,5 +5,6 @@
   "../../protos/google/analytics/admin/v1alpha/channel_group.proto",
   "../../protos/google/analytics/admin/v1alpha/event_create_and_edit.proto",
   "../../protos/google/analytics/admin/v1alpha/expanded_data_set.proto",
-  "../../protos/google/analytics/admin/v1alpha/resources.proto"
+  "../../protos/google/analytics/admin/v1alpha/resources.proto",
+  "../../protos/google/analytics/admin/v1alpha/subproperty_event_filter.proto"
 ]

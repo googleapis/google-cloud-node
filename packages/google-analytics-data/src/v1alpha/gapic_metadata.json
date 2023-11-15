@@ -20,6 +20,11 @@
                 "queryAudienceList"
               ]
             },
+            "SheetExportAudienceList": {
+              "methods": [
+                "sheetExportAudienceList"
+              ]
+            },
             "GetAudienceList": {
               "methods": [
                 "getAudienceList"
@@ -50,6 +55,11 @@
             "QueryAudienceList": {
               "methods": [
                 "queryAudienceList"
+              ]
+            },
+            "SheetExportAudienceList": {
+              "methods": [
+                "sheetExportAudienceList"
               ]
             },
             "GetAudienceList": {

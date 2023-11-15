@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-artifactregistry",
-        "version": "3.0.1",
+        "version": "3.1.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -948,6 +948,54 @@
             }
         },
         {
+            "regionTag": "artifactregistry_v1_generated_ArtifactRegistry_BatchDeleteVersions_async",
+            "title": "ArtifactRegistry batchDeleteVersions Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes multiple versions across a repository. The returned operation will complete once the versions have been deleted.",
+            "canonical": true,
+            "file": "artifact_registry.batch_delete_versions.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "BatchDeleteVersions",
+                "fullName": "google.devtools.artifactregistry.v1.ArtifactRegistry.BatchDeleteVersions",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "names",
+                        "type": "TYPE_STRING[]"
+                    },
+                    {
+                        "name": "validate_only",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ArtifactRegistryClient",
+                    "fullName": "google.devtools.artifactregistry.v1.ArtifactRegistryClient"
+                },
+                "method": {
+                    "shortName": "BatchDeleteVersions",
+                    "fullName": "google.devtools.artifactregistry.v1.ArtifactRegistry.BatchDeleteVersions",
+                    "service": {
+                        "shortName": "ArtifactRegistry",
+                        "fullName": "google.devtools.artifactregistry.v1.ArtifactRegistry"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "artifactregistry_v1_generated_ArtifactRegistry_ListFiles_async",
             "title": "ArtifactRegistry listFiles Sample",
             "origin": "API_DEFINITION",
@@ -1054,7 +1102,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 71,
+                    "end": 73,
                     "type": "FULL"
                 }
             ],

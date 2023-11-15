@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-networkconnectivity",
-        "version": "3.1.0",
+        "version": "3.2.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -252,6 +252,70 @@
             }
         },
         {
+            "regionTag": "networkconnectivity_v1_generated_HubService_ListHubSpokes_async",
+            "title": "HubService listHubSpokes Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists the Network Connectivity Center spokes associated with a specified hub and location. The list includes both spokes that are attached to the hub and spokes that have been proposed but not yet accepted.",
+            "canonical": true,
+            "file": "hub_service.list_hub_spokes.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 88,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListHubSpokes",
+                "fullName": "google.cloud.networkconnectivity.v1.HubService.ListHubSpokes",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "spoke_locations",
+                        "type": "TYPE_STRING[]"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "view",
+                        "type": ".google.cloud.networkconnectivity.v1.ListHubSpokesRequest.SpokeView"
+                    }
+                ],
+                "resultType": ".google.cloud.networkconnectivity.v1.ListHubSpokesResponse",
+                "client": {
+                    "shortName": "HubServiceClient",
+                    "fullName": "google.cloud.networkconnectivity.v1.HubServiceClient"
+                },
+                "method": {
+                    "shortName": "ListHubSpokes",
+                    "fullName": "google.cloud.networkconnectivity.v1.HubService.ListHubSpokes",
+                    "service": {
+                        "shortName": "HubService",
+                        "fullName": "google.cloud.networkconnectivity.v1.HubService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "networkconnectivity_v1_generated_HubService_ListSpokes_async",
             "title": "HubService listSpokes Sample",
             "origin": "API_DEFINITION",
@@ -448,6 +512,106 @@
             }
         },
         {
+            "regionTag": "networkconnectivity_v1_generated_HubService_RejectHubSpoke_async",
+            "title": "HubService rejectHubSpoke Sample",
+            "origin": "API_DEFINITION",
+            "description": " Rejects a Network Connectivity Center spoke from being attached to a hub. If the spoke was previously in the `ACTIVE` state, it transitions to the `INACTIVE` state and is no longer able to connect to other spokes that are attached to the hub.",
+            "canonical": true,
+            "file": "hub_service.reject_hub_spoke.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 78,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RejectHubSpoke",
+                "fullName": "google.cloud.networkconnectivity.v1.HubService.RejectHubSpoke",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "spoke_uri",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "details",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "HubServiceClient",
+                    "fullName": "google.cloud.networkconnectivity.v1.HubServiceClient"
+                },
+                "method": {
+                    "shortName": "RejectHubSpoke",
+                    "fullName": "google.cloud.networkconnectivity.v1.HubService.RejectHubSpoke",
+                    "service": {
+                        "shortName": "HubService",
+                        "fullName": "google.cloud.networkconnectivity.v1.HubService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "networkconnectivity_v1_generated_HubService_AcceptHubSpoke_async",
+            "title": "HubService acceptHubSpoke Sample",
+            "origin": "API_DEFINITION",
+            "description": " Accepts a proposal to attach a Network Connectivity Center spoke to a hub.",
+            "canonical": true,
+            "file": "hub_service.accept_hub_spoke.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 74,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "AcceptHubSpoke",
+                "fullName": "google.cloud.networkconnectivity.v1.HubService.AcceptHubSpoke",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "spoke_uri",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "HubServiceClient",
+                    "fullName": "google.cloud.networkconnectivity.v1.HubServiceClient"
+                },
+                "method": {
+                    "shortName": "AcceptHubSpoke",
+                    "fullName": "google.cloud.networkconnectivity.v1.HubService.AcceptHubSpoke",
+                    "service": {
+                        "shortName": "HubService",
+                        "fullName": "google.cloud.networkconnectivity.v1.HubService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "networkconnectivity_v1_generated_HubService_DeleteSpoke_async",
             "title": "HubService deleteSpoke Sample",
             "origin": "API_DEFINITION",
@@ -484,6 +648,294 @@
                 "method": {
                     "shortName": "DeleteSpoke",
                     "fullName": "google.cloud.networkconnectivity.v1.HubService.DeleteSpoke",
+                    "service": {
+                        "shortName": "HubService",
+                        "fullName": "google.cloud.networkconnectivity.v1.HubService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "networkconnectivity_v1_generated_HubService_GetRouteTable_async",
+            "title": "HubService getRouteTable Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets details about a Network Connectivity Center route table.",
+            "canonical": true,
+            "file": "hub_service.get_route_table.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetRouteTable",
+                "fullName": "google.cloud.networkconnectivity.v1.HubService.GetRouteTable",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.networkconnectivity.v1.RouteTable",
+                "client": {
+                    "shortName": "HubServiceClient",
+                    "fullName": "google.cloud.networkconnectivity.v1.HubServiceClient"
+                },
+                "method": {
+                    "shortName": "GetRouteTable",
+                    "fullName": "google.cloud.networkconnectivity.v1.HubService.GetRouteTable",
+                    "service": {
+                        "shortName": "HubService",
+                        "fullName": "google.cloud.networkconnectivity.v1.HubService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "networkconnectivity_v1_generated_HubService_GetRoute_async",
+            "title": "HubService getRoute Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets details about the specified route.",
+            "canonical": true,
+            "file": "hub_service.get_route.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetRoute",
+                "fullName": "google.cloud.networkconnectivity.v1.HubService.GetRoute",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.networkconnectivity.v1.Route",
+                "client": {
+                    "shortName": "HubServiceClient",
+                    "fullName": "google.cloud.networkconnectivity.v1.HubServiceClient"
+                },
+                "method": {
+                    "shortName": "GetRoute",
+                    "fullName": "google.cloud.networkconnectivity.v1.HubService.GetRoute",
+                    "service": {
+                        "shortName": "HubService",
+                        "fullName": "google.cloud.networkconnectivity.v1.HubService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "networkconnectivity_v1_generated_HubService_ListRoutes_async",
+            "title": "HubService listRoutes Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists routes in a given project.",
+            "canonical": true,
+            "file": "hub_service.list_routes.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 71,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListRoutes",
+                "fullName": "google.cloud.networkconnectivity.v1.HubService.ListRoutes",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.networkconnectivity.v1.ListRoutesResponse",
+                "client": {
+                    "shortName": "HubServiceClient",
+                    "fullName": "google.cloud.networkconnectivity.v1.HubServiceClient"
+                },
+                "method": {
+                    "shortName": "ListRoutes",
+                    "fullName": "google.cloud.networkconnectivity.v1.HubService.ListRoutes",
+                    "service": {
+                        "shortName": "HubService",
+                        "fullName": "google.cloud.networkconnectivity.v1.HubService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "networkconnectivity_v1_generated_HubService_ListRouteTables_async",
+            "title": "HubService listRouteTables Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists route tables in a given project.",
+            "canonical": true,
+            "file": "hub_service.list_route_tables.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 71,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListRouteTables",
+                "fullName": "google.cloud.networkconnectivity.v1.HubService.ListRouteTables",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.networkconnectivity.v1.ListRouteTablesResponse",
+                "client": {
+                    "shortName": "HubServiceClient",
+                    "fullName": "google.cloud.networkconnectivity.v1.HubServiceClient"
+                },
+                "method": {
+                    "shortName": "ListRouteTables",
+                    "fullName": "google.cloud.networkconnectivity.v1.HubService.ListRouteTables",
+                    "service": {
+                        "shortName": "HubService",
+                        "fullName": "google.cloud.networkconnectivity.v1.HubService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "networkconnectivity_v1_generated_HubService_GetGroup_async",
+            "title": "HubService getGroup Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets details about a Network Connectivity Center group.",
+            "canonical": true,
+            "file": "hub_service.get_group.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetGroup",
+                "fullName": "google.cloud.networkconnectivity.v1.HubService.GetGroup",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.networkconnectivity.v1.Group",
+                "client": {
+                    "shortName": "HubServiceClient",
+                    "fullName": "google.cloud.networkconnectivity.v1.HubServiceClient"
+                },
+                "method": {
+                    "shortName": "GetGroup",
+                    "fullName": "google.cloud.networkconnectivity.v1.HubService.GetGroup",
+                    "service": {
+                        "shortName": "HubService",
+                        "fullName": "google.cloud.networkconnectivity.v1.HubService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "networkconnectivity_v1_generated_HubService_ListGroups_async",
+            "title": "HubService listGroups Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists groups in a given hub.",
+            "canonical": true,
+            "file": "hub_service.list_groups.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 71,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListGroups",
+                "fullName": "google.cloud.networkconnectivity.v1.HubService.ListGroups",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.networkconnectivity.v1.ListGroupsResponse",
+                "client": {
+                    "shortName": "HubServiceClient",
+                    "fullName": "google.cloud.networkconnectivity.v1.HubServiceClient"
+                },
+                "method": {
+                    "shortName": "ListGroups",
+                    "fullName": "google.cloud.networkconnectivity.v1.HubService.ListGroups",
                     "service": {
                         "shortName": "HubService",
                         "fullName": "google.cloud.networkconnectivity.v1.HubService"

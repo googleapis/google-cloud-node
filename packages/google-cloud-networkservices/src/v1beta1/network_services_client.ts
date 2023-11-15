@@ -182,6 +182,12 @@ export class NetworkServicesClient {
       endpointPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/endpointPolicies/{endpoint_policy}'
       ),
+      lbRouteExtensionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/lbRouteExtensions/{lb_route_extension}'
+      ),
+      lbTrafficExtensionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/lbTrafficExtensions/{lb_traffic_extension}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -954,8 +960,8 @@ export class NetworkServicesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location from which the EndpointPolicies should be
-   *   listed, specified in the format `projects/* /locations/global`.
+   *   Required. The project and location from which the EndpointPolicies should
+   *   be listed, specified in the format `projects/* /locations/global`.
    * @param {number} request.pageSize
    *   Maximum number of EndpointPolicies to return per call.
    * @param {string} request.pageToken
@@ -1055,8 +1061,8 @@ export class NetworkServicesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location from which the EndpointPolicies should be
-   *   listed, specified in the format `projects/* /locations/global`.
+   *   Required. The project and location from which the EndpointPolicies should
+   *   be listed, specified in the format `projects/* /locations/global`.
    * @param {number} request.pageSize
    *   Maximum number of EndpointPolicies to return per call.
    * @param {string} request.pageToken
@@ -1104,8 +1110,8 @@ export class NetworkServicesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location from which the EndpointPolicies should be
-   *   listed, specified in the format `projects/* /locations/global`.
+   *   Required. The project and location from which the EndpointPolicies should
+   *   be listed, specified in the format `projects/* /locations/global`.
    * @param {number} request.pageSize
    *   Maximum number of EndpointPolicies to return per call.
    * @param {string} request.pageToken
@@ -1207,6 +1213,126 @@ export class NetworkServicesClient {
     return this.pathTemplates.endpointPolicyPathTemplate.match(
       endpointPolicyName
     ).endpoint_policy;
+  }
+
+  /**
+   * Return a fully-qualified lbRouteExtension resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} lb_route_extension
+   * @returns {string} Resource name string.
+   */
+  lbRouteExtensionPath(
+    project: string,
+    location: string,
+    lbRouteExtension: string
+  ) {
+    return this.pathTemplates.lbRouteExtensionPathTemplate.render({
+      project: project,
+      location: location,
+      lb_route_extension: lbRouteExtension,
+    });
+  }
+
+  /**
+   * Parse the project from LbRouteExtension resource.
+   *
+   * @param {string} lbRouteExtensionName
+   *   A fully-qualified path representing LbRouteExtension resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLbRouteExtensionName(lbRouteExtensionName: string) {
+    return this.pathTemplates.lbRouteExtensionPathTemplate.match(
+      lbRouteExtensionName
+    ).project;
+  }
+
+  /**
+   * Parse the location from LbRouteExtension resource.
+   *
+   * @param {string} lbRouteExtensionName
+   *   A fully-qualified path representing LbRouteExtension resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLbRouteExtensionName(lbRouteExtensionName: string) {
+    return this.pathTemplates.lbRouteExtensionPathTemplate.match(
+      lbRouteExtensionName
+    ).location;
+  }
+
+  /**
+   * Parse the lb_route_extension from LbRouteExtension resource.
+   *
+   * @param {string} lbRouteExtensionName
+   *   A fully-qualified path representing LbRouteExtension resource.
+   * @returns {string} A string representing the lb_route_extension.
+   */
+  matchLbRouteExtensionFromLbRouteExtensionName(lbRouteExtensionName: string) {
+    return this.pathTemplates.lbRouteExtensionPathTemplate.match(
+      lbRouteExtensionName
+    ).lb_route_extension;
+  }
+
+  /**
+   * Return a fully-qualified lbTrafficExtension resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} lb_traffic_extension
+   * @returns {string} Resource name string.
+   */
+  lbTrafficExtensionPath(
+    project: string,
+    location: string,
+    lbTrafficExtension: string
+  ) {
+    return this.pathTemplates.lbTrafficExtensionPathTemplate.render({
+      project: project,
+      location: location,
+      lb_traffic_extension: lbTrafficExtension,
+    });
+  }
+
+  /**
+   * Parse the project from LbTrafficExtension resource.
+   *
+   * @param {string} lbTrafficExtensionName
+   *   A fully-qualified path representing LbTrafficExtension resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLbTrafficExtensionName(lbTrafficExtensionName: string) {
+    return this.pathTemplates.lbTrafficExtensionPathTemplate.match(
+      lbTrafficExtensionName
+    ).project;
+  }
+
+  /**
+   * Parse the location from LbTrafficExtension resource.
+   *
+   * @param {string} lbTrafficExtensionName
+   *   A fully-qualified path representing LbTrafficExtension resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLbTrafficExtensionName(lbTrafficExtensionName: string) {
+    return this.pathTemplates.lbTrafficExtensionPathTemplate.match(
+      lbTrafficExtensionName
+    ).location;
+  }
+
+  /**
+   * Parse the lb_traffic_extension from LbTrafficExtension resource.
+   *
+   * @param {string} lbTrafficExtensionName
+   *   A fully-qualified path representing LbTrafficExtension resource.
+   * @returns {string} A string representing the lb_traffic_extension.
+   */
+  matchLbTrafficExtensionFromLbTrafficExtensionName(
+    lbTrafficExtensionName: string
+  ) {
+    return this.pathTemplates.lbTrafficExtensionPathTemplate.match(
+      lbTrafficExtensionName
+    ).lb_traffic_extension;
   }
 
   /**

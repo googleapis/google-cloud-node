@@ -29,8 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name of the trigger to execute a hybrid inspect on, for example
-   *  `projects/dlp-test-project/jobTriggers/53234423`.
+   *  Required. Resource name of the trigger to execute a hybrid inspect on, for
+   *  example `projects/dlp-test-project/jobTriggers/53234423`.
    */
   // const name = 'abc123'
   /**

@@ -12,6 +12,9 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Places.get_photo_media](#places.get_photo_media)
+  * [Places.get_place](#places.get_place)
+  * [Places.search_nearby](#places.search_nearby)
   * [Places.search_text](#places.search_text)
   * [Quickstart](#quickstart)
 
@@ -27,6 +30,57 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Places.get_photo_media
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-places/samples/generated/v1/places.get_photo_media.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-places/samples/generated/v1/places.get_photo_media.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-maps-places/samples/generated/v1/places.get_photo_media.js`
+
+
+-----
+
+
+
+
+### Places.get_place
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-places/samples/generated/v1/places.get_place.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-places/samples/generated/v1/places.get_place.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-maps-places/samples/generated/v1/places.get_place.js`
+
+
+-----
+
+
+
+
+### Places.search_nearby
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-places/samples/generated/v1/places.search_nearby.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-places/samples/generated/v1/places.search_nearby.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-maps-places/samples/generated/v1/places.search_nearby.js`
+
+
+-----
+
 
 
 

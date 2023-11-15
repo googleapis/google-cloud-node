@@ -34,11 +34,11 @@ function main(parent, repositoryId, repository) {
    */
   // const parent = 'abc123'
   /**
-   *  The repository id to use for this repository.
+   *  Required. The repository id to use for this repository.
    */
   // const repositoryId = 'abc123'
   /**
-   *  The repository to be created.
+   *  Required. The repository to be created.
    */
   // const repository = {}
 
