@@ -17332,6 +17332,7 @@
                          * @interface ILogsPolicy
                          * @property {google.cloud.batch.v1alpha.LogsPolicy.Destination|null} [destination] LogsPolicy destination
                          * @property {string|null} [logsPath] LogsPolicy logsPath
+                         * @property {google.cloud.batch.v1alpha.LogsPolicy.ICloudLoggingOption|null} [cloudLoggingOption] LogsPolicy cloudLoggingOption
                          */
     
                         /**
@@ -17366,6 +17367,14 @@
                         LogsPolicy.prototype.logsPath = "";
     
                         /**
+                         * LogsPolicy cloudLoggingOption.
+                         * @member {google.cloud.batch.v1alpha.LogsPolicy.ICloudLoggingOption|null|undefined} cloudLoggingOption
+                         * @memberof google.cloud.batch.v1alpha.LogsPolicy
+                         * @instance
+                         */
+                        LogsPolicy.prototype.cloudLoggingOption = null;
+    
+                        /**
                          * Creates a new LogsPolicy instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.batch.v1alpha.LogsPolicy
@@ -17393,6 +17402,8 @@
                                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.destination);
                             if (message.logsPath != null && Object.hasOwnProperty.call(message, "logsPath"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.logsPath);
+                            if (message.cloudLoggingOption != null && Object.hasOwnProperty.call(message, "cloudLoggingOption"))
+                                $root.google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption.encode(message.cloudLoggingOption, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -17433,6 +17444,10 @@
                                     }
                                 case 2: {
                                         message.logsPath = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.cloudLoggingOption = $root.google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -17482,6 +17497,11 @@
                             if (message.logsPath != null && message.hasOwnProperty("logsPath"))
                                 if (!$util.isString(message.logsPath))
                                     return "logsPath: string expected";
+                            if (message.cloudLoggingOption != null && message.hasOwnProperty("cloudLoggingOption")) {
+                                var error = $root.google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption.verify(message.cloudLoggingOption);
+                                if (error)
+                                    return "cloudLoggingOption." + error;
+                            }
                             return null;
                         };
     
@@ -17519,6 +17539,11 @@
                             }
                             if (object.logsPath != null)
                                 message.logsPath = String(object.logsPath);
+                            if (object.cloudLoggingOption != null) {
+                                if (typeof object.cloudLoggingOption !== "object")
+                                    throw TypeError(".google.cloud.batch.v1alpha.LogsPolicy.cloudLoggingOption: object expected");
+                                message.cloudLoggingOption = $root.google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption.fromObject(object.cloudLoggingOption);
+                            }
                             return message;
                         };
     
@@ -17538,11 +17563,14 @@
                             if (options.defaults) {
                                 object.destination = options.enums === String ? "DESTINATION_UNSPECIFIED" : 0;
                                 object.logsPath = "";
+                                object.cloudLoggingOption = null;
                             }
                             if (message.destination != null && message.hasOwnProperty("destination"))
                                 object.destination = options.enums === String ? $root.google.cloud.batch.v1alpha.LogsPolicy.Destination[message.destination] === undefined ? message.destination : $root.google.cloud.batch.v1alpha.LogsPolicy.Destination[message.destination] : message.destination;
                             if (message.logsPath != null && message.hasOwnProperty("logsPath"))
                                 object.logsPath = message.logsPath;
+                            if (message.cloudLoggingOption != null && message.hasOwnProperty("cloudLoggingOption"))
+                                object.cloudLoggingOption = $root.google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption.toObject(message.cloudLoggingOption, options);
                             return object;
                         };
     
@@ -17571,6 +17599,209 @@
                             }
                             return typeUrlPrefix + "/google.cloud.batch.v1alpha.LogsPolicy";
                         };
+    
+                        LogsPolicy.CloudLoggingOption = (function() {
+    
+                            /**
+                             * Properties of a CloudLoggingOption.
+                             * @memberof google.cloud.batch.v1alpha.LogsPolicy
+                             * @interface ICloudLoggingOption
+                             * @property {boolean|null} [useGenericTaskMonitoredResource] CloudLoggingOption useGenericTaskMonitoredResource
+                             */
+    
+                            /**
+                             * Constructs a new CloudLoggingOption.
+                             * @memberof google.cloud.batch.v1alpha.LogsPolicy
+                             * @classdesc Represents a CloudLoggingOption.
+                             * @implements ICloudLoggingOption
+                             * @constructor
+                             * @param {google.cloud.batch.v1alpha.LogsPolicy.ICloudLoggingOption=} [properties] Properties to set
+                             */
+                            function CloudLoggingOption(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CloudLoggingOption useGenericTaskMonitoredResource.
+                             * @member {boolean} useGenericTaskMonitoredResource
+                             * @memberof google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption
+                             * @instance
+                             */
+                            CloudLoggingOption.prototype.useGenericTaskMonitoredResource = false;
+    
+                            /**
+                             * Creates a new CloudLoggingOption instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption
+                             * @static
+                             * @param {google.cloud.batch.v1alpha.LogsPolicy.ICloudLoggingOption=} [properties] Properties to set
+                             * @returns {google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption} CloudLoggingOption instance
+                             */
+                            CloudLoggingOption.create = function create(properties) {
+                                return new CloudLoggingOption(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CloudLoggingOption message. Does not implicitly {@link google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption
+                             * @static
+                             * @param {google.cloud.batch.v1alpha.LogsPolicy.ICloudLoggingOption} message CloudLoggingOption message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CloudLoggingOption.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.useGenericTaskMonitoredResource != null && Object.hasOwnProperty.call(message, "useGenericTaskMonitoredResource"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.useGenericTaskMonitoredResource);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CloudLoggingOption message, length delimited. Does not implicitly {@link google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption
+                             * @static
+                             * @param {google.cloud.batch.v1alpha.LogsPolicy.ICloudLoggingOption} message CloudLoggingOption message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CloudLoggingOption.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CloudLoggingOption message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption} CloudLoggingOption
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CloudLoggingOption.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.useGenericTaskMonitoredResource = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CloudLoggingOption message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption} CloudLoggingOption
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CloudLoggingOption.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CloudLoggingOption message.
+                             * @function verify
+                             * @memberof google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CloudLoggingOption.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.useGenericTaskMonitoredResource != null && message.hasOwnProperty("useGenericTaskMonitoredResource"))
+                                    if (typeof message.useGenericTaskMonitoredResource !== "boolean")
+                                        return "useGenericTaskMonitoredResource: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CloudLoggingOption message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption} CloudLoggingOption
+                             */
+                            CloudLoggingOption.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption)
+                                    return object;
+                                var message = new $root.google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption();
+                                if (object.useGenericTaskMonitoredResource != null)
+                                    message.useGenericTaskMonitoredResource = Boolean(object.useGenericTaskMonitoredResource);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CloudLoggingOption message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption
+                             * @static
+                             * @param {google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption} message CloudLoggingOption
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CloudLoggingOption.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.useGenericTaskMonitoredResource = false;
+                                if (message.useGenericTaskMonitoredResource != null && message.hasOwnProperty("useGenericTaskMonitoredResource"))
+                                    object.useGenericTaskMonitoredResource = message.useGenericTaskMonitoredResource;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CloudLoggingOption to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CloudLoggingOption.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CloudLoggingOption
+                             * @function getTypeUrl
+                             * @memberof google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CloudLoggingOption.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.batch.v1alpha.LogsPolicy.CloudLoggingOption";
+                            };
+    
+                            return CloudLoggingOption;
+                        })();
     
                         /**
                          * Destination enum.

@@ -1374,6 +1374,82 @@ describe('v1alpha.UserEventServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('engine', () => {
+      const fakePath = '/rendered/path/engine';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+        engine: 'engineValue',
+      };
+      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.enginePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.enginePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('enginePath', () => {
+        const result = client.enginePath(
+          'projectValue',
+          'locationValue',
+          'collectionValue',
+          'engineValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.enginePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromEngineName', () => {
+        const result = client.matchProjectFromEngineName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.enginePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromEngineName', () => {
+        const result = client.matchLocationFromEngineName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.enginePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCollectionFromEngineName', () => {
+        const result = client.matchCollectionFromEngineName(fakePath);
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (client.pathTemplates.enginePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEngineFromEngineName', () => {
+        const result = client.matchEngineFromEngineName(fakePath);
+        assert.strictEqual(result, 'engineValue');
+        assert(
+          (client.pathTemplates.enginePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('projectLocationCollectionDataStore', () => {
       const fakePath = '/rendered/path/projectLocationCollectionDataStore';
       const expectedParameters = {

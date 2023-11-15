@@ -17,6 +17,7 @@
   * [Alpha_analytics_data.list_audience_lists](#alpha_analytics_data.list_audience_lists)
   * [Alpha_analytics_data.query_audience_list](#alpha_analytics_data.query_audience_list)
   * [Alpha_analytics_data.run_funnel_report](#alpha_analytics_data.run_funnel_report)
+  * [Alpha_analytics_data.sheet_export_audience_list](#alpha_analytics_data.sheet_export_audience_list)
   * [Beta_analytics_data.batch_run_pivot_reports](#beta_analytics_data.batch_run_pivot_reports)
   * [Beta_analytics_data.batch_run_reports](#beta_analytics_data.batch_run_reports)
   * [Beta_analytics_data.check_compatibility](#beta_analytics_data.check_compatibility)
@@ -119,6 +120,23 @@ __Usage:__
 
 
 `node packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.run_funnel_report.js`
+
+
+-----
+
+
+
+
+### Alpha_analytics_data.sheet_export_audience_list
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.sheet_export_audience_list.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.sheet_export_audience_list.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.sheet_export_audience_list.js`
 
 
 -----
