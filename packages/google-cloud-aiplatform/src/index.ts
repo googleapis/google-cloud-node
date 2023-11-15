@@ -57,16 +57,6 @@ const ModelGardenServiceClient = v1.ModelGardenServiceClient;
 type ModelGardenServiceClient = v1.ModelGardenServiceClient;
 const ScheduleServiceClient = v1.ScheduleServiceClient;
 type ScheduleServiceClient = v1.ScheduleServiceClient;
-const SqlAvailableDatabaseVersionsServiceClient = v1.SqlAvailableDatabaseVersionsServiceClient;
-type SqlAvailableDatabaseVersionsServiceClient = v1.SqlAvailableDatabaseVersionsServiceClient;
-const SqlEventsServiceClient = v1.SqlEventsServiceClient;
-type SqlEventsServiceClient = v1.SqlEventsServiceClient;
-const SqlIamPoliciesServiceClient = v1.SqlIamPoliciesServiceClient;
-type SqlIamPoliciesServiceClient = v1.SqlIamPoliciesServiceClient;
-const SqlInstanceNamesServiceClient = v1.SqlInstanceNamesServiceClient;
-type SqlInstanceNamesServiceClient = v1.SqlInstanceNamesServiceClient;
-const SqlRegionsServiceClient = v1.SqlRegionsServiceClient;
-type SqlRegionsServiceClient = v1.SqlRegionsServiceClient;
 
 export {
   v1beta1,
@@ -111,11 +101,6 @@ export default {
   MatchServiceClient,
   ModelGardenServiceClient,
   ScheduleServiceClient,
-  SqlAvailableDatabaseVersionsServiceClient,
-  SqlEventsServiceClient,
-  SqlIamPoliciesServiceClient,
-  SqlInstanceNamesServiceClient,
-  SqlRegionsServiceClient,
 };
 import * as protos from '../protos/protos';
 export {protos};
