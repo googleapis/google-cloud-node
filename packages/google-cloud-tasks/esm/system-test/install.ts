@@ -42,7 +42,7 @@ describe('📦 pack-n-play test', () => {
       sample: {
         description: 'JavaScript user can use the library',
         ts: readFileSync(
-          './esm/system-test/fixtures/sample/src/index.js'
+          './esm/system-test/fixtures/sample/src/index.cjs'
         ).toString(),
       },
     };
