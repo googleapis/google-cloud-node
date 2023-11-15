@@ -38,7 +38,7 @@
     "fix": "gts fix",
     "lint": "gts check",
     "postpack": "minifyProtoJson",
-    "prepare": "npm run compile-protos && npm run compile",
+    "prepare": "npm run compile",
     "system-test": "c8 mocha build/system-test",
     "test": "c8 mocha build/test",
     "samples-test": "cd samples/ && npm link ../ && npm i && npm test",
