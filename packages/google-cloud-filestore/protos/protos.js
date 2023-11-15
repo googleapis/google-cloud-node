@@ -628,6 +628,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.filestore.v1.CloudFilestoreManager|revertInstance}.
+                         * @memberof google.cloud.filestore.v1.CloudFilestoreManager
+                         * @typedef RevertInstanceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls RevertInstance.
+                         * @function revertInstance
+                         * @memberof google.cloud.filestore.v1.CloudFilestoreManager
+                         * @instance
+                         * @param {google.cloud.filestore.v1.IRevertInstanceRequest} request RevertInstanceRequest message or plain object
+                         * @param {google.cloud.filestore.v1.CloudFilestoreManager.RevertInstanceCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudFilestoreManager.prototype.revertInstance = function revertInstance(request, callback) {
+                            return this.rpcCall(revertInstance, $root.google.cloud.filestore.v1.RevertInstanceRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "RevertInstance" });
+    
+                        /**
+                         * Calls RevertInstance.
+                         * @function revertInstance
+                         * @memberof google.cloud.filestore.v1.CloudFilestoreManager
+                         * @instance
+                         * @param {google.cloud.filestore.v1.IRevertInstanceRequest} request RevertInstanceRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.filestore.v1.CloudFilestoreManager|deleteInstance}.
                          * @memberof google.cloud.filestore.v1.CloudFilestoreManager
                          * @typedef DeleteInstanceCallback
@@ -2170,6 +2203,7 @@
                          * @property {Array.<google.cloud.filestore.v1.INetworkConfig>|null} [networks] Instance networks
                          * @property {string|null} [etag] Instance etag
                          * @property {google.protobuf.IBoolValue|null} [satisfiesPzs] Instance satisfiesPzs
+                         * @property {boolean|null} [satisfiesPzi] Instance satisfiesPzi
                          * @property {string|null} [kmsKeyName] Instance kmsKeyName
                          * @property {Array.<google.cloud.filestore.v1.Instance.SuspensionReason>|null} [suspensionReasons] Instance suspensionReasons
                          */
@@ -2282,6 +2316,14 @@
                         Instance.prototype.satisfiesPzs = null;
     
                         /**
+                         * Instance satisfiesPzi.
+                         * @member {boolean} satisfiesPzi
+                         * @memberof google.cloud.filestore.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.satisfiesPzi = false;
+    
+                        /**
                          * Instance kmsKeyName.
                          * @member {string} kmsKeyName
                          * @memberof google.cloud.filestore.v1.Instance
@@ -2354,6 +2396,8 @@
                                     writer.int32(message.suspensionReasons[i]);
                                 writer.ldelim();
                             }
+                            if (message.satisfiesPzi != null && Object.hasOwnProperty.call(message, "satisfiesPzi"))
+                                writer.uint32(/* id 18, wireType 0 =*/144).bool(message.satisfiesPzi);
                             return writer;
                         };
     
@@ -2455,6 +2499,10 @@
                                         message.satisfiesPzs = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 18: {
+                                        message.satisfiesPzi = reader.bool();
+                                        break;
+                                    }
                                 case 14: {
                                         message.kmsKeyName = reader.string();
                                         break;
@@ -2525,6 +2573,7 @@
                                 case 8:
                                 case 9:
                                 case 10:
+                                case 12:
                                     break;
                                 }
                             if (message.statusMessage != null && message.hasOwnProperty("statusMessage"))
@@ -2546,6 +2595,8 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
+                                case 8:
                                     break;
                                 }
                             if (message.labels != null && message.hasOwnProperty("labels")) {
@@ -2582,6 +2633,9 @@
                                 if (error)
                                     return "satisfiesPzs." + error;
                             }
+                            if (message.satisfiesPzi != null && message.hasOwnProperty("satisfiesPzi"))
+                                if (typeof message.satisfiesPzi !== "boolean")
+                                    return "satisfiesPzi: boolean expected";
                             if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
                                 if (!$util.isString(message.kmsKeyName))
                                     return "kmsKeyName: string expected";
@@ -2663,6 +2717,10 @@
                             case 10:
                                 message.state = 10;
                                 break;
+                            case "REVERTING":
+                            case 12:
+                                message.state = 12;
+                                break;
                             }
                             if (object.statusMessage != null)
                                 message.statusMessage = String(object.statusMessage);
@@ -2706,6 +2764,14 @@
                             case 6:
                                 message.tier = 6;
                                 break;
+                            case "ZONAL":
+                            case 7:
+                                message.tier = 7;
+                                break;
+                            case "REGIONAL":
+                            case 8:
+                                message.tier = 8;
+                                break;
                             }
                             if (object.labels) {
                                 if (typeof object.labels !== "object")
@@ -2741,6 +2807,8 @@
                                     throw TypeError(".google.cloud.filestore.v1.Instance.satisfiesPzs: object expected");
                                 message.satisfiesPzs = $root.google.protobuf.BoolValue.fromObject(object.satisfiesPzs);
                             }
+                            if (object.satisfiesPzi != null)
+                                message.satisfiesPzi = Boolean(object.satisfiesPzi);
                             if (object.kmsKeyName != null)
                                 message.kmsKeyName = String(object.kmsKeyName);
                             if (object.suspensionReasons) {
@@ -2797,6 +2865,7 @@
                                 object.etag = "";
                                 object.satisfiesPzs = null;
                                 object.kmsKeyName = "";
+                                object.satisfiesPzi = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -2837,6 +2906,8 @@
                                 for (var j = 0; j < message.suspensionReasons.length; ++j)
                                     object.suspensionReasons[j] = options.enums === String ? $root.google.cloud.filestore.v1.Instance.SuspensionReason[message.suspensionReasons[j]] === undefined ? message.suspensionReasons[j] : $root.google.cloud.filestore.v1.Instance.SuspensionReason[message.suspensionReasons[j]] : message.suspensionReasons[j];
                             }
+                            if (message.satisfiesPzi != null && message.hasOwnProperty("satisfiesPzi"))
+                                object.satisfiesPzi = message.satisfiesPzi;
                             return object;
                         };
     
@@ -2880,6 +2951,7 @@
                          * @property {number} SUSPENDED=8 SUSPENDED value
                          * @property {number} SUSPENDING=9 SUSPENDING value
                          * @property {number} RESUMING=10 RESUMING value
+                         * @property {number} REVERTING=12 REVERTING value
                          */
                         Instance.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -2893,6 +2965,7 @@
                             values[valuesById[8] = "SUSPENDED"] = 8;
                             values[valuesById[9] = "SUSPENDING"] = 9;
                             values[valuesById[10] = "RESUMING"] = 10;
+                            values[valuesById[12] = "REVERTING"] = 12;
                             return values;
                         })();
     
@@ -2907,6 +2980,8 @@
                          * @property {number} BASIC_SSD=4 BASIC_SSD value
                          * @property {number} HIGH_SCALE_SSD=5 HIGH_SCALE_SSD value
                          * @property {number} ENTERPRISE=6 ENTERPRISE value
+                         * @property {number} ZONAL=7 ZONAL value
+                         * @property {number} REGIONAL=8 REGIONAL value
                          */
                         Instance.Tier = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -2917,6 +2992,8 @@
                             values[valuesById[4] = "BASIC_SSD"] = 4;
                             values[valuesById[5] = "HIGH_SCALE_SSD"] = 5;
                             values[valuesById[6] = "ENTERPRISE"] = 6;
+                            values[valuesById[7] = "ZONAL"] = 7;
+                            values[valuesById[8] = "REGIONAL"] = 8;
                             return values;
                         })();
     
@@ -3899,6 +3976,233 @@
                         };
     
                         return RestoreInstanceRequest;
+                    })();
+    
+                    v1.RevertInstanceRequest = (function() {
+    
+                        /**
+                         * Properties of a RevertInstanceRequest.
+                         * @memberof google.cloud.filestore.v1
+                         * @interface IRevertInstanceRequest
+                         * @property {string|null} [name] RevertInstanceRequest name
+                         * @property {string|null} [targetSnapshotId] RevertInstanceRequest targetSnapshotId
+                         */
+    
+                        /**
+                         * Constructs a new RevertInstanceRequest.
+                         * @memberof google.cloud.filestore.v1
+                         * @classdesc Represents a RevertInstanceRequest.
+                         * @implements IRevertInstanceRequest
+                         * @constructor
+                         * @param {google.cloud.filestore.v1.IRevertInstanceRequest=} [properties] Properties to set
+                         */
+                        function RevertInstanceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RevertInstanceRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.filestore.v1.RevertInstanceRequest
+                         * @instance
+                         */
+                        RevertInstanceRequest.prototype.name = "";
+    
+                        /**
+                         * RevertInstanceRequest targetSnapshotId.
+                         * @member {string} targetSnapshotId
+                         * @memberof google.cloud.filestore.v1.RevertInstanceRequest
+                         * @instance
+                         */
+                        RevertInstanceRequest.prototype.targetSnapshotId = "";
+    
+                        /**
+                         * Creates a new RevertInstanceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.filestore.v1.RevertInstanceRequest
+                         * @static
+                         * @param {google.cloud.filestore.v1.IRevertInstanceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.filestore.v1.RevertInstanceRequest} RevertInstanceRequest instance
+                         */
+                        RevertInstanceRequest.create = function create(properties) {
+                            return new RevertInstanceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RevertInstanceRequest message. Does not implicitly {@link google.cloud.filestore.v1.RevertInstanceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.filestore.v1.RevertInstanceRequest
+                         * @static
+                         * @param {google.cloud.filestore.v1.IRevertInstanceRequest} message RevertInstanceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RevertInstanceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.targetSnapshotId != null && Object.hasOwnProperty.call(message, "targetSnapshotId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.targetSnapshotId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RevertInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.filestore.v1.RevertInstanceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.filestore.v1.RevertInstanceRequest
+                         * @static
+                         * @param {google.cloud.filestore.v1.IRevertInstanceRequest} message RevertInstanceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RevertInstanceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RevertInstanceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.filestore.v1.RevertInstanceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.filestore.v1.RevertInstanceRequest} RevertInstanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RevertInstanceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.filestore.v1.RevertInstanceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.targetSnapshotId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RevertInstanceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.filestore.v1.RevertInstanceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.filestore.v1.RevertInstanceRequest} RevertInstanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RevertInstanceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RevertInstanceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.filestore.v1.RevertInstanceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RevertInstanceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.targetSnapshotId != null && message.hasOwnProperty("targetSnapshotId"))
+                                if (!$util.isString(message.targetSnapshotId))
+                                    return "targetSnapshotId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RevertInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.filestore.v1.RevertInstanceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.filestore.v1.RevertInstanceRequest} RevertInstanceRequest
+                         */
+                        RevertInstanceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.filestore.v1.RevertInstanceRequest)
+                                return object;
+                            var message = new $root.google.cloud.filestore.v1.RevertInstanceRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.targetSnapshotId != null)
+                                message.targetSnapshotId = String(object.targetSnapshotId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RevertInstanceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.filestore.v1.RevertInstanceRequest
+                         * @static
+                         * @param {google.cloud.filestore.v1.RevertInstanceRequest} message RevertInstanceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RevertInstanceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.targetSnapshotId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.targetSnapshotId != null && message.hasOwnProperty("targetSnapshotId"))
+                                object.targetSnapshotId = message.targetSnapshotId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RevertInstanceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.filestore.v1.RevertInstanceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RevertInstanceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RevertInstanceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.filestore.v1.RevertInstanceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RevertInstanceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.filestore.v1.RevertInstanceRequest";
+                        };
+    
+                        return RevertInstanceRequest;
                     })();
     
                     v1.DeleteInstanceRequest = (function() {
@@ -6593,6 +6897,7 @@
                          * @property {google.cloud.filestore.v1.Instance.Tier|null} [sourceInstanceTier] Backup sourceInstanceTier
                          * @property {number|Long|null} [downloadBytes] Backup downloadBytes
                          * @property {google.protobuf.IBoolValue|null} [satisfiesPzs] Backup satisfiesPzs
+                         * @property {boolean|null} [satisfiesPzi] Backup satisfiesPzi
                          * @property {string|null} [kmsKey] Backup kmsKey
                          */
     
@@ -6709,6 +7014,14 @@
                         Backup.prototype.satisfiesPzs = null;
     
                         /**
+                         * Backup satisfiesPzi.
+                         * @member {boolean} satisfiesPzi
+                         * @memberof google.cloud.filestore.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.satisfiesPzi = false;
+    
+                        /**
                          * Backup kmsKey.
                          * @member {string} kmsKey
                          * @memberof google.cloud.filestore.v1.Backup
@@ -6767,6 +7080,8 @@
                                 $root.google.protobuf.BoolValue.encode(message.satisfiesPzs, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             if (message.kmsKey != null && Object.hasOwnProperty.call(message, "kmsKey"))
                                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.kmsKey);
+                            if (message.satisfiesPzi != null && Object.hasOwnProperty.call(message, "satisfiesPzi"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).bool(message.satisfiesPzi);
                             return writer;
                         };
     
@@ -6868,6 +7183,10 @@
                                         message.satisfiesPzs = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 14: {
+                                        message.satisfiesPzi = reader.bool();
+                                        break;
+                                    }
                                 case 13: {
                                         message.kmsKey = reader.string();
                                         break;
@@ -6922,6 +7241,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.createTime != null && message.hasOwnProperty("createTime")) {
@@ -6960,6 +7280,8 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
+                                case 8:
                                     break;
                                 }
                             if (message.downloadBytes != null && message.hasOwnProperty("downloadBytes"))
@@ -6970,6 +7292,9 @@
                                 if (error)
                                     return "satisfiesPzs." + error;
                             }
+                            if (message.satisfiesPzi != null && message.hasOwnProperty("satisfiesPzi"))
+                                if (typeof message.satisfiesPzi !== "boolean")
+                                    return "satisfiesPzi: boolean expected";
                             if (message.kmsKey != null && message.hasOwnProperty("kmsKey"))
                                 if (!$util.isString(message.kmsKey))
                                     return "kmsKey: string expected";
@@ -7018,6 +7343,10 @@
                             case "DELETING":
                             case 4:
                                 message.state = 4;
+                                break;
+                            case "INVALID":
+                            case 5:
+                                message.state = 5;
                                 break;
                             }
                             if (object.createTime != null) {
@@ -7089,6 +7418,14 @@
                             case 6:
                                 message.sourceInstanceTier = 6;
                                 break;
+                            case "ZONAL":
+                            case 7:
+                                message.sourceInstanceTier = 7;
+                                break;
+                            case "REGIONAL":
+                            case 8:
+                                message.sourceInstanceTier = 8;
+                                break;
                             }
                             if (object.downloadBytes != null)
                                 if ($util.Long)
@@ -7104,6 +7441,8 @@
                                     throw TypeError(".google.cloud.filestore.v1.Backup.satisfiesPzs: object expected");
                                 message.satisfiesPzs = $root.google.protobuf.BoolValue.fromObject(object.satisfiesPzs);
                             }
+                            if (object.satisfiesPzi != null)
+                                message.satisfiesPzi = Boolean(object.satisfiesPzi);
                             if (object.kmsKey != null)
                                 message.kmsKey = String(object.kmsKey);
                             return message;
@@ -7149,6 +7488,7 @@
                                     object.downloadBytes = options.longs === String ? "0" : 0;
                                 object.satisfiesPzs = null;
                                 object.kmsKey = "";
+                                object.satisfiesPzi = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -7189,6 +7529,8 @@
                                 object.satisfiesPzs = $root.google.protobuf.BoolValue.toObject(message.satisfiesPzs, options);
                             if (message.kmsKey != null && message.hasOwnProperty("kmsKey"))
                                 object.kmsKey = message.kmsKey;
+                            if (message.satisfiesPzi != null && message.hasOwnProperty("satisfiesPzi"))
+                                object.satisfiesPzi = message.satisfiesPzi;
                             return object;
                         };
     
@@ -7227,6 +7569,7 @@
                          * @property {number} FINALIZING=2 FINALIZING value
                          * @property {number} READY=3 READY value
                          * @property {number} DELETING=4 DELETING value
+                         * @property {number} INVALID=5 INVALID value
                          */
                         Backup.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -7235,6 +7578,7 @@
                             values[valuesById[2] = "FINALIZING"] = 2;
                             values[valuesById[3] = "READY"] = 3;
                             values[valuesById[4] = "DELETING"] = 4;
+                            values[valuesById[5] = "INVALID"] = 5;
                             return values;
                         })();
     
@@ -11229,6 +11573,7 @@
                          * @property {Array.<google.cloud.filestore.v1beta1.INetworkConfig>|null} [networks] Instance networks
                          * @property {string|null} [etag] Instance etag
                          * @property {google.protobuf.IBoolValue|null} [satisfiesPzs] Instance satisfiesPzs
+                         * @property {boolean|null} [satisfiesPzi] Instance satisfiesPzi
                          * @property {string|null} [kmsKeyName] Instance kmsKeyName
                          * @property {Array.<google.cloud.filestore.v1beta1.Instance.SuspensionReason>|null} [suspensionReasons] Instance suspensionReasons
                          * @property {number|Long|null} [maxCapacityGb] Instance maxCapacityGb
@@ -11346,6 +11691,14 @@
                          * @instance
                          */
                         Instance.prototype.satisfiesPzs = null;
+    
+                        /**
+                         * Instance satisfiesPzi.
+                         * @member {boolean} satisfiesPzi
+                         * @memberof google.cloud.filestore.v1beta1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.satisfiesPzi = false;
     
                         /**
                          * Instance kmsKeyName.
@@ -11490,6 +11843,8 @@
                                 writer.uint32(/* id 21, wireType 0 =*/168).int32(message.protocol);
                             if (message.directoryServices != null && Object.hasOwnProperty.call(message, "directoryServices"))
                                 $root.google.cloud.filestore.v1beta1.DirectoryServicesConfig.encode(message.directoryServices, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
+                            if (message.satisfiesPzi != null && Object.hasOwnProperty.call(message, "satisfiesPzi"))
+                                writer.uint32(/* id 26, wireType 0 =*/208).bool(message.satisfiesPzi);
                             return writer;
                         };
     
@@ -11589,6 +11944,10 @@
                                     }
                                 case 13: {
                                         message.satisfiesPzs = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 26: {
+                                        message.satisfiesPzi = reader.bool();
                                         break;
                                     }
                                 case 14: {
@@ -11712,6 +12071,7 @@
                                 case 6:
                                 case 7:
                                 case 8:
+                                case 9:
                                     break;
                                 }
                             if (message.labels != null && message.hasOwnProperty("labels")) {
@@ -11748,6 +12108,9 @@
                                 if (error)
                                     return "satisfiesPzs." + error;
                             }
+                            if (message.satisfiesPzi != null && message.hasOwnProperty("satisfiesPzi"))
+                                if (typeof message.satisfiesPzi !== "boolean")
+                                    return "satisfiesPzi: boolean expected";
                             if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
                                 if (!$util.isString(message.kmsKeyName))
                                     return "kmsKeyName: string expected";
@@ -11909,6 +12272,10 @@
                             case 8:
                                 message.tier = 8;
                                 break;
+                            case "REGIONAL":
+                            case 9:
+                                message.tier = 9;
+                                break;
                             }
                             if (object.labels) {
                                 if (typeof object.labels !== "object")
@@ -11944,6 +12311,8 @@
                                     throw TypeError(".google.cloud.filestore.v1beta1.Instance.satisfiesPzs: object expected");
                                 message.satisfiesPzs = $root.google.protobuf.BoolValue.fromObject(object.satisfiesPzs);
                             }
+                            if (object.satisfiesPzi != null)
+                                message.satisfiesPzi = Boolean(object.satisfiesPzi);
                             if (object.kmsKeyName != null)
                                 message.kmsKeyName = String(object.kmsKeyName);
                             if (object.suspensionReasons) {
@@ -12086,6 +12455,7 @@
                                 object.multiShareEnabled = false;
                                 object.protocol = options.enums === String ? "FILE_PROTOCOL_UNSPECIFIED" : 0;
                                 object.directoryServices = null;
+                                object.satisfiesPzi = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -12152,6 +12522,8 @@
                                 object.protocol = options.enums === String ? $root.google.cloud.filestore.v1beta1.Instance.FileProtocol[message.protocol] === undefined ? message.protocol : $root.google.cloud.filestore.v1beta1.Instance.FileProtocol[message.protocol] : message.protocol;
                             if (message.directoryServices != null && message.hasOwnProperty("directoryServices"))
                                 object.directoryServices = $root.google.cloud.filestore.v1beta1.DirectoryServicesConfig.toObject(message.directoryServices, options);
+                            if (message.satisfiesPzi != null && message.hasOwnProperty("satisfiesPzi"))
+                                object.satisfiesPzi = message.satisfiesPzi;
                             return object;
                         };
     
@@ -12225,6 +12597,7 @@
                          * @property {number} HIGH_SCALE_SSD=6 HIGH_SCALE_SSD value
                          * @property {number} ENTERPRISE=7 ENTERPRISE value
                          * @property {number} ZONAL=8 ZONAL value
+                         * @property {number} REGIONAL=9 REGIONAL value
                          */
                         Instance.Tier = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -12236,6 +12609,7 @@
                             values[valuesById[6] = "HIGH_SCALE_SSD"] = 6;
                             values[valuesById[7] = "ENTERPRISE"] = 7;
                             values[valuesById[8] = "ZONAL"] = 8;
+                            values[valuesById[9] = "REGIONAL"] = 9;
                             return values;
                         })();
     
@@ -16184,6 +16558,7 @@
                          * @property {google.cloud.filestore.v1beta1.Instance.Tier|null} [sourceInstanceTier] Backup sourceInstanceTier
                          * @property {number|Long|null} [downloadBytes] Backup downloadBytes
                          * @property {google.protobuf.IBoolValue|null} [satisfiesPzs] Backup satisfiesPzs
+                         * @property {boolean|null} [satisfiesPzi] Backup satisfiesPzi
                          * @property {string|null} [kmsKeyName] Backup kmsKeyName
                          */
     
@@ -16300,6 +16675,14 @@
                         Backup.prototype.satisfiesPzs = null;
     
                         /**
+                         * Backup satisfiesPzi.
+                         * @member {boolean} satisfiesPzi
+                         * @memberof google.cloud.filestore.v1beta1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.satisfiesPzi = false;
+    
+                        /**
                          * Backup kmsKeyName.
                          * @member {string} kmsKeyName
                          * @memberof google.cloud.filestore.v1beta1.Backup
@@ -16358,6 +16741,8 @@
                                 $root.google.protobuf.BoolValue.encode(message.satisfiesPzs, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             if (message.kmsKeyName != null && Object.hasOwnProperty.call(message, "kmsKeyName"))
                                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.kmsKeyName);
+                            if (message.satisfiesPzi != null && Object.hasOwnProperty.call(message, "satisfiesPzi"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).bool(message.satisfiesPzi);
                             return writer;
                         };
     
@@ -16459,6 +16844,10 @@
                                         message.satisfiesPzs = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 14: {
+                                        message.satisfiesPzi = reader.bool();
+                                        break;
+                                    }
                                 case 13: {
                                         message.kmsKeyName = reader.string();
                                         break;
@@ -16553,6 +16942,7 @@
                                 case 6:
                                 case 7:
                                 case 8:
+                                case 9:
                                     break;
                                 }
                             if (message.downloadBytes != null && message.hasOwnProperty("downloadBytes"))
@@ -16563,6 +16953,9 @@
                                 if (error)
                                     return "satisfiesPzs." + error;
                             }
+                            if (message.satisfiesPzi != null && message.hasOwnProperty("satisfiesPzi"))
+                                if (typeof message.satisfiesPzi !== "boolean")
+                                    return "satisfiesPzi: boolean expected";
                             if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
                                 if (!$util.isString(message.kmsKeyName))
                                     return "kmsKeyName: string expected";
@@ -16690,6 +17083,10 @@
                             case 8:
                                 message.sourceInstanceTier = 8;
                                 break;
+                            case "REGIONAL":
+                            case 9:
+                                message.sourceInstanceTier = 9;
+                                break;
                             }
                             if (object.downloadBytes != null)
                                 if ($util.Long)
@@ -16705,6 +17102,8 @@
                                     throw TypeError(".google.cloud.filestore.v1beta1.Backup.satisfiesPzs: object expected");
                                 message.satisfiesPzs = $root.google.protobuf.BoolValue.fromObject(object.satisfiesPzs);
                             }
+                            if (object.satisfiesPzi != null)
+                                message.satisfiesPzi = Boolean(object.satisfiesPzi);
                             if (object.kmsKeyName != null)
                                 message.kmsKeyName = String(object.kmsKeyName);
                             return message;
@@ -16750,6 +17149,7 @@
                                     object.downloadBytes = options.longs === String ? "0" : 0;
                                 object.satisfiesPzs = null;
                                 object.kmsKeyName = "";
+                                object.satisfiesPzi = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -16790,6 +17190,8 @@
                                 object.satisfiesPzs = $root.google.protobuf.BoolValue.toObject(message.satisfiesPzs, options);
                             if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
                                 object.kmsKeyName = message.kmsKeyName;
+                            if (message.satisfiesPzi != null && message.hasOwnProperty("satisfiesPzi"))
+                                object.satisfiesPzi = message.satisfiesPzi;
                             return object;
                         };
     

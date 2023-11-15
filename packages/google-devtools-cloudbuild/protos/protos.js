@@ -1232,6 +1232,7 @@
                          * @property {string|null} [bucket] StorageSource bucket
                          * @property {string|null} [object] StorageSource object
                          * @property {number|Long|null} [generation] StorageSource generation
+                         * @property {google.devtools.cloudbuild.v1.StorageSource.SourceFetcher|null} [sourceFetcher] StorageSource sourceFetcher
                          */
     
                         /**
@@ -1274,6 +1275,14 @@
                         StorageSource.prototype.generation = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
                         /**
+                         * StorageSource sourceFetcher.
+                         * @member {google.devtools.cloudbuild.v1.StorageSource.SourceFetcher} sourceFetcher
+                         * @memberof google.devtools.cloudbuild.v1.StorageSource
+                         * @instance
+                         */
+                        StorageSource.prototype.sourceFetcher = 0;
+    
+                        /**
                          * Creates a new StorageSource instance using the specified properties.
                          * @function create
                          * @memberof google.devtools.cloudbuild.v1.StorageSource
@@ -1303,6 +1312,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.object);
                             if (message.generation != null && Object.hasOwnProperty.call(message, "generation"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int64(message.generation);
+                            if (message.sourceFetcher != null && Object.hasOwnProperty.call(message, "sourceFetcher"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.sourceFetcher);
                             return writer;
                         };
     
@@ -1349,6 +1360,10 @@
                                         message.generation = reader.int64();
                                         break;
                                     }
+                                case 5: {
+                                        message.sourceFetcher = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -1393,6 +1408,15 @@
                             if (message.generation != null && message.hasOwnProperty("generation"))
                                 if (!$util.isInteger(message.generation) && !(message.generation && $util.isInteger(message.generation.low) && $util.isInteger(message.generation.high)))
                                     return "generation: integer|Long expected";
+                            if (message.sourceFetcher != null && message.hasOwnProperty("sourceFetcher"))
+                                switch (message.sourceFetcher) {
+                                default:
+                                    return "sourceFetcher: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -1421,6 +1445,26 @@
                                     message.generation = object.generation;
                                 else if (typeof object.generation === "object")
                                     message.generation = new $util.LongBits(object.generation.low >>> 0, object.generation.high >>> 0).toNumber();
+                            switch (object.sourceFetcher) {
+                            default:
+                                if (typeof object.sourceFetcher === "number") {
+                                    message.sourceFetcher = object.sourceFetcher;
+                                    break;
+                                }
+                                break;
+                            case "SOURCE_FETCHER_UNSPECIFIED":
+                            case 0:
+                                message.sourceFetcher = 0;
+                                break;
+                            case "GSUTIL":
+                            case 1:
+                                message.sourceFetcher = 1;
+                                break;
+                            case "GCS_FETCHER":
+                            case 2:
+                                message.sourceFetcher = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -1445,6 +1489,7 @@
                                     object.generation = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                                 } else
                                     object.generation = options.longs === String ? "0" : 0;
+                                object.sourceFetcher = options.enums === String ? "SOURCE_FETCHER_UNSPECIFIED" : 0;
                             }
                             if (message.bucket != null && message.hasOwnProperty("bucket"))
                                 object.bucket = message.bucket;
@@ -1455,6 +1500,8 @@
                                     object.generation = options.longs === String ? String(message.generation) : message.generation;
                                 else
                                     object.generation = options.longs === String ? $util.Long.prototype.toString.call(message.generation) : options.longs === Number ? new $util.LongBits(message.generation.low >>> 0, message.generation.high >>> 0).toNumber() : message.generation;
+                            if (message.sourceFetcher != null && message.hasOwnProperty("sourceFetcher"))
+                                object.sourceFetcher = options.enums === String ? $root.google.devtools.cloudbuild.v1.StorageSource.SourceFetcher[message.sourceFetcher] === undefined ? message.sourceFetcher : $root.google.devtools.cloudbuild.v1.StorageSource.SourceFetcher[message.sourceFetcher] : message.sourceFetcher;
                             return object;
                         };
     
@@ -1483,6 +1530,22 @@
                             }
                             return typeUrlPrefix + "/google.devtools.cloudbuild.v1.StorageSource";
                         };
+    
+                        /**
+                         * SourceFetcher enum.
+                         * @name google.devtools.cloudbuild.v1.StorageSource.SourceFetcher
+                         * @enum {number}
+                         * @property {number} SOURCE_FETCHER_UNSPECIFIED=0 SOURCE_FETCHER_UNSPECIFIED value
+                         * @property {number} GSUTIL=1 GSUTIL value
+                         * @property {number} GCS_FETCHER=2 GCS_FETCHER value
+                         */
+                        StorageSource.SourceFetcher = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SOURCE_FETCHER_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "GSUTIL"] = 1;
+                            values[valuesById[2] = "GCS_FETCHER"] = 2;
+                            return values;
+                        })();
     
                         return StorageSource;
                     })();

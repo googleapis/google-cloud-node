@@ -216,6 +216,9 @@ export class DatasetServiceClient {
       datasetPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}'
       ),
+      datasetVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/datasets/{dataset}/datasetVersions/{dataset_version}'
+      ),
       deploymentResourcePoolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}'
       ),
@@ -225,8 +228,17 @@ export class DatasetServiceClient {
       executionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/metadataStores/{metadata_store}/executions/{execution}'
       ),
-      featurePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}'
+      featureGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/featureGroups/{feature_group}'
+      ),
+      featureOnlineStorePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}'
+      ),
+      featureViewPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}/featureViews/{feature_view}'
+      ),
+      featureViewSyncPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}/featureViews/{feature_view}/featureViewSyncs/feature_view_sync'
       ),
       featurestorePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featurestores/{featurestore}'
@@ -277,6 +289,14 @@ export class DatasetServiceClient {
       projectLocationEndpointPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/endpoints/{endpoint}'
       ),
+      projectLocationFeatureGroupFeaturePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/featureGroups/{feature_group}/features/{feature}'
+        ),
+      projectLocationFeaturestoreEntityTypeFeaturePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}'
+        ),
       projectLocationPublisherModelPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/publishers/{publisher}/models/{model}'
@@ -324,6 +344,11 @@ export class DatasetServiceClient {
         'pageToken',
         'nextPageToken',
         'datasets'
+      ),
+      listDatasetVersions: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'datasetVersions'
       ),
       listDataItems: new this._gaxModule.PageDescriptor(
         'pageToken',
@@ -1635,6 +1660,24 @@ export class DatasetServiceClient {
     const exportDataMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1beta1.ExportDataOperationMetadata'
     ) as gax.protobuf.Type;
+    const createDatasetVersionResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.DatasetVersion'
+    ) as gax.protobuf.Type;
+    const createDatasetVersionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.CreateDatasetVersionOperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteDatasetVersionResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteDatasetVersionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata'
+    ) as gax.protobuf.Type;
+    const restoreDatasetVersionResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.DatasetVersion'
+    ) as gax.protobuf.Type;
+    const restoreDatasetVersionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.RestoreDatasetVersionOperationMetadata'
+    ) as gax.protobuf.Type;
     const deleteSavedQueryResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
@@ -1662,6 +1705,23 @@ export class DatasetServiceClient {
         this.operationsClient,
         exportDataResponse.decode.bind(exportDataResponse),
         exportDataMetadata.decode.bind(exportDataMetadata)
+      ),
+      createDatasetVersion: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createDatasetVersionResponse.decode.bind(createDatasetVersionResponse),
+        createDatasetVersionMetadata.decode.bind(createDatasetVersionMetadata)
+      ),
+      deleteDatasetVersion: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteDatasetVersionResponse.decode.bind(deleteDatasetVersionResponse),
+        deleteDatasetVersionMetadata.decode.bind(deleteDatasetVersionMetadata)
+      ),
+      restoreDatasetVersion: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        restoreDatasetVersionResponse.decode.bind(
+          restoreDatasetVersionResponse
+        ),
+        restoreDatasetVersionMetadata.decode.bind(restoreDatasetVersionMetadata)
       ),
       deleteSavedQuery: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -1727,6 +1787,11 @@ export class DatasetServiceClient {
       'deleteDataset',
       'importData',
       'exportData',
+      'createDatasetVersion',
+      'deleteDatasetVersion',
+      'getDatasetVersion',
+      'listDatasetVersions',
+      'restoreDatasetVersion',
       'listDataItems',
       'searchDataItems',
       'listSavedQueries',
@@ -2008,6 +2073,106 @@ export class DatasetServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.updateDataset(request, options, callback);
+  }
+  /**
+   * Gets a Dataset version.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the Dataset version to delete.
+   *   Format:
+   *   `projects/{project}/locations/{location}/datasets/{dataset}/datasetVersions/{dataset_version}`
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.DatasetVersion|DatasetVersion}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataset_service.get_dataset_version.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_DatasetService_GetDatasetVersion_async
+   */
+  getDatasetVersion(
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetDatasetVersionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IDatasetVersion,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IGetDatasetVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getDatasetVersion(
+    request: protos.google.cloud.aiplatform.v1beta1.IGetDatasetVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IDatasetVersion,
+      | protos.google.cloud.aiplatform.v1beta1.IGetDatasetVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getDatasetVersion(
+    request: protos.google.cloud.aiplatform.v1beta1.IGetDatasetVersionRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IDatasetVersion,
+      | protos.google.cloud.aiplatform.v1beta1.IGetDatasetVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getDatasetVersion(
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetDatasetVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.IDatasetVersion,
+          | protos.google.cloud.aiplatform.v1beta1.IGetDatasetVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IDatasetVersion,
+      | protos.google.cloud.aiplatform.v1beta1.IGetDatasetVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IDatasetVersion,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IGetDatasetVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getDatasetVersion(request, options, callback);
   }
   /**
    * Gets an AnnotationSpec.
@@ -2669,6 +2834,424 @@ export class DatasetServiceClient {
     >;
   }
   /**
+   * Create a version from a Dataset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the Dataset resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/datasets/{dataset}`
+   * @param {google.cloud.aiplatform.v1beta1.DatasetVersion} request.datasetVersion
+   *   Required. The version to be created. The same CMEK policies with the
+   *   original Dataset will be applied the dataset version. So here we don't need
+   *   to specify the EncryptionSpecType here.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataset_service.create_dataset_version.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_DatasetService_CreateDatasetVersion_async
+   */
+  createDatasetVersion(
+    request?: protos.google.cloud.aiplatform.v1beta1.ICreateDatasetVersionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDatasetVersion,
+        protos.google.cloud.aiplatform.v1beta1.ICreateDatasetVersionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createDatasetVersion(
+    request: protos.google.cloud.aiplatform.v1beta1.ICreateDatasetVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDatasetVersion,
+        protos.google.cloud.aiplatform.v1beta1.ICreateDatasetVersionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createDatasetVersion(
+    request: protos.google.cloud.aiplatform.v1beta1.ICreateDatasetVersionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDatasetVersion,
+        protos.google.cloud.aiplatform.v1beta1.ICreateDatasetVersionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createDatasetVersion(
+    request?: protos.google.cloud.aiplatform.v1beta1.ICreateDatasetVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1beta1.IDatasetVersion,
+            protos.google.cloud.aiplatform.v1beta1.ICreateDatasetVersionOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDatasetVersion,
+        protos.google.cloud.aiplatform.v1beta1.ICreateDatasetVersionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDatasetVersion,
+        protos.google.cloud.aiplatform.v1beta1.ICreateDatasetVersionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createDatasetVersion(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `createDatasetVersion()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataset_service.create_dataset_version.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_DatasetService_CreateDatasetVersion_async
+   */
+  async checkCreateDatasetVersionProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1beta1.DatasetVersion,
+      protos.google.cloud.aiplatform.v1beta1.CreateDatasetVersionOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createDatasetVersion,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1beta1.DatasetVersion,
+      protos.google.cloud.aiplatform.v1beta1.CreateDatasetVersionOperationMetadata
+    >;
+  }
+  /**
+   * Deletes a Dataset version.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the Dataset version to delete.
+   *   Format:
+   *   `projects/{project}/locations/{location}/datasets/{dataset}/datasetVersions/{dataset_version}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataset_service.delete_dataset_version.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_DatasetService_DeleteDatasetVersion_async
+   */
+  deleteDatasetVersion(
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteDatasetVersionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteDatasetVersion(
+    request: protos.google.cloud.aiplatform.v1beta1.IDeleteDatasetVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteDatasetVersion(
+    request: protos.google.cloud.aiplatform.v1beta1.IDeleteDatasetVersionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteDatasetVersion(
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteDatasetVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteDatasetVersion(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteDatasetVersion()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataset_service.delete_dataset_version.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_DatasetService_DeleteDatasetVersion_async
+   */
+  async checkDeleteDatasetVersionProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteDatasetVersion,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
+    >;
+  }
+  /**
+   * Restores a dataset version.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the DatasetVersion resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/datasets/{dataset}/datasetVersions/{dataset_version}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataset_service.restore_dataset_version.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_DatasetService_RestoreDatasetVersion_async
+   */
+  restoreDatasetVersion(
+    request?: protos.google.cloud.aiplatform.v1beta1.IRestoreDatasetVersionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDatasetVersion,
+        protos.google.cloud.aiplatform.v1beta1.IRestoreDatasetVersionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  restoreDatasetVersion(
+    request: protos.google.cloud.aiplatform.v1beta1.IRestoreDatasetVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDatasetVersion,
+        protos.google.cloud.aiplatform.v1beta1.IRestoreDatasetVersionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  restoreDatasetVersion(
+    request: protos.google.cloud.aiplatform.v1beta1.IRestoreDatasetVersionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDatasetVersion,
+        protos.google.cloud.aiplatform.v1beta1.IRestoreDatasetVersionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  restoreDatasetVersion(
+    request?: protos.google.cloud.aiplatform.v1beta1.IRestoreDatasetVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1beta1.IDatasetVersion,
+            protos.google.cloud.aiplatform.v1beta1.IRestoreDatasetVersionOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDatasetVersion,
+        protos.google.cloud.aiplatform.v1beta1.IRestoreDatasetVersionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDatasetVersion,
+        protos.google.cloud.aiplatform.v1beta1.IRestoreDatasetVersionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.restoreDatasetVersion(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `restoreDatasetVersion()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataset_service.restore_dataset_version.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_DatasetService_RestoreDatasetVersion_async
+   */
+  async checkRestoreDatasetVersionProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1beta1.DatasetVersion,
+      protos.google.cloud.aiplatform.v1beta1.RestoreDatasetVersionOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.restoreDatasetVersion,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1beta1.DatasetVersion,
+      protos.google.cloud.aiplatform.v1beta1.RestoreDatasetVersionOperationMetadata
+    >;
+  }
+  /**
    * Deletes a SavedQuery.
    *
    * @param {Object} request
@@ -3069,6 +3652,219 @@ export class DatasetServiceClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IDataset>;
+  }
+  /**
+   * Lists DatasetVersions in a Dataset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Dataset to list DatasetVersions from.
+   *   Format:
+   *   `projects/{project}/locations/{location}/datasets/{dataset}`
+   * @param {string} [request.filter]
+   *   Optional. The standard list filter.
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
+   * @param {google.protobuf.FieldMask} [request.readMask]
+   *   Optional. Mask specifying which fields to read.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields to order by, sorted in ascending
+   *   order. Use "desc" after a field name for descending.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.DatasetVersion|DatasetVersion}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listDatasetVersionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listDatasetVersions(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListDatasetVersionsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IDatasetVersion[],
+      protos.google.cloud.aiplatform.v1beta1.IListDatasetVersionsRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.IListDatasetVersionsResponse,
+    ]
+  >;
+  listDatasetVersions(
+    request: protos.google.cloud.aiplatform.v1beta1.IListDatasetVersionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListDatasetVersionsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListDatasetVersionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IDatasetVersion
+    >
+  ): void;
+  listDatasetVersions(
+    request: protos.google.cloud.aiplatform.v1beta1.IListDatasetVersionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListDatasetVersionsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListDatasetVersionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IDatasetVersion
+    >
+  ): void;
+  listDatasetVersions(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListDatasetVersionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListDatasetVersionsRequest,
+          | protos.google.cloud.aiplatform.v1beta1.IListDatasetVersionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1beta1.IDatasetVersion
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListDatasetVersionsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListDatasetVersionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IDatasetVersion
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IDatasetVersion[],
+      protos.google.cloud.aiplatform.v1beta1.IListDatasetVersionsRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.IListDatasetVersionsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listDatasetVersions(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Dataset to list DatasetVersions from.
+   *   Format:
+   *   `projects/{project}/locations/{location}/datasets/{dataset}`
+   * @param {string} [request.filter]
+   *   Optional. The standard list filter.
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
+   * @param {google.protobuf.FieldMask} [request.readMask]
+   *   Optional. Mask specifying which fields to read.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields to order by, sorted in ascending
+   *   order. Use "desc" after a field name for descending.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.DatasetVersion|DatasetVersion} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listDatasetVersionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listDatasetVersionsStream(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListDatasetVersionsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listDatasetVersions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listDatasetVersions.createStream(
+      this.innerApiCalls.listDatasetVersions as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listDatasetVersions`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Dataset to list DatasetVersions from.
+   *   Format:
+   *   `projects/{project}/locations/{location}/datasets/{dataset}`
+   * @param {string} [request.filter]
+   *   Optional. The standard list filter.
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
+   * @param {google.protobuf.FieldMask} [request.readMask]
+   *   Optional. Mask specifying which fields to read.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields to order by, sorted in ascending
+   *   order. Use "desc" after a field name for descending.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.aiplatform.v1beta1.DatasetVersion|DatasetVersion}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataset_service.list_dataset_versions.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_DatasetService_ListDatasetVersions_async
+   */
+  listDatasetVersionsAsync(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListDatasetVersionsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IDatasetVersion> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listDatasetVersions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listDatasetVersions.asyncIterate(
+      this.innerApiCalls['listDatasetVersions'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IDatasetVersion>;
   }
   /**
    * Lists DataItems in a Dataset.
@@ -5048,6 +5844,81 @@ export class DatasetServiceClient {
   }
 
   /**
+   * Return a fully-qualified datasetVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} dataset
+   * @param {string} dataset_version
+   * @returns {string} Resource name string.
+   */
+  datasetVersionPath(
+    project: string,
+    location: string,
+    dataset: string,
+    datasetVersion: string
+  ) {
+    return this.pathTemplates.datasetVersionPathTemplate.render({
+      project: project,
+      location: location,
+      dataset: dataset,
+      dataset_version: datasetVersion,
+    });
+  }
+
+  /**
+   * Parse the project from DatasetVersion resource.
+   *
+   * @param {string} datasetVersionName
+   *   A fully-qualified path representing DatasetVersion resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDatasetVersionName(datasetVersionName: string) {
+    return this.pathTemplates.datasetVersionPathTemplate.match(
+      datasetVersionName
+    ).project;
+  }
+
+  /**
+   * Parse the location from DatasetVersion resource.
+   *
+   * @param {string} datasetVersionName
+   *   A fully-qualified path representing DatasetVersion resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDatasetVersionName(datasetVersionName: string) {
+    return this.pathTemplates.datasetVersionPathTemplate.match(
+      datasetVersionName
+    ).location;
+  }
+
+  /**
+   * Parse the dataset from DatasetVersion resource.
+   *
+   * @param {string} datasetVersionName
+   *   A fully-qualified path representing DatasetVersion resource.
+   * @returns {string} A string representing the dataset.
+   */
+  matchDatasetFromDatasetVersionName(datasetVersionName: string) {
+    return this.pathTemplates.datasetVersionPathTemplate.match(
+      datasetVersionName
+    ).dataset;
+  }
+
+  /**
+   * Parse the dataset_version from DatasetVersion resource.
+   *
+   * @param {string} datasetVersionName
+   *   A fully-qualified path representing DatasetVersion resource.
+   * @returns {string} A string representing the dataset_version.
+   */
+  matchDatasetVersionFromDatasetVersionName(datasetVersionName: string) {
+    return this.pathTemplates.datasetVersionPathTemplate.match(
+      datasetVersionName
+    ).dataset_version;
+  }
+
+  /**
    * Return a fully-qualified deploymentResourcePool resource name string.
    *
    * @param {string} project
@@ -5255,86 +6126,262 @@ export class DatasetServiceClient {
   }
 
   /**
-   * Return a fully-qualified feature resource name string.
+   * Return a fully-qualified featureGroup resource name string.
    *
    * @param {string} project
    * @param {string} location
-   * @param {string} featurestore
-   * @param {string} entity_type
-   * @param {string} feature
+   * @param {string} feature_group
    * @returns {string} Resource name string.
    */
-  featurePath(
-    project: string,
-    location: string,
-    featurestore: string,
-    entityType: string,
-    feature: string
-  ) {
-    return this.pathTemplates.featurePathTemplate.render({
+  featureGroupPath(project: string, location: string, featureGroup: string) {
+    return this.pathTemplates.featureGroupPathTemplate.render({
       project: project,
       location: location,
-      featurestore: featurestore,
-      entity_type: entityType,
-      feature: feature,
+      feature_group: featureGroup,
     });
   }
 
   /**
-   * Parse the project from Feature resource.
+   * Parse the project from FeatureGroup resource.
    *
-   * @param {string} featureName
-   *   A fully-qualified path representing Feature resource.
+   * @param {string} featureGroupName
+   *   A fully-qualified path representing FeatureGroup resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromFeatureName(featureName: string) {
-    return this.pathTemplates.featurePathTemplate.match(featureName).project;
+  matchProjectFromFeatureGroupName(featureGroupName: string) {
+    return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName)
+      .project;
   }
 
   /**
-   * Parse the location from Feature resource.
+   * Parse the location from FeatureGroup resource.
    *
-   * @param {string} featureName
-   *   A fully-qualified path representing Feature resource.
+   * @param {string} featureGroupName
+   *   A fully-qualified path representing FeatureGroup resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFeatureName(featureName: string) {
-    return this.pathTemplates.featurePathTemplate.match(featureName).location;
+  matchLocationFromFeatureGroupName(featureGroupName: string) {
+    return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName)
+      .location;
   }
 
   /**
-   * Parse the featurestore from Feature resource.
+   * Parse the feature_group from FeatureGroup resource.
    *
-   * @param {string} featureName
-   *   A fully-qualified path representing Feature resource.
-   * @returns {string} A string representing the featurestore.
+   * @param {string} featureGroupName
+   *   A fully-qualified path representing FeatureGroup resource.
+   * @returns {string} A string representing the feature_group.
    */
-  matchFeaturestoreFromFeatureName(featureName: string) {
-    return this.pathTemplates.featurePathTemplate.match(featureName)
-      .featurestore;
+  matchFeatureGroupFromFeatureGroupName(featureGroupName: string) {
+    return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName)
+      .feature_group;
   }
 
   /**
-   * Parse the entity_type from Feature resource.
+   * Return a fully-qualified featureOnlineStore resource name string.
    *
-   * @param {string} featureName
-   *   A fully-qualified path representing Feature resource.
-   * @returns {string} A string representing the entity_type.
+   * @param {string} project
+   * @param {string} location
+   * @param {string} feature_online_store
+   * @returns {string} Resource name string.
    */
-  matchEntityTypeFromFeatureName(featureName: string) {
-    return this.pathTemplates.featurePathTemplate.match(featureName)
-      .entity_type;
+  featureOnlineStorePath(
+    project: string,
+    location: string,
+    featureOnlineStore: string
+  ) {
+    return this.pathTemplates.featureOnlineStorePathTemplate.render({
+      project: project,
+      location: location,
+      feature_online_store: featureOnlineStore,
+    });
   }
 
   /**
-   * Parse the feature from Feature resource.
+   * Parse the project from FeatureOnlineStore resource.
    *
-   * @param {string} featureName
-   *   A fully-qualified path representing Feature resource.
-   * @returns {string} A string representing the feature.
+   * @param {string} featureOnlineStoreName
+   *   A fully-qualified path representing FeatureOnlineStore resource.
+   * @returns {string} A string representing the project.
    */
-  matchFeatureFromFeatureName(featureName: string) {
-    return this.pathTemplates.featurePathTemplate.match(featureName).feature;
+  matchProjectFromFeatureOnlineStoreName(featureOnlineStoreName: string) {
+    return this.pathTemplates.featureOnlineStorePathTemplate.match(
+      featureOnlineStoreName
+    ).project;
+  }
+
+  /**
+   * Parse the location from FeatureOnlineStore resource.
+   *
+   * @param {string} featureOnlineStoreName
+   *   A fully-qualified path representing FeatureOnlineStore resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFeatureOnlineStoreName(featureOnlineStoreName: string) {
+    return this.pathTemplates.featureOnlineStorePathTemplate.match(
+      featureOnlineStoreName
+    ).location;
+  }
+
+  /**
+   * Parse the feature_online_store from FeatureOnlineStore resource.
+   *
+   * @param {string} featureOnlineStoreName
+   *   A fully-qualified path representing FeatureOnlineStore resource.
+   * @returns {string} A string representing the feature_online_store.
+   */
+  matchFeatureOnlineStoreFromFeatureOnlineStoreName(
+    featureOnlineStoreName: string
+  ) {
+    return this.pathTemplates.featureOnlineStorePathTemplate.match(
+      featureOnlineStoreName
+    ).feature_online_store;
+  }
+
+  /**
+   * Return a fully-qualified featureView resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} feature_online_store
+   * @param {string} feature_view
+   * @returns {string} Resource name string.
+   */
+  featureViewPath(
+    project: string,
+    location: string,
+    featureOnlineStore: string,
+    featureView: string
+  ) {
+    return this.pathTemplates.featureViewPathTemplate.render({
+      project: project,
+      location: location,
+      feature_online_store: featureOnlineStore,
+      feature_view: featureView,
+    });
+  }
+
+  /**
+   * Parse the project from FeatureView resource.
+   *
+   * @param {string} featureViewName
+   *   A fully-qualified path representing FeatureView resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromFeatureViewName(featureViewName: string) {
+    return this.pathTemplates.featureViewPathTemplate.match(featureViewName)
+      .project;
+  }
+
+  /**
+   * Parse the location from FeatureView resource.
+   *
+   * @param {string} featureViewName
+   *   A fully-qualified path representing FeatureView resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFeatureViewName(featureViewName: string) {
+    return this.pathTemplates.featureViewPathTemplate.match(featureViewName)
+      .location;
+  }
+
+  /**
+   * Parse the feature_online_store from FeatureView resource.
+   *
+   * @param {string} featureViewName
+   *   A fully-qualified path representing FeatureView resource.
+   * @returns {string} A string representing the feature_online_store.
+   */
+  matchFeatureOnlineStoreFromFeatureViewName(featureViewName: string) {
+    return this.pathTemplates.featureViewPathTemplate.match(featureViewName)
+      .feature_online_store;
+  }
+
+  /**
+   * Parse the feature_view from FeatureView resource.
+   *
+   * @param {string} featureViewName
+   *   A fully-qualified path representing FeatureView resource.
+   * @returns {string} A string representing the feature_view.
+   */
+  matchFeatureViewFromFeatureViewName(featureViewName: string) {
+    return this.pathTemplates.featureViewPathTemplate.match(featureViewName)
+      .feature_view;
+  }
+
+  /**
+   * Return a fully-qualified featureViewSync resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} feature_online_store
+   * @param {string} feature_view
+   * @returns {string} Resource name string.
+   */
+  featureViewSyncPath(
+    project: string,
+    location: string,
+    featureOnlineStore: string,
+    featureView: string
+  ) {
+    return this.pathTemplates.featureViewSyncPathTemplate.render({
+      project: project,
+      location: location,
+      feature_online_store: featureOnlineStore,
+      feature_view: featureView,
+    });
+  }
+
+  /**
+   * Parse the project from FeatureViewSync resource.
+   *
+   * @param {string} featureViewSyncName
+   *   A fully-qualified path representing FeatureViewSync resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromFeatureViewSyncName(featureViewSyncName: string) {
+    return this.pathTemplates.featureViewSyncPathTemplate.match(
+      featureViewSyncName
+    ).project;
+  }
+
+  /**
+   * Parse the location from FeatureViewSync resource.
+   *
+   * @param {string} featureViewSyncName
+   *   A fully-qualified path representing FeatureViewSync resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFeatureViewSyncName(featureViewSyncName: string) {
+    return this.pathTemplates.featureViewSyncPathTemplate.match(
+      featureViewSyncName
+    ).location;
+  }
+
+  /**
+   * Parse the feature_online_store from FeatureViewSync resource.
+   *
+   * @param {string} featureViewSyncName
+   *   A fully-qualified path representing FeatureViewSync resource.
+   * @returns {string} A string representing the feature_online_store.
+   */
+  matchFeatureOnlineStoreFromFeatureViewSyncName(featureViewSyncName: string) {
+    return this.pathTemplates.featureViewSyncPathTemplate.match(
+      featureViewSyncName
+    ).feature_online_store;
+  }
+
+  /**
+   * Parse the feature_view from FeatureViewSync resource.
+   *
+   * @param {string} featureViewSyncName
+   *   A fully-qualified path representing FeatureViewSync resource.
+   * @returns {string} A string representing the feature_view.
+   */
+  matchFeatureViewFromFeatureViewSyncName(featureViewSyncName: string) {
+    return this.pathTemplates.featureViewSyncPathTemplate.match(
+      featureViewSyncName
+    ).feature_view;
   }
 
   /**
@@ -6300,6 +7347,194 @@ export class DatasetServiceClient {
     return this.pathTemplates.projectLocationEndpointPathTemplate.match(
       projectLocationEndpointName
     ).endpoint;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationFeatureGroupFeature resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} feature_group
+   * @param {string} feature
+   * @returns {string} Resource name string.
+   */
+  projectLocationFeatureGroupFeaturePath(
+    project: string,
+    location: string,
+    featureGroup: string,
+    feature: string
+  ) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        feature_group: featureGroup,
+        feature: feature,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationFeatureGroupFeature resource.
+   *
+   * @param {string} projectLocationFeatureGroupFeatureName
+   *   A fully-qualified path representing project_location_feature_group_feature resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationFeatureGroupFeatureName(
+    projectLocationFeatureGroupFeatureName: string
+  ) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(
+      projectLocationFeatureGroupFeatureName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationFeatureGroupFeature resource.
+   *
+   * @param {string} projectLocationFeatureGroupFeatureName
+   *   A fully-qualified path representing project_location_feature_group_feature resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationFeatureGroupFeatureName(
+    projectLocationFeatureGroupFeatureName: string
+  ) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(
+      projectLocationFeatureGroupFeatureName
+    ).location;
+  }
+
+  /**
+   * Parse the feature_group from ProjectLocationFeatureGroupFeature resource.
+   *
+   * @param {string} projectLocationFeatureGroupFeatureName
+   *   A fully-qualified path representing project_location_feature_group_feature resource.
+   * @returns {string} A string representing the feature_group.
+   */
+  matchFeatureGroupFromProjectLocationFeatureGroupFeatureName(
+    projectLocationFeatureGroupFeatureName: string
+  ) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(
+      projectLocationFeatureGroupFeatureName
+    ).feature_group;
+  }
+
+  /**
+   * Parse the feature from ProjectLocationFeatureGroupFeature resource.
+   *
+   * @param {string} projectLocationFeatureGroupFeatureName
+   *   A fully-qualified path representing project_location_feature_group_feature resource.
+   * @returns {string} A string representing the feature.
+   */
+  matchFeatureFromProjectLocationFeatureGroupFeatureName(
+    projectLocationFeatureGroupFeatureName: string
+  ) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(
+      projectLocationFeatureGroupFeatureName
+    ).feature;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationFeaturestoreEntityTypeFeature resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} featurestore
+   * @param {string} entity_type
+   * @param {string} feature
+   * @returns {string} Resource name string.
+   */
+  projectLocationFeaturestoreEntityTypeFeaturePath(
+    project: string,
+    location: string,
+    featurestore: string,
+    entityType: string,
+    feature: string
+  ) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        featurestore: featurestore,
+        entity_type: entityType,
+        feature: feature,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationFeaturestoreEntityTypeFeature resource.
+   *
+   * @param {string} projectLocationFeaturestoreEntityTypeFeatureName
+   *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName(
+    projectLocationFeaturestoreEntityTypeFeatureName: string
+  ) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(
+      projectLocationFeaturestoreEntityTypeFeatureName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationFeaturestoreEntityTypeFeature resource.
+   *
+   * @param {string} projectLocationFeaturestoreEntityTypeFeatureName
+   *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName(
+    projectLocationFeaturestoreEntityTypeFeatureName: string
+  ) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(
+      projectLocationFeaturestoreEntityTypeFeatureName
+    ).location;
+  }
+
+  /**
+   * Parse the featurestore from ProjectLocationFeaturestoreEntityTypeFeature resource.
+   *
+   * @param {string} projectLocationFeaturestoreEntityTypeFeatureName
+   *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
+   * @returns {string} A string representing the featurestore.
+   */
+  matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName(
+    projectLocationFeaturestoreEntityTypeFeatureName: string
+  ) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(
+      projectLocationFeaturestoreEntityTypeFeatureName
+    ).featurestore;
+  }
+
+  /**
+   * Parse the entity_type from ProjectLocationFeaturestoreEntityTypeFeature resource.
+   *
+   * @param {string} projectLocationFeaturestoreEntityTypeFeatureName
+   *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
+   * @returns {string} A string representing the entity_type.
+   */
+  matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName(
+    projectLocationFeaturestoreEntityTypeFeatureName: string
+  ) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(
+      projectLocationFeaturestoreEntityTypeFeatureName
+    ).entity_type;
+  }
+
+  /**
+   * Parse the feature from ProjectLocationFeaturestoreEntityTypeFeature resource.
+   *
+   * @param {string} projectLocationFeaturestoreEntityTypeFeatureName
+   *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
+   * @returns {string} A string representing the feature.
+   */
+  matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName(
+    projectLocationFeaturestoreEntityTypeFeatureName: string
+  ) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(
+      projectLocationFeaturestoreEntityTypeFeatureName
+    ).feature;
   }
 
   /**

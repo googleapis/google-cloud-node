@@ -23,6 +23,7 @@ import "google/api/resource.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
+import "google/rpc/status.proto";
 
 option csharp_namespace = "Google.Cloud.RecaptchaEnterprise.V1";
 option go_package = "cloud.google.com/go/recaptchaenterprise/v2/apiv1/recaptchaenterprisepb;recaptchaenterprisepb";
@@ -115,7 +116,7 @@ service RecaptchaEnterpriseService {
   // Migrates an existing key from reCAPTCHA to reCAPTCHA Enterprise.
   // Once a key is migrated, it can be used from either product. SiteVerify
   // requests are billed as CreateAssessment calls. You must be
-  // authenticated as one of the current owners of the reCAPTCHA Site Key, and
+  // authenticated as one of the current owners of the reCAPTCHA Key, and
   // your user must have the reCAPTCHA Enterprise Admin IAM role in the
   // destination project.
   rpc MigrateKey(MigrateKeyRequest) returns (Key) {
@@ -130,6 +131,54 @@ service RecaptchaEnterpriseService {
   rpc GetMetrics(GetMetricsRequest) returns (Metrics) {
     option (google.api.http) = {
       get: "/v1/{name=projects/*/keys/*/metrics}"
+    };
+    option (google.api.method_signature) = "name";
+  }
+
+  // Creates a new FirewallPolicy, specifying conditions at which reCAPTCHA
+  // Enterprise actions can be executed.
+  // A project may have a maximum of 1000 policies.
+  rpc CreateFirewallPolicy(CreateFirewallPolicyRequest)
+      returns (FirewallPolicy) {
+    option (google.api.http) = {
+      post: "/v1/{parent=projects/*}/firewallpolicies"
+      body: "firewall_policy"
+    };
+    option (google.api.method_signature) = "parent,firewall_policy";
+  }
+
+  // Returns the list of all firewall policies that belong to a project.
+  rpc ListFirewallPolicies(ListFirewallPoliciesRequest)
+      returns (ListFirewallPoliciesResponse) {
+    option (google.api.http) = {
+      get: "/v1/{parent=projects/*}/firewallpolicies"
+    };
+    option (google.api.method_signature) = "parent";
+  }
+
+  // Returns the specified firewall policy.
+  rpc GetFirewallPolicy(GetFirewallPolicyRequest) returns (FirewallPolicy) {
+    option (google.api.http) = {
+      get: "/v1/{name=projects/*/firewallpolicies/*}"
+    };
+    option (google.api.method_signature) = "name";
+  }
+
+  // Updates the specified firewall policy.
+  rpc UpdateFirewallPolicy(UpdateFirewallPolicyRequest)
+      returns (FirewallPolicy) {
+    option (google.api.http) = {
+      patch: "/v1/{firewall_policy.name=projects/*/firewallpolicies/*}"
+      body: "firewall_policy"
+    };
+    option (google.api.method_signature) = "firewall_policy,update_mask";
+  }
+
+  // Deletes the specified firewall policy.
+  rpc DeleteFirewallPolicy(DeleteFirewallPolicyRequest)
+      returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1/{name=projects/*/firewallpolicies/*}"
     };
     option (google.api.method_signature) = "name";
   }
@@ -168,7 +217,7 @@ service RecaptchaEnterpriseService {
 // The create assessment request message.
 message CreateAssessmentRequest {
   // Required. The name of the project in which the assessment will be created,
-  // in the format "projects/{project}".
+  // in the format `projects/{project}`.
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
@@ -389,7 +438,7 @@ message AnnotateAssessmentRequest {
   }
 
   // Required. The resource name of the Assessment, in the format
-  // "projects/{project}/assessments/{assessment}".
+  // `projects/{project}/assessments/{assessment}`.
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
@@ -488,12 +537,13 @@ message AccountVerificationInfo {
     ERROR_VERDICT_MISMATCH = 9;
   }
 
-  // Endpoints that can be used for identity verification.
-  repeated EndpointVerificationInfo endpoints = 1;
+  // Optional. Endpoints that can be used for identity verification.
+  repeated EndpointVerificationInfo endpoints = 1
+      [(google.api.field_behavior) = OPTIONAL];
 
-  // Language code preference for the verification message, set as a IETF BCP 47
-  // language code.
-  string language_code = 3;
+  // Optional. Language code preference for the verification message, set as a
+  // IETF BCP 47 language code.
+  string language_code = 3 [(google.api.field_behavior) = OPTIONAL];
 
   // Output only. Result of the latest account verification challenge.
   Result latest_verification_result = 7
@@ -506,10 +556,10 @@ message AccountVerificationInfo {
 
 // Private password leak verification info.
 message PrivatePasswordLeakVerification {
-  // Optional. Exactly 26-bit prefix of the SHA-256 hash of the canonicalized
+  // Required. Exactly 26-bit prefix of the SHA-256 hash of the canonicalized
   // username. It is used to look up password leaks associated with that hash
   // prefix.
-  bytes lookup_hash_prefix = 1 [(google.api.field_behavior) = OPTIONAL];
+  bytes lookup_hash_prefix = 1 [(google.api.field_behavior) = REQUIRED];
 
   // Optional. Encrypted Scrypt hash of the canonicalized username+password. It
   // is re-encrypted by the server and returned through
@@ -538,11 +588,11 @@ message Assessment {
   };
 
   // Output only. The resource name for the Assessment in the format
-  // "projects/{project}/assessments/{assessment}".
+  // `projects/{project}/assessments/{assessment}`.
   string name = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // The event being assessed.
-  Event event = 2;
+  // Optional. The event being assessed.
+  Event event = 2 [(google.api.field_behavior) = OPTIONAL];
 
   // Output only. The risk analysis result for the event being assessed.
   RiskAnalysis risk_analysis = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
@@ -551,20 +601,35 @@ message Assessment {
   TokenProperties token_properties = 4
       [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Account verification information for identity verification. The assessment
-  // event must include a token and site key to use this feature.
-  AccountVerificationInfo account_verification = 5;
+  // Optional. Account verification information for identity verification. The
+  // assessment event must include a token and site key to use this feature.
+  AccountVerificationInfo account_verification = 5
+      [(google.api.field_behavior) = OPTIONAL];
 
-  // Assessment returned by account defender when a hashed_account_id is
-  // provided.
-  AccountDefenderAssessment account_defender_assessment = 6;
+  // Output only. Assessment returned by account defender when a
+  // hashed_account_id is provided.
+  AccountDefenderAssessment account_defender_assessment = 6
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // The private password leak verification field contains the parameters that
-  // are used to to check for leaks privately without sharing user credentials.
-  PrivatePasswordLeakVerification private_password_leak_verification = 8;
+  // Optional. The private password leak verification field contains the
+  // parameters that are used to to check for leaks privately without sharing
+  // user credentials.
+  PrivatePasswordLeakVerification private_password_leak_verification = 8
+      [(google.api.field_behavior) = OPTIONAL];
 
-  // Assessment returned by Fraud Prevention when TransactionData is provided.
-  FraudPreventionAssessment fraud_prevention_assessment = 11;
+  // Output only. Assessment returned when firewall policies belonging to the
+  // project are evaluated using the field firewall_policy_evaluation.
+  FirewallPolicyAssessment firewall_policy_assessment = 10
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Assessment returned by Fraud Prevention when TransactionData
+  // is provided.
+  FraudPreventionAssessment fraud_prevention_assessment = 11
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Fraud Signals specific to the users involved in a payment
+  // transaction.
+  FraudSignals fraud_signals = 13 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // The event being assessed.
@@ -594,6 +659,30 @@ message Event {
   // identifier must be hashed using hmac-sha256 with stable secret.
   bytes hashed_account_id = 6 [(google.api.field_behavior) = OPTIONAL];
 
+  // Optional. Flag for a reCAPTCHA express request for an assessment without a
+  // token. If enabled, `site_key` must reference a SCORE key with WAF feature
+  // set to EXPRESS.
+  bool express = 14 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The URI resource the user requested that triggered an assessment.
+  string requested_uri = 8 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Flag for running WAF token assessment.
+  // If enabled, the token must be specified, and have been created by a
+  // WAF-enabled key.
+  bool waf_token_assessment = 9 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. JA3 fingerprint for SSL clients.
+  string ja3 = 10 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. HTTP header information about the request.
+  repeated string headers = 11 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Flag for enabling firewall policy config assessment.
+  // If this flag is enabled, the firewall policy will be evaluated and a
+  // suggested firewall action will be returned in the response.
+  bool firewall_policy_evaluation = 12 [(google.api.field_behavior) = OPTIONAL];
+
   // Optional. Data describing a payment transaction to be assessed. Sending
   // this data enables reCAPTCHA Enterprise Fraud Prevention and the
   // FraudPreventionAssessment component in the response.
@@ -602,88 +691,90 @@ message Event {
 }
 
 // Transaction data associated with a payment protected by reCAPTCHA Enterprise.
-// All fields are optional.
 message TransactionData {
   // Structured address format for billing and shipping addresses.
   message Address {
-    // The recipient name, potentially including information such as "care of".
-    string recipient = 1;
+    // Optional. The recipient name, potentially including information such as
+    // "care of".
+    string recipient = 1 [(google.api.field_behavior) = OPTIONAL];
 
-    // The first lines of the address. The first line generally contains the
-    // street name and number, and further lines may include information such as
-    // an apartment number.
-    repeated string address = 2;
+    // Optional. The first lines of the address. The first line generally
+    // contains the street name and number, and further lines may include
+    // information such as an apartment number.
+    repeated string address = 2 [(google.api.field_behavior) = OPTIONAL];
 
-    // The town/city of the address.
-    string locality = 3;
+    // Optional. The town/city of the address.
+    string locality = 3 [(google.api.field_behavior) = OPTIONAL];
 
-    // The state, province, or otherwise administrative area of the address.
-    string administrative_area = 4;
+    // Optional. The state, province, or otherwise administrative area of the
+    // address.
+    string administrative_area = 4 [(google.api.field_behavior) = OPTIONAL];
 
-    // The CLDR country/region of the address.
-    string region_code = 5;
+    // Optional. The CLDR country/region of the address.
+    string region_code = 5 [(google.api.field_behavior) = OPTIONAL];
 
-    // The postal or ZIP code of the address.
-    string postal_code = 6;
+    // Optional. The postal or ZIP code of the address.
+    string postal_code = 6 [(google.api.field_behavior) = OPTIONAL];
   }
 
   // Details about a user's account involved in the transaction.
   message User {
-    // Unique account identifier for this user. If using account defender,
-    // this should match the hashed_account_id field. Otherwise, a unique and
-    // persistent identifier for this account.
-    string account_id = 6;
+    // Optional. Unique account identifier for this user. If using account
+    // defender, this should match the hashed_account_id field. Otherwise, a
+    // unique and persistent identifier for this account.
+    string account_id = 6 [(google.api.field_behavior) = OPTIONAL];
 
-    // The epoch milliseconds of the user's account creation.
-    int64 creation_ms = 1;
+    // Optional. The epoch milliseconds of the user's account creation.
+    int64 creation_ms = 1 [(google.api.field_behavior) = OPTIONAL];
 
-    // The email address of the user.
-    string email = 2;
+    // Optional. The email address of the user.
+    string email = 2 [(google.api.field_behavior) = OPTIONAL];
 
-    // Whether the email has been verified to be accessible by the user (OTP or
-    // similar).
-    bool email_verified = 3;
+    // Optional. Whether the email has been verified to be accessible by the
+    // user (OTP or similar).
+    bool email_verified = 3 [(google.api.field_behavior) = OPTIONAL];
 
-    // The phone number of the user, with country code.
-    string phone_number = 4;
+    // Optional. The phone number of the user, with country code.
+    string phone_number = 4 [(google.api.field_behavior) = OPTIONAL];
 
-    // Whether the phone number has been verified to be accessible by the user
-    // (OTP or similar).
-    bool phone_verified = 5;
+    // Optional. Whether the phone number has been verified to be accessible by
+    // the user (OTP or similar).
+    bool phone_verified = 5 [(google.api.field_behavior) = OPTIONAL];
   }
 
   // Line items being purchased in this transaction.
   message Item {
-    // The full name of the item.
-    string name = 1;
+    // Optional. The full name of the item.
+    string name = 1 [(google.api.field_behavior) = OPTIONAL];
 
-    // The value per item that the user is paying, in the transaction currency,
-    // after discounts.
-    double value = 2;
+    // Optional. The value per item that the user is paying, in the transaction
+    // currency, after discounts.
+    double value = 2 [(google.api.field_behavior) = OPTIONAL];
 
-    // The quantity of this item that is being purchased.
-    int64 quantity = 3;
+    // Optional. The quantity of this item that is being purchased.
+    int64 quantity = 3 [(google.api.field_behavior) = OPTIONAL];
 
-    // When a merchant is specified, its corresponding account_id. Necessary to
-    // populate marketplace-style transactions.
-    string merchant_account_id = 4;
+    // Optional. When a merchant is specified, its corresponding account_id.
+    // Necessary to populate marketplace-style transactions.
+    string merchant_account_id = 4 [(google.api.field_behavior) = OPTIONAL];
   }
 
   // Details about the transaction from the gateway.
   message GatewayInfo {
-    // Name of the gateway service (for example, stripe, square, paypal).
-    string name = 1;
+    // Optional. Name of the gateway service (for example, stripe, square,
+    // paypal).
+    string name = 1 [(google.api.field_behavior) = OPTIONAL];
 
-    // Gateway response code describing the state of the transaction.
-    string gateway_response_code = 2;
+    // Optional. Gateway response code describing the state of the transaction.
+    string gateway_response_code = 2 [(google.api.field_behavior) = OPTIONAL];
 
-    // AVS response code from the gateway
+    // Optional. AVS response code from the gateway
     // (available only when reCAPTCHA Enterprise is called after authorization).
-    string avs_response_code = 3;
+    string avs_response_code = 3 [(google.api.field_behavior) = OPTIONAL];
 
-    // CVV response code from the gateway
+    // Optional. CVV response code from the gateway
     // (available only when reCAPTCHA Enterprise is called after authorization).
-    string cvv_response_code = 4;
+    string cvv_response_code = 4 [(google.api.field_behavior) = OPTIONAL];
   }
 
   // Unique identifier for the transaction. This custom identifier can be used
@@ -692,7 +783,7 @@ message TransactionData {
   // same transaction id.
   optional string transaction_id = 11;
 
-  // The payment method for the transaction. The allowed values are:
+  // Optional. The payment method for the transaction. The allowed values are:
   //
   // * credit-card
   // * debit-card
@@ -701,41 +792,44 @@ message TransactionData {
   // processor-paypal)
   // * custom-{name} (If an alternative method is used, for example,
   // custom-crypto)
-  string payment_method = 1;
+  string payment_method = 1 [(google.api.field_behavior) = OPTIONAL];
 
-  // The Bank Identification Number - generally the first 6 or 8 digits of the
-  // card.
-  string card_bin = 2;
+  // Optional. The Bank Identification Number - generally the first 6 or 8
+  // digits of the card.
+  string card_bin = 2 [(google.api.field_behavior) = OPTIONAL];
 
-  // The last four digits of the card.
-  string card_last_four = 3;
+  // Optional. The last four digits of the card.
+  string card_last_four = 3 [(google.api.field_behavior) = OPTIONAL];
 
-  // The currency code in ISO-4217 format.
-  string currency_code = 4;
+  // Optional. The currency code in ISO-4217 format.
+  string currency_code = 4 [(google.api.field_behavior) = OPTIONAL];
 
-  // The decimal value of the transaction in the specified currency.
-  double value = 5;
+  // Optional. The decimal value of the transaction in the specified currency.
+  double value = 5 [(google.api.field_behavior) = OPTIONAL];
 
-  // The value of shipping in the specified currency. 0 for free or no shipping.
-  double shipping_value = 12;
+  // Optional. The value of shipping in the specified currency. 0 for free or no
+  // shipping.
+  double shipping_value = 12 [(google.api.field_behavior) = OPTIONAL];
 
-  // Destination address if this transaction involves shipping a physical item.
-  Address shipping_address = 6;
+  // Optional. Destination address if this transaction involves shipping a
+  // physical item.
+  Address shipping_address = 6 [(google.api.field_behavior) = OPTIONAL];
 
-  // Address associated with the payment method when applicable.
-  Address billing_address = 7;
+  // Optional. Address associated with the payment method when applicable.
+  Address billing_address = 7 [(google.api.field_behavior) = OPTIONAL];
 
-  // Information about the user paying/initiating the transaction.
-  User user = 8;
+  // Optional. Information about the user paying/initiating the transaction.
+  User user = 8 [(google.api.field_behavior) = OPTIONAL];
 
-  // Information about the user or users fulfilling the transaction.
-  repeated User merchants = 13;
+  // Optional. Information about the user or users fulfilling the transaction.
+  repeated User merchants = 13 [(google.api.field_behavior) = OPTIONAL];
 
-  // Items purchased in this transaction.
-  repeated Item items = 14;
+  // Optional. Items purchased in this transaction.
+  repeated Item items = 14 [(google.api.field_behavior) = OPTIONAL];
 
-  // Information about the payment gateway's response to the transaction.
-  GatewayInfo gateway_info = 10;
+  // Optional. Information about the payment gateway's response to the
+  // transaction.
+  GatewayInfo gateway_info = 10 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Risk analysis result for an event.
@@ -769,13 +863,19 @@ message RiskAnalysis {
     SUSPECTED_CHARGEBACK = 7;
   }
 
-  // Legitimate event score from 0.0 to 1.0.
+  // Output only. Legitimate event score from 0.0 to 1.0.
   // (1.0 means very likely legitimate traffic while 0.0 means very likely
   // non-legitimate traffic).
-  float score = 1;
+  float score = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Reasons contributing to the risk analysis verdict.
-  repeated ClassificationReason reasons = 2;
+  // Output only. Reasons contributing to the risk analysis verdict.
+  repeated ClassificationReason reasons = 2
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Extended verdict reasons to be used for experimentation only.
+  // The set of possible reasons is subject to change.
+  repeated string extended_verdict_reasons = 3
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Properties of the provided event token.
@@ -805,32 +905,34 @@ message TokenProperties {
     BROWSER_ERROR = 6;
   }
 
-  // Whether the provided user response token is valid. When valid = false, the
-  // reason could be specified in invalid_reason or it could also be due to
-  // a user failing to solve a challenge or a sitekey mismatch (i.e the sitekey
-  // used to generate the token was different than the one specified in the
-  // assessment).
-  bool valid = 1;
+  // Output only. Whether the provided user response token is valid. When valid
+  // = false, the reason could be specified in invalid_reason or it could also
+  // be due to a user failing to solve a challenge or a sitekey mismatch (i.e
+  // the sitekey used to generate the token was different than the one specified
+  // in the assessment).
+  bool valid = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Reason associated with the response when valid = false.
-  InvalidReason invalid_reason = 2;
+  // Output only. Reason associated with the response when valid = false.
+  InvalidReason invalid_reason = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // The timestamp corresponding to the generation of the token.
-  google.protobuf.Timestamp create_time = 3;
+  // Output only. The timestamp corresponding to the generation of the token.
+  google.protobuf.Timestamp create_time = 3
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // The hostname of the page on which the token was generated (Web keys only).
-  string hostname = 4;
-
-  // The name of the Android package with which the token was generated (Android
+  // Output only. The hostname of the page on which the token was generated (Web
   // keys only).
-  string android_package_name = 8;
+  string hostname = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // The ID of the iOS bundle with which the token was generated (iOS keys
-  // only).
-  string ios_bundle_id = 9;
+  // Output only. The name of the Android package with which the token was
+  // generated (Android keys only).
+  string android_package_name = 8 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Action name provided at token generation.
-  string action = 5;
+  // Output only. The ID of the iOS bundle with which the token was generated
+  // (iOS keys only).
+  string ios_bundle_id = 9 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Action name provided at token generation.
+  string action = 5 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Assessment for Fraud Prevention.
@@ -838,29 +940,93 @@ message FraudPreventionAssessment {
   // Information about stolen instrument fraud, where the user is not the
   // legitimate owner of the instrument being used for the purchase.
   message StolenInstrumentVerdict {
-    // Probability (0-1) of this transaction being executed with a stolen
-    // instrument.
-    float risk = 1;
+    // Output only. Probability of this transaction being executed with a stolen
+    // instrument. Values are from 0.0 (lowest) to 1.0 (highest).
+    float risk = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
   }
 
   // Information about card testing fraud, where an adversary is testing
   // fraudulently obtained cards or brute forcing their details.
   message CardTestingVerdict {
-    // Probability (0-1) of this transaction attempt being part of a card
-    // testing attack.
-    float risk = 1;
+    // Output only. Probability of this transaction attempt being part of a card
+    // testing attack. Values are from 0.0 (lowest) to 1.0 (highest).
+    float risk = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
   }
 
-  // Probability (0-1) of this transaction being fraudulent. Summarizes the
-  // combined risk of attack vectors below.
-  float transaction_risk = 1;
+  // Information about behavioral trust of the transaction.
+  message BehavioralTrustVerdict {
+    // Output only. Probability of this transaction attempt being executed in a
+    // behaviorally trustworthy way. Values are from 0.0 (lowest) to 1.0
+    // (highest).
+    float trust = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+  }
 
-  // Assessment of this transaction for risk of a stolen instrument.
-  StolenInstrumentVerdict stolen_instrument_verdict = 2;
+  // Output only. Probability of this transaction being fraudulent. Summarizes
+  // the combined risk of attack vectors below. Values are from 0.0 (lowest)
+  // to 1.0 (highest).
+  float transaction_risk = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Assessment of this transaction for risk of being part of a card testing
-  // attack.
-  CardTestingVerdict card_testing_verdict = 3;
+  // Output only. Assessment of this transaction for risk of a stolen
+  // instrument.
+  StolenInstrumentVerdict stolen_instrument_verdict = 2
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Assessment of this transaction for risk of being part of a
+  // card testing attack.
+  CardTestingVerdict card_testing_verdict = 3
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Assessment of this transaction for behavioral trust.
+  BehavioralTrustVerdict behavioral_trust_verdict = 4
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// Fraud signals describing users and cards involved in the transaction.
+message FraudSignals {
+  // Signals describing the user involved in this transaction.
+  message UserSignals {
+    // Output only. This user (based on email, phone, and other identifiers) has
+    // been seen on the internet for at least this number of days.
+    int32 active_days_lower_bound = 1
+        [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Output only. Likelihood (from 0.0 to 1.0) this user includes synthetic
+    // components in their identity, such as a randomly generated email address,
+    // temporary phone number, or fake shipping address.
+    float synthetic_risk = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+  }
+
+  // Signals describing the payment card used in this transaction.
+  message CardSignals {
+    // Risk labels describing the card being assessed, such as its funding
+    // mechanism.
+    enum CardLabel {
+      // No label specified.
+      CARD_LABEL_UNSPECIFIED = 0;
+
+      // This card has been detected as prepaid.
+      PREPAID = 1;
+
+      // This card has been detected as virtual, such as a card number generated
+      // for a single transaction or merchant.
+      VIRTUAL = 2;
+
+      // This card has been detected as being used in an unexpected geographic
+      // location.
+      UNEXPECTED_LOCATION = 3;
+    }
+
+    // Output only. The labels for the payment card in this transaction.
+    repeated CardLabel card_labels = 1
+        [(google.api.field_behavior) = OUTPUT_ONLY];
+  }
+
+  // Output only. Signals describing the end user in this transaction.
+  UserSignals user_signals = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Signals describing the payment card or cards used in this
+  // transaction.
+  CardSignals card_signals = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Account defender risk assessment.
@@ -887,14 +1053,15 @@ message AccountDefenderAssessment {
     RELATED_ACCOUNTS_NUMBER_HIGH = 4;
   }
 
-  // Labels for this request.
-  repeated AccountDefenderLabel labels = 1;
+  // Output only. Labels for this request.
+  repeated AccountDefenderLabel labels = 1
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // The create key request message.
 message CreateKeyRequest {
   // Required. The name of the project in which the key will be created, in the
-  // format "projects/{project}".
+  // format `projects/{project}`.
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
@@ -909,7 +1076,7 @@ message CreateKeyRequest {
 // The list keys request message.
 message ListKeysRequest {
   // Required. The name of the project that contains the keys that will be
-  // listed, in the format "projects/{project}".
+  // listed, in the format `projects/{project}`.
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
@@ -939,7 +1106,7 @@ message ListKeysResponse {
 // The retrieve legacy secret key request message.
 message RetrieveLegacySecretKeyRequest {
   // Required. The public key name linked to the requested secret key in the
-  // format "projects/{project}/keys/{key}".
+  // format `projects/{project}/keys/{key}`.
   string key = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
@@ -951,7 +1118,7 @@ message RetrieveLegacySecretKeyRequest {
 // The get key request message.
 message GetKeyRequest {
   // Required. The name of the requested key, in the format
-  // "projects/{project}/keys/{key}".
+  // `projects/{project}/keys/{key}`.
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
@@ -974,7 +1141,7 @@ message UpdateKeyRequest {
 // The delete key request message.
 message DeleteKeyRequest {
   // Required. The name of the key to be deleted, in the format
-  // "projects/{project}/keys/{key}".
+  // `projects/{project}/keys/{key}`.
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
@@ -983,10 +1150,90 @@ message DeleteKeyRequest {
   ];
 }
 
+// The create firewall policy request message.
+message CreateFirewallPolicyRequest {
+  // Required. The name of the project this policy will apply to, in the format
+  // `projects/{project}`.
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "cloudresourcemanager.googleapis.com/Project"
+    }
+  ];
+
+  // Required. Information to create the policy.
+  FirewallPolicy firewall_policy = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// The list firewall policies request message.
+message ListFirewallPoliciesRequest {
+  // Required. The name of the project to list the policies for, in the format
+  // `projects/{project}`.
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "cloudresourcemanager.googleapis.com/Project"
+    }
+  ];
+
+  // Optional. The maximum number of policies to return. Default is 10. Max
+  // limit is 1000.
+  int32 page_size = 2 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The next_page_token value returned from a previous.
+  // ListFirewallPoliciesRequest, if any.
+  string page_token = 3 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Response to request to list firewall policies belonging to a key.
+message ListFirewallPoliciesResponse {
+  // Policy details.
+  repeated FirewallPolicy firewall_policies = 1;
+
+  // Token to retrieve the next page of results. It is set to empty if no
+  // policies remain in results.
+  string next_page_token = 2;
+}
+
+// The get firewall policy request message.
+message GetFirewallPolicyRequest {
+  // Required. The name of the requested policy, in the format
+  // `projects/{project}/firewallpolicies/{firewallpolicy}`.
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "recaptchaenterprise.googleapis.com/FirewallPolicy"
+    }
+  ];
+}
+
+// The update firewall policy request message.
+message UpdateFirewallPolicyRequest {
+  // Required. The policy to update.
+  FirewallPolicy firewall_policy = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. The mask to control which fields of the policy get updated. If
+  // the mask is not present, all fields will be updated.
+  google.protobuf.FieldMask update_mask = 2
+      [(google.api.field_behavior) = OPTIONAL];
+}
+
+// The delete firewall policy request message.
+message DeleteFirewallPolicyRequest {
+  // Required. The name of the policy to be deleted, in the format
+  // `projects/{project}/firewallpolicies/{firewallpolicy}`.
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "recaptchaenterprise.googleapis.com/FirewallPolicy"
+    }
+  ];
+}
+
 // The migrate key request message.
 message MigrateKeyRequest {
   // Required. The name of the key to be migrated, in the format
-  // "projects/{project}/keys/{key}".
+  // `projects/{project}/keys/{key}`.
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
@@ -1008,7 +1255,7 @@ message MigrateKeyRequest {
 // The get metrics request message.
 message GetMetricsRequest {
   // Required. The name of the requested metrics, in the format
-  // "projects/{project}/keys/{key}/metrics".
+  // `projects/{project}/keys/{key}/metrics`.
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
@@ -1025,7 +1272,7 @@ message Metrics {
   };
 
   // Output only. The name of the metrics, in the format
-  // "projects/{project}/keys/{key}/metrics".
+  // `projects/{project}/keys/{key}/metrics`.
   string name = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Inclusive start time aligned to a day (UTC).
@@ -1060,13 +1307,13 @@ message Key {
   };
 
   // The resource name for the Key in the format
-  // "projects/{project}/keys/{key}".
+  // `projects/{project}/keys/{key}`.
   string name = 1;
 
-  // Human-readable display name of this key. Modifiable by user.
-  string display_name = 2;
+  // Required. Human-readable display name of this key. Modifiable by user.
+  string display_name = 2 [(google.api.field_behavior) = REQUIRED];
 
-  // Platform specific settings for this key. The key can only be used on a
+  // Platform-specific settings for this key. The key can only be used on a
   // platform for which the settings are enabled.
   oneof platform_settings {
     // Settings for keys that can be used by websites.
@@ -1079,19 +1326,19 @@ message Key {
     IOSKeySettings ios_settings = 5;
   }
 
-  // See <a href="https://cloud.google.com/recaptcha-enterprise/docs/labels">
-  // Creating and managing labels</a>.
-  map<string, string> labels = 6;
+  // Optional. See [Creating and managing labels]
+  // (https://cloud.google.com/recaptcha-enterprise/docs/labels).
+  map<string, string> labels = 6 [(google.api.field_behavior) = OPTIONAL];
 
-  // Output only. The timestamp corresponding to the creation of this Key.
+  // Output only. The timestamp corresponding to the creation of this key.
   google.protobuf.Timestamp create_time = 7
       [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Options for user acceptance testing.
-  TestingOptions testing_options = 9;
+  // Optional. Options for user acceptance testing.
+  TestingOptions testing_options = 9 [(google.api.field_behavior) = OPTIONAL];
 
-  // Settings for WAF
-  WafSettings waf_settings = 10;
+  // Optional. Settings for WAF
+  WafSettings waf_settings = 10 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Options for user acceptance testing.
@@ -1112,14 +1359,15 @@ message TestingOptions {
     UNSOLVABLE_CHALLENGE = 2;
   }
 
-  // All assessments for this Key will return this score. Must be between 0
-  // (likely not legitimate) and 1 (likely legitimate) inclusive.
-  float testing_score = 1;
+  // Optional. All assessments for this Key will return this score. Must be
+  // between 0 (likely not legitimate) and 1 (likely legitimate) inclusive.
+  float testing_score = 1 [(google.api.field_behavior) = OPTIONAL];
 
-  // For challenge-based keys only (CHECKBOX, INVISIBLE), all challenge requests
-  // for this site will return nocaptcha if NOCAPTCHA, or an unsolvable
-  // challenge if CHALLENGE.
-  TestingChallenge testing_challenge = 2;
+  // Optional. For challenge-based keys only (CHECKBOX, INVISIBLE), all
+  // challenge requests for this site will return nocaptcha if NOCAPTCHA, or an
+  // unsolvable challenge if CHALLENGE.
+  TestingChallenge testing_challenge = 2
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Settings specific to keys that can be used by websites.
@@ -1160,46 +1408,81 @@ message WebKeySettings {
     SECURITY = 3;
   }
 
-  // If set to true, it means allowed_domains will not be enforced.
-  bool allow_all_domains = 3;
+  // Optional. If set to true, it means allowed_domains will not be enforced.
+  bool allow_all_domains = 3 [(google.api.field_behavior) = OPTIONAL];
 
-  // Domains or subdomains of websites allowed to use the key. All subdomains
-  // of an allowed domain are automatically allowed. A valid domain requires a
-  // host and must not include any path, port, query or fragment.
+  // Optional. Domains or subdomains of websites allowed to use the key. All
+  // subdomains of an allowed domain are automatically allowed. A valid domain
+  // requires a host and must not include any path, port, query or fragment.
   // Examples: 'example.com' or 'subdomain.example.com'
-  repeated string allowed_domains = 1;
+  repeated string allowed_domains = 1 [(google.api.field_behavior) = OPTIONAL];
 
-  // If set to true, the key can be used on AMP (Accelerated Mobile Pages)
-  // websites. This is supported only for the SCORE integration type.
-  bool allow_amp_traffic = 2;
+  // Optional. If set to true, the key can be used on AMP (Accelerated Mobile
+  // Pages) websites. This is supported only for the SCORE integration type.
+  bool allow_amp_traffic = 2 [(google.api.field_behavior) = OPTIONAL];
 
   // Required. Describes how this key is integrated with the website.
   IntegrationType integration_type = 4 [(google.api.field_behavior) = REQUIRED];
 
-  // Settings for the frequency and difficulty at which this key triggers
-  // captcha challenges. This should only be specified for IntegrationTypes
-  // CHECKBOX and INVISIBLE.
-  ChallengeSecurityPreference challenge_security_preference = 5;
+  // Optional. Settings for the frequency and difficulty at which this key
+  // triggers captcha challenges. This should only be specified for
+  // IntegrationTypes CHECKBOX and INVISIBLE.
+  ChallengeSecurityPreference challenge_security_preference = 5
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Settings specific to keys that can be used by Android apps.
 message AndroidKeySettings {
-  // If set to true, allowed_package_names are not enforced.
-  bool allow_all_package_names = 2;
+  // Optional. If set to true, allowed_package_names are not enforced.
+  bool allow_all_package_names = 2 [(google.api.field_behavior) = OPTIONAL];
 
-  // Android package names of apps allowed to use the key.
+  // Optional. Android package names of apps allowed to use the key.
   // Example: 'com.companyname.appname'
-  repeated string allowed_package_names = 1;
+  repeated string allowed_package_names = 1
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Set to true for keys that are used in an Android application that
+  // is available for download in app stores in addition to the Google Play
+  // Store.
+  bool support_non_google_app_store_distribution = 3
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Settings specific to keys that can be used by iOS apps.
 message IOSKeySettings {
-  // If set to true, allowed_bundle_ids are not enforced.
-  bool allow_all_bundle_ids = 2;
+  // Optional. If set to true, allowed_bundle_ids are not enforced.
+  bool allow_all_bundle_ids = 2 [(google.api.field_behavior) = OPTIONAL];
 
-  // iOS bundle ids of apps allowed to use the key.
+  // Optional. iOS bundle ids of apps allowed to use the key.
   // Example: 'com.companyname.productname.appname'
-  repeated string allowed_bundle_ids = 1;
+  repeated string allowed_bundle_ids = 1
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Apple Developer account details for the app that is protected by
+  // the reCAPTCHA Key. reCAPTCHA Enterprise leverages platform-specific checks
+  // like Apple App Attest and Apple DeviceCheck to protect your app from abuse.
+  // Providing these fields allows reCAPTCHA Enterprise to get a better
+  // assessment of the integrity of your app.
+  AppleDeveloperId apple_developer_id = 3
+      [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Contains fields that are required to perform Apple-specific integrity checks.
+message AppleDeveloperId {
+  // Required. Input only. A private key (downloaded as a text file with a .p8
+  // file extension) generated for your Apple Developer account. Ensure that
+  // Apple DeviceCheck is enabled for the private key.
+  string private_key = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.field_behavior) = INPUT_ONLY
+  ];
+
+  // Required. The Apple developer key ID (10-character string).
+  string key_id = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The Apple team ID (10-character string) owning the provisioning
+  // profile used to build your application.
+  string team_id = 3 [(google.api.field_behavior) = REQUIRED];
 }
 
 // Score distribution.
@@ -1237,6 +1520,118 @@ message ChallengeMetrics {
   // submitted challenge solutions that were correct and resulted in
   // verification.
   int64 passed_count = 4;
+}
+
+// Policy config assessment.
+message FirewallPolicyAssessment {
+  // Output only. If the processing of a policy config fails, an error will be
+  // populated and the firewall_policy will be left empty.
+  google.rpc.Status error = 5 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The policy that matched the request. If more than one policy
+  // may match, this is the first match. If no policy matches the incoming
+  // request, the policy field will be left empty.
+  FirewallPolicy firewall_policy = 8
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// An individual action. Each action represents what to do if a policy
+// matches.
+message FirewallAction {
+  // An allow action continues processing a request unimpeded.
+  message AllowAction {}
+
+  // A block action serves an HTTP error code a prevents the request from
+  // hitting the backend.
+  message BlockAction {}
+
+  // A redirect action returns a 307 (temporary redirect) response, pointing
+  // the user to a ReCaptcha interstitial page to attach a token.
+  message RedirectAction {}
+
+  // A substitute action transparently serves a different page than the one
+  // requested.
+  message SubstituteAction {
+    // Optional. The address to redirect to. The target is a relative path in
+    // the current host. Example: "/blog/404.html".
+    string path = 1 [(google.api.field_behavior) = OPTIONAL];
+  }
+
+  // A set header action sets a header and forwards the request to the
+  // backend. This can be used to trigger custom protection implemented on the
+  // backend.
+  message SetHeaderAction {
+    // Optional. The header key to set in the request to the backend server.
+    string key = 1 [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. The header value to set in the request to the backend server.
+    string value = 2 [(google.api.field_behavior) = OPTIONAL];
+  }
+
+  oneof firewall_action_oneof {
+    // The user request did not match any policy and should be allowed
+    // access to the requested resource.
+    AllowAction allow = 1;
+
+    // This action will deny access to a given page. The user will get an HTTP
+    // error code.
+    BlockAction block = 2;
+
+    // This action will redirect the request to a ReCaptcha interstitial to
+    // attach a token.
+    RedirectAction redirect = 5;
+
+    // This action will transparently serve a different page to an offending
+    // user.
+    SubstituteAction substitute = 3;
+
+    // This action will set a custom header but allow the request to continue
+    // to the customer backend.
+    SetHeaderAction set_header = 4;
+  }
+}
+
+// A FirewallPolicy represents a single matching pattern and resulting actions
+// to take.
+message FirewallPolicy {
+  option (google.api.resource) = {
+    type: "recaptchaenterprise.googleapis.com/FirewallPolicy"
+    pattern: "projects/{project}/firewallpolicies/{firewallpolicy}"
+  };
+
+  // The resource name for the FirewallPolicy in the format
+  // `projects/{project}/firewallpolicies/{firewallpolicy}`.
+  string name = 1;
+
+  // Optional. A description of what this policy aims to achieve, for
+  // convenience purposes. The description can at most include 256 UTF-8
+  // characters.
+  string description = 2 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The path for which this policy applies, specified as a glob
+  // pattern. For more information on glob, see the [manual
+  // page](https://man7.org/linux/man-pages/man7/glob.7.html).
+  // A path has a max length of 200 characters.
+  string path = 4 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. A CEL (Common Expression Language) conditional expression that
+  // specifies if this policy applies to an incoming user request. If this
+  // condition evaluates to true and the requested path matched the path
+  // pattern, the associated actions should be executed by the caller. The
+  // condition string is checked for CEL syntax correctness on creation. For
+  // more information, see the [CEL spec](https://github.com/google/cel-spec)
+  // and its [language
+  // definition](https://github.com/google/cel-spec/blob/master/doc/langdef.md).
+  // A condition has a max length of 500 characters.
+  string condition = 5 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The actions that the caller should take regarding user access.
+  // There should be at most one terminal action. A terminal action is any
+  // action that forces a response, such as `AllowAction`,
+  // `BlockAction` or `SubstituteAction`.
+  // Zero or more non-terminal actions such as `SetHeader` might be
+  // specified. A single policy can contain up to 16 actions.
+  repeated FirewallAction actions = 6 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // The request message to list memberships in a related account group.
@@ -1277,7 +1672,7 @@ message ListRelatedAccountGroupMembershipsResponse {
 // The request message to list related account groups.
 message ListRelatedAccountGroupsRequest {
   // Required. The name of the project to list related account groups from, in
-  // the format "projects/{project}".
+  // the format `projects/{project}`.
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
@@ -1313,7 +1708,7 @@ message ListRelatedAccountGroupsResponse {
 message SearchRelatedAccountGroupMembershipsRequest {
   // Required. The name of the project to search related account group
   // memberships from. Specify the project name in the following format:
-  // "projects/{project}".
+  // `projects/{project}`.
   string project = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
@@ -1321,8 +1716,8 @@ message SearchRelatedAccountGroupMembershipsRequest {
     }
   ];
 
-  // Optional. The unique stable hashed user identifier we should search
-  // connections to. The identifier should correspond to a `hashed_account_id`
+  // Optional. The unique stable hashed user identifier used to search
+  // connections. The identifier should correspond to a `hashed_account_id`
   // provided in a previous `CreateAssessment` or `AnnotateAssessment` call.
   bytes hashed_account_id = 2 [(google.api.field_behavior) = OPTIONAL];
 
@@ -1408,6 +1803,10 @@ message WafSettings {
 
     // Use reCAPTCHA action-tokens to protect user actions.
     ACTION_TOKEN = 3;
+
+    // Use reCAPTCHA WAF express protection to protect any content other than
+    // web pages, like APIs and IoT devices.
+    EXPRESS = 5;
   }
 
   // Web Application Firewalls supported by reCAPTCHA Enterprise.
@@ -1417,6 +1816,9 @@ message WafSettings {
 
     // Cloud Armor
     CA = 1;
+
+    // Fastly
+    FASTLY = 3;
   }
 
   // Required. The WAF service that uses this key.

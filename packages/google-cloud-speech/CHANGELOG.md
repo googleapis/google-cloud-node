@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/speech-v6.0.2...speech-v6.1.0) (2023-11-03)
+
+
+### Features
+
+* Support MP3, TranscriptNormalization and SpeakerLabels in STT V1 API ([#4775](https://github.com/googleapis/google-cloud-node/issues/4775)) ([10e783c](https://github.com/googleapis/google-cloud-node/commit/10e783c1039c2cb192be636d0aff1c78e3c84e73))
+
 ## [6.0.2](https://github.com/googleapis/google-cloud-node/compare/speech-v6.0.1...speech-v6.0.2) (2023-09-06)
 
 

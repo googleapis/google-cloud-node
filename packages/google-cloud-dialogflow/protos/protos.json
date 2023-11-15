@@ -1541,6 +1541,13 @@
                           "type": "google.protobuf.Struct",
                           "id": 13
                         },
+                        "enableExtendedStreaming": {
+                          "type": "bool",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "enablePartialAutomatedAgentReply": {
                           "type": "bool",
                           "id": 12
@@ -11991,6 +11998,13 @@
                         "cxCurrentPage": {
                           "type": "string",
                           "id": 15
+                        },
+                        "enableExtendedStreaming": {
+                          "type": "bool",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "enablePartialAutomatedAgentReply": {
                           "type": "bool",

@@ -2842,6 +2842,115 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a ConnectionInfo. */
+                interface IConnectionInfo {
+
+                    /** ConnectionInfo name */
+                    name?: (string|null);
+
+                    /** ConnectionInfo ipAddress */
+                    ipAddress?: (string|null);
+
+                    /** ConnectionInfo instanceUid */
+                    instanceUid?: (string|null);
+                }
+
+                /** Represents a ConnectionInfo. */
+                class ConnectionInfo implements IConnectionInfo {
+
+                    /**
+                     * Constructs a new ConnectionInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.alloydb.v1.IConnectionInfo);
+
+                    /** ConnectionInfo name. */
+                    public name: string;
+
+                    /** ConnectionInfo ipAddress. */
+                    public ipAddress: string;
+
+                    /** ConnectionInfo instanceUid. */
+                    public instanceUid: string;
+
+                    /**
+                     * Creates a new ConnectionInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConnectionInfo instance
+                     */
+                    public static create(properties?: google.cloud.alloydb.v1.IConnectionInfo): google.cloud.alloydb.v1.ConnectionInfo;
+
+                    /**
+                     * Encodes the specified ConnectionInfo message. Does not implicitly {@link google.cloud.alloydb.v1.ConnectionInfo.verify|verify} messages.
+                     * @param message ConnectionInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.alloydb.v1.IConnectionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConnectionInfo message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1.ConnectionInfo.verify|verify} messages.
+                     * @param message ConnectionInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.alloydb.v1.IConnectionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConnectionInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConnectionInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1.ConnectionInfo;
+
+                    /**
+                     * Decodes a ConnectionInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConnectionInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1.ConnectionInfo;
+
+                    /**
+                     * Verifies a ConnectionInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConnectionInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConnectionInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1.ConnectionInfo;
+
+                    /**
+                     * Creates a plain object from a ConnectionInfo message. Also converts values to other types if specified.
+                     * @param message ConnectionInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.alloydb.v1.ConnectionInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConnectionInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConnectionInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Backup. */
                 interface IBackup {
 
@@ -4018,6 +4127,34 @@ export namespace google {
                     public listSupportedDatabaseFlags(request: google.cloud.alloydb.v1.IListSupportedDatabaseFlagsRequest): Promise<google.cloud.alloydb.v1.ListSupportedDatabaseFlagsResponse>;
 
                     /**
+                     * Calls GenerateClientCertificate.
+                     * @param request GenerateClientCertificateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and GenerateClientCertificateResponse
+                     */
+                    public generateClientCertificate(request: google.cloud.alloydb.v1.IGenerateClientCertificateRequest, callback: google.cloud.alloydb.v1.AlloyDBAdmin.GenerateClientCertificateCallback): void;
+
+                    /**
+                     * Calls GenerateClientCertificate.
+                     * @param request GenerateClientCertificateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public generateClientCertificate(request: google.cloud.alloydb.v1.IGenerateClientCertificateRequest): Promise<google.cloud.alloydb.v1.GenerateClientCertificateResponse>;
+
+                    /**
+                     * Calls GetConnectionInfo.
+                     * @param request GetConnectionInfoRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ConnectionInfo
+                     */
+                    public getConnectionInfo(request: google.cloud.alloydb.v1.IGetConnectionInfoRequest, callback: google.cloud.alloydb.v1.AlloyDBAdmin.GetConnectionInfoCallback): void;
+
+                    /**
+                     * Calls GetConnectionInfo.
+                     * @param request GetConnectionInfoRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getConnectionInfo(request: google.cloud.alloydb.v1.IGetConnectionInfoRequest): Promise<google.cloud.alloydb.v1.ConnectionInfo>;
+
+                    /**
                      * Calls ListUsers.
                      * @param request ListUsersRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListUsersResponse
@@ -4257,6 +4394,20 @@ export namespace google {
                      * @param [response] ListSupportedDatabaseFlagsResponse
                      */
                     type ListSupportedDatabaseFlagsCallback = (error: (Error|null), response?: google.cloud.alloydb.v1.ListSupportedDatabaseFlagsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.alloydb.v1.AlloyDBAdmin|generateClientCertificate}.
+                     * @param error Error, if any
+                     * @param [response] GenerateClientCertificateResponse
+                     */
+                    type GenerateClientCertificateCallback = (error: (Error|null), response?: google.cloud.alloydb.v1.GenerateClientCertificateResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.alloydb.v1.AlloyDBAdmin|getConnectionInfo}.
+                     * @param error Error, if any
+                     * @param [response] ConnectionInfo
+                     */
+                    type GetConnectionInfoCallback = (error: (Error|null), response?: google.cloud.alloydb.v1.ConnectionInfo) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.alloydb.v1.AlloyDBAdmin|listUsers}.
@@ -7940,6 +8091,333 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ListSupportedDatabaseFlagsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GenerateClientCertificateRequest. */
+                interface IGenerateClientCertificateRequest {
+
+                    /** GenerateClientCertificateRequest parent */
+                    parent?: (string|null);
+
+                    /** GenerateClientCertificateRequest requestId */
+                    requestId?: (string|null);
+
+                    /** GenerateClientCertificateRequest certDuration */
+                    certDuration?: (google.protobuf.IDuration|null);
+
+                    /** GenerateClientCertificateRequest publicKey */
+                    publicKey?: (string|null);
+
+                    /** GenerateClientCertificateRequest useMetadataExchange */
+                    useMetadataExchange?: (boolean|null);
+                }
+
+                /** Represents a GenerateClientCertificateRequest. */
+                class GenerateClientCertificateRequest implements IGenerateClientCertificateRequest {
+
+                    /**
+                     * Constructs a new GenerateClientCertificateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.alloydb.v1.IGenerateClientCertificateRequest);
+
+                    /** GenerateClientCertificateRequest parent. */
+                    public parent: string;
+
+                    /** GenerateClientCertificateRequest requestId. */
+                    public requestId: string;
+
+                    /** GenerateClientCertificateRequest certDuration. */
+                    public certDuration?: (google.protobuf.IDuration|null);
+
+                    /** GenerateClientCertificateRequest publicKey. */
+                    public publicKey: string;
+
+                    /** GenerateClientCertificateRequest useMetadataExchange. */
+                    public useMetadataExchange: boolean;
+
+                    /**
+                     * Creates a new GenerateClientCertificateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenerateClientCertificateRequest instance
+                     */
+                    public static create(properties?: google.cloud.alloydb.v1.IGenerateClientCertificateRequest): google.cloud.alloydb.v1.GenerateClientCertificateRequest;
+
+                    /**
+                     * Encodes the specified GenerateClientCertificateRequest message. Does not implicitly {@link google.cloud.alloydb.v1.GenerateClientCertificateRequest.verify|verify} messages.
+                     * @param message GenerateClientCertificateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.alloydb.v1.IGenerateClientCertificateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenerateClientCertificateRequest message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1.GenerateClientCertificateRequest.verify|verify} messages.
+                     * @param message GenerateClientCertificateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.alloydb.v1.IGenerateClientCertificateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenerateClientCertificateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenerateClientCertificateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1.GenerateClientCertificateRequest;
+
+                    /**
+                     * Decodes a GenerateClientCertificateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenerateClientCertificateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1.GenerateClientCertificateRequest;
+
+                    /**
+                     * Verifies a GenerateClientCertificateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenerateClientCertificateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenerateClientCertificateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1.GenerateClientCertificateRequest;
+
+                    /**
+                     * Creates a plain object from a GenerateClientCertificateRequest message. Also converts values to other types if specified.
+                     * @param message GenerateClientCertificateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.alloydb.v1.GenerateClientCertificateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenerateClientCertificateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GenerateClientCertificateRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GenerateClientCertificateResponse. */
+                interface IGenerateClientCertificateResponse {
+
+                    /** GenerateClientCertificateResponse pemCertificateChain */
+                    pemCertificateChain?: (string[]|null);
+
+                    /** GenerateClientCertificateResponse caCert */
+                    caCert?: (string|null);
+                }
+
+                /** Represents a GenerateClientCertificateResponse. */
+                class GenerateClientCertificateResponse implements IGenerateClientCertificateResponse {
+
+                    /**
+                     * Constructs a new GenerateClientCertificateResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.alloydb.v1.IGenerateClientCertificateResponse);
+
+                    /** GenerateClientCertificateResponse pemCertificateChain. */
+                    public pemCertificateChain: string[];
+
+                    /** GenerateClientCertificateResponse caCert. */
+                    public caCert: string;
+
+                    /**
+                     * Creates a new GenerateClientCertificateResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenerateClientCertificateResponse instance
+                     */
+                    public static create(properties?: google.cloud.alloydb.v1.IGenerateClientCertificateResponse): google.cloud.alloydb.v1.GenerateClientCertificateResponse;
+
+                    /**
+                     * Encodes the specified GenerateClientCertificateResponse message. Does not implicitly {@link google.cloud.alloydb.v1.GenerateClientCertificateResponse.verify|verify} messages.
+                     * @param message GenerateClientCertificateResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.alloydb.v1.IGenerateClientCertificateResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenerateClientCertificateResponse message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1.GenerateClientCertificateResponse.verify|verify} messages.
+                     * @param message GenerateClientCertificateResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.alloydb.v1.IGenerateClientCertificateResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenerateClientCertificateResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenerateClientCertificateResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1.GenerateClientCertificateResponse;
+
+                    /**
+                     * Decodes a GenerateClientCertificateResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenerateClientCertificateResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1.GenerateClientCertificateResponse;
+
+                    /**
+                     * Verifies a GenerateClientCertificateResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenerateClientCertificateResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenerateClientCertificateResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1.GenerateClientCertificateResponse;
+
+                    /**
+                     * Creates a plain object from a GenerateClientCertificateResponse message. Also converts values to other types if specified.
+                     * @param message GenerateClientCertificateResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.alloydb.v1.GenerateClientCertificateResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenerateClientCertificateResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GenerateClientCertificateResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetConnectionInfoRequest. */
+                interface IGetConnectionInfoRequest {
+
+                    /** GetConnectionInfoRequest parent */
+                    parent?: (string|null);
+
+                    /** GetConnectionInfoRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a GetConnectionInfoRequest. */
+                class GetConnectionInfoRequest implements IGetConnectionInfoRequest {
+
+                    /**
+                     * Constructs a new GetConnectionInfoRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.alloydb.v1.IGetConnectionInfoRequest);
+
+                    /** GetConnectionInfoRequest parent. */
+                    public parent: string;
+
+                    /** GetConnectionInfoRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new GetConnectionInfoRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetConnectionInfoRequest instance
+                     */
+                    public static create(properties?: google.cloud.alloydb.v1.IGetConnectionInfoRequest): google.cloud.alloydb.v1.GetConnectionInfoRequest;
+
+                    /**
+                     * Encodes the specified GetConnectionInfoRequest message. Does not implicitly {@link google.cloud.alloydb.v1.GetConnectionInfoRequest.verify|verify} messages.
+                     * @param message GetConnectionInfoRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.alloydb.v1.IGetConnectionInfoRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetConnectionInfoRequest message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1.GetConnectionInfoRequest.verify|verify} messages.
+                     * @param message GetConnectionInfoRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.alloydb.v1.IGetConnectionInfoRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetConnectionInfoRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetConnectionInfoRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1.GetConnectionInfoRequest;
+
+                    /**
+                     * Decodes a GetConnectionInfoRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetConnectionInfoRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1.GetConnectionInfoRequest;
+
+                    /**
+                     * Verifies a GetConnectionInfoRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetConnectionInfoRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetConnectionInfoRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1.GetConnectionInfoRequest;
+
+                    /**
+                     * Creates a plain object from a GetConnectionInfoRequest message. Also converts values to other types if specified.
+                     * @param message GetConnectionInfoRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.alloydb.v1.GetConnectionInfoRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetConnectionInfoRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetConnectionInfoRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

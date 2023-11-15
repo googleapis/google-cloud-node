@@ -253,6 +253,34 @@
                             }
                           ]
                         },
+                        "BulkDeleteConversations": {
+                          "requestType": "BulkDeleteConversationsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/conversations:bulkDelete",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,filter",
+                            "(google.longrunning.operation_info).response_type": "BulkDeleteConversationsResponse",
+                            "(google.longrunning.operation_info).metadata_type": "BulkDeleteConversationsMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/conversations:bulkDelete",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,filter"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "BulkDeleteConversationsResponse",
+                                "metadata_type": "BulkDeleteConversationsMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "IngestConversations": {
                           "requestType": "IngestConversationsRequest",
                           "responseType": "google.longrunning.Operation",
@@ -1164,6 +1192,20 @@
                         "conversationConfig": {
                           "type": "ConversationConfig",
                           "id": 4
+                        },
+                        "redactionConfig": {
+                          "type": "RedactionConfig",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "speechConfig": {
+                          "type": "SpeechConfig",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -1174,6 +1216,22 @@
                               "id": 1,
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "bucketObjectType": {
+                              "type": "BucketObjectType",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "BucketObjectType": {
+                              "values": {
+                                "BUCKET_OBJECT_TYPE_UNSPECIFIED": 0,
+                                "TRANSCRIPT": 1,
+                                "AUDIO": 2
                               }
                             }
                           }
@@ -1194,6 +1252,20 @@
                             "agentId": {
                               "type": "string",
                               "id": 1
+                            },
+                            "agentChannel": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "customerChannel": {
+                              "type": "int32",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         }
@@ -1411,6 +1483,14 @@
                         "totalRequestedAnalysesCount": {
                           "type": "int32",
                           "id": 6
+                        },
+                        "partialErrors": {
+                          "rule": "repeated",
+                          "type": "google.rpc.Status",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -1425,6 +1505,54 @@
                           "id": 2
                         }
                       }
+                    },
+                    "BulkDeleteConversationsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "maxDeleteCount": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "BulkDeleteConversationsMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "request": {
+                          "type": "BulkDeleteConversationsRequest",
+                          "id": 3
+                        },
+                        "partialErrors": {
+                          "rule": "repeated",
+                          "type": "google.rpc.Status",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "BulkDeleteConversationsResponse": {
+                      "fields": {}
                     },
                     "ExportInsightsDataRequest": {
                       "oneofs": {

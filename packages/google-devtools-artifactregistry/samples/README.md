@@ -12,6 +12,7 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Artifact_registry.batch_delete_versions](#artifact_registry.batch_delete_versions)
   * [Artifact_registry.create_repository](#artifact_registry.create_repository)
   * [Artifact_registry.create_tag](#artifact_registry.create_tag)
   * [Artifact_registry.delete_package](#artifact_registry.delete_package)
@@ -86,6 +87,23 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Artifact_registry.batch_delete_versions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.batch_delete_versions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.batch_delete_versions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.batch_delete_versions.js`
+
+
+-----
+
 
 
 

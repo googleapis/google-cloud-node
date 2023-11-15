@@ -114,6 +114,15 @@ message Job {
 // LogsPolicy describes how outputs from a Job's Tasks (stdout/stderr) will be
 // preserved.
 message LogsPolicy {
+  // CloudLoggingOption contains additional settings for cloud logging generated
+  // by Batch job.
+  message CloudLoggingOption {
+    // Optional. Set this flag to true to use generic_task as monitored resource
+    // for Batch job generated cloud logging.
+    bool use_generic_task_monitored_resource = 1
+        [(google.api.field_behavior) = OPTIONAL];
+  }
+
   // The destination (if any) for logs.
   enum Destination {
     // Logs are not preserved.
@@ -133,6 +142,11 @@ message LogsPolicy {
   // local file path on the VM, or under the mount point of a Persistent Disk or
   // Filestore, or a Cloud Storage path.
   string logs_path = 2;
+
+  // Optional. Additional settings for Cloud Logging. It will only take effect
+  // when the destination of LogsPolicy is set to CLOUD_LOGGING.
+  CloudLoggingOption cloud_logging_option = 3
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // JobDependency describes the state of other Jobs that the start of this Job
@@ -332,6 +346,7 @@ message AllocationPolicy {
       // * `batch-centos`: use Batch CentOS images.
       // * `batch-cos`: use Batch Container-Optimized images.
       // * `batch-hpc-centos`: use Batch HPC CentOS images.
+      // * `batch-hpc-rocky`: use Batch HPC Rocky Linux images.
       string image = 4;
 
       // Name of a snapshot used as the data source.
@@ -445,9 +460,9 @@ message AllocationPolicy {
     // storage and accessing.
     repeated AttachedDisk disks = 6;
 
-    // If specified, VMs will consume only the specified reservation.
+    // Optional. If specified, VMs will consume only the specified reservation.
     // If not specified (default), VMs will consume any applicable reservation.
-    string reservation = 7;
+    string reservation = 7 [(google.api.field_behavior) = OPTIONAL];
   }
 
   // InstancePolicyOrTemplate lets you define the type of resources to use for
@@ -627,7 +642,8 @@ message TaskGroup {
   int64 task_count = 4;
 
   // Max number of tasks that can run in parallel.
-  // Default to min(task_count, 1000).
+  // Default to min(task_count, parallel tasks per job limit).
+  // See: [Job Limits](https://cloud.google.com/batch/quotas#job_limits).
   // Field parallelism must be 1 if the scheduling_policy is IN_ORDER.
   int64 parallelism = 5;
 

@@ -536,6 +536,497 @@
                 return LatLng;
             })();
     
+            type.Money = (function() {
+    
+                /**
+                 * Properties of a Money.
+                 * @memberof google.type
+                 * @interface IMoney
+                 * @property {string|null} [currencyCode] Money currencyCode
+                 * @property {number|Long|null} [units] Money units
+                 * @property {number|null} [nanos] Money nanos
+                 */
+    
+                /**
+                 * Constructs a new Money.
+                 * @memberof google.type
+                 * @classdesc Represents a Money.
+                 * @implements IMoney
+                 * @constructor
+                 * @param {google.type.IMoney=} [properties] Properties to set
+                 */
+                function Money(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Money currencyCode.
+                 * @member {string} currencyCode
+                 * @memberof google.type.Money
+                 * @instance
+                 */
+                Money.prototype.currencyCode = "";
+    
+                /**
+                 * Money units.
+                 * @member {number|Long} units
+                 * @memberof google.type.Money
+                 * @instance
+                 */
+                Money.prototype.units = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                /**
+                 * Money nanos.
+                 * @member {number} nanos
+                 * @memberof google.type.Money
+                 * @instance
+                 */
+                Money.prototype.nanos = 0;
+    
+                /**
+                 * Creates a new Money instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.Money
+                 * @static
+                 * @param {google.type.IMoney=} [properties] Properties to set
+                 * @returns {google.type.Money} Money instance
+                 */
+                Money.create = function create(properties) {
+                    return new Money(properties);
+                };
+    
+                /**
+                 * Encodes the specified Money message. Does not implicitly {@link google.type.Money.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.Money
+                 * @static
+                 * @param {google.type.IMoney} message Money message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Money.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.currencyCode != null && Object.hasOwnProperty.call(message, "currencyCode"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.currencyCode);
+                    if (message.units != null && Object.hasOwnProperty.call(message, "units"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int64(message.units);
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.nanos);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Money message, length delimited. Does not implicitly {@link google.type.Money.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.Money
+                 * @static
+                 * @param {google.type.IMoney} message Money message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Money.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Money message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.Money
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.Money} Money
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Money.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Money();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.currencyCode = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.units = reader.int64();
+                                break;
+                            }
+                        case 3: {
+                                message.nanos = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Money message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.Money
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.Money} Money
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Money.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Money message.
+                 * @function verify
+                 * @memberof google.type.Money
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Money.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.currencyCode != null && message.hasOwnProperty("currencyCode"))
+                        if (!$util.isString(message.currencyCode))
+                            return "currencyCode: string expected";
+                    if (message.units != null && message.hasOwnProperty("units"))
+                        if (!$util.isInteger(message.units) && !(message.units && $util.isInteger(message.units.low) && $util.isInteger(message.units.high)))
+                            return "units: integer|Long expected";
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        if (!$util.isInteger(message.nanos))
+                            return "nanos: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Money message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.Money
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.Money} Money
+                 */
+                Money.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.Money)
+                        return object;
+                    var message = new $root.google.type.Money();
+                    if (object.currencyCode != null)
+                        message.currencyCode = String(object.currencyCode);
+                    if (object.units != null)
+                        if ($util.Long)
+                            (message.units = $util.Long.fromValue(object.units)).unsigned = false;
+                        else if (typeof object.units === "string")
+                            message.units = parseInt(object.units, 10);
+                        else if (typeof object.units === "number")
+                            message.units = object.units;
+                        else if (typeof object.units === "object")
+                            message.units = new $util.LongBits(object.units.low >>> 0, object.units.high >>> 0).toNumber();
+                    if (object.nanos != null)
+                        message.nanos = object.nanos | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Money message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.Money
+                 * @static
+                 * @param {google.type.Money} message Money
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Money.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.currencyCode = "";
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, false);
+                            object.units = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.units = options.longs === String ? "0" : 0;
+                        object.nanos = 0;
+                    }
+                    if (message.currencyCode != null && message.hasOwnProperty("currencyCode"))
+                        object.currencyCode = message.currencyCode;
+                    if (message.units != null && message.hasOwnProperty("units"))
+                        if (typeof message.units === "number")
+                            object.units = options.longs === String ? String(message.units) : message.units;
+                        else
+                            object.units = options.longs === String ? $util.Long.prototype.toString.call(message.units) : options.longs === Number ? new $util.LongBits(message.units.low >>> 0, message.units.high >>> 0).toNumber() : message.units;
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        object.nanos = message.nanos;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Money to JSON.
+                 * @function toJSON
+                 * @memberof google.type.Money
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Money.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Money
+                 * @function getTypeUrl
+                 * @memberof google.type.Money
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Money.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.type.Money";
+                };
+    
+                return Money;
+            })();
+    
+            type.LocalizedText = (function() {
+    
+                /**
+                 * Properties of a LocalizedText.
+                 * @memberof google.type
+                 * @interface ILocalizedText
+                 * @property {string|null} [text] LocalizedText text
+                 * @property {string|null} [languageCode] LocalizedText languageCode
+                 */
+    
+                /**
+                 * Constructs a new LocalizedText.
+                 * @memberof google.type
+                 * @classdesc Represents a LocalizedText.
+                 * @implements ILocalizedText
+                 * @constructor
+                 * @param {google.type.ILocalizedText=} [properties] Properties to set
+                 */
+                function LocalizedText(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * LocalizedText text.
+                 * @member {string} text
+                 * @memberof google.type.LocalizedText
+                 * @instance
+                 */
+                LocalizedText.prototype.text = "";
+    
+                /**
+                 * LocalizedText languageCode.
+                 * @member {string} languageCode
+                 * @memberof google.type.LocalizedText
+                 * @instance
+                 */
+                LocalizedText.prototype.languageCode = "";
+    
+                /**
+                 * Creates a new LocalizedText instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.LocalizedText
+                 * @static
+                 * @param {google.type.ILocalizedText=} [properties] Properties to set
+                 * @returns {google.type.LocalizedText} LocalizedText instance
+                 */
+                LocalizedText.create = function create(properties) {
+                    return new LocalizedText(properties);
+                };
+    
+                /**
+                 * Encodes the specified LocalizedText message. Does not implicitly {@link google.type.LocalizedText.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.LocalizedText
+                 * @static
+                 * @param {google.type.ILocalizedText} message LocalizedText message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                LocalizedText.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.text);
+                    if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.languageCode);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified LocalizedText message, length delimited. Does not implicitly {@link google.type.LocalizedText.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.LocalizedText
+                 * @static
+                 * @param {google.type.ILocalizedText} message LocalizedText message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                LocalizedText.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a LocalizedText message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.LocalizedText
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.LocalizedText} LocalizedText
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                LocalizedText.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.LocalizedText();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.text = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.languageCode = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a LocalizedText message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.LocalizedText
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.LocalizedText} LocalizedText
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                LocalizedText.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a LocalizedText message.
+                 * @function verify
+                 * @memberof google.type.LocalizedText
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                LocalizedText.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.text != null && message.hasOwnProperty("text"))
+                        if (!$util.isString(message.text))
+                            return "text: string expected";
+                    if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                        if (!$util.isString(message.languageCode))
+                            return "languageCode: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a LocalizedText message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.LocalizedText
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.LocalizedText} LocalizedText
+                 */
+                LocalizedText.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.LocalizedText)
+                        return object;
+                    var message = new $root.google.type.LocalizedText();
+                    if (object.text != null)
+                        message.text = String(object.text);
+                    if (object.languageCode != null)
+                        message.languageCode = String(object.languageCode);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a LocalizedText message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.LocalizedText
+                 * @static
+                 * @param {google.type.LocalizedText} message LocalizedText
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                LocalizedText.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.text = "";
+                        object.languageCode = "";
+                    }
+                    if (message.text != null && message.hasOwnProperty("text"))
+                        object.text = message.text;
+                    if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                        object.languageCode = message.languageCode;
+                    return object;
+                };
+    
+                /**
+                 * Converts this LocalizedText to JSON.
+                 * @function toJSON
+                 * @memberof google.type.LocalizedText
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                LocalizedText.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for LocalizedText
+                 * @function getTypeUrl
+                 * @memberof google.type.LocalizedText
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                LocalizedText.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.type.LocalizedText";
+                };
+    
+                return LocalizedText;
+            })();
+    
             type.Date = (function() {
     
                 /**
@@ -786,233 +1277,6 @@
                 return Date;
             })();
     
-            type.LocalizedText = (function() {
-    
-                /**
-                 * Properties of a LocalizedText.
-                 * @memberof google.type
-                 * @interface ILocalizedText
-                 * @property {string|null} [text] LocalizedText text
-                 * @property {string|null} [languageCode] LocalizedText languageCode
-                 */
-    
-                /**
-                 * Constructs a new LocalizedText.
-                 * @memberof google.type
-                 * @classdesc Represents a LocalizedText.
-                 * @implements ILocalizedText
-                 * @constructor
-                 * @param {google.type.ILocalizedText=} [properties] Properties to set
-                 */
-                function LocalizedText(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * LocalizedText text.
-                 * @member {string} text
-                 * @memberof google.type.LocalizedText
-                 * @instance
-                 */
-                LocalizedText.prototype.text = "";
-    
-                /**
-                 * LocalizedText languageCode.
-                 * @member {string} languageCode
-                 * @memberof google.type.LocalizedText
-                 * @instance
-                 */
-                LocalizedText.prototype.languageCode = "";
-    
-                /**
-                 * Creates a new LocalizedText instance using the specified properties.
-                 * @function create
-                 * @memberof google.type.LocalizedText
-                 * @static
-                 * @param {google.type.ILocalizedText=} [properties] Properties to set
-                 * @returns {google.type.LocalizedText} LocalizedText instance
-                 */
-                LocalizedText.create = function create(properties) {
-                    return new LocalizedText(properties);
-                };
-    
-                /**
-                 * Encodes the specified LocalizedText message. Does not implicitly {@link google.type.LocalizedText.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.type.LocalizedText
-                 * @static
-                 * @param {google.type.ILocalizedText} message LocalizedText message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                LocalizedText.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.text != null && Object.hasOwnProperty.call(message, "text"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.text);
-                    if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.languageCode);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified LocalizedText message, length delimited. Does not implicitly {@link google.type.LocalizedText.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.type.LocalizedText
-                 * @static
-                 * @param {google.type.ILocalizedText} message LocalizedText message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                LocalizedText.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a LocalizedText message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.type.LocalizedText
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.type.LocalizedText} LocalizedText
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                LocalizedText.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.LocalizedText();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.text = reader.string();
-                                break;
-                            }
-                        case 2: {
-                                message.languageCode = reader.string();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a LocalizedText message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.type.LocalizedText
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.type.LocalizedText} LocalizedText
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                LocalizedText.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a LocalizedText message.
-                 * @function verify
-                 * @memberof google.type.LocalizedText
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                LocalizedText.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.text != null && message.hasOwnProperty("text"))
-                        if (!$util.isString(message.text))
-                            return "text: string expected";
-                    if (message.languageCode != null && message.hasOwnProperty("languageCode"))
-                        if (!$util.isString(message.languageCode))
-                            return "languageCode: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a LocalizedText message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.type.LocalizedText
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.type.LocalizedText} LocalizedText
-                 */
-                LocalizedText.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.type.LocalizedText)
-                        return object;
-                    var message = new $root.google.type.LocalizedText();
-                    if (object.text != null)
-                        message.text = String(object.text);
-                    if (object.languageCode != null)
-                        message.languageCode = String(object.languageCode);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a LocalizedText message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.type.LocalizedText
-                 * @static
-                 * @param {google.type.LocalizedText} message LocalizedText
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                LocalizedText.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.text = "";
-                        object.languageCode = "";
-                    }
-                    if (message.text != null && message.hasOwnProperty("text"))
-                        object.text = message.text;
-                    if (message.languageCode != null && message.hasOwnProperty("languageCode"))
-                        object.languageCode = message.languageCode;
-                    return object;
-                };
-    
-                /**
-                 * Converts this LocalizedText to JSON.
-                 * @function toJSON
-                 * @memberof google.type.LocalizedText
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                LocalizedText.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for LocalizedText
-                 * @function getTypeUrl
-                 * @memberof google.type.LocalizedText
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                LocalizedText.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.type.LocalizedText";
-                };
-    
-                return LocalizedText;
-            })();
-    
             return type;
         })();
     
@@ -1042,6 +1306,1587 @@
                      * @namespace
                      */
                     var v1 = {};
+    
+                    v1.AuthorAttribution = (function() {
+    
+                        /**
+                         * Properties of an AuthorAttribution.
+                         * @memberof google.maps.places.v1
+                         * @interface IAuthorAttribution
+                         * @property {string|null} [displayName] AuthorAttribution displayName
+                         * @property {string|null} [uri] AuthorAttribution uri
+                         * @property {string|null} [photoUri] AuthorAttribution photoUri
+                         */
+    
+                        /**
+                         * Constructs a new AuthorAttribution.
+                         * @memberof google.maps.places.v1
+                         * @classdesc Represents an AuthorAttribution.
+                         * @implements IAuthorAttribution
+                         * @constructor
+                         * @param {google.maps.places.v1.IAuthorAttribution=} [properties] Properties to set
+                         */
+                        function AuthorAttribution(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AuthorAttribution displayName.
+                         * @member {string} displayName
+                         * @memberof google.maps.places.v1.AuthorAttribution
+                         * @instance
+                         */
+                        AuthorAttribution.prototype.displayName = "";
+    
+                        /**
+                         * AuthorAttribution uri.
+                         * @member {string} uri
+                         * @memberof google.maps.places.v1.AuthorAttribution
+                         * @instance
+                         */
+                        AuthorAttribution.prototype.uri = "";
+    
+                        /**
+                         * AuthorAttribution photoUri.
+                         * @member {string} photoUri
+                         * @memberof google.maps.places.v1.AuthorAttribution
+                         * @instance
+                         */
+                        AuthorAttribution.prototype.photoUri = "";
+    
+                        /**
+                         * Creates a new AuthorAttribution instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.places.v1.AuthorAttribution
+                         * @static
+                         * @param {google.maps.places.v1.IAuthorAttribution=} [properties] Properties to set
+                         * @returns {google.maps.places.v1.AuthorAttribution} AuthorAttribution instance
+                         */
+                        AuthorAttribution.create = function create(properties) {
+                            return new AuthorAttribution(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AuthorAttribution message. Does not implicitly {@link google.maps.places.v1.AuthorAttribution.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.places.v1.AuthorAttribution
+                         * @static
+                         * @param {google.maps.places.v1.IAuthorAttribution} message AuthorAttribution message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AuthorAttribution.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.uri);
+                            if (message.photoUri != null && Object.hasOwnProperty.call(message, "photoUri"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.photoUri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AuthorAttribution message, length delimited. Does not implicitly {@link google.maps.places.v1.AuthorAttribution.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.places.v1.AuthorAttribution
+                         * @static
+                         * @param {google.maps.places.v1.IAuthorAttribution} message AuthorAttribution message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AuthorAttribution.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AuthorAttribution message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.places.v1.AuthorAttribution
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.places.v1.AuthorAttribution} AuthorAttribution
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AuthorAttribution.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.AuthorAttribution();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.photoUri = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AuthorAttribution message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.places.v1.AuthorAttribution
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.places.v1.AuthorAttribution} AuthorAttribution
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AuthorAttribution.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AuthorAttribution message.
+                         * @function verify
+                         * @memberof google.maps.places.v1.AuthorAttribution
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AuthorAttribution.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            if (message.photoUri != null && message.hasOwnProperty("photoUri"))
+                                if (!$util.isString(message.photoUri))
+                                    return "photoUri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AuthorAttribution message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.places.v1.AuthorAttribution
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.places.v1.AuthorAttribution} AuthorAttribution
+                         */
+                        AuthorAttribution.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.places.v1.AuthorAttribution)
+                                return object;
+                            var message = new $root.google.maps.places.v1.AuthorAttribution();
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            if (object.photoUri != null)
+                                message.photoUri = String(object.photoUri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AuthorAttribution message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.places.v1.AuthorAttribution
+                         * @static
+                         * @param {google.maps.places.v1.AuthorAttribution} message AuthorAttribution
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AuthorAttribution.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.displayName = "";
+                                object.uri = "";
+                                object.photoUri = "";
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            if (message.photoUri != null && message.hasOwnProperty("photoUri"))
+                                object.photoUri = message.photoUri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AuthorAttribution to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.places.v1.AuthorAttribution
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AuthorAttribution.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AuthorAttribution
+                         * @function getTypeUrl
+                         * @memberof google.maps.places.v1.AuthorAttribution
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AuthorAttribution.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.places.v1.AuthorAttribution";
+                        };
+    
+                        return AuthorAttribution;
+                    })();
+    
+                    v1.EVChargeOptions = (function() {
+    
+                        /**
+                         * Properties of a EVChargeOptions.
+                         * @memberof google.maps.places.v1
+                         * @interface IEVChargeOptions
+                         * @property {number|null} [connectorCount] EVChargeOptions connectorCount
+                         * @property {Array.<google.maps.places.v1.EVChargeOptions.IConnectorAggregation>|null} [connectorAggregation] EVChargeOptions connectorAggregation
+                         */
+    
+                        /**
+                         * Constructs a new EVChargeOptions.
+                         * @memberof google.maps.places.v1
+                         * @classdesc Represents a EVChargeOptions.
+                         * @implements IEVChargeOptions
+                         * @constructor
+                         * @param {google.maps.places.v1.IEVChargeOptions=} [properties] Properties to set
+                         */
+                        function EVChargeOptions(properties) {
+                            this.connectorAggregation = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * EVChargeOptions connectorCount.
+                         * @member {number} connectorCount
+                         * @memberof google.maps.places.v1.EVChargeOptions
+                         * @instance
+                         */
+                        EVChargeOptions.prototype.connectorCount = 0;
+    
+                        /**
+                         * EVChargeOptions connectorAggregation.
+                         * @member {Array.<google.maps.places.v1.EVChargeOptions.IConnectorAggregation>} connectorAggregation
+                         * @memberof google.maps.places.v1.EVChargeOptions
+                         * @instance
+                         */
+                        EVChargeOptions.prototype.connectorAggregation = $util.emptyArray;
+    
+                        /**
+                         * Creates a new EVChargeOptions instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.places.v1.EVChargeOptions
+                         * @static
+                         * @param {google.maps.places.v1.IEVChargeOptions=} [properties] Properties to set
+                         * @returns {google.maps.places.v1.EVChargeOptions} EVChargeOptions instance
+                         */
+                        EVChargeOptions.create = function create(properties) {
+                            return new EVChargeOptions(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EVChargeOptions message. Does not implicitly {@link google.maps.places.v1.EVChargeOptions.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.places.v1.EVChargeOptions
+                         * @static
+                         * @param {google.maps.places.v1.IEVChargeOptions} message EVChargeOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EVChargeOptions.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.connectorCount != null && Object.hasOwnProperty.call(message, "connectorCount"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.connectorCount);
+                            if (message.connectorAggregation != null && message.connectorAggregation.length)
+                                for (var i = 0; i < message.connectorAggregation.length; ++i)
+                                    $root.google.maps.places.v1.EVChargeOptions.ConnectorAggregation.encode(message.connectorAggregation[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EVChargeOptions message, length delimited. Does not implicitly {@link google.maps.places.v1.EVChargeOptions.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.places.v1.EVChargeOptions
+                         * @static
+                         * @param {google.maps.places.v1.IEVChargeOptions} message EVChargeOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EVChargeOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a EVChargeOptions message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.places.v1.EVChargeOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.places.v1.EVChargeOptions} EVChargeOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EVChargeOptions.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.EVChargeOptions();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.connectorCount = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.connectorAggregation && message.connectorAggregation.length))
+                                            message.connectorAggregation = [];
+                                        message.connectorAggregation.push($root.google.maps.places.v1.EVChargeOptions.ConnectorAggregation.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a EVChargeOptions message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.places.v1.EVChargeOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.places.v1.EVChargeOptions} EVChargeOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EVChargeOptions.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a EVChargeOptions message.
+                         * @function verify
+                         * @memberof google.maps.places.v1.EVChargeOptions
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EVChargeOptions.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.connectorCount != null && message.hasOwnProperty("connectorCount"))
+                                if (!$util.isInteger(message.connectorCount))
+                                    return "connectorCount: integer expected";
+                            if (message.connectorAggregation != null && message.hasOwnProperty("connectorAggregation")) {
+                                if (!Array.isArray(message.connectorAggregation))
+                                    return "connectorAggregation: array expected";
+                                for (var i = 0; i < message.connectorAggregation.length; ++i) {
+                                    var error = $root.google.maps.places.v1.EVChargeOptions.ConnectorAggregation.verify(message.connectorAggregation[i]);
+                                    if (error)
+                                        return "connectorAggregation." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a EVChargeOptions message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.places.v1.EVChargeOptions
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.places.v1.EVChargeOptions} EVChargeOptions
+                         */
+                        EVChargeOptions.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.places.v1.EVChargeOptions)
+                                return object;
+                            var message = new $root.google.maps.places.v1.EVChargeOptions();
+                            if (object.connectorCount != null)
+                                message.connectorCount = object.connectorCount | 0;
+                            if (object.connectorAggregation) {
+                                if (!Array.isArray(object.connectorAggregation))
+                                    throw TypeError(".google.maps.places.v1.EVChargeOptions.connectorAggregation: array expected");
+                                message.connectorAggregation = [];
+                                for (var i = 0; i < object.connectorAggregation.length; ++i) {
+                                    if (typeof object.connectorAggregation[i] !== "object")
+                                        throw TypeError(".google.maps.places.v1.EVChargeOptions.connectorAggregation: object expected");
+                                    message.connectorAggregation[i] = $root.google.maps.places.v1.EVChargeOptions.ConnectorAggregation.fromObject(object.connectorAggregation[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a EVChargeOptions message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.places.v1.EVChargeOptions
+                         * @static
+                         * @param {google.maps.places.v1.EVChargeOptions} message EVChargeOptions
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EVChargeOptions.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.connectorAggregation = [];
+                            if (options.defaults)
+                                object.connectorCount = 0;
+                            if (message.connectorCount != null && message.hasOwnProperty("connectorCount"))
+                                object.connectorCount = message.connectorCount;
+                            if (message.connectorAggregation && message.connectorAggregation.length) {
+                                object.connectorAggregation = [];
+                                for (var j = 0; j < message.connectorAggregation.length; ++j)
+                                    object.connectorAggregation[j] = $root.google.maps.places.v1.EVChargeOptions.ConnectorAggregation.toObject(message.connectorAggregation[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this EVChargeOptions to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.places.v1.EVChargeOptions
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EVChargeOptions.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for EVChargeOptions
+                         * @function getTypeUrl
+                         * @memberof google.maps.places.v1.EVChargeOptions
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        EVChargeOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.places.v1.EVChargeOptions";
+                        };
+    
+                        EVChargeOptions.ConnectorAggregation = (function() {
+    
+                            /**
+                             * Properties of a ConnectorAggregation.
+                             * @memberof google.maps.places.v1.EVChargeOptions
+                             * @interface IConnectorAggregation
+                             * @property {google.maps.places.v1.EVConnectorType|null} [type] ConnectorAggregation type
+                             * @property {number|null} [maxChargeRateKw] ConnectorAggregation maxChargeRateKw
+                             * @property {number|null} [count] ConnectorAggregation count
+                             * @property {number|null} [availableCount] ConnectorAggregation availableCount
+                             * @property {number|null} [outOfServiceCount] ConnectorAggregation outOfServiceCount
+                             * @property {google.protobuf.ITimestamp|null} [availabilityLastUpdateTime] ConnectorAggregation availabilityLastUpdateTime
+                             */
+    
+                            /**
+                             * Constructs a new ConnectorAggregation.
+                             * @memberof google.maps.places.v1.EVChargeOptions
+                             * @classdesc Represents a ConnectorAggregation.
+                             * @implements IConnectorAggregation
+                             * @constructor
+                             * @param {google.maps.places.v1.EVChargeOptions.IConnectorAggregation=} [properties] Properties to set
+                             */
+                            function ConnectorAggregation(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ConnectorAggregation type.
+                             * @member {google.maps.places.v1.EVConnectorType} type
+                             * @memberof google.maps.places.v1.EVChargeOptions.ConnectorAggregation
+                             * @instance
+                             */
+                            ConnectorAggregation.prototype.type = 0;
+    
+                            /**
+                             * ConnectorAggregation maxChargeRateKw.
+                             * @member {number} maxChargeRateKw
+                             * @memberof google.maps.places.v1.EVChargeOptions.ConnectorAggregation
+                             * @instance
+                             */
+                            ConnectorAggregation.prototype.maxChargeRateKw = 0;
+    
+                            /**
+                             * ConnectorAggregation count.
+                             * @member {number} count
+                             * @memberof google.maps.places.v1.EVChargeOptions.ConnectorAggregation
+                             * @instance
+                             */
+                            ConnectorAggregation.prototype.count = 0;
+    
+                            /**
+                             * ConnectorAggregation availableCount.
+                             * @member {number|null|undefined} availableCount
+                             * @memberof google.maps.places.v1.EVChargeOptions.ConnectorAggregation
+                             * @instance
+                             */
+                            ConnectorAggregation.prototype.availableCount = null;
+    
+                            /**
+                             * ConnectorAggregation outOfServiceCount.
+                             * @member {number|null|undefined} outOfServiceCount
+                             * @memberof google.maps.places.v1.EVChargeOptions.ConnectorAggregation
+                             * @instance
+                             */
+                            ConnectorAggregation.prototype.outOfServiceCount = null;
+    
+                            /**
+                             * ConnectorAggregation availabilityLastUpdateTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} availabilityLastUpdateTime
+                             * @memberof google.maps.places.v1.EVChargeOptions.ConnectorAggregation
+                             * @instance
+                             */
+                            ConnectorAggregation.prototype.availabilityLastUpdateTime = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * ConnectorAggregation _availableCount.
+                             * @member {"availableCount"|undefined} _availableCount
+                             * @memberof google.maps.places.v1.EVChargeOptions.ConnectorAggregation
+                             * @instance
+                             */
+                            Object.defineProperty(ConnectorAggregation.prototype, "_availableCount", {
+                                get: $util.oneOfGetter($oneOfFields = ["availableCount"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * ConnectorAggregation _outOfServiceCount.
+                             * @member {"outOfServiceCount"|undefined} _outOfServiceCount
+                             * @memberof google.maps.places.v1.EVChargeOptions.ConnectorAggregation
+                             * @instance
+                             */
+                            Object.defineProperty(ConnectorAggregation.prototype, "_outOfServiceCount", {
+                                get: $util.oneOfGetter($oneOfFields = ["outOfServiceCount"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new ConnectorAggregation instance using the specified properties.
+                             * @function create
+                             * @memberof google.maps.places.v1.EVChargeOptions.ConnectorAggregation
+                             * @static
+                             * @param {google.maps.places.v1.EVChargeOptions.IConnectorAggregation=} [properties] Properties to set
+                             * @returns {google.maps.places.v1.EVChargeOptions.ConnectorAggregation} ConnectorAggregation instance
+                             */
+                            ConnectorAggregation.create = function create(properties) {
+                                return new ConnectorAggregation(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ConnectorAggregation message. Does not implicitly {@link google.maps.places.v1.EVChargeOptions.ConnectorAggregation.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.maps.places.v1.EVChargeOptions.ConnectorAggregation
+                             * @static
+                             * @param {google.maps.places.v1.EVChargeOptions.IConnectorAggregation} message ConnectorAggregation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ConnectorAggregation.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+                                if (message.maxChargeRateKw != null && Object.hasOwnProperty.call(message, "maxChargeRateKw"))
+                                    writer.uint32(/* id 2, wireType 1 =*/17).double(message.maxChargeRateKw);
+                                if (message.count != null && Object.hasOwnProperty.call(message, "count"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.count);
+                                if (message.availableCount != null && Object.hasOwnProperty.call(message, "availableCount"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.availableCount);
+                                if (message.outOfServiceCount != null && Object.hasOwnProperty.call(message, "outOfServiceCount"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).int32(message.outOfServiceCount);
+                                if (message.availabilityLastUpdateTime != null && Object.hasOwnProperty.call(message, "availabilityLastUpdateTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.availabilityLastUpdateTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ConnectorAggregation message, length delimited. Does not implicitly {@link google.maps.places.v1.EVChargeOptions.ConnectorAggregation.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.maps.places.v1.EVChargeOptions.ConnectorAggregation
+                             * @static
+                             * @param {google.maps.places.v1.EVChargeOptions.IConnectorAggregation} message ConnectorAggregation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ConnectorAggregation.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ConnectorAggregation message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.maps.places.v1.EVChargeOptions.ConnectorAggregation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.maps.places.v1.EVChargeOptions.ConnectorAggregation} ConnectorAggregation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ConnectorAggregation.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.EVChargeOptions.ConnectorAggregation();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.type = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.maxChargeRateKw = reader.double();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.count = reader.int32();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.availableCount = reader.int32();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.outOfServiceCount = reader.int32();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.availabilityLastUpdateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ConnectorAggregation message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.maps.places.v1.EVChargeOptions.ConnectorAggregation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.maps.places.v1.EVChargeOptions.ConnectorAggregation} ConnectorAggregation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ConnectorAggregation.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ConnectorAggregation message.
+                             * @function verify
+                             * @memberof google.maps.places.v1.EVChargeOptions.ConnectorAggregation
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ConnectorAggregation.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    switch (message.type) {
+                                    default:
+                                        return "type: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                    case 6:
+                                    case 7:
+                                    case 8:
+                                    case 9:
+                                        break;
+                                    }
+                                if (message.maxChargeRateKw != null && message.hasOwnProperty("maxChargeRateKw"))
+                                    if (typeof message.maxChargeRateKw !== "number")
+                                        return "maxChargeRateKw: number expected";
+                                if (message.count != null && message.hasOwnProperty("count"))
+                                    if (!$util.isInteger(message.count))
+                                        return "count: integer expected";
+                                if (message.availableCount != null && message.hasOwnProperty("availableCount")) {
+                                    properties._availableCount = 1;
+                                    if (!$util.isInteger(message.availableCount))
+                                        return "availableCount: integer expected";
+                                }
+                                if (message.outOfServiceCount != null && message.hasOwnProperty("outOfServiceCount")) {
+                                    properties._outOfServiceCount = 1;
+                                    if (!$util.isInteger(message.outOfServiceCount))
+                                        return "outOfServiceCount: integer expected";
+                                }
+                                if (message.availabilityLastUpdateTime != null && message.hasOwnProperty("availabilityLastUpdateTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.availabilityLastUpdateTime);
+                                    if (error)
+                                        return "availabilityLastUpdateTime." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ConnectorAggregation message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.maps.places.v1.EVChargeOptions.ConnectorAggregation
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.maps.places.v1.EVChargeOptions.ConnectorAggregation} ConnectorAggregation
+                             */
+                            ConnectorAggregation.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.maps.places.v1.EVChargeOptions.ConnectorAggregation)
+                                    return object;
+                                var message = new $root.google.maps.places.v1.EVChargeOptions.ConnectorAggregation();
+                                switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
+                                case "EV_CONNECTOR_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.type = 0;
+                                    break;
+                                case "EV_CONNECTOR_TYPE_OTHER":
+                                case 1:
+                                    message.type = 1;
+                                    break;
+                                case "EV_CONNECTOR_TYPE_J1772":
+                                case 2:
+                                    message.type = 2;
+                                    break;
+                                case "EV_CONNECTOR_TYPE_TYPE_2":
+                                case 3:
+                                    message.type = 3;
+                                    break;
+                                case "EV_CONNECTOR_TYPE_CHADEMO":
+                                case 4:
+                                    message.type = 4;
+                                    break;
+                                case "EV_CONNECTOR_TYPE_CCS_COMBO_1":
+                                case 5:
+                                    message.type = 5;
+                                    break;
+                                case "EV_CONNECTOR_TYPE_CCS_COMBO_2":
+                                case 6:
+                                    message.type = 6;
+                                    break;
+                                case "EV_CONNECTOR_TYPE_TESLA":
+                                case 7:
+                                    message.type = 7;
+                                    break;
+                                case "EV_CONNECTOR_TYPE_UNSPECIFIED_GB_T":
+                                case 8:
+                                    message.type = 8;
+                                    break;
+                                case "EV_CONNECTOR_TYPE_UNSPECIFIED_WALL_OUTLET":
+                                case 9:
+                                    message.type = 9;
+                                    break;
+                                }
+                                if (object.maxChargeRateKw != null)
+                                    message.maxChargeRateKw = Number(object.maxChargeRateKw);
+                                if (object.count != null)
+                                    message.count = object.count | 0;
+                                if (object.availableCount != null)
+                                    message.availableCount = object.availableCount | 0;
+                                if (object.outOfServiceCount != null)
+                                    message.outOfServiceCount = object.outOfServiceCount | 0;
+                                if (object.availabilityLastUpdateTime != null) {
+                                    if (typeof object.availabilityLastUpdateTime !== "object")
+                                        throw TypeError(".google.maps.places.v1.EVChargeOptions.ConnectorAggregation.availabilityLastUpdateTime: object expected");
+                                    message.availabilityLastUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.availabilityLastUpdateTime);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ConnectorAggregation message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.maps.places.v1.EVChargeOptions.ConnectorAggregation
+                             * @static
+                             * @param {google.maps.places.v1.EVChargeOptions.ConnectorAggregation} message ConnectorAggregation
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ConnectorAggregation.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.type = options.enums === String ? "EV_CONNECTOR_TYPE_UNSPECIFIED" : 0;
+                                    object.maxChargeRateKw = 0;
+                                    object.count = 0;
+                                    object.availabilityLastUpdateTime = null;
+                                }
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    object.type = options.enums === String ? $root.google.maps.places.v1.EVConnectorType[message.type] === undefined ? message.type : $root.google.maps.places.v1.EVConnectorType[message.type] : message.type;
+                                if (message.maxChargeRateKw != null && message.hasOwnProperty("maxChargeRateKw"))
+                                    object.maxChargeRateKw = options.json && !isFinite(message.maxChargeRateKw) ? String(message.maxChargeRateKw) : message.maxChargeRateKw;
+                                if (message.count != null && message.hasOwnProperty("count"))
+                                    object.count = message.count;
+                                if (message.availableCount != null && message.hasOwnProperty("availableCount")) {
+                                    object.availableCount = message.availableCount;
+                                    if (options.oneofs)
+                                        object._availableCount = "availableCount";
+                                }
+                                if (message.outOfServiceCount != null && message.hasOwnProperty("outOfServiceCount")) {
+                                    object.outOfServiceCount = message.outOfServiceCount;
+                                    if (options.oneofs)
+                                        object._outOfServiceCount = "outOfServiceCount";
+                                }
+                                if (message.availabilityLastUpdateTime != null && message.hasOwnProperty("availabilityLastUpdateTime"))
+                                    object.availabilityLastUpdateTime = $root.google.protobuf.Timestamp.toObject(message.availabilityLastUpdateTime, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ConnectorAggregation to JSON.
+                             * @function toJSON
+                             * @memberof google.maps.places.v1.EVChargeOptions.ConnectorAggregation
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ConnectorAggregation.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ConnectorAggregation
+                             * @function getTypeUrl
+                             * @memberof google.maps.places.v1.EVChargeOptions.ConnectorAggregation
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ConnectorAggregation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.maps.places.v1.EVChargeOptions.ConnectorAggregation";
+                            };
+    
+                            return ConnectorAggregation;
+                        })();
+    
+                        return EVChargeOptions;
+                    })();
+    
+                    /**
+                     * EVConnectorType enum.
+                     * @name google.maps.places.v1.EVConnectorType
+                     * @enum {number}
+                     * @property {number} EV_CONNECTOR_TYPE_UNSPECIFIED=0 EV_CONNECTOR_TYPE_UNSPECIFIED value
+                     * @property {number} EV_CONNECTOR_TYPE_OTHER=1 EV_CONNECTOR_TYPE_OTHER value
+                     * @property {number} EV_CONNECTOR_TYPE_J1772=2 EV_CONNECTOR_TYPE_J1772 value
+                     * @property {number} EV_CONNECTOR_TYPE_TYPE_2=3 EV_CONNECTOR_TYPE_TYPE_2 value
+                     * @property {number} EV_CONNECTOR_TYPE_CHADEMO=4 EV_CONNECTOR_TYPE_CHADEMO value
+                     * @property {number} EV_CONNECTOR_TYPE_CCS_COMBO_1=5 EV_CONNECTOR_TYPE_CCS_COMBO_1 value
+                     * @property {number} EV_CONNECTOR_TYPE_CCS_COMBO_2=6 EV_CONNECTOR_TYPE_CCS_COMBO_2 value
+                     * @property {number} EV_CONNECTOR_TYPE_TESLA=7 EV_CONNECTOR_TYPE_TESLA value
+                     * @property {number} EV_CONNECTOR_TYPE_UNSPECIFIED_GB_T=8 EV_CONNECTOR_TYPE_UNSPECIFIED_GB_T value
+                     * @property {number} EV_CONNECTOR_TYPE_UNSPECIFIED_WALL_OUTLET=9 EV_CONNECTOR_TYPE_UNSPECIFIED_WALL_OUTLET value
+                     */
+                    v1.EVConnectorType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "EV_CONNECTOR_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "EV_CONNECTOR_TYPE_OTHER"] = 1;
+                        values[valuesById[2] = "EV_CONNECTOR_TYPE_J1772"] = 2;
+                        values[valuesById[3] = "EV_CONNECTOR_TYPE_TYPE_2"] = 3;
+                        values[valuesById[4] = "EV_CONNECTOR_TYPE_CHADEMO"] = 4;
+                        values[valuesById[5] = "EV_CONNECTOR_TYPE_CCS_COMBO_1"] = 5;
+                        values[valuesById[6] = "EV_CONNECTOR_TYPE_CCS_COMBO_2"] = 6;
+                        values[valuesById[7] = "EV_CONNECTOR_TYPE_TESLA"] = 7;
+                        values[valuesById[8] = "EV_CONNECTOR_TYPE_UNSPECIFIED_GB_T"] = 8;
+                        values[valuesById[9] = "EV_CONNECTOR_TYPE_UNSPECIFIED_WALL_OUTLET"] = 9;
+                        return values;
+                    })();
+    
+                    v1.FuelOptions = (function() {
+    
+                        /**
+                         * Properties of a FuelOptions.
+                         * @memberof google.maps.places.v1
+                         * @interface IFuelOptions
+                         * @property {Array.<google.maps.places.v1.FuelOptions.IFuelPrice>|null} [fuelPrices] FuelOptions fuelPrices
+                         */
+    
+                        /**
+                         * Constructs a new FuelOptions.
+                         * @memberof google.maps.places.v1
+                         * @classdesc Represents a FuelOptions.
+                         * @implements IFuelOptions
+                         * @constructor
+                         * @param {google.maps.places.v1.IFuelOptions=} [properties] Properties to set
+                         */
+                        function FuelOptions(properties) {
+                            this.fuelPrices = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FuelOptions fuelPrices.
+                         * @member {Array.<google.maps.places.v1.FuelOptions.IFuelPrice>} fuelPrices
+                         * @memberof google.maps.places.v1.FuelOptions
+                         * @instance
+                         */
+                        FuelOptions.prototype.fuelPrices = $util.emptyArray;
+    
+                        /**
+                         * Creates a new FuelOptions instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.places.v1.FuelOptions
+                         * @static
+                         * @param {google.maps.places.v1.IFuelOptions=} [properties] Properties to set
+                         * @returns {google.maps.places.v1.FuelOptions} FuelOptions instance
+                         */
+                        FuelOptions.create = function create(properties) {
+                            return new FuelOptions(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FuelOptions message. Does not implicitly {@link google.maps.places.v1.FuelOptions.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.places.v1.FuelOptions
+                         * @static
+                         * @param {google.maps.places.v1.IFuelOptions} message FuelOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FuelOptions.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.fuelPrices != null && message.fuelPrices.length)
+                                for (var i = 0; i < message.fuelPrices.length; ++i)
+                                    $root.google.maps.places.v1.FuelOptions.FuelPrice.encode(message.fuelPrices[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FuelOptions message, length delimited. Does not implicitly {@link google.maps.places.v1.FuelOptions.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.places.v1.FuelOptions
+                         * @static
+                         * @param {google.maps.places.v1.IFuelOptions} message FuelOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FuelOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FuelOptions message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.places.v1.FuelOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.places.v1.FuelOptions} FuelOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FuelOptions.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.FuelOptions();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.fuelPrices && message.fuelPrices.length))
+                                            message.fuelPrices = [];
+                                        message.fuelPrices.push($root.google.maps.places.v1.FuelOptions.FuelPrice.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FuelOptions message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.places.v1.FuelOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.places.v1.FuelOptions} FuelOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FuelOptions.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FuelOptions message.
+                         * @function verify
+                         * @memberof google.maps.places.v1.FuelOptions
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FuelOptions.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.fuelPrices != null && message.hasOwnProperty("fuelPrices")) {
+                                if (!Array.isArray(message.fuelPrices))
+                                    return "fuelPrices: array expected";
+                                for (var i = 0; i < message.fuelPrices.length; ++i) {
+                                    var error = $root.google.maps.places.v1.FuelOptions.FuelPrice.verify(message.fuelPrices[i]);
+                                    if (error)
+                                        return "fuelPrices." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FuelOptions message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.places.v1.FuelOptions
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.places.v1.FuelOptions} FuelOptions
+                         */
+                        FuelOptions.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.places.v1.FuelOptions)
+                                return object;
+                            var message = new $root.google.maps.places.v1.FuelOptions();
+                            if (object.fuelPrices) {
+                                if (!Array.isArray(object.fuelPrices))
+                                    throw TypeError(".google.maps.places.v1.FuelOptions.fuelPrices: array expected");
+                                message.fuelPrices = [];
+                                for (var i = 0; i < object.fuelPrices.length; ++i) {
+                                    if (typeof object.fuelPrices[i] !== "object")
+                                        throw TypeError(".google.maps.places.v1.FuelOptions.fuelPrices: object expected");
+                                    message.fuelPrices[i] = $root.google.maps.places.v1.FuelOptions.FuelPrice.fromObject(object.fuelPrices[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FuelOptions message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.places.v1.FuelOptions
+                         * @static
+                         * @param {google.maps.places.v1.FuelOptions} message FuelOptions
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FuelOptions.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.fuelPrices = [];
+                            if (message.fuelPrices && message.fuelPrices.length) {
+                                object.fuelPrices = [];
+                                for (var j = 0; j < message.fuelPrices.length; ++j)
+                                    object.fuelPrices[j] = $root.google.maps.places.v1.FuelOptions.FuelPrice.toObject(message.fuelPrices[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FuelOptions to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.places.v1.FuelOptions
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FuelOptions.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FuelOptions
+                         * @function getTypeUrl
+                         * @memberof google.maps.places.v1.FuelOptions
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FuelOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.places.v1.FuelOptions";
+                        };
+    
+                        FuelOptions.FuelPrice = (function() {
+    
+                            /**
+                             * Properties of a FuelPrice.
+                             * @memberof google.maps.places.v1.FuelOptions
+                             * @interface IFuelPrice
+                             * @property {google.maps.places.v1.FuelOptions.FuelPrice.FuelType|null} [type] FuelPrice type
+                             * @property {google.type.IMoney|null} [price] FuelPrice price
+                             * @property {google.protobuf.ITimestamp|null} [updateTime] FuelPrice updateTime
+                             */
+    
+                            /**
+                             * Constructs a new FuelPrice.
+                             * @memberof google.maps.places.v1.FuelOptions
+                             * @classdesc Represents a FuelPrice.
+                             * @implements IFuelPrice
+                             * @constructor
+                             * @param {google.maps.places.v1.FuelOptions.IFuelPrice=} [properties] Properties to set
+                             */
+                            function FuelPrice(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * FuelPrice type.
+                             * @member {google.maps.places.v1.FuelOptions.FuelPrice.FuelType} type
+                             * @memberof google.maps.places.v1.FuelOptions.FuelPrice
+                             * @instance
+                             */
+                            FuelPrice.prototype.type = 0;
+    
+                            /**
+                             * FuelPrice price.
+                             * @member {google.type.IMoney|null|undefined} price
+                             * @memberof google.maps.places.v1.FuelOptions.FuelPrice
+                             * @instance
+                             */
+                            FuelPrice.prototype.price = null;
+    
+                            /**
+                             * FuelPrice updateTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                             * @memberof google.maps.places.v1.FuelOptions.FuelPrice
+                             * @instance
+                             */
+                            FuelPrice.prototype.updateTime = null;
+    
+                            /**
+                             * Creates a new FuelPrice instance using the specified properties.
+                             * @function create
+                             * @memberof google.maps.places.v1.FuelOptions.FuelPrice
+                             * @static
+                             * @param {google.maps.places.v1.FuelOptions.IFuelPrice=} [properties] Properties to set
+                             * @returns {google.maps.places.v1.FuelOptions.FuelPrice} FuelPrice instance
+                             */
+                            FuelPrice.create = function create(properties) {
+                                return new FuelPrice(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified FuelPrice message. Does not implicitly {@link google.maps.places.v1.FuelOptions.FuelPrice.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.maps.places.v1.FuelOptions.FuelPrice
+                             * @static
+                             * @param {google.maps.places.v1.FuelOptions.IFuelPrice} message FuelPrice message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FuelPrice.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+                                if (message.price != null && Object.hasOwnProperty.call(message, "price"))
+                                    $root.google.type.Money.encode(message.price, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified FuelPrice message, length delimited. Does not implicitly {@link google.maps.places.v1.FuelOptions.FuelPrice.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.maps.places.v1.FuelOptions.FuelPrice
+                             * @static
+                             * @param {google.maps.places.v1.FuelOptions.IFuelPrice} message FuelPrice message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FuelPrice.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a FuelPrice message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.maps.places.v1.FuelOptions.FuelPrice
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.maps.places.v1.FuelOptions.FuelPrice} FuelPrice
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FuelPrice.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.FuelOptions.FuelPrice();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.type = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.price = $root.google.type.Money.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a FuelPrice message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.maps.places.v1.FuelOptions.FuelPrice
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.maps.places.v1.FuelOptions.FuelPrice} FuelPrice
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FuelPrice.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a FuelPrice message.
+                             * @function verify
+                             * @memberof google.maps.places.v1.FuelOptions.FuelPrice
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            FuelPrice.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    switch (message.type) {
+                                    default:
+                                        return "type: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                    case 6:
+                                    case 7:
+                                    case 8:
+                                    case 9:
+                                    case 10:
+                                    case 11:
+                                    case 12:
+                                    case 13:
+                                    case 14:
+                                    case 15:
+                                    case 16:
+                                    case 17:
+                                    case 18:
+                                        break;
+                                    }
+                                if (message.price != null && message.hasOwnProperty("price")) {
+                                    var error = $root.google.type.Money.verify(message.price);
+                                    if (error)
+                                        return "price." + error;
+                                }
+                                if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                    if (error)
+                                        return "updateTime." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a FuelPrice message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.maps.places.v1.FuelOptions.FuelPrice
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.maps.places.v1.FuelOptions.FuelPrice} FuelPrice
+                             */
+                            FuelPrice.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.maps.places.v1.FuelOptions.FuelPrice)
+                                    return object;
+                                var message = new $root.google.maps.places.v1.FuelOptions.FuelPrice();
+                                switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
+                                case "FUEL_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.type = 0;
+                                    break;
+                                case "DIESEL":
+                                case 1:
+                                    message.type = 1;
+                                    break;
+                                case "REGULAR_UNLEADED":
+                                case 2:
+                                    message.type = 2;
+                                    break;
+                                case "MIDGRADE":
+                                case 3:
+                                    message.type = 3;
+                                    break;
+                                case "PREMIUM":
+                                case 4:
+                                    message.type = 4;
+                                    break;
+                                case "SP91":
+                                case 5:
+                                    message.type = 5;
+                                    break;
+                                case "SP91_E10":
+                                case 6:
+                                    message.type = 6;
+                                    break;
+                                case "SP92":
+                                case 7:
+                                    message.type = 7;
+                                    break;
+                                case "SP95":
+                                case 8:
+                                    message.type = 8;
+                                    break;
+                                case "SP95_E10":
+                                case 9:
+                                    message.type = 9;
+                                    break;
+                                case "SP98":
+                                case 10:
+                                    message.type = 10;
+                                    break;
+                                case "SP99":
+                                case 11:
+                                    message.type = 11;
+                                    break;
+                                case "SP100":
+                                case 12:
+                                    message.type = 12;
+                                    break;
+                                case "LPG":
+                                case 13:
+                                    message.type = 13;
+                                    break;
+                                case "E80":
+                                case 14:
+                                    message.type = 14;
+                                    break;
+                                case "E85":
+                                case 15:
+                                    message.type = 15;
+                                    break;
+                                case "METHANE":
+                                case 16:
+                                    message.type = 16;
+                                    break;
+                                case "BIO_DIESEL":
+                                case 17:
+                                    message.type = 17;
+                                    break;
+                                case "TRUCK_DIESEL":
+                                case 18:
+                                    message.type = 18;
+                                    break;
+                                }
+                                if (object.price != null) {
+                                    if (typeof object.price !== "object")
+                                        throw TypeError(".google.maps.places.v1.FuelOptions.FuelPrice.price: object expected");
+                                    message.price = $root.google.type.Money.fromObject(object.price);
+                                }
+                                if (object.updateTime != null) {
+                                    if (typeof object.updateTime !== "object")
+                                        throw TypeError(".google.maps.places.v1.FuelOptions.FuelPrice.updateTime: object expected");
+                                    message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a FuelPrice message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.maps.places.v1.FuelOptions.FuelPrice
+                             * @static
+                             * @param {google.maps.places.v1.FuelOptions.FuelPrice} message FuelPrice
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            FuelPrice.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.type = options.enums === String ? "FUEL_TYPE_UNSPECIFIED" : 0;
+                                    object.price = null;
+                                    object.updateTime = null;
+                                }
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    object.type = options.enums === String ? $root.google.maps.places.v1.FuelOptions.FuelPrice.FuelType[message.type] === undefined ? message.type : $root.google.maps.places.v1.FuelOptions.FuelPrice.FuelType[message.type] : message.type;
+                                if (message.price != null && message.hasOwnProperty("price"))
+                                    object.price = $root.google.type.Money.toObject(message.price, options);
+                                if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                    object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this FuelPrice to JSON.
+                             * @function toJSON
+                             * @memberof google.maps.places.v1.FuelOptions.FuelPrice
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            FuelPrice.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FuelPrice
+                             * @function getTypeUrl
+                             * @memberof google.maps.places.v1.FuelOptions.FuelPrice
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FuelPrice.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.maps.places.v1.FuelOptions.FuelPrice";
+                            };
+    
+                            /**
+                             * FuelType enum.
+                             * @name google.maps.places.v1.FuelOptions.FuelPrice.FuelType
+                             * @enum {number}
+                             * @property {number} FUEL_TYPE_UNSPECIFIED=0 FUEL_TYPE_UNSPECIFIED value
+                             * @property {number} DIESEL=1 DIESEL value
+                             * @property {number} REGULAR_UNLEADED=2 REGULAR_UNLEADED value
+                             * @property {number} MIDGRADE=3 MIDGRADE value
+                             * @property {number} PREMIUM=4 PREMIUM value
+                             * @property {number} SP91=5 SP91 value
+                             * @property {number} SP91_E10=6 SP91_E10 value
+                             * @property {number} SP92=7 SP92 value
+                             * @property {number} SP95=8 SP95 value
+                             * @property {number} SP95_E10=9 SP95_E10 value
+                             * @property {number} SP98=10 SP98 value
+                             * @property {number} SP99=11 SP99 value
+                             * @property {number} SP100=12 SP100 value
+                             * @property {number} LPG=13 LPG value
+                             * @property {number} E80=14 E80 value
+                             * @property {number} E85=15 E85 value
+                             * @property {number} METHANE=16 METHANE value
+                             * @property {number} BIO_DIESEL=17 BIO_DIESEL value
+                             * @property {number} TRUCK_DIESEL=18 TRUCK_DIESEL value
+                             */
+                            FuelPrice.FuelType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "FUEL_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "DIESEL"] = 1;
+                                values[valuesById[2] = "REGULAR_UNLEADED"] = 2;
+                                values[valuesById[3] = "MIDGRADE"] = 3;
+                                values[valuesById[4] = "PREMIUM"] = 4;
+                                values[valuesById[5] = "SP91"] = 5;
+                                values[valuesById[6] = "SP91_E10"] = 6;
+                                values[valuesById[7] = "SP92"] = 7;
+                                values[valuesById[8] = "SP95"] = 8;
+                                values[valuesById[9] = "SP95_E10"] = 9;
+                                values[valuesById[10] = "SP98"] = 10;
+                                values[valuesById[11] = "SP99"] = 11;
+                                values[valuesById[12] = "SP100"] = 12;
+                                values[valuesById[13] = "LPG"] = 13;
+                                values[valuesById[14] = "E80"] = 14;
+                                values[valuesById[15] = "E85"] = 15;
+                                values[valuesById[16] = "METHANE"] = 16;
+                                values[valuesById[17] = "BIO_DIESEL"] = 17;
+                                values[valuesById[18] = "TRUCK_DIESEL"] = 18;
+                                return values;
+                            })();
+    
+                            return FuelPrice;
+                        })();
+    
+                        return FuelOptions;
+                    })();
     
                     v1.Circle = (function() {
     
@@ -1275,12 +3120,308 @@
                         return Circle;
                     })();
     
+                    v1.Photo = (function() {
+    
+                        /**
+                         * Properties of a Photo.
+                         * @memberof google.maps.places.v1
+                         * @interface IPhoto
+                         * @property {string|null} [name] Photo name
+                         * @property {number|null} [widthPx] Photo widthPx
+                         * @property {number|null} [heightPx] Photo heightPx
+                         * @property {Array.<google.maps.places.v1.IAuthorAttribution>|null} [authorAttributions] Photo authorAttributions
+                         */
+    
+                        /**
+                         * Constructs a new Photo.
+                         * @memberof google.maps.places.v1
+                         * @classdesc Represents a Photo.
+                         * @implements IPhoto
+                         * @constructor
+                         * @param {google.maps.places.v1.IPhoto=} [properties] Properties to set
+                         */
+                        function Photo(properties) {
+                            this.authorAttributions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Photo name.
+                         * @member {string} name
+                         * @memberof google.maps.places.v1.Photo
+                         * @instance
+                         */
+                        Photo.prototype.name = "";
+    
+                        /**
+                         * Photo widthPx.
+                         * @member {number} widthPx
+                         * @memberof google.maps.places.v1.Photo
+                         * @instance
+                         */
+                        Photo.prototype.widthPx = 0;
+    
+                        /**
+                         * Photo heightPx.
+                         * @member {number} heightPx
+                         * @memberof google.maps.places.v1.Photo
+                         * @instance
+                         */
+                        Photo.prototype.heightPx = 0;
+    
+                        /**
+                         * Photo authorAttributions.
+                         * @member {Array.<google.maps.places.v1.IAuthorAttribution>} authorAttributions
+                         * @memberof google.maps.places.v1.Photo
+                         * @instance
+                         */
+                        Photo.prototype.authorAttributions = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Photo instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.places.v1.Photo
+                         * @static
+                         * @param {google.maps.places.v1.IPhoto=} [properties] Properties to set
+                         * @returns {google.maps.places.v1.Photo} Photo instance
+                         */
+                        Photo.create = function create(properties) {
+                            return new Photo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Photo message. Does not implicitly {@link google.maps.places.v1.Photo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.places.v1.Photo
+                         * @static
+                         * @param {google.maps.places.v1.IPhoto} message Photo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Photo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.widthPx != null && Object.hasOwnProperty.call(message, "widthPx"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.widthPx);
+                            if (message.heightPx != null && Object.hasOwnProperty.call(message, "heightPx"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.heightPx);
+                            if (message.authorAttributions != null && message.authorAttributions.length)
+                                for (var i = 0; i < message.authorAttributions.length; ++i)
+                                    $root.google.maps.places.v1.AuthorAttribution.encode(message.authorAttributions[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Photo message, length delimited. Does not implicitly {@link google.maps.places.v1.Photo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.places.v1.Photo
+                         * @static
+                         * @param {google.maps.places.v1.IPhoto} message Photo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Photo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Photo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.places.v1.Photo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.places.v1.Photo} Photo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Photo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Photo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.widthPx = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.heightPx = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.authorAttributions && message.authorAttributions.length))
+                                            message.authorAttributions = [];
+                                        message.authorAttributions.push($root.google.maps.places.v1.AuthorAttribution.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Photo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.places.v1.Photo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.places.v1.Photo} Photo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Photo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Photo message.
+                         * @function verify
+                         * @memberof google.maps.places.v1.Photo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Photo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.widthPx != null && message.hasOwnProperty("widthPx"))
+                                if (!$util.isInteger(message.widthPx))
+                                    return "widthPx: integer expected";
+                            if (message.heightPx != null && message.hasOwnProperty("heightPx"))
+                                if (!$util.isInteger(message.heightPx))
+                                    return "heightPx: integer expected";
+                            if (message.authorAttributions != null && message.hasOwnProperty("authorAttributions")) {
+                                if (!Array.isArray(message.authorAttributions))
+                                    return "authorAttributions: array expected";
+                                for (var i = 0; i < message.authorAttributions.length; ++i) {
+                                    var error = $root.google.maps.places.v1.AuthorAttribution.verify(message.authorAttributions[i]);
+                                    if (error)
+                                        return "authorAttributions." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Photo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.places.v1.Photo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.places.v1.Photo} Photo
+                         */
+                        Photo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.places.v1.Photo)
+                                return object;
+                            var message = new $root.google.maps.places.v1.Photo();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.widthPx != null)
+                                message.widthPx = object.widthPx | 0;
+                            if (object.heightPx != null)
+                                message.heightPx = object.heightPx | 0;
+                            if (object.authorAttributions) {
+                                if (!Array.isArray(object.authorAttributions))
+                                    throw TypeError(".google.maps.places.v1.Photo.authorAttributions: array expected");
+                                message.authorAttributions = [];
+                                for (var i = 0; i < object.authorAttributions.length; ++i) {
+                                    if (typeof object.authorAttributions[i] !== "object")
+                                        throw TypeError(".google.maps.places.v1.Photo.authorAttributions: object expected");
+                                    message.authorAttributions[i] = $root.google.maps.places.v1.AuthorAttribution.fromObject(object.authorAttributions[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Photo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.places.v1.Photo
+                         * @static
+                         * @param {google.maps.places.v1.Photo} message Photo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Photo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.authorAttributions = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.widthPx = 0;
+                                object.heightPx = 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.widthPx != null && message.hasOwnProperty("widthPx"))
+                                object.widthPx = message.widthPx;
+                            if (message.heightPx != null && message.hasOwnProperty("heightPx"))
+                                object.heightPx = message.heightPx;
+                            if (message.authorAttributions && message.authorAttributions.length) {
+                                object.authorAttributions = [];
+                                for (var j = 0; j < message.authorAttributions.length; ++j)
+                                    object.authorAttributions[j] = $root.google.maps.places.v1.AuthorAttribution.toObject(message.authorAttributions[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Photo to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.places.v1.Photo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Photo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Photo
+                         * @function getTypeUrl
+                         * @memberof google.maps.places.v1.Photo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Photo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.places.v1.Photo";
+                        };
+    
+                        return Photo;
+                    })();
+    
                     v1.Place = (function() {
     
                         /**
                          * Properties of a Place.
                          * @memberof google.maps.places.v1
                          * @interface IPlace
+                         * @property {string|null} [name] Place name
                          * @property {string|null} [id] Place id
                          * @property {google.type.ILocalizedText|null} [displayName] Place displayName
                          * @property {Array.<string>|null} [types] Place types
@@ -1294,9 +3435,10 @@
                          * @property {number|null} [rating] Place rating
                          * @property {string|null} [googleMapsUri] Place googleMapsUri
                          * @property {string|null} [websiteUri] Place websiteUri
-                         * @property {Array.<google.maps.places.v1.Place.IReview>|null} [reviews] Place reviews
-                         * @property {google.maps.places.v1.Place.IOpeningHours|null} [openingHours] Place openingHours
+                         * @property {Array.<google.maps.places.v1.IReview>|null} [reviews] Place reviews
+                         * @property {google.maps.places.v1.Place.IOpeningHours|null} [regularOpeningHours] Place regularOpeningHours
                          * @property {number|null} [utcOffsetMinutes] Place utcOffsetMinutes
+                         * @property {Array.<google.maps.places.v1.IPhoto>|null} [photos] Place photos
                          * @property {string|null} [adrFormatAddress] Place adrFormatAddress
                          * @property {google.maps.places.v1.Place.BusinessStatus|null} [businessStatus] Place businessStatus
                          * @property {google.maps.places.v1.PriceLevel|null} [priceLevel] Place priceLevel
@@ -1308,7 +3450,6 @@
                          * @property {boolean|null} [delivery] Place delivery
                          * @property {boolean|null} [dineIn] Place dineIn
                          * @property {boolean|null} [curbsidePickup] Place curbsidePickup
-                         * @property {boolean|null} [wheelchairAccessibleEntrance] Place wheelchairAccessibleEntrance
                          * @property {boolean|null} [reservable] Place reservable
                          * @property {boolean|null} [servesBreakfast] Place servesBreakfast
                          * @property {boolean|null} [servesLunch] Place servesLunch
@@ -1319,8 +3460,25 @@
                          * @property {boolean|null} [servesVegetarianFood] Place servesVegetarianFood
                          * @property {google.maps.places.v1.Place.IOpeningHours|null} [currentOpeningHours] Place currentOpeningHours
                          * @property {Array.<google.maps.places.v1.Place.IOpeningHours>|null} [currentSecondaryOpeningHours] Place currentSecondaryOpeningHours
-                         * @property {Array.<google.maps.places.v1.Place.IOpeningHours>|null} [secondaryOpeningHours] Place secondaryOpeningHours
-                         * @property {google.maps.places.v1.Place.IEditorialSummary|null} [editorialSummary] Place editorialSummary
+                         * @property {Array.<google.maps.places.v1.Place.IOpeningHours>|null} [regularSecondaryOpeningHours] Place regularSecondaryOpeningHours
+                         * @property {google.type.ILocalizedText|null} [editorialSummary] Place editorialSummary
+                         * @property {boolean|null} [outdoorSeating] Place outdoorSeating
+                         * @property {boolean|null} [liveMusic] Place liveMusic
+                         * @property {boolean|null} [menuForChildren] Place menuForChildren
+                         * @property {boolean|null} [servesCocktails] Place servesCocktails
+                         * @property {boolean|null} [servesDessert] Place servesDessert
+                         * @property {boolean|null} [servesCoffee] Place servesCoffee
+                         * @property {boolean|null} [goodForChildren] Place goodForChildren
+                         * @property {boolean|null} [allowsDogs] Place allowsDogs
+                         * @property {boolean|null} [restroom] Place restroom
+                         * @property {boolean|null} [goodForGroups] Place goodForGroups
+                         * @property {boolean|null} [goodForWatchingSports] Place goodForWatchingSports
+                         * @property {google.maps.places.v1.Place.IPaymentOptions|null} [paymentOptions] Place paymentOptions
+                         * @property {google.maps.places.v1.Place.IParkingOptions|null} [parkingOptions] Place parkingOptions
+                         * @property {Array.<google.maps.places.v1.Place.ISubDestination>|null} [subDestinations] Place subDestinations
+                         * @property {google.maps.places.v1.Place.IAccessibilityOptions|null} [accessibilityOptions] Place accessibilityOptions
+                         * @property {google.maps.places.v1.IFuelOptions|null} [fuelOptions] Place fuelOptions
+                         * @property {google.maps.places.v1.IEVChargeOptions|null} [evChargeOptions] Place evChargeOptions
                          */
     
                         /**
@@ -1335,14 +3493,24 @@
                             this.types = [];
                             this.addressComponents = [];
                             this.reviews = [];
+                            this.photos = [];
                             this.attributions = [];
                             this.currentSecondaryOpeningHours = [];
-                            this.secondaryOpeningHours = [];
+                            this.regularSecondaryOpeningHours = [];
+                            this.subDestinations = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * Place name.
+                         * @member {string} name
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.name = "";
     
                         /**
                          * Place id.
@@ -1450,27 +3618,35 @@
     
                         /**
                          * Place reviews.
-                         * @member {Array.<google.maps.places.v1.Place.IReview>} reviews
+                         * @member {Array.<google.maps.places.v1.IReview>} reviews
                          * @memberof google.maps.places.v1.Place
                          * @instance
                          */
                         Place.prototype.reviews = $util.emptyArray;
     
                         /**
-                         * Place openingHours.
-                         * @member {google.maps.places.v1.Place.IOpeningHours|null|undefined} openingHours
+                         * Place regularOpeningHours.
+                         * @member {google.maps.places.v1.Place.IOpeningHours|null|undefined} regularOpeningHours
                          * @memberof google.maps.places.v1.Place
                          * @instance
                          */
-                        Place.prototype.openingHours = null;
+                        Place.prototype.regularOpeningHours = null;
     
                         /**
                          * Place utcOffsetMinutes.
-                         * @member {number} utcOffsetMinutes
+                         * @member {number|null|undefined} utcOffsetMinutes
                          * @memberof google.maps.places.v1.Place
                          * @instance
                          */
-                        Place.prototype.utcOffsetMinutes = 0;
+                        Place.prototype.utcOffsetMinutes = null;
+    
+                        /**
+                         * Place photos.
+                         * @member {Array.<google.maps.places.v1.IPhoto>} photos
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.photos = $util.emptyArray;
     
                         /**
                          * Place adrFormatAddress.
@@ -1506,11 +3682,11 @@
     
                         /**
                          * Place userRatingCount.
-                         * @member {number} userRatingCount
+                         * @member {number|null|undefined} userRatingCount
                          * @memberof google.maps.places.v1.Place
                          * @instance
                          */
-                        Place.prototype.userRatingCount = 0;
+                        Place.prototype.userRatingCount = null;
     
                         /**
                          * Place iconMaskBaseUri.
@@ -1559,14 +3735,6 @@
                          * @instance
                          */
                         Place.prototype.curbsidePickup = null;
-    
-                        /**
-                         * Place wheelchairAccessibleEntrance.
-                         * @member {boolean|null|undefined} wheelchairAccessibleEntrance
-                         * @memberof google.maps.places.v1.Place
-                         * @instance
-                         */
-                        Place.prototype.wheelchairAccessibleEntrance = null;
     
                         /**
                          * Place reservable.
@@ -1649,23 +3817,181 @@
                         Place.prototype.currentSecondaryOpeningHours = $util.emptyArray;
     
                         /**
-                         * Place secondaryOpeningHours.
-                         * @member {Array.<google.maps.places.v1.Place.IOpeningHours>} secondaryOpeningHours
+                         * Place regularSecondaryOpeningHours.
+                         * @member {Array.<google.maps.places.v1.Place.IOpeningHours>} regularSecondaryOpeningHours
                          * @memberof google.maps.places.v1.Place
                          * @instance
                          */
-                        Place.prototype.secondaryOpeningHours = $util.emptyArray;
+                        Place.prototype.regularSecondaryOpeningHours = $util.emptyArray;
     
                         /**
                          * Place editorialSummary.
-                         * @member {google.maps.places.v1.Place.IEditorialSummary|null|undefined} editorialSummary
+                         * @member {google.type.ILocalizedText|null|undefined} editorialSummary
                          * @memberof google.maps.places.v1.Place
                          * @instance
                          */
                         Place.prototype.editorialSummary = null;
     
+                        /**
+                         * Place outdoorSeating.
+                         * @member {boolean|null|undefined} outdoorSeating
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.outdoorSeating = null;
+    
+                        /**
+                         * Place liveMusic.
+                         * @member {boolean|null|undefined} liveMusic
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.liveMusic = null;
+    
+                        /**
+                         * Place menuForChildren.
+                         * @member {boolean|null|undefined} menuForChildren
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.menuForChildren = null;
+    
+                        /**
+                         * Place servesCocktails.
+                         * @member {boolean|null|undefined} servesCocktails
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.servesCocktails = null;
+    
+                        /**
+                         * Place servesDessert.
+                         * @member {boolean|null|undefined} servesDessert
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.servesDessert = null;
+    
+                        /**
+                         * Place servesCoffee.
+                         * @member {boolean|null|undefined} servesCoffee
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.servesCoffee = null;
+    
+                        /**
+                         * Place goodForChildren.
+                         * @member {boolean|null|undefined} goodForChildren
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.goodForChildren = null;
+    
+                        /**
+                         * Place allowsDogs.
+                         * @member {boolean|null|undefined} allowsDogs
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.allowsDogs = null;
+    
+                        /**
+                         * Place restroom.
+                         * @member {boolean|null|undefined} restroom
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.restroom = null;
+    
+                        /**
+                         * Place goodForGroups.
+                         * @member {boolean|null|undefined} goodForGroups
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.goodForGroups = null;
+    
+                        /**
+                         * Place goodForWatchingSports.
+                         * @member {boolean|null|undefined} goodForWatchingSports
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.goodForWatchingSports = null;
+    
+                        /**
+                         * Place paymentOptions.
+                         * @member {google.maps.places.v1.Place.IPaymentOptions|null|undefined} paymentOptions
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.paymentOptions = null;
+    
+                        /**
+                         * Place parkingOptions.
+                         * @member {google.maps.places.v1.Place.IParkingOptions|null|undefined} parkingOptions
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.parkingOptions = null;
+    
+                        /**
+                         * Place subDestinations.
+                         * @member {Array.<google.maps.places.v1.Place.ISubDestination>} subDestinations
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.subDestinations = $util.emptyArray;
+    
+                        /**
+                         * Place accessibilityOptions.
+                         * @member {google.maps.places.v1.Place.IAccessibilityOptions|null|undefined} accessibilityOptions
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.accessibilityOptions = null;
+    
+                        /**
+                         * Place fuelOptions.
+                         * @member {google.maps.places.v1.IFuelOptions|null|undefined} fuelOptions
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.fuelOptions = null;
+    
+                        /**
+                         * Place evChargeOptions.
+                         * @member {google.maps.places.v1.IEVChargeOptions|null|undefined} evChargeOptions
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.evChargeOptions = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
+    
+                        /**
+                         * Place _utcOffsetMinutes.
+                         * @member {"utcOffsetMinutes"|undefined} _utcOffsetMinutes
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Object.defineProperty(Place.prototype, "_utcOffsetMinutes", {
+                            get: $util.oneOfGetter($oneOfFields = ["utcOffsetMinutes"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Place _userRatingCount.
+                         * @member {"userRatingCount"|undefined} _userRatingCount
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Object.defineProperty(Place.prototype, "_userRatingCount", {
+                            get: $util.oneOfGetter($oneOfFields = ["userRatingCount"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Place _takeout.
@@ -1708,17 +4034,6 @@
                          */
                         Object.defineProperty(Place.prototype, "_curbsidePickup", {
                             get: $util.oneOfGetter($oneOfFields = ["curbsidePickup"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        /**
-                         * Place _wheelchairAccessibleEntrance.
-                         * @member {"wheelchairAccessibleEntrance"|undefined} _wheelchairAccessibleEntrance
-                         * @memberof google.maps.places.v1.Place
-                         * @instance
-                         */
-                        Object.defineProperty(Place.prototype, "_wheelchairAccessibleEntrance", {
-                            get: $util.oneOfGetter($oneOfFields = ["wheelchairAccessibleEntrance"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -1811,6 +4126,138 @@
                         });
     
                         /**
+                         * Place _outdoorSeating.
+                         * @member {"outdoorSeating"|undefined} _outdoorSeating
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Object.defineProperty(Place.prototype, "_outdoorSeating", {
+                            get: $util.oneOfGetter($oneOfFields = ["outdoorSeating"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Place _liveMusic.
+                         * @member {"liveMusic"|undefined} _liveMusic
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Object.defineProperty(Place.prototype, "_liveMusic", {
+                            get: $util.oneOfGetter($oneOfFields = ["liveMusic"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Place _menuForChildren.
+                         * @member {"menuForChildren"|undefined} _menuForChildren
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Object.defineProperty(Place.prototype, "_menuForChildren", {
+                            get: $util.oneOfGetter($oneOfFields = ["menuForChildren"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Place _servesCocktails.
+                         * @member {"servesCocktails"|undefined} _servesCocktails
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Object.defineProperty(Place.prototype, "_servesCocktails", {
+                            get: $util.oneOfGetter($oneOfFields = ["servesCocktails"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Place _servesDessert.
+                         * @member {"servesDessert"|undefined} _servesDessert
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Object.defineProperty(Place.prototype, "_servesDessert", {
+                            get: $util.oneOfGetter($oneOfFields = ["servesDessert"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Place _servesCoffee.
+                         * @member {"servesCoffee"|undefined} _servesCoffee
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Object.defineProperty(Place.prototype, "_servesCoffee", {
+                            get: $util.oneOfGetter($oneOfFields = ["servesCoffee"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Place _goodForChildren.
+                         * @member {"goodForChildren"|undefined} _goodForChildren
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Object.defineProperty(Place.prototype, "_goodForChildren", {
+                            get: $util.oneOfGetter($oneOfFields = ["goodForChildren"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Place _allowsDogs.
+                         * @member {"allowsDogs"|undefined} _allowsDogs
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Object.defineProperty(Place.prototype, "_allowsDogs", {
+                            get: $util.oneOfGetter($oneOfFields = ["allowsDogs"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Place _restroom.
+                         * @member {"restroom"|undefined} _restroom
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Object.defineProperty(Place.prototype, "_restroom", {
+                            get: $util.oneOfGetter($oneOfFields = ["restroom"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Place _goodForGroups.
+                         * @member {"goodForGroups"|undefined} _goodForGroups
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Object.defineProperty(Place.prototype, "_goodForGroups", {
+                            get: $util.oneOfGetter($oneOfFields = ["goodForGroups"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Place _goodForWatchingSports.
+                         * @member {"goodForWatchingSports"|undefined} _goodForWatchingSports
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Object.defineProperty(Place.prototype, "_goodForWatchingSports", {
+                            get: $util.oneOfGetter($oneOfFields = ["goodForWatchingSports"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Place _accessibilityOptions.
+                         * @member {"accessibilityOptions"|undefined} _accessibilityOptions
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Object.defineProperty(Place.prototype, "_accessibilityOptions", {
+                            get: $util.oneOfGetter($oneOfFields = ["accessibilityOptions"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new Place instance using the specified properties.
                          * @function create
                          * @memberof google.maps.places.v1.Place
@@ -1834,6 +4281,8 @@
                         Place.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                             if (message.id != null && Object.hasOwnProperty.call(message, "id"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.id);
                             if (message.types != null && message.types.length)
@@ -1860,11 +4309,8 @@
                                 writer.uint32(/* id 15, wireType 2 =*/122).string(message.googleMapsUri);
                             if (message.websiteUri != null && Object.hasOwnProperty.call(message, "websiteUri"))
                                 writer.uint32(/* id 16, wireType 2 =*/130).string(message.websiteUri);
-                            if (message.reviews != null && message.reviews.length)
-                                for (var i = 0; i < message.reviews.length; ++i)
-                                    $root.google.maps.places.v1.Place.Review.encode(message.reviews[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
-                            if (message.openingHours != null && Object.hasOwnProperty.call(message, "openingHours"))
-                                $root.google.maps.places.v1.Place.OpeningHours.encode(message.openingHours, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                            if (message.regularOpeningHours != null && Object.hasOwnProperty.call(message, "regularOpeningHours"))
+                                $root.google.maps.places.v1.Place.OpeningHours.encode(message.regularOpeningHours, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
                             if (message.utcOffsetMinutes != null && Object.hasOwnProperty.call(message, "utcOffsetMinutes"))
                                 writer.uint32(/* id 22, wireType 0 =*/176).int32(message.utcOffsetMinutes);
                             if (message.adrFormatAddress != null && Object.hasOwnProperty.call(message, "adrFormatAddress"))
@@ -1892,8 +4338,6 @@
                                 writer.uint32(/* id 35, wireType 0 =*/280).bool(message.dineIn);
                             if (message.curbsidePickup != null && Object.hasOwnProperty.call(message, "curbsidePickup"))
                                 writer.uint32(/* id 36, wireType 0 =*/288).bool(message.curbsidePickup);
-                            if (message.wheelchairAccessibleEntrance != null && Object.hasOwnProperty.call(message, "wheelchairAccessibleEntrance"))
-                                writer.uint32(/* id 37, wireType 0 =*/296).bool(message.wheelchairAccessibleEntrance);
                             if (message.reservable != null && Object.hasOwnProperty.call(message, "reservable"))
                                 writer.uint32(/* id 38, wireType 0 =*/304).bool(message.reservable);
                             if (message.servesBreakfast != null && Object.hasOwnProperty.call(message, "servesBreakfast"))
@@ -1915,11 +4359,52 @@
                             if (message.currentSecondaryOpeningHours != null && message.currentSecondaryOpeningHours.length)
                                 for (var i = 0; i < message.currentSecondaryOpeningHours.length; ++i)
                                     $root.google.maps.places.v1.Place.OpeningHours.encode(message.currentSecondaryOpeningHours[i], writer.uint32(/* id 47, wireType 2 =*/378).fork()).ldelim();
+                            if (message.regularSecondaryOpeningHours != null && message.regularSecondaryOpeningHours.length)
+                                for (var i = 0; i < message.regularSecondaryOpeningHours.length; ++i)
+                                    $root.google.maps.places.v1.Place.OpeningHours.encode(message.regularSecondaryOpeningHours[i], writer.uint32(/* id 49, wireType 2 =*/394).fork()).ldelim();
                             if (message.editorialSummary != null && Object.hasOwnProperty.call(message, "editorialSummary"))
-                                $root.google.maps.places.v1.Place.EditorialSummary.encode(message.editorialSummary, writer.uint32(/* id 48, wireType 2 =*/386).fork()).ldelim();
-                            if (message.secondaryOpeningHours != null && message.secondaryOpeningHours.length)
-                                for (var i = 0; i < message.secondaryOpeningHours.length; ++i)
-                                    $root.google.maps.places.v1.Place.OpeningHours.encode(message.secondaryOpeningHours[i], writer.uint32(/* id 49, wireType 2 =*/394).fork()).ldelim();
+                                $root.google.type.LocalizedText.encode(message.editorialSummary, writer.uint32(/* id 52, wireType 2 =*/418).fork()).ldelim();
+                            if (message.reviews != null && message.reviews.length)
+                                for (var i = 0; i < message.reviews.length; ++i)
+                                    $root.google.maps.places.v1.Review.encode(message.reviews[i], writer.uint32(/* id 53, wireType 2 =*/426).fork()).ldelim();
+                            if (message.photos != null && message.photos.length)
+                                for (var i = 0; i < message.photos.length; ++i)
+                                    $root.google.maps.places.v1.Photo.encode(message.photos[i], writer.uint32(/* id 54, wireType 2 =*/434).fork()).ldelim();
+                            if (message.outdoorSeating != null && Object.hasOwnProperty.call(message, "outdoorSeating"))
+                                writer.uint32(/* id 55, wireType 0 =*/440).bool(message.outdoorSeating);
+                            if (message.liveMusic != null && Object.hasOwnProperty.call(message, "liveMusic"))
+                                writer.uint32(/* id 56, wireType 0 =*/448).bool(message.liveMusic);
+                            if (message.menuForChildren != null && Object.hasOwnProperty.call(message, "menuForChildren"))
+                                writer.uint32(/* id 57, wireType 0 =*/456).bool(message.menuForChildren);
+                            if (message.servesCocktails != null && Object.hasOwnProperty.call(message, "servesCocktails"))
+                                writer.uint32(/* id 58, wireType 0 =*/464).bool(message.servesCocktails);
+                            if (message.servesDessert != null && Object.hasOwnProperty.call(message, "servesDessert"))
+                                writer.uint32(/* id 59, wireType 0 =*/472).bool(message.servesDessert);
+                            if (message.servesCoffee != null && Object.hasOwnProperty.call(message, "servesCoffee"))
+                                writer.uint32(/* id 60, wireType 0 =*/480).bool(message.servesCoffee);
+                            if (message.goodForChildren != null && Object.hasOwnProperty.call(message, "goodForChildren"))
+                                writer.uint32(/* id 62, wireType 0 =*/496).bool(message.goodForChildren);
+                            if (message.allowsDogs != null && Object.hasOwnProperty.call(message, "allowsDogs"))
+                                writer.uint32(/* id 63, wireType 0 =*/504).bool(message.allowsDogs);
+                            if (message.restroom != null && Object.hasOwnProperty.call(message, "restroom"))
+                                writer.uint32(/* id 64, wireType 0 =*/512).bool(message.restroom);
+                            if (message.goodForGroups != null && Object.hasOwnProperty.call(message, "goodForGroups"))
+                                writer.uint32(/* id 65, wireType 0 =*/520).bool(message.goodForGroups);
+                            if (message.goodForWatchingSports != null && Object.hasOwnProperty.call(message, "goodForWatchingSports"))
+                                writer.uint32(/* id 66, wireType 0 =*/528).bool(message.goodForWatchingSports);
+                            if (message.paymentOptions != null && Object.hasOwnProperty.call(message, "paymentOptions"))
+                                $root.google.maps.places.v1.Place.PaymentOptions.encode(message.paymentOptions, writer.uint32(/* id 67, wireType 2 =*/538).fork()).ldelim();
+                            if (message.parkingOptions != null && Object.hasOwnProperty.call(message, "parkingOptions"))
+                                $root.google.maps.places.v1.Place.ParkingOptions.encode(message.parkingOptions, writer.uint32(/* id 70, wireType 2 =*/562).fork()).ldelim();
+                            if (message.subDestinations != null && message.subDestinations.length)
+                                for (var i = 0; i < message.subDestinations.length; ++i)
+                                    $root.google.maps.places.v1.Place.SubDestination.encode(message.subDestinations[i], writer.uint32(/* id 71, wireType 2 =*/570).fork()).ldelim();
+                            if (message.accessibilityOptions != null && Object.hasOwnProperty.call(message, "accessibilityOptions"))
+                                $root.google.maps.places.v1.Place.AccessibilityOptions.encode(message.accessibilityOptions, writer.uint32(/* id 72, wireType 2 =*/578).fork()).ldelim();
+                            if (message.fuelOptions != null && Object.hasOwnProperty.call(message, "fuelOptions"))
+                                $root.google.maps.places.v1.FuelOptions.encode(message.fuelOptions, writer.uint32(/* id 78, wireType 2 =*/626).fork()).ldelim();
+                            if (message.evChargeOptions != null && Object.hasOwnProperty.call(message, "evChargeOptions"))
+                                $root.google.maps.places.v1.EVChargeOptions.encode(message.evChargeOptions, writer.uint32(/* id 79, wireType 2 =*/634).fork()).ldelim();
                             return writer;
                         };
     
@@ -1954,6 +4439,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 case 2: {
                                         message.id = reader.string();
                                         break;
@@ -2010,18 +4499,24 @@
                                         message.websiteUri = reader.string();
                                         break;
                                     }
-                                case 20: {
+                                case 53: {
                                         if (!(message.reviews && message.reviews.length))
                                             message.reviews = [];
-                                        message.reviews.push($root.google.maps.places.v1.Place.Review.decode(reader, reader.uint32()));
+                                        message.reviews.push($root.google.maps.places.v1.Review.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 case 21: {
-                                        message.openingHours = $root.google.maps.places.v1.Place.OpeningHours.decode(reader, reader.uint32());
+                                        message.regularOpeningHours = $root.google.maps.places.v1.Place.OpeningHours.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 22: {
                                         message.utcOffsetMinutes = reader.int32();
+                                        break;
+                                    }
+                                case 54: {
+                                        if (!(message.photos && message.photos.length))
+                                            message.photos = [];
+                                        message.photos.push($root.google.maps.places.v1.Photo.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 case 24: {
@@ -2070,10 +4565,6 @@
                                         message.curbsidePickup = reader.bool();
                                         break;
                                     }
-                                case 37: {
-                                        message.wheelchairAccessibleEntrance = reader.bool();
-                                        break;
-                                    }
                                 case 38: {
                                         message.reservable = reader.bool();
                                         break;
@@ -2117,13 +4608,83 @@
                                         break;
                                     }
                                 case 49: {
-                                        if (!(message.secondaryOpeningHours && message.secondaryOpeningHours.length))
-                                            message.secondaryOpeningHours = [];
-                                        message.secondaryOpeningHours.push($root.google.maps.places.v1.Place.OpeningHours.decode(reader, reader.uint32()));
+                                        if (!(message.regularSecondaryOpeningHours && message.regularSecondaryOpeningHours.length))
+                                            message.regularSecondaryOpeningHours = [];
+                                        message.regularSecondaryOpeningHours.push($root.google.maps.places.v1.Place.OpeningHours.decode(reader, reader.uint32()));
                                         break;
                                     }
-                                case 48: {
-                                        message.editorialSummary = $root.google.maps.places.v1.Place.EditorialSummary.decode(reader, reader.uint32());
+                                case 52: {
+                                        message.editorialSummary = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 55: {
+                                        message.outdoorSeating = reader.bool();
+                                        break;
+                                    }
+                                case 56: {
+                                        message.liveMusic = reader.bool();
+                                        break;
+                                    }
+                                case 57: {
+                                        message.menuForChildren = reader.bool();
+                                        break;
+                                    }
+                                case 58: {
+                                        message.servesCocktails = reader.bool();
+                                        break;
+                                    }
+                                case 59: {
+                                        message.servesDessert = reader.bool();
+                                        break;
+                                    }
+                                case 60: {
+                                        message.servesCoffee = reader.bool();
+                                        break;
+                                    }
+                                case 62: {
+                                        message.goodForChildren = reader.bool();
+                                        break;
+                                    }
+                                case 63: {
+                                        message.allowsDogs = reader.bool();
+                                        break;
+                                    }
+                                case 64: {
+                                        message.restroom = reader.bool();
+                                        break;
+                                    }
+                                case 65: {
+                                        message.goodForGroups = reader.bool();
+                                        break;
+                                    }
+                                case 66: {
+                                        message.goodForWatchingSports = reader.bool();
+                                        break;
+                                    }
+                                case 67: {
+                                        message.paymentOptions = $root.google.maps.places.v1.Place.PaymentOptions.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 70: {
+                                        message.parkingOptions = $root.google.maps.places.v1.Place.ParkingOptions.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 71: {
+                                        if (!(message.subDestinations && message.subDestinations.length))
+                                            message.subDestinations = [];
+                                        message.subDestinations.push($root.google.maps.places.v1.Place.SubDestination.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 72: {
+                                        message.accessibilityOptions = $root.google.maps.places.v1.Place.AccessibilityOptions.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 78: {
+                                        message.fuelOptions = $root.google.maps.places.v1.FuelOptions.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 79: {
+                                        message.evChargeOptions = $root.google.maps.places.v1.EVChargeOptions.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -2162,6 +4723,9 @@
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
                             var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
                             if (message.id != null && message.hasOwnProperty("id"))
                                 if (!$util.isString(message.id))
                                     return "id: string expected";
@@ -2223,19 +4787,30 @@
                                 if (!Array.isArray(message.reviews))
                                     return "reviews: array expected";
                                 for (var i = 0; i < message.reviews.length; ++i) {
-                                    var error = $root.google.maps.places.v1.Place.Review.verify(message.reviews[i]);
+                                    var error = $root.google.maps.places.v1.Review.verify(message.reviews[i]);
                                     if (error)
                                         return "reviews." + error;
                                 }
                             }
-                            if (message.openingHours != null && message.hasOwnProperty("openingHours")) {
-                                var error = $root.google.maps.places.v1.Place.OpeningHours.verify(message.openingHours);
+                            if (message.regularOpeningHours != null && message.hasOwnProperty("regularOpeningHours")) {
+                                var error = $root.google.maps.places.v1.Place.OpeningHours.verify(message.regularOpeningHours);
                                 if (error)
-                                    return "openingHours." + error;
+                                    return "regularOpeningHours." + error;
                             }
-                            if (message.utcOffsetMinutes != null && message.hasOwnProperty("utcOffsetMinutes"))
+                            if (message.utcOffsetMinutes != null && message.hasOwnProperty("utcOffsetMinutes")) {
+                                properties._utcOffsetMinutes = 1;
                                 if (!$util.isInteger(message.utcOffsetMinutes))
                                     return "utcOffsetMinutes: integer expected";
+                            }
+                            if (message.photos != null && message.hasOwnProperty("photos")) {
+                                if (!Array.isArray(message.photos))
+                                    return "photos: array expected";
+                                for (var i = 0; i < message.photos.length; ++i) {
+                                    var error = $root.google.maps.places.v1.Photo.verify(message.photos[i]);
+                                    if (error)
+                                        return "photos." + error;
+                                }
+                            }
                             if (message.adrFormatAddress != null && message.hasOwnProperty("adrFormatAddress"))
                                 if (!$util.isString(message.adrFormatAddress))
                                     return "adrFormatAddress: string expected";
@@ -2270,9 +4845,11 @@
                                         return "attributions." + error;
                                 }
                             }
-                            if (message.userRatingCount != null && message.hasOwnProperty("userRatingCount"))
+                            if (message.userRatingCount != null && message.hasOwnProperty("userRatingCount")) {
+                                properties._userRatingCount = 1;
                                 if (!$util.isInteger(message.userRatingCount))
                                     return "userRatingCount: integer expected";
+                            }
                             if (message.iconMaskBaseUri != null && message.hasOwnProperty("iconMaskBaseUri"))
                                 if (!$util.isString(message.iconMaskBaseUri))
                                     return "iconMaskBaseUri: string expected";
@@ -2298,11 +4875,6 @@
                                 properties._curbsidePickup = 1;
                                 if (typeof message.curbsidePickup !== "boolean")
                                     return "curbsidePickup: boolean expected";
-                            }
-                            if (message.wheelchairAccessibleEntrance != null && message.hasOwnProperty("wheelchairAccessibleEntrance")) {
-                                properties._wheelchairAccessibleEntrance = 1;
-                                if (typeof message.wheelchairAccessibleEntrance !== "boolean")
-                                    return "wheelchairAccessibleEntrance: boolean expected";
                             }
                             if (message.reservable != null && message.hasOwnProperty("reservable")) {
                                 properties._reservable = 1;
@@ -2358,19 +4930,111 @@
                                         return "currentSecondaryOpeningHours." + error;
                                 }
                             }
-                            if (message.secondaryOpeningHours != null && message.hasOwnProperty("secondaryOpeningHours")) {
-                                if (!Array.isArray(message.secondaryOpeningHours))
-                                    return "secondaryOpeningHours: array expected";
-                                for (var i = 0; i < message.secondaryOpeningHours.length; ++i) {
-                                    var error = $root.google.maps.places.v1.Place.OpeningHours.verify(message.secondaryOpeningHours[i]);
+                            if (message.regularSecondaryOpeningHours != null && message.hasOwnProperty("regularSecondaryOpeningHours")) {
+                                if (!Array.isArray(message.regularSecondaryOpeningHours))
+                                    return "regularSecondaryOpeningHours: array expected";
+                                for (var i = 0; i < message.regularSecondaryOpeningHours.length; ++i) {
+                                    var error = $root.google.maps.places.v1.Place.OpeningHours.verify(message.regularSecondaryOpeningHours[i]);
                                     if (error)
-                                        return "secondaryOpeningHours." + error;
+                                        return "regularSecondaryOpeningHours." + error;
                                 }
                             }
                             if (message.editorialSummary != null && message.hasOwnProperty("editorialSummary")) {
-                                var error = $root.google.maps.places.v1.Place.EditorialSummary.verify(message.editorialSummary);
+                                var error = $root.google.type.LocalizedText.verify(message.editorialSummary);
                                 if (error)
                                     return "editorialSummary." + error;
+                            }
+                            if (message.outdoorSeating != null && message.hasOwnProperty("outdoorSeating")) {
+                                properties._outdoorSeating = 1;
+                                if (typeof message.outdoorSeating !== "boolean")
+                                    return "outdoorSeating: boolean expected";
+                            }
+                            if (message.liveMusic != null && message.hasOwnProperty("liveMusic")) {
+                                properties._liveMusic = 1;
+                                if (typeof message.liveMusic !== "boolean")
+                                    return "liveMusic: boolean expected";
+                            }
+                            if (message.menuForChildren != null && message.hasOwnProperty("menuForChildren")) {
+                                properties._menuForChildren = 1;
+                                if (typeof message.menuForChildren !== "boolean")
+                                    return "menuForChildren: boolean expected";
+                            }
+                            if (message.servesCocktails != null && message.hasOwnProperty("servesCocktails")) {
+                                properties._servesCocktails = 1;
+                                if (typeof message.servesCocktails !== "boolean")
+                                    return "servesCocktails: boolean expected";
+                            }
+                            if (message.servesDessert != null && message.hasOwnProperty("servesDessert")) {
+                                properties._servesDessert = 1;
+                                if (typeof message.servesDessert !== "boolean")
+                                    return "servesDessert: boolean expected";
+                            }
+                            if (message.servesCoffee != null && message.hasOwnProperty("servesCoffee")) {
+                                properties._servesCoffee = 1;
+                                if (typeof message.servesCoffee !== "boolean")
+                                    return "servesCoffee: boolean expected";
+                            }
+                            if (message.goodForChildren != null && message.hasOwnProperty("goodForChildren")) {
+                                properties._goodForChildren = 1;
+                                if (typeof message.goodForChildren !== "boolean")
+                                    return "goodForChildren: boolean expected";
+                            }
+                            if (message.allowsDogs != null && message.hasOwnProperty("allowsDogs")) {
+                                properties._allowsDogs = 1;
+                                if (typeof message.allowsDogs !== "boolean")
+                                    return "allowsDogs: boolean expected";
+                            }
+                            if (message.restroom != null && message.hasOwnProperty("restroom")) {
+                                properties._restroom = 1;
+                                if (typeof message.restroom !== "boolean")
+                                    return "restroom: boolean expected";
+                            }
+                            if (message.goodForGroups != null && message.hasOwnProperty("goodForGroups")) {
+                                properties._goodForGroups = 1;
+                                if (typeof message.goodForGroups !== "boolean")
+                                    return "goodForGroups: boolean expected";
+                            }
+                            if (message.goodForWatchingSports != null && message.hasOwnProperty("goodForWatchingSports")) {
+                                properties._goodForWatchingSports = 1;
+                                if (typeof message.goodForWatchingSports !== "boolean")
+                                    return "goodForWatchingSports: boolean expected";
+                            }
+                            if (message.paymentOptions != null && message.hasOwnProperty("paymentOptions")) {
+                                var error = $root.google.maps.places.v1.Place.PaymentOptions.verify(message.paymentOptions);
+                                if (error)
+                                    return "paymentOptions." + error;
+                            }
+                            if (message.parkingOptions != null && message.hasOwnProperty("parkingOptions")) {
+                                var error = $root.google.maps.places.v1.Place.ParkingOptions.verify(message.parkingOptions);
+                                if (error)
+                                    return "parkingOptions." + error;
+                            }
+                            if (message.subDestinations != null && message.hasOwnProperty("subDestinations")) {
+                                if (!Array.isArray(message.subDestinations))
+                                    return "subDestinations: array expected";
+                                for (var i = 0; i < message.subDestinations.length; ++i) {
+                                    var error = $root.google.maps.places.v1.Place.SubDestination.verify(message.subDestinations[i]);
+                                    if (error)
+                                        return "subDestinations." + error;
+                                }
+                            }
+                            if (message.accessibilityOptions != null && message.hasOwnProperty("accessibilityOptions")) {
+                                properties._accessibilityOptions = 1;
+                                {
+                                    var error = $root.google.maps.places.v1.Place.AccessibilityOptions.verify(message.accessibilityOptions);
+                                    if (error)
+                                        return "accessibilityOptions." + error;
+                                }
+                            }
+                            if (message.fuelOptions != null && message.hasOwnProperty("fuelOptions")) {
+                                var error = $root.google.maps.places.v1.FuelOptions.verify(message.fuelOptions);
+                                if (error)
+                                    return "fuelOptions." + error;
+                            }
+                            if (message.evChargeOptions != null && message.hasOwnProperty("evChargeOptions")) {
+                                var error = $root.google.maps.places.v1.EVChargeOptions.verify(message.evChargeOptions);
+                                if (error)
+                                    return "evChargeOptions." + error;
                             }
                             return null;
                         };
@@ -2387,6 +5051,8 @@
                             if (object instanceof $root.google.maps.places.v1.Place)
                                 return object;
                             var message = new $root.google.maps.places.v1.Place();
+                            if (object.name != null)
+                                message.name = String(object.name);
                             if (object.id != null)
                                 message.id = String(object.id);
                             if (object.displayName != null) {
@@ -2445,16 +5111,26 @@
                                 for (var i = 0; i < object.reviews.length; ++i) {
                                     if (typeof object.reviews[i] !== "object")
                                         throw TypeError(".google.maps.places.v1.Place.reviews: object expected");
-                                    message.reviews[i] = $root.google.maps.places.v1.Place.Review.fromObject(object.reviews[i]);
+                                    message.reviews[i] = $root.google.maps.places.v1.Review.fromObject(object.reviews[i]);
                                 }
                             }
-                            if (object.openingHours != null) {
-                                if (typeof object.openingHours !== "object")
-                                    throw TypeError(".google.maps.places.v1.Place.openingHours: object expected");
-                                message.openingHours = $root.google.maps.places.v1.Place.OpeningHours.fromObject(object.openingHours);
+                            if (object.regularOpeningHours != null) {
+                                if (typeof object.regularOpeningHours !== "object")
+                                    throw TypeError(".google.maps.places.v1.Place.regularOpeningHours: object expected");
+                                message.regularOpeningHours = $root.google.maps.places.v1.Place.OpeningHours.fromObject(object.regularOpeningHours);
                             }
                             if (object.utcOffsetMinutes != null)
                                 message.utcOffsetMinutes = object.utcOffsetMinutes | 0;
+                            if (object.photos) {
+                                if (!Array.isArray(object.photos))
+                                    throw TypeError(".google.maps.places.v1.Place.photos: array expected");
+                                message.photos = [];
+                                for (var i = 0; i < object.photos.length; ++i) {
+                                    if (typeof object.photos[i] !== "object")
+                                        throw TypeError(".google.maps.places.v1.Place.photos: object expected");
+                                    message.photos[i] = $root.google.maps.places.v1.Photo.fromObject(object.photos[i]);
+                                }
+                            }
                             if (object.adrFormatAddress != null)
                                 message.adrFormatAddress = String(object.adrFormatAddress);
                             switch (object.businessStatus) {
@@ -2492,23 +5168,23 @@
                             case 0:
                                 message.priceLevel = 0;
                                 break;
-                            case "FREE":
+                            case "PRICE_LEVEL_FREE":
                             case 1:
                                 message.priceLevel = 1;
                                 break;
-                            case "INEXPENSIVE":
+                            case "PRICE_LEVEL_INEXPENSIVE":
                             case 2:
                                 message.priceLevel = 2;
                                 break;
-                            case "MODERATE":
+                            case "PRICE_LEVEL_MODERATE":
                             case 3:
                                 message.priceLevel = 3;
                                 break;
-                            case "EXPENSIVE":
+                            case "PRICE_LEVEL_EXPENSIVE":
                             case 4:
                                 message.priceLevel = 4;
                                 break;
-                            case "VERY_EXPENSIVE":
+                            case "PRICE_LEVEL_VERY_EXPENSIVE":
                             case 5:
                                 message.priceLevel = 5;
                                 break;
@@ -2537,8 +5213,6 @@
                                 message.dineIn = Boolean(object.dineIn);
                             if (object.curbsidePickup != null)
                                 message.curbsidePickup = Boolean(object.curbsidePickup);
-                            if (object.wheelchairAccessibleEntrance != null)
-                                message.wheelchairAccessibleEntrance = Boolean(object.wheelchairAccessibleEntrance);
                             if (object.reservable != null)
                                 message.reservable = Boolean(object.reservable);
                             if (object.servesBreakfast != null)
@@ -2570,20 +5244,77 @@
                                     message.currentSecondaryOpeningHours[i] = $root.google.maps.places.v1.Place.OpeningHours.fromObject(object.currentSecondaryOpeningHours[i]);
                                 }
                             }
-                            if (object.secondaryOpeningHours) {
-                                if (!Array.isArray(object.secondaryOpeningHours))
-                                    throw TypeError(".google.maps.places.v1.Place.secondaryOpeningHours: array expected");
-                                message.secondaryOpeningHours = [];
-                                for (var i = 0; i < object.secondaryOpeningHours.length; ++i) {
-                                    if (typeof object.secondaryOpeningHours[i] !== "object")
-                                        throw TypeError(".google.maps.places.v1.Place.secondaryOpeningHours: object expected");
-                                    message.secondaryOpeningHours[i] = $root.google.maps.places.v1.Place.OpeningHours.fromObject(object.secondaryOpeningHours[i]);
+                            if (object.regularSecondaryOpeningHours) {
+                                if (!Array.isArray(object.regularSecondaryOpeningHours))
+                                    throw TypeError(".google.maps.places.v1.Place.regularSecondaryOpeningHours: array expected");
+                                message.regularSecondaryOpeningHours = [];
+                                for (var i = 0; i < object.regularSecondaryOpeningHours.length; ++i) {
+                                    if (typeof object.regularSecondaryOpeningHours[i] !== "object")
+                                        throw TypeError(".google.maps.places.v1.Place.regularSecondaryOpeningHours: object expected");
+                                    message.regularSecondaryOpeningHours[i] = $root.google.maps.places.v1.Place.OpeningHours.fromObject(object.regularSecondaryOpeningHours[i]);
                                 }
                             }
                             if (object.editorialSummary != null) {
                                 if (typeof object.editorialSummary !== "object")
                                     throw TypeError(".google.maps.places.v1.Place.editorialSummary: object expected");
-                                message.editorialSummary = $root.google.maps.places.v1.Place.EditorialSummary.fromObject(object.editorialSummary);
+                                message.editorialSummary = $root.google.type.LocalizedText.fromObject(object.editorialSummary);
+                            }
+                            if (object.outdoorSeating != null)
+                                message.outdoorSeating = Boolean(object.outdoorSeating);
+                            if (object.liveMusic != null)
+                                message.liveMusic = Boolean(object.liveMusic);
+                            if (object.menuForChildren != null)
+                                message.menuForChildren = Boolean(object.menuForChildren);
+                            if (object.servesCocktails != null)
+                                message.servesCocktails = Boolean(object.servesCocktails);
+                            if (object.servesDessert != null)
+                                message.servesDessert = Boolean(object.servesDessert);
+                            if (object.servesCoffee != null)
+                                message.servesCoffee = Boolean(object.servesCoffee);
+                            if (object.goodForChildren != null)
+                                message.goodForChildren = Boolean(object.goodForChildren);
+                            if (object.allowsDogs != null)
+                                message.allowsDogs = Boolean(object.allowsDogs);
+                            if (object.restroom != null)
+                                message.restroom = Boolean(object.restroom);
+                            if (object.goodForGroups != null)
+                                message.goodForGroups = Boolean(object.goodForGroups);
+                            if (object.goodForWatchingSports != null)
+                                message.goodForWatchingSports = Boolean(object.goodForWatchingSports);
+                            if (object.paymentOptions != null) {
+                                if (typeof object.paymentOptions !== "object")
+                                    throw TypeError(".google.maps.places.v1.Place.paymentOptions: object expected");
+                                message.paymentOptions = $root.google.maps.places.v1.Place.PaymentOptions.fromObject(object.paymentOptions);
+                            }
+                            if (object.parkingOptions != null) {
+                                if (typeof object.parkingOptions !== "object")
+                                    throw TypeError(".google.maps.places.v1.Place.parkingOptions: object expected");
+                                message.parkingOptions = $root.google.maps.places.v1.Place.ParkingOptions.fromObject(object.parkingOptions);
+                            }
+                            if (object.subDestinations) {
+                                if (!Array.isArray(object.subDestinations))
+                                    throw TypeError(".google.maps.places.v1.Place.subDestinations: array expected");
+                                message.subDestinations = [];
+                                for (var i = 0; i < object.subDestinations.length; ++i) {
+                                    if (typeof object.subDestinations[i] !== "object")
+                                        throw TypeError(".google.maps.places.v1.Place.subDestinations: object expected");
+                                    message.subDestinations[i] = $root.google.maps.places.v1.Place.SubDestination.fromObject(object.subDestinations[i]);
+                                }
+                            }
+                            if (object.accessibilityOptions != null) {
+                                if (typeof object.accessibilityOptions !== "object")
+                                    throw TypeError(".google.maps.places.v1.Place.accessibilityOptions: object expected");
+                                message.accessibilityOptions = $root.google.maps.places.v1.Place.AccessibilityOptions.fromObject(object.accessibilityOptions);
+                            }
+                            if (object.fuelOptions != null) {
+                                if (typeof object.fuelOptions !== "object")
+                                    throw TypeError(".google.maps.places.v1.Place.fuelOptions: object expected");
+                                message.fuelOptions = $root.google.maps.places.v1.FuelOptions.fromObject(object.fuelOptions);
+                            }
+                            if (object.evChargeOptions != null) {
+                                if (typeof object.evChargeOptions !== "object")
+                                    throw TypeError(".google.maps.places.v1.Place.evChargeOptions: object expected");
+                                message.evChargeOptions = $root.google.maps.places.v1.EVChargeOptions.fromObject(object.evChargeOptions);
                             }
                             return message;
                         };
@@ -2604,12 +5335,15 @@
                             if (options.arrays || options.defaults) {
                                 object.types = [];
                                 object.addressComponents = [];
-                                object.reviews = [];
                                 object.attributions = [];
                                 object.currentSecondaryOpeningHours = [];
-                                object.secondaryOpeningHours = [];
+                                object.regularSecondaryOpeningHours = [];
+                                object.reviews = [];
+                                object.photos = [];
+                                object.subDestinations = [];
                             }
                             if (options.defaults) {
+                                object.name = "";
                                 object.id = "";
                                 object.nationalPhoneNumber = "";
                                 object.internationalPhoneNumber = "";
@@ -2620,18 +5354,22 @@
                                 object.rating = 0;
                                 object.googleMapsUri = "";
                                 object.websiteUri = "";
-                                object.openingHours = null;
-                                object.utcOffsetMinutes = 0;
+                                object.regularOpeningHours = null;
                                 object.adrFormatAddress = "";
                                 object.businessStatus = options.enums === String ? "BUSINESS_STATUS_UNSPECIFIED" : 0;
                                 object.priceLevel = options.enums === String ? "PRICE_LEVEL_UNSPECIFIED" : 0;
-                                object.userRatingCount = 0;
                                 object.iconMaskBaseUri = "";
                                 object.iconBackgroundColor = "";
                                 object.displayName = null;
                                 object.currentOpeningHours = null;
                                 object.editorialSummary = null;
+                                object.paymentOptions = null;
+                                object.parkingOptions = null;
+                                object.fuelOptions = null;
+                                object.evChargeOptions = null;
                             }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
                             if (message.id != null && message.hasOwnProperty("id"))
                                 object.id = message.id;
                             if (message.types && message.types.length) {
@@ -2662,15 +5400,13 @@
                                 object.googleMapsUri = message.googleMapsUri;
                             if (message.websiteUri != null && message.hasOwnProperty("websiteUri"))
                                 object.websiteUri = message.websiteUri;
-                            if (message.reviews && message.reviews.length) {
-                                object.reviews = [];
-                                for (var j = 0; j < message.reviews.length; ++j)
-                                    object.reviews[j] = $root.google.maps.places.v1.Place.Review.toObject(message.reviews[j], options);
-                            }
-                            if (message.openingHours != null && message.hasOwnProperty("openingHours"))
-                                object.openingHours = $root.google.maps.places.v1.Place.OpeningHours.toObject(message.openingHours, options);
-                            if (message.utcOffsetMinutes != null && message.hasOwnProperty("utcOffsetMinutes"))
+                            if (message.regularOpeningHours != null && message.hasOwnProperty("regularOpeningHours"))
+                                object.regularOpeningHours = $root.google.maps.places.v1.Place.OpeningHours.toObject(message.regularOpeningHours, options);
+                            if (message.utcOffsetMinutes != null && message.hasOwnProperty("utcOffsetMinutes")) {
                                 object.utcOffsetMinutes = message.utcOffsetMinutes;
+                                if (options.oneofs)
+                                    object._utcOffsetMinutes = "utcOffsetMinutes";
+                            }
                             if (message.adrFormatAddress != null && message.hasOwnProperty("adrFormatAddress"))
                                 object.adrFormatAddress = message.adrFormatAddress;
                             if (message.businessStatus != null && message.hasOwnProperty("businessStatus"))
@@ -2682,8 +5418,11 @@
                                 for (var j = 0; j < message.attributions.length; ++j)
                                     object.attributions[j] = $root.google.maps.places.v1.Place.Attribution.toObject(message.attributions[j], options);
                             }
-                            if (message.userRatingCount != null && message.hasOwnProperty("userRatingCount"))
+                            if (message.userRatingCount != null && message.hasOwnProperty("userRatingCount")) {
                                 object.userRatingCount = message.userRatingCount;
+                                if (options.oneofs)
+                                    object._userRatingCount = "userRatingCount";
+                            }
                             if (message.iconMaskBaseUri != null && message.hasOwnProperty("iconMaskBaseUri"))
                                 object.iconMaskBaseUri = message.iconMaskBaseUri;
                             if (message.iconBackgroundColor != null && message.hasOwnProperty("iconBackgroundColor"))
@@ -2709,11 +5448,6 @@
                                 object.curbsidePickup = message.curbsidePickup;
                                 if (options.oneofs)
                                     object._curbsidePickup = "curbsidePickup";
-                            }
-                            if (message.wheelchairAccessibleEntrance != null && message.hasOwnProperty("wheelchairAccessibleEntrance")) {
-                                object.wheelchairAccessibleEntrance = message.wheelchairAccessibleEntrance;
-                                if (options.oneofs)
-                                    object._wheelchairAccessibleEntrance = "wheelchairAccessibleEntrance";
                             }
                             if (message.reservable != null && message.hasOwnProperty("reservable")) {
                                 object.reservable = message.reservable;
@@ -2762,13 +5496,96 @@
                                 for (var j = 0; j < message.currentSecondaryOpeningHours.length; ++j)
                                     object.currentSecondaryOpeningHours[j] = $root.google.maps.places.v1.Place.OpeningHours.toObject(message.currentSecondaryOpeningHours[j], options);
                             }
-                            if (message.editorialSummary != null && message.hasOwnProperty("editorialSummary"))
-                                object.editorialSummary = $root.google.maps.places.v1.Place.EditorialSummary.toObject(message.editorialSummary, options);
-                            if (message.secondaryOpeningHours && message.secondaryOpeningHours.length) {
-                                object.secondaryOpeningHours = [];
-                                for (var j = 0; j < message.secondaryOpeningHours.length; ++j)
-                                    object.secondaryOpeningHours[j] = $root.google.maps.places.v1.Place.OpeningHours.toObject(message.secondaryOpeningHours[j], options);
+                            if (message.regularSecondaryOpeningHours && message.regularSecondaryOpeningHours.length) {
+                                object.regularSecondaryOpeningHours = [];
+                                for (var j = 0; j < message.regularSecondaryOpeningHours.length; ++j)
+                                    object.regularSecondaryOpeningHours[j] = $root.google.maps.places.v1.Place.OpeningHours.toObject(message.regularSecondaryOpeningHours[j], options);
                             }
+                            if (message.editorialSummary != null && message.hasOwnProperty("editorialSummary"))
+                                object.editorialSummary = $root.google.type.LocalizedText.toObject(message.editorialSummary, options);
+                            if (message.reviews && message.reviews.length) {
+                                object.reviews = [];
+                                for (var j = 0; j < message.reviews.length; ++j)
+                                    object.reviews[j] = $root.google.maps.places.v1.Review.toObject(message.reviews[j], options);
+                            }
+                            if (message.photos && message.photos.length) {
+                                object.photos = [];
+                                for (var j = 0; j < message.photos.length; ++j)
+                                    object.photos[j] = $root.google.maps.places.v1.Photo.toObject(message.photos[j], options);
+                            }
+                            if (message.outdoorSeating != null && message.hasOwnProperty("outdoorSeating")) {
+                                object.outdoorSeating = message.outdoorSeating;
+                                if (options.oneofs)
+                                    object._outdoorSeating = "outdoorSeating";
+                            }
+                            if (message.liveMusic != null && message.hasOwnProperty("liveMusic")) {
+                                object.liveMusic = message.liveMusic;
+                                if (options.oneofs)
+                                    object._liveMusic = "liveMusic";
+                            }
+                            if (message.menuForChildren != null && message.hasOwnProperty("menuForChildren")) {
+                                object.menuForChildren = message.menuForChildren;
+                                if (options.oneofs)
+                                    object._menuForChildren = "menuForChildren";
+                            }
+                            if (message.servesCocktails != null && message.hasOwnProperty("servesCocktails")) {
+                                object.servesCocktails = message.servesCocktails;
+                                if (options.oneofs)
+                                    object._servesCocktails = "servesCocktails";
+                            }
+                            if (message.servesDessert != null && message.hasOwnProperty("servesDessert")) {
+                                object.servesDessert = message.servesDessert;
+                                if (options.oneofs)
+                                    object._servesDessert = "servesDessert";
+                            }
+                            if (message.servesCoffee != null && message.hasOwnProperty("servesCoffee")) {
+                                object.servesCoffee = message.servesCoffee;
+                                if (options.oneofs)
+                                    object._servesCoffee = "servesCoffee";
+                            }
+                            if (message.goodForChildren != null && message.hasOwnProperty("goodForChildren")) {
+                                object.goodForChildren = message.goodForChildren;
+                                if (options.oneofs)
+                                    object._goodForChildren = "goodForChildren";
+                            }
+                            if (message.allowsDogs != null && message.hasOwnProperty("allowsDogs")) {
+                                object.allowsDogs = message.allowsDogs;
+                                if (options.oneofs)
+                                    object._allowsDogs = "allowsDogs";
+                            }
+                            if (message.restroom != null && message.hasOwnProperty("restroom")) {
+                                object.restroom = message.restroom;
+                                if (options.oneofs)
+                                    object._restroom = "restroom";
+                            }
+                            if (message.goodForGroups != null && message.hasOwnProperty("goodForGroups")) {
+                                object.goodForGroups = message.goodForGroups;
+                                if (options.oneofs)
+                                    object._goodForGroups = "goodForGroups";
+                            }
+                            if (message.goodForWatchingSports != null && message.hasOwnProperty("goodForWatchingSports")) {
+                                object.goodForWatchingSports = message.goodForWatchingSports;
+                                if (options.oneofs)
+                                    object._goodForWatchingSports = "goodForWatchingSports";
+                            }
+                            if (message.paymentOptions != null && message.hasOwnProperty("paymentOptions"))
+                                object.paymentOptions = $root.google.maps.places.v1.Place.PaymentOptions.toObject(message.paymentOptions, options);
+                            if (message.parkingOptions != null && message.hasOwnProperty("parkingOptions"))
+                                object.parkingOptions = $root.google.maps.places.v1.Place.ParkingOptions.toObject(message.parkingOptions, options);
+                            if (message.subDestinations && message.subDestinations.length) {
+                                object.subDestinations = [];
+                                for (var j = 0; j < message.subDestinations.length; ++j)
+                                    object.subDestinations[j] = $root.google.maps.places.v1.Place.SubDestination.toObject(message.subDestinations[j], options);
+                            }
+                            if (message.accessibilityOptions != null && message.hasOwnProperty("accessibilityOptions")) {
+                                object.accessibilityOptions = $root.google.maps.places.v1.Place.AccessibilityOptions.toObject(message.accessibilityOptions, options);
+                                if (options.oneofs)
+                                    object._accessibilityOptions = "accessibilityOptions";
+                            }
+                            if (message.fuelOptions != null && message.hasOwnProperty("fuelOptions"))
+                                object.fuelOptions = $root.google.maps.places.v1.FuelOptions.toObject(message.fuelOptions, options);
+                            if (message.evChargeOptions != null && message.hasOwnProperty("evChargeOptions"))
+                                object.evChargeOptions = $root.google.maps.places.v1.EVChargeOptions.toObject(message.evChargeOptions, options);
                             return object;
                         };
     
@@ -3315,404 +6132,6 @@
                             return PlusCode;
                         })();
     
-                        Place.Review = (function() {
-    
-                            /**
-                             * Properties of a Review.
-                             * @memberof google.maps.places.v1.Place
-                             * @interface IReview
-                             * @property {google.protobuf.ITimestamp|null} [publishTime] Review publishTime
-                             * @property {string|null} [relativePublishTimeDescription] Review relativePublishTimeDescription
-                             * @property {google.type.ILocalizedText|null} [text] Review text
-                             * @property {string|null} [author] Review author
-                             * @property {string|null} [authorUri] Review authorUri
-                             * @property {string|null} [authorPhotoUri] Review authorPhotoUri
-                             * @property {number|null} [rating] Review rating
-                             * @property {string|null} [originalLanguageCode] Review originalLanguageCode
-                             * @property {boolean|null} [translated] Review translated
-                             */
-    
-                            /**
-                             * Constructs a new Review.
-                             * @memberof google.maps.places.v1.Place
-                             * @classdesc Represents a Review.
-                             * @implements IReview
-                             * @constructor
-                             * @param {google.maps.places.v1.Place.IReview=} [properties] Properties to set
-                             */
-                            function Review(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * Review publishTime.
-                             * @member {google.protobuf.ITimestamp|null|undefined} publishTime
-                             * @memberof google.maps.places.v1.Place.Review
-                             * @instance
-                             */
-                            Review.prototype.publishTime = null;
-    
-                            /**
-                             * Review relativePublishTimeDescription.
-                             * @member {string} relativePublishTimeDescription
-                             * @memberof google.maps.places.v1.Place.Review
-                             * @instance
-                             */
-                            Review.prototype.relativePublishTimeDescription = "";
-    
-                            /**
-                             * Review text.
-                             * @member {google.type.ILocalizedText|null|undefined} text
-                             * @memberof google.maps.places.v1.Place.Review
-                             * @instance
-                             */
-                            Review.prototype.text = null;
-    
-                            /**
-                             * Review author.
-                             * @member {string} author
-                             * @memberof google.maps.places.v1.Place.Review
-                             * @instance
-                             */
-                            Review.prototype.author = "";
-    
-                            /**
-                             * Review authorUri.
-                             * @member {string} authorUri
-                             * @memberof google.maps.places.v1.Place.Review
-                             * @instance
-                             */
-                            Review.prototype.authorUri = "";
-    
-                            /**
-                             * Review authorPhotoUri.
-                             * @member {string} authorPhotoUri
-                             * @memberof google.maps.places.v1.Place.Review
-                             * @instance
-                             */
-                            Review.prototype.authorPhotoUri = "";
-    
-                            /**
-                             * Review rating.
-                             * @member {number} rating
-                             * @memberof google.maps.places.v1.Place.Review
-                             * @instance
-                             */
-                            Review.prototype.rating = 0;
-    
-                            /**
-                             * Review originalLanguageCode.
-                             * @member {string} originalLanguageCode
-                             * @memberof google.maps.places.v1.Place.Review
-                             * @instance
-                             */
-                            Review.prototype.originalLanguageCode = "";
-    
-                            /**
-                             * Review translated.
-                             * @member {boolean} translated
-                             * @memberof google.maps.places.v1.Place.Review
-                             * @instance
-                             */
-                            Review.prototype.translated = false;
-    
-                            /**
-                             * Creates a new Review instance using the specified properties.
-                             * @function create
-                             * @memberof google.maps.places.v1.Place.Review
-                             * @static
-                             * @param {google.maps.places.v1.Place.IReview=} [properties] Properties to set
-                             * @returns {google.maps.places.v1.Place.Review} Review instance
-                             */
-                            Review.create = function create(properties) {
-                                return new Review(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified Review message. Does not implicitly {@link google.maps.places.v1.Place.Review.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.maps.places.v1.Place.Review
-                             * @static
-                             * @param {google.maps.places.v1.Place.IReview} message Review message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Review.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.publishTime != null && Object.hasOwnProperty.call(message, "publishTime"))
-                                    $root.google.protobuf.Timestamp.encode(message.publishTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                                if (message.relativePublishTimeDescription != null && Object.hasOwnProperty.call(message, "relativePublishTimeDescription"))
-                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.relativePublishTimeDescription);
-                                if (message.author != null && Object.hasOwnProperty.call(message, "author"))
-                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.author);
-                                if (message.authorUri != null && Object.hasOwnProperty.call(message, "authorUri"))
-                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.authorUri);
-                                if (message.authorPhotoUri != null && Object.hasOwnProperty.call(message, "authorPhotoUri"))
-                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.authorPhotoUri);
-                                if (message.rating != null && Object.hasOwnProperty.call(message, "rating"))
-                                    writer.uint32(/* id 7, wireType 1 =*/57).double(message.rating);
-                                if (message.text != null && Object.hasOwnProperty.call(message, "text"))
-                                    $root.google.type.LocalizedText.encode(message.text, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
-                                if (message.originalLanguageCode != null && Object.hasOwnProperty.call(message, "originalLanguageCode"))
-                                    writer.uint32(/* id 10, wireType 2 =*/82).string(message.originalLanguageCode);
-                                if (message.translated != null && Object.hasOwnProperty.call(message, "translated"))
-                                    writer.uint32(/* id 11, wireType 0 =*/88).bool(message.translated);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified Review message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.Review.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.maps.places.v1.Place.Review
-                             * @static
-                             * @param {google.maps.places.v1.Place.IReview} message Review message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Review.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a Review message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.maps.places.v1.Place.Review
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.maps.places.v1.Place.Review} Review
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Review.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.Review();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.publishTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.relativePublishTimeDescription = reader.string();
-                                            break;
-                                        }
-                                    case 9: {
-                                            message.text = $root.google.type.LocalizedText.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 4: {
-                                            message.author = reader.string();
-                                            break;
-                                        }
-                                    case 5: {
-                                            message.authorUri = reader.string();
-                                            break;
-                                        }
-                                    case 6: {
-                                            message.authorPhotoUri = reader.string();
-                                            break;
-                                        }
-                                    case 7: {
-                                            message.rating = reader.double();
-                                            break;
-                                        }
-                                    case 10: {
-                                            message.originalLanguageCode = reader.string();
-                                            break;
-                                        }
-                                    case 11: {
-                                            message.translated = reader.bool();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a Review message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.maps.places.v1.Place.Review
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.maps.places.v1.Place.Review} Review
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Review.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a Review message.
-                             * @function verify
-                             * @memberof google.maps.places.v1.Place.Review
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            Review.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.publishTime != null && message.hasOwnProperty("publishTime")) {
-                                    var error = $root.google.protobuf.Timestamp.verify(message.publishTime);
-                                    if (error)
-                                        return "publishTime." + error;
-                                }
-                                if (message.relativePublishTimeDescription != null && message.hasOwnProperty("relativePublishTimeDescription"))
-                                    if (!$util.isString(message.relativePublishTimeDescription))
-                                        return "relativePublishTimeDescription: string expected";
-                                if (message.text != null && message.hasOwnProperty("text")) {
-                                    var error = $root.google.type.LocalizedText.verify(message.text);
-                                    if (error)
-                                        return "text." + error;
-                                }
-                                if (message.author != null && message.hasOwnProperty("author"))
-                                    if (!$util.isString(message.author))
-                                        return "author: string expected";
-                                if (message.authorUri != null && message.hasOwnProperty("authorUri"))
-                                    if (!$util.isString(message.authorUri))
-                                        return "authorUri: string expected";
-                                if (message.authorPhotoUri != null && message.hasOwnProperty("authorPhotoUri"))
-                                    if (!$util.isString(message.authorPhotoUri))
-                                        return "authorPhotoUri: string expected";
-                                if (message.rating != null && message.hasOwnProperty("rating"))
-                                    if (typeof message.rating !== "number")
-                                        return "rating: number expected";
-                                if (message.originalLanguageCode != null && message.hasOwnProperty("originalLanguageCode"))
-                                    if (!$util.isString(message.originalLanguageCode))
-                                        return "originalLanguageCode: string expected";
-                                if (message.translated != null && message.hasOwnProperty("translated"))
-                                    if (typeof message.translated !== "boolean")
-                                        return "translated: boolean expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a Review message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.maps.places.v1.Place.Review
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.maps.places.v1.Place.Review} Review
-                             */
-                            Review.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.maps.places.v1.Place.Review)
-                                    return object;
-                                var message = new $root.google.maps.places.v1.Place.Review();
-                                if (object.publishTime != null) {
-                                    if (typeof object.publishTime !== "object")
-                                        throw TypeError(".google.maps.places.v1.Place.Review.publishTime: object expected");
-                                    message.publishTime = $root.google.protobuf.Timestamp.fromObject(object.publishTime);
-                                }
-                                if (object.relativePublishTimeDescription != null)
-                                    message.relativePublishTimeDescription = String(object.relativePublishTimeDescription);
-                                if (object.text != null) {
-                                    if (typeof object.text !== "object")
-                                        throw TypeError(".google.maps.places.v1.Place.Review.text: object expected");
-                                    message.text = $root.google.type.LocalizedText.fromObject(object.text);
-                                }
-                                if (object.author != null)
-                                    message.author = String(object.author);
-                                if (object.authorUri != null)
-                                    message.authorUri = String(object.authorUri);
-                                if (object.authorPhotoUri != null)
-                                    message.authorPhotoUri = String(object.authorPhotoUri);
-                                if (object.rating != null)
-                                    message.rating = Number(object.rating);
-                                if (object.originalLanguageCode != null)
-                                    message.originalLanguageCode = String(object.originalLanguageCode);
-                                if (object.translated != null)
-                                    message.translated = Boolean(object.translated);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a Review message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.maps.places.v1.Place.Review
-                             * @static
-                             * @param {google.maps.places.v1.Place.Review} message Review
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            Review.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.publishTime = null;
-                                    object.relativePublishTimeDescription = "";
-                                    object.author = "";
-                                    object.authorUri = "";
-                                    object.authorPhotoUri = "";
-                                    object.rating = 0;
-                                    object.text = null;
-                                    object.originalLanguageCode = "";
-                                    object.translated = false;
-                                }
-                                if (message.publishTime != null && message.hasOwnProperty("publishTime"))
-                                    object.publishTime = $root.google.protobuf.Timestamp.toObject(message.publishTime, options);
-                                if (message.relativePublishTimeDescription != null && message.hasOwnProperty("relativePublishTimeDescription"))
-                                    object.relativePublishTimeDescription = message.relativePublishTimeDescription;
-                                if (message.author != null && message.hasOwnProperty("author"))
-                                    object.author = message.author;
-                                if (message.authorUri != null && message.hasOwnProperty("authorUri"))
-                                    object.authorUri = message.authorUri;
-                                if (message.authorPhotoUri != null && message.hasOwnProperty("authorPhotoUri"))
-                                    object.authorPhotoUri = message.authorPhotoUri;
-                                if (message.rating != null && message.hasOwnProperty("rating"))
-                                    object.rating = options.json && !isFinite(message.rating) ? String(message.rating) : message.rating;
-                                if (message.text != null && message.hasOwnProperty("text"))
-                                    object.text = $root.google.type.LocalizedText.toObject(message.text, options);
-                                if (message.originalLanguageCode != null && message.hasOwnProperty("originalLanguageCode"))
-                                    object.originalLanguageCode = message.originalLanguageCode;
-                                if (message.translated != null && message.hasOwnProperty("translated"))
-                                    object.translated = message.translated;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this Review to JSON.
-                             * @function toJSON
-                             * @memberof google.maps.places.v1.Place.Review
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            Review.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for Review
-                             * @function getTypeUrl
-                             * @memberof google.maps.places.v1.Place.Review
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            Review.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.maps.places.v1.Place.Review";
-                            };
-    
-                            return Review;
-                        })();
-    
                         Place.OpeningHours = (function() {
     
                             /**
@@ -3720,9 +6139,9 @@
                              * @memberof google.maps.places.v1.Place
                              * @interface IOpeningHours
                              * @property {boolean|null} [openNow] OpeningHours openNow
-                             * @property {Array.<google.maps.places.v1.Place.OpeningHours.IOpeningHoursPeriod>|null} [periods] OpeningHours periods
+                             * @property {Array.<google.maps.places.v1.Place.OpeningHours.IPeriod>|null} [periods] OpeningHours periods
                              * @property {Array.<string>|null} [weekdayDescriptions] OpeningHours weekdayDescriptions
-                             * @property {google.maps.places.v1.Place.OpeningHours.SecondaryHourType|null} [secondaryHourType] OpeningHours secondaryHourType
+                             * @property {google.maps.places.v1.Place.OpeningHours.SecondaryHoursType|null} [secondaryHoursType] OpeningHours secondaryHoursType
                              * @property {Array.<google.maps.places.v1.Place.OpeningHours.ISpecialDay>|null} [specialDays] OpeningHours specialDays
                              */
     
@@ -3746,15 +6165,15 @@
     
                             /**
                              * OpeningHours openNow.
-                             * @member {boolean} openNow
+                             * @member {boolean|null|undefined} openNow
                              * @memberof google.maps.places.v1.Place.OpeningHours
                              * @instance
                              */
-                            OpeningHours.prototype.openNow = false;
+                            OpeningHours.prototype.openNow = null;
     
                             /**
                              * OpeningHours periods.
-                             * @member {Array.<google.maps.places.v1.Place.OpeningHours.IOpeningHoursPeriod>} periods
+                             * @member {Array.<google.maps.places.v1.Place.OpeningHours.IPeriod>} periods
                              * @memberof google.maps.places.v1.Place.OpeningHours
                              * @instance
                              */
@@ -3769,12 +6188,12 @@
                             OpeningHours.prototype.weekdayDescriptions = $util.emptyArray;
     
                             /**
-                             * OpeningHours secondaryHourType.
-                             * @member {google.maps.places.v1.Place.OpeningHours.SecondaryHourType} secondaryHourType
+                             * OpeningHours secondaryHoursType.
+                             * @member {google.maps.places.v1.Place.OpeningHours.SecondaryHoursType} secondaryHoursType
                              * @memberof google.maps.places.v1.Place.OpeningHours
                              * @instance
                              */
-                            OpeningHours.prototype.secondaryHourType = 0;
+                            OpeningHours.prototype.secondaryHoursType = 0;
     
                             /**
                              * OpeningHours specialDays.
@@ -3783,6 +6202,20 @@
                              * @instance
                              */
                             OpeningHours.prototype.specialDays = $util.emptyArray;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * OpeningHours _openNow.
+                             * @member {"openNow"|undefined} _openNow
+                             * @memberof google.maps.places.v1.Place.OpeningHours
+                             * @instance
+                             */
+                            Object.defineProperty(OpeningHours.prototype, "_openNow", {
+                                get: $util.oneOfGetter($oneOfFields = ["openNow"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
     
                             /**
                              * Creates a new OpeningHours instance using the specified properties.
@@ -3812,12 +6245,12 @@
                                     writer.uint32(/* id 1, wireType 0 =*/8).bool(message.openNow);
                                 if (message.periods != null && message.periods.length)
                                     for (var i = 0; i < message.periods.length; ++i)
-                                        $root.google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.encode(message.periods[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                        $root.google.maps.places.v1.Place.OpeningHours.Period.encode(message.periods[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                                 if (message.weekdayDescriptions != null && message.weekdayDescriptions.length)
                                     for (var i = 0; i < message.weekdayDescriptions.length; ++i)
                                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.weekdayDescriptions[i]);
-                                if (message.secondaryHourType != null && Object.hasOwnProperty.call(message, "secondaryHourType"))
-                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.secondaryHourType);
+                                if (message.secondaryHoursType != null && Object.hasOwnProperty.call(message, "secondaryHoursType"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.secondaryHoursType);
                                 if (message.specialDays != null && message.specialDays.length)
                                     for (var i = 0; i < message.specialDays.length; ++i)
                                         $root.google.maps.places.v1.Place.OpeningHours.SpecialDay.encode(message.specialDays[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
@@ -3862,7 +6295,7 @@
                                     case 2: {
                                             if (!(message.periods && message.periods.length))
                                                 message.periods = [];
-                                            message.periods.push($root.google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.decode(reader, reader.uint32()));
+                                            message.periods.push($root.google.maps.places.v1.Place.OpeningHours.Period.decode(reader, reader.uint32()));
                                             break;
                                         }
                                     case 3: {
@@ -3872,7 +6305,7 @@
                                             break;
                                         }
                                     case 4: {
-                                            message.secondaryHourType = reader.int32();
+                                            message.secondaryHoursType = reader.int32();
                                             break;
                                         }
                                     case 5: {
@@ -3916,14 +6349,17 @@
                             OpeningHours.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
-                                if (message.openNow != null && message.hasOwnProperty("openNow"))
+                                var properties = {};
+                                if (message.openNow != null && message.hasOwnProperty("openNow")) {
+                                    properties._openNow = 1;
                                     if (typeof message.openNow !== "boolean")
                                         return "openNow: boolean expected";
+                                }
                                 if (message.periods != null && message.hasOwnProperty("periods")) {
                                     if (!Array.isArray(message.periods))
                                         return "periods: array expected";
                                     for (var i = 0; i < message.periods.length; ++i) {
-                                        var error = $root.google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.verify(message.periods[i]);
+                                        var error = $root.google.maps.places.v1.Place.OpeningHours.Period.verify(message.periods[i]);
                                         if (error)
                                             return "periods." + error;
                                     }
@@ -3935,10 +6371,10 @@
                                         if (!$util.isString(message.weekdayDescriptions[i]))
                                             return "weekdayDescriptions: string[] expected";
                                 }
-                                if (message.secondaryHourType != null && message.hasOwnProperty("secondaryHourType"))
-                                    switch (message.secondaryHourType) {
+                                if (message.secondaryHoursType != null && message.hasOwnProperty("secondaryHoursType"))
+                                    switch (message.secondaryHoursType) {
                                     default:
-                                        return "secondaryHourType: enum value expected";
+                                        return "secondaryHoursType: enum value expected";
                                     case 0:
                                     case 1:
                                     case 2:
@@ -3988,7 +6424,7 @@
                                     for (var i = 0; i < object.periods.length; ++i) {
                                         if (typeof object.periods[i] !== "object")
                                             throw TypeError(".google.maps.places.v1.Place.OpeningHours.periods: object expected");
-                                        message.periods[i] = $root.google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.fromObject(object.periods[i]);
+                                        message.periods[i] = $root.google.maps.places.v1.Place.OpeningHours.Period.fromObject(object.periods[i]);
                                     }
                                 }
                                 if (object.weekdayDescriptions) {
@@ -3998,68 +6434,68 @@
                                     for (var i = 0; i < object.weekdayDescriptions.length; ++i)
                                         message.weekdayDescriptions[i] = String(object.weekdayDescriptions[i]);
                                 }
-                                switch (object.secondaryHourType) {
+                                switch (object.secondaryHoursType) {
                                 default:
-                                    if (typeof object.secondaryHourType === "number") {
-                                        message.secondaryHourType = object.secondaryHourType;
+                                    if (typeof object.secondaryHoursType === "number") {
+                                        message.secondaryHoursType = object.secondaryHoursType;
                                         break;
                                     }
                                     break;
-                                case "SECONDARY_HOUR_TYPE_UNSPECIFIED":
+                                case "SECONDARY_HOURS_TYPE_UNSPECIFIED":
                                 case 0:
-                                    message.secondaryHourType = 0;
+                                    message.secondaryHoursType = 0;
                                     break;
                                 case "DRIVE_THROUGH":
                                 case 1:
-                                    message.secondaryHourType = 1;
+                                    message.secondaryHoursType = 1;
                                     break;
                                 case "HAPPY_HOUR":
                                 case 2:
-                                    message.secondaryHourType = 2;
+                                    message.secondaryHoursType = 2;
                                     break;
                                 case "DELIVERY":
                                 case 3:
-                                    message.secondaryHourType = 3;
+                                    message.secondaryHoursType = 3;
                                     break;
                                 case "TAKEOUT":
                                 case 4:
-                                    message.secondaryHourType = 4;
+                                    message.secondaryHoursType = 4;
                                     break;
                                 case "KITCHEN":
                                 case 5:
-                                    message.secondaryHourType = 5;
+                                    message.secondaryHoursType = 5;
                                     break;
                                 case "BREAKFAST":
                                 case 6:
-                                    message.secondaryHourType = 6;
+                                    message.secondaryHoursType = 6;
                                     break;
                                 case "LUNCH":
                                 case 7:
-                                    message.secondaryHourType = 7;
+                                    message.secondaryHoursType = 7;
                                     break;
                                 case "DINNER":
                                 case 8:
-                                    message.secondaryHourType = 8;
+                                    message.secondaryHoursType = 8;
                                     break;
                                 case "BRUNCH":
                                 case 9:
-                                    message.secondaryHourType = 9;
+                                    message.secondaryHoursType = 9;
                                     break;
                                 case "PICKUP":
                                 case 10:
-                                    message.secondaryHourType = 10;
+                                    message.secondaryHoursType = 10;
                                     break;
                                 case "ACCESS":
                                 case 11:
-                                    message.secondaryHourType = 11;
+                                    message.secondaryHoursType = 11;
                                     break;
                                 case "SENIOR_HOURS":
                                 case 12:
-                                    message.secondaryHourType = 12;
+                                    message.secondaryHoursType = 12;
                                     break;
                                 case "ONLINE_SERVICE_HOURS":
                                 case 13:
-                                    message.secondaryHourType = 13;
+                                    message.secondaryHoursType = 13;
                                     break;
                                 }
                                 if (object.specialDays) {
@@ -4093,24 +6529,25 @@
                                     object.weekdayDescriptions = [];
                                     object.specialDays = [];
                                 }
-                                if (options.defaults) {
-                                    object.openNow = false;
-                                    object.secondaryHourType = options.enums === String ? "SECONDARY_HOUR_TYPE_UNSPECIFIED" : 0;
-                                }
-                                if (message.openNow != null && message.hasOwnProperty("openNow"))
+                                if (options.defaults)
+                                    object.secondaryHoursType = options.enums === String ? "SECONDARY_HOURS_TYPE_UNSPECIFIED" : 0;
+                                if (message.openNow != null && message.hasOwnProperty("openNow")) {
                                     object.openNow = message.openNow;
+                                    if (options.oneofs)
+                                        object._openNow = "openNow";
+                                }
                                 if (message.periods && message.periods.length) {
                                     object.periods = [];
                                     for (var j = 0; j < message.periods.length; ++j)
-                                        object.periods[j] = $root.google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.toObject(message.periods[j], options);
+                                        object.periods[j] = $root.google.maps.places.v1.Place.OpeningHours.Period.toObject(message.periods[j], options);
                                 }
                                 if (message.weekdayDescriptions && message.weekdayDescriptions.length) {
                                     object.weekdayDescriptions = [];
                                     for (var j = 0; j < message.weekdayDescriptions.length; ++j)
                                         object.weekdayDescriptions[j] = message.weekdayDescriptions[j];
                                 }
-                                if (message.secondaryHourType != null && message.hasOwnProperty("secondaryHourType"))
-                                    object.secondaryHourType = options.enums === String ? $root.google.maps.places.v1.Place.OpeningHours.SecondaryHourType[message.secondaryHourType] === undefined ? message.secondaryHourType : $root.google.maps.places.v1.Place.OpeningHours.SecondaryHourType[message.secondaryHourType] : message.secondaryHourType;
+                                if (message.secondaryHoursType != null && message.hasOwnProperty("secondaryHoursType"))
+                                    object.secondaryHoursType = options.enums === String ? $root.google.maps.places.v1.Place.OpeningHours.SecondaryHoursType[message.secondaryHoursType] === undefined ? message.secondaryHoursType : $root.google.maps.places.v1.Place.OpeningHours.SecondaryHoursType[message.secondaryHoursType] : message.secondaryHoursType;
                                 if (message.specialDays && message.specialDays.length) {
                                     object.specialDays = [];
                                     for (var j = 0; j < message.specialDays.length; ++j)
@@ -4145,25 +6582,25 @@
                                 return typeUrlPrefix + "/google.maps.places.v1.Place.OpeningHours";
                             };
     
-                            OpeningHours.OpeningHoursPeriod = (function() {
+                            OpeningHours.Period = (function() {
     
                                 /**
-                                 * Properties of an OpeningHoursPeriod.
+                                 * Properties of a Period.
                                  * @memberof google.maps.places.v1.Place.OpeningHours
-                                 * @interface IOpeningHoursPeriod
-                                 * @property {google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.IOpeningHoursPoint|null} [open] OpeningHoursPeriod open
-                                 * @property {google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.IOpeningHoursPoint|null} [close] OpeningHoursPeriod close
+                                 * @interface IPeriod
+                                 * @property {google.maps.places.v1.Place.OpeningHours.Period.IPoint|null} [open] Period open
+                                 * @property {google.maps.places.v1.Place.OpeningHours.Period.IPoint|null} [close] Period close
                                  */
     
                                 /**
-                                 * Constructs a new OpeningHoursPeriod.
+                                 * Constructs a new Period.
                                  * @memberof google.maps.places.v1.Place.OpeningHours
-                                 * @classdesc Represents an OpeningHoursPeriod.
-                                 * @implements IOpeningHoursPeriod
+                                 * @classdesc Represents a Period.
+                                 * @implements IPeriod
                                  * @constructor
-                                 * @param {google.maps.places.v1.Place.OpeningHours.IOpeningHoursPeriod=} [properties] Properties to set
+                                 * @param {google.maps.places.v1.Place.OpeningHours.IPeriod=} [properties] Properties to set
                                  */
-                                function OpeningHoursPeriod(properties) {
+                                function Period(properties) {
                                     if (properties)
                                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                             if (properties[keys[i]] != null)
@@ -4171,89 +6608,89 @@
                                 }
     
                                 /**
-                                 * OpeningHoursPeriod open.
-                                 * @member {google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.IOpeningHoursPoint|null|undefined} open
-                                 * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod
+                                 * Period open.
+                                 * @member {google.maps.places.v1.Place.OpeningHours.Period.IPoint|null|undefined} open
+                                 * @memberof google.maps.places.v1.Place.OpeningHours.Period
                                  * @instance
                                  */
-                                OpeningHoursPeriod.prototype.open = null;
+                                Period.prototype.open = null;
     
                                 /**
-                                 * OpeningHoursPeriod close.
-                                 * @member {google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.IOpeningHoursPoint|null|undefined} close
-                                 * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod
+                                 * Period close.
+                                 * @member {google.maps.places.v1.Place.OpeningHours.Period.IPoint|null|undefined} close
+                                 * @memberof google.maps.places.v1.Place.OpeningHours.Period
                                  * @instance
                                  */
-                                OpeningHoursPeriod.prototype.close = null;
+                                Period.prototype.close = null;
     
                                 /**
-                                 * Creates a new OpeningHoursPeriod instance using the specified properties.
+                                 * Creates a new Period instance using the specified properties.
                                  * @function create
-                                 * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod
+                                 * @memberof google.maps.places.v1.Place.OpeningHours.Period
                                  * @static
-                                 * @param {google.maps.places.v1.Place.OpeningHours.IOpeningHoursPeriod=} [properties] Properties to set
-                                 * @returns {google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod} OpeningHoursPeriod instance
+                                 * @param {google.maps.places.v1.Place.OpeningHours.IPeriod=} [properties] Properties to set
+                                 * @returns {google.maps.places.v1.Place.OpeningHours.Period} Period instance
                                  */
-                                OpeningHoursPeriod.create = function create(properties) {
-                                    return new OpeningHoursPeriod(properties);
+                                Period.create = function create(properties) {
+                                    return new Period(properties);
                                 };
     
                                 /**
-                                 * Encodes the specified OpeningHoursPeriod message. Does not implicitly {@link google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.verify|verify} messages.
+                                 * Encodes the specified Period message. Does not implicitly {@link google.maps.places.v1.Place.OpeningHours.Period.verify|verify} messages.
                                  * @function encode
-                                 * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod
+                                 * @memberof google.maps.places.v1.Place.OpeningHours.Period
                                  * @static
-                                 * @param {google.maps.places.v1.Place.OpeningHours.IOpeningHoursPeriod} message OpeningHoursPeriod message or plain object to encode
+                                 * @param {google.maps.places.v1.Place.OpeningHours.IPeriod} message Period message or plain object to encode
                                  * @param {$protobuf.Writer} [writer] Writer to encode to
                                  * @returns {$protobuf.Writer} Writer
                                  */
-                                OpeningHoursPeriod.encode = function encode(message, writer) {
+                                Period.encode = function encode(message, writer) {
                                     if (!writer)
                                         writer = $Writer.create();
                                     if (message.open != null && Object.hasOwnProperty.call(message, "open"))
-                                        $root.google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint.encode(message.open, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                        $root.google.maps.places.v1.Place.OpeningHours.Period.Point.encode(message.open, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                                     if (message.close != null && Object.hasOwnProperty.call(message, "close"))
-                                        $root.google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint.encode(message.close, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                        $root.google.maps.places.v1.Place.OpeningHours.Period.Point.encode(message.close, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                                     return writer;
                                 };
     
                                 /**
-                                 * Encodes the specified OpeningHoursPeriod message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.verify|verify} messages.
+                                 * Encodes the specified Period message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.OpeningHours.Period.verify|verify} messages.
                                  * @function encodeDelimited
-                                 * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod
+                                 * @memberof google.maps.places.v1.Place.OpeningHours.Period
                                  * @static
-                                 * @param {google.maps.places.v1.Place.OpeningHours.IOpeningHoursPeriod} message OpeningHoursPeriod message or plain object to encode
+                                 * @param {google.maps.places.v1.Place.OpeningHours.IPeriod} message Period message or plain object to encode
                                  * @param {$protobuf.Writer} [writer] Writer to encode to
                                  * @returns {$protobuf.Writer} Writer
                                  */
-                                OpeningHoursPeriod.encodeDelimited = function encodeDelimited(message, writer) {
+                                Period.encodeDelimited = function encodeDelimited(message, writer) {
                                     return this.encode(message, writer).ldelim();
                                 };
     
                                 /**
-                                 * Decodes an OpeningHoursPeriod message from the specified reader or buffer.
+                                 * Decodes a Period message from the specified reader or buffer.
                                  * @function decode
-                                 * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod
+                                 * @memberof google.maps.places.v1.Place.OpeningHours.Period
                                  * @static
                                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                                  * @param {number} [length] Message length if known beforehand
-                                 * @returns {google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod} OpeningHoursPeriod
+                                 * @returns {google.maps.places.v1.Place.OpeningHours.Period} Period
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                OpeningHoursPeriod.decode = function decode(reader, length) {
+                                Period.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
-                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod();
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.OpeningHours.Period();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
                                         switch (tag >>> 3) {
                                         case 1: {
-                                                message.open = $root.google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint.decode(reader, reader.uint32());
+                                                message.open = $root.google.maps.places.v1.Place.OpeningHours.Period.Point.decode(reader, reader.uint32());
                                                 break;
                                             }
                                         case 2: {
-                                                message.close = $root.google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint.decode(reader, reader.uint32());
+                                                message.close = $root.google.maps.places.v1.Place.OpeningHours.Period.Point.decode(reader, reader.uint32());
                                                 break;
                                             }
                                         default:
@@ -4265,39 +6702,39 @@
                                 };
     
                                 /**
-                                 * Decodes an OpeningHoursPeriod message from the specified reader or buffer, length delimited.
+                                 * Decodes a Period message from the specified reader or buffer, length delimited.
                                  * @function decodeDelimited
-                                 * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod
+                                 * @memberof google.maps.places.v1.Place.OpeningHours.Period
                                  * @static
                                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                                 * @returns {google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod} OpeningHoursPeriod
+                                 * @returns {google.maps.places.v1.Place.OpeningHours.Period} Period
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                OpeningHoursPeriod.decodeDelimited = function decodeDelimited(reader) {
+                                Period.decodeDelimited = function decodeDelimited(reader) {
                                     if (!(reader instanceof $Reader))
                                         reader = new $Reader(reader);
                                     return this.decode(reader, reader.uint32());
                                 };
     
                                 /**
-                                 * Verifies an OpeningHoursPeriod message.
+                                 * Verifies a Period message.
                                  * @function verify
-                                 * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod
+                                 * @memberof google.maps.places.v1.Place.OpeningHours.Period
                                  * @static
                                  * @param {Object.<string,*>} message Plain object to verify
                                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                                  */
-                                OpeningHoursPeriod.verify = function verify(message) {
+                                Period.verify = function verify(message) {
                                     if (typeof message !== "object" || message === null)
                                         return "object expected";
                                     if (message.open != null && message.hasOwnProperty("open")) {
-                                        var error = $root.google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint.verify(message.open);
+                                        var error = $root.google.maps.places.v1.Place.OpeningHours.Period.Point.verify(message.open);
                                         if (error)
                                             return "open." + error;
                                     }
                                     if (message.close != null && message.hasOwnProperty("close")) {
-                                        var error = $root.google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint.verify(message.close);
+                                        var error = $root.google.maps.places.v1.Place.OpeningHours.Period.Point.verify(message.close);
                                         if (error)
                                             return "close." + error;
                                     }
@@ -4305,40 +6742,40 @@
                                 };
     
                                 /**
-                                 * Creates an OpeningHoursPeriod message from a plain object. Also converts values to their respective internal types.
+                                 * Creates a Period message from a plain object. Also converts values to their respective internal types.
                                  * @function fromObject
-                                 * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod
+                                 * @memberof google.maps.places.v1.Place.OpeningHours.Period
                                  * @static
                                  * @param {Object.<string,*>} object Plain object
-                                 * @returns {google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod} OpeningHoursPeriod
+                                 * @returns {google.maps.places.v1.Place.OpeningHours.Period} Period
                                  */
-                                OpeningHoursPeriod.fromObject = function fromObject(object) {
-                                    if (object instanceof $root.google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod)
+                                Period.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.maps.places.v1.Place.OpeningHours.Period)
                                         return object;
-                                    var message = new $root.google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod();
+                                    var message = new $root.google.maps.places.v1.Place.OpeningHours.Period();
                                     if (object.open != null) {
                                         if (typeof object.open !== "object")
-                                            throw TypeError(".google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.open: object expected");
-                                        message.open = $root.google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint.fromObject(object.open);
+                                            throw TypeError(".google.maps.places.v1.Place.OpeningHours.Period.open: object expected");
+                                        message.open = $root.google.maps.places.v1.Place.OpeningHours.Period.Point.fromObject(object.open);
                                     }
                                     if (object.close != null) {
                                         if (typeof object.close !== "object")
-                                            throw TypeError(".google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.close: object expected");
-                                        message.close = $root.google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint.fromObject(object.close);
+                                            throw TypeError(".google.maps.places.v1.Place.OpeningHours.Period.close: object expected");
+                                        message.close = $root.google.maps.places.v1.Place.OpeningHours.Period.Point.fromObject(object.close);
                                     }
                                     return message;
                                 };
     
                                 /**
-                                 * Creates a plain object from an OpeningHoursPeriod message. Also converts values to other types if specified.
+                                 * Creates a plain object from a Period message. Also converts values to other types if specified.
                                  * @function toObject
-                                 * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod
+                                 * @memberof google.maps.places.v1.Place.OpeningHours.Period
                                  * @static
-                                 * @param {google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod} message OpeningHoursPeriod
+                                 * @param {google.maps.places.v1.Place.OpeningHours.Period} message Period
                                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                                  * @returns {Object.<string,*>} Plain object
                                  */
-                                OpeningHoursPeriod.toObject = function toObject(message, options) {
+                                Period.toObject = function toObject(message, options) {
                                     if (!options)
                                         options = {};
                                     var object = {};
@@ -4347,61 +6784,60 @@
                                         object.close = null;
                                     }
                                     if (message.open != null && message.hasOwnProperty("open"))
-                                        object.open = $root.google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint.toObject(message.open, options);
+                                        object.open = $root.google.maps.places.v1.Place.OpeningHours.Period.Point.toObject(message.open, options);
                                     if (message.close != null && message.hasOwnProperty("close"))
-                                        object.close = $root.google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint.toObject(message.close, options);
+                                        object.close = $root.google.maps.places.v1.Place.OpeningHours.Period.Point.toObject(message.close, options);
                                     return object;
                                 };
     
                                 /**
-                                 * Converts this OpeningHoursPeriod to JSON.
+                                 * Converts this Period to JSON.
                                  * @function toJSON
-                                 * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod
+                                 * @memberof google.maps.places.v1.Place.OpeningHours.Period
                                  * @instance
                                  * @returns {Object.<string,*>} JSON object
                                  */
-                                OpeningHoursPeriod.prototype.toJSON = function toJSON() {
+                                Period.prototype.toJSON = function toJSON() {
                                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                                 };
     
                                 /**
-                                 * Gets the default type url for OpeningHoursPeriod
+                                 * Gets the default type url for Period
                                  * @function getTypeUrl
-                                 * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod
+                                 * @memberof google.maps.places.v1.Place.OpeningHours.Period
                                  * @static
                                  * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                                  * @returns {string} The default type url
                                  */
-                                OpeningHoursPeriod.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                Period.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
                                     if (typeUrlPrefix === undefined) {
                                         typeUrlPrefix = "type.googleapis.com";
                                     }
-                                    return typeUrlPrefix + "/google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod";
+                                    return typeUrlPrefix + "/google.maps.places.v1.Place.OpeningHours.Period";
                                 };
     
-                                OpeningHoursPeriod.OpeningHoursPoint = (function() {
+                                Period.Point = (function() {
     
                                     /**
-                                     * Properties of an OpeningHoursPoint.
-                                     * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod
-                                     * @interface IOpeningHoursPoint
-                                     * @property {number|null} [day] OpeningHoursPoint day
-                                     * @property {number|null} [hour] OpeningHoursPoint hour
-                                     * @property {number|null} [minute] OpeningHoursPoint minute
-                                     * @property {string|null} [dateDeprecated] OpeningHoursPoint dateDeprecated
-                                     * @property {google.type.IDate|null} [date] OpeningHoursPoint date
-                                     * @property {boolean|null} [truncated] OpeningHoursPoint truncated
+                                     * Properties of a Point.
+                                     * @memberof google.maps.places.v1.Place.OpeningHours.Period
+                                     * @interface IPoint
+                                     * @property {number|null} [day] Point day
+                                     * @property {number|null} [hour] Point hour
+                                     * @property {number|null} [minute] Point minute
+                                     * @property {google.type.IDate|null} [date] Point date
+                                     * @property {boolean|null} [truncated] Point truncated
                                      */
     
                                     /**
-                                     * Constructs a new OpeningHoursPoint.
-                                     * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod
-                                     * @classdesc Represents an OpeningHoursPoint.
-                                     * @implements IOpeningHoursPoint
+                                     * Constructs a new Point.
+                                     * @memberof google.maps.places.v1.Place.OpeningHours.Period
+                                     * @classdesc Represents a Point.
+                                     * @implements IPoint
                                      * @constructor
-                                     * @param {google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.IOpeningHoursPoint=} [properties] Properties to set
+                                     * @param {google.maps.places.v1.Place.OpeningHours.Period.IPoint=} [properties] Properties to set
                                      */
-                                    function OpeningHoursPoint(properties) {
+                                    function Point(properties) {
                                         if (properties)
                                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                                 if (properties[keys[i]] != null)
@@ -4409,111 +6845,103 @@
                                     }
     
                                     /**
-                                     * OpeningHoursPoint day.
+                                     * Point day.
                                      * @member {number|null|undefined} day
-                                     * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint
+                                     * @memberof google.maps.places.v1.Place.OpeningHours.Period.Point
                                      * @instance
                                      */
-                                    OpeningHoursPoint.prototype.day = null;
+                                    Point.prototype.day = null;
     
                                     /**
-                                     * OpeningHoursPoint hour.
+                                     * Point hour.
                                      * @member {number|null|undefined} hour
-                                     * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint
+                                     * @memberof google.maps.places.v1.Place.OpeningHours.Period.Point
                                      * @instance
                                      */
-                                    OpeningHoursPoint.prototype.hour = null;
+                                    Point.prototype.hour = null;
     
                                     /**
-                                     * OpeningHoursPoint minute.
+                                     * Point minute.
                                      * @member {number|null|undefined} minute
-                                     * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint
+                                     * @memberof google.maps.places.v1.Place.OpeningHours.Period.Point
                                      * @instance
                                      */
-                                    OpeningHoursPoint.prototype.minute = null;
+                                    Point.prototype.minute = null;
     
                                     /**
-                                     * OpeningHoursPoint dateDeprecated.
-                                     * @member {string} dateDeprecated
-                                     * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint
-                                     * @instance
-                                     */
-                                    OpeningHoursPoint.prototype.dateDeprecated = "";
-    
-                                    /**
-                                     * OpeningHoursPoint date.
+                                     * Point date.
                                      * @member {google.type.IDate|null|undefined} date
-                                     * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint
+                                     * @memberof google.maps.places.v1.Place.OpeningHours.Period.Point
                                      * @instance
                                      */
-                                    OpeningHoursPoint.prototype.date = null;
+                                    Point.prototype.date = null;
     
                                     /**
-                                     * OpeningHoursPoint truncated.
+                                     * Point truncated.
                                      * @member {boolean} truncated
-                                     * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint
+                                     * @memberof google.maps.places.v1.Place.OpeningHours.Period.Point
                                      * @instance
                                      */
-                                    OpeningHoursPoint.prototype.truncated = false;
+                                    Point.prototype.truncated = false;
     
                                     // OneOf field names bound to virtual getters and setters
                                     var $oneOfFields;
     
                                     /**
-                                     * OpeningHoursPoint _day.
+                                     * Point _day.
                                      * @member {"day"|undefined} _day
-                                     * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint
+                                     * @memberof google.maps.places.v1.Place.OpeningHours.Period.Point
                                      * @instance
                                      */
-                                    Object.defineProperty(OpeningHoursPoint.prototype, "_day", {
+                                    Object.defineProperty(Point.prototype, "_day", {
                                         get: $util.oneOfGetter($oneOfFields = ["day"]),
                                         set: $util.oneOfSetter($oneOfFields)
                                     });
     
                                     /**
-                                     * OpeningHoursPoint _hour.
+                                     * Point _hour.
                                      * @member {"hour"|undefined} _hour
-                                     * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint
+                                     * @memberof google.maps.places.v1.Place.OpeningHours.Period.Point
                                      * @instance
                                      */
-                                    Object.defineProperty(OpeningHoursPoint.prototype, "_hour", {
+                                    Object.defineProperty(Point.prototype, "_hour", {
                                         get: $util.oneOfGetter($oneOfFields = ["hour"]),
                                         set: $util.oneOfSetter($oneOfFields)
                                     });
     
                                     /**
-                                     * OpeningHoursPoint _minute.
+                                     * Point _minute.
                                      * @member {"minute"|undefined} _minute
-                                     * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint
+                                     * @memberof google.maps.places.v1.Place.OpeningHours.Period.Point
                                      * @instance
                                      */
-                                    Object.defineProperty(OpeningHoursPoint.prototype, "_minute", {
+                                    Object.defineProperty(Point.prototype, "_minute", {
                                         get: $util.oneOfGetter($oneOfFields = ["minute"]),
                                         set: $util.oneOfSetter($oneOfFields)
                                     });
     
                                     /**
-                                     * Creates a new OpeningHoursPoint instance using the specified properties.
+                                     * Creates a new Point instance using the specified properties.
                                      * @function create
-                                     * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint
+                                     * @memberof google.maps.places.v1.Place.OpeningHours.Period.Point
                                      * @static
-                                     * @param {google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.IOpeningHoursPoint=} [properties] Properties to set
-                                     * @returns {google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint} OpeningHoursPoint instance
+                                     * @param {google.maps.places.v1.Place.OpeningHours.Period.IPoint=} [properties] Properties to set
+                                     * @returns {google.maps.places.v1.Place.OpeningHours.Period.Point} Point instance
                                      */
-                                    OpeningHoursPoint.create = function create(properties) {
-                                        return new OpeningHoursPoint(properties);
+                                    Point.create = function create(properties) {
+                                        return new Point(properties);
                                     };
     
                                     /**
-                                     * Encodes the specified OpeningHoursPoint message. Does not implicitly {@link google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint.verify|verify} messages.
+                                     * Encodes the specified Point message. Does not implicitly {@link google.maps.places.v1.Place.OpeningHours.Period.Point.verify|verify} messages.
                                      * @function encode
-                                     * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint
+                                     * @memberof google.maps.places.v1.Place.OpeningHours.Period.Point
                                      * @static
-                                     * @param {google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.IOpeningHoursPoint} message OpeningHoursPoint message or plain object to encode
+                                     * @param {google.maps.places.v1.Place.OpeningHours.Period.IPoint} message Point message or plain object to encode
                                      * @param {$protobuf.Writer} [writer] Writer to encode to
                                      * @returns {$protobuf.Writer} Writer
                                      */
-                                    OpeningHoursPoint.encode = function encode(message, writer) {
+                                    Point.encode = function encode(message, writer) {
                                         if (!writer)
                                             writer = $Writer.create();
                                         if (message.day != null && Object.hasOwnProperty.call(message, "day"))
@@ -4522,8 +6950,6 @@
                                             writer.uint32(/* id 2, wireType 0 =*/16).int32(message.hour);
                                         if (message.minute != null && Object.hasOwnProperty.call(message, "minute"))
                                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.minute);
-                                        if (message.dateDeprecated != null && Object.hasOwnProperty.call(message, "dateDeprecated"))
-                                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.dateDeprecated);
                                         if (message.truncated != null && Object.hasOwnProperty.call(message, "truncated"))
                                             writer.uint32(/* id 5, wireType 0 =*/40).bool(message.truncated);
                                         if (message.date != null && Object.hasOwnProperty.call(message, "date"))
@@ -4532,33 +6958,33 @@
                                     };
     
                                     /**
-                                     * Encodes the specified OpeningHoursPoint message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint.verify|verify} messages.
+                                     * Encodes the specified Point message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.OpeningHours.Period.Point.verify|verify} messages.
                                      * @function encodeDelimited
-                                     * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint
+                                     * @memberof google.maps.places.v1.Place.OpeningHours.Period.Point
                                      * @static
-                                     * @param {google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.IOpeningHoursPoint} message OpeningHoursPoint message or plain object to encode
+                                     * @param {google.maps.places.v1.Place.OpeningHours.Period.IPoint} message Point message or plain object to encode
                                      * @param {$protobuf.Writer} [writer] Writer to encode to
                                      * @returns {$protobuf.Writer} Writer
                                      */
-                                    OpeningHoursPoint.encodeDelimited = function encodeDelimited(message, writer) {
+                                    Point.encodeDelimited = function encodeDelimited(message, writer) {
                                         return this.encode(message, writer).ldelim();
                                     };
     
                                     /**
-                                     * Decodes an OpeningHoursPoint message from the specified reader or buffer.
+                                     * Decodes a Point message from the specified reader or buffer.
                                      * @function decode
-                                     * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint
+                                     * @memberof google.maps.places.v1.Place.OpeningHours.Period.Point
                                      * @static
                                      * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                                      * @param {number} [length] Message length if known beforehand
-                                     * @returns {google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint} OpeningHoursPoint
+                                     * @returns {google.maps.places.v1.Place.OpeningHours.Period.Point} Point
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    OpeningHoursPoint.decode = function decode(reader, length) {
+                                    Point.decode = function decode(reader, length) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
-                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint();
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.OpeningHours.Period.Point();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
                                             switch (tag >>> 3) {
@@ -4572,10 +6998,6 @@
                                                 }
                                             case 3: {
                                                     message.minute = reader.int32();
-                                                    break;
-                                                }
-                                            case 4: {
-                                                    message.dateDeprecated = reader.string();
                                                     break;
                                                 }
                                             case 6: {
@@ -4595,30 +7017,30 @@
                                     };
     
                                     /**
-                                     * Decodes an OpeningHoursPoint message from the specified reader or buffer, length delimited.
+                                     * Decodes a Point message from the specified reader or buffer, length delimited.
                                      * @function decodeDelimited
-                                     * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint
+                                     * @memberof google.maps.places.v1.Place.OpeningHours.Period.Point
                                      * @static
                                      * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                                     * @returns {google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint} OpeningHoursPoint
+                                     * @returns {google.maps.places.v1.Place.OpeningHours.Period.Point} Point
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    OpeningHoursPoint.decodeDelimited = function decodeDelimited(reader) {
+                                    Point.decodeDelimited = function decodeDelimited(reader) {
                                         if (!(reader instanceof $Reader))
                                             reader = new $Reader(reader);
                                         return this.decode(reader, reader.uint32());
                                     };
     
                                     /**
-                                     * Verifies an OpeningHoursPoint message.
+                                     * Verifies a Point message.
                                      * @function verify
-                                     * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint
+                                     * @memberof google.maps.places.v1.Place.OpeningHours.Period.Point
                                      * @static
                                      * @param {Object.<string,*>} message Plain object to verify
                                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                                      */
-                                    OpeningHoursPoint.verify = function verify(message) {
+                                    Point.verify = function verify(message) {
                                         if (typeof message !== "object" || message === null)
                                             return "object expected";
                                         var properties = {};
@@ -4637,9 +7059,6 @@
                                             if (!$util.isInteger(message.minute))
                                                 return "minute: integer expected";
                                         }
-                                        if (message.dateDeprecated != null && message.hasOwnProperty("dateDeprecated"))
-                                            if (!$util.isString(message.dateDeprecated))
-                                                return "dateDeprecated: string expected";
                                         if (message.date != null && message.hasOwnProperty("date")) {
                                             var error = $root.google.type.Date.verify(message.date);
                                             if (error)
@@ -4652,28 +7071,26 @@
                                     };
     
                                     /**
-                                     * Creates an OpeningHoursPoint message from a plain object. Also converts values to their respective internal types.
+                                     * Creates a Point message from a plain object. Also converts values to their respective internal types.
                                      * @function fromObject
-                                     * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint
+                                     * @memberof google.maps.places.v1.Place.OpeningHours.Period.Point
                                      * @static
                                      * @param {Object.<string,*>} object Plain object
-                                     * @returns {google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint} OpeningHoursPoint
+                                     * @returns {google.maps.places.v1.Place.OpeningHours.Period.Point} Point
                                      */
-                                    OpeningHoursPoint.fromObject = function fromObject(object) {
-                                        if (object instanceof $root.google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint)
+                                    Point.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.maps.places.v1.Place.OpeningHours.Period.Point)
                                             return object;
-                                        var message = new $root.google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint();
+                                        var message = new $root.google.maps.places.v1.Place.OpeningHours.Period.Point();
                                         if (object.day != null)
                                             message.day = object.day | 0;
                                         if (object.hour != null)
                                             message.hour = object.hour | 0;
                                         if (object.minute != null)
                                             message.minute = object.minute | 0;
-                                        if (object.dateDeprecated != null)
-                                            message.dateDeprecated = String(object.dateDeprecated);
                                         if (object.date != null) {
                                             if (typeof object.date !== "object")
-                                                throw TypeError(".google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint.date: object expected");
+                                                throw TypeError(".google.maps.places.v1.Place.OpeningHours.Period.Point.date: object expected");
                                             message.date = $root.google.type.Date.fromObject(object.date);
                                         }
                                         if (object.truncated != null)
@@ -4682,20 +7099,19 @@
                                     };
     
                                     /**
-                                     * Creates a plain object from an OpeningHoursPoint message. Also converts values to other types if specified.
+                                     * Creates a plain object from a Point message. Also converts values to other types if specified.
                                      * @function toObject
-                                     * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint
+                                     * @memberof google.maps.places.v1.Place.OpeningHours.Period.Point
                                      * @static
-                                     * @param {google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint} message OpeningHoursPoint
+                                     * @param {google.maps.places.v1.Place.OpeningHours.Period.Point} message Point
                                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                                      * @returns {Object.<string,*>} Plain object
                                      */
-                                    OpeningHoursPoint.toObject = function toObject(message, options) {
+                                    Point.toObject = function toObject(message, options) {
                                         if (!options)
                                             options = {};
                                         var object = {};
                                         if (options.defaults) {
-                                            object.dateDeprecated = "";
                                             object.truncated = false;
                                             object.date = null;
                                         }
@@ -4714,8 +7130,6 @@
                                             if (options.oneofs)
                                                 object._minute = "minute";
                                         }
-                                        if (message.dateDeprecated != null && message.hasOwnProperty("dateDeprecated"))
-                                            object.dateDeprecated = message.dateDeprecated;
                                         if (message.truncated != null && message.hasOwnProperty("truncated"))
                                             object.truncated = message.truncated;
                                         if (message.date != null && message.hasOwnProperty("date"))
@@ -4724,42 +7138,42 @@
                                     };
     
                                     /**
-                                     * Converts this OpeningHoursPoint to JSON.
+                                     * Converts this Point to JSON.
                                      * @function toJSON
-                                     * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint
+                                     * @memberof google.maps.places.v1.Place.OpeningHours.Period.Point
                                      * @instance
                                      * @returns {Object.<string,*>} JSON object
                                      */
-                                    OpeningHoursPoint.prototype.toJSON = function toJSON() {
+                                    Point.prototype.toJSON = function toJSON() {
                                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                                     };
     
                                     /**
-                                     * Gets the default type url for OpeningHoursPoint
+                                     * Gets the default type url for Point
                                      * @function getTypeUrl
-                                     * @memberof google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint
+                                     * @memberof google.maps.places.v1.Place.OpeningHours.Period.Point
                                      * @static
                                      * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                                      * @returns {string} The default type url
                                      */
-                                    OpeningHoursPoint.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    Point.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
                                         if (typeUrlPrefix === undefined) {
                                             typeUrlPrefix = "type.googleapis.com";
                                         }
-                                        return typeUrlPrefix + "/google.maps.places.v1.Place.OpeningHours.OpeningHoursPeriod.OpeningHoursPoint";
+                                        return typeUrlPrefix + "/google.maps.places.v1.Place.OpeningHours.Period.Point";
                                     };
     
-                                    return OpeningHoursPoint;
+                                    return Point;
                                 })();
     
-                                return OpeningHoursPeriod;
+                                return Period;
                             })();
     
                             /**
-                             * SecondaryHourType enum.
-                             * @name google.maps.places.v1.Place.OpeningHours.SecondaryHourType
+                             * SecondaryHoursType enum.
+                             * @name google.maps.places.v1.Place.OpeningHours.SecondaryHoursType
                              * @enum {number}
-                             * @property {number} SECONDARY_HOUR_TYPE_UNSPECIFIED=0 SECONDARY_HOUR_TYPE_UNSPECIFIED value
+                             * @property {number} SECONDARY_HOURS_TYPE_UNSPECIFIED=0 SECONDARY_HOURS_TYPE_UNSPECIFIED value
                              * @property {number} DRIVE_THROUGH=1 DRIVE_THROUGH value
                              * @property {number} HAPPY_HOUR=2 HAPPY_HOUR value
                              * @property {number} DELIVERY=3 DELIVERY value
@@ -4774,9 +7188,9 @@
                              * @property {number} SENIOR_HOURS=12 SENIOR_HOURS value
                              * @property {number} ONLINE_SERVICE_HOURS=13 ONLINE_SERVICE_HOURS value
                              */
-                            OpeningHours.SecondaryHourType = (function() {
+                            OpeningHours.SecondaryHoursType = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
-                                values[valuesById[0] = "SECONDARY_HOUR_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[0] = "SECONDARY_HOURS_TYPE_UNSPECIFIED"] = 0;
                                 values[valuesById[1] = "DRIVE_THROUGH"] = 1;
                                 values[valuesById[2] = "HAPPY_HOUR"] = 2;
                                 values[valuesById[3] = "DELIVERY"] = 3;
@@ -5249,24 +7663,27 @@
                             return Attribution;
                         })();
     
-                        Place.EditorialSummary = (function() {
+                        Place.PaymentOptions = (function() {
     
                             /**
-                             * Properties of an EditorialSummary.
+                             * Properties of a PaymentOptions.
                              * @memberof google.maps.places.v1.Place
-                             * @interface IEditorialSummary
-                             * @property {google.type.ILocalizedText|null} [overview] EditorialSummary overview
+                             * @interface IPaymentOptions
+                             * @property {boolean|null} [acceptsCreditCards] PaymentOptions acceptsCreditCards
+                             * @property {boolean|null} [acceptsDebitCards] PaymentOptions acceptsDebitCards
+                             * @property {boolean|null} [acceptsCashOnly] PaymentOptions acceptsCashOnly
+                             * @property {boolean|null} [acceptsNfc] PaymentOptions acceptsNfc
                              */
     
                             /**
-                             * Constructs a new EditorialSummary.
+                             * Constructs a new PaymentOptions.
                              * @memberof google.maps.places.v1.Place
-                             * @classdesc Represents an EditorialSummary.
-                             * @implements IEditorialSummary
+                             * @classdesc Represents a PaymentOptions.
+                             * @implements IPaymentOptions
                              * @constructor
-                             * @param {google.maps.places.v1.Place.IEditorialSummary=} [properties] Properties to set
+                             * @param {google.maps.places.v1.Place.IPaymentOptions=} [properties] Properties to set
                              */
-                            function EditorialSummary(properties) {
+                            function PaymentOptions(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -5274,75 +7691,164 @@
                             }
     
                             /**
-                             * EditorialSummary overview.
-                             * @member {google.type.ILocalizedText|null|undefined} overview
-                             * @memberof google.maps.places.v1.Place.EditorialSummary
+                             * PaymentOptions acceptsCreditCards.
+                             * @member {boolean|null|undefined} acceptsCreditCards
+                             * @memberof google.maps.places.v1.Place.PaymentOptions
                              * @instance
                              */
-                            EditorialSummary.prototype.overview = null;
+                            PaymentOptions.prototype.acceptsCreditCards = null;
     
                             /**
-                             * Creates a new EditorialSummary instance using the specified properties.
-                             * @function create
-                             * @memberof google.maps.places.v1.Place.EditorialSummary
-                             * @static
-                             * @param {google.maps.places.v1.Place.IEditorialSummary=} [properties] Properties to set
-                             * @returns {google.maps.places.v1.Place.EditorialSummary} EditorialSummary instance
+                             * PaymentOptions acceptsDebitCards.
+                             * @member {boolean|null|undefined} acceptsDebitCards
+                             * @memberof google.maps.places.v1.Place.PaymentOptions
+                             * @instance
                              */
-                            EditorialSummary.create = function create(properties) {
-                                return new EditorialSummary(properties);
+                            PaymentOptions.prototype.acceptsDebitCards = null;
+    
+                            /**
+                             * PaymentOptions acceptsCashOnly.
+                             * @member {boolean|null|undefined} acceptsCashOnly
+                             * @memberof google.maps.places.v1.Place.PaymentOptions
+                             * @instance
+                             */
+                            PaymentOptions.prototype.acceptsCashOnly = null;
+    
+                            /**
+                             * PaymentOptions acceptsNfc.
+                             * @member {boolean|null|undefined} acceptsNfc
+                             * @memberof google.maps.places.v1.Place.PaymentOptions
+                             * @instance
+                             */
+                            PaymentOptions.prototype.acceptsNfc = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * PaymentOptions _acceptsCreditCards.
+                             * @member {"acceptsCreditCards"|undefined} _acceptsCreditCards
+                             * @memberof google.maps.places.v1.Place.PaymentOptions
+                             * @instance
+                             */
+                            Object.defineProperty(PaymentOptions.prototype, "_acceptsCreditCards", {
+                                get: $util.oneOfGetter($oneOfFields = ["acceptsCreditCards"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * PaymentOptions _acceptsDebitCards.
+                             * @member {"acceptsDebitCards"|undefined} _acceptsDebitCards
+                             * @memberof google.maps.places.v1.Place.PaymentOptions
+                             * @instance
+                             */
+                            Object.defineProperty(PaymentOptions.prototype, "_acceptsDebitCards", {
+                                get: $util.oneOfGetter($oneOfFields = ["acceptsDebitCards"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * PaymentOptions _acceptsCashOnly.
+                             * @member {"acceptsCashOnly"|undefined} _acceptsCashOnly
+                             * @memberof google.maps.places.v1.Place.PaymentOptions
+                             * @instance
+                             */
+                            Object.defineProperty(PaymentOptions.prototype, "_acceptsCashOnly", {
+                                get: $util.oneOfGetter($oneOfFields = ["acceptsCashOnly"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * PaymentOptions _acceptsNfc.
+                             * @member {"acceptsNfc"|undefined} _acceptsNfc
+                             * @memberof google.maps.places.v1.Place.PaymentOptions
+                             * @instance
+                             */
+                            Object.defineProperty(PaymentOptions.prototype, "_acceptsNfc", {
+                                get: $util.oneOfGetter($oneOfFields = ["acceptsNfc"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new PaymentOptions instance using the specified properties.
+                             * @function create
+                             * @memberof google.maps.places.v1.Place.PaymentOptions
+                             * @static
+                             * @param {google.maps.places.v1.Place.IPaymentOptions=} [properties] Properties to set
+                             * @returns {google.maps.places.v1.Place.PaymentOptions} PaymentOptions instance
+                             */
+                            PaymentOptions.create = function create(properties) {
+                                return new PaymentOptions(properties);
                             };
     
                             /**
-                             * Encodes the specified EditorialSummary message. Does not implicitly {@link google.maps.places.v1.Place.EditorialSummary.verify|verify} messages.
+                             * Encodes the specified PaymentOptions message. Does not implicitly {@link google.maps.places.v1.Place.PaymentOptions.verify|verify} messages.
                              * @function encode
-                             * @memberof google.maps.places.v1.Place.EditorialSummary
+                             * @memberof google.maps.places.v1.Place.PaymentOptions
                              * @static
-                             * @param {google.maps.places.v1.Place.IEditorialSummary} message EditorialSummary message or plain object to encode
+                             * @param {google.maps.places.v1.Place.IPaymentOptions} message PaymentOptions message or plain object to encode
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            EditorialSummary.encode = function encode(message, writer) {
+                            PaymentOptions.encode = function encode(message, writer) {
                                 if (!writer)
                                     writer = $Writer.create();
-                                if (message.overview != null && Object.hasOwnProperty.call(message, "overview"))
-                                    $root.google.type.LocalizedText.encode(message.overview, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.acceptsCreditCards != null && Object.hasOwnProperty.call(message, "acceptsCreditCards"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.acceptsCreditCards);
+                                if (message.acceptsDebitCards != null && Object.hasOwnProperty.call(message, "acceptsDebitCards"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.acceptsDebitCards);
+                                if (message.acceptsCashOnly != null && Object.hasOwnProperty.call(message, "acceptsCashOnly"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.acceptsCashOnly);
+                                if (message.acceptsNfc != null && Object.hasOwnProperty.call(message, "acceptsNfc"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.acceptsNfc);
                                 return writer;
                             };
     
                             /**
-                             * Encodes the specified EditorialSummary message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.EditorialSummary.verify|verify} messages.
+                             * Encodes the specified PaymentOptions message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.PaymentOptions.verify|verify} messages.
                              * @function encodeDelimited
-                             * @memberof google.maps.places.v1.Place.EditorialSummary
+                             * @memberof google.maps.places.v1.Place.PaymentOptions
                              * @static
-                             * @param {google.maps.places.v1.Place.IEditorialSummary} message EditorialSummary message or plain object to encode
+                             * @param {google.maps.places.v1.Place.IPaymentOptions} message PaymentOptions message or plain object to encode
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            EditorialSummary.encodeDelimited = function encodeDelimited(message, writer) {
+                            PaymentOptions.encodeDelimited = function encodeDelimited(message, writer) {
                                 return this.encode(message, writer).ldelim();
                             };
     
                             /**
-                             * Decodes an EditorialSummary message from the specified reader or buffer.
+                             * Decodes a PaymentOptions message from the specified reader or buffer.
                              * @function decode
-                             * @memberof google.maps.places.v1.Place.EditorialSummary
+                             * @memberof google.maps.places.v1.Place.PaymentOptions
                              * @static
                              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                              * @param {number} [length] Message length if known beforehand
-                             * @returns {google.maps.places.v1.Place.EditorialSummary} EditorialSummary
+                             * @returns {google.maps.places.v1.Place.PaymentOptions} PaymentOptions
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            EditorialSummary.decode = function decode(reader, length) {
+                            PaymentOptions.decode = function decode(reader, length) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.EditorialSummary();
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.PaymentOptions();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
                                     case 1: {
-                                            message.overview = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                            message.acceptsCreditCards = reader.bool();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.acceptsDebitCards = reader.bool();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.acceptsCashOnly = reader.bool();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.acceptsNfc = reader.bool();
                                             break;
                                         }
                                     default:
@@ -5354,107 +7860,1039 @@
                             };
     
                             /**
-                             * Decodes an EditorialSummary message from the specified reader or buffer, length delimited.
+                             * Decodes a PaymentOptions message from the specified reader or buffer, length delimited.
                              * @function decodeDelimited
-                             * @memberof google.maps.places.v1.Place.EditorialSummary
+                             * @memberof google.maps.places.v1.Place.PaymentOptions
                              * @static
                              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.maps.places.v1.Place.EditorialSummary} EditorialSummary
+                             * @returns {google.maps.places.v1.Place.PaymentOptions} PaymentOptions
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            EditorialSummary.decodeDelimited = function decodeDelimited(reader) {
+                            PaymentOptions.decodeDelimited = function decodeDelimited(reader) {
                                 if (!(reader instanceof $Reader))
                                     reader = new $Reader(reader);
                                 return this.decode(reader, reader.uint32());
                             };
     
                             /**
-                             * Verifies an EditorialSummary message.
+                             * Verifies a PaymentOptions message.
                              * @function verify
-                             * @memberof google.maps.places.v1.Place.EditorialSummary
+                             * @memberof google.maps.places.v1.Place.PaymentOptions
                              * @static
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            EditorialSummary.verify = function verify(message) {
+                            PaymentOptions.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
-                                if (message.overview != null && message.hasOwnProperty("overview")) {
-                                    var error = $root.google.type.LocalizedText.verify(message.overview);
-                                    if (error)
-                                        return "overview." + error;
+                                var properties = {};
+                                if (message.acceptsCreditCards != null && message.hasOwnProperty("acceptsCreditCards")) {
+                                    properties._acceptsCreditCards = 1;
+                                    if (typeof message.acceptsCreditCards !== "boolean")
+                                        return "acceptsCreditCards: boolean expected";
+                                }
+                                if (message.acceptsDebitCards != null && message.hasOwnProperty("acceptsDebitCards")) {
+                                    properties._acceptsDebitCards = 1;
+                                    if (typeof message.acceptsDebitCards !== "boolean")
+                                        return "acceptsDebitCards: boolean expected";
+                                }
+                                if (message.acceptsCashOnly != null && message.hasOwnProperty("acceptsCashOnly")) {
+                                    properties._acceptsCashOnly = 1;
+                                    if (typeof message.acceptsCashOnly !== "boolean")
+                                        return "acceptsCashOnly: boolean expected";
+                                }
+                                if (message.acceptsNfc != null && message.hasOwnProperty("acceptsNfc")) {
+                                    properties._acceptsNfc = 1;
+                                    if (typeof message.acceptsNfc !== "boolean")
+                                        return "acceptsNfc: boolean expected";
                                 }
                                 return null;
                             };
     
                             /**
-                             * Creates an EditorialSummary message from a plain object. Also converts values to their respective internal types.
+                             * Creates a PaymentOptions message from a plain object. Also converts values to their respective internal types.
                              * @function fromObject
-                             * @memberof google.maps.places.v1.Place.EditorialSummary
+                             * @memberof google.maps.places.v1.Place.PaymentOptions
                              * @static
                              * @param {Object.<string,*>} object Plain object
-                             * @returns {google.maps.places.v1.Place.EditorialSummary} EditorialSummary
+                             * @returns {google.maps.places.v1.Place.PaymentOptions} PaymentOptions
                              */
-                            EditorialSummary.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.maps.places.v1.Place.EditorialSummary)
+                            PaymentOptions.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.maps.places.v1.Place.PaymentOptions)
                                     return object;
-                                var message = new $root.google.maps.places.v1.Place.EditorialSummary();
-                                if (object.overview != null) {
-                                    if (typeof object.overview !== "object")
-                                        throw TypeError(".google.maps.places.v1.Place.EditorialSummary.overview: object expected");
-                                    message.overview = $root.google.type.LocalizedText.fromObject(object.overview);
+                                var message = new $root.google.maps.places.v1.Place.PaymentOptions();
+                                if (object.acceptsCreditCards != null)
+                                    message.acceptsCreditCards = Boolean(object.acceptsCreditCards);
+                                if (object.acceptsDebitCards != null)
+                                    message.acceptsDebitCards = Boolean(object.acceptsDebitCards);
+                                if (object.acceptsCashOnly != null)
+                                    message.acceptsCashOnly = Boolean(object.acceptsCashOnly);
+                                if (object.acceptsNfc != null)
+                                    message.acceptsNfc = Boolean(object.acceptsNfc);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PaymentOptions message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.maps.places.v1.Place.PaymentOptions
+                             * @static
+                             * @param {google.maps.places.v1.Place.PaymentOptions} message PaymentOptions
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PaymentOptions.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.acceptsCreditCards != null && message.hasOwnProperty("acceptsCreditCards")) {
+                                    object.acceptsCreditCards = message.acceptsCreditCards;
+                                    if (options.oneofs)
+                                        object._acceptsCreditCards = "acceptsCreditCards";
+                                }
+                                if (message.acceptsDebitCards != null && message.hasOwnProperty("acceptsDebitCards")) {
+                                    object.acceptsDebitCards = message.acceptsDebitCards;
+                                    if (options.oneofs)
+                                        object._acceptsDebitCards = "acceptsDebitCards";
+                                }
+                                if (message.acceptsCashOnly != null && message.hasOwnProperty("acceptsCashOnly")) {
+                                    object.acceptsCashOnly = message.acceptsCashOnly;
+                                    if (options.oneofs)
+                                        object._acceptsCashOnly = "acceptsCashOnly";
+                                }
+                                if (message.acceptsNfc != null && message.hasOwnProperty("acceptsNfc")) {
+                                    object.acceptsNfc = message.acceptsNfc;
+                                    if (options.oneofs)
+                                        object._acceptsNfc = "acceptsNfc";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PaymentOptions to JSON.
+                             * @function toJSON
+                             * @memberof google.maps.places.v1.Place.PaymentOptions
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PaymentOptions.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PaymentOptions
+                             * @function getTypeUrl
+                             * @memberof google.maps.places.v1.Place.PaymentOptions
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PaymentOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.maps.places.v1.Place.PaymentOptions";
+                            };
+    
+                            return PaymentOptions;
+                        })();
+    
+                        Place.ParkingOptions = (function() {
+    
+                            /**
+                             * Properties of a ParkingOptions.
+                             * @memberof google.maps.places.v1.Place
+                             * @interface IParkingOptions
+                             * @property {boolean|null} [freeParkingLot] ParkingOptions freeParkingLot
+                             * @property {boolean|null} [paidParkingLot] ParkingOptions paidParkingLot
+                             * @property {boolean|null} [freeStreetParking] ParkingOptions freeStreetParking
+                             * @property {boolean|null} [paidStreetParking] ParkingOptions paidStreetParking
+                             * @property {boolean|null} [valetParking] ParkingOptions valetParking
+                             * @property {boolean|null} [freeGarageParking] ParkingOptions freeGarageParking
+                             * @property {boolean|null} [paidGarageParking] ParkingOptions paidGarageParking
+                             */
+    
+                            /**
+                             * Constructs a new ParkingOptions.
+                             * @memberof google.maps.places.v1.Place
+                             * @classdesc Represents a ParkingOptions.
+                             * @implements IParkingOptions
+                             * @constructor
+                             * @param {google.maps.places.v1.Place.IParkingOptions=} [properties] Properties to set
+                             */
+                            function ParkingOptions(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ParkingOptions freeParkingLot.
+                             * @member {boolean|null|undefined} freeParkingLot
+                             * @memberof google.maps.places.v1.Place.ParkingOptions
+                             * @instance
+                             */
+                            ParkingOptions.prototype.freeParkingLot = null;
+    
+                            /**
+                             * ParkingOptions paidParkingLot.
+                             * @member {boolean|null|undefined} paidParkingLot
+                             * @memberof google.maps.places.v1.Place.ParkingOptions
+                             * @instance
+                             */
+                            ParkingOptions.prototype.paidParkingLot = null;
+    
+                            /**
+                             * ParkingOptions freeStreetParking.
+                             * @member {boolean|null|undefined} freeStreetParking
+                             * @memberof google.maps.places.v1.Place.ParkingOptions
+                             * @instance
+                             */
+                            ParkingOptions.prototype.freeStreetParking = null;
+    
+                            /**
+                             * ParkingOptions paidStreetParking.
+                             * @member {boolean|null|undefined} paidStreetParking
+                             * @memberof google.maps.places.v1.Place.ParkingOptions
+                             * @instance
+                             */
+                            ParkingOptions.prototype.paidStreetParking = null;
+    
+                            /**
+                             * ParkingOptions valetParking.
+                             * @member {boolean|null|undefined} valetParking
+                             * @memberof google.maps.places.v1.Place.ParkingOptions
+                             * @instance
+                             */
+                            ParkingOptions.prototype.valetParking = null;
+    
+                            /**
+                             * ParkingOptions freeGarageParking.
+                             * @member {boolean|null|undefined} freeGarageParking
+                             * @memberof google.maps.places.v1.Place.ParkingOptions
+                             * @instance
+                             */
+                            ParkingOptions.prototype.freeGarageParking = null;
+    
+                            /**
+                             * ParkingOptions paidGarageParking.
+                             * @member {boolean|null|undefined} paidGarageParking
+                             * @memberof google.maps.places.v1.Place.ParkingOptions
+                             * @instance
+                             */
+                            ParkingOptions.prototype.paidGarageParking = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * ParkingOptions _freeParkingLot.
+                             * @member {"freeParkingLot"|undefined} _freeParkingLot
+                             * @memberof google.maps.places.v1.Place.ParkingOptions
+                             * @instance
+                             */
+                            Object.defineProperty(ParkingOptions.prototype, "_freeParkingLot", {
+                                get: $util.oneOfGetter($oneOfFields = ["freeParkingLot"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * ParkingOptions _paidParkingLot.
+                             * @member {"paidParkingLot"|undefined} _paidParkingLot
+                             * @memberof google.maps.places.v1.Place.ParkingOptions
+                             * @instance
+                             */
+                            Object.defineProperty(ParkingOptions.prototype, "_paidParkingLot", {
+                                get: $util.oneOfGetter($oneOfFields = ["paidParkingLot"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * ParkingOptions _freeStreetParking.
+                             * @member {"freeStreetParking"|undefined} _freeStreetParking
+                             * @memberof google.maps.places.v1.Place.ParkingOptions
+                             * @instance
+                             */
+                            Object.defineProperty(ParkingOptions.prototype, "_freeStreetParking", {
+                                get: $util.oneOfGetter($oneOfFields = ["freeStreetParking"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * ParkingOptions _paidStreetParking.
+                             * @member {"paidStreetParking"|undefined} _paidStreetParking
+                             * @memberof google.maps.places.v1.Place.ParkingOptions
+                             * @instance
+                             */
+                            Object.defineProperty(ParkingOptions.prototype, "_paidStreetParking", {
+                                get: $util.oneOfGetter($oneOfFields = ["paidStreetParking"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * ParkingOptions _valetParking.
+                             * @member {"valetParking"|undefined} _valetParking
+                             * @memberof google.maps.places.v1.Place.ParkingOptions
+                             * @instance
+                             */
+                            Object.defineProperty(ParkingOptions.prototype, "_valetParking", {
+                                get: $util.oneOfGetter($oneOfFields = ["valetParking"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * ParkingOptions _freeGarageParking.
+                             * @member {"freeGarageParking"|undefined} _freeGarageParking
+                             * @memberof google.maps.places.v1.Place.ParkingOptions
+                             * @instance
+                             */
+                            Object.defineProperty(ParkingOptions.prototype, "_freeGarageParking", {
+                                get: $util.oneOfGetter($oneOfFields = ["freeGarageParking"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * ParkingOptions _paidGarageParking.
+                             * @member {"paidGarageParking"|undefined} _paidGarageParking
+                             * @memberof google.maps.places.v1.Place.ParkingOptions
+                             * @instance
+                             */
+                            Object.defineProperty(ParkingOptions.prototype, "_paidGarageParking", {
+                                get: $util.oneOfGetter($oneOfFields = ["paidGarageParking"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new ParkingOptions instance using the specified properties.
+                             * @function create
+                             * @memberof google.maps.places.v1.Place.ParkingOptions
+                             * @static
+                             * @param {google.maps.places.v1.Place.IParkingOptions=} [properties] Properties to set
+                             * @returns {google.maps.places.v1.Place.ParkingOptions} ParkingOptions instance
+                             */
+                            ParkingOptions.create = function create(properties) {
+                                return new ParkingOptions(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ParkingOptions message. Does not implicitly {@link google.maps.places.v1.Place.ParkingOptions.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.maps.places.v1.Place.ParkingOptions
+                             * @static
+                             * @param {google.maps.places.v1.Place.IParkingOptions} message ParkingOptions message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ParkingOptions.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.freeParkingLot != null && Object.hasOwnProperty.call(message, "freeParkingLot"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.freeParkingLot);
+                                if (message.paidParkingLot != null && Object.hasOwnProperty.call(message, "paidParkingLot"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.paidParkingLot);
+                                if (message.freeStreetParking != null && Object.hasOwnProperty.call(message, "freeStreetParking"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.freeStreetParking);
+                                if (message.paidStreetParking != null && Object.hasOwnProperty.call(message, "paidStreetParking"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.paidStreetParking);
+                                if (message.valetParking != null && Object.hasOwnProperty.call(message, "valetParking"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).bool(message.valetParking);
+                                if (message.freeGarageParking != null && Object.hasOwnProperty.call(message, "freeGarageParking"))
+                                    writer.uint32(/* id 6, wireType 0 =*/48).bool(message.freeGarageParking);
+                                if (message.paidGarageParking != null && Object.hasOwnProperty.call(message, "paidGarageParking"))
+                                    writer.uint32(/* id 7, wireType 0 =*/56).bool(message.paidGarageParking);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ParkingOptions message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.ParkingOptions.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.maps.places.v1.Place.ParkingOptions
+                             * @static
+                             * @param {google.maps.places.v1.Place.IParkingOptions} message ParkingOptions message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ParkingOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ParkingOptions message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.maps.places.v1.Place.ParkingOptions
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.maps.places.v1.Place.ParkingOptions} ParkingOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ParkingOptions.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.ParkingOptions();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.freeParkingLot = reader.bool();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.paidParkingLot = reader.bool();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.freeStreetParking = reader.bool();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.paidStreetParking = reader.bool();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.valetParking = reader.bool();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.freeGarageParking = reader.bool();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.paidGarageParking = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
                                 }
                                 return message;
                             };
     
                             /**
-                             * Creates a plain object from an EditorialSummary message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.maps.places.v1.Place.EditorialSummary
+                             * Decodes a ParkingOptions message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.maps.places.v1.Place.ParkingOptions
                              * @static
-                             * @param {google.maps.places.v1.Place.EditorialSummary} message EditorialSummary
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.maps.places.v1.Place.ParkingOptions} ParkingOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ParkingOptions.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ParkingOptions message.
+                             * @function verify
+                             * @memberof google.maps.places.v1.Place.ParkingOptions
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ParkingOptions.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.freeParkingLot != null && message.hasOwnProperty("freeParkingLot")) {
+                                    properties._freeParkingLot = 1;
+                                    if (typeof message.freeParkingLot !== "boolean")
+                                        return "freeParkingLot: boolean expected";
+                                }
+                                if (message.paidParkingLot != null && message.hasOwnProperty("paidParkingLot")) {
+                                    properties._paidParkingLot = 1;
+                                    if (typeof message.paidParkingLot !== "boolean")
+                                        return "paidParkingLot: boolean expected";
+                                }
+                                if (message.freeStreetParking != null && message.hasOwnProperty("freeStreetParking")) {
+                                    properties._freeStreetParking = 1;
+                                    if (typeof message.freeStreetParking !== "boolean")
+                                        return "freeStreetParking: boolean expected";
+                                }
+                                if (message.paidStreetParking != null && message.hasOwnProperty("paidStreetParking")) {
+                                    properties._paidStreetParking = 1;
+                                    if (typeof message.paidStreetParking !== "boolean")
+                                        return "paidStreetParking: boolean expected";
+                                }
+                                if (message.valetParking != null && message.hasOwnProperty("valetParking")) {
+                                    properties._valetParking = 1;
+                                    if (typeof message.valetParking !== "boolean")
+                                        return "valetParking: boolean expected";
+                                }
+                                if (message.freeGarageParking != null && message.hasOwnProperty("freeGarageParking")) {
+                                    properties._freeGarageParking = 1;
+                                    if (typeof message.freeGarageParking !== "boolean")
+                                        return "freeGarageParking: boolean expected";
+                                }
+                                if (message.paidGarageParking != null && message.hasOwnProperty("paidGarageParking")) {
+                                    properties._paidGarageParking = 1;
+                                    if (typeof message.paidGarageParking !== "boolean")
+                                        return "paidGarageParking: boolean expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ParkingOptions message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.maps.places.v1.Place.ParkingOptions
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.maps.places.v1.Place.ParkingOptions} ParkingOptions
+                             */
+                            ParkingOptions.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.maps.places.v1.Place.ParkingOptions)
+                                    return object;
+                                var message = new $root.google.maps.places.v1.Place.ParkingOptions();
+                                if (object.freeParkingLot != null)
+                                    message.freeParkingLot = Boolean(object.freeParkingLot);
+                                if (object.paidParkingLot != null)
+                                    message.paidParkingLot = Boolean(object.paidParkingLot);
+                                if (object.freeStreetParking != null)
+                                    message.freeStreetParking = Boolean(object.freeStreetParking);
+                                if (object.paidStreetParking != null)
+                                    message.paidStreetParking = Boolean(object.paidStreetParking);
+                                if (object.valetParking != null)
+                                    message.valetParking = Boolean(object.valetParking);
+                                if (object.freeGarageParking != null)
+                                    message.freeGarageParking = Boolean(object.freeGarageParking);
+                                if (object.paidGarageParking != null)
+                                    message.paidGarageParking = Boolean(object.paidGarageParking);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ParkingOptions message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.maps.places.v1.Place.ParkingOptions
+                             * @static
+                             * @param {google.maps.places.v1.Place.ParkingOptions} message ParkingOptions
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            EditorialSummary.toObject = function toObject(message, options) {
+                            ParkingOptions.toObject = function toObject(message, options) {
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults)
-                                    object.overview = null;
-                                if (message.overview != null && message.hasOwnProperty("overview"))
-                                    object.overview = $root.google.type.LocalizedText.toObject(message.overview, options);
+                                if (message.freeParkingLot != null && message.hasOwnProperty("freeParkingLot")) {
+                                    object.freeParkingLot = message.freeParkingLot;
+                                    if (options.oneofs)
+                                        object._freeParkingLot = "freeParkingLot";
+                                }
+                                if (message.paidParkingLot != null && message.hasOwnProperty("paidParkingLot")) {
+                                    object.paidParkingLot = message.paidParkingLot;
+                                    if (options.oneofs)
+                                        object._paidParkingLot = "paidParkingLot";
+                                }
+                                if (message.freeStreetParking != null && message.hasOwnProperty("freeStreetParking")) {
+                                    object.freeStreetParking = message.freeStreetParking;
+                                    if (options.oneofs)
+                                        object._freeStreetParking = "freeStreetParking";
+                                }
+                                if (message.paidStreetParking != null && message.hasOwnProperty("paidStreetParking")) {
+                                    object.paidStreetParking = message.paidStreetParking;
+                                    if (options.oneofs)
+                                        object._paidStreetParking = "paidStreetParking";
+                                }
+                                if (message.valetParking != null && message.hasOwnProperty("valetParking")) {
+                                    object.valetParking = message.valetParking;
+                                    if (options.oneofs)
+                                        object._valetParking = "valetParking";
+                                }
+                                if (message.freeGarageParking != null && message.hasOwnProperty("freeGarageParking")) {
+                                    object.freeGarageParking = message.freeGarageParking;
+                                    if (options.oneofs)
+                                        object._freeGarageParking = "freeGarageParking";
+                                }
+                                if (message.paidGarageParking != null && message.hasOwnProperty("paidGarageParking")) {
+                                    object.paidGarageParking = message.paidGarageParking;
+                                    if (options.oneofs)
+                                        object._paidGarageParking = "paidGarageParking";
+                                }
                                 return object;
                             };
     
                             /**
-                             * Converts this EditorialSummary to JSON.
+                             * Converts this ParkingOptions to JSON.
                              * @function toJSON
-                             * @memberof google.maps.places.v1.Place.EditorialSummary
+                             * @memberof google.maps.places.v1.Place.ParkingOptions
                              * @instance
                              * @returns {Object.<string,*>} JSON object
                              */
-                            EditorialSummary.prototype.toJSON = function toJSON() {
+                            ParkingOptions.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
     
                             /**
-                             * Gets the default type url for EditorialSummary
+                             * Gets the default type url for ParkingOptions
                              * @function getTypeUrl
-                             * @memberof google.maps.places.v1.Place.EditorialSummary
+                             * @memberof google.maps.places.v1.Place.ParkingOptions
                              * @static
                              * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                              * @returns {string} The default type url
                              */
-                            EditorialSummary.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            ParkingOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
                                 if (typeUrlPrefix === undefined) {
                                     typeUrlPrefix = "type.googleapis.com";
                                 }
-                                return typeUrlPrefix + "/google.maps.places.v1.Place.EditorialSummary";
+                                return typeUrlPrefix + "/google.maps.places.v1.Place.ParkingOptions";
                             };
     
-                            return EditorialSummary;
+                            return ParkingOptions;
+                        })();
+    
+                        Place.SubDestination = (function() {
+    
+                            /**
+                             * Properties of a SubDestination.
+                             * @memberof google.maps.places.v1.Place
+                             * @interface ISubDestination
+                             * @property {string|null} [name] SubDestination name
+                             * @property {string|null} [id] SubDestination id
+                             */
+    
+                            /**
+                             * Constructs a new SubDestination.
+                             * @memberof google.maps.places.v1.Place
+                             * @classdesc Represents a SubDestination.
+                             * @implements ISubDestination
+                             * @constructor
+                             * @param {google.maps.places.v1.Place.ISubDestination=} [properties] Properties to set
+                             */
+                            function SubDestination(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SubDestination name.
+                             * @member {string} name
+                             * @memberof google.maps.places.v1.Place.SubDestination
+                             * @instance
+                             */
+                            SubDestination.prototype.name = "";
+    
+                            /**
+                             * SubDestination id.
+                             * @member {string} id
+                             * @memberof google.maps.places.v1.Place.SubDestination
+                             * @instance
+                             */
+                            SubDestination.prototype.id = "";
+    
+                            /**
+                             * Creates a new SubDestination instance using the specified properties.
+                             * @function create
+                             * @memberof google.maps.places.v1.Place.SubDestination
+                             * @static
+                             * @param {google.maps.places.v1.Place.ISubDestination=} [properties] Properties to set
+                             * @returns {google.maps.places.v1.Place.SubDestination} SubDestination instance
+                             */
+                            SubDestination.create = function create(properties) {
+                                return new SubDestination(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SubDestination message. Does not implicitly {@link google.maps.places.v1.Place.SubDestination.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.maps.places.v1.Place.SubDestination
+                             * @static
+                             * @param {google.maps.places.v1.Place.ISubDestination} message SubDestination message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SubDestination.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.id);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SubDestination message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.SubDestination.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.maps.places.v1.Place.SubDestination
+                             * @static
+                             * @param {google.maps.places.v1.Place.ISubDestination} message SubDestination message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SubDestination.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SubDestination message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.maps.places.v1.Place.SubDestination
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.maps.places.v1.Place.SubDestination} SubDestination
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SubDestination.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.SubDestination();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.id = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SubDestination message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.maps.places.v1.Place.SubDestination
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.maps.places.v1.Place.SubDestination} SubDestination
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SubDestination.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SubDestination message.
+                             * @function verify
+                             * @memberof google.maps.places.v1.Place.SubDestination
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SubDestination.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.id != null && message.hasOwnProperty("id"))
+                                    if (!$util.isString(message.id))
+                                        return "id: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SubDestination message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.maps.places.v1.Place.SubDestination
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.maps.places.v1.Place.SubDestination} SubDestination
+                             */
+                            SubDestination.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.maps.places.v1.Place.SubDestination)
+                                    return object;
+                                var message = new $root.google.maps.places.v1.Place.SubDestination();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.id != null)
+                                    message.id = String(object.id);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SubDestination message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.maps.places.v1.Place.SubDestination
+                             * @static
+                             * @param {google.maps.places.v1.Place.SubDestination} message SubDestination
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SubDestination.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.id = "";
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.id != null && message.hasOwnProperty("id"))
+                                    object.id = message.id;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SubDestination to JSON.
+                             * @function toJSON
+                             * @memberof google.maps.places.v1.Place.SubDestination
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SubDestination.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SubDestination
+                             * @function getTypeUrl
+                             * @memberof google.maps.places.v1.Place.SubDestination
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SubDestination.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.maps.places.v1.Place.SubDestination";
+                            };
+    
+                            return SubDestination;
+                        })();
+    
+                        Place.AccessibilityOptions = (function() {
+    
+                            /**
+                             * Properties of an AccessibilityOptions.
+                             * @memberof google.maps.places.v1.Place
+                             * @interface IAccessibilityOptions
+                             * @property {boolean|null} [wheelchairAccessibleEntrance] AccessibilityOptions wheelchairAccessibleEntrance
+                             */
+    
+                            /**
+                             * Constructs a new AccessibilityOptions.
+                             * @memberof google.maps.places.v1.Place
+                             * @classdesc Represents an AccessibilityOptions.
+                             * @implements IAccessibilityOptions
+                             * @constructor
+                             * @param {google.maps.places.v1.Place.IAccessibilityOptions=} [properties] Properties to set
+                             */
+                            function AccessibilityOptions(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AccessibilityOptions wheelchairAccessibleEntrance.
+                             * @member {boolean|null|undefined} wheelchairAccessibleEntrance
+                             * @memberof google.maps.places.v1.Place.AccessibilityOptions
+                             * @instance
+                             */
+                            AccessibilityOptions.prototype.wheelchairAccessibleEntrance = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * AccessibilityOptions _wheelchairAccessibleEntrance.
+                             * @member {"wheelchairAccessibleEntrance"|undefined} _wheelchairAccessibleEntrance
+                             * @memberof google.maps.places.v1.Place.AccessibilityOptions
+                             * @instance
+                             */
+                            Object.defineProperty(AccessibilityOptions.prototype, "_wheelchairAccessibleEntrance", {
+                                get: $util.oneOfGetter($oneOfFields = ["wheelchairAccessibleEntrance"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new AccessibilityOptions instance using the specified properties.
+                             * @function create
+                             * @memberof google.maps.places.v1.Place.AccessibilityOptions
+                             * @static
+                             * @param {google.maps.places.v1.Place.IAccessibilityOptions=} [properties] Properties to set
+                             * @returns {google.maps.places.v1.Place.AccessibilityOptions} AccessibilityOptions instance
+                             */
+                            AccessibilityOptions.create = function create(properties) {
+                                return new AccessibilityOptions(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AccessibilityOptions message. Does not implicitly {@link google.maps.places.v1.Place.AccessibilityOptions.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.maps.places.v1.Place.AccessibilityOptions
+                             * @static
+                             * @param {google.maps.places.v1.Place.IAccessibilityOptions} message AccessibilityOptions message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AccessibilityOptions.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.wheelchairAccessibleEntrance != null && Object.hasOwnProperty.call(message, "wheelchairAccessibleEntrance"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.wheelchairAccessibleEntrance);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AccessibilityOptions message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.AccessibilityOptions.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.maps.places.v1.Place.AccessibilityOptions
+                             * @static
+                             * @param {google.maps.places.v1.Place.IAccessibilityOptions} message AccessibilityOptions message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AccessibilityOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AccessibilityOptions message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.maps.places.v1.Place.AccessibilityOptions
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.maps.places.v1.Place.AccessibilityOptions} AccessibilityOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AccessibilityOptions.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.AccessibilityOptions();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 2: {
+                                            message.wheelchairAccessibleEntrance = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AccessibilityOptions message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.maps.places.v1.Place.AccessibilityOptions
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.maps.places.v1.Place.AccessibilityOptions} AccessibilityOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AccessibilityOptions.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AccessibilityOptions message.
+                             * @function verify
+                             * @memberof google.maps.places.v1.Place.AccessibilityOptions
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AccessibilityOptions.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.wheelchairAccessibleEntrance != null && message.hasOwnProperty("wheelchairAccessibleEntrance")) {
+                                    properties._wheelchairAccessibleEntrance = 1;
+                                    if (typeof message.wheelchairAccessibleEntrance !== "boolean")
+                                        return "wheelchairAccessibleEntrance: boolean expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AccessibilityOptions message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.maps.places.v1.Place.AccessibilityOptions
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.maps.places.v1.Place.AccessibilityOptions} AccessibilityOptions
+                             */
+                            AccessibilityOptions.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.maps.places.v1.Place.AccessibilityOptions)
+                                    return object;
+                                var message = new $root.google.maps.places.v1.Place.AccessibilityOptions();
+                                if (object.wheelchairAccessibleEntrance != null)
+                                    message.wheelchairAccessibleEntrance = Boolean(object.wheelchairAccessibleEntrance);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AccessibilityOptions message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.maps.places.v1.Place.AccessibilityOptions
+                             * @static
+                             * @param {google.maps.places.v1.Place.AccessibilityOptions} message AccessibilityOptions
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AccessibilityOptions.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.wheelchairAccessibleEntrance != null && message.hasOwnProperty("wheelchairAccessibleEntrance")) {
+                                    object.wheelchairAccessibleEntrance = message.wheelchairAccessibleEntrance;
+                                    if (options.oneofs)
+                                        object._wheelchairAccessibleEntrance = "wheelchairAccessibleEntrance";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AccessibilityOptions to JSON.
+                             * @function toJSON
+                             * @memberof google.maps.places.v1.Place.AccessibilityOptions
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AccessibilityOptions.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AccessibilityOptions
+                             * @function getTypeUrl
+                             * @memberof google.maps.places.v1.Place.AccessibilityOptions
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AccessibilityOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.maps.places.v1.Place.AccessibilityOptions";
+                            };
+    
+                            return AccessibilityOptions;
                         })();
     
                         return Place;
@@ -5465,21 +8903,383 @@
                      * @name google.maps.places.v1.PriceLevel
                      * @enum {number}
                      * @property {number} PRICE_LEVEL_UNSPECIFIED=0 PRICE_LEVEL_UNSPECIFIED value
-                     * @property {number} FREE=1 FREE value
-                     * @property {number} INEXPENSIVE=2 INEXPENSIVE value
-                     * @property {number} MODERATE=3 MODERATE value
-                     * @property {number} EXPENSIVE=4 EXPENSIVE value
-                     * @property {number} VERY_EXPENSIVE=5 VERY_EXPENSIVE value
+                     * @property {number} PRICE_LEVEL_FREE=1 PRICE_LEVEL_FREE value
+                     * @property {number} PRICE_LEVEL_INEXPENSIVE=2 PRICE_LEVEL_INEXPENSIVE value
+                     * @property {number} PRICE_LEVEL_MODERATE=3 PRICE_LEVEL_MODERATE value
+                     * @property {number} PRICE_LEVEL_EXPENSIVE=4 PRICE_LEVEL_EXPENSIVE value
+                     * @property {number} PRICE_LEVEL_VERY_EXPENSIVE=5 PRICE_LEVEL_VERY_EXPENSIVE value
                      */
                     v1.PriceLevel = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
                         values[valuesById[0] = "PRICE_LEVEL_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "FREE"] = 1;
-                        values[valuesById[2] = "INEXPENSIVE"] = 2;
-                        values[valuesById[3] = "MODERATE"] = 3;
-                        values[valuesById[4] = "EXPENSIVE"] = 4;
-                        values[valuesById[5] = "VERY_EXPENSIVE"] = 5;
+                        values[valuesById[1] = "PRICE_LEVEL_FREE"] = 1;
+                        values[valuesById[2] = "PRICE_LEVEL_INEXPENSIVE"] = 2;
+                        values[valuesById[3] = "PRICE_LEVEL_MODERATE"] = 3;
+                        values[valuesById[4] = "PRICE_LEVEL_EXPENSIVE"] = 4;
+                        values[valuesById[5] = "PRICE_LEVEL_VERY_EXPENSIVE"] = 5;
                         return values;
+                    })();
+    
+                    v1.Review = (function() {
+    
+                        /**
+                         * Properties of a Review.
+                         * @memberof google.maps.places.v1
+                         * @interface IReview
+                         * @property {string|null} [name] Review name
+                         * @property {string|null} [relativePublishTimeDescription] Review relativePublishTimeDescription
+                         * @property {google.type.ILocalizedText|null} [text] Review text
+                         * @property {google.type.ILocalizedText|null} [originalText] Review originalText
+                         * @property {number|null} [rating] Review rating
+                         * @property {google.maps.places.v1.IAuthorAttribution|null} [authorAttribution] Review authorAttribution
+                         * @property {google.protobuf.ITimestamp|null} [publishTime] Review publishTime
+                         */
+    
+                        /**
+                         * Constructs a new Review.
+                         * @memberof google.maps.places.v1
+                         * @classdesc Represents a Review.
+                         * @implements IReview
+                         * @constructor
+                         * @param {google.maps.places.v1.IReview=} [properties] Properties to set
+                         */
+                        function Review(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Review name.
+                         * @member {string} name
+                         * @memberof google.maps.places.v1.Review
+                         * @instance
+                         */
+                        Review.prototype.name = "";
+    
+                        /**
+                         * Review relativePublishTimeDescription.
+                         * @member {string} relativePublishTimeDescription
+                         * @memberof google.maps.places.v1.Review
+                         * @instance
+                         */
+                        Review.prototype.relativePublishTimeDescription = "";
+    
+                        /**
+                         * Review text.
+                         * @member {google.type.ILocalizedText|null|undefined} text
+                         * @memberof google.maps.places.v1.Review
+                         * @instance
+                         */
+                        Review.prototype.text = null;
+    
+                        /**
+                         * Review originalText.
+                         * @member {google.type.ILocalizedText|null|undefined} originalText
+                         * @memberof google.maps.places.v1.Review
+                         * @instance
+                         */
+                        Review.prototype.originalText = null;
+    
+                        /**
+                         * Review rating.
+                         * @member {number} rating
+                         * @memberof google.maps.places.v1.Review
+                         * @instance
+                         */
+                        Review.prototype.rating = 0;
+    
+                        /**
+                         * Review authorAttribution.
+                         * @member {google.maps.places.v1.IAuthorAttribution|null|undefined} authorAttribution
+                         * @memberof google.maps.places.v1.Review
+                         * @instance
+                         */
+                        Review.prototype.authorAttribution = null;
+    
+                        /**
+                         * Review publishTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} publishTime
+                         * @memberof google.maps.places.v1.Review
+                         * @instance
+                         */
+                        Review.prototype.publishTime = null;
+    
+                        /**
+                         * Creates a new Review instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.places.v1.Review
+                         * @static
+                         * @param {google.maps.places.v1.IReview=} [properties] Properties to set
+                         * @returns {google.maps.places.v1.Review} Review instance
+                         */
+                        Review.create = function create(properties) {
+                            return new Review(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Review message. Does not implicitly {@link google.maps.places.v1.Review.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.places.v1.Review
+                         * @static
+                         * @param {google.maps.places.v1.IReview} message Review message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Review.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.relativePublishTimeDescription != null && Object.hasOwnProperty.call(message, "relativePublishTimeDescription"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.relativePublishTimeDescription);
+                            if (message.rating != null && Object.hasOwnProperty.call(message, "rating"))
+                                writer.uint32(/* id 7, wireType 1 =*/57).double(message.rating);
+                            if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+                                $root.google.type.LocalizedText.encode(message.text, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.originalText != null && Object.hasOwnProperty.call(message, "originalText"))
+                                $root.google.type.LocalizedText.encode(message.originalText, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.authorAttribution != null && Object.hasOwnProperty.call(message, "authorAttribution"))
+                                $root.google.maps.places.v1.AuthorAttribution.encode(message.authorAttribution, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.publishTime != null && Object.hasOwnProperty.call(message, "publishTime"))
+                                $root.google.protobuf.Timestamp.encode(message.publishTime, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Review message, length delimited. Does not implicitly {@link google.maps.places.v1.Review.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.places.v1.Review
+                         * @static
+                         * @param {google.maps.places.v1.IReview} message Review message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Review.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Review message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.places.v1.Review
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.places.v1.Review} Review
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Review.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Review();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.relativePublishTimeDescription = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.text = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 12: {
+                                        message.originalText = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.rating = reader.double();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.authorAttribution = $root.google.maps.places.v1.AuthorAttribution.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 14: {
+                                        message.publishTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Review message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.places.v1.Review
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.places.v1.Review} Review
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Review.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Review message.
+                         * @function verify
+                         * @memberof google.maps.places.v1.Review
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Review.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.relativePublishTimeDescription != null && message.hasOwnProperty("relativePublishTimeDescription"))
+                                if (!$util.isString(message.relativePublishTimeDescription))
+                                    return "relativePublishTimeDescription: string expected";
+                            if (message.text != null && message.hasOwnProperty("text")) {
+                                var error = $root.google.type.LocalizedText.verify(message.text);
+                                if (error)
+                                    return "text." + error;
+                            }
+                            if (message.originalText != null && message.hasOwnProperty("originalText")) {
+                                var error = $root.google.type.LocalizedText.verify(message.originalText);
+                                if (error)
+                                    return "originalText." + error;
+                            }
+                            if (message.rating != null && message.hasOwnProperty("rating"))
+                                if (typeof message.rating !== "number")
+                                    return "rating: number expected";
+                            if (message.authorAttribution != null && message.hasOwnProperty("authorAttribution")) {
+                                var error = $root.google.maps.places.v1.AuthorAttribution.verify(message.authorAttribution);
+                                if (error)
+                                    return "authorAttribution." + error;
+                            }
+                            if (message.publishTime != null && message.hasOwnProperty("publishTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.publishTime);
+                                if (error)
+                                    return "publishTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Review message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.places.v1.Review
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.places.v1.Review} Review
+                         */
+                        Review.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.places.v1.Review)
+                                return object;
+                            var message = new $root.google.maps.places.v1.Review();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.relativePublishTimeDescription != null)
+                                message.relativePublishTimeDescription = String(object.relativePublishTimeDescription);
+                            if (object.text != null) {
+                                if (typeof object.text !== "object")
+                                    throw TypeError(".google.maps.places.v1.Review.text: object expected");
+                                message.text = $root.google.type.LocalizedText.fromObject(object.text);
+                            }
+                            if (object.originalText != null) {
+                                if (typeof object.originalText !== "object")
+                                    throw TypeError(".google.maps.places.v1.Review.originalText: object expected");
+                                message.originalText = $root.google.type.LocalizedText.fromObject(object.originalText);
+                            }
+                            if (object.rating != null)
+                                message.rating = Number(object.rating);
+                            if (object.authorAttribution != null) {
+                                if (typeof object.authorAttribution !== "object")
+                                    throw TypeError(".google.maps.places.v1.Review.authorAttribution: object expected");
+                                message.authorAttribution = $root.google.maps.places.v1.AuthorAttribution.fromObject(object.authorAttribution);
+                            }
+                            if (object.publishTime != null) {
+                                if (typeof object.publishTime !== "object")
+                                    throw TypeError(".google.maps.places.v1.Review.publishTime: object expected");
+                                message.publishTime = $root.google.protobuf.Timestamp.fromObject(object.publishTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Review message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.places.v1.Review
+                         * @static
+                         * @param {google.maps.places.v1.Review} message Review
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Review.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.relativePublishTimeDescription = "";
+                                object.rating = 0;
+                                object.text = null;
+                                object.originalText = null;
+                                object.authorAttribution = null;
+                                object.publishTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.relativePublishTimeDescription != null && message.hasOwnProperty("relativePublishTimeDescription"))
+                                object.relativePublishTimeDescription = message.relativePublishTimeDescription;
+                            if (message.rating != null && message.hasOwnProperty("rating"))
+                                object.rating = options.json && !isFinite(message.rating) ? String(message.rating) : message.rating;
+                            if (message.text != null && message.hasOwnProperty("text"))
+                                object.text = $root.google.type.LocalizedText.toObject(message.text, options);
+                            if (message.originalText != null && message.hasOwnProperty("originalText"))
+                                object.originalText = $root.google.type.LocalizedText.toObject(message.originalText, options);
+                            if (message.authorAttribution != null && message.hasOwnProperty("authorAttribution"))
+                                object.authorAttribution = $root.google.maps.places.v1.AuthorAttribution.toObject(message.authorAttribution, options);
+                            if (message.publishTime != null && message.hasOwnProperty("publishTime"))
+                                object.publishTime = $root.google.protobuf.Timestamp.toObject(message.publishTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Review to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.places.v1.Review
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Review.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Review
+                         * @function getTypeUrl
+                         * @memberof google.maps.places.v1.Review
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Review.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.places.v1.Review";
+                        };
+    
+                        return Review;
                     })();
     
                     v1.Places = (function() {
@@ -5515,6 +9315,39 @@
                         };
     
                         /**
+                         * Callback as used by {@link google.maps.places.v1.Places|searchNearby}.
+                         * @memberof google.maps.places.v1.Places
+                         * @typedef SearchNearbyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.maps.places.v1.SearchNearbyResponse} [response] SearchNearbyResponse
+                         */
+    
+                        /**
+                         * Calls SearchNearby.
+                         * @function searchNearby
+                         * @memberof google.maps.places.v1.Places
+                         * @instance
+                         * @param {google.maps.places.v1.ISearchNearbyRequest} request SearchNearbyRequest message or plain object
+                         * @param {google.maps.places.v1.Places.SearchNearbyCallback} callback Node-style callback called with the error, if any, and SearchNearbyResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Places.prototype.searchNearby = function searchNearby(request, callback) {
+                            return this.rpcCall(searchNearby, $root.google.maps.places.v1.SearchNearbyRequest, $root.google.maps.places.v1.SearchNearbyResponse, request, callback);
+                        }, "name", { value: "SearchNearby" });
+    
+                        /**
+                         * Calls SearchNearby.
+                         * @function searchNearby
+                         * @memberof google.maps.places.v1.Places
+                         * @instance
+                         * @param {google.maps.places.v1.ISearchNearbyRequest} request SearchNearbyRequest message or plain object
+                         * @returns {Promise<google.maps.places.v1.SearchNearbyResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.maps.places.v1.Places|searchText}.
                          * @memberof google.maps.places.v1.Places
                          * @typedef SearchTextCallback
@@ -5547,28 +9380,105 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.maps.places.v1.Places|getPhotoMedia}.
+                         * @memberof google.maps.places.v1.Places
+                         * @typedef GetPhotoMediaCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.maps.places.v1.PhotoMedia} [response] PhotoMedia
+                         */
+    
+                        /**
+                         * Calls GetPhotoMedia.
+                         * @function getPhotoMedia
+                         * @memberof google.maps.places.v1.Places
+                         * @instance
+                         * @param {google.maps.places.v1.IGetPhotoMediaRequest} request GetPhotoMediaRequest message or plain object
+                         * @param {google.maps.places.v1.Places.GetPhotoMediaCallback} callback Node-style callback called with the error, if any, and PhotoMedia
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Places.prototype.getPhotoMedia = function getPhotoMedia(request, callback) {
+                            return this.rpcCall(getPhotoMedia, $root.google.maps.places.v1.GetPhotoMediaRequest, $root.google.maps.places.v1.PhotoMedia, request, callback);
+                        }, "name", { value: "GetPhotoMedia" });
+    
+                        /**
+                         * Calls GetPhotoMedia.
+                         * @function getPhotoMedia
+                         * @memberof google.maps.places.v1.Places
+                         * @instance
+                         * @param {google.maps.places.v1.IGetPhotoMediaRequest} request GetPhotoMediaRequest message or plain object
+                         * @returns {Promise<google.maps.places.v1.PhotoMedia>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.maps.places.v1.Places|getPlace}.
+                         * @memberof google.maps.places.v1.Places
+                         * @typedef GetPlaceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.maps.places.v1.Place} [response] Place
+                         */
+    
+                        /**
+                         * Calls GetPlace.
+                         * @function getPlace
+                         * @memberof google.maps.places.v1.Places
+                         * @instance
+                         * @param {google.maps.places.v1.IGetPlaceRequest} request GetPlaceRequest message or plain object
+                         * @param {google.maps.places.v1.Places.GetPlaceCallback} callback Node-style callback called with the error, if any, and Place
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Places.prototype.getPlace = function getPlace(request, callback) {
+                            return this.rpcCall(getPlace, $root.google.maps.places.v1.GetPlaceRequest, $root.google.maps.places.v1.Place, request, callback);
+                        }, "name", { value: "GetPlace" });
+    
+                        /**
+                         * Calls GetPlace.
+                         * @function getPlace
+                         * @memberof google.maps.places.v1.Places
+                         * @instance
+                         * @param {google.maps.places.v1.IGetPlaceRequest} request GetPlaceRequest message or plain object
+                         * @returns {Promise<google.maps.places.v1.Place>} Promise
+                         * @variation 2
+                         */
+    
                         return Places;
                     })();
     
-                    v1.Int32Range = (function() {
+                    v1.SearchNearbyRequest = (function() {
     
                         /**
-                         * Properties of an Int32Range.
+                         * Properties of a SearchNearbyRequest.
                          * @memberof google.maps.places.v1
-                         * @interface IInt32Range
-                         * @property {number|null} [min] Int32Range min
-                         * @property {number|null} [max] Int32Range max
+                         * @interface ISearchNearbyRequest
+                         * @property {string|null} [languageCode] SearchNearbyRequest languageCode
+                         * @property {string|null} [regionCode] SearchNearbyRequest regionCode
+                         * @property {Array.<string>|null} [includedTypes] SearchNearbyRequest includedTypes
+                         * @property {Array.<string>|null} [excludedTypes] SearchNearbyRequest excludedTypes
+                         * @property {Array.<string>|null} [includedPrimaryTypes] SearchNearbyRequest includedPrimaryTypes
+                         * @property {Array.<string>|null} [excludedPrimaryTypes] SearchNearbyRequest excludedPrimaryTypes
+                         * @property {number|null} [maxResultCount] SearchNearbyRequest maxResultCount
+                         * @property {google.maps.places.v1.SearchNearbyRequest.ILocationRestriction|null} [locationRestriction] SearchNearbyRequest locationRestriction
+                         * @property {google.maps.places.v1.SearchNearbyRequest.RankPreference|null} [rankPreference] SearchNearbyRequest rankPreference
                          */
     
                         /**
-                         * Constructs a new Int32Range.
+                         * Constructs a new SearchNearbyRequest.
                          * @memberof google.maps.places.v1
-                         * @classdesc Represents an Int32Range.
-                         * @implements IInt32Range
+                         * @classdesc Represents a SearchNearbyRequest.
+                         * @implements ISearchNearbyRequest
                          * @constructor
-                         * @param {google.maps.places.v1.IInt32Range=} [properties] Properties to set
+                         * @param {google.maps.places.v1.ISearchNearbyRequest=} [properties] Properties to set
                          */
-                        function Int32Range(properties) {
+                        function SearchNearbyRequest(properties) {
+                            this.includedTypes = [];
+                            this.excludedTypes = [];
+                            this.includedPrimaryTypes = [];
+                            this.excludedPrimaryTypes = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -5576,114 +9486,199 @@
                         }
     
                         /**
-                         * Int32Range min.
-                         * @member {number|null|undefined} min
-                         * @memberof google.maps.places.v1.Int32Range
+                         * SearchNearbyRequest languageCode.
+                         * @member {string} languageCode
+                         * @memberof google.maps.places.v1.SearchNearbyRequest
                          * @instance
                          */
-                        Int32Range.prototype.min = null;
+                        SearchNearbyRequest.prototype.languageCode = "";
     
                         /**
-                         * Int32Range max.
-                         * @member {number|null|undefined} max
-                         * @memberof google.maps.places.v1.Int32Range
+                         * SearchNearbyRequest regionCode.
+                         * @member {string} regionCode
+                         * @memberof google.maps.places.v1.SearchNearbyRequest
                          * @instance
                          */
-                        Int32Range.prototype.max = null;
-    
-                        // OneOf field names bound to virtual getters and setters
-                        var $oneOfFields;
+                        SearchNearbyRequest.prototype.regionCode = "";
     
                         /**
-                         * Int32Range _min.
-                         * @member {"min"|undefined} _min
-                         * @memberof google.maps.places.v1.Int32Range
+                         * SearchNearbyRequest includedTypes.
+                         * @member {Array.<string>} includedTypes
+                         * @memberof google.maps.places.v1.SearchNearbyRequest
                          * @instance
                          */
-                        Object.defineProperty(Int32Range.prototype, "_min", {
-                            get: $util.oneOfGetter($oneOfFields = ["min"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
+                        SearchNearbyRequest.prototype.includedTypes = $util.emptyArray;
     
                         /**
-                         * Int32Range _max.
-                         * @member {"max"|undefined} _max
-                         * @memberof google.maps.places.v1.Int32Range
+                         * SearchNearbyRequest excludedTypes.
+                         * @member {Array.<string>} excludedTypes
+                         * @memberof google.maps.places.v1.SearchNearbyRequest
                          * @instance
                          */
-                        Object.defineProperty(Int32Range.prototype, "_max", {
-                            get: $util.oneOfGetter($oneOfFields = ["max"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
+                        SearchNearbyRequest.prototype.excludedTypes = $util.emptyArray;
     
                         /**
-                         * Creates a new Int32Range instance using the specified properties.
+                         * SearchNearbyRequest includedPrimaryTypes.
+                         * @member {Array.<string>} includedPrimaryTypes
+                         * @memberof google.maps.places.v1.SearchNearbyRequest
+                         * @instance
+                         */
+                        SearchNearbyRequest.prototype.includedPrimaryTypes = $util.emptyArray;
+    
+                        /**
+                         * SearchNearbyRequest excludedPrimaryTypes.
+                         * @member {Array.<string>} excludedPrimaryTypes
+                         * @memberof google.maps.places.v1.SearchNearbyRequest
+                         * @instance
+                         */
+                        SearchNearbyRequest.prototype.excludedPrimaryTypes = $util.emptyArray;
+    
+                        /**
+                         * SearchNearbyRequest maxResultCount.
+                         * @member {number} maxResultCount
+                         * @memberof google.maps.places.v1.SearchNearbyRequest
+                         * @instance
+                         */
+                        SearchNearbyRequest.prototype.maxResultCount = 0;
+    
+                        /**
+                         * SearchNearbyRequest locationRestriction.
+                         * @member {google.maps.places.v1.SearchNearbyRequest.ILocationRestriction|null|undefined} locationRestriction
+                         * @memberof google.maps.places.v1.SearchNearbyRequest
+                         * @instance
+                         */
+                        SearchNearbyRequest.prototype.locationRestriction = null;
+    
+                        /**
+                         * SearchNearbyRequest rankPreference.
+                         * @member {google.maps.places.v1.SearchNearbyRequest.RankPreference} rankPreference
+                         * @memberof google.maps.places.v1.SearchNearbyRequest
+                         * @instance
+                         */
+                        SearchNearbyRequest.prototype.rankPreference = 0;
+    
+                        /**
+                         * Creates a new SearchNearbyRequest instance using the specified properties.
                          * @function create
-                         * @memberof google.maps.places.v1.Int32Range
+                         * @memberof google.maps.places.v1.SearchNearbyRequest
                          * @static
-                         * @param {google.maps.places.v1.IInt32Range=} [properties] Properties to set
-                         * @returns {google.maps.places.v1.Int32Range} Int32Range instance
+                         * @param {google.maps.places.v1.ISearchNearbyRequest=} [properties] Properties to set
+                         * @returns {google.maps.places.v1.SearchNearbyRequest} SearchNearbyRequest instance
                          */
-                        Int32Range.create = function create(properties) {
-                            return new Int32Range(properties);
+                        SearchNearbyRequest.create = function create(properties) {
+                            return new SearchNearbyRequest(properties);
                         };
     
                         /**
-                         * Encodes the specified Int32Range message. Does not implicitly {@link google.maps.places.v1.Int32Range.verify|verify} messages.
+                         * Encodes the specified SearchNearbyRequest message. Does not implicitly {@link google.maps.places.v1.SearchNearbyRequest.verify|verify} messages.
                          * @function encode
-                         * @memberof google.maps.places.v1.Int32Range
+                         * @memberof google.maps.places.v1.SearchNearbyRequest
                          * @static
-                         * @param {google.maps.places.v1.IInt32Range} message Int32Range message or plain object to encode
+                         * @param {google.maps.places.v1.ISearchNearbyRequest} message SearchNearbyRequest message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        Int32Range.encode = function encode(message, writer) {
+                        SearchNearbyRequest.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
-                            if (message.min != null && Object.hasOwnProperty.call(message, "min"))
-                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.min);
-                            if (message.max != null && Object.hasOwnProperty.call(message, "max"))
-                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.max);
+                            if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.languageCode);
+                            if (message.regionCode != null && Object.hasOwnProperty.call(message, "regionCode"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.regionCode);
+                            if (message.includedTypes != null && message.includedTypes.length)
+                                for (var i = 0; i < message.includedTypes.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.includedTypes[i]);
+                            if (message.excludedTypes != null && message.excludedTypes.length)
+                                for (var i = 0; i < message.excludedTypes.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.excludedTypes[i]);
+                            if (message.includedPrimaryTypes != null && message.includedPrimaryTypes.length)
+                                for (var i = 0; i < message.includedPrimaryTypes.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.includedPrimaryTypes[i]);
+                            if (message.excludedPrimaryTypes != null && message.excludedPrimaryTypes.length)
+                                for (var i = 0; i < message.excludedPrimaryTypes.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.excludedPrimaryTypes[i]);
+                            if (message.maxResultCount != null && Object.hasOwnProperty.call(message, "maxResultCount"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.maxResultCount);
+                            if (message.locationRestriction != null && Object.hasOwnProperty.call(message, "locationRestriction"))
+                                $root.google.maps.places.v1.SearchNearbyRequest.LocationRestriction.encode(message.locationRestriction, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.rankPreference != null && Object.hasOwnProperty.call(message, "rankPreference"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.rankPreference);
                             return writer;
                         };
     
                         /**
-                         * Encodes the specified Int32Range message, length delimited. Does not implicitly {@link google.maps.places.v1.Int32Range.verify|verify} messages.
+                         * Encodes the specified SearchNearbyRequest message, length delimited. Does not implicitly {@link google.maps.places.v1.SearchNearbyRequest.verify|verify} messages.
                          * @function encodeDelimited
-                         * @memberof google.maps.places.v1.Int32Range
+                         * @memberof google.maps.places.v1.SearchNearbyRequest
                          * @static
-                         * @param {google.maps.places.v1.IInt32Range} message Int32Range message or plain object to encode
+                         * @param {google.maps.places.v1.ISearchNearbyRequest} message SearchNearbyRequest message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        Int32Range.encodeDelimited = function encodeDelimited(message, writer) {
+                        SearchNearbyRequest.encodeDelimited = function encodeDelimited(message, writer) {
                             return this.encode(message, writer).ldelim();
                         };
     
                         /**
-                         * Decodes an Int32Range message from the specified reader or buffer.
+                         * Decodes a SearchNearbyRequest message from the specified reader or buffer.
                          * @function decode
-                         * @memberof google.maps.places.v1.Int32Range
+                         * @memberof google.maps.places.v1.SearchNearbyRequest
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                          * @param {number} [length] Message length if known beforehand
-                         * @returns {google.maps.places.v1.Int32Range} Int32Range
+                         * @returns {google.maps.places.v1.SearchNearbyRequest} SearchNearbyRequest
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Int32Range.decode = function decode(reader, length) {
+                        SearchNearbyRequest.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Int32Range();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.SearchNearbyRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
                                 case 1: {
-                                        message.min = reader.int32();
+                                        message.languageCode = reader.string();
                                         break;
                                     }
                                 case 2: {
-                                        message.max = reader.int32();
+                                        message.regionCode = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.includedTypes && message.includedTypes.length))
+                                            message.includedTypes = [];
+                                        message.includedTypes.push(reader.string());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.excludedTypes && message.excludedTypes.length))
+                                            message.excludedTypes = [];
+                                        message.excludedTypes.push(reader.string());
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.includedPrimaryTypes && message.includedPrimaryTypes.length))
+                                            message.includedPrimaryTypes = [];
+                                        message.includedPrimaryTypes.push(reader.string());
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.excludedPrimaryTypes && message.excludedPrimaryTypes.length))
+                                            message.excludedPrimaryTypes = [];
+                                        message.excludedPrimaryTypes.push(reader.string());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.maxResultCount = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.locationRestriction = $root.google.maps.places.v1.SearchNearbyRequest.LocationRestriction.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.rankPreference = reader.int32();
                                         break;
                                     }
                                 default:
@@ -5695,118 +9690,713 @@
                         };
     
                         /**
-                         * Decodes an Int32Range message from the specified reader or buffer, length delimited.
+                         * Decodes a SearchNearbyRequest message from the specified reader or buffer, length delimited.
                          * @function decodeDelimited
-                         * @memberof google.maps.places.v1.Int32Range
+                         * @memberof google.maps.places.v1.SearchNearbyRequest
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.maps.places.v1.Int32Range} Int32Range
+                         * @returns {google.maps.places.v1.SearchNearbyRequest} SearchNearbyRequest
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Int32Range.decodeDelimited = function decodeDelimited(reader) {
+                        SearchNearbyRequest.decodeDelimited = function decodeDelimited(reader) {
                             if (!(reader instanceof $Reader))
                                 reader = new $Reader(reader);
                             return this.decode(reader, reader.uint32());
                         };
     
                         /**
-                         * Verifies an Int32Range message.
+                         * Verifies a SearchNearbyRequest message.
                          * @function verify
-                         * @memberof google.maps.places.v1.Int32Range
+                         * @memberof google.maps.places.v1.SearchNearbyRequest
                          * @static
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        Int32Range.verify = function verify(message) {
+                        SearchNearbyRequest.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
-                            var properties = {};
-                            if (message.min != null && message.hasOwnProperty("min")) {
-                                properties._min = 1;
-                                if (!$util.isInteger(message.min))
-                                    return "min: integer expected";
+                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                if (!$util.isString(message.languageCode))
+                                    return "languageCode: string expected";
+                            if (message.regionCode != null && message.hasOwnProperty("regionCode"))
+                                if (!$util.isString(message.regionCode))
+                                    return "regionCode: string expected";
+                            if (message.includedTypes != null && message.hasOwnProperty("includedTypes")) {
+                                if (!Array.isArray(message.includedTypes))
+                                    return "includedTypes: array expected";
+                                for (var i = 0; i < message.includedTypes.length; ++i)
+                                    if (!$util.isString(message.includedTypes[i]))
+                                        return "includedTypes: string[] expected";
                             }
-                            if (message.max != null && message.hasOwnProperty("max")) {
-                                properties._max = 1;
-                                if (!$util.isInteger(message.max))
-                                    return "max: integer expected";
+                            if (message.excludedTypes != null && message.hasOwnProperty("excludedTypes")) {
+                                if (!Array.isArray(message.excludedTypes))
+                                    return "excludedTypes: array expected";
+                                for (var i = 0; i < message.excludedTypes.length; ++i)
+                                    if (!$util.isString(message.excludedTypes[i]))
+                                        return "excludedTypes: string[] expected";
+                            }
+                            if (message.includedPrimaryTypes != null && message.hasOwnProperty("includedPrimaryTypes")) {
+                                if (!Array.isArray(message.includedPrimaryTypes))
+                                    return "includedPrimaryTypes: array expected";
+                                for (var i = 0; i < message.includedPrimaryTypes.length; ++i)
+                                    if (!$util.isString(message.includedPrimaryTypes[i]))
+                                        return "includedPrimaryTypes: string[] expected";
+                            }
+                            if (message.excludedPrimaryTypes != null && message.hasOwnProperty("excludedPrimaryTypes")) {
+                                if (!Array.isArray(message.excludedPrimaryTypes))
+                                    return "excludedPrimaryTypes: array expected";
+                                for (var i = 0; i < message.excludedPrimaryTypes.length; ++i)
+                                    if (!$util.isString(message.excludedPrimaryTypes[i]))
+                                        return "excludedPrimaryTypes: string[] expected";
+                            }
+                            if (message.maxResultCount != null && message.hasOwnProperty("maxResultCount"))
+                                if (!$util.isInteger(message.maxResultCount))
+                                    return "maxResultCount: integer expected";
+                            if (message.locationRestriction != null && message.hasOwnProperty("locationRestriction")) {
+                                var error = $root.google.maps.places.v1.SearchNearbyRequest.LocationRestriction.verify(message.locationRestriction);
+                                if (error)
+                                    return "locationRestriction." + error;
+                            }
+                            if (message.rankPreference != null && message.hasOwnProperty("rankPreference"))
+                                switch (message.rankPreference) {
+                                default:
+                                    return "rankPreference: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SearchNearbyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.places.v1.SearchNearbyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.places.v1.SearchNearbyRequest} SearchNearbyRequest
+                         */
+                        SearchNearbyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.places.v1.SearchNearbyRequest)
+                                return object;
+                            var message = new $root.google.maps.places.v1.SearchNearbyRequest();
+                            if (object.languageCode != null)
+                                message.languageCode = String(object.languageCode);
+                            if (object.regionCode != null)
+                                message.regionCode = String(object.regionCode);
+                            if (object.includedTypes) {
+                                if (!Array.isArray(object.includedTypes))
+                                    throw TypeError(".google.maps.places.v1.SearchNearbyRequest.includedTypes: array expected");
+                                message.includedTypes = [];
+                                for (var i = 0; i < object.includedTypes.length; ++i)
+                                    message.includedTypes[i] = String(object.includedTypes[i]);
+                            }
+                            if (object.excludedTypes) {
+                                if (!Array.isArray(object.excludedTypes))
+                                    throw TypeError(".google.maps.places.v1.SearchNearbyRequest.excludedTypes: array expected");
+                                message.excludedTypes = [];
+                                for (var i = 0; i < object.excludedTypes.length; ++i)
+                                    message.excludedTypes[i] = String(object.excludedTypes[i]);
+                            }
+                            if (object.includedPrimaryTypes) {
+                                if (!Array.isArray(object.includedPrimaryTypes))
+                                    throw TypeError(".google.maps.places.v1.SearchNearbyRequest.includedPrimaryTypes: array expected");
+                                message.includedPrimaryTypes = [];
+                                for (var i = 0; i < object.includedPrimaryTypes.length; ++i)
+                                    message.includedPrimaryTypes[i] = String(object.includedPrimaryTypes[i]);
+                            }
+                            if (object.excludedPrimaryTypes) {
+                                if (!Array.isArray(object.excludedPrimaryTypes))
+                                    throw TypeError(".google.maps.places.v1.SearchNearbyRequest.excludedPrimaryTypes: array expected");
+                                message.excludedPrimaryTypes = [];
+                                for (var i = 0; i < object.excludedPrimaryTypes.length; ++i)
+                                    message.excludedPrimaryTypes[i] = String(object.excludedPrimaryTypes[i]);
+                            }
+                            if (object.maxResultCount != null)
+                                message.maxResultCount = object.maxResultCount | 0;
+                            if (object.locationRestriction != null) {
+                                if (typeof object.locationRestriction !== "object")
+                                    throw TypeError(".google.maps.places.v1.SearchNearbyRequest.locationRestriction: object expected");
+                                message.locationRestriction = $root.google.maps.places.v1.SearchNearbyRequest.LocationRestriction.fromObject(object.locationRestriction);
+                            }
+                            switch (object.rankPreference) {
+                            default:
+                                if (typeof object.rankPreference === "number") {
+                                    message.rankPreference = object.rankPreference;
+                                    break;
+                                }
+                                break;
+                            case "RANK_PREFERENCE_UNSPECIFIED":
+                            case 0:
+                                message.rankPreference = 0;
+                                break;
+                            case "DISTANCE":
+                            case 1:
+                                message.rankPreference = 1;
+                                break;
+                            case "POPULARITY":
+                            case 2:
+                                message.rankPreference = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SearchNearbyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.places.v1.SearchNearbyRequest
+                         * @static
+                         * @param {google.maps.places.v1.SearchNearbyRequest} message SearchNearbyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SearchNearbyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.includedTypes = [];
+                                object.excludedTypes = [];
+                                object.includedPrimaryTypes = [];
+                                object.excludedPrimaryTypes = [];
+                            }
+                            if (options.defaults) {
+                                object.languageCode = "";
+                                object.regionCode = "";
+                                object.maxResultCount = 0;
+                                object.locationRestriction = null;
+                                object.rankPreference = options.enums === String ? "RANK_PREFERENCE_UNSPECIFIED" : 0;
+                            }
+                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                object.languageCode = message.languageCode;
+                            if (message.regionCode != null && message.hasOwnProperty("regionCode"))
+                                object.regionCode = message.regionCode;
+                            if (message.includedTypes && message.includedTypes.length) {
+                                object.includedTypes = [];
+                                for (var j = 0; j < message.includedTypes.length; ++j)
+                                    object.includedTypes[j] = message.includedTypes[j];
+                            }
+                            if (message.excludedTypes && message.excludedTypes.length) {
+                                object.excludedTypes = [];
+                                for (var j = 0; j < message.excludedTypes.length; ++j)
+                                    object.excludedTypes[j] = message.excludedTypes[j];
+                            }
+                            if (message.includedPrimaryTypes && message.includedPrimaryTypes.length) {
+                                object.includedPrimaryTypes = [];
+                                for (var j = 0; j < message.includedPrimaryTypes.length; ++j)
+                                    object.includedPrimaryTypes[j] = message.includedPrimaryTypes[j];
+                            }
+                            if (message.excludedPrimaryTypes && message.excludedPrimaryTypes.length) {
+                                object.excludedPrimaryTypes = [];
+                                for (var j = 0; j < message.excludedPrimaryTypes.length; ++j)
+                                    object.excludedPrimaryTypes[j] = message.excludedPrimaryTypes[j];
+                            }
+                            if (message.maxResultCount != null && message.hasOwnProperty("maxResultCount"))
+                                object.maxResultCount = message.maxResultCount;
+                            if (message.locationRestriction != null && message.hasOwnProperty("locationRestriction"))
+                                object.locationRestriction = $root.google.maps.places.v1.SearchNearbyRequest.LocationRestriction.toObject(message.locationRestriction, options);
+                            if (message.rankPreference != null && message.hasOwnProperty("rankPreference"))
+                                object.rankPreference = options.enums === String ? $root.google.maps.places.v1.SearchNearbyRequest.RankPreference[message.rankPreference] === undefined ? message.rankPreference : $root.google.maps.places.v1.SearchNearbyRequest.RankPreference[message.rankPreference] : message.rankPreference;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SearchNearbyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.places.v1.SearchNearbyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SearchNearbyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SearchNearbyRequest
+                         * @function getTypeUrl
+                         * @memberof google.maps.places.v1.SearchNearbyRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SearchNearbyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.places.v1.SearchNearbyRequest";
+                        };
+    
+                        SearchNearbyRequest.LocationRestriction = (function() {
+    
+                            /**
+                             * Properties of a LocationRestriction.
+                             * @memberof google.maps.places.v1.SearchNearbyRequest
+                             * @interface ILocationRestriction
+                             * @property {google.maps.places.v1.ICircle|null} [circle] LocationRestriction circle
+                             */
+    
+                            /**
+                             * Constructs a new LocationRestriction.
+                             * @memberof google.maps.places.v1.SearchNearbyRequest
+                             * @classdesc Represents a LocationRestriction.
+                             * @implements ILocationRestriction
+                             * @constructor
+                             * @param {google.maps.places.v1.SearchNearbyRequest.ILocationRestriction=} [properties] Properties to set
+                             */
+                            function LocationRestriction(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * LocationRestriction circle.
+                             * @member {google.maps.places.v1.ICircle|null|undefined} circle
+                             * @memberof google.maps.places.v1.SearchNearbyRequest.LocationRestriction
+                             * @instance
+                             */
+                            LocationRestriction.prototype.circle = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * LocationRestriction type.
+                             * @member {"circle"|undefined} type
+                             * @memberof google.maps.places.v1.SearchNearbyRequest.LocationRestriction
+                             * @instance
+                             */
+                            Object.defineProperty(LocationRestriction.prototype, "type", {
+                                get: $util.oneOfGetter($oneOfFields = ["circle"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new LocationRestriction instance using the specified properties.
+                             * @function create
+                             * @memberof google.maps.places.v1.SearchNearbyRequest.LocationRestriction
+                             * @static
+                             * @param {google.maps.places.v1.SearchNearbyRequest.ILocationRestriction=} [properties] Properties to set
+                             * @returns {google.maps.places.v1.SearchNearbyRequest.LocationRestriction} LocationRestriction instance
+                             */
+                            LocationRestriction.create = function create(properties) {
+                                return new LocationRestriction(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified LocationRestriction message. Does not implicitly {@link google.maps.places.v1.SearchNearbyRequest.LocationRestriction.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.maps.places.v1.SearchNearbyRequest.LocationRestriction
+                             * @static
+                             * @param {google.maps.places.v1.SearchNearbyRequest.ILocationRestriction} message LocationRestriction message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LocationRestriction.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.circle != null && Object.hasOwnProperty.call(message, "circle"))
+                                    $root.google.maps.places.v1.Circle.encode(message.circle, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified LocationRestriction message, length delimited. Does not implicitly {@link google.maps.places.v1.SearchNearbyRequest.LocationRestriction.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.maps.places.v1.SearchNearbyRequest.LocationRestriction
+                             * @static
+                             * @param {google.maps.places.v1.SearchNearbyRequest.ILocationRestriction} message LocationRestriction message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LocationRestriction.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a LocationRestriction message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.maps.places.v1.SearchNearbyRequest.LocationRestriction
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.maps.places.v1.SearchNearbyRequest.LocationRestriction} LocationRestriction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LocationRestriction.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.SearchNearbyRequest.LocationRestriction();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 2: {
+                                            message.circle = $root.google.maps.places.v1.Circle.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a LocationRestriction message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.maps.places.v1.SearchNearbyRequest.LocationRestriction
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.maps.places.v1.SearchNearbyRequest.LocationRestriction} LocationRestriction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LocationRestriction.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a LocationRestriction message.
+                             * @function verify
+                             * @memberof google.maps.places.v1.SearchNearbyRequest.LocationRestriction
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            LocationRestriction.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.circle != null && message.hasOwnProperty("circle")) {
+                                    properties.type = 1;
+                                    {
+                                        var error = $root.google.maps.places.v1.Circle.verify(message.circle);
+                                        if (error)
+                                            return "circle." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a LocationRestriction message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.maps.places.v1.SearchNearbyRequest.LocationRestriction
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.maps.places.v1.SearchNearbyRequest.LocationRestriction} LocationRestriction
+                             */
+                            LocationRestriction.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.maps.places.v1.SearchNearbyRequest.LocationRestriction)
+                                    return object;
+                                var message = new $root.google.maps.places.v1.SearchNearbyRequest.LocationRestriction();
+                                if (object.circle != null) {
+                                    if (typeof object.circle !== "object")
+                                        throw TypeError(".google.maps.places.v1.SearchNearbyRequest.LocationRestriction.circle: object expected");
+                                    message.circle = $root.google.maps.places.v1.Circle.fromObject(object.circle);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a LocationRestriction message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.maps.places.v1.SearchNearbyRequest.LocationRestriction
+                             * @static
+                             * @param {google.maps.places.v1.SearchNearbyRequest.LocationRestriction} message LocationRestriction
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            LocationRestriction.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.circle != null && message.hasOwnProperty("circle")) {
+                                    object.circle = $root.google.maps.places.v1.Circle.toObject(message.circle, options);
+                                    if (options.oneofs)
+                                        object.type = "circle";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this LocationRestriction to JSON.
+                             * @function toJSON
+                             * @memberof google.maps.places.v1.SearchNearbyRequest.LocationRestriction
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            LocationRestriction.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for LocationRestriction
+                             * @function getTypeUrl
+                             * @memberof google.maps.places.v1.SearchNearbyRequest.LocationRestriction
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            LocationRestriction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.maps.places.v1.SearchNearbyRequest.LocationRestriction";
+                            };
+    
+                            return LocationRestriction;
+                        })();
+    
+                        /**
+                         * RankPreference enum.
+                         * @name google.maps.places.v1.SearchNearbyRequest.RankPreference
+                         * @enum {number}
+                         * @property {number} RANK_PREFERENCE_UNSPECIFIED=0 RANK_PREFERENCE_UNSPECIFIED value
+                         * @property {number} DISTANCE=1 DISTANCE value
+                         * @property {number} POPULARITY=2 POPULARITY value
+                         */
+                        SearchNearbyRequest.RankPreference = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "RANK_PREFERENCE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DISTANCE"] = 1;
+                            values[valuesById[2] = "POPULARITY"] = 2;
+                            return values;
+                        })();
+    
+                        return SearchNearbyRequest;
+                    })();
+    
+                    v1.SearchNearbyResponse = (function() {
+    
+                        /**
+                         * Properties of a SearchNearbyResponse.
+                         * @memberof google.maps.places.v1
+                         * @interface ISearchNearbyResponse
+                         * @property {Array.<google.maps.places.v1.IPlace>|null} [places] SearchNearbyResponse places
+                         */
+    
+                        /**
+                         * Constructs a new SearchNearbyResponse.
+                         * @memberof google.maps.places.v1
+                         * @classdesc Represents a SearchNearbyResponse.
+                         * @implements ISearchNearbyResponse
+                         * @constructor
+                         * @param {google.maps.places.v1.ISearchNearbyResponse=} [properties] Properties to set
+                         */
+                        function SearchNearbyResponse(properties) {
+                            this.places = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SearchNearbyResponse places.
+                         * @member {Array.<google.maps.places.v1.IPlace>} places
+                         * @memberof google.maps.places.v1.SearchNearbyResponse
+                         * @instance
+                         */
+                        SearchNearbyResponse.prototype.places = $util.emptyArray;
+    
+                        /**
+                         * Creates a new SearchNearbyResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.places.v1.SearchNearbyResponse
+                         * @static
+                         * @param {google.maps.places.v1.ISearchNearbyResponse=} [properties] Properties to set
+                         * @returns {google.maps.places.v1.SearchNearbyResponse} SearchNearbyResponse instance
+                         */
+                        SearchNearbyResponse.create = function create(properties) {
+                            return new SearchNearbyResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SearchNearbyResponse message. Does not implicitly {@link google.maps.places.v1.SearchNearbyResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.places.v1.SearchNearbyResponse
+                         * @static
+                         * @param {google.maps.places.v1.ISearchNearbyResponse} message SearchNearbyResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchNearbyResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.places != null && message.places.length)
+                                for (var i = 0; i < message.places.length; ++i)
+                                    $root.google.maps.places.v1.Place.encode(message.places[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SearchNearbyResponse message, length delimited. Does not implicitly {@link google.maps.places.v1.SearchNearbyResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.places.v1.SearchNearbyResponse
+                         * @static
+                         * @param {google.maps.places.v1.ISearchNearbyResponse} message SearchNearbyResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchNearbyResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SearchNearbyResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.places.v1.SearchNearbyResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.places.v1.SearchNearbyResponse} SearchNearbyResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchNearbyResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.SearchNearbyResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.places && message.places.length))
+                                            message.places = [];
+                                        message.places.push($root.google.maps.places.v1.Place.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SearchNearbyResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.places.v1.SearchNearbyResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.places.v1.SearchNearbyResponse} SearchNearbyResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchNearbyResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SearchNearbyResponse message.
+                         * @function verify
+                         * @memberof google.maps.places.v1.SearchNearbyResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SearchNearbyResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.places != null && message.hasOwnProperty("places")) {
+                                if (!Array.isArray(message.places))
+                                    return "places: array expected";
+                                for (var i = 0; i < message.places.length; ++i) {
+                                    var error = $root.google.maps.places.v1.Place.verify(message.places[i]);
+                                    if (error)
+                                        return "places." + error;
+                                }
                             }
                             return null;
                         };
     
                         /**
-                         * Creates an Int32Range message from a plain object. Also converts values to their respective internal types.
+                         * Creates a SearchNearbyResponse message from a plain object. Also converts values to their respective internal types.
                          * @function fromObject
-                         * @memberof google.maps.places.v1.Int32Range
+                         * @memberof google.maps.places.v1.SearchNearbyResponse
                          * @static
                          * @param {Object.<string,*>} object Plain object
-                         * @returns {google.maps.places.v1.Int32Range} Int32Range
+                         * @returns {google.maps.places.v1.SearchNearbyResponse} SearchNearbyResponse
                          */
-                        Int32Range.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.maps.places.v1.Int32Range)
+                        SearchNearbyResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.places.v1.SearchNearbyResponse)
                                 return object;
-                            var message = new $root.google.maps.places.v1.Int32Range();
-                            if (object.min != null)
-                                message.min = object.min | 0;
-                            if (object.max != null)
-                                message.max = object.max | 0;
+                            var message = new $root.google.maps.places.v1.SearchNearbyResponse();
+                            if (object.places) {
+                                if (!Array.isArray(object.places))
+                                    throw TypeError(".google.maps.places.v1.SearchNearbyResponse.places: array expected");
+                                message.places = [];
+                                for (var i = 0; i < object.places.length; ++i) {
+                                    if (typeof object.places[i] !== "object")
+                                        throw TypeError(".google.maps.places.v1.SearchNearbyResponse.places: object expected");
+                                    message.places[i] = $root.google.maps.places.v1.Place.fromObject(object.places[i]);
+                                }
+                            }
                             return message;
                         };
     
                         /**
-                         * Creates a plain object from an Int32Range message. Also converts values to other types if specified.
+                         * Creates a plain object from a SearchNearbyResponse message. Also converts values to other types if specified.
                          * @function toObject
-                         * @memberof google.maps.places.v1.Int32Range
+                         * @memberof google.maps.places.v1.SearchNearbyResponse
                          * @static
-                         * @param {google.maps.places.v1.Int32Range} message Int32Range
+                         * @param {google.maps.places.v1.SearchNearbyResponse} message SearchNearbyResponse
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        Int32Range.toObject = function toObject(message, options) {
+                        SearchNearbyResponse.toObject = function toObject(message, options) {
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (message.min != null && message.hasOwnProperty("min")) {
-                                object.min = message.min;
-                                if (options.oneofs)
-                                    object._min = "min";
-                            }
-                            if (message.max != null && message.hasOwnProperty("max")) {
-                                object.max = message.max;
-                                if (options.oneofs)
-                                    object._max = "max";
+                            if (options.arrays || options.defaults)
+                                object.places = [];
+                            if (message.places && message.places.length) {
+                                object.places = [];
+                                for (var j = 0; j < message.places.length; ++j)
+                                    object.places[j] = $root.google.maps.places.v1.Place.toObject(message.places[j], options);
                             }
                             return object;
                         };
     
                         /**
-                         * Converts this Int32Range to JSON.
+                         * Converts this SearchNearbyResponse to JSON.
                          * @function toJSON
-                         * @memberof google.maps.places.v1.Int32Range
+                         * @memberof google.maps.places.v1.SearchNearbyResponse
                          * @instance
                          * @returns {Object.<string,*>} JSON object
                          */
-                        Int32Range.prototype.toJSON = function toJSON() {
+                        SearchNearbyResponse.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
                         /**
-                         * Gets the default type url for Int32Range
+                         * Gets the default type url for SearchNearbyResponse
                          * @function getTypeUrl
-                         * @memberof google.maps.places.v1.Int32Range
+                         * @memberof google.maps.places.v1.SearchNearbyResponse
                          * @static
                          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns {string} The default type url
                          */
-                        Int32Range.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        SearchNearbyResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
                             if (typeUrlPrefix === undefined) {
                                 typeUrlPrefix = "type.googleapis.com";
                             }
-                            return typeUrlPrefix + "/google.maps.places.v1.Int32Range";
+                            return typeUrlPrefix + "/google.maps.places.v1.SearchNearbyResponse";
                         };
     
-                        return Int32Range;
+                        return SearchNearbyResponse;
                     })();
     
                     v1.SearchTextRequest = (function() {
@@ -5819,10 +10409,8 @@
                          * @property {string|null} [languageCode] SearchTextRequest languageCode
                          * @property {string|null} [regionCode] SearchTextRequest regionCode
                          * @property {google.maps.places.v1.SearchTextRequest.RankPreference|null} [rankPreference] SearchTextRequest rankPreference
-                         * @property {google.maps.places.v1.SearchTextRequest.ILocation|null} [location] SearchTextRequest location
                          * @property {string|null} [includedType] SearchTextRequest includedType
                          * @property {boolean|null} [openNow] SearchTextRequest openNow
-                         * @property {google.maps.places.v1.IInt32Range|null} [priceRange] SearchTextRequest priceRange
                          * @property {number|null} [minRating] SearchTextRequest minRating
                          * @property {number|null} [maxResultCount] SearchTextRequest maxResultCount
                          * @property {Array.<google.maps.places.v1.PriceLevel>|null} [priceLevels] SearchTextRequest priceLevels
@@ -5880,14 +10468,6 @@
                         SearchTextRequest.prototype.rankPreference = 0;
     
                         /**
-                         * SearchTextRequest location.
-                         * @member {google.maps.places.v1.SearchTextRequest.ILocation|null|undefined} location
-                         * @memberof google.maps.places.v1.SearchTextRequest
-                         * @instance
-                         */
-                        SearchTextRequest.prototype.location = null;
-    
-                        /**
                          * SearchTextRequest includedType.
                          * @member {string} includedType
                          * @memberof google.maps.places.v1.SearchTextRequest
@@ -5902,14 +10482,6 @@
                          * @instance
                          */
                         SearchTextRequest.prototype.openNow = false;
-    
-                        /**
-                         * SearchTextRequest priceRange.
-                         * @member {google.maps.places.v1.IInt32Range|null|undefined} priceRange
-                         * @memberof google.maps.places.v1.SearchTextRequest
-                         * @instance
-                         */
-                        SearchTextRequest.prototype.priceRange = null;
     
                         /**
                          * SearchTextRequest minRating.
@@ -5991,14 +10563,10 @@
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.regionCode);
                             if (message.rankPreference != null && Object.hasOwnProperty.call(message, "rankPreference"))
                                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.rankPreference);
-                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
-                                $root.google.maps.places.v1.SearchTextRequest.Location.encode(message.location, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.includedType != null && Object.hasOwnProperty.call(message, "includedType"))
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.includedType);
                             if (message.openNow != null && Object.hasOwnProperty.call(message, "openNow"))
                                 writer.uint32(/* id 7, wireType 0 =*/56).bool(message.openNow);
-                            if (message.priceRange != null && Object.hasOwnProperty.call(message, "priceRange"))
-                                $root.google.maps.places.v1.Int32Range.encode(message.priceRange, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.minRating != null && Object.hasOwnProperty.call(message, "minRating"))
                                 writer.uint32(/* id 9, wireType 1 =*/73).double(message.minRating);
                             if (message.maxResultCount != null && Object.hasOwnProperty.call(message, "maxResultCount"))
@@ -6065,20 +10633,12 @@
                                         message.rankPreference = reader.int32();
                                         break;
                                     }
-                                case 5: {
-                                        message.location = $root.google.maps.places.v1.SearchTextRequest.Location.decode(reader, reader.uint32());
-                                        break;
-                                    }
                                 case 6: {
                                         message.includedType = reader.string();
                                         break;
                                     }
                                 case 7: {
                                         message.openNow = reader.bool();
-                                        break;
-                                    }
-                                case 8: {
-                                        message.priceRange = $root.google.maps.places.v1.Int32Range.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 9: {
@@ -6165,22 +10725,12 @@
                                 case 2:
                                     break;
                                 }
-                            if (message.location != null && message.hasOwnProperty("location")) {
-                                var error = $root.google.maps.places.v1.SearchTextRequest.Location.verify(message.location);
-                                if (error)
-                                    return "location." + error;
-                            }
                             if (message.includedType != null && message.hasOwnProperty("includedType"))
                                 if (!$util.isString(message.includedType))
                                     return "includedType: string expected";
                             if (message.openNow != null && message.hasOwnProperty("openNow"))
                                 if (typeof message.openNow !== "boolean")
                                     return "openNow: boolean expected";
-                            if (message.priceRange != null && message.hasOwnProperty("priceRange")) {
-                                var error = $root.google.maps.places.v1.Int32Range.verify(message.priceRange);
-                                if (error)
-                                    return "priceRange." + error;
-                            }
                             if (message.minRating != null && message.hasOwnProperty("minRating"))
                                 if (typeof message.minRating !== "number")
                                     return "minRating: number expected";
@@ -6257,20 +10807,10 @@
                                 message.rankPreference = 2;
                                 break;
                             }
-                            if (object.location != null) {
-                                if (typeof object.location !== "object")
-                                    throw TypeError(".google.maps.places.v1.SearchTextRequest.location: object expected");
-                                message.location = $root.google.maps.places.v1.SearchTextRequest.Location.fromObject(object.location);
-                            }
                             if (object.includedType != null)
                                 message.includedType = String(object.includedType);
                             if (object.openNow != null)
                                 message.openNow = Boolean(object.openNow);
-                            if (object.priceRange != null) {
-                                if (typeof object.priceRange !== "object")
-                                    throw TypeError(".google.maps.places.v1.SearchTextRequest.priceRange: object expected");
-                                message.priceRange = $root.google.maps.places.v1.Int32Range.fromObject(object.priceRange);
-                            }
                             if (object.minRating != null)
                                 message.minRating = Number(object.minRating);
                             if (object.maxResultCount != null)
@@ -6290,23 +10830,23 @@
                                     case 0:
                                         message.priceLevels[i] = 0;
                                         break;
-                                    case "FREE":
+                                    case "PRICE_LEVEL_FREE":
                                     case 1:
                                         message.priceLevels[i] = 1;
                                         break;
-                                    case "INEXPENSIVE":
+                                    case "PRICE_LEVEL_INEXPENSIVE":
                                     case 2:
                                         message.priceLevels[i] = 2;
                                         break;
-                                    case "MODERATE":
+                                    case "PRICE_LEVEL_MODERATE":
                                     case 3:
                                         message.priceLevels[i] = 3;
                                         break;
-                                    case "EXPENSIVE":
+                                    case "PRICE_LEVEL_EXPENSIVE":
                                     case 4:
                                         message.priceLevels[i] = 4;
                                         break;
-                                    case "VERY_EXPENSIVE":
+                                    case "PRICE_LEVEL_VERY_EXPENSIVE":
                                     case 5:
                                         message.priceLevels[i] = 5;
                                         break;
@@ -6347,10 +10887,8 @@
                                 object.languageCode = "";
                                 object.regionCode = "";
                                 object.rankPreference = options.enums === String ? "RANK_PREFERENCE_UNSPECIFIED" : 0;
-                                object.location = null;
                                 object.includedType = "";
                                 object.openNow = false;
-                                object.priceRange = null;
                                 object.minRating = 0;
                                 object.maxResultCount = 0;
                                 object.strictTypeFiltering = false;
@@ -6365,14 +10903,10 @@
                                 object.regionCode = message.regionCode;
                             if (message.rankPreference != null && message.hasOwnProperty("rankPreference"))
                                 object.rankPreference = options.enums === String ? $root.google.maps.places.v1.SearchTextRequest.RankPreference[message.rankPreference] === undefined ? message.rankPreference : $root.google.maps.places.v1.SearchTextRequest.RankPreference[message.rankPreference] : message.rankPreference;
-                            if (message.location != null && message.hasOwnProperty("location"))
-                                object.location = $root.google.maps.places.v1.SearchTextRequest.Location.toObject(message.location, options);
                             if (message.includedType != null && message.hasOwnProperty("includedType"))
                                 object.includedType = message.includedType;
                             if (message.openNow != null && message.hasOwnProperty("openNow"))
                                 object.openNow = message.openNow;
-                            if (message.priceRange != null && message.hasOwnProperty("priceRange"))
-                                object.priceRange = $root.google.maps.places.v1.Int32Range.toObject(message.priceRange, options);
                             if (message.minRating != null && message.hasOwnProperty("minRating"))
                                 object.minRating = options.json && !isFinite(message.minRating) ? String(message.minRating) : message.minRating;
                             if (message.maxResultCount != null && message.hasOwnProperty("maxResultCount"))
@@ -6431,257 +10965,6 @@
                             values[valuesById[1] = "DISTANCE"] = 1;
                             values[valuesById[2] = "RELEVANCE"] = 2;
                             return values;
-                        })();
-    
-                        SearchTextRequest.Location = (function() {
-    
-                            /**
-                             * Properties of a Location.
-                             * @memberof google.maps.places.v1.SearchTextRequest
-                             * @interface ILocation
-                             * @property {google.geo.type.IViewport|null} [rectangle] Location rectangle
-                             * @property {boolean|null} [strictRestriction] Location strictRestriction
-                             */
-    
-                            /**
-                             * Constructs a new Location.
-                             * @memberof google.maps.places.v1.SearchTextRequest
-                             * @classdesc Represents a Location.
-                             * @implements ILocation
-                             * @constructor
-                             * @param {google.maps.places.v1.SearchTextRequest.ILocation=} [properties] Properties to set
-                             */
-                            function Location(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * Location rectangle.
-                             * @member {google.geo.type.IViewport|null|undefined} rectangle
-                             * @memberof google.maps.places.v1.SearchTextRequest.Location
-                             * @instance
-                             */
-                            Location.prototype.rectangle = null;
-    
-                            /**
-                             * Location strictRestriction.
-                             * @member {boolean} strictRestriction
-                             * @memberof google.maps.places.v1.SearchTextRequest.Location
-                             * @instance
-                             */
-                            Location.prototype.strictRestriction = false;
-    
-                            // OneOf field names bound to virtual getters and setters
-                            var $oneOfFields;
-    
-                            /**
-                             * Location type.
-                             * @member {"rectangle"|undefined} type
-                             * @memberof google.maps.places.v1.SearchTextRequest.Location
-                             * @instance
-                             */
-                            Object.defineProperty(Location.prototype, "type", {
-                                get: $util.oneOfGetter($oneOfFields = ["rectangle"]),
-                                set: $util.oneOfSetter($oneOfFields)
-                            });
-    
-                            /**
-                             * Creates a new Location instance using the specified properties.
-                             * @function create
-                             * @memberof google.maps.places.v1.SearchTextRequest.Location
-                             * @static
-                             * @param {google.maps.places.v1.SearchTextRequest.ILocation=} [properties] Properties to set
-                             * @returns {google.maps.places.v1.SearchTextRequest.Location} Location instance
-                             */
-                            Location.create = function create(properties) {
-                                return new Location(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified Location message. Does not implicitly {@link google.maps.places.v1.SearchTextRequest.Location.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.maps.places.v1.SearchTextRequest.Location
-                             * @static
-                             * @param {google.maps.places.v1.SearchTextRequest.ILocation} message Location message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Location.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.rectangle != null && Object.hasOwnProperty.call(message, "rectangle"))
-                                    $root.google.geo.type.Viewport.encode(message.rectangle, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                                if (message.strictRestriction != null && Object.hasOwnProperty.call(message, "strictRestriction"))
-                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.strictRestriction);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified Location message, length delimited. Does not implicitly {@link google.maps.places.v1.SearchTextRequest.Location.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.maps.places.v1.SearchTextRequest.Location
-                             * @static
-                             * @param {google.maps.places.v1.SearchTextRequest.ILocation} message Location message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Location.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a Location message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.maps.places.v1.SearchTextRequest.Location
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.maps.places.v1.SearchTextRequest.Location} Location
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Location.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.SearchTextRequest.Location();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.rectangle = $root.google.geo.type.Viewport.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.strictRestriction = reader.bool();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a Location message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.maps.places.v1.SearchTextRequest.Location
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.maps.places.v1.SearchTextRequest.Location} Location
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Location.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a Location message.
-                             * @function verify
-                             * @memberof google.maps.places.v1.SearchTextRequest.Location
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            Location.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                var properties = {};
-                                if (message.rectangle != null && message.hasOwnProperty("rectangle")) {
-                                    properties.type = 1;
-                                    {
-                                        var error = $root.google.geo.type.Viewport.verify(message.rectangle);
-                                        if (error)
-                                            return "rectangle." + error;
-                                    }
-                                }
-                                if (message.strictRestriction != null && message.hasOwnProperty("strictRestriction"))
-                                    if (typeof message.strictRestriction !== "boolean")
-                                        return "strictRestriction: boolean expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a Location message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.maps.places.v1.SearchTextRequest.Location
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.maps.places.v1.SearchTextRequest.Location} Location
-                             */
-                            Location.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.maps.places.v1.SearchTextRequest.Location)
-                                    return object;
-                                var message = new $root.google.maps.places.v1.SearchTextRequest.Location();
-                                if (object.rectangle != null) {
-                                    if (typeof object.rectangle !== "object")
-                                        throw TypeError(".google.maps.places.v1.SearchTextRequest.Location.rectangle: object expected");
-                                    message.rectangle = $root.google.geo.type.Viewport.fromObject(object.rectangle);
-                                }
-                                if (object.strictRestriction != null)
-                                    message.strictRestriction = Boolean(object.strictRestriction);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a Location message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.maps.places.v1.SearchTextRequest.Location
-                             * @static
-                             * @param {google.maps.places.v1.SearchTextRequest.Location} message Location
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            Location.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults)
-                                    object.strictRestriction = false;
-                                if (message.rectangle != null && message.hasOwnProperty("rectangle")) {
-                                    object.rectangle = $root.google.geo.type.Viewport.toObject(message.rectangle, options);
-                                    if (options.oneofs)
-                                        object.type = "rectangle";
-                                }
-                                if (message.strictRestriction != null && message.hasOwnProperty("strictRestriction"))
-                                    object.strictRestriction = message.strictRestriction;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this Location to JSON.
-                             * @function toJSON
-                             * @memberof google.maps.places.v1.SearchTextRequest.Location
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            Location.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for Location
-                             * @function getTypeUrl
-                             * @memberof google.maps.places.v1.SearchTextRequest.Location
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            Location.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.maps.places.v1.SearchTextRequest.Location";
-                            };
-    
-                            return Location;
                         })();
     
                         SearchTextRequest.LocationBias = (function() {
@@ -7400,6 +11683,756 @@
                         return SearchTextResponse;
                     })();
     
+                    v1.GetPhotoMediaRequest = (function() {
+    
+                        /**
+                         * Properties of a GetPhotoMediaRequest.
+                         * @memberof google.maps.places.v1
+                         * @interface IGetPhotoMediaRequest
+                         * @property {string|null} [name] GetPhotoMediaRequest name
+                         * @property {number|null} [maxWidthPx] GetPhotoMediaRequest maxWidthPx
+                         * @property {number|null} [maxHeightPx] GetPhotoMediaRequest maxHeightPx
+                         * @property {boolean|null} [skipHttpRedirect] GetPhotoMediaRequest skipHttpRedirect
+                         */
+    
+                        /**
+                         * Constructs a new GetPhotoMediaRequest.
+                         * @memberof google.maps.places.v1
+                         * @classdesc Represents a GetPhotoMediaRequest.
+                         * @implements IGetPhotoMediaRequest
+                         * @constructor
+                         * @param {google.maps.places.v1.IGetPhotoMediaRequest=} [properties] Properties to set
+                         */
+                        function GetPhotoMediaRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetPhotoMediaRequest name.
+                         * @member {string} name
+                         * @memberof google.maps.places.v1.GetPhotoMediaRequest
+                         * @instance
+                         */
+                        GetPhotoMediaRequest.prototype.name = "";
+    
+                        /**
+                         * GetPhotoMediaRequest maxWidthPx.
+                         * @member {number} maxWidthPx
+                         * @memberof google.maps.places.v1.GetPhotoMediaRequest
+                         * @instance
+                         */
+                        GetPhotoMediaRequest.prototype.maxWidthPx = 0;
+    
+                        /**
+                         * GetPhotoMediaRequest maxHeightPx.
+                         * @member {number} maxHeightPx
+                         * @memberof google.maps.places.v1.GetPhotoMediaRequest
+                         * @instance
+                         */
+                        GetPhotoMediaRequest.prototype.maxHeightPx = 0;
+    
+                        /**
+                         * GetPhotoMediaRequest skipHttpRedirect.
+                         * @member {boolean} skipHttpRedirect
+                         * @memberof google.maps.places.v1.GetPhotoMediaRequest
+                         * @instance
+                         */
+                        GetPhotoMediaRequest.prototype.skipHttpRedirect = false;
+    
+                        /**
+                         * Creates a new GetPhotoMediaRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.places.v1.GetPhotoMediaRequest
+                         * @static
+                         * @param {google.maps.places.v1.IGetPhotoMediaRequest=} [properties] Properties to set
+                         * @returns {google.maps.places.v1.GetPhotoMediaRequest} GetPhotoMediaRequest instance
+                         */
+                        GetPhotoMediaRequest.create = function create(properties) {
+                            return new GetPhotoMediaRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetPhotoMediaRequest message. Does not implicitly {@link google.maps.places.v1.GetPhotoMediaRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.places.v1.GetPhotoMediaRequest
+                         * @static
+                         * @param {google.maps.places.v1.IGetPhotoMediaRequest} message GetPhotoMediaRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetPhotoMediaRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.maxWidthPx != null && Object.hasOwnProperty.call(message, "maxWidthPx"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.maxWidthPx);
+                            if (message.maxHeightPx != null && Object.hasOwnProperty.call(message, "maxHeightPx"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.maxHeightPx);
+                            if (message.skipHttpRedirect != null && Object.hasOwnProperty.call(message, "skipHttpRedirect"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.skipHttpRedirect);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetPhotoMediaRequest message, length delimited. Does not implicitly {@link google.maps.places.v1.GetPhotoMediaRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.places.v1.GetPhotoMediaRequest
+                         * @static
+                         * @param {google.maps.places.v1.IGetPhotoMediaRequest} message GetPhotoMediaRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetPhotoMediaRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetPhotoMediaRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.places.v1.GetPhotoMediaRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.places.v1.GetPhotoMediaRequest} GetPhotoMediaRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetPhotoMediaRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.GetPhotoMediaRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.maxWidthPx = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.maxHeightPx = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.skipHttpRedirect = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetPhotoMediaRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.places.v1.GetPhotoMediaRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.places.v1.GetPhotoMediaRequest} GetPhotoMediaRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetPhotoMediaRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetPhotoMediaRequest message.
+                         * @function verify
+                         * @memberof google.maps.places.v1.GetPhotoMediaRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetPhotoMediaRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.maxWidthPx != null && message.hasOwnProperty("maxWidthPx"))
+                                if (!$util.isInteger(message.maxWidthPx))
+                                    return "maxWidthPx: integer expected";
+                            if (message.maxHeightPx != null && message.hasOwnProperty("maxHeightPx"))
+                                if (!$util.isInteger(message.maxHeightPx))
+                                    return "maxHeightPx: integer expected";
+                            if (message.skipHttpRedirect != null && message.hasOwnProperty("skipHttpRedirect"))
+                                if (typeof message.skipHttpRedirect !== "boolean")
+                                    return "skipHttpRedirect: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetPhotoMediaRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.places.v1.GetPhotoMediaRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.places.v1.GetPhotoMediaRequest} GetPhotoMediaRequest
+                         */
+                        GetPhotoMediaRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.places.v1.GetPhotoMediaRequest)
+                                return object;
+                            var message = new $root.google.maps.places.v1.GetPhotoMediaRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.maxWidthPx != null)
+                                message.maxWidthPx = object.maxWidthPx | 0;
+                            if (object.maxHeightPx != null)
+                                message.maxHeightPx = object.maxHeightPx | 0;
+                            if (object.skipHttpRedirect != null)
+                                message.skipHttpRedirect = Boolean(object.skipHttpRedirect);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetPhotoMediaRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.places.v1.GetPhotoMediaRequest
+                         * @static
+                         * @param {google.maps.places.v1.GetPhotoMediaRequest} message GetPhotoMediaRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetPhotoMediaRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.maxWidthPx = 0;
+                                object.maxHeightPx = 0;
+                                object.skipHttpRedirect = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.maxWidthPx != null && message.hasOwnProperty("maxWidthPx"))
+                                object.maxWidthPx = message.maxWidthPx;
+                            if (message.maxHeightPx != null && message.hasOwnProperty("maxHeightPx"))
+                                object.maxHeightPx = message.maxHeightPx;
+                            if (message.skipHttpRedirect != null && message.hasOwnProperty("skipHttpRedirect"))
+                                object.skipHttpRedirect = message.skipHttpRedirect;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetPhotoMediaRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.places.v1.GetPhotoMediaRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetPhotoMediaRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetPhotoMediaRequest
+                         * @function getTypeUrl
+                         * @memberof google.maps.places.v1.GetPhotoMediaRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetPhotoMediaRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.places.v1.GetPhotoMediaRequest";
+                        };
+    
+                        return GetPhotoMediaRequest;
+                    })();
+    
+                    v1.PhotoMedia = (function() {
+    
+                        /**
+                         * Properties of a PhotoMedia.
+                         * @memberof google.maps.places.v1
+                         * @interface IPhotoMedia
+                         * @property {string|null} [name] PhotoMedia name
+                         * @property {string|null} [photoUri] PhotoMedia photoUri
+                         */
+    
+                        /**
+                         * Constructs a new PhotoMedia.
+                         * @memberof google.maps.places.v1
+                         * @classdesc Represents a PhotoMedia.
+                         * @implements IPhotoMedia
+                         * @constructor
+                         * @param {google.maps.places.v1.IPhotoMedia=} [properties] Properties to set
+                         */
+                        function PhotoMedia(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PhotoMedia name.
+                         * @member {string} name
+                         * @memberof google.maps.places.v1.PhotoMedia
+                         * @instance
+                         */
+                        PhotoMedia.prototype.name = "";
+    
+                        /**
+                         * PhotoMedia photoUri.
+                         * @member {string} photoUri
+                         * @memberof google.maps.places.v1.PhotoMedia
+                         * @instance
+                         */
+                        PhotoMedia.prototype.photoUri = "";
+    
+                        /**
+                         * Creates a new PhotoMedia instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.places.v1.PhotoMedia
+                         * @static
+                         * @param {google.maps.places.v1.IPhotoMedia=} [properties] Properties to set
+                         * @returns {google.maps.places.v1.PhotoMedia} PhotoMedia instance
+                         */
+                        PhotoMedia.create = function create(properties) {
+                            return new PhotoMedia(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PhotoMedia message. Does not implicitly {@link google.maps.places.v1.PhotoMedia.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.places.v1.PhotoMedia
+                         * @static
+                         * @param {google.maps.places.v1.IPhotoMedia} message PhotoMedia message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PhotoMedia.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.photoUri != null && Object.hasOwnProperty.call(message, "photoUri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.photoUri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PhotoMedia message, length delimited. Does not implicitly {@link google.maps.places.v1.PhotoMedia.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.places.v1.PhotoMedia
+                         * @static
+                         * @param {google.maps.places.v1.IPhotoMedia} message PhotoMedia message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PhotoMedia.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PhotoMedia message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.places.v1.PhotoMedia
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.places.v1.PhotoMedia} PhotoMedia
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PhotoMedia.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.PhotoMedia();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.photoUri = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PhotoMedia message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.places.v1.PhotoMedia
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.places.v1.PhotoMedia} PhotoMedia
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PhotoMedia.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PhotoMedia message.
+                         * @function verify
+                         * @memberof google.maps.places.v1.PhotoMedia
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PhotoMedia.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.photoUri != null && message.hasOwnProperty("photoUri"))
+                                if (!$util.isString(message.photoUri))
+                                    return "photoUri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PhotoMedia message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.places.v1.PhotoMedia
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.places.v1.PhotoMedia} PhotoMedia
+                         */
+                        PhotoMedia.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.places.v1.PhotoMedia)
+                                return object;
+                            var message = new $root.google.maps.places.v1.PhotoMedia();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.photoUri != null)
+                                message.photoUri = String(object.photoUri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PhotoMedia message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.places.v1.PhotoMedia
+                         * @static
+                         * @param {google.maps.places.v1.PhotoMedia} message PhotoMedia
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PhotoMedia.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.photoUri = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.photoUri != null && message.hasOwnProperty("photoUri"))
+                                object.photoUri = message.photoUri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PhotoMedia to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.places.v1.PhotoMedia
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PhotoMedia.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PhotoMedia
+                         * @function getTypeUrl
+                         * @memberof google.maps.places.v1.PhotoMedia
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PhotoMedia.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.places.v1.PhotoMedia";
+                        };
+    
+                        return PhotoMedia;
+                    })();
+    
+                    v1.GetPlaceRequest = (function() {
+    
+                        /**
+                         * Properties of a GetPlaceRequest.
+                         * @memberof google.maps.places.v1
+                         * @interface IGetPlaceRequest
+                         * @property {string|null} [name] GetPlaceRequest name
+                         * @property {string|null} [languageCode] GetPlaceRequest languageCode
+                         * @property {string|null} [regionCode] GetPlaceRequest regionCode
+                         */
+    
+                        /**
+                         * Constructs a new GetPlaceRequest.
+                         * @memberof google.maps.places.v1
+                         * @classdesc Represents a GetPlaceRequest.
+                         * @implements IGetPlaceRequest
+                         * @constructor
+                         * @param {google.maps.places.v1.IGetPlaceRequest=} [properties] Properties to set
+                         */
+                        function GetPlaceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetPlaceRequest name.
+                         * @member {string} name
+                         * @memberof google.maps.places.v1.GetPlaceRequest
+                         * @instance
+                         */
+                        GetPlaceRequest.prototype.name = "";
+    
+                        /**
+                         * GetPlaceRequest languageCode.
+                         * @member {string} languageCode
+                         * @memberof google.maps.places.v1.GetPlaceRequest
+                         * @instance
+                         */
+                        GetPlaceRequest.prototype.languageCode = "";
+    
+                        /**
+                         * GetPlaceRequest regionCode.
+                         * @member {string} regionCode
+                         * @memberof google.maps.places.v1.GetPlaceRequest
+                         * @instance
+                         */
+                        GetPlaceRequest.prototype.regionCode = "";
+    
+                        /**
+                         * Creates a new GetPlaceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.places.v1.GetPlaceRequest
+                         * @static
+                         * @param {google.maps.places.v1.IGetPlaceRequest=} [properties] Properties to set
+                         * @returns {google.maps.places.v1.GetPlaceRequest} GetPlaceRequest instance
+                         */
+                        GetPlaceRequest.create = function create(properties) {
+                            return new GetPlaceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetPlaceRequest message. Does not implicitly {@link google.maps.places.v1.GetPlaceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.places.v1.GetPlaceRequest
+                         * @static
+                         * @param {google.maps.places.v1.IGetPlaceRequest} message GetPlaceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetPlaceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.languageCode);
+                            if (message.regionCode != null && Object.hasOwnProperty.call(message, "regionCode"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.regionCode);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetPlaceRequest message, length delimited. Does not implicitly {@link google.maps.places.v1.GetPlaceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.places.v1.GetPlaceRequest
+                         * @static
+                         * @param {google.maps.places.v1.IGetPlaceRequest} message GetPlaceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetPlaceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetPlaceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.places.v1.GetPlaceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.places.v1.GetPlaceRequest} GetPlaceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetPlaceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.GetPlaceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.languageCode = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.regionCode = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetPlaceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.places.v1.GetPlaceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.places.v1.GetPlaceRequest} GetPlaceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetPlaceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetPlaceRequest message.
+                         * @function verify
+                         * @memberof google.maps.places.v1.GetPlaceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetPlaceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                if (!$util.isString(message.languageCode))
+                                    return "languageCode: string expected";
+                            if (message.regionCode != null && message.hasOwnProperty("regionCode"))
+                                if (!$util.isString(message.regionCode))
+                                    return "regionCode: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetPlaceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.places.v1.GetPlaceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.places.v1.GetPlaceRequest} GetPlaceRequest
+                         */
+                        GetPlaceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.places.v1.GetPlaceRequest)
+                                return object;
+                            var message = new $root.google.maps.places.v1.GetPlaceRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.languageCode != null)
+                                message.languageCode = String(object.languageCode);
+                            if (object.regionCode != null)
+                                message.regionCode = String(object.regionCode);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetPlaceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.places.v1.GetPlaceRequest
+                         * @static
+                         * @param {google.maps.places.v1.GetPlaceRequest} message GetPlaceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetPlaceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.languageCode = "";
+                                object.regionCode = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                object.languageCode = message.languageCode;
+                            if (message.regionCode != null && message.hasOwnProperty("regionCode"))
+                                object.regionCode = message.regionCode;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetPlaceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.places.v1.GetPlaceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetPlaceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetPlaceRequest
+                         * @function getTypeUrl
+                         * @memberof google.maps.places.v1.GetPlaceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetPlaceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.places.v1.GetPlaceRequest";
+                        };
+    
+                        return GetPlaceRequest;
+                    })();
+    
                     return v1;
                 })();
     
@@ -7442,6 +12475,690 @@
                 values[valuesById[6] = "UNORDERED_LIST"] = 6;
                 values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
                 return values;
+            })();
+    
+            api.ResourceDescriptor = (function() {
+    
+                /**
+                 * Properties of a ResourceDescriptor.
+                 * @memberof google.api
+                 * @interface IResourceDescriptor
+                 * @property {string|null} [type] ResourceDescriptor type
+                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
+                 * @property {string|null} [nameField] ResourceDescriptor nameField
+                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
+                 * @property {string|null} [plural] ResourceDescriptor plural
+                 * @property {string|null} [singular] ResourceDescriptor singular
+                 * @property {Array.<google.api.ResourceDescriptor.Style>|null} [style] ResourceDescriptor style
+                 */
+    
+                /**
+                 * Constructs a new ResourceDescriptor.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceDescriptor.
+                 * @implements IResourceDescriptor
+                 * @constructor
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 */
+                function ResourceDescriptor(properties) {
+                    this.pattern = [];
+                    this.style = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceDescriptor type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.type = "";
+    
+                /**
+                 * ResourceDescriptor pattern.
+                 * @member {Array.<string>} pattern
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.pattern = $util.emptyArray;
+    
+                /**
+                 * ResourceDescriptor nameField.
+                 * @member {string} nameField
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.nameField = "";
+    
+                /**
+                 * ResourceDescriptor history.
+                 * @member {google.api.ResourceDescriptor.History} history
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.history = 0;
+    
+                /**
+                 * ResourceDescriptor plural.
+                 * @member {string} plural
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.plural = "";
+    
+                /**
+                 * ResourceDescriptor singular.
+                 * @member {string} singular
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.singular = "";
+    
+                /**
+                 * ResourceDescriptor style.
+                 * @member {Array.<google.api.ResourceDescriptor.Style>} style
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.style = $util.emptyArray;
+    
+                /**
+                 * Creates a new ResourceDescriptor instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
+                 */
+                ResourceDescriptor.create = function create(properties) {
+                    return new ResourceDescriptor(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.pattern != null && message.pattern.length)
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
+                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
+                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
+                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
+                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
+                    if (message.style != null && message.style.length) {
+                        writer.uint32(/* id 10, wireType 2 =*/82).fork();
+                        for (var i = 0; i < message.style.length; ++i)
+                            writer.int32(message.style[i]);
+                        writer.ldelim();
+                    }
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.pattern && message.pattern.length))
+                                    message.pattern = [];
+                                message.pattern.push(reader.string());
+                                break;
+                            }
+                        case 3: {
+                                message.nameField = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.history = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.plural = reader.string();
+                                break;
+                            }
+                        case 6: {
+                                message.singular = reader.string();
+                                break;
+                            }
+                        case 10: {
+                                if (!(message.style && message.style.length))
+                                    message.style = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.style.push(reader.int32());
+                                } else
+                                    message.style.push(reader.int32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceDescriptor message.
+                 * @function verify
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceDescriptor.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
+                        if (!Array.isArray(message.pattern))
+                            return "pattern: array expected";
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            if (!$util.isString(message.pattern[i]))
+                                return "pattern: string[] expected";
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        if (!$util.isString(message.nameField))
+                            return "nameField: string expected";
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        switch (message.history) {
+                        default:
+                            return "history: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        if (!$util.isString(message.plural))
+                            return "plural: string expected";
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        if (!$util.isString(message.singular))
+                            return "singular: string expected";
+                    if (message.style != null && message.hasOwnProperty("style")) {
+                        if (!Array.isArray(message.style))
+                            return "style: array expected";
+                        for (var i = 0; i < message.style.length; ++i)
+                            switch (message.style[i]) {
+                            default:
+                                return "style: enum value[] expected";
+                            case 0:
+                            case 1:
+                                break;
+                            }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 */
+                ResourceDescriptor.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceDescriptor)
+                        return object;
+                    var message = new $root.google.api.ResourceDescriptor();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.pattern) {
+                        if (!Array.isArray(object.pattern))
+                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
+                        message.pattern = [];
+                        for (var i = 0; i < object.pattern.length; ++i)
+                            message.pattern[i] = String(object.pattern[i]);
+                    }
+                    if (object.nameField != null)
+                        message.nameField = String(object.nameField);
+                    switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
+                    case "HISTORY_UNSPECIFIED":
+                    case 0:
+                        message.history = 0;
+                        break;
+                    case "ORIGINALLY_SINGLE_PATTERN":
+                    case 1:
+                        message.history = 1;
+                        break;
+                    case "FUTURE_MULTI_PATTERN":
+                    case 2:
+                        message.history = 2;
+                        break;
+                    }
+                    if (object.plural != null)
+                        message.plural = String(object.plural);
+                    if (object.singular != null)
+                        message.singular = String(object.singular);
+                    if (object.style) {
+                        if (!Array.isArray(object.style))
+                            throw TypeError(".google.api.ResourceDescriptor.style: array expected");
+                        message.style = [];
+                        for (var i = 0; i < object.style.length; ++i)
+                            switch (object.style[i]) {
+                            default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
+                            case "STYLE_UNSPECIFIED":
+                            case 0:
+                                message.style[i] = 0;
+                                break;
+                            case "DECLARATIVE_FRIENDLY":
+                            case 1:
+                                message.style[i] = 1;
+                                break;
+                            }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceDescriptor.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.pattern = [];
+                        object.style = [];
+                    }
+                    if (options.defaults) {
+                        object.type = "";
+                        object.nameField = "";
+                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
+                        object.plural = "";
+                        object.singular = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.pattern && message.pattern.length) {
+                        object.pattern = [];
+                        for (var j = 0; j < message.pattern.length; ++j)
+                            object.pattern[j] = message.pattern[j];
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        object.nameField = message.nameField;
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        object.plural = message.plural;
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        object.singular = message.singular;
+                    if (message.style && message.style.length) {
+                        object.style = [];
+                        for (var j = 0; j < message.style.length; ++j)
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceDescriptor to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceDescriptor.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ResourceDescriptor
+                 * @function getTypeUrl
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ResourceDescriptor.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.ResourceDescriptor";
+                };
+    
+                /**
+                 * History enum.
+                 * @name google.api.ResourceDescriptor.History
+                 * @enum {number}
+                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
+                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
+                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
+                 */
+                ResourceDescriptor.History = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
+                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
+                    return values;
+                })();
+    
+                /**
+                 * Style enum.
+                 * @name google.api.ResourceDescriptor.Style
+                 * @enum {number}
+                 * @property {number} STYLE_UNSPECIFIED=0 STYLE_UNSPECIFIED value
+                 * @property {number} DECLARATIVE_FRIENDLY=1 DECLARATIVE_FRIENDLY value
+                 */
+                ResourceDescriptor.Style = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "STYLE_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "DECLARATIVE_FRIENDLY"] = 1;
+                    return values;
+                })();
+    
+                return ResourceDescriptor;
+            })();
+    
+            api.ResourceReference = (function() {
+    
+                /**
+                 * Properties of a ResourceReference.
+                 * @memberof google.api
+                 * @interface IResourceReference
+                 * @property {string|null} [type] ResourceReference type
+                 * @property {string|null} [childType] ResourceReference childType
+                 */
+    
+                /**
+                 * Constructs a new ResourceReference.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceReference.
+                 * @implements IResourceReference
+                 * @constructor
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 */
+                function ResourceReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceReference type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.type = "";
+    
+                /**
+                 * ResourceReference childType.
+                 * @member {string} childType
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.childType = "";
+    
+                /**
+                 * Creates a new ResourceReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 * @returns {google.api.ResourceReference} ResourceReference instance
+                 */
+                ResourceReference.create = function create(properties) {
+                    return new ResourceReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.childType = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceReference message.
+                 * @function verify
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        if (!$util.isString(message.childType))
+                            return "childType: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 */
+                ResourceReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceReference)
+                        return object;
+                    var message = new $root.google.api.ResourceReference();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.childType != null)
+                        message.childType = String(object.childType);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.ResourceReference} message ResourceReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type = "";
+                        object.childType = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        object.childType = message.childType;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ResourceReference
+                 * @function getTypeUrl
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ResourceReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.ResourceReference";
+                };
+    
+                return ResourceReference;
             })();
     
             api.Http = (function() {
@@ -16500,6 +22217,7 @@
                  * @property {string|null} [phpMetadataNamespace] FileOptions phpMetadataNamespace
                  * @property {string|null} [rubyPackage] FileOptions rubyPackage
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FileOptions uninterpretedOption
+                 * @property {Array.<google.api.IResourceDescriptor>|null} [".google.api.resourceDefinition"] FileOptions .google.api.resourceDefinition
                  */
     
                 /**
@@ -16512,6 +22230,7 @@
                  */
                 function FileOptions(properties) {
                     this.uninterpretedOption = [];
+                    this[".google.api.resourceDefinition"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -16687,6 +22406,14 @@
                 FileOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
+                 * FileOptions .google.api.resourceDefinition.
+                 * @member {Array.<google.api.IResourceDescriptor>} .google.api.resourceDefinition
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype[".google.api.resourceDefinition"] = $util.emptyArray;
+    
+                /**
                  * Creates a new FileOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FileOptions
@@ -16753,6 +22480,9 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.api.resourceDefinition"] != null && message[".google.api.resourceDefinition"].length)
+                        for (var i = 0; i < message[".google.api.resourceDefinition"].length; ++i)
+                            $root.google.api.ResourceDescriptor.encode(message[".google.api.resourceDefinition"][i], writer.uint32(/* id 1053, wireType 2 =*/8426).fork()).ldelim();
                     return writer;
                 };
     
@@ -16873,6 +22603,12 @@
                                 message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
                                 break;
                             }
+                        case 1053: {
+                                if (!(message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length))
+                                    message[".google.api.resourceDefinition"] = [];
+                                message[".google.api.resourceDefinition"].push($root.google.api.ResourceDescriptor.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -16983,6 +22719,15 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message[".google.api.resourceDefinition"] != null && message.hasOwnProperty(".google.api.resourceDefinition")) {
+                        if (!Array.isArray(message[".google.api.resourceDefinition"]))
+                            return ".google.api.resourceDefinition: array expected";
+                        for (var i = 0; i < message[".google.api.resourceDefinition"].length; ++i) {
+                            var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resourceDefinition"][i]);
+                            if (error)
+                                return ".google.api.resourceDefinition." + error;
+                        }
+                    }
                     return null;
                 };
     
@@ -17066,6 +22811,16 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object[".google.api.resourceDefinition"]) {
+                        if (!Array.isArray(object[".google.api.resourceDefinition"]))
+                            throw TypeError(".google.protobuf.FileOptions..google.api.resourceDefinition: array expected");
+                        message[".google.api.resourceDefinition"] = [];
+                        for (var i = 0; i < object[".google.api.resourceDefinition"].length; ++i) {
+                            if (typeof object[".google.api.resourceDefinition"][i] !== "object")
+                                throw TypeError(".google.protobuf.FileOptions..google.api.resourceDefinition: object expected");
+                            message[".google.api.resourceDefinition"][i] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resourceDefinition"][i]);
+                        }
+                    }
                     return message;
                 };
     
@@ -17082,8 +22837,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults)
+                    if (options.arrays || options.defaults) {
                         object.uninterpretedOption = [];
+                        object[".google.api.resourceDefinition"] = [];
+                    }
                     if (options.defaults) {
                         object.javaPackage = "";
                         object.javaOuterClassname = "";
@@ -17151,6 +22908,11 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
+                    if (message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length) {
+                        object[".google.api.resourceDefinition"] = [];
+                        for (var j = 0; j < message[".google.api.resourceDefinition"].length; ++j)
+                            object[".google.api.resourceDefinition"][j] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resourceDefinition"][j], options);
+                    }
                     return object;
                 };
     
@@ -17211,6 +22973,7 @@
                  * @property {boolean|null} [mapEntry] MessageOptions mapEntry
                  * @property {boolean|null} [deprecatedLegacyJsonFieldConflicts] MessageOptions deprecatedLegacyJsonFieldConflicts
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MessageOptions uninterpretedOption
+                 * @property {google.api.IResourceDescriptor|null} [".google.api.resource"] MessageOptions .google.api.resource
                  */
     
                 /**
@@ -17278,6 +23041,14 @@
                 MessageOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
+                 * MessageOptions .google.api.resource.
+                 * @member {google.api.IResourceDescriptor|null|undefined} .google.api.resource
+                 * @memberof google.protobuf.MessageOptions
+                 * @instance
+                 */
+                MessageOptions.prototype[".google.api.resource"] = null;
+    
+                /**
                  * Creates a new MessageOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.MessageOptions
@@ -17314,6 +23085,8 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.api.resource"] != null && Object.hasOwnProperty.call(message, ".google.api.resource"))
+                        $root.google.api.ResourceDescriptor.encode(message[".google.api.resource"], writer.uint32(/* id 1053, wireType 2 =*/8426).fork()).ldelim();
                     return writer;
                 };
     
@@ -17372,6 +23145,10 @@
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
                                 message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 1053: {
+                                message[".google.api.resource"] = $root.google.api.ResourceDescriptor.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -17433,6 +23210,11 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource")) {
+                        var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resource"]);
+                        if (error)
+                            return ".google.api.resource." + error;
+                    }
                     return null;
                 };
     
@@ -17468,6 +23250,11 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object[".google.api.resource"] != null) {
+                        if (typeof object[".google.api.resource"] !== "object")
+                            throw TypeError(".google.protobuf.MessageOptions..google.api.resource: object expected");
+                        message[".google.api.resource"] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resource"]);
+                    }
                     return message;
                 };
     
@@ -17492,6 +23279,7 @@
                         object.deprecated = false;
                         object.mapEntry = false;
                         object.deprecatedLegacyJsonFieldConflicts = false;
+                        object[".google.api.resource"] = null;
                     }
                     if (message.messageSetWireFormat != null && message.hasOwnProperty("messageSetWireFormat"))
                         object.messageSetWireFormat = message.messageSetWireFormat;
@@ -17508,6 +23296,8 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
+                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource"))
+                        object[".google.api.resource"] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resource"], options);
                     return object;
                 };
     
@@ -17558,6 +23348,7 @@
                  * @property {google.protobuf.FieldOptions.OptionTargetType|null} [target] FieldOptions target
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
+                 * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  */
     
                 /**
@@ -17674,6 +23465,14 @@
                 FieldOptions.prototype[".google.api.fieldBehavior"] = $util.emptyArray;
     
                 /**
+                 * FieldOptions .google.api.resourceReference.
+                 * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.resourceReference"] = null;
+    
+                /**
                  * Creates a new FieldOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FieldOptions
@@ -17726,6 +23525,8 @@
                             writer.int32(message[".google.api.fieldBehavior"][i]);
                         writer.ldelim();
                     }
+                    if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
+                        $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
                     return writer;
                 };
     
@@ -17815,6 +23616,10 @@
                                         message[".google.api.fieldBehavior"].push(reader.int32());
                                 } else
                                     message[".google.api.fieldBehavior"].push(reader.int32());
+                                break;
+                            }
+                        case 1055: {
+                                message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -17939,6 +23744,11 @@
                             case 7:
                                 break;
                             }
+                    }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
+                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
+                        if (error)
+                            return ".google.api.resourceReference." + error;
                     }
                     return null;
                 };
@@ -18130,6 +23940,11 @@
                                 break;
                             }
                     }
+                    if (object[".google.api.resourceReference"] != null) {
+                        if (typeof object[".google.api.resourceReference"] !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
+                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
+                    }
                     return message;
                 };
     
@@ -18161,6 +23976,7 @@
                         object.debugRedact = false;
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.target = options.enums === String ? "TARGET_TYPE_UNKNOWN" : 0;
+                        object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
                         object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
@@ -18192,6 +24008,8 @@
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
                             object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
+                        object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
                     return object;
                 };
     

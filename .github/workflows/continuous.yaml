@@ -4,25 +4,6 @@ on:
       - main
 name: continuous
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node: [14]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node }}
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 7.32.2
-      - run: node --version
-      - run: ci/run_conditional_tests.sh
-        name: Check lint
-        env:
-          BUILD_TYPE: continuous
-          TEST_TYPE: lint
   units:
     runs-on: ubuntu-latest
     strategy:

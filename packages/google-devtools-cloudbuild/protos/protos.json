@@ -728,6 +728,22 @@
                         "generation": {
                           "type": "int64",
                           "id": 3
+                        },
+                        "sourceFetcher": {
+                          "type": "SourceFetcher",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SourceFetcher": {
+                          "values": {
+                            "SOURCE_FETCHER_UNSPECIFIED": 0,
+                            "GSUTIL": 1,
+                            "GCS_FETCHER": 2
+                          }
                         }
                       }
                     },

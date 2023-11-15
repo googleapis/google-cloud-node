@@ -31,12 +31,12 @@ function main(project) {
   /**
    *  Required. The name of the project to search related account group
    *  memberships from. Specify the project name in the following format:
-   *  "projects/{project}".
+   *  `projects/{project}`.
    */
   // const project = 'my-project'
   /**
-   *  Optional. The unique stable hashed user identifier we should search
-   *  connections to. The identifier should correspond to a `hashed_account_id`
+   *  Optional. The unique stable hashed user identifier used to search
+   *  connections. The identifier should correspond to a `hashed_account_id`
    *  provided in a previous `CreateAssessment` or `AnnotateAssessment` call.
    */
   // const hashedAccountId = Buffer.from('string')

@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-contactcenterinsights",
-        "version": "3.0.1",
+        "version": "3.2.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -532,6 +532,58 @@
             }
         },
         {
+            "regionTag": "contactcenterinsights_v1_generated_ContactCenterInsights_BulkDeleteConversations_async",
+            "title": "ContactCenterInsights bulkDeleteConversations Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes multiple conversations in a single request.",
+            "canonical": true,
+            "file": "contact_center_insights.bulk_delete_conversations.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 71,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "BulkDeleteConversations",
+                "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.BulkDeleteConversations",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "max_delete_count",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "force",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ContactCenterInsightsClient",
+                    "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsightsClient"
+                },
+                "method": {
+                    "shortName": "BulkDeleteConversations",
+                    "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.BulkDeleteConversations",
+                    "service": {
+                        "shortName": "ContactCenterInsights",
+                        "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "contactcenterinsights_v1_generated_ContactCenterInsights_IngestConversations_async",
             "title": "ContactCenterInsights ingestConversations Sample",
             "origin": "API_DEFINITION",
@@ -542,7 +594,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 77,
                     "type": "FULL"
                 }
             ],
@@ -566,6 +618,14 @@
                     {
                         "name": "conversation_config",
                         "type": ".google.cloud.contactcenterinsights.v1.IngestConversationsRequest.ConversationConfig"
+                    },
+                    {
+                        "name": "redaction_config",
+                        "type": ".google.cloud.contactcenterinsights.v1.RedactionConfig"
+                    },
+                    {
+                        "name": "speech_config",
+                        "type": ".google.cloud.contactcenterinsights.v1.SpeechConfig"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",

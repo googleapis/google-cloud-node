@@ -10,9 +10,24 @@
         "grpc": {
           "libraryClient": "PlacesClient",
           "rpcs": {
+            "SearchNearby": {
+              "methods": [
+                "searchNearby"
+              ]
+            },
             "SearchText": {
               "methods": [
                 "searchText"
+              ]
+            },
+            "GetPhotoMedia": {
+              "methods": [
+                "getPhotoMedia"
+              ]
+            },
+            "GetPlace": {
+              "methods": [
+                "getPlace"
               ]
             }
           }
@@ -20,9 +35,24 @@
         "grpc-fallback": {
           "libraryClient": "PlacesClient",
           "rpcs": {
+            "SearchNearby": {
+              "methods": [
+                "searchNearby"
+              ]
+            },
             "SearchText": {
               "methods": [
                 "searchText"
+              ]
+            },
+            "GetPhotoMedia": {
+              "methods": [
+                "getPhotoMedia"
+              ]
+            },
+            "GetPlace": {
+              "methods": [
+                "getPlace"
               ]
             }
           }

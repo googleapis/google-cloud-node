@@ -29,9 +29,6 @@ function main(parent, feature, featureId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the EntityType to create a Feature.
-   *  Format:
-   *  `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`
    */
   // const parent = 'abc123'
   /**
@@ -43,7 +40,7 @@ function main(parent, feature, featureId) {
    *  component of the Feature's resource name.
    *  This value may be up to 128 characters, and valid characters are
    *  `[a-z0-9_]`. The first character cannot be a number.
-   *  The value must be unique within an EntityType.
+   *  The value must be unique within an EntityType/FeatureGroup.
    */
   // const featureId = 'abc123'
 

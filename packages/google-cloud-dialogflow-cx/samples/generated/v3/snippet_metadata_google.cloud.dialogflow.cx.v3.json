@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-cx",
-        "version": "4.1.0",
+        "version": "4.2.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -2324,6 +2324,114 @@
                 "method": {
                     "shortName": "DeleteIntent",
                     "fullName": "google.cloud.dialogflow.cx.v3.Intents.DeleteIntent",
+                    "service": {
+                        "shortName": "Intents",
+                        "fullName": "google.cloud.dialogflow.cx.v3.Intents"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v3_generated_Intents_ImportIntents_async",
+            "title": "Agents importIntents Sample",
+            "origin": "API_DEFINITION",
+            "description": " Imports the specified intents into the agent. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: [ImportIntentsMetadata][google.cloud.dialogflow.cx.v3.ImportIntentsMetadata] - `response`: [ImportIntentsResponse][google.cloud.dialogflow.cx.v3.ImportIntentsResponse]",
+            "canonical": true,
+            "file": "intents.import_intents.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 74,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ImportIntents",
+                "fullName": "google.cloud.dialogflow.cx.v3.Intents.ImportIntents",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "intents_uri",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "intents_content",
+                        "type": ".google.cloud.dialogflow.cx.v3.InlineSource"
+                    },
+                    {
+                        "name": "merge_option",
+                        "type": ".google.cloud.dialogflow.cx.v3.ImportIntentsRequest.MergeOption"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "IntentsClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3.IntentsClient"
+                },
+                "method": {
+                    "shortName": "ImportIntents",
+                    "fullName": "google.cloud.dialogflow.cx.v3.Intents.ImportIntents",
+                    "service": {
+                        "shortName": "Intents",
+                        "fullName": "google.cloud.dialogflow.cx.v3.Intents"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v3_generated_Intents_ExportIntents_async",
+            "title": "Agents exportIntents Sample",
+            "origin": "API_DEFINITION",
+            "description": " Exports the selected intents. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: [ExportIntentsMetadata][google.cloud.dialogflow.cx.v3.ExportIntentsMetadata] - `response`: [ExportIntentsResponse][google.cloud.dialogflow.cx.v3.ExportIntentsResponse]",
+            "canonical": true,
+            "file": "intents.export_intents.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 84,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ExportIntents",
+                "fullName": "google.cloud.dialogflow.cx.v3.Intents.ExportIntents",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "intents",
+                        "type": "TYPE_STRING[]"
+                    },
+                    {
+                        "name": "intents_uri",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "intents_content_inline",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "data_format",
+                        "type": ".google.cloud.dialogflow.cx.v3.ExportIntentsRequest.DataFormat"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "IntentsClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3.IntentsClient"
+                },
+                "method": {
+                    "shortName": "ExportIntents",
+                    "fullName": "google.cloud.dialogflow.cx.v3.Intents.ExportIntents",
                     "service": {
                         "shortName": "Intents",
                         "fullName": "google.cloud.dialogflow.cx.v3.Intents"

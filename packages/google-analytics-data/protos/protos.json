@@ -1035,13 +1035,13 @@
                     "java_outer_classname": "ReportingApiProto",
                     "java_package": "com.google.analytics.data.v1alpha",
                     "(google.api.resource_definition).type": "analyticsadmin.googleapis.com/Property",
-                    "(google.api.resource_definition).pattern": "properties/{propertyId}"
+                    "(google.api.resource_definition).pattern": "properties/{property}"
                   },
                   "nested": {
                     "AlphaAnalyticsData": {
                       "options": {
                         "(google.api.default_host)": "analyticsdata.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/analytics,https://www.googleapis.com/auth/analytics.readonly"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/analytics,https://www.googleapis.com/auth/analytics.readonly,https://www.googleapis.com/auth/drive,https://www.googleapis.com/auth/drive.file,https://www.googleapis.com/auth/spreadsheets"
                       },
                       "methods": {
                         "RunFunnelReport": {
@@ -1100,6 +1100,26 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v1alpha/{name=properties/*/audienceLists/*}:query",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "SheetExportAudienceList": {
+                          "requestType": "SheetExportAudienceListRequest",
+                          "responseType": "SheetExportAudienceListResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{name=properties/*/audienceLists/*}:exportSheet",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{name=properties/*/audienceLists/*}:exportSheet",
                                 "body": "*"
                               }
                             },
@@ -1170,11 +1190,17 @@
                         },
                         "pageSize": {
                           "type": "int32",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "pageToken": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1223,7 +1249,9 @@
                     "AudienceList": {
                       "options": {
                         "(google.api.resource).type": "analyticsdata.googleapis.com/AudienceList",
-                        "(google.api.resource).pattern": "properties/{propertyId}/audienceLists/{audienceListId}"
+                        "(google.api.resource).pattern": "properties/{property}/audienceLists/{audience_list}",
+                        "(google.api.resource).plural": "audienceLists",
+                        "(google.api.resource).singular": "audienceList"
                       },
                       "oneofs": {
                         "_state": {
@@ -1234,6 +1262,16 @@
                         "_beginCreatingTime": {
                           "oneof": [
                             "beginCreatingTime"
+                          ]
+                        },
+                        "_rowCount": {
+                          "oneof": [
+                            "rowCount"
+                          ]
+                        },
+                        "_errorMessage": {
+                          "oneof": [
+                            "errorMessage"
                           ]
                         }
                       },
@@ -1282,6 +1320,29 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
                           }
+                        },
+                        "creationQuotaTokensCharged": {
+                          "type": "int32",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "rowCount": {
+                          "type": "int32",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "errorMessage": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -1302,15 +1363,24 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "offset": {
                           "type": "int64",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "limit": {
                           "type": "int64",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1349,6 +1419,86 @@
                         }
                       }
                     },
+                    "SheetExportAudienceListRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsdata.googleapis.com/AudienceList"
+                          }
+                        },
+                        "offset": {
+                          "type": "int64",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "limit": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SheetExportAudienceListResponse": {
+                      "oneofs": {
+                        "_spreadsheetUri": {
+                          "oneof": [
+                            "spreadsheetUri"
+                          ]
+                        },
+                        "_spreadsheetId": {
+                          "oneof": [
+                            "spreadsheetId"
+                          ]
+                        },
+                        "_rowCount": {
+                          "oneof": [
+                            "rowCount"
+                          ]
+                        },
+                        "_audienceList": {
+                          "oneof": [
+                            "audienceList"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "spreadsheetUri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "spreadsheetId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "rowCount": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "audienceList": {
+                          "type": "AudienceList",
+                          "id": 4,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "AudienceRow": {
                       "fields": {
                         "dimensionValues": {
@@ -1362,7 +1512,10 @@
                       "fields": {
                         "dimensionName": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1385,45 +1538,75 @@
                       "fields": {
                         "property": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "dateRanges": {
                           "rule": "repeated",
                           "type": "DateRange",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "funnel": {
                           "type": "Funnel",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "funnelBreakdown": {
                           "type": "FunnelBreakdown",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "funnelNextAction": {
                           "type": "FunnelNextAction",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "funnelVisualizationType": {
                           "type": "FunnelVisualizationType",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "segments": {
                           "rule": "repeated",
                           "type": "Segment",
-                          "id": 7
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "limit": {
                           "type": "int64",
-                          "id": 9
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "dimensionFilter": {
                           "type": "FilterExpression",
-                          "id": 10
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "returnPropertyQuota": {
                           "type": "bool",
-                          "id": 12
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {

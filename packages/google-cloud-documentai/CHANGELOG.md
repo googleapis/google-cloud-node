@@ -1,5 +1,13 @@
 # Changelog
 
+## [8.1.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v8.0.1...documentai-v8.1.0) (2023-10-18)
+
+
+### Features
+
+* [documentai] added field Processor.processor_version_aliases ([#4689](https://github.com/googleapis/google-cloud-node/issues/4689)) ([effcc26](https://github.com/googleapis/google-cloud-node/commit/effcc26ef80ba3d7fd982d1d3860c147a9046f15))
+* [documentai] Added SummaryOptions to ProcessOptions for the Summarizer processor ([#4696](https://github.com/googleapis/google-cloud-node/issues/4696)) ([d02e044](https://github.com/googleapis/google-cloud-node/commit/d02e04450fbbe047238f2d0d8b20355ec9855832))
+
 ## [8.0.1](https://github.com/googleapis/google-cloud-node/compare/documentai-v8.0.0...documentai-v8.0.1) (2023-09-06)
 
 

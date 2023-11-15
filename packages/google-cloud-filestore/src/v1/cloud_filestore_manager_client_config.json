@@ -57,6 +57,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "RevertInstance": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "DeleteInstance": {
           "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",

@@ -37,6 +37,10 @@ const version = require('../../../package.json').version;
 
 /**
  *  Service definition for the Places API.
+ *  Note: every request actually requires a field mask set outside of the request
+ *  proto (all/'*' is not assumed).  That can be set via either a side channel
+ *  (SystemParameterContext) over RPC, or a header (X-Goog-FieldMask) over HTTP.
+ *  See: https://cloud.google.com/apis/docs/system-parameters
  * @class
  * @memberof v1
  */
@@ -57,6 +61,7 @@ export class PlacesClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   placesStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -170,6 +175,22 @@ export class PlacesClient {
     // Load the applicable protos.
     this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
 
+    // This API contains "path templates"; forward-slash-separated
+    // identifiers to uniquely identify resources within the API.
+    // Create useful helper objects for these.
+    this.pathTemplates = {
+      photoPathTemplate: new this._gaxModule.PathTemplate(
+        'places/{place}/photos/{photo}'
+      ),
+      photoMediaPathTemplate: new this._gaxModule.PathTemplate(
+        'places/{place_id}/photos/{photo_reference}/media'
+      ),
+      placePathTemplate: new this._gaxModule.PathTemplate('places/{place_id}'),
+      reviewPathTemplate: new this._gaxModule.PathTemplate(
+        'places/{place}/reviews/{review}'
+      ),
+    };
+
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
       'google.maps.places.v1.Places',
@@ -219,7 +240,12 @@ export class PlacesClient {
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const placesStubMethods = ['searchText'];
+    const placesStubMethods = [
+      'searchNearby',
+      'searchText',
+      'getPhotoMedia',
+      'getPlace',
+    ];
     for (const methodName of placesStubMethods) {
       const callPromise = this.placesStub.then(
         stub =>
@@ -303,6 +329,166 @@ export class PlacesClient {
   // -- Service calls --
   // -------------------
   /**
+   * Search for places near locations.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.languageCode
+   *   Place details will be displayed with the preferred language if available.
+   *   If the language code is unspecified or unrecognized, place details of any
+   *   language may be returned, with a preference for English if such details
+   *   exist.
+   *
+   *   Current list of supported languages:
+   *   https://developers.google.com/maps/faq#languagesupport.
+   * @param {string} request.regionCode
+   *   The Unicode country/region code (CLDR) of the location where the
+   *   request is coming from. This parameter is used to display the place
+   *   details, like region-specific place name, if available. The parameter can
+   *   affect results based on applicable law.
+   *
+   *   For more information, see
+   *   http://www.unicode.org/reports/tr35/#unicode_region_subtag.
+   *
+   *
+   *   Note that 3-digit region codes are not currently supported.
+   * @param {string[]} request.includedTypes
+   *   Included Place type (eg, "restaurant" or "gas_station") from
+   *   https://developers.google.com/places/supported_types.
+   *
+   *   If there are any conflicting types, i.e. a type appears in both
+   *   included_types and excluded_types, an INVALID_ARGUMENT error is
+   *   returned.
+   *
+   *   If a Place type is specified with multiple type restrictions, only places
+   *   that satisfy all of the restrictions are returned. For example, if we
+   *   have {included_types = ["restaurant"], excluded_primary_types =
+   *   ["restaurant"]}, the returned places are POIs that provide "restaurant"
+   *   related services but do not operate primarily as "restaurants".
+   * @param {string[]} request.excludedTypes
+   *   Excluded Place type (eg, "restaurant" or "gas_station") from
+   *   https://developers.google.com/places/supported_types.
+   *
+   *   If the client provides both included_types (e.g. restaurant) and
+   *   excluded_types (e.g. cafe), then the response should include places that
+   *   are restaurant but not cafe. The response includes places that match at
+   *   least one of the included_types and none of the excluded_types.
+   *
+   *   If there are any conflicting types, i.e. a type appears in both
+   *   included_types and excluded_types, an INVALID_ARGUMENT error is returned.
+   *
+   *   If a Place type is specified with multiple type restrictions, only places
+   *   that satisfy all of the restrictions are returned. For example, if we
+   *   have {included_types = ["restaurant"], excluded_primary_types =
+   *   ["restaurant"]}, the returned places are POIs that provide "restaurant"
+   *   related services but do not operate primarily as "restaurants".
+   * @param {string[]} request.includedPrimaryTypes
+   *   Included primary Place type (e.g. "restaurant" or "gas_station") from
+   *   https://developers.google.com/places/supported_types.
+   *
+   *   If there are any conflicting primary types, i.e. a type appears in both
+   *   included_primary_types and excluded_primary_types, an INVALID_ARGUMENT
+   *   error is returned.
+   *
+   *   If a Place type is specified with multiple type restrictions, only places
+   *   that satisfy all of the restrictions are returned. For example, if we
+   *   have {included_types = ["restaurant"], excluded_primary_types =
+   *   ["restaurant"]}, the returned places are POIs that provide "restaurant"
+   *   related services but do not operate primarily as "restaurants".
+   * @param {string[]} request.excludedPrimaryTypes
+   *   Excluded primary Place type (e.g. "restaurant" or "gas_station") from
+   *   https://developers.google.com/places/supported_types.
+   *
+   *   If there are any conflicting primary types, i.e. a type appears in both
+   *   included_primary_types and excluded_primary_types, an INVALID_ARGUMENT
+   *   error is returned.
+   *
+   *   If a Place type is specified with multiple type restrictions, only places
+   *   that satisfy all of the restrictions are returned. For example, if we
+   *   have {included_types = ["restaurant"], excluded_primary_types =
+   *   ["restaurant"]}, the returned places are POIs that provide "restaurant"
+   *   related services but do not operate primarily as "restaurants".
+   * @param {number} request.maxResultCount
+   *   Maximum number of results to return. It must be between 1 and 20,
+   *   inclusively. If the number is unset, it falls back to the upper limit. If
+   *   the number is set to negative or exceeds the upper limit, an
+   *   INVALID_ARGUMENT error is returned.
+   * @param {google.maps.places.v1.SearchNearbyRequest.LocationRestriction} request.locationRestriction
+   *   Required. The region to search.
+   * @param {google.maps.places.v1.SearchNearbyRequest.RankPreference} request.rankPreference
+   *   How results will be ranked in the response.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.maps.places.v1.SearchNearbyResponse|SearchNearbyResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/places.search_nearby.js</caption>
+   * region_tag:places_v1_generated_Places_SearchNearby_async
+   */
+  searchNearby(
+    request?: protos.google.maps.places.v1.ISearchNearbyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.maps.places.v1.ISearchNearbyResponse,
+      protos.google.maps.places.v1.ISearchNearbyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  searchNearby(
+    request: protos.google.maps.places.v1.ISearchNearbyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.maps.places.v1.ISearchNearbyResponse,
+      protos.google.maps.places.v1.ISearchNearbyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  searchNearby(
+    request: protos.google.maps.places.v1.ISearchNearbyRequest,
+    callback: Callback<
+      protos.google.maps.places.v1.ISearchNearbyResponse,
+      protos.google.maps.places.v1.ISearchNearbyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  searchNearby(
+    request?: protos.google.maps.places.v1.ISearchNearbyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.maps.places.v1.ISearchNearbyResponse,
+          protos.google.maps.places.v1.ISearchNearbyRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.maps.places.v1.ISearchNearbyResponse,
+      protos.google.maps.places.v1.ISearchNearbyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.maps.places.v1.ISearchNearbyResponse,
+      protos.google.maps.places.v1.ISearchNearbyRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    this.initialize();
+    return this.innerApiCalls.searchNearby(request, options, callback);
+  }
+  /**
    * Text query based place search.
    *
    * @param {Object} request
@@ -319,8 +505,9 @@ export class PlacesClient {
    *   https://developers.google.com/maps/faq#languagesupport.
    * @param {string} request.regionCode
    *   The Unicode country/region code (CLDR) of the location where the
-   *   request is coming from. It is used to display the place details, like
-   *   region-specific place name, if available.
+   *   request is coming from. This parameter is used to display the place
+   *   details, like region-specific place name, if available. The parameter can
+   *   affect results based on applicable law.
    *
    *   For more information, see
    *   http://www.unicode.org/reports/tr35/#unicode_region_subtag.
@@ -329,13 +516,6 @@ export class PlacesClient {
    *   Note that 3-digit region codes are not currently supported.
    * @param {google.maps.places.v1.SearchTextRequest.RankPreference} request.rankPreference
    *   How results will be ranked in the response.
-   * @param {google.maps.places.v1.SearchTextRequest.Location} request.location
-   *   The region to search. Setting location would usually yields
-   *   better results. Recommended to set. This location serves as a bias unless
-   *   strict_restriction is set to true, which turns the location to a strict
-   *   restriction.
-   *
-   *   Deprecated.  Use LocationRestriction or LocationBias instead.
    * @param {string} request.includedType
    *   The requested place type. Full list of types supported:
    *   https://developers.google.com/places/supported_types. Only support one
@@ -343,16 +523,10 @@ export class PlacesClient {
    * @param {boolean} request.openNow
    *   Used to restrict the search to places that are open at a specific time.
    *   open_now marks if a business is currently open.
-   * @param {google.maps.places.v1.Int32Range} request.priceRange
-   *   [Deprecated!]Used to restrict the search to places that are within a
-   *   certain price range. This is on a scale of 0 to 4. Set a minimum of 0 or
-   *   set a maximum of 4 has no effect on the search results. Min price is
-   *   default to 0 and max price is default to 4. Default value will be used if
-   *   either min or max is unset.
    * @param {number} request.minRating
    *   Filter out results whose average user rating is strictly less than this
    *   limit. A valid value must be an float between 0 and 5 (inclusively) at a
-   *   0.5 cadence i.e. `[0, 0.5, 1.0, ... , 5.0]` inclusively. This is to keep
+   *   0.5 cadence i.e. [0, 0.5, 1.0, ... , 5.0] inclusively. This is to keep
    *   parity with LocalRefinement_UserRating. The input rating will round up to
    *   the nearest 0.5(ceiling). For instance, a rating of 0.6 will eliminate all
    *   results with a less than 1.0 rating.
@@ -446,6 +620,355 @@ export class PlacesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.searchText(request, options, callback);
+  }
+  /**
+   * Get a photo media with a photo reference string.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of a photo. It is returned in Place's
+   *   photos.name field. Format:
+   *   places/<place_id>/photos/<photo_reference>/media.
+   * @param {number} [request.maxWidthPx]
+   *   Optional. Specifies the maximum desired width, in pixels, of the image. If
+   *   the image is smaller than the values specified, the original image will be
+   *   returned. If the image is larger in either dimension, it will be scaled to
+   *   match the smaller of the two dimensions, restricted to its original aspect
+   *   ratio. Both the max_height_px and max_width_px properties accept an integer
+   *   between 1 and 4800, inclusively. If the value is not within the allowed
+   *   range, an INVALID_ARGUMENT error will be returned.
+   *
+   *   At least one of max_height_px or max_width_px needs to be specified. If
+   *   neither max_height_px nor max_width_px is specified, an INVALID_ARGUMENT
+   *   error will be returned.
+   * @param {number} [request.maxHeightPx]
+   *   Optional. Specifies the maximum desired height, in pixels, of the image. If
+   *   the image is smaller than the values specified, the original image will be
+   *   returned. If the image is larger in either dimension, it will be scaled to
+   *   match the smaller of the two dimensions, restricted to its original aspect
+   *   ratio. Both the max_height_px and max_width_px properties accept an integer
+   *   between 1 and 4800, inclusively. If the value is not within the allowed
+   *   range, an INVALID_ARGUMENT error will be returned.
+   *
+   *   At least one of max_height_px or max_width_px needs to be specified. If
+   *   neither max_height_px nor max_width_px is specified, an INVALID_ARGUMENT
+   *   error will be returned.
+   * @param {boolean} [request.skipHttpRedirect]
+   *   Optional. If set, skip the default HTTP redirect behavior and render a text
+   *   format (for example, in JSON format for HTTP use case) response. If not
+   *   set, an HTTP redirect will be issued to redirect the call to the image
+   *   midea. This option is ignored for non-HTTP requests.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.maps.places.v1.PhotoMedia|PhotoMedia}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/places.get_photo_media.js</caption>
+   * region_tag:places_v1_generated_Places_GetPhotoMedia_async
+   */
+  getPhotoMedia(
+    request?: protos.google.maps.places.v1.IGetPhotoMediaRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.maps.places.v1.IPhotoMedia,
+      protos.google.maps.places.v1.IGetPhotoMediaRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getPhotoMedia(
+    request: protos.google.maps.places.v1.IGetPhotoMediaRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.maps.places.v1.IPhotoMedia,
+      protos.google.maps.places.v1.IGetPhotoMediaRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getPhotoMedia(
+    request: protos.google.maps.places.v1.IGetPhotoMediaRequest,
+    callback: Callback<
+      protos.google.maps.places.v1.IPhotoMedia,
+      protos.google.maps.places.v1.IGetPhotoMediaRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getPhotoMedia(
+    request?: protos.google.maps.places.v1.IGetPhotoMediaRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.maps.places.v1.IPhotoMedia,
+          protos.google.maps.places.v1.IGetPhotoMediaRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.maps.places.v1.IPhotoMedia,
+      protos.google.maps.places.v1.IGetPhotoMediaRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.maps.places.v1.IPhotoMedia,
+      protos.google.maps.places.v1.IGetPhotoMediaRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getPhotoMedia(request, options, callback);
+  }
+  /**
+   * Get a Place with a place id (in a name) string.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. A place_id returned in a Place (with "places/" prefix), or
+   *   equivalently the name in the same Place. Format: places/<place_id>.
+   * @param {string} [request.languageCode]
+   *   Optional. Place details will be displayed with the preferred language if
+   *   available.
+   *
+   *   Current list of supported languages:
+   *   https://developers.google.com/maps/faq#languagesupport.
+   * @param {string} [request.regionCode]
+   *   Optional. The Unicode country/region code (CLDR) of the location where the
+   *   request is coming from. This parameter is used to display the place
+   *   details, like region-specific place name, if available. The parameter can
+   *   affect results based on applicable law.
+   *   For more information, see
+   *   http://www.unicode.org/reports/tr35/#unicode_region_subtag.
+   *
+   *
+   *   Note that 3-digit region codes are not currently supported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.maps.places.v1.Place|Place}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/places.get_place.js</caption>
+   * region_tag:places_v1_generated_Places_GetPlace_async
+   */
+  getPlace(
+    request?: protos.google.maps.places.v1.IGetPlaceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.maps.places.v1.IPlace,
+      protos.google.maps.places.v1.IGetPlaceRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getPlace(
+    request: protos.google.maps.places.v1.IGetPlaceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.maps.places.v1.IPlace,
+      protos.google.maps.places.v1.IGetPlaceRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getPlace(
+    request: protos.google.maps.places.v1.IGetPlaceRequest,
+    callback: Callback<
+      protos.google.maps.places.v1.IPlace,
+      protos.google.maps.places.v1.IGetPlaceRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getPlace(
+    request?: protos.google.maps.places.v1.IGetPlaceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.maps.places.v1.IPlace,
+          protos.google.maps.places.v1.IGetPlaceRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.maps.places.v1.IPlace,
+      protos.google.maps.places.v1.IGetPlaceRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.maps.places.v1.IPlace,
+      protos.google.maps.places.v1.IGetPlaceRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getPlace(request, options, callback);
+  }
+
+  // --------------------
+  // -- Path templates --
+  // --------------------
+
+  /**
+   * Return a fully-qualified photo resource name string.
+   *
+   * @param {string} place
+   * @param {string} photo
+   * @returns {string} Resource name string.
+   */
+  photoPath(place: string, photo: string) {
+    return this.pathTemplates.photoPathTemplate.render({
+      place: place,
+      photo: photo,
+    });
+  }
+
+  /**
+   * Parse the place from Photo resource.
+   *
+   * @param {string} photoName
+   *   A fully-qualified path representing Photo resource.
+   * @returns {string} A string representing the place.
+   */
+  matchPlaceFromPhotoName(photoName: string) {
+    return this.pathTemplates.photoPathTemplate.match(photoName).place;
+  }
+
+  /**
+   * Parse the photo from Photo resource.
+   *
+   * @param {string} photoName
+   *   A fully-qualified path representing Photo resource.
+   * @returns {string} A string representing the photo.
+   */
+  matchPhotoFromPhotoName(photoName: string) {
+    return this.pathTemplates.photoPathTemplate.match(photoName).photo;
+  }
+
+  /**
+   * Return a fully-qualified photoMedia resource name string.
+   *
+   * @param {string} place_id
+   * @param {string} photo_reference
+   * @returns {string} Resource name string.
+   */
+  photoMediaPath(placeId: string, photoReference: string) {
+    return this.pathTemplates.photoMediaPathTemplate.render({
+      place_id: placeId,
+      photo_reference: photoReference,
+    });
+  }
+
+  /**
+   * Parse the place_id from PhotoMedia resource.
+   *
+   * @param {string} photoMediaName
+   *   A fully-qualified path representing PhotoMedia resource.
+   * @returns {string} A string representing the place_id.
+   */
+  matchPlaceIdFromPhotoMediaName(photoMediaName: string) {
+    return this.pathTemplates.photoMediaPathTemplate.match(photoMediaName)
+      .place_id;
+  }
+
+  /**
+   * Parse the photo_reference from PhotoMedia resource.
+   *
+   * @param {string} photoMediaName
+   *   A fully-qualified path representing PhotoMedia resource.
+   * @returns {string} A string representing the photo_reference.
+   */
+  matchPhotoReferenceFromPhotoMediaName(photoMediaName: string) {
+    return this.pathTemplates.photoMediaPathTemplate.match(photoMediaName)
+      .photo_reference;
+  }
+
+  /**
+   * Return a fully-qualified place resource name string.
+   *
+   * @param {string} place_id
+   * @returns {string} Resource name string.
+   */
+  placePath(placeId: string) {
+    return this.pathTemplates.placePathTemplate.render({
+      place_id: placeId,
+    });
+  }
+
+  /**
+   * Parse the place_id from Place resource.
+   *
+   * @param {string} placeName
+   *   A fully-qualified path representing Place resource.
+   * @returns {string} A string representing the place_id.
+   */
+  matchPlaceIdFromPlaceName(placeName: string) {
+    return this.pathTemplates.placePathTemplate.match(placeName).place_id;
+  }
+
+  /**
+   * Return a fully-qualified review resource name string.
+   *
+   * @param {string} place
+   * @param {string} review
+   * @returns {string} Resource name string.
+   */
+  reviewPath(place: string, review: string) {
+    return this.pathTemplates.reviewPathTemplate.render({
+      place: place,
+      review: review,
+    });
+  }
+
+  /**
+   * Parse the place from Review resource.
+   *
+   * @param {string} reviewName
+   *   A fully-qualified path representing Review resource.
+   * @returns {string} A string representing the place.
+   */
+  matchPlaceFromReviewName(reviewName: string) {
+    return this.pathTemplates.reviewPathTemplate.match(reviewName).place;
+  }
+
+  /**
+   * Parse the review from Review resource.
+   *
+   * @param {string} reviewName
+   *   A fully-qualified path representing Review resource.
+   * @returns {string} A string representing the review.
+   */
+  matchReviewFromReviewName(reviewName: string) {
+    return this.pathTemplates.reviewPathTemplate.match(reviewName).review;
   }
 
   /**

@@ -861,6 +861,10 @@ export class ClusterManagerClient {
    *   Optional. The desired disk size for nodes in the node pool.
    *   Initiates an upgrade operation that migrates the nodes in the
    *   node pool to the specified disk size.
+   * @param {google.container.v1beta1.ResourceManagerTags} request.resourceManagerTags
+   *   Desired resource manager tag keys and values to be attached to the nodes
+   *   for managing Compute Engine firewalls using Network Firewall Policies.
+   *   Existing tags will be replaced with new values.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [8.1.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v8.0.1...security-center-v8.1.0) (2023-10-24)
+
+
+### Features
+
+* [securitycenter] Add SimulateSecurityHealthAnalyticsCustomModule API for testing SHA custom module ([#4749](https://github.com/googleapis/google-cloud-node/issues/4749)) ([ed25f95](https://github.com/googleapis/google-cloud-node/commit/ed25f958cde497f8df502a2796eb8bd46a676f16))
+
 ## [8.0.1](https://github.com/googleapis/google-cloud-node/compare/security-center-v8.0.0...security-center-v8.0.1) (2023-09-06)
 
 

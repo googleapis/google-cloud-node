@@ -20,6 +20,11 @@
                 "updateDataset"
               ]
             },
+            "GetDatasetVersion": {
+              "methods": [
+                "getDatasetVersion"
+              ]
+            },
             "GetAnnotationSpec": {
               "methods": [
                 "getAnnotationSpec"
@@ -45,6 +50,21 @@
                 "exportData"
               ]
             },
+            "CreateDatasetVersion": {
+              "methods": [
+                "createDatasetVersion"
+              ]
+            },
+            "DeleteDatasetVersion": {
+              "methods": [
+                "deleteDatasetVersion"
+              ]
+            },
+            "RestoreDatasetVersion": {
+              "methods": [
+                "restoreDatasetVersion"
+              ]
+            },
             "DeleteSavedQuery": {
               "methods": [
                 "deleteSavedQuery"
@@ -55,6 +75,13 @@
                 "listDatasets",
                 "listDatasetsStream",
                 "listDatasetsAsync"
+              ]
+            },
+            "ListDatasetVersions": {
+              "methods": [
+                "listDatasetVersions",
+                "listDatasetVersionsStream",
+                "listDatasetVersionsAsync"
               ]
             },
             "ListDataItems": {
@@ -100,6 +127,11 @@
                 "updateDataset"
               ]
             },
+            "GetDatasetVersion": {
+              "methods": [
+                "getDatasetVersion"
+              ]
+            },
             "GetAnnotationSpec": {
               "methods": [
                 "getAnnotationSpec"
@@ -125,6 +157,21 @@
                 "exportData"
               ]
             },
+            "CreateDatasetVersion": {
+              "methods": [
+                "createDatasetVersion"
+              ]
+            },
+            "DeleteDatasetVersion": {
+              "methods": [
+                "deleteDatasetVersion"
+              ]
+            },
+            "RestoreDatasetVersion": {
+              "methods": [
+                "restoreDatasetVersion"
+              ]
+            },
             "DeleteSavedQuery": {
               "methods": [
                 "deleteSavedQuery"
@@ -135,6 +182,13 @@
                 "listDatasets",
                 "listDatasetsStream",
                 "listDatasetsAsync"
+              ]
+            },
+            "ListDatasetVersions": {
+              "methods": [
+                "listDatasetVersions",
+                "listDatasetVersionsStream",
+                "listDatasetVersionsAsync"
               ]
             },
             "ListDataItems": {
@@ -333,6 +387,318 @@
                 "listEndpoints",
                 "listEndpointsStream",
                 "listEndpointsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "FeatureOnlineStoreAdminService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "FeatureOnlineStoreAdminServiceClient",
+          "rpcs": {
+            "GetFeatureOnlineStore": {
+              "methods": [
+                "getFeatureOnlineStore"
+              ]
+            },
+            "GetFeatureView": {
+              "methods": [
+                "getFeatureView"
+              ]
+            },
+            "SyncFeatureView": {
+              "methods": [
+                "syncFeatureView"
+              ]
+            },
+            "GetFeatureViewSync": {
+              "methods": [
+                "getFeatureViewSync"
+              ]
+            },
+            "CreateFeatureOnlineStore": {
+              "methods": [
+                "createFeatureOnlineStore"
+              ]
+            },
+            "UpdateFeatureOnlineStore": {
+              "methods": [
+                "updateFeatureOnlineStore"
+              ]
+            },
+            "DeleteFeatureOnlineStore": {
+              "methods": [
+                "deleteFeatureOnlineStore"
+              ]
+            },
+            "CreateFeatureView": {
+              "methods": [
+                "createFeatureView"
+              ]
+            },
+            "UpdateFeatureView": {
+              "methods": [
+                "updateFeatureView"
+              ]
+            },
+            "DeleteFeatureView": {
+              "methods": [
+                "deleteFeatureView"
+              ]
+            },
+            "ListFeatureOnlineStores": {
+              "methods": [
+                "listFeatureOnlineStores",
+                "listFeatureOnlineStoresStream",
+                "listFeatureOnlineStoresAsync"
+              ]
+            },
+            "ListFeatureViews": {
+              "methods": [
+                "listFeatureViews",
+                "listFeatureViewsStream",
+                "listFeatureViewsAsync"
+              ]
+            },
+            "ListFeatureViewSyncs": {
+              "methods": [
+                "listFeatureViewSyncs",
+                "listFeatureViewSyncsStream",
+                "listFeatureViewSyncsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "FeatureOnlineStoreAdminServiceClient",
+          "rpcs": {
+            "GetFeatureOnlineStore": {
+              "methods": [
+                "getFeatureOnlineStore"
+              ]
+            },
+            "GetFeatureView": {
+              "methods": [
+                "getFeatureView"
+              ]
+            },
+            "SyncFeatureView": {
+              "methods": [
+                "syncFeatureView"
+              ]
+            },
+            "GetFeatureViewSync": {
+              "methods": [
+                "getFeatureViewSync"
+              ]
+            },
+            "CreateFeatureOnlineStore": {
+              "methods": [
+                "createFeatureOnlineStore"
+              ]
+            },
+            "UpdateFeatureOnlineStore": {
+              "methods": [
+                "updateFeatureOnlineStore"
+              ]
+            },
+            "DeleteFeatureOnlineStore": {
+              "methods": [
+                "deleteFeatureOnlineStore"
+              ]
+            },
+            "CreateFeatureView": {
+              "methods": [
+                "createFeatureView"
+              ]
+            },
+            "UpdateFeatureView": {
+              "methods": [
+                "updateFeatureView"
+              ]
+            },
+            "DeleteFeatureView": {
+              "methods": [
+                "deleteFeatureView"
+              ]
+            },
+            "ListFeatureOnlineStores": {
+              "methods": [
+                "listFeatureOnlineStores",
+                "listFeatureOnlineStoresStream",
+                "listFeatureOnlineStoresAsync"
+              ]
+            },
+            "ListFeatureViews": {
+              "methods": [
+                "listFeatureViews",
+                "listFeatureViewsStream",
+                "listFeatureViewsAsync"
+              ]
+            },
+            "ListFeatureViewSyncs": {
+              "methods": [
+                "listFeatureViewSyncs",
+                "listFeatureViewSyncsStream",
+                "listFeatureViewSyncsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "FeatureOnlineStoreService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "FeatureOnlineStoreServiceClient",
+          "rpcs": {
+            "FetchFeatureValues": {
+              "methods": [
+                "fetchFeatureValues"
+              ]
+            },
+            "SearchNearestEntities": {
+              "methods": [
+                "searchNearestEntities"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "FeatureOnlineStoreServiceClient",
+          "rpcs": {
+            "FetchFeatureValues": {
+              "methods": [
+                "fetchFeatureValues"
+              ]
+            },
+            "SearchNearestEntities": {
+              "methods": [
+                "searchNearestEntities"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "FeatureRegistryService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "FeatureRegistryServiceClient",
+          "rpcs": {
+            "GetFeatureGroup": {
+              "methods": [
+                "getFeatureGroup"
+              ]
+            },
+            "GetFeature": {
+              "methods": [
+                "getFeature"
+              ]
+            },
+            "CreateFeatureGroup": {
+              "methods": [
+                "createFeatureGroup"
+              ]
+            },
+            "UpdateFeatureGroup": {
+              "methods": [
+                "updateFeatureGroup"
+              ]
+            },
+            "DeleteFeatureGroup": {
+              "methods": [
+                "deleteFeatureGroup"
+              ]
+            },
+            "CreateFeature": {
+              "methods": [
+                "createFeature"
+              ]
+            },
+            "UpdateFeature": {
+              "methods": [
+                "updateFeature"
+              ]
+            },
+            "DeleteFeature": {
+              "methods": [
+                "deleteFeature"
+              ]
+            },
+            "ListFeatureGroups": {
+              "methods": [
+                "listFeatureGroups",
+                "listFeatureGroupsStream",
+                "listFeatureGroupsAsync"
+              ]
+            },
+            "ListFeatures": {
+              "methods": [
+                "listFeatures",
+                "listFeaturesStream",
+                "listFeaturesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "FeatureRegistryServiceClient",
+          "rpcs": {
+            "GetFeatureGroup": {
+              "methods": [
+                "getFeatureGroup"
+              ]
+            },
+            "GetFeature": {
+              "methods": [
+                "getFeature"
+              ]
+            },
+            "CreateFeatureGroup": {
+              "methods": [
+                "createFeatureGroup"
+              ]
+            },
+            "UpdateFeatureGroup": {
+              "methods": [
+                "updateFeatureGroup"
+              ]
+            },
+            "DeleteFeatureGroup": {
+              "methods": [
+                "deleteFeatureGroup"
+              ]
+            },
+            "CreateFeature": {
+              "methods": [
+                "createFeature"
+              ]
+            },
+            "UpdateFeature": {
+              "methods": [
+                "updateFeature"
+              ]
+            },
+            "DeleteFeature": {
+              "methods": [
+                "deleteFeature"
+              ]
+            },
+            "ListFeatureGroups": {
+              "methods": [
+                "listFeatureGroups",
+                "listFeatureGroupsStream",
+                "listFeatureGroupsAsync"
+              ]
+            },
+            "ListFeatures": {
+              "methods": [
+                "listFeatures",
+                "listFeaturesStream",
+                "listFeaturesAsync"
               ]
             }
           }
@@ -1635,6 +2001,13 @@
               "methods": [
                 "getPublisherModel"
               ]
+            },
+            "ListPublisherModels": {
+              "methods": [
+                "listPublisherModels",
+                "listPublisherModelsStream",
+                "listPublisherModelsAsync"
+              ]
             }
           }
         },
@@ -1644,6 +2017,13 @@
             "GetPublisherModel": {
               "methods": [
                 "getPublisherModel"
+              ]
+            },
+            "ListPublisherModels": {
+              "methods": [
+                "listPublisherModels",
+                "listPublisherModelsStream",
+                "listPublisherModelsAsync"
               ]
             }
           }

@@ -20,7 +20,19 @@
         }
       },
       "methods": {
+        "SearchNearby": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "SearchText": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetPhotoMedia": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetPlace": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

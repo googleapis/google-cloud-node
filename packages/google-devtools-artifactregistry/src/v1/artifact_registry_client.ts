@@ -355,6 +355,12 @@ export class ArtifactRegistryClient {
     const deleteVersionMetadata = protoFilesRoot.lookup(
       '.google.devtools.artifactregistry.v1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const batchDeleteVersionsResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const batchDeleteVersionsMetadata = protoFilesRoot.lookup(
+      '.google.devtools.artifactregistry.v1.BatchDeleteVersionsMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       importAptArtifacts: new this._gaxModule.LongrunningDescriptor(
@@ -386,6 +392,11 @@ export class ArtifactRegistryClient {
         this.operationsClient,
         deleteVersionResponse.decode.bind(deleteVersionResponse),
         deleteVersionMetadata.decode.bind(deleteVersionMetadata)
+      ),
+      batchDeleteVersions: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        batchDeleteVersionsResponse.decode.bind(batchDeleteVersionsResponse),
+        batchDeleteVersionsMetadata.decode.bind(batchDeleteVersionsMetadata)
       ),
     };
 
@@ -461,6 +472,7 @@ export class ArtifactRegistryClient {
       'listVersions',
       'getVersion',
       'deleteVersion',
+      'batchDeleteVersions',
       'listFiles',
       'getFile',
       'listTags',
@@ -2733,9 +2745,9 @@ export class ArtifactRegistryClient {
    *   Required. The name of the parent resource where the repository will be
    *   created.
    * @param {string} request.repositoryId
-   *   The repository id to use for this repository.
+   *   Required. The repository id to use for this repository.
    * @param {google.devtools.artifactregistry.v1.Repository} request.repository
-   *   The repository to be created.
+   *   Required. The repository to be created.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3278,6 +3290,148 @@ export class ArtifactRegistryClient {
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
       protos.google.devtools.artifactregistry.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes multiple versions across a repository. The returned operation will
+   * complete once the versions have been deleted.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The name of the repository holding all requested versions.
+   * @param {string[]} request.names
+   *   Required. The names of the versions to delete.
+   *   A maximum of 10000 versions can be deleted in a batch.
+   * @param {boolean} request.validateOnly
+   *   If true, the request is performed without deleting data, following AIP-163.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/artifact_registry.batch_delete_versions.js</caption>
+   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_BatchDeleteVersions_async
+   */
+  batchDeleteVersions(
+    request?: protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchDeleteVersions(
+    request: protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchDeleteVersions(
+    request: protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchDeleteVersions(
+    request?: protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.batchDeleteVersions(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `batchDeleteVersions()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/artifact_registry.batch_delete_versions.js</caption>
+   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_BatchDeleteVersions_async
+   */
+  async checkBatchDeleteVersionsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.devtools.artifactregistry.v1.BatchDeleteVersionsMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.batchDeleteVersions,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.devtools.artifactregistry.v1.BatchDeleteVersionsMetadata
     >;
   }
   /**
@@ -4855,7 +5009,9 @@ export class ArtifactRegistryClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The name of the parent resource whose tags will be listed.
+   *   The name of the parent package whose tags will be listed.
+   *   For example:
+   *   `projects/p1/locations/us-central1/repositories/repo1/packages/pkg1`.
    * @param {string} request.filter
    *   An expression for filtering the results of the request. Filter rules are
    *   case insensitive. The fields eligible for filtering are:
@@ -4962,7 +5118,9 @@ export class ArtifactRegistryClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The name of the parent resource whose tags will be listed.
+   *   The name of the parent package whose tags will be listed.
+   *   For example:
+   *   `projects/p1/locations/us-central1/repositories/repo1/packages/pkg1`.
    * @param {string} request.filter
    *   An expression for filtering the results of the request. Filter rules are
    *   case insensitive. The fields eligible for filtering are:
@@ -5017,7 +5175,9 @@ export class ArtifactRegistryClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The name of the parent resource whose tags will be listed.
+   *   The name of the parent package whose tags will be listed.
+   *   For example:
+   *   `projects/p1/locations/us-central1/repositories/repo1/packages/pkg1`.
    * @param {string} request.filter
    *   An expression for filtering the results of the request. Filter rules are
    *   case insensitive. The fields eligible for filtering are:

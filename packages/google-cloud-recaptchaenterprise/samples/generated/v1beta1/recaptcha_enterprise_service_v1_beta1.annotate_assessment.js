@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. The resource name of the Assessment, in the format
-   *  "projects/{project_number}/assessments/{assessment_id}".
+   *  `projects/{project_number}/assessments/{assessment_id}`.
    */
   // const name = 'abc123'
   /**

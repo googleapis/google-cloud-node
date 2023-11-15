@@ -529,6 +529,136 @@ describe('v1beta1.DatasetServiceClient', () => {
     });
   });
 
+  describe('getDatasetVersion', () => {
+    it('invokes getDatasetVersion without error', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.GetDatasetVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetDatasetVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DatasetVersion()
+      );
+      client.innerApiCalls.getDatasetVersion = stubSimpleCall(expectedResponse);
+      const [response] = await client.getDatasetVersion(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getDatasetVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDatasetVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getDatasetVersion without error using callback', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.GetDatasetVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetDatasetVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DatasetVersion()
+      );
+      client.innerApiCalls.getDatasetVersion =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getDatasetVersion(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1beta1.IDatasetVersion | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getDatasetVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDatasetVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getDatasetVersion with error', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.GetDatasetVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetDatasetVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getDatasetVersion = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getDatasetVersion(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getDatasetVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDatasetVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getDatasetVersion with closed client', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.GetDatasetVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetDatasetVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getDatasetVersion(request), expectedError);
+    });
+  });
+
   describe('getAnnotationSpec', () => {
     it('invokes getAnnotationSpec without error', async () => {
       const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
@@ -1427,6 +1557,591 @@ describe('v1beta1.DatasetServiceClient', () => {
     });
   });
 
+  describe('createDatasetVersion', () => {
+    it('invokes createDatasetVersion without error', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.CreateDatasetVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateDatasetVersionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createDatasetVersion =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createDatasetVersion(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createDatasetVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDatasetVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createDatasetVersion without error using callback', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.CreateDatasetVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateDatasetVersionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createDatasetVersion =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createDatasetVersion(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.aiplatform.v1beta1.IDatasetVersion,
+              protos.google.cloud.aiplatform.v1beta1.ICreateDatasetVersionOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDatasetVersion,
+        protos.google.cloud.aiplatform.v1beta1.ICreateDatasetVersionOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createDatasetVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDatasetVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createDatasetVersion with call error', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.CreateDatasetVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateDatasetVersionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createDatasetVersion = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createDatasetVersion(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createDatasetVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDatasetVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createDatasetVersion with LRO error', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.CreateDatasetVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateDatasetVersionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createDatasetVersion = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createDatasetVersion(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createDatasetVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDatasetVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateDatasetVersionProgress without error', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateDatasetVersionProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateDatasetVersionProgress with error', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateDatasetVersionProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteDatasetVersion', () => {
+    it('invokes deleteDatasetVersion without error', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DeleteDatasetVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteDatasetVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteDatasetVersion =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteDatasetVersion(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteDatasetVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDatasetVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteDatasetVersion without error using callback', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DeleteDatasetVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteDatasetVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteDatasetVersion =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteDatasetVersion(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteDatasetVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDatasetVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteDatasetVersion with call error', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DeleteDatasetVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteDatasetVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteDatasetVersion = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteDatasetVersion(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteDatasetVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDatasetVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteDatasetVersion with LRO error', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DeleteDatasetVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteDatasetVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteDatasetVersion = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteDatasetVersion(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteDatasetVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDatasetVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteDatasetVersionProgress without error', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteDatasetVersionProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteDatasetVersionProgress with error', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteDatasetVersionProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('restoreDatasetVersion', () => {
+    it('invokes restoreDatasetVersion without error', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.RestoreDatasetVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.RestoreDatasetVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.restoreDatasetVersion =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.restoreDatasetVersion(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.restoreDatasetVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.restoreDatasetVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes restoreDatasetVersion without error using callback', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.RestoreDatasetVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.RestoreDatasetVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.restoreDatasetVersion =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.restoreDatasetVersion(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.aiplatform.v1beta1.IDatasetVersion,
+              protos.google.cloud.aiplatform.v1beta1.IRestoreDatasetVersionOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDatasetVersion,
+        protos.google.cloud.aiplatform.v1beta1.IRestoreDatasetVersionOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.restoreDatasetVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.restoreDatasetVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes restoreDatasetVersion with call error', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.RestoreDatasetVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.RestoreDatasetVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.restoreDatasetVersion = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.restoreDatasetVersion(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.restoreDatasetVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.restoreDatasetVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes restoreDatasetVersion with LRO error', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.RestoreDatasetVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.RestoreDatasetVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.restoreDatasetVersion = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.restoreDatasetVersion(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.restoreDatasetVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.restoreDatasetVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkRestoreDatasetVersionProgress without error', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkRestoreDatasetVersionProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkRestoreDatasetVersionProgress with error', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkRestoreDatasetVersionProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('deleteSavedQuery', () => {
     it('invokes deleteSavedQuery without error', async () => {
       const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
@@ -1940,6 +2655,338 @@ describe('v1beta1.DatasetServiceClient', () => {
       );
       assert(
         (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('listDatasetVersions', () => {
+    it('invokes listDatasetVersions without error', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListDatasetVersionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListDatasetVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.DatasetVersion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.DatasetVersion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.DatasetVersion()
+        ),
+      ];
+      client.innerApiCalls.listDatasetVersions =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listDatasetVersions(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listDatasetVersions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDatasetVersions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listDatasetVersions without error using callback', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListDatasetVersionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListDatasetVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.DatasetVersion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.DatasetVersion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.DatasetVersion()
+        ),
+      ];
+      client.innerApiCalls.listDatasetVersions =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listDatasetVersions(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.aiplatform.v1beta1.IDatasetVersion[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listDatasetVersions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDatasetVersions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listDatasetVersions with error', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListDatasetVersionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListDatasetVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listDatasetVersions = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listDatasetVersions(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listDatasetVersions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDatasetVersions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listDatasetVersionsStream without error', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListDatasetVersionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListDatasetVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.DatasetVersion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.DatasetVersion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.DatasetVersion()
+        ),
+      ];
+      client.descriptors.page.listDatasetVersions.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listDatasetVersionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.DatasetVersion[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.aiplatform.v1beta1.DatasetVersion) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listDatasetVersions.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listDatasetVersions, request)
+      );
+      assert(
+        (client.descriptors.page.listDatasetVersions.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listDatasetVersionsStream with error', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListDatasetVersionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListDatasetVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listDatasetVersions.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listDatasetVersionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.DatasetVersion[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.aiplatform.v1beta1.DatasetVersion) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listDatasetVersions.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listDatasetVersions, request)
+      );
+      assert(
+        (client.descriptors.page.listDatasetVersions.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listDatasetVersions without error', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListDatasetVersionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListDatasetVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.DatasetVersion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.DatasetVersion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.DatasetVersion()
+        ),
+      ];
+      client.descriptors.page.listDatasetVersions.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1beta1.IDatasetVersion[] =
+        [];
+      const iterable = client.listDatasetVersionsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listDatasetVersions.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listDatasetVersions.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listDatasetVersions with error', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListDatasetVersionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListDatasetVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listDatasetVersions.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listDatasetVersionsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.IDatasetVersion[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listDatasetVersions.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listDatasetVersions.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
@@ -4754,6 +5801,83 @@ describe('v1beta1.DatasetServiceClient', () => {
       });
     });
 
+    describe('datasetVersion', () => {
+      const fakePath = '/rendered/path/datasetVersion';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        dataset: 'datasetValue',
+        dataset_version: 'datasetVersionValue',
+      };
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.datasetVersionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.datasetVersionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('datasetVersionPath', () => {
+        const result = client.datasetVersionPath(
+          'projectValue',
+          'locationValue',
+          'datasetValue',
+          'datasetVersionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.datasetVersionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromDatasetVersionName', () => {
+        const result = client.matchProjectFromDatasetVersionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromDatasetVersionName', () => {
+        const result = client.matchLocationFromDatasetVersionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDatasetFromDatasetVersionName', () => {
+        const result = client.matchDatasetFromDatasetVersionName(fakePath);
+        assert.strictEqual(result, 'datasetValue');
+        assert(
+          (client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDatasetVersionFromDatasetVersionName', () => {
+        const result =
+          client.matchDatasetVersionFromDatasetVersionName(fakePath);
+        assert.strictEqual(result, 'datasetVersionValue');
+        assert(
+          (client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('deploymentResourcePool', () => {
       const fakePath = '/rendered/path/deploymentResourcePool';
       const expectedParameters = {
@@ -4987,88 +6111,295 @@ describe('v1beta1.DatasetServiceClient', () => {
       });
     });
 
-    describe('feature', () => {
-      const fakePath = '/rendered/path/feature';
+    describe('featureGroup', () => {
+      const fakePath = '/rendered/path/featureGroup';
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
-        featurestore: 'featurestoreValue',
-        entity_type: 'entityTypeValue',
-        feature: 'featureValue',
+        feature_group: 'featureGroupValue',
       };
       const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.featurePathTemplate.render = sinon
+      client.pathTemplates.featureGroupPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
-      client.pathTemplates.featurePathTemplate.match = sinon
+      client.pathTemplates.featureGroupPathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
 
-      it('featurePath', () => {
-        const result = client.featurePath(
+      it('featureGroupPath', () => {
+        const result = client.featureGroupPath(
           'projectValue',
           'locationValue',
-          'featurestoreValue',
-          'entityTypeValue',
-          'featureValue'
+          'featureGroupValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.featurePathTemplate.render as SinonStub)
+          (client.pathTemplates.featureGroupPathTemplate.render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
-      it('matchProjectFromFeatureName', () => {
-        const result = client.matchProjectFromFeatureName(fakePath);
+      it('matchProjectFromFeatureGroupName', () => {
+        const result = client.matchProjectFromFeatureGroupName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.featurePathTemplate.match as SinonStub)
+          (client.pathTemplates.featureGroupPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchLocationFromFeatureName', () => {
-        const result = client.matchLocationFromFeatureName(fakePath);
+      it('matchLocationFromFeatureGroupName', () => {
+        const result = client.matchLocationFromFeatureGroupName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.featurePathTemplate.match as SinonStub)
+          (client.pathTemplates.featureGroupPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchFeaturestoreFromFeatureName', () => {
-        const result = client.matchFeaturestoreFromFeatureName(fakePath);
-        assert.strictEqual(result, 'featurestoreValue');
+      it('matchFeatureGroupFromFeatureGroupName', () => {
+        const result = client.matchFeatureGroupFromFeatureGroupName(fakePath);
+        assert.strictEqual(result, 'featureGroupValue');
         assert(
-          (client.pathTemplates.featurePathTemplate.match as SinonStub)
+          (client.pathTemplates.featureGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('featureOnlineStore', () => {
+      const fakePath = '/rendered/path/featureOnlineStore';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        feature_online_store: 'featureOnlineStoreValue',
+      };
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.featureOnlineStorePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.featureOnlineStorePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('featureOnlineStorePath', () => {
+        const result = client.featureOnlineStorePath(
+          'projectValue',
+          'locationValue',
+          'featureOnlineStoreValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.featureOnlineStorePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromFeatureOnlineStoreName', () => {
+        const result = client.matchProjectFromFeatureOnlineStoreName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.featureOnlineStorePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchEntityTypeFromFeatureName', () => {
-        const result = client.matchEntityTypeFromFeatureName(fakePath);
-        assert.strictEqual(result, 'entityTypeValue');
+      it('matchLocationFromFeatureOnlineStoreName', () => {
+        const result = client.matchLocationFromFeatureOnlineStoreName(fakePath);
+        assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.featurePathTemplate.match as SinonStub)
+          (
+            client.pathTemplates.featureOnlineStorePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchFeatureFromFeatureName', () => {
-        const result = client.matchFeatureFromFeatureName(fakePath);
-        assert.strictEqual(result, 'featureValue');
+      it('matchFeatureOnlineStoreFromFeatureOnlineStoreName', () => {
+        const result =
+          client.matchFeatureOnlineStoreFromFeatureOnlineStoreName(fakePath);
+        assert.strictEqual(result, 'featureOnlineStoreValue');
         assert(
-          (client.pathTemplates.featurePathTemplate.match as SinonStub)
+          (
+            client.pathTemplates.featureOnlineStorePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('featureView', () => {
+      const fakePath = '/rendered/path/featureView';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        feature_online_store: 'featureOnlineStoreValue',
+        feature_view: 'featureViewValue',
+      };
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.featureViewPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.featureViewPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('featureViewPath', () => {
+        const result = client.featureViewPath(
+          'projectValue',
+          'locationValue',
+          'featureOnlineStoreValue',
+          'featureViewValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.featureViewPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromFeatureViewName', () => {
+        const result = client.matchProjectFromFeatureViewName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.featureViewPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromFeatureViewName', () => {
+        const result = client.matchLocationFromFeatureViewName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.featureViewPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureOnlineStoreFromFeatureViewName', () => {
+        const result =
+          client.matchFeatureOnlineStoreFromFeatureViewName(fakePath);
+        assert.strictEqual(result, 'featureOnlineStoreValue');
+        assert(
+          (client.pathTemplates.featureViewPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureViewFromFeatureViewName', () => {
+        const result = client.matchFeatureViewFromFeatureViewName(fakePath);
+        assert.strictEqual(result, 'featureViewValue');
+        assert(
+          (client.pathTemplates.featureViewPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('featureViewSync', () => {
+      const fakePath = '/rendered/path/featureViewSync';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        feature_online_store: 'featureOnlineStoreValue',
+        feature_view: 'featureViewValue',
+      };
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.featureViewSyncPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.featureViewSyncPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('featureViewSyncPath', () => {
+        const result = client.featureViewSyncPath(
+          'projectValue',
+          'locationValue',
+          'featureOnlineStoreValue',
+          'featureViewValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.featureViewSyncPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromFeatureViewSyncName', () => {
+        const result = client.matchProjectFromFeatureViewSyncName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.featureViewSyncPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromFeatureViewSyncName', () => {
+        const result = client.matchLocationFromFeatureViewSyncName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.featureViewSyncPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureOnlineStoreFromFeatureViewSyncName', () => {
+        const result =
+          client.matchFeatureOnlineStoreFromFeatureViewSyncName(fakePath);
+        assert.strictEqual(result, 'featureOnlineStoreValue');
+        assert(
+          (client.pathTemplates.featureViewSyncPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureViewFromFeatureViewSyncName', () => {
+        const result = client.matchFeatureViewFromFeatureViewSyncName(fakePath);
+        assert.strictEqual(result, 'featureViewValue');
+        assert(
+          (client.pathTemplates.featureViewSyncPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -6220,6 +7551,233 @@ describe('v1beta1.DatasetServiceClient', () => {
         assert(
           (
             client.pathTemplates.projectLocationEndpointPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationFeatureGroupFeature', () => {
+      const fakePath = '/rendered/path/projectLocationFeatureGroupFeature';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        feature_group: 'featureGroupValue',
+        feature: 'featureValue',
+      };
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationFeatureGroupFeaturePath', () => {
+        const result = client.projectLocationFeatureGroupFeaturePath(
+          'projectValue',
+          'locationValue',
+          'featureGroupValue',
+          'featureValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationFeatureGroupFeatureName', () => {
+        const result =
+          client.matchProjectFromProjectLocationFeatureGroupFeatureName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationFeatureGroupFeatureName', () => {
+        const result =
+          client.matchLocationFromProjectLocationFeatureGroupFeatureName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureGroupFromProjectLocationFeatureGroupFeatureName', () => {
+        const result =
+          client.matchFeatureGroupFromProjectLocationFeatureGroupFeatureName(
+            fakePath
+          );
+        assert.strictEqual(result, 'featureGroupValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureFromProjectLocationFeatureGroupFeatureName', () => {
+        const result =
+          client.matchFeatureFromProjectLocationFeatureGroupFeatureName(
+            fakePath
+          );
+        assert.strictEqual(result, 'featureValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationFeaturestoreEntityTypeFeature', () => {
+      const fakePath =
+        '/rendered/path/projectLocationFeaturestoreEntityTypeFeature';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        featurestore: 'featurestoreValue',
+        entity_type: 'entityTypeValue',
+        feature: 'featureValue',
+      };
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationFeaturestoreEntityTypeFeaturePath', () => {
+        const result = client.projectLocationFeaturestoreEntityTypeFeaturePath(
+          'projectValue',
+          'locationValue',
+          'featurestoreValue',
+          'entityTypeValue',
+          'featureValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationFeaturestoreEntityTypeFeaturePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName', () => {
+        const result =
+          client.matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationFeaturestoreEntityTypeFeaturePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName', () => {
+        const result =
+          client.matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationFeaturestoreEntityTypeFeaturePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName', () => {
+        const result =
+          client.matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName(
+            fakePath
+          );
+        assert.strictEqual(result, 'featurestoreValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationFeaturestoreEntityTypeFeaturePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName', () => {
+        const result =
+          client.matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName(
+            fakePath
+          );
+        assert.strictEqual(result, 'entityTypeValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationFeaturestoreEntityTypeFeaturePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName', () => {
+        const result =
+          client.matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName(
+            fakePath
+          );
+        assert.strictEqual(result, 'featureValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationFeaturestoreEntityTypeFeaturePathTemplate
               .match as SinonStub
           )
             .getCall(-1)

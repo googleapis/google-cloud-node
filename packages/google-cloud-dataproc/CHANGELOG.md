@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v5.2.0...dataproc-v5.3.0) (2023-11-03)
+
+
+### Features
+
+* [dataproc] support required_registration_fraction for secondary workers ([#4786](https://github.com/googleapis/google-cloud-node/issues/4786)) ([8d1ae22](https://github.com/googleapis/google-cloud-node/commit/8d1ae22ced4e3f56a9d9b728140d1ec5c3e1cdde))
+
 ## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v5.1.0...dataproc-v5.2.0) (2023-09-19)
 
 

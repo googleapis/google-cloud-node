@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/network-connectivity-v3.1.0...network-connectivity-v3.2.0) (2023-10-18)
+
+
+### Features
+
+* [networkconnectivity] add Network Connectivity Center APIs related to VPC spokes ([#4725](https://github.com/googleapis/google-cloud-node/issues/4725)) ([4e65f0a](https://github.com/googleapis/google-cloud-node/commit/4e65f0a9c2b49bb04b552ac9a04a93112d2c50bf))
+
 ## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/network-connectivity-v3.0.1...network-connectivity-v3.1.0) (2023-09-14)
 
 

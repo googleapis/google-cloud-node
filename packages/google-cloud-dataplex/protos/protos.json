@@ -2269,9 +2269,24 @@
                     },
                     "DataQualityDimensionResult": {
                       "fields": {
+                        "dimension": {
+                          "type": "DataQualityDimension",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "passed": {
                           "type": "bool",
                           "id": 3
+                        }
+                      }
+                    },
+                    "DataQualityDimension": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     },
@@ -6907,6 +6922,75 @@
                                 "BIGQUERY": 2
                               }
                             }
+                          }
+                        }
+                      }
+                    },
+                    "GovernanceEvent": {
+                      "oneofs": {
+                        "_entity": {
+                          "oneof": [
+                            "entity"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "message": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "eventType": {
+                          "type": "EventType",
+                          "id": 2
+                        },
+                        "entity": {
+                          "type": "Entity",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Entity": {
+                          "fields": {
+                            "entity": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "dataplex.googleapis.com/Entity"
+                              }
+                            },
+                            "entityType": {
+                              "type": "EntityType",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "EntityType": {
+                              "values": {
+                                "ENTITY_TYPE_UNSPECIFIED": 0,
+                                "TABLE": 1,
+                                "FILESET": 2
+                              }
+                            }
+                          }
+                        },
+                        "EventType": {
+                          "values": {
+                            "EVENT_TYPE_UNSPECIFIED": 0,
+                            "RESOURCE_IAM_POLICY_UPDATE": 1,
+                            "BIGQUERY_TABLE_CREATE": 2,
+                            "BIGQUERY_TABLE_UPDATE": 3,
+                            "BIGQUERY_TABLE_DELETE": 4,
+                            "BIGQUERY_CONNECTION_CREATE": 5,
+                            "BIGQUERY_CONNECTION_UPDATE": 6,
+                            "BIGQUERY_CONNECTION_DELETE": 7,
+                            "BIGQUERY_TAXONOMY_CREATE": 10,
+                            "BIGQUERY_POLICY_TAG_CREATE": 11,
+                            "BIGQUERY_POLICY_TAG_DELETE": 12,
+                            "BIGQUERY_POLICY_TAG_SET_IAM_POLICY": 13,
+                            "ACCESS_POLICY_UPDATE": 14
                           }
                         }
                       }

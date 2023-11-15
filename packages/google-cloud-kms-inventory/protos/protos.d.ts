@@ -1227,6 +1227,7 @@ export namespace google {
                         ENCRYPT_DECRYPT = 1,
                         ASYMMETRIC_SIGN = 5,
                         ASYMMETRIC_DECRYPT = 6,
+                        RAW_ENCRYPT_DECRYPT = 7,
                         MAC = 9
                     }
                 }
@@ -1601,6 +1602,12 @@ export namespace google {
                     /** CryptoKeyVersion importFailureReason */
                     importFailureReason?: (string|null);
 
+                    /** CryptoKeyVersion generationFailureReason */
+                    generationFailureReason?: (string|null);
+
+                    /** CryptoKeyVersion externalDestructionFailureReason */
+                    externalDestructionFailureReason?: (string|null);
+
                     /** CryptoKeyVersion externalProtectionLevelOptions */
                     externalProtectionLevelOptions?: (google.cloud.kms.v1.IExternalProtectionLevelOptions|null);
 
@@ -1652,6 +1659,12 @@ export namespace google {
 
                     /** CryptoKeyVersion importFailureReason. */
                     public importFailureReason: string;
+
+                    /** CryptoKeyVersion generationFailureReason. */
+                    public generationFailureReason: string;
+
+                    /** CryptoKeyVersion externalDestructionFailureReason. */
+                    public externalDestructionFailureReason: string;
 
                     /** CryptoKeyVersion externalProtectionLevelOptions. */
                     public externalProtectionLevelOptions?: (google.cloud.kms.v1.IExternalProtectionLevelOptions|null);
@@ -1743,6 +1756,12 @@ export namespace google {
                     enum CryptoKeyVersionAlgorithm {
                         CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED = 0,
                         GOOGLE_SYMMETRIC_ENCRYPTION = 1,
+                        AES_128_GCM = 41,
+                        AES_256_GCM = 19,
+                        AES_128_CBC = 42,
+                        AES_256_CBC = 43,
+                        AES_128_CTR = 44,
+                        AES_256_CTR = 45,
                         RSA_SIGN_PSS_2048_SHA256 = 2,
                         RSA_SIGN_PSS_3072_SHA256 = 3,
                         RSA_SIGN_PSS_4096_SHA256 = 4,
@@ -1781,7 +1800,10 @@ export namespace google {
                         DESTROYED = 3,
                         DESTROY_SCHEDULED = 4,
                         PENDING_IMPORT = 6,
-                        IMPORT_FAILED = 7
+                        IMPORT_FAILED = 7,
+                        GENERATION_FAILED = 8,
+                        PENDING_EXTERNAL_DESTRUCTION = 9,
+                        EXTERNAL_DESTRUCTION_FAILED = 10
                     }
 
                     /** CryptoKeyVersionView enum. */

@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v3.1.0...contact-center-insights-v3.2.0) (2023-11-03)
+
+
+### Features
+
+* [contactcenterinsights] Launch BulkDelete API, and bulk audio import via the IngestConversations API ([#4789](https://github.com/googleapis/google-cloud-node/issues/4789)) ([e7129c6](https://github.com/googleapis/google-cloud-node/commit/e7129c613335a9495c11c5c3dd87986f21d84339))
+
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v3.0.1...contact-center-insights-v3.1.0) (2023-10-18)
+
+
+### Features
+
+* [contactcenterinsights] add optional SpeechConfig to UploadConversationRequest ([#4695](https://github.com/googleapis/google-cloud-node/issues/4695)) ([44b3333](https://github.com/googleapis/google-cloud-node/commit/44b33333493ac4a458e84c1d3231f5571e63fd33))
+
 ## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v3.0.0...contact-center-insights-v3.0.1) (2023-09-06)
 
 

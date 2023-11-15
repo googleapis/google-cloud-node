@@ -67,6 +67,15 @@ function main(endpoint, instances) {
    */
   // const explanationSpecOverride = {}
   /**
+   *  Optional. This field is the same as the one above, but supports multiple
+   *  explanations to occur in parallel. The key can be any string. Each override
+   *  will be run against the model, then its explanations will be grouped
+   *  together.
+   *  Note - these explanations are run **In Addition** to the default
+   *  Explanation in the deployed model.
+   */
+  // const concurrentExplanationSpecOverride = [1,2,3,4]
+  /**
    *  If specified, this ExplainRequest will be served by the chosen
    *  DeployedModel, overriding
    *  Endpoint.traffic_split google.cloud.aiplatform.v1beta1.Endpoint.traffic_split.

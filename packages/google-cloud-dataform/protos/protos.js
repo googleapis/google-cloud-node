@@ -21018,6 +21018,171 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|commitRepositoryChanges}.
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @typedef CommitRepositoryChangesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls CommitRepositoryChanges.
+                         * @function commitRepositoryChanges
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest} request CommitRepositoryChangesRequest message or plain object
+                         * @param {google.cloud.dataform.v1beta1.Dataform.CommitRepositoryChangesCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Dataform.prototype.commitRepositoryChanges = function commitRepositoryChanges(request, callback) {
+                            return this.rpcCall(commitRepositoryChanges, $root.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "CommitRepositoryChanges" });
+    
+                        /**
+                         * Calls CommitRepositoryChanges.
+                         * @function commitRepositoryChanges
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest} request CommitRepositoryChangesRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|readRepositoryFile}.
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @typedef ReadRepositoryFileCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.dataform.v1beta1.ReadRepositoryFileResponse} [response] ReadRepositoryFileResponse
+                         */
+    
+                        /**
+                         * Calls ReadRepositoryFile.
+                         * @function readRepositoryFile
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.IReadRepositoryFileRequest} request ReadRepositoryFileRequest message or plain object
+                         * @param {google.cloud.dataform.v1beta1.Dataform.ReadRepositoryFileCallback} callback Node-style callback called with the error, if any, and ReadRepositoryFileResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Dataform.prototype.readRepositoryFile = function readRepositoryFile(request, callback) {
+                            return this.rpcCall(readRepositoryFile, $root.google.cloud.dataform.v1beta1.ReadRepositoryFileRequest, $root.google.cloud.dataform.v1beta1.ReadRepositoryFileResponse, request, callback);
+                        }, "name", { value: "ReadRepositoryFile" });
+    
+                        /**
+                         * Calls ReadRepositoryFile.
+                         * @function readRepositoryFile
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.IReadRepositoryFileRequest} request ReadRepositoryFileRequest message or plain object
+                         * @returns {Promise<google.cloud.dataform.v1beta1.ReadRepositoryFileResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|queryRepositoryDirectoryContents}.
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @typedef QueryRepositoryDirectoryContentsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsResponse} [response] QueryRepositoryDirectoryContentsResponse
+                         */
+    
+                        /**
+                         * Calls QueryRepositoryDirectoryContents.
+                         * @function queryRepositoryDirectoryContents
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest} request QueryRepositoryDirectoryContentsRequest message or plain object
+                         * @param {google.cloud.dataform.v1beta1.Dataform.QueryRepositoryDirectoryContentsCallback} callback Node-style callback called with the error, if any, and QueryRepositoryDirectoryContentsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Dataform.prototype.queryRepositoryDirectoryContents = function queryRepositoryDirectoryContents(request, callback) {
+                            return this.rpcCall(queryRepositoryDirectoryContents, $root.google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest, $root.google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsResponse, request, callback);
+                        }, "name", { value: "QueryRepositoryDirectoryContents" });
+    
+                        /**
+                         * Calls QueryRepositoryDirectoryContents.
+                         * @function queryRepositoryDirectoryContents
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest} request QueryRepositoryDirectoryContentsRequest message or plain object
+                         * @returns {Promise<google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|fetchRepositoryHistory}.
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @typedef FetchRepositoryHistoryCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.dataform.v1beta1.FetchRepositoryHistoryResponse} [response] FetchRepositoryHistoryResponse
+                         */
+    
+                        /**
+                         * Calls FetchRepositoryHistory.
+                         * @function fetchRepositoryHistory
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest} request FetchRepositoryHistoryRequest message or plain object
+                         * @param {google.cloud.dataform.v1beta1.Dataform.FetchRepositoryHistoryCallback} callback Node-style callback called with the error, if any, and FetchRepositoryHistoryResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Dataform.prototype.fetchRepositoryHistory = function fetchRepositoryHistory(request, callback) {
+                            return this.rpcCall(fetchRepositoryHistory, $root.google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest, $root.google.cloud.dataform.v1beta1.FetchRepositoryHistoryResponse, request, callback);
+                        }, "name", { value: "FetchRepositoryHistory" });
+    
+                        /**
+                         * Calls FetchRepositoryHistory.
+                         * @function fetchRepositoryHistory
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest} request FetchRepositoryHistoryRequest message or plain object
+                         * @returns {Promise<google.cloud.dataform.v1beta1.FetchRepositoryHistoryResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|computeRepositoryAccessTokenStatus}.
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @typedef ComputeRepositoryAccessTokenStatusCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse} [response] ComputeRepositoryAccessTokenStatusResponse
+                         */
+    
+                        /**
+                         * Calls ComputeRepositoryAccessTokenStatus.
+                         * @function computeRepositoryAccessTokenStatus
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest} request ComputeRepositoryAccessTokenStatusRequest message or plain object
+                         * @param {google.cloud.dataform.v1beta1.Dataform.ComputeRepositoryAccessTokenStatusCallback} callback Node-style callback called with the error, if any, and ComputeRepositoryAccessTokenStatusResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Dataform.prototype.computeRepositoryAccessTokenStatus = function computeRepositoryAccessTokenStatus(request, callback) {
+                            return this.rpcCall(computeRepositoryAccessTokenStatus, $root.google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusRequest, $root.google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse, request, callback);
+                        }, "name", { value: "ComputeRepositoryAccessTokenStatus" });
+    
+                        /**
+                         * Calls ComputeRepositoryAccessTokenStatus.
+                         * @function computeRepositoryAccessTokenStatus
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest} request ComputeRepositoryAccessTokenStatusRequest message or plain object
+                         * @returns {Promise<google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|fetchRemoteBranches}.
                          * @memberof google.cloud.dataform.v1beta1.Dataform
                          * @typedef FetchRemoteBranchesCallback
@@ -21711,6 +21876,171 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|listReleaseConfigs}.
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @typedef ListReleaseConfigsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.dataform.v1beta1.ListReleaseConfigsResponse} [response] ListReleaseConfigsResponse
+                         */
+    
+                        /**
+                         * Calls ListReleaseConfigs.
+                         * @function listReleaseConfigs
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.IListReleaseConfigsRequest} request ListReleaseConfigsRequest message or plain object
+                         * @param {google.cloud.dataform.v1beta1.Dataform.ListReleaseConfigsCallback} callback Node-style callback called with the error, if any, and ListReleaseConfigsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Dataform.prototype.listReleaseConfigs = function listReleaseConfigs(request, callback) {
+                            return this.rpcCall(listReleaseConfigs, $root.google.cloud.dataform.v1beta1.ListReleaseConfigsRequest, $root.google.cloud.dataform.v1beta1.ListReleaseConfigsResponse, request, callback);
+                        }, "name", { value: "ListReleaseConfigs" });
+    
+                        /**
+                         * Calls ListReleaseConfigs.
+                         * @function listReleaseConfigs
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.IListReleaseConfigsRequest} request ListReleaseConfigsRequest message or plain object
+                         * @returns {Promise<google.cloud.dataform.v1beta1.ListReleaseConfigsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|getReleaseConfig}.
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @typedef GetReleaseConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.dataform.v1beta1.ReleaseConfig} [response] ReleaseConfig
+                         */
+    
+                        /**
+                         * Calls GetReleaseConfig.
+                         * @function getReleaseConfig
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.IGetReleaseConfigRequest} request GetReleaseConfigRequest message or plain object
+                         * @param {google.cloud.dataform.v1beta1.Dataform.GetReleaseConfigCallback} callback Node-style callback called with the error, if any, and ReleaseConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Dataform.prototype.getReleaseConfig = function getReleaseConfig(request, callback) {
+                            return this.rpcCall(getReleaseConfig, $root.google.cloud.dataform.v1beta1.GetReleaseConfigRequest, $root.google.cloud.dataform.v1beta1.ReleaseConfig, request, callback);
+                        }, "name", { value: "GetReleaseConfig" });
+    
+                        /**
+                         * Calls GetReleaseConfig.
+                         * @function getReleaseConfig
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.IGetReleaseConfigRequest} request GetReleaseConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.dataform.v1beta1.ReleaseConfig>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|createReleaseConfig}.
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @typedef CreateReleaseConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.dataform.v1beta1.ReleaseConfig} [response] ReleaseConfig
+                         */
+    
+                        /**
+                         * Calls CreateReleaseConfig.
+                         * @function createReleaseConfig
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest} request CreateReleaseConfigRequest message or plain object
+                         * @param {google.cloud.dataform.v1beta1.Dataform.CreateReleaseConfigCallback} callback Node-style callback called with the error, if any, and ReleaseConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Dataform.prototype.createReleaseConfig = function createReleaseConfig(request, callback) {
+                            return this.rpcCall(createReleaseConfig, $root.google.cloud.dataform.v1beta1.CreateReleaseConfigRequest, $root.google.cloud.dataform.v1beta1.ReleaseConfig, request, callback);
+                        }, "name", { value: "CreateReleaseConfig" });
+    
+                        /**
+                         * Calls CreateReleaseConfig.
+                         * @function createReleaseConfig
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest} request CreateReleaseConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.dataform.v1beta1.ReleaseConfig>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|updateReleaseConfig}.
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @typedef UpdateReleaseConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.dataform.v1beta1.ReleaseConfig} [response] ReleaseConfig
+                         */
+    
+                        /**
+                         * Calls UpdateReleaseConfig.
+                         * @function updateReleaseConfig
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest} request UpdateReleaseConfigRequest message or plain object
+                         * @param {google.cloud.dataform.v1beta1.Dataform.UpdateReleaseConfigCallback} callback Node-style callback called with the error, if any, and ReleaseConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Dataform.prototype.updateReleaseConfig = function updateReleaseConfig(request, callback) {
+                            return this.rpcCall(updateReleaseConfig, $root.google.cloud.dataform.v1beta1.UpdateReleaseConfigRequest, $root.google.cloud.dataform.v1beta1.ReleaseConfig, request, callback);
+                        }, "name", { value: "UpdateReleaseConfig" });
+    
+                        /**
+                         * Calls UpdateReleaseConfig.
+                         * @function updateReleaseConfig
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest} request UpdateReleaseConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.dataform.v1beta1.ReleaseConfig>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|deleteReleaseConfig}.
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @typedef DeleteReleaseConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteReleaseConfig.
+                         * @function deleteReleaseConfig
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest} request DeleteReleaseConfigRequest message or plain object
+                         * @param {google.cloud.dataform.v1beta1.Dataform.DeleteReleaseConfigCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Dataform.prototype.deleteReleaseConfig = function deleteReleaseConfig(request, callback) {
+                            return this.rpcCall(deleteReleaseConfig, $root.google.cloud.dataform.v1beta1.DeleteReleaseConfigRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteReleaseConfig" });
+    
+                        /**
+                         * Calls DeleteReleaseConfig.
+                         * @function deleteReleaseConfig
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest} request DeleteReleaseConfigRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|listCompilationResults}.
                          * @memberof google.cloud.dataform.v1beta1.Dataform
                          * @typedef ListCompilationResultsCallback
@@ -21839,6 +22169,171 @@
                          * @instance
                          * @param {google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest} request QueryCompilationResultActionsRequest message or plain object
                          * @returns {Promise<google.cloud.dataform.v1beta1.QueryCompilationResultActionsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|listWorkflowConfigs}.
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @typedef ListWorkflowConfigsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse} [response] ListWorkflowConfigsResponse
+                         */
+    
+                        /**
+                         * Calls ListWorkflowConfigs.
+                         * @function listWorkflowConfigs
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest} request ListWorkflowConfigsRequest message or plain object
+                         * @param {google.cloud.dataform.v1beta1.Dataform.ListWorkflowConfigsCallback} callback Node-style callback called with the error, if any, and ListWorkflowConfigsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Dataform.prototype.listWorkflowConfigs = function listWorkflowConfigs(request, callback) {
+                            return this.rpcCall(listWorkflowConfigs, $root.google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest, $root.google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse, request, callback);
+                        }, "name", { value: "ListWorkflowConfigs" });
+    
+                        /**
+                         * Calls ListWorkflowConfigs.
+                         * @function listWorkflowConfigs
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest} request ListWorkflowConfigsRequest message or plain object
+                         * @returns {Promise<google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|getWorkflowConfig}.
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @typedef GetWorkflowConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.dataform.v1beta1.WorkflowConfig} [response] WorkflowConfig
+                         */
+    
+                        /**
+                         * Calls GetWorkflowConfig.
+                         * @function getWorkflowConfig
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest} request GetWorkflowConfigRequest message or plain object
+                         * @param {google.cloud.dataform.v1beta1.Dataform.GetWorkflowConfigCallback} callback Node-style callback called with the error, if any, and WorkflowConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Dataform.prototype.getWorkflowConfig = function getWorkflowConfig(request, callback) {
+                            return this.rpcCall(getWorkflowConfig, $root.google.cloud.dataform.v1beta1.GetWorkflowConfigRequest, $root.google.cloud.dataform.v1beta1.WorkflowConfig, request, callback);
+                        }, "name", { value: "GetWorkflowConfig" });
+    
+                        /**
+                         * Calls GetWorkflowConfig.
+                         * @function getWorkflowConfig
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest} request GetWorkflowConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.dataform.v1beta1.WorkflowConfig>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|createWorkflowConfig}.
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @typedef CreateWorkflowConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.dataform.v1beta1.WorkflowConfig} [response] WorkflowConfig
+                         */
+    
+                        /**
+                         * Calls CreateWorkflowConfig.
+                         * @function createWorkflowConfig
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest} request CreateWorkflowConfigRequest message or plain object
+                         * @param {google.cloud.dataform.v1beta1.Dataform.CreateWorkflowConfigCallback} callback Node-style callback called with the error, if any, and WorkflowConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Dataform.prototype.createWorkflowConfig = function createWorkflowConfig(request, callback) {
+                            return this.rpcCall(createWorkflowConfig, $root.google.cloud.dataform.v1beta1.CreateWorkflowConfigRequest, $root.google.cloud.dataform.v1beta1.WorkflowConfig, request, callback);
+                        }, "name", { value: "CreateWorkflowConfig" });
+    
+                        /**
+                         * Calls CreateWorkflowConfig.
+                         * @function createWorkflowConfig
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest} request CreateWorkflowConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.dataform.v1beta1.WorkflowConfig>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|updateWorkflowConfig}.
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @typedef UpdateWorkflowConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.dataform.v1beta1.WorkflowConfig} [response] WorkflowConfig
+                         */
+    
+                        /**
+                         * Calls UpdateWorkflowConfig.
+                         * @function updateWorkflowConfig
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest} request UpdateWorkflowConfigRequest message or plain object
+                         * @param {google.cloud.dataform.v1beta1.Dataform.UpdateWorkflowConfigCallback} callback Node-style callback called with the error, if any, and WorkflowConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Dataform.prototype.updateWorkflowConfig = function updateWorkflowConfig(request, callback) {
+                            return this.rpcCall(updateWorkflowConfig, $root.google.cloud.dataform.v1beta1.UpdateWorkflowConfigRequest, $root.google.cloud.dataform.v1beta1.WorkflowConfig, request, callback);
+                        }, "name", { value: "UpdateWorkflowConfig" });
+    
+                        /**
+                         * Calls UpdateWorkflowConfig.
+                         * @function updateWorkflowConfig
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest} request UpdateWorkflowConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.dataform.v1beta1.WorkflowConfig>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|deleteWorkflowConfig}.
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @typedef DeleteWorkflowConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteWorkflowConfig.
+                         * @function deleteWorkflowConfig
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest} request DeleteWorkflowConfigRequest message or plain object
+                         * @param {google.cloud.dataform.v1beta1.Dataform.DeleteWorkflowConfigCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Dataform.prototype.deleteWorkflowConfig = function deleteWorkflowConfig(request, callback) {
+                            return this.rpcCall(deleteWorkflowConfig, $root.google.cloud.dataform.v1beta1.DeleteWorkflowConfigRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteWorkflowConfig" });
+    
+                        /**
+                         * Calls DeleteWorkflowConfig.
+                         * @function deleteWorkflowConfig
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest} request DeleteWorkflowConfigRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
                          * @variation 2
                          */
     
@@ -22050,7 +22545,13 @@
                          * @memberof google.cloud.dataform.v1beta1
                          * @interface IRepository
                          * @property {string|null} [name] Repository name
+                         * @property {string|null} [displayName] Repository displayName
                          * @property {google.cloud.dataform.v1beta1.Repository.IGitRemoteSettings|null} [gitRemoteSettings] Repository gitRemoteSettings
+                         * @property {string|null} [npmrcEnvironmentVariablesSecretVersion] Repository npmrcEnvironmentVariablesSecretVersion
+                         * @property {google.cloud.dataform.v1beta1.Repository.IWorkspaceCompilationOverrides|null} [workspaceCompilationOverrides] Repository workspaceCompilationOverrides
+                         * @property {Object.<string,string>|null} [labels] Repository labels
+                         * @property {boolean|null} [setAuthenticatedUserAdmin] Repository setAuthenticatedUserAdmin
+                         * @property {string|null} [serviceAccount] Repository serviceAccount
                          */
     
                         /**
@@ -22062,6 +22563,7 @@
                          * @param {google.cloud.dataform.v1beta1.IRepository=} [properties] Properties to set
                          */
                         function Repository(properties) {
+                            this.labels = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -22077,12 +22579,60 @@
                         Repository.prototype.name = "";
     
                         /**
+                         * Repository displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.dataform.v1beta1.Repository
+                         * @instance
+                         */
+                        Repository.prototype.displayName = "";
+    
+                        /**
                          * Repository gitRemoteSettings.
                          * @member {google.cloud.dataform.v1beta1.Repository.IGitRemoteSettings|null|undefined} gitRemoteSettings
                          * @memberof google.cloud.dataform.v1beta1.Repository
                          * @instance
                          */
                         Repository.prototype.gitRemoteSettings = null;
+    
+                        /**
+                         * Repository npmrcEnvironmentVariablesSecretVersion.
+                         * @member {string} npmrcEnvironmentVariablesSecretVersion
+                         * @memberof google.cloud.dataform.v1beta1.Repository
+                         * @instance
+                         */
+                        Repository.prototype.npmrcEnvironmentVariablesSecretVersion = "";
+    
+                        /**
+                         * Repository workspaceCompilationOverrides.
+                         * @member {google.cloud.dataform.v1beta1.Repository.IWorkspaceCompilationOverrides|null|undefined} workspaceCompilationOverrides
+                         * @memberof google.cloud.dataform.v1beta1.Repository
+                         * @instance
+                         */
+                        Repository.prototype.workspaceCompilationOverrides = null;
+    
+                        /**
+                         * Repository labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.dataform.v1beta1.Repository
+                         * @instance
+                         */
+                        Repository.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * Repository setAuthenticatedUserAdmin.
+                         * @member {boolean} setAuthenticatedUserAdmin
+                         * @memberof google.cloud.dataform.v1beta1.Repository
+                         * @instance
+                         */
+                        Repository.prototype.setAuthenticatedUserAdmin = false;
+    
+                        /**
+                         * Repository serviceAccount.
+                         * @member {string} serviceAccount
+                         * @memberof google.cloud.dataform.v1beta1.Repository
+                         * @instance
+                         */
+                        Repository.prototype.serviceAccount = "";
     
                         /**
                          * Creates a new Repository instance using the specified properties.
@@ -22112,6 +22662,19 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                             if (message.gitRemoteSettings != null && Object.hasOwnProperty.call(message, "gitRemoteSettings"))
                                 $root.google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.encode(message.gitRemoteSettings, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.npmrcEnvironmentVariablesSecretVersion != null && Object.hasOwnProperty.call(message, "npmrcEnvironmentVariablesSecretVersion"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.npmrcEnvironmentVariablesSecretVersion);
+                            if (message.workspaceCompilationOverrides != null && Object.hasOwnProperty.call(message, "workspaceCompilationOverrides"))
+                                $root.google.cloud.dataform.v1beta1.Repository.WorkspaceCompilationOverrides.encode(message.workspaceCompilationOverrides, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.displayName);
+                            if (message.setAuthenticatedUserAdmin != null && Object.hasOwnProperty.call(message, "setAuthenticatedUserAdmin"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.setAuthenticatedUserAdmin);
+                            if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.serviceAccount);
                             return writer;
                         };
     
@@ -22142,7 +22705,7 @@
                         Repository.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.Repository();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.Repository(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -22150,8 +22713,51 @@
                                         message.name = reader.string();
                                         break;
                                     }
+                                case 8: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
                                 case 2: {
                                         message.gitRemoteSettings = $root.google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.npmrcEnvironmentVariablesSecretVersion = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.workspaceCompilationOverrides = $root.google.cloud.dataform.v1beta1.Repository.WorkspaceCompilationOverrides.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 9: {
+                                        message.setAuthenticatedUserAdmin = reader.bool();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.serviceAccount = reader.string();
                                         break;
                                     }
                                 default:
@@ -22192,11 +22798,36 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
                             if (message.gitRemoteSettings != null && message.hasOwnProperty("gitRemoteSettings")) {
                                 var error = $root.google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.verify(message.gitRemoteSettings);
                                 if (error)
                                     return "gitRemoteSettings." + error;
                             }
+                            if (message.npmrcEnvironmentVariablesSecretVersion != null && message.hasOwnProperty("npmrcEnvironmentVariablesSecretVersion"))
+                                if (!$util.isString(message.npmrcEnvironmentVariablesSecretVersion))
+                                    return "npmrcEnvironmentVariablesSecretVersion: string expected";
+                            if (message.workspaceCompilationOverrides != null && message.hasOwnProperty("workspaceCompilationOverrides")) {
+                                var error = $root.google.cloud.dataform.v1beta1.Repository.WorkspaceCompilationOverrides.verify(message.workspaceCompilationOverrides);
+                                if (error)
+                                    return "workspaceCompilationOverrides." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.setAuthenticatedUserAdmin != null && message.hasOwnProperty("setAuthenticatedUserAdmin"))
+                                if (typeof message.setAuthenticatedUserAdmin !== "boolean")
+                                    return "setAuthenticatedUserAdmin: boolean expected";
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                if (!$util.isString(message.serviceAccount))
+                                    return "serviceAccount: string expected";
                             return null;
                         };
     
@@ -22214,11 +22845,31 @@
                             var message = new $root.google.cloud.dataform.v1beta1.Repository();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
                             if (object.gitRemoteSettings != null) {
                                 if (typeof object.gitRemoteSettings !== "object")
                                     throw TypeError(".google.cloud.dataform.v1beta1.Repository.gitRemoteSettings: object expected");
                                 message.gitRemoteSettings = $root.google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.fromObject(object.gitRemoteSettings);
                             }
+                            if (object.npmrcEnvironmentVariablesSecretVersion != null)
+                                message.npmrcEnvironmentVariablesSecretVersion = String(object.npmrcEnvironmentVariablesSecretVersion);
+                            if (object.workspaceCompilationOverrides != null) {
+                                if (typeof object.workspaceCompilationOverrides !== "object")
+                                    throw TypeError(".google.cloud.dataform.v1beta1.Repository.workspaceCompilationOverrides: object expected");
+                                message.workspaceCompilationOverrides = $root.google.cloud.dataform.v1beta1.Repository.WorkspaceCompilationOverrides.fromObject(object.workspaceCompilationOverrides);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.dataform.v1beta1.Repository.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.setAuthenticatedUserAdmin != null)
+                                message.setAuthenticatedUserAdmin = Boolean(object.setAuthenticatedUserAdmin);
+                            if (object.serviceAccount != null)
+                                message.serviceAccount = String(object.serviceAccount);
                             return message;
                         };
     
@@ -22235,14 +22886,37 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
                             if (options.defaults) {
                                 object.name = "";
                                 object.gitRemoteSettings = null;
+                                object.npmrcEnvironmentVariablesSecretVersion = "";
+                                object.workspaceCompilationOverrides = null;
+                                object.displayName = "";
+                                object.setAuthenticatedUserAdmin = false;
+                                object.serviceAccount = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.gitRemoteSettings != null && message.hasOwnProperty("gitRemoteSettings"))
                                 object.gitRemoteSettings = $root.google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.toObject(message.gitRemoteSettings, options);
+                            if (message.npmrcEnvironmentVariablesSecretVersion != null && message.hasOwnProperty("npmrcEnvironmentVariablesSecretVersion"))
+                                object.npmrcEnvironmentVariablesSecretVersion = message.npmrcEnvironmentVariablesSecretVersion;
+                            if (message.workspaceCompilationOverrides != null && message.hasOwnProperty("workspaceCompilationOverrides"))
+                                object.workspaceCompilationOverrides = $root.google.cloud.dataform.v1beta1.Repository.WorkspaceCompilationOverrides.toObject(message.workspaceCompilationOverrides, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.setAuthenticatedUserAdmin != null && message.hasOwnProperty("setAuthenticatedUserAdmin"))
+                                object.setAuthenticatedUserAdmin = message.setAuthenticatedUserAdmin;
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                object.serviceAccount = message.serviceAccount;
                             return object;
                         };
     
@@ -22281,6 +22955,7 @@
                              * @property {string|null} [url] GitRemoteSettings url
                              * @property {string|null} [defaultBranch] GitRemoteSettings defaultBranch
                              * @property {string|null} [authenticationTokenSecretVersion] GitRemoteSettings authenticationTokenSecretVersion
+                             * @property {google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.ISshAuthenticationConfig|null} [sshAuthenticationConfig] GitRemoteSettings sshAuthenticationConfig
                              * @property {google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.TokenStatus|null} [tokenStatus] GitRemoteSettings tokenStatus
                              */
     
@@ -22324,6 +22999,14 @@
                             GitRemoteSettings.prototype.authenticationTokenSecretVersion = "";
     
                             /**
+                             * GitRemoteSettings sshAuthenticationConfig.
+                             * @member {google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.ISshAuthenticationConfig|null|undefined} sshAuthenticationConfig
+                             * @memberof google.cloud.dataform.v1beta1.Repository.GitRemoteSettings
+                             * @instance
+                             */
+                            GitRemoteSettings.prototype.sshAuthenticationConfig = null;
+    
+                            /**
                              * GitRemoteSettings tokenStatus.
                              * @member {google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.TokenStatus} tokenStatus
                              * @memberof google.cloud.dataform.v1beta1.Repository.GitRemoteSettings
@@ -22363,6 +23046,8 @@
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.authenticationTokenSecretVersion);
                                 if (message.tokenStatus != null && Object.hasOwnProperty.call(message, "tokenStatus"))
                                     writer.uint32(/* id 4, wireType 0 =*/32).int32(message.tokenStatus);
+                                if (message.sshAuthenticationConfig != null && Object.hasOwnProperty.call(message, "sshAuthenticationConfig"))
+                                    $root.google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig.encode(message.sshAuthenticationConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                                 return writer;
                             };
     
@@ -22407,6 +23092,10 @@
                                         }
                                     case 3: {
                                             message.authenticationTokenSecretVersion = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.sshAuthenticationConfig = $root.google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig.decode(reader, reader.uint32());
                                             break;
                                         }
                                     case 4: {
@@ -22457,6 +23146,11 @@
                                 if (message.authenticationTokenSecretVersion != null && message.hasOwnProperty("authenticationTokenSecretVersion"))
                                     if (!$util.isString(message.authenticationTokenSecretVersion))
                                         return "authenticationTokenSecretVersion: string expected";
+                                if (message.sshAuthenticationConfig != null && message.hasOwnProperty("sshAuthenticationConfig")) {
+                                    var error = $root.google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig.verify(message.sshAuthenticationConfig);
+                                    if (error)
+                                        return "sshAuthenticationConfig." + error;
+                                }
                                 if (message.tokenStatus != null && message.hasOwnProperty("tokenStatus"))
                                     switch (message.tokenStatus) {
                                     default:
@@ -22488,6 +23182,11 @@
                                     message.defaultBranch = String(object.defaultBranch);
                                 if (object.authenticationTokenSecretVersion != null)
                                     message.authenticationTokenSecretVersion = String(object.authenticationTokenSecretVersion);
+                                if (object.sshAuthenticationConfig != null) {
+                                    if (typeof object.sshAuthenticationConfig !== "object")
+                                        throw TypeError(".google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.sshAuthenticationConfig: object expected");
+                                    message.sshAuthenticationConfig = $root.google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig.fromObject(object.sshAuthenticationConfig);
+                                }
                                 switch (object.tokenStatus) {
                                 default:
                                     if (typeof object.tokenStatus === "number") {
@@ -22533,6 +23232,7 @@
                                     object.defaultBranch = "";
                                     object.authenticationTokenSecretVersion = "";
                                     object.tokenStatus = options.enums === String ? "TOKEN_STATUS_UNSPECIFIED" : 0;
+                                    object.sshAuthenticationConfig = null;
                                 }
                                 if (message.url != null && message.hasOwnProperty("url"))
                                     object.url = message.url;
@@ -22542,6 +23242,8 @@
                                     object.authenticationTokenSecretVersion = message.authenticationTokenSecretVersion;
                                 if (message.tokenStatus != null && message.hasOwnProperty("tokenStatus"))
                                     object.tokenStatus = options.enums === String ? $root.google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.TokenStatus[message.tokenStatus] === undefined ? message.tokenStatus : $root.google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.TokenStatus[message.tokenStatus] : message.tokenStatus;
+                                if (message.sshAuthenticationConfig != null && message.hasOwnProperty("sshAuthenticationConfig"))
+                                    object.sshAuthenticationConfig = $root.google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig.toObject(message.sshAuthenticationConfig, options);
                                 return object;
                             };
     
@@ -22571,6 +23273,233 @@
                                 return typeUrlPrefix + "/google.cloud.dataform.v1beta1.Repository.GitRemoteSettings";
                             };
     
+                            GitRemoteSettings.SshAuthenticationConfig = (function() {
+    
+                                /**
+                                 * Properties of a SshAuthenticationConfig.
+                                 * @memberof google.cloud.dataform.v1beta1.Repository.GitRemoteSettings
+                                 * @interface ISshAuthenticationConfig
+                                 * @property {string|null} [userPrivateKeySecretVersion] SshAuthenticationConfig userPrivateKeySecretVersion
+                                 * @property {string|null} [hostPublicKey] SshAuthenticationConfig hostPublicKey
+                                 */
+    
+                                /**
+                                 * Constructs a new SshAuthenticationConfig.
+                                 * @memberof google.cloud.dataform.v1beta1.Repository.GitRemoteSettings
+                                 * @classdesc Represents a SshAuthenticationConfig.
+                                 * @implements ISshAuthenticationConfig
+                                 * @constructor
+                                 * @param {google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.ISshAuthenticationConfig=} [properties] Properties to set
+                                 */
+                                function SshAuthenticationConfig(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * SshAuthenticationConfig userPrivateKeySecretVersion.
+                                 * @member {string} userPrivateKeySecretVersion
+                                 * @memberof google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig
+                                 * @instance
+                                 */
+                                SshAuthenticationConfig.prototype.userPrivateKeySecretVersion = "";
+    
+                                /**
+                                 * SshAuthenticationConfig hostPublicKey.
+                                 * @member {string} hostPublicKey
+                                 * @memberof google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig
+                                 * @instance
+                                 */
+                                SshAuthenticationConfig.prototype.hostPublicKey = "";
+    
+                                /**
+                                 * Creates a new SshAuthenticationConfig instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.ISshAuthenticationConfig=} [properties] Properties to set
+                                 * @returns {google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig} SshAuthenticationConfig instance
+                                 */
+                                SshAuthenticationConfig.create = function create(properties) {
+                                    return new SshAuthenticationConfig(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified SshAuthenticationConfig message. Does not implicitly {@link google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.ISshAuthenticationConfig} message SshAuthenticationConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SshAuthenticationConfig.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.userPrivateKeySecretVersion != null && Object.hasOwnProperty.call(message, "userPrivateKeySecretVersion"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.userPrivateKeySecretVersion);
+                                    if (message.hostPublicKey != null && Object.hasOwnProperty.call(message, "hostPublicKey"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.hostPublicKey);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified SshAuthenticationConfig message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.ISshAuthenticationConfig} message SshAuthenticationConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SshAuthenticationConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a SshAuthenticationConfig message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig} SshAuthenticationConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SshAuthenticationConfig.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.userPrivateKeySecretVersion = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.hostPublicKey = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a SshAuthenticationConfig message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig} SshAuthenticationConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SshAuthenticationConfig.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a SshAuthenticationConfig message.
+                                 * @function verify
+                                 * @memberof google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                SshAuthenticationConfig.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.userPrivateKeySecretVersion != null && message.hasOwnProperty("userPrivateKeySecretVersion"))
+                                        if (!$util.isString(message.userPrivateKeySecretVersion))
+                                            return "userPrivateKeySecretVersion: string expected";
+                                    if (message.hostPublicKey != null && message.hasOwnProperty("hostPublicKey"))
+                                        if (!$util.isString(message.hostPublicKey))
+                                            return "hostPublicKey: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a SshAuthenticationConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig} SshAuthenticationConfig
+                                 */
+                                SshAuthenticationConfig.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig)
+                                        return object;
+                                    var message = new $root.google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig();
+                                    if (object.userPrivateKeySecretVersion != null)
+                                        message.userPrivateKeySecretVersion = String(object.userPrivateKeySecretVersion);
+                                    if (object.hostPublicKey != null)
+                                        message.hostPublicKey = String(object.hostPublicKey);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a SshAuthenticationConfig message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig} message SshAuthenticationConfig
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                SshAuthenticationConfig.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.userPrivateKeySecretVersion = "";
+                                        object.hostPublicKey = "";
+                                    }
+                                    if (message.userPrivateKeySecretVersion != null && message.hasOwnProperty("userPrivateKeySecretVersion"))
+                                        object.userPrivateKeySecretVersion = message.userPrivateKeySecretVersion;
+                                    if (message.hostPublicKey != null && message.hasOwnProperty("hostPublicKey"))
+                                        object.hostPublicKey = message.hostPublicKey;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this SshAuthenticationConfig to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                SshAuthenticationConfig.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for SshAuthenticationConfig
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                SshAuthenticationConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig";
+                                };
+    
+                                return SshAuthenticationConfig;
+                            })();
+    
                             /**
                              * TokenStatus enum.
                              * @name google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.TokenStatus
@@ -22590,6 +23519,256 @@
                             })();
     
                             return GitRemoteSettings;
+                        })();
+    
+                        Repository.WorkspaceCompilationOverrides = (function() {
+    
+                            /**
+                             * Properties of a WorkspaceCompilationOverrides.
+                             * @memberof google.cloud.dataform.v1beta1.Repository
+                             * @interface IWorkspaceCompilationOverrides
+                             * @property {string|null} [defaultDatabase] WorkspaceCompilationOverrides defaultDatabase
+                             * @property {string|null} [schemaSuffix] WorkspaceCompilationOverrides schemaSuffix
+                             * @property {string|null} [tablePrefix] WorkspaceCompilationOverrides tablePrefix
+                             */
+    
+                            /**
+                             * Constructs a new WorkspaceCompilationOverrides.
+                             * @memberof google.cloud.dataform.v1beta1.Repository
+                             * @classdesc Represents a WorkspaceCompilationOverrides.
+                             * @implements IWorkspaceCompilationOverrides
+                             * @constructor
+                             * @param {google.cloud.dataform.v1beta1.Repository.IWorkspaceCompilationOverrides=} [properties] Properties to set
+                             */
+                            function WorkspaceCompilationOverrides(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * WorkspaceCompilationOverrides defaultDatabase.
+                             * @member {string} defaultDatabase
+                             * @memberof google.cloud.dataform.v1beta1.Repository.WorkspaceCompilationOverrides
+                             * @instance
+                             */
+                            WorkspaceCompilationOverrides.prototype.defaultDatabase = "";
+    
+                            /**
+                             * WorkspaceCompilationOverrides schemaSuffix.
+                             * @member {string} schemaSuffix
+                             * @memberof google.cloud.dataform.v1beta1.Repository.WorkspaceCompilationOverrides
+                             * @instance
+                             */
+                            WorkspaceCompilationOverrides.prototype.schemaSuffix = "";
+    
+                            /**
+                             * WorkspaceCompilationOverrides tablePrefix.
+                             * @member {string} tablePrefix
+                             * @memberof google.cloud.dataform.v1beta1.Repository.WorkspaceCompilationOverrides
+                             * @instance
+                             */
+                            WorkspaceCompilationOverrides.prototype.tablePrefix = "";
+    
+                            /**
+                             * Creates a new WorkspaceCompilationOverrides instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dataform.v1beta1.Repository.WorkspaceCompilationOverrides
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.Repository.IWorkspaceCompilationOverrides=} [properties] Properties to set
+                             * @returns {google.cloud.dataform.v1beta1.Repository.WorkspaceCompilationOverrides} WorkspaceCompilationOverrides instance
+                             */
+                            WorkspaceCompilationOverrides.create = function create(properties) {
+                                return new WorkspaceCompilationOverrides(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified WorkspaceCompilationOverrides message. Does not implicitly {@link google.cloud.dataform.v1beta1.Repository.WorkspaceCompilationOverrides.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dataform.v1beta1.Repository.WorkspaceCompilationOverrides
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.Repository.IWorkspaceCompilationOverrides} message WorkspaceCompilationOverrides message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            WorkspaceCompilationOverrides.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.defaultDatabase != null && Object.hasOwnProperty.call(message, "defaultDatabase"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.defaultDatabase);
+                                if (message.schemaSuffix != null && Object.hasOwnProperty.call(message, "schemaSuffix"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.schemaSuffix);
+                                if (message.tablePrefix != null && Object.hasOwnProperty.call(message, "tablePrefix"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.tablePrefix);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified WorkspaceCompilationOverrides message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.Repository.WorkspaceCompilationOverrides.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dataform.v1beta1.Repository.WorkspaceCompilationOverrides
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.Repository.IWorkspaceCompilationOverrides} message WorkspaceCompilationOverrides message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            WorkspaceCompilationOverrides.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a WorkspaceCompilationOverrides message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dataform.v1beta1.Repository.WorkspaceCompilationOverrides
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dataform.v1beta1.Repository.WorkspaceCompilationOverrides} WorkspaceCompilationOverrides
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            WorkspaceCompilationOverrides.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.Repository.WorkspaceCompilationOverrides();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.defaultDatabase = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.schemaSuffix = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.tablePrefix = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a WorkspaceCompilationOverrides message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dataform.v1beta1.Repository.WorkspaceCompilationOverrides
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dataform.v1beta1.Repository.WorkspaceCompilationOverrides} WorkspaceCompilationOverrides
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            WorkspaceCompilationOverrides.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a WorkspaceCompilationOverrides message.
+                             * @function verify
+                             * @memberof google.cloud.dataform.v1beta1.Repository.WorkspaceCompilationOverrides
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            WorkspaceCompilationOverrides.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.defaultDatabase != null && message.hasOwnProperty("defaultDatabase"))
+                                    if (!$util.isString(message.defaultDatabase))
+                                        return "defaultDatabase: string expected";
+                                if (message.schemaSuffix != null && message.hasOwnProperty("schemaSuffix"))
+                                    if (!$util.isString(message.schemaSuffix))
+                                        return "schemaSuffix: string expected";
+                                if (message.tablePrefix != null && message.hasOwnProperty("tablePrefix"))
+                                    if (!$util.isString(message.tablePrefix))
+                                        return "tablePrefix: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a WorkspaceCompilationOverrides message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dataform.v1beta1.Repository.WorkspaceCompilationOverrides
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dataform.v1beta1.Repository.WorkspaceCompilationOverrides} WorkspaceCompilationOverrides
+                             */
+                            WorkspaceCompilationOverrides.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dataform.v1beta1.Repository.WorkspaceCompilationOverrides)
+                                    return object;
+                                var message = new $root.google.cloud.dataform.v1beta1.Repository.WorkspaceCompilationOverrides();
+                                if (object.defaultDatabase != null)
+                                    message.defaultDatabase = String(object.defaultDatabase);
+                                if (object.schemaSuffix != null)
+                                    message.schemaSuffix = String(object.schemaSuffix);
+                                if (object.tablePrefix != null)
+                                    message.tablePrefix = String(object.tablePrefix);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a WorkspaceCompilationOverrides message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dataform.v1beta1.Repository.WorkspaceCompilationOverrides
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.Repository.WorkspaceCompilationOverrides} message WorkspaceCompilationOverrides
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            WorkspaceCompilationOverrides.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.defaultDatabase = "";
+                                    object.schemaSuffix = "";
+                                    object.tablePrefix = "";
+                                }
+                                if (message.defaultDatabase != null && message.hasOwnProperty("defaultDatabase"))
+                                    object.defaultDatabase = message.defaultDatabase;
+                                if (message.schemaSuffix != null && message.hasOwnProperty("schemaSuffix"))
+                                    object.schemaSuffix = message.schemaSuffix;
+                                if (message.tablePrefix != null && message.hasOwnProperty("tablePrefix"))
+                                    object.tablePrefix = message.tablePrefix;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this WorkspaceCompilationOverrides to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dataform.v1beta1.Repository.WorkspaceCompilationOverrides
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            WorkspaceCompilationOverrides.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for WorkspaceCompilationOverrides
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dataform.v1beta1.Repository.WorkspaceCompilationOverrides
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            WorkspaceCompilationOverrides.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dataform.v1beta1.Repository.WorkspaceCompilationOverrides";
+                            };
+    
+                            return WorkspaceCompilationOverrides;
                         })();
     
                         return Repository;
@@ -24099,6 +25278,3448 @@
                         };
     
                         return DeleteRepositoryRequest;
+                    })();
+    
+                    v1beta1.CommitRepositoryChangesRequest = (function() {
+    
+                        /**
+                         * Properties of a CommitRepositoryChangesRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface ICommitRepositoryChangesRequest
+                         * @property {string|null} [name] CommitRepositoryChangesRequest name
+                         * @property {google.cloud.dataform.v1beta1.ICommitMetadata|null} [commitMetadata] CommitRepositoryChangesRequest commitMetadata
+                         * @property {string|null} [requiredHeadCommitSha] CommitRepositoryChangesRequest requiredHeadCommitSha
+                         * @property {Object.<string,google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.IFileOperation>|null} [fileOperations] CommitRepositoryChangesRequest fileOperations
+                         */
+    
+                        /**
+                         * Constructs a new CommitRepositoryChangesRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a CommitRepositoryChangesRequest.
+                         * @implements ICommitRepositoryChangesRequest
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest=} [properties] Properties to set
+                         */
+                        function CommitRepositoryChangesRequest(properties) {
+                            this.fileOperations = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CommitRepositoryChangesRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest
+                         * @instance
+                         */
+                        CommitRepositoryChangesRequest.prototype.name = "";
+    
+                        /**
+                         * CommitRepositoryChangesRequest commitMetadata.
+                         * @member {google.cloud.dataform.v1beta1.ICommitMetadata|null|undefined} commitMetadata
+                         * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest
+                         * @instance
+                         */
+                        CommitRepositoryChangesRequest.prototype.commitMetadata = null;
+    
+                        /**
+                         * CommitRepositoryChangesRequest requiredHeadCommitSha.
+                         * @member {string} requiredHeadCommitSha
+                         * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest
+                         * @instance
+                         */
+                        CommitRepositoryChangesRequest.prototype.requiredHeadCommitSha = "";
+    
+                        /**
+                         * CommitRepositoryChangesRequest fileOperations.
+                         * @member {Object.<string,google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.IFileOperation>} fileOperations
+                         * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest
+                         * @instance
+                         */
+                        CommitRepositoryChangesRequest.prototype.fileOperations = $util.emptyObject;
+    
+                        /**
+                         * Creates a new CommitRepositoryChangesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest} CommitRepositoryChangesRequest instance
+                         */
+                        CommitRepositoryChangesRequest.create = function create(properties) {
+                            return new CommitRepositoryChangesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CommitRepositoryChangesRequest message. Does not implicitly {@link google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest} message CommitRepositoryChangesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CommitRepositoryChangesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.commitMetadata != null && Object.hasOwnProperty.call(message, "commitMetadata"))
+                                $root.google.cloud.dataform.v1beta1.CommitMetadata.encode(message.commitMetadata, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.fileOperations != null && Object.hasOwnProperty.call(message, "fileOperations"))
+                                for (var keys = Object.keys(message.fileOperations), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.encode(message.fileOperations[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
+                            if (message.requiredHeadCommitSha != null && Object.hasOwnProperty.call(message, "requiredHeadCommitSha"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requiredHeadCommitSha);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CommitRepositoryChangesRequest message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest} message CommitRepositoryChangesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CommitRepositoryChangesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CommitRepositoryChangesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest} CommitRepositoryChangesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CommitRepositoryChangesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.commitMetadata = $root.google.cloud.dataform.v1beta1.CommitMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requiredHeadCommitSha = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (message.fileOperations === $util.emptyObject)
+                                            message.fileOperations = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = null;
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = $root.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.decode(reader, reader.uint32());
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.fileOperations[key] = value;
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CommitRepositoryChangesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest} CommitRepositoryChangesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CommitRepositoryChangesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CommitRepositoryChangesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CommitRepositoryChangesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.commitMetadata != null && message.hasOwnProperty("commitMetadata")) {
+                                var error = $root.google.cloud.dataform.v1beta1.CommitMetadata.verify(message.commitMetadata);
+                                if (error)
+                                    return "commitMetadata." + error;
+                            }
+                            if (message.requiredHeadCommitSha != null && message.hasOwnProperty("requiredHeadCommitSha"))
+                                if (!$util.isString(message.requiredHeadCommitSha))
+                                    return "requiredHeadCommitSha: string expected";
+                            if (message.fileOperations != null && message.hasOwnProperty("fileOperations")) {
+                                if (!$util.isObject(message.fileOperations))
+                                    return "fileOperations: object expected";
+                                var key = Object.keys(message.fileOperations);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.verify(message.fileOperations[key[i]]);
+                                    if (error)
+                                        return "fileOperations." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CommitRepositoryChangesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest} CommitRepositoryChangesRequest
+                         */
+                        CommitRepositoryChangesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest)
+                                return object;
+                            var message = new $root.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.commitMetadata != null) {
+                                if (typeof object.commitMetadata !== "object")
+                                    throw TypeError(".google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.commitMetadata: object expected");
+                                message.commitMetadata = $root.google.cloud.dataform.v1beta1.CommitMetadata.fromObject(object.commitMetadata);
+                            }
+                            if (object.requiredHeadCommitSha != null)
+                                message.requiredHeadCommitSha = String(object.requiredHeadCommitSha);
+                            if (object.fileOperations) {
+                                if (typeof object.fileOperations !== "object")
+                                    throw TypeError(".google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.fileOperations: object expected");
+                                message.fileOperations = {};
+                                for (var keys = Object.keys(object.fileOperations), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.fileOperations[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.fileOperations: object expected");
+                                    message.fileOperations[keys[i]] = $root.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.fromObject(object.fileOperations[keys[i]]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CommitRepositoryChangesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest} message CommitRepositoryChangesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CommitRepositoryChangesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.fileOperations = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.commitMetadata = null;
+                                object.requiredHeadCommitSha = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.commitMetadata != null && message.hasOwnProperty("commitMetadata"))
+                                object.commitMetadata = $root.google.cloud.dataform.v1beta1.CommitMetadata.toObject(message.commitMetadata, options);
+                            var keys2;
+                            if (message.fileOperations && (keys2 = Object.keys(message.fileOperations)).length) {
+                                object.fileOperations = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.fileOperations[keys2[j]] = $root.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.toObject(message.fileOperations[keys2[j]], options);
+                            }
+                            if (message.requiredHeadCommitSha != null && message.hasOwnProperty("requiredHeadCommitSha"))
+                                object.requiredHeadCommitSha = message.requiredHeadCommitSha;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CommitRepositoryChangesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CommitRepositoryChangesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CommitRepositoryChangesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CommitRepositoryChangesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest";
+                        };
+    
+                        CommitRepositoryChangesRequest.FileOperation = (function() {
+    
+                            /**
+                             * Properties of a FileOperation.
+                             * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest
+                             * @interface IFileOperation
+                             * @property {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.IWriteFile|null} [writeFile] FileOperation writeFile
+                             * @property {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.IDeleteFile|null} [deleteFile] FileOperation deleteFile
+                             */
+    
+                            /**
+                             * Constructs a new FileOperation.
+                             * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest
+                             * @classdesc Represents a FileOperation.
+                             * @implements IFileOperation
+                             * @constructor
+                             * @param {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.IFileOperation=} [properties] Properties to set
+                             */
+                            function FileOperation(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * FileOperation writeFile.
+                             * @member {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.IWriteFile|null|undefined} writeFile
+                             * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation
+                             * @instance
+                             */
+                            FileOperation.prototype.writeFile = null;
+    
+                            /**
+                             * FileOperation deleteFile.
+                             * @member {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.IDeleteFile|null|undefined} deleteFile
+                             * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation
+                             * @instance
+                             */
+                            FileOperation.prototype.deleteFile = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * FileOperation operation.
+                             * @member {"writeFile"|"deleteFile"|undefined} operation
+                             * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation
+                             * @instance
+                             */
+                            Object.defineProperty(FileOperation.prototype, "operation", {
+                                get: $util.oneOfGetter($oneOfFields = ["writeFile", "deleteFile"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new FileOperation instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.IFileOperation=} [properties] Properties to set
+                             * @returns {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation} FileOperation instance
+                             */
+                            FileOperation.create = function create(properties) {
+                                return new FileOperation(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified FileOperation message. Does not implicitly {@link google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.IFileOperation} message FileOperation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FileOperation.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.writeFile != null && Object.hasOwnProperty.call(message, "writeFile"))
+                                    $root.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.WriteFile.encode(message.writeFile, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.deleteFile != null && Object.hasOwnProperty.call(message, "deleteFile"))
+                                    $root.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.DeleteFile.encode(message.deleteFile, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified FileOperation message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.IFileOperation} message FileOperation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FileOperation.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a FileOperation message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation} FileOperation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FileOperation.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.writeFile = $root.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.WriteFile.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.deleteFile = $root.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.DeleteFile.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a FileOperation message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation} FileOperation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FileOperation.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a FileOperation message.
+                             * @function verify
+                             * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            FileOperation.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.writeFile != null && message.hasOwnProperty("writeFile")) {
+                                    properties.operation = 1;
+                                    {
+                                        var error = $root.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.WriteFile.verify(message.writeFile);
+                                        if (error)
+                                            return "writeFile." + error;
+                                    }
+                                }
+                                if (message.deleteFile != null && message.hasOwnProperty("deleteFile")) {
+                                    if (properties.operation === 1)
+                                        return "operation: multiple values";
+                                    properties.operation = 1;
+                                    {
+                                        var error = $root.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.DeleteFile.verify(message.deleteFile);
+                                        if (error)
+                                            return "deleteFile." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a FileOperation message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation} FileOperation
+                             */
+                            FileOperation.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation)
+                                    return object;
+                                var message = new $root.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation();
+                                if (object.writeFile != null) {
+                                    if (typeof object.writeFile !== "object")
+                                        throw TypeError(".google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.writeFile: object expected");
+                                    message.writeFile = $root.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.WriteFile.fromObject(object.writeFile);
+                                }
+                                if (object.deleteFile != null) {
+                                    if (typeof object.deleteFile !== "object")
+                                        throw TypeError(".google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.deleteFile: object expected");
+                                    message.deleteFile = $root.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.DeleteFile.fromObject(object.deleteFile);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a FileOperation message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation} message FileOperation
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            FileOperation.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.writeFile != null && message.hasOwnProperty("writeFile")) {
+                                    object.writeFile = $root.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.WriteFile.toObject(message.writeFile, options);
+                                    if (options.oneofs)
+                                        object.operation = "writeFile";
+                                }
+                                if (message.deleteFile != null && message.hasOwnProperty("deleteFile")) {
+                                    object.deleteFile = $root.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.DeleteFile.toObject(message.deleteFile, options);
+                                    if (options.oneofs)
+                                        object.operation = "deleteFile";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this FileOperation to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            FileOperation.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FileOperation
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FileOperation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation";
+                            };
+    
+                            FileOperation.WriteFile = (function() {
+    
+                                /**
+                                 * Properties of a WriteFile.
+                                 * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation
+                                 * @interface IWriteFile
+                                 * @property {Uint8Array|null} [contents] WriteFile contents
+                                 */
+    
+                                /**
+                                 * Constructs a new WriteFile.
+                                 * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation
+                                 * @classdesc Represents a WriteFile.
+                                 * @implements IWriteFile
+                                 * @constructor
+                                 * @param {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.IWriteFile=} [properties] Properties to set
+                                 */
+                                function WriteFile(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * WriteFile contents.
+                                 * @member {Uint8Array} contents
+                                 * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.WriteFile
+                                 * @instance
+                                 */
+                                WriteFile.prototype.contents = $util.newBuffer([]);
+    
+                                /**
+                                 * Creates a new WriteFile instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.WriteFile
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.IWriteFile=} [properties] Properties to set
+                                 * @returns {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.WriteFile} WriteFile instance
+                                 */
+                                WriteFile.create = function create(properties) {
+                                    return new WriteFile(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified WriteFile message. Does not implicitly {@link google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.WriteFile.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.WriteFile
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.IWriteFile} message WriteFile message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                WriteFile.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.contents != null && Object.hasOwnProperty.call(message, "contents"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.contents);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified WriteFile message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.WriteFile.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.WriteFile
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.IWriteFile} message WriteFile message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                WriteFile.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a WriteFile message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.WriteFile
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.WriteFile} WriteFile
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                WriteFile.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.WriteFile();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.contents = reader.bytes();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a WriteFile message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.WriteFile
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.WriteFile} WriteFile
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                WriteFile.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a WriteFile message.
+                                 * @function verify
+                                 * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.WriteFile
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                WriteFile.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.contents != null && message.hasOwnProperty("contents"))
+                                        if (!(message.contents && typeof message.contents.length === "number" || $util.isString(message.contents)))
+                                            return "contents: buffer expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a WriteFile message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.WriteFile
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.WriteFile} WriteFile
+                                 */
+                                WriteFile.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.WriteFile)
+                                        return object;
+                                    var message = new $root.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.WriteFile();
+                                    if (object.contents != null)
+                                        if (typeof object.contents === "string")
+                                            $util.base64.decode(object.contents, message.contents = $util.newBuffer($util.base64.length(object.contents)), 0);
+                                        else if (object.contents.length >= 0)
+                                            message.contents = object.contents;
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a WriteFile message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.WriteFile
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.WriteFile} message WriteFile
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                WriteFile.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        if (options.bytes === String)
+                                            object.contents = "";
+                                        else {
+                                            object.contents = [];
+                                            if (options.bytes !== Array)
+                                                object.contents = $util.newBuffer(object.contents);
+                                        }
+                                    if (message.contents != null && message.hasOwnProperty("contents"))
+                                        object.contents = options.bytes === String ? $util.base64.encode(message.contents, 0, message.contents.length) : options.bytes === Array ? Array.prototype.slice.call(message.contents) : message.contents;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this WriteFile to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.WriteFile
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                WriteFile.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for WriteFile
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.WriteFile
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                WriteFile.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.WriteFile";
+                                };
+    
+                                return WriteFile;
+                            })();
+    
+                            FileOperation.DeleteFile = (function() {
+    
+                                /**
+                                 * Properties of a DeleteFile.
+                                 * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation
+                                 * @interface IDeleteFile
+                                 */
+    
+                                /**
+                                 * Constructs a new DeleteFile.
+                                 * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation
+                                 * @classdesc Represents a DeleteFile.
+                                 * @implements IDeleteFile
+                                 * @constructor
+                                 * @param {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.IDeleteFile=} [properties] Properties to set
+                                 */
+                                function DeleteFile(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Creates a new DeleteFile instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.DeleteFile
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.IDeleteFile=} [properties] Properties to set
+                                 * @returns {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.DeleteFile} DeleteFile instance
+                                 */
+                                DeleteFile.create = function create(properties) {
+                                    return new DeleteFile(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified DeleteFile message. Does not implicitly {@link google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.DeleteFile.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.DeleteFile
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.IDeleteFile} message DeleteFile message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                DeleteFile.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified DeleteFile message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.DeleteFile.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.DeleteFile
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.IDeleteFile} message DeleteFile message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                DeleteFile.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a DeleteFile message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.DeleteFile
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.DeleteFile} DeleteFile
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                DeleteFile.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.DeleteFile();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a DeleteFile message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.DeleteFile
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.DeleteFile} DeleteFile
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                DeleteFile.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a DeleteFile message.
+                                 * @function verify
+                                 * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.DeleteFile
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                DeleteFile.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a DeleteFile message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.DeleteFile
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.DeleteFile} DeleteFile
+                                 */
+                                DeleteFile.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.DeleteFile)
+                                        return object;
+                                    return new $root.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.DeleteFile();
+                                };
+    
+                                /**
+                                 * Creates a plain object from a DeleteFile message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.DeleteFile
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.DeleteFile} message DeleteFile
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                DeleteFile.toObject = function toObject() {
+                                    return {};
+                                };
+    
+                                /**
+                                 * Converts this DeleteFile to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.DeleteFile
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                DeleteFile.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for DeleteFile
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.DeleteFile
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                DeleteFile.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.DeleteFile";
+                                };
+    
+                                return DeleteFile;
+                            })();
+    
+                            return FileOperation;
+                        })();
+    
+                        return CommitRepositoryChangesRequest;
+                    })();
+    
+                    v1beta1.ReadRepositoryFileRequest = (function() {
+    
+                        /**
+                         * Properties of a ReadRepositoryFileRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface IReadRepositoryFileRequest
+                         * @property {string|null} [name] ReadRepositoryFileRequest name
+                         * @property {string|null} [commitSha] ReadRepositoryFileRequest commitSha
+                         * @property {string|null} [path] ReadRepositoryFileRequest path
+                         */
+    
+                        /**
+                         * Constructs a new ReadRepositoryFileRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a ReadRepositoryFileRequest.
+                         * @implements IReadRepositoryFileRequest
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.IReadRepositoryFileRequest=} [properties] Properties to set
+                         */
+                        function ReadRepositoryFileRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ReadRepositoryFileRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.dataform.v1beta1.ReadRepositoryFileRequest
+                         * @instance
+                         */
+                        ReadRepositoryFileRequest.prototype.name = "";
+    
+                        /**
+                         * ReadRepositoryFileRequest commitSha.
+                         * @member {string} commitSha
+                         * @memberof google.cloud.dataform.v1beta1.ReadRepositoryFileRequest
+                         * @instance
+                         */
+                        ReadRepositoryFileRequest.prototype.commitSha = "";
+    
+                        /**
+                         * ReadRepositoryFileRequest path.
+                         * @member {string} path
+                         * @memberof google.cloud.dataform.v1beta1.ReadRepositoryFileRequest
+                         * @instance
+                         */
+                        ReadRepositoryFileRequest.prototype.path = "";
+    
+                        /**
+                         * Creates a new ReadRepositoryFileRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.ReadRepositoryFileRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IReadRepositoryFileRequest=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.ReadRepositoryFileRequest} ReadRepositoryFileRequest instance
+                         */
+                        ReadRepositoryFileRequest.create = function create(properties) {
+                            return new ReadRepositoryFileRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ReadRepositoryFileRequest message. Does not implicitly {@link google.cloud.dataform.v1beta1.ReadRepositoryFileRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.ReadRepositoryFileRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IReadRepositoryFileRequest} message ReadRepositoryFileRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReadRepositoryFileRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.commitSha != null && Object.hasOwnProperty.call(message, "commitSha"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.commitSha);
+                            if (message.path != null && Object.hasOwnProperty.call(message, "path"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.path);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ReadRepositoryFileRequest message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.ReadRepositoryFileRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.ReadRepositoryFileRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IReadRepositoryFileRequest} message ReadRepositoryFileRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReadRepositoryFileRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ReadRepositoryFileRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.ReadRepositoryFileRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.ReadRepositoryFileRequest} ReadRepositoryFileRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReadRepositoryFileRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.ReadRepositoryFileRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.commitSha = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.path = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ReadRepositoryFileRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.ReadRepositoryFileRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.ReadRepositoryFileRequest} ReadRepositoryFileRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReadRepositoryFileRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ReadRepositoryFileRequest message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.ReadRepositoryFileRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ReadRepositoryFileRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.commitSha != null && message.hasOwnProperty("commitSha"))
+                                if (!$util.isString(message.commitSha))
+                                    return "commitSha: string expected";
+                            if (message.path != null && message.hasOwnProperty("path"))
+                                if (!$util.isString(message.path))
+                                    return "path: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ReadRepositoryFileRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.ReadRepositoryFileRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.ReadRepositoryFileRequest} ReadRepositoryFileRequest
+                         */
+                        ReadRepositoryFileRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.ReadRepositoryFileRequest)
+                                return object;
+                            var message = new $root.google.cloud.dataform.v1beta1.ReadRepositoryFileRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.commitSha != null)
+                                message.commitSha = String(object.commitSha);
+                            if (object.path != null)
+                                message.path = String(object.path);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ReadRepositoryFileRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.ReadRepositoryFileRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.ReadRepositoryFileRequest} message ReadRepositoryFileRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ReadRepositoryFileRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.commitSha = "";
+                                object.path = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.commitSha != null && message.hasOwnProperty("commitSha"))
+                                object.commitSha = message.commitSha;
+                            if (message.path != null && message.hasOwnProperty("path"))
+                                object.path = message.path;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ReadRepositoryFileRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.ReadRepositoryFileRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ReadRepositoryFileRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ReadRepositoryFileRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.ReadRepositoryFileRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ReadRepositoryFileRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.ReadRepositoryFileRequest";
+                        };
+    
+                        return ReadRepositoryFileRequest;
+                    })();
+    
+                    v1beta1.ReadRepositoryFileResponse = (function() {
+    
+                        /**
+                         * Properties of a ReadRepositoryFileResponse.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface IReadRepositoryFileResponse
+                         * @property {Uint8Array|null} [contents] ReadRepositoryFileResponse contents
+                         */
+    
+                        /**
+                         * Constructs a new ReadRepositoryFileResponse.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a ReadRepositoryFileResponse.
+                         * @implements IReadRepositoryFileResponse
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.IReadRepositoryFileResponse=} [properties] Properties to set
+                         */
+                        function ReadRepositoryFileResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ReadRepositoryFileResponse contents.
+                         * @member {Uint8Array} contents
+                         * @memberof google.cloud.dataform.v1beta1.ReadRepositoryFileResponse
+                         * @instance
+                         */
+                        ReadRepositoryFileResponse.prototype.contents = $util.newBuffer([]);
+    
+                        /**
+                         * Creates a new ReadRepositoryFileResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.ReadRepositoryFileResponse
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IReadRepositoryFileResponse=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.ReadRepositoryFileResponse} ReadRepositoryFileResponse instance
+                         */
+                        ReadRepositoryFileResponse.create = function create(properties) {
+                            return new ReadRepositoryFileResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ReadRepositoryFileResponse message. Does not implicitly {@link google.cloud.dataform.v1beta1.ReadRepositoryFileResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.ReadRepositoryFileResponse
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IReadRepositoryFileResponse} message ReadRepositoryFileResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReadRepositoryFileResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.contents != null && Object.hasOwnProperty.call(message, "contents"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.contents);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ReadRepositoryFileResponse message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.ReadRepositoryFileResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.ReadRepositoryFileResponse
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IReadRepositoryFileResponse} message ReadRepositoryFileResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReadRepositoryFileResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ReadRepositoryFileResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.ReadRepositoryFileResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.ReadRepositoryFileResponse} ReadRepositoryFileResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReadRepositoryFileResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.ReadRepositoryFileResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.contents = reader.bytes();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ReadRepositoryFileResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.ReadRepositoryFileResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.ReadRepositoryFileResponse} ReadRepositoryFileResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReadRepositoryFileResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ReadRepositoryFileResponse message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.ReadRepositoryFileResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ReadRepositoryFileResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.contents != null && message.hasOwnProperty("contents"))
+                                if (!(message.contents && typeof message.contents.length === "number" || $util.isString(message.contents)))
+                                    return "contents: buffer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ReadRepositoryFileResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.ReadRepositoryFileResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.ReadRepositoryFileResponse} ReadRepositoryFileResponse
+                         */
+                        ReadRepositoryFileResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.ReadRepositoryFileResponse)
+                                return object;
+                            var message = new $root.google.cloud.dataform.v1beta1.ReadRepositoryFileResponse();
+                            if (object.contents != null)
+                                if (typeof object.contents === "string")
+                                    $util.base64.decode(object.contents, message.contents = $util.newBuffer($util.base64.length(object.contents)), 0);
+                                else if (object.contents.length >= 0)
+                                    message.contents = object.contents;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ReadRepositoryFileResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.ReadRepositoryFileResponse
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.ReadRepositoryFileResponse} message ReadRepositoryFileResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ReadRepositoryFileResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                if (options.bytes === String)
+                                    object.contents = "";
+                                else {
+                                    object.contents = [];
+                                    if (options.bytes !== Array)
+                                        object.contents = $util.newBuffer(object.contents);
+                                }
+                            if (message.contents != null && message.hasOwnProperty("contents"))
+                                object.contents = options.bytes === String ? $util.base64.encode(message.contents, 0, message.contents.length) : options.bytes === Array ? Array.prototype.slice.call(message.contents) : message.contents;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ReadRepositoryFileResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.ReadRepositoryFileResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ReadRepositoryFileResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ReadRepositoryFileResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.ReadRepositoryFileResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ReadRepositoryFileResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.ReadRepositoryFileResponse";
+                        };
+    
+                        return ReadRepositoryFileResponse;
+                    })();
+    
+                    v1beta1.QueryRepositoryDirectoryContentsRequest = (function() {
+    
+                        /**
+                         * Properties of a QueryRepositoryDirectoryContentsRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface IQueryRepositoryDirectoryContentsRequest
+                         * @property {string|null} [name] QueryRepositoryDirectoryContentsRequest name
+                         * @property {string|null} [commitSha] QueryRepositoryDirectoryContentsRequest commitSha
+                         * @property {string|null} [path] QueryRepositoryDirectoryContentsRequest path
+                         * @property {number|null} [pageSize] QueryRepositoryDirectoryContentsRequest pageSize
+                         * @property {string|null} [pageToken] QueryRepositoryDirectoryContentsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new QueryRepositoryDirectoryContentsRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a QueryRepositoryDirectoryContentsRequest.
+                         * @implements IQueryRepositoryDirectoryContentsRequest
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest=} [properties] Properties to set
+                         */
+                        function QueryRepositoryDirectoryContentsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QueryRepositoryDirectoryContentsRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest
+                         * @instance
+                         */
+                        QueryRepositoryDirectoryContentsRequest.prototype.name = "";
+    
+                        /**
+                         * QueryRepositoryDirectoryContentsRequest commitSha.
+                         * @member {string} commitSha
+                         * @memberof google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest
+                         * @instance
+                         */
+                        QueryRepositoryDirectoryContentsRequest.prototype.commitSha = "";
+    
+                        /**
+                         * QueryRepositoryDirectoryContentsRequest path.
+                         * @member {string} path
+                         * @memberof google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest
+                         * @instance
+                         */
+                        QueryRepositoryDirectoryContentsRequest.prototype.path = "";
+    
+                        /**
+                         * QueryRepositoryDirectoryContentsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest
+                         * @instance
+                         */
+                        QueryRepositoryDirectoryContentsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * QueryRepositoryDirectoryContentsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest
+                         * @instance
+                         */
+                        QueryRepositoryDirectoryContentsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new QueryRepositoryDirectoryContentsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest} QueryRepositoryDirectoryContentsRequest instance
+                         */
+                        QueryRepositoryDirectoryContentsRequest.create = function create(properties) {
+                            return new QueryRepositoryDirectoryContentsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QueryRepositoryDirectoryContentsRequest message. Does not implicitly {@link google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest} message QueryRepositoryDirectoryContentsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryRepositoryDirectoryContentsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.commitSha != null && Object.hasOwnProperty.call(message, "commitSha"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.commitSha);
+                            if (message.path != null && Object.hasOwnProperty.call(message, "path"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.path);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QueryRepositoryDirectoryContentsRequest message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest} message QueryRepositoryDirectoryContentsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryRepositoryDirectoryContentsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QueryRepositoryDirectoryContentsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest} QueryRepositoryDirectoryContentsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryRepositoryDirectoryContentsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.commitSha = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.path = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QueryRepositoryDirectoryContentsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest} QueryRepositoryDirectoryContentsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryRepositoryDirectoryContentsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QueryRepositoryDirectoryContentsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QueryRepositoryDirectoryContentsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.commitSha != null && message.hasOwnProperty("commitSha"))
+                                if (!$util.isString(message.commitSha))
+                                    return "commitSha: string expected";
+                            if (message.path != null && message.hasOwnProperty("path"))
+                                if (!$util.isString(message.path))
+                                    return "path: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QueryRepositoryDirectoryContentsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest} QueryRepositoryDirectoryContentsRequest
+                         */
+                        QueryRepositoryDirectoryContentsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest)
+                                return object;
+                            var message = new $root.google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.commitSha != null)
+                                message.commitSha = String(object.commitSha);
+                            if (object.path != null)
+                                message.path = String(object.path);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QueryRepositoryDirectoryContentsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest} message QueryRepositoryDirectoryContentsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QueryRepositoryDirectoryContentsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.commitSha = "";
+                                object.path = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.commitSha != null && message.hasOwnProperty("commitSha"))
+                                object.commitSha = message.commitSha;
+                            if (message.path != null && message.hasOwnProperty("path"))
+                                object.path = message.path;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QueryRepositoryDirectoryContentsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QueryRepositoryDirectoryContentsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QueryRepositoryDirectoryContentsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QueryRepositoryDirectoryContentsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest";
+                        };
+    
+                        return QueryRepositoryDirectoryContentsRequest;
+                    })();
+    
+                    v1beta1.QueryRepositoryDirectoryContentsResponse = (function() {
+    
+                        /**
+                         * Properties of a QueryRepositoryDirectoryContentsResponse.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface IQueryRepositoryDirectoryContentsResponse
+                         * @property {Array.<google.cloud.dataform.v1beta1.IDirectoryEntry>|null} [directoryEntries] QueryRepositoryDirectoryContentsResponse directoryEntries
+                         * @property {string|null} [nextPageToken] QueryRepositoryDirectoryContentsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new QueryRepositoryDirectoryContentsResponse.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a QueryRepositoryDirectoryContentsResponse.
+                         * @implements IQueryRepositoryDirectoryContentsResponse
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsResponse=} [properties] Properties to set
+                         */
+                        function QueryRepositoryDirectoryContentsResponse(properties) {
+                            this.directoryEntries = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QueryRepositoryDirectoryContentsResponse directoryEntries.
+                         * @member {Array.<google.cloud.dataform.v1beta1.IDirectoryEntry>} directoryEntries
+                         * @memberof google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsResponse
+                         * @instance
+                         */
+                        QueryRepositoryDirectoryContentsResponse.prototype.directoryEntries = $util.emptyArray;
+    
+                        /**
+                         * QueryRepositoryDirectoryContentsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsResponse
+                         * @instance
+                         */
+                        QueryRepositoryDirectoryContentsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new QueryRepositoryDirectoryContentsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsResponse
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsResponse} QueryRepositoryDirectoryContentsResponse instance
+                         */
+                        QueryRepositoryDirectoryContentsResponse.create = function create(properties) {
+                            return new QueryRepositoryDirectoryContentsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QueryRepositoryDirectoryContentsResponse message. Does not implicitly {@link google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsResponse
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsResponse} message QueryRepositoryDirectoryContentsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryRepositoryDirectoryContentsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.directoryEntries != null && message.directoryEntries.length)
+                                for (var i = 0; i < message.directoryEntries.length; ++i)
+                                    $root.google.cloud.dataform.v1beta1.DirectoryEntry.encode(message.directoryEntries[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QueryRepositoryDirectoryContentsResponse message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsResponse
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsResponse} message QueryRepositoryDirectoryContentsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryRepositoryDirectoryContentsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QueryRepositoryDirectoryContentsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsResponse} QueryRepositoryDirectoryContentsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryRepositoryDirectoryContentsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.directoryEntries && message.directoryEntries.length))
+                                            message.directoryEntries = [];
+                                        message.directoryEntries.push($root.google.cloud.dataform.v1beta1.DirectoryEntry.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QueryRepositoryDirectoryContentsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsResponse} QueryRepositoryDirectoryContentsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryRepositoryDirectoryContentsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QueryRepositoryDirectoryContentsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QueryRepositoryDirectoryContentsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.directoryEntries != null && message.hasOwnProperty("directoryEntries")) {
+                                if (!Array.isArray(message.directoryEntries))
+                                    return "directoryEntries: array expected";
+                                for (var i = 0; i < message.directoryEntries.length; ++i) {
+                                    var error = $root.google.cloud.dataform.v1beta1.DirectoryEntry.verify(message.directoryEntries[i]);
+                                    if (error)
+                                        return "directoryEntries." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QueryRepositoryDirectoryContentsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsResponse} QueryRepositoryDirectoryContentsResponse
+                         */
+                        QueryRepositoryDirectoryContentsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsResponse)
+                                return object;
+                            var message = new $root.google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsResponse();
+                            if (object.directoryEntries) {
+                                if (!Array.isArray(object.directoryEntries))
+                                    throw TypeError(".google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsResponse.directoryEntries: array expected");
+                                message.directoryEntries = [];
+                                for (var i = 0; i < object.directoryEntries.length; ++i) {
+                                    if (typeof object.directoryEntries[i] !== "object")
+                                        throw TypeError(".google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsResponse.directoryEntries: object expected");
+                                    message.directoryEntries[i] = $root.google.cloud.dataform.v1beta1.DirectoryEntry.fromObject(object.directoryEntries[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QueryRepositoryDirectoryContentsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsResponse
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsResponse} message QueryRepositoryDirectoryContentsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QueryRepositoryDirectoryContentsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.directoryEntries = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.directoryEntries && message.directoryEntries.length) {
+                                object.directoryEntries = [];
+                                for (var j = 0; j < message.directoryEntries.length; ++j)
+                                    object.directoryEntries[j] = $root.google.cloud.dataform.v1beta1.DirectoryEntry.toObject(message.directoryEntries[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QueryRepositoryDirectoryContentsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QueryRepositoryDirectoryContentsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QueryRepositoryDirectoryContentsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QueryRepositoryDirectoryContentsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsResponse";
+                        };
+    
+                        return QueryRepositoryDirectoryContentsResponse;
+                    })();
+    
+                    v1beta1.FetchRepositoryHistoryRequest = (function() {
+    
+                        /**
+                         * Properties of a FetchRepositoryHistoryRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface IFetchRepositoryHistoryRequest
+                         * @property {string|null} [name] FetchRepositoryHistoryRequest name
+                         * @property {number|null} [pageSize] FetchRepositoryHistoryRequest pageSize
+                         * @property {string|null} [pageToken] FetchRepositoryHistoryRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new FetchRepositoryHistoryRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a FetchRepositoryHistoryRequest.
+                         * @implements IFetchRepositoryHistoryRequest
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest=} [properties] Properties to set
+                         */
+                        function FetchRepositoryHistoryRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FetchRepositoryHistoryRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest
+                         * @instance
+                         */
+                        FetchRepositoryHistoryRequest.prototype.name = "";
+    
+                        /**
+                         * FetchRepositoryHistoryRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest
+                         * @instance
+                         */
+                        FetchRepositoryHistoryRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * FetchRepositoryHistoryRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest
+                         * @instance
+                         */
+                        FetchRepositoryHistoryRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new FetchRepositoryHistoryRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest} FetchRepositoryHistoryRequest instance
+                         */
+                        FetchRepositoryHistoryRequest.create = function create(properties) {
+                            return new FetchRepositoryHistoryRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FetchRepositoryHistoryRequest message. Does not implicitly {@link google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest} message FetchRepositoryHistoryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FetchRepositoryHistoryRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FetchRepositoryHistoryRequest message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest} message FetchRepositoryHistoryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FetchRepositoryHistoryRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FetchRepositoryHistoryRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest} FetchRepositoryHistoryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FetchRepositoryHistoryRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FetchRepositoryHistoryRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest} FetchRepositoryHistoryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FetchRepositoryHistoryRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FetchRepositoryHistoryRequest message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FetchRepositoryHistoryRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FetchRepositoryHistoryRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest} FetchRepositoryHistoryRequest
+                         */
+                        FetchRepositoryHistoryRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest)
+                                return object;
+                            var message = new $root.google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FetchRepositoryHistoryRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest} message FetchRepositoryHistoryRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FetchRepositoryHistoryRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FetchRepositoryHistoryRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FetchRepositoryHistoryRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FetchRepositoryHistoryRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FetchRepositoryHistoryRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest";
+                        };
+    
+                        return FetchRepositoryHistoryRequest;
+                    })();
+    
+                    v1beta1.FetchRepositoryHistoryResponse = (function() {
+    
+                        /**
+                         * Properties of a FetchRepositoryHistoryResponse.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface IFetchRepositoryHistoryResponse
+                         * @property {Array.<google.cloud.dataform.v1beta1.ICommitLogEntry>|null} [commits] FetchRepositoryHistoryResponse commits
+                         * @property {string|null} [nextPageToken] FetchRepositoryHistoryResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new FetchRepositoryHistoryResponse.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a FetchRepositoryHistoryResponse.
+                         * @implements IFetchRepositoryHistoryResponse
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.IFetchRepositoryHistoryResponse=} [properties] Properties to set
+                         */
+                        function FetchRepositoryHistoryResponse(properties) {
+                            this.commits = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FetchRepositoryHistoryResponse commits.
+                         * @member {Array.<google.cloud.dataform.v1beta1.ICommitLogEntry>} commits
+                         * @memberof google.cloud.dataform.v1beta1.FetchRepositoryHistoryResponse
+                         * @instance
+                         */
+                        FetchRepositoryHistoryResponse.prototype.commits = $util.emptyArray;
+    
+                        /**
+                         * FetchRepositoryHistoryResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.dataform.v1beta1.FetchRepositoryHistoryResponse
+                         * @instance
+                         */
+                        FetchRepositoryHistoryResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new FetchRepositoryHistoryResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.FetchRepositoryHistoryResponse
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IFetchRepositoryHistoryResponse=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.FetchRepositoryHistoryResponse} FetchRepositoryHistoryResponse instance
+                         */
+                        FetchRepositoryHistoryResponse.create = function create(properties) {
+                            return new FetchRepositoryHistoryResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FetchRepositoryHistoryResponse message. Does not implicitly {@link google.cloud.dataform.v1beta1.FetchRepositoryHistoryResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.FetchRepositoryHistoryResponse
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IFetchRepositoryHistoryResponse} message FetchRepositoryHistoryResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FetchRepositoryHistoryResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.commits != null && message.commits.length)
+                                for (var i = 0; i < message.commits.length; ++i)
+                                    $root.google.cloud.dataform.v1beta1.CommitLogEntry.encode(message.commits[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FetchRepositoryHistoryResponse message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.FetchRepositoryHistoryResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.FetchRepositoryHistoryResponse
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IFetchRepositoryHistoryResponse} message FetchRepositoryHistoryResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FetchRepositoryHistoryResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FetchRepositoryHistoryResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.FetchRepositoryHistoryResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.FetchRepositoryHistoryResponse} FetchRepositoryHistoryResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FetchRepositoryHistoryResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.FetchRepositoryHistoryResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.commits && message.commits.length))
+                                            message.commits = [];
+                                        message.commits.push($root.google.cloud.dataform.v1beta1.CommitLogEntry.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FetchRepositoryHistoryResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.FetchRepositoryHistoryResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.FetchRepositoryHistoryResponse} FetchRepositoryHistoryResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FetchRepositoryHistoryResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FetchRepositoryHistoryResponse message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.FetchRepositoryHistoryResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FetchRepositoryHistoryResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.commits != null && message.hasOwnProperty("commits")) {
+                                if (!Array.isArray(message.commits))
+                                    return "commits: array expected";
+                                for (var i = 0; i < message.commits.length; ++i) {
+                                    var error = $root.google.cloud.dataform.v1beta1.CommitLogEntry.verify(message.commits[i]);
+                                    if (error)
+                                        return "commits." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FetchRepositoryHistoryResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.FetchRepositoryHistoryResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.FetchRepositoryHistoryResponse} FetchRepositoryHistoryResponse
+                         */
+                        FetchRepositoryHistoryResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.FetchRepositoryHistoryResponse)
+                                return object;
+                            var message = new $root.google.cloud.dataform.v1beta1.FetchRepositoryHistoryResponse();
+                            if (object.commits) {
+                                if (!Array.isArray(object.commits))
+                                    throw TypeError(".google.cloud.dataform.v1beta1.FetchRepositoryHistoryResponse.commits: array expected");
+                                message.commits = [];
+                                for (var i = 0; i < object.commits.length; ++i) {
+                                    if (typeof object.commits[i] !== "object")
+                                        throw TypeError(".google.cloud.dataform.v1beta1.FetchRepositoryHistoryResponse.commits: object expected");
+                                    message.commits[i] = $root.google.cloud.dataform.v1beta1.CommitLogEntry.fromObject(object.commits[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FetchRepositoryHistoryResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.FetchRepositoryHistoryResponse
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.FetchRepositoryHistoryResponse} message FetchRepositoryHistoryResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FetchRepositoryHistoryResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.commits = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.commits && message.commits.length) {
+                                object.commits = [];
+                                for (var j = 0; j < message.commits.length; ++j)
+                                    object.commits[j] = $root.google.cloud.dataform.v1beta1.CommitLogEntry.toObject(message.commits[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FetchRepositoryHistoryResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.FetchRepositoryHistoryResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FetchRepositoryHistoryResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FetchRepositoryHistoryResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.FetchRepositoryHistoryResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FetchRepositoryHistoryResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.FetchRepositoryHistoryResponse";
+                        };
+    
+                        return FetchRepositoryHistoryResponse;
+                    })();
+    
+                    v1beta1.CommitLogEntry = (function() {
+    
+                        /**
+                         * Properties of a CommitLogEntry.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface ICommitLogEntry
+                         * @property {google.protobuf.ITimestamp|null} [commitTime] CommitLogEntry commitTime
+                         * @property {string|null} [commitSha] CommitLogEntry commitSha
+                         * @property {google.cloud.dataform.v1beta1.ICommitAuthor|null} [author] CommitLogEntry author
+                         * @property {string|null} [commitMessage] CommitLogEntry commitMessage
+                         */
+    
+                        /**
+                         * Constructs a new CommitLogEntry.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a CommitLogEntry.
+                         * @implements ICommitLogEntry
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.ICommitLogEntry=} [properties] Properties to set
+                         */
+                        function CommitLogEntry(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CommitLogEntry commitTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} commitTime
+                         * @memberof google.cloud.dataform.v1beta1.CommitLogEntry
+                         * @instance
+                         */
+                        CommitLogEntry.prototype.commitTime = null;
+    
+                        /**
+                         * CommitLogEntry commitSha.
+                         * @member {string} commitSha
+                         * @memberof google.cloud.dataform.v1beta1.CommitLogEntry
+                         * @instance
+                         */
+                        CommitLogEntry.prototype.commitSha = "";
+    
+                        /**
+                         * CommitLogEntry author.
+                         * @member {google.cloud.dataform.v1beta1.ICommitAuthor|null|undefined} author
+                         * @memberof google.cloud.dataform.v1beta1.CommitLogEntry
+                         * @instance
+                         */
+                        CommitLogEntry.prototype.author = null;
+    
+                        /**
+                         * CommitLogEntry commitMessage.
+                         * @member {string} commitMessage
+                         * @memberof google.cloud.dataform.v1beta1.CommitLogEntry
+                         * @instance
+                         */
+                        CommitLogEntry.prototype.commitMessage = "";
+    
+                        /**
+                         * Creates a new CommitLogEntry instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.CommitLogEntry
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.ICommitLogEntry=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.CommitLogEntry} CommitLogEntry instance
+                         */
+                        CommitLogEntry.create = function create(properties) {
+                            return new CommitLogEntry(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CommitLogEntry message. Does not implicitly {@link google.cloud.dataform.v1beta1.CommitLogEntry.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.CommitLogEntry
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.ICommitLogEntry} message CommitLogEntry message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CommitLogEntry.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.commitTime != null && Object.hasOwnProperty.call(message, "commitTime"))
+                                $root.google.protobuf.Timestamp.encode(message.commitTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.commitSha != null && Object.hasOwnProperty.call(message, "commitSha"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.commitSha);
+                            if (message.author != null && Object.hasOwnProperty.call(message, "author"))
+                                $root.google.cloud.dataform.v1beta1.CommitAuthor.encode(message.author, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.commitMessage != null && Object.hasOwnProperty.call(message, "commitMessage"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.commitMessage);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CommitLogEntry message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.CommitLogEntry.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.CommitLogEntry
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.ICommitLogEntry} message CommitLogEntry message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CommitLogEntry.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CommitLogEntry message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.CommitLogEntry
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.CommitLogEntry} CommitLogEntry
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CommitLogEntry.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.CommitLogEntry();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.commitTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.commitSha = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.author = $root.google.cloud.dataform.v1beta1.CommitAuthor.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.commitMessage = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CommitLogEntry message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.CommitLogEntry
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.CommitLogEntry} CommitLogEntry
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CommitLogEntry.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CommitLogEntry message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.CommitLogEntry
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CommitLogEntry.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.commitTime != null && message.hasOwnProperty("commitTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.commitTime);
+                                if (error)
+                                    return "commitTime." + error;
+                            }
+                            if (message.commitSha != null && message.hasOwnProperty("commitSha"))
+                                if (!$util.isString(message.commitSha))
+                                    return "commitSha: string expected";
+                            if (message.author != null && message.hasOwnProperty("author")) {
+                                var error = $root.google.cloud.dataform.v1beta1.CommitAuthor.verify(message.author);
+                                if (error)
+                                    return "author." + error;
+                            }
+                            if (message.commitMessage != null && message.hasOwnProperty("commitMessage"))
+                                if (!$util.isString(message.commitMessage))
+                                    return "commitMessage: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CommitLogEntry message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.CommitLogEntry
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.CommitLogEntry} CommitLogEntry
+                         */
+                        CommitLogEntry.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.CommitLogEntry)
+                                return object;
+                            var message = new $root.google.cloud.dataform.v1beta1.CommitLogEntry();
+                            if (object.commitTime != null) {
+                                if (typeof object.commitTime !== "object")
+                                    throw TypeError(".google.cloud.dataform.v1beta1.CommitLogEntry.commitTime: object expected");
+                                message.commitTime = $root.google.protobuf.Timestamp.fromObject(object.commitTime);
+                            }
+                            if (object.commitSha != null)
+                                message.commitSha = String(object.commitSha);
+                            if (object.author != null) {
+                                if (typeof object.author !== "object")
+                                    throw TypeError(".google.cloud.dataform.v1beta1.CommitLogEntry.author: object expected");
+                                message.author = $root.google.cloud.dataform.v1beta1.CommitAuthor.fromObject(object.author);
+                            }
+                            if (object.commitMessage != null)
+                                message.commitMessage = String(object.commitMessage);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CommitLogEntry message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.CommitLogEntry
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.CommitLogEntry} message CommitLogEntry
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CommitLogEntry.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.commitTime = null;
+                                object.commitSha = "";
+                                object.author = null;
+                                object.commitMessage = "";
+                            }
+                            if (message.commitTime != null && message.hasOwnProperty("commitTime"))
+                                object.commitTime = $root.google.protobuf.Timestamp.toObject(message.commitTime, options);
+                            if (message.commitSha != null && message.hasOwnProperty("commitSha"))
+                                object.commitSha = message.commitSha;
+                            if (message.author != null && message.hasOwnProperty("author"))
+                                object.author = $root.google.cloud.dataform.v1beta1.CommitAuthor.toObject(message.author, options);
+                            if (message.commitMessage != null && message.hasOwnProperty("commitMessage"))
+                                object.commitMessage = message.commitMessage;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CommitLogEntry to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.CommitLogEntry
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CommitLogEntry.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CommitLogEntry
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.CommitLogEntry
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CommitLogEntry.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.CommitLogEntry";
+                        };
+    
+                        return CommitLogEntry;
+                    })();
+    
+                    v1beta1.CommitMetadata = (function() {
+    
+                        /**
+                         * Properties of a CommitMetadata.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface ICommitMetadata
+                         * @property {google.cloud.dataform.v1beta1.ICommitAuthor|null} [author] CommitMetadata author
+                         * @property {string|null} [commitMessage] CommitMetadata commitMessage
+                         */
+    
+                        /**
+                         * Constructs a new CommitMetadata.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a CommitMetadata.
+                         * @implements ICommitMetadata
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.ICommitMetadata=} [properties] Properties to set
+                         */
+                        function CommitMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CommitMetadata author.
+                         * @member {google.cloud.dataform.v1beta1.ICommitAuthor|null|undefined} author
+                         * @memberof google.cloud.dataform.v1beta1.CommitMetadata
+                         * @instance
+                         */
+                        CommitMetadata.prototype.author = null;
+    
+                        /**
+                         * CommitMetadata commitMessage.
+                         * @member {string} commitMessage
+                         * @memberof google.cloud.dataform.v1beta1.CommitMetadata
+                         * @instance
+                         */
+                        CommitMetadata.prototype.commitMessage = "";
+    
+                        /**
+                         * Creates a new CommitMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.CommitMetadata
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.ICommitMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.CommitMetadata} CommitMetadata instance
+                         */
+                        CommitMetadata.create = function create(properties) {
+                            return new CommitMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CommitMetadata message. Does not implicitly {@link google.cloud.dataform.v1beta1.CommitMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.CommitMetadata
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.ICommitMetadata} message CommitMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CommitMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.author != null && Object.hasOwnProperty.call(message, "author"))
+                                $root.google.cloud.dataform.v1beta1.CommitAuthor.encode(message.author, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.commitMessage != null && Object.hasOwnProperty.call(message, "commitMessage"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.commitMessage);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CommitMetadata message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.CommitMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.CommitMetadata
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.ICommitMetadata} message CommitMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CommitMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CommitMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.CommitMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.CommitMetadata} CommitMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CommitMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.CommitMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.author = $root.google.cloud.dataform.v1beta1.CommitAuthor.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.commitMessage = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CommitMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.CommitMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.CommitMetadata} CommitMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CommitMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CommitMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.CommitMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CommitMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.author != null && message.hasOwnProperty("author")) {
+                                var error = $root.google.cloud.dataform.v1beta1.CommitAuthor.verify(message.author);
+                                if (error)
+                                    return "author." + error;
+                            }
+                            if (message.commitMessage != null && message.hasOwnProperty("commitMessage"))
+                                if (!$util.isString(message.commitMessage))
+                                    return "commitMessage: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CommitMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.CommitMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.CommitMetadata} CommitMetadata
+                         */
+                        CommitMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.CommitMetadata)
+                                return object;
+                            var message = new $root.google.cloud.dataform.v1beta1.CommitMetadata();
+                            if (object.author != null) {
+                                if (typeof object.author !== "object")
+                                    throw TypeError(".google.cloud.dataform.v1beta1.CommitMetadata.author: object expected");
+                                message.author = $root.google.cloud.dataform.v1beta1.CommitAuthor.fromObject(object.author);
+                            }
+                            if (object.commitMessage != null)
+                                message.commitMessage = String(object.commitMessage);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CommitMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.CommitMetadata
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.CommitMetadata} message CommitMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CommitMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.author = null;
+                                object.commitMessage = "";
+                            }
+                            if (message.author != null && message.hasOwnProperty("author"))
+                                object.author = $root.google.cloud.dataform.v1beta1.CommitAuthor.toObject(message.author, options);
+                            if (message.commitMessage != null && message.hasOwnProperty("commitMessage"))
+                                object.commitMessage = message.commitMessage;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CommitMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.CommitMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CommitMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CommitMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.CommitMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CommitMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.CommitMetadata";
+                        };
+    
+                        return CommitMetadata;
+                    })();
+    
+                    v1beta1.ComputeRepositoryAccessTokenStatusRequest = (function() {
+    
+                        /**
+                         * Properties of a ComputeRepositoryAccessTokenStatusRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface IComputeRepositoryAccessTokenStatusRequest
+                         * @property {string|null} [name] ComputeRepositoryAccessTokenStatusRequest name
+                         */
+    
+                        /**
+                         * Constructs a new ComputeRepositoryAccessTokenStatusRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a ComputeRepositoryAccessTokenStatusRequest.
+                         * @implements IComputeRepositoryAccessTokenStatusRequest
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest=} [properties] Properties to set
+                         */
+                        function ComputeRepositoryAccessTokenStatusRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ComputeRepositoryAccessTokenStatusRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusRequest
+                         * @instance
+                         */
+                        ComputeRepositoryAccessTokenStatusRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new ComputeRepositoryAccessTokenStatusRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusRequest} ComputeRepositoryAccessTokenStatusRequest instance
+                         */
+                        ComputeRepositoryAccessTokenStatusRequest.create = function create(properties) {
+                            return new ComputeRepositoryAccessTokenStatusRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ComputeRepositoryAccessTokenStatusRequest message. Does not implicitly {@link google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest} message ComputeRepositoryAccessTokenStatusRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ComputeRepositoryAccessTokenStatusRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ComputeRepositoryAccessTokenStatusRequest message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest} message ComputeRepositoryAccessTokenStatusRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ComputeRepositoryAccessTokenStatusRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ComputeRepositoryAccessTokenStatusRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusRequest} ComputeRepositoryAccessTokenStatusRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ComputeRepositoryAccessTokenStatusRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ComputeRepositoryAccessTokenStatusRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusRequest} ComputeRepositoryAccessTokenStatusRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ComputeRepositoryAccessTokenStatusRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ComputeRepositoryAccessTokenStatusRequest message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ComputeRepositoryAccessTokenStatusRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ComputeRepositoryAccessTokenStatusRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusRequest} ComputeRepositoryAccessTokenStatusRequest
+                         */
+                        ComputeRepositoryAccessTokenStatusRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusRequest)
+                                return object;
+                            var message = new $root.google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ComputeRepositoryAccessTokenStatusRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusRequest} message ComputeRepositoryAccessTokenStatusRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ComputeRepositoryAccessTokenStatusRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ComputeRepositoryAccessTokenStatusRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ComputeRepositoryAccessTokenStatusRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ComputeRepositoryAccessTokenStatusRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ComputeRepositoryAccessTokenStatusRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusRequest";
+                        };
+    
+                        return ComputeRepositoryAccessTokenStatusRequest;
+                    })();
+    
+                    v1beta1.ComputeRepositoryAccessTokenStatusResponse = (function() {
+    
+                        /**
+                         * Properties of a ComputeRepositoryAccessTokenStatusResponse.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface IComputeRepositoryAccessTokenStatusResponse
+                         * @property {google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse.TokenStatus|null} [tokenStatus] ComputeRepositoryAccessTokenStatusResponse tokenStatus
+                         */
+    
+                        /**
+                         * Constructs a new ComputeRepositoryAccessTokenStatusResponse.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a ComputeRepositoryAccessTokenStatusResponse.
+                         * @implements IComputeRepositoryAccessTokenStatusResponse
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusResponse=} [properties] Properties to set
+                         */
+                        function ComputeRepositoryAccessTokenStatusResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ComputeRepositoryAccessTokenStatusResponse tokenStatus.
+                         * @member {google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse.TokenStatus} tokenStatus
+                         * @memberof google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse
+                         * @instance
+                         */
+                        ComputeRepositoryAccessTokenStatusResponse.prototype.tokenStatus = 0;
+    
+                        /**
+                         * Creates a new ComputeRepositoryAccessTokenStatusResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusResponse=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse} ComputeRepositoryAccessTokenStatusResponse instance
+                         */
+                        ComputeRepositoryAccessTokenStatusResponse.create = function create(properties) {
+                            return new ComputeRepositoryAccessTokenStatusResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ComputeRepositoryAccessTokenStatusResponse message. Does not implicitly {@link google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusResponse} message ComputeRepositoryAccessTokenStatusResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ComputeRepositoryAccessTokenStatusResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.tokenStatus != null && Object.hasOwnProperty.call(message, "tokenStatus"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.tokenStatus);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ComputeRepositoryAccessTokenStatusResponse message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusResponse} message ComputeRepositoryAccessTokenStatusResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ComputeRepositoryAccessTokenStatusResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ComputeRepositoryAccessTokenStatusResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse} ComputeRepositoryAccessTokenStatusResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ComputeRepositoryAccessTokenStatusResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.tokenStatus = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ComputeRepositoryAccessTokenStatusResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse} ComputeRepositoryAccessTokenStatusResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ComputeRepositoryAccessTokenStatusResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ComputeRepositoryAccessTokenStatusResponse message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ComputeRepositoryAccessTokenStatusResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.tokenStatus != null && message.hasOwnProperty("tokenStatus"))
+                                switch (message.tokenStatus) {
+                                default:
+                                    return "tokenStatus: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ComputeRepositoryAccessTokenStatusResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse} ComputeRepositoryAccessTokenStatusResponse
+                         */
+                        ComputeRepositoryAccessTokenStatusResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse)
+                                return object;
+                            var message = new $root.google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse();
+                            switch (object.tokenStatus) {
+                            default:
+                                if (typeof object.tokenStatus === "number") {
+                                    message.tokenStatus = object.tokenStatus;
+                                    break;
+                                }
+                                break;
+                            case "TOKEN_STATUS_UNSPECIFIED":
+                            case 0:
+                                message.tokenStatus = 0;
+                                break;
+                            case "NOT_FOUND":
+                            case 1:
+                                message.tokenStatus = 1;
+                                break;
+                            case "INVALID":
+                            case 2:
+                                message.tokenStatus = 2;
+                                break;
+                            case "VALID":
+                            case 3:
+                                message.tokenStatus = 3;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ComputeRepositoryAccessTokenStatusResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse} message ComputeRepositoryAccessTokenStatusResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ComputeRepositoryAccessTokenStatusResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.tokenStatus = options.enums === String ? "TOKEN_STATUS_UNSPECIFIED" : 0;
+                            if (message.tokenStatus != null && message.hasOwnProperty("tokenStatus"))
+                                object.tokenStatus = options.enums === String ? $root.google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse.TokenStatus[message.tokenStatus] === undefined ? message.tokenStatus : $root.google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse.TokenStatus[message.tokenStatus] : message.tokenStatus;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ComputeRepositoryAccessTokenStatusResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ComputeRepositoryAccessTokenStatusResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ComputeRepositoryAccessTokenStatusResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ComputeRepositoryAccessTokenStatusResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse";
+                        };
+    
+                        /**
+                         * TokenStatus enum.
+                         * @name google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse.TokenStatus
+                         * @enum {number}
+                         * @property {number} TOKEN_STATUS_UNSPECIFIED=0 TOKEN_STATUS_UNSPECIFIED value
+                         * @property {number} NOT_FOUND=1 NOT_FOUND value
+                         * @property {number} INVALID=2 INVALID value
+                         * @property {number} VALID=3 VALID value
+                         */
+                        ComputeRepositoryAccessTokenStatusResponse.TokenStatus = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TOKEN_STATUS_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NOT_FOUND"] = 1;
+                            values[valuesById[2] = "INVALID"] = 2;
+                            values[valuesById[3] = "VALID"] = 3;
+                            return values;
+                        })();
+    
+                        return ComputeRepositoryAccessTokenStatusResponse;
                     })();
     
                     v1beta1.FetchRemoteBranchesRequest = (function() {
@@ -29113,7 +33734,7 @@
                          * Properties of a QueryDirectoryContentsResponse.
                          * @memberof google.cloud.dataform.v1beta1
                          * @interface IQueryDirectoryContentsResponse
-                         * @property {Array.<google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.IDirectoryEntry>|null} [directoryEntries] QueryDirectoryContentsResponse directoryEntries
+                         * @property {Array.<google.cloud.dataform.v1beta1.IDirectoryEntry>|null} [directoryEntries] QueryDirectoryContentsResponse directoryEntries
                          * @property {string|null} [nextPageToken] QueryDirectoryContentsResponse nextPageToken
                          */
     
@@ -29135,7 +33756,7 @@
     
                         /**
                          * QueryDirectoryContentsResponse directoryEntries.
-                         * @member {Array.<google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.IDirectoryEntry>} directoryEntries
+                         * @member {Array.<google.cloud.dataform.v1beta1.IDirectoryEntry>} directoryEntries
                          * @memberof google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse
                          * @instance
                          */
@@ -29175,7 +33796,7 @@
                                 writer = $Writer.create();
                             if (message.directoryEntries != null && message.directoryEntries.length)
                                 for (var i = 0; i < message.directoryEntries.length; ++i)
-                                    $root.google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.DirectoryEntry.encode(message.directoryEntries[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    $root.google.cloud.dataform.v1beta1.DirectoryEntry.encode(message.directoryEntries[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
                             return writer;
@@ -29215,7 +33836,7 @@
                                 case 1: {
                                         if (!(message.directoryEntries && message.directoryEntries.length))
                                             message.directoryEntries = [];
-                                        message.directoryEntries.push($root.google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.DirectoryEntry.decode(reader, reader.uint32()));
+                                        message.directoryEntries.push($root.google.cloud.dataform.v1beta1.DirectoryEntry.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 case 2: {
@@ -29261,7 +33882,7 @@
                                 if (!Array.isArray(message.directoryEntries))
                                     return "directoryEntries: array expected";
                                 for (var i = 0; i < message.directoryEntries.length; ++i) {
-                                    var error = $root.google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.DirectoryEntry.verify(message.directoryEntries[i]);
+                                    var error = $root.google.cloud.dataform.v1beta1.DirectoryEntry.verify(message.directoryEntries[i]);
                                     if (error)
                                         return "directoryEntries." + error;
                                 }
@@ -29291,7 +33912,7 @@
                                 for (var i = 0; i < object.directoryEntries.length; ++i) {
                                     if (typeof object.directoryEntries[i] !== "object")
                                         throw TypeError(".google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.directoryEntries: object expected");
-                                    message.directoryEntries[i] = $root.google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.DirectoryEntry.fromObject(object.directoryEntries[i]);
+                                    message.directoryEntries[i] = $root.google.cloud.dataform.v1beta1.DirectoryEntry.fromObject(object.directoryEntries[i]);
                                 }
                             }
                             if (object.nextPageToken != null)
@@ -29319,7 +33940,7 @@
                             if (message.directoryEntries && message.directoryEntries.length) {
                                 object.directoryEntries = [];
                                 for (var j = 0; j < message.directoryEntries.length; ++j)
-                                    object.directoryEntries[j] = $root.google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.DirectoryEntry.toObject(message.directoryEntries[j], options);
+                                    object.directoryEntries[j] = $root.google.cloud.dataform.v1beta1.DirectoryEntry.toObject(message.directoryEntries[j], options);
                             }
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 object.nextPageToken = message.nextPageToken;
@@ -29352,257 +33973,257 @@
                             return typeUrlPrefix + "/google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse";
                         };
     
-                        QueryDirectoryContentsResponse.DirectoryEntry = (function() {
+                        return QueryDirectoryContentsResponse;
+                    })();
     
-                            /**
-                             * Properties of a DirectoryEntry.
-                             * @memberof google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse
-                             * @interface IDirectoryEntry
-                             * @property {string|null} [file] DirectoryEntry file
-                             * @property {string|null} [directory] DirectoryEntry directory
-                             */
+                    v1beta1.DirectoryEntry = (function() {
     
-                            /**
-                             * Constructs a new DirectoryEntry.
-                             * @memberof google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse
-                             * @classdesc Represents a DirectoryEntry.
-                             * @implements IDirectoryEntry
-                             * @constructor
-                             * @param {google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.IDirectoryEntry=} [properties] Properties to set
-                             */
-                            function DirectoryEntry(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
+                        /**
+                         * Properties of a DirectoryEntry.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface IDirectoryEntry
+                         * @property {string|null} [file] DirectoryEntry file
+                         * @property {string|null} [directory] DirectoryEntry directory
+                         */
     
-                            /**
-                             * DirectoryEntry file.
-                             * @member {string|null|undefined} file
-                             * @memberof google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.DirectoryEntry
-                             * @instance
-                             */
-                            DirectoryEntry.prototype.file = null;
+                        /**
+                         * Constructs a new DirectoryEntry.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a DirectoryEntry.
+                         * @implements IDirectoryEntry
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.IDirectoryEntry=} [properties] Properties to set
+                         */
+                        function DirectoryEntry(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
     
-                            /**
-                             * DirectoryEntry directory.
-                             * @member {string|null|undefined} directory
-                             * @memberof google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.DirectoryEntry
-                             * @instance
-                             */
-                            DirectoryEntry.prototype.directory = null;
+                        /**
+                         * DirectoryEntry file.
+                         * @member {string|null|undefined} file
+                         * @memberof google.cloud.dataform.v1beta1.DirectoryEntry
+                         * @instance
+                         */
+                        DirectoryEntry.prototype.file = null;
     
-                            // OneOf field names bound to virtual getters and setters
-                            var $oneOfFields;
+                        /**
+                         * DirectoryEntry directory.
+                         * @member {string|null|undefined} directory
+                         * @memberof google.cloud.dataform.v1beta1.DirectoryEntry
+                         * @instance
+                         */
+                        DirectoryEntry.prototype.directory = null;
     
-                            /**
-                             * DirectoryEntry entry.
-                             * @member {"file"|"directory"|undefined} entry
-                             * @memberof google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.DirectoryEntry
-                             * @instance
-                             */
-                            Object.defineProperty(DirectoryEntry.prototype, "entry", {
-                                get: $util.oneOfGetter($oneOfFields = ["file", "directory"]),
-                                set: $util.oneOfSetter($oneOfFields)
-                            });
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
     
-                            /**
-                             * Creates a new DirectoryEntry instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.DirectoryEntry
-                             * @static
-                             * @param {google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.IDirectoryEntry=} [properties] Properties to set
-                             * @returns {google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.DirectoryEntry} DirectoryEntry instance
-                             */
-                            DirectoryEntry.create = function create(properties) {
-                                return new DirectoryEntry(properties);
-                            };
+                        /**
+                         * DirectoryEntry entry.
+                         * @member {"file"|"directory"|undefined} entry
+                         * @memberof google.cloud.dataform.v1beta1.DirectoryEntry
+                         * @instance
+                         */
+                        Object.defineProperty(DirectoryEntry.prototype, "entry", {
+                            get: $util.oneOfGetter($oneOfFields = ["file", "directory"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
-                            /**
-                             * Encodes the specified DirectoryEntry message. Does not implicitly {@link google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.DirectoryEntry.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.DirectoryEntry
-                             * @static
-                             * @param {google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.IDirectoryEntry} message DirectoryEntry message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            DirectoryEntry.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.file != null && Object.hasOwnProperty.call(message, "file"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.file);
-                                if (message.directory != null && Object.hasOwnProperty.call(message, "directory"))
-                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.directory);
-                                return writer;
-                            };
+                        /**
+                         * Creates a new DirectoryEntry instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.DirectoryEntry
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IDirectoryEntry=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.DirectoryEntry} DirectoryEntry instance
+                         */
+                        DirectoryEntry.create = function create(properties) {
+                            return new DirectoryEntry(properties);
+                        };
     
-                            /**
-                             * Encodes the specified DirectoryEntry message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.DirectoryEntry.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.DirectoryEntry
-                             * @static
-                             * @param {google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.IDirectoryEntry} message DirectoryEntry message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            DirectoryEntry.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
+                        /**
+                         * Encodes the specified DirectoryEntry message. Does not implicitly {@link google.cloud.dataform.v1beta1.DirectoryEntry.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.DirectoryEntry
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IDirectoryEntry} message DirectoryEntry message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DirectoryEntry.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.file != null && Object.hasOwnProperty.call(message, "file"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.file);
+                            if (message.directory != null && Object.hasOwnProperty.call(message, "directory"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.directory);
+                            return writer;
+                        };
     
-                            /**
-                             * Decodes a DirectoryEntry message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.DirectoryEntry
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.DirectoryEntry} DirectoryEntry
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            DirectoryEntry.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.DirectoryEntry();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.file = reader.string();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.directory = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
+                        /**
+                         * Encodes the specified DirectoryEntry message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.DirectoryEntry.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.DirectoryEntry
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IDirectoryEntry} message DirectoryEntry message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DirectoryEntry.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DirectoryEntry message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.DirectoryEntry
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.DirectoryEntry} DirectoryEntry
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DirectoryEntry.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.DirectoryEntry();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.file = reader.string();
                                         break;
                                     }
+                                case 2: {
+                                        message.directory = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
                                 }
-                                return message;
-                            };
+                            }
+                            return message;
+                        };
     
-                            /**
-                             * Decodes a DirectoryEntry message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.DirectoryEntry
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.DirectoryEntry} DirectoryEntry
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            DirectoryEntry.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
+                        /**
+                         * Decodes a DirectoryEntry message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.DirectoryEntry
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.DirectoryEntry} DirectoryEntry
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DirectoryEntry.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
     
-                            /**
-                             * Verifies a DirectoryEntry message.
-                             * @function verify
-                             * @memberof google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.DirectoryEntry
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            DirectoryEntry.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                var properties = {};
-                                if (message.file != null && message.hasOwnProperty("file")) {
-                                    properties.entry = 1;
-                                    if (!$util.isString(message.file))
-                                        return "file: string expected";
-                                }
-                                if (message.directory != null && message.hasOwnProperty("directory")) {
-                                    if (properties.entry === 1)
-                                        return "entry: multiple values";
-                                    properties.entry = 1;
-                                    if (!$util.isString(message.directory))
-                                        return "directory: string expected";
-                                }
-                                return null;
-                            };
+                        /**
+                         * Verifies a DirectoryEntry message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.DirectoryEntry
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DirectoryEntry.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.file != null && message.hasOwnProperty("file")) {
+                                properties.entry = 1;
+                                if (!$util.isString(message.file))
+                                    return "file: string expected";
+                            }
+                            if (message.directory != null && message.hasOwnProperty("directory")) {
+                                if (properties.entry === 1)
+                                    return "entry: multiple values";
+                                properties.entry = 1;
+                                if (!$util.isString(message.directory))
+                                    return "directory: string expected";
+                            }
+                            return null;
+                        };
     
-                            /**
-                             * Creates a DirectoryEntry message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.DirectoryEntry
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.DirectoryEntry} DirectoryEntry
-                             */
-                            DirectoryEntry.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.DirectoryEntry)
-                                    return object;
-                                var message = new $root.google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.DirectoryEntry();
-                                if (object.file != null)
-                                    message.file = String(object.file);
-                                if (object.directory != null)
-                                    message.directory = String(object.directory);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a DirectoryEntry message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.DirectoryEntry
-                             * @static
-                             * @param {google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.DirectoryEntry} message DirectoryEntry
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            DirectoryEntry.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (message.file != null && message.hasOwnProperty("file")) {
-                                    object.file = message.file;
-                                    if (options.oneofs)
-                                        object.entry = "file";
-                                }
-                                if (message.directory != null && message.hasOwnProperty("directory")) {
-                                    object.directory = message.directory;
-                                    if (options.oneofs)
-                                        object.entry = "directory";
-                                }
+                        /**
+                         * Creates a DirectoryEntry message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.DirectoryEntry
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.DirectoryEntry} DirectoryEntry
+                         */
+                        DirectoryEntry.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.DirectoryEntry)
                                 return object;
-                            };
+                            var message = new $root.google.cloud.dataform.v1beta1.DirectoryEntry();
+                            if (object.file != null)
+                                message.file = String(object.file);
+                            if (object.directory != null)
+                                message.directory = String(object.directory);
+                            return message;
+                        };
     
-                            /**
-                             * Converts this DirectoryEntry to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.DirectoryEntry
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            DirectoryEntry.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
+                        /**
+                         * Creates a plain object from a DirectoryEntry message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.DirectoryEntry
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.DirectoryEntry} message DirectoryEntry
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DirectoryEntry.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.file != null && message.hasOwnProperty("file")) {
+                                object.file = message.file;
+                                if (options.oneofs)
+                                    object.entry = "file";
+                            }
+                            if (message.directory != null && message.hasOwnProperty("directory")) {
+                                object.directory = message.directory;
+                                if (options.oneofs)
+                                    object.entry = "directory";
+                            }
+                            return object;
+                        };
     
-                            /**
-                             * Gets the default type url for DirectoryEntry
-                             * @function getTypeUrl
-                             * @memberof google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.DirectoryEntry
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            DirectoryEntry.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse.DirectoryEntry";
-                            };
+                        /**
+                         * Converts this DirectoryEntry to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.DirectoryEntry
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DirectoryEntry.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
     
-                            return DirectoryEntry;
-                        })();
+                        /**
+                         * Gets the default type url for DirectoryEntry
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.DirectoryEntry
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DirectoryEntry.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.DirectoryEntry";
+                        };
     
-                        return QueryDirectoryContentsResponse;
+                        return DirectoryEntry;
                     })();
     
                     v1beta1.MakeDirectoryRequest = (function() {
@@ -32562,6 +37183,2096 @@
                         return InstallNpmPackagesResponse;
                     })();
     
+                    v1beta1.ReleaseConfig = (function() {
+    
+                        /**
+                         * Properties of a ReleaseConfig.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface IReleaseConfig
+                         * @property {string|null} [name] ReleaseConfig name
+                         * @property {string|null} [gitCommitish] ReleaseConfig gitCommitish
+                         * @property {google.cloud.dataform.v1beta1.ICodeCompilationConfig|null} [codeCompilationConfig] ReleaseConfig codeCompilationConfig
+                         * @property {string|null} [cronSchedule] ReleaseConfig cronSchedule
+                         * @property {string|null} [timeZone] ReleaseConfig timeZone
+                         * @property {Array.<google.cloud.dataform.v1beta1.ReleaseConfig.IScheduledReleaseRecord>|null} [recentScheduledReleaseRecords] ReleaseConfig recentScheduledReleaseRecords
+                         * @property {string|null} [releaseCompilationResult] ReleaseConfig releaseCompilationResult
+                         */
+    
+                        /**
+                         * Constructs a new ReleaseConfig.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a ReleaseConfig.
+                         * @implements IReleaseConfig
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.IReleaseConfig=} [properties] Properties to set
+                         */
+                        function ReleaseConfig(properties) {
+                            this.recentScheduledReleaseRecords = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ReleaseConfig name.
+                         * @member {string} name
+                         * @memberof google.cloud.dataform.v1beta1.ReleaseConfig
+                         * @instance
+                         */
+                        ReleaseConfig.prototype.name = "";
+    
+                        /**
+                         * ReleaseConfig gitCommitish.
+                         * @member {string} gitCommitish
+                         * @memberof google.cloud.dataform.v1beta1.ReleaseConfig
+                         * @instance
+                         */
+                        ReleaseConfig.prototype.gitCommitish = "";
+    
+                        /**
+                         * ReleaseConfig codeCompilationConfig.
+                         * @member {google.cloud.dataform.v1beta1.ICodeCompilationConfig|null|undefined} codeCompilationConfig
+                         * @memberof google.cloud.dataform.v1beta1.ReleaseConfig
+                         * @instance
+                         */
+                        ReleaseConfig.prototype.codeCompilationConfig = null;
+    
+                        /**
+                         * ReleaseConfig cronSchedule.
+                         * @member {string} cronSchedule
+                         * @memberof google.cloud.dataform.v1beta1.ReleaseConfig
+                         * @instance
+                         */
+                        ReleaseConfig.prototype.cronSchedule = "";
+    
+                        /**
+                         * ReleaseConfig timeZone.
+                         * @member {string} timeZone
+                         * @memberof google.cloud.dataform.v1beta1.ReleaseConfig
+                         * @instance
+                         */
+                        ReleaseConfig.prototype.timeZone = "";
+    
+                        /**
+                         * ReleaseConfig recentScheduledReleaseRecords.
+                         * @member {Array.<google.cloud.dataform.v1beta1.ReleaseConfig.IScheduledReleaseRecord>} recentScheduledReleaseRecords
+                         * @memberof google.cloud.dataform.v1beta1.ReleaseConfig
+                         * @instance
+                         */
+                        ReleaseConfig.prototype.recentScheduledReleaseRecords = $util.emptyArray;
+    
+                        /**
+                         * ReleaseConfig releaseCompilationResult.
+                         * @member {string} releaseCompilationResult
+                         * @memberof google.cloud.dataform.v1beta1.ReleaseConfig
+                         * @instance
+                         */
+                        ReleaseConfig.prototype.releaseCompilationResult = "";
+    
+                        /**
+                         * Creates a new ReleaseConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.ReleaseConfig
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IReleaseConfig=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.ReleaseConfig} ReleaseConfig instance
+                         */
+                        ReleaseConfig.create = function create(properties) {
+                            return new ReleaseConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ReleaseConfig message. Does not implicitly {@link google.cloud.dataform.v1beta1.ReleaseConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.ReleaseConfig
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IReleaseConfig} message ReleaseConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReleaseConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.gitCommitish != null && Object.hasOwnProperty.call(message, "gitCommitish"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.gitCommitish);
+                            if (message.codeCompilationConfig != null && Object.hasOwnProperty.call(message, "codeCompilationConfig"))
+                                $root.google.cloud.dataform.v1beta1.CodeCompilationConfig.encode(message.codeCompilationConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.cronSchedule != null && Object.hasOwnProperty.call(message, "cronSchedule"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.cronSchedule);
+                            if (message.recentScheduledReleaseRecords != null && message.recentScheduledReleaseRecords.length)
+                                for (var i = 0; i < message.recentScheduledReleaseRecords.length; ++i)
+                                    $root.google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord.encode(message.recentScheduledReleaseRecords[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.releaseCompilationResult != null && Object.hasOwnProperty.call(message, "releaseCompilationResult"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.releaseCompilationResult);
+                            if (message.timeZone != null && Object.hasOwnProperty.call(message, "timeZone"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.timeZone);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ReleaseConfig message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.ReleaseConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.ReleaseConfig
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IReleaseConfig} message ReleaseConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReleaseConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ReleaseConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.ReleaseConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.ReleaseConfig} ReleaseConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReleaseConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.ReleaseConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.gitCommitish = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.codeCompilationConfig = $root.google.cloud.dataform.v1beta1.CodeCompilationConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.cronSchedule = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.timeZone = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.recentScheduledReleaseRecords && message.recentScheduledReleaseRecords.length))
+                                            message.recentScheduledReleaseRecords = [];
+                                        message.recentScheduledReleaseRecords.push($root.google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 6: {
+                                        message.releaseCompilationResult = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ReleaseConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.ReleaseConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.ReleaseConfig} ReleaseConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReleaseConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ReleaseConfig message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.ReleaseConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ReleaseConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.gitCommitish != null && message.hasOwnProperty("gitCommitish"))
+                                if (!$util.isString(message.gitCommitish))
+                                    return "gitCommitish: string expected";
+                            if (message.codeCompilationConfig != null && message.hasOwnProperty("codeCompilationConfig")) {
+                                var error = $root.google.cloud.dataform.v1beta1.CodeCompilationConfig.verify(message.codeCompilationConfig);
+                                if (error)
+                                    return "codeCompilationConfig." + error;
+                            }
+                            if (message.cronSchedule != null && message.hasOwnProperty("cronSchedule"))
+                                if (!$util.isString(message.cronSchedule))
+                                    return "cronSchedule: string expected";
+                            if (message.timeZone != null && message.hasOwnProperty("timeZone"))
+                                if (!$util.isString(message.timeZone))
+                                    return "timeZone: string expected";
+                            if (message.recentScheduledReleaseRecords != null && message.hasOwnProperty("recentScheduledReleaseRecords")) {
+                                if (!Array.isArray(message.recentScheduledReleaseRecords))
+                                    return "recentScheduledReleaseRecords: array expected";
+                                for (var i = 0; i < message.recentScheduledReleaseRecords.length; ++i) {
+                                    var error = $root.google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord.verify(message.recentScheduledReleaseRecords[i]);
+                                    if (error)
+                                        return "recentScheduledReleaseRecords." + error;
+                                }
+                            }
+                            if (message.releaseCompilationResult != null && message.hasOwnProperty("releaseCompilationResult"))
+                                if (!$util.isString(message.releaseCompilationResult))
+                                    return "releaseCompilationResult: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ReleaseConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.ReleaseConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.ReleaseConfig} ReleaseConfig
+                         */
+                        ReleaseConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.ReleaseConfig)
+                                return object;
+                            var message = new $root.google.cloud.dataform.v1beta1.ReleaseConfig();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.gitCommitish != null)
+                                message.gitCommitish = String(object.gitCommitish);
+                            if (object.codeCompilationConfig != null) {
+                                if (typeof object.codeCompilationConfig !== "object")
+                                    throw TypeError(".google.cloud.dataform.v1beta1.ReleaseConfig.codeCompilationConfig: object expected");
+                                message.codeCompilationConfig = $root.google.cloud.dataform.v1beta1.CodeCompilationConfig.fromObject(object.codeCompilationConfig);
+                            }
+                            if (object.cronSchedule != null)
+                                message.cronSchedule = String(object.cronSchedule);
+                            if (object.timeZone != null)
+                                message.timeZone = String(object.timeZone);
+                            if (object.recentScheduledReleaseRecords) {
+                                if (!Array.isArray(object.recentScheduledReleaseRecords))
+                                    throw TypeError(".google.cloud.dataform.v1beta1.ReleaseConfig.recentScheduledReleaseRecords: array expected");
+                                message.recentScheduledReleaseRecords = [];
+                                for (var i = 0; i < object.recentScheduledReleaseRecords.length; ++i) {
+                                    if (typeof object.recentScheduledReleaseRecords[i] !== "object")
+                                        throw TypeError(".google.cloud.dataform.v1beta1.ReleaseConfig.recentScheduledReleaseRecords: object expected");
+                                    message.recentScheduledReleaseRecords[i] = $root.google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord.fromObject(object.recentScheduledReleaseRecords[i]);
+                                }
+                            }
+                            if (object.releaseCompilationResult != null)
+                                message.releaseCompilationResult = String(object.releaseCompilationResult);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ReleaseConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.ReleaseConfig
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.ReleaseConfig} message ReleaseConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ReleaseConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.recentScheduledReleaseRecords = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.gitCommitish = "";
+                                object.codeCompilationConfig = null;
+                                object.cronSchedule = "";
+                                object.releaseCompilationResult = "";
+                                object.timeZone = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.gitCommitish != null && message.hasOwnProperty("gitCommitish"))
+                                object.gitCommitish = message.gitCommitish;
+                            if (message.codeCompilationConfig != null && message.hasOwnProperty("codeCompilationConfig"))
+                                object.codeCompilationConfig = $root.google.cloud.dataform.v1beta1.CodeCompilationConfig.toObject(message.codeCompilationConfig, options);
+                            if (message.cronSchedule != null && message.hasOwnProperty("cronSchedule"))
+                                object.cronSchedule = message.cronSchedule;
+                            if (message.recentScheduledReleaseRecords && message.recentScheduledReleaseRecords.length) {
+                                object.recentScheduledReleaseRecords = [];
+                                for (var j = 0; j < message.recentScheduledReleaseRecords.length; ++j)
+                                    object.recentScheduledReleaseRecords[j] = $root.google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord.toObject(message.recentScheduledReleaseRecords[j], options);
+                            }
+                            if (message.releaseCompilationResult != null && message.hasOwnProperty("releaseCompilationResult"))
+                                object.releaseCompilationResult = message.releaseCompilationResult;
+                            if (message.timeZone != null && message.hasOwnProperty("timeZone"))
+                                object.timeZone = message.timeZone;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ReleaseConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.ReleaseConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ReleaseConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ReleaseConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.ReleaseConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ReleaseConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.ReleaseConfig";
+                        };
+    
+                        ReleaseConfig.ScheduledReleaseRecord = (function() {
+    
+                            /**
+                             * Properties of a ScheduledReleaseRecord.
+                             * @memberof google.cloud.dataform.v1beta1.ReleaseConfig
+                             * @interface IScheduledReleaseRecord
+                             * @property {google.protobuf.ITimestamp|null} [releaseTime] ScheduledReleaseRecord releaseTime
+                             * @property {string|null} [compilationResult] ScheduledReleaseRecord compilationResult
+                             * @property {google.rpc.IStatus|null} [errorStatus] ScheduledReleaseRecord errorStatus
+                             */
+    
+                            /**
+                             * Constructs a new ScheduledReleaseRecord.
+                             * @memberof google.cloud.dataform.v1beta1.ReleaseConfig
+                             * @classdesc Represents a ScheduledReleaseRecord.
+                             * @implements IScheduledReleaseRecord
+                             * @constructor
+                             * @param {google.cloud.dataform.v1beta1.ReleaseConfig.IScheduledReleaseRecord=} [properties] Properties to set
+                             */
+                            function ScheduledReleaseRecord(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ScheduledReleaseRecord releaseTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} releaseTime
+                             * @memberof google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord
+                             * @instance
+                             */
+                            ScheduledReleaseRecord.prototype.releaseTime = null;
+    
+                            /**
+                             * ScheduledReleaseRecord compilationResult.
+                             * @member {string|null|undefined} compilationResult
+                             * @memberof google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord
+                             * @instance
+                             */
+                            ScheduledReleaseRecord.prototype.compilationResult = null;
+    
+                            /**
+                             * ScheduledReleaseRecord errorStatus.
+                             * @member {google.rpc.IStatus|null|undefined} errorStatus
+                             * @memberof google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord
+                             * @instance
+                             */
+                            ScheduledReleaseRecord.prototype.errorStatus = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * ScheduledReleaseRecord result.
+                             * @member {"compilationResult"|"errorStatus"|undefined} result
+                             * @memberof google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord
+                             * @instance
+                             */
+                            Object.defineProperty(ScheduledReleaseRecord.prototype, "result", {
+                                get: $util.oneOfGetter($oneOfFields = ["compilationResult", "errorStatus"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new ScheduledReleaseRecord instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.ReleaseConfig.IScheduledReleaseRecord=} [properties] Properties to set
+                             * @returns {google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord} ScheduledReleaseRecord instance
+                             */
+                            ScheduledReleaseRecord.create = function create(properties) {
+                                return new ScheduledReleaseRecord(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ScheduledReleaseRecord message. Does not implicitly {@link google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.ReleaseConfig.IScheduledReleaseRecord} message ScheduledReleaseRecord message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ScheduledReleaseRecord.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.releaseTime != null && Object.hasOwnProperty.call(message, "releaseTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.releaseTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.compilationResult != null && Object.hasOwnProperty.call(message, "compilationResult"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.compilationResult);
+                                if (message.errorStatus != null && Object.hasOwnProperty.call(message, "errorStatus"))
+                                    $root.google.rpc.Status.encode(message.errorStatus, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ScheduledReleaseRecord message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.ReleaseConfig.IScheduledReleaseRecord} message ScheduledReleaseRecord message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ScheduledReleaseRecord.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ScheduledReleaseRecord message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord} ScheduledReleaseRecord
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ScheduledReleaseRecord.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.releaseTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.compilationResult = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.errorStatus = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ScheduledReleaseRecord message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord} ScheduledReleaseRecord
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ScheduledReleaseRecord.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ScheduledReleaseRecord message.
+                             * @function verify
+                             * @memberof google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ScheduledReleaseRecord.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.releaseTime != null && message.hasOwnProperty("releaseTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.releaseTime);
+                                    if (error)
+                                        return "releaseTime." + error;
+                                }
+                                if (message.compilationResult != null && message.hasOwnProperty("compilationResult")) {
+                                    properties.result = 1;
+                                    if (!$util.isString(message.compilationResult))
+                                        return "compilationResult: string expected";
+                                }
+                                if (message.errorStatus != null && message.hasOwnProperty("errorStatus")) {
+                                    if (properties.result === 1)
+                                        return "result: multiple values";
+                                    properties.result = 1;
+                                    {
+                                        var error = $root.google.rpc.Status.verify(message.errorStatus);
+                                        if (error)
+                                            return "errorStatus." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ScheduledReleaseRecord message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord} ScheduledReleaseRecord
+                             */
+                            ScheduledReleaseRecord.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord)
+                                    return object;
+                                var message = new $root.google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord();
+                                if (object.releaseTime != null) {
+                                    if (typeof object.releaseTime !== "object")
+                                        throw TypeError(".google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord.releaseTime: object expected");
+                                    message.releaseTime = $root.google.protobuf.Timestamp.fromObject(object.releaseTime);
+                                }
+                                if (object.compilationResult != null)
+                                    message.compilationResult = String(object.compilationResult);
+                                if (object.errorStatus != null) {
+                                    if (typeof object.errorStatus !== "object")
+                                        throw TypeError(".google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord.errorStatus: object expected");
+                                    message.errorStatus = $root.google.rpc.Status.fromObject(object.errorStatus);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ScheduledReleaseRecord message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord} message ScheduledReleaseRecord
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ScheduledReleaseRecord.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.releaseTime = null;
+                                if (message.releaseTime != null && message.hasOwnProperty("releaseTime"))
+                                    object.releaseTime = $root.google.protobuf.Timestamp.toObject(message.releaseTime, options);
+                                if (message.compilationResult != null && message.hasOwnProperty("compilationResult")) {
+                                    object.compilationResult = message.compilationResult;
+                                    if (options.oneofs)
+                                        object.result = "compilationResult";
+                                }
+                                if (message.errorStatus != null && message.hasOwnProperty("errorStatus")) {
+                                    object.errorStatus = $root.google.rpc.Status.toObject(message.errorStatus, options);
+                                    if (options.oneofs)
+                                        object.result = "errorStatus";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ScheduledReleaseRecord to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ScheduledReleaseRecord.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ScheduledReleaseRecord
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ScheduledReleaseRecord.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dataform.v1beta1.ReleaseConfig.ScheduledReleaseRecord";
+                            };
+    
+                            return ScheduledReleaseRecord;
+                        })();
+    
+                        return ReleaseConfig;
+                    })();
+    
+                    v1beta1.ListReleaseConfigsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListReleaseConfigsRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface IListReleaseConfigsRequest
+                         * @property {string|null} [parent] ListReleaseConfigsRequest parent
+                         * @property {number|null} [pageSize] ListReleaseConfigsRequest pageSize
+                         * @property {string|null} [pageToken] ListReleaseConfigsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListReleaseConfigsRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a ListReleaseConfigsRequest.
+                         * @implements IListReleaseConfigsRequest
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.IListReleaseConfigsRequest=} [properties] Properties to set
+                         */
+                        function ListReleaseConfigsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListReleaseConfigsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.dataform.v1beta1.ListReleaseConfigsRequest
+                         * @instance
+                         */
+                        ListReleaseConfigsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListReleaseConfigsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.dataform.v1beta1.ListReleaseConfigsRequest
+                         * @instance
+                         */
+                        ListReleaseConfigsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListReleaseConfigsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.dataform.v1beta1.ListReleaseConfigsRequest
+                         * @instance
+                         */
+                        ListReleaseConfigsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListReleaseConfigsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.ListReleaseConfigsRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IListReleaseConfigsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.ListReleaseConfigsRequest} ListReleaseConfigsRequest instance
+                         */
+                        ListReleaseConfigsRequest.create = function create(properties) {
+                            return new ListReleaseConfigsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListReleaseConfigsRequest message. Does not implicitly {@link google.cloud.dataform.v1beta1.ListReleaseConfigsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.ListReleaseConfigsRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IListReleaseConfigsRequest} message ListReleaseConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListReleaseConfigsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListReleaseConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.ListReleaseConfigsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.ListReleaseConfigsRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IListReleaseConfigsRequest} message ListReleaseConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListReleaseConfigsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListReleaseConfigsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.ListReleaseConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.ListReleaseConfigsRequest} ListReleaseConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListReleaseConfigsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.ListReleaseConfigsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListReleaseConfigsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.ListReleaseConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.ListReleaseConfigsRequest} ListReleaseConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListReleaseConfigsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListReleaseConfigsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.ListReleaseConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListReleaseConfigsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListReleaseConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.ListReleaseConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.ListReleaseConfigsRequest} ListReleaseConfigsRequest
+                         */
+                        ListReleaseConfigsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.ListReleaseConfigsRequest)
+                                return object;
+                            var message = new $root.google.cloud.dataform.v1beta1.ListReleaseConfigsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListReleaseConfigsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.ListReleaseConfigsRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.ListReleaseConfigsRequest} message ListReleaseConfigsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListReleaseConfigsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListReleaseConfigsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.ListReleaseConfigsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListReleaseConfigsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListReleaseConfigsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.ListReleaseConfigsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListReleaseConfigsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.ListReleaseConfigsRequest";
+                        };
+    
+                        return ListReleaseConfigsRequest;
+                    })();
+    
+                    v1beta1.ListReleaseConfigsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListReleaseConfigsResponse.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface IListReleaseConfigsResponse
+                         * @property {Array.<google.cloud.dataform.v1beta1.IReleaseConfig>|null} [releaseConfigs] ListReleaseConfigsResponse releaseConfigs
+                         * @property {string|null} [nextPageToken] ListReleaseConfigsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListReleaseConfigsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListReleaseConfigsResponse.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a ListReleaseConfigsResponse.
+                         * @implements IListReleaseConfigsResponse
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.IListReleaseConfigsResponse=} [properties] Properties to set
+                         */
+                        function ListReleaseConfigsResponse(properties) {
+                            this.releaseConfigs = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListReleaseConfigsResponse releaseConfigs.
+                         * @member {Array.<google.cloud.dataform.v1beta1.IReleaseConfig>} releaseConfigs
+                         * @memberof google.cloud.dataform.v1beta1.ListReleaseConfigsResponse
+                         * @instance
+                         */
+                        ListReleaseConfigsResponse.prototype.releaseConfigs = $util.emptyArray;
+    
+                        /**
+                         * ListReleaseConfigsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.dataform.v1beta1.ListReleaseConfigsResponse
+                         * @instance
+                         */
+                        ListReleaseConfigsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListReleaseConfigsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.dataform.v1beta1.ListReleaseConfigsResponse
+                         * @instance
+                         */
+                        ListReleaseConfigsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListReleaseConfigsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.ListReleaseConfigsResponse
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IListReleaseConfigsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.ListReleaseConfigsResponse} ListReleaseConfigsResponse instance
+                         */
+                        ListReleaseConfigsResponse.create = function create(properties) {
+                            return new ListReleaseConfigsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListReleaseConfigsResponse message. Does not implicitly {@link google.cloud.dataform.v1beta1.ListReleaseConfigsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.ListReleaseConfigsResponse
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IListReleaseConfigsResponse} message ListReleaseConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListReleaseConfigsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.releaseConfigs != null && message.releaseConfigs.length)
+                                for (var i = 0; i < message.releaseConfigs.length; ++i)
+                                    $root.google.cloud.dataform.v1beta1.ReleaseConfig.encode(message.releaseConfigs[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListReleaseConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.ListReleaseConfigsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.ListReleaseConfigsResponse
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IListReleaseConfigsResponse} message ListReleaseConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListReleaseConfigsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListReleaseConfigsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.ListReleaseConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.ListReleaseConfigsResponse} ListReleaseConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListReleaseConfigsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.ListReleaseConfigsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.releaseConfigs && message.releaseConfigs.length))
+                                            message.releaseConfigs = [];
+                                        message.releaseConfigs.push($root.google.cloud.dataform.v1beta1.ReleaseConfig.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListReleaseConfigsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.ListReleaseConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.ListReleaseConfigsResponse} ListReleaseConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListReleaseConfigsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListReleaseConfigsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.ListReleaseConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListReleaseConfigsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.releaseConfigs != null && message.hasOwnProperty("releaseConfigs")) {
+                                if (!Array.isArray(message.releaseConfigs))
+                                    return "releaseConfigs: array expected";
+                                for (var i = 0; i < message.releaseConfigs.length; ++i) {
+                                    var error = $root.google.cloud.dataform.v1beta1.ReleaseConfig.verify(message.releaseConfigs[i]);
+                                    if (error)
+                                        return "releaseConfigs." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListReleaseConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.ListReleaseConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.ListReleaseConfigsResponse} ListReleaseConfigsResponse
+                         */
+                        ListReleaseConfigsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.ListReleaseConfigsResponse)
+                                return object;
+                            var message = new $root.google.cloud.dataform.v1beta1.ListReleaseConfigsResponse();
+                            if (object.releaseConfigs) {
+                                if (!Array.isArray(object.releaseConfigs))
+                                    throw TypeError(".google.cloud.dataform.v1beta1.ListReleaseConfigsResponse.releaseConfigs: array expected");
+                                message.releaseConfigs = [];
+                                for (var i = 0; i < object.releaseConfigs.length; ++i) {
+                                    if (typeof object.releaseConfigs[i] !== "object")
+                                        throw TypeError(".google.cloud.dataform.v1beta1.ListReleaseConfigsResponse.releaseConfigs: object expected");
+                                    message.releaseConfigs[i] = $root.google.cloud.dataform.v1beta1.ReleaseConfig.fromObject(object.releaseConfigs[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.dataform.v1beta1.ListReleaseConfigsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListReleaseConfigsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.ListReleaseConfigsResponse
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.ListReleaseConfigsResponse} message ListReleaseConfigsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListReleaseConfigsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.releaseConfigs = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.releaseConfigs && message.releaseConfigs.length) {
+                                object.releaseConfigs = [];
+                                for (var j = 0; j < message.releaseConfigs.length; ++j)
+                                    object.releaseConfigs[j] = $root.google.cloud.dataform.v1beta1.ReleaseConfig.toObject(message.releaseConfigs[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListReleaseConfigsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.ListReleaseConfigsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListReleaseConfigsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListReleaseConfigsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.ListReleaseConfigsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListReleaseConfigsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.ListReleaseConfigsResponse";
+                        };
+    
+                        return ListReleaseConfigsResponse;
+                    })();
+    
+                    v1beta1.GetReleaseConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a GetReleaseConfigRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface IGetReleaseConfigRequest
+                         * @property {string|null} [name] GetReleaseConfigRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetReleaseConfigRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a GetReleaseConfigRequest.
+                         * @implements IGetReleaseConfigRequest
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.IGetReleaseConfigRequest=} [properties] Properties to set
+                         */
+                        function GetReleaseConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetReleaseConfigRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.dataform.v1beta1.GetReleaseConfigRequest
+                         * @instance
+                         */
+                        GetReleaseConfigRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetReleaseConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.GetReleaseConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IGetReleaseConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.GetReleaseConfigRequest} GetReleaseConfigRequest instance
+                         */
+                        GetReleaseConfigRequest.create = function create(properties) {
+                            return new GetReleaseConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetReleaseConfigRequest message. Does not implicitly {@link google.cloud.dataform.v1beta1.GetReleaseConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.GetReleaseConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IGetReleaseConfigRequest} message GetReleaseConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetReleaseConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetReleaseConfigRequest message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.GetReleaseConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.GetReleaseConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IGetReleaseConfigRequest} message GetReleaseConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetReleaseConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetReleaseConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.GetReleaseConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.GetReleaseConfigRequest} GetReleaseConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetReleaseConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.GetReleaseConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetReleaseConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.GetReleaseConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.GetReleaseConfigRequest} GetReleaseConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetReleaseConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetReleaseConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.GetReleaseConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetReleaseConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetReleaseConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.GetReleaseConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.GetReleaseConfigRequest} GetReleaseConfigRequest
+                         */
+                        GetReleaseConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.GetReleaseConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.dataform.v1beta1.GetReleaseConfigRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetReleaseConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.GetReleaseConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.GetReleaseConfigRequest} message GetReleaseConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetReleaseConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetReleaseConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.GetReleaseConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetReleaseConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetReleaseConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.GetReleaseConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetReleaseConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.GetReleaseConfigRequest";
+                        };
+    
+                        return GetReleaseConfigRequest;
+                    })();
+    
+                    v1beta1.CreateReleaseConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateReleaseConfigRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface ICreateReleaseConfigRequest
+                         * @property {string|null} [parent] CreateReleaseConfigRequest parent
+                         * @property {google.cloud.dataform.v1beta1.IReleaseConfig|null} [releaseConfig] CreateReleaseConfigRequest releaseConfig
+                         * @property {string|null} [releaseConfigId] CreateReleaseConfigRequest releaseConfigId
+                         */
+    
+                        /**
+                         * Constructs a new CreateReleaseConfigRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a CreateReleaseConfigRequest.
+                         * @implements ICreateReleaseConfigRequest
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest=} [properties] Properties to set
+                         */
+                        function CreateReleaseConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateReleaseConfigRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.dataform.v1beta1.CreateReleaseConfigRequest
+                         * @instance
+                         */
+                        CreateReleaseConfigRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateReleaseConfigRequest releaseConfig.
+                         * @member {google.cloud.dataform.v1beta1.IReleaseConfig|null|undefined} releaseConfig
+                         * @memberof google.cloud.dataform.v1beta1.CreateReleaseConfigRequest
+                         * @instance
+                         */
+                        CreateReleaseConfigRequest.prototype.releaseConfig = null;
+    
+                        /**
+                         * CreateReleaseConfigRequest releaseConfigId.
+                         * @member {string} releaseConfigId
+                         * @memberof google.cloud.dataform.v1beta1.CreateReleaseConfigRequest
+                         * @instance
+                         */
+                        CreateReleaseConfigRequest.prototype.releaseConfigId = "";
+    
+                        /**
+                         * Creates a new CreateReleaseConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.CreateReleaseConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.CreateReleaseConfigRequest} CreateReleaseConfigRequest instance
+                         */
+                        CreateReleaseConfigRequest.create = function create(properties) {
+                            return new CreateReleaseConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateReleaseConfigRequest message. Does not implicitly {@link google.cloud.dataform.v1beta1.CreateReleaseConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.CreateReleaseConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest} message CreateReleaseConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateReleaseConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.releaseConfig != null && Object.hasOwnProperty.call(message, "releaseConfig"))
+                                $root.google.cloud.dataform.v1beta1.ReleaseConfig.encode(message.releaseConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.releaseConfigId != null && Object.hasOwnProperty.call(message, "releaseConfigId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.releaseConfigId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateReleaseConfigRequest message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.CreateReleaseConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.CreateReleaseConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest} message CreateReleaseConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateReleaseConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateReleaseConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.CreateReleaseConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.CreateReleaseConfigRequest} CreateReleaseConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateReleaseConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.CreateReleaseConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.releaseConfig = $root.google.cloud.dataform.v1beta1.ReleaseConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.releaseConfigId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateReleaseConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.CreateReleaseConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.CreateReleaseConfigRequest} CreateReleaseConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateReleaseConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateReleaseConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.CreateReleaseConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateReleaseConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.releaseConfig != null && message.hasOwnProperty("releaseConfig")) {
+                                var error = $root.google.cloud.dataform.v1beta1.ReleaseConfig.verify(message.releaseConfig);
+                                if (error)
+                                    return "releaseConfig." + error;
+                            }
+                            if (message.releaseConfigId != null && message.hasOwnProperty("releaseConfigId"))
+                                if (!$util.isString(message.releaseConfigId))
+                                    return "releaseConfigId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateReleaseConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.CreateReleaseConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.CreateReleaseConfigRequest} CreateReleaseConfigRequest
+                         */
+                        CreateReleaseConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.CreateReleaseConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.dataform.v1beta1.CreateReleaseConfigRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.releaseConfig != null) {
+                                if (typeof object.releaseConfig !== "object")
+                                    throw TypeError(".google.cloud.dataform.v1beta1.CreateReleaseConfigRequest.releaseConfig: object expected");
+                                message.releaseConfig = $root.google.cloud.dataform.v1beta1.ReleaseConfig.fromObject(object.releaseConfig);
+                            }
+                            if (object.releaseConfigId != null)
+                                message.releaseConfigId = String(object.releaseConfigId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateReleaseConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.CreateReleaseConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.CreateReleaseConfigRequest} message CreateReleaseConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateReleaseConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.releaseConfig = null;
+                                object.releaseConfigId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.releaseConfig != null && message.hasOwnProperty("releaseConfig"))
+                                object.releaseConfig = $root.google.cloud.dataform.v1beta1.ReleaseConfig.toObject(message.releaseConfig, options);
+                            if (message.releaseConfigId != null && message.hasOwnProperty("releaseConfigId"))
+                                object.releaseConfigId = message.releaseConfigId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateReleaseConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.CreateReleaseConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateReleaseConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateReleaseConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.CreateReleaseConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateReleaseConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.CreateReleaseConfigRequest";
+                        };
+    
+                        return CreateReleaseConfigRequest;
+                    })();
+    
+                    v1beta1.UpdateReleaseConfigRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateReleaseConfigRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface IUpdateReleaseConfigRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateReleaseConfigRequest updateMask
+                         * @property {google.cloud.dataform.v1beta1.IReleaseConfig|null} [releaseConfig] UpdateReleaseConfigRequest releaseConfig
+                         */
+    
+                        /**
+                         * Constructs a new UpdateReleaseConfigRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents an UpdateReleaseConfigRequest.
+                         * @implements IUpdateReleaseConfigRequest
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest=} [properties] Properties to set
+                         */
+                        function UpdateReleaseConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateReleaseConfigRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.dataform.v1beta1.UpdateReleaseConfigRequest
+                         * @instance
+                         */
+                        UpdateReleaseConfigRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateReleaseConfigRequest releaseConfig.
+                         * @member {google.cloud.dataform.v1beta1.IReleaseConfig|null|undefined} releaseConfig
+                         * @memberof google.cloud.dataform.v1beta1.UpdateReleaseConfigRequest
+                         * @instance
+                         */
+                        UpdateReleaseConfigRequest.prototype.releaseConfig = null;
+    
+                        /**
+                         * Creates a new UpdateReleaseConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.UpdateReleaseConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.UpdateReleaseConfigRequest} UpdateReleaseConfigRequest instance
+                         */
+                        UpdateReleaseConfigRequest.create = function create(properties) {
+                            return new UpdateReleaseConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateReleaseConfigRequest message. Does not implicitly {@link google.cloud.dataform.v1beta1.UpdateReleaseConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.UpdateReleaseConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest} message UpdateReleaseConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateReleaseConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.releaseConfig != null && Object.hasOwnProperty.call(message, "releaseConfig"))
+                                $root.google.cloud.dataform.v1beta1.ReleaseConfig.encode(message.releaseConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateReleaseConfigRequest message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.UpdateReleaseConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.UpdateReleaseConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest} message UpdateReleaseConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateReleaseConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateReleaseConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.UpdateReleaseConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.UpdateReleaseConfigRequest} UpdateReleaseConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateReleaseConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.UpdateReleaseConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.releaseConfig = $root.google.cloud.dataform.v1beta1.ReleaseConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateReleaseConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.UpdateReleaseConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.UpdateReleaseConfigRequest} UpdateReleaseConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateReleaseConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateReleaseConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.UpdateReleaseConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateReleaseConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.releaseConfig != null && message.hasOwnProperty("releaseConfig")) {
+                                var error = $root.google.cloud.dataform.v1beta1.ReleaseConfig.verify(message.releaseConfig);
+                                if (error)
+                                    return "releaseConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateReleaseConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.UpdateReleaseConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.UpdateReleaseConfigRequest} UpdateReleaseConfigRequest
+                         */
+                        UpdateReleaseConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.UpdateReleaseConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.dataform.v1beta1.UpdateReleaseConfigRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.dataform.v1beta1.UpdateReleaseConfigRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.releaseConfig != null) {
+                                if (typeof object.releaseConfig !== "object")
+                                    throw TypeError(".google.cloud.dataform.v1beta1.UpdateReleaseConfigRequest.releaseConfig: object expected");
+                                message.releaseConfig = $root.google.cloud.dataform.v1beta1.ReleaseConfig.fromObject(object.releaseConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateReleaseConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.UpdateReleaseConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.UpdateReleaseConfigRequest} message UpdateReleaseConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateReleaseConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.releaseConfig = null;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.releaseConfig != null && message.hasOwnProperty("releaseConfig"))
+                                object.releaseConfig = $root.google.cloud.dataform.v1beta1.ReleaseConfig.toObject(message.releaseConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateReleaseConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.UpdateReleaseConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateReleaseConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateReleaseConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.UpdateReleaseConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateReleaseConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.UpdateReleaseConfigRequest";
+                        };
+    
+                        return UpdateReleaseConfigRequest;
+                    })();
+    
+                    v1beta1.DeleteReleaseConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteReleaseConfigRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface IDeleteReleaseConfigRequest
+                         * @property {string|null} [name] DeleteReleaseConfigRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteReleaseConfigRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a DeleteReleaseConfigRequest.
+                         * @implements IDeleteReleaseConfigRequest
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest=} [properties] Properties to set
+                         */
+                        function DeleteReleaseConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteReleaseConfigRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.dataform.v1beta1.DeleteReleaseConfigRequest
+                         * @instance
+                         */
+                        DeleteReleaseConfigRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteReleaseConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.DeleteReleaseConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.DeleteReleaseConfigRequest} DeleteReleaseConfigRequest instance
+                         */
+                        DeleteReleaseConfigRequest.create = function create(properties) {
+                            return new DeleteReleaseConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteReleaseConfigRequest message. Does not implicitly {@link google.cloud.dataform.v1beta1.DeleteReleaseConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.DeleteReleaseConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest} message DeleteReleaseConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteReleaseConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteReleaseConfigRequest message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.DeleteReleaseConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.DeleteReleaseConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest} message DeleteReleaseConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteReleaseConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteReleaseConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.DeleteReleaseConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.DeleteReleaseConfigRequest} DeleteReleaseConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteReleaseConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.DeleteReleaseConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteReleaseConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.DeleteReleaseConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.DeleteReleaseConfigRequest} DeleteReleaseConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteReleaseConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteReleaseConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.DeleteReleaseConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteReleaseConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteReleaseConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.DeleteReleaseConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.DeleteReleaseConfigRequest} DeleteReleaseConfigRequest
+                         */
+                        DeleteReleaseConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.DeleteReleaseConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.dataform.v1beta1.DeleteReleaseConfigRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteReleaseConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.DeleteReleaseConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.DeleteReleaseConfigRequest} message DeleteReleaseConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteReleaseConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteReleaseConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.DeleteReleaseConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteReleaseConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteReleaseConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.DeleteReleaseConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteReleaseConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.DeleteReleaseConfigRequest";
+                        };
+    
+                        return DeleteReleaseConfigRequest;
+                    })();
+    
                     v1beta1.CompilationResult = (function() {
     
                         /**
@@ -32571,7 +39282,9 @@
                          * @property {string|null} [name] CompilationResult name
                          * @property {string|null} [gitCommitish] CompilationResult gitCommitish
                          * @property {string|null} [workspace] CompilationResult workspace
-                         * @property {google.cloud.dataform.v1beta1.CompilationResult.ICodeCompilationConfig|null} [codeCompilationConfig] CompilationResult codeCompilationConfig
+                         * @property {string|null} [releaseConfig] CompilationResult releaseConfig
+                         * @property {google.cloud.dataform.v1beta1.ICodeCompilationConfig|null} [codeCompilationConfig] CompilationResult codeCompilationConfig
+                         * @property {string|null} [resolvedGitCommitSha] CompilationResult resolvedGitCommitSha
                          * @property {string|null} [dataformCoreVersion] CompilationResult dataformCoreVersion
                          * @property {Array.<google.cloud.dataform.v1beta1.CompilationResult.ICompilationError>|null} [compilationErrors] CompilationResult compilationErrors
                          */
@@ -32617,12 +39330,28 @@
                         CompilationResult.prototype.workspace = null;
     
                         /**
+                         * CompilationResult releaseConfig.
+                         * @member {string|null|undefined} releaseConfig
+                         * @memberof google.cloud.dataform.v1beta1.CompilationResult
+                         * @instance
+                         */
+                        CompilationResult.prototype.releaseConfig = null;
+    
+                        /**
                          * CompilationResult codeCompilationConfig.
-                         * @member {google.cloud.dataform.v1beta1.CompilationResult.ICodeCompilationConfig|null|undefined} codeCompilationConfig
+                         * @member {google.cloud.dataform.v1beta1.ICodeCompilationConfig|null|undefined} codeCompilationConfig
                          * @memberof google.cloud.dataform.v1beta1.CompilationResult
                          * @instance
                          */
                         CompilationResult.prototype.codeCompilationConfig = null;
+    
+                        /**
+                         * CompilationResult resolvedGitCommitSha.
+                         * @member {string} resolvedGitCommitSha
+                         * @memberof google.cloud.dataform.v1beta1.CompilationResult
+                         * @instance
+                         */
+                        CompilationResult.prototype.resolvedGitCommitSha = "";
     
                         /**
                          * CompilationResult dataformCoreVersion.
@@ -32645,12 +39374,12 @@
     
                         /**
                          * CompilationResult source.
-                         * @member {"gitCommitish"|"workspace"|undefined} source
+                         * @member {"gitCommitish"|"workspace"|"releaseConfig"|undefined} source
                          * @memberof google.cloud.dataform.v1beta1.CompilationResult
                          * @instance
                          */
                         Object.defineProperty(CompilationResult.prototype, "source", {
-                            get: $util.oneOfGetter($oneOfFields = ["gitCommitish", "workspace"]),
+                            get: $util.oneOfGetter($oneOfFields = ["gitCommitish", "workspace", "releaseConfig"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -32685,12 +39414,16 @@
                             if (message.workspace != null && Object.hasOwnProperty.call(message, "workspace"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.workspace);
                             if (message.codeCompilationConfig != null && Object.hasOwnProperty.call(message, "codeCompilationConfig"))
-                                $root.google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig.encode(message.codeCompilationConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                $root.google.cloud.dataform.v1beta1.CodeCompilationConfig.encode(message.codeCompilationConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.dataformCoreVersion != null && Object.hasOwnProperty.call(message, "dataformCoreVersion"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.dataformCoreVersion);
                             if (message.compilationErrors != null && message.compilationErrors.length)
                                 for (var i = 0; i < message.compilationErrors.length; ++i)
                                     $root.google.cloud.dataform.v1beta1.CompilationResult.CompilationError.encode(message.compilationErrors[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.releaseConfig != null && Object.hasOwnProperty.call(message, "releaseConfig"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.releaseConfig);
+                            if (message.resolvedGitCommitSha != null && Object.hasOwnProperty.call(message, "resolvedGitCommitSha"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.resolvedGitCommitSha);
                             return writer;
                         };
     
@@ -32737,8 +39470,16 @@
                                         message.workspace = reader.string();
                                         break;
                                     }
+                                case 7: {
+                                        message.releaseConfig = reader.string();
+                                        break;
+                                    }
                                 case 4: {
-                                        message.codeCompilationConfig = $root.google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig.decode(reader, reader.uint32());
+                                        message.codeCompilationConfig = $root.google.cloud.dataform.v1beta1.CodeCompilationConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.resolvedGitCommitSha = reader.string();
                                         break;
                                     }
                                 case 5: {
@@ -32802,11 +39543,21 @@
                                 if (!$util.isString(message.workspace))
                                     return "workspace: string expected";
                             }
+                            if (message.releaseConfig != null && message.hasOwnProperty("releaseConfig")) {
+                                if (properties.source === 1)
+                                    return "source: multiple values";
+                                properties.source = 1;
+                                if (!$util.isString(message.releaseConfig))
+                                    return "releaseConfig: string expected";
+                            }
                             if (message.codeCompilationConfig != null && message.hasOwnProperty("codeCompilationConfig")) {
-                                var error = $root.google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig.verify(message.codeCompilationConfig);
+                                var error = $root.google.cloud.dataform.v1beta1.CodeCompilationConfig.verify(message.codeCompilationConfig);
                                 if (error)
                                     return "codeCompilationConfig." + error;
                             }
+                            if (message.resolvedGitCommitSha != null && message.hasOwnProperty("resolvedGitCommitSha"))
+                                if (!$util.isString(message.resolvedGitCommitSha))
+                                    return "resolvedGitCommitSha: string expected";
                             if (message.dataformCoreVersion != null && message.hasOwnProperty("dataformCoreVersion"))
                                 if (!$util.isString(message.dataformCoreVersion))
                                     return "dataformCoreVersion: string expected";
@@ -32840,11 +39591,15 @@
                                 message.gitCommitish = String(object.gitCommitish);
                             if (object.workspace != null)
                                 message.workspace = String(object.workspace);
+                            if (object.releaseConfig != null)
+                                message.releaseConfig = String(object.releaseConfig);
                             if (object.codeCompilationConfig != null) {
                                 if (typeof object.codeCompilationConfig !== "object")
                                     throw TypeError(".google.cloud.dataform.v1beta1.CompilationResult.codeCompilationConfig: object expected");
-                                message.codeCompilationConfig = $root.google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig.fromObject(object.codeCompilationConfig);
+                                message.codeCompilationConfig = $root.google.cloud.dataform.v1beta1.CodeCompilationConfig.fromObject(object.codeCompilationConfig);
                             }
+                            if (object.resolvedGitCommitSha != null)
+                                message.resolvedGitCommitSha = String(object.resolvedGitCommitSha);
                             if (object.dataformCoreVersion != null)
                                 message.dataformCoreVersion = String(object.dataformCoreVersion);
                             if (object.compilationErrors) {
@@ -32879,6 +39634,7 @@
                                 object.name = "";
                                 object.codeCompilationConfig = null;
                                 object.dataformCoreVersion = "";
+                                object.resolvedGitCommitSha = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -32893,7 +39649,7 @@
                                     object.source = "workspace";
                             }
                             if (message.codeCompilationConfig != null && message.hasOwnProperty("codeCompilationConfig"))
-                                object.codeCompilationConfig = $root.google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig.toObject(message.codeCompilationConfig, options);
+                                object.codeCompilationConfig = $root.google.cloud.dataform.v1beta1.CodeCompilationConfig.toObject(message.codeCompilationConfig, options);
                             if (message.dataformCoreVersion != null && message.hasOwnProperty("dataformCoreVersion"))
                                 object.dataformCoreVersion = message.dataformCoreVersion;
                             if (message.compilationErrors && message.compilationErrors.length) {
@@ -32901,6 +39657,13 @@
                                 for (var j = 0; j < message.compilationErrors.length; ++j)
                                     object.compilationErrors[j] = $root.google.cloud.dataform.v1beta1.CompilationResult.CompilationError.toObject(message.compilationErrors[j], options);
                             }
+                            if (message.releaseConfig != null && message.hasOwnProperty("releaseConfig")) {
+                                object.releaseConfig = message.releaseConfig;
+                                if (options.oneofs)
+                                    object.source = "releaseConfig";
+                            }
+                            if (message.resolvedGitCommitSha != null && message.hasOwnProperty("resolvedGitCommitSha"))
+                                object.resolvedGitCommitSha = message.resolvedGitCommitSha;
                             return object;
                         };
     
@@ -32929,407 +39692,6 @@
                             }
                             return typeUrlPrefix + "/google.cloud.dataform.v1beta1.CompilationResult";
                         };
-    
-                        CompilationResult.CodeCompilationConfig = (function() {
-    
-                            /**
-                             * Properties of a CodeCompilationConfig.
-                             * @memberof google.cloud.dataform.v1beta1.CompilationResult
-                             * @interface ICodeCompilationConfig
-                             * @property {string|null} [defaultDatabase] CodeCompilationConfig defaultDatabase
-                             * @property {string|null} [defaultSchema] CodeCompilationConfig defaultSchema
-                             * @property {string|null} [defaultLocation] CodeCompilationConfig defaultLocation
-                             * @property {string|null} [assertionSchema] CodeCompilationConfig assertionSchema
-                             * @property {Object.<string,string>|null} [vars] CodeCompilationConfig vars
-                             * @property {string|null} [databaseSuffix] CodeCompilationConfig databaseSuffix
-                             * @property {string|null} [schemaSuffix] CodeCompilationConfig schemaSuffix
-                             * @property {string|null} [tablePrefix] CodeCompilationConfig tablePrefix
-                             */
-    
-                            /**
-                             * Constructs a new CodeCompilationConfig.
-                             * @memberof google.cloud.dataform.v1beta1.CompilationResult
-                             * @classdesc Represents a CodeCompilationConfig.
-                             * @implements ICodeCompilationConfig
-                             * @constructor
-                             * @param {google.cloud.dataform.v1beta1.CompilationResult.ICodeCompilationConfig=} [properties] Properties to set
-                             */
-                            function CodeCompilationConfig(properties) {
-                                this.vars = {};
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * CodeCompilationConfig defaultDatabase.
-                             * @member {string} defaultDatabase
-                             * @memberof google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig
-                             * @instance
-                             */
-                            CodeCompilationConfig.prototype.defaultDatabase = "";
-    
-                            /**
-                             * CodeCompilationConfig defaultSchema.
-                             * @member {string} defaultSchema
-                             * @memberof google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig
-                             * @instance
-                             */
-                            CodeCompilationConfig.prototype.defaultSchema = "";
-    
-                            /**
-                             * CodeCompilationConfig defaultLocation.
-                             * @member {string} defaultLocation
-                             * @memberof google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig
-                             * @instance
-                             */
-                            CodeCompilationConfig.prototype.defaultLocation = "";
-    
-                            /**
-                             * CodeCompilationConfig assertionSchema.
-                             * @member {string} assertionSchema
-                             * @memberof google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig
-                             * @instance
-                             */
-                            CodeCompilationConfig.prototype.assertionSchema = "";
-    
-                            /**
-                             * CodeCompilationConfig vars.
-                             * @member {Object.<string,string>} vars
-                             * @memberof google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig
-                             * @instance
-                             */
-                            CodeCompilationConfig.prototype.vars = $util.emptyObject;
-    
-                            /**
-                             * CodeCompilationConfig databaseSuffix.
-                             * @member {string} databaseSuffix
-                             * @memberof google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig
-                             * @instance
-                             */
-                            CodeCompilationConfig.prototype.databaseSuffix = "";
-    
-                            /**
-                             * CodeCompilationConfig schemaSuffix.
-                             * @member {string} schemaSuffix
-                             * @memberof google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig
-                             * @instance
-                             */
-                            CodeCompilationConfig.prototype.schemaSuffix = "";
-    
-                            /**
-                             * CodeCompilationConfig tablePrefix.
-                             * @member {string} tablePrefix
-                             * @memberof google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig
-                             * @instance
-                             */
-                            CodeCompilationConfig.prototype.tablePrefix = "";
-    
-                            /**
-                             * Creates a new CodeCompilationConfig instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig
-                             * @static
-                             * @param {google.cloud.dataform.v1beta1.CompilationResult.ICodeCompilationConfig=} [properties] Properties to set
-                             * @returns {google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig} CodeCompilationConfig instance
-                             */
-                            CodeCompilationConfig.create = function create(properties) {
-                                return new CodeCompilationConfig(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified CodeCompilationConfig message. Does not implicitly {@link google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig
-                             * @static
-                             * @param {google.cloud.dataform.v1beta1.CompilationResult.ICodeCompilationConfig} message CodeCompilationConfig message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            CodeCompilationConfig.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.defaultDatabase != null && Object.hasOwnProperty.call(message, "defaultDatabase"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.defaultDatabase);
-                                if (message.defaultSchema != null && Object.hasOwnProperty.call(message, "defaultSchema"))
-                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.defaultSchema);
-                                if (message.assertionSchema != null && Object.hasOwnProperty.call(message, "assertionSchema"))
-                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.assertionSchema);
-                                if (message.vars != null && Object.hasOwnProperty.call(message, "vars"))
-                                    for (var keys = Object.keys(message.vars), i = 0; i < keys.length; ++i)
-                                        writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.vars[keys[i]]).ldelim();
-                                if (message.databaseSuffix != null && Object.hasOwnProperty.call(message, "databaseSuffix"))
-                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.databaseSuffix);
-                                if (message.schemaSuffix != null && Object.hasOwnProperty.call(message, "schemaSuffix"))
-                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.schemaSuffix);
-                                if (message.tablePrefix != null && Object.hasOwnProperty.call(message, "tablePrefix"))
-                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.tablePrefix);
-                                if (message.defaultLocation != null && Object.hasOwnProperty.call(message, "defaultLocation"))
-                                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.defaultLocation);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified CodeCompilationConfig message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig
-                             * @static
-                             * @param {google.cloud.dataform.v1beta1.CompilationResult.ICodeCompilationConfig} message CodeCompilationConfig message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            CodeCompilationConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a CodeCompilationConfig message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig} CodeCompilationConfig
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            CodeCompilationConfig.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig(), key, value;
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.defaultDatabase = reader.string();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.defaultSchema = reader.string();
-                                            break;
-                                        }
-                                    case 8: {
-                                            message.defaultLocation = reader.string();
-                                            break;
-                                        }
-                                    case 3: {
-                                            message.assertionSchema = reader.string();
-                                            break;
-                                        }
-                                    case 4: {
-                                            if (message.vars === $util.emptyObject)
-                                                message.vars = {};
-                                            var end2 = reader.uint32() + reader.pos;
-                                            key = "";
-                                            value = "";
-                                            while (reader.pos < end2) {
-                                                var tag2 = reader.uint32();
-                                                switch (tag2 >>> 3) {
-                                                case 1:
-                                                    key = reader.string();
-                                                    break;
-                                                case 2:
-                                                    value = reader.string();
-                                                    break;
-                                                default:
-                                                    reader.skipType(tag2 & 7);
-                                                    break;
-                                                }
-                                            }
-                                            message.vars[key] = value;
-                                            break;
-                                        }
-                                    case 5: {
-                                            message.databaseSuffix = reader.string();
-                                            break;
-                                        }
-                                    case 6: {
-                                            message.schemaSuffix = reader.string();
-                                            break;
-                                        }
-                                    case 7: {
-                                            message.tablePrefix = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a CodeCompilationConfig message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig} CodeCompilationConfig
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            CodeCompilationConfig.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a CodeCompilationConfig message.
-                             * @function verify
-                             * @memberof google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            CodeCompilationConfig.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.defaultDatabase != null && message.hasOwnProperty("defaultDatabase"))
-                                    if (!$util.isString(message.defaultDatabase))
-                                        return "defaultDatabase: string expected";
-                                if (message.defaultSchema != null && message.hasOwnProperty("defaultSchema"))
-                                    if (!$util.isString(message.defaultSchema))
-                                        return "defaultSchema: string expected";
-                                if (message.defaultLocation != null && message.hasOwnProperty("defaultLocation"))
-                                    if (!$util.isString(message.defaultLocation))
-                                        return "defaultLocation: string expected";
-                                if (message.assertionSchema != null && message.hasOwnProperty("assertionSchema"))
-                                    if (!$util.isString(message.assertionSchema))
-                                        return "assertionSchema: string expected";
-                                if (message.vars != null && message.hasOwnProperty("vars")) {
-                                    if (!$util.isObject(message.vars))
-                                        return "vars: object expected";
-                                    var key = Object.keys(message.vars);
-                                    for (var i = 0; i < key.length; ++i)
-                                        if (!$util.isString(message.vars[key[i]]))
-                                            return "vars: string{k:string} expected";
-                                }
-                                if (message.databaseSuffix != null && message.hasOwnProperty("databaseSuffix"))
-                                    if (!$util.isString(message.databaseSuffix))
-                                        return "databaseSuffix: string expected";
-                                if (message.schemaSuffix != null && message.hasOwnProperty("schemaSuffix"))
-                                    if (!$util.isString(message.schemaSuffix))
-                                        return "schemaSuffix: string expected";
-                                if (message.tablePrefix != null && message.hasOwnProperty("tablePrefix"))
-                                    if (!$util.isString(message.tablePrefix))
-                                        return "tablePrefix: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a CodeCompilationConfig message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig} CodeCompilationConfig
-                             */
-                            CodeCompilationConfig.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig)
-                                    return object;
-                                var message = new $root.google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig();
-                                if (object.defaultDatabase != null)
-                                    message.defaultDatabase = String(object.defaultDatabase);
-                                if (object.defaultSchema != null)
-                                    message.defaultSchema = String(object.defaultSchema);
-                                if (object.defaultLocation != null)
-                                    message.defaultLocation = String(object.defaultLocation);
-                                if (object.assertionSchema != null)
-                                    message.assertionSchema = String(object.assertionSchema);
-                                if (object.vars) {
-                                    if (typeof object.vars !== "object")
-                                        throw TypeError(".google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig.vars: object expected");
-                                    message.vars = {};
-                                    for (var keys = Object.keys(object.vars), i = 0; i < keys.length; ++i)
-                                        message.vars[keys[i]] = String(object.vars[keys[i]]);
-                                }
-                                if (object.databaseSuffix != null)
-                                    message.databaseSuffix = String(object.databaseSuffix);
-                                if (object.schemaSuffix != null)
-                                    message.schemaSuffix = String(object.schemaSuffix);
-                                if (object.tablePrefix != null)
-                                    message.tablePrefix = String(object.tablePrefix);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a CodeCompilationConfig message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig
-                             * @static
-                             * @param {google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig} message CodeCompilationConfig
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            CodeCompilationConfig.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.objects || options.defaults)
-                                    object.vars = {};
-                                if (options.defaults) {
-                                    object.defaultDatabase = "";
-                                    object.defaultSchema = "";
-                                    object.assertionSchema = "";
-                                    object.databaseSuffix = "";
-                                    object.schemaSuffix = "";
-                                    object.tablePrefix = "";
-                                    object.defaultLocation = "";
-                                }
-                                if (message.defaultDatabase != null && message.hasOwnProperty("defaultDatabase"))
-                                    object.defaultDatabase = message.defaultDatabase;
-                                if (message.defaultSchema != null && message.hasOwnProperty("defaultSchema"))
-                                    object.defaultSchema = message.defaultSchema;
-                                if (message.assertionSchema != null && message.hasOwnProperty("assertionSchema"))
-                                    object.assertionSchema = message.assertionSchema;
-                                var keys2;
-                                if (message.vars && (keys2 = Object.keys(message.vars)).length) {
-                                    object.vars = {};
-                                    for (var j = 0; j < keys2.length; ++j)
-                                        object.vars[keys2[j]] = message.vars[keys2[j]];
-                                }
-                                if (message.databaseSuffix != null && message.hasOwnProperty("databaseSuffix"))
-                                    object.databaseSuffix = message.databaseSuffix;
-                                if (message.schemaSuffix != null && message.hasOwnProperty("schemaSuffix"))
-                                    object.schemaSuffix = message.schemaSuffix;
-                                if (message.tablePrefix != null && message.hasOwnProperty("tablePrefix"))
-                                    object.tablePrefix = message.tablePrefix;
-                                if (message.defaultLocation != null && message.hasOwnProperty("defaultLocation"))
-                                    object.defaultLocation = message.defaultLocation;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this CodeCompilationConfig to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            CodeCompilationConfig.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for CodeCompilationConfig
-                             * @function getTypeUrl
-                             * @memberof google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            CodeCompilationConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.dataform.v1beta1.CompilationResult.CodeCompilationConfig";
-                            };
-    
-                            return CodeCompilationConfig;
-                        })();
     
                         CompilationResult.CompilationError = (function() {
     
@@ -33610,6 +39972,407 @@
                         })();
     
                         return CompilationResult;
+                    })();
+    
+                    v1beta1.CodeCompilationConfig = (function() {
+    
+                        /**
+                         * Properties of a CodeCompilationConfig.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface ICodeCompilationConfig
+                         * @property {string|null} [defaultDatabase] CodeCompilationConfig defaultDatabase
+                         * @property {string|null} [defaultSchema] CodeCompilationConfig defaultSchema
+                         * @property {string|null} [defaultLocation] CodeCompilationConfig defaultLocation
+                         * @property {string|null} [assertionSchema] CodeCompilationConfig assertionSchema
+                         * @property {Object.<string,string>|null} [vars] CodeCompilationConfig vars
+                         * @property {string|null} [databaseSuffix] CodeCompilationConfig databaseSuffix
+                         * @property {string|null} [schemaSuffix] CodeCompilationConfig schemaSuffix
+                         * @property {string|null} [tablePrefix] CodeCompilationConfig tablePrefix
+                         */
+    
+                        /**
+                         * Constructs a new CodeCompilationConfig.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a CodeCompilationConfig.
+                         * @implements ICodeCompilationConfig
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.ICodeCompilationConfig=} [properties] Properties to set
+                         */
+                        function CodeCompilationConfig(properties) {
+                            this.vars = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CodeCompilationConfig defaultDatabase.
+                         * @member {string} defaultDatabase
+                         * @memberof google.cloud.dataform.v1beta1.CodeCompilationConfig
+                         * @instance
+                         */
+                        CodeCompilationConfig.prototype.defaultDatabase = "";
+    
+                        /**
+                         * CodeCompilationConfig defaultSchema.
+                         * @member {string} defaultSchema
+                         * @memberof google.cloud.dataform.v1beta1.CodeCompilationConfig
+                         * @instance
+                         */
+                        CodeCompilationConfig.prototype.defaultSchema = "";
+    
+                        /**
+                         * CodeCompilationConfig defaultLocation.
+                         * @member {string} defaultLocation
+                         * @memberof google.cloud.dataform.v1beta1.CodeCompilationConfig
+                         * @instance
+                         */
+                        CodeCompilationConfig.prototype.defaultLocation = "";
+    
+                        /**
+                         * CodeCompilationConfig assertionSchema.
+                         * @member {string} assertionSchema
+                         * @memberof google.cloud.dataform.v1beta1.CodeCompilationConfig
+                         * @instance
+                         */
+                        CodeCompilationConfig.prototype.assertionSchema = "";
+    
+                        /**
+                         * CodeCompilationConfig vars.
+                         * @member {Object.<string,string>} vars
+                         * @memberof google.cloud.dataform.v1beta1.CodeCompilationConfig
+                         * @instance
+                         */
+                        CodeCompilationConfig.prototype.vars = $util.emptyObject;
+    
+                        /**
+                         * CodeCompilationConfig databaseSuffix.
+                         * @member {string} databaseSuffix
+                         * @memberof google.cloud.dataform.v1beta1.CodeCompilationConfig
+                         * @instance
+                         */
+                        CodeCompilationConfig.prototype.databaseSuffix = "";
+    
+                        /**
+                         * CodeCompilationConfig schemaSuffix.
+                         * @member {string} schemaSuffix
+                         * @memberof google.cloud.dataform.v1beta1.CodeCompilationConfig
+                         * @instance
+                         */
+                        CodeCompilationConfig.prototype.schemaSuffix = "";
+    
+                        /**
+                         * CodeCompilationConfig tablePrefix.
+                         * @member {string} tablePrefix
+                         * @memberof google.cloud.dataform.v1beta1.CodeCompilationConfig
+                         * @instance
+                         */
+                        CodeCompilationConfig.prototype.tablePrefix = "";
+    
+                        /**
+                         * Creates a new CodeCompilationConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.CodeCompilationConfig
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.ICodeCompilationConfig=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.CodeCompilationConfig} CodeCompilationConfig instance
+                         */
+                        CodeCompilationConfig.create = function create(properties) {
+                            return new CodeCompilationConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CodeCompilationConfig message. Does not implicitly {@link google.cloud.dataform.v1beta1.CodeCompilationConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.CodeCompilationConfig
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.ICodeCompilationConfig} message CodeCompilationConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CodeCompilationConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.defaultDatabase != null && Object.hasOwnProperty.call(message, "defaultDatabase"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.defaultDatabase);
+                            if (message.defaultSchema != null && Object.hasOwnProperty.call(message, "defaultSchema"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.defaultSchema);
+                            if (message.assertionSchema != null && Object.hasOwnProperty.call(message, "assertionSchema"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.assertionSchema);
+                            if (message.vars != null && Object.hasOwnProperty.call(message, "vars"))
+                                for (var keys = Object.keys(message.vars), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.vars[keys[i]]).ldelim();
+                            if (message.databaseSuffix != null && Object.hasOwnProperty.call(message, "databaseSuffix"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.databaseSuffix);
+                            if (message.schemaSuffix != null && Object.hasOwnProperty.call(message, "schemaSuffix"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.schemaSuffix);
+                            if (message.tablePrefix != null && Object.hasOwnProperty.call(message, "tablePrefix"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.tablePrefix);
+                            if (message.defaultLocation != null && Object.hasOwnProperty.call(message, "defaultLocation"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.defaultLocation);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CodeCompilationConfig message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.CodeCompilationConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.CodeCompilationConfig
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.ICodeCompilationConfig} message CodeCompilationConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CodeCompilationConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CodeCompilationConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.CodeCompilationConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.CodeCompilationConfig} CodeCompilationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CodeCompilationConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.CodeCompilationConfig(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.defaultDatabase = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.defaultSchema = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.defaultLocation = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.assertionSchema = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (message.vars === $util.emptyObject)
+                                            message.vars = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.vars[key] = value;
+                                        break;
+                                    }
+                                case 5: {
+                                        message.databaseSuffix = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.schemaSuffix = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.tablePrefix = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CodeCompilationConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.CodeCompilationConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.CodeCompilationConfig} CodeCompilationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CodeCompilationConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CodeCompilationConfig message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.CodeCompilationConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CodeCompilationConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.defaultDatabase != null && message.hasOwnProperty("defaultDatabase"))
+                                if (!$util.isString(message.defaultDatabase))
+                                    return "defaultDatabase: string expected";
+                            if (message.defaultSchema != null && message.hasOwnProperty("defaultSchema"))
+                                if (!$util.isString(message.defaultSchema))
+                                    return "defaultSchema: string expected";
+                            if (message.defaultLocation != null && message.hasOwnProperty("defaultLocation"))
+                                if (!$util.isString(message.defaultLocation))
+                                    return "defaultLocation: string expected";
+                            if (message.assertionSchema != null && message.hasOwnProperty("assertionSchema"))
+                                if (!$util.isString(message.assertionSchema))
+                                    return "assertionSchema: string expected";
+                            if (message.vars != null && message.hasOwnProperty("vars")) {
+                                if (!$util.isObject(message.vars))
+                                    return "vars: object expected";
+                                var key = Object.keys(message.vars);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.vars[key[i]]))
+                                        return "vars: string{k:string} expected";
+                            }
+                            if (message.databaseSuffix != null && message.hasOwnProperty("databaseSuffix"))
+                                if (!$util.isString(message.databaseSuffix))
+                                    return "databaseSuffix: string expected";
+                            if (message.schemaSuffix != null && message.hasOwnProperty("schemaSuffix"))
+                                if (!$util.isString(message.schemaSuffix))
+                                    return "schemaSuffix: string expected";
+                            if (message.tablePrefix != null && message.hasOwnProperty("tablePrefix"))
+                                if (!$util.isString(message.tablePrefix))
+                                    return "tablePrefix: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CodeCompilationConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.CodeCompilationConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.CodeCompilationConfig} CodeCompilationConfig
+                         */
+                        CodeCompilationConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.CodeCompilationConfig)
+                                return object;
+                            var message = new $root.google.cloud.dataform.v1beta1.CodeCompilationConfig();
+                            if (object.defaultDatabase != null)
+                                message.defaultDatabase = String(object.defaultDatabase);
+                            if (object.defaultSchema != null)
+                                message.defaultSchema = String(object.defaultSchema);
+                            if (object.defaultLocation != null)
+                                message.defaultLocation = String(object.defaultLocation);
+                            if (object.assertionSchema != null)
+                                message.assertionSchema = String(object.assertionSchema);
+                            if (object.vars) {
+                                if (typeof object.vars !== "object")
+                                    throw TypeError(".google.cloud.dataform.v1beta1.CodeCompilationConfig.vars: object expected");
+                                message.vars = {};
+                                for (var keys = Object.keys(object.vars), i = 0; i < keys.length; ++i)
+                                    message.vars[keys[i]] = String(object.vars[keys[i]]);
+                            }
+                            if (object.databaseSuffix != null)
+                                message.databaseSuffix = String(object.databaseSuffix);
+                            if (object.schemaSuffix != null)
+                                message.schemaSuffix = String(object.schemaSuffix);
+                            if (object.tablePrefix != null)
+                                message.tablePrefix = String(object.tablePrefix);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CodeCompilationConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.CodeCompilationConfig
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.CodeCompilationConfig} message CodeCompilationConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CodeCompilationConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.vars = {};
+                            if (options.defaults) {
+                                object.defaultDatabase = "";
+                                object.defaultSchema = "";
+                                object.assertionSchema = "";
+                                object.databaseSuffix = "";
+                                object.schemaSuffix = "";
+                                object.tablePrefix = "";
+                                object.defaultLocation = "";
+                            }
+                            if (message.defaultDatabase != null && message.hasOwnProperty("defaultDatabase"))
+                                object.defaultDatabase = message.defaultDatabase;
+                            if (message.defaultSchema != null && message.hasOwnProperty("defaultSchema"))
+                                object.defaultSchema = message.defaultSchema;
+                            if (message.assertionSchema != null && message.hasOwnProperty("assertionSchema"))
+                                object.assertionSchema = message.assertionSchema;
+                            var keys2;
+                            if (message.vars && (keys2 = Object.keys(message.vars)).length) {
+                                object.vars = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.vars[keys2[j]] = message.vars[keys2[j]];
+                            }
+                            if (message.databaseSuffix != null && message.hasOwnProperty("databaseSuffix"))
+                                object.databaseSuffix = message.databaseSuffix;
+                            if (message.schemaSuffix != null && message.hasOwnProperty("schemaSuffix"))
+                                object.schemaSuffix = message.schemaSuffix;
+                            if (message.tablePrefix != null && message.hasOwnProperty("tablePrefix"))
+                                object.tablePrefix = message.tablePrefix;
+                            if (message.defaultLocation != null && message.hasOwnProperty("defaultLocation"))
+                                object.defaultLocation = message.defaultLocation;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CodeCompilationConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.CodeCompilationConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CodeCompilationConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CodeCompilationConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.CodeCompilationConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CodeCompilationConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.CodeCompilationConfig";
+                        };
+    
+                        return CodeCompilationConfig;
                     })();
     
                     v1beta1.ListCompilationResultsRequest = (function() {
@@ -38373,6 +45136,2431 @@
                         return QueryCompilationResultActionsResponse;
                     })();
     
+                    v1beta1.WorkflowConfig = (function() {
+    
+                        /**
+                         * Properties of a WorkflowConfig.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface IWorkflowConfig
+                         * @property {string|null} [name] WorkflowConfig name
+                         * @property {string|null} [releaseConfig] WorkflowConfig releaseConfig
+                         * @property {google.cloud.dataform.v1beta1.IInvocationConfig|null} [invocationConfig] WorkflowConfig invocationConfig
+                         * @property {string|null} [cronSchedule] WorkflowConfig cronSchedule
+                         * @property {string|null} [timeZone] WorkflowConfig timeZone
+                         * @property {Array.<google.cloud.dataform.v1beta1.WorkflowConfig.IScheduledExecutionRecord>|null} [recentScheduledExecutionRecords] WorkflowConfig recentScheduledExecutionRecords
+                         */
+    
+                        /**
+                         * Constructs a new WorkflowConfig.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a WorkflowConfig.
+                         * @implements IWorkflowConfig
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.IWorkflowConfig=} [properties] Properties to set
+                         */
+                        function WorkflowConfig(properties) {
+                            this.recentScheduledExecutionRecords = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * WorkflowConfig name.
+                         * @member {string} name
+                         * @memberof google.cloud.dataform.v1beta1.WorkflowConfig
+                         * @instance
+                         */
+                        WorkflowConfig.prototype.name = "";
+    
+                        /**
+                         * WorkflowConfig releaseConfig.
+                         * @member {string} releaseConfig
+                         * @memberof google.cloud.dataform.v1beta1.WorkflowConfig
+                         * @instance
+                         */
+                        WorkflowConfig.prototype.releaseConfig = "";
+    
+                        /**
+                         * WorkflowConfig invocationConfig.
+                         * @member {google.cloud.dataform.v1beta1.IInvocationConfig|null|undefined} invocationConfig
+                         * @memberof google.cloud.dataform.v1beta1.WorkflowConfig
+                         * @instance
+                         */
+                        WorkflowConfig.prototype.invocationConfig = null;
+    
+                        /**
+                         * WorkflowConfig cronSchedule.
+                         * @member {string} cronSchedule
+                         * @memberof google.cloud.dataform.v1beta1.WorkflowConfig
+                         * @instance
+                         */
+                        WorkflowConfig.prototype.cronSchedule = "";
+    
+                        /**
+                         * WorkflowConfig timeZone.
+                         * @member {string} timeZone
+                         * @memberof google.cloud.dataform.v1beta1.WorkflowConfig
+                         * @instance
+                         */
+                        WorkflowConfig.prototype.timeZone = "";
+    
+                        /**
+                         * WorkflowConfig recentScheduledExecutionRecords.
+                         * @member {Array.<google.cloud.dataform.v1beta1.WorkflowConfig.IScheduledExecutionRecord>} recentScheduledExecutionRecords
+                         * @memberof google.cloud.dataform.v1beta1.WorkflowConfig
+                         * @instance
+                         */
+                        WorkflowConfig.prototype.recentScheduledExecutionRecords = $util.emptyArray;
+    
+                        /**
+                         * Creates a new WorkflowConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.WorkflowConfig
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IWorkflowConfig=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.WorkflowConfig} WorkflowConfig instance
+                         */
+                        WorkflowConfig.create = function create(properties) {
+                            return new WorkflowConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified WorkflowConfig message. Does not implicitly {@link google.cloud.dataform.v1beta1.WorkflowConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.WorkflowConfig
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IWorkflowConfig} message WorkflowConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WorkflowConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.releaseConfig != null && Object.hasOwnProperty.call(message, "releaseConfig"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.releaseConfig);
+                            if (message.invocationConfig != null && Object.hasOwnProperty.call(message, "invocationConfig"))
+                                $root.google.cloud.dataform.v1beta1.InvocationConfig.encode(message.invocationConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.cronSchedule != null && Object.hasOwnProperty.call(message, "cronSchedule"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.cronSchedule);
+                            if (message.recentScheduledExecutionRecords != null && message.recentScheduledExecutionRecords.length)
+                                for (var i = 0; i < message.recentScheduledExecutionRecords.length; ++i)
+                                    $root.google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord.encode(message.recentScheduledExecutionRecords[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.timeZone != null && Object.hasOwnProperty.call(message, "timeZone"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.timeZone);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified WorkflowConfig message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.WorkflowConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.WorkflowConfig
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IWorkflowConfig} message WorkflowConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WorkflowConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a WorkflowConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.WorkflowConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.WorkflowConfig} WorkflowConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WorkflowConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.WorkflowConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.releaseConfig = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.invocationConfig = $root.google.cloud.dataform.v1beta1.InvocationConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.cronSchedule = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.timeZone = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.recentScheduledExecutionRecords && message.recentScheduledExecutionRecords.length))
+                                            message.recentScheduledExecutionRecords = [];
+                                        message.recentScheduledExecutionRecords.push($root.google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a WorkflowConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.WorkflowConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.WorkflowConfig} WorkflowConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WorkflowConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a WorkflowConfig message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.WorkflowConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        WorkflowConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.releaseConfig != null && message.hasOwnProperty("releaseConfig"))
+                                if (!$util.isString(message.releaseConfig))
+                                    return "releaseConfig: string expected";
+                            if (message.invocationConfig != null && message.hasOwnProperty("invocationConfig")) {
+                                var error = $root.google.cloud.dataform.v1beta1.InvocationConfig.verify(message.invocationConfig);
+                                if (error)
+                                    return "invocationConfig." + error;
+                            }
+                            if (message.cronSchedule != null && message.hasOwnProperty("cronSchedule"))
+                                if (!$util.isString(message.cronSchedule))
+                                    return "cronSchedule: string expected";
+                            if (message.timeZone != null && message.hasOwnProperty("timeZone"))
+                                if (!$util.isString(message.timeZone))
+                                    return "timeZone: string expected";
+                            if (message.recentScheduledExecutionRecords != null && message.hasOwnProperty("recentScheduledExecutionRecords")) {
+                                if (!Array.isArray(message.recentScheduledExecutionRecords))
+                                    return "recentScheduledExecutionRecords: array expected";
+                                for (var i = 0; i < message.recentScheduledExecutionRecords.length; ++i) {
+                                    var error = $root.google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord.verify(message.recentScheduledExecutionRecords[i]);
+                                    if (error)
+                                        return "recentScheduledExecutionRecords." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a WorkflowConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.WorkflowConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.WorkflowConfig} WorkflowConfig
+                         */
+                        WorkflowConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.WorkflowConfig)
+                                return object;
+                            var message = new $root.google.cloud.dataform.v1beta1.WorkflowConfig();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.releaseConfig != null)
+                                message.releaseConfig = String(object.releaseConfig);
+                            if (object.invocationConfig != null) {
+                                if (typeof object.invocationConfig !== "object")
+                                    throw TypeError(".google.cloud.dataform.v1beta1.WorkflowConfig.invocationConfig: object expected");
+                                message.invocationConfig = $root.google.cloud.dataform.v1beta1.InvocationConfig.fromObject(object.invocationConfig);
+                            }
+                            if (object.cronSchedule != null)
+                                message.cronSchedule = String(object.cronSchedule);
+                            if (object.timeZone != null)
+                                message.timeZone = String(object.timeZone);
+                            if (object.recentScheduledExecutionRecords) {
+                                if (!Array.isArray(object.recentScheduledExecutionRecords))
+                                    throw TypeError(".google.cloud.dataform.v1beta1.WorkflowConfig.recentScheduledExecutionRecords: array expected");
+                                message.recentScheduledExecutionRecords = [];
+                                for (var i = 0; i < object.recentScheduledExecutionRecords.length; ++i) {
+                                    if (typeof object.recentScheduledExecutionRecords[i] !== "object")
+                                        throw TypeError(".google.cloud.dataform.v1beta1.WorkflowConfig.recentScheduledExecutionRecords: object expected");
+                                    message.recentScheduledExecutionRecords[i] = $root.google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord.fromObject(object.recentScheduledExecutionRecords[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a WorkflowConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.WorkflowConfig
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.WorkflowConfig} message WorkflowConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        WorkflowConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.recentScheduledExecutionRecords = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.releaseConfig = "";
+                                object.invocationConfig = null;
+                                object.cronSchedule = "";
+                                object.timeZone = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.releaseConfig != null && message.hasOwnProperty("releaseConfig"))
+                                object.releaseConfig = message.releaseConfig;
+                            if (message.invocationConfig != null && message.hasOwnProperty("invocationConfig"))
+                                object.invocationConfig = $root.google.cloud.dataform.v1beta1.InvocationConfig.toObject(message.invocationConfig, options);
+                            if (message.cronSchedule != null && message.hasOwnProperty("cronSchedule"))
+                                object.cronSchedule = message.cronSchedule;
+                            if (message.recentScheduledExecutionRecords && message.recentScheduledExecutionRecords.length) {
+                                object.recentScheduledExecutionRecords = [];
+                                for (var j = 0; j < message.recentScheduledExecutionRecords.length; ++j)
+                                    object.recentScheduledExecutionRecords[j] = $root.google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord.toObject(message.recentScheduledExecutionRecords[j], options);
+                            }
+                            if (message.timeZone != null && message.hasOwnProperty("timeZone"))
+                                object.timeZone = message.timeZone;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this WorkflowConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.WorkflowConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        WorkflowConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for WorkflowConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.WorkflowConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        WorkflowConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.WorkflowConfig";
+                        };
+    
+                        WorkflowConfig.ScheduledExecutionRecord = (function() {
+    
+                            /**
+                             * Properties of a ScheduledExecutionRecord.
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowConfig
+                             * @interface IScheduledExecutionRecord
+                             * @property {google.protobuf.ITimestamp|null} [executionTime] ScheduledExecutionRecord executionTime
+                             * @property {string|null} [workflowInvocation] ScheduledExecutionRecord workflowInvocation
+                             * @property {google.rpc.IStatus|null} [errorStatus] ScheduledExecutionRecord errorStatus
+                             */
+    
+                            /**
+                             * Constructs a new ScheduledExecutionRecord.
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowConfig
+                             * @classdesc Represents a ScheduledExecutionRecord.
+                             * @implements IScheduledExecutionRecord
+                             * @constructor
+                             * @param {google.cloud.dataform.v1beta1.WorkflowConfig.IScheduledExecutionRecord=} [properties] Properties to set
+                             */
+                            function ScheduledExecutionRecord(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ScheduledExecutionRecord executionTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} executionTime
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord
+                             * @instance
+                             */
+                            ScheduledExecutionRecord.prototype.executionTime = null;
+    
+                            /**
+                             * ScheduledExecutionRecord workflowInvocation.
+                             * @member {string|null|undefined} workflowInvocation
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord
+                             * @instance
+                             */
+                            ScheduledExecutionRecord.prototype.workflowInvocation = null;
+    
+                            /**
+                             * ScheduledExecutionRecord errorStatus.
+                             * @member {google.rpc.IStatus|null|undefined} errorStatus
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord
+                             * @instance
+                             */
+                            ScheduledExecutionRecord.prototype.errorStatus = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * ScheduledExecutionRecord result.
+                             * @member {"workflowInvocation"|"errorStatus"|undefined} result
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord
+                             * @instance
+                             */
+                            Object.defineProperty(ScheduledExecutionRecord.prototype, "result", {
+                                get: $util.oneOfGetter($oneOfFields = ["workflowInvocation", "errorStatus"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new ScheduledExecutionRecord instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.WorkflowConfig.IScheduledExecutionRecord=} [properties] Properties to set
+                             * @returns {google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord} ScheduledExecutionRecord instance
+                             */
+                            ScheduledExecutionRecord.create = function create(properties) {
+                                return new ScheduledExecutionRecord(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ScheduledExecutionRecord message. Does not implicitly {@link google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.WorkflowConfig.IScheduledExecutionRecord} message ScheduledExecutionRecord message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ScheduledExecutionRecord.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.executionTime != null && Object.hasOwnProperty.call(message, "executionTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.executionTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.workflowInvocation != null && Object.hasOwnProperty.call(message, "workflowInvocation"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.workflowInvocation);
+                                if (message.errorStatus != null && Object.hasOwnProperty.call(message, "errorStatus"))
+                                    $root.google.rpc.Status.encode(message.errorStatus, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ScheduledExecutionRecord message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.WorkflowConfig.IScheduledExecutionRecord} message ScheduledExecutionRecord message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ScheduledExecutionRecord.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ScheduledExecutionRecord message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord} ScheduledExecutionRecord
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ScheduledExecutionRecord.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.executionTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.workflowInvocation = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.errorStatus = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ScheduledExecutionRecord message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord} ScheduledExecutionRecord
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ScheduledExecutionRecord.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ScheduledExecutionRecord message.
+                             * @function verify
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ScheduledExecutionRecord.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.executionTime != null && message.hasOwnProperty("executionTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.executionTime);
+                                    if (error)
+                                        return "executionTime." + error;
+                                }
+                                if (message.workflowInvocation != null && message.hasOwnProperty("workflowInvocation")) {
+                                    properties.result = 1;
+                                    if (!$util.isString(message.workflowInvocation))
+                                        return "workflowInvocation: string expected";
+                                }
+                                if (message.errorStatus != null && message.hasOwnProperty("errorStatus")) {
+                                    if (properties.result === 1)
+                                        return "result: multiple values";
+                                    properties.result = 1;
+                                    {
+                                        var error = $root.google.rpc.Status.verify(message.errorStatus);
+                                        if (error)
+                                            return "errorStatus." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ScheduledExecutionRecord message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord} ScheduledExecutionRecord
+                             */
+                            ScheduledExecutionRecord.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord)
+                                    return object;
+                                var message = new $root.google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord();
+                                if (object.executionTime != null) {
+                                    if (typeof object.executionTime !== "object")
+                                        throw TypeError(".google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord.executionTime: object expected");
+                                    message.executionTime = $root.google.protobuf.Timestamp.fromObject(object.executionTime);
+                                }
+                                if (object.workflowInvocation != null)
+                                    message.workflowInvocation = String(object.workflowInvocation);
+                                if (object.errorStatus != null) {
+                                    if (typeof object.errorStatus !== "object")
+                                        throw TypeError(".google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord.errorStatus: object expected");
+                                    message.errorStatus = $root.google.rpc.Status.fromObject(object.errorStatus);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ScheduledExecutionRecord message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord} message ScheduledExecutionRecord
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ScheduledExecutionRecord.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.executionTime = null;
+                                if (message.executionTime != null && message.hasOwnProperty("executionTime"))
+                                    object.executionTime = $root.google.protobuf.Timestamp.toObject(message.executionTime, options);
+                                if (message.workflowInvocation != null && message.hasOwnProperty("workflowInvocation")) {
+                                    object.workflowInvocation = message.workflowInvocation;
+                                    if (options.oneofs)
+                                        object.result = "workflowInvocation";
+                                }
+                                if (message.errorStatus != null && message.hasOwnProperty("errorStatus")) {
+                                    object.errorStatus = $root.google.rpc.Status.toObject(message.errorStatus, options);
+                                    if (options.oneofs)
+                                        object.result = "errorStatus";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ScheduledExecutionRecord to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ScheduledExecutionRecord.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ScheduledExecutionRecord
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ScheduledExecutionRecord.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord";
+                            };
+    
+                            return ScheduledExecutionRecord;
+                        })();
+    
+                        return WorkflowConfig;
+                    })();
+    
+                    v1beta1.InvocationConfig = (function() {
+    
+                        /**
+                         * Properties of an InvocationConfig.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface IInvocationConfig
+                         * @property {Array.<google.cloud.dataform.v1beta1.ITarget>|null} [includedTargets] InvocationConfig includedTargets
+                         * @property {Array.<string>|null} [includedTags] InvocationConfig includedTags
+                         * @property {boolean|null} [transitiveDependenciesIncluded] InvocationConfig transitiveDependenciesIncluded
+                         * @property {boolean|null} [transitiveDependentsIncluded] InvocationConfig transitiveDependentsIncluded
+                         * @property {boolean|null} [fullyRefreshIncrementalTablesEnabled] InvocationConfig fullyRefreshIncrementalTablesEnabled
+                         * @property {string|null} [serviceAccount] InvocationConfig serviceAccount
+                         */
+    
+                        /**
+                         * Constructs a new InvocationConfig.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents an InvocationConfig.
+                         * @implements IInvocationConfig
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.IInvocationConfig=} [properties] Properties to set
+                         */
+                        function InvocationConfig(properties) {
+                            this.includedTargets = [];
+                            this.includedTags = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * InvocationConfig includedTargets.
+                         * @member {Array.<google.cloud.dataform.v1beta1.ITarget>} includedTargets
+                         * @memberof google.cloud.dataform.v1beta1.InvocationConfig
+                         * @instance
+                         */
+                        InvocationConfig.prototype.includedTargets = $util.emptyArray;
+    
+                        /**
+                         * InvocationConfig includedTags.
+                         * @member {Array.<string>} includedTags
+                         * @memberof google.cloud.dataform.v1beta1.InvocationConfig
+                         * @instance
+                         */
+                        InvocationConfig.prototype.includedTags = $util.emptyArray;
+    
+                        /**
+                         * InvocationConfig transitiveDependenciesIncluded.
+                         * @member {boolean} transitiveDependenciesIncluded
+                         * @memberof google.cloud.dataform.v1beta1.InvocationConfig
+                         * @instance
+                         */
+                        InvocationConfig.prototype.transitiveDependenciesIncluded = false;
+    
+                        /**
+                         * InvocationConfig transitiveDependentsIncluded.
+                         * @member {boolean} transitiveDependentsIncluded
+                         * @memberof google.cloud.dataform.v1beta1.InvocationConfig
+                         * @instance
+                         */
+                        InvocationConfig.prototype.transitiveDependentsIncluded = false;
+    
+                        /**
+                         * InvocationConfig fullyRefreshIncrementalTablesEnabled.
+                         * @member {boolean} fullyRefreshIncrementalTablesEnabled
+                         * @memberof google.cloud.dataform.v1beta1.InvocationConfig
+                         * @instance
+                         */
+                        InvocationConfig.prototype.fullyRefreshIncrementalTablesEnabled = false;
+    
+                        /**
+                         * InvocationConfig serviceAccount.
+                         * @member {string} serviceAccount
+                         * @memberof google.cloud.dataform.v1beta1.InvocationConfig
+                         * @instance
+                         */
+                        InvocationConfig.prototype.serviceAccount = "";
+    
+                        /**
+                         * Creates a new InvocationConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.InvocationConfig
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IInvocationConfig=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.InvocationConfig} InvocationConfig instance
+                         */
+                        InvocationConfig.create = function create(properties) {
+                            return new InvocationConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified InvocationConfig message. Does not implicitly {@link google.cloud.dataform.v1beta1.InvocationConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.InvocationConfig
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IInvocationConfig} message InvocationConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InvocationConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.includedTargets != null && message.includedTargets.length)
+                                for (var i = 0; i < message.includedTargets.length; ++i)
+                                    $root.google.cloud.dataform.v1beta1.Target.encode(message.includedTargets[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.includedTags != null && message.includedTags.length)
+                                for (var i = 0; i < message.includedTags.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.includedTags[i]);
+                            if (message.transitiveDependenciesIncluded != null && Object.hasOwnProperty.call(message, "transitiveDependenciesIncluded"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.transitiveDependenciesIncluded);
+                            if (message.transitiveDependentsIncluded != null && Object.hasOwnProperty.call(message, "transitiveDependentsIncluded"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.transitiveDependentsIncluded);
+                            if (message.fullyRefreshIncrementalTablesEnabled != null && Object.hasOwnProperty.call(message, "fullyRefreshIncrementalTablesEnabled"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.fullyRefreshIncrementalTablesEnabled);
+                            if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.serviceAccount);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified InvocationConfig message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.InvocationConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.InvocationConfig
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IInvocationConfig} message InvocationConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InvocationConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an InvocationConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.InvocationConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.InvocationConfig} InvocationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InvocationConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.InvocationConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.includedTargets && message.includedTargets.length))
+                                            message.includedTargets = [];
+                                        message.includedTargets.push($root.google.cloud.dataform.v1beta1.Target.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.includedTags && message.includedTags.length))
+                                            message.includedTags = [];
+                                        message.includedTags.push(reader.string());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.transitiveDependenciesIncluded = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.transitiveDependentsIncluded = reader.bool();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.fullyRefreshIncrementalTablesEnabled = reader.bool();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.serviceAccount = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an InvocationConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.InvocationConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.InvocationConfig} InvocationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InvocationConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an InvocationConfig message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.InvocationConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        InvocationConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.includedTargets != null && message.hasOwnProperty("includedTargets")) {
+                                if (!Array.isArray(message.includedTargets))
+                                    return "includedTargets: array expected";
+                                for (var i = 0; i < message.includedTargets.length; ++i) {
+                                    var error = $root.google.cloud.dataform.v1beta1.Target.verify(message.includedTargets[i]);
+                                    if (error)
+                                        return "includedTargets." + error;
+                                }
+                            }
+                            if (message.includedTags != null && message.hasOwnProperty("includedTags")) {
+                                if (!Array.isArray(message.includedTags))
+                                    return "includedTags: array expected";
+                                for (var i = 0; i < message.includedTags.length; ++i)
+                                    if (!$util.isString(message.includedTags[i]))
+                                        return "includedTags: string[] expected";
+                            }
+                            if (message.transitiveDependenciesIncluded != null && message.hasOwnProperty("transitiveDependenciesIncluded"))
+                                if (typeof message.transitiveDependenciesIncluded !== "boolean")
+                                    return "transitiveDependenciesIncluded: boolean expected";
+                            if (message.transitiveDependentsIncluded != null && message.hasOwnProperty("transitiveDependentsIncluded"))
+                                if (typeof message.transitiveDependentsIncluded !== "boolean")
+                                    return "transitiveDependentsIncluded: boolean expected";
+                            if (message.fullyRefreshIncrementalTablesEnabled != null && message.hasOwnProperty("fullyRefreshIncrementalTablesEnabled"))
+                                if (typeof message.fullyRefreshIncrementalTablesEnabled !== "boolean")
+                                    return "fullyRefreshIncrementalTablesEnabled: boolean expected";
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                if (!$util.isString(message.serviceAccount))
+                                    return "serviceAccount: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an InvocationConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.InvocationConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.InvocationConfig} InvocationConfig
+                         */
+                        InvocationConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.InvocationConfig)
+                                return object;
+                            var message = new $root.google.cloud.dataform.v1beta1.InvocationConfig();
+                            if (object.includedTargets) {
+                                if (!Array.isArray(object.includedTargets))
+                                    throw TypeError(".google.cloud.dataform.v1beta1.InvocationConfig.includedTargets: array expected");
+                                message.includedTargets = [];
+                                for (var i = 0; i < object.includedTargets.length; ++i) {
+                                    if (typeof object.includedTargets[i] !== "object")
+                                        throw TypeError(".google.cloud.dataform.v1beta1.InvocationConfig.includedTargets: object expected");
+                                    message.includedTargets[i] = $root.google.cloud.dataform.v1beta1.Target.fromObject(object.includedTargets[i]);
+                                }
+                            }
+                            if (object.includedTags) {
+                                if (!Array.isArray(object.includedTags))
+                                    throw TypeError(".google.cloud.dataform.v1beta1.InvocationConfig.includedTags: array expected");
+                                message.includedTags = [];
+                                for (var i = 0; i < object.includedTags.length; ++i)
+                                    message.includedTags[i] = String(object.includedTags[i]);
+                            }
+                            if (object.transitiveDependenciesIncluded != null)
+                                message.transitiveDependenciesIncluded = Boolean(object.transitiveDependenciesIncluded);
+                            if (object.transitiveDependentsIncluded != null)
+                                message.transitiveDependentsIncluded = Boolean(object.transitiveDependentsIncluded);
+                            if (object.fullyRefreshIncrementalTablesEnabled != null)
+                                message.fullyRefreshIncrementalTablesEnabled = Boolean(object.fullyRefreshIncrementalTablesEnabled);
+                            if (object.serviceAccount != null)
+                                message.serviceAccount = String(object.serviceAccount);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an InvocationConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.InvocationConfig
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.InvocationConfig} message InvocationConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        InvocationConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.includedTargets = [];
+                                object.includedTags = [];
+                            }
+                            if (options.defaults) {
+                                object.transitiveDependenciesIncluded = false;
+                                object.transitiveDependentsIncluded = false;
+                                object.fullyRefreshIncrementalTablesEnabled = false;
+                                object.serviceAccount = "";
+                            }
+                            if (message.includedTargets && message.includedTargets.length) {
+                                object.includedTargets = [];
+                                for (var j = 0; j < message.includedTargets.length; ++j)
+                                    object.includedTargets[j] = $root.google.cloud.dataform.v1beta1.Target.toObject(message.includedTargets[j], options);
+                            }
+                            if (message.includedTags && message.includedTags.length) {
+                                object.includedTags = [];
+                                for (var j = 0; j < message.includedTags.length; ++j)
+                                    object.includedTags[j] = message.includedTags[j];
+                            }
+                            if (message.transitiveDependenciesIncluded != null && message.hasOwnProperty("transitiveDependenciesIncluded"))
+                                object.transitiveDependenciesIncluded = message.transitiveDependenciesIncluded;
+                            if (message.transitiveDependentsIncluded != null && message.hasOwnProperty("transitiveDependentsIncluded"))
+                                object.transitiveDependentsIncluded = message.transitiveDependentsIncluded;
+                            if (message.fullyRefreshIncrementalTablesEnabled != null && message.hasOwnProperty("fullyRefreshIncrementalTablesEnabled"))
+                                object.fullyRefreshIncrementalTablesEnabled = message.fullyRefreshIncrementalTablesEnabled;
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                object.serviceAccount = message.serviceAccount;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this InvocationConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.InvocationConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        InvocationConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for InvocationConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.InvocationConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        InvocationConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.InvocationConfig";
+                        };
+    
+                        return InvocationConfig;
+                    })();
+    
+                    v1beta1.ListWorkflowConfigsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListWorkflowConfigsRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface IListWorkflowConfigsRequest
+                         * @property {string|null} [parent] ListWorkflowConfigsRequest parent
+                         * @property {number|null} [pageSize] ListWorkflowConfigsRequest pageSize
+                         * @property {string|null} [pageToken] ListWorkflowConfigsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListWorkflowConfigsRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a ListWorkflowConfigsRequest.
+                         * @implements IListWorkflowConfigsRequest
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest=} [properties] Properties to set
+                         */
+                        function ListWorkflowConfigsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListWorkflowConfigsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest
+                         * @instance
+                         */
+                        ListWorkflowConfigsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListWorkflowConfigsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest
+                         * @instance
+                         */
+                        ListWorkflowConfigsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListWorkflowConfigsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest
+                         * @instance
+                         */
+                        ListWorkflowConfigsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListWorkflowConfigsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest} ListWorkflowConfigsRequest instance
+                         */
+                        ListWorkflowConfigsRequest.create = function create(properties) {
+                            return new ListWorkflowConfigsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListWorkflowConfigsRequest message. Does not implicitly {@link google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest} message ListWorkflowConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWorkflowConfigsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListWorkflowConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest} message ListWorkflowConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWorkflowConfigsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListWorkflowConfigsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest} ListWorkflowConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWorkflowConfigsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListWorkflowConfigsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest} ListWorkflowConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWorkflowConfigsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListWorkflowConfigsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListWorkflowConfigsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListWorkflowConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest} ListWorkflowConfigsRequest
+                         */
+                        ListWorkflowConfigsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest)
+                                return object;
+                            var message = new $root.google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListWorkflowConfigsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest} message ListWorkflowConfigsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListWorkflowConfigsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListWorkflowConfigsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListWorkflowConfigsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListWorkflowConfigsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListWorkflowConfigsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest";
+                        };
+    
+                        return ListWorkflowConfigsRequest;
+                    })();
+    
+                    v1beta1.ListWorkflowConfigsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListWorkflowConfigsResponse.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface IListWorkflowConfigsResponse
+                         * @property {Array.<google.cloud.dataform.v1beta1.IWorkflowConfig>|null} [workflowConfigs] ListWorkflowConfigsResponse workflowConfigs
+                         * @property {string|null} [nextPageToken] ListWorkflowConfigsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListWorkflowConfigsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListWorkflowConfigsResponse.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a ListWorkflowConfigsResponse.
+                         * @implements IListWorkflowConfigsResponse
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.IListWorkflowConfigsResponse=} [properties] Properties to set
+                         */
+                        function ListWorkflowConfigsResponse(properties) {
+                            this.workflowConfigs = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListWorkflowConfigsResponse workflowConfigs.
+                         * @member {Array.<google.cloud.dataform.v1beta1.IWorkflowConfig>} workflowConfigs
+                         * @memberof google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse
+                         * @instance
+                         */
+                        ListWorkflowConfigsResponse.prototype.workflowConfigs = $util.emptyArray;
+    
+                        /**
+                         * ListWorkflowConfigsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse
+                         * @instance
+                         */
+                        ListWorkflowConfigsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListWorkflowConfigsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse
+                         * @instance
+                         */
+                        ListWorkflowConfigsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListWorkflowConfigsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IListWorkflowConfigsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse} ListWorkflowConfigsResponse instance
+                         */
+                        ListWorkflowConfigsResponse.create = function create(properties) {
+                            return new ListWorkflowConfigsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListWorkflowConfigsResponse message. Does not implicitly {@link google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IListWorkflowConfigsResponse} message ListWorkflowConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWorkflowConfigsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.workflowConfigs != null && message.workflowConfigs.length)
+                                for (var i = 0; i < message.workflowConfigs.length; ++i)
+                                    $root.google.cloud.dataform.v1beta1.WorkflowConfig.encode(message.workflowConfigs[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListWorkflowConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IListWorkflowConfigsResponse} message ListWorkflowConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWorkflowConfigsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListWorkflowConfigsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse} ListWorkflowConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWorkflowConfigsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.workflowConfigs && message.workflowConfigs.length))
+                                            message.workflowConfigs = [];
+                                        message.workflowConfigs.push($root.google.cloud.dataform.v1beta1.WorkflowConfig.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListWorkflowConfigsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse} ListWorkflowConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWorkflowConfigsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListWorkflowConfigsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListWorkflowConfigsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.workflowConfigs != null && message.hasOwnProperty("workflowConfigs")) {
+                                if (!Array.isArray(message.workflowConfigs))
+                                    return "workflowConfigs: array expected";
+                                for (var i = 0; i < message.workflowConfigs.length; ++i) {
+                                    var error = $root.google.cloud.dataform.v1beta1.WorkflowConfig.verify(message.workflowConfigs[i]);
+                                    if (error)
+                                        return "workflowConfigs." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListWorkflowConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse} ListWorkflowConfigsResponse
+                         */
+                        ListWorkflowConfigsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse)
+                                return object;
+                            var message = new $root.google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse();
+                            if (object.workflowConfigs) {
+                                if (!Array.isArray(object.workflowConfigs))
+                                    throw TypeError(".google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse.workflowConfigs: array expected");
+                                message.workflowConfigs = [];
+                                for (var i = 0; i < object.workflowConfigs.length; ++i) {
+                                    if (typeof object.workflowConfigs[i] !== "object")
+                                        throw TypeError(".google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse.workflowConfigs: object expected");
+                                    message.workflowConfigs[i] = $root.google.cloud.dataform.v1beta1.WorkflowConfig.fromObject(object.workflowConfigs[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListWorkflowConfigsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse} message ListWorkflowConfigsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListWorkflowConfigsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.workflowConfigs = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.workflowConfigs && message.workflowConfigs.length) {
+                                object.workflowConfigs = [];
+                                for (var j = 0; j < message.workflowConfigs.length; ++j)
+                                    object.workflowConfigs[j] = $root.google.cloud.dataform.v1beta1.WorkflowConfig.toObject(message.workflowConfigs[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListWorkflowConfigsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListWorkflowConfigsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListWorkflowConfigsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListWorkflowConfigsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse";
+                        };
+    
+                        return ListWorkflowConfigsResponse;
+                    })();
+    
+                    v1beta1.GetWorkflowConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a GetWorkflowConfigRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface IGetWorkflowConfigRequest
+                         * @property {string|null} [name] GetWorkflowConfigRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetWorkflowConfigRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a GetWorkflowConfigRequest.
+                         * @implements IGetWorkflowConfigRequest
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest=} [properties] Properties to set
+                         */
+                        function GetWorkflowConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetWorkflowConfigRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.dataform.v1beta1.GetWorkflowConfigRequest
+                         * @instance
+                         */
+                        GetWorkflowConfigRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetWorkflowConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.GetWorkflowConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.GetWorkflowConfigRequest} GetWorkflowConfigRequest instance
+                         */
+                        GetWorkflowConfigRequest.create = function create(properties) {
+                            return new GetWorkflowConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetWorkflowConfigRequest message. Does not implicitly {@link google.cloud.dataform.v1beta1.GetWorkflowConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.GetWorkflowConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest} message GetWorkflowConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetWorkflowConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetWorkflowConfigRequest message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.GetWorkflowConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.GetWorkflowConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest} message GetWorkflowConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetWorkflowConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetWorkflowConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.GetWorkflowConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.GetWorkflowConfigRequest} GetWorkflowConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetWorkflowConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.GetWorkflowConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetWorkflowConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.GetWorkflowConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.GetWorkflowConfigRequest} GetWorkflowConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetWorkflowConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetWorkflowConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.GetWorkflowConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetWorkflowConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetWorkflowConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.GetWorkflowConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.GetWorkflowConfigRequest} GetWorkflowConfigRequest
+                         */
+                        GetWorkflowConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.GetWorkflowConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.dataform.v1beta1.GetWorkflowConfigRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetWorkflowConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.GetWorkflowConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.GetWorkflowConfigRequest} message GetWorkflowConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetWorkflowConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetWorkflowConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.GetWorkflowConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetWorkflowConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetWorkflowConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.GetWorkflowConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetWorkflowConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.GetWorkflowConfigRequest";
+                        };
+    
+                        return GetWorkflowConfigRequest;
+                    })();
+    
+                    v1beta1.CreateWorkflowConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateWorkflowConfigRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface ICreateWorkflowConfigRequest
+                         * @property {string|null} [parent] CreateWorkflowConfigRequest parent
+                         * @property {google.cloud.dataform.v1beta1.IWorkflowConfig|null} [workflowConfig] CreateWorkflowConfigRequest workflowConfig
+                         * @property {string|null} [workflowConfigId] CreateWorkflowConfigRequest workflowConfigId
+                         */
+    
+                        /**
+                         * Constructs a new CreateWorkflowConfigRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a CreateWorkflowConfigRequest.
+                         * @implements ICreateWorkflowConfigRequest
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest=} [properties] Properties to set
+                         */
+                        function CreateWorkflowConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateWorkflowConfigRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.dataform.v1beta1.CreateWorkflowConfigRequest
+                         * @instance
+                         */
+                        CreateWorkflowConfigRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateWorkflowConfigRequest workflowConfig.
+                         * @member {google.cloud.dataform.v1beta1.IWorkflowConfig|null|undefined} workflowConfig
+                         * @memberof google.cloud.dataform.v1beta1.CreateWorkflowConfigRequest
+                         * @instance
+                         */
+                        CreateWorkflowConfigRequest.prototype.workflowConfig = null;
+    
+                        /**
+                         * CreateWorkflowConfigRequest workflowConfigId.
+                         * @member {string} workflowConfigId
+                         * @memberof google.cloud.dataform.v1beta1.CreateWorkflowConfigRequest
+                         * @instance
+                         */
+                        CreateWorkflowConfigRequest.prototype.workflowConfigId = "";
+    
+                        /**
+                         * Creates a new CreateWorkflowConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.CreateWorkflowConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.CreateWorkflowConfigRequest} CreateWorkflowConfigRequest instance
+                         */
+                        CreateWorkflowConfigRequest.create = function create(properties) {
+                            return new CreateWorkflowConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateWorkflowConfigRequest message. Does not implicitly {@link google.cloud.dataform.v1beta1.CreateWorkflowConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.CreateWorkflowConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest} message CreateWorkflowConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateWorkflowConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.workflowConfig != null && Object.hasOwnProperty.call(message, "workflowConfig"))
+                                $root.google.cloud.dataform.v1beta1.WorkflowConfig.encode(message.workflowConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.workflowConfigId != null && Object.hasOwnProperty.call(message, "workflowConfigId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.workflowConfigId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateWorkflowConfigRequest message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.CreateWorkflowConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.CreateWorkflowConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest} message CreateWorkflowConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateWorkflowConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateWorkflowConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.CreateWorkflowConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.CreateWorkflowConfigRequest} CreateWorkflowConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateWorkflowConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.CreateWorkflowConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.workflowConfig = $root.google.cloud.dataform.v1beta1.WorkflowConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.workflowConfigId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateWorkflowConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.CreateWorkflowConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.CreateWorkflowConfigRequest} CreateWorkflowConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateWorkflowConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateWorkflowConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.CreateWorkflowConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateWorkflowConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.workflowConfig != null && message.hasOwnProperty("workflowConfig")) {
+                                var error = $root.google.cloud.dataform.v1beta1.WorkflowConfig.verify(message.workflowConfig);
+                                if (error)
+                                    return "workflowConfig." + error;
+                            }
+                            if (message.workflowConfigId != null && message.hasOwnProperty("workflowConfigId"))
+                                if (!$util.isString(message.workflowConfigId))
+                                    return "workflowConfigId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateWorkflowConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.CreateWorkflowConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.CreateWorkflowConfigRequest} CreateWorkflowConfigRequest
+                         */
+                        CreateWorkflowConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.CreateWorkflowConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.dataform.v1beta1.CreateWorkflowConfigRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.workflowConfig != null) {
+                                if (typeof object.workflowConfig !== "object")
+                                    throw TypeError(".google.cloud.dataform.v1beta1.CreateWorkflowConfigRequest.workflowConfig: object expected");
+                                message.workflowConfig = $root.google.cloud.dataform.v1beta1.WorkflowConfig.fromObject(object.workflowConfig);
+                            }
+                            if (object.workflowConfigId != null)
+                                message.workflowConfigId = String(object.workflowConfigId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateWorkflowConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.CreateWorkflowConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.CreateWorkflowConfigRequest} message CreateWorkflowConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateWorkflowConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.workflowConfig = null;
+                                object.workflowConfigId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.workflowConfig != null && message.hasOwnProperty("workflowConfig"))
+                                object.workflowConfig = $root.google.cloud.dataform.v1beta1.WorkflowConfig.toObject(message.workflowConfig, options);
+                            if (message.workflowConfigId != null && message.hasOwnProperty("workflowConfigId"))
+                                object.workflowConfigId = message.workflowConfigId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateWorkflowConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.CreateWorkflowConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateWorkflowConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateWorkflowConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.CreateWorkflowConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateWorkflowConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.CreateWorkflowConfigRequest";
+                        };
+    
+                        return CreateWorkflowConfigRequest;
+                    })();
+    
+                    v1beta1.UpdateWorkflowConfigRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateWorkflowConfigRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface IUpdateWorkflowConfigRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateWorkflowConfigRequest updateMask
+                         * @property {google.cloud.dataform.v1beta1.IWorkflowConfig|null} [workflowConfig] UpdateWorkflowConfigRequest workflowConfig
+                         */
+    
+                        /**
+                         * Constructs a new UpdateWorkflowConfigRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents an UpdateWorkflowConfigRequest.
+                         * @implements IUpdateWorkflowConfigRequest
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest=} [properties] Properties to set
+                         */
+                        function UpdateWorkflowConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateWorkflowConfigRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.dataform.v1beta1.UpdateWorkflowConfigRequest
+                         * @instance
+                         */
+                        UpdateWorkflowConfigRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateWorkflowConfigRequest workflowConfig.
+                         * @member {google.cloud.dataform.v1beta1.IWorkflowConfig|null|undefined} workflowConfig
+                         * @memberof google.cloud.dataform.v1beta1.UpdateWorkflowConfigRequest
+                         * @instance
+                         */
+                        UpdateWorkflowConfigRequest.prototype.workflowConfig = null;
+    
+                        /**
+                         * Creates a new UpdateWorkflowConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.UpdateWorkflowConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.UpdateWorkflowConfigRequest} UpdateWorkflowConfigRequest instance
+                         */
+                        UpdateWorkflowConfigRequest.create = function create(properties) {
+                            return new UpdateWorkflowConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateWorkflowConfigRequest message. Does not implicitly {@link google.cloud.dataform.v1beta1.UpdateWorkflowConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.UpdateWorkflowConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest} message UpdateWorkflowConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateWorkflowConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.workflowConfig != null && Object.hasOwnProperty.call(message, "workflowConfig"))
+                                $root.google.cloud.dataform.v1beta1.WorkflowConfig.encode(message.workflowConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateWorkflowConfigRequest message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.UpdateWorkflowConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.UpdateWorkflowConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest} message UpdateWorkflowConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateWorkflowConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateWorkflowConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.UpdateWorkflowConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.UpdateWorkflowConfigRequest} UpdateWorkflowConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateWorkflowConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.UpdateWorkflowConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.workflowConfig = $root.google.cloud.dataform.v1beta1.WorkflowConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateWorkflowConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.UpdateWorkflowConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.UpdateWorkflowConfigRequest} UpdateWorkflowConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateWorkflowConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateWorkflowConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.UpdateWorkflowConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateWorkflowConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.workflowConfig != null && message.hasOwnProperty("workflowConfig")) {
+                                var error = $root.google.cloud.dataform.v1beta1.WorkflowConfig.verify(message.workflowConfig);
+                                if (error)
+                                    return "workflowConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateWorkflowConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.UpdateWorkflowConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.UpdateWorkflowConfigRequest} UpdateWorkflowConfigRequest
+                         */
+                        UpdateWorkflowConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.UpdateWorkflowConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.dataform.v1beta1.UpdateWorkflowConfigRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.dataform.v1beta1.UpdateWorkflowConfigRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.workflowConfig != null) {
+                                if (typeof object.workflowConfig !== "object")
+                                    throw TypeError(".google.cloud.dataform.v1beta1.UpdateWorkflowConfigRequest.workflowConfig: object expected");
+                                message.workflowConfig = $root.google.cloud.dataform.v1beta1.WorkflowConfig.fromObject(object.workflowConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateWorkflowConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.UpdateWorkflowConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.UpdateWorkflowConfigRequest} message UpdateWorkflowConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateWorkflowConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.workflowConfig = null;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.workflowConfig != null && message.hasOwnProperty("workflowConfig"))
+                                object.workflowConfig = $root.google.cloud.dataform.v1beta1.WorkflowConfig.toObject(message.workflowConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateWorkflowConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.UpdateWorkflowConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateWorkflowConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateWorkflowConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.UpdateWorkflowConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateWorkflowConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.UpdateWorkflowConfigRequest";
+                        };
+    
+                        return UpdateWorkflowConfigRequest;
+                    })();
+    
+                    v1beta1.DeleteWorkflowConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteWorkflowConfigRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface IDeleteWorkflowConfigRequest
+                         * @property {string|null} [name] DeleteWorkflowConfigRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteWorkflowConfigRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a DeleteWorkflowConfigRequest.
+                         * @implements IDeleteWorkflowConfigRequest
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest=} [properties] Properties to set
+                         */
+                        function DeleteWorkflowConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteWorkflowConfigRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.dataform.v1beta1.DeleteWorkflowConfigRequest
+                         * @instance
+                         */
+                        DeleteWorkflowConfigRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteWorkflowConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.DeleteWorkflowConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.DeleteWorkflowConfigRequest} DeleteWorkflowConfigRequest instance
+                         */
+                        DeleteWorkflowConfigRequest.create = function create(properties) {
+                            return new DeleteWorkflowConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteWorkflowConfigRequest message. Does not implicitly {@link google.cloud.dataform.v1beta1.DeleteWorkflowConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.DeleteWorkflowConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest} message DeleteWorkflowConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteWorkflowConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteWorkflowConfigRequest message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.DeleteWorkflowConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.DeleteWorkflowConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest} message DeleteWorkflowConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteWorkflowConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteWorkflowConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.DeleteWorkflowConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.DeleteWorkflowConfigRequest} DeleteWorkflowConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteWorkflowConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.DeleteWorkflowConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteWorkflowConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.DeleteWorkflowConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.DeleteWorkflowConfigRequest} DeleteWorkflowConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteWorkflowConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteWorkflowConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.DeleteWorkflowConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteWorkflowConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteWorkflowConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.DeleteWorkflowConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.DeleteWorkflowConfigRequest} DeleteWorkflowConfigRequest
+                         */
+                        DeleteWorkflowConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.DeleteWorkflowConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.dataform.v1beta1.DeleteWorkflowConfigRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteWorkflowConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.DeleteWorkflowConfigRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.DeleteWorkflowConfigRequest} message DeleteWorkflowConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteWorkflowConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteWorkflowConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.DeleteWorkflowConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteWorkflowConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteWorkflowConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.DeleteWorkflowConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteWorkflowConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.DeleteWorkflowConfigRequest";
+                        };
+    
+                        return DeleteWorkflowConfigRequest;
+                    })();
+    
                     v1beta1.WorkflowInvocation = (function() {
     
                         /**
@@ -38381,7 +47569,8 @@
                          * @interface IWorkflowInvocation
                          * @property {string|null} [name] WorkflowInvocation name
                          * @property {string|null} [compilationResult] WorkflowInvocation compilationResult
-                         * @property {google.cloud.dataform.v1beta1.WorkflowInvocation.IInvocationConfig|null} [invocationConfig] WorkflowInvocation invocationConfig
+                         * @property {string|null} [workflowConfig] WorkflowInvocation workflowConfig
+                         * @property {google.cloud.dataform.v1beta1.IInvocationConfig|null} [invocationConfig] WorkflowInvocation invocationConfig
                          * @property {google.cloud.dataform.v1beta1.WorkflowInvocation.State|null} [state] WorkflowInvocation state
                          * @property {google.type.IInterval|null} [invocationTiming] WorkflowInvocation invocationTiming
                          */
@@ -38411,15 +47600,23 @@
     
                         /**
                          * WorkflowInvocation compilationResult.
-                         * @member {string} compilationResult
+                         * @member {string|null|undefined} compilationResult
                          * @memberof google.cloud.dataform.v1beta1.WorkflowInvocation
                          * @instance
                          */
-                        WorkflowInvocation.prototype.compilationResult = "";
+                        WorkflowInvocation.prototype.compilationResult = null;
+    
+                        /**
+                         * WorkflowInvocation workflowConfig.
+                         * @member {string|null|undefined} workflowConfig
+                         * @memberof google.cloud.dataform.v1beta1.WorkflowInvocation
+                         * @instance
+                         */
+                        WorkflowInvocation.prototype.workflowConfig = null;
     
                         /**
                          * WorkflowInvocation invocationConfig.
-                         * @member {google.cloud.dataform.v1beta1.WorkflowInvocation.IInvocationConfig|null|undefined} invocationConfig
+                         * @member {google.cloud.dataform.v1beta1.IInvocationConfig|null|undefined} invocationConfig
                          * @memberof google.cloud.dataform.v1beta1.WorkflowInvocation
                          * @instance
                          */
@@ -38440,6 +47637,20 @@
                          * @instance
                          */
                         WorkflowInvocation.prototype.invocationTiming = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * WorkflowInvocation compilationSource.
+                         * @member {"compilationResult"|"workflowConfig"|undefined} compilationSource
+                         * @memberof google.cloud.dataform.v1beta1.WorkflowInvocation
+                         * @instance
+                         */
+                        Object.defineProperty(WorkflowInvocation.prototype, "compilationSource", {
+                            get: $util.oneOfGetter($oneOfFields = ["compilationResult", "workflowConfig"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new WorkflowInvocation instance using the specified properties.
@@ -38470,11 +47681,13 @@
                             if (message.compilationResult != null && Object.hasOwnProperty.call(message, "compilationResult"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.compilationResult);
                             if (message.invocationConfig != null && Object.hasOwnProperty.call(message, "invocationConfig"))
-                                $root.google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig.encode(message.invocationConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                $root.google.cloud.dataform.v1beta1.InvocationConfig.encode(message.invocationConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.state);
                             if (message.invocationTiming != null && Object.hasOwnProperty.call(message, "invocationTiming"))
                                 $root.google.type.Interval.encode(message.invocationTiming, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.workflowConfig != null && Object.hasOwnProperty.call(message, "workflowConfig"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.workflowConfig);
                             return writer;
                         };
     
@@ -38517,8 +47730,12 @@
                                         message.compilationResult = reader.string();
                                         break;
                                     }
+                                case 6: {
+                                        message.workflowConfig = reader.string();
+                                        break;
+                                    }
                                 case 3: {
-                                        message.invocationConfig = $root.google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig.decode(reader, reader.uint32());
+                                        message.invocationConfig = $root.google.cloud.dataform.v1beta1.InvocationConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 4: {
@@ -38564,14 +47781,24 @@
                         WorkflowInvocation.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
-                            if (message.compilationResult != null && message.hasOwnProperty("compilationResult"))
+                            if (message.compilationResult != null && message.hasOwnProperty("compilationResult")) {
+                                properties.compilationSource = 1;
                                 if (!$util.isString(message.compilationResult))
                                     return "compilationResult: string expected";
+                            }
+                            if (message.workflowConfig != null && message.hasOwnProperty("workflowConfig")) {
+                                if (properties.compilationSource === 1)
+                                    return "compilationSource: multiple values";
+                                properties.compilationSource = 1;
+                                if (!$util.isString(message.workflowConfig))
+                                    return "workflowConfig: string expected";
+                            }
                             if (message.invocationConfig != null && message.hasOwnProperty("invocationConfig")) {
-                                var error = $root.google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig.verify(message.invocationConfig);
+                                var error = $root.google.cloud.dataform.v1beta1.InvocationConfig.verify(message.invocationConfig);
                                 if (error)
                                     return "invocationConfig." + error;
                             }
@@ -38611,10 +47838,12 @@
                                 message.name = String(object.name);
                             if (object.compilationResult != null)
                                 message.compilationResult = String(object.compilationResult);
+                            if (object.workflowConfig != null)
+                                message.workflowConfig = String(object.workflowConfig);
                             if (object.invocationConfig != null) {
                                 if (typeof object.invocationConfig !== "object")
                                     throw TypeError(".google.cloud.dataform.v1beta1.WorkflowInvocation.invocationConfig: object expected");
-                                message.invocationConfig = $root.google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig.fromObject(object.invocationConfig);
+                                message.invocationConfig = $root.google.cloud.dataform.v1beta1.InvocationConfig.fromObject(object.invocationConfig);
                             }
                             switch (object.state) {
                             default:
@@ -38671,21 +47900,28 @@
                             var object = {};
                             if (options.defaults) {
                                 object.name = "";
-                                object.compilationResult = "";
                                 object.invocationConfig = null;
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                 object.invocationTiming = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
-                            if (message.compilationResult != null && message.hasOwnProperty("compilationResult"))
+                            if (message.compilationResult != null && message.hasOwnProperty("compilationResult")) {
                                 object.compilationResult = message.compilationResult;
+                                if (options.oneofs)
+                                    object.compilationSource = "compilationResult";
+                            }
                             if (message.invocationConfig != null && message.hasOwnProperty("invocationConfig"))
-                                object.invocationConfig = $root.google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig.toObject(message.invocationConfig, options);
+                                object.invocationConfig = $root.google.cloud.dataform.v1beta1.InvocationConfig.toObject(message.invocationConfig, options);
                             if (message.state != null && message.hasOwnProperty("state"))
                                 object.state = options.enums === String ? $root.google.cloud.dataform.v1beta1.WorkflowInvocation.State[message.state] === undefined ? message.state : $root.google.cloud.dataform.v1beta1.WorkflowInvocation.State[message.state] : message.state;
                             if (message.invocationTiming != null && message.hasOwnProperty("invocationTiming"))
                                 object.invocationTiming = $root.google.type.Interval.toObject(message.invocationTiming, options);
+                            if (message.workflowConfig != null && message.hasOwnProperty("workflowConfig")) {
+                                object.workflowConfig = message.workflowConfig;
+                                if (options.oneofs)
+                                    object.compilationSource = "workflowConfig";
+                            }
                             return object;
                         };
     
@@ -38714,341 +47950,6 @@
                             }
                             return typeUrlPrefix + "/google.cloud.dataform.v1beta1.WorkflowInvocation";
                         };
-    
-                        WorkflowInvocation.InvocationConfig = (function() {
-    
-                            /**
-                             * Properties of an InvocationConfig.
-                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocation
-                             * @interface IInvocationConfig
-                             * @property {Array.<google.cloud.dataform.v1beta1.ITarget>|null} [includedTargets] InvocationConfig includedTargets
-                             * @property {Array.<string>|null} [includedTags] InvocationConfig includedTags
-                             * @property {boolean|null} [transitiveDependenciesIncluded] InvocationConfig transitiveDependenciesIncluded
-                             * @property {boolean|null} [transitiveDependentsIncluded] InvocationConfig transitiveDependentsIncluded
-                             * @property {boolean|null} [fullyRefreshIncrementalTablesEnabled] InvocationConfig fullyRefreshIncrementalTablesEnabled
-                             */
-    
-                            /**
-                             * Constructs a new InvocationConfig.
-                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocation
-                             * @classdesc Represents an InvocationConfig.
-                             * @implements IInvocationConfig
-                             * @constructor
-                             * @param {google.cloud.dataform.v1beta1.WorkflowInvocation.IInvocationConfig=} [properties] Properties to set
-                             */
-                            function InvocationConfig(properties) {
-                                this.includedTargets = [];
-                                this.includedTags = [];
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * InvocationConfig includedTargets.
-                             * @member {Array.<google.cloud.dataform.v1beta1.ITarget>} includedTargets
-                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig
-                             * @instance
-                             */
-                            InvocationConfig.prototype.includedTargets = $util.emptyArray;
-    
-                            /**
-                             * InvocationConfig includedTags.
-                             * @member {Array.<string>} includedTags
-                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig
-                             * @instance
-                             */
-                            InvocationConfig.prototype.includedTags = $util.emptyArray;
-    
-                            /**
-                             * InvocationConfig transitiveDependenciesIncluded.
-                             * @member {boolean} transitiveDependenciesIncluded
-                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig
-                             * @instance
-                             */
-                            InvocationConfig.prototype.transitiveDependenciesIncluded = false;
-    
-                            /**
-                             * InvocationConfig transitiveDependentsIncluded.
-                             * @member {boolean} transitiveDependentsIncluded
-                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig
-                             * @instance
-                             */
-                            InvocationConfig.prototype.transitiveDependentsIncluded = false;
-    
-                            /**
-                             * InvocationConfig fullyRefreshIncrementalTablesEnabled.
-                             * @member {boolean} fullyRefreshIncrementalTablesEnabled
-                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig
-                             * @instance
-                             */
-                            InvocationConfig.prototype.fullyRefreshIncrementalTablesEnabled = false;
-    
-                            /**
-                             * Creates a new InvocationConfig instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig
-                             * @static
-                             * @param {google.cloud.dataform.v1beta1.WorkflowInvocation.IInvocationConfig=} [properties] Properties to set
-                             * @returns {google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig} InvocationConfig instance
-                             */
-                            InvocationConfig.create = function create(properties) {
-                                return new InvocationConfig(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified InvocationConfig message. Does not implicitly {@link google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig
-                             * @static
-                             * @param {google.cloud.dataform.v1beta1.WorkflowInvocation.IInvocationConfig} message InvocationConfig message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            InvocationConfig.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.includedTargets != null && message.includedTargets.length)
-                                    for (var i = 0; i < message.includedTargets.length; ++i)
-                                        $root.google.cloud.dataform.v1beta1.Target.encode(message.includedTargets[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                                if (message.includedTags != null && message.includedTags.length)
-                                    for (var i = 0; i < message.includedTags.length; ++i)
-                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.includedTags[i]);
-                                if (message.transitiveDependenciesIncluded != null && Object.hasOwnProperty.call(message, "transitiveDependenciesIncluded"))
-                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.transitiveDependenciesIncluded);
-                                if (message.transitiveDependentsIncluded != null && Object.hasOwnProperty.call(message, "transitiveDependentsIncluded"))
-                                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.transitiveDependentsIncluded);
-                                if (message.fullyRefreshIncrementalTablesEnabled != null && Object.hasOwnProperty.call(message, "fullyRefreshIncrementalTablesEnabled"))
-                                    writer.uint32(/* id 5, wireType 0 =*/40).bool(message.fullyRefreshIncrementalTablesEnabled);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified InvocationConfig message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig
-                             * @static
-                             * @param {google.cloud.dataform.v1beta1.WorkflowInvocation.IInvocationConfig} message InvocationConfig message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            InvocationConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes an InvocationConfig message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig} InvocationConfig
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            InvocationConfig.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            if (!(message.includedTargets && message.includedTargets.length))
-                                                message.includedTargets = [];
-                                            message.includedTargets.push($root.google.cloud.dataform.v1beta1.Target.decode(reader, reader.uint32()));
-                                            break;
-                                        }
-                                    case 2: {
-                                            if (!(message.includedTags && message.includedTags.length))
-                                                message.includedTags = [];
-                                            message.includedTags.push(reader.string());
-                                            break;
-                                        }
-                                    case 3: {
-                                            message.transitiveDependenciesIncluded = reader.bool();
-                                            break;
-                                        }
-                                    case 4: {
-                                            message.transitiveDependentsIncluded = reader.bool();
-                                            break;
-                                        }
-                                    case 5: {
-                                            message.fullyRefreshIncrementalTablesEnabled = reader.bool();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes an InvocationConfig message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig} InvocationConfig
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            InvocationConfig.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies an InvocationConfig message.
-                             * @function verify
-                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            InvocationConfig.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.includedTargets != null && message.hasOwnProperty("includedTargets")) {
-                                    if (!Array.isArray(message.includedTargets))
-                                        return "includedTargets: array expected";
-                                    for (var i = 0; i < message.includedTargets.length; ++i) {
-                                        var error = $root.google.cloud.dataform.v1beta1.Target.verify(message.includedTargets[i]);
-                                        if (error)
-                                            return "includedTargets." + error;
-                                    }
-                                }
-                                if (message.includedTags != null && message.hasOwnProperty("includedTags")) {
-                                    if (!Array.isArray(message.includedTags))
-                                        return "includedTags: array expected";
-                                    for (var i = 0; i < message.includedTags.length; ++i)
-                                        if (!$util.isString(message.includedTags[i]))
-                                            return "includedTags: string[] expected";
-                                }
-                                if (message.transitiveDependenciesIncluded != null && message.hasOwnProperty("transitiveDependenciesIncluded"))
-                                    if (typeof message.transitiveDependenciesIncluded !== "boolean")
-                                        return "transitiveDependenciesIncluded: boolean expected";
-                                if (message.transitiveDependentsIncluded != null && message.hasOwnProperty("transitiveDependentsIncluded"))
-                                    if (typeof message.transitiveDependentsIncluded !== "boolean")
-                                        return "transitiveDependentsIncluded: boolean expected";
-                                if (message.fullyRefreshIncrementalTablesEnabled != null && message.hasOwnProperty("fullyRefreshIncrementalTablesEnabled"))
-                                    if (typeof message.fullyRefreshIncrementalTablesEnabled !== "boolean")
-                                        return "fullyRefreshIncrementalTablesEnabled: boolean expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates an InvocationConfig message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig} InvocationConfig
-                             */
-                            InvocationConfig.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig)
-                                    return object;
-                                var message = new $root.google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig();
-                                if (object.includedTargets) {
-                                    if (!Array.isArray(object.includedTargets))
-                                        throw TypeError(".google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig.includedTargets: array expected");
-                                    message.includedTargets = [];
-                                    for (var i = 0; i < object.includedTargets.length; ++i) {
-                                        if (typeof object.includedTargets[i] !== "object")
-                                            throw TypeError(".google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig.includedTargets: object expected");
-                                        message.includedTargets[i] = $root.google.cloud.dataform.v1beta1.Target.fromObject(object.includedTargets[i]);
-                                    }
-                                }
-                                if (object.includedTags) {
-                                    if (!Array.isArray(object.includedTags))
-                                        throw TypeError(".google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig.includedTags: array expected");
-                                    message.includedTags = [];
-                                    for (var i = 0; i < object.includedTags.length; ++i)
-                                        message.includedTags[i] = String(object.includedTags[i]);
-                                }
-                                if (object.transitiveDependenciesIncluded != null)
-                                    message.transitiveDependenciesIncluded = Boolean(object.transitiveDependenciesIncluded);
-                                if (object.transitiveDependentsIncluded != null)
-                                    message.transitiveDependentsIncluded = Boolean(object.transitiveDependentsIncluded);
-                                if (object.fullyRefreshIncrementalTablesEnabled != null)
-                                    message.fullyRefreshIncrementalTablesEnabled = Boolean(object.fullyRefreshIncrementalTablesEnabled);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from an InvocationConfig message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig
-                             * @static
-                             * @param {google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig} message InvocationConfig
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            InvocationConfig.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.arrays || options.defaults) {
-                                    object.includedTargets = [];
-                                    object.includedTags = [];
-                                }
-                                if (options.defaults) {
-                                    object.transitiveDependenciesIncluded = false;
-                                    object.transitiveDependentsIncluded = false;
-                                    object.fullyRefreshIncrementalTablesEnabled = false;
-                                }
-                                if (message.includedTargets && message.includedTargets.length) {
-                                    object.includedTargets = [];
-                                    for (var j = 0; j < message.includedTargets.length; ++j)
-                                        object.includedTargets[j] = $root.google.cloud.dataform.v1beta1.Target.toObject(message.includedTargets[j], options);
-                                }
-                                if (message.includedTags && message.includedTags.length) {
-                                    object.includedTags = [];
-                                    for (var j = 0; j < message.includedTags.length; ++j)
-                                        object.includedTags[j] = message.includedTags[j];
-                                }
-                                if (message.transitiveDependenciesIncluded != null && message.hasOwnProperty("transitiveDependenciesIncluded"))
-                                    object.transitiveDependenciesIncluded = message.transitiveDependenciesIncluded;
-                                if (message.transitiveDependentsIncluded != null && message.hasOwnProperty("transitiveDependentsIncluded"))
-                                    object.transitiveDependentsIncluded = message.transitiveDependentsIncluded;
-                                if (message.fullyRefreshIncrementalTablesEnabled != null && message.hasOwnProperty("fullyRefreshIncrementalTablesEnabled"))
-                                    object.fullyRefreshIncrementalTablesEnabled = message.fullyRefreshIncrementalTablesEnabled;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this InvocationConfig to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            InvocationConfig.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for InvocationConfig
-                             * @function getTypeUrl
-                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            InvocationConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.dataform.v1beta1.WorkflowInvocation.InvocationConfig";
-                            };
-    
-                            return InvocationConfig;
-                        })();
     
                         /**
                          * State enum.
@@ -39084,6 +47985,8 @@
                          * @property {string|null} [parent] ListWorkflowInvocationsRequest parent
                          * @property {number|null} [pageSize] ListWorkflowInvocationsRequest pageSize
                          * @property {string|null} [pageToken] ListWorkflowInvocationsRequest pageToken
+                         * @property {string|null} [orderBy] ListWorkflowInvocationsRequest orderBy
+                         * @property {string|null} [filter] ListWorkflowInvocationsRequest filter
                          */
     
                         /**
@@ -39126,6 +48029,22 @@
                         ListWorkflowInvocationsRequest.prototype.pageToken = "";
     
                         /**
+                         * ListWorkflowInvocationsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.dataform.v1beta1.ListWorkflowInvocationsRequest
+                         * @instance
+                         */
+                        ListWorkflowInvocationsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * ListWorkflowInvocationsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.dataform.v1beta1.ListWorkflowInvocationsRequest
+                         * @instance
+                         */
+                        ListWorkflowInvocationsRequest.prototype.filter = "";
+    
+                        /**
                          * Creates a new ListWorkflowInvocationsRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataform.v1beta1.ListWorkflowInvocationsRequest
@@ -39155,6 +48074,10 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
                             if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.orderBy);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.filter);
                             return writer;
                         };
     
@@ -39201,6 +48124,14 @@
                                         message.pageToken = reader.string();
                                         break;
                                     }
+                                case 4: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -39245,6 +48176,12 @@
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 if (!$util.isString(message.pageToken))
                                     return "pageToken: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
                             return null;
                         };
     
@@ -39266,6 +48203,10 @@
                                 message.pageSize = object.pageSize | 0;
                             if (object.pageToken != null)
                                 message.pageToken = String(object.pageToken);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
                             return message;
                         };
     
@@ -39286,6 +48227,8 @@
                                 object.parent = "";
                                 object.pageSize = 0;
                                 object.pageToken = "";
+                                object.orderBy = "";
+                                object.filter = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -39293,6 +48236,10 @@
                                 object.pageSize = message.pageSize;
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 object.pageToken = message.pageToken;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
                             return object;
                         };
     
@@ -57366,6 +66313,242 @@
                 return Timestamp;
             })();
     
+            protobuf.Any = (function() {
+    
+                /**
+                 * Properties of an Any.
+                 * @memberof google.protobuf
+                 * @interface IAny
+                 * @property {string|null} [type_url] Any type_url
+                 * @property {Uint8Array|null} [value] Any value
+                 */
+    
+                /**
+                 * Constructs a new Any.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Any.
+                 * @implements IAny
+                 * @constructor
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 */
+                function Any(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Any type_url.
+                 * @member {string} type_url
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.type_url = "";
+    
+                /**
+                 * Any value.
+                 * @member {Uint8Array} value
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.value = $util.newBuffer([]);
+    
+                /**
+                 * Creates a new Any instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 * @returns {google.protobuf.Any} Any instance
+                 */
+                Any.create = function create(properties) {
+                    return new Any(properties);
+                };
+    
+                /**
+                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type_url = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.value = reader.bytes();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Any message.
+                 * @function verify
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Any.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        if (!$util.isString(message.type_url))
+                            return "type_url: string expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
+                            return "value: buffer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Any} Any
+                 */
+                Any.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Any)
+                        return object;
+                    var message = new $root.google.protobuf.Any();
+                    if (object.type_url != null)
+                        message.type_url = String(object.type_url);
+                    if (object.value != null)
+                        if (typeof object.value === "string")
+                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
+                        else if (object.value.length >= 0)
+                            message.value = object.value;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Any message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.Any} message Any
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Any.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type_url = "";
+                        if (options.bytes === String)
+                            object.value = "";
+                        else {
+                            object.value = [];
+                            if (options.bytes !== Array)
+                                object.value = $util.newBuffer(object.value);
+                        }
+                    }
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        object.type_url = message.type_url;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Any to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Any.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Any
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Any.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Any";
+                };
+    
+                return Any;
+            })();
+    
             return protobuf;
         })();
     
@@ -57616,6 +66799,290 @@
             })();
     
             return type;
+        })();
+    
+        google.rpc = (function() {
+    
+            /**
+             * Namespace rpc.
+             * @memberof google
+             * @namespace
+             */
+            var rpc = {};
+    
+            rpc.Status = (function() {
+    
+                /**
+                 * Properties of a Status.
+                 * @memberof google.rpc
+                 * @interface IStatus
+                 * @property {number|null} [code] Status code
+                 * @property {string|null} [message] Status message
+                 * @property {Array.<google.protobuf.IAny>|null} [details] Status details
+                 */
+    
+                /**
+                 * Constructs a new Status.
+                 * @memberof google.rpc
+                 * @classdesc Represents a Status.
+                 * @implements IStatus
+                 * @constructor
+                 * @param {google.rpc.IStatus=} [properties] Properties to set
+                 */
+                function Status(properties) {
+                    this.details = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Status code.
+                 * @member {number} code
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.code = 0;
+    
+                /**
+                 * Status message.
+                 * @member {string} message
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.message = "";
+    
+                /**
+                 * Status details.
+                 * @member {Array.<google.protobuf.IAny>} details
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.details = $util.emptyArray;
+    
+                /**
+                 * Creates a new Status instance using the specified properties.
+                 * @function create
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus=} [properties] Properties to set
+                 * @returns {google.rpc.Status} Status instance
+                 */
+                Status.create = function create(properties) {
+                    return new Status(properties);
+                };
+    
+                /**
+                 * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus} message Status message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Status.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
+                    if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
+                    if (message.details != null && message.details.length)
+                        for (var i = 0; i < message.details.length; ++i)
+                            $root.google.protobuf.Any.encode(message.details[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus} message Status message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Status.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Status message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.rpc.Status} Status
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Status.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.code = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.message = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.details && message.details.length))
+                                    message.details = [];
+                                message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Status message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.rpc.Status} Status
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Status.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Status message.
+                 * @function verify
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Status.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.code != null && message.hasOwnProperty("code"))
+                        if (!$util.isInteger(message.code))
+                            return "code: integer expected";
+                    if (message.message != null && message.hasOwnProperty("message"))
+                        if (!$util.isString(message.message))
+                            return "message: string expected";
+                    if (message.details != null && message.hasOwnProperty("details")) {
+                        if (!Array.isArray(message.details))
+                            return "details: array expected";
+                        for (var i = 0; i < message.details.length; ++i) {
+                            var error = $root.google.protobuf.Any.verify(message.details[i]);
+                            if (error)
+                                return "details." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Status message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.rpc.Status} Status
+                 */
+                Status.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.rpc.Status)
+                        return object;
+                    var message = new $root.google.rpc.Status();
+                    if (object.code != null)
+                        message.code = object.code | 0;
+                    if (object.message != null)
+                        message.message = String(object.message);
+                    if (object.details) {
+                        if (!Array.isArray(object.details))
+                            throw TypeError(".google.rpc.Status.details: array expected");
+                        message.details = [];
+                        for (var i = 0; i < object.details.length; ++i) {
+                            if (typeof object.details[i] !== "object")
+                                throw TypeError(".google.rpc.Status.details: object expected");
+                            message.details[i] = $root.google.protobuf.Any.fromObject(object.details[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Status message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.Status} message Status
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Status.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.details = [];
+                    if (options.defaults) {
+                        object.code = 0;
+                        object.message = "";
+                    }
+                    if (message.code != null && message.hasOwnProperty("code"))
+                        object.code = message.code;
+                    if (message.message != null && message.hasOwnProperty("message"))
+                        object.message = message.message;
+                    if (message.details && message.details.length) {
+                        object.details = [];
+                        for (var j = 0; j < message.details.length; ++j)
+                            object.details[j] = $root.google.protobuf.Any.toObject(message.details[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Status to JSON.
+                 * @function toJSON
+                 * @memberof google.rpc.Status
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Status.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Status
+                 * @function getTypeUrl
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Status.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.rpc.Status";
+                };
+    
+                return Status;
+            })();
+    
+            return rpc;
         })();
     
         return google;

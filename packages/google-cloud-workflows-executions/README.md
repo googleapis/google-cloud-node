@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
+
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -53,28 +53,6 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 npm install @google-cloud/workflows
 ```
 
-
-### Using the client library
-
-```javascript
-/**
- * TODO(developer): Uncomment these variables before running the sample.
- */
-// const projectId = 'my-project';
-// const location = 'us-central1';
-const {WorkflowsClient} = require('@google-cloud/workflows');
-const client = new WorkflowsClient();
-async function listWorkflows() {
-  const [workflows] = await client.listWorkflows({
-    parent: client.locationPath(projectId, location),
-  });
-  for (const workflow of workflows) {
-    console.info(`name: ${workflow.name}`);
-  }
-}
-listWorkflows();
-
-```
 
 
 

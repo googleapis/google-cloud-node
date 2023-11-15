@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+## [6.1.1](https://github.com/googleapis/google-cloud-node/compare/language-v6.1.0...language-v6.1.1) (2023-11-03)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency mathjs to v12 ([#4765](https://github.com/googleapis/google-cloud-node/issues/4765)) ([e1ca310](https://github.com/googleapis/google-cloud-node/commit/e1ca3103786e35ee41710aebd4b216a7d33a5115))
+
 ## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/language-v6.0.0...language-v6.1.0) (2023-09-06)
 
 

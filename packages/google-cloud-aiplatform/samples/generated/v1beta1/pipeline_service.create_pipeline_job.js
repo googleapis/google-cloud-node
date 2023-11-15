@@ -42,7 +42,7 @@ function main(parent, pipelineJob) {
    *  the PipelineJob name. If not provided, an ID will be automatically
    *  generated.
    *  This value should be less than 128 characters, and valid characters
-   *  are /[a-z][0-9]-/.
+   *  are `/[a-z][0-9]-/`.
    */
   // const pipelineJobId = 'abc123'
 

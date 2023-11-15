@@ -20,6 +20,11 @@
                 "deleteExecution"
               ]
             },
+            "CancelExecution": {
+              "methods": [
+                "cancelExecution"
+              ]
+            },
             "ListExecutions": {
               "methods": [
                 "listExecutions",
@@ -40,6 +45,11 @@
             "DeleteExecution": {
               "methods": [
                 "deleteExecution"
+              ]
+            },
+            "CancelExecution": {
+              "methods": [
+                "cancelExecution"
               ]
             },
             "ListExecutions": {

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/lineage-v1.0.1...lineage-v1.1.0) (2023-11-09)
+
+
+### Features
+
+* Add open lineage support ([#4793](https://github.com/googleapis/google-cloud-node/issues/4793)) ([a2ffd6d](https://github.com/googleapis/google-cloud-node/commit/a2ffd6d854a6882e7d1f4226735654b66fd6937e))
+
 ## [1.0.1](https://github.com/googleapis/google-cloud-node/compare/lineage-v1.0.0...lineage-v1.0.1) (2023-09-06)
 
 

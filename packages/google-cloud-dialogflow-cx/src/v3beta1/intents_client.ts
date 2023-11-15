@@ -23,6 +23,8 @@ import type {
   CallOptions,
   Descriptors,
   ClientOptions,
+  GrpcClientOptions,
+  LROperation,
   PaginationCallback,
   GaxCall,
   LocationsClient,
@@ -63,6 +65,7 @@ export class IntentsClient {
   innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
+  operationsClient: gax.OperationsClient;
   intentsStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -273,6 +276,79 @@ export class IntentsClient {
       ),
     };
 
+    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    // This API contains "long-running operations", which return a
+    // an Operation object that allows for tracking of the operation,
+    // rather than holding a request open.
+    const lroOptions: GrpcClientOptions = {
+      auth: this.auth,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+    };
+    if (opts.fallback) {
+      lroOptions.protoJson = protoFilesRoot;
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v3beta1/{name=projects/*/locations/*}',
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v3beta1/{name=projects/*}/locations',
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v3beta1/{name=projects/*/operations/*}:cancel',
+          additional_bindings: [
+            {
+              post: '/v3beta1/{name=projects/*/locations/*/operations/*}:cancel',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v3beta1/{name=projects/*/operations/*}',
+          additional_bindings: [
+            {get: '/v3beta1/{name=projects/*/locations/*/operations/*}'},
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v3beta1/{name=projects/*}/operations',
+          additional_bindings: [
+            {get: '/v3beta1/{name=projects/*/locations/*}/operations'},
+          ],
+        },
+      ];
+    }
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
+    const importIntentsResponse = protoFilesRoot.lookup(
+      '.google.cloud.dialogflow.cx.v3beta1.ImportIntentsResponse'
+    ) as gax.protobuf.Type;
+    const importIntentsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dialogflow.cx.v3beta1.ImportIntentsMetadata'
+    ) as gax.protobuf.Type;
+    const exportIntentsResponse = protoFilesRoot.lookup(
+      '.google.cloud.dialogflow.cx.v3beta1.ExportIntentsResponse'
+    ) as gax.protobuf.Type;
+    const exportIntentsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dialogflow.cx.v3beta1.ExportIntentsMetadata'
+    ) as gax.protobuf.Type;
+
+    this.descriptors.longrunning = {
+      importIntents: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        importIntentsResponse.decode.bind(importIntentsResponse),
+        importIntentsMetadata.decode.bind(importIntentsMetadata)
+      ),
+      exportIntents: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        exportIntentsResponse.decode.bind(exportIntentsResponse),
+        exportIntentsMetadata.decode.bind(exportIntentsMetadata)
+      ),
+    };
+
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.dialogflow.cx.v3beta1.Intents',
@@ -328,6 +404,8 @@ export class IntentsClient {
       'createIntent',
       'updateIntent',
       'deleteIntent',
+      'importIntents',
+      'exportIntents',
     ];
     for (const methodName of intentsStubMethods) {
       const callPromise = this.intentsStub.then(
@@ -344,7 +422,10 @@ export class IntentsClient {
         }
       );
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        this.descriptors.longrunning[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -847,6 +928,333 @@ export class IntentsClient {
   }
 
   /**
+   * Imports the specified intents into the agent.
+   *
+   * This method is a [long-running
+   * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+   * The returned `Operation` type has the following method-specific fields:
+   *
+   * - `metadata`:
+   * {@link protos.google.cloud.dialogflow.cx.v3beta1.ImportIntentsMetadata|ImportIntentsMetadata}
+   * - `response`:
+   * {@link protos.google.cloud.dialogflow.cx.v3beta1.ImportIntentsResponse|ImportIntentsResponse}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The agent to import the intents into.
+   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   * @param {string} request.intentsUri
+   *   The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI
+   *   to import intents from. The format of this URI must be
+   *   `gs://<bucket-name>/<object-name>`.
+   *
+   *   Dialogflow performs a read operation for the Cloud Storage object
+   *   on the caller's behalf, so your request authentication must
+   *   have read permissions for the object. For more information, see
+   *   [Dialogflow access
+   *   control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+   * @param {google.cloud.dialogflow.cx.v3beta1.InlineSource} request.intentsContent
+   *   Uncompressed byte content of intents.
+   * @param {google.cloud.dialogflow.cx.v3beta1.ImportIntentsRequest.MergeOption} request.mergeOption
+   *   Merge option for importing intents. If not specified, `REJECT` is assumed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3beta1/intents.import_intents.js</caption>
+   * region_tag:dialogflow_v3beta1_generated_Intents_ImportIntents_async
+   */
+  importIntents(
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IImportIntentsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3beta1.IImportIntentsResponse,
+        protos.google.cloud.dialogflow.cx.v3beta1.IImportIntentsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  importIntents(
+    request: protos.google.cloud.dialogflow.cx.v3beta1.IImportIntentsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3beta1.IImportIntentsResponse,
+        protos.google.cloud.dialogflow.cx.v3beta1.IImportIntentsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importIntents(
+    request: protos.google.cloud.dialogflow.cx.v3beta1.IImportIntentsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3beta1.IImportIntentsResponse,
+        protos.google.cloud.dialogflow.cx.v3beta1.IImportIntentsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importIntents(
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IImportIntentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3beta1.IImportIntentsResponse,
+            protos.google.cloud.dialogflow.cx.v3beta1.IImportIntentsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3beta1.IImportIntentsResponse,
+        protos.google.cloud.dialogflow.cx.v3beta1.IImportIntentsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3beta1.IImportIntentsResponse,
+        protos.google.cloud.dialogflow.cx.v3beta1.IImportIntentsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.importIntents(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `importIntents()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3beta1/intents.import_intents.js</caption>
+   * region_tag:dialogflow_v3beta1_generated_Intents_ImportIntents_async
+   */
+  async checkImportIntentsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dialogflow.cx.v3beta1.ImportIntentsResponse,
+      protos.google.cloud.dialogflow.cx.v3beta1.ImportIntentsMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.importIntents,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dialogflow.cx.v3beta1.ImportIntentsResponse,
+      protos.google.cloud.dialogflow.cx.v3beta1.ImportIntentsMetadata
+    >;
+  }
+  /**
+   * Exports the selected intents.
+   *
+   * This method is a [long-running
+   * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+   * The returned `Operation` type has the following method-specific fields:
+   *
+   * - `metadata`:
+   * {@link protos.google.cloud.dialogflow.cx.v3beta1.ExportIntentsMetadata|ExportIntentsMetadata}
+   * - `response`:
+   * {@link protos.google.cloud.dialogflow.cx.v3beta1.ExportIntentsResponse|ExportIntentsResponse}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent agent to export intents.
+   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *   ID>`.
+   * @param {string[]} request.intents
+   *   Required. The name of the intents to export.
+   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *   ID>/intents/<Intent ID>`.
+   * @param {string} [request.intentsUri]
+   *   Optional. The [Google Cloud
+   *   Storage](https://cloud.google.com/storage/docs/) URI to export the
+   *   intents to. The format of this URI must be
+   *   `gs://<bucket-name>/<object-name>`.
+   *
+   *   Dialogflow performs a write operation for the Cloud Storage object
+   *   on the caller's behalf, so your request authentication must
+   *   have write permissions for the object. For more information, see
+   *   [Dialogflow access
+   *   control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+   * @param {boolean} [request.intentsContentInline]
+   *   Optional. The option to return the serialized intents inline.
+   * @param {google.cloud.dialogflow.cx.v3beta1.ExportIntentsRequest.DataFormat} [request.dataFormat]
+   *   Optional. The data format of the exported intents. If not specified, `BLOB`
+   *   is assumed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3beta1/intents.export_intents.js</caption>
+   * region_tag:dialogflow_v3beta1_generated_Intents_ExportIntents_async
+   */
+  exportIntents(
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IExportIntentsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3beta1.IExportIntentsResponse,
+        protos.google.cloud.dialogflow.cx.v3beta1.IExportIntentsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  exportIntents(
+    request: protos.google.cloud.dialogflow.cx.v3beta1.IExportIntentsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3beta1.IExportIntentsResponse,
+        protos.google.cloud.dialogflow.cx.v3beta1.IExportIntentsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportIntents(
+    request: protos.google.cloud.dialogflow.cx.v3beta1.IExportIntentsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3beta1.IExportIntentsResponse,
+        protos.google.cloud.dialogflow.cx.v3beta1.IExportIntentsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportIntents(
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IExportIntentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3beta1.IExportIntentsResponse,
+            protos.google.cloud.dialogflow.cx.v3beta1.IExportIntentsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3beta1.IExportIntentsResponse,
+        protos.google.cloud.dialogflow.cx.v3beta1.IExportIntentsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3beta1.IExportIntentsResponse,
+        protos.google.cloud.dialogflow.cx.v3beta1.IExportIntentsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.exportIntents(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `exportIntents()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3beta1/intents.export_intents.js</caption>
+   * region_tag:dialogflow_v3beta1_generated_Intents_ExportIntents_async
+   */
+  async checkExportIntentsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dialogflow.cx.v3beta1.ExportIntentsResponse,
+      protos.google.cloud.dialogflow.cx.v3beta1.ExportIntentsMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.exportIntents,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dialogflow.cx.v3beta1.ExportIntentsResponse,
+      protos.google.cloud.dialogflow.cx.v3beta1.ExportIntentsMetadata
+    >;
+  }
+  /**
    * Returns the list of all intents in the specified agent.
    *
    * @param {Object} request
@@ -1153,6 +1561,181 @@ export class IntentsClient {
     options?: CallOptions
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
+  }
+
+  /**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   *   for the details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   *   {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<[protos.google.longrunning.Operation]> {
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | iteration protocols}.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.CancelOperationRequest,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   * for the details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.deleteOperation(request, options, callback);
   }
 
   // --------------------
@@ -2938,6 +3521,7 @@ export class IntentsClient {
         this._terminated = true;
         stub.close();
         this.locationsClient.close();
+        this.operationsClient.close();
       });
     }
     return Promise.resolve();

@@ -66,6 +66,745 @@
                      */
                     var v1 = {};
     
+                    v1.AutomationEvent = (function() {
+    
+                        /**
+                         * Properties of an AutomationEvent.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IAutomationEvent
+                         * @property {string|null} [message] AutomationEvent message
+                         * @property {string|null} [automation] AutomationEvent automation
+                         * @property {string|null} [pipelineUid] AutomationEvent pipelineUid
+                         * @property {google.cloud.deploy.v1.Type|null} [type] AutomationEvent type
+                         */
+    
+                        /**
+                         * Constructs a new AutomationEvent.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents an AutomationEvent.
+                         * @implements IAutomationEvent
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IAutomationEvent=} [properties] Properties to set
+                         */
+                        function AutomationEvent(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AutomationEvent message.
+                         * @member {string} message
+                         * @memberof google.cloud.deploy.v1.AutomationEvent
+                         * @instance
+                         */
+                        AutomationEvent.prototype.message = "";
+    
+                        /**
+                         * AutomationEvent automation.
+                         * @member {string} automation
+                         * @memberof google.cloud.deploy.v1.AutomationEvent
+                         * @instance
+                         */
+                        AutomationEvent.prototype.automation = "";
+    
+                        /**
+                         * AutomationEvent pipelineUid.
+                         * @member {string} pipelineUid
+                         * @memberof google.cloud.deploy.v1.AutomationEvent
+                         * @instance
+                         */
+                        AutomationEvent.prototype.pipelineUid = "";
+    
+                        /**
+                         * AutomationEvent type.
+                         * @member {google.cloud.deploy.v1.Type} type
+                         * @memberof google.cloud.deploy.v1.AutomationEvent
+                         * @instance
+                         */
+                        AutomationEvent.prototype.type = 0;
+    
+                        /**
+                         * Creates a new AutomationEvent instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.AutomationEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAutomationEvent=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.AutomationEvent} AutomationEvent instance
+                         */
+                        AutomationEvent.create = function create(properties) {
+                            return new AutomationEvent(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AutomationEvent message. Does not implicitly {@link google.cloud.deploy.v1.AutomationEvent.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.AutomationEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAutomationEvent} message AutomationEvent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AutomationEvent.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.message);
+                            if (message.automation != null && Object.hasOwnProperty.call(message, "automation"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.automation);
+                            if (message.pipelineUid != null && Object.hasOwnProperty.call(message, "pipelineUid"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pipelineUid);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.type);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AutomationEvent message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.AutomationEvent.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.AutomationEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAutomationEvent} message AutomationEvent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AutomationEvent.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AutomationEvent message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.AutomationEvent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.AutomationEvent} AutomationEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AutomationEvent.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.AutomationEvent();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.message = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.automation = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pipelineUid = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AutomationEvent message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.AutomationEvent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.AutomationEvent} AutomationEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AutomationEvent.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AutomationEvent message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.AutomationEvent
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AutomationEvent.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.message != null && message.hasOwnProperty("message"))
+                                if (!$util.isString(message.message))
+                                    return "message: string expected";
+                            if (message.automation != null && message.hasOwnProperty("automation"))
+                                if (!$util.isString(message.automation))
+                                    return "automation: string expected";
+                            if (message.pipelineUid != null && message.hasOwnProperty("pipelineUid"))
+                                if (!$util.isString(message.pipelineUid))
+                                    return "pipelineUid: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AutomationEvent message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.AutomationEvent
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.AutomationEvent} AutomationEvent
+                         */
+                        AutomationEvent.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.AutomationEvent)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.AutomationEvent();
+                            if (object.message != null)
+                                message.message = String(object.message);
+                            if (object.automation != null)
+                                message.automation = String(object.automation);
+                            if (object.pipelineUid != null)
+                                message.pipelineUid = String(object.pipelineUid);
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "TYPE_PUBSUB_NOTIFICATION_FAILURE":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "TYPE_RESOURCE_STATE_CHANGE":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            case "TYPE_PROCESS_ABORTED":
+                            case 4:
+                                message.type = 4;
+                                break;
+                            case "TYPE_RESTRICTION_VIOLATED":
+                            case 5:
+                                message.type = 5;
+                                break;
+                            case "TYPE_RESOURCE_DELETED":
+                            case 6:
+                                message.type = 6;
+                                break;
+                            case "TYPE_ROLLOUT_UPDATE":
+                            case 7:
+                                message.type = 7;
+                                break;
+                            case "TYPE_RENDER_STATUES_CHANGE":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AutomationEvent message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.AutomationEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.AutomationEvent} message AutomationEvent
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AutomationEvent.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.message = "";
+                                object.automation = "";
+                                object.pipelineUid = "";
+                                object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.message != null && message.hasOwnProperty("message"))
+                                object.message = message.message;
+                            if (message.automation != null && message.hasOwnProperty("automation"))
+                                object.automation = message.automation;
+                            if (message.pipelineUid != null && message.hasOwnProperty("pipelineUid"))
+                                object.pipelineUid = message.pipelineUid;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.deploy.v1.Type[message.type] === undefined ? message.type : $root.google.cloud.deploy.v1.Type[message.type] : message.type;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AutomationEvent to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.AutomationEvent
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AutomationEvent.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AutomationEvent
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.AutomationEvent
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AutomationEvent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.AutomationEvent";
+                        };
+    
+                        return AutomationEvent;
+                    })();
+    
+                    /**
+                     * Type enum.
+                     * @name google.cloud.deploy.v1.Type
+                     * @enum {number}
+                     * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                     * @property {number} TYPE_PUBSUB_NOTIFICATION_FAILURE=1 TYPE_PUBSUB_NOTIFICATION_FAILURE value
+                     * @property {number} TYPE_RESOURCE_STATE_CHANGE=3 TYPE_RESOURCE_STATE_CHANGE value
+                     * @property {number} TYPE_PROCESS_ABORTED=4 TYPE_PROCESS_ABORTED value
+                     * @property {number} TYPE_RESTRICTION_VIOLATED=5 TYPE_RESTRICTION_VIOLATED value
+                     * @property {number} TYPE_RESOURCE_DELETED=6 TYPE_RESOURCE_DELETED value
+                     * @property {number} TYPE_ROLLOUT_UPDATE=7 TYPE_ROLLOUT_UPDATE value
+                     * @property {number} TYPE_RENDER_STATUES_CHANGE=2 TYPE_RENDER_STATUES_CHANGE value
+                     */
+                    v1.Type = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "TYPE_PUBSUB_NOTIFICATION_FAILURE"] = 1;
+                        values[valuesById[3] = "TYPE_RESOURCE_STATE_CHANGE"] = 3;
+                        values[valuesById[4] = "TYPE_PROCESS_ABORTED"] = 4;
+                        values[valuesById[5] = "TYPE_RESTRICTION_VIOLATED"] = 5;
+                        values[valuesById[6] = "TYPE_RESOURCE_DELETED"] = 6;
+                        values[valuesById[7] = "TYPE_ROLLOUT_UPDATE"] = 7;
+                        values[valuesById[2] = "TYPE_RENDER_STATUES_CHANGE"] = 2;
+                        return values;
+                    })();
+    
+                    v1.AutomationRunEvent = (function() {
+    
+                        /**
+                         * Properties of an AutomationRunEvent.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IAutomationRunEvent
+                         * @property {string|null} [message] AutomationRunEvent message
+                         * @property {string|null} [automationRun] AutomationRunEvent automationRun
+                         * @property {string|null} [pipelineUid] AutomationRunEvent pipelineUid
+                         * @property {string|null} [automationId] AutomationRunEvent automationId
+                         * @property {string|null} [ruleId] AutomationRunEvent ruleId
+                         * @property {string|null} [destinationTargetId] AutomationRunEvent destinationTargetId
+                         * @property {google.cloud.deploy.v1.Type|null} [type] AutomationRunEvent type
+                         */
+    
+                        /**
+                         * Constructs a new AutomationRunEvent.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents an AutomationRunEvent.
+                         * @implements IAutomationRunEvent
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IAutomationRunEvent=} [properties] Properties to set
+                         */
+                        function AutomationRunEvent(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AutomationRunEvent message.
+                         * @member {string} message
+                         * @memberof google.cloud.deploy.v1.AutomationRunEvent
+                         * @instance
+                         */
+                        AutomationRunEvent.prototype.message = "";
+    
+                        /**
+                         * AutomationRunEvent automationRun.
+                         * @member {string} automationRun
+                         * @memberof google.cloud.deploy.v1.AutomationRunEvent
+                         * @instance
+                         */
+                        AutomationRunEvent.prototype.automationRun = "";
+    
+                        /**
+                         * AutomationRunEvent pipelineUid.
+                         * @member {string} pipelineUid
+                         * @memberof google.cloud.deploy.v1.AutomationRunEvent
+                         * @instance
+                         */
+                        AutomationRunEvent.prototype.pipelineUid = "";
+    
+                        /**
+                         * AutomationRunEvent automationId.
+                         * @member {string} automationId
+                         * @memberof google.cloud.deploy.v1.AutomationRunEvent
+                         * @instance
+                         */
+                        AutomationRunEvent.prototype.automationId = "";
+    
+                        /**
+                         * AutomationRunEvent ruleId.
+                         * @member {string} ruleId
+                         * @memberof google.cloud.deploy.v1.AutomationRunEvent
+                         * @instance
+                         */
+                        AutomationRunEvent.prototype.ruleId = "";
+    
+                        /**
+                         * AutomationRunEvent destinationTargetId.
+                         * @member {string} destinationTargetId
+                         * @memberof google.cloud.deploy.v1.AutomationRunEvent
+                         * @instance
+                         */
+                        AutomationRunEvent.prototype.destinationTargetId = "";
+    
+                        /**
+                         * AutomationRunEvent type.
+                         * @member {google.cloud.deploy.v1.Type} type
+                         * @memberof google.cloud.deploy.v1.AutomationRunEvent
+                         * @instance
+                         */
+                        AutomationRunEvent.prototype.type = 0;
+    
+                        /**
+                         * Creates a new AutomationRunEvent instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.AutomationRunEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAutomationRunEvent=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.AutomationRunEvent} AutomationRunEvent instance
+                         */
+                        AutomationRunEvent.create = function create(properties) {
+                            return new AutomationRunEvent(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AutomationRunEvent message. Does not implicitly {@link google.cloud.deploy.v1.AutomationRunEvent.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.AutomationRunEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAutomationRunEvent} message AutomationRunEvent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AutomationRunEvent.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.message);
+                            if (message.automationRun != null && Object.hasOwnProperty.call(message, "automationRun"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.automationRun);
+                            if (message.pipelineUid != null && Object.hasOwnProperty.call(message, "pipelineUid"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pipelineUid);
+                            if (message.automationId != null && Object.hasOwnProperty.call(message, "automationId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.automationId);
+                            if (message.ruleId != null && Object.hasOwnProperty.call(message, "ruleId"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.ruleId);
+                            if (message.destinationTargetId != null && Object.hasOwnProperty.call(message, "destinationTargetId"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.destinationTargetId);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.type);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AutomationRunEvent message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.AutomationRunEvent.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.AutomationRunEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAutomationRunEvent} message AutomationRunEvent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AutomationRunEvent.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AutomationRunEvent message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.AutomationRunEvent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.AutomationRunEvent} AutomationRunEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AutomationRunEvent.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.AutomationRunEvent();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.message = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.automationRun = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pipelineUid = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.automationId = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.ruleId = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.destinationTargetId = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AutomationRunEvent message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.AutomationRunEvent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.AutomationRunEvent} AutomationRunEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AutomationRunEvent.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AutomationRunEvent message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.AutomationRunEvent
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AutomationRunEvent.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.message != null && message.hasOwnProperty("message"))
+                                if (!$util.isString(message.message))
+                                    return "message: string expected";
+                            if (message.automationRun != null && message.hasOwnProperty("automationRun"))
+                                if (!$util.isString(message.automationRun))
+                                    return "automationRun: string expected";
+                            if (message.pipelineUid != null && message.hasOwnProperty("pipelineUid"))
+                                if (!$util.isString(message.pipelineUid))
+                                    return "pipelineUid: string expected";
+                            if (message.automationId != null && message.hasOwnProperty("automationId"))
+                                if (!$util.isString(message.automationId))
+                                    return "automationId: string expected";
+                            if (message.ruleId != null && message.hasOwnProperty("ruleId"))
+                                if (!$util.isString(message.ruleId))
+                                    return "ruleId: string expected";
+                            if (message.destinationTargetId != null && message.hasOwnProperty("destinationTargetId"))
+                                if (!$util.isString(message.destinationTargetId))
+                                    return "destinationTargetId: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AutomationRunEvent message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.AutomationRunEvent
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.AutomationRunEvent} AutomationRunEvent
+                         */
+                        AutomationRunEvent.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.AutomationRunEvent)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.AutomationRunEvent();
+                            if (object.message != null)
+                                message.message = String(object.message);
+                            if (object.automationRun != null)
+                                message.automationRun = String(object.automationRun);
+                            if (object.pipelineUid != null)
+                                message.pipelineUid = String(object.pipelineUid);
+                            if (object.automationId != null)
+                                message.automationId = String(object.automationId);
+                            if (object.ruleId != null)
+                                message.ruleId = String(object.ruleId);
+                            if (object.destinationTargetId != null)
+                                message.destinationTargetId = String(object.destinationTargetId);
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "TYPE_PUBSUB_NOTIFICATION_FAILURE":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "TYPE_RESOURCE_STATE_CHANGE":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            case "TYPE_PROCESS_ABORTED":
+                            case 4:
+                                message.type = 4;
+                                break;
+                            case "TYPE_RESTRICTION_VIOLATED":
+                            case 5:
+                                message.type = 5;
+                                break;
+                            case "TYPE_RESOURCE_DELETED":
+                            case 6:
+                                message.type = 6;
+                                break;
+                            case "TYPE_ROLLOUT_UPDATE":
+                            case 7:
+                                message.type = 7;
+                                break;
+                            case "TYPE_RENDER_STATUES_CHANGE":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AutomationRunEvent message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.AutomationRunEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.AutomationRunEvent} message AutomationRunEvent
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AutomationRunEvent.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.message = "";
+                                object.automationRun = "";
+                                object.pipelineUid = "";
+                                object.automationId = "";
+                                object.ruleId = "";
+                                object.destinationTargetId = "";
+                                object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.message != null && message.hasOwnProperty("message"))
+                                object.message = message.message;
+                            if (message.automationRun != null && message.hasOwnProperty("automationRun"))
+                                object.automationRun = message.automationRun;
+                            if (message.pipelineUid != null && message.hasOwnProperty("pipelineUid"))
+                                object.pipelineUid = message.pipelineUid;
+                            if (message.automationId != null && message.hasOwnProperty("automationId"))
+                                object.automationId = message.automationId;
+                            if (message.ruleId != null && message.hasOwnProperty("ruleId"))
+                                object.ruleId = message.ruleId;
+                            if (message.destinationTargetId != null && message.hasOwnProperty("destinationTargetId"))
+                                object.destinationTargetId = message.destinationTargetId;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.deploy.v1.Type[message.type] === undefined ? message.type : $root.google.cloud.deploy.v1.Type[message.type] : message.type;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AutomationRunEvent to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.AutomationRunEvent
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AutomationRunEvent.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AutomationRunEvent
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.AutomationRunEvent
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AutomationRunEvent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.AutomationRunEvent";
+                        };
+    
+                        return AutomationRunEvent;
+                    })();
+    
                     v1.CloudDeploy = (function() {
     
                         /**
@@ -293,6 +1032,39 @@
                          * @instance
                          * @param {google.cloud.deploy.v1.IListTargetsRequest} request ListTargetsRequest message or plain object
                          * @returns {Promise<google.cloud.deploy.v1.ListTargetsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|rollbackTarget}.
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @typedef RollbackTargetCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.deploy.v1.RollbackTargetResponse} [response] RollbackTargetResponse
+                         */
+    
+                        /**
+                         * Calls RollbackTarget.
+                         * @function rollbackTarget
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @instance
+                         * @param {google.cloud.deploy.v1.IRollbackTargetRequest} request RollbackTargetRequest message or plain object
+                         * @param {google.cloud.deploy.v1.CloudDeploy.RollbackTargetCallback} callback Node-style callback called with the error, if any, and RollbackTargetResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudDeploy.prototype.rollbackTarget = function rollbackTarget(request, callback) {
+                            return this.rpcCall(rollbackTarget, $root.google.cloud.deploy.v1.RollbackTargetRequest, $root.google.cloud.deploy.v1.RollbackTargetResponse, request, callback);
+                        }, "name", { value: "RollbackTarget" });
+    
+                        /**
+                         * Calls RollbackTarget.
+                         * @function rollbackTarget
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @instance
+                         * @param {google.cloud.deploy.v1.IRollbackTargetRequest} request RollbackTargetRequest message or plain object
+                         * @returns {Promise<google.cloud.deploy.v1.RollbackTargetResponse>} Promise
                          * @variation 2
                          */
     
@@ -953,6 +1725,270 @@
                          * @instance
                          * @param {google.cloud.deploy.v1.IGetConfigRequest} request GetConfigRequest message or plain object
                          * @returns {Promise<google.cloud.deploy.v1.Config>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|createAutomation}.
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @typedef CreateAutomationCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateAutomation.
+                         * @function createAutomation
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @instance
+                         * @param {google.cloud.deploy.v1.ICreateAutomationRequest} request CreateAutomationRequest message or plain object
+                         * @param {google.cloud.deploy.v1.CloudDeploy.CreateAutomationCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudDeploy.prototype.createAutomation = function createAutomation(request, callback) {
+                            return this.rpcCall(createAutomation, $root.google.cloud.deploy.v1.CreateAutomationRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateAutomation" });
+    
+                        /**
+                         * Calls CreateAutomation.
+                         * @function createAutomation
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @instance
+                         * @param {google.cloud.deploy.v1.ICreateAutomationRequest} request CreateAutomationRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|updateAutomation}.
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @typedef UpdateAutomationCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateAutomation.
+                         * @function updateAutomation
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @instance
+                         * @param {google.cloud.deploy.v1.IUpdateAutomationRequest} request UpdateAutomationRequest message or plain object
+                         * @param {google.cloud.deploy.v1.CloudDeploy.UpdateAutomationCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudDeploy.prototype.updateAutomation = function updateAutomation(request, callback) {
+                            return this.rpcCall(updateAutomation, $root.google.cloud.deploy.v1.UpdateAutomationRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateAutomation" });
+    
+                        /**
+                         * Calls UpdateAutomation.
+                         * @function updateAutomation
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @instance
+                         * @param {google.cloud.deploy.v1.IUpdateAutomationRequest} request UpdateAutomationRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|deleteAutomation}.
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @typedef DeleteAutomationCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteAutomation.
+                         * @function deleteAutomation
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @instance
+                         * @param {google.cloud.deploy.v1.IDeleteAutomationRequest} request DeleteAutomationRequest message or plain object
+                         * @param {google.cloud.deploy.v1.CloudDeploy.DeleteAutomationCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudDeploy.prototype.deleteAutomation = function deleteAutomation(request, callback) {
+                            return this.rpcCall(deleteAutomation, $root.google.cloud.deploy.v1.DeleteAutomationRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteAutomation" });
+    
+                        /**
+                         * Calls DeleteAutomation.
+                         * @function deleteAutomation
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @instance
+                         * @param {google.cloud.deploy.v1.IDeleteAutomationRequest} request DeleteAutomationRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|getAutomation}.
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @typedef GetAutomationCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.deploy.v1.Automation} [response] Automation
+                         */
+    
+                        /**
+                         * Calls GetAutomation.
+                         * @function getAutomation
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @instance
+                         * @param {google.cloud.deploy.v1.IGetAutomationRequest} request GetAutomationRequest message or plain object
+                         * @param {google.cloud.deploy.v1.CloudDeploy.GetAutomationCallback} callback Node-style callback called with the error, if any, and Automation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudDeploy.prototype.getAutomation = function getAutomation(request, callback) {
+                            return this.rpcCall(getAutomation, $root.google.cloud.deploy.v1.GetAutomationRequest, $root.google.cloud.deploy.v1.Automation, request, callback);
+                        }, "name", { value: "GetAutomation" });
+    
+                        /**
+                         * Calls GetAutomation.
+                         * @function getAutomation
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @instance
+                         * @param {google.cloud.deploy.v1.IGetAutomationRequest} request GetAutomationRequest message or plain object
+                         * @returns {Promise<google.cloud.deploy.v1.Automation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|listAutomations}.
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @typedef ListAutomationsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.deploy.v1.ListAutomationsResponse} [response] ListAutomationsResponse
+                         */
+    
+                        /**
+                         * Calls ListAutomations.
+                         * @function listAutomations
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @instance
+                         * @param {google.cloud.deploy.v1.IListAutomationsRequest} request ListAutomationsRequest message or plain object
+                         * @param {google.cloud.deploy.v1.CloudDeploy.ListAutomationsCallback} callback Node-style callback called with the error, if any, and ListAutomationsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudDeploy.prototype.listAutomations = function listAutomations(request, callback) {
+                            return this.rpcCall(listAutomations, $root.google.cloud.deploy.v1.ListAutomationsRequest, $root.google.cloud.deploy.v1.ListAutomationsResponse, request, callback);
+                        }, "name", { value: "ListAutomations" });
+    
+                        /**
+                         * Calls ListAutomations.
+                         * @function listAutomations
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @instance
+                         * @param {google.cloud.deploy.v1.IListAutomationsRequest} request ListAutomationsRequest message or plain object
+                         * @returns {Promise<google.cloud.deploy.v1.ListAutomationsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|getAutomationRun}.
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @typedef GetAutomationRunCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.deploy.v1.AutomationRun} [response] AutomationRun
+                         */
+    
+                        /**
+                         * Calls GetAutomationRun.
+                         * @function getAutomationRun
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @instance
+                         * @param {google.cloud.deploy.v1.IGetAutomationRunRequest} request GetAutomationRunRequest message or plain object
+                         * @param {google.cloud.deploy.v1.CloudDeploy.GetAutomationRunCallback} callback Node-style callback called with the error, if any, and AutomationRun
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudDeploy.prototype.getAutomationRun = function getAutomationRun(request, callback) {
+                            return this.rpcCall(getAutomationRun, $root.google.cloud.deploy.v1.GetAutomationRunRequest, $root.google.cloud.deploy.v1.AutomationRun, request, callback);
+                        }, "name", { value: "GetAutomationRun" });
+    
+                        /**
+                         * Calls GetAutomationRun.
+                         * @function getAutomationRun
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @instance
+                         * @param {google.cloud.deploy.v1.IGetAutomationRunRequest} request GetAutomationRunRequest message or plain object
+                         * @returns {Promise<google.cloud.deploy.v1.AutomationRun>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|listAutomationRuns}.
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @typedef ListAutomationRunsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.deploy.v1.ListAutomationRunsResponse} [response] ListAutomationRunsResponse
+                         */
+    
+                        /**
+                         * Calls ListAutomationRuns.
+                         * @function listAutomationRuns
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @instance
+                         * @param {google.cloud.deploy.v1.IListAutomationRunsRequest} request ListAutomationRunsRequest message or plain object
+                         * @param {google.cloud.deploy.v1.CloudDeploy.ListAutomationRunsCallback} callback Node-style callback called with the error, if any, and ListAutomationRunsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudDeploy.prototype.listAutomationRuns = function listAutomationRuns(request, callback) {
+                            return this.rpcCall(listAutomationRuns, $root.google.cloud.deploy.v1.ListAutomationRunsRequest, $root.google.cloud.deploy.v1.ListAutomationRunsResponse, request, callback);
+                        }, "name", { value: "ListAutomationRuns" });
+    
+                        /**
+                         * Calls ListAutomationRuns.
+                         * @function listAutomationRuns
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @instance
+                         * @param {google.cloud.deploy.v1.IListAutomationRunsRequest} request ListAutomationRunsRequest message or plain object
+                         * @returns {Promise<google.cloud.deploy.v1.ListAutomationRunsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|cancelAutomationRun}.
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @typedef CancelAutomationRunCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.deploy.v1.CancelAutomationRunResponse} [response] CancelAutomationRunResponse
+                         */
+    
+                        /**
+                         * Calls CancelAutomationRun.
+                         * @function cancelAutomationRun
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @instance
+                         * @param {google.cloud.deploy.v1.ICancelAutomationRunRequest} request CancelAutomationRunRequest message or plain object
+                         * @param {google.cloud.deploy.v1.CloudDeploy.CancelAutomationRunCallback} callback Node-style callback called with the error, if any, and CancelAutomationRunResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudDeploy.prototype.cancelAutomationRun = function cancelAutomationRun(request, callback) {
+                            return this.rpcCall(cancelAutomationRun, $root.google.cloud.deploy.v1.CancelAutomationRunRequest, $root.google.cloud.deploy.v1.CancelAutomationRunResponse, request, callback);
+                        }, "name", { value: "CancelAutomationRun" });
+    
+                        /**
+                         * Calls CancelAutomationRun.
+                         * @function cancelAutomationRun
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @instance
+                         * @param {google.cloud.deploy.v1.ICancelAutomationRunRequest} request CancelAutomationRunRequest message or plain object
+                         * @returns {Promise<google.cloud.deploy.v1.CancelAutomationRunResponse>} Promise
                          * @variation 2
                          */
     
@@ -8434,6 +9470,793 @@
                         return DeleteDeliveryPipelineRequest;
                     })();
     
+                    v1.RollbackTargetConfig = (function() {
+    
+                        /**
+                         * Properties of a RollbackTargetConfig.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IRollbackTargetConfig
+                         * @property {google.cloud.deploy.v1.IRollout|null} [rollout] RollbackTargetConfig rollout
+                         * @property {string|null} [startingPhaseId] RollbackTargetConfig startingPhaseId
+                         */
+    
+                        /**
+                         * Constructs a new RollbackTargetConfig.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a RollbackTargetConfig.
+                         * @implements IRollbackTargetConfig
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IRollbackTargetConfig=} [properties] Properties to set
+                         */
+                        function RollbackTargetConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RollbackTargetConfig rollout.
+                         * @member {google.cloud.deploy.v1.IRollout|null|undefined} rollout
+                         * @memberof google.cloud.deploy.v1.RollbackTargetConfig
+                         * @instance
+                         */
+                        RollbackTargetConfig.prototype.rollout = null;
+    
+                        /**
+                         * RollbackTargetConfig startingPhaseId.
+                         * @member {string} startingPhaseId
+                         * @memberof google.cloud.deploy.v1.RollbackTargetConfig
+                         * @instance
+                         */
+                        RollbackTargetConfig.prototype.startingPhaseId = "";
+    
+                        /**
+                         * Creates a new RollbackTargetConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.RollbackTargetConfig
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRollbackTargetConfig=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.RollbackTargetConfig} RollbackTargetConfig instance
+                         */
+                        RollbackTargetConfig.create = function create(properties) {
+                            return new RollbackTargetConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RollbackTargetConfig message. Does not implicitly {@link google.cloud.deploy.v1.RollbackTargetConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.RollbackTargetConfig
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRollbackTargetConfig} message RollbackTargetConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RollbackTargetConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.rollout != null && Object.hasOwnProperty.call(message, "rollout"))
+                                $root.google.cloud.deploy.v1.Rollout.encode(message.rollout, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.startingPhaseId != null && Object.hasOwnProperty.call(message, "startingPhaseId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.startingPhaseId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RollbackTargetConfig message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.RollbackTargetConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.RollbackTargetConfig
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRollbackTargetConfig} message RollbackTargetConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RollbackTargetConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RollbackTargetConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.RollbackTargetConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.RollbackTargetConfig} RollbackTargetConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RollbackTargetConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.RollbackTargetConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.rollout = $root.google.cloud.deploy.v1.Rollout.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.startingPhaseId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RollbackTargetConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.RollbackTargetConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.RollbackTargetConfig} RollbackTargetConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RollbackTargetConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RollbackTargetConfig message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.RollbackTargetConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RollbackTargetConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.rollout != null && message.hasOwnProperty("rollout")) {
+                                var error = $root.google.cloud.deploy.v1.Rollout.verify(message.rollout);
+                                if (error)
+                                    return "rollout." + error;
+                            }
+                            if (message.startingPhaseId != null && message.hasOwnProperty("startingPhaseId"))
+                                if (!$util.isString(message.startingPhaseId))
+                                    return "startingPhaseId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RollbackTargetConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.RollbackTargetConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.RollbackTargetConfig} RollbackTargetConfig
+                         */
+                        RollbackTargetConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.RollbackTargetConfig)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.RollbackTargetConfig();
+                            if (object.rollout != null) {
+                                if (typeof object.rollout !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.RollbackTargetConfig.rollout: object expected");
+                                message.rollout = $root.google.cloud.deploy.v1.Rollout.fromObject(object.rollout);
+                            }
+                            if (object.startingPhaseId != null)
+                                message.startingPhaseId = String(object.startingPhaseId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RollbackTargetConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.RollbackTargetConfig
+                         * @static
+                         * @param {google.cloud.deploy.v1.RollbackTargetConfig} message RollbackTargetConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RollbackTargetConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.rollout = null;
+                                object.startingPhaseId = "";
+                            }
+                            if (message.rollout != null && message.hasOwnProperty("rollout"))
+                                object.rollout = $root.google.cloud.deploy.v1.Rollout.toObject(message.rollout, options);
+                            if (message.startingPhaseId != null && message.hasOwnProperty("startingPhaseId"))
+                                object.startingPhaseId = message.startingPhaseId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RollbackTargetConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.RollbackTargetConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RollbackTargetConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RollbackTargetConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.RollbackTargetConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RollbackTargetConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.RollbackTargetConfig";
+                        };
+    
+                        return RollbackTargetConfig;
+                    })();
+    
+                    v1.RollbackTargetRequest = (function() {
+    
+                        /**
+                         * Properties of a RollbackTargetRequest.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IRollbackTargetRequest
+                         * @property {string|null} [name] RollbackTargetRequest name
+                         * @property {string|null} [targetId] RollbackTargetRequest targetId
+                         * @property {string|null} [rolloutId] RollbackTargetRequest rolloutId
+                         * @property {string|null} [releaseId] RollbackTargetRequest releaseId
+                         * @property {string|null} [rolloutToRollBack] RollbackTargetRequest rolloutToRollBack
+                         * @property {google.cloud.deploy.v1.IRollbackTargetConfig|null} [rollbackConfig] RollbackTargetRequest rollbackConfig
+                         * @property {boolean|null} [validateOnly] RollbackTargetRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new RollbackTargetRequest.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a RollbackTargetRequest.
+                         * @implements IRollbackTargetRequest
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IRollbackTargetRequest=} [properties] Properties to set
+                         */
+                        function RollbackTargetRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RollbackTargetRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.deploy.v1.RollbackTargetRequest
+                         * @instance
+                         */
+                        RollbackTargetRequest.prototype.name = "";
+    
+                        /**
+                         * RollbackTargetRequest targetId.
+                         * @member {string} targetId
+                         * @memberof google.cloud.deploy.v1.RollbackTargetRequest
+                         * @instance
+                         */
+                        RollbackTargetRequest.prototype.targetId = "";
+    
+                        /**
+                         * RollbackTargetRequest rolloutId.
+                         * @member {string} rolloutId
+                         * @memberof google.cloud.deploy.v1.RollbackTargetRequest
+                         * @instance
+                         */
+                        RollbackTargetRequest.prototype.rolloutId = "";
+    
+                        /**
+                         * RollbackTargetRequest releaseId.
+                         * @member {string} releaseId
+                         * @memberof google.cloud.deploy.v1.RollbackTargetRequest
+                         * @instance
+                         */
+                        RollbackTargetRequest.prototype.releaseId = "";
+    
+                        /**
+                         * RollbackTargetRequest rolloutToRollBack.
+                         * @member {string} rolloutToRollBack
+                         * @memberof google.cloud.deploy.v1.RollbackTargetRequest
+                         * @instance
+                         */
+                        RollbackTargetRequest.prototype.rolloutToRollBack = "";
+    
+                        /**
+                         * RollbackTargetRequest rollbackConfig.
+                         * @member {google.cloud.deploy.v1.IRollbackTargetConfig|null|undefined} rollbackConfig
+                         * @memberof google.cloud.deploy.v1.RollbackTargetRequest
+                         * @instance
+                         */
+                        RollbackTargetRequest.prototype.rollbackConfig = null;
+    
+                        /**
+                         * RollbackTargetRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.deploy.v1.RollbackTargetRequest
+                         * @instance
+                         */
+                        RollbackTargetRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new RollbackTargetRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.RollbackTargetRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRollbackTargetRequest=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.RollbackTargetRequest} RollbackTargetRequest instance
+                         */
+                        RollbackTargetRequest.create = function create(properties) {
+                            return new RollbackTargetRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RollbackTargetRequest message. Does not implicitly {@link google.cloud.deploy.v1.RollbackTargetRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.RollbackTargetRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRollbackTargetRequest} message RollbackTargetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RollbackTargetRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.targetId != null && Object.hasOwnProperty.call(message, "targetId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.targetId);
+                            if (message.rolloutId != null && Object.hasOwnProperty.call(message, "rolloutId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.rolloutId);
+                            if (message.releaseId != null && Object.hasOwnProperty.call(message, "releaseId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.releaseId);
+                            if (message.rolloutToRollBack != null && Object.hasOwnProperty.call(message, "rolloutToRollBack"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.rolloutToRollBack);
+                            if (message.rollbackConfig != null && Object.hasOwnProperty.call(message, "rollbackConfig"))
+                                $root.google.cloud.deploy.v1.RollbackTargetConfig.encode(message.rollbackConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RollbackTargetRequest message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.RollbackTargetRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.RollbackTargetRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRollbackTargetRequest} message RollbackTargetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RollbackTargetRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RollbackTargetRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.RollbackTargetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.RollbackTargetRequest} RollbackTargetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RollbackTargetRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.RollbackTargetRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.targetId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.rolloutId = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.releaseId = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.rolloutToRollBack = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.rollbackConfig = $root.google.cloud.deploy.v1.RollbackTargetConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RollbackTargetRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.RollbackTargetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.RollbackTargetRequest} RollbackTargetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RollbackTargetRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RollbackTargetRequest message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.RollbackTargetRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RollbackTargetRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.targetId != null && message.hasOwnProperty("targetId"))
+                                if (!$util.isString(message.targetId))
+                                    return "targetId: string expected";
+                            if (message.rolloutId != null && message.hasOwnProperty("rolloutId"))
+                                if (!$util.isString(message.rolloutId))
+                                    return "rolloutId: string expected";
+                            if (message.releaseId != null && message.hasOwnProperty("releaseId"))
+                                if (!$util.isString(message.releaseId))
+                                    return "releaseId: string expected";
+                            if (message.rolloutToRollBack != null && message.hasOwnProperty("rolloutToRollBack"))
+                                if (!$util.isString(message.rolloutToRollBack))
+                                    return "rolloutToRollBack: string expected";
+                            if (message.rollbackConfig != null && message.hasOwnProperty("rollbackConfig")) {
+                                var error = $root.google.cloud.deploy.v1.RollbackTargetConfig.verify(message.rollbackConfig);
+                                if (error)
+                                    return "rollbackConfig." + error;
+                            }
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RollbackTargetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.RollbackTargetRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.RollbackTargetRequest} RollbackTargetRequest
+                         */
+                        RollbackTargetRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.RollbackTargetRequest)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.RollbackTargetRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.targetId != null)
+                                message.targetId = String(object.targetId);
+                            if (object.rolloutId != null)
+                                message.rolloutId = String(object.rolloutId);
+                            if (object.releaseId != null)
+                                message.releaseId = String(object.releaseId);
+                            if (object.rolloutToRollBack != null)
+                                message.rolloutToRollBack = String(object.rolloutToRollBack);
+                            if (object.rollbackConfig != null) {
+                                if (typeof object.rollbackConfig !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.RollbackTargetRequest.rollbackConfig: object expected");
+                                message.rollbackConfig = $root.google.cloud.deploy.v1.RollbackTargetConfig.fromObject(object.rollbackConfig);
+                            }
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RollbackTargetRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.RollbackTargetRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.RollbackTargetRequest} message RollbackTargetRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RollbackTargetRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.targetId = "";
+                                object.rolloutId = "";
+                                object.releaseId = "";
+                                object.rolloutToRollBack = "";
+                                object.rollbackConfig = null;
+                                object.validateOnly = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.targetId != null && message.hasOwnProperty("targetId"))
+                                object.targetId = message.targetId;
+                            if (message.rolloutId != null && message.hasOwnProperty("rolloutId"))
+                                object.rolloutId = message.rolloutId;
+                            if (message.releaseId != null && message.hasOwnProperty("releaseId"))
+                                object.releaseId = message.releaseId;
+                            if (message.rolloutToRollBack != null && message.hasOwnProperty("rolloutToRollBack"))
+                                object.rolloutToRollBack = message.rolloutToRollBack;
+                            if (message.rollbackConfig != null && message.hasOwnProperty("rollbackConfig"))
+                                object.rollbackConfig = $root.google.cloud.deploy.v1.RollbackTargetConfig.toObject(message.rollbackConfig, options);
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RollbackTargetRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.RollbackTargetRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RollbackTargetRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RollbackTargetRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.RollbackTargetRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RollbackTargetRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.RollbackTargetRequest";
+                        };
+    
+                        return RollbackTargetRequest;
+                    })();
+    
+                    v1.RollbackTargetResponse = (function() {
+    
+                        /**
+                         * Properties of a RollbackTargetResponse.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IRollbackTargetResponse
+                         * @property {google.cloud.deploy.v1.IRollbackTargetConfig|null} [rollbackConfig] RollbackTargetResponse rollbackConfig
+                         */
+    
+                        /**
+                         * Constructs a new RollbackTargetResponse.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a RollbackTargetResponse.
+                         * @implements IRollbackTargetResponse
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IRollbackTargetResponse=} [properties] Properties to set
+                         */
+                        function RollbackTargetResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RollbackTargetResponse rollbackConfig.
+                         * @member {google.cloud.deploy.v1.IRollbackTargetConfig|null|undefined} rollbackConfig
+                         * @memberof google.cloud.deploy.v1.RollbackTargetResponse
+                         * @instance
+                         */
+                        RollbackTargetResponse.prototype.rollbackConfig = null;
+    
+                        /**
+                         * Creates a new RollbackTargetResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.RollbackTargetResponse
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRollbackTargetResponse=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.RollbackTargetResponse} RollbackTargetResponse instance
+                         */
+                        RollbackTargetResponse.create = function create(properties) {
+                            return new RollbackTargetResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RollbackTargetResponse message. Does not implicitly {@link google.cloud.deploy.v1.RollbackTargetResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.RollbackTargetResponse
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRollbackTargetResponse} message RollbackTargetResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RollbackTargetResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.rollbackConfig != null && Object.hasOwnProperty.call(message, "rollbackConfig"))
+                                $root.google.cloud.deploy.v1.RollbackTargetConfig.encode(message.rollbackConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RollbackTargetResponse message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.RollbackTargetResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.RollbackTargetResponse
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRollbackTargetResponse} message RollbackTargetResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RollbackTargetResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RollbackTargetResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.RollbackTargetResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.RollbackTargetResponse} RollbackTargetResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RollbackTargetResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.RollbackTargetResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.rollbackConfig = $root.google.cloud.deploy.v1.RollbackTargetConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RollbackTargetResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.RollbackTargetResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.RollbackTargetResponse} RollbackTargetResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RollbackTargetResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RollbackTargetResponse message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.RollbackTargetResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RollbackTargetResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.rollbackConfig != null && message.hasOwnProperty("rollbackConfig")) {
+                                var error = $root.google.cloud.deploy.v1.RollbackTargetConfig.verify(message.rollbackConfig);
+                                if (error)
+                                    return "rollbackConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RollbackTargetResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.RollbackTargetResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.RollbackTargetResponse} RollbackTargetResponse
+                         */
+                        RollbackTargetResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.RollbackTargetResponse)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.RollbackTargetResponse();
+                            if (object.rollbackConfig != null) {
+                                if (typeof object.rollbackConfig !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.RollbackTargetResponse.rollbackConfig: object expected");
+                                message.rollbackConfig = $root.google.cloud.deploy.v1.RollbackTargetConfig.fromObject(object.rollbackConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RollbackTargetResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.RollbackTargetResponse
+                         * @static
+                         * @param {google.cloud.deploy.v1.RollbackTargetResponse} message RollbackTargetResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RollbackTargetResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.rollbackConfig = null;
+                            if (message.rollbackConfig != null && message.hasOwnProperty("rollbackConfig"))
+                                object.rollbackConfig = $root.google.cloud.deploy.v1.RollbackTargetConfig.toObject(message.rollbackConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RollbackTargetResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.RollbackTargetResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RollbackTargetResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RollbackTargetResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.RollbackTargetResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RollbackTargetResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.RollbackTargetResponse";
+                        };
+    
+                        return RollbackTargetResponse;
+                    })();
+    
                     v1.Target = (function() {
     
                         /**
@@ -12670,6 +14493,268 @@
                         return DeleteTargetRequest;
                     })();
     
+                    v1.TargetAttribute = (function() {
+    
+                        /**
+                         * Properties of a TargetAttribute.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface ITargetAttribute
+                         * @property {string|null} [id] TargetAttribute id
+                         * @property {Object.<string,string>|null} [labels] TargetAttribute labels
+                         */
+    
+                        /**
+                         * Constructs a new TargetAttribute.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a TargetAttribute.
+                         * @implements ITargetAttribute
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.ITargetAttribute=} [properties] Properties to set
+                         */
+                        function TargetAttribute(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TargetAttribute id.
+                         * @member {string} id
+                         * @memberof google.cloud.deploy.v1.TargetAttribute
+                         * @instance
+                         */
+                        TargetAttribute.prototype.id = "";
+    
+                        /**
+                         * TargetAttribute labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.deploy.v1.TargetAttribute
+                         * @instance
+                         */
+                        TargetAttribute.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * Creates a new TargetAttribute instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.TargetAttribute
+                         * @static
+                         * @param {google.cloud.deploy.v1.ITargetAttribute=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.TargetAttribute} TargetAttribute instance
+                         */
+                        TargetAttribute.create = function create(properties) {
+                            return new TargetAttribute(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TargetAttribute message. Does not implicitly {@link google.cloud.deploy.v1.TargetAttribute.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.TargetAttribute
+                         * @static
+                         * @param {google.cloud.deploy.v1.ITargetAttribute} message TargetAttribute message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TargetAttribute.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TargetAttribute message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.TargetAttribute.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.TargetAttribute
+                         * @static
+                         * @param {google.cloud.deploy.v1.ITargetAttribute} message TargetAttribute message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TargetAttribute.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TargetAttribute message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.TargetAttribute
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.TargetAttribute} TargetAttribute
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TargetAttribute.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.TargetAttribute(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.id = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TargetAttribute message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.TargetAttribute
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.TargetAttribute} TargetAttribute
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TargetAttribute.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TargetAttribute message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.TargetAttribute
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TargetAttribute.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                if (!$util.isString(message.id))
+                                    return "id: string expected";
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TargetAttribute message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.TargetAttribute
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.TargetAttribute} TargetAttribute
+                         */
+                        TargetAttribute.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.TargetAttribute)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.TargetAttribute();
+                            if (object.id != null)
+                                message.id = String(object.id);
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.TargetAttribute.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TargetAttribute message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.TargetAttribute
+                         * @static
+                         * @param {google.cloud.deploy.v1.TargetAttribute} message TargetAttribute
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TargetAttribute.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults)
+                                object.id = "";
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                object.id = message.id;
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TargetAttribute to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.TargetAttribute
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TargetAttribute.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TargetAttribute
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.TargetAttribute
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TargetAttribute.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.TargetAttribute";
+                        };
+    
+                        return TargetAttribute;
+                    })();
+    
                     v1.Release = (function() {
     
                         /**
@@ -13851,6 +15936,7 @@
                                     case 1:
                                     case 2:
                                     case 3:
+                                    case 4:
                                     case 5:
                                         break;
                                     }
@@ -13925,6 +16011,10 @@
                                 case "CLOUD_BUILD_REQUEST_FAILED":
                                 case 3:
                                     message.failureCause = 3;
+                                    break;
+                                case "VERIFICATION_CONFIG_NOT_FOUND":
+                                case 4:
+                                    message.failureCause = 4;
                                     break;
                                 case "CUSTOM_ACTION_NOT_FOUND":
                                 case 5:
@@ -14021,6 +16111,7 @@
                              * @property {number} CLOUD_BUILD_UNAVAILABLE=1 CLOUD_BUILD_UNAVAILABLE value
                              * @property {number} EXECUTION_FAILED=2 EXECUTION_FAILED value
                              * @property {number} CLOUD_BUILD_REQUEST_FAILED=3 CLOUD_BUILD_REQUEST_FAILED value
+                             * @property {number} VERIFICATION_CONFIG_NOT_FOUND=4 VERIFICATION_CONFIG_NOT_FOUND value
                              * @property {number} CUSTOM_ACTION_NOT_FOUND=5 CUSTOM_ACTION_NOT_FOUND value
                              */
                             TargetRender.FailureCause = (function() {
@@ -14029,6 +16120,7 @@
                                 values[valuesById[1] = "CLOUD_BUILD_UNAVAILABLE"] = 1;
                                 values[valuesById[2] = "EXECUTION_FAILED"] = 2;
                                 values[valuesById[3] = "CLOUD_BUILD_REQUEST_FAILED"] = 3;
+                                values[valuesById[4] = "VERIFICATION_CONFIG_NOT_FOUND"] = 4;
                                 values[valuesById[5] = "CUSTOM_ACTION_NOT_FOUND"] = 5;
                                 return values;
                             })();
@@ -17371,6 +19463,8 @@
                          * @property {Array.<google.cloud.deploy.v1.IPhase>|null} [phases] Rollout phases
                          * @property {google.cloud.deploy.v1.IMetadata|null} [metadata] Rollout metadata
                          * @property {string|null} [controllerRollout] Rollout controllerRollout
+                         * @property {string|null} [rollbackOfRollout] Rollout rollbackOfRollout
+                         * @property {Array.<string>|null} [rolledBackByRollouts] Rollout rolledBackByRollouts
                          */
     
                         /**
@@ -17385,6 +19479,7 @@
                             this.annotations = {};
                             this.labels = {};
                             this.phases = [];
+                            this.rolledBackByRollouts = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -17552,6 +19647,22 @@
                         Rollout.prototype.controllerRollout = "";
     
                         /**
+                         * Rollout rollbackOfRollout.
+                         * @member {string} rollbackOfRollout
+                         * @memberof google.cloud.deploy.v1.Rollout
+                         * @instance
+                         */
+                        Rollout.prototype.rollbackOfRollout = "";
+    
+                        /**
+                         * Rollout rolledBackByRollouts.
+                         * @member {Array.<string>} rolledBackByRollouts
+                         * @memberof google.cloud.deploy.v1.Rollout
+                         * @instance
+                         */
+                        Rollout.prototype.rolledBackByRollouts = $util.emptyArray;
+    
+                        /**
                          * Creates a new Rollout instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.deploy.v1.Rollout
@@ -17618,6 +19729,11 @@
                                 $root.google.cloud.deploy.v1.Metadata.encode(message.metadata, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
                             if (message.controllerRollout != null && Object.hasOwnProperty.call(message, "controllerRollout"))
                                 writer.uint32(/* id 25, wireType 2 =*/202).string(message.controllerRollout);
+                            if (message.rollbackOfRollout != null && Object.hasOwnProperty.call(message, "rollbackOfRollout"))
+                                writer.uint32(/* id 26, wireType 2 =*/210).string(message.rollbackOfRollout);
+                            if (message.rolledBackByRollouts != null && message.rolledBackByRollouts.length)
+                                for (var i = 0; i < message.rolledBackByRollouts.length; ++i)
+                                    writer.uint32(/* id 27, wireType 2 =*/218).string(message.rolledBackByRollouts[i]);
                             return writer;
                         };
     
@@ -17770,6 +19886,16 @@
                                     }
                                 case 25: {
                                         message.controllerRollout = reader.string();
+                                        break;
+                                    }
+                                case 26: {
+                                        message.rollbackOfRollout = reader.string();
+                                        break;
+                                    }
+                                case 27: {
+                                        if (!(message.rolledBackByRollouts && message.rolledBackByRollouts.length))
+                                            message.rolledBackByRollouts = [];
+                                        message.rolledBackByRollouts.push(reader.string());
                                         break;
                                     }
                                 default:
@@ -17928,6 +20054,16 @@
                             if (message.controllerRollout != null && message.hasOwnProperty("controllerRollout"))
                                 if (!$util.isString(message.controllerRollout))
                                     return "controllerRollout: string expected";
+                            if (message.rollbackOfRollout != null && message.hasOwnProperty("rollbackOfRollout"))
+                                if (!$util.isString(message.rollbackOfRollout))
+                                    return "rollbackOfRollout: string expected";
+                            if (message.rolledBackByRollouts != null && message.hasOwnProperty("rolledBackByRollouts")) {
+                                if (!Array.isArray(message.rolledBackByRollouts))
+                                    return "rolledBackByRollouts: array expected";
+                                for (var i = 0; i < message.rolledBackByRollouts.length; ++i)
+                                    if (!$util.isString(message.rolledBackByRollouts[i]))
+                                        return "rolledBackByRollouts: string[] expected";
+                            }
                             return null;
                         };
     
@@ -18133,6 +20269,15 @@
                             }
                             if (object.controllerRollout != null)
                                 message.controllerRollout = String(object.controllerRollout);
+                            if (object.rollbackOfRollout != null)
+                                message.rollbackOfRollout = String(object.rollbackOfRollout);
+                            if (object.rolledBackByRollouts) {
+                                if (!Array.isArray(object.rolledBackByRollouts))
+                                    throw TypeError(".google.cloud.deploy.v1.Rollout.rolledBackByRollouts: array expected");
+                                message.rolledBackByRollouts = [];
+                                for (var i = 0; i < object.rolledBackByRollouts.length; ++i)
+                                    message.rolledBackByRollouts[i] = String(object.rolledBackByRollouts[i]);
+                            }
                             return message;
                         };
     
@@ -18149,8 +20294,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.phases = [];
+                                object.rolledBackByRollouts = [];
+                            }
                             if (options.objects || options.defaults) {
                                 object.annotations = {};
                                 object.labels = {};
@@ -18173,6 +20320,7 @@
                                 object.deployFailureCause = options.enums === String ? "FAILURE_CAUSE_UNSPECIFIED" : 0;
                                 object.metadata = null;
                                 object.controllerRollout = "";
+                                object.rollbackOfRollout = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -18224,6 +20372,13 @@
                                 object.metadata = $root.google.cloud.deploy.v1.Metadata.toObject(message.metadata, options);
                             if (message.controllerRollout != null && message.hasOwnProperty("controllerRollout"))
                                 object.controllerRollout = message.controllerRollout;
+                            if (message.rollbackOfRollout != null && message.hasOwnProperty("rollbackOfRollout"))
+                                object.rollbackOfRollout = message.rollbackOfRollout;
+                            if (message.rolledBackByRollouts && message.rolledBackByRollouts.length) {
+                                object.rolledBackByRollouts = [];
+                                for (var j = 0; j < message.rolledBackByRollouts.length; ++j)
+                                    object.rolledBackByRollouts[j] = message.rolledBackByRollouts[j];
+                            }
                             return object;
                         };
     
@@ -18341,6 +20496,7 @@
                          * @memberof google.cloud.deploy.v1
                          * @interface IMetadata
                          * @property {google.cloud.deploy.v1.ICloudRunMetadata|null} [cloudRun] Metadata cloudRun
+                         * @property {google.cloud.deploy.v1.IAutomationRolloutMetadata|null} [automation] Metadata automation
                          */
     
                         /**
@@ -18365,6 +20521,14 @@
                          * @instance
                          */
                         Metadata.prototype.cloudRun = null;
+    
+                        /**
+                         * Metadata automation.
+                         * @member {google.cloud.deploy.v1.IAutomationRolloutMetadata|null|undefined} automation
+                         * @memberof google.cloud.deploy.v1.Metadata
+                         * @instance
+                         */
+                        Metadata.prototype.automation = null;
     
                         /**
                          * Creates a new Metadata instance using the specified properties.
@@ -18392,6 +20556,8 @@
                                 writer = $Writer.create();
                             if (message.cloudRun != null && Object.hasOwnProperty.call(message, "cloudRun"))
                                 $root.google.cloud.deploy.v1.CloudRunMetadata.encode(message.cloudRun, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.automation != null && Object.hasOwnProperty.call(message, "automation"))
+                                $root.google.cloud.deploy.v1.AutomationRolloutMetadata.encode(message.automation, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             return writer;
                         };
     
@@ -18428,6 +20594,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.cloudRun = $root.google.cloud.deploy.v1.CloudRunMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.automation = $root.google.cloud.deploy.v1.AutomationRolloutMetadata.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -18470,6 +20640,11 @@
                                 if (error)
                                     return "cloudRun." + error;
                             }
+                            if (message.automation != null && message.hasOwnProperty("automation")) {
+                                var error = $root.google.cloud.deploy.v1.AutomationRolloutMetadata.verify(message.automation);
+                                if (error)
+                                    return "automation." + error;
+                            }
                             return null;
                         };
     
@@ -18490,6 +20665,11 @@
                                     throw TypeError(".google.cloud.deploy.v1.Metadata.cloudRun: object expected");
                                 message.cloudRun = $root.google.cloud.deploy.v1.CloudRunMetadata.fromObject(object.cloudRun);
                             }
+                            if (object.automation != null) {
+                                if (typeof object.automation !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.Metadata.automation: object expected");
+                                message.automation = $root.google.cloud.deploy.v1.AutomationRolloutMetadata.fromObject(object.automation);
+                            }
                             return message;
                         };
     
@@ -18506,10 +20686,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.cloudRun = null;
+                                object.automation = null;
+                            }
                             if (message.cloudRun != null && message.hasOwnProperty("cloudRun"))
                                 object.cloudRun = $root.google.cloud.deploy.v1.CloudRunMetadata.toObject(message.cloudRun, options);
+                            if (message.automation != null && message.hasOwnProperty("automation"))
+                                object.automation = $root.google.cloud.deploy.v1.AutomationRolloutMetadata.toObject(message.automation, options);
                             return object;
                         };
     
@@ -18759,6 +20943,7 @@
                          * @property {string|null} [service] CloudRunMetadata service
                          * @property {Array.<string>|null} [serviceUrls] CloudRunMetadata serviceUrls
                          * @property {string|null} [revision] CloudRunMetadata revision
+                         * @property {string|null} [job] CloudRunMetadata job
                          */
     
                         /**
@@ -18802,6 +20987,14 @@
                         CloudRunMetadata.prototype.revision = "";
     
                         /**
+                         * CloudRunMetadata job.
+                         * @member {string} job
+                         * @memberof google.cloud.deploy.v1.CloudRunMetadata
+                         * @instance
+                         */
+                        CloudRunMetadata.prototype.job = "";
+    
+                        /**
                          * Creates a new CloudRunMetadata instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.deploy.v1.CloudRunMetadata
@@ -18832,6 +21025,8 @@
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.serviceUrls[i]);
                             if (message.revision != null && Object.hasOwnProperty.call(message, "revision"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.revision);
+                            if (message.job != null && Object.hasOwnProperty.call(message, "job"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.job);
                             return writer;
                         };
     
@@ -18878,6 +21073,10 @@
                                     }
                                 case 3: {
                                         message.revision = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.job = reader.string();
                                         break;
                                     }
                                 default:
@@ -18928,6 +21127,9 @@
                             if (message.revision != null && message.hasOwnProperty("revision"))
                                 if (!$util.isString(message.revision))
                                     return "revision: string expected";
+                            if (message.job != null && message.hasOwnProperty("job"))
+                                if (!$util.isString(message.job))
+                                    return "job: string expected";
                             return null;
                         };
     
@@ -18954,6 +21156,8 @@
                             }
                             if (object.revision != null)
                                 message.revision = String(object.revision);
+                            if (object.job != null)
+                                message.job = String(object.job);
                             return message;
                         };
     
@@ -18975,6 +21179,7 @@
                             if (options.defaults) {
                                 object.service = "";
                                 object.revision = "";
+                                object.job = "";
                             }
                             if (message.service != null && message.hasOwnProperty("service"))
                                 object.service = message.service;
@@ -18985,6 +21190,8 @@
                             }
                             if (message.revision != null && message.hasOwnProperty("revision"))
                                 object.revision = message.revision;
+                            if (message.job != null && message.hasOwnProperty("job"))
+                                object.job = message.job;
                             return object;
                         };
     
@@ -19015,6 +21222,289 @@
                         };
     
                         return CloudRunMetadata;
+                    })();
+    
+                    v1.AutomationRolloutMetadata = (function() {
+    
+                        /**
+                         * Properties of an AutomationRolloutMetadata.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IAutomationRolloutMetadata
+                         * @property {string|null} [promoteAutomationRun] AutomationRolloutMetadata promoteAutomationRun
+                         * @property {Array.<string>|null} [advanceAutomationRuns] AutomationRolloutMetadata advanceAutomationRuns
+                         * @property {Array.<string>|null} [repairAutomationRuns] AutomationRolloutMetadata repairAutomationRuns
+                         */
+    
+                        /**
+                         * Constructs a new AutomationRolloutMetadata.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents an AutomationRolloutMetadata.
+                         * @implements IAutomationRolloutMetadata
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IAutomationRolloutMetadata=} [properties] Properties to set
+                         */
+                        function AutomationRolloutMetadata(properties) {
+                            this.advanceAutomationRuns = [];
+                            this.repairAutomationRuns = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AutomationRolloutMetadata promoteAutomationRun.
+                         * @member {string} promoteAutomationRun
+                         * @memberof google.cloud.deploy.v1.AutomationRolloutMetadata
+                         * @instance
+                         */
+                        AutomationRolloutMetadata.prototype.promoteAutomationRun = "";
+    
+                        /**
+                         * AutomationRolloutMetadata advanceAutomationRuns.
+                         * @member {Array.<string>} advanceAutomationRuns
+                         * @memberof google.cloud.deploy.v1.AutomationRolloutMetadata
+                         * @instance
+                         */
+                        AutomationRolloutMetadata.prototype.advanceAutomationRuns = $util.emptyArray;
+    
+                        /**
+                         * AutomationRolloutMetadata repairAutomationRuns.
+                         * @member {Array.<string>} repairAutomationRuns
+                         * @memberof google.cloud.deploy.v1.AutomationRolloutMetadata
+                         * @instance
+                         */
+                        AutomationRolloutMetadata.prototype.repairAutomationRuns = $util.emptyArray;
+    
+                        /**
+                         * Creates a new AutomationRolloutMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.AutomationRolloutMetadata
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAutomationRolloutMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.AutomationRolloutMetadata} AutomationRolloutMetadata instance
+                         */
+                        AutomationRolloutMetadata.create = function create(properties) {
+                            return new AutomationRolloutMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AutomationRolloutMetadata message. Does not implicitly {@link google.cloud.deploy.v1.AutomationRolloutMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.AutomationRolloutMetadata
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAutomationRolloutMetadata} message AutomationRolloutMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AutomationRolloutMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.promoteAutomationRun != null && Object.hasOwnProperty.call(message, "promoteAutomationRun"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.promoteAutomationRun);
+                            if (message.advanceAutomationRuns != null && message.advanceAutomationRuns.length)
+                                for (var i = 0; i < message.advanceAutomationRuns.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.advanceAutomationRuns[i]);
+                            if (message.repairAutomationRuns != null && message.repairAutomationRuns.length)
+                                for (var i = 0; i < message.repairAutomationRuns.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.repairAutomationRuns[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AutomationRolloutMetadata message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.AutomationRolloutMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.AutomationRolloutMetadata
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAutomationRolloutMetadata} message AutomationRolloutMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AutomationRolloutMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AutomationRolloutMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.AutomationRolloutMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.AutomationRolloutMetadata} AutomationRolloutMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AutomationRolloutMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.AutomationRolloutMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.promoteAutomationRun = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.advanceAutomationRuns && message.advanceAutomationRuns.length))
+                                            message.advanceAutomationRuns = [];
+                                        message.advanceAutomationRuns.push(reader.string());
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.repairAutomationRuns && message.repairAutomationRuns.length))
+                                            message.repairAutomationRuns = [];
+                                        message.repairAutomationRuns.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AutomationRolloutMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.AutomationRolloutMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.AutomationRolloutMetadata} AutomationRolloutMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AutomationRolloutMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AutomationRolloutMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.AutomationRolloutMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AutomationRolloutMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.promoteAutomationRun != null && message.hasOwnProperty("promoteAutomationRun"))
+                                if (!$util.isString(message.promoteAutomationRun))
+                                    return "promoteAutomationRun: string expected";
+                            if (message.advanceAutomationRuns != null && message.hasOwnProperty("advanceAutomationRuns")) {
+                                if (!Array.isArray(message.advanceAutomationRuns))
+                                    return "advanceAutomationRuns: array expected";
+                                for (var i = 0; i < message.advanceAutomationRuns.length; ++i)
+                                    if (!$util.isString(message.advanceAutomationRuns[i]))
+                                        return "advanceAutomationRuns: string[] expected";
+                            }
+                            if (message.repairAutomationRuns != null && message.hasOwnProperty("repairAutomationRuns")) {
+                                if (!Array.isArray(message.repairAutomationRuns))
+                                    return "repairAutomationRuns: array expected";
+                                for (var i = 0; i < message.repairAutomationRuns.length; ++i)
+                                    if (!$util.isString(message.repairAutomationRuns[i]))
+                                        return "repairAutomationRuns: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AutomationRolloutMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.AutomationRolloutMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.AutomationRolloutMetadata} AutomationRolloutMetadata
+                         */
+                        AutomationRolloutMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.AutomationRolloutMetadata)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.AutomationRolloutMetadata();
+                            if (object.promoteAutomationRun != null)
+                                message.promoteAutomationRun = String(object.promoteAutomationRun);
+                            if (object.advanceAutomationRuns) {
+                                if (!Array.isArray(object.advanceAutomationRuns))
+                                    throw TypeError(".google.cloud.deploy.v1.AutomationRolloutMetadata.advanceAutomationRuns: array expected");
+                                message.advanceAutomationRuns = [];
+                                for (var i = 0; i < object.advanceAutomationRuns.length; ++i)
+                                    message.advanceAutomationRuns[i] = String(object.advanceAutomationRuns[i]);
+                            }
+                            if (object.repairAutomationRuns) {
+                                if (!Array.isArray(object.repairAutomationRuns))
+                                    throw TypeError(".google.cloud.deploy.v1.AutomationRolloutMetadata.repairAutomationRuns: array expected");
+                                message.repairAutomationRuns = [];
+                                for (var i = 0; i < object.repairAutomationRuns.length; ++i)
+                                    message.repairAutomationRuns[i] = String(object.repairAutomationRuns[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AutomationRolloutMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.AutomationRolloutMetadata
+                         * @static
+                         * @param {google.cloud.deploy.v1.AutomationRolloutMetadata} message AutomationRolloutMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AutomationRolloutMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.advanceAutomationRuns = [];
+                                object.repairAutomationRuns = [];
+                            }
+                            if (options.defaults)
+                                object.promoteAutomationRun = "";
+                            if (message.promoteAutomationRun != null && message.hasOwnProperty("promoteAutomationRun"))
+                                object.promoteAutomationRun = message.promoteAutomationRun;
+                            if (message.advanceAutomationRuns && message.advanceAutomationRuns.length) {
+                                object.advanceAutomationRuns = [];
+                                for (var j = 0; j < message.advanceAutomationRuns.length; ++j)
+                                    object.advanceAutomationRuns[j] = message.advanceAutomationRuns[j];
+                            }
+                            if (message.repairAutomationRuns && message.repairAutomationRuns.length) {
+                                object.repairAutomationRuns = [];
+                                for (var j = 0; j < message.repairAutomationRuns.length; ++j)
+                                    object.repairAutomationRuns[j] = message.repairAutomationRuns[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AutomationRolloutMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.AutomationRolloutMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AutomationRolloutMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AutomationRolloutMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.AutomationRolloutMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AutomationRolloutMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.AutomationRolloutMetadata";
+                        };
+    
+                        return AutomationRolloutMetadata;
                     })();
     
                     v1.Phase = (function() {
@@ -29970,6 +32460,8672 @@
                         return GetConfigRequest;
                     })();
     
+                    v1.Automation = (function() {
+    
+                        /**
+                         * Properties of an Automation.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IAutomation
+                         * @property {string|null} [name] Automation name
+                         * @property {string|null} [uid] Automation uid
+                         * @property {string|null} [description] Automation description
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Automation createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] Automation updateTime
+                         * @property {Object.<string,string>|null} [annotations] Automation annotations
+                         * @property {Object.<string,string>|null} [labels] Automation labels
+                         * @property {string|null} [etag] Automation etag
+                         * @property {boolean|null} [suspended] Automation suspended
+                         * @property {string|null} [serviceAccount] Automation serviceAccount
+                         * @property {google.cloud.deploy.v1.IAutomationResourceSelector|null} [selector] Automation selector
+                         * @property {Array.<google.cloud.deploy.v1.IAutomationRule>|null} [rules] Automation rules
+                         */
+    
+                        /**
+                         * Constructs a new Automation.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents an Automation.
+                         * @implements IAutomation
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IAutomation=} [properties] Properties to set
+                         */
+                        function Automation(properties) {
+                            this.annotations = {};
+                            this.labels = {};
+                            this.rules = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Automation name.
+                         * @member {string} name
+                         * @memberof google.cloud.deploy.v1.Automation
+                         * @instance
+                         */
+                        Automation.prototype.name = "";
+    
+                        /**
+                         * Automation uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.deploy.v1.Automation
+                         * @instance
+                         */
+                        Automation.prototype.uid = "";
+    
+                        /**
+                         * Automation description.
+                         * @member {string} description
+                         * @memberof google.cloud.deploy.v1.Automation
+                         * @instance
+                         */
+                        Automation.prototype.description = "";
+    
+                        /**
+                         * Automation createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.deploy.v1.Automation
+                         * @instance
+                         */
+                        Automation.prototype.createTime = null;
+    
+                        /**
+                         * Automation updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.deploy.v1.Automation
+                         * @instance
+                         */
+                        Automation.prototype.updateTime = null;
+    
+                        /**
+                         * Automation annotations.
+                         * @member {Object.<string,string>} annotations
+                         * @memberof google.cloud.deploy.v1.Automation
+                         * @instance
+                         */
+                        Automation.prototype.annotations = $util.emptyObject;
+    
+                        /**
+                         * Automation labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.deploy.v1.Automation
+                         * @instance
+                         */
+                        Automation.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * Automation etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.deploy.v1.Automation
+                         * @instance
+                         */
+                        Automation.prototype.etag = "";
+    
+                        /**
+                         * Automation suspended.
+                         * @member {boolean} suspended
+                         * @memberof google.cloud.deploy.v1.Automation
+                         * @instance
+                         */
+                        Automation.prototype.suspended = false;
+    
+                        /**
+                         * Automation serviceAccount.
+                         * @member {string} serviceAccount
+                         * @memberof google.cloud.deploy.v1.Automation
+                         * @instance
+                         */
+                        Automation.prototype.serviceAccount = "";
+    
+                        /**
+                         * Automation selector.
+                         * @member {google.cloud.deploy.v1.IAutomationResourceSelector|null|undefined} selector
+                         * @memberof google.cloud.deploy.v1.Automation
+                         * @instance
+                         */
+                        Automation.prototype.selector = null;
+    
+                        /**
+                         * Automation rules.
+                         * @member {Array.<google.cloud.deploy.v1.IAutomationRule>} rules
+                         * @memberof google.cloud.deploy.v1.Automation
+                         * @instance
+                         */
+                        Automation.prototype.rules = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Automation instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.Automation
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAutomation=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.Automation} Automation instance
+                         */
+                        Automation.create = function create(properties) {
+                            return new Automation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Automation message. Does not implicitly {@link google.cloud.deploy.v1.Automation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.Automation
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAutomation} message Automation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Automation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.uid);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                                for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 7, wireType 2 =*/58).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.etag);
+                            if (message.suspended != null && Object.hasOwnProperty.call(message, "suspended"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.suspended);
+                            if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.serviceAccount);
+                            if (message.selector != null && Object.hasOwnProperty.call(message, "selector"))
+                                $root.google.cloud.deploy.v1.AutomationResourceSelector.encode(message.selector, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.rules != null && message.rules.length)
+                                for (var i = 0; i < message.rules.length; ++i)
+                                    $root.google.cloud.deploy.v1.AutomationRule.encode(message.rules[i], writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Automation message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.Automation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.Automation
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAutomation} message Automation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Automation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an Automation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.Automation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.Automation} Automation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Automation.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.Automation(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        if (message.annotations === $util.emptyObject)
+                                            message.annotations = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.annotations[key] = value;
+                                        break;
+                                    }
+                                case 7: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 8: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.suspended = reader.bool();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.serviceAccount = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.selector = $root.google.cloud.deploy.v1.AutomationResourceSelector.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 14: {
+                                        if (!(message.rules && message.rules.length))
+                                            message.rules = [];
+                                        message.rules.push($root.google.cloud.deploy.v1.AutomationRule.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an Automation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.Automation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.Automation} Automation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Automation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an Automation message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.Automation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Automation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                                if (!$util.isObject(message.annotations))
+                                    return "annotations: object expected";
+                                var key = Object.keys(message.annotations);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.annotations[key[i]]))
+                                        return "annotations: string{k:string} expected";
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            if (message.suspended != null && message.hasOwnProperty("suspended"))
+                                if (typeof message.suspended !== "boolean")
+                                    return "suspended: boolean expected";
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                if (!$util.isString(message.serviceAccount))
+                                    return "serviceAccount: string expected";
+                            if (message.selector != null && message.hasOwnProperty("selector")) {
+                                var error = $root.google.cloud.deploy.v1.AutomationResourceSelector.verify(message.selector);
+                                if (error)
+                                    return "selector." + error;
+                            }
+                            if (message.rules != null && message.hasOwnProperty("rules")) {
+                                if (!Array.isArray(message.rules))
+                                    return "rules: array expected";
+                                for (var i = 0; i < message.rules.length; ++i) {
+                                    var error = $root.google.cloud.deploy.v1.AutomationRule.verify(message.rules[i]);
+                                    if (error)
+                                        return "rules." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an Automation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.Automation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.Automation} Automation
+                         */
+                        Automation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.Automation)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.Automation();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.Automation.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.Automation.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.annotations) {
+                                if (typeof object.annotations !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.Automation.annotations: object expected");
+                                message.annotations = {};
+                                for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
+                                    message.annotations[keys[i]] = String(object.annotations[keys[i]]);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.Automation.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            if (object.suspended != null)
+                                message.suspended = Boolean(object.suspended);
+                            if (object.serviceAccount != null)
+                                message.serviceAccount = String(object.serviceAccount);
+                            if (object.selector != null) {
+                                if (typeof object.selector !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.Automation.selector: object expected");
+                                message.selector = $root.google.cloud.deploy.v1.AutomationResourceSelector.fromObject(object.selector);
+                            }
+                            if (object.rules) {
+                                if (!Array.isArray(object.rules))
+                                    throw TypeError(".google.cloud.deploy.v1.Automation.rules: array expected");
+                                message.rules = [];
+                                for (var i = 0; i < object.rules.length; ++i) {
+                                    if (typeof object.rules[i] !== "object")
+                                        throw TypeError(".google.cloud.deploy.v1.Automation.rules: object expected");
+                                    message.rules[i] = $root.google.cloud.deploy.v1.AutomationRule.fromObject(object.rules[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an Automation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.Automation
+                         * @static
+                         * @param {google.cloud.deploy.v1.Automation} message Automation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Automation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.rules = [];
+                            if (options.objects || options.defaults) {
+                                object.annotations = {};
+                                object.labels = {};
+                            }
+                            if (options.defaults) {
+                                object.name = "";
+                                object.uid = "";
+                                object.description = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.etag = "";
+                                object.suspended = false;
+                                object.serviceAccount = "";
+                                object.selector = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            var keys2;
+                            if (message.annotations && (keys2 = Object.keys(message.annotations)).length) {
+                                object.annotations = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.annotations[keys2[j]] = message.annotations[keys2[j]];
+                            }
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            if (message.suspended != null && message.hasOwnProperty("suspended"))
+                                object.suspended = message.suspended;
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                object.serviceAccount = message.serviceAccount;
+                            if (message.selector != null && message.hasOwnProperty("selector"))
+                                object.selector = $root.google.cloud.deploy.v1.AutomationResourceSelector.toObject(message.selector, options);
+                            if (message.rules && message.rules.length) {
+                                object.rules = [];
+                                for (var j = 0; j < message.rules.length; ++j)
+                                    object.rules[j] = $root.google.cloud.deploy.v1.AutomationRule.toObject(message.rules[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Automation to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.Automation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Automation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Automation
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.Automation
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Automation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.Automation";
+                        };
+    
+                        return Automation;
+                    })();
+    
+                    v1.AutomationResourceSelector = (function() {
+    
+                        /**
+                         * Properties of an AutomationResourceSelector.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IAutomationResourceSelector
+                         * @property {Array.<google.cloud.deploy.v1.ITargetAttribute>|null} [targets] AutomationResourceSelector targets
+                         */
+    
+                        /**
+                         * Constructs a new AutomationResourceSelector.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents an AutomationResourceSelector.
+                         * @implements IAutomationResourceSelector
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IAutomationResourceSelector=} [properties] Properties to set
+                         */
+                        function AutomationResourceSelector(properties) {
+                            this.targets = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AutomationResourceSelector targets.
+                         * @member {Array.<google.cloud.deploy.v1.ITargetAttribute>} targets
+                         * @memberof google.cloud.deploy.v1.AutomationResourceSelector
+                         * @instance
+                         */
+                        AutomationResourceSelector.prototype.targets = $util.emptyArray;
+    
+                        /**
+                         * Creates a new AutomationResourceSelector instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.AutomationResourceSelector
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAutomationResourceSelector=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.AutomationResourceSelector} AutomationResourceSelector instance
+                         */
+                        AutomationResourceSelector.create = function create(properties) {
+                            return new AutomationResourceSelector(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AutomationResourceSelector message. Does not implicitly {@link google.cloud.deploy.v1.AutomationResourceSelector.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.AutomationResourceSelector
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAutomationResourceSelector} message AutomationResourceSelector message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AutomationResourceSelector.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.targets != null && message.targets.length)
+                                for (var i = 0; i < message.targets.length; ++i)
+                                    $root.google.cloud.deploy.v1.TargetAttribute.encode(message.targets[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AutomationResourceSelector message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.AutomationResourceSelector.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.AutomationResourceSelector
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAutomationResourceSelector} message AutomationResourceSelector message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AutomationResourceSelector.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AutomationResourceSelector message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.AutomationResourceSelector
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.AutomationResourceSelector} AutomationResourceSelector
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AutomationResourceSelector.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.AutomationResourceSelector();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.targets && message.targets.length))
+                                            message.targets = [];
+                                        message.targets.push($root.google.cloud.deploy.v1.TargetAttribute.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AutomationResourceSelector message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.AutomationResourceSelector
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.AutomationResourceSelector} AutomationResourceSelector
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AutomationResourceSelector.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AutomationResourceSelector message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.AutomationResourceSelector
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AutomationResourceSelector.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.targets != null && message.hasOwnProperty("targets")) {
+                                if (!Array.isArray(message.targets))
+                                    return "targets: array expected";
+                                for (var i = 0; i < message.targets.length; ++i) {
+                                    var error = $root.google.cloud.deploy.v1.TargetAttribute.verify(message.targets[i]);
+                                    if (error)
+                                        return "targets." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AutomationResourceSelector message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.AutomationResourceSelector
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.AutomationResourceSelector} AutomationResourceSelector
+                         */
+                        AutomationResourceSelector.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.AutomationResourceSelector)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.AutomationResourceSelector();
+                            if (object.targets) {
+                                if (!Array.isArray(object.targets))
+                                    throw TypeError(".google.cloud.deploy.v1.AutomationResourceSelector.targets: array expected");
+                                message.targets = [];
+                                for (var i = 0; i < object.targets.length; ++i) {
+                                    if (typeof object.targets[i] !== "object")
+                                        throw TypeError(".google.cloud.deploy.v1.AutomationResourceSelector.targets: object expected");
+                                    message.targets[i] = $root.google.cloud.deploy.v1.TargetAttribute.fromObject(object.targets[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AutomationResourceSelector message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.AutomationResourceSelector
+                         * @static
+                         * @param {google.cloud.deploy.v1.AutomationResourceSelector} message AutomationResourceSelector
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AutomationResourceSelector.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.targets = [];
+                            if (message.targets && message.targets.length) {
+                                object.targets = [];
+                                for (var j = 0; j < message.targets.length; ++j)
+                                    object.targets[j] = $root.google.cloud.deploy.v1.TargetAttribute.toObject(message.targets[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AutomationResourceSelector to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.AutomationResourceSelector
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AutomationResourceSelector.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AutomationResourceSelector
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.AutomationResourceSelector
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AutomationResourceSelector.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.AutomationResourceSelector";
+                        };
+    
+                        return AutomationResourceSelector;
+                    })();
+    
+                    v1.AutomationRule = (function() {
+    
+                        /**
+                         * Properties of an AutomationRule.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IAutomationRule
+                         * @property {google.cloud.deploy.v1.IPromoteReleaseRule|null} [promoteReleaseRule] AutomationRule promoteReleaseRule
+                         * @property {google.cloud.deploy.v1.IAdvanceRolloutRule|null} [advanceRolloutRule] AutomationRule advanceRolloutRule
+                         * @property {google.cloud.deploy.v1.IRepairRolloutRule|null} [repairRolloutRule] AutomationRule repairRolloutRule
+                         */
+    
+                        /**
+                         * Constructs a new AutomationRule.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents an AutomationRule.
+                         * @implements IAutomationRule
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IAutomationRule=} [properties] Properties to set
+                         */
+                        function AutomationRule(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AutomationRule promoteReleaseRule.
+                         * @member {google.cloud.deploy.v1.IPromoteReleaseRule|null|undefined} promoteReleaseRule
+                         * @memberof google.cloud.deploy.v1.AutomationRule
+                         * @instance
+                         */
+                        AutomationRule.prototype.promoteReleaseRule = null;
+    
+                        /**
+                         * AutomationRule advanceRolloutRule.
+                         * @member {google.cloud.deploy.v1.IAdvanceRolloutRule|null|undefined} advanceRolloutRule
+                         * @memberof google.cloud.deploy.v1.AutomationRule
+                         * @instance
+                         */
+                        AutomationRule.prototype.advanceRolloutRule = null;
+    
+                        /**
+                         * AutomationRule repairRolloutRule.
+                         * @member {google.cloud.deploy.v1.IRepairRolloutRule|null|undefined} repairRolloutRule
+                         * @memberof google.cloud.deploy.v1.AutomationRule
+                         * @instance
+                         */
+                        AutomationRule.prototype.repairRolloutRule = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * AutomationRule rule.
+                         * @member {"promoteReleaseRule"|"advanceRolloutRule"|"repairRolloutRule"|undefined} rule
+                         * @memberof google.cloud.deploy.v1.AutomationRule
+                         * @instance
+                         */
+                        Object.defineProperty(AutomationRule.prototype, "rule", {
+                            get: $util.oneOfGetter($oneOfFields = ["promoteReleaseRule", "advanceRolloutRule", "repairRolloutRule"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new AutomationRule instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.AutomationRule
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAutomationRule=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.AutomationRule} AutomationRule instance
+                         */
+                        AutomationRule.create = function create(properties) {
+                            return new AutomationRule(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AutomationRule message. Does not implicitly {@link google.cloud.deploy.v1.AutomationRule.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.AutomationRule
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAutomationRule} message AutomationRule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AutomationRule.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.promoteReleaseRule != null && Object.hasOwnProperty.call(message, "promoteReleaseRule"))
+                                $root.google.cloud.deploy.v1.PromoteReleaseRule.encode(message.promoteReleaseRule, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.advanceRolloutRule != null && Object.hasOwnProperty.call(message, "advanceRolloutRule"))
+                                $root.google.cloud.deploy.v1.AdvanceRolloutRule.encode(message.advanceRolloutRule, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.repairRolloutRule != null && Object.hasOwnProperty.call(message, "repairRolloutRule"))
+                                $root.google.cloud.deploy.v1.RepairRolloutRule.encode(message.repairRolloutRule, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AutomationRule message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.AutomationRule.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.AutomationRule
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAutomationRule} message AutomationRule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AutomationRule.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AutomationRule message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.AutomationRule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.AutomationRule} AutomationRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AutomationRule.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.AutomationRule();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.promoteReleaseRule = $root.google.cloud.deploy.v1.PromoteReleaseRule.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.advanceRolloutRule = $root.google.cloud.deploy.v1.AdvanceRolloutRule.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.repairRolloutRule = $root.google.cloud.deploy.v1.RepairRolloutRule.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AutomationRule message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.AutomationRule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.AutomationRule} AutomationRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AutomationRule.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AutomationRule message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.AutomationRule
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AutomationRule.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.promoteReleaseRule != null && message.hasOwnProperty("promoteReleaseRule")) {
+                                properties.rule = 1;
+                                {
+                                    var error = $root.google.cloud.deploy.v1.PromoteReleaseRule.verify(message.promoteReleaseRule);
+                                    if (error)
+                                        return "promoteReleaseRule." + error;
+                                }
+                            }
+                            if (message.advanceRolloutRule != null && message.hasOwnProperty("advanceRolloutRule")) {
+                                if (properties.rule === 1)
+                                    return "rule: multiple values";
+                                properties.rule = 1;
+                                {
+                                    var error = $root.google.cloud.deploy.v1.AdvanceRolloutRule.verify(message.advanceRolloutRule);
+                                    if (error)
+                                        return "advanceRolloutRule." + error;
+                                }
+                            }
+                            if (message.repairRolloutRule != null && message.hasOwnProperty("repairRolloutRule")) {
+                                if (properties.rule === 1)
+                                    return "rule: multiple values";
+                                properties.rule = 1;
+                                {
+                                    var error = $root.google.cloud.deploy.v1.RepairRolloutRule.verify(message.repairRolloutRule);
+                                    if (error)
+                                        return "repairRolloutRule." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AutomationRule message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.AutomationRule
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.AutomationRule} AutomationRule
+                         */
+                        AutomationRule.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.AutomationRule)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.AutomationRule();
+                            if (object.promoteReleaseRule != null) {
+                                if (typeof object.promoteReleaseRule !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.AutomationRule.promoteReleaseRule: object expected");
+                                message.promoteReleaseRule = $root.google.cloud.deploy.v1.PromoteReleaseRule.fromObject(object.promoteReleaseRule);
+                            }
+                            if (object.advanceRolloutRule != null) {
+                                if (typeof object.advanceRolloutRule !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.AutomationRule.advanceRolloutRule: object expected");
+                                message.advanceRolloutRule = $root.google.cloud.deploy.v1.AdvanceRolloutRule.fromObject(object.advanceRolloutRule);
+                            }
+                            if (object.repairRolloutRule != null) {
+                                if (typeof object.repairRolloutRule !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.AutomationRule.repairRolloutRule: object expected");
+                                message.repairRolloutRule = $root.google.cloud.deploy.v1.RepairRolloutRule.fromObject(object.repairRolloutRule);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AutomationRule message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.AutomationRule
+                         * @static
+                         * @param {google.cloud.deploy.v1.AutomationRule} message AutomationRule
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AutomationRule.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.promoteReleaseRule != null && message.hasOwnProperty("promoteReleaseRule")) {
+                                object.promoteReleaseRule = $root.google.cloud.deploy.v1.PromoteReleaseRule.toObject(message.promoteReleaseRule, options);
+                                if (options.oneofs)
+                                    object.rule = "promoteReleaseRule";
+                            }
+                            if (message.advanceRolloutRule != null && message.hasOwnProperty("advanceRolloutRule")) {
+                                object.advanceRolloutRule = $root.google.cloud.deploy.v1.AdvanceRolloutRule.toObject(message.advanceRolloutRule, options);
+                                if (options.oneofs)
+                                    object.rule = "advanceRolloutRule";
+                            }
+                            if (message.repairRolloutRule != null && message.hasOwnProperty("repairRolloutRule")) {
+                                object.repairRolloutRule = $root.google.cloud.deploy.v1.RepairRolloutRule.toObject(message.repairRolloutRule, options);
+                                if (options.oneofs)
+                                    object.rule = "repairRolloutRule";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AutomationRule to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.AutomationRule
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AutomationRule.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AutomationRule
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.AutomationRule
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AutomationRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.AutomationRule";
+                        };
+    
+                        return AutomationRule;
+                    })();
+    
+                    v1.PromoteReleaseRule = (function() {
+    
+                        /**
+                         * Properties of a PromoteReleaseRule.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IPromoteReleaseRule
+                         * @property {string|null} [id] PromoteReleaseRule id
+                         * @property {google.protobuf.IDuration|null} [wait] PromoteReleaseRule wait
+                         * @property {string|null} [destinationTargetId] PromoteReleaseRule destinationTargetId
+                         * @property {google.cloud.deploy.v1.IAutomationRuleCondition|null} [condition] PromoteReleaseRule condition
+                         * @property {string|null} [destinationPhase] PromoteReleaseRule destinationPhase
+                         */
+    
+                        /**
+                         * Constructs a new PromoteReleaseRule.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a PromoteReleaseRule.
+                         * @implements IPromoteReleaseRule
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IPromoteReleaseRule=} [properties] Properties to set
+                         */
+                        function PromoteReleaseRule(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PromoteReleaseRule id.
+                         * @member {string} id
+                         * @memberof google.cloud.deploy.v1.PromoteReleaseRule
+                         * @instance
+                         */
+                        PromoteReleaseRule.prototype.id = "";
+    
+                        /**
+                         * PromoteReleaseRule wait.
+                         * @member {google.protobuf.IDuration|null|undefined} wait
+                         * @memberof google.cloud.deploy.v1.PromoteReleaseRule
+                         * @instance
+                         */
+                        PromoteReleaseRule.prototype.wait = null;
+    
+                        /**
+                         * PromoteReleaseRule destinationTargetId.
+                         * @member {string} destinationTargetId
+                         * @memberof google.cloud.deploy.v1.PromoteReleaseRule
+                         * @instance
+                         */
+                        PromoteReleaseRule.prototype.destinationTargetId = "";
+    
+                        /**
+                         * PromoteReleaseRule condition.
+                         * @member {google.cloud.deploy.v1.IAutomationRuleCondition|null|undefined} condition
+                         * @memberof google.cloud.deploy.v1.PromoteReleaseRule
+                         * @instance
+                         */
+                        PromoteReleaseRule.prototype.condition = null;
+    
+                        /**
+                         * PromoteReleaseRule destinationPhase.
+                         * @member {string} destinationPhase
+                         * @memberof google.cloud.deploy.v1.PromoteReleaseRule
+                         * @instance
+                         */
+                        PromoteReleaseRule.prototype.destinationPhase = "";
+    
+                        /**
+                         * Creates a new PromoteReleaseRule instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.PromoteReleaseRule
+                         * @static
+                         * @param {google.cloud.deploy.v1.IPromoteReleaseRule=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.PromoteReleaseRule} PromoteReleaseRule instance
+                         */
+                        PromoteReleaseRule.create = function create(properties) {
+                            return new PromoteReleaseRule(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PromoteReleaseRule message. Does not implicitly {@link google.cloud.deploy.v1.PromoteReleaseRule.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.PromoteReleaseRule
+                         * @static
+                         * @param {google.cloud.deploy.v1.IPromoteReleaseRule} message PromoteReleaseRule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PromoteReleaseRule.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                            if (message.wait != null && Object.hasOwnProperty.call(message, "wait"))
+                                $root.google.protobuf.Duration.encode(message.wait, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.condition != null && Object.hasOwnProperty.call(message, "condition"))
+                                $root.google.cloud.deploy.v1.AutomationRuleCondition.encode(message.condition, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.destinationTargetId != null && Object.hasOwnProperty.call(message, "destinationTargetId"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.destinationTargetId);
+                            if (message.destinationPhase != null && Object.hasOwnProperty.call(message, "destinationPhase"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.destinationPhase);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PromoteReleaseRule message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.PromoteReleaseRule.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.PromoteReleaseRule
+                         * @static
+                         * @param {google.cloud.deploy.v1.IPromoteReleaseRule} message PromoteReleaseRule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PromoteReleaseRule.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PromoteReleaseRule message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.PromoteReleaseRule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.PromoteReleaseRule} PromoteReleaseRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PromoteReleaseRule.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.PromoteReleaseRule();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.id = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.wait = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.destinationTargetId = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.condition = $root.google.cloud.deploy.v1.AutomationRuleCondition.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.destinationPhase = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PromoteReleaseRule message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.PromoteReleaseRule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.PromoteReleaseRule} PromoteReleaseRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PromoteReleaseRule.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PromoteReleaseRule message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.PromoteReleaseRule
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PromoteReleaseRule.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                if (!$util.isString(message.id))
+                                    return "id: string expected";
+                            if (message.wait != null && message.hasOwnProperty("wait")) {
+                                var error = $root.google.protobuf.Duration.verify(message.wait);
+                                if (error)
+                                    return "wait." + error;
+                            }
+                            if (message.destinationTargetId != null && message.hasOwnProperty("destinationTargetId"))
+                                if (!$util.isString(message.destinationTargetId))
+                                    return "destinationTargetId: string expected";
+                            if (message.condition != null && message.hasOwnProperty("condition")) {
+                                var error = $root.google.cloud.deploy.v1.AutomationRuleCondition.verify(message.condition);
+                                if (error)
+                                    return "condition." + error;
+                            }
+                            if (message.destinationPhase != null && message.hasOwnProperty("destinationPhase"))
+                                if (!$util.isString(message.destinationPhase))
+                                    return "destinationPhase: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PromoteReleaseRule message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.PromoteReleaseRule
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.PromoteReleaseRule} PromoteReleaseRule
+                         */
+                        PromoteReleaseRule.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.PromoteReleaseRule)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.PromoteReleaseRule();
+                            if (object.id != null)
+                                message.id = String(object.id);
+                            if (object.wait != null) {
+                                if (typeof object.wait !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.PromoteReleaseRule.wait: object expected");
+                                message.wait = $root.google.protobuf.Duration.fromObject(object.wait);
+                            }
+                            if (object.destinationTargetId != null)
+                                message.destinationTargetId = String(object.destinationTargetId);
+                            if (object.condition != null) {
+                                if (typeof object.condition !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.PromoteReleaseRule.condition: object expected");
+                                message.condition = $root.google.cloud.deploy.v1.AutomationRuleCondition.fromObject(object.condition);
+                            }
+                            if (object.destinationPhase != null)
+                                message.destinationPhase = String(object.destinationPhase);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PromoteReleaseRule message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.PromoteReleaseRule
+                         * @static
+                         * @param {google.cloud.deploy.v1.PromoteReleaseRule} message PromoteReleaseRule
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PromoteReleaseRule.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.id = "";
+                                object.wait = null;
+                                object.condition = null;
+                                object.destinationTargetId = "";
+                                object.destinationPhase = "";
+                            }
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                object.id = message.id;
+                            if (message.wait != null && message.hasOwnProperty("wait"))
+                                object.wait = $root.google.protobuf.Duration.toObject(message.wait, options);
+                            if (message.condition != null && message.hasOwnProperty("condition"))
+                                object.condition = $root.google.cloud.deploy.v1.AutomationRuleCondition.toObject(message.condition, options);
+                            if (message.destinationTargetId != null && message.hasOwnProperty("destinationTargetId"))
+                                object.destinationTargetId = message.destinationTargetId;
+                            if (message.destinationPhase != null && message.hasOwnProperty("destinationPhase"))
+                                object.destinationPhase = message.destinationPhase;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PromoteReleaseRule to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.PromoteReleaseRule
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PromoteReleaseRule.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PromoteReleaseRule
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.PromoteReleaseRule
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PromoteReleaseRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.PromoteReleaseRule";
+                        };
+    
+                        return PromoteReleaseRule;
+                    })();
+    
+                    v1.AdvanceRolloutRule = (function() {
+    
+                        /**
+                         * Properties of an AdvanceRolloutRule.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IAdvanceRolloutRule
+                         * @property {string|null} [id] AdvanceRolloutRule id
+                         * @property {Array.<string>|null} [sourcePhases] AdvanceRolloutRule sourcePhases
+                         * @property {google.protobuf.IDuration|null} [wait] AdvanceRolloutRule wait
+                         * @property {google.cloud.deploy.v1.IAutomationRuleCondition|null} [condition] AdvanceRolloutRule condition
+                         */
+    
+                        /**
+                         * Constructs a new AdvanceRolloutRule.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents an AdvanceRolloutRule.
+                         * @implements IAdvanceRolloutRule
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IAdvanceRolloutRule=} [properties] Properties to set
+                         */
+                        function AdvanceRolloutRule(properties) {
+                            this.sourcePhases = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AdvanceRolloutRule id.
+                         * @member {string} id
+                         * @memberof google.cloud.deploy.v1.AdvanceRolloutRule
+                         * @instance
+                         */
+                        AdvanceRolloutRule.prototype.id = "";
+    
+                        /**
+                         * AdvanceRolloutRule sourcePhases.
+                         * @member {Array.<string>} sourcePhases
+                         * @memberof google.cloud.deploy.v1.AdvanceRolloutRule
+                         * @instance
+                         */
+                        AdvanceRolloutRule.prototype.sourcePhases = $util.emptyArray;
+    
+                        /**
+                         * AdvanceRolloutRule wait.
+                         * @member {google.protobuf.IDuration|null|undefined} wait
+                         * @memberof google.cloud.deploy.v1.AdvanceRolloutRule
+                         * @instance
+                         */
+                        AdvanceRolloutRule.prototype.wait = null;
+    
+                        /**
+                         * AdvanceRolloutRule condition.
+                         * @member {google.cloud.deploy.v1.IAutomationRuleCondition|null|undefined} condition
+                         * @memberof google.cloud.deploy.v1.AdvanceRolloutRule
+                         * @instance
+                         */
+                        AdvanceRolloutRule.prototype.condition = null;
+    
+                        /**
+                         * Creates a new AdvanceRolloutRule instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.AdvanceRolloutRule
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAdvanceRolloutRule=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.AdvanceRolloutRule} AdvanceRolloutRule instance
+                         */
+                        AdvanceRolloutRule.create = function create(properties) {
+                            return new AdvanceRolloutRule(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AdvanceRolloutRule message. Does not implicitly {@link google.cloud.deploy.v1.AdvanceRolloutRule.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.AdvanceRolloutRule
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAdvanceRolloutRule} message AdvanceRolloutRule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdvanceRolloutRule.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                            if (message.wait != null && Object.hasOwnProperty.call(message, "wait"))
+                                $root.google.protobuf.Duration.encode(message.wait, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.condition != null && Object.hasOwnProperty.call(message, "condition"))
+                                $root.google.cloud.deploy.v1.AutomationRuleCondition.encode(message.condition, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.sourcePhases != null && message.sourcePhases.length)
+                                for (var i = 0; i < message.sourcePhases.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.sourcePhases[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AdvanceRolloutRule message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.AdvanceRolloutRule.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.AdvanceRolloutRule
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAdvanceRolloutRule} message AdvanceRolloutRule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdvanceRolloutRule.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AdvanceRolloutRule message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.AdvanceRolloutRule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.AdvanceRolloutRule} AdvanceRolloutRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdvanceRolloutRule.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.AdvanceRolloutRule();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.id = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.sourcePhases && message.sourcePhases.length))
+                                            message.sourcePhases = [];
+                                        message.sourcePhases.push(reader.string());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.wait = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.condition = $root.google.cloud.deploy.v1.AutomationRuleCondition.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AdvanceRolloutRule message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.AdvanceRolloutRule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.AdvanceRolloutRule} AdvanceRolloutRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdvanceRolloutRule.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AdvanceRolloutRule message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.AdvanceRolloutRule
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AdvanceRolloutRule.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                if (!$util.isString(message.id))
+                                    return "id: string expected";
+                            if (message.sourcePhases != null && message.hasOwnProperty("sourcePhases")) {
+                                if (!Array.isArray(message.sourcePhases))
+                                    return "sourcePhases: array expected";
+                                for (var i = 0; i < message.sourcePhases.length; ++i)
+                                    if (!$util.isString(message.sourcePhases[i]))
+                                        return "sourcePhases: string[] expected";
+                            }
+                            if (message.wait != null && message.hasOwnProperty("wait")) {
+                                var error = $root.google.protobuf.Duration.verify(message.wait);
+                                if (error)
+                                    return "wait." + error;
+                            }
+                            if (message.condition != null && message.hasOwnProperty("condition")) {
+                                var error = $root.google.cloud.deploy.v1.AutomationRuleCondition.verify(message.condition);
+                                if (error)
+                                    return "condition." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AdvanceRolloutRule message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.AdvanceRolloutRule
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.AdvanceRolloutRule} AdvanceRolloutRule
+                         */
+                        AdvanceRolloutRule.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.AdvanceRolloutRule)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.AdvanceRolloutRule();
+                            if (object.id != null)
+                                message.id = String(object.id);
+                            if (object.sourcePhases) {
+                                if (!Array.isArray(object.sourcePhases))
+                                    throw TypeError(".google.cloud.deploy.v1.AdvanceRolloutRule.sourcePhases: array expected");
+                                message.sourcePhases = [];
+                                for (var i = 0; i < object.sourcePhases.length; ++i)
+                                    message.sourcePhases[i] = String(object.sourcePhases[i]);
+                            }
+                            if (object.wait != null) {
+                                if (typeof object.wait !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.AdvanceRolloutRule.wait: object expected");
+                                message.wait = $root.google.protobuf.Duration.fromObject(object.wait);
+                            }
+                            if (object.condition != null) {
+                                if (typeof object.condition !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.AdvanceRolloutRule.condition: object expected");
+                                message.condition = $root.google.cloud.deploy.v1.AutomationRuleCondition.fromObject(object.condition);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AdvanceRolloutRule message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.AdvanceRolloutRule
+                         * @static
+                         * @param {google.cloud.deploy.v1.AdvanceRolloutRule} message AdvanceRolloutRule
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AdvanceRolloutRule.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.sourcePhases = [];
+                            if (options.defaults) {
+                                object.id = "";
+                                object.wait = null;
+                                object.condition = null;
+                            }
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                object.id = message.id;
+                            if (message.wait != null && message.hasOwnProperty("wait"))
+                                object.wait = $root.google.protobuf.Duration.toObject(message.wait, options);
+                            if (message.condition != null && message.hasOwnProperty("condition"))
+                                object.condition = $root.google.cloud.deploy.v1.AutomationRuleCondition.toObject(message.condition, options);
+                            if (message.sourcePhases && message.sourcePhases.length) {
+                                object.sourcePhases = [];
+                                for (var j = 0; j < message.sourcePhases.length; ++j)
+                                    object.sourcePhases[j] = message.sourcePhases[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AdvanceRolloutRule to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.AdvanceRolloutRule
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AdvanceRolloutRule.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AdvanceRolloutRule
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.AdvanceRolloutRule
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AdvanceRolloutRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.AdvanceRolloutRule";
+                        };
+    
+                        return AdvanceRolloutRule;
+                    })();
+    
+                    v1.RepairRolloutRule = (function() {
+    
+                        /**
+                         * Properties of a RepairRolloutRule.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IRepairRolloutRule
+                         * @property {string|null} [id] RepairRolloutRule id
+                         * @property {Array.<string>|null} [sourcePhases] RepairRolloutRule sourcePhases
+                         * @property {Array.<string>|null} [jobs] RepairRolloutRule jobs
+                         * @property {Array.<google.cloud.deploy.v1.IRepairMode>|null} [repairModes] RepairRolloutRule repairModes
+                         * @property {google.cloud.deploy.v1.IAutomationRuleCondition|null} [condition] RepairRolloutRule condition
+                         */
+    
+                        /**
+                         * Constructs a new RepairRolloutRule.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a RepairRolloutRule.
+                         * @implements IRepairRolloutRule
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IRepairRolloutRule=} [properties] Properties to set
+                         */
+                        function RepairRolloutRule(properties) {
+                            this.sourcePhases = [];
+                            this.jobs = [];
+                            this.repairModes = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RepairRolloutRule id.
+                         * @member {string} id
+                         * @memberof google.cloud.deploy.v1.RepairRolloutRule
+                         * @instance
+                         */
+                        RepairRolloutRule.prototype.id = "";
+    
+                        /**
+                         * RepairRolloutRule sourcePhases.
+                         * @member {Array.<string>} sourcePhases
+                         * @memberof google.cloud.deploy.v1.RepairRolloutRule
+                         * @instance
+                         */
+                        RepairRolloutRule.prototype.sourcePhases = $util.emptyArray;
+    
+                        /**
+                         * RepairRolloutRule jobs.
+                         * @member {Array.<string>} jobs
+                         * @memberof google.cloud.deploy.v1.RepairRolloutRule
+                         * @instance
+                         */
+                        RepairRolloutRule.prototype.jobs = $util.emptyArray;
+    
+                        /**
+                         * RepairRolloutRule repairModes.
+                         * @member {Array.<google.cloud.deploy.v1.IRepairMode>} repairModes
+                         * @memberof google.cloud.deploy.v1.RepairRolloutRule
+                         * @instance
+                         */
+                        RepairRolloutRule.prototype.repairModes = $util.emptyArray;
+    
+                        /**
+                         * RepairRolloutRule condition.
+                         * @member {google.cloud.deploy.v1.IAutomationRuleCondition|null|undefined} condition
+                         * @memberof google.cloud.deploy.v1.RepairRolloutRule
+                         * @instance
+                         */
+                        RepairRolloutRule.prototype.condition = null;
+    
+                        /**
+                         * Creates a new RepairRolloutRule instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.RepairRolloutRule
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRepairRolloutRule=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.RepairRolloutRule} RepairRolloutRule instance
+                         */
+                        RepairRolloutRule.create = function create(properties) {
+                            return new RepairRolloutRule(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RepairRolloutRule message. Does not implicitly {@link google.cloud.deploy.v1.RepairRolloutRule.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.RepairRolloutRule
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRepairRolloutRule} message RepairRolloutRule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RepairRolloutRule.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                            if (message.sourcePhases != null && message.sourcePhases.length)
+                                for (var i = 0; i < message.sourcePhases.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.sourcePhases[i]);
+                            if (message.jobs != null && message.jobs.length)
+                                for (var i = 0; i < message.jobs.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.jobs[i]);
+                            if (message.repairModes != null && message.repairModes.length)
+                                for (var i = 0; i < message.repairModes.length; ++i)
+                                    $root.google.cloud.deploy.v1.RepairMode.encode(message.repairModes[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.condition != null && Object.hasOwnProperty.call(message, "condition"))
+                                $root.google.cloud.deploy.v1.AutomationRuleCondition.encode(message.condition, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RepairRolloutRule message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.RepairRolloutRule.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.RepairRolloutRule
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRepairRolloutRule} message RepairRolloutRule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RepairRolloutRule.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RepairRolloutRule message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.RepairRolloutRule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.RepairRolloutRule} RepairRolloutRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RepairRolloutRule.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.RepairRolloutRule();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.id = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.sourcePhases && message.sourcePhases.length))
+                                            message.sourcePhases = [];
+                                        message.sourcePhases.push(reader.string());
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.jobs && message.jobs.length))
+                                            message.jobs = [];
+                                        message.jobs.push(reader.string());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.repairModes && message.repairModes.length))
+                                            message.repairModes = [];
+                                        message.repairModes.push($root.google.cloud.deploy.v1.RepairMode.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 6: {
+                                        message.condition = $root.google.cloud.deploy.v1.AutomationRuleCondition.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RepairRolloutRule message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.RepairRolloutRule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.RepairRolloutRule} RepairRolloutRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RepairRolloutRule.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RepairRolloutRule message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.RepairRolloutRule
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RepairRolloutRule.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                if (!$util.isString(message.id))
+                                    return "id: string expected";
+                            if (message.sourcePhases != null && message.hasOwnProperty("sourcePhases")) {
+                                if (!Array.isArray(message.sourcePhases))
+                                    return "sourcePhases: array expected";
+                                for (var i = 0; i < message.sourcePhases.length; ++i)
+                                    if (!$util.isString(message.sourcePhases[i]))
+                                        return "sourcePhases: string[] expected";
+                            }
+                            if (message.jobs != null && message.hasOwnProperty("jobs")) {
+                                if (!Array.isArray(message.jobs))
+                                    return "jobs: array expected";
+                                for (var i = 0; i < message.jobs.length; ++i)
+                                    if (!$util.isString(message.jobs[i]))
+                                        return "jobs: string[] expected";
+                            }
+                            if (message.repairModes != null && message.hasOwnProperty("repairModes")) {
+                                if (!Array.isArray(message.repairModes))
+                                    return "repairModes: array expected";
+                                for (var i = 0; i < message.repairModes.length; ++i) {
+                                    var error = $root.google.cloud.deploy.v1.RepairMode.verify(message.repairModes[i]);
+                                    if (error)
+                                        return "repairModes." + error;
+                                }
+                            }
+                            if (message.condition != null && message.hasOwnProperty("condition")) {
+                                var error = $root.google.cloud.deploy.v1.AutomationRuleCondition.verify(message.condition);
+                                if (error)
+                                    return "condition." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RepairRolloutRule message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.RepairRolloutRule
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.RepairRolloutRule} RepairRolloutRule
+                         */
+                        RepairRolloutRule.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.RepairRolloutRule)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.RepairRolloutRule();
+                            if (object.id != null)
+                                message.id = String(object.id);
+                            if (object.sourcePhases) {
+                                if (!Array.isArray(object.sourcePhases))
+                                    throw TypeError(".google.cloud.deploy.v1.RepairRolloutRule.sourcePhases: array expected");
+                                message.sourcePhases = [];
+                                for (var i = 0; i < object.sourcePhases.length; ++i)
+                                    message.sourcePhases[i] = String(object.sourcePhases[i]);
+                            }
+                            if (object.jobs) {
+                                if (!Array.isArray(object.jobs))
+                                    throw TypeError(".google.cloud.deploy.v1.RepairRolloutRule.jobs: array expected");
+                                message.jobs = [];
+                                for (var i = 0; i < object.jobs.length; ++i)
+                                    message.jobs[i] = String(object.jobs[i]);
+                            }
+                            if (object.repairModes) {
+                                if (!Array.isArray(object.repairModes))
+                                    throw TypeError(".google.cloud.deploy.v1.RepairRolloutRule.repairModes: array expected");
+                                message.repairModes = [];
+                                for (var i = 0; i < object.repairModes.length; ++i) {
+                                    if (typeof object.repairModes[i] !== "object")
+                                        throw TypeError(".google.cloud.deploy.v1.RepairRolloutRule.repairModes: object expected");
+                                    message.repairModes[i] = $root.google.cloud.deploy.v1.RepairMode.fromObject(object.repairModes[i]);
+                                }
+                            }
+                            if (object.condition != null) {
+                                if (typeof object.condition !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.RepairRolloutRule.condition: object expected");
+                                message.condition = $root.google.cloud.deploy.v1.AutomationRuleCondition.fromObject(object.condition);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RepairRolloutRule message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.RepairRolloutRule
+                         * @static
+                         * @param {google.cloud.deploy.v1.RepairRolloutRule} message RepairRolloutRule
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RepairRolloutRule.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.sourcePhases = [];
+                                object.jobs = [];
+                                object.repairModes = [];
+                            }
+                            if (options.defaults) {
+                                object.id = "";
+                                object.condition = null;
+                            }
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                object.id = message.id;
+                            if (message.sourcePhases && message.sourcePhases.length) {
+                                object.sourcePhases = [];
+                                for (var j = 0; j < message.sourcePhases.length; ++j)
+                                    object.sourcePhases[j] = message.sourcePhases[j];
+                            }
+                            if (message.jobs && message.jobs.length) {
+                                object.jobs = [];
+                                for (var j = 0; j < message.jobs.length; ++j)
+                                    object.jobs[j] = message.jobs[j];
+                            }
+                            if (message.repairModes && message.repairModes.length) {
+                                object.repairModes = [];
+                                for (var j = 0; j < message.repairModes.length; ++j)
+                                    object.repairModes[j] = $root.google.cloud.deploy.v1.RepairMode.toObject(message.repairModes[j], options);
+                            }
+                            if (message.condition != null && message.hasOwnProperty("condition"))
+                                object.condition = $root.google.cloud.deploy.v1.AutomationRuleCondition.toObject(message.condition, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RepairRolloutRule to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.RepairRolloutRule
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RepairRolloutRule.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RepairRolloutRule
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.RepairRolloutRule
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RepairRolloutRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.RepairRolloutRule";
+                        };
+    
+                        return RepairRolloutRule;
+                    })();
+    
+                    v1.RepairMode = (function() {
+    
+                        /**
+                         * Properties of a RepairMode.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IRepairMode
+                         * @property {google.cloud.deploy.v1.IRetry|null} [retry] RepairMode retry
+                         * @property {google.cloud.deploy.v1.IRollback|null} [rollback] RepairMode rollback
+                         */
+    
+                        /**
+                         * Constructs a new RepairMode.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a RepairMode.
+                         * @implements IRepairMode
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IRepairMode=} [properties] Properties to set
+                         */
+                        function RepairMode(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RepairMode retry.
+                         * @member {google.cloud.deploy.v1.IRetry|null|undefined} retry
+                         * @memberof google.cloud.deploy.v1.RepairMode
+                         * @instance
+                         */
+                        RepairMode.prototype.retry = null;
+    
+                        /**
+                         * RepairMode rollback.
+                         * @member {google.cloud.deploy.v1.IRollback|null|undefined} rollback
+                         * @memberof google.cloud.deploy.v1.RepairMode
+                         * @instance
+                         */
+                        RepairMode.prototype.rollback = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * RepairMode mode.
+                         * @member {"retry"|"rollback"|undefined} mode
+                         * @memberof google.cloud.deploy.v1.RepairMode
+                         * @instance
+                         */
+                        Object.defineProperty(RepairMode.prototype, "mode", {
+                            get: $util.oneOfGetter($oneOfFields = ["retry", "rollback"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new RepairMode instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.RepairMode
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRepairMode=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.RepairMode} RepairMode instance
+                         */
+                        RepairMode.create = function create(properties) {
+                            return new RepairMode(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RepairMode message. Does not implicitly {@link google.cloud.deploy.v1.RepairMode.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.RepairMode
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRepairMode} message RepairMode message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RepairMode.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.retry != null && Object.hasOwnProperty.call(message, "retry"))
+                                $root.google.cloud.deploy.v1.Retry.encode(message.retry, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.rollback != null && Object.hasOwnProperty.call(message, "rollback"))
+                                $root.google.cloud.deploy.v1.Rollback.encode(message.rollback, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RepairMode message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.RepairMode.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.RepairMode
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRepairMode} message RepairMode message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RepairMode.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RepairMode message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.RepairMode
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.RepairMode} RepairMode
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RepairMode.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.RepairMode();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.retry = $root.google.cloud.deploy.v1.Retry.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.rollback = $root.google.cloud.deploy.v1.Rollback.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RepairMode message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.RepairMode
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.RepairMode} RepairMode
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RepairMode.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RepairMode message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.RepairMode
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RepairMode.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.retry != null && message.hasOwnProperty("retry")) {
+                                properties.mode = 1;
+                                {
+                                    var error = $root.google.cloud.deploy.v1.Retry.verify(message.retry);
+                                    if (error)
+                                        return "retry." + error;
+                                }
+                            }
+                            if (message.rollback != null && message.hasOwnProperty("rollback")) {
+                                if (properties.mode === 1)
+                                    return "mode: multiple values";
+                                properties.mode = 1;
+                                {
+                                    var error = $root.google.cloud.deploy.v1.Rollback.verify(message.rollback);
+                                    if (error)
+                                        return "rollback." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RepairMode message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.RepairMode
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.RepairMode} RepairMode
+                         */
+                        RepairMode.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.RepairMode)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.RepairMode();
+                            if (object.retry != null) {
+                                if (typeof object.retry !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.RepairMode.retry: object expected");
+                                message.retry = $root.google.cloud.deploy.v1.Retry.fromObject(object.retry);
+                            }
+                            if (object.rollback != null) {
+                                if (typeof object.rollback !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.RepairMode.rollback: object expected");
+                                message.rollback = $root.google.cloud.deploy.v1.Rollback.fromObject(object.rollback);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RepairMode message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.RepairMode
+                         * @static
+                         * @param {google.cloud.deploy.v1.RepairMode} message RepairMode
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RepairMode.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.retry != null && message.hasOwnProperty("retry")) {
+                                object.retry = $root.google.cloud.deploy.v1.Retry.toObject(message.retry, options);
+                                if (options.oneofs)
+                                    object.mode = "retry";
+                            }
+                            if (message.rollback != null && message.hasOwnProperty("rollback")) {
+                                object.rollback = $root.google.cloud.deploy.v1.Rollback.toObject(message.rollback, options);
+                                if (options.oneofs)
+                                    object.mode = "rollback";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RepairMode to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.RepairMode
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RepairMode.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RepairMode
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.RepairMode
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RepairMode.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.RepairMode";
+                        };
+    
+                        return RepairMode;
+                    })();
+    
+                    v1.Retry = (function() {
+    
+                        /**
+                         * Properties of a Retry.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IRetry
+                         * @property {number|Long|null} [attempts] Retry attempts
+                         * @property {google.protobuf.IDuration|null} [wait] Retry wait
+                         * @property {google.cloud.deploy.v1.BackoffMode|null} [backoffMode] Retry backoffMode
+                         */
+    
+                        /**
+                         * Constructs a new Retry.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a Retry.
+                         * @implements IRetry
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IRetry=} [properties] Properties to set
+                         */
+                        function Retry(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Retry attempts.
+                         * @member {number|Long} attempts
+                         * @memberof google.cloud.deploy.v1.Retry
+                         * @instance
+                         */
+                        Retry.prototype.attempts = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Retry wait.
+                         * @member {google.protobuf.IDuration|null|undefined} wait
+                         * @memberof google.cloud.deploy.v1.Retry
+                         * @instance
+                         */
+                        Retry.prototype.wait = null;
+    
+                        /**
+                         * Retry backoffMode.
+                         * @member {google.cloud.deploy.v1.BackoffMode} backoffMode
+                         * @memberof google.cloud.deploy.v1.Retry
+                         * @instance
+                         */
+                        Retry.prototype.backoffMode = 0;
+    
+                        /**
+                         * Creates a new Retry instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.Retry
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRetry=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.Retry} Retry instance
+                         */
+                        Retry.create = function create(properties) {
+                            return new Retry(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Retry message. Does not implicitly {@link google.cloud.deploy.v1.Retry.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.Retry
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRetry} message Retry message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Retry.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.attempts != null && Object.hasOwnProperty.call(message, "attempts"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.attempts);
+                            if (message.wait != null && Object.hasOwnProperty.call(message, "wait"))
+                                $root.google.protobuf.Duration.encode(message.wait, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.backoffMode != null && Object.hasOwnProperty.call(message, "backoffMode"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.backoffMode);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Retry message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.Retry.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.Retry
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRetry} message Retry message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Retry.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Retry message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.Retry
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.Retry} Retry
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Retry.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.Retry();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.attempts = reader.int64();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.wait = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.backoffMode = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Retry message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.Retry
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.Retry} Retry
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Retry.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Retry message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.Retry
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Retry.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.attempts != null && message.hasOwnProperty("attempts"))
+                                if (!$util.isInteger(message.attempts) && !(message.attempts && $util.isInteger(message.attempts.low) && $util.isInteger(message.attempts.high)))
+                                    return "attempts: integer|Long expected";
+                            if (message.wait != null && message.hasOwnProperty("wait")) {
+                                var error = $root.google.protobuf.Duration.verify(message.wait);
+                                if (error)
+                                    return "wait." + error;
+                            }
+                            if (message.backoffMode != null && message.hasOwnProperty("backoffMode"))
+                                switch (message.backoffMode) {
+                                default:
+                                    return "backoffMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Retry message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.Retry
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.Retry} Retry
+                         */
+                        Retry.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.Retry)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.Retry();
+                            if (object.attempts != null)
+                                if ($util.Long)
+                                    (message.attempts = $util.Long.fromValue(object.attempts)).unsigned = false;
+                                else if (typeof object.attempts === "string")
+                                    message.attempts = parseInt(object.attempts, 10);
+                                else if (typeof object.attempts === "number")
+                                    message.attempts = object.attempts;
+                                else if (typeof object.attempts === "object")
+                                    message.attempts = new $util.LongBits(object.attempts.low >>> 0, object.attempts.high >>> 0).toNumber();
+                            if (object.wait != null) {
+                                if (typeof object.wait !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.Retry.wait: object expected");
+                                message.wait = $root.google.protobuf.Duration.fromObject(object.wait);
+                            }
+                            switch (object.backoffMode) {
+                            default:
+                                if (typeof object.backoffMode === "number") {
+                                    message.backoffMode = object.backoffMode;
+                                    break;
+                                }
+                                break;
+                            case "BACKOFF_MODE_UNSPECIFIED":
+                            case 0:
+                                message.backoffMode = 0;
+                                break;
+                            case "BACKOFF_MODE_LINEAR":
+                            case 1:
+                                message.backoffMode = 1;
+                                break;
+                            case "BACKOFF_MODE_EXPONENTIAL":
+                            case 2:
+                                message.backoffMode = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Retry message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.Retry
+                         * @static
+                         * @param {google.cloud.deploy.v1.Retry} message Retry
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Retry.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.attempts = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.attempts = options.longs === String ? "0" : 0;
+                                object.wait = null;
+                                object.backoffMode = options.enums === String ? "BACKOFF_MODE_UNSPECIFIED" : 0;
+                            }
+                            if (message.attempts != null && message.hasOwnProperty("attempts"))
+                                if (typeof message.attempts === "number")
+                                    object.attempts = options.longs === String ? String(message.attempts) : message.attempts;
+                                else
+                                    object.attempts = options.longs === String ? $util.Long.prototype.toString.call(message.attempts) : options.longs === Number ? new $util.LongBits(message.attempts.low >>> 0, message.attempts.high >>> 0).toNumber() : message.attempts;
+                            if (message.wait != null && message.hasOwnProperty("wait"))
+                                object.wait = $root.google.protobuf.Duration.toObject(message.wait, options);
+                            if (message.backoffMode != null && message.hasOwnProperty("backoffMode"))
+                                object.backoffMode = options.enums === String ? $root.google.cloud.deploy.v1.BackoffMode[message.backoffMode] === undefined ? message.backoffMode : $root.google.cloud.deploy.v1.BackoffMode[message.backoffMode] : message.backoffMode;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Retry to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.Retry
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Retry.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Retry
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.Retry
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Retry.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.Retry";
+                        };
+    
+                        return Retry;
+                    })();
+    
+                    v1.Rollback = (function() {
+    
+                        /**
+                         * Properties of a Rollback.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IRollback
+                         * @property {string|null} [destinationPhase] Rollback destinationPhase
+                         */
+    
+                        /**
+                         * Constructs a new Rollback.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a Rollback.
+                         * @implements IRollback
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IRollback=} [properties] Properties to set
+                         */
+                        function Rollback(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Rollback destinationPhase.
+                         * @member {string} destinationPhase
+                         * @memberof google.cloud.deploy.v1.Rollback
+                         * @instance
+                         */
+                        Rollback.prototype.destinationPhase = "";
+    
+                        /**
+                         * Creates a new Rollback instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.Rollback
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRollback=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.Rollback} Rollback instance
+                         */
+                        Rollback.create = function create(properties) {
+                            return new Rollback(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Rollback message. Does not implicitly {@link google.cloud.deploy.v1.Rollback.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.Rollback
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRollback} message Rollback message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Rollback.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.destinationPhase != null && Object.hasOwnProperty.call(message, "destinationPhase"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.destinationPhase);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Rollback message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.Rollback.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.Rollback
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRollback} message Rollback message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Rollback.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Rollback message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.Rollback
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.Rollback} Rollback
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Rollback.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.Rollback();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.destinationPhase = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Rollback message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.Rollback
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.Rollback} Rollback
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Rollback.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Rollback message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.Rollback
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Rollback.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.destinationPhase != null && message.hasOwnProperty("destinationPhase"))
+                                if (!$util.isString(message.destinationPhase))
+                                    return "destinationPhase: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Rollback message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.Rollback
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.Rollback} Rollback
+                         */
+                        Rollback.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.Rollback)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.Rollback();
+                            if (object.destinationPhase != null)
+                                message.destinationPhase = String(object.destinationPhase);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Rollback message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.Rollback
+                         * @static
+                         * @param {google.cloud.deploy.v1.Rollback} message Rollback
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Rollback.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.destinationPhase = "";
+                            if (message.destinationPhase != null && message.hasOwnProperty("destinationPhase"))
+                                object.destinationPhase = message.destinationPhase;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Rollback to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.Rollback
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Rollback.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Rollback
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.Rollback
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Rollback.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.Rollback";
+                        };
+    
+                        return Rollback;
+                    })();
+    
+                    v1.AutomationRuleCondition = (function() {
+    
+                        /**
+                         * Properties of an AutomationRuleCondition.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IAutomationRuleCondition
+                         * @property {google.cloud.deploy.v1.ITargetsPresentCondition|null} [targetsPresentCondition] AutomationRuleCondition targetsPresentCondition
+                         */
+    
+                        /**
+                         * Constructs a new AutomationRuleCondition.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents an AutomationRuleCondition.
+                         * @implements IAutomationRuleCondition
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IAutomationRuleCondition=} [properties] Properties to set
+                         */
+                        function AutomationRuleCondition(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AutomationRuleCondition targetsPresentCondition.
+                         * @member {google.cloud.deploy.v1.ITargetsPresentCondition|null|undefined} targetsPresentCondition
+                         * @memberof google.cloud.deploy.v1.AutomationRuleCondition
+                         * @instance
+                         */
+                        AutomationRuleCondition.prototype.targetsPresentCondition = null;
+    
+                        /**
+                         * Creates a new AutomationRuleCondition instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.AutomationRuleCondition
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAutomationRuleCondition=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.AutomationRuleCondition} AutomationRuleCondition instance
+                         */
+                        AutomationRuleCondition.create = function create(properties) {
+                            return new AutomationRuleCondition(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AutomationRuleCondition message. Does not implicitly {@link google.cloud.deploy.v1.AutomationRuleCondition.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.AutomationRuleCondition
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAutomationRuleCondition} message AutomationRuleCondition message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AutomationRuleCondition.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.targetsPresentCondition != null && Object.hasOwnProperty.call(message, "targetsPresentCondition"))
+                                $root.google.cloud.deploy.v1.TargetsPresentCondition.encode(message.targetsPresentCondition, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AutomationRuleCondition message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.AutomationRuleCondition.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.AutomationRuleCondition
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAutomationRuleCondition} message AutomationRuleCondition message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AutomationRuleCondition.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AutomationRuleCondition message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.AutomationRuleCondition
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.AutomationRuleCondition} AutomationRuleCondition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AutomationRuleCondition.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.AutomationRuleCondition();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.targetsPresentCondition = $root.google.cloud.deploy.v1.TargetsPresentCondition.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AutomationRuleCondition message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.AutomationRuleCondition
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.AutomationRuleCondition} AutomationRuleCondition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AutomationRuleCondition.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AutomationRuleCondition message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.AutomationRuleCondition
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AutomationRuleCondition.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.targetsPresentCondition != null && message.hasOwnProperty("targetsPresentCondition")) {
+                                var error = $root.google.cloud.deploy.v1.TargetsPresentCondition.verify(message.targetsPresentCondition);
+                                if (error)
+                                    return "targetsPresentCondition." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AutomationRuleCondition message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.AutomationRuleCondition
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.AutomationRuleCondition} AutomationRuleCondition
+                         */
+                        AutomationRuleCondition.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.AutomationRuleCondition)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.AutomationRuleCondition();
+                            if (object.targetsPresentCondition != null) {
+                                if (typeof object.targetsPresentCondition !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.AutomationRuleCondition.targetsPresentCondition: object expected");
+                                message.targetsPresentCondition = $root.google.cloud.deploy.v1.TargetsPresentCondition.fromObject(object.targetsPresentCondition);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AutomationRuleCondition message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.AutomationRuleCondition
+                         * @static
+                         * @param {google.cloud.deploy.v1.AutomationRuleCondition} message AutomationRuleCondition
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AutomationRuleCondition.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.targetsPresentCondition = null;
+                            if (message.targetsPresentCondition != null && message.hasOwnProperty("targetsPresentCondition"))
+                                object.targetsPresentCondition = $root.google.cloud.deploy.v1.TargetsPresentCondition.toObject(message.targetsPresentCondition, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AutomationRuleCondition to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.AutomationRuleCondition
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AutomationRuleCondition.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AutomationRuleCondition
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.AutomationRuleCondition
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AutomationRuleCondition.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.AutomationRuleCondition";
+                        };
+    
+                        return AutomationRuleCondition;
+                    })();
+    
+                    v1.CreateAutomationRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateAutomationRequest.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface ICreateAutomationRequest
+                         * @property {string|null} [parent] CreateAutomationRequest parent
+                         * @property {string|null} [automationId] CreateAutomationRequest automationId
+                         * @property {google.cloud.deploy.v1.IAutomation|null} [automation] CreateAutomationRequest automation
+                         * @property {string|null} [requestId] CreateAutomationRequest requestId
+                         * @property {boolean|null} [validateOnly] CreateAutomationRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new CreateAutomationRequest.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a CreateAutomationRequest.
+                         * @implements ICreateAutomationRequest
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.ICreateAutomationRequest=} [properties] Properties to set
+                         */
+                        function CreateAutomationRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateAutomationRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.deploy.v1.CreateAutomationRequest
+                         * @instance
+                         */
+                        CreateAutomationRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateAutomationRequest automationId.
+                         * @member {string} automationId
+                         * @memberof google.cloud.deploy.v1.CreateAutomationRequest
+                         * @instance
+                         */
+                        CreateAutomationRequest.prototype.automationId = "";
+    
+                        /**
+                         * CreateAutomationRequest automation.
+                         * @member {google.cloud.deploy.v1.IAutomation|null|undefined} automation
+                         * @memberof google.cloud.deploy.v1.CreateAutomationRequest
+                         * @instance
+                         */
+                        CreateAutomationRequest.prototype.automation = null;
+    
+                        /**
+                         * CreateAutomationRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.deploy.v1.CreateAutomationRequest
+                         * @instance
+                         */
+                        CreateAutomationRequest.prototype.requestId = "";
+    
+                        /**
+                         * CreateAutomationRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.deploy.v1.CreateAutomationRequest
+                         * @instance
+                         */
+                        CreateAutomationRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new CreateAutomationRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.CreateAutomationRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.ICreateAutomationRequest=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.CreateAutomationRequest} CreateAutomationRequest instance
+                         */
+                        CreateAutomationRequest.create = function create(properties) {
+                            return new CreateAutomationRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateAutomationRequest message. Does not implicitly {@link google.cloud.deploy.v1.CreateAutomationRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.CreateAutomationRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.ICreateAutomationRequest} message CreateAutomationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateAutomationRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.automationId != null && Object.hasOwnProperty.call(message, "automationId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.automationId);
+                            if (message.automation != null && Object.hasOwnProperty.call(message, "automation"))
+                                $root.google.cloud.deploy.v1.Automation.encode(message.automation, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateAutomationRequest message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.CreateAutomationRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.CreateAutomationRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.ICreateAutomationRequest} message CreateAutomationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateAutomationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateAutomationRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.CreateAutomationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.CreateAutomationRequest} CreateAutomationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateAutomationRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.CreateAutomationRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.automationId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.automation = $root.google.cloud.deploy.v1.Automation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateAutomationRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.CreateAutomationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.CreateAutomationRequest} CreateAutomationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateAutomationRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateAutomationRequest message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.CreateAutomationRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateAutomationRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.automationId != null && message.hasOwnProperty("automationId"))
+                                if (!$util.isString(message.automationId))
+                                    return "automationId: string expected";
+                            if (message.automation != null && message.hasOwnProperty("automation")) {
+                                var error = $root.google.cloud.deploy.v1.Automation.verify(message.automation);
+                                if (error)
+                                    return "automation." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateAutomationRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.CreateAutomationRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.CreateAutomationRequest} CreateAutomationRequest
+                         */
+                        CreateAutomationRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.CreateAutomationRequest)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.CreateAutomationRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.automationId != null)
+                                message.automationId = String(object.automationId);
+                            if (object.automation != null) {
+                                if (typeof object.automation !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.CreateAutomationRequest.automation: object expected");
+                                message.automation = $root.google.cloud.deploy.v1.Automation.fromObject(object.automation);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateAutomationRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.CreateAutomationRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.CreateAutomationRequest} message CreateAutomationRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateAutomationRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.automationId = "";
+                                object.automation = null;
+                                object.requestId = "";
+                                object.validateOnly = false;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.automationId != null && message.hasOwnProperty("automationId"))
+                                object.automationId = message.automationId;
+                            if (message.automation != null && message.hasOwnProperty("automation"))
+                                object.automation = $root.google.cloud.deploy.v1.Automation.toObject(message.automation, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateAutomationRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.CreateAutomationRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateAutomationRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateAutomationRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.CreateAutomationRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateAutomationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.CreateAutomationRequest";
+                        };
+    
+                        return CreateAutomationRequest;
+                    })();
+    
+                    v1.UpdateAutomationRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateAutomationRequest.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IUpdateAutomationRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateAutomationRequest updateMask
+                         * @property {google.cloud.deploy.v1.IAutomation|null} [automation] UpdateAutomationRequest automation
+                         * @property {string|null} [requestId] UpdateAutomationRequest requestId
+                         * @property {boolean|null} [allowMissing] UpdateAutomationRequest allowMissing
+                         * @property {boolean|null} [validateOnly] UpdateAutomationRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new UpdateAutomationRequest.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents an UpdateAutomationRequest.
+                         * @implements IUpdateAutomationRequest
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IUpdateAutomationRequest=} [properties] Properties to set
+                         */
+                        function UpdateAutomationRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateAutomationRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.deploy.v1.UpdateAutomationRequest
+                         * @instance
+                         */
+                        UpdateAutomationRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateAutomationRequest automation.
+                         * @member {google.cloud.deploy.v1.IAutomation|null|undefined} automation
+                         * @memberof google.cloud.deploy.v1.UpdateAutomationRequest
+                         * @instance
+                         */
+                        UpdateAutomationRequest.prototype.automation = null;
+    
+                        /**
+                         * UpdateAutomationRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.deploy.v1.UpdateAutomationRequest
+                         * @instance
+                         */
+                        UpdateAutomationRequest.prototype.requestId = "";
+    
+                        /**
+                         * UpdateAutomationRequest allowMissing.
+                         * @member {boolean} allowMissing
+                         * @memberof google.cloud.deploy.v1.UpdateAutomationRequest
+                         * @instance
+                         */
+                        UpdateAutomationRequest.prototype.allowMissing = false;
+    
+                        /**
+                         * UpdateAutomationRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.deploy.v1.UpdateAutomationRequest
+                         * @instance
+                         */
+                        UpdateAutomationRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new UpdateAutomationRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.UpdateAutomationRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IUpdateAutomationRequest=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.UpdateAutomationRequest} UpdateAutomationRequest instance
+                         */
+                        UpdateAutomationRequest.create = function create(properties) {
+                            return new UpdateAutomationRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateAutomationRequest message. Does not implicitly {@link google.cloud.deploy.v1.UpdateAutomationRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.UpdateAutomationRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IUpdateAutomationRequest} message UpdateAutomationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateAutomationRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.automation != null && Object.hasOwnProperty.call(message, "automation"))
+                                $root.google.cloud.deploy.v1.Automation.encode(message.automation, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            if (message.allowMissing != null && Object.hasOwnProperty.call(message, "allowMissing"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.allowMissing);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateAutomationRequest message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.UpdateAutomationRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.UpdateAutomationRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IUpdateAutomationRequest} message UpdateAutomationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateAutomationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateAutomationRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.UpdateAutomationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.UpdateAutomationRequest} UpdateAutomationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateAutomationRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.UpdateAutomationRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.automation = $root.google.cloud.deploy.v1.Automation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.allowMissing = reader.bool();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateAutomationRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.UpdateAutomationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.UpdateAutomationRequest} UpdateAutomationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateAutomationRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateAutomationRequest message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.UpdateAutomationRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateAutomationRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.automation != null && message.hasOwnProperty("automation")) {
+                                var error = $root.google.cloud.deploy.v1.Automation.verify(message.automation);
+                                if (error)
+                                    return "automation." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                if (typeof message.allowMissing !== "boolean")
+                                    return "allowMissing: boolean expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateAutomationRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.UpdateAutomationRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.UpdateAutomationRequest} UpdateAutomationRequest
+                         */
+                        UpdateAutomationRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.UpdateAutomationRequest)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.UpdateAutomationRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.UpdateAutomationRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.automation != null) {
+                                if (typeof object.automation !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.UpdateAutomationRequest.automation: object expected");
+                                message.automation = $root.google.cloud.deploy.v1.Automation.fromObject(object.automation);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            if (object.allowMissing != null)
+                                message.allowMissing = Boolean(object.allowMissing);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateAutomationRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.UpdateAutomationRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.UpdateAutomationRequest} message UpdateAutomationRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateAutomationRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.automation = null;
+                                object.requestId = "";
+                                object.allowMissing = false;
+                                object.validateOnly = false;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.automation != null && message.hasOwnProperty("automation"))
+                                object.automation = $root.google.cloud.deploy.v1.Automation.toObject(message.automation, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                object.allowMissing = message.allowMissing;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateAutomationRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.UpdateAutomationRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateAutomationRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateAutomationRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.UpdateAutomationRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateAutomationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.UpdateAutomationRequest";
+                        };
+    
+                        return UpdateAutomationRequest;
+                    })();
+    
+                    v1.DeleteAutomationRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteAutomationRequest.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IDeleteAutomationRequest
+                         * @property {string|null} [name] DeleteAutomationRequest name
+                         * @property {string|null} [requestId] DeleteAutomationRequest requestId
+                         * @property {boolean|null} [allowMissing] DeleteAutomationRequest allowMissing
+                         * @property {boolean|null} [validateOnly] DeleteAutomationRequest validateOnly
+                         * @property {string|null} [etag] DeleteAutomationRequest etag
+                         */
+    
+                        /**
+                         * Constructs a new DeleteAutomationRequest.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a DeleteAutomationRequest.
+                         * @implements IDeleteAutomationRequest
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IDeleteAutomationRequest=} [properties] Properties to set
+                         */
+                        function DeleteAutomationRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteAutomationRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.deploy.v1.DeleteAutomationRequest
+                         * @instance
+                         */
+                        DeleteAutomationRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteAutomationRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.deploy.v1.DeleteAutomationRequest
+                         * @instance
+                         */
+                        DeleteAutomationRequest.prototype.requestId = "";
+    
+                        /**
+                         * DeleteAutomationRequest allowMissing.
+                         * @member {boolean} allowMissing
+                         * @memberof google.cloud.deploy.v1.DeleteAutomationRequest
+                         * @instance
+                         */
+                        DeleteAutomationRequest.prototype.allowMissing = false;
+    
+                        /**
+                         * DeleteAutomationRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.deploy.v1.DeleteAutomationRequest
+                         * @instance
+                         */
+                        DeleteAutomationRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * DeleteAutomationRequest etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.deploy.v1.DeleteAutomationRequest
+                         * @instance
+                         */
+                        DeleteAutomationRequest.prototype.etag = "";
+    
+                        /**
+                         * Creates a new DeleteAutomationRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.DeleteAutomationRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IDeleteAutomationRequest=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.DeleteAutomationRequest} DeleteAutomationRequest instance
+                         */
+                        DeleteAutomationRequest.create = function create(properties) {
+                            return new DeleteAutomationRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteAutomationRequest message. Does not implicitly {@link google.cloud.deploy.v1.DeleteAutomationRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.DeleteAutomationRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IDeleteAutomationRequest} message DeleteAutomationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteAutomationRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            if (message.allowMissing != null && Object.hasOwnProperty.call(message, "allowMissing"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.allowMissing);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.validateOnly);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.etag);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteAutomationRequest message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.DeleteAutomationRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.DeleteAutomationRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IDeleteAutomationRequest} message DeleteAutomationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteAutomationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteAutomationRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.DeleteAutomationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.DeleteAutomationRequest} DeleteAutomationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteAutomationRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.DeleteAutomationRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.allowMissing = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteAutomationRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.DeleteAutomationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.DeleteAutomationRequest} DeleteAutomationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteAutomationRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteAutomationRequest message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.DeleteAutomationRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteAutomationRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                if (typeof message.allowMissing !== "boolean")
+                                    return "allowMissing: boolean expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteAutomationRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.DeleteAutomationRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.DeleteAutomationRequest} DeleteAutomationRequest
+                         */
+                        DeleteAutomationRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.DeleteAutomationRequest)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.DeleteAutomationRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            if (object.allowMissing != null)
+                                message.allowMissing = Boolean(object.allowMissing);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteAutomationRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.DeleteAutomationRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.DeleteAutomationRequest} message DeleteAutomationRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteAutomationRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                                object.allowMissing = false;
+                                object.validateOnly = false;
+                                object.etag = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                object.allowMissing = message.allowMissing;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteAutomationRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.DeleteAutomationRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteAutomationRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteAutomationRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.DeleteAutomationRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteAutomationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.DeleteAutomationRequest";
+                        };
+    
+                        return DeleteAutomationRequest;
+                    })();
+    
+                    v1.ListAutomationsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListAutomationsRequest.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IListAutomationsRequest
+                         * @property {string|null} [parent] ListAutomationsRequest parent
+                         * @property {number|null} [pageSize] ListAutomationsRequest pageSize
+                         * @property {string|null} [pageToken] ListAutomationsRequest pageToken
+                         * @property {string|null} [filter] ListAutomationsRequest filter
+                         * @property {string|null} [orderBy] ListAutomationsRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListAutomationsRequest.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a ListAutomationsRequest.
+                         * @implements IListAutomationsRequest
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IListAutomationsRequest=} [properties] Properties to set
+                         */
+                        function ListAutomationsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAutomationsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.deploy.v1.ListAutomationsRequest
+                         * @instance
+                         */
+                        ListAutomationsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListAutomationsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.deploy.v1.ListAutomationsRequest
+                         * @instance
+                         */
+                        ListAutomationsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListAutomationsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.deploy.v1.ListAutomationsRequest
+                         * @instance
+                         */
+                        ListAutomationsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListAutomationsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.deploy.v1.ListAutomationsRequest
+                         * @instance
+                         */
+                        ListAutomationsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListAutomationsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.deploy.v1.ListAutomationsRequest
+                         * @instance
+                         */
+                        ListAutomationsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListAutomationsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.ListAutomationsRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IListAutomationsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.ListAutomationsRequest} ListAutomationsRequest instance
+                         */
+                        ListAutomationsRequest.create = function create(properties) {
+                            return new ListAutomationsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAutomationsRequest message. Does not implicitly {@link google.cloud.deploy.v1.ListAutomationsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.ListAutomationsRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IListAutomationsRequest} message ListAutomationsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAutomationsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAutomationsRequest message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.ListAutomationsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.ListAutomationsRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IListAutomationsRequest} message ListAutomationsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAutomationsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAutomationsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.ListAutomationsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.ListAutomationsRequest} ListAutomationsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAutomationsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.ListAutomationsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAutomationsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.ListAutomationsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.ListAutomationsRequest} ListAutomationsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAutomationsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAutomationsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.ListAutomationsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAutomationsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAutomationsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.ListAutomationsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.ListAutomationsRequest} ListAutomationsRequest
+                         */
+                        ListAutomationsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.ListAutomationsRequest)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.ListAutomationsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAutomationsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.ListAutomationsRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.ListAutomationsRequest} message ListAutomationsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAutomationsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAutomationsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.ListAutomationsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAutomationsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListAutomationsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.ListAutomationsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListAutomationsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.ListAutomationsRequest";
+                        };
+    
+                        return ListAutomationsRequest;
+                    })();
+    
+                    v1.ListAutomationsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListAutomationsResponse.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IListAutomationsResponse
+                         * @property {Array.<google.cloud.deploy.v1.IAutomation>|null} [automations] ListAutomationsResponse automations
+                         * @property {string|null} [nextPageToken] ListAutomationsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListAutomationsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListAutomationsResponse.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a ListAutomationsResponse.
+                         * @implements IListAutomationsResponse
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IListAutomationsResponse=} [properties] Properties to set
+                         */
+                        function ListAutomationsResponse(properties) {
+                            this.automations = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAutomationsResponse automations.
+                         * @member {Array.<google.cloud.deploy.v1.IAutomation>} automations
+                         * @memberof google.cloud.deploy.v1.ListAutomationsResponse
+                         * @instance
+                         */
+                        ListAutomationsResponse.prototype.automations = $util.emptyArray;
+    
+                        /**
+                         * ListAutomationsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.deploy.v1.ListAutomationsResponse
+                         * @instance
+                         */
+                        ListAutomationsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListAutomationsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.deploy.v1.ListAutomationsResponse
+                         * @instance
+                         */
+                        ListAutomationsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListAutomationsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.ListAutomationsResponse
+                         * @static
+                         * @param {google.cloud.deploy.v1.IListAutomationsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.ListAutomationsResponse} ListAutomationsResponse instance
+                         */
+                        ListAutomationsResponse.create = function create(properties) {
+                            return new ListAutomationsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAutomationsResponse message. Does not implicitly {@link google.cloud.deploy.v1.ListAutomationsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.ListAutomationsResponse
+                         * @static
+                         * @param {google.cloud.deploy.v1.IListAutomationsResponse} message ListAutomationsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAutomationsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.automations != null && message.automations.length)
+                                for (var i = 0; i < message.automations.length; ++i)
+                                    $root.google.cloud.deploy.v1.Automation.encode(message.automations[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAutomationsResponse message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.ListAutomationsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.ListAutomationsResponse
+                         * @static
+                         * @param {google.cloud.deploy.v1.IListAutomationsResponse} message ListAutomationsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAutomationsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAutomationsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.ListAutomationsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.ListAutomationsResponse} ListAutomationsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAutomationsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.ListAutomationsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.automations && message.automations.length))
+                                            message.automations = [];
+                                        message.automations.push($root.google.cloud.deploy.v1.Automation.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAutomationsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.ListAutomationsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.ListAutomationsResponse} ListAutomationsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAutomationsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAutomationsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.ListAutomationsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAutomationsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.automations != null && message.hasOwnProperty("automations")) {
+                                if (!Array.isArray(message.automations))
+                                    return "automations: array expected";
+                                for (var i = 0; i < message.automations.length; ++i) {
+                                    var error = $root.google.cloud.deploy.v1.Automation.verify(message.automations[i]);
+                                    if (error)
+                                        return "automations." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAutomationsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.ListAutomationsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.ListAutomationsResponse} ListAutomationsResponse
+                         */
+                        ListAutomationsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.ListAutomationsResponse)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.ListAutomationsResponse();
+                            if (object.automations) {
+                                if (!Array.isArray(object.automations))
+                                    throw TypeError(".google.cloud.deploy.v1.ListAutomationsResponse.automations: array expected");
+                                message.automations = [];
+                                for (var i = 0; i < object.automations.length; ++i) {
+                                    if (typeof object.automations[i] !== "object")
+                                        throw TypeError(".google.cloud.deploy.v1.ListAutomationsResponse.automations: object expected");
+                                    message.automations[i] = $root.google.cloud.deploy.v1.Automation.fromObject(object.automations[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.deploy.v1.ListAutomationsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAutomationsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.ListAutomationsResponse
+                         * @static
+                         * @param {google.cloud.deploy.v1.ListAutomationsResponse} message ListAutomationsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAutomationsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.automations = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.automations && message.automations.length) {
+                                object.automations = [];
+                                for (var j = 0; j < message.automations.length; ++j)
+                                    object.automations[j] = $root.google.cloud.deploy.v1.Automation.toObject(message.automations[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAutomationsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.ListAutomationsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAutomationsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListAutomationsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.ListAutomationsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListAutomationsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.ListAutomationsResponse";
+                        };
+    
+                        return ListAutomationsResponse;
+                    })();
+    
+                    v1.GetAutomationRequest = (function() {
+    
+                        /**
+                         * Properties of a GetAutomationRequest.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IGetAutomationRequest
+                         * @property {string|null} [name] GetAutomationRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetAutomationRequest.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a GetAutomationRequest.
+                         * @implements IGetAutomationRequest
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IGetAutomationRequest=} [properties] Properties to set
+                         */
+                        function GetAutomationRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetAutomationRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.deploy.v1.GetAutomationRequest
+                         * @instance
+                         */
+                        GetAutomationRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetAutomationRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.GetAutomationRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IGetAutomationRequest=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.GetAutomationRequest} GetAutomationRequest instance
+                         */
+                        GetAutomationRequest.create = function create(properties) {
+                            return new GetAutomationRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetAutomationRequest message. Does not implicitly {@link google.cloud.deploy.v1.GetAutomationRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.GetAutomationRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IGetAutomationRequest} message GetAutomationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetAutomationRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetAutomationRequest message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.GetAutomationRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.GetAutomationRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IGetAutomationRequest} message GetAutomationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetAutomationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetAutomationRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.GetAutomationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.GetAutomationRequest} GetAutomationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetAutomationRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.GetAutomationRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetAutomationRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.GetAutomationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.GetAutomationRequest} GetAutomationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetAutomationRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetAutomationRequest message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.GetAutomationRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetAutomationRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetAutomationRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.GetAutomationRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.GetAutomationRequest} GetAutomationRequest
+                         */
+                        GetAutomationRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.GetAutomationRequest)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.GetAutomationRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetAutomationRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.GetAutomationRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.GetAutomationRequest} message GetAutomationRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetAutomationRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetAutomationRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.GetAutomationRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetAutomationRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetAutomationRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.GetAutomationRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetAutomationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.GetAutomationRequest";
+                        };
+    
+                        return GetAutomationRequest;
+                    })();
+    
+                    v1.AutomationRun = (function() {
+    
+                        /**
+                         * Properties of an AutomationRun.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IAutomationRun
+                         * @property {string|null} [name] AutomationRun name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] AutomationRun createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] AutomationRun updateTime
+                         * @property {string|null} [etag] AutomationRun etag
+                         * @property {string|null} [serviceAccount] AutomationRun serviceAccount
+                         * @property {google.cloud.deploy.v1.IAutomation|null} [automationSnapshot] AutomationRun automationSnapshot
+                         * @property {string|null} [targetId] AutomationRun targetId
+                         * @property {google.cloud.deploy.v1.AutomationRun.State|null} [state] AutomationRun state
+                         * @property {string|null} [stateDescription] AutomationRun stateDescription
+                         * @property {google.protobuf.ITimestamp|null} [expireTime] AutomationRun expireTime
+                         * @property {string|null} [ruleId] AutomationRun ruleId
+                         * @property {string|null} [automationId] AutomationRun automationId
+                         * @property {google.cloud.deploy.v1.IPromoteReleaseOperation|null} [promoteReleaseOperation] AutomationRun promoteReleaseOperation
+                         * @property {google.cloud.deploy.v1.IAdvanceRolloutOperation|null} [advanceRolloutOperation] AutomationRun advanceRolloutOperation
+                         * @property {google.cloud.deploy.v1.IRepairRolloutOperation|null} [repairRolloutOperation] AutomationRun repairRolloutOperation
+                         * @property {google.protobuf.ITimestamp|null} [waitUntilTime] AutomationRun waitUntilTime
+                         */
+    
+                        /**
+                         * Constructs a new AutomationRun.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents an AutomationRun.
+                         * @implements IAutomationRun
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IAutomationRun=} [properties] Properties to set
+                         */
+                        function AutomationRun(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AutomationRun name.
+                         * @member {string} name
+                         * @memberof google.cloud.deploy.v1.AutomationRun
+                         * @instance
+                         */
+                        AutomationRun.prototype.name = "";
+    
+                        /**
+                         * AutomationRun createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.deploy.v1.AutomationRun
+                         * @instance
+                         */
+                        AutomationRun.prototype.createTime = null;
+    
+                        /**
+                         * AutomationRun updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.deploy.v1.AutomationRun
+                         * @instance
+                         */
+                        AutomationRun.prototype.updateTime = null;
+    
+                        /**
+                         * AutomationRun etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.deploy.v1.AutomationRun
+                         * @instance
+                         */
+                        AutomationRun.prototype.etag = "";
+    
+                        /**
+                         * AutomationRun serviceAccount.
+                         * @member {string} serviceAccount
+                         * @memberof google.cloud.deploy.v1.AutomationRun
+                         * @instance
+                         */
+                        AutomationRun.prototype.serviceAccount = "";
+    
+                        /**
+                         * AutomationRun automationSnapshot.
+                         * @member {google.cloud.deploy.v1.IAutomation|null|undefined} automationSnapshot
+                         * @memberof google.cloud.deploy.v1.AutomationRun
+                         * @instance
+                         */
+                        AutomationRun.prototype.automationSnapshot = null;
+    
+                        /**
+                         * AutomationRun targetId.
+                         * @member {string} targetId
+                         * @memberof google.cloud.deploy.v1.AutomationRun
+                         * @instance
+                         */
+                        AutomationRun.prototype.targetId = "";
+    
+                        /**
+                         * AutomationRun state.
+                         * @member {google.cloud.deploy.v1.AutomationRun.State} state
+                         * @memberof google.cloud.deploy.v1.AutomationRun
+                         * @instance
+                         */
+                        AutomationRun.prototype.state = 0;
+    
+                        /**
+                         * AutomationRun stateDescription.
+                         * @member {string} stateDescription
+                         * @memberof google.cloud.deploy.v1.AutomationRun
+                         * @instance
+                         */
+                        AutomationRun.prototype.stateDescription = "";
+    
+                        /**
+                         * AutomationRun expireTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} expireTime
+                         * @memberof google.cloud.deploy.v1.AutomationRun
+                         * @instance
+                         */
+                        AutomationRun.prototype.expireTime = null;
+    
+                        /**
+                         * AutomationRun ruleId.
+                         * @member {string} ruleId
+                         * @memberof google.cloud.deploy.v1.AutomationRun
+                         * @instance
+                         */
+                        AutomationRun.prototype.ruleId = "";
+    
+                        /**
+                         * AutomationRun automationId.
+                         * @member {string} automationId
+                         * @memberof google.cloud.deploy.v1.AutomationRun
+                         * @instance
+                         */
+                        AutomationRun.prototype.automationId = "";
+    
+                        /**
+                         * AutomationRun promoteReleaseOperation.
+                         * @member {google.cloud.deploy.v1.IPromoteReleaseOperation|null|undefined} promoteReleaseOperation
+                         * @memberof google.cloud.deploy.v1.AutomationRun
+                         * @instance
+                         */
+                        AutomationRun.prototype.promoteReleaseOperation = null;
+    
+                        /**
+                         * AutomationRun advanceRolloutOperation.
+                         * @member {google.cloud.deploy.v1.IAdvanceRolloutOperation|null|undefined} advanceRolloutOperation
+                         * @memberof google.cloud.deploy.v1.AutomationRun
+                         * @instance
+                         */
+                        AutomationRun.prototype.advanceRolloutOperation = null;
+    
+                        /**
+                         * AutomationRun repairRolloutOperation.
+                         * @member {google.cloud.deploy.v1.IRepairRolloutOperation|null|undefined} repairRolloutOperation
+                         * @memberof google.cloud.deploy.v1.AutomationRun
+                         * @instance
+                         */
+                        AutomationRun.prototype.repairRolloutOperation = null;
+    
+                        /**
+                         * AutomationRun waitUntilTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} waitUntilTime
+                         * @memberof google.cloud.deploy.v1.AutomationRun
+                         * @instance
+                         */
+                        AutomationRun.prototype.waitUntilTime = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * AutomationRun operation.
+                         * @member {"promoteReleaseOperation"|"advanceRolloutOperation"|"repairRolloutOperation"|undefined} operation
+                         * @memberof google.cloud.deploy.v1.AutomationRun
+                         * @instance
+                         */
+                        Object.defineProperty(AutomationRun.prototype, "operation", {
+                            get: $util.oneOfGetter($oneOfFields = ["promoteReleaseOperation", "advanceRolloutOperation", "repairRolloutOperation"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new AutomationRun instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.AutomationRun
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAutomationRun=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.AutomationRun} AutomationRun instance
+                         */
+                        AutomationRun.create = function create(properties) {
+                            return new AutomationRun(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AutomationRun message. Does not implicitly {@link google.cloud.deploy.v1.AutomationRun.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.AutomationRun
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAutomationRun} message AutomationRun message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AutomationRun.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.etag);
+                            if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.serviceAccount);
+                            if (message.automationSnapshot != null && Object.hasOwnProperty.call(message, "automationSnapshot"))
+                                $root.google.cloud.deploy.v1.Automation.encode(message.automationSnapshot, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.targetId != null && Object.hasOwnProperty.call(message, "targetId"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.targetId);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.state);
+                            if (message.stateDescription != null && Object.hasOwnProperty.call(message, "stateDescription"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.stateDescription);
+                            if (message.expireTime != null && Object.hasOwnProperty.call(message, "expireTime"))
+                                $root.google.protobuf.Timestamp.encode(message.expireTime, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.ruleId != null && Object.hasOwnProperty.call(message, "ruleId"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.ruleId);
+                            if (message.promoteReleaseOperation != null && Object.hasOwnProperty.call(message, "promoteReleaseOperation"))
+                                $root.google.cloud.deploy.v1.PromoteReleaseOperation.encode(message.promoteReleaseOperation, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.advanceRolloutOperation != null && Object.hasOwnProperty.call(message, "advanceRolloutOperation"))
+                                $root.google.cloud.deploy.v1.AdvanceRolloutOperation.encode(message.advanceRolloutOperation, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.automationId != null && Object.hasOwnProperty.call(message, "automationId"))
+                                writer.uint32(/* id 15, wireType 2 =*/122).string(message.automationId);
+                            if (message.waitUntilTime != null && Object.hasOwnProperty.call(message, "waitUntilTime"))
+                                $root.google.protobuf.Timestamp.encode(message.waitUntilTime, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                            if (message.repairRolloutOperation != null && Object.hasOwnProperty.call(message, "repairRolloutOperation"))
+                                $root.google.cloud.deploy.v1.RepairRolloutOperation.encode(message.repairRolloutOperation, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AutomationRun message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.AutomationRun.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.AutomationRun
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAutomationRun} message AutomationRun message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AutomationRun.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AutomationRun message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.AutomationRun
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.AutomationRun} AutomationRun
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AutomationRun.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.AutomationRun();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.serviceAccount = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.automationSnapshot = $root.google.cloud.deploy.v1.Automation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.targetId = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.stateDescription = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 12: {
+                                        message.ruleId = reader.string();
+                                        break;
+                                    }
+                                case 15: {
+                                        message.automationId = reader.string();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.promoteReleaseOperation = $root.google.cloud.deploy.v1.PromoteReleaseOperation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 14: {
+                                        message.advanceRolloutOperation = $root.google.cloud.deploy.v1.AdvanceRolloutOperation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 17: {
+                                        message.repairRolloutOperation = $root.google.cloud.deploy.v1.RepairRolloutOperation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 16: {
+                                        message.waitUntilTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AutomationRun message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.AutomationRun
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.AutomationRun} AutomationRun
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AutomationRun.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AutomationRun message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.AutomationRun
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AutomationRun.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                if (!$util.isString(message.serviceAccount))
+                                    return "serviceAccount: string expected";
+                            if (message.automationSnapshot != null && message.hasOwnProperty("automationSnapshot")) {
+                                var error = $root.google.cloud.deploy.v1.Automation.verify(message.automationSnapshot);
+                                if (error)
+                                    return "automationSnapshot." + error;
+                            }
+                            if (message.targetId != null && message.hasOwnProperty("targetId"))
+                                if (!$util.isString(message.targetId))
+                                    return "targetId: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.stateDescription != null && message.hasOwnProperty("stateDescription"))
+                                if (!$util.isString(message.stateDescription))
+                                    return "stateDescription: string expected";
+                            if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.expireTime);
+                                if (error)
+                                    return "expireTime." + error;
+                            }
+                            if (message.ruleId != null && message.hasOwnProperty("ruleId"))
+                                if (!$util.isString(message.ruleId))
+                                    return "ruleId: string expected";
+                            if (message.automationId != null && message.hasOwnProperty("automationId"))
+                                if (!$util.isString(message.automationId))
+                                    return "automationId: string expected";
+                            if (message.promoteReleaseOperation != null && message.hasOwnProperty("promoteReleaseOperation")) {
+                                properties.operation = 1;
+                                {
+                                    var error = $root.google.cloud.deploy.v1.PromoteReleaseOperation.verify(message.promoteReleaseOperation);
+                                    if (error)
+                                        return "promoteReleaseOperation." + error;
+                                }
+                            }
+                            if (message.advanceRolloutOperation != null && message.hasOwnProperty("advanceRolloutOperation")) {
+                                if (properties.operation === 1)
+                                    return "operation: multiple values";
+                                properties.operation = 1;
+                                {
+                                    var error = $root.google.cloud.deploy.v1.AdvanceRolloutOperation.verify(message.advanceRolloutOperation);
+                                    if (error)
+                                        return "advanceRolloutOperation." + error;
+                                }
+                            }
+                            if (message.repairRolloutOperation != null && message.hasOwnProperty("repairRolloutOperation")) {
+                                if (properties.operation === 1)
+                                    return "operation: multiple values";
+                                properties.operation = 1;
+                                {
+                                    var error = $root.google.cloud.deploy.v1.RepairRolloutOperation.verify(message.repairRolloutOperation);
+                                    if (error)
+                                        return "repairRolloutOperation." + error;
+                                }
+                            }
+                            if (message.waitUntilTime != null && message.hasOwnProperty("waitUntilTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.waitUntilTime);
+                                if (error)
+                                    return "waitUntilTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AutomationRun message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.AutomationRun
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.AutomationRun} AutomationRun
+                         */
+                        AutomationRun.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.AutomationRun)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.AutomationRun();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.AutomationRun.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.AutomationRun.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            if (object.serviceAccount != null)
+                                message.serviceAccount = String(object.serviceAccount);
+                            if (object.automationSnapshot != null) {
+                                if (typeof object.automationSnapshot !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.AutomationRun.automationSnapshot: object expected");
+                                message.automationSnapshot = $root.google.cloud.deploy.v1.Automation.fromObject(object.automationSnapshot);
+                            }
+                            if (object.targetId != null)
+                                message.targetId = String(object.targetId);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "SUCCEEDED":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "CANCELLED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "FAILED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "IN_PROGRESS":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "PENDING":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            }
+                            if (object.stateDescription != null)
+                                message.stateDescription = String(object.stateDescription);
+                            if (object.expireTime != null) {
+                                if (typeof object.expireTime !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.AutomationRun.expireTime: object expected");
+                                message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime);
+                            }
+                            if (object.ruleId != null)
+                                message.ruleId = String(object.ruleId);
+                            if (object.automationId != null)
+                                message.automationId = String(object.automationId);
+                            if (object.promoteReleaseOperation != null) {
+                                if (typeof object.promoteReleaseOperation !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.AutomationRun.promoteReleaseOperation: object expected");
+                                message.promoteReleaseOperation = $root.google.cloud.deploy.v1.PromoteReleaseOperation.fromObject(object.promoteReleaseOperation);
+                            }
+                            if (object.advanceRolloutOperation != null) {
+                                if (typeof object.advanceRolloutOperation !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.AutomationRun.advanceRolloutOperation: object expected");
+                                message.advanceRolloutOperation = $root.google.cloud.deploy.v1.AdvanceRolloutOperation.fromObject(object.advanceRolloutOperation);
+                            }
+                            if (object.repairRolloutOperation != null) {
+                                if (typeof object.repairRolloutOperation !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.AutomationRun.repairRolloutOperation: object expected");
+                                message.repairRolloutOperation = $root.google.cloud.deploy.v1.RepairRolloutOperation.fromObject(object.repairRolloutOperation);
+                            }
+                            if (object.waitUntilTime != null) {
+                                if (typeof object.waitUntilTime !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.AutomationRun.waitUntilTime: object expected");
+                                message.waitUntilTime = $root.google.protobuf.Timestamp.fromObject(object.waitUntilTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AutomationRun message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.AutomationRun
+                         * @static
+                         * @param {google.cloud.deploy.v1.AutomationRun} message AutomationRun
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AutomationRun.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.etag = "";
+                                object.serviceAccount = "";
+                                object.automationSnapshot = null;
+                                object.targetId = "";
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.stateDescription = "";
+                                object.expireTime = null;
+                                object.ruleId = "";
+                                object.automationId = "";
+                                object.waitUntilTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                object.serviceAccount = message.serviceAccount;
+                            if (message.automationSnapshot != null && message.hasOwnProperty("automationSnapshot"))
+                                object.automationSnapshot = $root.google.cloud.deploy.v1.Automation.toObject(message.automationSnapshot, options);
+                            if (message.targetId != null && message.hasOwnProperty("targetId"))
+                                object.targetId = message.targetId;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.deploy.v1.AutomationRun.State[message.state] === undefined ? message.state : $root.google.cloud.deploy.v1.AutomationRun.State[message.state] : message.state;
+                            if (message.stateDescription != null && message.hasOwnProperty("stateDescription"))
+                                object.stateDescription = message.stateDescription;
+                            if (message.expireTime != null && message.hasOwnProperty("expireTime"))
+                                object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
+                            if (message.ruleId != null && message.hasOwnProperty("ruleId"))
+                                object.ruleId = message.ruleId;
+                            if (message.promoteReleaseOperation != null && message.hasOwnProperty("promoteReleaseOperation")) {
+                                object.promoteReleaseOperation = $root.google.cloud.deploy.v1.PromoteReleaseOperation.toObject(message.promoteReleaseOperation, options);
+                                if (options.oneofs)
+                                    object.operation = "promoteReleaseOperation";
+                            }
+                            if (message.advanceRolloutOperation != null && message.hasOwnProperty("advanceRolloutOperation")) {
+                                object.advanceRolloutOperation = $root.google.cloud.deploy.v1.AdvanceRolloutOperation.toObject(message.advanceRolloutOperation, options);
+                                if (options.oneofs)
+                                    object.operation = "advanceRolloutOperation";
+                            }
+                            if (message.automationId != null && message.hasOwnProperty("automationId"))
+                                object.automationId = message.automationId;
+                            if (message.waitUntilTime != null && message.hasOwnProperty("waitUntilTime"))
+                                object.waitUntilTime = $root.google.protobuf.Timestamp.toObject(message.waitUntilTime, options);
+                            if (message.repairRolloutOperation != null && message.hasOwnProperty("repairRolloutOperation")) {
+                                object.repairRolloutOperation = $root.google.cloud.deploy.v1.RepairRolloutOperation.toObject(message.repairRolloutOperation, options);
+                                if (options.oneofs)
+                                    object.operation = "repairRolloutOperation";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AutomationRun to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.AutomationRun
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AutomationRun.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AutomationRun
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.AutomationRun
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AutomationRun.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.AutomationRun";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.deploy.v1.AutomationRun.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} SUCCEEDED=1 SUCCEEDED value
+                         * @property {number} CANCELLED=2 CANCELLED value
+                         * @property {number} FAILED=3 FAILED value
+                         * @property {number} IN_PROGRESS=4 IN_PROGRESS value
+                         * @property {number} PENDING=5 PENDING value
+                         */
+                        AutomationRun.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SUCCEEDED"] = 1;
+                            values[valuesById[2] = "CANCELLED"] = 2;
+                            values[valuesById[3] = "FAILED"] = 3;
+                            values[valuesById[4] = "IN_PROGRESS"] = 4;
+                            values[valuesById[5] = "PENDING"] = 5;
+                            return values;
+                        })();
+    
+                        return AutomationRun;
+                    })();
+    
+                    v1.PromoteReleaseOperation = (function() {
+    
+                        /**
+                         * Properties of a PromoteReleaseOperation.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IPromoteReleaseOperation
+                         * @property {string|null} [targetId] PromoteReleaseOperation targetId
+                         * @property {google.protobuf.IDuration|null} [wait] PromoteReleaseOperation wait
+                         * @property {string|null} [rollout] PromoteReleaseOperation rollout
+                         * @property {string|null} [phase] PromoteReleaseOperation phase
+                         */
+    
+                        /**
+                         * Constructs a new PromoteReleaseOperation.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a PromoteReleaseOperation.
+                         * @implements IPromoteReleaseOperation
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IPromoteReleaseOperation=} [properties] Properties to set
+                         */
+                        function PromoteReleaseOperation(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PromoteReleaseOperation targetId.
+                         * @member {string} targetId
+                         * @memberof google.cloud.deploy.v1.PromoteReleaseOperation
+                         * @instance
+                         */
+                        PromoteReleaseOperation.prototype.targetId = "";
+    
+                        /**
+                         * PromoteReleaseOperation wait.
+                         * @member {google.protobuf.IDuration|null|undefined} wait
+                         * @memberof google.cloud.deploy.v1.PromoteReleaseOperation
+                         * @instance
+                         */
+                        PromoteReleaseOperation.prototype.wait = null;
+    
+                        /**
+                         * PromoteReleaseOperation rollout.
+                         * @member {string} rollout
+                         * @memberof google.cloud.deploy.v1.PromoteReleaseOperation
+                         * @instance
+                         */
+                        PromoteReleaseOperation.prototype.rollout = "";
+    
+                        /**
+                         * PromoteReleaseOperation phase.
+                         * @member {string} phase
+                         * @memberof google.cloud.deploy.v1.PromoteReleaseOperation
+                         * @instance
+                         */
+                        PromoteReleaseOperation.prototype.phase = "";
+    
+                        /**
+                         * Creates a new PromoteReleaseOperation instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.PromoteReleaseOperation
+                         * @static
+                         * @param {google.cloud.deploy.v1.IPromoteReleaseOperation=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.PromoteReleaseOperation} PromoteReleaseOperation instance
+                         */
+                        PromoteReleaseOperation.create = function create(properties) {
+                            return new PromoteReleaseOperation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PromoteReleaseOperation message. Does not implicitly {@link google.cloud.deploy.v1.PromoteReleaseOperation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.PromoteReleaseOperation
+                         * @static
+                         * @param {google.cloud.deploy.v1.IPromoteReleaseOperation} message PromoteReleaseOperation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PromoteReleaseOperation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.targetId != null && Object.hasOwnProperty.call(message, "targetId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.targetId);
+                            if (message.wait != null && Object.hasOwnProperty.call(message, "wait"))
+                                $root.google.protobuf.Duration.encode(message.wait, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.rollout != null && Object.hasOwnProperty.call(message, "rollout"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.rollout);
+                            if (message.phase != null && Object.hasOwnProperty.call(message, "phase"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.phase);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PromoteReleaseOperation message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.PromoteReleaseOperation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.PromoteReleaseOperation
+                         * @static
+                         * @param {google.cloud.deploy.v1.IPromoteReleaseOperation} message PromoteReleaseOperation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PromoteReleaseOperation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PromoteReleaseOperation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.PromoteReleaseOperation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.PromoteReleaseOperation} PromoteReleaseOperation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PromoteReleaseOperation.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.PromoteReleaseOperation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.targetId = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.wait = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.rollout = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.phase = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PromoteReleaseOperation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.PromoteReleaseOperation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.PromoteReleaseOperation} PromoteReleaseOperation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PromoteReleaseOperation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PromoteReleaseOperation message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.PromoteReleaseOperation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PromoteReleaseOperation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.targetId != null && message.hasOwnProperty("targetId"))
+                                if (!$util.isString(message.targetId))
+                                    return "targetId: string expected";
+                            if (message.wait != null && message.hasOwnProperty("wait")) {
+                                var error = $root.google.protobuf.Duration.verify(message.wait);
+                                if (error)
+                                    return "wait." + error;
+                            }
+                            if (message.rollout != null && message.hasOwnProperty("rollout"))
+                                if (!$util.isString(message.rollout))
+                                    return "rollout: string expected";
+                            if (message.phase != null && message.hasOwnProperty("phase"))
+                                if (!$util.isString(message.phase))
+                                    return "phase: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PromoteReleaseOperation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.PromoteReleaseOperation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.PromoteReleaseOperation} PromoteReleaseOperation
+                         */
+                        PromoteReleaseOperation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.PromoteReleaseOperation)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.PromoteReleaseOperation();
+                            if (object.targetId != null)
+                                message.targetId = String(object.targetId);
+                            if (object.wait != null) {
+                                if (typeof object.wait !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.PromoteReleaseOperation.wait: object expected");
+                                message.wait = $root.google.protobuf.Duration.fromObject(object.wait);
+                            }
+                            if (object.rollout != null)
+                                message.rollout = String(object.rollout);
+                            if (object.phase != null)
+                                message.phase = String(object.phase);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PromoteReleaseOperation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.PromoteReleaseOperation
+                         * @static
+                         * @param {google.cloud.deploy.v1.PromoteReleaseOperation} message PromoteReleaseOperation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PromoteReleaseOperation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.targetId = "";
+                                object.wait = null;
+                                object.rollout = "";
+                                object.phase = "";
+                            }
+                            if (message.targetId != null && message.hasOwnProperty("targetId"))
+                                object.targetId = message.targetId;
+                            if (message.wait != null && message.hasOwnProperty("wait"))
+                                object.wait = $root.google.protobuf.Duration.toObject(message.wait, options);
+                            if (message.rollout != null && message.hasOwnProperty("rollout"))
+                                object.rollout = message.rollout;
+                            if (message.phase != null && message.hasOwnProperty("phase"))
+                                object.phase = message.phase;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PromoteReleaseOperation to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.PromoteReleaseOperation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PromoteReleaseOperation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PromoteReleaseOperation
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.PromoteReleaseOperation
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PromoteReleaseOperation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.PromoteReleaseOperation";
+                        };
+    
+                        return PromoteReleaseOperation;
+                    })();
+    
+                    v1.AdvanceRolloutOperation = (function() {
+    
+                        /**
+                         * Properties of an AdvanceRolloutOperation.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IAdvanceRolloutOperation
+                         * @property {string|null} [sourcePhase] AdvanceRolloutOperation sourcePhase
+                         * @property {google.protobuf.IDuration|null} [wait] AdvanceRolloutOperation wait
+                         * @property {string|null} [rollout] AdvanceRolloutOperation rollout
+                         * @property {string|null} [destinationPhase] AdvanceRolloutOperation destinationPhase
+                         */
+    
+                        /**
+                         * Constructs a new AdvanceRolloutOperation.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents an AdvanceRolloutOperation.
+                         * @implements IAdvanceRolloutOperation
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IAdvanceRolloutOperation=} [properties] Properties to set
+                         */
+                        function AdvanceRolloutOperation(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AdvanceRolloutOperation sourcePhase.
+                         * @member {string} sourcePhase
+                         * @memberof google.cloud.deploy.v1.AdvanceRolloutOperation
+                         * @instance
+                         */
+                        AdvanceRolloutOperation.prototype.sourcePhase = "";
+    
+                        /**
+                         * AdvanceRolloutOperation wait.
+                         * @member {google.protobuf.IDuration|null|undefined} wait
+                         * @memberof google.cloud.deploy.v1.AdvanceRolloutOperation
+                         * @instance
+                         */
+                        AdvanceRolloutOperation.prototype.wait = null;
+    
+                        /**
+                         * AdvanceRolloutOperation rollout.
+                         * @member {string} rollout
+                         * @memberof google.cloud.deploy.v1.AdvanceRolloutOperation
+                         * @instance
+                         */
+                        AdvanceRolloutOperation.prototype.rollout = "";
+    
+                        /**
+                         * AdvanceRolloutOperation destinationPhase.
+                         * @member {string} destinationPhase
+                         * @memberof google.cloud.deploy.v1.AdvanceRolloutOperation
+                         * @instance
+                         */
+                        AdvanceRolloutOperation.prototype.destinationPhase = "";
+    
+                        /**
+                         * Creates a new AdvanceRolloutOperation instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.AdvanceRolloutOperation
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAdvanceRolloutOperation=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.AdvanceRolloutOperation} AdvanceRolloutOperation instance
+                         */
+                        AdvanceRolloutOperation.create = function create(properties) {
+                            return new AdvanceRolloutOperation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AdvanceRolloutOperation message. Does not implicitly {@link google.cloud.deploy.v1.AdvanceRolloutOperation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.AdvanceRolloutOperation
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAdvanceRolloutOperation} message AdvanceRolloutOperation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdvanceRolloutOperation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.wait != null && Object.hasOwnProperty.call(message, "wait"))
+                                $root.google.protobuf.Duration.encode(message.wait, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.rollout != null && Object.hasOwnProperty.call(message, "rollout"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.rollout);
+                            if (message.destinationPhase != null && Object.hasOwnProperty.call(message, "destinationPhase"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.destinationPhase);
+                            if (message.sourcePhase != null && Object.hasOwnProperty.call(message, "sourcePhase"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.sourcePhase);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AdvanceRolloutOperation message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.AdvanceRolloutOperation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.AdvanceRolloutOperation
+                         * @static
+                         * @param {google.cloud.deploy.v1.IAdvanceRolloutOperation} message AdvanceRolloutOperation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdvanceRolloutOperation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AdvanceRolloutOperation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.AdvanceRolloutOperation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.AdvanceRolloutOperation} AdvanceRolloutOperation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdvanceRolloutOperation.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.AdvanceRolloutOperation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 5: {
+                                        message.sourcePhase = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.wait = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.rollout = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.destinationPhase = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AdvanceRolloutOperation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.AdvanceRolloutOperation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.AdvanceRolloutOperation} AdvanceRolloutOperation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdvanceRolloutOperation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AdvanceRolloutOperation message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.AdvanceRolloutOperation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AdvanceRolloutOperation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.sourcePhase != null && message.hasOwnProperty("sourcePhase"))
+                                if (!$util.isString(message.sourcePhase))
+                                    return "sourcePhase: string expected";
+                            if (message.wait != null && message.hasOwnProperty("wait")) {
+                                var error = $root.google.protobuf.Duration.verify(message.wait);
+                                if (error)
+                                    return "wait." + error;
+                            }
+                            if (message.rollout != null && message.hasOwnProperty("rollout"))
+                                if (!$util.isString(message.rollout))
+                                    return "rollout: string expected";
+                            if (message.destinationPhase != null && message.hasOwnProperty("destinationPhase"))
+                                if (!$util.isString(message.destinationPhase))
+                                    return "destinationPhase: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AdvanceRolloutOperation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.AdvanceRolloutOperation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.AdvanceRolloutOperation} AdvanceRolloutOperation
+                         */
+                        AdvanceRolloutOperation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.AdvanceRolloutOperation)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.AdvanceRolloutOperation();
+                            if (object.sourcePhase != null)
+                                message.sourcePhase = String(object.sourcePhase);
+                            if (object.wait != null) {
+                                if (typeof object.wait !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.AdvanceRolloutOperation.wait: object expected");
+                                message.wait = $root.google.protobuf.Duration.fromObject(object.wait);
+                            }
+                            if (object.rollout != null)
+                                message.rollout = String(object.rollout);
+                            if (object.destinationPhase != null)
+                                message.destinationPhase = String(object.destinationPhase);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AdvanceRolloutOperation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.AdvanceRolloutOperation
+                         * @static
+                         * @param {google.cloud.deploy.v1.AdvanceRolloutOperation} message AdvanceRolloutOperation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AdvanceRolloutOperation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.wait = null;
+                                object.rollout = "";
+                                object.destinationPhase = "";
+                                object.sourcePhase = "";
+                            }
+                            if (message.wait != null && message.hasOwnProperty("wait"))
+                                object.wait = $root.google.protobuf.Duration.toObject(message.wait, options);
+                            if (message.rollout != null && message.hasOwnProperty("rollout"))
+                                object.rollout = message.rollout;
+                            if (message.destinationPhase != null && message.hasOwnProperty("destinationPhase"))
+                                object.destinationPhase = message.destinationPhase;
+                            if (message.sourcePhase != null && message.hasOwnProperty("sourcePhase"))
+                                object.sourcePhase = message.sourcePhase;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AdvanceRolloutOperation to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.AdvanceRolloutOperation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AdvanceRolloutOperation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AdvanceRolloutOperation
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.AdvanceRolloutOperation
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AdvanceRolloutOperation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.AdvanceRolloutOperation";
+                        };
+    
+                        return AdvanceRolloutOperation;
+                    })();
+    
+                    v1.RepairRolloutOperation = (function() {
+    
+                        /**
+                         * Properties of a RepairRolloutOperation.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IRepairRolloutOperation
+                         * @property {string|null} [rollout] RepairRolloutOperation rollout
+                         * @property {number|Long|null} [currentRepairModeIndex] RepairRolloutOperation currentRepairModeIndex
+                         * @property {Array.<google.cloud.deploy.v1.IRepairPhase>|null} [repairPhases] RepairRolloutOperation repairPhases
+                         */
+    
+                        /**
+                         * Constructs a new RepairRolloutOperation.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a RepairRolloutOperation.
+                         * @implements IRepairRolloutOperation
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IRepairRolloutOperation=} [properties] Properties to set
+                         */
+                        function RepairRolloutOperation(properties) {
+                            this.repairPhases = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RepairRolloutOperation rollout.
+                         * @member {string} rollout
+                         * @memberof google.cloud.deploy.v1.RepairRolloutOperation
+                         * @instance
+                         */
+                        RepairRolloutOperation.prototype.rollout = "";
+    
+                        /**
+                         * RepairRolloutOperation currentRepairModeIndex.
+                         * @member {number|Long} currentRepairModeIndex
+                         * @memberof google.cloud.deploy.v1.RepairRolloutOperation
+                         * @instance
+                         */
+                        RepairRolloutOperation.prototype.currentRepairModeIndex = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * RepairRolloutOperation repairPhases.
+                         * @member {Array.<google.cloud.deploy.v1.IRepairPhase>} repairPhases
+                         * @memberof google.cloud.deploy.v1.RepairRolloutOperation
+                         * @instance
+                         */
+                        RepairRolloutOperation.prototype.repairPhases = $util.emptyArray;
+    
+                        /**
+                         * Creates a new RepairRolloutOperation instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.RepairRolloutOperation
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRepairRolloutOperation=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.RepairRolloutOperation} RepairRolloutOperation instance
+                         */
+                        RepairRolloutOperation.create = function create(properties) {
+                            return new RepairRolloutOperation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RepairRolloutOperation message. Does not implicitly {@link google.cloud.deploy.v1.RepairRolloutOperation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.RepairRolloutOperation
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRepairRolloutOperation} message RepairRolloutOperation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RepairRolloutOperation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.rollout != null && Object.hasOwnProperty.call(message, "rollout"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.rollout);
+                            if (message.currentRepairModeIndex != null && Object.hasOwnProperty.call(message, "currentRepairModeIndex"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.currentRepairModeIndex);
+                            if (message.repairPhases != null && message.repairPhases.length)
+                                for (var i = 0; i < message.repairPhases.length; ++i)
+                                    $root.google.cloud.deploy.v1.RepairPhase.encode(message.repairPhases[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RepairRolloutOperation message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.RepairRolloutOperation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.RepairRolloutOperation
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRepairRolloutOperation} message RepairRolloutOperation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RepairRolloutOperation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RepairRolloutOperation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.RepairRolloutOperation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.RepairRolloutOperation} RepairRolloutOperation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RepairRolloutOperation.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.RepairRolloutOperation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.rollout = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.currentRepairModeIndex = reader.int64();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.repairPhases && message.repairPhases.length))
+                                            message.repairPhases = [];
+                                        message.repairPhases.push($root.google.cloud.deploy.v1.RepairPhase.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RepairRolloutOperation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.RepairRolloutOperation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.RepairRolloutOperation} RepairRolloutOperation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RepairRolloutOperation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RepairRolloutOperation message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.RepairRolloutOperation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RepairRolloutOperation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.rollout != null && message.hasOwnProperty("rollout"))
+                                if (!$util.isString(message.rollout))
+                                    return "rollout: string expected";
+                            if (message.currentRepairModeIndex != null && message.hasOwnProperty("currentRepairModeIndex"))
+                                if (!$util.isInteger(message.currentRepairModeIndex) && !(message.currentRepairModeIndex && $util.isInteger(message.currentRepairModeIndex.low) && $util.isInteger(message.currentRepairModeIndex.high)))
+                                    return "currentRepairModeIndex: integer|Long expected";
+                            if (message.repairPhases != null && message.hasOwnProperty("repairPhases")) {
+                                if (!Array.isArray(message.repairPhases))
+                                    return "repairPhases: array expected";
+                                for (var i = 0; i < message.repairPhases.length; ++i) {
+                                    var error = $root.google.cloud.deploy.v1.RepairPhase.verify(message.repairPhases[i]);
+                                    if (error)
+                                        return "repairPhases." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RepairRolloutOperation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.RepairRolloutOperation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.RepairRolloutOperation} RepairRolloutOperation
+                         */
+                        RepairRolloutOperation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.RepairRolloutOperation)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.RepairRolloutOperation();
+                            if (object.rollout != null)
+                                message.rollout = String(object.rollout);
+                            if (object.currentRepairModeIndex != null)
+                                if ($util.Long)
+                                    (message.currentRepairModeIndex = $util.Long.fromValue(object.currentRepairModeIndex)).unsigned = false;
+                                else if (typeof object.currentRepairModeIndex === "string")
+                                    message.currentRepairModeIndex = parseInt(object.currentRepairModeIndex, 10);
+                                else if (typeof object.currentRepairModeIndex === "number")
+                                    message.currentRepairModeIndex = object.currentRepairModeIndex;
+                                else if (typeof object.currentRepairModeIndex === "object")
+                                    message.currentRepairModeIndex = new $util.LongBits(object.currentRepairModeIndex.low >>> 0, object.currentRepairModeIndex.high >>> 0).toNumber();
+                            if (object.repairPhases) {
+                                if (!Array.isArray(object.repairPhases))
+                                    throw TypeError(".google.cloud.deploy.v1.RepairRolloutOperation.repairPhases: array expected");
+                                message.repairPhases = [];
+                                for (var i = 0; i < object.repairPhases.length; ++i) {
+                                    if (typeof object.repairPhases[i] !== "object")
+                                        throw TypeError(".google.cloud.deploy.v1.RepairRolloutOperation.repairPhases: object expected");
+                                    message.repairPhases[i] = $root.google.cloud.deploy.v1.RepairPhase.fromObject(object.repairPhases[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RepairRolloutOperation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.RepairRolloutOperation
+                         * @static
+                         * @param {google.cloud.deploy.v1.RepairRolloutOperation} message RepairRolloutOperation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RepairRolloutOperation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.repairPhases = [];
+                            if (options.defaults) {
+                                object.rollout = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.currentRepairModeIndex = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.currentRepairModeIndex = options.longs === String ? "0" : 0;
+                            }
+                            if (message.rollout != null && message.hasOwnProperty("rollout"))
+                                object.rollout = message.rollout;
+                            if (message.currentRepairModeIndex != null && message.hasOwnProperty("currentRepairModeIndex"))
+                                if (typeof message.currentRepairModeIndex === "number")
+                                    object.currentRepairModeIndex = options.longs === String ? String(message.currentRepairModeIndex) : message.currentRepairModeIndex;
+                                else
+                                    object.currentRepairModeIndex = options.longs === String ? $util.Long.prototype.toString.call(message.currentRepairModeIndex) : options.longs === Number ? new $util.LongBits(message.currentRepairModeIndex.low >>> 0, message.currentRepairModeIndex.high >>> 0).toNumber() : message.currentRepairModeIndex;
+                            if (message.repairPhases && message.repairPhases.length) {
+                                object.repairPhases = [];
+                                for (var j = 0; j < message.repairPhases.length; ++j)
+                                    object.repairPhases[j] = $root.google.cloud.deploy.v1.RepairPhase.toObject(message.repairPhases[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RepairRolloutOperation to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.RepairRolloutOperation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RepairRolloutOperation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RepairRolloutOperation
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.RepairRolloutOperation
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RepairRolloutOperation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.RepairRolloutOperation";
+                        };
+    
+                        return RepairRolloutOperation;
+                    })();
+    
+                    v1.RepairPhase = (function() {
+    
+                        /**
+                         * Properties of a RepairPhase.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IRepairPhase
+                         * @property {google.cloud.deploy.v1.IRetryPhase|null} [retry] RepairPhase retry
+                         * @property {google.cloud.deploy.v1.IRollbackAttempt|null} [rollback] RepairPhase rollback
+                         */
+    
+                        /**
+                         * Constructs a new RepairPhase.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a RepairPhase.
+                         * @implements IRepairPhase
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IRepairPhase=} [properties] Properties to set
+                         */
+                        function RepairPhase(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RepairPhase retry.
+                         * @member {google.cloud.deploy.v1.IRetryPhase|null|undefined} retry
+                         * @memberof google.cloud.deploy.v1.RepairPhase
+                         * @instance
+                         */
+                        RepairPhase.prototype.retry = null;
+    
+                        /**
+                         * RepairPhase rollback.
+                         * @member {google.cloud.deploy.v1.IRollbackAttempt|null|undefined} rollback
+                         * @memberof google.cloud.deploy.v1.RepairPhase
+                         * @instance
+                         */
+                        RepairPhase.prototype.rollback = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * RepairPhase repairPhase.
+                         * @member {"retry"|"rollback"|undefined} repairPhase
+                         * @memberof google.cloud.deploy.v1.RepairPhase
+                         * @instance
+                         */
+                        Object.defineProperty(RepairPhase.prototype, "repairPhase", {
+                            get: $util.oneOfGetter($oneOfFields = ["retry", "rollback"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new RepairPhase instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.RepairPhase
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRepairPhase=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.RepairPhase} RepairPhase instance
+                         */
+                        RepairPhase.create = function create(properties) {
+                            return new RepairPhase(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RepairPhase message. Does not implicitly {@link google.cloud.deploy.v1.RepairPhase.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.RepairPhase
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRepairPhase} message RepairPhase message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RepairPhase.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.retry != null && Object.hasOwnProperty.call(message, "retry"))
+                                $root.google.cloud.deploy.v1.RetryPhase.encode(message.retry, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.rollback != null && Object.hasOwnProperty.call(message, "rollback"))
+                                $root.google.cloud.deploy.v1.RollbackAttempt.encode(message.rollback, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RepairPhase message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.RepairPhase.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.RepairPhase
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRepairPhase} message RepairPhase message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RepairPhase.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RepairPhase message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.RepairPhase
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.RepairPhase} RepairPhase
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RepairPhase.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.RepairPhase();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.retry = $root.google.cloud.deploy.v1.RetryPhase.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.rollback = $root.google.cloud.deploy.v1.RollbackAttempt.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RepairPhase message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.RepairPhase
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.RepairPhase} RepairPhase
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RepairPhase.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RepairPhase message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.RepairPhase
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RepairPhase.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.retry != null && message.hasOwnProperty("retry")) {
+                                properties.repairPhase = 1;
+                                {
+                                    var error = $root.google.cloud.deploy.v1.RetryPhase.verify(message.retry);
+                                    if (error)
+                                        return "retry." + error;
+                                }
+                            }
+                            if (message.rollback != null && message.hasOwnProperty("rollback")) {
+                                if (properties.repairPhase === 1)
+                                    return "repairPhase: multiple values";
+                                properties.repairPhase = 1;
+                                {
+                                    var error = $root.google.cloud.deploy.v1.RollbackAttempt.verify(message.rollback);
+                                    if (error)
+                                        return "rollback." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RepairPhase message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.RepairPhase
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.RepairPhase} RepairPhase
+                         */
+                        RepairPhase.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.RepairPhase)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.RepairPhase();
+                            if (object.retry != null) {
+                                if (typeof object.retry !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.RepairPhase.retry: object expected");
+                                message.retry = $root.google.cloud.deploy.v1.RetryPhase.fromObject(object.retry);
+                            }
+                            if (object.rollback != null) {
+                                if (typeof object.rollback !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.RepairPhase.rollback: object expected");
+                                message.rollback = $root.google.cloud.deploy.v1.RollbackAttempt.fromObject(object.rollback);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RepairPhase message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.RepairPhase
+                         * @static
+                         * @param {google.cloud.deploy.v1.RepairPhase} message RepairPhase
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RepairPhase.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.retry != null && message.hasOwnProperty("retry")) {
+                                object.retry = $root.google.cloud.deploy.v1.RetryPhase.toObject(message.retry, options);
+                                if (options.oneofs)
+                                    object.repairPhase = "retry";
+                            }
+                            if (message.rollback != null && message.hasOwnProperty("rollback")) {
+                                object.rollback = $root.google.cloud.deploy.v1.RollbackAttempt.toObject(message.rollback, options);
+                                if (options.oneofs)
+                                    object.repairPhase = "rollback";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RepairPhase to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.RepairPhase
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RepairPhase.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RepairPhase
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.RepairPhase
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RepairPhase.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.RepairPhase";
+                        };
+    
+                        return RepairPhase;
+                    })();
+    
+                    v1.RetryPhase = (function() {
+    
+                        /**
+                         * Properties of a RetryPhase.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IRetryPhase
+                         * @property {number|Long|null} [totalAttempts] RetryPhase totalAttempts
+                         * @property {google.cloud.deploy.v1.BackoffMode|null} [backoffMode] RetryPhase backoffMode
+                         * @property {string|null} [phaseId] RetryPhase phaseId
+                         * @property {string|null} [jobId] RetryPhase jobId
+                         * @property {Array.<google.cloud.deploy.v1.IRetryAttempt>|null} [attempts] RetryPhase attempts
+                         */
+    
+                        /**
+                         * Constructs a new RetryPhase.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a RetryPhase.
+                         * @implements IRetryPhase
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IRetryPhase=} [properties] Properties to set
+                         */
+                        function RetryPhase(properties) {
+                            this.attempts = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RetryPhase totalAttempts.
+                         * @member {number|Long} totalAttempts
+                         * @memberof google.cloud.deploy.v1.RetryPhase
+                         * @instance
+                         */
+                        RetryPhase.prototype.totalAttempts = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * RetryPhase backoffMode.
+                         * @member {google.cloud.deploy.v1.BackoffMode} backoffMode
+                         * @memberof google.cloud.deploy.v1.RetryPhase
+                         * @instance
+                         */
+                        RetryPhase.prototype.backoffMode = 0;
+    
+                        /**
+                         * RetryPhase phaseId.
+                         * @member {string} phaseId
+                         * @memberof google.cloud.deploy.v1.RetryPhase
+                         * @instance
+                         */
+                        RetryPhase.prototype.phaseId = "";
+    
+                        /**
+                         * RetryPhase jobId.
+                         * @member {string} jobId
+                         * @memberof google.cloud.deploy.v1.RetryPhase
+                         * @instance
+                         */
+                        RetryPhase.prototype.jobId = "";
+    
+                        /**
+                         * RetryPhase attempts.
+                         * @member {Array.<google.cloud.deploy.v1.IRetryAttempt>} attempts
+                         * @memberof google.cloud.deploy.v1.RetryPhase
+                         * @instance
+                         */
+                        RetryPhase.prototype.attempts = $util.emptyArray;
+    
+                        /**
+                         * Creates a new RetryPhase instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.RetryPhase
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRetryPhase=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.RetryPhase} RetryPhase instance
+                         */
+                        RetryPhase.create = function create(properties) {
+                            return new RetryPhase(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RetryPhase message. Does not implicitly {@link google.cloud.deploy.v1.RetryPhase.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.RetryPhase
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRetryPhase} message RetryPhase message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetryPhase.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.totalAttempts != null && Object.hasOwnProperty.call(message, "totalAttempts"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.totalAttempts);
+                            if (message.backoffMode != null && Object.hasOwnProperty.call(message, "backoffMode"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.backoffMode);
+                            if (message.phaseId != null && Object.hasOwnProperty.call(message, "phaseId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.phaseId);
+                            if (message.jobId != null && Object.hasOwnProperty.call(message, "jobId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.jobId);
+                            if (message.attempts != null && message.attempts.length)
+                                for (var i = 0; i < message.attempts.length; ++i)
+                                    $root.google.cloud.deploy.v1.RetryAttempt.encode(message.attempts[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RetryPhase message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.RetryPhase.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.RetryPhase
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRetryPhase} message RetryPhase message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetryPhase.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RetryPhase message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.RetryPhase
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.RetryPhase} RetryPhase
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetryPhase.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.RetryPhase();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.totalAttempts = reader.int64();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.backoffMode = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.phaseId = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.jobId = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.attempts && message.attempts.length))
+                                            message.attempts = [];
+                                        message.attempts.push($root.google.cloud.deploy.v1.RetryAttempt.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RetryPhase message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.RetryPhase
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.RetryPhase} RetryPhase
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetryPhase.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RetryPhase message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.RetryPhase
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RetryPhase.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.totalAttempts != null && message.hasOwnProperty("totalAttempts"))
+                                if (!$util.isInteger(message.totalAttempts) && !(message.totalAttempts && $util.isInteger(message.totalAttempts.low) && $util.isInteger(message.totalAttempts.high)))
+                                    return "totalAttempts: integer|Long expected";
+                            if (message.backoffMode != null && message.hasOwnProperty("backoffMode"))
+                                switch (message.backoffMode) {
+                                default:
+                                    return "backoffMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.phaseId != null && message.hasOwnProperty("phaseId"))
+                                if (!$util.isString(message.phaseId))
+                                    return "phaseId: string expected";
+                            if (message.jobId != null && message.hasOwnProperty("jobId"))
+                                if (!$util.isString(message.jobId))
+                                    return "jobId: string expected";
+                            if (message.attempts != null && message.hasOwnProperty("attempts")) {
+                                if (!Array.isArray(message.attempts))
+                                    return "attempts: array expected";
+                                for (var i = 0; i < message.attempts.length; ++i) {
+                                    var error = $root.google.cloud.deploy.v1.RetryAttempt.verify(message.attempts[i]);
+                                    if (error)
+                                        return "attempts." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RetryPhase message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.RetryPhase
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.RetryPhase} RetryPhase
+                         */
+                        RetryPhase.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.RetryPhase)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.RetryPhase();
+                            if (object.totalAttempts != null)
+                                if ($util.Long)
+                                    (message.totalAttempts = $util.Long.fromValue(object.totalAttempts)).unsigned = false;
+                                else if (typeof object.totalAttempts === "string")
+                                    message.totalAttempts = parseInt(object.totalAttempts, 10);
+                                else if (typeof object.totalAttempts === "number")
+                                    message.totalAttempts = object.totalAttempts;
+                                else if (typeof object.totalAttempts === "object")
+                                    message.totalAttempts = new $util.LongBits(object.totalAttempts.low >>> 0, object.totalAttempts.high >>> 0).toNumber();
+                            switch (object.backoffMode) {
+                            default:
+                                if (typeof object.backoffMode === "number") {
+                                    message.backoffMode = object.backoffMode;
+                                    break;
+                                }
+                                break;
+                            case "BACKOFF_MODE_UNSPECIFIED":
+                            case 0:
+                                message.backoffMode = 0;
+                                break;
+                            case "BACKOFF_MODE_LINEAR":
+                            case 1:
+                                message.backoffMode = 1;
+                                break;
+                            case "BACKOFF_MODE_EXPONENTIAL":
+                            case 2:
+                                message.backoffMode = 2;
+                                break;
+                            }
+                            if (object.phaseId != null)
+                                message.phaseId = String(object.phaseId);
+                            if (object.jobId != null)
+                                message.jobId = String(object.jobId);
+                            if (object.attempts) {
+                                if (!Array.isArray(object.attempts))
+                                    throw TypeError(".google.cloud.deploy.v1.RetryPhase.attempts: array expected");
+                                message.attempts = [];
+                                for (var i = 0; i < object.attempts.length; ++i) {
+                                    if (typeof object.attempts[i] !== "object")
+                                        throw TypeError(".google.cloud.deploy.v1.RetryPhase.attempts: object expected");
+                                    message.attempts[i] = $root.google.cloud.deploy.v1.RetryAttempt.fromObject(object.attempts[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RetryPhase message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.RetryPhase
+                         * @static
+                         * @param {google.cloud.deploy.v1.RetryPhase} message RetryPhase
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RetryPhase.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.attempts = [];
+                            if (options.defaults) {
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.totalAttempts = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.totalAttempts = options.longs === String ? "0" : 0;
+                                object.backoffMode = options.enums === String ? "BACKOFF_MODE_UNSPECIFIED" : 0;
+                                object.phaseId = "";
+                                object.jobId = "";
+                            }
+                            if (message.totalAttempts != null && message.hasOwnProperty("totalAttempts"))
+                                if (typeof message.totalAttempts === "number")
+                                    object.totalAttempts = options.longs === String ? String(message.totalAttempts) : message.totalAttempts;
+                                else
+                                    object.totalAttempts = options.longs === String ? $util.Long.prototype.toString.call(message.totalAttempts) : options.longs === Number ? new $util.LongBits(message.totalAttempts.low >>> 0, message.totalAttempts.high >>> 0).toNumber() : message.totalAttempts;
+                            if (message.backoffMode != null && message.hasOwnProperty("backoffMode"))
+                                object.backoffMode = options.enums === String ? $root.google.cloud.deploy.v1.BackoffMode[message.backoffMode] === undefined ? message.backoffMode : $root.google.cloud.deploy.v1.BackoffMode[message.backoffMode] : message.backoffMode;
+                            if (message.phaseId != null && message.hasOwnProperty("phaseId"))
+                                object.phaseId = message.phaseId;
+                            if (message.jobId != null && message.hasOwnProperty("jobId"))
+                                object.jobId = message.jobId;
+                            if (message.attempts && message.attempts.length) {
+                                object.attempts = [];
+                                for (var j = 0; j < message.attempts.length; ++j)
+                                    object.attempts[j] = $root.google.cloud.deploy.v1.RetryAttempt.toObject(message.attempts[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RetryPhase to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.RetryPhase
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RetryPhase.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RetryPhase
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.RetryPhase
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RetryPhase.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.RetryPhase";
+                        };
+    
+                        return RetryPhase;
+                    })();
+    
+                    v1.RetryAttempt = (function() {
+    
+                        /**
+                         * Properties of a RetryAttempt.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IRetryAttempt
+                         * @property {number|Long|null} [attempt] RetryAttempt attempt
+                         * @property {google.protobuf.IDuration|null} [wait] RetryAttempt wait
+                         * @property {google.cloud.deploy.v1.RepairState|null} [state] RetryAttempt state
+                         * @property {string|null} [stateDesc] RetryAttempt stateDesc
+                         */
+    
+                        /**
+                         * Constructs a new RetryAttempt.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a RetryAttempt.
+                         * @implements IRetryAttempt
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IRetryAttempt=} [properties] Properties to set
+                         */
+                        function RetryAttempt(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RetryAttempt attempt.
+                         * @member {number|Long} attempt
+                         * @memberof google.cloud.deploy.v1.RetryAttempt
+                         * @instance
+                         */
+                        RetryAttempt.prototype.attempt = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * RetryAttempt wait.
+                         * @member {google.protobuf.IDuration|null|undefined} wait
+                         * @memberof google.cloud.deploy.v1.RetryAttempt
+                         * @instance
+                         */
+                        RetryAttempt.prototype.wait = null;
+    
+                        /**
+                         * RetryAttempt state.
+                         * @member {google.cloud.deploy.v1.RepairState} state
+                         * @memberof google.cloud.deploy.v1.RetryAttempt
+                         * @instance
+                         */
+                        RetryAttempt.prototype.state = 0;
+    
+                        /**
+                         * RetryAttempt stateDesc.
+                         * @member {string} stateDesc
+                         * @memberof google.cloud.deploy.v1.RetryAttempt
+                         * @instance
+                         */
+                        RetryAttempt.prototype.stateDesc = "";
+    
+                        /**
+                         * Creates a new RetryAttempt instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.RetryAttempt
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRetryAttempt=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.RetryAttempt} RetryAttempt instance
+                         */
+                        RetryAttempt.create = function create(properties) {
+                            return new RetryAttempt(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RetryAttempt message. Does not implicitly {@link google.cloud.deploy.v1.RetryAttempt.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.RetryAttempt
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRetryAttempt} message RetryAttempt message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetryAttempt.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.attempt != null && Object.hasOwnProperty.call(message, "attempt"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.attempt);
+                            if (message.wait != null && Object.hasOwnProperty.call(message, "wait"))
+                                $root.google.protobuf.Duration.encode(message.wait, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.state);
+                            if (message.stateDesc != null && Object.hasOwnProperty.call(message, "stateDesc"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.stateDesc);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RetryAttempt message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.RetryAttempt.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.RetryAttempt
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRetryAttempt} message RetryAttempt message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetryAttempt.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RetryAttempt message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.RetryAttempt
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.RetryAttempt} RetryAttempt
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetryAttempt.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.RetryAttempt();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.attempt = reader.int64();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.wait = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.stateDesc = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RetryAttempt message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.RetryAttempt
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.RetryAttempt} RetryAttempt
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetryAttempt.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RetryAttempt message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.RetryAttempt
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RetryAttempt.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.attempt != null && message.hasOwnProperty("attempt"))
+                                if (!$util.isInteger(message.attempt) && !(message.attempt && $util.isInteger(message.attempt.low) && $util.isInteger(message.attempt.high)))
+                                    return "attempt: integer|Long expected";
+                            if (message.wait != null && message.hasOwnProperty("wait")) {
+                                var error = $root.google.protobuf.Duration.verify(message.wait);
+                                if (error)
+                                    return "wait." + error;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    break;
+                                }
+                            if (message.stateDesc != null && message.hasOwnProperty("stateDesc"))
+                                if (!$util.isString(message.stateDesc))
+                                    return "stateDesc: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RetryAttempt message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.RetryAttempt
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.RetryAttempt} RetryAttempt
+                         */
+                        RetryAttempt.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.RetryAttempt)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.RetryAttempt();
+                            if (object.attempt != null)
+                                if ($util.Long)
+                                    (message.attempt = $util.Long.fromValue(object.attempt)).unsigned = false;
+                                else if (typeof object.attempt === "string")
+                                    message.attempt = parseInt(object.attempt, 10);
+                                else if (typeof object.attempt === "number")
+                                    message.attempt = object.attempt;
+                                else if (typeof object.attempt === "object")
+                                    message.attempt = new $util.LongBits(object.attempt.low >>> 0, object.attempt.high >>> 0).toNumber();
+                            if (object.wait != null) {
+                                if (typeof object.wait !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.RetryAttempt.wait: object expected");
+                                message.wait = $root.google.protobuf.Duration.fromObject(object.wait);
+                            }
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "REPAIR_STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "REPAIR_STATE_SUCCEEDED":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "REPAIR_STATE_CANCELLED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "REPAIR_STATE_FAILED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "REPAIR_STATE_IN_PROGRESS":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "REPAIR_STATE_PENDING":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            case "REPAIR_STATE_SKIPPED":
+                            case 6:
+                                message.state = 6;
+                                break;
+                            }
+                            if (object.stateDesc != null)
+                                message.stateDesc = String(object.stateDesc);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RetryAttempt message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.RetryAttempt
+                         * @static
+                         * @param {google.cloud.deploy.v1.RetryAttempt} message RetryAttempt
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RetryAttempt.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.attempt = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.attempt = options.longs === String ? "0" : 0;
+                                object.wait = null;
+                                object.state = options.enums === String ? "REPAIR_STATE_UNSPECIFIED" : 0;
+                                object.stateDesc = "";
+                            }
+                            if (message.attempt != null && message.hasOwnProperty("attempt"))
+                                if (typeof message.attempt === "number")
+                                    object.attempt = options.longs === String ? String(message.attempt) : message.attempt;
+                                else
+                                    object.attempt = options.longs === String ? $util.Long.prototype.toString.call(message.attempt) : options.longs === Number ? new $util.LongBits(message.attempt.low >>> 0, message.attempt.high >>> 0).toNumber() : message.attempt;
+                            if (message.wait != null && message.hasOwnProperty("wait"))
+                                object.wait = $root.google.protobuf.Duration.toObject(message.wait, options);
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.deploy.v1.RepairState[message.state] === undefined ? message.state : $root.google.cloud.deploy.v1.RepairState[message.state] : message.state;
+                            if (message.stateDesc != null && message.hasOwnProperty("stateDesc"))
+                                object.stateDesc = message.stateDesc;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RetryAttempt to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.RetryAttempt
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RetryAttempt.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RetryAttempt
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.RetryAttempt
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RetryAttempt.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.RetryAttempt";
+                        };
+    
+                        return RetryAttempt;
+                    })();
+    
+                    v1.RollbackAttempt = (function() {
+    
+                        /**
+                         * Properties of a RollbackAttempt.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IRollbackAttempt
+                         * @property {string|null} [destinationPhase] RollbackAttempt destinationPhase
+                         * @property {string|null} [rolloutId] RollbackAttempt rolloutId
+                         * @property {google.cloud.deploy.v1.RepairState|null} [state] RollbackAttempt state
+                         * @property {string|null} [stateDesc] RollbackAttempt stateDesc
+                         */
+    
+                        /**
+                         * Constructs a new RollbackAttempt.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a RollbackAttempt.
+                         * @implements IRollbackAttempt
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IRollbackAttempt=} [properties] Properties to set
+                         */
+                        function RollbackAttempt(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RollbackAttempt destinationPhase.
+                         * @member {string} destinationPhase
+                         * @memberof google.cloud.deploy.v1.RollbackAttempt
+                         * @instance
+                         */
+                        RollbackAttempt.prototype.destinationPhase = "";
+    
+                        /**
+                         * RollbackAttempt rolloutId.
+                         * @member {string} rolloutId
+                         * @memberof google.cloud.deploy.v1.RollbackAttempt
+                         * @instance
+                         */
+                        RollbackAttempt.prototype.rolloutId = "";
+    
+                        /**
+                         * RollbackAttempt state.
+                         * @member {google.cloud.deploy.v1.RepairState} state
+                         * @memberof google.cloud.deploy.v1.RollbackAttempt
+                         * @instance
+                         */
+                        RollbackAttempt.prototype.state = 0;
+    
+                        /**
+                         * RollbackAttempt stateDesc.
+                         * @member {string} stateDesc
+                         * @memberof google.cloud.deploy.v1.RollbackAttempt
+                         * @instance
+                         */
+                        RollbackAttempt.prototype.stateDesc = "";
+    
+                        /**
+                         * Creates a new RollbackAttempt instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.RollbackAttempt
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRollbackAttempt=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.RollbackAttempt} RollbackAttempt instance
+                         */
+                        RollbackAttempt.create = function create(properties) {
+                            return new RollbackAttempt(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RollbackAttempt message. Does not implicitly {@link google.cloud.deploy.v1.RollbackAttempt.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.RollbackAttempt
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRollbackAttempt} message RollbackAttempt message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RollbackAttempt.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.destinationPhase != null && Object.hasOwnProperty.call(message, "destinationPhase"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.destinationPhase);
+                            if (message.rolloutId != null && Object.hasOwnProperty.call(message, "rolloutId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.rolloutId);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.state);
+                            if (message.stateDesc != null && Object.hasOwnProperty.call(message, "stateDesc"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.stateDesc);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RollbackAttempt message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.RollbackAttempt.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.RollbackAttempt
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRollbackAttempt} message RollbackAttempt message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RollbackAttempt.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RollbackAttempt message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.RollbackAttempt
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.RollbackAttempt} RollbackAttempt
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RollbackAttempt.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.RollbackAttempt();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.destinationPhase = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.rolloutId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.stateDesc = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RollbackAttempt message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.RollbackAttempt
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.RollbackAttempt} RollbackAttempt
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RollbackAttempt.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RollbackAttempt message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.RollbackAttempt
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RollbackAttempt.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.destinationPhase != null && message.hasOwnProperty("destinationPhase"))
+                                if (!$util.isString(message.destinationPhase))
+                                    return "destinationPhase: string expected";
+                            if (message.rolloutId != null && message.hasOwnProperty("rolloutId"))
+                                if (!$util.isString(message.rolloutId))
+                                    return "rolloutId: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    break;
+                                }
+                            if (message.stateDesc != null && message.hasOwnProperty("stateDesc"))
+                                if (!$util.isString(message.stateDesc))
+                                    return "stateDesc: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RollbackAttempt message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.RollbackAttempt
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.RollbackAttempt} RollbackAttempt
+                         */
+                        RollbackAttempt.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.RollbackAttempt)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.RollbackAttempt();
+                            if (object.destinationPhase != null)
+                                message.destinationPhase = String(object.destinationPhase);
+                            if (object.rolloutId != null)
+                                message.rolloutId = String(object.rolloutId);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "REPAIR_STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "REPAIR_STATE_SUCCEEDED":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "REPAIR_STATE_CANCELLED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "REPAIR_STATE_FAILED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "REPAIR_STATE_IN_PROGRESS":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "REPAIR_STATE_PENDING":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            case "REPAIR_STATE_SKIPPED":
+                            case 6:
+                                message.state = 6;
+                                break;
+                            }
+                            if (object.stateDesc != null)
+                                message.stateDesc = String(object.stateDesc);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RollbackAttempt message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.RollbackAttempt
+                         * @static
+                         * @param {google.cloud.deploy.v1.RollbackAttempt} message RollbackAttempt
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RollbackAttempt.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.destinationPhase = "";
+                                object.rolloutId = "";
+                                object.state = options.enums === String ? "REPAIR_STATE_UNSPECIFIED" : 0;
+                                object.stateDesc = "";
+                            }
+                            if (message.destinationPhase != null && message.hasOwnProperty("destinationPhase"))
+                                object.destinationPhase = message.destinationPhase;
+                            if (message.rolloutId != null && message.hasOwnProperty("rolloutId"))
+                                object.rolloutId = message.rolloutId;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.deploy.v1.RepairState[message.state] === undefined ? message.state : $root.google.cloud.deploy.v1.RepairState[message.state] : message.state;
+                            if (message.stateDesc != null && message.hasOwnProperty("stateDesc"))
+                                object.stateDesc = message.stateDesc;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RollbackAttempt to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.RollbackAttempt
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RollbackAttempt.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RollbackAttempt
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.RollbackAttempt
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RollbackAttempt.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.RollbackAttempt";
+                        };
+    
+                        return RollbackAttempt;
+                    })();
+    
+                    v1.ListAutomationRunsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListAutomationRunsRequest.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IListAutomationRunsRequest
+                         * @property {string|null} [parent] ListAutomationRunsRequest parent
+                         * @property {number|null} [pageSize] ListAutomationRunsRequest pageSize
+                         * @property {string|null} [pageToken] ListAutomationRunsRequest pageToken
+                         * @property {string|null} [filter] ListAutomationRunsRequest filter
+                         * @property {string|null} [orderBy] ListAutomationRunsRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListAutomationRunsRequest.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a ListAutomationRunsRequest.
+                         * @implements IListAutomationRunsRequest
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IListAutomationRunsRequest=} [properties] Properties to set
+                         */
+                        function ListAutomationRunsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAutomationRunsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.deploy.v1.ListAutomationRunsRequest
+                         * @instance
+                         */
+                        ListAutomationRunsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListAutomationRunsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.deploy.v1.ListAutomationRunsRequest
+                         * @instance
+                         */
+                        ListAutomationRunsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListAutomationRunsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.deploy.v1.ListAutomationRunsRequest
+                         * @instance
+                         */
+                        ListAutomationRunsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListAutomationRunsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.deploy.v1.ListAutomationRunsRequest
+                         * @instance
+                         */
+                        ListAutomationRunsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListAutomationRunsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.deploy.v1.ListAutomationRunsRequest
+                         * @instance
+                         */
+                        ListAutomationRunsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListAutomationRunsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.ListAutomationRunsRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IListAutomationRunsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.ListAutomationRunsRequest} ListAutomationRunsRequest instance
+                         */
+                        ListAutomationRunsRequest.create = function create(properties) {
+                            return new ListAutomationRunsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAutomationRunsRequest message. Does not implicitly {@link google.cloud.deploy.v1.ListAutomationRunsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.ListAutomationRunsRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IListAutomationRunsRequest} message ListAutomationRunsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAutomationRunsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAutomationRunsRequest message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.ListAutomationRunsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.ListAutomationRunsRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IListAutomationRunsRequest} message ListAutomationRunsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAutomationRunsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAutomationRunsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.ListAutomationRunsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.ListAutomationRunsRequest} ListAutomationRunsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAutomationRunsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.ListAutomationRunsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAutomationRunsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.ListAutomationRunsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.ListAutomationRunsRequest} ListAutomationRunsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAutomationRunsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAutomationRunsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.ListAutomationRunsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAutomationRunsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAutomationRunsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.ListAutomationRunsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.ListAutomationRunsRequest} ListAutomationRunsRequest
+                         */
+                        ListAutomationRunsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.ListAutomationRunsRequest)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.ListAutomationRunsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAutomationRunsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.ListAutomationRunsRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.ListAutomationRunsRequest} message ListAutomationRunsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAutomationRunsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAutomationRunsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.ListAutomationRunsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAutomationRunsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListAutomationRunsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.ListAutomationRunsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListAutomationRunsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.ListAutomationRunsRequest";
+                        };
+    
+                        return ListAutomationRunsRequest;
+                    })();
+    
+                    v1.ListAutomationRunsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListAutomationRunsResponse.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IListAutomationRunsResponse
+                         * @property {Array.<google.cloud.deploy.v1.IAutomationRun>|null} [automationRuns] ListAutomationRunsResponse automationRuns
+                         * @property {string|null} [nextPageToken] ListAutomationRunsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListAutomationRunsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListAutomationRunsResponse.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a ListAutomationRunsResponse.
+                         * @implements IListAutomationRunsResponse
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IListAutomationRunsResponse=} [properties] Properties to set
+                         */
+                        function ListAutomationRunsResponse(properties) {
+                            this.automationRuns = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAutomationRunsResponse automationRuns.
+                         * @member {Array.<google.cloud.deploy.v1.IAutomationRun>} automationRuns
+                         * @memberof google.cloud.deploy.v1.ListAutomationRunsResponse
+                         * @instance
+                         */
+                        ListAutomationRunsResponse.prototype.automationRuns = $util.emptyArray;
+    
+                        /**
+                         * ListAutomationRunsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.deploy.v1.ListAutomationRunsResponse
+                         * @instance
+                         */
+                        ListAutomationRunsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListAutomationRunsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.deploy.v1.ListAutomationRunsResponse
+                         * @instance
+                         */
+                        ListAutomationRunsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListAutomationRunsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.ListAutomationRunsResponse
+                         * @static
+                         * @param {google.cloud.deploy.v1.IListAutomationRunsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.ListAutomationRunsResponse} ListAutomationRunsResponse instance
+                         */
+                        ListAutomationRunsResponse.create = function create(properties) {
+                            return new ListAutomationRunsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAutomationRunsResponse message. Does not implicitly {@link google.cloud.deploy.v1.ListAutomationRunsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.ListAutomationRunsResponse
+                         * @static
+                         * @param {google.cloud.deploy.v1.IListAutomationRunsResponse} message ListAutomationRunsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAutomationRunsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.automationRuns != null && message.automationRuns.length)
+                                for (var i = 0; i < message.automationRuns.length; ++i)
+                                    $root.google.cloud.deploy.v1.AutomationRun.encode(message.automationRuns[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAutomationRunsResponse message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.ListAutomationRunsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.ListAutomationRunsResponse
+                         * @static
+                         * @param {google.cloud.deploy.v1.IListAutomationRunsResponse} message ListAutomationRunsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAutomationRunsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAutomationRunsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.ListAutomationRunsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.ListAutomationRunsResponse} ListAutomationRunsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAutomationRunsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.ListAutomationRunsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.automationRuns && message.automationRuns.length))
+                                            message.automationRuns = [];
+                                        message.automationRuns.push($root.google.cloud.deploy.v1.AutomationRun.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAutomationRunsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.ListAutomationRunsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.ListAutomationRunsResponse} ListAutomationRunsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAutomationRunsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAutomationRunsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.ListAutomationRunsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAutomationRunsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.automationRuns != null && message.hasOwnProperty("automationRuns")) {
+                                if (!Array.isArray(message.automationRuns))
+                                    return "automationRuns: array expected";
+                                for (var i = 0; i < message.automationRuns.length; ++i) {
+                                    var error = $root.google.cloud.deploy.v1.AutomationRun.verify(message.automationRuns[i]);
+                                    if (error)
+                                        return "automationRuns." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAutomationRunsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.ListAutomationRunsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.ListAutomationRunsResponse} ListAutomationRunsResponse
+                         */
+                        ListAutomationRunsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.ListAutomationRunsResponse)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.ListAutomationRunsResponse();
+                            if (object.automationRuns) {
+                                if (!Array.isArray(object.automationRuns))
+                                    throw TypeError(".google.cloud.deploy.v1.ListAutomationRunsResponse.automationRuns: array expected");
+                                message.automationRuns = [];
+                                for (var i = 0; i < object.automationRuns.length; ++i) {
+                                    if (typeof object.automationRuns[i] !== "object")
+                                        throw TypeError(".google.cloud.deploy.v1.ListAutomationRunsResponse.automationRuns: object expected");
+                                    message.automationRuns[i] = $root.google.cloud.deploy.v1.AutomationRun.fromObject(object.automationRuns[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.deploy.v1.ListAutomationRunsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAutomationRunsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.ListAutomationRunsResponse
+                         * @static
+                         * @param {google.cloud.deploy.v1.ListAutomationRunsResponse} message ListAutomationRunsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAutomationRunsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.automationRuns = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.automationRuns && message.automationRuns.length) {
+                                object.automationRuns = [];
+                                for (var j = 0; j < message.automationRuns.length; ++j)
+                                    object.automationRuns[j] = $root.google.cloud.deploy.v1.AutomationRun.toObject(message.automationRuns[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAutomationRunsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.ListAutomationRunsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAutomationRunsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListAutomationRunsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.ListAutomationRunsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListAutomationRunsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.ListAutomationRunsResponse";
+                        };
+    
+                        return ListAutomationRunsResponse;
+                    })();
+    
+                    v1.GetAutomationRunRequest = (function() {
+    
+                        /**
+                         * Properties of a GetAutomationRunRequest.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IGetAutomationRunRequest
+                         * @property {string|null} [name] GetAutomationRunRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetAutomationRunRequest.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a GetAutomationRunRequest.
+                         * @implements IGetAutomationRunRequest
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IGetAutomationRunRequest=} [properties] Properties to set
+                         */
+                        function GetAutomationRunRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetAutomationRunRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.deploy.v1.GetAutomationRunRequest
+                         * @instance
+                         */
+                        GetAutomationRunRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetAutomationRunRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.GetAutomationRunRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IGetAutomationRunRequest=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.GetAutomationRunRequest} GetAutomationRunRequest instance
+                         */
+                        GetAutomationRunRequest.create = function create(properties) {
+                            return new GetAutomationRunRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetAutomationRunRequest message. Does not implicitly {@link google.cloud.deploy.v1.GetAutomationRunRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.GetAutomationRunRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IGetAutomationRunRequest} message GetAutomationRunRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetAutomationRunRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetAutomationRunRequest message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.GetAutomationRunRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.GetAutomationRunRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IGetAutomationRunRequest} message GetAutomationRunRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetAutomationRunRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetAutomationRunRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.GetAutomationRunRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.GetAutomationRunRequest} GetAutomationRunRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetAutomationRunRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.GetAutomationRunRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetAutomationRunRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.GetAutomationRunRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.GetAutomationRunRequest} GetAutomationRunRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetAutomationRunRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetAutomationRunRequest message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.GetAutomationRunRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetAutomationRunRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetAutomationRunRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.GetAutomationRunRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.GetAutomationRunRequest} GetAutomationRunRequest
+                         */
+                        GetAutomationRunRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.GetAutomationRunRequest)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.GetAutomationRunRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetAutomationRunRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.GetAutomationRunRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.GetAutomationRunRequest} message GetAutomationRunRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetAutomationRunRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetAutomationRunRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.GetAutomationRunRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetAutomationRunRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetAutomationRunRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.GetAutomationRunRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetAutomationRunRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.GetAutomationRunRequest";
+                        };
+    
+                        return GetAutomationRunRequest;
+                    })();
+    
+                    v1.CancelAutomationRunRequest = (function() {
+    
+                        /**
+                         * Properties of a CancelAutomationRunRequest.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface ICancelAutomationRunRequest
+                         * @property {string|null} [name] CancelAutomationRunRequest name
+                         */
+    
+                        /**
+                         * Constructs a new CancelAutomationRunRequest.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a CancelAutomationRunRequest.
+                         * @implements ICancelAutomationRunRequest
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.ICancelAutomationRunRequest=} [properties] Properties to set
+                         */
+                        function CancelAutomationRunRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CancelAutomationRunRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.deploy.v1.CancelAutomationRunRequest
+                         * @instance
+                         */
+                        CancelAutomationRunRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new CancelAutomationRunRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.CancelAutomationRunRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.ICancelAutomationRunRequest=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.CancelAutomationRunRequest} CancelAutomationRunRequest instance
+                         */
+                        CancelAutomationRunRequest.create = function create(properties) {
+                            return new CancelAutomationRunRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CancelAutomationRunRequest message. Does not implicitly {@link google.cloud.deploy.v1.CancelAutomationRunRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.CancelAutomationRunRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.ICancelAutomationRunRequest} message CancelAutomationRunRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CancelAutomationRunRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CancelAutomationRunRequest message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.CancelAutomationRunRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.CancelAutomationRunRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.ICancelAutomationRunRequest} message CancelAutomationRunRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CancelAutomationRunRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CancelAutomationRunRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.CancelAutomationRunRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.CancelAutomationRunRequest} CancelAutomationRunRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CancelAutomationRunRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.CancelAutomationRunRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CancelAutomationRunRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.CancelAutomationRunRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.CancelAutomationRunRequest} CancelAutomationRunRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CancelAutomationRunRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CancelAutomationRunRequest message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.CancelAutomationRunRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CancelAutomationRunRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CancelAutomationRunRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.CancelAutomationRunRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.CancelAutomationRunRequest} CancelAutomationRunRequest
+                         */
+                        CancelAutomationRunRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.CancelAutomationRunRequest)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.CancelAutomationRunRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CancelAutomationRunRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.CancelAutomationRunRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.CancelAutomationRunRequest} message CancelAutomationRunRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CancelAutomationRunRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CancelAutomationRunRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.CancelAutomationRunRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CancelAutomationRunRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CancelAutomationRunRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.CancelAutomationRunRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CancelAutomationRunRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.CancelAutomationRunRequest";
+                        };
+    
+                        return CancelAutomationRunRequest;
+                    })();
+    
+                    v1.CancelAutomationRunResponse = (function() {
+    
+                        /**
+                         * Properties of a CancelAutomationRunResponse.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface ICancelAutomationRunResponse
+                         */
+    
+                        /**
+                         * Constructs a new CancelAutomationRunResponse.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a CancelAutomationRunResponse.
+                         * @implements ICancelAutomationRunResponse
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.ICancelAutomationRunResponse=} [properties] Properties to set
+                         */
+                        function CancelAutomationRunResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new CancelAutomationRunResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.CancelAutomationRunResponse
+                         * @static
+                         * @param {google.cloud.deploy.v1.ICancelAutomationRunResponse=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.CancelAutomationRunResponse} CancelAutomationRunResponse instance
+                         */
+                        CancelAutomationRunResponse.create = function create(properties) {
+                            return new CancelAutomationRunResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CancelAutomationRunResponse message. Does not implicitly {@link google.cloud.deploy.v1.CancelAutomationRunResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.CancelAutomationRunResponse
+                         * @static
+                         * @param {google.cloud.deploy.v1.ICancelAutomationRunResponse} message CancelAutomationRunResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CancelAutomationRunResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CancelAutomationRunResponse message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.CancelAutomationRunResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.CancelAutomationRunResponse
+                         * @static
+                         * @param {google.cloud.deploy.v1.ICancelAutomationRunResponse} message CancelAutomationRunResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CancelAutomationRunResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CancelAutomationRunResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.CancelAutomationRunResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.CancelAutomationRunResponse} CancelAutomationRunResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CancelAutomationRunResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.CancelAutomationRunResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CancelAutomationRunResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.CancelAutomationRunResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.CancelAutomationRunResponse} CancelAutomationRunResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CancelAutomationRunResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CancelAutomationRunResponse message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.CancelAutomationRunResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CancelAutomationRunResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CancelAutomationRunResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.CancelAutomationRunResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.CancelAutomationRunResponse} CancelAutomationRunResponse
+                         */
+                        CancelAutomationRunResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.CancelAutomationRunResponse)
+                                return object;
+                            return new $root.google.cloud.deploy.v1.CancelAutomationRunResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from a CancelAutomationRunResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.CancelAutomationRunResponse
+                         * @static
+                         * @param {google.cloud.deploy.v1.CancelAutomationRunResponse} message CancelAutomationRunResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CancelAutomationRunResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this CancelAutomationRunResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.CancelAutomationRunResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CancelAutomationRunResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CancelAutomationRunResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.CancelAutomationRunResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CancelAutomationRunResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.CancelAutomationRunResponse";
+                        };
+    
+                        return CancelAutomationRunResponse;
+                    })();
+    
                     /**
                      * SkaffoldSupportState enum.
                      * @name google.cloud.deploy.v1.SkaffoldSupportState
@@ -29985,6 +41141,46 @@
                         values[valuesById[1] = "SKAFFOLD_SUPPORT_STATE_SUPPORTED"] = 1;
                         values[valuesById[2] = "SKAFFOLD_SUPPORT_STATE_MAINTENANCE_MODE"] = 2;
                         values[valuesById[3] = "SKAFFOLD_SUPPORT_STATE_UNSUPPORTED"] = 3;
+                        return values;
+                    })();
+    
+                    /**
+                     * BackoffMode enum.
+                     * @name google.cloud.deploy.v1.BackoffMode
+                     * @enum {number}
+                     * @property {number} BACKOFF_MODE_UNSPECIFIED=0 BACKOFF_MODE_UNSPECIFIED value
+                     * @property {number} BACKOFF_MODE_LINEAR=1 BACKOFF_MODE_LINEAR value
+                     * @property {number} BACKOFF_MODE_EXPONENTIAL=2 BACKOFF_MODE_EXPONENTIAL value
+                     */
+                    v1.BackoffMode = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "BACKOFF_MODE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "BACKOFF_MODE_LINEAR"] = 1;
+                        values[valuesById[2] = "BACKOFF_MODE_EXPONENTIAL"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * RepairState enum.
+                     * @name google.cloud.deploy.v1.RepairState
+                     * @enum {number}
+                     * @property {number} REPAIR_STATE_UNSPECIFIED=0 REPAIR_STATE_UNSPECIFIED value
+                     * @property {number} REPAIR_STATE_SUCCEEDED=1 REPAIR_STATE_SUCCEEDED value
+                     * @property {number} REPAIR_STATE_CANCELLED=2 REPAIR_STATE_CANCELLED value
+                     * @property {number} REPAIR_STATE_FAILED=3 REPAIR_STATE_FAILED value
+                     * @property {number} REPAIR_STATE_IN_PROGRESS=4 REPAIR_STATE_IN_PROGRESS value
+                     * @property {number} REPAIR_STATE_PENDING=5 REPAIR_STATE_PENDING value
+                     * @property {number} REPAIR_STATE_SKIPPED=6 REPAIR_STATE_SKIPPED value
+                     */
+                    v1.RepairState = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "REPAIR_STATE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "REPAIR_STATE_SUCCEEDED"] = 1;
+                        values[valuesById[2] = "REPAIR_STATE_CANCELLED"] = 2;
+                        values[valuesById[3] = "REPAIR_STATE_FAILED"] = 3;
+                        values[valuesById[4] = "REPAIR_STATE_IN_PROGRESS"] = 4;
+                        values[valuesById[5] = "REPAIR_STATE_PENDING"] = 5;
+                        values[valuesById[6] = "REPAIR_STATE_SKIPPED"] = 6;
                         return values;
                     })();
     
@@ -30165,6 +41361,7 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
                                 case 2:
                                     break;
                                 }
@@ -30217,6 +41414,10 @@
                             case "TYPE_RESOURCE_DELETED":
                             case 6:
                                 message.type = 6;
+                                break;
+                            case "TYPE_ROLLOUT_UPDATE":
+                            case 7:
+                                message.type = 7;
                                 break;
                             case "TYPE_RENDER_STATUES_CHANGE":
                             case 2:
@@ -30280,30 +41481,6 @@
                         };
     
                         return DeliveryPipelineNotificationEvent;
-                    })();
-    
-                    /**
-                     * Type enum.
-                     * @name google.cloud.deploy.v1.Type
-                     * @enum {number}
-                     * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
-                     * @property {number} TYPE_PUBSUB_NOTIFICATION_FAILURE=1 TYPE_PUBSUB_NOTIFICATION_FAILURE value
-                     * @property {number} TYPE_RESOURCE_STATE_CHANGE=3 TYPE_RESOURCE_STATE_CHANGE value
-                     * @property {number} TYPE_PROCESS_ABORTED=4 TYPE_PROCESS_ABORTED value
-                     * @property {number} TYPE_RESTRICTION_VIOLATED=5 TYPE_RESTRICTION_VIOLATED value
-                     * @property {number} TYPE_RESOURCE_DELETED=6 TYPE_RESOURCE_DELETED value
-                     * @property {number} TYPE_RENDER_STATUES_CHANGE=2 TYPE_RENDER_STATUES_CHANGE value
-                     */
-                    v1.Type = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "TYPE_PUBSUB_NOTIFICATION_FAILURE"] = 1;
-                        values[valuesById[3] = "TYPE_RESOURCE_STATE_CHANGE"] = 3;
-                        values[valuesById[4] = "TYPE_PROCESS_ABORTED"] = 4;
-                        values[valuesById[5] = "TYPE_RESTRICTION_VIOLATED"] = 5;
-                        values[valuesById[6] = "TYPE_RESOURCE_DELETED"] = 6;
-                        values[valuesById[2] = "TYPE_RENDER_STATUES_CHANGE"] = 2;
-                        return values;
                     })();
     
                     v1.JobRunNotificationEvent = (function() {
@@ -30555,6 +41732,7 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
                                 case 2:
                                     break;
                                 }
@@ -30615,6 +41793,10 @@
                             case "TYPE_RESOURCE_DELETED":
                             case 6:
                                 message.type = 6;
+                                break;
+                            case "TYPE_ROLLOUT_UPDATE":
+                            case 7:
+                                message.type = 7;
                                 break;
                             case "TYPE_RENDER_STATUES_CHANGE":
                             case 2:
@@ -30869,6 +42051,7 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
                                 case 2:
                                     break;
                                 }
@@ -30921,6 +42104,10 @@
                             case "TYPE_RESOURCE_DELETED":
                             case 6:
                                 message.type = 6;
+                                break;
+                            case "TYPE_ROLLOUT_UPDATE":
+                            case 7:
+                                message.type = 7;
                                 break;
                             case "TYPE_RENDER_STATUES_CHANGE":
                             case 2:
@@ -30994,6 +42181,7 @@
                          * @interface IReleaseRenderEvent
                          * @property {string|null} [message] ReleaseRenderEvent message
                          * @property {string|null} [release] ReleaseRenderEvent release
+                         * @property {google.cloud.deploy.v1.Release.RenderState|null} [releaseRenderState] ReleaseRenderEvent releaseRenderState
                          */
     
                         /**
@@ -31028,6 +42216,14 @@
                         ReleaseRenderEvent.prototype.release = "";
     
                         /**
+                         * ReleaseRenderEvent releaseRenderState.
+                         * @member {google.cloud.deploy.v1.Release.RenderState} releaseRenderState
+                         * @memberof google.cloud.deploy.v1.ReleaseRenderEvent
+                         * @instance
+                         */
+                        ReleaseRenderEvent.prototype.releaseRenderState = 0;
+    
+                        /**
                          * Creates a new ReleaseRenderEvent instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.deploy.v1.ReleaseRenderEvent
@@ -31055,6 +42251,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.message);
                             if (message.release != null && Object.hasOwnProperty.call(message, "release"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.release);
+                            if (message.releaseRenderState != null && Object.hasOwnProperty.call(message, "releaseRenderState"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.releaseRenderState);
                             return writer;
                         };
     
@@ -31095,6 +42293,10 @@
                                     }
                                 case 2: {
                                         message.release = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.releaseRenderState = reader.int32();
                                         break;
                                     }
                                 default:
@@ -31138,6 +42340,16 @@
                             if (message.release != null && message.hasOwnProperty("release"))
                                 if (!$util.isString(message.release))
                                     return "release: string expected";
+                            if (message.releaseRenderState != null && message.hasOwnProperty("releaseRenderState"))
+                                switch (message.releaseRenderState) {
+                                default:
+                                    return "releaseRenderState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -31157,6 +42369,30 @@
                                 message.message = String(object.message);
                             if (object.release != null)
                                 message.release = String(object.release);
+                            switch (object.releaseRenderState) {
+                            default:
+                                if (typeof object.releaseRenderState === "number") {
+                                    message.releaseRenderState = object.releaseRenderState;
+                                    break;
+                                }
+                                break;
+                            case "RENDER_STATE_UNSPECIFIED":
+                            case 0:
+                                message.releaseRenderState = 0;
+                                break;
+                            case "SUCCEEDED":
+                            case 1:
+                                message.releaseRenderState = 1;
+                                break;
+                            case "FAILED":
+                            case 2:
+                                message.releaseRenderState = 2;
+                                break;
+                            case "IN_PROGRESS":
+                            case 3:
+                                message.releaseRenderState = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -31176,11 +42412,14 @@
                             if (options.defaults) {
                                 object.message = "";
                                 object.release = "";
+                                object.releaseRenderState = options.enums === String ? "RENDER_STATE_UNSPECIFIED" : 0;
                             }
                             if (message.message != null && message.hasOwnProperty("message"))
                                 object.message = message.message;
                             if (message.release != null && message.hasOwnProperty("release"))
                                 object.release = message.release;
+                            if (message.releaseRenderState != null && message.hasOwnProperty("releaseRenderState"))
+                                object.releaseRenderState = options.enums === String ? $root.google.cloud.deploy.v1.Release.RenderState[message.releaseRenderState] === undefined ? message.releaseRenderState : $root.google.cloud.deploy.v1.Release.RenderState[message.releaseRenderState] : message.releaseRenderState;
                             return object;
                         };
     
@@ -31441,6 +42680,7 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
                                 case 2:
                                     break;
                                 }
@@ -31500,6 +42740,10 @@
                             case "TYPE_RESOURCE_DELETED":
                             case 6:
                                 message.type = 6;
+                                break;
+                            case "TYPE_ROLLOUT_UPDATE":
+                            case 7:
+                                message.type = 7;
                                 break;
                             case "TYPE_RENDER_STATUES_CHANGE":
                             case 2:
@@ -31574,6 +42818,514 @@
                         };
     
                         return RolloutNotificationEvent;
+                    })();
+    
+                    v1.RolloutUpdateEvent = (function() {
+    
+                        /**
+                         * Properties of a RolloutUpdateEvent.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IRolloutUpdateEvent
+                         * @property {string|null} [pipelineUid] RolloutUpdateEvent pipelineUid
+                         * @property {string|null} [releaseUid] RolloutUpdateEvent releaseUid
+                         * @property {string|null} [rollout] RolloutUpdateEvent rollout
+                         * @property {string|null} [targetId] RolloutUpdateEvent targetId
+                         * @property {google.cloud.deploy.v1.RolloutUpdateEvent.RolloutUpdateType|null} [rolloutUpdateType] RolloutUpdateEvent rolloutUpdateType
+                         * @property {string|null} [message] RolloutUpdateEvent message
+                         * @property {google.cloud.deploy.v1.Type|null} [type] RolloutUpdateEvent type
+                         */
+    
+                        /**
+                         * Constructs a new RolloutUpdateEvent.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a RolloutUpdateEvent.
+                         * @implements IRolloutUpdateEvent
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IRolloutUpdateEvent=} [properties] Properties to set
+                         */
+                        function RolloutUpdateEvent(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RolloutUpdateEvent pipelineUid.
+                         * @member {string} pipelineUid
+                         * @memberof google.cloud.deploy.v1.RolloutUpdateEvent
+                         * @instance
+                         */
+                        RolloutUpdateEvent.prototype.pipelineUid = "";
+    
+                        /**
+                         * RolloutUpdateEvent releaseUid.
+                         * @member {string} releaseUid
+                         * @memberof google.cloud.deploy.v1.RolloutUpdateEvent
+                         * @instance
+                         */
+                        RolloutUpdateEvent.prototype.releaseUid = "";
+    
+                        /**
+                         * RolloutUpdateEvent rollout.
+                         * @member {string} rollout
+                         * @memberof google.cloud.deploy.v1.RolloutUpdateEvent
+                         * @instance
+                         */
+                        RolloutUpdateEvent.prototype.rollout = "";
+    
+                        /**
+                         * RolloutUpdateEvent targetId.
+                         * @member {string} targetId
+                         * @memberof google.cloud.deploy.v1.RolloutUpdateEvent
+                         * @instance
+                         */
+                        RolloutUpdateEvent.prototype.targetId = "";
+    
+                        /**
+                         * RolloutUpdateEvent rolloutUpdateType.
+                         * @member {google.cloud.deploy.v1.RolloutUpdateEvent.RolloutUpdateType} rolloutUpdateType
+                         * @memberof google.cloud.deploy.v1.RolloutUpdateEvent
+                         * @instance
+                         */
+                        RolloutUpdateEvent.prototype.rolloutUpdateType = 0;
+    
+                        /**
+                         * RolloutUpdateEvent message.
+                         * @member {string} message
+                         * @memberof google.cloud.deploy.v1.RolloutUpdateEvent
+                         * @instance
+                         */
+                        RolloutUpdateEvent.prototype.message = "";
+    
+                        /**
+                         * RolloutUpdateEvent type.
+                         * @member {google.cloud.deploy.v1.Type} type
+                         * @memberof google.cloud.deploy.v1.RolloutUpdateEvent
+                         * @instance
+                         */
+                        RolloutUpdateEvent.prototype.type = 0;
+    
+                        /**
+                         * Creates a new RolloutUpdateEvent instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.RolloutUpdateEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRolloutUpdateEvent=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.RolloutUpdateEvent} RolloutUpdateEvent instance
+                         */
+                        RolloutUpdateEvent.create = function create(properties) {
+                            return new RolloutUpdateEvent(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RolloutUpdateEvent message. Does not implicitly {@link google.cloud.deploy.v1.RolloutUpdateEvent.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.RolloutUpdateEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRolloutUpdateEvent} message RolloutUpdateEvent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RolloutUpdateEvent.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.pipelineUid != null && Object.hasOwnProperty.call(message, "pipelineUid"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.pipelineUid);
+                            if (message.releaseUid != null && Object.hasOwnProperty.call(message, "releaseUid"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.releaseUid);
+                            if (message.rollout != null && Object.hasOwnProperty.call(message, "rollout"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.rollout);
+                            if (message.targetId != null && Object.hasOwnProperty.call(message, "targetId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.targetId);
+                            if (message.rolloutUpdateType != null && Object.hasOwnProperty.call(message, "rolloutUpdateType"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.rolloutUpdateType);
+                            if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.message);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.type);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RolloutUpdateEvent message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.RolloutUpdateEvent.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.RolloutUpdateEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.IRolloutUpdateEvent} message RolloutUpdateEvent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RolloutUpdateEvent.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RolloutUpdateEvent message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.RolloutUpdateEvent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.RolloutUpdateEvent} RolloutUpdateEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RolloutUpdateEvent.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.RolloutUpdateEvent();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.pipelineUid = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.releaseUid = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.rollout = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.targetId = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.rolloutUpdateType = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.message = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RolloutUpdateEvent message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.RolloutUpdateEvent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.RolloutUpdateEvent} RolloutUpdateEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RolloutUpdateEvent.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RolloutUpdateEvent message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.RolloutUpdateEvent
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RolloutUpdateEvent.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.pipelineUid != null && message.hasOwnProperty("pipelineUid"))
+                                if (!$util.isString(message.pipelineUid))
+                                    return "pipelineUid: string expected";
+                            if (message.releaseUid != null && message.hasOwnProperty("releaseUid"))
+                                if (!$util.isString(message.releaseUid))
+                                    return "releaseUid: string expected";
+                            if (message.rollout != null && message.hasOwnProperty("rollout"))
+                                if (!$util.isString(message.rollout))
+                                    return "rollout: string expected";
+                            if (message.targetId != null && message.hasOwnProperty("targetId"))
+                                if (!$util.isString(message.targetId))
+                                    return "targetId: string expected";
+                            if (message.rolloutUpdateType != null && message.hasOwnProperty("rolloutUpdateType"))
+                                switch (message.rolloutUpdateType) {
+                                default:
+                                    return "rolloutUpdateType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                case 13:
+                                    break;
+                                }
+                            if (message.message != null && message.hasOwnProperty("message"))
+                                if (!$util.isString(message.message))
+                                    return "message: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RolloutUpdateEvent message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.RolloutUpdateEvent
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.RolloutUpdateEvent} RolloutUpdateEvent
+                         */
+                        RolloutUpdateEvent.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.RolloutUpdateEvent)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.RolloutUpdateEvent();
+                            if (object.pipelineUid != null)
+                                message.pipelineUid = String(object.pipelineUid);
+                            if (object.releaseUid != null)
+                                message.releaseUid = String(object.releaseUid);
+                            if (object.rollout != null)
+                                message.rollout = String(object.rollout);
+                            if (object.targetId != null)
+                                message.targetId = String(object.targetId);
+                            switch (object.rolloutUpdateType) {
+                            default:
+                                if (typeof object.rolloutUpdateType === "number") {
+                                    message.rolloutUpdateType = object.rolloutUpdateType;
+                                    break;
+                                }
+                                break;
+                            case "ROLLOUT_UPDATE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.rolloutUpdateType = 0;
+                                break;
+                            case "PENDING":
+                            case 1:
+                                message.rolloutUpdateType = 1;
+                                break;
+                            case "PENDING_RELEASE":
+                            case 2:
+                                message.rolloutUpdateType = 2;
+                                break;
+                            case "IN_PROGRESS":
+                            case 3:
+                                message.rolloutUpdateType = 3;
+                                break;
+                            case "CANCELLING":
+                            case 4:
+                                message.rolloutUpdateType = 4;
+                                break;
+                            case "CANCELLED":
+                            case 5:
+                                message.rolloutUpdateType = 5;
+                                break;
+                            case "HALTED":
+                            case 6:
+                                message.rolloutUpdateType = 6;
+                                break;
+                            case "SUCCEEDED":
+                            case 7:
+                                message.rolloutUpdateType = 7;
+                                break;
+                            case "FAILED":
+                            case 8:
+                                message.rolloutUpdateType = 8;
+                                break;
+                            case "APPROVAL_REQUIRED":
+                            case 9:
+                                message.rolloutUpdateType = 9;
+                                break;
+                            case "APPROVED":
+                            case 10:
+                                message.rolloutUpdateType = 10;
+                                break;
+                            case "REJECTED":
+                            case 11:
+                                message.rolloutUpdateType = 11;
+                                break;
+                            case "ADVANCE_REQUIRED":
+                            case 12:
+                                message.rolloutUpdateType = 12;
+                                break;
+                            case "ADVANCED":
+                            case 13:
+                                message.rolloutUpdateType = 13;
+                                break;
+                            }
+                            if (object.message != null)
+                                message.message = String(object.message);
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "TYPE_PUBSUB_NOTIFICATION_FAILURE":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "TYPE_RESOURCE_STATE_CHANGE":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            case "TYPE_PROCESS_ABORTED":
+                            case 4:
+                                message.type = 4;
+                                break;
+                            case "TYPE_RESTRICTION_VIOLATED":
+                            case 5:
+                                message.type = 5;
+                                break;
+                            case "TYPE_RESOURCE_DELETED":
+                            case 6:
+                                message.type = 6;
+                                break;
+                            case "TYPE_ROLLOUT_UPDATE":
+                            case 7:
+                                message.type = 7;
+                                break;
+                            case "TYPE_RENDER_STATUES_CHANGE":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RolloutUpdateEvent message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.RolloutUpdateEvent
+                         * @static
+                         * @param {google.cloud.deploy.v1.RolloutUpdateEvent} message RolloutUpdateEvent
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RolloutUpdateEvent.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.pipelineUid = "";
+                                object.releaseUid = "";
+                                object.rollout = "";
+                                object.targetId = "";
+                                object.rolloutUpdateType = options.enums === String ? "ROLLOUT_UPDATE_TYPE_UNSPECIFIED" : 0;
+                                object.message = "";
+                                object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.pipelineUid != null && message.hasOwnProperty("pipelineUid"))
+                                object.pipelineUid = message.pipelineUid;
+                            if (message.releaseUid != null && message.hasOwnProperty("releaseUid"))
+                                object.releaseUid = message.releaseUid;
+                            if (message.rollout != null && message.hasOwnProperty("rollout"))
+                                object.rollout = message.rollout;
+                            if (message.targetId != null && message.hasOwnProperty("targetId"))
+                                object.targetId = message.targetId;
+                            if (message.rolloutUpdateType != null && message.hasOwnProperty("rolloutUpdateType"))
+                                object.rolloutUpdateType = options.enums === String ? $root.google.cloud.deploy.v1.RolloutUpdateEvent.RolloutUpdateType[message.rolloutUpdateType] === undefined ? message.rolloutUpdateType : $root.google.cloud.deploy.v1.RolloutUpdateEvent.RolloutUpdateType[message.rolloutUpdateType] : message.rolloutUpdateType;
+                            if (message.message != null && message.hasOwnProperty("message"))
+                                object.message = message.message;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.deploy.v1.Type[message.type] === undefined ? message.type : $root.google.cloud.deploy.v1.Type[message.type] : message.type;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RolloutUpdateEvent to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.RolloutUpdateEvent
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RolloutUpdateEvent.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RolloutUpdateEvent
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.RolloutUpdateEvent
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RolloutUpdateEvent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.RolloutUpdateEvent";
+                        };
+    
+                        /**
+                         * RolloutUpdateType enum.
+                         * @name google.cloud.deploy.v1.RolloutUpdateEvent.RolloutUpdateType
+                         * @enum {number}
+                         * @property {number} ROLLOUT_UPDATE_TYPE_UNSPECIFIED=0 ROLLOUT_UPDATE_TYPE_UNSPECIFIED value
+                         * @property {number} PENDING=1 PENDING value
+                         * @property {number} PENDING_RELEASE=2 PENDING_RELEASE value
+                         * @property {number} IN_PROGRESS=3 IN_PROGRESS value
+                         * @property {number} CANCELLING=4 CANCELLING value
+                         * @property {number} CANCELLED=5 CANCELLED value
+                         * @property {number} HALTED=6 HALTED value
+                         * @property {number} SUCCEEDED=7 SUCCEEDED value
+                         * @property {number} FAILED=8 FAILED value
+                         * @property {number} APPROVAL_REQUIRED=9 APPROVAL_REQUIRED value
+                         * @property {number} APPROVED=10 APPROVED value
+                         * @property {number} REJECTED=11 REJECTED value
+                         * @property {number} ADVANCE_REQUIRED=12 ADVANCE_REQUIRED value
+                         * @property {number} ADVANCED=13 ADVANCED value
+                         */
+                        RolloutUpdateEvent.RolloutUpdateType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ROLLOUT_UPDATE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PENDING"] = 1;
+                            values[valuesById[2] = "PENDING_RELEASE"] = 2;
+                            values[valuesById[3] = "IN_PROGRESS"] = 3;
+                            values[valuesById[4] = "CANCELLING"] = 4;
+                            values[valuesById[5] = "CANCELLED"] = 5;
+                            values[valuesById[6] = "HALTED"] = 6;
+                            values[valuesById[7] = "SUCCEEDED"] = 7;
+                            values[valuesById[8] = "FAILED"] = 8;
+                            values[valuesById[9] = "APPROVAL_REQUIRED"] = 9;
+                            values[valuesById[10] = "APPROVED"] = 10;
+                            values[valuesById[11] = "REJECTED"] = 11;
+                            values[valuesById[12] = "ADVANCE_REQUIRED"] = 12;
+                            values[valuesById[13] = "ADVANCED"] = 13;
+                            return values;
+                        })();
+    
+                        return RolloutUpdateEvent;
                     })();
     
                     v1.TargetNotificationEvent = (function() {
@@ -31753,6 +43505,7 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
                                 case 2:
                                     break;
                                 }
@@ -31805,6 +43558,10 @@
                             case "TYPE_RESOURCE_DELETED":
                             case 6:
                                 message.type = 6;
+                                break;
+                            case "TYPE_ROLLOUT_UPDATE":
+                            case 7:
+                                message.type = 7;
                                 break;
                             case "TYPE_RENDER_STATUES_CHANGE":
                             case 2:
