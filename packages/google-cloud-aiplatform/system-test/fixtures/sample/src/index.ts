@@ -19,11 +19,15 @@
 import {
   DatasetServiceClient,
   EndpointServiceClient,
+  FeatureOnlineStoreAdminServiceClient,
+  FeatureOnlineStoreServiceClient,
+  FeatureRegistryServiceClient,
   FeaturestoreOnlineServingServiceClient,
   FeaturestoreServiceClient,
   IndexEndpointServiceClient,
   IndexServiceClient,
   JobServiceClient,
+  LlmUtilityServiceClient,
   MatchServiceClient,
   MetadataServiceClient,
   MigrationServiceClient,
@@ -42,6 +46,21 @@ function doStuffWithDatasetServiceClient(client: DatasetServiceClient) {
   client.close();
 }
 function doStuffWithEndpointServiceClient(client: EndpointServiceClient) {
+  client.close();
+}
+function doStuffWithFeatureOnlineStoreAdminServiceClient(
+  client: FeatureOnlineStoreAdminServiceClient
+) {
+  client.close();
+}
+function doStuffWithFeatureOnlineStoreServiceClient(
+  client: FeatureOnlineStoreServiceClient
+) {
+  client.close();
+}
+function doStuffWithFeatureRegistryServiceClient(
+  client: FeatureRegistryServiceClient
+) {
   client.close();
 }
 function doStuffWithFeaturestoreOnlineServingServiceClient(
@@ -63,6 +82,9 @@ function doStuffWithIndexServiceClient(client: IndexServiceClient) {
   client.close();
 }
 function doStuffWithJobServiceClient(client: JobServiceClient) {
+  client.close();
+}
+function doStuffWithLlmUtilityServiceClient(client: LlmUtilityServiceClient) {
   client.close();
 }
 function doStuffWithMatchServiceClient(client: MatchServiceClient) {
@@ -109,6 +131,18 @@ function main() {
   const endpointServiceClient = new EndpointServiceClient();
   doStuffWithEndpointServiceClient(endpointServiceClient);
   // check that the client instance can be created
+  const featureOnlineStoreAdminServiceClient =
+    new FeatureOnlineStoreAdminServiceClient();
+  doStuffWithFeatureOnlineStoreAdminServiceClient(
+    featureOnlineStoreAdminServiceClient
+  );
+  // check that the client instance can be created
+  const featureOnlineStoreServiceClient = new FeatureOnlineStoreServiceClient();
+  doStuffWithFeatureOnlineStoreServiceClient(featureOnlineStoreServiceClient);
+  // check that the client instance can be created
+  const featureRegistryServiceClient = new FeatureRegistryServiceClient();
+  doStuffWithFeatureRegistryServiceClient(featureRegistryServiceClient);
+  // check that the client instance can be created
   const featurestoreOnlineServingServiceClient =
     new FeaturestoreOnlineServingServiceClient();
   doStuffWithFeaturestoreOnlineServingServiceClient(
@@ -126,6 +160,9 @@ function main() {
   // check that the client instance can be created
   const jobServiceClient = new JobServiceClient();
   doStuffWithJobServiceClient(jobServiceClient);
+  // check that the client instance can be created
+  const llmUtilityServiceClient = new LlmUtilityServiceClient();
+  doStuffWithLlmUtilityServiceClient(llmUtilityServiceClient);
   // check that the client instance can be created
   const matchServiceClient = new MatchServiceClient();
   doStuffWithMatchServiceClient(matchServiceClient);
