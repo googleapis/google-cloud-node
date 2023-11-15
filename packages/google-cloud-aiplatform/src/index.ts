@@ -57,8 +57,10 @@ const ModelGardenServiceClient = v1.ModelGardenServiceClient;
 type ModelGardenServiceClient = v1.ModelGardenServiceClient;
 const ScheduleServiceClient = v1.ScheduleServiceClient;
 type ScheduleServiceClient = v1.ScheduleServiceClient;
-const FeatureOnlineStoreAdminServiceClient = v1.FeatureOnlineStoreAdminServiceClient;
-type FeatureOnlineStoreAdminServiceClient = v1.FeatureOnlineStoreAdminServiceClient;
+const FeatureOnlineStoreAdminServiceClient =
+  v1.FeatureOnlineStoreAdminServiceClient;
+type FeatureOnlineStoreAdminServiceClient =
+  v1.FeatureOnlineStoreAdminServiceClient;
 const FeatureOnlineStoreServiceClient = v1.FeatureOnlineStoreServiceClient;
 type FeatureOnlineStoreServiceClient = v1.FeatureOnlineStoreServiceClient;
 const FeatureRegistryServiceClient = v1.FeatureRegistryServiceClient;
@@ -90,7 +92,7 @@ export {
   FeatureOnlineStoreAdminServiceClient,
   FeatureOnlineStoreServiceClient,
   FeatureRegistryServiceClient,
-  LlmUtilityServiceClient
+  LlmUtilityServiceClient,
 };
 export default {
   v1beta1,
@@ -116,7 +118,7 @@ export default {
   FeatureOnlineStoreAdminServiceClient,
   FeatureOnlineStoreServiceClient,
   FeatureRegistryServiceClient,
-  LlmUtilityServiceClient
+  LlmUtilityServiceClient,
 };
 import * as protos from '../protos/protos';
 export {protos};
