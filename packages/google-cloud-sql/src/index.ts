@@ -37,6 +37,16 @@ const SqlTiersServiceClient = v1.SqlTiersServiceClient;
 type SqlTiersServiceClient = v1.SqlTiersServiceClient;
 const SqlUsersServiceClient = v1.SqlUsersServiceClient;
 type SqlUsersServiceClient = v1.SqlUsersServiceClient;
+const SqlAvailableDatabaseVersionsServiceClient = v1.SqlAvailableDatabaseVersionsServiceClient;
+type SqlAvailableDatabaseVersionsServiceClient = v1.SqlAvailableDatabaseVersionsServiceClient;
+const SqlEventsServiceClient = v1.SqlEventsServiceClient;
+type SqlEventsServiceClient = v1.SqlEventsServiceClient;
+const SqlIamPoliciesServiceClient = v1.SqlIamPoliciesServiceClient;
+type SqlIamPoliciesServiceClient = v1.SqlIamPoliciesServiceClient;
+const SqlInstanceNamesServiceClient = v1.SqlInstanceNamesServiceClient;
+type SqlInstanceNamesServiceClient = v1.SqlInstanceNamesServiceClient;
+const SqlRegionsServiceClient = v1.SqlRegionsServiceClient;
+type SqlRegionsServiceClient = v1.SqlRegionsServiceClient;
 
 export {
   v1,
@@ -50,6 +60,11 @@ export {
   SqlSslCertsServiceClient,
   SqlTiersServiceClient,
   SqlUsersServiceClient,
+  SqlAvailableDatabaseVersionsServiceClient,
+  SqlEventsServiceClient,
+  SqlIamPoliciesServiceClient,
+  SqlInstanceNamesServiceClient,
+  SqlRegionsServiceClient,
 };
 export default {
   v1,
@@ -63,6 +78,11 @@ export default {
   SqlSslCertsServiceClient,
   SqlTiersServiceClient,
   SqlUsersServiceClient,
+  SqlAvailableDatabaseVersionsServiceClient,
+  SqlEventsServiceClient,
+  SqlIamPoliciesServiceClient,
+  SqlInstanceNamesServiceClient,
+  SqlRegionsServiceClient,
 };
 import * as protos from '../protos/protos';
 export {protos};
