@@ -395,7 +395,7 @@ describe('logging-common', () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (metadataWithTrace as any)[loggingSpanKey] = 'span1';
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (metadataWithTrace as any)[loggingSampledKey] = '1';
+      (metadataWithTrace as any)[loggingSampledKey] = true;
 
       loggingCommon.cloudLog.entry = (entryMetadata: {}, data: {}) => {
         assert.deepStrictEqual(entryMetadata, {
