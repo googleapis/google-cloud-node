@@ -35,20 +35,20 @@
     "test": "c8 mocha build/test"
   },
   "dependencies": {
-    "google-gax": "^4.0.4"
+    "google-gax": "^4.0.5"
   },
   "devDependencies": {
-    "@types/mocha": "^10.0.1",
+    "@types/mocha": "^10.0.2",
     "@types/node": "^18.11.18",
-    "@types/sinon": "^10.0.17",
+    "@types/sinon": "^10.0.19",
     "c8": "^8.0.1",
     "gapic-tools": "^0.2.0",
-    "gts": "5.0.1",
+    "gts": "5.2.0",
     "jsdoc": "^4.0.2",
     "jsdoc-fresh": "^3.0.0",
     "jsdoc-region-tag": "^3.0.0",
     "mocha": "^10.2.0",
-    "pack-n-play": "^1.0.0-2",
+    "pack-n-play": "^2.0.3",
     "sinon": "^15.2.0",
     "typescript": "5.1.6"
   },
