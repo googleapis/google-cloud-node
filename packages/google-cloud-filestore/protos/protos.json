@@ -2046,6 +2046,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "satisfiesPzi": {
+                          "type": "bool",
+                          "id": 26,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "kmsKeyName": {
                           "type": "string",
                           "id": 14
@@ -2121,7 +2128,8 @@
                             "BASIC_SSD": 4,
                             "HIGH_SCALE_SSD": 6,
                             "ENTERPRISE": 7,
-                            "ZONAL": 8
+                            "ZONAL": 8,
+                            "REGIONAL": 9
                           }
                         },
                         "SuspensionReason": {
@@ -2560,6 +2568,13 @@
                         "satisfiesPzs": {
                           "type": "google.protobuf.BoolValue",
                           "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "satisfiesPzi": {
+                          "type": "bool",
+                          "id": 14,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }

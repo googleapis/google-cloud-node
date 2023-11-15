@@ -11573,6 +11573,7 @@
                          * @property {Array.<google.cloud.filestore.v1beta1.INetworkConfig>|null} [networks] Instance networks
                          * @property {string|null} [etag] Instance etag
                          * @property {google.protobuf.IBoolValue|null} [satisfiesPzs] Instance satisfiesPzs
+                         * @property {boolean|null} [satisfiesPzi] Instance satisfiesPzi
                          * @property {string|null} [kmsKeyName] Instance kmsKeyName
                          * @property {Array.<google.cloud.filestore.v1beta1.Instance.SuspensionReason>|null} [suspensionReasons] Instance suspensionReasons
                          * @property {number|Long|null} [maxCapacityGb] Instance maxCapacityGb
@@ -11690,6 +11691,14 @@
                          * @instance
                          */
                         Instance.prototype.satisfiesPzs = null;
+    
+                        /**
+                         * Instance satisfiesPzi.
+                         * @member {boolean} satisfiesPzi
+                         * @memberof google.cloud.filestore.v1beta1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.satisfiesPzi = false;
     
                         /**
                          * Instance kmsKeyName.
@@ -11834,6 +11843,8 @@
                                 writer.uint32(/* id 21, wireType 0 =*/168).int32(message.protocol);
                             if (message.directoryServices != null && Object.hasOwnProperty.call(message, "directoryServices"))
                                 $root.google.cloud.filestore.v1beta1.DirectoryServicesConfig.encode(message.directoryServices, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
+                            if (message.satisfiesPzi != null && Object.hasOwnProperty.call(message, "satisfiesPzi"))
+                                writer.uint32(/* id 26, wireType 0 =*/208).bool(message.satisfiesPzi);
                             return writer;
                         };
     
@@ -11933,6 +11944,10 @@
                                     }
                                 case 13: {
                                         message.satisfiesPzs = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 26: {
+                                        message.satisfiesPzi = reader.bool();
                                         break;
                                     }
                                 case 14: {
@@ -12056,6 +12071,7 @@
                                 case 6:
                                 case 7:
                                 case 8:
+                                case 9:
                                     break;
                                 }
                             if (message.labels != null && message.hasOwnProperty("labels")) {
@@ -12092,6 +12108,9 @@
                                 if (error)
                                     return "satisfiesPzs." + error;
                             }
+                            if (message.satisfiesPzi != null && message.hasOwnProperty("satisfiesPzi"))
+                                if (typeof message.satisfiesPzi !== "boolean")
+                                    return "satisfiesPzi: boolean expected";
                             if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
                                 if (!$util.isString(message.kmsKeyName))
                                     return "kmsKeyName: string expected";
@@ -12253,6 +12272,10 @@
                             case 8:
                                 message.tier = 8;
                                 break;
+                            case "REGIONAL":
+                            case 9:
+                                message.tier = 9;
+                                break;
                             }
                             if (object.labels) {
                                 if (typeof object.labels !== "object")
@@ -12288,6 +12311,8 @@
                                     throw TypeError(".google.cloud.filestore.v1beta1.Instance.satisfiesPzs: object expected");
                                 message.satisfiesPzs = $root.google.protobuf.BoolValue.fromObject(object.satisfiesPzs);
                             }
+                            if (object.satisfiesPzi != null)
+                                message.satisfiesPzi = Boolean(object.satisfiesPzi);
                             if (object.kmsKeyName != null)
                                 message.kmsKeyName = String(object.kmsKeyName);
                             if (object.suspensionReasons) {
@@ -12430,6 +12455,7 @@
                                 object.multiShareEnabled = false;
                                 object.protocol = options.enums === String ? "FILE_PROTOCOL_UNSPECIFIED" : 0;
                                 object.directoryServices = null;
+                                object.satisfiesPzi = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -12496,6 +12522,8 @@
                                 object.protocol = options.enums === String ? $root.google.cloud.filestore.v1beta1.Instance.FileProtocol[message.protocol] === undefined ? message.protocol : $root.google.cloud.filestore.v1beta1.Instance.FileProtocol[message.protocol] : message.protocol;
                             if (message.directoryServices != null && message.hasOwnProperty("directoryServices"))
                                 object.directoryServices = $root.google.cloud.filestore.v1beta1.DirectoryServicesConfig.toObject(message.directoryServices, options);
+                            if (message.satisfiesPzi != null && message.hasOwnProperty("satisfiesPzi"))
+                                object.satisfiesPzi = message.satisfiesPzi;
                             return object;
                         };
     
@@ -12569,6 +12597,7 @@
                          * @property {number} HIGH_SCALE_SSD=6 HIGH_SCALE_SSD value
                          * @property {number} ENTERPRISE=7 ENTERPRISE value
                          * @property {number} ZONAL=8 ZONAL value
+                         * @property {number} REGIONAL=9 REGIONAL value
                          */
                         Instance.Tier = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -12580,6 +12609,7 @@
                             values[valuesById[6] = "HIGH_SCALE_SSD"] = 6;
                             values[valuesById[7] = "ENTERPRISE"] = 7;
                             values[valuesById[8] = "ZONAL"] = 8;
+                            values[valuesById[9] = "REGIONAL"] = 9;
                             return values;
                         })();
     
@@ -16528,6 +16558,7 @@
                          * @property {google.cloud.filestore.v1beta1.Instance.Tier|null} [sourceInstanceTier] Backup sourceInstanceTier
                          * @property {number|Long|null} [downloadBytes] Backup downloadBytes
                          * @property {google.protobuf.IBoolValue|null} [satisfiesPzs] Backup satisfiesPzs
+                         * @property {boolean|null} [satisfiesPzi] Backup satisfiesPzi
                          * @property {string|null} [kmsKeyName] Backup kmsKeyName
                          */
     
@@ -16644,6 +16675,14 @@
                         Backup.prototype.satisfiesPzs = null;
     
                         /**
+                         * Backup satisfiesPzi.
+                         * @member {boolean} satisfiesPzi
+                         * @memberof google.cloud.filestore.v1beta1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.satisfiesPzi = false;
+    
+                        /**
                          * Backup kmsKeyName.
                          * @member {string} kmsKeyName
                          * @memberof google.cloud.filestore.v1beta1.Backup
@@ -16702,6 +16741,8 @@
                                 $root.google.protobuf.BoolValue.encode(message.satisfiesPzs, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             if (message.kmsKeyName != null && Object.hasOwnProperty.call(message, "kmsKeyName"))
                                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.kmsKeyName);
+                            if (message.satisfiesPzi != null && Object.hasOwnProperty.call(message, "satisfiesPzi"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).bool(message.satisfiesPzi);
                             return writer;
                         };
     
@@ -16803,6 +16844,10 @@
                                         message.satisfiesPzs = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 14: {
+                                        message.satisfiesPzi = reader.bool();
+                                        break;
+                                    }
                                 case 13: {
                                         message.kmsKeyName = reader.string();
                                         break;
@@ -16897,6 +16942,7 @@
                                 case 6:
                                 case 7:
                                 case 8:
+                                case 9:
                                     break;
                                 }
                             if (message.downloadBytes != null && message.hasOwnProperty("downloadBytes"))
@@ -16907,6 +16953,9 @@
                                 if (error)
                                     return "satisfiesPzs." + error;
                             }
+                            if (message.satisfiesPzi != null && message.hasOwnProperty("satisfiesPzi"))
+                                if (typeof message.satisfiesPzi !== "boolean")
+                                    return "satisfiesPzi: boolean expected";
                             if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
                                 if (!$util.isString(message.kmsKeyName))
                                     return "kmsKeyName: string expected";
@@ -17034,6 +17083,10 @@
                             case 8:
                                 message.sourceInstanceTier = 8;
                                 break;
+                            case "REGIONAL":
+                            case 9:
+                                message.sourceInstanceTier = 9;
+                                break;
                             }
                             if (object.downloadBytes != null)
                                 if ($util.Long)
@@ -17049,6 +17102,8 @@
                                     throw TypeError(".google.cloud.filestore.v1beta1.Backup.satisfiesPzs: object expected");
                                 message.satisfiesPzs = $root.google.protobuf.BoolValue.fromObject(object.satisfiesPzs);
                             }
+                            if (object.satisfiesPzi != null)
+                                message.satisfiesPzi = Boolean(object.satisfiesPzi);
                             if (object.kmsKeyName != null)
                                 message.kmsKeyName = String(object.kmsKeyName);
                             return message;
@@ -17094,6 +17149,7 @@
                                     object.downloadBytes = options.longs === String ? "0" : 0;
                                 object.satisfiesPzs = null;
                                 object.kmsKeyName = "";
+                                object.satisfiesPzi = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -17134,6 +17190,8 @@
                                 object.satisfiesPzs = $root.google.protobuf.BoolValue.toObject(message.satisfiesPzs, options);
                             if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
                                 object.kmsKeyName = message.kmsKeyName;
+                            if (message.satisfiesPzi != null && message.hasOwnProperty("satisfiesPzi"))
+                                object.satisfiesPzi = message.satisfiesPzi;
                             return object;
                         };
     

@@ -4735,6 +4735,9 @@ export namespace google {
                     /** Instance satisfiesPzs */
                     satisfiesPzs?: (google.protobuf.IBoolValue|null);
 
+                    /** Instance satisfiesPzi */
+                    satisfiesPzi?: (boolean|null);
+
                     /** Instance kmsKeyName */
                     kmsKeyName?: (string|null);
 
@@ -4804,6 +4807,9 @@ export namespace google {
 
                     /** Instance satisfiesPzs. */
                     public satisfiesPzs?: (google.protobuf.IBoolValue|null);
+
+                    /** Instance satisfiesPzi. */
+                    public satisfiesPzi: boolean;
 
                     /** Instance kmsKeyName. */
                     public kmsKeyName: string;
@@ -4936,7 +4942,8 @@ export namespace google {
                         BASIC_SSD = 4,
                         HIGH_SCALE_SSD = 6,
                         ENTERPRISE = 7,
-                        ZONAL = 8
+                        ZONAL = 8,
+                        REGIONAL = 9
                     }
 
                     /** SuspensionReason enum. */
@@ -6623,6 +6630,9 @@ export namespace google {
                     /** Backup satisfiesPzs */
                     satisfiesPzs?: (google.protobuf.IBoolValue|null);
 
+                    /** Backup satisfiesPzi */
+                    satisfiesPzi?: (boolean|null);
+
                     /** Backup kmsKeyName */
                     kmsKeyName?: (string|null);
                 }
@@ -6671,6 +6681,9 @@ export namespace google {
 
                     /** Backup satisfiesPzs. */
                     public satisfiesPzs?: (google.protobuf.IBoolValue|null);
+
+                    /** Backup satisfiesPzi. */
+                    public satisfiesPzi: boolean;
 
                     /** Backup kmsKeyName. */
                     public kmsKeyName: string;
