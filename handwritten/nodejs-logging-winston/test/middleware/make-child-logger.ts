@@ -120,7 +120,7 @@ describe('makeChildLogger', () => {
     child.debug('hello world', {
       [LOGGING_TRACE_KEY]: 'to-be-clobbered',
       [LOGGING_SPAN_KEY]: 'to-be-clobbered',
-      [LOGGING_SAMPLED_KEY]: '0',
+      [LOGGING_SAMPLED_KEY]: false,
     });
     assert.notStrictEqual(trace, FAKE_TRACE);
     assert.notStrictEqual(span, FAKE_SPAN);
