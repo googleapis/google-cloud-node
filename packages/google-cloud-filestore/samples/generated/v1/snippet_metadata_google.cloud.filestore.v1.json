@@ -248,6 +248,50 @@
             }
         },
         {
+            "regionTag": "file_v1_generated_CloudFilestoreManager_RevertInstance_async",
+            "title": "CloudFilestoreManager revertInstance Sample",
+            "origin": "API_DEFINITION",
+            "description": " Revert an existing instance's file system to a specified snapshot.",
+            "canonical": true,
+            "file": "cloud_filestore_manager.revert_instance.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RevertInstance",
+                "fullName": "google.cloud.filestore.v1.CloudFilestoreManager.RevertInstance",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "target_snapshot_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "CloudFilestoreManagerClient",
+                    "fullName": "google.cloud.filestore.v1.CloudFilestoreManagerClient"
+                },
+                "method": {
+                    "shortName": "RevertInstance",
+                    "fullName": "google.cloud.filestore.v1.CloudFilestoreManager.RevertInstance",
+                    "service": {
+                        "shortName": "CloudFilestoreManager",
+                        "fullName": "google.cloud.filestore.v1.CloudFilestoreManager"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "file_v1_generated_CloudFilestoreManager_DeleteInstance_async",
             "title": "CloudFilestoreManager deleteInstance Sample",
             "origin": "API_DEFINITION",

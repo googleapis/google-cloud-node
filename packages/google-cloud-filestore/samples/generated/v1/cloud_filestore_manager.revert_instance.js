@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name, targetSnapshotId) {
-  // [START file_v1beta1_generated_CloudFilestoreManager_RevertInstance_async]
+  // [START file_v1_generated_CloudFilestoreManager_RevertInstance_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -42,7 +42,7 @@ function main(name, targetSnapshotId) {
   // const targetSnapshotId = 'abc123'
 
   // Imports the Filestore library
-  const {CloudFilestoreManagerClient} = require('@google-cloud/filestore').v1beta1;
+  const {CloudFilestoreManagerClient} = require('@google-cloud/filestore').v1;
 
   // Instantiates a client
   const filestoreClient = new CloudFilestoreManagerClient();
@@ -61,7 +61,7 @@ function main(name, targetSnapshotId) {
   }
 
   callRevertInstance();
-  // [END file_v1beta1_generated_CloudFilestoreManager_RevertInstance_async]
+  // [END file_v1_generated_CloudFilestoreManager_RevertInstance_async]
 }
 
 process.on('unhandledRejection', err => {
