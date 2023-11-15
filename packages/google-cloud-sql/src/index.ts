@@ -37,8 +37,10 @@ const SqlTiersServiceClient = v1.SqlTiersServiceClient;
 type SqlTiersServiceClient = v1.SqlTiersServiceClient;
 const SqlUsersServiceClient = v1.SqlUsersServiceClient;
 type SqlUsersServiceClient = v1.SqlUsersServiceClient;
-const SqlAvailableDatabaseVersionsServiceClient = v1.SqlAvailableDatabaseVersionsServiceClient;
-type SqlAvailableDatabaseVersionsServiceClient = v1.SqlAvailableDatabaseVersionsServiceClient;
+const SqlAvailableDatabaseVersionsServiceClient =
+  v1.SqlAvailableDatabaseVersionsServiceClient;
+type SqlAvailableDatabaseVersionsServiceClient =
+  v1.SqlAvailableDatabaseVersionsServiceClient;
 const SqlEventsServiceClient = v1.SqlEventsServiceClient;
 type SqlEventsServiceClient = v1.SqlEventsServiceClient;
 const SqlIamPoliciesServiceClient = v1.SqlIamPoliciesServiceClient;
