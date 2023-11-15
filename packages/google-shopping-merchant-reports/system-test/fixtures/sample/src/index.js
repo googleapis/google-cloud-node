@@ -16,10 +16,11 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as v1beta from './v1beta';
-const ReportServiceClient = v1beta.ReportServiceClient;
-type ReportServiceClient = v1beta.ReportServiceClient;
-export {v1beta, ReportServiceClient};
-export default {v1beta, ReportServiceClient};
-import * as protos from '../protos/protos';
-export {protos}
+/* eslint-disable node/no-missing-require, no-unused-vars */
+const reports = require('@google-cloud/reports');
+
+function main() {
+  const reportServiceClient = new reports.ReportServiceClient();
+}
+
+main();
