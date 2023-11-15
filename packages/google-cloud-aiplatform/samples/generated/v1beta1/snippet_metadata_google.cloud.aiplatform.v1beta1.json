@@ -6108,6 +6108,50 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1beta1_generated_LlmUtilityService_ComputeTokens_async",
+            "title": "DatasetService computeTokens Sample",
+            "origin": "API_DEFINITION",
+            "description": " Return a list of tokens based on the input text.",
+            "canonical": true,
+            "file": "llm_utility_service.compute_tokens.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 61,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ComputeTokens",
+                "fullName": "google.cloud.aiplatform.v1beta1.LlmUtilityService.ComputeTokens",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "endpoint",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "instances",
+                        "type": "TYPE_MESSAGE[]"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.ComputeTokensResponse",
+                "client": {
+                    "shortName": "LlmUtilityServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.LlmUtilityServiceClient"
+                },
+                "method": {
+                    "shortName": "ComputeTokens",
+                    "fullName": "google.cloud.aiplatform.v1beta1.LlmUtilityService.ComputeTokens",
+                    "service": {
+                        "shortName": "LlmUtilityService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.LlmUtilityService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1beta1_generated_MatchService_FindNeighbors_async",
             "title": "DatasetService findNeighbors Sample",
             "origin": "API_DEFINITION",
