@@ -1,9 +1,9 @@
 **/node_modules
-**/coverage
-test/fixtures
+**/.coverage
 build/
 docs/
 protos/
+system-test/
 samples/
 esm/src/**/*.d.ts
 esm/test/**/*.d.ts

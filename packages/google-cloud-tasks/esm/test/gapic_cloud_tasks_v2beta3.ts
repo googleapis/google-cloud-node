@@ -48,9 +48,9 @@ const root = protobuf.Root.fromJSON(
 function getTypeDefaultValue(typeName: string, fields: string[]) {
   let type = root.lookupType(typeName) as protobuf.Type;
   for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
+    type = type?.fields[field]?.resolvedType as protobuf.Type;
   }
-  return type?.fields[fields[fields.length - 1]]?.defaultValue || null;
+  return type?.fields[fields[fields.length - 1]]?.defaultValue ?? null;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {

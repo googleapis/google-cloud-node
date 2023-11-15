@@ -48,9 +48,9 @@ const root = protobuf.Root.fromJSON(
 function getTypeDefaultValue(typeName: string, fields: string[]) {
   let type = root.lookupType(typeName) as protobuf.Type;
   for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
+    type = type?.fields[field]?.resolvedType as protobuf.Type;
   }
-  return type?.fields[fields[fields.length - 1]]?.defaultValue;
+  return type?.fields[fields[fields.length - 1]]?.defaultValue ?? null;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
@@ -503,7 +503,7 @@ describe('v2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.UpdateQueueRequest()
       );
-      request.queue ??== {};
+      request.queue ??= {};
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.tasks.v2.UpdateQueueRequest',
         ['queue', 'name']
@@ -2672,7 +2672,7 @@ describe('v2.CloudTasksClient', () => {
       assert(
         (client.locationsClient.getLocation as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions)
+          .calledWith(request, expectedOptions, undefined)
       );
     });
     it('invokes getLocation without error using callback', async () => {
