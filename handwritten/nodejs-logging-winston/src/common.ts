@@ -277,7 +277,7 @@ export class LoggingCommon {
     }
 
     if (LOGGING_SAMPLED_KEY in metadata) {
-      entryMetadata.traceSampled = metadata[LOGGING_SAMPLED_KEY] === '1';
+      entryMetadata.traceSampled = metadata[LOGGING_SAMPLED_KEY] === true;
     }
 
     // we have tests that assert that metadata is always passed.
