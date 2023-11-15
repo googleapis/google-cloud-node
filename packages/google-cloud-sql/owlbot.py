@@ -23,15 +23,6 @@ import logging
 from pathlib import Path
 
 def patch(library: Path):
-  # remove empty v1 services
-  if re.search("/v1$", str(library)):
-    for service in ['sql_available_database_versions_service', 'sql_events_service', 'sql_iam_policies_service', 'sql_instance_names_service', 'sql_regions_service']:
-      for suffix in ['_client_config.json', '_client.ts', '_proto_list.json']:
-        os.unlink(library / f'src/v1/{service}{suffix}')
-      os.unlink(library / f'test/gapic_{service}_v1.ts')
-    # fix request.id which is Long but used in the path templates
-    s.replace(library / f'src/v1/sql_backup_runs_service_client.ts', r'id: request\.id', 'id: request.id?.toString()')
-
   # remove empty v1beta4 services
   if re.search("/v1beta4$", str(library)):
     for service in ['sql_iam_policies_service']:
