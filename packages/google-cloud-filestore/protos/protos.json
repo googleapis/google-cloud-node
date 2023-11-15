@@ -200,6 +200,30 @@
                             }
                           ]
                         },
+                        "RevertInstance": {
+                          "requestType": "RevertInstanceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/instances/*}:revert",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "Instance",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.common.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/instances/*}:revert",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Instance",
+                                "metadata_type": "google.cloud.common.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "DeleteInstance": {
                           "requestType": "DeleteInstanceRequest",
                           "responseType": "google.longrunning.Operation",
@@ -648,6 +672,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "satisfiesPzi": {
+                          "type": "bool",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "kmsKeyName": {
                           "type": "string",
                           "id": 14
@@ -673,7 +704,8 @@
                             "RESTORING": 7,
                             "SUSPENDED": 8,
                             "SUSPENDING": 9,
-                            "RESUMING": 10
+                            "RESUMING": 10,
+                            "REVERTING": 12
                           }
                         },
                         "Tier": {
@@ -684,7 +716,9 @@
                             "BASIC_HDD": 3,
                             "BASIC_SSD": 4,
                             "HIGH_SCALE_SSD": 5,
-                            "ENTERPRISE": 6
+                            "ENTERPRISE": 6,
+                            "ZONAL": 7,
+                            "REGIONAL": 8
                           }
                         },
                         "SuspensionReason": {
@@ -774,6 +808,25 @@
                           "id": 3,
                           "options": {
                             "(google.api.resource_reference).type": "file.googleapis.com/Backup"
+                          }
+                        }
+                      }
+                    },
+                    "RevertInstanceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "file.googleapis.com/Instance"
+                          }
+                        },
+                        "targetSnapshotId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -1086,6 +1139,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "satisfiesPzi": {
+                          "type": "bool",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "kmsKey": {
                           "type": "string",
                           "id": 13,
@@ -1101,7 +1161,8 @@
                             "CREATING": 1,
                             "FINALIZING": 2,
                             "READY": 3,
-                            "DELETING": 4
+                            "DELETING": 4,
+                            "INVALID": 5
                           }
                         }
                       }
@@ -1985,6 +2046,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "satisfiesPzi": {
+                          "type": "bool",
+                          "id": 26,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "kmsKeyName": {
                           "type": "string",
                           "id": 14
@@ -2060,7 +2128,8 @@
                             "BASIC_SSD": 4,
                             "HIGH_SCALE_SSD": 6,
                             "ENTERPRISE": 7,
-                            "ZONAL": 8
+                            "ZONAL": 8,
+                            "REGIONAL": 9
                           }
                         },
                         "SuspensionReason": {
@@ -2499,6 +2568,13 @@
                         "satisfiesPzs": {
                           "type": "google.protobuf.BoolValue",
                           "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "satisfiesPzi": {
+                          "type": "bool",
+                          "id": 14,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
