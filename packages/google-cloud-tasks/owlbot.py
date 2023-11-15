@@ -29,6 +29,7 @@ def patch(library: pathlib.Path):
 
 
 node.owlbot_main(relative_dir="packages/google-cloud-tasks",
+    templates_exclides=['esm/src/index.ts'],
     staging_excludes=["README.md", "package.json", 'esm/src/index.ts'],
     patch_staging=patch
 )
