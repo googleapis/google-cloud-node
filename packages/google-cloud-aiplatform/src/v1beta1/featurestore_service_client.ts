@@ -528,6 +528,12 @@ export class FeaturestoreServiceClient {
               post: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',
             },
             {
+              post: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}:cancel',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',
             },
             {
@@ -744,6 +750,14 @@ export class FeaturestoreServiceClient {
             },
             {
               delete:
+                '/ui/{name=projects/*/locations/*/extensionControllers/*}/operations',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/extensions/*}/operations',
+            },
+            {
+              delete:
                 '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}',
             },
             {
@@ -830,6 +844,22 @@ export class FeaturestoreServiceClient {
             {
               delete:
                 '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
             {delete: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
             {
@@ -1022,6 +1052,12 @@ export class FeaturestoreServiceClient {
             },
             {get: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}'},
             {
+              get: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}',
+            },
+            {
               get: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}',
             },
             {
@@ -1081,6 +1117,18 @@ export class FeaturestoreServiceClient {
             },
             {
               get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
             },
             {get: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
             {
@@ -1228,6 +1276,10 @@ export class FeaturestoreServiceClient {
             {get: '/ui/{name=projects/*/locations/*/edgeDevices/*}/operations'},
             {get: '/ui/{name=projects/*/locations/*/endpoints/*}/operations'},
             {
+              get: '/ui/{name=projects/*/locations/*/extensionControllers/*}/operations',
+            },
+            {get: '/ui/{name=projects/*/locations/*/extensions/*}/operations'},
+            {
               get: '/ui/{name=projects/*/locations/*/featurestores/*}/operations',
             },
             {
@@ -1285,6 +1337,18 @@ export class FeaturestoreServiceClient {
             },
             {
               get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
             },
             {get: '/v1beta1/{name=projects/*/locations/*}/operations'},
             {
@@ -1436,6 +1500,12 @@ export class FeaturestoreServiceClient {
               post: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',
             },
             {
+              post: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}:wait',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}:wait',
             },
             {
@@ -1503,6 +1573,18 @@ export class FeaturestoreServiceClient {
             },
             {
               post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
             },
             {post: '/v1beta1/{name=projects/*/locations/*/operations/*}:wait'},
             {
@@ -2241,8 +2323,9 @@ export class FeaturestoreServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the Feature resource.
-   *   Format:
+   *   Format for entity_type as parent:
    *   `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`
+   *   Format for feature_group as parent:
    *   `projects/{project}/locations/{location}/featureGroups/{feature_group}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2351,7 +2434,7 @@ export class FeaturestoreServiceClient {
    *
    *     * `description`
    *     * `labels`
-   *     * `disable_monitoring`
+   *     * `disable_monitoring` (Not supported for FeatureRegistry Feature)
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3176,6 +3259,11 @@ export class FeaturestoreServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
+   *   Required. The resource name of the EntityType or FeatureGroup to create a
+   *   Feature. Format for entity_type as parent:
+   *   `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`
+   *   Format for feature_group as parent:
+   *   `projects/{project}/locations/{location}/featureGroups/{feature_group}`
    * @param {google.cloud.aiplatform.v1beta1.Feature} request.feature
    *   Required. The Feature to create.
    * @param {string} request.featureId
@@ -4902,8 +4990,9 @@ export class FeaturestoreServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the Location to list Features.
-   *   Format:
+   *   Format for entity_type as parent:
    *   `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`
+   *   Format for feature_group as parent:
    *   `projects/{project}/locations/{location}/featureGroups/{feature_group}`
    * @param {string} request.filter
    *   Lists the Features that match the filter expression. The following
@@ -4934,10 +5023,14 @@ export class FeaturestoreServiceClient {
    * @param {string} request.pageToken
    *   A page token, received from a previous
    *   {@link protos.google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures}
+   *   call or
+   *   {@link protos.google.cloud.aiplatform.v1beta1.FeatureRegistryService.ListFeatures|FeatureRegistryService.ListFeatures}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
    *   {@link protos.google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures}
+   *   or or
+   *   {@link protos.google.cloud.aiplatform.v1beta1.FeatureRegistryService.ListFeatures|FeatureRegistryService.ListFeatures}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by, sorted in ascending order.
@@ -4951,6 +5044,7 @@ export class FeaturestoreServiceClient {
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {number} request.latestStatsCount
+   *   Only applicable for Vertex AI Feature Store (Legacy).
    *   If set, return the most recent
    *   {@link protos.google.cloud.aiplatform.v1beta1.ListFeaturesRequest.latest_stats_count|ListFeaturesRequest.latest_stats_count}
    *   of stats for each Feature in response. Valid value is [0, 10]. If number of
@@ -5050,8 +5144,9 @@ export class FeaturestoreServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the Location to list Features.
-   *   Format:
+   *   Format for entity_type as parent:
    *   `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`
+   *   Format for feature_group as parent:
    *   `projects/{project}/locations/{location}/featureGroups/{feature_group}`
    * @param {string} request.filter
    *   Lists the Features that match the filter expression. The following
@@ -5082,10 +5177,14 @@ export class FeaturestoreServiceClient {
    * @param {string} request.pageToken
    *   A page token, received from a previous
    *   {@link protos.google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures}
+   *   call or
+   *   {@link protos.google.cloud.aiplatform.v1beta1.FeatureRegistryService.ListFeatures|FeatureRegistryService.ListFeatures}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
    *   {@link protos.google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures}
+   *   or or
+   *   {@link protos.google.cloud.aiplatform.v1beta1.FeatureRegistryService.ListFeatures|FeatureRegistryService.ListFeatures}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by, sorted in ascending order.
@@ -5099,6 +5198,7 @@ export class FeaturestoreServiceClient {
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {number} request.latestStatsCount
+   *   Only applicable for Vertex AI Feature Store (Legacy).
    *   If set, return the most recent
    *   {@link protos.google.cloud.aiplatform.v1beta1.ListFeaturesRequest.latest_stats_count|ListFeaturesRequest.latest_stats_count}
    *   of stats for each Feature in response. Valid value is [0, 10]. If number of
@@ -5146,8 +5246,9 @@ export class FeaturestoreServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the Location to list Features.
-   *   Format:
+   *   Format for entity_type as parent:
    *   `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`
+   *   Format for feature_group as parent:
    *   `projects/{project}/locations/{location}/featureGroups/{feature_group}`
    * @param {string} request.filter
    *   Lists the Features that match the filter expression. The following
@@ -5178,10 +5279,14 @@ export class FeaturestoreServiceClient {
    * @param {string} request.pageToken
    *   A page token, received from a previous
    *   {@link protos.google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures}
+   *   call or
+   *   {@link protos.google.cloud.aiplatform.v1beta1.FeatureRegistryService.ListFeatures|FeatureRegistryService.ListFeatures}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
    *   {@link protos.google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures}
+   *   or or
+   *   {@link protos.google.cloud.aiplatform.v1beta1.FeatureRegistryService.ListFeatures|FeatureRegistryService.ListFeatures}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by, sorted in ascending order.
@@ -5195,6 +5300,7 @@ export class FeaturestoreServiceClient {
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {number} request.latestStatsCount
+   *   Only applicable for Vertex AI Feature Store (Legacy).
    *   If set, return the most recent
    *   {@link protos.google.cloud.aiplatform.v1beta1.ListFeaturesRequest.latest_stats_count|ListFeaturesRequest.latest_stats_count}
    *   of stats for each Feature in response. Valid value is [0, 10]. If number of
