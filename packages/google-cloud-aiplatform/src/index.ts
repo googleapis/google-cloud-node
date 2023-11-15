@@ -57,14 +57,14 @@ const ModelGardenServiceClient = v1.ModelGardenServiceClient;
 type ModelGardenServiceClient = v1.ModelGardenServiceClient;
 const ScheduleServiceClient = v1.ScheduleServiceClient;
 type ScheduleServiceClient = v1.ScheduleServiceClient;
-const FeatureOnlineStoreAdminServiceClient = v1.FeatureOnlineStoreAdminServiceClient();
-type FeatureOnlineStoreAdminServiceClient = v1.FeatureOnlineStoreAdminServiceClient();
-const FeatureOnlineStoreServiceClient = v1.FeatureOnlineStoreServiceClient();
-type FeatureOnlineStoreServiceClient = v1.FeatureOnlineStoreServiceClient();
-const FeatureRegistryServiceClient = v1.FeatureRegistryServiceClient();
-type FeatureRegistryServiceClient = v1.FeatureRegistryServiceClient();
-const LlmUtilityServiceClient = v1.LlmUtilityServiceClient();
-type LlmUtilityServiceClient = v1.LlmUtilityServiceClient();
+const FeatureOnlineStoreAdminServiceClient = v1.FeatureOnlineStoreAdminServiceClient;
+type FeatureOnlineStoreAdminServiceClient = v1.FeatureOnlineStoreAdminServiceClient;
+const FeatureOnlineStoreServiceClient = v1.FeatureOnlineStoreServiceClient;
+type FeatureOnlineStoreServiceClient = v1.FeatureOnlineStoreServiceClient;
+const FeatureRegistryServiceClient = v1.FeatureRegistryServiceClient;
+type FeatureRegistryServiceClient = v1.FeatureRegistryServiceClient;
+const LlmUtilityServiceClient = v1.LlmUtilityServiceClient;
+type LlmUtilityServiceClient = v1.LlmUtilityServiceClient;
 
 export {
   v1beta1,
