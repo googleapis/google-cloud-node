@@ -36871,6 +36871,83 @@
                         }
                       }
                     },
+                    "LlmUtilityService": {
+                      "options": {
+                        "(google.api.default_host)": "aiplatform.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ComputeTokens": {
+                          "requestType": "ComputeTokensRequest",
+                          "responseType": "ComputeTokensResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:computeTokens",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:computeTokens",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "endpoint,instances"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:computeTokens",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:computeTokens",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "endpoint,instances"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "ComputeTokensRequest": {
+                      "fields": {
+                        "endpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                          }
+                        },
+                        "instances": {
+                          "rule": "repeated",
+                          "type": "google.protobuf.Value",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "TokensInfo": {
+                      "fields": {
+                        "tokens": {
+                          "rule": "repeated",
+                          "type": "bytes",
+                          "id": 1
+                        },
+                        "tokenIds": {
+                          "rule": "repeated",
+                          "type": "int64",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ComputeTokensResponse": {
+                      "fields": {
+                        "tokensInfo": {
+                          "rule": "repeated",
+                          "type": "TokensInfo",
+                          "id": 1
+                        }
+                      }
+                    },
                     "MatchService": {
                       "options": {
                         "(google.api.default_host)": "aiplatform.googleapis.com",
