@@ -9986,6 +9986,10 @@
                       "type": "string",
                       "id": 110
                     },
+                    "queuedProvisioning": {
+                      "type": "QueuedProvisioning",
+                      "id": 112
+                    },
                     "bestEffortProvisioning": {
                       "type": "BestEffortProvisioning",
                       "id": 113
@@ -10113,6 +10117,14 @@
                             "TYPE_UNSPECIFIED": 0,
                             "COMPACT": 1
                           }
+                        }
+                      }
+                    },
+                    "QueuedProvisioning": {
+                      "fields": {
+                        "enabled": {
+                          "type": "bool",
+                          "id": 1
                         }
                       }
                     }
@@ -11646,6 +11658,25 @@
                 "Master": {
                   "fields": {}
                 },
+                "AutopilotConversionStatus": {
+                  "fields": {
+                    "state": {
+                      "type": "State",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "State": {
+                      "values": {
+                        "STATE_UNSPECIFIED": 0,
+                        "DONE": 5
+                      }
+                    }
+                  }
+                },
                 "Autopilot": {
                   "fields": {
                     "enabled": {
@@ -11655,6 +11686,10 @@
                     "workloadPolicyConfig": {
                       "type": "WorkloadPolicyConfig",
                       "id": 2
+                    },
+                    "conversionStatus": {
+                      "type": "AutopilotConversionStatus",
+                      "id": 3
                     }
                   }
                 },
