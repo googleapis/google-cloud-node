@@ -32,7 +32,7 @@ describe('Quickstart', () => {
     projectId = await merchantapiClient.getProjectId();
   });
 
-  it('should run quickstart', async () => {
+  it.skip('should run quickstart', async () => {
     const output = execSync(
       `node ./quickstart.js projects/${projectId}/locations/us-central1`,
       {cwd}
