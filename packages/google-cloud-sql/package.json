@@ -1,12 +1,8 @@
 {
   "name": "@google-cloud/sql",
-  "version": "0.2.0",
-  "description": "Cloud SQL Admin API client for Node.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/googleapis/google-cloud-node.git",
-    "directory": "packages/google-cloud-sql"
-  },
+  "version": "0.1.0",
+  "description": "Sql client for Node.js",
+  "repository": "googleapis/nodejs-sql",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "main": "build/src/index.js",
@@ -14,7 +10,6 @@
     "build/src",
     "build/protos"
   ],
-  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-sql",
   "keywords": [
     "google apis client",
     "google api client",
@@ -26,48 +21,51 @@
     "cloud",
     "google sql",
     "sql",
-    "Cloud SQL Admin API"
+    "sql available database versions service",
+    "sql backup runs service",
+    "sql connect service",
+    "sql databases service",
+    "sql events service",
+    "sql flags service",
+    "sql iam policies service",
+    "sql instance names service",
+    "sql instances service",
+    "sql operations service",
+    "sql regions service",
+    "sql ssl certs service",
+    "sql tiers service",
+    "sql users service"
   ],
   "scripts": {
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/",
+    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
     "compile-protos": "compileProtos src",
     "docs": "jsdoc -c .jsdoc.js",
-    "predocs-test": "npm run docs",
-    "docs-test": "linkinator docs",
     "fix": "gts fix",
     "lint": "gts check",
-    "postpack": "minifyProtoJson",
     "prepare": "npm run compile-protos && npm run compile",
     "system-test": "c8 mocha build/system-test",
-    "test": "c8 mocha build/test",
-    "samples-test": "cd samples/ && npm link ../ && npm i && npm test",
-    "prelint": "cd samples; npm link ../; npm i"
+    "test": "c8 mocha build/test"
   },
   "dependencies": {
-    "google-gax": "^3.5.8"
+    "google-gax": "^4.0.5"
   },
   "devDependencies": {
-    "@types/mocha": "^9.0.0",
-    "@types/node": "^20.0.0",
-    "@types/sinon": "^17.0.0",
-    "c8": "^7.3.5",
-    "gts": "^5.0.1",
-    "jsdoc": "^4.0.0",
+    "@types/mocha": "^10.0.2",
+    "@types/node": "^18.11.18",
+    "@types/sinon": "^10.0.19",
+    "c8": "^8.0.1",
+    "gapic-tools": "^0.2.0",
+    "gts": "5.2.0",
+    "jsdoc": "^4.0.2",
     "jsdoc-fresh": "^3.0.0",
     "jsdoc-region-tag": "^3.0.0",
-    "long": "^5.2.3",
-    "linkinator": "4.1.2",
-    "mocha": "^9.2.2",
-    "null-loader": "^4.0.1",
-    "pack-n-play": "^2.0.0",
-    "sinon": "^17.0.0",
-    "ts-loader": "^9.0.0",
-    "typescript": "^4.6.4",
-    "webpack": "^5.9.0",
-    "webpack-cli": "^5.0.0"
+    "mocha": "^10.2.0",
+    "pack-n-play": "^2.0.3",
+    "sinon": "^15.2.0",
+    "typescript": "5.1.6"
   },
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=v14"
   }
 }
