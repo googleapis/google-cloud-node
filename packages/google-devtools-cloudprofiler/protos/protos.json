@@ -9,7 +9,7 @@
                 "v2": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.Profiler.V2",
-                    "go_package": "google.golang.org/genproto/googleapis/devtools/cloudprofiler/v2;cloudprofiler",
+                    "go_package": "cloud.google.com/go/cloudprofiler/apiv2/cloudprofilerpb;cloudprofilerpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "ProfilerProto",
                     "java_package": "com.google.devtools.cloudprofiler.v2",

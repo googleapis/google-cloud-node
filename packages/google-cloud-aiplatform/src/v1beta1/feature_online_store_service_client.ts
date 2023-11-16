@@ -475,8 +475,16 @@ export class FeatureOnlineStoreServiceClient {
    * @param {string} request.featureView
    *   Required. FeatureView resource format
    *   `projects/{project}/locations/{location}/featureOnlineStores/{featureOnlineStore}/featureViews/{featureView}`
+   * @param {google.cloud.aiplatform.v1beta1.FeatureViewDataKey} [request.dataKey]
+   *   Optional. The request key to fetch feature values for.
+   * @param {google.cloud.aiplatform.v1beta1.FeatureViewDataFormat} [request.dataFormat]
+   *   Optional. Response data format. If not set,
+   *   {@link protos.google.cloud.aiplatform.v1beta1.FeatureViewDataFormat.KEY_VALUE|FeatureViewDataFormat.KEY_VALUE}
+   *   will be used.
    * @param {google.cloud.aiplatform.v1beta1.FetchFeatureValuesRequest.Format} request.format
    *   Specify response data format. If not set, KeyValue format will be used.
+   *   Deprecated. Use
+   *   {@link protos.google.cloud.aiplatform.v1beta1.FetchFeatureValuesRequest.data_format|FetchFeatureValuesRequest.data_format}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

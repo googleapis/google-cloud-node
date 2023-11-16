@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.0.1...data-v4.1.0) (2023-11-16)
+
+
+### Features
+
+* [analytics-data] add the `SheetExportAudienceList` method to the Data API v1 alpha ([#4804](https://github.com/googleapis/google-cloud-node/issues/4804)) ([279e77c](https://github.com/googleapis/google-cloud-node/commit/279e77c39982c98fb2f9f6b9305ee9097ae10352))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/data-v4.0.0...data-v4.0.1) (2023-09-06)
 
 
