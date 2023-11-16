@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.2.0...discoveryengine-v1.3.0) (2023-11-16)
+
+
+### Features
+
+* [discoveryengine] add data store and engine services ([#4810](https://github.com/googleapis/google-cloud-node/issues/4810)) ([7e95257](https://github.com/googleapis/google-cloud-node/commit/7e95257cb371509efce1e5b83a730cb1a1db4492))
+
 ## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.1.0...discoveryengine-v1.2.0) (2023-10-18)
 
 

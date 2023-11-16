@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v1.1.0...confidentialcomputing-v1.2.0) (2023-11-16)
+
+
+### Features
+
+* [confidentialcomputing] Add a new field `token_type` to `TokenOptions` message proto ([#4808](https://github.com/googleapis/google-cloud-node/issues/4808)) ([f885b65](https://github.com/googleapis/google-cloud-node/commit/f885b6565848041517d71214874aa8fbce9d4fa2))
+
 ## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v1.0.0...confidentialcomputing-v1.1.0) (2023-09-06)
 
 
