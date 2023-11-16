@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars, no-undef */
-import {CloudTasksClient} from '@google-cloud/tasks';
+import * as tasks from '@google-cloud/tasks';
 
 function main() {
   const cloudTasksClient = new tasks.CloudTasksClient();

@@ -37,7 +37,7 @@ describe('📦 pack-n-play test', () => {
     await packNTest({
       sample: {
         description: 'Should be able to import using ESM',
-        esm: readFileSync('./esm/system-test/fixtures/index-esm.js').toString(),
+        esm: readFileSync('./esm/system-test/fixtures/sample/src/index.js').toString(),
       },
     });
   });
@@ -46,7 +46,7 @@ describe('📦 pack-n-play test', () => {
     await packNTest({
       sample: {
         description: 'Should be able to import using CJS',
-        cjs: readFileSync('./esm/system-test/fixtures/index.cjs').toString(),
+        cjs: readFileSync('./esm/system-test/fixtures/sample/src/index.cjs').toString(),
       },
     });
   });
