@@ -53,7 +53,7 @@
     "docs-test": "linkinator docs",
     "fix": "gts fix",
     "lint": "gts check",
-    "prepare": "npm run compile",
+    "prepare": "npm run compile-protos && npm run compile",
     "system-test:cjs": "c8 mocha build/cjs/system-test",
     "system-test:esm": "c8 mocha build/esm/system-test",
     "system-test": "npm run system-test:esm && npm run system-test:cjs",
