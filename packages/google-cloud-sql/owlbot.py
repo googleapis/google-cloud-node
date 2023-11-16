@@ -30,8 +30,7 @@ def patch(library: Path):
         os.unlink(library / f'src/v1/{service}{suffix}')
       os.unlink(library / f'test/gapic_{service}_v1.ts')
     # fix request.id which is Long but used in the path templates
-    s.replace(library / f'src/v1/sql_backup_runs_service_client.ts', r'id: request\.id', 'id: request.id?.toString()')
-    
+    s.replace(library / f'src/v1/sql_backup_runs_service_client.ts', r'id: request\.id', 'id: request.id?.toString()')  
   # remove empty v1beta4 services
   if re.search("/v1beta4$", str(library)):
     for service in ['sql_iam_policies_service']:
@@ -41,4 +40,4 @@ def patch(library: Path):
     # fix request.id which is Long but used in the path templates
     s.replace(library / f'src/v1beta4/sql_backup_runs_service_client.ts', r'id: request\.id', 'id: request.id?.toString()')
 
-node.owlbot_main(relative_dir="packages/google-cloud-sql", templates_excludes=["src/index.ts", "src/v1/index.ts", "src/v1beta4/index.ts", "system-test/fixtures/sample/src/index.js", "system-test/fixtures/sample/src/index.ts"], patch_staging=patch)
+node.owlbot_main(relative_dir="packages/google-cloud-sql", templates_excludes=["src/index.ts", "src/v1/index.ts", "src/v1beta4/index.ts", "system-test/fixtures/sample/src/index.js", "system-test/fixtures/sample/src/index.ts"], staging_excludes=["src/index.ts", "src/v1/index.ts"], patch_staging=patch)
