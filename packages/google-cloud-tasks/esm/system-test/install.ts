@@ -33,7 +33,7 @@ describe('📦 pack-n-play test', () => {
     await packNTest(options);
   });
 
-    it('ESM module', async () => {
+    it('ESM module', async function()  {
     await packNTest({
       sample: {
         description: 'Should be able to import using ESM',
@@ -42,7 +42,7 @@ describe('📦 pack-n-play test', () => {
     });
   });
 
-  it('CJS module', async () => {
+  it('CJS module', async function() {
     await packNTest({
       sample: {
         description: 'Should be able to import using CJS',
