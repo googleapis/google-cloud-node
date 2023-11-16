@@ -81,13 +81,14 @@ npm install @google-cloud/inventories
  *  Provide the page token to retrieve the subsequent page.
  *  When paginating, all other parameters provided to `ListRegionalInventories`
  *  must match the call that provided the page token. The token returned as
- *  nextPageToken google.shopping.merchant.inventories.v1beta.ListRegionalInventoriesResponse.next_page_token 
+ *  nextPageToken google.shopping.merchant.inventories.v1beta.ListRegionalInventoriesResponse.next_page_token
  *  in the response to the previous request.
  */
 // const pageToken = 'abc123'
 
 // Imports the Inventories library
-const {RegionalInventoryServiceClient} = require('@google-cloud/inventories').v1beta;
+const {RegionalInventoryServiceClient} =
+  require('@google-cloud/inventories').v1beta;
 
 // Instantiates a client
 const inventoriesClient = new RegionalInventoryServiceClient();
@@ -99,9 +100,11 @@ async function callListRegionalInventories() {
   };
 
   // Run request
-  const iterable = await inventoriesClient.listRegionalInventoriesAsync(request);
+  const iterable = await inventoriesClient.listRegionalInventoriesAsync(
+    request
+  );
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
