@@ -157,7 +157,8 @@
     "packages/google-storagetransfer": {},
     "packages/grafeas": {},
     "packages/typeless-sample-bot": {},
-    "packages/google-cloud-edgenetwork": {}
+    "packages/google-cloud-edgenetwork": {},
+    "packages/google-shopping-merchant-inventories": {}
   },
   "plugins": [
     {
