@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.7.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.6.0...aiplatform-v3.7.0) (2023-11-16)
+
+
+### Features
+
+* [aiplatform] add protected_artifact_location_id to CustomJob ([#4809](https://github.com/googleapis/google-cloud-node/issues/4809)) ([9da9501](https://github.com/googleapis/google-cloud-node/commit/9da950110296e4fed58de27f35284091616ea1b7))
+
 ## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.5.0...aiplatform-v3.6.0) (2023-11-09)
 
 

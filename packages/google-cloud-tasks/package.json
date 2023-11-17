@@ -59,6 +59,8 @@
     "system-test": "npm run system-test:esm && npm run system-test:cjs",
     "test:cjs": "c8 mocha build/cjs/test",
     "test:esm": "c8 mocha build/esm/test",
+    "prelint": "cd samples; npm link ../; npm i",
+    "postpack": "minifyProtoJson",
     "samples-test": "cd samples/ && npm link ../ && npm i && npm test",
     "test": "npm run test:esm && npm run test:cjs",
     "compile:esm": "tsc -p ./tsconfig.esm.json",
