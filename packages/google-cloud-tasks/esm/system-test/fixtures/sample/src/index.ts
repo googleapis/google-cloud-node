@@ -16,40 +16,18 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-'use strict';
+/* eslint-disable node/no-missing-require, no-unused-vars, no-undef */
+import {CloudTasksClient} from '@google-cloud/tasks';
 
-module.exports = {
-  opts: {
-    readme: './README.md',
-    package: './package.json',
-    template: './node_modules/jsdoc-fresh',
-    recurse: true,
-    verbose: true,
-    destination: './docs/'
-  },
-  plugins: [
-    'plugins/markdown',
-    'jsdoc-region-tag'
-  ],
-  source: {
-    excludePattern: '(^|\\/|\\\\)[._]',
-    include: [
-      'build/src',
-      'protos'
-    ],
-    includePattern: '\\.js$'
-  },
-  templates: {
-    copyright: 'Copyright 2023 Google LLC',
-    includeDate: false,
-    sourceFiles: false,
-    systemName: '@google-cloud/tasks',
-    theme: 'lumen',
-    default: {
-      outputSourceFiles: false
-    }
-  },
-  markdown: {
-    idInHeadings: true
-  }
-};
+// check that the client class type name can be used
+function doStuffWithCloudTasksClient(client: CloudTasksClient) {
+  client.close();
+}
+
+function main() {
+  // check that the client instance can be created
+  const cloudTasksClient = new CloudTasksClient();
+  doStuffWithCloudTasksClient(cloudTasksClient);
+}
+
+main();

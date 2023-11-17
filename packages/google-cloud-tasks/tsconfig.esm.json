@@ -2,20 +2,16 @@
   "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
     "rootDir": ".",
+    "outDir": "build",
     "resolveJsonModule": true,
+    "module": "es2020",
     "moduleResolution": "node",
-    "allowJs": true,
     "esModuleInterop": true,
     "sourceMap": false,
-    "target": "esnext",
-    "module": "CommonJS",
-    "declaration": true,
-    "strict": true,
-    "isolatedModules": true,
-    "emitDeclarationOnly": true,
+    "allowJs": true,
     "lib": [
-      "es2018",
-      "dom"
+      "es2020",
+      "DOM"
     ]
   },
   "include": [
