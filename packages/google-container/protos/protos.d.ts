@@ -11244,6 +11244,9 @@ export namespace google {
                 /** NodePool etag */
                 etag?: (string|null);
 
+                /** NodePool queuedProvisioning */
+                queuedProvisioning?: (google.container.v1.NodePool.IQueuedProvisioning|null);
+
                 /** NodePool bestEffortProvisioning */
                 bestEffortProvisioning?: (google.container.v1.IBestEffortProvisioning|null);
             }
@@ -11313,6 +11316,9 @@ export namespace google {
 
                 /** NodePool etag. */
                 public etag: string;
+
+                /** NodePool queuedProvisioning. */
+                public queuedProvisioning?: (google.container.v1.NodePool.IQueuedProvisioning|null);
 
                 /** NodePool bestEffortProvisioning. */
                 public bestEffortProvisioning?: (google.container.v1.IBestEffortProvisioning|null);
@@ -11881,6 +11887,103 @@ export namespace google {
                         TYPE_UNSPECIFIED = 0,
                         COMPACT = 1
                     }
+                }
+
+                /** Properties of a QueuedProvisioning. */
+                interface IQueuedProvisioning {
+
+                    /** QueuedProvisioning enabled */
+                    enabled?: (boolean|null);
+                }
+
+                /** Represents a QueuedProvisioning. */
+                class QueuedProvisioning implements IQueuedProvisioning {
+
+                    /**
+                     * Constructs a new QueuedProvisioning.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.container.v1.NodePool.IQueuedProvisioning);
+
+                    /** QueuedProvisioning enabled. */
+                    public enabled: boolean;
+
+                    /**
+                     * Creates a new QueuedProvisioning instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueuedProvisioning instance
+                     */
+                    public static create(properties?: google.container.v1.NodePool.IQueuedProvisioning): google.container.v1.NodePool.QueuedProvisioning;
+
+                    /**
+                     * Encodes the specified QueuedProvisioning message. Does not implicitly {@link google.container.v1.NodePool.QueuedProvisioning.verify|verify} messages.
+                     * @param message QueuedProvisioning message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.container.v1.NodePool.IQueuedProvisioning, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueuedProvisioning message, length delimited. Does not implicitly {@link google.container.v1.NodePool.QueuedProvisioning.verify|verify} messages.
+                     * @param message QueuedProvisioning message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.container.v1.NodePool.IQueuedProvisioning, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueuedProvisioning message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueuedProvisioning
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.NodePool.QueuedProvisioning;
+
+                    /**
+                     * Decodes a QueuedProvisioning message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueuedProvisioning
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.NodePool.QueuedProvisioning;
+
+                    /**
+                     * Verifies a QueuedProvisioning message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueuedProvisioning message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueuedProvisioning
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.container.v1.NodePool.QueuedProvisioning;
+
+                    /**
+                     * Creates a plain object from a QueuedProvisioning message. Also converts values to other types if specified.
+                     * @param message QueuedProvisioning
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.container.v1.NodePool.QueuedProvisioning, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueuedProvisioning to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueuedProvisioning
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
 

@@ -3768,6 +3768,10 @@
                       "type": "string",
                       "id": 110
                     },
+                    "queuedProvisioning": {
+                      "type": "QueuedProvisioning",
+                      "id": 112
+                    },
                     "bestEffortProvisioning": {
                       "type": "BestEffortProvisioning",
                       "id": 113
@@ -3897,6 +3901,14 @@
                             "TYPE_UNSPECIFIED": 0,
                             "COMPACT": 1
                           }
+                        }
+                      }
+                    },
+                    "QueuedProvisioning": {
+                      "fields": {
+                        "enabled": {
+                          "type": "bool",
+                          "id": 1
                         }
                       }
                     }
