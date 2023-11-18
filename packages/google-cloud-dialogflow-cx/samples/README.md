@@ -84,6 +84,7 @@
   * [Sessions.fulfill_intent](#sessions.fulfill_intent)
   * [Sessions.match_intent](#sessions.match_intent)
   * [Sessions.streaming_detect_intent](#sessions.streaming_detect_intent)
+  * [Sessions.submit_answer_feedback](#sessions.submit_answer_feedback)
   * [Test_cases.batch_delete_test_cases](#test_cases.batch_delete_test_cases)
   * [Test_cases.batch_run_test_cases](#test_cases.batch_run_test_cases)
   * [Test_cases.calculate_coverage](#test_cases.calculate_coverage)
@@ -1448,6 +1449,23 @@ __Usage:__
 
 
 `node packages/google-cloud-dialogflow-cx/samples/generated/v3/sessions.streaming_detect_intent.js`
+
+
+-----
+
+
+
+
+### Sessions.submit_answer_feedback
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3/sessions.submit_answer_feedback.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3/sessions.submit_answer_feedback.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3/sessions.submit_answer_feedback.js`
 
 
 -----
