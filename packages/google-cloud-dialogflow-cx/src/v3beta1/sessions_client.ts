@@ -247,6 +247,13 @@ export class SessionsClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/agents/{agent}/transitionRouteGroups/{transition_route_group}'
         ),
+      projectLocationCollectionDataStorePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}'
+        ),
+      projectLocationDataStorePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}'
+      ),
       securitySettingsPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/securitySettings/{security_settings}'
       ),
@@ -327,6 +334,7 @@ export class SessionsClient {
       'streamingDetectIntent',
       'matchIntent',
       'fulfillIntent',
+      'submitAnswerFeedback',
     ];
     for (const methodName of sessionsStubMethods) {
       const callPromise = this.sessionsStub.then(
@@ -764,6 +772,111 @@ export class SessionsClient {
       });
     this.initialize();
     return this.innerApiCalls.fulfillIntent(request, options, callback);
+  }
+  /**
+   * Updates the feedback received from the user for a single turn of the bot
+   * response.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.session
+   *   Required. The name of the session the feedback was sent to.
+   * @param {string} request.responseId
+   *   Required. ID of the response to update its feedback. This is the same as
+   *   DetectIntentResponse.response_id.
+   * @param {google.cloud.dialogflow.cx.v3beta1.AnswerFeedback} request.answerFeedback
+   *   Required. Feedback provided for a bot answer.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The mask to control which fields to update. If the mask is not
+   *   present, all fields will be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.AnswerFeedback|AnswerFeedback}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3beta1/sessions.submit_answer_feedback.js</caption>
+   * region_tag:dialogflow_v3beta1_generated_Sessions_SubmitAnswerFeedback_async
+   */
+  submitAnswerFeedback(
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.ISubmitAnswerFeedbackRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.cx.v3beta1.IAnswerFeedback,
+      (
+        | protos.google.cloud.dialogflow.cx.v3beta1.ISubmitAnswerFeedbackRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  submitAnswerFeedback(
+    request: protos.google.cloud.dialogflow.cx.v3beta1.ISubmitAnswerFeedbackRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dialogflow.cx.v3beta1.IAnswerFeedback,
+      | protos.google.cloud.dialogflow.cx.v3beta1.ISubmitAnswerFeedbackRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  submitAnswerFeedback(
+    request: protos.google.cloud.dialogflow.cx.v3beta1.ISubmitAnswerFeedbackRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.cx.v3beta1.IAnswerFeedback,
+      | protos.google.cloud.dialogflow.cx.v3beta1.ISubmitAnswerFeedbackRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  submitAnswerFeedback(
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.ISubmitAnswerFeedbackRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IAnswerFeedback,
+          | protos.google.cloud.dialogflow.cx.v3beta1.ISubmitAnswerFeedbackRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dialogflow.cx.v3beta1.IAnswerFeedback,
+      | protos.google.cloud.dialogflow.cx.v3beta1.ISubmitAnswerFeedbackRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.cx.v3beta1.IAnswerFeedback,
+      (
+        | protos.google.cloud.dialogflow.cx.v3beta1.ISubmitAnswerFeedbackRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        session: request.session ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.submitAnswerFeedback(request, options, callback);
   }
 
   /**
@@ -2399,6 +2512,156 @@ export class SessionsClient {
     return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(
       projectLocationAgentTransitionRouteGroupName
     ).transition_route_group;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionDataStore resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStorePath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStore resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreName
+   *   A fully-qualified path representing project_location_collection_data_store resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreName(
+    projectLocationCollectionDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
+      projectLocationCollectionDataStoreName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStore resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreName
+   *   A fully-qualified path representing project_location_collection_data_store resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreName(
+    projectLocationCollectionDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
+      projectLocationCollectionDataStoreName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStore resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreName
+   *   A fully-qualified path representing project_location_collection_data_store resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreName(
+    projectLocationCollectionDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
+      projectLocationCollectionDataStoreName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStore resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreName
+   *   A fully-qualified path representing project_location_collection_data_store resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreName(
+    projectLocationCollectionDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
+      projectLocationCollectionDataStoreName
+    ).data_store;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationDataStore resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStorePath(
+    project: string,
+    location: string,
+    dataStore: string
+  ) {
+    return this.pathTemplates.projectLocationDataStorePathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStore resource.
+   *
+   * @param {string} projectLocationDataStoreName
+   *   A fully-qualified path representing project_location_data_store resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreName(
+    projectLocationDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStorePathTemplate.match(
+      projectLocationDataStoreName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStore resource.
+   *
+   * @param {string} projectLocationDataStoreName
+   *   A fully-qualified path representing project_location_data_store resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreName(
+    projectLocationDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStorePathTemplate.match(
+      projectLocationDataStoreName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStore resource.
+   *
+   * @param {string} projectLocationDataStoreName
+   *   A fully-qualified path representing project_location_data_store resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreName(
+    projectLocationDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStorePathTemplate.match(
+      projectLocationDataStoreName
+    ).data_store;
   }
 
   /**

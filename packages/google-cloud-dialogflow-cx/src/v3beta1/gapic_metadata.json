@@ -911,6 +911,11 @@
                 "fulfillIntent"
               ]
             },
+            "SubmitAnswerFeedback": {
+              "methods": [
+                "submitAnswerFeedback"
+              ]
+            },
             "StreamingDetectIntent": {
               "methods": [
                 "streamingDetectIntent"
@@ -934,6 +939,11 @@
             "FulfillIntent": {
               "methods": [
                 "fulfillIntent"
+              ]
+            },
+            "SubmitAnswerFeedback": {
+              "methods": [
+                "submitAnswerFeedback"
               ]
             }
           }

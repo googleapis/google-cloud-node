@@ -324,11 +324,11 @@ export class EntityTypesClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const entityTypesStubMethods = [
-      'listEntityTypes',
       'getEntityType',
       'createEntityType',
       'updateEntityType',
       'deleteEntityType',
+      'listEntityTypes',
     ];
     for (const methodName of entityTypesStubMethods) {
       const callPromise = this.entityTypesStub.then(
