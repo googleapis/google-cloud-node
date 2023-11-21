@@ -1237,1424 +1237,6 @@
                       }
                     }
                   }
-                },
-                "v1alpha": {
-                  "options": {
-                    "csharp_namespace": "Google.Cloud.Batch.V1Alpha",
-                    "go_package": "cloud.google.com/go/batch/apiv1alpha/batchpb;batchpb",
-                    "java_multiple_files": true,
-                    "java_outer_classname": "VolumeProto",
-                    "java_package": "com.google.cloud.batch.v1alpha",
-                    "objc_class_prefix": "GCB",
-                    "php_namespace": "Google\\Cloud\\Batch\\V1alpha",
-                    "ruby_package": "Google::Cloud::Batch::V1alpha"
-                  },
-                  "nested": {
-                    "BatchService": {
-                      "options": {
-                        "(google.api.default_host)": "batch.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
-                      },
-                      "methods": {
-                        "CreateJob": {
-                          "requestType": "CreateJobRequest",
-                          "responseType": "Job",
-                          "options": {
-                            "(google.api.http).post": "/v1alpha/{parent=projects/*/locations/*}/jobs",
-                            "(google.api.http).body": "job",
-                            "(google.api.method_signature)": "parent,job,job_id"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1alpha/{parent=projects/*/locations/*}/jobs",
-                                "body": "job"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent,job,job_id"
-                            }
-                          ]
-                        },
-                        "GetJob": {
-                          "requestType": "GetJobRequest",
-                          "responseType": "Job",
-                          "options": {
-                            "(google.api.http).get": "/v1alpha/{name=projects/*/locations/*/jobs/*}",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1alpha/{name=projects/*/locations/*/jobs/*}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
-                        "DeleteJob": {
-                          "requestType": "DeleteJobRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).delete": "/v1alpha/{name=projects/*/locations/*/jobs/*}",
-                            "(google.api.method_signature)": "name",
-                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                            "(google.longrunning.operation_info).metadata_type": "google.cloud.batch.v1alpha.OperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "delete": "/v1alpha/{name=projects/*/locations/*/jobs/*}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "google.protobuf.Empty",
-                                "metadata_type": "google.cloud.batch.v1alpha.OperationMetadata"
-                              }
-                            }
-                          ]
-                        },
-                        "ListJobs": {
-                          "requestType": "ListJobsRequest",
-                          "responseType": "ListJobsResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1alpha/{parent=projects/*/locations/*}/jobs",
-                            "(google.api.method_signature)": "parent"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1alpha/{parent=projects/*/locations/*}/jobs"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent"
-                            }
-                          ]
-                        },
-                        "GetTask": {
-                          "requestType": "GetTaskRequest",
-                          "responseType": "Task",
-                          "options": {
-                            "(google.api.http).get": "/v1alpha/{name=projects/*/locations/*/jobs/*/taskGroups/*/tasks/*}",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1alpha/{name=projects/*/locations/*/jobs/*/taskGroups/*/tasks/*}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
-                        "ListTasks": {
-                          "requestType": "ListTasksRequest",
-                          "responseType": "ListTasksResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1alpha/{parent=projects/*/locations/*/jobs/*/taskGroups/*}/tasks",
-                            "(google.api.method_signature)": "parent"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1alpha/{parent=projects/*/locations/*/jobs/*/taskGroups/*}/tasks"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent"
-                            }
-                          ]
-                        }
-                      }
-                    },
-                    "CreateJobRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "batch.googleapis.com/Job"
-                          }
-                        },
-                        "jobId": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "job": {
-                          "type": "Job",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "requestId": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "GetJobRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "batch.googleapis.com/Job"
-                          }
-                        }
-                      }
-                    },
-                    "DeleteJobRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "reason": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "requestId": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "ListJobsRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "filter": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "orderBy": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ListJobsResponse": {
-                      "fields": {
-                        "jobs": {
-                          "rule": "repeated",
-                          "type": "Job",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "unreachable": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ListTasksRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "batch.googleapis.com/TaskGroup"
-                          }
-                        },
-                        "filter": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "orderBy": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 3
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "ListTasksResponse": {
-                      "fields": {
-                        "tasks": {
-                          "rule": "repeated",
-                          "type": "Task",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "unreachable": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "GetTaskRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "batch.googleapis.com/Task"
-                          }
-                        }
-                      }
-                    },
-                    "OperationMetadata": {
-                      "fields": {
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "endTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "target": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "verb": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "statusMessage": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "requestedCancellation": {
-                          "type": "bool",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "apiVersion": {
-                          "type": "string",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "Job": {
-                      "options": {
-                        "(google.api.resource).type": "batch.googleapis.com/Job",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/jobs/{job}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "uid": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "priority": {
-                          "type": "int64",
-                          "id": 3
-                        },
-                        "taskGroups": {
-                          "rule": "repeated",
-                          "type": "TaskGroup",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "schedulingPolicy": {
-                          "type": "SchedulingPolicy",
-                          "id": 5
-                        },
-                        "dependencies": {
-                          "rule": "repeated",
-                          "type": "JobDependency",
-                          "id": 6
-                        },
-                        "allocationPolicy": {
-                          "type": "AllocationPolicy",
-                          "id": 7
-                        },
-                        "labels": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 8
-                        },
-                        "status": {
-                          "type": "JobStatus",
-                          "id": 9,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "notification": {
-                          "type": "JobNotification",
-                          "id": 10,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 11,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 12,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "logsPolicy": {
-                          "type": "LogsPolicy",
-                          "id": 13
-                        },
-                        "notifications": {
-                          "rule": "repeated",
-                          "type": "JobNotification",
-                          "id": 14
-                        }
-                      },
-                      "nested": {
-                        "SchedulingPolicy": {
-                          "values": {
-                            "SCHEDULING_POLICY_UNSPECIFIED": 0,
-                            "AS_SOON_AS_POSSIBLE": 1
-                          }
-                        }
-                      }
-                    },
-                    "LogsPolicy": {
-                      "fields": {
-                        "destination": {
-                          "type": "Destination",
-                          "id": 1
-                        },
-                        "logsPath": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "cloudLoggingOption": {
-                          "type": "CloudLoggingOption",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "CloudLoggingOption": {
-                          "fields": {
-                            "useGenericTaskMonitoredResource": {
-                              "type": "bool",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          }
-                        },
-                        "Destination": {
-                          "values": {
-                            "DESTINATION_UNSPECIFIED": 0,
-                            "CLOUD_LOGGING": 1,
-                            "PATH": 2
-                          }
-                        }
-                      }
-                    },
-                    "JobDependency": {
-                      "fields": {
-                        "items": {
-                          "keyType": "string",
-                          "type": "Type",
-                          "id": 1
-                        }
-                      },
-                      "nested": {
-                        "Type": {
-                          "values": {
-                            "TYPE_UNSPECIFIED": 0,
-                            "SUCCEEDED": 1,
-                            "FAILED": 2,
-                            "FINISHED": 3
-                          }
-                        }
-                      }
-                    },
-                    "JobStatus": {
-                      "fields": {
-                        "state": {
-                          "type": "State",
-                          "id": 1
-                        },
-                        "statusEvents": {
-                          "rule": "repeated",
-                          "type": "StatusEvent",
-                          "id": 2
-                        },
-                        "taskGroups": {
-                          "keyType": "string",
-                          "type": "TaskGroupStatus",
-                          "id": 4
-                        },
-                        "runDuration": {
-                          "type": "google.protobuf.Duration",
-                          "id": 5
-                        },
-                        "resourceUsage": {
-                          "type": "ResourceUsage",
-                          "id": 6
-                        }
-                      },
-                      "nested": {
-                        "InstanceStatus": {
-                          "fields": {
-                            "machineType": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "provisioningModel": {
-                              "type": "AllocationPolicy.ProvisioningModel",
-                              "id": 2
-                            },
-                            "taskPack": {
-                              "type": "int64",
-                              "id": 3
-                            },
-                            "bootDisk": {
-                              "type": "AllocationPolicy.Disk",
-                              "id": 4
-                            }
-                          }
-                        },
-                        "TaskGroupStatus": {
-                          "fields": {
-                            "counts": {
-                              "keyType": "string",
-                              "type": "int64",
-                              "id": 1
-                            },
-                            "instances": {
-                              "rule": "repeated",
-                              "type": "InstanceStatus",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "State": {
-                          "values": {
-                            "STATE_UNSPECIFIED": 0,
-                            "QUEUED": 1,
-                            "SCHEDULED": 2,
-                            "RUNNING": 3,
-                            "SUCCEEDED": 4,
-                            "FAILED": 5,
-                            "DELETION_IN_PROGRESS": 6
-                          }
-                        }
-                      }
-                    },
-                    "ResourceUsage": {
-                      "fields": {
-                        "coreHours": {
-                          "type": "double",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "JobNotification": {
-                      "fields": {
-                        "pubsubTopic": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "message": {
-                          "type": "Message",
-                          "id": 2
-                        }
-                      },
-                      "nested": {
-                        "Message": {
-                          "fields": {
-                            "type": {
-                              "type": "Type",
-                              "id": 1
-                            },
-                            "newJobState": {
-                              "type": "JobStatus.State",
-                              "id": 2
-                            },
-                            "newTaskState": {
-                              "type": "TaskStatus.State",
-                              "id": 3
-                            }
-                          }
-                        },
-                        "Type": {
-                          "values": {
-                            "TYPE_UNSPECIFIED": 0,
-                            "JOB_STATE_CHANGED": 1,
-                            "TASK_STATE_CHANGED": 2
-                          }
-                        }
-                      }
-                    },
-                    "AllocationPolicy": {
-                      "fields": {
-                        "location": {
-                          "type": "LocationPolicy",
-                          "id": 1
-                        },
-                        "instance": {
-                          "type": "InstancePolicy",
-                          "id": 2,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
-                        "instances": {
-                          "rule": "repeated",
-                          "type": "InstancePolicyOrTemplate",
-                          "id": 8
-                        },
-                        "instanceTemplates": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
-                        "provisioningModels": {
-                          "rule": "repeated",
-                          "type": "ProvisioningModel",
-                          "id": 4,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
-                        "serviceAccountEmail": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
-                        "serviceAccount": {
-                          "type": "ServiceAccount",
-                          "id": 9
-                        },
-                        "labels": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 6
-                        },
-                        "network": {
-                          "type": "NetworkPolicy",
-                          "id": 7
-                        },
-                        "placement": {
-                          "type": "PlacementPolicy",
-                          "id": 10
-                        }
-                      },
-                      "nested": {
-                        "LocationPolicy": {
-                          "fields": {
-                            "allowedLocations": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 1
-                            },
-                            "deniedLocations": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "Disk": {
-                          "oneofs": {
-                            "dataSource": {
-                              "oneof": [
-                                "image",
-                                "snapshot"
-                              ]
-                            }
-                          },
-                          "fields": {
-                            "image": {
-                              "type": "string",
-                              "id": 4
-                            },
-                            "snapshot": {
-                              "type": "string",
-                              "id": 5
-                            },
-                            "type": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "sizeGb": {
-                              "type": "int64",
-                              "id": 2
-                            },
-                            "diskInterface": {
-                              "type": "string",
-                              "id": 6
-                            }
-                          }
-                        },
-                        "AttachedDisk": {
-                          "oneofs": {
-                            "attached": {
-                              "oneof": [
-                                "newDisk",
-                                "existingDisk"
-                              ]
-                            }
-                          },
-                          "fields": {
-                            "newDisk": {
-                              "type": "Disk",
-                              "id": 1
-                            },
-                            "existingDisk": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "deviceName": {
-                              "type": "string",
-                              "id": 3
-                            }
-                          }
-                        },
-                        "Accelerator": {
-                          "fields": {
-                            "type": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "count": {
-                              "type": "int64",
-                              "id": 2
-                            },
-                            "installGpuDrivers": {
-                              "type": "bool",
-                              "id": 3,
-                              "options": {
-                                "deprecated": true
-                              }
-                            },
-                            "driverVersion": {
-                              "type": "string",
-                              "id": 4,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          }
-                        },
-                        "InstancePolicy": {
-                          "fields": {
-                            "allowedMachineTypes": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "deprecated": true
-                              }
-                            },
-                            "machineType": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "minCpuPlatform": {
-                              "type": "string",
-                              "id": 3
-                            },
-                            "provisioningModel": {
-                              "type": "ProvisioningModel",
-                              "id": 4
-                            },
-                            "accelerators": {
-                              "rule": "repeated",
-                              "type": "Accelerator",
-                              "id": 5
-                            },
-                            "bootDisk": {
-                              "type": "Disk",
-                              "id": 8
-                            },
-                            "disks": {
-                              "rule": "repeated",
-                              "type": "AttachedDisk",
-                              "id": 6
-                            },
-                            "reservation": {
-                              "type": "string",
-                              "id": 7,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          }
-                        },
-                        "InstancePolicyOrTemplate": {
-                          "oneofs": {
-                            "policyTemplate": {
-                              "oneof": [
-                                "policy",
-                                "instanceTemplate"
-                              ]
-                            }
-                          },
-                          "fields": {
-                            "policy": {
-                              "type": "InstancePolicy",
-                              "id": 1
-                            },
-                            "instanceTemplate": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "installGpuDrivers": {
-                              "type": "bool",
-                              "id": 3
-                            }
-                          }
-                        },
-                        "NetworkInterface": {
-                          "fields": {
-                            "network": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "subnetwork": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "noExternalIpAddress": {
-                              "type": "bool",
-                              "id": 3
-                            }
-                          }
-                        },
-                        "NetworkPolicy": {
-                          "fields": {
-                            "networkInterfaces": {
-                              "rule": "repeated",
-                              "type": "NetworkInterface",
-                              "id": 1
-                            }
-                          }
-                        },
-                        "PlacementPolicy": {
-                          "fields": {
-                            "collocation": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "maxDistance": {
-                              "type": "int64",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "ProvisioningModel": {
-                          "values": {
-                            "PROVISIONING_MODEL_UNSPECIFIED": 0,
-                            "STANDARD": 1,
-                            "SPOT": 2,
-                            "PREEMPTIBLE": 3
-                          }
-                        }
-                      }
-                    },
-                    "TaskGroup": {
-                      "options": {
-                        "(google.api.resource).type": "batch.googleapis.com/TaskGroup",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/jobs/{job}/taskGroups/{task_group}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "taskSpec": {
-                          "type": "TaskSpec",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "taskCount": {
-                          "type": "int64",
-                          "id": 4
-                        },
-                        "parallelism": {
-                          "type": "int64",
-                          "id": 5
-                        },
-                        "schedulingPolicy": {
-                          "type": "SchedulingPolicy",
-                          "id": 6
-                        },
-                        "allocationPolicy": {
-                          "type": "AllocationPolicy",
-                          "id": 7
-                        },
-                        "labels": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 8
-                        },
-                        "taskEnvironments": {
-                          "rule": "repeated",
-                          "type": "Environment",
-                          "id": 9
-                        },
-                        "taskCountPerNode": {
-                          "type": "int64",
-                          "id": 10
-                        },
-                        "requireHostsFile": {
-                          "type": "bool",
-                          "id": 11
-                        },
-                        "permissiveSsh": {
-                          "type": "bool",
-                          "id": 12
-                        }
-                      },
-                      "nested": {
-                        "SchedulingPolicy": {
-                          "values": {
-                            "SCHEDULING_POLICY_UNSPECIFIED": 0,
-                            "AS_SOON_AS_POSSIBLE": 1,
-                            "IN_ORDER": 2
-                          }
-                        }
-                      }
-                    },
-                    "ServiceAccount": {
-                      "fields": {
-                        "email": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "scopes": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "ComputeResource": {
-                      "fields": {
-                        "cpuMilli": {
-                          "type": "int64",
-                          "id": 1
-                        },
-                        "memoryMib": {
-                          "type": "int64",
-                          "id": 2
-                        },
-                        "gpuCount": {
-                          "type": "int64",
-                          "id": 3
-                        },
-                        "bootDiskMib": {
-                          "type": "int64",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "StatusEvent": {
-                      "fields": {
-                        "type": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "eventTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2
-                        },
-                        "taskExecution": {
-                          "type": "TaskExecution",
-                          "id": 4
-                        },
-                        "taskState": {
-                          "type": "TaskStatus.State",
-                          "id": 5
-                        }
-                      }
-                    },
-                    "TaskExecution": {
-                      "fields": {
-                        "exitCode": {
-                          "type": "int32",
-                          "id": 1
-                        },
-                        "stderrSnippet": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "TaskStatus": {
-                      "fields": {
-                        "state": {
-                          "type": "State",
-                          "id": 1
-                        },
-                        "statusEvents": {
-                          "rule": "repeated",
-                          "type": "StatusEvent",
-                          "id": 2
-                        },
-                        "resourceUsage": {
-                          "type": "TaskResourceUsage",
-                          "id": 3
-                        }
-                      },
-                      "nested": {
-                        "State": {
-                          "values": {
-                            "STATE_UNSPECIFIED": 0,
-                            "PENDING": 1,
-                            "ASSIGNED": 2,
-                            "RUNNING": 3,
-                            "FAILED": 4,
-                            "SUCCEEDED": 5,
-                            "UNEXECUTED": 6
-                          }
-                        }
-                      }
-                    },
-                    "TaskResourceUsage": {
-                      "fields": {
-                        "coreHours": {
-                          "type": "double",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "Runnable": {
-                      "oneofs": {
-                        "executable": {
-                          "oneof": [
-                            "container",
-                            "script",
-                            "barrier"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "container": {
-                          "type": "Container",
-                          "id": 1
-                        },
-                        "script": {
-                          "type": "Script",
-                          "id": 2
-                        },
-                        "barrier": {
-                          "type": "Barrier",
-                          "id": 6
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 10,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "ignoreExitStatus": {
-                          "type": "bool",
-                          "id": 3
-                        },
-                        "background": {
-                          "type": "bool",
-                          "id": 4
-                        },
-                        "alwaysRun": {
-                          "type": "bool",
-                          "id": 5
-                        },
-                        "environment": {
-                          "type": "Environment",
-                          "id": 7
-                        },
-                        "timeout": {
-                          "type": "google.protobuf.Duration",
-                          "id": 8
-                        },
-                        "labels": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 9
-                        }
-                      },
-                      "nested": {
-                        "Container": {
-                          "fields": {
-                            "imageUri": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "commands": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 2
-                            },
-                            "entrypoint": {
-                              "type": "string",
-                              "id": 3
-                            },
-                            "volumes": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 7
-                            },
-                            "options": {
-                              "type": "string",
-                              "id": 8
-                            },
-                            "blockExternalNetwork": {
-                              "type": "bool",
-                              "id": 9
-                            },
-                            "username": {
-                              "type": "string",
-                              "id": 10
-                            },
-                            "password": {
-                              "type": "string",
-                              "id": 11
-                            },
-                            "enableImageStreaming": {
-                              "type": "bool",
-                              "id": 12,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          }
-                        },
-                        "Script": {
-                          "oneofs": {
-                            "command": {
-                              "oneof": [
-                                "path",
-                                "text"
-                              ]
-                            }
-                          },
-                          "fields": {
-                            "path": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "text": {
-                              "type": "string",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "Barrier": {
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "TaskSpec": {
-                      "fields": {
-                        "runnables": {
-                          "rule": "repeated",
-                          "type": "Runnable",
-                          "id": 8
-                        },
-                        "computeResource": {
-                          "type": "ComputeResource",
-                          "id": 3
-                        },
-                        "maxRunDuration": {
-                          "type": "google.protobuf.Duration",
-                          "id": 4
-                        },
-                        "maxRetryCount": {
-                          "type": "int32",
-                          "id": 5
-                        },
-                        "lifecyclePolicies": {
-                          "rule": "repeated",
-                          "type": "LifecyclePolicy",
-                          "id": 9
-                        },
-                        "environments": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 6,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
-                        "volumes": {
-                          "rule": "repeated",
-                          "type": "Volume",
-                          "id": 7
-                        },
-                        "environment": {
-                          "type": "Environment",
-                          "id": 10
-                        }
-                      }
-                    },
-                    "LifecyclePolicy": {
-                      "fields": {
-                        "action": {
-                          "type": "Action",
-                          "id": 1
-                        },
-                        "actionCondition": {
-                          "type": "ActionCondition",
-                          "id": 2
-                        }
-                      },
-                      "nested": {
-                        "ActionCondition": {
-                          "fields": {
-                            "exitCodes": {
-                              "rule": "repeated",
-                              "type": "int32",
-                              "id": 1
-                            }
-                          }
-                        },
-                        "Action": {
-                          "values": {
-                            "ACTION_UNSPECIFIED": 0,
-                            "RETRY_TASK": 1,
-                            "FAIL_TASK": 2
-                          }
-                        }
-                      }
-                    },
-                    "Task": {
-                      "options": {
-                        "(google.api.resource).type": "batch.googleapis.com/Task",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/jobs/{job}/taskGroups/{task_group}/tasks/{task}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "status": {
-                          "type": "TaskStatus",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "Environment": {
-                      "fields": {
-                        "variables": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 1
-                        },
-                        "secretVariables": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 2
-                        },
-                        "encryptedVariables": {
-                          "type": "KMSEnvMap",
-                          "id": 3
-                        }
-                      },
-                      "nested": {
-                        "KMSEnvMap": {
-                          "fields": {
-                            "keyName": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "cipherText": {
-                              "type": "string",
-                              "id": 2
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "Volume": {
-                      "oneofs": {
-                        "source": {
-                          "oneof": [
-                            "nfs",
-                            "pd",
-                            "gcs",
-                            "deviceName"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "nfs": {
-                          "type": "NFS",
-                          "id": 1
-                        },
-                        "pd": {
-                          "type": "PD",
-                          "id": 2,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
-                        "gcs": {
-                          "type": "GCS",
-                          "id": 3
-                        },
-                        "deviceName": {
-                          "type": "string",
-                          "id": 6
-                        },
-                        "mountPath": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "mountOptions": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 5
-                        }
-                      }
-                    },
-                    "NFS": {
-                      "fields": {
-                        "server": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "remotePath": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "PD": {
-                      "fields": {
-                        "disk": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "device": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "existing": {
-                          "type": "bool",
-                          "id": 3,
-                          "options": {
-                            "deprecated": true
-                          }
-                        }
-                      }
-                    },
-                    "GCS": {
-                      "fields": {
-                        "remotePath": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    }
-                  }
                 }
               }
             }
@@ -2877,6 +1459,10 @@
                   "rule": "repeated",
                   "type": "ClientLibrarySettings",
                   "id": 109
+                },
+                "protoReferenceDocumentationUri": {
+                  "type": "string",
+                  "id": 110
                 }
               }
             },
@@ -2934,6 +1520,31 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "renamedServices": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
+                },
+                "renamedResources": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 3
+                },
+                "ignoredResources": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 4
+                },
+                "forcedNamespaceAliases": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 5
+                },
+                "handwrittenSignatures": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 6
                 }
               }
             },
@@ -2993,7 +1604,10 @@
                 "CLOUD": 1,
                 "ADS": 2,
                 "PHOTOS": 3,
-                "STREET_VIEW": 4
+                "STREET_VIEW": 4,
+                "SHOPPING": 5,
+                "GEO": 6,
+                "GENERATIVE_AI": 7
               }
             },
             "ClientLibraryDestination": {
@@ -3289,6 +1903,25 @@
                   "rule": "repeated",
                   "type": "UninterpretedOption",
                   "id": 999
+                },
+                "declaration": {
+                  "rule": "repeated",
+                  "type": "Declaration",
+                  "id": 2,
+                  "options": {
+                    "retention": "RETENTION_SOURCE"
+                  }
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 50
+                },
+                "verification": {
+                  "type": "VerificationState",
+                  "id": 3,
+                  "options": {
+                    "default": "UNVERIFIED"
+                  }
                 }
               },
               "extensions": [
@@ -3296,7 +1929,45 @@
                   1000,
                   536870911
                 ]
-              ]
+              ],
+              "nested": {
+                "Declaration": {
+                  "fields": {
+                    "number": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "fullName": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "type": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "reserved": {
+                      "type": "bool",
+                      "id": 5
+                    },
+                    "repeated": {
+                      "type": "bool",
+                      "id": 6
+                    }
+                  },
+                  "reserved": [
+                    [
+                      4,
+                      4
+                    ]
+                  ]
+                },
+                "VerificationState": {
+                  "values": {
+                    "DECLARATION": 0,
+                    "UNVERIFIED": 1
+                  }
+                }
+              }
             },
             "FieldDescriptorProto": {
               "fields": {
@@ -3609,6 +2280,10 @@
                   "type": "string",
                   "id": 45
                 },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 50
+                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -3670,6 +2345,10 @@
                   "options": {
                     "deprecated": true
                   }
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 12
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -3765,9 +2444,22 @@
                   "type": "OptionRetention",
                   "id": 17
                 },
-                "target": {
+                "targets": {
+                  "rule": "repeated",
                   "type": "OptionTargetType",
-                  "id": 18
+                  "id": 19,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "editionDefaults": {
+                  "rule": "repeated",
+                  "type": "EditionDefault",
+                  "id": 20
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 21
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -3785,6 +2477,10 @@
                 [
                   4,
                   4
+                ],
+                [
+                  18,
+                  18
                 ]
               ],
               "nested": {
@@ -3822,11 +2518,27 @@
                     "TARGET_TYPE_SERVICE": 8,
                     "TARGET_TYPE_METHOD": 9
                   }
+                },
+                "EditionDefault": {
+                  "fields": {
+                    "edition": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "value": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
                 }
               }
             },
             "OneofOptions": {
               "fields": {
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 1
+                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -3860,6 +2572,10 @@
                     "deprecated": true
                   }
                 },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 7
+                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -3888,6 +2604,17 @@
                     "default": false
                   }
                 },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 2
+                },
+                "debugRedact": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -3903,6 +2630,10 @@
             },
             "ServiceOptions": {
               "fields": {
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 34
+                },
                 "deprecated": {
                   "type": "bool",
                   "id": 33,
@@ -3938,6 +2669,10 @@
                   "options": {
                     "default": "IDEMPOTENCY_UNKNOWN"
                   }
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 35
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -4006,6 +2741,137 @@
                       "type": "bool",
                       "id": 2
                     }
+                  }
+                }
+              }
+            },
+            "FeatureSet": {
+              "fields": {
+                "fieldPresence": {
+                  "type": "FieldPresence",
+                  "id": 1,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "2023",
+                    "edition_defaults.value": "EXPLICIT"
+                  }
+                },
+                "enumType": {
+                  "type": "EnumType",
+                  "id": 2,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "2023",
+                    "edition_defaults.value": "OPEN"
+                  }
+                },
+                "repeatedFieldEncoding": {
+                  "type": "RepeatedFieldEncoding",
+                  "id": 3,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "2023",
+                    "edition_defaults.value": "PACKED"
+                  }
+                },
+                "stringFieldValidation": {
+                  "type": "StringFieldValidation",
+                  "id": 4,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "2023",
+                    "edition_defaults.value": "MANDATORY"
+                  }
+                },
+                "messageEncoding": {
+                  "type": "MessageEncoding",
+                  "id": 5,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "2023",
+                    "edition_defaults.value": "LENGTH_PREFIXED"
+                  }
+                },
+                "jsonFormat": {
+                  "type": "JsonFormat",
+                  "id": 6,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "2023",
+                    "edition_defaults.value": "ALLOW"
+                  }
+                },
+                "rawFeatures": {
+                  "type": "FeatureSet",
+                  "id": 999,
+                  "options": {
+                    "targets": "TARGET_TYPE_UNKNOWN"
+                  }
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  1000
+                ],
+                [
+                  1001,
+                  1001
+                ],
+                [
+                  9995,
+                  9999
+                ]
+              ],
+              "nested": {
+                "FieldPresence": {
+                  "values": {
+                    "FIELD_PRESENCE_UNKNOWN": 0,
+                    "EXPLICIT": 1,
+                    "IMPLICIT": 2,
+                    "LEGACY_REQUIRED": 3
+                  }
+                },
+                "EnumType": {
+                  "values": {
+                    "ENUM_TYPE_UNKNOWN": 0,
+                    "OPEN": 1,
+                    "CLOSED": 2
+                  }
+                },
+                "RepeatedFieldEncoding": {
+                  "values": {
+                    "REPEATED_FIELD_ENCODING_UNKNOWN": 0,
+                    "PACKED": 1,
+                    "EXPANDED": 2
+                  }
+                },
+                "StringFieldValidation": {
+                  "values": {
+                    "STRING_FIELD_VALIDATION_UNKNOWN": 0,
+                    "MANDATORY": 1,
+                    "HINT": 2,
+                    "NONE": 3
+                  }
+                },
+                "MessageEncoding": {
+                  "values": {
+                    "MESSAGE_ENCODING_UNKNOWN": 0,
+                    "LENGTH_PREFIXED": 1,
+                    "DELIMITED": 2
+                  }
+                },
+                "JsonFormat": {
+                  "values": {
+                    "JSON_FORMAT_UNKNOWN": 0,
+                    "ALLOW": 1,
+                    "LEGACY_BEST_EFFORT": 2
                   }
                 }
               }
@@ -4138,7 +3004,7 @@
           "options": {
             "cc_enable_arenas": true,
             "csharp_namespace": "Google.LongRunning",
-            "go_package": "google.golang.org/genproto/googleapis/longrunning;longrunning",
+            "go_package": "cloud.google.com/go/longrunning/autogen/longrunningpb;longrunningpb",
             "java_multiple_files": true,
             "java_outer_classname": "OperationsProto",
             "java_package": "com.google.longrunning",
