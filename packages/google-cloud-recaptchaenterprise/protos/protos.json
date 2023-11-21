@@ -463,6 +463,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "accountId": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "hashedAccountId": {
                           "type": "bytes",
                           "id": 4,
@@ -755,6 +762,7 @@
                           "type": "bytes",
                           "id": 6,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
@@ -804,6 +812,13 @@
                         "transactionData": {
                           "type": "TransactionData",
                           "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "userInfo": {
+                          "type": "UserInfo",
+                          "id": 15,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -1069,6 +1084,66 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
+                          }
+                        }
+                      }
+                    },
+                    "UserInfo": {
+                      "fields": {
+                        "createAccountTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "accountId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "userIds": {
+                          "rule": "repeated",
+                          "type": "UserId",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UserId": {
+                      "oneofs": {
+                        "idOneof": {
+                          "oneof": [
+                            "email",
+                            "phoneNumber",
+                            "username"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "email": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "phoneNumber": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "username": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
