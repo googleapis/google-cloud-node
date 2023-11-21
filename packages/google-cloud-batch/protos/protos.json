@@ -442,9 +442,19 @@
                         "logsPath": {
                           "type": "string",
                           "id": 2
+                        },
+                        "cloudLoggingOption": {
+                          "type": "CloudLoggingOption",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
+                        "CloudLoggingOption": {
+                          "fields": {}
+                        },
                         "Destination": {
                           "values": {
                             "DESTINATION_UNSPECIFIED": 0,
