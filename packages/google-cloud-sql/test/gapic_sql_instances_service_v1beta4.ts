@@ -2265,6 +2265,160 @@ describe('v1beta4.SqlInstancesServiceClient', () => {
     });
   });
 
+  describe('switchover', () => {
+    it('invokes switchover without error', async () => {
+      const client =
+        new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1beta4.SqlInstancesSwitchoverRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.SqlInstancesSwitchoverRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.SqlInstancesSwitchoverRequest',
+        ['instance']
+      );
+      request.instance = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.sql.v1beta4.Operation()
+      );
+      client.innerApiCalls.switchover = stubSimpleCall(expectedResponse);
+      const [response] = await client.switchover(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.switchover as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.switchover as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes switchover without error using callback', async () => {
+      const client =
+        new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1beta4.SqlInstancesSwitchoverRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.SqlInstancesSwitchoverRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.SqlInstancesSwitchoverRequest',
+        ['instance']
+      );
+      request.instance = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.sql.v1beta4.Operation()
+      );
+      client.innerApiCalls.switchover =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.switchover(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.sql.v1beta4.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.switchover as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.switchover as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes switchover with error', async () => {
+      const client =
+        new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1beta4.SqlInstancesSwitchoverRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.SqlInstancesSwitchoverRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.SqlInstancesSwitchoverRequest',
+        ['instance']
+      );
+      request.instance = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.switchover = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.switchover(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.switchover as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.switchover as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes switchover with closed client', async () => {
+      const client =
+        new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1beta4.SqlInstancesSwitchoverRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.SqlInstancesSwitchoverRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.SqlInstancesSwitchoverRequest',
+        ['instance']
+      );
+      request.instance = defaultValue2;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.switchover(request), expectedError);
+    });
+  });
+
   describe('resetSslConfig', () => {
     it('invokes resetSslConfig without error', async () => {
       const client =

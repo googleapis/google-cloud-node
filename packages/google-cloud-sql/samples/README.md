@@ -108,6 +108,7 @@
   * [Sql_instances_service.start_external_sync](#sql_instances_service.start_external_sync)
   * [Sql_instances_service.start_replica](#sql_instances_service.start_replica)
   * [Sql_instances_service.stop_replica](#sql_instances_service.stop_replica)
+  * [Sql_instances_service.switchover](#sql_instances_service.switchover)
   * [Sql_instances_service.truncate_log](#sql_instances_service.truncate_log)
   * [Sql_instances_service.update](#sql_instances_service.update)
   * [Sql_instances_service.verify_external_sync_settings](#sql_instances_service.verify_external_sync_settings)
@@ -1766,6 +1767,23 @@ __Usage:__
 
 
 `node packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.stop_replica.js`
+
+
+-----
+
+
+
+
+### Sql_instances_service.switchover
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.switchover.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.switchover.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.switchover.js`
 
 
 -----

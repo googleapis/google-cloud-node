@@ -20,12 +20,18 @@
 const sql = require('@google-cloud/sql');
 
 function main() {
+  const sqlAvailableDatabaseVersionsServiceClient =
+    new sql.SqlAvailableDatabaseVersionsServiceClient();
   const sqlBackupRunsServiceClient = new sql.SqlBackupRunsServiceClient();
   const sqlConnectServiceClient = new sql.SqlConnectServiceClient();
   const sqlDatabasesServiceClient = new sql.SqlDatabasesServiceClient();
+  const sqlEventsServiceClient = new sql.SqlEventsServiceClient();
   const sqlFlagsServiceClient = new sql.SqlFlagsServiceClient();
+  const sqlIamPoliciesServiceClient = new sql.SqlIamPoliciesServiceClient();
+  const sqlInstanceNamesServiceClient = new sql.SqlInstanceNamesServiceClient();
   const sqlInstancesServiceClient = new sql.SqlInstancesServiceClient();
   const sqlOperationsServiceClient = new sql.SqlOperationsServiceClient();
+  const sqlRegionsServiceClient = new sql.SqlRegionsServiceClient();
   const sqlSslCertsServiceClient = new sql.SqlSslCertsServiceClient();
   const sqlTiersServiceClient = new sql.SqlTiersServiceClient();
   const sqlUsersServiceClient = new sql.SqlUsersServiceClient();
