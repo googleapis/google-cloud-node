@@ -9182,6 +9182,7 @@
                          * @property {Array.<google.cloud.sql.v1.IAclEntry>|null} [authorizedNetworks] IpConfiguration authorizedNetworks
                          * @property {string|null} [allocatedIpRange] IpConfiguration allocatedIpRange
                          * @property {google.protobuf.IBoolValue|null} [enablePrivatePathForGoogleCloudServices] IpConfiguration enablePrivatePathForGoogleCloudServices
+                         * @property {google.cloud.sql.v1.IpConfiguration.SslMode|null} [sslMode] IpConfiguration sslMode
                          * @property {google.cloud.sql.v1.IPscConfig|null} [pscConfig] IpConfiguration pscConfig
                          */
     
@@ -9250,6 +9251,14 @@
                         IpConfiguration.prototype.enablePrivatePathForGoogleCloudServices = null;
     
                         /**
+                         * IpConfiguration sslMode.
+                         * @member {google.cloud.sql.v1.IpConfiguration.SslMode} sslMode
+                         * @memberof google.cloud.sql.v1.IpConfiguration
+                         * @instance
+                         */
+                        IpConfiguration.prototype.sslMode = 0;
+    
+                        /**
                          * IpConfiguration pscConfig.
                          * @member {google.cloud.sql.v1.IPscConfig|null|undefined} pscConfig
                          * @memberof google.cloud.sql.v1.IpConfiguration
@@ -9308,6 +9317,8 @@
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.allocatedIpRange);
                             if (message.enablePrivatePathForGoogleCloudServices != null && Object.hasOwnProperty.call(message, "enablePrivatePathForGoogleCloudServices"))
                                 $root.google.protobuf.BoolValue.encode(message.enablePrivatePathForGoogleCloudServices, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.sslMode != null && Object.hasOwnProperty.call(message, "sslMode"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.sslMode);
                             if (message.pscConfig != null && Object.hasOwnProperty.call(message, "pscConfig"))
                                 $root.google.cloud.sql.v1.PscConfig.encode(message.pscConfig, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             return writer;
@@ -9368,6 +9379,10 @@
                                     }
                                 case 7: {
                                         message.enablePrivatePathForGoogleCloudServices = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.sslMode = reader.int32();
                                         break;
                                     }
                                 case 9: {
@@ -9440,6 +9455,16 @@
                                 if (error)
                                     return "enablePrivatePathForGoogleCloudServices." + error;
                             }
+                            if (message.sslMode != null && message.hasOwnProperty("sslMode"))
+                                switch (message.sslMode) {
+                                default:
+                                    return "sslMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             if (message.pscConfig != null && message.hasOwnProperty("pscConfig")) {
                                 properties._pscConfig = 1;
                                 {
@@ -9492,6 +9517,30 @@
                                     throw TypeError(".google.cloud.sql.v1.IpConfiguration.enablePrivatePathForGoogleCloudServices: object expected");
                                 message.enablePrivatePathForGoogleCloudServices = $root.google.protobuf.BoolValue.fromObject(object.enablePrivatePathForGoogleCloudServices);
                             }
+                            switch (object.sslMode) {
+                            default:
+                                if (typeof object.sslMode === "number") {
+                                    message.sslMode = object.sslMode;
+                                    break;
+                                }
+                                break;
+                            case "SSL_MODE_UNSPECIFIED":
+                            case 0:
+                                message.sslMode = 0;
+                                break;
+                            case "ALLOW_UNENCRYPTED_AND_ENCRYPTED":
+                            case 1:
+                                message.sslMode = 1;
+                                break;
+                            case "ENCRYPTED_ONLY":
+                            case 2:
+                                message.sslMode = 2;
+                                break;
+                            case "TRUSTED_CLIENT_CERTIFICATE_REQUIRED":
+                            case 3:
+                                message.sslMode = 3;
+                                break;
+                            }
                             if (object.pscConfig != null) {
                                 if (typeof object.pscConfig !== "object")
                                     throw TypeError(".google.cloud.sql.v1.IpConfiguration.pscConfig: object expected");
@@ -9521,6 +9570,7 @@
                                 object.requireSsl = null;
                                 object.allocatedIpRange = "";
                                 object.enablePrivatePathForGoogleCloudServices = null;
+                                object.sslMode = options.enums === String ? "SSL_MODE_UNSPECIFIED" : 0;
                             }
                             if (message.ipv4Enabled != null && message.hasOwnProperty("ipv4Enabled"))
                                 object.ipv4Enabled = $root.google.protobuf.BoolValue.toObject(message.ipv4Enabled, options);
@@ -9537,6 +9587,8 @@
                                 object.allocatedIpRange = message.allocatedIpRange;
                             if (message.enablePrivatePathForGoogleCloudServices != null && message.hasOwnProperty("enablePrivatePathForGoogleCloudServices"))
                                 object.enablePrivatePathForGoogleCloudServices = $root.google.protobuf.BoolValue.toObject(message.enablePrivatePathForGoogleCloudServices, options);
+                            if (message.sslMode != null && message.hasOwnProperty("sslMode"))
+                                object.sslMode = options.enums === String ? $root.google.cloud.sql.v1.IpConfiguration.SslMode[message.sslMode] === undefined ? message.sslMode : $root.google.cloud.sql.v1.IpConfiguration.SslMode[message.sslMode] : message.sslMode;
                             if (message.pscConfig != null && message.hasOwnProperty("pscConfig")) {
                                 object.pscConfig = $root.google.cloud.sql.v1.PscConfig.toObject(message.pscConfig, options);
                                 if (options.oneofs)
@@ -9570,6 +9622,24 @@
                             }
                             return typeUrlPrefix + "/google.cloud.sql.v1.IpConfiguration";
                         };
+    
+                        /**
+                         * SslMode enum.
+                         * @name google.cloud.sql.v1.IpConfiguration.SslMode
+                         * @enum {number}
+                         * @property {number} SSL_MODE_UNSPECIFIED=0 SSL_MODE_UNSPECIFIED value
+                         * @property {number} ALLOW_UNENCRYPTED_AND_ENCRYPTED=1 ALLOW_UNENCRYPTED_AND_ENCRYPTED value
+                         * @property {number} ENCRYPTED_ONLY=2 ENCRYPTED_ONLY value
+                         * @property {number} TRUSTED_CLIENT_CERTIFICATE_REQUIRED=3 TRUSTED_CLIENT_CERTIFICATE_REQUIRED value
+                         */
+                        IpConfiguration.SslMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SSL_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ALLOW_UNENCRYPTED_AND_ENCRYPTED"] = 1;
+                            values[valuesById[2] = "ENCRYPTED_ONLY"] = 2;
+                            values[valuesById[3] = "TRUSTED_CLIENT_CERTIFICATE_REQUIRED"] = 3;
+                            return values;
+                        })();
     
                         return IpConfiguration;
                     })();
@@ -22181,6 +22251,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.sql.v1.SqlInstancesService|switchover}.
+                         * @memberof google.cloud.sql.v1.SqlInstancesService
+                         * @typedef SwitchoverCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.sql.v1.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls Switchover.
+                         * @function switchover
+                         * @memberof google.cloud.sql.v1.SqlInstancesService
+                         * @instance
+                         * @param {google.cloud.sql.v1.ISqlInstancesSwitchoverRequest} request SqlInstancesSwitchoverRequest message or plain object
+                         * @param {google.cloud.sql.v1.SqlInstancesService.SwitchoverCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SqlInstancesService.prototype.switchover = function switchover(request, callback) {
+                            return this.rpcCall(switchover, $root.google.cloud.sql.v1.SqlInstancesSwitchoverRequest, $root.google.cloud.sql.v1.Operation, request, callback);
+                        }, "name", { value: "Switchover" });
+    
+                        /**
+                         * Calls Switchover.
+                         * @function switchover
+                         * @memberof google.cloud.sql.v1.SqlInstancesService
+                         * @instance
+                         * @param {google.cloud.sql.v1.ISqlInstancesSwitchoverRequest} request SqlInstancesSwitchoverRequest message or plain object
+                         * @returns {Promise<google.cloud.sql.v1.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.sql.v1.SqlInstancesService|resetSslConfig}.
                          * @memberof google.cloud.sql.v1.SqlInstancesService
                          * @typedef ResetSslConfigCallback
@@ -25662,6 +25765,7 @@
                          * @interface ISqlInstancesPromoteReplicaRequest
                          * @property {string|null} [instance] SqlInstancesPromoteReplicaRequest instance
                          * @property {string|null} [project] SqlInstancesPromoteReplicaRequest project
+                         * @property {boolean|null} [failover] SqlInstancesPromoteReplicaRequest failover
                          */
     
                         /**
@@ -25696,6 +25800,14 @@
                         SqlInstancesPromoteReplicaRequest.prototype.project = "";
     
                         /**
+                         * SqlInstancesPromoteReplicaRequest failover.
+                         * @member {boolean} failover
+                         * @memberof google.cloud.sql.v1.SqlInstancesPromoteReplicaRequest
+                         * @instance
+                         */
+                        SqlInstancesPromoteReplicaRequest.prototype.failover = false;
+    
+                        /**
                          * Creates a new SqlInstancesPromoteReplicaRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.sql.v1.SqlInstancesPromoteReplicaRequest
@@ -25723,6 +25835,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.instance);
                             if (message.project != null && Object.hasOwnProperty.call(message, "project"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.project);
+                            if (message.failover != null && Object.hasOwnProperty.call(message, "failover"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.failover);
                             return writer;
                         };
     
@@ -25763,6 +25877,10 @@
                                     }
                                 case 2: {
                                         message.project = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.failover = reader.bool();
                                         break;
                                     }
                                 default:
@@ -25806,6 +25924,9 @@
                             if (message.project != null && message.hasOwnProperty("project"))
                                 if (!$util.isString(message.project))
                                     return "project: string expected";
+                            if (message.failover != null && message.hasOwnProperty("failover"))
+                                if (typeof message.failover !== "boolean")
+                                    return "failover: boolean expected";
                             return null;
                         };
     
@@ -25825,6 +25946,8 @@
                                 message.instance = String(object.instance);
                             if (object.project != null)
                                 message.project = String(object.project);
+                            if (object.failover != null)
+                                message.failover = Boolean(object.failover);
                             return message;
                         };
     
@@ -25844,11 +25967,14 @@
                             if (options.defaults) {
                                 object.instance = "";
                                 object.project = "";
+                                object.failover = false;
                             }
                             if (message.instance != null && message.hasOwnProperty("instance"))
                                 object.instance = message.instance;
                             if (message.project != null && message.hasOwnProperty("project"))
                                 object.project = message.project;
+                            if (message.failover != null && message.hasOwnProperty("failover"))
+                                object.failover = message.failover;
                             return object;
                         };
     
@@ -25879,6 +26005,261 @@
                         };
     
                         return SqlInstancesPromoteReplicaRequest;
+                    })();
+    
+                    v1.SqlInstancesSwitchoverRequest = (function() {
+    
+                        /**
+                         * Properties of a SqlInstancesSwitchoverRequest.
+                         * @memberof google.cloud.sql.v1
+                         * @interface ISqlInstancesSwitchoverRequest
+                         * @property {string|null} [instance] SqlInstancesSwitchoverRequest instance
+                         * @property {string|null} [project] SqlInstancesSwitchoverRequest project
+                         * @property {google.protobuf.IDuration|null} [dbTimeout] SqlInstancesSwitchoverRequest dbTimeout
+                         */
+    
+                        /**
+                         * Constructs a new SqlInstancesSwitchoverRequest.
+                         * @memberof google.cloud.sql.v1
+                         * @classdesc Represents a SqlInstancesSwitchoverRequest.
+                         * @implements ISqlInstancesSwitchoverRequest
+                         * @constructor
+                         * @param {google.cloud.sql.v1.ISqlInstancesSwitchoverRequest=} [properties] Properties to set
+                         */
+                        function SqlInstancesSwitchoverRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SqlInstancesSwitchoverRequest instance.
+                         * @member {string} instance
+                         * @memberof google.cloud.sql.v1.SqlInstancesSwitchoverRequest
+                         * @instance
+                         */
+                        SqlInstancesSwitchoverRequest.prototype.instance = "";
+    
+                        /**
+                         * SqlInstancesSwitchoverRequest project.
+                         * @member {string} project
+                         * @memberof google.cloud.sql.v1.SqlInstancesSwitchoverRequest
+                         * @instance
+                         */
+                        SqlInstancesSwitchoverRequest.prototype.project = "";
+    
+                        /**
+                         * SqlInstancesSwitchoverRequest dbTimeout.
+                         * @member {google.protobuf.IDuration|null|undefined} dbTimeout
+                         * @memberof google.cloud.sql.v1.SqlInstancesSwitchoverRequest
+                         * @instance
+                         */
+                        SqlInstancesSwitchoverRequest.prototype.dbTimeout = null;
+    
+                        /**
+                         * Creates a new SqlInstancesSwitchoverRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.sql.v1.SqlInstancesSwitchoverRequest
+                         * @static
+                         * @param {google.cloud.sql.v1.ISqlInstancesSwitchoverRequest=} [properties] Properties to set
+                         * @returns {google.cloud.sql.v1.SqlInstancesSwitchoverRequest} SqlInstancesSwitchoverRequest instance
+                         */
+                        SqlInstancesSwitchoverRequest.create = function create(properties) {
+                            return new SqlInstancesSwitchoverRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SqlInstancesSwitchoverRequest message. Does not implicitly {@link google.cloud.sql.v1.SqlInstancesSwitchoverRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.sql.v1.SqlInstancesSwitchoverRequest
+                         * @static
+                         * @param {google.cloud.sql.v1.ISqlInstancesSwitchoverRequest} message SqlInstancesSwitchoverRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SqlInstancesSwitchoverRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.instance != null && Object.hasOwnProperty.call(message, "instance"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.instance);
+                            if (message.project != null && Object.hasOwnProperty.call(message, "project"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.project);
+                            if (message.dbTimeout != null && Object.hasOwnProperty.call(message, "dbTimeout"))
+                                $root.google.protobuf.Duration.encode(message.dbTimeout, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SqlInstancesSwitchoverRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1.SqlInstancesSwitchoverRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.sql.v1.SqlInstancesSwitchoverRequest
+                         * @static
+                         * @param {google.cloud.sql.v1.ISqlInstancesSwitchoverRequest} message SqlInstancesSwitchoverRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SqlInstancesSwitchoverRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SqlInstancesSwitchoverRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.sql.v1.SqlInstancesSwitchoverRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.sql.v1.SqlInstancesSwitchoverRequest} SqlInstancesSwitchoverRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SqlInstancesSwitchoverRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.sql.v1.SqlInstancesSwitchoverRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.instance = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.project = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.dbTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SqlInstancesSwitchoverRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.sql.v1.SqlInstancesSwitchoverRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.sql.v1.SqlInstancesSwitchoverRequest} SqlInstancesSwitchoverRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SqlInstancesSwitchoverRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SqlInstancesSwitchoverRequest message.
+                         * @function verify
+                         * @memberof google.cloud.sql.v1.SqlInstancesSwitchoverRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SqlInstancesSwitchoverRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                if (!$util.isString(message.instance))
+                                    return "instance: string expected";
+                            if (message.project != null && message.hasOwnProperty("project"))
+                                if (!$util.isString(message.project))
+                                    return "project: string expected";
+                            if (message.dbTimeout != null && message.hasOwnProperty("dbTimeout")) {
+                                var error = $root.google.protobuf.Duration.verify(message.dbTimeout);
+                                if (error)
+                                    return "dbTimeout." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SqlInstancesSwitchoverRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.sql.v1.SqlInstancesSwitchoverRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.sql.v1.SqlInstancesSwitchoverRequest} SqlInstancesSwitchoverRequest
+                         */
+                        SqlInstancesSwitchoverRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.sql.v1.SqlInstancesSwitchoverRequest)
+                                return object;
+                            var message = new $root.google.cloud.sql.v1.SqlInstancesSwitchoverRequest();
+                            if (object.instance != null)
+                                message.instance = String(object.instance);
+                            if (object.project != null)
+                                message.project = String(object.project);
+                            if (object.dbTimeout != null) {
+                                if (typeof object.dbTimeout !== "object")
+                                    throw TypeError(".google.cloud.sql.v1.SqlInstancesSwitchoverRequest.dbTimeout: object expected");
+                                message.dbTimeout = $root.google.protobuf.Duration.fromObject(object.dbTimeout);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SqlInstancesSwitchoverRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.sql.v1.SqlInstancesSwitchoverRequest
+                         * @static
+                         * @param {google.cloud.sql.v1.SqlInstancesSwitchoverRequest} message SqlInstancesSwitchoverRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SqlInstancesSwitchoverRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.instance = "";
+                                object.project = "";
+                                object.dbTimeout = null;
+                            }
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                object.instance = message.instance;
+                            if (message.project != null && message.hasOwnProperty("project"))
+                                object.project = message.project;
+                            if (message.dbTimeout != null && message.hasOwnProperty("dbTimeout"))
+                                object.dbTimeout = $root.google.protobuf.Duration.toObject(message.dbTimeout, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SqlInstancesSwitchoverRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.sql.v1.SqlInstancesSwitchoverRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SqlInstancesSwitchoverRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SqlInstancesSwitchoverRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.sql.v1.SqlInstancesSwitchoverRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SqlInstancesSwitchoverRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.sql.v1.SqlInstancesSwitchoverRequest";
+                        };
+    
+                        return SqlInstancesSwitchoverRequest;
                     })();
     
                     v1.SqlInstancesResetSslConfigRequest = (function() {
@@ -34838,6 +35219,7 @@
                          * @property {string|null} [pscServiceAttachmentLink] DatabaseInstance pscServiceAttachmentLink
                          * @property {string|null} [dnsName] DatabaseInstance dnsName
                          * @property {string|null} [primaryDnsName] DatabaseInstance primaryDnsName
+                         * @property {string|null} [writeEndpoint] DatabaseInstance writeEndpoint
                          */
     
                         /**
@@ -35171,6 +35553,14 @@
                          */
                         DatabaseInstance.prototype.primaryDnsName = null;
     
+                        /**
+                         * DatabaseInstance writeEndpoint.
+                         * @member {string|null|undefined} writeEndpoint
+                         * @memberof google.cloud.sql.v1.DatabaseInstance
+                         * @instance
+                         */
+                        DatabaseInstance.prototype.writeEndpoint = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -35215,6 +35605,17 @@
                          */
                         Object.defineProperty(DatabaseInstance.prototype, "_primaryDnsName", {
                             get: $util.oneOfGetter($oneOfFields = ["primaryDnsName"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * DatabaseInstance _writeEndpoint.
+                         * @member {"writeEndpoint"|undefined} _writeEndpoint
+                         * @memberof google.cloud.sql.v1.DatabaseInstance
+                         * @instance
+                         */
+                        Object.defineProperty(DatabaseInstance.prototype, "_writeEndpoint", {
+                            get: $util.oneOfGetter($oneOfFields = ["writeEndpoint"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -35327,6 +35728,8 @@
                                 writer.uint32(/* id 49, wireType 2 =*/394).string(message.dnsName);
                             if (message.primaryDnsName != null && Object.hasOwnProperty.call(message, "primaryDnsName"))
                                 writer.uint32(/* id 51, wireType 2 =*/410).string(message.primaryDnsName);
+                            if (message.writeEndpoint != null && Object.hasOwnProperty.call(message, "writeEndpoint"))
+                                writer.uint32(/* id 52, wireType 2 =*/418).string(message.writeEndpoint);
                             return writer;
                         };
     
@@ -35528,6 +35931,10 @@
                                     }
                                 case 51: {
                                         message.primaryDnsName = reader.string();
+                                        break;
+                                    }
+                                case 52: {
+                                        message.writeEndpoint = reader.string();
                                         break;
                                     }
                                 default:
@@ -35808,6 +36215,11 @@
                                 properties._primaryDnsName = 1;
                                 if (!$util.isString(message.primaryDnsName))
                                     return "primaryDnsName: string expected";
+                            }
+                            if (message.writeEndpoint != null && message.hasOwnProperty("writeEndpoint")) {
+                                properties._writeEndpoint = 1;
+                                if (!$util.isString(message.writeEndpoint))
+                                    return "writeEndpoint: string expected";
                             }
                             return null;
                         };
@@ -36226,6 +36638,8 @@
                                 message.dnsName = String(object.dnsName);
                             if (object.primaryDnsName != null)
                                 message.primaryDnsName = String(object.primaryDnsName);
+                            if (object.writeEndpoint != null)
+                                message.writeEndpoint = String(object.writeEndpoint);
                             return message;
                         };
     
@@ -36382,6 +36796,11 @@
                                 object.primaryDnsName = message.primaryDnsName;
                                 if (options.oneofs)
                                     object._primaryDnsName = "primaryDnsName";
+                            }
+                            if (message.writeEndpoint != null && message.hasOwnProperty("writeEndpoint")) {
+                                object.writeEndpoint = message.writeEndpoint;
+                                if (options.oneofs)
+                                    object._writeEndpoint = "writeEndpoint";
                             }
                             return object;
                         };
@@ -39254,6 +39673,7 @@
                                 case 33:
                                 case 34:
                                 case 35:
+                                case 36:
                                     break;
                                 }
                             if (message.detail != null && message.hasOwnProperty("detail"))
@@ -39427,6 +39847,10 @@
                             case 35:
                                 message.type = 35;
                                 break;
+                            case "TURN_ON_PITR_AFTER_PROMOTE":
+                            case 36:
+                                message.type = 36;
+                                break;
                             }
                             if (object.detail != null)
                                 message.detail = String(object.detail);
@@ -39526,6 +39950,7 @@
                          * @property {number} UNSUPPORTED_DATABASE_SETTINGS=33 UNSUPPORTED_DATABASE_SETTINGS value
                          * @property {number} MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE=34 MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE value
                          * @property {number} LOCAL_INFILE_OFF=35 LOCAL_INFILE_OFF value
+                         * @property {number} TURN_ON_PITR_AFTER_PROMOTE=36 TURN_ON_PITR_AFTER_PROMOTE value
                          */
                         SqlExternalSyncSettingError.SqlExternalSyncSettingErrorType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -39565,6 +39990,7 @@
                             values[valuesById[33] = "UNSUPPORTED_DATABASE_SETTINGS"] = 33;
                             values[valuesById[34] = "MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE"] = 34;
                             values[valuesById[35] = "LOCAL_INFILE_OFF"] = 35;
+                            values[valuesById[36] = "TURN_ON_PITR_AFTER_PROMOTE"] = 36;
                             return values;
                         })();
     
@@ -39973,6 +40399,7 @@
                          * @property {string|null} [kind] ReplicaConfiguration kind
                          * @property {google.cloud.sql.v1.IMySqlReplicaConfiguration|null} [mysqlReplicaConfiguration] ReplicaConfiguration mysqlReplicaConfiguration
                          * @property {google.protobuf.IBoolValue|null} [failoverTarget] ReplicaConfiguration failoverTarget
+                         * @property {google.protobuf.IBoolValue|null} [cascadableReplica] ReplicaConfiguration cascadableReplica
                          */
     
                         /**
@@ -40015,6 +40442,14 @@
                         ReplicaConfiguration.prototype.failoverTarget = null;
     
                         /**
+                         * ReplicaConfiguration cascadableReplica.
+                         * @member {google.protobuf.IBoolValue|null|undefined} cascadableReplica
+                         * @memberof google.cloud.sql.v1.ReplicaConfiguration
+                         * @instance
+                         */
+                        ReplicaConfiguration.prototype.cascadableReplica = null;
+    
+                        /**
                          * Creates a new ReplicaConfiguration instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.sql.v1.ReplicaConfiguration
@@ -40044,6 +40479,8 @@
                                 $root.google.cloud.sql.v1.MySqlReplicaConfiguration.encode(message.mysqlReplicaConfiguration, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.failoverTarget != null && Object.hasOwnProperty.call(message, "failoverTarget"))
                                 $root.google.protobuf.BoolValue.encode(message.failoverTarget, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.cascadableReplica != null && Object.hasOwnProperty.call(message, "cascadableReplica"))
+                                $root.google.protobuf.BoolValue.encode(message.cascadableReplica, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             return writer;
                         };
     
@@ -40088,6 +40525,10 @@
                                     }
                                 case 3: {
                                         message.failoverTarget = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.cascadableReplica = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -40138,6 +40579,11 @@
                                 if (error)
                                     return "failoverTarget." + error;
                             }
+                            if (message.cascadableReplica != null && message.hasOwnProperty("cascadableReplica")) {
+                                var error = $root.google.protobuf.BoolValue.verify(message.cascadableReplica);
+                                if (error)
+                                    return "cascadableReplica." + error;
+                            }
                             return null;
                         };
     
@@ -40165,6 +40611,11 @@
                                     throw TypeError(".google.cloud.sql.v1.ReplicaConfiguration.failoverTarget: object expected");
                                 message.failoverTarget = $root.google.protobuf.BoolValue.fromObject(object.failoverTarget);
                             }
+                            if (object.cascadableReplica != null) {
+                                if (typeof object.cascadableReplica !== "object")
+                                    throw TypeError(".google.cloud.sql.v1.ReplicaConfiguration.cascadableReplica: object expected");
+                                message.cascadableReplica = $root.google.protobuf.BoolValue.fromObject(object.cascadableReplica);
+                            }
                             return message;
                         };
     
@@ -40185,6 +40636,7 @@
                                 object.kind = "";
                                 object.mysqlReplicaConfiguration = null;
                                 object.failoverTarget = null;
+                                object.cascadableReplica = null;
                             }
                             if (message.kind != null && message.hasOwnProperty("kind"))
                                 object.kind = message.kind;
@@ -40192,6 +40644,8 @@
                                 object.mysqlReplicaConfiguration = $root.google.cloud.sql.v1.MySqlReplicaConfiguration.toObject(message.mysqlReplicaConfiguration, options);
                             if (message.failoverTarget != null && message.hasOwnProperty("failoverTarget"))
                                 object.failoverTarget = $root.google.protobuf.BoolValue.toObject(message.failoverTarget, options);
+                            if (message.cascadableReplica != null && message.hasOwnProperty("cascadableReplica"))
+                                object.cascadableReplica = $root.google.protobuf.BoolValue.toObject(message.cascadableReplica, options);
                             return object;
                         };
     
@@ -46580,6 +47034,9 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
+                                case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.sqlserverUserDetails != null && message.hasOwnProperty("sqlserverUserDetails")) {
@@ -46654,6 +47111,18 @@
                             case "CLOUD_IAM_SERVICE_ACCOUNT":
                             case 2:
                                 message.type = 2;
+                                break;
+                            case "CLOUD_IAM_GROUP":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            case "CLOUD_IAM_GROUP_USER":
+                            case 4:
+                                message.type = 4;
+                                break;
+                            case "CLOUD_IAM_GROUP_SERVICE_ACCOUNT":
+                            case 5:
+                                message.type = 5;
                                 break;
                             }
                             if (object.sqlserverUserDetails != null) {
@@ -46781,12 +47250,18 @@
                          * @property {number} BUILT_IN=0 BUILT_IN value
                          * @property {number} CLOUD_IAM_USER=1 CLOUD_IAM_USER value
                          * @property {number} CLOUD_IAM_SERVICE_ACCOUNT=2 CLOUD_IAM_SERVICE_ACCOUNT value
+                         * @property {number} CLOUD_IAM_GROUP=3 CLOUD_IAM_GROUP value
+                         * @property {number} CLOUD_IAM_GROUP_USER=4 CLOUD_IAM_GROUP_USER value
+                         * @property {number} CLOUD_IAM_GROUP_SERVICE_ACCOUNT=5 CLOUD_IAM_GROUP_SERVICE_ACCOUNT value
                          */
                         User.SqlUserType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "BUILT_IN"] = 0;
                             values[valuesById[1] = "CLOUD_IAM_USER"] = 1;
                             values[valuesById[2] = "CLOUD_IAM_SERVICE_ACCOUNT"] = 2;
+                            values[valuesById[3] = "CLOUD_IAM_GROUP"] = 3;
+                            values[valuesById[4] = "CLOUD_IAM_GROUP_USER"] = 4;
+                            values[valuesById[5] = "CLOUD_IAM_GROUP_SERVICE_ACCOUNT"] = 5;
                             return values;
                         })();
     

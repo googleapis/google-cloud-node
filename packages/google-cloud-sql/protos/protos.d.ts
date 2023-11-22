@@ -3649,6 +3649,9 @@ export namespace google {
                     /** IpConfiguration enablePrivatePathForGoogleCloudServices */
                     enablePrivatePathForGoogleCloudServices?: (google.protobuf.IBoolValue|null);
 
+                    /** IpConfiguration sslMode */
+                    sslMode?: (google.cloud.sql.v1.IpConfiguration.SslMode|keyof typeof google.cloud.sql.v1.IpConfiguration.SslMode|null);
+
                     /** IpConfiguration pscConfig */
                     pscConfig?: (google.cloud.sql.v1.IPscConfig|null);
                 }
@@ -3679,6 +3682,9 @@ export namespace google {
 
                     /** IpConfiguration enablePrivatePathForGoogleCloudServices. */
                     public enablePrivatePathForGoogleCloudServices?: (google.protobuf.IBoolValue|null);
+
+                    /** IpConfiguration sslMode. */
+                    public sslMode: (google.cloud.sql.v1.IpConfiguration.SslMode|keyof typeof google.cloud.sql.v1.IpConfiguration.SslMode);
 
                     /** IpConfiguration pscConfig. */
                     public pscConfig?: (google.cloud.sql.v1.IPscConfig|null);
@@ -3762,6 +3768,17 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace IpConfiguration {
+
+                    /** SslMode enum. */
+                    enum SslMode {
+                        SSL_MODE_UNSPECIFIED = 0,
+                        ALLOW_UNENCRYPTED_AND_ENCRYPTED = 1,
+                        ENCRYPTED_ONLY = 2,
+                        TRUSTED_CLIENT_CERTIFICATE_REQUIRED = 3
+                    }
                 }
 
                 /** Properties of a PscConfig. */
@@ -8477,6 +8494,20 @@ export namespace google {
                     public promoteReplica(request: google.cloud.sql.v1.ISqlInstancesPromoteReplicaRequest): Promise<google.cloud.sql.v1.Operation>;
 
                     /**
+                     * Calls Switchover.
+                     * @param request SqlInstancesSwitchoverRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public switchover(request: google.cloud.sql.v1.ISqlInstancesSwitchoverRequest, callback: google.cloud.sql.v1.SqlInstancesService.SwitchoverCallback): void;
+
+                    /**
+                     * Calls Switchover.
+                     * @param request SqlInstancesSwitchoverRequest message or plain object
+                     * @returns Promise
+                     */
+                    public switchover(request: google.cloud.sql.v1.ISqlInstancesSwitchoverRequest): Promise<google.cloud.sql.v1.Operation>;
+
+                    /**
                      * Calls ResetSslConfig.
                      * @param request SqlInstancesResetSslConfigRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -8800,6 +8831,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type PromoteReplicaCallback = (error: (Error|null), response?: google.cloud.sql.v1.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.sql.v1.SqlInstancesService|switchover}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type SwitchoverCallback = (error: (Error|null), response?: google.cloud.sql.v1.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.sql.v1.SqlInstancesService|resetSslConfig}.
@@ -10206,6 +10244,9 @@ export namespace google {
 
                     /** SqlInstancesPromoteReplicaRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesPromoteReplicaRequest failover */
+                    failover?: (boolean|null);
                 }
 
                 /** Represents a SqlInstancesPromoteReplicaRequest. */
@@ -10222,6 +10263,9 @@ export namespace google {
 
                     /** SqlInstancesPromoteReplicaRequest project. */
                     public project: string;
+
+                    /** SqlInstancesPromoteReplicaRequest failover. */
+                    public failover: boolean;
 
                     /**
                      * Creates a new SqlInstancesPromoteReplicaRequest instance using the specified properties.
@@ -10295,6 +10339,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for SqlInstancesPromoteReplicaRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SqlInstancesSwitchoverRequest. */
+                interface ISqlInstancesSwitchoverRequest {
+
+                    /** SqlInstancesSwitchoverRequest instance */
+                    instance?: (string|null);
+
+                    /** SqlInstancesSwitchoverRequest project */
+                    project?: (string|null);
+
+                    /** SqlInstancesSwitchoverRequest dbTimeout */
+                    dbTimeout?: (google.protobuf.IDuration|null);
+                }
+
+                /** Represents a SqlInstancesSwitchoverRequest. */
+                class SqlInstancesSwitchoverRequest implements ISqlInstancesSwitchoverRequest {
+
+                    /**
+                     * Constructs a new SqlInstancesSwitchoverRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1.ISqlInstancesSwitchoverRequest);
+
+                    /** SqlInstancesSwitchoverRequest instance. */
+                    public instance: string;
+
+                    /** SqlInstancesSwitchoverRequest project. */
+                    public project: string;
+
+                    /** SqlInstancesSwitchoverRequest dbTimeout. */
+                    public dbTimeout?: (google.protobuf.IDuration|null);
+
+                    /**
+                     * Creates a new SqlInstancesSwitchoverRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SqlInstancesSwitchoverRequest instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1.ISqlInstancesSwitchoverRequest): google.cloud.sql.v1.SqlInstancesSwitchoverRequest;
+
+                    /**
+                     * Encodes the specified SqlInstancesSwitchoverRequest message. Does not implicitly {@link google.cloud.sql.v1.SqlInstancesSwitchoverRequest.verify|verify} messages.
+                     * @param message SqlInstancesSwitchoverRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1.ISqlInstancesSwitchoverRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SqlInstancesSwitchoverRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1.SqlInstancesSwitchoverRequest.verify|verify} messages.
+                     * @param message SqlInstancesSwitchoverRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1.ISqlInstancesSwitchoverRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SqlInstancesSwitchoverRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SqlInstancesSwitchoverRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1.SqlInstancesSwitchoverRequest;
+
+                    /**
+                     * Decodes a SqlInstancesSwitchoverRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SqlInstancesSwitchoverRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1.SqlInstancesSwitchoverRequest;
+
+                    /**
+                     * Verifies a SqlInstancesSwitchoverRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SqlInstancesSwitchoverRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SqlInstancesSwitchoverRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1.SqlInstancesSwitchoverRequest;
+
+                    /**
+                     * Creates a plain object from a SqlInstancesSwitchoverRequest message. Also converts values to other types if specified.
+                     * @param message SqlInstancesSwitchoverRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1.SqlInstancesSwitchoverRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SqlInstancesSwitchoverRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SqlInstancesSwitchoverRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -14185,6 +14338,9 @@ export namespace google {
 
                     /** DatabaseInstance primaryDnsName */
                     primaryDnsName?: (string|null);
+
+                    /** DatabaseInstance writeEndpoint */
+                    writeEndpoint?: (string|null);
                 }
 
                 /** Represents a DatabaseInstance. */
@@ -14313,6 +14469,9 @@ export namespace google {
                     /** DatabaseInstance primaryDnsName. */
                     public primaryDnsName?: (string|null);
 
+                    /** DatabaseInstance writeEndpoint. */
+                    public writeEndpoint?: (string|null);
+
                     /** DatabaseInstance _outOfDiskReport. */
                     public _outOfDiskReport?: "outOfDiskReport";
 
@@ -14324,6 +14483,9 @@ export namespace google {
 
                     /** DatabaseInstance _primaryDnsName. */
                     public _primaryDnsName?: "primaryDnsName";
+
+                    /** DatabaseInstance _writeEndpoint. */
+                    public _writeEndpoint?: "writeEndpoint";
 
                     /**
                      * Creates a new DatabaseInstance instance using the specified properties.
@@ -15662,7 +15824,8 @@ export namespace google {
                         INVALID_FILE_INFO = 32,
                         UNSUPPORTED_DATABASE_SETTINGS = 33,
                         MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE = 34,
-                        LOCAL_INFILE_OFF = 35
+                        LOCAL_INFILE_OFF = 35,
+                        TURN_ON_PITR_AFTER_PROMOTE = 36
                     }
                 }
 
@@ -15822,6 +15985,9 @@ export namespace google {
 
                     /** ReplicaConfiguration failoverTarget */
                     failoverTarget?: (google.protobuf.IBoolValue|null);
+
+                    /** ReplicaConfiguration cascadableReplica */
+                    cascadableReplica?: (google.protobuf.IBoolValue|null);
                 }
 
                 /** Represents a ReplicaConfiguration. */
@@ -15841,6 +16007,9 @@ export namespace google {
 
                     /** ReplicaConfiguration failoverTarget. */
                     public failoverTarget?: (google.protobuf.IBoolValue|null);
+
+                    /** ReplicaConfiguration cascadableReplica. */
+                    public cascadableReplica?: (google.protobuf.IBoolValue|null);
 
                     /**
                      * Creates a new ReplicaConfiguration instance using the specified properties.
@@ -18779,7 +18948,10 @@ export namespace google {
                     enum SqlUserType {
                         BUILT_IN = 0,
                         CLOUD_IAM_USER = 1,
-                        CLOUD_IAM_SERVICE_ACCOUNT = 2
+                        CLOUD_IAM_SERVICE_ACCOUNT = 2,
+                        CLOUD_IAM_GROUP = 3,
+                        CLOUD_IAM_GROUP_USER = 4,
+                        CLOUD_IAM_GROUP_SERVICE_ACCOUNT = 5
                     }
 
                     /** DualPasswordType enum. */

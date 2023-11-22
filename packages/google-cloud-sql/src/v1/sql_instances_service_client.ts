@@ -241,6 +241,7 @@ export class SqlInstancesServiceClient {
       'listServerCas',
       'patch',
       'promoteReplica',
+      'switchover',
       'resetSslConfig',
       'restart',
       'restoreBackup',
@@ -1555,6 +1556,10 @@ export class SqlInstancesServiceClient {
    *   Cloud SQL read replica instance name.
    * @param {string} request.project
    *   ID of the project that contains the read replica.
+   * @param {boolean} request.failover
+   *   Set to true if the promote operation should attempt to re-add the original
+   *   primary as a replica when it comes back online. Otherwise, if this value is
+   *   false or not set, the original primary will be a standalone instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1638,6 +1643,103 @@ export class SqlInstancesServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.promoteReplica(request, options, callback);
+  }
+  /**
+   * Switches over from the primary instance to the replica instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.instance
+   *   Cloud SQL read replica instance name.
+   * @param {string} request.project
+   *   ID of the project that contains the replica.
+   * @param {google.protobuf.Duration} [request.dbTimeout]
+   *   Optional. (MySQL only) Cloud SQL instance operations timeout, which is a
+   *   sum of all database operations. Default value is 10 minutes and can be
+   *   modified to a maximum value of 24 hours.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/sql_instances_service.switchover.js</caption>
+   * region_tag:sqladmin_v1_generated_SqlInstancesService_Switchover_async
+   */
+  switchover(
+    request?: protos.google.cloud.sql.v1.ISqlInstancesSwitchoverRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.sql.v1.IOperation,
+      protos.google.cloud.sql.v1.ISqlInstancesSwitchoverRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  switchover(
+    request: protos.google.cloud.sql.v1.ISqlInstancesSwitchoverRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.sql.v1.IOperation,
+      | protos.google.cloud.sql.v1.ISqlInstancesSwitchoverRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  switchover(
+    request: protos.google.cloud.sql.v1.ISqlInstancesSwitchoverRequest,
+    callback: Callback<
+      protos.google.cloud.sql.v1.IOperation,
+      | protos.google.cloud.sql.v1.ISqlInstancesSwitchoverRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  switchover(
+    request?: protos.google.cloud.sql.v1.ISqlInstancesSwitchoverRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.ISqlInstancesSwitchoverRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.sql.v1.IOperation,
+      | protos.google.cloud.sql.v1.ISqlInstancesSwitchoverRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.sql.v1.IOperation,
+      protos.google.cloud.sql.v1.ISqlInstancesSwitchoverRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        instance: request.instance ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.switchover(request, options, callback);
   }
   /**
    * Deletes all client certificates and generates a new server SSL certificate

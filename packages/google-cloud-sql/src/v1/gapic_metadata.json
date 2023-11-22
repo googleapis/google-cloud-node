@@ -314,6 +314,11 @@
                 "promoteReplica"
               ]
             },
+            "Switchover": {
+              "methods": [
+                "switchover"
+              ]
+            },
             "ResetSslConfig": {
               "methods": [
                 "resetSslConfig"
@@ -467,6 +472,11 @@
             "PromoteReplica": {
               "methods": [
                 "promoteReplica"
+              ]
+            },
+            "Switchover": {
+              "methods": [
+                "switchover"
               ]
             },
             "ResetSslConfig": {
