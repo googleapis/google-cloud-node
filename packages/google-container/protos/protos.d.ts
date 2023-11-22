@@ -6520,7 +6520,8 @@ export namespace google {
                 enum VulnerabilityMode {
                     VULNERABILITY_MODE_UNSPECIFIED = 0,
                     VULNERABILITY_DISABLED = 1,
-                    VULNERABILITY_BASIC = 2
+                    VULNERABILITY_BASIC = 2,
+                    VULNERABILITY_ENTERPRISE = 3
                 }
             }
 
@@ -20389,6 +20390,9 @@ export namespace google {
 
                 /** AdvancedDatapathObservabilityConfig relayMode */
                 relayMode?: (google.container.v1.AdvancedDatapathObservabilityConfig.RelayMode|keyof typeof google.container.v1.AdvancedDatapathObservabilityConfig.RelayMode|null);
+
+                /** AdvancedDatapathObservabilityConfig enableRelay */
+                enableRelay?: (boolean|null);
             }
 
             /** Represents an AdvancedDatapathObservabilityConfig. */
@@ -20405,6 +20409,12 @@ export namespace google {
 
                 /** AdvancedDatapathObservabilityConfig relayMode. */
                 public relayMode: (google.container.v1.AdvancedDatapathObservabilityConfig.RelayMode|keyof typeof google.container.v1.AdvancedDatapathObservabilityConfig.RelayMode);
+
+                /** AdvancedDatapathObservabilityConfig enableRelay. */
+                public enableRelay?: (boolean|null);
+
+                /** AdvancedDatapathObservabilityConfig _enableRelay. */
+                public _enableRelay?: "enableRelay";
 
                 /**
                  * Creates a new AdvancedDatapathObservabilityConfig instance using the specified properties.

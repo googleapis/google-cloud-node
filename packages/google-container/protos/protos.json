@@ -2252,7 +2252,8 @@
                       "values": {
                         "VULNERABILITY_MODE_UNSPECIFIED": 0,
                         "VULNERABILITY_DISABLED": 1,
-                        "VULNERABILITY_BASIC": 2
+                        "VULNERABILITY_BASIC": 2,
+                        "VULNERABILITY_ENTERPRISE": 3
                       }
                     }
                   }
@@ -5524,6 +5525,13 @@
                   }
                 },
                 "AdvancedDatapathObservabilityConfig": {
+                  "oneofs": {
+                    "_enableRelay": {
+                      "oneof": [
+                        "enableRelay"
+                      ]
+                    }
+                  },
                   "fields": {
                     "enableMetrics": {
                       "type": "bool",
@@ -5532,6 +5540,13 @@
                     "relayMode": {
                       "type": "RelayMode",
                       "id": 2
+                    },
+                    "enableRelay": {
+                      "type": "bool",
+                      "id": 3,
+                      "options": {
+                        "proto3_optional": true
+                      }
                     }
                   },
                   "nested": {
