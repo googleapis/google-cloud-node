@@ -11959,6 +11959,13 @@
                   }
                 },
                 "AdvancedDatapathObservabilityConfig": {
+                  "oneofs": {
+                    "_enableRelay": {
+                      "oneof": [
+                        "enableRelay"
+                      ]
+                    }
+                  },
                   "fields": {
                     "enableMetrics": {
                       "type": "bool",
@@ -11967,6 +11974,13 @@
                     "relayMode": {
                       "type": "RelayMode",
                       "id": 2
+                    },
+                    "enableRelay": {
+                      "type": "bool",
+                      "id": 3,
+                      "options": {
+                        "proto3_optional": true
+                      }
                     }
                   },
                   "nested": {

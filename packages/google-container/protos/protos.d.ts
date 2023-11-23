@@ -44624,6 +44624,9 @@ export namespace google {
 
                 /** AdvancedDatapathObservabilityConfig relayMode */
                 relayMode?: (google.container.v1beta1.AdvancedDatapathObservabilityConfig.RelayMode|keyof typeof google.container.v1beta1.AdvancedDatapathObservabilityConfig.RelayMode|null);
+
+                /** AdvancedDatapathObservabilityConfig enableRelay */
+                enableRelay?: (boolean|null);
             }
 
             /** Represents an AdvancedDatapathObservabilityConfig. */
@@ -44640,6 +44643,12 @@ export namespace google {
 
                 /** AdvancedDatapathObservabilityConfig relayMode. */
                 public relayMode: (google.container.v1beta1.AdvancedDatapathObservabilityConfig.RelayMode|keyof typeof google.container.v1beta1.AdvancedDatapathObservabilityConfig.RelayMode);
+
+                /** AdvancedDatapathObservabilityConfig enableRelay. */
+                public enableRelay?: (boolean|null);
+
+                /** AdvancedDatapathObservabilityConfig _enableRelay. */
+                public _enableRelay?: "enableRelay";
 
                 /**
                  * Creates a new AdvancedDatapathObservabilityConfig instance using the specified properties.
