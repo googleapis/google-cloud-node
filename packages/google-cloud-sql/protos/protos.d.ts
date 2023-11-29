@@ -8354,6 +8354,20 @@ export namespace google {
                     public demoteMaster(request: google.cloud.sql.v1.ISqlInstancesDemoteMasterRequest): Promise<google.cloud.sql.v1.Operation>;
 
                     /**
+                     * Calls Demote.
+                     * @param request SqlInstancesDemoteRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public demote(request: google.cloud.sql.v1.ISqlInstancesDemoteRequest, callback: google.cloud.sql.v1.SqlInstancesService.DemoteCallback): void;
+
+                    /**
+                     * Calls Demote.
+                     * @param request SqlInstancesDemoteRequest message or plain object
+                     * @returns Promise
+                     */
+                    public demote(request: google.cloud.sql.v1.ISqlInstancesDemoteRequest): Promise<google.cloud.sql.v1.Operation>;
+
+                    /**
                      * Calls Export.
                      * @param request SqlInstancesExportRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -8761,6 +8775,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DemoteMasterCallback = (error: (Error|null), response?: google.cloud.sql.v1.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.sql.v1.SqlInstancesService|demote}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DemoteCallback = (error: (Error|null), response?: google.cloud.sql.v1.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.sql.v1.SqlInstancesService|export_}.
@@ -9370,6 +9391,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for SqlInstancesDemoteMasterRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SqlInstancesDemoteRequest. */
+                interface ISqlInstancesDemoteRequest {
+
+                    /** SqlInstancesDemoteRequest instance */
+                    instance?: (string|null);
+
+                    /** SqlInstancesDemoteRequest project */
+                    project?: (string|null);
+
+                    /** SqlInstancesDemoteRequest body */
+                    body?: (google.cloud.sql.v1.IInstancesDemoteRequest|null);
+                }
+
+                /** Represents a SqlInstancesDemoteRequest. */
+                class SqlInstancesDemoteRequest implements ISqlInstancesDemoteRequest {
+
+                    /**
+                     * Constructs a new SqlInstancesDemoteRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1.ISqlInstancesDemoteRequest);
+
+                    /** SqlInstancesDemoteRequest instance. */
+                    public instance: string;
+
+                    /** SqlInstancesDemoteRequest project. */
+                    public project: string;
+
+                    /** SqlInstancesDemoteRequest body. */
+                    public body?: (google.cloud.sql.v1.IInstancesDemoteRequest|null);
+
+                    /**
+                     * Creates a new SqlInstancesDemoteRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SqlInstancesDemoteRequest instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1.ISqlInstancesDemoteRequest): google.cloud.sql.v1.SqlInstancesDemoteRequest;
+
+                    /**
+                     * Encodes the specified SqlInstancesDemoteRequest message. Does not implicitly {@link google.cloud.sql.v1.SqlInstancesDemoteRequest.verify|verify} messages.
+                     * @param message SqlInstancesDemoteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1.ISqlInstancesDemoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SqlInstancesDemoteRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1.SqlInstancesDemoteRequest.verify|verify} messages.
+                     * @param message SqlInstancesDemoteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1.ISqlInstancesDemoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SqlInstancesDemoteRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SqlInstancesDemoteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1.SqlInstancesDemoteRequest;
+
+                    /**
+                     * Decodes a SqlInstancesDemoteRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SqlInstancesDemoteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1.SqlInstancesDemoteRequest;
+
+                    /**
+                     * Verifies a SqlInstancesDemoteRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SqlInstancesDemoteRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SqlInstancesDemoteRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1.SqlInstancesDemoteRequest;
+
+                    /**
+                     * Creates a plain object from a SqlInstancesDemoteRequest message. Also converts values to other types if specified.
+                     * @param message SqlInstancesDemoteRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1.SqlInstancesDemoteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SqlInstancesDemoteRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SqlInstancesDemoteRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -12635,6 +12765,103 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an InstancesDemoteRequest. */
+                interface IInstancesDemoteRequest {
+
+                    /** InstancesDemoteRequest demoteContext */
+                    demoteContext?: (google.cloud.sql.v1.IDemoteContext|null);
+                }
+
+                /** Represents an InstancesDemoteRequest. */
+                class InstancesDemoteRequest implements IInstancesDemoteRequest {
+
+                    /**
+                     * Constructs a new InstancesDemoteRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1.IInstancesDemoteRequest);
+
+                    /** InstancesDemoteRequest demoteContext. */
+                    public demoteContext?: (google.cloud.sql.v1.IDemoteContext|null);
+
+                    /**
+                     * Creates a new InstancesDemoteRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InstancesDemoteRequest instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1.IInstancesDemoteRequest): google.cloud.sql.v1.InstancesDemoteRequest;
+
+                    /**
+                     * Encodes the specified InstancesDemoteRequest message. Does not implicitly {@link google.cloud.sql.v1.InstancesDemoteRequest.verify|verify} messages.
+                     * @param message InstancesDemoteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1.IInstancesDemoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InstancesDemoteRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1.InstancesDemoteRequest.verify|verify} messages.
+                     * @param message InstancesDemoteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1.IInstancesDemoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InstancesDemoteRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InstancesDemoteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1.InstancesDemoteRequest;
+
+                    /**
+                     * Decodes an InstancesDemoteRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InstancesDemoteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1.InstancesDemoteRequest;
+
+                    /**
+                     * Verifies an InstancesDemoteRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InstancesDemoteRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InstancesDemoteRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1.InstancesDemoteRequest;
+
+                    /**
+                     * Creates a plain object from an InstancesDemoteRequest message. Also converts values to other types if specified.
+                     * @param message InstancesDemoteRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1.InstancesDemoteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InstancesDemoteRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InstancesDemoteRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an InstancesExportRequest. */
                 interface IInstancesExportRequest {
 
@@ -15246,6 +15473,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DemoteMasterContext
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DemoteContext. */
+                interface IDemoteContext {
+
+                    /** DemoteContext kind */
+                    kind?: (string|null);
+
+                    /** DemoteContext sourceRepresentativeInstanceName */
+                    sourceRepresentativeInstanceName?: (string|null);
+                }
+
+                /** Represents a DemoteContext. */
+                class DemoteContext implements IDemoteContext {
+
+                    /**
+                     * Constructs a new DemoteContext.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1.IDemoteContext);
+
+                    /** DemoteContext kind. */
+                    public kind: string;
+
+                    /** DemoteContext sourceRepresentativeInstanceName. */
+                    public sourceRepresentativeInstanceName: string;
+
+                    /**
+                     * Creates a new DemoteContext instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DemoteContext instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1.IDemoteContext): google.cloud.sql.v1.DemoteContext;
+
+                    /**
+                     * Encodes the specified DemoteContext message. Does not implicitly {@link google.cloud.sql.v1.DemoteContext.verify|verify} messages.
+                     * @param message DemoteContext message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1.IDemoteContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DemoteContext message, length delimited. Does not implicitly {@link google.cloud.sql.v1.DemoteContext.verify|verify} messages.
+                     * @param message DemoteContext message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1.IDemoteContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DemoteContext message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DemoteContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1.DemoteContext;
+
+                    /**
+                     * Decodes a DemoteContext message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DemoteContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1.DemoteContext;
+
+                    /**
+                     * Verifies a DemoteContext message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DemoteContext message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DemoteContext
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1.DemoteContext;
+
+                    /**
+                     * Creates a plain object from a DemoteContext message. Also converts values to other types if specified.
+                     * @param message DemoteContext
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1.DemoteContext, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DemoteContext to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DemoteContext
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

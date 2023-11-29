@@ -29,6 +29,7 @@
   * [Sql_instances_service.clone](#sql_instances_service.clone)
   * [Sql_instances_service.create_ephemeral](#sql_instances_service.create_ephemeral)
   * [Sql_instances_service.delete](#sql_instances_service.delete)
+  * [Sql_instances_service.demote](#sql_instances_service.demote)
   * [Sql_instances_service.demote_master](#sql_instances_service.demote_master)
   * [Sql_instances_service.export](#sql_instances_service.export)
   * [Sql_instances_service.failover](#sql_instances_service.failover)
@@ -425,6 +426,23 @@ __Usage:__
 
 
 `node packages/google-cloud-sql/samples/generated/v1/sql_instances_service.delete.js`
+
+
+-----
+
+
+
+
+### Sql_instances_service.demote
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.demote.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.demote.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-sql/samples/generated/v1/sql_instances_service.demote.js`
 
 
 -----

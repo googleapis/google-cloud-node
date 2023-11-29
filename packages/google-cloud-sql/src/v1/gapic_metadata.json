@@ -264,6 +264,11 @@
                 "demoteMaster"
               ]
             },
+            "Demote": {
+              "methods": [
+                "demote"
+              ]
+            },
             "Export": {
               "methods": [
                 "export"
@@ -422,6 +427,11 @@
             "DemoteMaster": {
               "methods": [
                 "demoteMaster"
+              ]
+            },
+            "Demote": {
+              "methods": [
+                "demote"
               ]
             },
             "Export": {

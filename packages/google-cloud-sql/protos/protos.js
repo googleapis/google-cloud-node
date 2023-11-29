@@ -21921,6 +21921,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.sql.v1.SqlInstancesService|demote}.
+                         * @memberof google.cloud.sql.v1.SqlInstancesService
+                         * @typedef DemoteCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.sql.v1.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls Demote.
+                         * @function demote
+                         * @memberof google.cloud.sql.v1.SqlInstancesService
+                         * @instance
+                         * @param {google.cloud.sql.v1.ISqlInstancesDemoteRequest} request SqlInstancesDemoteRequest message or plain object
+                         * @param {google.cloud.sql.v1.SqlInstancesService.DemoteCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SqlInstancesService.prototype.demote = function demote(request, callback) {
+                            return this.rpcCall(demote, $root.google.cloud.sql.v1.SqlInstancesDemoteRequest, $root.google.cloud.sql.v1.Operation, request, callback);
+                        }, "name", { value: "Demote" });
+    
+                        /**
+                         * Calls Demote.
+                         * @function demote
+                         * @memberof google.cloud.sql.v1.SqlInstancesService
+                         * @instance
+                         * @param {google.cloud.sql.v1.ISqlInstancesDemoteRequest} request SqlInstancesDemoteRequest message or plain object
+                         * @returns {Promise<google.cloud.sql.v1.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.sql.v1.SqlInstancesService|export_}.
                          * @memberof google.cloud.sql.v1.SqlInstancesService
                          * @typedef ExportCallback
@@ -23776,6 +23809,261 @@
                         };
     
                         return SqlInstancesDemoteMasterRequest;
+                    })();
+    
+                    v1.SqlInstancesDemoteRequest = (function() {
+    
+                        /**
+                         * Properties of a SqlInstancesDemoteRequest.
+                         * @memberof google.cloud.sql.v1
+                         * @interface ISqlInstancesDemoteRequest
+                         * @property {string|null} [instance] SqlInstancesDemoteRequest instance
+                         * @property {string|null} [project] SqlInstancesDemoteRequest project
+                         * @property {google.cloud.sql.v1.IInstancesDemoteRequest|null} [body] SqlInstancesDemoteRequest body
+                         */
+    
+                        /**
+                         * Constructs a new SqlInstancesDemoteRequest.
+                         * @memberof google.cloud.sql.v1
+                         * @classdesc Represents a SqlInstancesDemoteRequest.
+                         * @implements ISqlInstancesDemoteRequest
+                         * @constructor
+                         * @param {google.cloud.sql.v1.ISqlInstancesDemoteRequest=} [properties] Properties to set
+                         */
+                        function SqlInstancesDemoteRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SqlInstancesDemoteRequest instance.
+                         * @member {string} instance
+                         * @memberof google.cloud.sql.v1.SqlInstancesDemoteRequest
+                         * @instance
+                         */
+                        SqlInstancesDemoteRequest.prototype.instance = "";
+    
+                        /**
+                         * SqlInstancesDemoteRequest project.
+                         * @member {string} project
+                         * @memberof google.cloud.sql.v1.SqlInstancesDemoteRequest
+                         * @instance
+                         */
+                        SqlInstancesDemoteRequest.prototype.project = "";
+    
+                        /**
+                         * SqlInstancesDemoteRequest body.
+                         * @member {google.cloud.sql.v1.IInstancesDemoteRequest|null|undefined} body
+                         * @memberof google.cloud.sql.v1.SqlInstancesDemoteRequest
+                         * @instance
+                         */
+                        SqlInstancesDemoteRequest.prototype.body = null;
+    
+                        /**
+                         * Creates a new SqlInstancesDemoteRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.sql.v1.SqlInstancesDemoteRequest
+                         * @static
+                         * @param {google.cloud.sql.v1.ISqlInstancesDemoteRequest=} [properties] Properties to set
+                         * @returns {google.cloud.sql.v1.SqlInstancesDemoteRequest} SqlInstancesDemoteRequest instance
+                         */
+                        SqlInstancesDemoteRequest.create = function create(properties) {
+                            return new SqlInstancesDemoteRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SqlInstancesDemoteRequest message. Does not implicitly {@link google.cloud.sql.v1.SqlInstancesDemoteRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.sql.v1.SqlInstancesDemoteRequest
+                         * @static
+                         * @param {google.cloud.sql.v1.ISqlInstancesDemoteRequest} message SqlInstancesDemoteRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SqlInstancesDemoteRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.instance != null && Object.hasOwnProperty.call(message, "instance"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.instance);
+                            if (message.project != null && Object.hasOwnProperty.call(message, "project"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.project);
+                            if (message.body != null && Object.hasOwnProperty.call(message, "body"))
+                                $root.google.cloud.sql.v1.InstancesDemoteRequest.encode(message.body, writer.uint32(/* id 100, wireType 2 =*/802).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SqlInstancesDemoteRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1.SqlInstancesDemoteRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.sql.v1.SqlInstancesDemoteRequest
+                         * @static
+                         * @param {google.cloud.sql.v1.ISqlInstancesDemoteRequest} message SqlInstancesDemoteRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SqlInstancesDemoteRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SqlInstancesDemoteRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.sql.v1.SqlInstancesDemoteRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.sql.v1.SqlInstancesDemoteRequest} SqlInstancesDemoteRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SqlInstancesDemoteRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.sql.v1.SqlInstancesDemoteRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.instance = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.project = reader.string();
+                                        break;
+                                    }
+                                case 100: {
+                                        message.body = $root.google.cloud.sql.v1.InstancesDemoteRequest.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SqlInstancesDemoteRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.sql.v1.SqlInstancesDemoteRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.sql.v1.SqlInstancesDemoteRequest} SqlInstancesDemoteRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SqlInstancesDemoteRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SqlInstancesDemoteRequest message.
+                         * @function verify
+                         * @memberof google.cloud.sql.v1.SqlInstancesDemoteRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SqlInstancesDemoteRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                if (!$util.isString(message.instance))
+                                    return "instance: string expected";
+                            if (message.project != null && message.hasOwnProperty("project"))
+                                if (!$util.isString(message.project))
+                                    return "project: string expected";
+                            if (message.body != null && message.hasOwnProperty("body")) {
+                                var error = $root.google.cloud.sql.v1.InstancesDemoteRequest.verify(message.body);
+                                if (error)
+                                    return "body." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SqlInstancesDemoteRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.sql.v1.SqlInstancesDemoteRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.sql.v1.SqlInstancesDemoteRequest} SqlInstancesDemoteRequest
+                         */
+                        SqlInstancesDemoteRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.sql.v1.SqlInstancesDemoteRequest)
+                                return object;
+                            var message = new $root.google.cloud.sql.v1.SqlInstancesDemoteRequest();
+                            if (object.instance != null)
+                                message.instance = String(object.instance);
+                            if (object.project != null)
+                                message.project = String(object.project);
+                            if (object.body != null) {
+                                if (typeof object.body !== "object")
+                                    throw TypeError(".google.cloud.sql.v1.SqlInstancesDemoteRequest.body: object expected");
+                                message.body = $root.google.cloud.sql.v1.InstancesDemoteRequest.fromObject(object.body);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SqlInstancesDemoteRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.sql.v1.SqlInstancesDemoteRequest
+                         * @static
+                         * @param {google.cloud.sql.v1.SqlInstancesDemoteRequest} message SqlInstancesDemoteRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SqlInstancesDemoteRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.instance = "";
+                                object.project = "";
+                                object.body = null;
+                            }
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                object.instance = message.instance;
+                            if (message.project != null && message.hasOwnProperty("project"))
+                                object.project = message.project;
+                            if (message.body != null && message.hasOwnProperty("body"))
+                                object.body = $root.google.cloud.sql.v1.InstancesDemoteRequest.toObject(message.body, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SqlInstancesDemoteRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.sql.v1.SqlInstancesDemoteRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SqlInstancesDemoteRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SqlInstancesDemoteRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.sql.v1.SqlInstancesDemoteRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SqlInstancesDemoteRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.sql.v1.SqlInstancesDemoteRequest";
+                        };
+    
+                        return SqlInstancesDemoteRequest;
                     })();
     
                     v1.SqlInstancesExportRequest = (function() {
@@ -31405,6 +31693,214 @@
                         return InstancesDemoteMasterRequest;
                     })();
     
+                    v1.InstancesDemoteRequest = (function() {
+    
+                        /**
+                         * Properties of an InstancesDemoteRequest.
+                         * @memberof google.cloud.sql.v1
+                         * @interface IInstancesDemoteRequest
+                         * @property {google.cloud.sql.v1.IDemoteContext|null} [demoteContext] InstancesDemoteRequest demoteContext
+                         */
+    
+                        /**
+                         * Constructs a new InstancesDemoteRequest.
+                         * @memberof google.cloud.sql.v1
+                         * @classdesc Represents an InstancesDemoteRequest.
+                         * @implements IInstancesDemoteRequest
+                         * @constructor
+                         * @param {google.cloud.sql.v1.IInstancesDemoteRequest=} [properties] Properties to set
+                         */
+                        function InstancesDemoteRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * InstancesDemoteRequest demoteContext.
+                         * @member {google.cloud.sql.v1.IDemoteContext|null|undefined} demoteContext
+                         * @memberof google.cloud.sql.v1.InstancesDemoteRequest
+                         * @instance
+                         */
+                        InstancesDemoteRequest.prototype.demoteContext = null;
+    
+                        /**
+                         * Creates a new InstancesDemoteRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.sql.v1.InstancesDemoteRequest
+                         * @static
+                         * @param {google.cloud.sql.v1.IInstancesDemoteRequest=} [properties] Properties to set
+                         * @returns {google.cloud.sql.v1.InstancesDemoteRequest} InstancesDemoteRequest instance
+                         */
+                        InstancesDemoteRequest.create = function create(properties) {
+                            return new InstancesDemoteRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified InstancesDemoteRequest message. Does not implicitly {@link google.cloud.sql.v1.InstancesDemoteRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.sql.v1.InstancesDemoteRequest
+                         * @static
+                         * @param {google.cloud.sql.v1.IInstancesDemoteRequest} message InstancesDemoteRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InstancesDemoteRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.demoteContext != null && Object.hasOwnProperty.call(message, "demoteContext"))
+                                $root.google.cloud.sql.v1.DemoteContext.encode(message.demoteContext, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified InstancesDemoteRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1.InstancesDemoteRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.sql.v1.InstancesDemoteRequest
+                         * @static
+                         * @param {google.cloud.sql.v1.IInstancesDemoteRequest} message InstancesDemoteRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InstancesDemoteRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an InstancesDemoteRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.sql.v1.InstancesDemoteRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.sql.v1.InstancesDemoteRequest} InstancesDemoteRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InstancesDemoteRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.sql.v1.InstancesDemoteRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.demoteContext = $root.google.cloud.sql.v1.DemoteContext.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an InstancesDemoteRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.sql.v1.InstancesDemoteRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.sql.v1.InstancesDemoteRequest} InstancesDemoteRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InstancesDemoteRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an InstancesDemoteRequest message.
+                         * @function verify
+                         * @memberof google.cloud.sql.v1.InstancesDemoteRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        InstancesDemoteRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.demoteContext != null && message.hasOwnProperty("demoteContext")) {
+                                var error = $root.google.cloud.sql.v1.DemoteContext.verify(message.demoteContext);
+                                if (error)
+                                    return "demoteContext." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an InstancesDemoteRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.sql.v1.InstancesDemoteRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.sql.v1.InstancesDemoteRequest} InstancesDemoteRequest
+                         */
+                        InstancesDemoteRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.sql.v1.InstancesDemoteRequest)
+                                return object;
+                            var message = new $root.google.cloud.sql.v1.InstancesDemoteRequest();
+                            if (object.demoteContext != null) {
+                                if (typeof object.demoteContext !== "object")
+                                    throw TypeError(".google.cloud.sql.v1.InstancesDemoteRequest.demoteContext: object expected");
+                                message.demoteContext = $root.google.cloud.sql.v1.DemoteContext.fromObject(object.demoteContext);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an InstancesDemoteRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.sql.v1.InstancesDemoteRequest
+                         * @static
+                         * @param {google.cloud.sql.v1.InstancesDemoteRequest} message InstancesDemoteRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        InstancesDemoteRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.demoteContext = null;
+                            if (message.demoteContext != null && message.hasOwnProperty("demoteContext"))
+                                object.demoteContext = $root.google.cloud.sql.v1.DemoteContext.toObject(message.demoteContext, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this InstancesDemoteRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.sql.v1.InstancesDemoteRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        InstancesDemoteRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for InstancesDemoteRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.sql.v1.InstancesDemoteRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        InstancesDemoteRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.sql.v1.InstancesDemoteRequest";
+                        };
+    
+                        return InstancesDemoteRequest;
+                    })();
+    
                     v1.InstancesExportRequest = (function() {
     
                         /**
@@ -38485,6 +38981,233 @@
                         };
     
                         return DemoteMasterContext;
+                    })();
+    
+                    v1.DemoteContext = (function() {
+    
+                        /**
+                         * Properties of a DemoteContext.
+                         * @memberof google.cloud.sql.v1
+                         * @interface IDemoteContext
+                         * @property {string|null} [kind] DemoteContext kind
+                         * @property {string|null} [sourceRepresentativeInstanceName] DemoteContext sourceRepresentativeInstanceName
+                         */
+    
+                        /**
+                         * Constructs a new DemoteContext.
+                         * @memberof google.cloud.sql.v1
+                         * @classdesc Represents a DemoteContext.
+                         * @implements IDemoteContext
+                         * @constructor
+                         * @param {google.cloud.sql.v1.IDemoteContext=} [properties] Properties to set
+                         */
+                        function DemoteContext(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DemoteContext kind.
+                         * @member {string} kind
+                         * @memberof google.cloud.sql.v1.DemoteContext
+                         * @instance
+                         */
+                        DemoteContext.prototype.kind = "";
+    
+                        /**
+                         * DemoteContext sourceRepresentativeInstanceName.
+                         * @member {string} sourceRepresentativeInstanceName
+                         * @memberof google.cloud.sql.v1.DemoteContext
+                         * @instance
+                         */
+                        DemoteContext.prototype.sourceRepresentativeInstanceName = "";
+    
+                        /**
+                         * Creates a new DemoteContext instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.sql.v1.DemoteContext
+                         * @static
+                         * @param {google.cloud.sql.v1.IDemoteContext=} [properties] Properties to set
+                         * @returns {google.cloud.sql.v1.DemoteContext} DemoteContext instance
+                         */
+                        DemoteContext.create = function create(properties) {
+                            return new DemoteContext(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DemoteContext message. Does not implicitly {@link google.cloud.sql.v1.DemoteContext.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.sql.v1.DemoteContext
+                         * @static
+                         * @param {google.cloud.sql.v1.IDemoteContext} message DemoteContext message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DemoteContext.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.kind != null && Object.hasOwnProperty.call(message, "kind"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.kind);
+                            if (message.sourceRepresentativeInstanceName != null && Object.hasOwnProperty.call(message, "sourceRepresentativeInstanceName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.sourceRepresentativeInstanceName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DemoteContext message, length delimited. Does not implicitly {@link google.cloud.sql.v1.DemoteContext.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.sql.v1.DemoteContext
+                         * @static
+                         * @param {google.cloud.sql.v1.IDemoteContext} message DemoteContext message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DemoteContext.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DemoteContext message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.sql.v1.DemoteContext
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.sql.v1.DemoteContext} DemoteContext
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DemoteContext.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.sql.v1.DemoteContext();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.kind = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.sourceRepresentativeInstanceName = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DemoteContext message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.sql.v1.DemoteContext
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.sql.v1.DemoteContext} DemoteContext
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DemoteContext.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DemoteContext message.
+                         * @function verify
+                         * @memberof google.cloud.sql.v1.DemoteContext
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DemoteContext.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.kind != null && message.hasOwnProperty("kind"))
+                                if (!$util.isString(message.kind))
+                                    return "kind: string expected";
+                            if (message.sourceRepresentativeInstanceName != null && message.hasOwnProperty("sourceRepresentativeInstanceName"))
+                                if (!$util.isString(message.sourceRepresentativeInstanceName))
+                                    return "sourceRepresentativeInstanceName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DemoteContext message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.sql.v1.DemoteContext
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.sql.v1.DemoteContext} DemoteContext
+                         */
+                        DemoteContext.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.sql.v1.DemoteContext)
+                                return object;
+                            var message = new $root.google.cloud.sql.v1.DemoteContext();
+                            if (object.kind != null)
+                                message.kind = String(object.kind);
+                            if (object.sourceRepresentativeInstanceName != null)
+                                message.sourceRepresentativeInstanceName = String(object.sourceRepresentativeInstanceName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DemoteContext message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.sql.v1.DemoteContext
+                         * @static
+                         * @param {google.cloud.sql.v1.DemoteContext} message DemoteContext
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DemoteContext.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.kind = "";
+                                object.sourceRepresentativeInstanceName = "";
+                            }
+                            if (message.kind != null && message.hasOwnProperty("kind"))
+                                object.kind = message.kind;
+                            if (message.sourceRepresentativeInstanceName != null && message.hasOwnProperty("sourceRepresentativeInstanceName"))
+                                object.sourceRepresentativeInstanceName = message.sourceRepresentativeInstanceName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DemoteContext to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.sql.v1.DemoteContext
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DemoteContext.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DemoteContext
+                         * @function getTypeUrl
+                         * @memberof google.cloud.sql.v1.DemoteContext
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DemoteContext.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.sql.v1.DemoteContext";
+                        };
+    
+                        return DemoteContext;
                     })();
     
                     v1.FailoverContext = (function() {

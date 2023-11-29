@@ -2164,6 +2164,22 @@
                             }
                           ]
                         },
+                        "Demote": {
+                          "requestType": "SqlInstancesDemoteRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/projects/{project}/instances/{instance}/demote",
+                            "(google.api.http).body": "body"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/projects/{project}/instances/{instance}/demote",
+                                "body": "body"
+                              }
+                            }
+                          ]
+                        },
                         "Export": {
                           "requestType": "SqlInstancesExportRequest",
                           "responseType": "Operation",
@@ -2629,6 +2645,31 @@
                         "body": {
                           "type": "InstancesDemoteMasterRequest",
                           "id": 100
+                        }
+                      }
+                    },
+                    "SqlInstancesDemoteRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "body": {
+                          "type": "InstancesDemoteRequest",
+                          "id": 100,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -3153,6 +3194,17 @@
                         "demoteMasterContext": {
                           "type": "DemoteMasterContext",
                           "id": 1
+                        }
+                      }
+                    },
+                    "InstancesDemoteRequest": {
+                      "fields": {
+                        "demoteContext": {
+                          "type": "DemoteContext",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -3767,6 +3819,21 @@
                         "skipReplicationSetup": {
                           "type": "bool",
                           "id": 5
+                        }
+                      }
+                    },
+                    "DemoteContext": {
+                      "fields": {
+                        "kind": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "sourceRepresentativeInstanceName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
