@@ -249,6 +249,7 @@ describe('Transfer Manager', () => {
         {
           metadata: {
             size: 1024,
+            crc32c: 'AAAAAA==',
           },
         },
       ]);
@@ -265,6 +266,26 @@ describe('Transfer Manager', () => {
       assert.strictEqual(downloadCallCount, 1);
     });
 
+    it('should return downloaded data', async () => {
+      sandbox.stub(file, 'download').callsFake(() => {
+        return Promise.resolve([Buffer.alloc(100)]);
+      });
+
+      const data = await transferManager.downloadFileInChunks(file);
+      assert.deepStrictEqual(data, [Buffer.alloc(1024)]);
+    });
+
+    it('should not return downloaded data when noReturnData flag is set', async () => {
+      sandbox.stub(file, 'download').callsFake(() => {
+        return Promise.resolve([Buffer.alloc(100)]);
+      });
+
+      const data = await transferManager.downloadFileInChunks(file, {
+        noReturnData: true,
+      });
+      assert.strictEqual(data, undefined);
+    });
+
     it('should call fromFile when validation is set to crc32c', async () => {
       let callCount = 0;
       file.download = () => {
@@ -277,6 +298,22 @@ describe('Transfer Manager', () => {
 
       await transferManager.downloadFileInChunks(file, {validation: 'crc32c'});
       assert.strictEqual(callCount, 1);
+    });
+
+    it('should throw an error if crc32c validation fails', async () => {
+      file.download = () => {
+        return Promise.resolve([Buffer.alloc(0)]) as Promise<DownloadResponse>;
+      };
+      CRC32C.fromFile = () => {
+        return Promise.resolve(new CRC32C(1)); // Set non-expected initial value
+      };
+
+      await assert.rejects(
+        transferManager.downloadFileInChunks(file, {validation: 'crc32c'}),
+        {
+          code: 'CONTENT_DOWNLOAD_MISMATCH',
+        }
+      );
     });
 
     it('should set the appropriate `GCCL_GCS_CMD_KEY`', async () => {
