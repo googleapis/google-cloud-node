@@ -48,6 +48,7 @@ export interface GetServiceAccountCallback {
 export interface CreateBucketQuery {
   project: string;
   userProject: string;
+  enableObjectRetention: boolean;
 }
 
 export enum IdempotencyStrategy {
@@ -121,6 +122,7 @@ export interface CreateBucketRequest {
   cors?: Cors[];
   customPlacementConfig?: CustomPlacementConfig;
   dra?: boolean;
+  enableObjectRetention?: boolean;
   location?: string;
   multiRegional?: boolean;
   nearline?: boolean;
@@ -862,6 +864,7 @@ export class Storage extends Service {
    *     For more information, see {@link https://cloud.google.com/storage/docs/locations| Bucket Locations}.
    * @property {boolean} [dra=false] Specify the storage class as Durable Reduced
    *     Availability.
+   * @property {boolean} [enableObjectRetention=false] Specifiy whether or not object retention should be enabled on this bucket.
    * @property {string} [location] Specify the bucket's location. If specifying
    *     a dual-region, the `customPlacementConfig` property should be set in conjunction.
    *     For more information, see {@link https://cloud.google.com/storage/docs/locations| Bucket Locations}.
@@ -1021,6 +1024,11 @@ export class Storage extends Service {
     if (body.userProject) {
       query.userProject = body.userProject as string;
       delete body.userProject;
+    }
+
+    if (body.enableObjectRetention) {
+      query.enableObjectRetention = body.enableObjectRetention;
+      delete body.enableObjectRetention;
     }
 
     this.request(

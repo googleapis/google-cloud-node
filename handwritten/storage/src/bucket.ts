@@ -327,6 +327,9 @@ export interface BucketMetadata extends BaseMetadata {
   };
   metageneration?: string;
   name?: string;
+  objectRetention?: {
+    mode?: string;
+  };
   owner?: {
     entity?: string;
     entityId?: string;

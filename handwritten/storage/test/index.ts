@@ -905,6 +905,17 @@ describe('Storage', () => {
       }, /Both `coldline` and `storageClass` were provided./);
     });
 
+    it('should allow enabling object retention', done => {
+      storage.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function
+      ) => {
+        assert.strictEqual(reqOpts.qs.enableObjectRetention, true);
+        callback();
+      };
+      storage.createBucket(BUCKET_NAME, {enableObjectRetention: true}, done);
+    });
+
     describe('storage classes', () => {
       it('should expand metadata.archive', done => {
         storage.request = (reqOpts: DecorateRequestOptions) => {

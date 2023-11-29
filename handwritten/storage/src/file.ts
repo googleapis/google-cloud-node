@@ -423,6 +423,7 @@ export interface FileMetadata extends BaseMetadata {
   };
   customTime?: string;
   eventBasedHold?: boolean | null;
+  readonly eventBasedHoldReleaseTime?: string;
   generation?: string | number;
   kmsKeyName?: string;
   md5Hash?: string;
@@ -436,6 +437,10 @@ export interface FileMetadata extends BaseMetadata {
     entity?: string;
     entityId?: string;
   };
+  retention?: {
+    retainUntilTime?: string;
+    mode?: string;
+  } | null;
   retentionExpirationTime?: string;
   size?: string | number;
   storageClass?: string;
@@ -3813,7 +3818,8 @@ class File extends ServiceObject<File, FileMetadata> {
     optionsOrCallback: SetMetadataOptions | MetadataCallback<FileMetadata>,
     cb?: MetadataCallback<FileMetadata>
   ): Promise<SetMetadataResponse<FileMetadata>> | void {
-    const options =
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const options: any =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
     cb =
       typeof optionsOrCallback === 'function'
@@ -3825,6 +3831,10 @@ class File extends ServiceObject<File, FileMetadata> {
       AvailableServiceObjectMethods.setMetadata,
       options
     );
+
+    if (metadata.retention !== undefined) {
+      options.overrideUnlockedRetention = true;
+    }
 
     super
       .setMetadata(metadata, options)

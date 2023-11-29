@@ -4567,6 +4567,20 @@ describe('File', () => {
     });
   });
 
+  describe('setMetadata', () => {
+    it('should set query parameter overrideUnlockedRetention', done => {
+      const newFile = new File(BUCKET, 'new-file');
+
+      newFile.parent.request = (reqOpts: DecorateRequestOptions) => {
+        console.log(reqOpts.qs);
+        assert.strictEqual(reqOpts.qs.overrideUnlockedRetention, true);
+        done();
+      };
+
+      newFile.setMetadata({retention: null}, assert.ifError);
+    });
+  });
+
   describe('setStorageClass', () => {
     const STORAGE_CLASS = 'new_storage_class';
 

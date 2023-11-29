@@ -1602,6 +1602,51 @@ describe('storage', () => {
     });
   });
 
+  describe('object retention lock', () => {
+    const fileName = generateName();
+    let objectRetentionBucket: Bucket;
+
+    before(async () => {
+      objectRetentionBucket = storage.bucket(generateName());
+    });
+
+    after(async () => {
+      await objectRetentionBucket.deleteFiles({force: true});
+      await objectRetentionBucket.delete();
+    });
+
+    it('should create a bucket with object retention enabled', async () => {
+      const result = await objectRetentionBucket.create({
+        enableObjectRetention: true,
+      });
+
+      assert.deepStrictEqual(result[0].metadata.objectRetention, {
+        mode: 'Enabled',
+      });
+    });
+
+    it('should create a file with object retention enabled', async () => {
+      const time = new Date();
+      time.setMinutes(time.getSeconds() + 1);
+      const retention = {mode: 'Unlocked', retainUntilTime: time.toISOString()};
+      const file = new File(objectRetentionBucket, fileName);
+      await objectRetentionBucket.upload(FILES.big.path, {
+        metadata: {
+          retention,
+        },
+        destination: fileName,
+      });
+      const [metadata] = await file.getMetadata();
+      assert.deepStrictEqual(metadata.retention, retention);
+    });
+
+    it('should disable object retention on the file', async () => {
+      const file = new File(objectRetentionBucket, fileName);
+      const [metadata] = await file.setMetadata({retention: null});
+      assert.strictEqual(metadata.retention, undefined);
+    });
+  });
+
   describe('requester pays', () => {
     const HAS_2ND_PROJECT =
       process.env.GCN_STORAGE_2ND_PROJECT_ID !== undefined;
