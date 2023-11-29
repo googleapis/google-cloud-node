@@ -230,6 +230,7 @@ export class SqlInstancesServiceClient {
       'clone',
       'delete',
       'demoteMaster',
+      'demote',
       'export',
       'failover',
       'reencrypt',
@@ -735,6 +736,102 @@ export class SqlInstancesServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.demoteMaster(request, options, callback);
+  }
+  /**
+   * Demotes an existing standalone instance to be a Cloud SQL read replica
+   * for an external database server.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.instance
+   *   Required. The name of the Cloud SQL instance.
+   * @param {string} request.project
+   *   Required. The project ID of the project that contains the instance.
+   * @param {google.cloud.sql.v1beta4.InstancesDemoteRequest} request.body
+   *   The request body.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.demote.js</caption>
+   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_Demote_async
+   */
+  demote(
+    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.sql.v1beta4.IOperation,
+      protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  demote(
+    request: protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.sql.v1beta4.IOperation,
+      | protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  demote(
+    request: protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest,
+    callback: Callback<
+      protos.google.cloud.sql.v1beta4.IOperation,
+      | protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  demote(
+    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          | protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.sql.v1beta4.IOperation,
+      | protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.sql.v1beta4.IOperation,
+      protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        instance: request.instance ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.demote(request, options, callback);
   }
   /**
    * Exports data from a Cloud SQL instance to a Cloud Storage bucket as a SQL
