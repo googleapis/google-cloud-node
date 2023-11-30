@@ -6520,7 +6520,8 @@ export namespace google {
                 enum VulnerabilityMode {
                     VULNERABILITY_MODE_UNSPECIFIED = 0,
                     VULNERABILITY_DISABLED = 1,
-                    VULNERABILITY_BASIC = 2
+                    VULNERABILITY_BASIC = 2,
+                    VULNERABILITY_ENTERPRISE = 3
                 }
             }
 
@@ -11244,6 +11245,9 @@ export namespace google {
                 /** NodePool etag */
                 etag?: (string|null);
 
+                /** NodePool queuedProvisioning */
+                queuedProvisioning?: (google.container.v1.NodePool.IQueuedProvisioning|null);
+
                 /** NodePool bestEffortProvisioning */
                 bestEffortProvisioning?: (google.container.v1.IBestEffortProvisioning|null);
             }
@@ -11313,6 +11317,9 @@ export namespace google {
 
                 /** NodePool etag. */
                 public etag: string;
+
+                /** NodePool queuedProvisioning. */
+                public queuedProvisioning?: (google.container.v1.NodePool.IQueuedProvisioning|null);
 
                 /** NodePool bestEffortProvisioning. */
                 public bestEffortProvisioning?: (google.container.v1.IBestEffortProvisioning|null);
@@ -11881,6 +11888,103 @@ export namespace google {
                         TYPE_UNSPECIFIED = 0,
                         COMPACT = 1
                     }
+                }
+
+                /** Properties of a QueuedProvisioning. */
+                interface IQueuedProvisioning {
+
+                    /** QueuedProvisioning enabled */
+                    enabled?: (boolean|null);
+                }
+
+                /** Represents a QueuedProvisioning. */
+                class QueuedProvisioning implements IQueuedProvisioning {
+
+                    /**
+                     * Constructs a new QueuedProvisioning.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.container.v1.NodePool.IQueuedProvisioning);
+
+                    /** QueuedProvisioning enabled. */
+                    public enabled: boolean;
+
+                    /**
+                     * Creates a new QueuedProvisioning instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueuedProvisioning instance
+                     */
+                    public static create(properties?: google.container.v1.NodePool.IQueuedProvisioning): google.container.v1.NodePool.QueuedProvisioning;
+
+                    /**
+                     * Encodes the specified QueuedProvisioning message. Does not implicitly {@link google.container.v1.NodePool.QueuedProvisioning.verify|verify} messages.
+                     * @param message QueuedProvisioning message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.container.v1.NodePool.IQueuedProvisioning, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueuedProvisioning message, length delimited. Does not implicitly {@link google.container.v1.NodePool.QueuedProvisioning.verify|verify} messages.
+                     * @param message QueuedProvisioning message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.container.v1.NodePool.IQueuedProvisioning, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueuedProvisioning message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueuedProvisioning
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.NodePool.QueuedProvisioning;
+
+                    /**
+                     * Decodes a QueuedProvisioning message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueuedProvisioning
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.NodePool.QueuedProvisioning;
+
+                    /**
+                     * Verifies a QueuedProvisioning message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueuedProvisioning message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueuedProvisioning
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.container.v1.NodePool.QueuedProvisioning;
+
+                    /**
+                     * Creates a plain object from a QueuedProvisioning message. Also converts values to other types if specified.
+                     * @param message QueuedProvisioning
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.container.v1.NodePool.QueuedProvisioning, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueuedProvisioning to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueuedProvisioning
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
 
@@ -20286,6 +20390,9 @@ export namespace google {
 
                 /** AdvancedDatapathObservabilityConfig relayMode */
                 relayMode?: (google.container.v1.AdvancedDatapathObservabilityConfig.RelayMode|keyof typeof google.container.v1.AdvancedDatapathObservabilityConfig.RelayMode|null);
+
+                /** AdvancedDatapathObservabilityConfig enableRelay */
+                enableRelay?: (boolean|null);
             }
 
             /** Represents an AdvancedDatapathObservabilityConfig. */
@@ -20302,6 +20409,12 @@ export namespace google {
 
                 /** AdvancedDatapathObservabilityConfig relayMode. */
                 public relayMode: (google.container.v1.AdvancedDatapathObservabilityConfig.RelayMode|keyof typeof google.container.v1.AdvancedDatapathObservabilityConfig.RelayMode);
+
+                /** AdvancedDatapathObservabilityConfig enableRelay. */
+                public enableRelay?: (boolean|null);
+
+                /** AdvancedDatapathObservabilityConfig _enableRelay. */
+                public _enableRelay?: "enableRelay";
 
                 /**
                  * Creates a new AdvancedDatapathObservabilityConfig instance using the specified properties.
@@ -34492,6 +34605,9 @@ export namespace google {
                 /** NodePool etag */
                 etag?: (string|null);
 
+                /** NodePool queuedProvisioning */
+                queuedProvisioning?: (google.container.v1beta1.NodePool.IQueuedProvisioning|null);
+
                 /** NodePool bestEffortProvisioning */
                 bestEffortProvisioning?: (google.container.v1beta1.IBestEffortProvisioning|null);
             }
@@ -34561,6 +34677,9 @@ export namespace google {
 
                 /** NodePool etag. */
                 public etag: string;
+
+                /** NodePool queuedProvisioning. */
+                public queuedProvisioning?: (google.container.v1beta1.NodePool.IQueuedProvisioning|null);
 
                 /** NodePool bestEffortProvisioning. */
                 public bestEffortProvisioning?: (google.container.v1beta1.IBestEffortProvisioning|null);
@@ -35130,6 +35249,103 @@ export namespace google {
                         TYPE_UNSPECIFIED = 0,
                         COMPACT = 1
                     }
+                }
+
+                /** Properties of a QueuedProvisioning. */
+                interface IQueuedProvisioning {
+
+                    /** QueuedProvisioning enabled */
+                    enabled?: (boolean|null);
+                }
+
+                /** Represents a QueuedProvisioning. */
+                class QueuedProvisioning implements IQueuedProvisioning {
+
+                    /**
+                     * Constructs a new QueuedProvisioning.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.container.v1beta1.NodePool.IQueuedProvisioning);
+
+                    /** QueuedProvisioning enabled. */
+                    public enabled: boolean;
+
+                    /**
+                     * Creates a new QueuedProvisioning instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueuedProvisioning instance
+                     */
+                    public static create(properties?: google.container.v1beta1.NodePool.IQueuedProvisioning): google.container.v1beta1.NodePool.QueuedProvisioning;
+
+                    /**
+                     * Encodes the specified QueuedProvisioning message. Does not implicitly {@link google.container.v1beta1.NodePool.QueuedProvisioning.verify|verify} messages.
+                     * @param message QueuedProvisioning message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.container.v1beta1.NodePool.IQueuedProvisioning, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueuedProvisioning message, length delimited. Does not implicitly {@link google.container.v1beta1.NodePool.QueuedProvisioning.verify|verify} messages.
+                     * @param message QueuedProvisioning message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.container.v1beta1.NodePool.IQueuedProvisioning, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueuedProvisioning message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueuedProvisioning
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.NodePool.QueuedProvisioning;
+
+                    /**
+                     * Decodes a QueuedProvisioning message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueuedProvisioning
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.NodePool.QueuedProvisioning;
+
+                    /**
+                     * Verifies a QueuedProvisioning message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueuedProvisioning message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueuedProvisioning
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.container.v1beta1.NodePool.QueuedProvisioning;
+
+                    /**
+                     * Creates a plain object from a QueuedProvisioning message. Also converts values to other types if specified.
+                     * @param message QueuedProvisioning
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.container.v1beta1.NodePool.QueuedProvisioning, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueuedProvisioning to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueuedProvisioning
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
 
@@ -42848,6 +43064,112 @@ export namespace google {
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
+            /** Properties of an AutopilotConversionStatus. */
+            interface IAutopilotConversionStatus {
+
+                /** AutopilotConversionStatus state */
+                state?: (google.container.v1beta1.AutopilotConversionStatus.State|keyof typeof google.container.v1beta1.AutopilotConversionStatus.State|null);
+            }
+
+            /** Represents an AutopilotConversionStatus. */
+            class AutopilotConversionStatus implements IAutopilotConversionStatus {
+
+                /**
+                 * Constructs a new AutopilotConversionStatus.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IAutopilotConversionStatus);
+
+                /** AutopilotConversionStatus state. */
+                public state: (google.container.v1beta1.AutopilotConversionStatus.State|keyof typeof google.container.v1beta1.AutopilotConversionStatus.State);
+
+                /**
+                 * Creates a new AutopilotConversionStatus instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns AutopilotConversionStatus instance
+                 */
+                public static create(properties?: google.container.v1beta1.IAutopilotConversionStatus): google.container.v1beta1.AutopilotConversionStatus;
+
+                /**
+                 * Encodes the specified AutopilotConversionStatus message. Does not implicitly {@link google.container.v1beta1.AutopilotConversionStatus.verify|verify} messages.
+                 * @param message AutopilotConversionStatus message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IAutopilotConversionStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified AutopilotConversionStatus message, length delimited. Does not implicitly {@link google.container.v1beta1.AutopilotConversionStatus.verify|verify} messages.
+                 * @param message AutopilotConversionStatus message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IAutopilotConversionStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an AutopilotConversionStatus message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns AutopilotConversionStatus
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.AutopilotConversionStatus;
+
+                /**
+                 * Decodes an AutopilotConversionStatus message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns AutopilotConversionStatus
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.AutopilotConversionStatus;
+
+                /**
+                 * Verifies an AutopilotConversionStatus message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an AutopilotConversionStatus message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns AutopilotConversionStatus
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.AutopilotConversionStatus;
+
+                /**
+                 * Creates a plain object from an AutopilotConversionStatus message. Also converts values to other types if specified.
+                 * @param message AutopilotConversionStatus
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.AutopilotConversionStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this AutopilotConversionStatus to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for AutopilotConversionStatus
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace AutopilotConversionStatus {
+
+                /** State enum. */
+                enum State {
+                    STATE_UNSPECIFIED = 0,
+                    DONE = 5
+                }
+            }
+
             /** Properties of an Autopilot. */
             interface IAutopilot {
 
@@ -42856,6 +43178,9 @@ export namespace google {
 
                 /** Autopilot workloadPolicyConfig */
                 workloadPolicyConfig?: (google.container.v1beta1.IWorkloadPolicyConfig|null);
+
+                /** Autopilot conversionStatus */
+                conversionStatus?: (google.container.v1beta1.IAutopilotConversionStatus|null);
             }
 
             /** Represents an Autopilot. */
@@ -42872,6 +43197,9 @@ export namespace google {
 
                 /** Autopilot workloadPolicyConfig. */
                 public workloadPolicyConfig?: (google.container.v1beta1.IWorkloadPolicyConfig|null);
+
+                /** Autopilot conversionStatus. */
+                public conversionStatus?: (google.container.v1beta1.IAutopilotConversionStatus|null);
 
                 /**
                  * Creates a new Autopilot instance using the specified properties.
@@ -44296,6 +44624,9 @@ export namespace google {
 
                 /** AdvancedDatapathObservabilityConfig relayMode */
                 relayMode?: (google.container.v1beta1.AdvancedDatapathObservabilityConfig.RelayMode|keyof typeof google.container.v1beta1.AdvancedDatapathObservabilityConfig.RelayMode|null);
+
+                /** AdvancedDatapathObservabilityConfig enableRelay */
+                enableRelay?: (boolean|null);
             }
 
             /** Represents an AdvancedDatapathObservabilityConfig. */
@@ -44312,6 +44643,12 @@ export namespace google {
 
                 /** AdvancedDatapathObservabilityConfig relayMode. */
                 public relayMode: (google.container.v1beta1.AdvancedDatapathObservabilityConfig.RelayMode|keyof typeof google.container.v1beta1.AdvancedDatapathObservabilityConfig.RelayMode);
+
+                /** AdvancedDatapathObservabilityConfig enableRelay. */
+                public enableRelay?: (boolean|null);
+
+                /** AdvancedDatapathObservabilityConfig _enableRelay. */
+                public _enableRelay?: "enableRelay";
 
                 /**
                  * Creates a new AdvancedDatapathObservabilityConfig instance using the specified properties.

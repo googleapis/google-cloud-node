@@ -1880,6 +1880,14 @@
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         },
+                        "grpcPorts": {
+                          "rule": "repeated",
+                          "type": "Port",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
                         "deploymentTimeout": {
                           "type": "google.protobuf.Duration",
                           "id": 10,
@@ -13382,6 +13390,44 @@
                             }
                           ]
                         },
+                        "DirectPredict": {
+                          "requestType": "DirectPredictRequest",
+                          "responseType": "DirectPredictResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:directPredict",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:directPredict",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "DirectRawPredict": {
+                          "requestType": "DirectRawPredictRequest",
+                          "responseType": "DirectRawPredictResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:directRawPredict",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:directRawPredict",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "StreamingPredict": {
+                          "requestType": "StreamingPredictRequest",
+                          "requestStream": true,
+                          "responseType": "StreamingPredictResponse",
+                          "responseStream": true
+                        },
                         "ServerStreamingPredict": {
                           "requestType": "StreamingPredictRequest",
                           "responseType": "StreamingPredictResponse",
@@ -13404,6 +13450,12 @@
                               }
                             }
                           ]
+                        },
+                        "StreamingRawPredict": {
+                          "requestType": "StreamingRawPredictRequest",
+                          "requestStream": true,
+                          "responseType": "StreamingRawPredictResponse",
+                          "responseStream": true
                         },
                         "Explain": {
                           "requestType": "ExplainRequest",
@@ -13509,6 +13561,68 @@
                         }
                       }
                     },
+                    "DirectPredictRequest": {
+                      "fields": {
+                        "endpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                          }
+                        },
+                        "inputs": {
+                          "rule": "repeated",
+                          "type": "Tensor",
+                          "id": 2
+                        },
+                        "parameters": {
+                          "type": "Tensor",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "DirectPredictResponse": {
+                      "fields": {
+                        "outputs": {
+                          "rule": "repeated",
+                          "type": "Tensor",
+                          "id": 1
+                        },
+                        "parameters": {
+                          "type": "Tensor",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DirectRawPredictRequest": {
+                      "fields": {
+                        "endpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                          }
+                        },
+                        "methodName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "input": {
+                          "type": "bytes",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "DirectRawPredictResponse": {
+                      "fields": {
+                        "output": {
+                          "type": "bytes",
+                          "id": 1
+                        }
+                      }
+                    },
                     "StreamingPredictRequest": {
                       "fields": {
                         "endpoint": {
@@ -13540,6 +13654,34 @@
                         "parameters": {
                           "type": "Tensor",
                           "id": 2
+                        }
+                      }
+                    },
+                    "StreamingRawPredictRequest": {
+                      "fields": {
+                        "endpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                          }
+                        },
+                        "methodName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "input": {
+                          "type": "bytes",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "StreamingRawPredictResponse": {
+                      "fields": {
+                        "output": {
+                          "type": "bytes",
+                          "id": 1
                         }
                       }
                     },
@@ -25279,6 +25421,14 @@
                         "healthRoute": {
                           "type": "string",
                           "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "grpcPorts": {
+                          "rule": "repeated",
+                          "type": "Port",
+                          "id": 9,
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
@@ -42706,6 +42856,44 @@
                             }
                           ]
                         },
+                        "DirectPredict": {
+                          "requestType": "DirectPredictRequest",
+                          "responseType": "DirectPredictResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:directPredict",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:directPredict",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "DirectRawPredict": {
+                          "requestType": "DirectRawPredictRequest",
+                          "responseType": "DirectRawPredictResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:directRawPredict",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:directRawPredict",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "StreamingPredict": {
+                          "requestType": "StreamingPredictRequest",
+                          "requestStream": true,
+                          "responseType": "StreamingPredictResponse",
+                          "responseStream": true
+                        },
                         "ServerStreamingPredict": {
                           "requestType": "StreamingPredictRequest",
                           "responseType": "StreamingPredictResponse",
@@ -42728,6 +42916,12 @@
                               }
                             }
                           ]
+                        },
+                        "StreamingRawPredict": {
+                          "requestType": "StreamingRawPredictRequest",
+                          "requestStream": true,
+                          "responseType": "StreamingRawPredictResponse",
+                          "responseStream": true
                         },
                         "Explain": {
                           "requestType": "ExplainRequest",
@@ -42859,6 +43053,68 @@
                         }
                       }
                     },
+                    "DirectPredictRequest": {
+                      "fields": {
+                        "endpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                          }
+                        },
+                        "inputs": {
+                          "rule": "repeated",
+                          "type": "Tensor",
+                          "id": 2
+                        },
+                        "parameters": {
+                          "type": "Tensor",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "DirectPredictResponse": {
+                      "fields": {
+                        "outputs": {
+                          "rule": "repeated",
+                          "type": "Tensor",
+                          "id": 1
+                        },
+                        "parameters": {
+                          "type": "Tensor",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DirectRawPredictRequest": {
+                      "fields": {
+                        "endpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                          }
+                        },
+                        "methodName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "input": {
+                          "type": "bytes",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "DirectRawPredictResponse": {
+                      "fields": {
+                        "output": {
+                          "type": "bytes",
+                          "id": 1
+                        }
+                      }
+                    },
                     "StreamingPredictRequest": {
                       "fields": {
                         "endpoint": {
@@ -42890,6 +43146,34 @@
                         "parameters": {
                           "type": "Tensor",
                           "id": 2
+                        }
+                      }
+                    },
+                    "StreamingRawPredictRequest": {
+                      "fields": {
+                        "endpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                          }
+                        },
+                        "methodName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "input": {
+                          "type": "bytes",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "StreamingRawPredictResponse": {
+                      "fields": {
+                        "output": {
+                          "type": "bytes",
+                          "id": 1
                         }
                       }
                     },
