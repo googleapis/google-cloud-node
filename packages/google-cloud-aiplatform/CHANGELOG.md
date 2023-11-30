@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.8.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.7.0...aiplatform-v3.8.0) (2023-11-30)
+
+
+### Features
+
+* Add grpc_ports to UploadModel ModelContainerSpec ([#4836](https://github.com/googleapis/google-cloud-node/issues/4836)) ([736ff8b](https://github.com/googleapis/google-cloud-node/commit/736ff8bf73959cbc6e0caa0125bf4dd2ba0776dc))
+
 ## [3.7.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.6.0...aiplatform-v3.7.0) (2023-11-16)
 
 
