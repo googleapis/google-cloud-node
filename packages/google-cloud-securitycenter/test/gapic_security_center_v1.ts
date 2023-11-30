@@ -280,9 +280,8 @@ describe('v1.SecurityCenterClient', () => {
       );
       client.innerApiCalls.createSecurityHealthAnalyticsCustomModule =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.createSecurityHealthAnalyticsCustomModule(
-        request
-      );
+      const [response] =
+        await client.createSecurityHealthAnalyticsCustomModule(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls
@@ -1217,9 +1216,8 @@ describe('v1.SecurityCenterClient', () => {
       );
       client.innerApiCalls.deleteSecurityHealthAnalyticsCustomModule =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteSecurityHealthAnalyticsCustomModule(
-        request
-      );
+      const [response] =
+        await client.deleteSecurityHealthAnalyticsCustomModule(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls
@@ -2166,9 +2164,8 @@ describe('v1.SecurityCenterClient', () => {
       );
       client.innerApiCalls.getSecurityHealthAnalyticsCustomModule =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.getSecurityHealthAnalyticsCustomModule(
-        request
-      );
+      const [response] =
+        await client.getSecurityHealthAnalyticsCustomModule(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.getSecurityHealthAnalyticsCustomModule as SinonStub
@@ -3776,9 +3773,8 @@ describe('v1.SecurityCenterClient', () => {
       );
       client.innerApiCalls.updateSecurityHealthAnalyticsCustomModule =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.updateSecurityHealthAnalyticsCustomModule(
-        request
-      );
+      const [response] =
+        await client.updateSecurityHealthAnalyticsCustomModule(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls
@@ -7823,9 +7819,8 @@ describe('v1.SecurityCenterClient', () => {
       ];
       client.innerApiCalls.listSecurityHealthAnalyticsCustomModules =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.listSecurityHealthAnalyticsCustomModules(
-        request
-      );
+      const [response] =
+        await client.listSecurityHealthAnalyticsCustomModules(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls
