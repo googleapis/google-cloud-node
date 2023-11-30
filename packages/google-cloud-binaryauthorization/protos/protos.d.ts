@@ -2273,6 +2273,2731 @@ export namespace google {
                     }
                 }
             }
+
+            /** Namespace v1beta1. */
+            namespace v1beta1 {
+
+                /** Properties of a ContinuousValidationEvent. */
+                interface IContinuousValidationEvent {
+
+                    /** ContinuousValidationEvent podEvent */
+                    podEvent?: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IContinuousValidationPodEvent|null);
+
+                    /** ContinuousValidationEvent configErrorEvent */
+                    configErrorEvent?: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IConfigErrorEvent|null);
+                }
+
+                /** Represents a ContinuousValidationEvent. */
+                class ContinuousValidationEvent implements IContinuousValidationEvent {
+
+                    /**
+                     * Constructs a new ContinuousValidationEvent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.binaryauthorization.v1beta1.IContinuousValidationEvent);
+
+                    /** ContinuousValidationEvent podEvent. */
+                    public podEvent?: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IContinuousValidationPodEvent|null);
+
+                    /** ContinuousValidationEvent configErrorEvent. */
+                    public configErrorEvent?: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IConfigErrorEvent|null);
+
+                    /** ContinuousValidationEvent eventType. */
+                    public eventType?: ("podEvent"|"configErrorEvent");
+
+                    /**
+                     * Creates a new ContinuousValidationEvent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ContinuousValidationEvent instance
+                     */
+                    public static create(properties?: google.cloud.binaryauthorization.v1beta1.IContinuousValidationEvent): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent;
+
+                    /**
+                     * Encodes the specified ContinuousValidationEvent message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.verify|verify} messages.
+                     * @param message ContinuousValidationEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.binaryauthorization.v1beta1.IContinuousValidationEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ContinuousValidationEvent message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.verify|verify} messages.
+                     * @param message ContinuousValidationEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.binaryauthorization.v1beta1.IContinuousValidationEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ContinuousValidationEvent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ContinuousValidationEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent;
+
+                    /**
+                     * Decodes a ContinuousValidationEvent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ContinuousValidationEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent;
+
+                    /**
+                     * Verifies a ContinuousValidationEvent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ContinuousValidationEvent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ContinuousValidationEvent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent;
+
+                    /**
+                     * Creates a plain object from a ContinuousValidationEvent message. Also converts values to other types if specified.
+                     * @param message ContinuousValidationEvent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ContinuousValidationEvent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ContinuousValidationEvent
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ContinuousValidationEvent {
+
+                    /** Properties of a ContinuousValidationPodEvent. */
+                    interface IContinuousValidationPodEvent {
+
+                        /** ContinuousValidationPodEvent podNamespace */
+                        podNamespace?: (string|null);
+
+                        /** ContinuousValidationPodEvent pod */
+                        pod?: (string|null);
+
+                        /** ContinuousValidationPodEvent policyName */
+                        policyName?: (string|null);
+
+                        /** ContinuousValidationPodEvent deployTime */
+                        deployTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ContinuousValidationPodEvent endTime */
+                        endTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ContinuousValidationPodEvent verdict */
+                        verdict?: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.PolicyConformanceVerdict|keyof typeof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.PolicyConformanceVerdict|null);
+
+                        /** ContinuousValidationPodEvent images */
+                        images?: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.IImageDetails[]|null);
+                    }
+
+                    /** Represents a ContinuousValidationPodEvent. */
+                    class ContinuousValidationPodEvent implements IContinuousValidationPodEvent {
+
+                        /**
+                         * Constructs a new ContinuousValidationPodEvent.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IContinuousValidationPodEvent);
+
+                        /** ContinuousValidationPodEvent podNamespace. */
+                        public podNamespace: string;
+
+                        /** ContinuousValidationPodEvent pod. */
+                        public pod: string;
+
+                        /** ContinuousValidationPodEvent policyName. */
+                        public policyName: string;
+
+                        /** ContinuousValidationPodEvent deployTime. */
+                        public deployTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ContinuousValidationPodEvent endTime. */
+                        public endTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ContinuousValidationPodEvent verdict. */
+                        public verdict: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.PolicyConformanceVerdict|keyof typeof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.PolicyConformanceVerdict);
+
+                        /** ContinuousValidationPodEvent images. */
+                        public images: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.IImageDetails[];
+
+                        /**
+                         * Creates a new ContinuousValidationPodEvent instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ContinuousValidationPodEvent instance
+                         */
+                        public static create(properties?: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IContinuousValidationPodEvent): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent;
+
+                        /**
+                         * Encodes the specified ContinuousValidationPodEvent message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.verify|verify} messages.
+                         * @param message ContinuousValidationPodEvent message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IContinuousValidationPodEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ContinuousValidationPodEvent message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.verify|verify} messages.
+                         * @param message ContinuousValidationPodEvent message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IContinuousValidationPodEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ContinuousValidationPodEvent message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ContinuousValidationPodEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent;
+
+                        /**
+                         * Decodes a ContinuousValidationPodEvent message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ContinuousValidationPodEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent;
+
+                        /**
+                         * Verifies a ContinuousValidationPodEvent message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ContinuousValidationPodEvent message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ContinuousValidationPodEvent
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent;
+
+                        /**
+                         * Creates a plain object from a ContinuousValidationPodEvent message. Also converts values to other types if specified.
+                         * @param message ContinuousValidationPodEvent
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ContinuousValidationPodEvent to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ContinuousValidationPodEvent
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ContinuousValidationPodEvent {
+
+                        /** PolicyConformanceVerdict enum. */
+                        enum PolicyConformanceVerdict {
+                            POLICY_CONFORMANCE_VERDICT_UNSPECIFIED = 0,
+                            VIOLATES_POLICY = 1
+                        }
+
+                        /** Properties of an ImageDetails. */
+                        interface IImageDetails {
+
+                            /** ImageDetails image */
+                            image?: (string|null);
+
+                            /** ImageDetails containerName */
+                            containerName?: (string|null);
+
+                            /** ImageDetails containerType */
+                            containerType?: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ContainerType|keyof typeof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ContainerType|null);
+
+                            /** ImageDetails result */
+                            result?: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.AuditResult|keyof typeof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.AuditResult|null);
+
+                            /** ImageDetails description */
+                            description?: (string|null);
+
+                            /** ImageDetails checkResults */
+                            checkResults?: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ICheckResult[]|null);
+                        }
+
+                        /** Represents an ImageDetails. */
+                        class ImageDetails implements IImageDetails {
+
+                            /**
+                             * Constructs a new ImageDetails.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.IImageDetails);
+
+                            /** ImageDetails image. */
+                            public image: string;
+
+                            /** ImageDetails containerName. */
+                            public containerName: string;
+
+                            /** ImageDetails containerType. */
+                            public containerType: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ContainerType|keyof typeof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ContainerType);
+
+                            /** ImageDetails result. */
+                            public result: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.AuditResult|keyof typeof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.AuditResult);
+
+                            /** ImageDetails description. */
+                            public description: string;
+
+                            /** ImageDetails checkResults. */
+                            public checkResults: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ICheckResult[];
+
+                            /**
+                             * Creates a new ImageDetails instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ImageDetails instance
+                             */
+                            public static create(properties?: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.IImageDetails): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails;
+
+                            /**
+                             * Encodes the specified ImageDetails message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.verify|verify} messages.
+                             * @param message ImageDetails message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.IImageDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ImageDetails message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.verify|verify} messages.
+                             * @param message ImageDetails message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.IImageDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an ImageDetails message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ImageDetails
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails;
+
+                            /**
+                             * Decodes an ImageDetails message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ImageDetails
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails;
+
+                            /**
+                             * Verifies an ImageDetails message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an ImageDetails message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ImageDetails
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails;
+
+                            /**
+                             * Creates a plain object from an ImageDetails message. Also converts values to other types if specified.
+                             * @param message ImageDetails
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ImageDetails to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ImageDetails
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace ImageDetails {
+
+                            /** ContainerType enum. */
+                            enum ContainerType {
+                                CONTAINER_TYPE_UNSPECIFIED = 0,
+                                CONTAINER = 1,
+                                INIT_CONTAINER = 2,
+                                EPHEMERAL_CONTAINER = 3
+                            }
+
+                            /** AuditResult enum. */
+                            enum AuditResult {
+                                AUDIT_RESULT_UNSPECIFIED = 0,
+                                ALLOW = 1,
+                                DENY = 2
+                            }
+
+                            /** Properties of a CheckResult. */
+                            interface ICheckResult {
+
+                                /** CheckResult checkSetIndex */
+                                checkSetIndex?: (string|null);
+
+                                /** CheckResult checkSetName */
+                                checkSetName?: (string|null);
+
+                                /** CheckResult checkSetScope */
+                                checkSetScope?: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.ICheckSetScope|null);
+
+                                /** CheckResult checkIndex */
+                                checkIndex?: (string|null);
+
+                                /** CheckResult checkName */
+                                checkName?: (string|null);
+
+                                /** CheckResult checkType */
+                                checkType?: (string|null);
+
+                                /** CheckResult verdict */
+                                verdict?: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckVerdict|keyof typeof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckVerdict|null);
+
+                                /** CheckResult explanation */
+                                explanation?: (string|null);
+                            }
+
+                            /** Represents a CheckResult. */
+                            class CheckResult implements ICheckResult {
+
+                                /**
+                                 * Constructs a new CheckResult.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ICheckResult);
+
+                                /** CheckResult checkSetIndex. */
+                                public checkSetIndex: string;
+
+                                /** CheckResult checkSetName. */
+                                public checkSetName: string;
+
+                                /** CheckResult checkSetScope. */
+                                public checkSetScope?: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.ICheckSetScope|null);
+
+                                /** CheckResult checkIndex. */
+                                public checkIndex: string;
+
+                                /** CheckResult checkName. */
+                                public checkName: string;
+
+                                /** CheckResult checkType. */
+                                public checkType: string;
+
+                                /** CheckResult verdict. */
+                                public verdict: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckVerdict|keyof typeof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckVerdict);
+
+                                /** CheckResult explanation. */
+                                public explanation: string;
+
+                                /**
+                                 * Creates a new CheckResult instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns CheckResult instance
+                                 */
+                                public static create(properties?: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ICheckResult): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult;
+
+                                /**
+                                 * Encodes the specified CheckResult message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.verify|verify} messages.
+                                 * @param message CheckResult message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ICheckResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified CheckResult message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.verify|verify} messages.
+                                 * @param message CheckResult message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ICheckResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a CheckResult message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns CheckResult
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult;
+
+                                /**
+                                 * Decodes a CheckResult message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns CheckResult
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult;
+
+                                /**
+                                 * Verifies a CheckResult message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a CheckResult message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns CheckResult
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult;
+
+                                /**
+                                 * Creates a plain object from a CheckResult message. Also converts values to other types if specified.
+                                 * @param message CheckResult
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this CheckResult to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for CheckResult
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            namespace CheckResult {
+
+                                /** Properties of a CheckSetScope. */
+                                interface ICheckSetScope {
+
+                                    /** CheckSetScope kubernetesServiceAccount */
+                                    kubernetesServiceAccount?: (string|null);
+
+                                    /** CheckSetScope kubernetesNamespace */
+                                    kubernetesNamespace?: (string|null);
+                                }
+
+                                /** Represents a CheckSetScope. */
+                                class CheckSetScope implements ICheckSetScope {
+
+                                    /**
+                                     * Constructs a new CheckSetScope.
+                                     * @param [properties] Properties to set
+                                     */
+                                    constructor(properties?: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.ICheckSetScope);
+
+                                    /** CheckSetScope kubernetesServiceAccount. */
+                                    public kubernetesServiceAccount?: (string|null);
+
+                                    /** CheckSetScope kubernetesNamespace. */
+                                    public kubernetesNamespace?: (string|null);
+
+                                    /** CheckSetScope scope. */
+                                    public scope?: ("kubernetesServiceAccount"|"kubernetesNamespace");
+
+                                    /**
+                                     * Creates a new CheckSetScope instance using the specified properties.
+                                     * @param [properties] Properties to set
+                                     * @returns CheckSetScope instance
+                                     */
+                                    public static create(properties?: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.ICheckSetScope): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope;
+
+                                    /**
+                                     * Encodes the specified CheckSetScope message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope.verify|verify} messages.
+                                     * @param message CheckSetScope message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encode(message: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.ICheckSetScope, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Encodes the specified CheckSetScope message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope.verify|verify} messages.
+                                     * @param message CheckSetScope message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encodeDelimited(message: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.ICheckSetScope, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Decodes a CheckSetScope message from the specified reader or buffer.
+                                     * @param reader Reader or buffer to decode from
+                                     * @param [length] Message length if known beforehand
+                                     * @returns CheckSetScope
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope;
+
+                                    /**
+                                     * Decodes a CheckSetScope message from the specified reader or buffer, length delimited.
+                                     * @param reader Reader or buffer to decode from
+                                     * @returns CheckSetScope
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope;
+
+                                    /**
+                                     * Verifies a CheckSetScope message.
+                                     * @param message Plain object to verify
+                                     * @returns `null` if valid, otherwise the reason why it is not
+                                     */
+                                    public static verify(message: { [k: string]: any }): (string|null);
+
+                                    /**
+                                     * Creates a CheckSetScope message from a plain object. Also converts values to their respective internal types.
+                                     * @param object Plain object
+                                     * @returns CheckSetScope
+                                     */
+                                    public static fromObject(object: { [k: string]: any }): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope;
+
+                                    /**
+                                     * Creates a plain object from a CheckSetScope message. Also converts values to other types if specified.
+                                     * @param message CheckSetScope
+                                     * @param [options] Conversion options
+                                     * @returns Plain object
+                                     */
+                                    public static toObject(message: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                    /**
+                                     * Converts this CheckSetScope to JSON.
+                                     * @returns JSON object
+                                     */
+                                    public toJSON(): { [k: string]: any };
+
+                                    /**
+                                     * Gets the default type url for CheckSetScope
+                                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns The default type url
+                                     */
+                                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                                }
+
+                                /** CheckVerdict enum. */
+                                enum CheckVerdict {
+                                    CHECK_VERDICT_UNSPECIFIED = 0,
+                                    NON_CONFORMANT = 1
+                                }
+                            }
+                        }
+                    }
+
+                    /** Properties of a ConfigErrorEvent. */
+                    interface IConfigErrorEvent {
+
+                        /** ConfigErrorEvent description */
+                        description?: (string|null);
+                    }
+
+                    /** Represents a ConfigErrorEvent. */
+                    class ConfigErrorEvent implements IConfigErrorEvent {
+
+                        /**
+                         * Constructs a new ConfigErrorEvent.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IConfigErrorEvent);
+
+                        /** ConfigErrorEvent description. */
+                        public description: string;
+
+                        /**
+                         * Creates a new ConfigErrorEvent instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConfigErrorEvent instance
+                         */
+                        public static create(properties?: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IConfigErrorEvent): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent;
+
+                        /**
+                         * Encodes the specified ConfigErrorEvent message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent.verify|verify} messages.
+                         * @param message ConfigErrorEvent message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IConfigErrorEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConfigErrorEvent message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent.verify|verify} messages.
+                         * @param message ConfigErrorEvent message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IConfigErrorEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConfigErrorEvent message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConfigErrorEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent;
+
+                        /**
+                         * Decodes a ConfigErrorEvent message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConfigErrorEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent;
+
+                        /**
+                         * Verifies a ConfigErrorEvent message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConfigErrorEvent message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConfigErrorEvent
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent;
+
+                        /**
+                         * Creates a plain object from a ConfigErrorEvent message. Also converts values to other types if specified.
+                         * @param message ConfigErrorEvent
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConfigErrorEvent to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ConfigErrorEvent
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a Policy. */
+                interface IPolicy {
+
+                    /** Policy name */
+                    name?: (string|null);
+
+                    /** Policy description */
+                    description?: (string|null);
+
+                    /** Policy globalPolicyEvaluationMode */
+                    globalPolicyEvaluationMode?: (google.cloud.binaryauthorization.v1beta1.Policy.GlobalPolicyEvaluationMode|keyof typeof google.cloud.binaryauthorization.v1beta1.Policy.GlobalPolicyEvaluationMode|null);
+
+                    /** Policy admissionWhitelistPatterns */
+                    admissionWhitelistPatterns?: (google.cloud.binaryauthorization.v1beta1.IAdmissionWhitelistPattern[]|null);
+
+                    /** Policy clusterAdmissionRules */
+                    clusterAdmissionRules?: ({ [k: string]: google.cloud.binaryauthorization.v1beta1.IAdmissionRule }|null);
+
+                    /** Policy kubernetesNamespaceAdmissionRules */
+                    kubernetesNamespaceAdmissionRules?: ({ [k: string]: google.cloud.binaryauthorization.v1beta1.IAdmissionRule }|null);
+
+                    /** Policy kubernetesServiceAccountAdmissionRules */
+                    kubernetesServiceAccountAdmissionRules?: ({ [k: string]: google.cloud.binaryauthorization.v1beta1.IAdmissionRule }|null);
+
+                    /** Policy istioServiceIdentityAdmissionRules */
+                    istioServiceIdentityAdmissionRules?: ({ [k: string]: google.cloud.binaryauthorization.v1beta1.IAdmissionRule }|null);
+
+                    /** Policy defaultAdmissionRule */
+                    defaultAdmissionRule?: (google.cloud.binaryauthorization.v1beta1.IAdmissionRule|null);
+
+                    /** Policy updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a Policy. */
+                class Policy implements IPolicy {
+
+                    /**
+                     * Constructs a new Policy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.binaryauthorization.v1beta1.IPolicy);
+
+                    /** Policy name. */
+                    public name: string;
+
+                    /** Policy description. */
+                    public description: string;
+
+                    /** Policy globalPolicyEvaluationMode. */
+                    public globalPolicyEvaluationMode: (google.cloud.binaryauthorization.v1beta1.Policy.GlobalPolicyEvaluationMode|keyof typeof google.cloud.binaryauthorization.v1beta1.Policy.GlobalPolicyEvaluationMode);
+
+                    /** Policy admissionWhitelistPatterns. */
+                    public admissionWhitelistPatterns: google.cloud.binaryauthorization.v1beta1.IAdmissionWhitelistPattern[];
+
+                    /** Policy clusterAdmissionRules. */
+                    public clusterAdmissionRules: { [k: string]: google.cloud.binaryauthorization.v1beta1.IAdmissionRule };
+
+                    /** Policy kubernetesNamespaceAdmissionRules. */
+                    public kubernetesNamespaceAdmissionRules: { [k: string]: google.cloud.binaryauthorization.v1beta1.IAdmissionRule };
+
+                    /** Policy kubernetesServiceAccountAdmissionRules. */
+                    public kubernetesServiceAccountAdmissionRules: { [k: string]: google.cloud.binaryauthorization.v1beta1.IAdmissionRule };
+
+                    /** Policy istioServiceIdentityAdmissionRules. */
+                    public istioServiceIdentityAdmissionRules: { [k: string]: google.cloud.binaryauthorization.v1beta1.IAdmissionRule };
+
+                    /** Policy defaultAdmissionRule. */
+                    public defaultAdmissionRule?: (google.cloud.binaryauthorization.v1beta1.IAdmissionRule|null);
+
+                    /** Policy updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new Policy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Policy instance
+                     */
+                    public static create(properties?: google.cloud.binaryauthorization.v1beta1.IPolicy): google.cloud.binaryauthorization.v1beta1.Policy;
+
+                    /**
+                     * Encodes the specified Policy message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.Policy.verify|verify} messages.
+                     * @param message Policy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.binaryauthorization.v1beta1.IPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Policy message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.Policy.verify|verify} messages.
+                     * @param message Policy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.binaryauthorization.v1beta1.IPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Policy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Policy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.binaryauthorization.v1beta1.Policy;
+
+                    /**
+                     * Decodes a Policy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Policy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.binaryauthorization.v1beta1.Policy;
+
+                    /**
+                     * Verifies a Policy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Policy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Policy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.binaryauthorization.v1beta1.Policy;
+
+                    /**
+                     * Creates a plain object from a Policy message. Also converts values to other types if specified.
+                     * @param message Policy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.binaryauthorization.v1beta1.Policy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Policy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Policy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Policy {
+
+                    /** GlobalPolicyEvaluationMode enum. */
+                    enum GlobalPolicyEvaluationMode {
+                        GLOBAL_POLICY_EVALUATION_MODE_UNSPECIFIED = 0,
+                        ENABLE = 1,
+                        DISABLE = 2
+                    }
+                }
+
+                /** Properties of an AdmissionWhitelistPattern. */
+                interface IAdmissionWhitelistPattern {
+
+                    /** AdmissionWhitelistPattern namePattern */
+                    namePattern?: (string|null);
+                }
+
+                /** Represents an AdmissionWhitelistPattern. */
+                class AdmissionWhitelistPattern implements IAdmissionWhitelistPattern {
+
+                    /**
+                     * Constructs a new AdmissionWhitelistPattern.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.binaryauthorization.v1beta1.IAdmissionWhitelistPattern);
+
+                    /** AdmissionWhitelistPattern namePattern. */
+                    public namePattern: string;
+
+                    /**
+                     * Creates a new AdmissionWhitelistPattern instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AdmissionWhitelistPattern instance
+                     */
+                    public static create(properties?: google.cloud.binaryauthorization.v1beta1.IAdmissionWhitelistPattern): google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern;
+
+                    /**
+                     * Encodes the specified AdmissionWhitelistPattern message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern.verify|verify} messages.
+                     * @param message AdmissionWhitelistPattern message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.binaryauthorization.v1beta1.IAdmissionWhitelistPattern, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AdmissionWhitelistPattern message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern.verify|verify} messages.
+                     * @param message AdmissionWhitelistPattern message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.binaryauthorization.v1beta1.IAdmissionWhitelistPattern, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AdmissionWhitelistPattern message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AdmissionWhitelistPattern
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern;
+
+                    /**
+                     * Decodes an AdmissionWhitelistPattern message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AdmissionWhitelistPattern
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern;
+
+                    /**
+                     * Verifies an AdmissionWhitelistPattern message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AdmissionWhitelistPattern message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AdmissionWhitelistPattern
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern;
+
+                    /**
+                     * Creates a plain object from an AdmissionWhitelistPattern message. Also converts values to other types if specified.
+                     * @param message AdmissionWhitelistPattern
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AdmissionWhitelistPattern to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AdmissionWhitelistPattern
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AdmissionRule. */
+                interface IAdmissionRule {
+
+                    /** AdmissionRule evaluationMode */
+                    evaluationMode?: (google.cloud.binaryauthorization.v1beta1.AdmissionRule.EvaluationMode|keyof typeof google.cloud.binaryauthorization.v1beta1.AdmissionRule.EvaluationMode|null);
+
+                    /** AdmissionRule requireAttestationsBy */
+                    requireAttestationsBy?: (string[]|null);
+
+                    /** AdmissionRule enforcementMode */
+                    enforcementMode?: (google.cloud.binaryauthorization.v1beta1.AdmissionRule.EnforcementMode|keyof typeof google.cloud.binaryauthorization.v1beta1.AdmissionRule.EnforcementMode|null);
+                }
+
+                /** Represents an AdmissionRule. */
+                class AdmissionRule implements IAdmissionRule {
+
+                    /**
+                     * Constructs a new AdmissionRule.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.binaryauthorization.v1beta1.IAdmissionRule);
+
+                    /** AdmissionRule evaluationMode. */
+                    public evaluationMode: (google.cloud.binaryauthorization.v1beta1.AdmissionRule.EvaluationMode|keyof typeof google.cloud.binaryauthorization.v1beta1.AdmissionRule.EvaluationMode);
+
+                    /** AdmissionRule requireAttestationsBy. */
+                    public requireAttestationsBy: string[];
+
+                    /** AdmissionRule enforcementMode. */
+                    public enforcementMode: (google.cloud.binaryauthorization.v1beta1.AdmissionRule.EnforcementMode|keyof typeof google.cloud.binaryauthorization.v1beta1.AdmissionRule.EnforcementMode);
+
+                    /**
+                     * Creates a new AdmissionRule instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AdmissionRule instance
+                     */
+                    public static create(properties?: google.cloud.binaryauthorization.v1beta1.IAdmissionRule): google.cloud.binaryauthorization.v1beta1.AdmissionRule;
+
+                    /**
+                     * Encodes the specified AdmissionRule message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.AdmissionRule.verify|verify} messages.
+                     * @param message AdmissionRule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.binaryauthorization.v1beta1.IAdmissionRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AdmissionRule message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.AdmissionRule.verify|verify} messages.
+                     * @param message AdmissionRule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.binaryauthorization.v1beta1.IAdmissionRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AdmissionRule message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AdmissionRule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.binaryauthorization.v1beta1.AdmissionRule;
+
+                    /**
+                     * Decodes an AdmissionRule message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AdmissionRule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.binaryauthorization.v1beta1.AdmissionRule;
+
+                    /**
+                     * Verifies an AdmissionRule message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AdmissionRule message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AdmissionRule
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.binaryauthorization.v1beta1.AdmissionRule;
+
+                    /**
+                     * Creates a plain object from an AdmissionRule message. Also converts values to other types if specified.
+                     * @param message AdmissionRule
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.binaryauthorization.v1beta1.AdmissionRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AdmissionRule to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AdmissionRule
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AdmissionRule {
+
+                    /** EvaluationMode enum. */
+                    enum EvaluationMode {
+                        EVALUATION_MODE_UNSPECIFIED = 0,
+                        ALWAYS_ALLOW = 1,
+                        REQUIRE_ATTESTATION = 2,
+                        ALWAYS_DENY = 3
+                    }
+
+                    /** EnforcementMode enum. */
+                    enum EnforcementMode {
+                        ENFORCEMENT_MODE_UNSPECIFIED = 0,
+                        ENFORCED_BLOCK_AND_AUDIT_LOG = 1,
+                        DRYRUN_AUDIT_LOG_ONLY = 2
+                    }
+                }
+
+                /** Properties of an Attestor. */
+                interface IAttestor {
+
+                    /** Attestor name */
+                    name?: (string|null);
+
+                    /** Attestor description */
+                    description?: (string|null);
+
+                    /** Attestor userOwnedDrydockNote */
+                    userOwnedDrydockNote?: (google.cloud.binaryauthorization.v1beta1.IUserOwnedDrydockNote|null);
+
+                    /** Attestor updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents an Attestor. */
+                class Attestor implements IAttestor {
+
+                    /**
+                     * Constructs a new Attestor.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.binaryauthorization.v1beta1.IAttestor);
+
+                    /** Attestor name. */
+                    public name: string;
+
+                    /** Attestor description. */
+                    public description: string;
+
+                    /** Attestor userOwnedDrydockNote. */
+                    public userOwnedDrydockNote?: (google.cloud.binaryauthorization.v1beta1.IUserOwnedDrydockNote|null);
+
+                    /** Attestor updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Attestor attestorType. */
+                    public attestorType?: "userOwnedDrydockNote";
+
+                    /**
+                     * Creates a new Attestor instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Attestor instance
+                     */
+                    public static create(properties?: google.cloud.binaryauthorization.v1beta1.IAttestor): google.cloud.binaryauthorization.v1beta1.Attestor;
+
+                    /**
+                     * Encodes the specified Attestor message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.Attestor.verify|verify} messages.
+                     * @param message Attestor message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.binaryauthorization.v1beta1.IAttestor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Attestor message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.Attestor.verify|verify} messages.
+                     * @param message Attestor message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.binaryauthorization.v1beta1.IAttestor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Attestor message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Attestor
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.binaryauthorization.v1beta1.Attestor;
+
+                    /**
+                     * Decodes an Attestor message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Attestor
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.binaryauthorization.v1beta1.Attestor;
+
+                    /**
+                     * Verifies an Attestor message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Attestor message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Attestor
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.binaryauthorization.v1beta1.Attestor;
+
+                    /**
+                     * Creates a plain object from an Attestor message. Also converts values to other types if specified.
+                     * @param message Attestor
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.binaryauthorization.v1beta1.Attestor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Attestor to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Attestor
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a UserOwnedDrydockNote. */
+                interface IUserOwnedDrydockNote {
+
+                    /** UserOwnedDrydockNote noteReference */
+                    noteReference?: (string|null);
+
+                    /** UserOwnedDrydockNote publicKeys */
+                    publicKeys?: (google.cloud.binaryauthorization.v1beta1.IAttestorPublicKey[]|null);
+
+                    /** UserOwnedDrydockNote delegationServiceAccountEmail */
+                    delegationServiceAccountEmail?: (string|null);
+                }
+
+                /** Represents a UserOwnedDrydockNote. */
+                class UserOwnedDrydockNote implements IUserOwnedDrydockNote {
+
+                    /**
+                     * Constructs a new UserOwnedDrydockNote.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.binaryauthorization.v1beta1.IUserOwnedDrydockNote);
+
+                    /** UserOwnedDrydockNote noteReference. */
+                    public noteReference: string;
+
+                    /** UserOwnedDrydockNote publicKeys. */
+                    public publicKeys: google.cloud.binaryauthorization.v1beta1.IAttestorPublicKey[];
+
+                    /** UserOwnedDrydockNote delegationServiceAccountEmail. */
+                    public delegationServiceAccountEmail: string;
+
+                    /**
+                     * Creates a new UserOwnedDrydockNote instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UserOwnedDrydockNote instance
+                     */
+                    public static create(properties?: google.cloud.binaryauthorization.v1beta1.IUserOwnedDrydockNote): google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote;
+
+                    /**
+                     * Encodes the specified UserOwnedDrydockNote message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote.verify|verify} messages.
+                     * @param message UserOwnedDrydockNote message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.binaryauthorization.v1beta1.IUserOwnedDrydockNote, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UserOwnedDrydockNote message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote.verify|verify} messages.
+                     * @param message UserOwnedDrydockNote message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.binaryauthorization.v1beta1.IUserOwnedDrydockNote, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a UserOwnedDrydockNote message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UserOwnedDrydockNote
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote;
+
+                    /**
+                     * Decodes a UserOwnedDrydockNote message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UserOwnedDrydockNote
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote;
+
+                    /**
+                     * Verifies a UserOwnedDrydockNote message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a UserOwnedDrydockNote message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UserOwnedDrydockNote
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote;
+
+                    /**
+                     * Creates a plain object from a UserOwnedDrydockNote message. Also converts values to other types if specified.
+                     * @param message UserOwnedDrydockNote
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UserOwnedDrydockNote to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UserOwnedDrydockNote
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PkixPublicKey. */
+                interface IPkixPublicKey {
+
+                    /** PkixPublicKey publicKeyPem */
+                    publicKeyPem?: (string|null);
+
+                    /** PkixPublicKey signatureAlgorithm */
+                    signatureAlgorithm?: (google.cloud.binaryauthorization.v1beta1.PkixPublicKey.SignatureAlgorithm|keyof typeof google.cloud.binaryauthorization.v1beta1.PkixPublicKey.SignatureAlgorithm|null);
+                }
+
+                /** Represents a PkixPublicKey. */
+                class PkixPublicKey implements IPkixPublicKey {
+
+                    /**
+                     * Constructs a new PkixPublicKey.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.binaryauthorization.v1beta1.IPkixPublicKey);
+
+                    /** PkixPublicKey publicKeyPem. */
+                    public publicKeyPem: string;
+
+                    /** PkixPublicKey signatureAlgorithm. */
+                    public signatureAlgorithm: (google.cloud.binaryauthorization.v1beta1.PkixPublicKey.SignatureAlgorithm|keyof typeof google.cloud.binaryauthorization.v1beta1.PkixPublicKey.SignatureAlgorithm);
+
+                    /**
+                     * Creates a new PkixPublicKey instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PkixPublicKey instance
+                     */
+                    public static create(properties?: google.cloud.binaryauthorization.v1beta1.IPkixPublicKey): google.cloud.binaryauthorization.v1beta1.PkixPublicKey;
+
+                    /**
+                     * Encodes the specified PkixPublicKey message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.PkixPublicKey.verify|verify} messages.
+                     * @param message PkixPublicKey message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.binaryauthorization.v1beta1.IPkixPublicKey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PkixPublicKey message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.PkixPublicKey.verify|verify} messages.
+                     * @param message PkixPublicKey message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.binaryauthorization.v1beta1.IPkixPublicKey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PkixPublicKey message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PkixPublicKey
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.binaryauthorization.v1beta1.PkixPublicKey;
+
+                    /**
+                     * Decodes a PkixPublicKey message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PkixPublicKey
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.binaryauthorization.v1beta1.PkixPublicKey;
+
+                    /**
+                     * Verifies a PkixPublicKey message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PkixPublicKey message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PkixPublicKey
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.binaryauthorization.v1beta1.PkixPublicKey;
+
+                    /**
+                     * Creates a plain object from a PkixPublicKey message. Also converts values to other types if specified.
+                     * @param message PkixPublicKey
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.binaryauthorization.v1beta1.PkixPublicKey, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PkixPublicKey to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PkixPublicKey
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace PkixPublicKey {
+
+                    /** SignatureAlgorithm enum. */
+                    enum SignatureAlgorithm {
+                        SIGNATURE_ALGORITHM_UNSPECIFIED = 0,
+                        RSA_PSS_2048_SHA256 = 1,
+                        RSA_PSS_3072_SHA256 = 2,
+                        RSA_PSS_4096_SHA256 = 3,
+                        RSA_PSS_4096_SHA512 = 4,
+                        RSA_SIGN_PKCS1_2048_SHA256 = 5,
+                        RSA_SIGN_PKCS1_3072_SHA256 = 6,
+                        RSA_SIGN_PKCS1_4096_SHA256 = 7,
+                        RSA_SIGN_PKCS1_4096_SHA512 = 8,
+                        ECDSA_P256_SHA256 = 9,
+                        EC_SIGN_P256_SHA256 = 9,
+                        ECDSA_P384_SHA384 = 10,
+                        EC_SIGN_P384_SHA384 = 10,
+                        ECDSA_P521_SHA512 = 11,
+                        EC_SIGN_P521_SHA512 = 11
+                    }
+                }
+
+                /** Properties of an AttestorPublicKey. */
+                interface IAttestorPublicKey {
+
+                    /** AttestorPublicKey comment */
+                    comment?: (string|null);
+
+                    /** AttestorPublicKey id */
+                    id?: (string|null);
+
+                    /** AttestorPublicKey asciiArmoredPgpPublicKey */
+                    asciiArmoredPgpPublicKey?: (string|null);
+
+                    /** AttestorPublicKey pkixPublicKey */
+                    pkixPublicKey?: (google.cloud.binaryauthorization.v1beta1.IPkixPublicKey|null);
+                }
+
+                /** Represents an AttestorPublicKey. */
+                class AttestorPublicKey implements IAttestorPublicKey {
+
+                    /**
+                     * Constructs a new AttestorPublicKey.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.binaryauthorization.v1beta1.IAttestorPublicKey);
+
+                    /** AttestorPublicKey comment. */
+                    public comment: string;
+
+                    /** AttestorPublicKey id. */
+                    public id: string;
+
+                    /** AttestorPublicKey asciiArmoredPgpPublicKey. */
+                    public asciiArmoredPgpPublicKey?: (string|null);
+
+                    /** AttestorPublicKey pkixPublicKey. */
+                    public pkixPublicKey?: (google.cloud.binaryauthorization.v1beta1.IPkixPublicKey|null);
+
+                    /** AttestorPublicKey publicKey. */
+                    public publicKey?: ("asciiArmoredPgpPublicKey"|"pkixPublicKey");
+
+                    /**
+                     * Creates a new AttestorPublicKey instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AttestorPublicKey instance
+                     */
+                    public static create(properties?: google.cloud.binaryauthorization.v1beta1.IAttestorPublicKey): google.cloud.binaryauthorization.v1beta1.AttestorPublicKey;
+
+                    /**
+                     * Encodes the specified AttestorPublicKey message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.AttestorPublicKey.verify|verify} messages.
+                     * @param message AttestorPublicKey message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.binaryauthorization.v1beta1.IAttestorPublicKey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AttestorPublicKey message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.AttestorPublicKey.verify|verify} messages.
+                     * @param message AttestorPublicKey message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.binaryauthorization.v1beta1.IAttestorPublicKey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AttestorPublicKey message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AttestorPublicKey
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.binaryauthorization.v1beta1.AttestorPublicKey;
+
+                    /**
+                     * Decodes an AttestorPublicKey message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AttestorPublicKey
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.binaryauthorization.v1beta1.AttestorPublicKey;
+
+                    /**
+                     * Verifies an AttestorPublicKey message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AttestorPublicKey message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AttestorPublicKey
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.binaryauthorization.v1beta1.AttestorPublicKey;
+
+                    /**
+                     * Creates a plain object from an AttestorPublicKey message. Also converts values to other types if specified.
+                     * @param message AttestorPublicKey
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.binaryauthorization.v1beta1.AttestorPublicKey, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AttestorPublicKey to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AttestorPublicKey
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a BinauthzManagementServiceV1Beta1 */
+                class BinauthzManagementServiceV1Beta1 extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new BinauthzManagementServiceV1Beta1 service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new BinauthzManagementServiceV1Beta1 service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): BinauthzManagementServiceV1Beta1;
+
+                    /**
+                     * Calls GetPolicy.
+                     * @param request GetPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Policy
+                     */
+                    public getPolicy(request: google.cloud.binaryauthorization.v1beta1.IGetPolicyRequest, callback: google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.GetPolicyCallback): void;
+
+                    /**
+                     * Calls GetPolicy.
+                     * @param request GetPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getPolicy(request: google.cloud.binaryauthorization.v1beta1.IGetPolicyRequest): Promise<google.cloud.binaryauthorization.v1beta1.Policy>;
+
+                    /**
+                     * Calls UpdatePolicy.
+                     * @param request UpdatePolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Policy
+                     */
+                    public updatePolicy(request: google.cloud.binaryauthorization.v1beta1.IUpdatePolicyRequest, callback: google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.UpdatePolicyCallback): void;
+
+                    /**
+                     * Calls UpdatePolicy.
+                     * @param request UpdatePolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updatePolicy(request: google.cloud.binaryauthorization.v1beta1.IUpdatePolicyRequest): Promise<google.cloud.binaryauthorization.v1beta1.Policy>;
+
+                    /**
+                     * Calls CreateAttestor.
+                     * @param request CreateAttestorRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Attestor
+                     */
+                    public createAttestor(request: google.cloud.binaryauthorization.v1beta1.ICreateAttestorRequest, callback: google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.CreateAttestorCallback): void;
+
+                    /**
+                     * Calls CreateAttestor.
+                     * @param request CreateAttestorRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createAttestor(request: google.cloud.binaryauthorization.v1beta1.ICreateAttestorRequest): Promise<google.cloud.binaryauthorization.v1beta1.Attestor>;
+
+                    /**
+                     * Calls GetAttestor.
+                     * @param request GetAttestorRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Attestor
+                     */
+                    public getAttestor(request: google.cloud.binaryauthorization.v1beta1.IGetAttestorRequest, callback: google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.GetAttestorCallback): void;
+
+                    /**
+                     * Calls GetAttestor.
+                     * @param request GetAttestorRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getAttestor(request: google.cloud.binaryauthorization.v1beta1.IGetAttestorRequest): Promise<google.cloud.binaryauthorization.v1beta1.Attestor>;
+
+                    /**
+                     * Calls UpdateAttestor.
+                     * @param request UpdateAttestorRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Attestor
+                     */
+                    public updateAttestor(request: google.cloud.binaryauthorization.v1beta1.IUpdateAttestorRequest, callback: google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.UpdateAttestorCallback): void;
+
+                    /**
+                     * Calls UpdateAttestor.
+                     * @param request UpdateAttestorRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateAttestor(request: google.cloud.binaryauthorization.v1beta1.IUpdateAttestorRequest): Promise<google.cloud.binaryauthorization.v1beta1.Attestor>;
+
+                    /**
+                     * Calls ListAttestors.
+                     * @param request ListAttestorsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAttestorsResponse
+                     */
+                    public listAttestors(request: google.cloud.binaryauthorization.v1beta1.IListAttestorsRequest, callback: google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.ListAttestorsCallback): void;
+
+                    /**
+                     * Calls ListAttestors.
+                     * @param request ListAttestorsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAttestors(request: google.cloud.binaryauthorization.v1beta1.IListAttestorsRequest): Promise<google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse>;
+
+                    /**
+                     * Calls DeleteAttestor.
+                     * @param request DeleteAttestorRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteAttestor(request: google.cloud.binaryauthorization.v1beta1.IDeleteAttestorRequest, callback: google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.DeleteAttestorCallback): void;
+
+                    /**
+                     * Calls DeleteAttestor.
+                     * @param request DeleteAttestorRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteAttestor(request: google.cloud.binaryauthorization.v1beta1.IDeleteAttestorRequest): Promise<google.protobuf.Empty>;
+                }
+
+                namespace BinauthzManagementServiceV1Beta1 {
+
+                    /**
+                     * Callback as used by {@link google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1|getPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Policy
+                     */
+                    type GetPolicyCallback = (error: (Error|null), response?: google.cloud.binaryauthorization.v1beta1.Policy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1|updatePolicy}.
+                     * @param error Error, if any
+                     * @param [response] Policy
+                     */
+                    type UpdatePolicyCallback = (error: (Error|null), response?: google.cloud.binaryauthorization.v1beta1.Policy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1|createAttestor}.
+                     * @param error Error, if any
+                     * @param [response] Attestor
+                     */
+                    type CreateAttestorCallback = (error: (Error|null), response?: google.cloud.binaryauthorization.v1beta1.Attestor) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1|getAttestor}.
+                     * @param error Error, if any
+                     * @param [response] Attestor
+                     */
+                    type GetAttestorCallback = (error: (Error|null), response?: google.cloud.binaryauthorization.v1beta1.Attestor) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1|updateAttestor}.
+                     * @param error Error, if any
+                     * @param [response] Attestor
+                     */
+                    type UpdateAttestorCallback = (error: (Error|null), response?: google.cloud.binaryauthorization.v1beta1.Attestor) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1|listAttestors}.
+                     * @param error Error, if any
+                     * @param [response] ListAttestorsResponse
+                     */
+                    type ListAttestorsCallback = (error: (Error|null), response?: google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1|deleteAttestor}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteAttestorCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                }
+
+                /** Properties of a GetPolicyRequest. */
+                interface IGetPolicyRequest {
+
+                    /** GetPolicyRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetPolicyRequest. */
+                class GetPolicyRequest implements IGetPolicyRequest {
+
+                    /**
+                     * Constructs a new GetPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.binaryauthorization.v1beta1.IGetPolicyRequest);
+
+                    /** GetPolicyRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.binaryauthorization.v1beta1.IGetPolicyRequest): google.cloud.binaryauthorization.v1beta1.GetPolicyRequest;
+
+                    /**
+                     * Encodes the specified GetPolicyRequest message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.GetPolicyRequest.verify|verify} messages.
+                     * @param message GetPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.binaryauthorization.v1beta1.IGetPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.GetPolicyRequest.verify|verify} messages.
+                     * @param message GetPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.binaryauthorization.v1beta1.IGetPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.binaryauthorization.v1beta1.GetPolicyRequest;
+
+                    /**
+                     * Decodes a GetPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.binaryauthorization.v1beta1.GetPolicyRequest;
+
+                    /**
+                     * Verifies a GetPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.binaryauthorization.v1beta1.GetPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a GetPolicyRequest message. Also converts values to other types if specified.
+                     * @param message GetPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.binaryauthorization.v1beta1.GetPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetPolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a SystemPolicyV1Beta1 */
+                class SystemPolicyV1Beta1 extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new SystemPolicyV1Beta1 service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new SystemPolicyV1Beta1 service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): SystemPolicyV1Beta1;
+
+                    /**
+                     * Calls GetSystemPolicy.
+                     * @param request GetSystemPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Policy
+                     */
+                    public getSystemPolicy(request: google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest, callback: google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1.GetSystemPolicyCallback): void;
+
+                    /**
+                     * Calls GetSystemPolicy.
+                     * @param request GetSystemPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getSystemPolicy(request: google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest): Promise<google.cloud.binaryauthorization.v1beta1.Policy>;
+                }
+
+                namespace SystemPolicyV1Beta1 {
+
+                    /**
+                     * Callback as used by {@link google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1|getSystemPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Policy
+                     */
+                    type GetSystemPolicyCallback = (error: (Error|null), response?: google.cloud.binaryauthorization.v1beta1.Policy) => void;
+                }
+
+                /** Properties of an UpdatePolicyRequest. */
+                interface IUpdatePolicyRequest {
+
+                    /** UpdatePolicyRequest policy */
+                    policy?: (google.cloud.binaryauthorization.v1beta1.IPolicy|null);
+                }
+
+                /** Represents an UpdatePolicyRequest. */
+                class UpdatePolicyRequest implements IUpdatePolicyRequest {
+
+                    /**
+                     * Constructs a new UpdatePolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.binaryauthorization.v1beta1.IUpdatePolicyRequest);
+
+                    /** UpdatePolicyRequest policy. */
+                    public policy?: (google.cloud.binaryauthorization.v1beta1.IPolicy|null);
+
+                    /**
+                     * Creates a new UpdatePolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdatePolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.binaryauthorization.v1beta1.IUpdatePolicyRequest): google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest;
+
+                    /**
+                     * Encodes the specified UpdatePolicyRequest message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest.verify|verify} messages.
+                     * @param message UpdatePolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.binaryauthorization.v1beta1.IUpdatePolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdatePolicyRequest message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest.verify|verify} messages.
+                     * @param message UpdatePolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.binaryauthorization.v1beta1.IUpdatePolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdatePolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdatePolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest;
+
+                    /**
+                     * Decodes an UpdatePolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdatePolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest;
+
+                    /**
+                     * Verifies an UpdatePolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdatePolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdatePolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest;
+
+                    /**
+                     * Creates a plain object from an UpdatePolicyRequest message. Also converts values to other types if specified.
+                     * @param message UpdatePolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdatePolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdatePolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateAttestorRequest. */
+                interface ICreateAttestorRequest {
+
+                    /** CreateAttestorRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateAttestorRequest attestorId */
+                    attestorId?: (string|null);
+
+                    /** CreateAttestorRequest attestor */
+                    attestor?: (google.cloud.binaryauthorization.v1beta1.IAttestor|null);
+                }
+
+                /** Represents a CreateAttestorRequest. */
+                class CreateAttestorRequest implements ICreateAttestorRequest {
+
+                    /**
+                     * Constructs a new CreateAttestorRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.binaryauthorization.v1beta1.ICreateAttestorRequest);
+
+                    /** CreateAttestorRequest parent. */
+                    public parent: string;
+
+                    /** CreateAttestorRequest attestorId. */
+                    public attestorId: string;
+
+                    /** CreateAttestorRequest attestor. */
+                    public attestor?: (google.cloud.binaryauthorization.v1beta1.IAttestor|null);
+
+                    /**
+                     * Creates a new CreateAttestorRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateAttestorRequest instance
+                     */
+                    public static create(properties?: google.cloud.binaryauthorization.v1beta1.ICreateAttestorRequest): google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest;
+
+                    /**
+                     * Encodes the specified CreateAttestorRequest message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest.verify|verify} messages.
+                     * @param message CreateAttestorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.binaryauthorization.v1beta1.ICreateAttestorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateAttestorRequest message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest.verify|verify} messages.
+                     * @param message CreateAttestorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.binaryauthorization.v1beta1.ICreateAttestorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateAttestorRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateAttestorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest;
+
+                    /**
+                     * Decodes a CreateAttestorRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateAttestorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest;
+
+                    /**
+                     * Verifies a CreateAttestorRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateAttestorRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateAttestorRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest;
+
+                    /**
+                     * Creates a plain object from a CreateAttestorRequest message. Also converts values to other types if specified.
+                     * @param message CreateAttestorRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateAttestorRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateAttestorRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetAttestorRequest. */
+                interface IGetAttestorRequest {
+
+                    /** GetAttestorRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetAttestorRequest. */
+                class GetAttestorRequest implements IGetAttestorRequest {
+
+                    /**
+                     * Constructs a new GetAttestorRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.binaryauthorization.v1beta1.IGetAttestorRequest);
+
+                    /** GetAttestorRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetAttestorRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetAttestorRequest instance
+                     */
+                    public static create(properties?: google.cloud.binaryauthorization.v1beta1.IGetAttestorRequest): google.cloud.binaryauthorization.v1beta1.GetAttestorRequest;
+
+                    /**
+                     * Encodes the specified GetAttestorRequest message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.GetAttestorRequest.verify|verify} messages.
+                     * @param message GetAttestorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.binaryauthorization.v1beta1.IGetAttestorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetAttestorRequest message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.GetAttestorRequest.verify|verify} messages.
+                     * @param message GetAttestorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.binaryauthorization.v1beta1.IGetAttestorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetAttestorRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetAttestorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.binaryauthorization.v1beta1.GetAttestorRequest;
+
+                    /**
+                     * Decodes a GetAttestorRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetAttestorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.binaryauthorization.v1beta1.GetAttestorRequest;
+
+                    /**
+                     * Verifies a GetAttestorRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetAttestorRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetAttestorRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.binaryauthorization.v1beta1.GetAttestorRequest;
+
+                    /**
+                     * Creates a plain object from a GetAttestorRequest message. Also converts values to other types if specified.
+                     * @param message GetAttestorRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.binaryauthorization.v1beta1.GetAttestorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetAttestorRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetAttestorRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateAttestorRequest. */
+                interface IUpdateAttestorRequest {
+
+                    /** UpdateAttestorRequest attestor */
+                    attestor?: (google.cloud.binaryauthorization.v1beta1.IAttestor|null);
+                }
+
+                /** Represents an UpdateAttestorRequest. */
+                class UpdateAttestorRequest implements IUpdateAttestorRequest {
+
+                    /**
+                     * Constructs a new UpdateAttestorRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.binaryauthorization.v1beta1.IUpdateAttestorRequest);
+
+                    /** UpdateAttestorRequest attestor. */
+                    public attestor?: (google.cloud.binaryauthorization.v1beta1.IAttestor|null);
+
+                    /**
+                     * Creates a new UpdateAttestorRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateAttestorRequest instance
+                     */
+                    public static create(properties?: google.cloud.binaryauthorization.v1beta1.IUpdateAttestorRequest): google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest;
+
+                    /**
+                     * Encodes the specified UpdateAttestorRequest message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest.verify|verify} messages.
+                     * @param message UpdateAttestorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.binaryauthorization.v1beta1.IUpdateAttestorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateAttestorRequest message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest.verify|verify} messages.
+                     * @param message UpdateAttestorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.binaryauthorization.v1beta1.IUpdateAttestorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateAttestorRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateAttestorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest;
+
+                    /**
+                     * Decodes an UpdateAttestorRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateAttestorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest;
+
+                    /**
+                     * Verifies an UpdateAttestorRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateAttestorRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateAttestorRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateAttestorRequest message. Also converts values to other types if specified.
+                     * @param message UpdateAttestorRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateAttestorRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateAttestorRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAttestorsRequest. */
+                interface IListAttestorsRequest {
+
+                    /** ListAttestorsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListAttestorsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAttestorsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListAttestorsRequest. */
+                class ListAttestorsRequest implements IListAttestorsRequest {
+
+                    /**
+                     * Constructs a new ListAttestorsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.binaryauthorization.v1beta1.IListAttestorsRequest);
+
+                    /** ListAttestorsRequest parent. */
+                    public parent: string;
+
+                    /** ListAttestorsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAttestorsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListAttestorsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAttestorsRequest instance
+                     */
+                    public static create(properties?: google.cloud.binaryauthorization.v1beta1.IListAttestorsRequest): google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest;
+
+                    /**
+                     * Encodes the specified ListAttestorsRequest message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest.verify|verify} messages.
+                     * @param message ListAttestorsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.binaryauthorization.v1beta1.IListAttestorsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAttestorsRequest message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest.verify|verify} messages.
+                     * @param message ListAttestorsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.binaryauthorization.v1beta1.IListAttestorsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAttestorsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAttestorsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest;
+
+                    /**
+                     * Decodes a ListAttestorsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAttestorsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest;
+
+                    /**
+                     * Verifies a ListAttestorsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAttestorsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAttestorsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest;
+
+                    /**
+                     * Creates a plain object from a ListAttestorsRequest message. Also converts values to other types if specified.
+                     * @param message ListAttestorsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAttestorsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAttestorsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAttestorsResponse. */
+                interface IListAttestorsResponse {
+
+                    /** ListAttestorsResponse attestors */
+                    attestors?: (google.cloud.binaryauthorization.v1beta1.IAttestor[]|null);
+
+                    /** ListAttestorsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListAttestorsResponse. */
+                class ListAttestorsResponse implements IListAttestorsResponse {
+
+                    /**
+                     * Constructs a new ListAttestorsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.binaryauthorization.v1beta1.IListAttestorsResponse);
+
+                    /** ListAttestorsResponse attestors. */
+                    public attestors: google.cloud.binaryauthorization.v1beta1.IAttestor[];
+
+                    /** ListAttestorsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListAttestorsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAttestorsResponse instance
+                     */
+                    public static create(properties?: google.cloud.binaryauthorization.v1beta1.IListAttestorsResponse): google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse;
+
+                    /**
+                     * Encodes the specified ListAttestorsResponse message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse.verify|verify} messages.
+                     * @param message ListAttestorsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.binaryauthorization.v1beta1.IListAttestorsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAttestorsResponse message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse.verify|verify} messages.
+                     * @param message ListAttestorsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.binaryauthorization.v1beta1.IListAttestorsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAttestorsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAttestorsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse;
+
+                    /**
+                     * Decodes a ListAttestorsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAttestorsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse;
+
+                    /**
+                     * Verifies a ListAttestorsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAttestorsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAttestorsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse;
+
+                    /**
+                     * Creates a plain object from a ListAttestorsResponse message. Also converts values to other types if specified.
+                     * @param message ListAttestorsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAttestorsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAttestorsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteAttestorRequest. */
+                interface IDeleteAttestorRequest {
+
+                    /** DeleteAttestorRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteAttestorRequest. */
+                class DeleteAttestorRequest implements IDeleteAttestorRequest {
+
+                    /**
+                     * Constructs a new DeleteAttestorRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.binaryauthorization.v1beta1.IDeleteAttestorRequest);
+
+                    /** DeleteAttestorRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteAttestorRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteAttestorRequest instance
+                     */
+                    public static create(properties?: google.cloud.binaryauthorization.v1beta1.IDeleteAttestorRequest): google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest;
+
+                    /**
+                     * Encodes the specified DeleteAttestorRequest message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest.verify|verify} messages.
+                     * @param message DeleteAttestorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.binaryauthorization.v1beta1.IDeleteAttestorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteAttestorRequest message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest.verify|verify} messages.
+                     * @param message DeleteAttestorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.binaryauthorization.v1beta1.IDeleteAttestorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteAttestorRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteAttestorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest;
+
+                    /**
+                     * Decodes a DeleteAttestorRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteAttestorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest;
+
+                    /**
+                     * Verifies a DeleteAttestorRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteAttestorRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteAttestorRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteAttestorRequest message. Also converts values to other types if specified.
+                     * @param message DeleteAttestorRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteAttestorRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteAttestorRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetSystemPolicyRequest. */
+                interface IGetSystemPolicyRequest {
+
+                    /** GetSystemPolicyRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetSystemPolicyRequest. */
+                class GetSystemPolicyRequest implements IGetSystemPolicyRequest {
+
+                    /**
+                     * Constructs a new GetSystemPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest);
+
+                    /** GetSystemPolicyRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetSystemPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetSystemPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest): google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest;
+
+                    /**
+                     * Encodes the specified GetSystemPolicyRequest message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest.verify|verify} messages.
+                     * @param message GetSystemPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetSystemPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest.verify|verify} messages.
+                     * @param message GetSystemPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetSystemPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetSystemPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest;
+
+                    /**
+                     * Decodes a GetSystemPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetSystemPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest;
+
+                    /**
+                     * Verifies a GetSystemPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetSystemPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetSystemPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a GetSystemPolicyRequest message. Also converts values to other types if specified.
+                     * @param message GetSystemPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetSystemPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetSystemPolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+            }
         }
     }
 
@@ -3192,9 +5917,6 @@ export namespace google {
 
             /** Publishing librarySettings */
             librarySettings?: (google.api.IClientLibrarySettings[]|null);
-
-            /** Publishing protoReferenceDocumentationUri */
-            protoReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -3232,9 +5954,6 @@ export namespace google {
 
             /** Publishing librarySettings. */
             public librarySettings: google.api.IClientLibrarySettings[];
-
-            /** Publishing protoReferenceDocumentationUri. */
-            public protoReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -3816,21 +6535,6 @@ export namespace google {
 
             /** DotnetSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
-
-            /** DotnetSettings renamedServices */
-            renamedServices?: ({ [k: string]: string }|null);
-
-            /** DotnetSettings renamedResources */
-            renamedResources?: ({ [k: string]: string }|null);
-
-            /** DotnetSettings ignoredResources */
-            ignoredResources?: (string[]|null);
-
-            /** DotnetSettings forcedNamespaceAliases */
-            forcedNamespaceAliases?: (string[]|null);
-
-            /** DotnetSettings handwrittenSignatures */
-            handwrittenSignatures?: (string[]|null);
         }
 
         /** Represents a DotnetSettings. */
@@ -3844,21 +6548,6 @@ export namespace google {
 
             /** DotnetSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
-
-            /** DotnetSettings renamedServices. */
-            public renamedServices: { [k: string]: string };
-
-            /** DotnetSettings renamedResources. */
-            public renamedResources: { [k: string]: string };
-
-            /** DotnetSettings ignoredResources. */
-            public ignoredResources: string[];
-
-            /** DotnetSettings forcedNamespaceAliases. */
-            public forcedNamespaceAliases: string[];
-
-            /** DotnetSettings handwrittenSignatures. */
-            public handwrittenSignatures: string[];
 
             /**
              * Creates a new DotnetSettings instance using the specified properties.
@@ -4359,10 +7048,7 @@ export namespace google {
             CLOUD = 1,
             ADS = 2,
             PHOTOS = 3,
-            STREET_VIEW = 4,
-            SHOPPING = 5,
-            GEO = 6,
-            GENERATIVE_AI = 7
+            STREET_VIEW = 4
         }
 
         /** ClientLibraryDestination enum. */
@@ -5025,15 +7711,6 @@ export namespace google {
 
             /** ExtensionRangeOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
-
-            /** ExtensionRangeOptions declaration */
-            declaration?: (google.protobuf.ExtensionRangeOptions.IDeclaration[]|null);
-
-            /** ExtensionRangeOptions features */
-            features?: (google.protobuf.IFeatureSet|null);
-
-            /** ExtensionRangeOptions verification */
-            verification?: (google.protobuf.ExtensionRangeOptions.VerificationState|keyof typeof google.protobuf.ExtensionRangeOptions.VerificationState|null);
         }
 
         /** Represents an ExtensionRangeOptions. */
@@ -5047,15 +7724,6 @@ export namespace google {
 
             /** ExtensionRangeOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
-
-            /** ExtensionRangeOptions declaration. */
-            public declaration: google.protobuf.ExtensionRangeOptions.IDeclaration[];
-
-            /** ExtensionRangeOptions features. */
-            public features?: (google.protobuf.IFeatureSet|null);
-
-            /** ExtensionRangeOptions verification. */
-            public verification: (google.protobuf.ExtensionRangeOptions.VerificationState|keyof typeof google.protobuf.ExtensionRangeOptions.VerificationState);
 
             /**
              * Creates a new ExtensionRangeOptions instance using the specified properties.
@@ -5133,136 +7801,6 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        namespace ExtensionRangeOptions {
-
-            /** Properties of a Declaration. */
-            interface IDeclaration {
-
-                /** Declaration number */
-                number?: (number|null);
-
-                /** Declaration fullName */
-                fullName?: (string|null);
-
-                /** Declaration type */
-                type?: (string|null);
-
-                /** Declaration reserved */
-                reserved?: (boolean|null);
-
-                /** Declaration repeated */
-                repeated?: (boolean|null);
-            }
-
-            /** Represents a Declaration. */
-            class Declaration implements IDeclaration {
-
-                /**
-                 * Constructs a new Declaration.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.protobuf.ExtensionRangeOptions.IDeclaration);
-
-                /** Declaration number. */
-                public number: number;
-
-                /** Declaration fullName. */
-                public fullName: string;
-
-                /** Declaration type. */
-                public type: string;
-
-                /** Declaration reserved. */
-                public reserved: boolean;
-
-                /** Declaration repeated. */
-                public repeated: boolean;
-
-                /**
-                 * Creates a new Declaration instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns Declaration instance
-                 */
-                public static create(properties?: google.protobuf.ExtensionRangeOptions.IDeclaration): google.protobuf.ExtensionRangeOptions.Declaration;
-
-                /**
-                 * Encodes the specified Declaration message. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
-                 * @param message Declaration message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.protobuf.ExtensionRangeOptions.IDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified Declaration message, length delimited. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
-                 * @param message Declaration message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.protobuf.ExtensionRangeOptions.IDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a Declaration message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns Declaration
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.ExtensionRangeOptions.Declaration;
-
-                /**
-                 * Decodes a Declaration message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns Declaration
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.ExtensionRangeOptions.Declaration;
-
-                /**
-                 * Verifies a Declaration message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a Declaration message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns Declaration
-                 */
-                public static fromObject(object: { [k: string]: any }): google.protobuf.ExtensionRangeOptions.Declaration;
-
-                /**
-                 * Creates a plain object from a Declaration message. Also converts values to other types if specified.
-                 * @param message Declaration
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.protobuf.ExtensionRangeOptions.Declaration, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this Declaration to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for Declaration
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** VerificationState enum. */
-            enum VerificationState {
-                DECLARATION = 0,
-                UNVERIFIED = 1
-            }
         }
 
         /** Properties of a FieldDescriptorProto. */
@@ -6192,9 +8730,6 @@ export namespace google {
             /** FileOptions rubyPackage */
             rubyPackage?: (string|null);
 
-            /** FileOptions features */
-            features?: (google.protobuf.IFeatureSet|null);
-
             /** FileOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -6270,9 +8805,6 @@ export namespace google {
 
             /** FileOptions rubyPackage. */
             public rubyPackage: string;
-
-            /** FileOptions features. */
-            public features?: (google.protobuf.IFeatureSet|null);
 
             /** FileOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -6383,9 +8915,6 @@ export namespace google {
             /** MessageOptions deprecatedLegacyJsonFieldConflicts */
             deprecatedLegacyJsonFieldConflicts?: (boolean|null);
 
-            /** MessageOptions features */
-            features?: (google.protobuf.IFeatureSet|null);
-
             /** MessageOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -6416,9 +8945,6 @@ export namespace google {
 
             /** MessageOptions deprecatedLegacyJsonFieldConflicts. */
             public deprecatedLegacyJsonFieldConflicts: boolean;
-
-            /** MessageOptions features. */
-            public features?: (google.protobuf.IFeatureSet|null);
 
             /** MessageOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -6531,14 +9057,8 @@ export namespace google {
             /** FieldOptions retention */
             retention?: (google.protobuf.FieldOptions.OptionRetention|keyof typeof google.protobuf.FieldOptions.OptionRetention|null);
 
-            /** FieldOptions targets */
-            targets?: (google.protobuf.FieldOptions.OptionTargetType[]|null);
-
-            /** FieldOptions editionDefaults */
-            editionDefaults?: (google.protobuf.FieldOptions.IEditionDefault[]|null);
-
-            /** FieldOptions features */
-            features?: (google.protobuf.IFeatureSet|null);
+            /** FieldOptions target */
+            target?: (google.protobuf.FieldOptions.OptionTargetType|keyof typeof google.protobuf.FieldOptions.OptionTargetType|null);
 
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -6586,14 +9106,8 @@ export namespace google {
             /** FieldOptions retention. */
             public retention: (google.protobuf.FieldOptions.OptionRetention|keyof typeof google.protobuf.FieldOptions.OptionRetention);
 
-            /** FieldOptions targets. */
-            public targets: google.protobuf.FieldOptions.OptionTargetType[];
-
-            /** FieldOptions editionDefaults. */
-            public editionDefaults: google.protobuf.FieldOptions.IEditionDefault[];
-
-            /** FieldOptions features. */
-            public features?: (google.protobuf.IFeatureSet|null);
+            /** FieldOptions target. */
+            public target: (google.protobuf.FieldOptions.OptionTargetType|keyof typeof google.protobuf.FieldOptions.OptionTargetType);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -6712,116 +9226,10 @@ export namespace google {
                 TARGET_TYPE_SERVICE = 8,
                 TARGET_TYPE_METHOD = 9
             }
-
-            /** Properties of an EditionDefault. */
-            interface IEditionDefault {
-
-                /** EditionDefault edition */
-                edition?: (string|null);
-
-                /** EditionDefault value */
-                value?: (string|null);
-            }
-
-            /** Represents an EditionDefault. */
-            class EditionDefault implements IEditionDefault {
-
-                /**
-                 * Constructs a new EditionDefault.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.protobuf.FieldOptions.IEditionDefault);
-
-                /** EditionDefault edition. */
-                public edition: string;
-
-                /** EditionDefault value. */
-                public value: string;
-
-                /**
-                 * Creates a new EditionDefault instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns EditionDefault instance
-                 */
-                public static create(properties?: google.protobuf.FieldOptions.IEditionDefault): google.protobuf.FieldOptions.EditionDefault;
-
-                /**
-                 * Encodes the specified EditionDefault message. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
-                 * @param message EditionDefault message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.protobuf.FieldOptions.IEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified EditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
-                 * @param message EditionDefault message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.protobuf.FieldOptions.IEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes an EditionDefault message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns EditionDefault
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.EditionDefault;
-
-                /**
-                 * Decodes an EditionDefault message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns EditionDefault
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.EditionDefault;
-
-                /**
-                 * Verifies an EditionDefault message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates an EditionDefault message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns EditionDefault
-                 */
-                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.EditionDefault;
-
-                /**
-                 * Creates a plain object from an EditionDefault message. Also converts values to other types if specified.
-                 * @param message EditionDefault
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.protobuf.FieldOptions.EditionDefault, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this EditionDefault to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for EditionDefault
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
         }
 
         /** Properties of an OneofOptions. */
         interface IOneofOptions {
-
-            /** OneofOptions features */
-            features?: (google.protobuf.IFeatureSet|null);
 
             /** OneofOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -6835,9 +9243,6 @@ export namespace google {
              * @param [properties] Properties to set
              */
             constructor(properties?: google.protobuf.IOneofOptions);
-
-            /** OneofOptions features. */
-            public features?: (google.protobuf.IFeatureSet|null);
 
             /** OneofOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -6932,9 +9337,6 @@ export namespace google {
             /** EnumOptions deprecatedLegacyJsonFieldConflicts */
             deprecatedLegacyJsonFieldConflicts?: (boolean|null);
 
-            /** EnumOptions features */
-            features?: (google.protobuf.IFeatureSet|null);
-
             /** EnumOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -6956,9 +9358,6 @@ export namespace google {
 
             /** EnumOptions deprecatedLegacyJsonFieldConflicts. */
             public deprecatedLegacyJsonFieldConflicts: boolean;
-
-            /** EnumOptions features. */
-            public features?: (google.protobuf.IFeatureSet|null);
 
             /** EnumOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -7047,12 +9446,6 @@ export namespace google {
             /** EnumValueOptions deprecated */
             deprecated?: (boolean|null);
 
-            /** EnumValueOptions features */
-            features?: (google.protobuf.IFeatureSet|null);
-
-            /** EnumValueOptions debugRedact */
-            debugRedact?: (boolean|null);
-
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -7068,12 +9461,6 @@ export namespace google {
 
             /** EnumValueOptions deprecated. */
             public deprecated: boolean;
-
-            /** EnumValueOptions features. */
-            public features?: (google.protobuf.IFeatureSet|null);
-
-            /** EnumValueOptions debugRedact. */
-            public debugRedact: boolean;
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -7159,9 +9546,6 @@ export namespace google {
         /** Properties of a ServiceOptions. */
         interface IServiceOptions {
 
-            /** ServiceOptions features */
-            features?: (google.protobuf.IFeatureSet|null);
-
             /** ServiceOptions deprecated */
             deprecated?: (boolean|null);
 
@@ -7183,9 +9567,6 @@ export namespace google {
              * @param [properties] Properties to set
              */
             constructor(properties?: google.protobuf.IServiceOptions);
-
-            /** ServiceOptions features. */
-            public features?: (google.protobuf.IFeatureSet|null);
 
             /** ServiceOptions deprecated. */
             public deprecated: boolean;
@@ -7280,9 +9661,6 @@ export namespace google {
             /** MethodOptions idempotencyLevel */
             idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel|null);
 
-            /** MethodOptions features */
-            features?: (google.protobuf.IFeatureSet|null);
-
             /** MethodOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -7307,9 +9685,6 @@ export namespace google {
 
             /** MethodOptions idempotencyLevel. */
             public idempotencyLevel: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel);
-
-            /** MethodOptions features. */
-            public features?: (google.protobuf.IFeatureSet|null);
 
             /** MethodOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -7638,186 +10013,6 @@ export namespace google {
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-        }
-
-        /** Properties of a FeatureSet. */
-        interface IFeatureSet {
-
-            /** FeatureSet fieldPresence */
-            fieldPresence?: (google.protobuf.FeatureSet.FieldPresence|keyof typeof google.protobuf.FeatureSet.FieldPresence|null);
-
-            /** FeatureSet enumType */
-            enumType?: (google.protobuf.FeatureSet.EnumType|keyof typeof google.protobuf.FeatureSet.EnumType|null);
-
-            /** FeatureSet repeatedFieldEncoding */
-            repeatedFieldEncoding?: (google.protobuf.FeatureSet.RepeatedFieldEncoding|keyof typeof google.protobuf.FeatureSet.RepeatedFieldEncoding|null);
-
-            /** FeatureSet stringFieldValidation */
-            stringFieldValidation?: (google.protobuf.FeatureSet.StringFieldValidation|keyof typeof google.protobuf.FeatureSet.StringFieldValidation|null);
-
-            /** FeatureSet messageEncoding */
-            messageEncoding?: (google.protobuf.FeatureSet.MessageEncoding|keyof typeof google.protobuf.FeatureSet.MessageEncoding|null);
-
-            /** FeatureSet jsonFormat */
-            jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
-
-            /** FeatureSet rawFeatures */
-            rawFeatures?: (google.protobuf.IFeatureSet|null);
-        }
-
-        /** Represents a FeatureSet. */
-        class FeatureSet implements IFeatureSet {
-
-            /**
-             * Constructs a new FeatureSet.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IFeatureSet);
-
-            /** FeatureSet fieldPresence. */
-            public fieldPresence: (google.protobuf.FeatureSet.FieldPresence|keyof typeof google.protobuf.FeatureSet.FieldPresence);
-
-            /** FeatureSet enumType. */
-            public enumType: (google.protobuf.FeatureSet.EnumType|keyof typeof google.protobuf.FeatureSet.EnumType);
-
-            /** FeatureSet repeatedFieldEncoding. */
-            public repeatedFieldEncoding: (google.protobuf.FeatureSet.RepeatedFieldEncoding|keyof typeof google.protobuf.FeatureSet.RepeatedFieldEncoding);
-
-            /** FeatureSet stringFieldValidation. */
-            public stringFieldValidation: (google.protobuf.FeatureSet.StringFieldValidation|keyof typeof google.protobuf.FeatureSet.StringFieldValidation);
-
-            /** FeatureSet messageEncoding. */
-            public messageEncoding: (google.protobuf.FeatureSet.MessageEncoding|keyof typeof google.protobuf.FeatureSet.MessageEncoding);
-
-            /** FeatureSet jsonFormat. */
-            public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
-
-            /** FeatureSet rawFeatures. */
-            public rawFeatures?: (google.protobuf.IFeatureSet|null);
-
-            /**
-             * Creates a new FeatureSet instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns FeatureSet instance
-             */
-            public static create(properties?: google.protobuf.IFeatureSet): google.protobuf.FeatureSet;
-
-            /**
-             * Encodes the specified FeatureSet message. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
-             * @param message FeatureSet message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IFeatureSet, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified FeatureSet message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
-             * @param message FeatureSet message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IFeatureSet, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a FeatureSet message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns FeatureSet
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet;
-
-            /**
-             * Decodes a FeatureSet message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns FeatureSet
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet;
-
-            /**
-             * Verifies a FeatureSet message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a FeatureSet message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns FeatureSet
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet;
-
-            /**
-             * Creates a plain object from a FeatureSet message. Also converts values to other types if specified.
-             * @param message FeatureSet
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.FeatureSet, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this FeatureSet to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for FeatureSet
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        namespace FeatureSet {
-
-            /** FieldPresence enum. */
-            enum FieldPresence {
-                FIELD_PRESENCE_UNKNOWN = 0,
-                EXPLICIT = 1,
-                IMPLICIT = 2,
-                LEGACY_REQUIRED = 3
-            }
-
-            /** EnumType enum. */
-            enum EnumType {
-                ENUM_TYPE_UNKNOWN = 0,
-                OPEN = 1,
-                CLOSED = 2
-            }
-
-            /** RepeatedFieldEncoding enum. */
-            enum RepeatedFieldEncoding {
-                REPEATED_FIELD_ENCODING_UNKNOWN = 0,
-                PACKED = 1,
-                EXPANDED = 2
-            }
-
-            /** StringFieldValidation enum. */
-            enum StringFieldValidation {
-                STRING_FIELD_VALIDATION_UNKNOWN = 0,
-                MANDATORY = 1,
-                HINT = 2,
-                NONE = 3
-            }
-
-            /** MessageEncoding enum. */
-            enum MessageEncoding {
-                MESSAGE_ENCODING_UNKNOWN = 0,
-                LENGTH_PREFIXED = 1,
-                DELIMITED = 2
-            }
-
-            /** JsonFormat enum. */
-            enum JsonFormat {
-                JSON_FORMAT_UNKNOWN = 0,
-                ALLOW = 1,
-                LEGACY_BEST_EFFORT = 2
             }
         }
 

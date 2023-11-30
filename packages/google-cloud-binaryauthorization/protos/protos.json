@@ -666,6 +666,772 @@
                       }
                     }
                   }
+                },
+                "v1beta1": {
+                  "options": {
+                    "cc_enable_arenas": true,
+                    "csharp_namespace": "Google.Cloud.BinaryAuthorization.V1Beta1",
+                    "go_package": "cloud.google.com/go/binaryauthorization/apiv1beta1/binaryauthorizationpb;binaryauthorizationpb",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "BinaryAuthorizationServiceProto",
+                    "java_package": "com.google.cloud.binaryauthorization.v1beta1",
+                    "php_namespace": "Google\\Cloud\\BinaryAuthorization\\V1beta1",
+                    "ruby_package": "Google::Cloud::BinaryAuthorization::V1beta1"
+                  },
+                  "nested": {
+                    "ContinuousValidationEvent": {
+                      "oneofs": {
+                        "eventType": {
+                          "oneof": [
+                            "podEvent",
+                            "configErrorEvent"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "podEvent": {
+                          "type": "ContinuousValidationPodEvent",
+                          "id": 1
+                        },
+                        "configErrorEvent": {
+                          "type": "ConfigErrorEvent",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "ContinuousValidationPodEvent": {
+                          "fields": {
+                            "podNamespace": {
+                              "type": "string",
+                              "id": 7
+                            },
+                            "pod": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "policyName": {
+                              "type": "string",
+                              "id": 8
+                            },
+                            "deployTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 2
+                            },
+                            "endTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 3
+                            },
+                            "verdict": {
+                              "type": "PolicyConformanceVerdict",
+                              "id": 4
+                            },
+                            "images": {
+                              "rule": "repeated",
+                              "type": "ImageDetails",
+                              "id": 5
+                            }
+                          },
+                          "nested": {
+                            "PolicyConformanceVerdict": {
+                              "values": {
+                                "POLICY_CONFORMANCE_VERDICT_UNSPECIFIED": 0,
+                                "VIOLATES_POLICY": 1
+                              }
+                            },
+                            "ImageDetails": {
+                              "fields": {
+                                "image": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "containerName": {
+                                  "type": "string",
+                                  "id": 5
+                                },
+                                "containerType": {
+                                  "type": "ContainerType",
+                                  "id": 6
+                                },
+                                "result": {
+                                  "type": "AuditResult",
+                                  "id": 2
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "id": 3
+                                },
+                                "checkResults": {
+                                  "rule": "repeated",
+                                  "type": "CheckResult",
+                                  "id": 4
+                                }
+                              },
+                              "nested": {
+                                "ContainerType": {
+                                  "values": {
+                                    "CONTAINER_TYPE_UNSPECIFIED": 0,
+                                    "CONTAINER": 1,
+                                    "INIT_CONTAINER": 2,
+                                    "EPHEMERAL_CONTAINER": 3
+                                  }
+                                },
+                                "AuditResult": {
+                                  "values": {
+                                    "AUDIT_RESULT_UNSPECIFIED": 0,
+                                    "ALLOW": 1,
+                                    "DENY": 2
+                                  }
+                                },
+                                "CheckResult": {
+                                  "fields": {
+                                    "checkSetIndex": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "checkSetName": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "checkSetScope": {
+                                      "type": "CheckSetScope",
+                                      "id": 3
+                                    },
+                                    "checkIndex": {
+                                      "type": "string",
+                                      "id": 4
+                                    },
+                                    "checkName": {
+                                      "type": "string",
+                                      "id": 5
+                                    },
+                                    "checkType": {
+                                      "type": "string",
+                                      "id": 6
+                                    },
+                                    "verdict": {
+                                      "type": "CheckVerdict",
+                                      "id": 7
+                                    },
+                                    "explanation": {
+                                      "type": "string",
+                                      "id": 8
+                                    }
+                                  },
+                                  "nested": {
+                                    "CheckSetScope": {
+                                      "oneofs": {
+                                        "scope": {
+                                          "oneof": [
+                                            "kubernetesServiceAccount",
+                                            "kubernetesNamespace"
+                                          ]
+                                        }
+                                      },
+                                      "fields": {
+                                        "kubernetesServiceAccount": {
+                                          "type": "string",
+                                          "id": 1
+                                        },
+                                        "kubernetesNamespace": {
+                                          "type": "string",
+                                          "id": 2
+                                        }
+                                      }
+                                    },
+                                    "CheckVerdict": {
+                                      "values": {
+                                        "CHECK_VERDICT_UNSPECIFIED": 0,
+                                        "NON_CONFORMANT": 1
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "ConfigErrorEvent": {
+                          "fields": {
+                            "description": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "Policy": {
+                      "options": {
+                        "(google.api.resource).type": "binaryauthorization.googleapis.com/Policy",
+                        "(google.api.resource).pattern": "locations/{location}/policy"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "globalPolicyEvaluationMode": {
+                          "type": "GlobalPolicyEvaluationMode",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "admissionWhitelistPatterns": {
+                          "rule": "repeated",
+                          "type": "AdmissionWhitelistPattern",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "clusterAdmissionRules": {
+                          "keyType": "string",
+                          "type": "AdmissionRule",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "kubernetesNamespaceAdmissionRules": {
+                          "keyType": "string",
+                          "type": "AdmissionRule",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "kubernetesServiceAccountAdmissionRules": {
+                          "keyType": "string",
+                          "type": "AdmissionRule",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "istioServiceIdentityAdmissionRules": {
+                          "keyType": "string",
+                          "type": "AdmissionRule",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "defaultAdmissionRule": {
+                          "type": "AdmissionRule",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "GlobalPolicyEvaluationMode": {
+                          "values": {
+                            "GLOBAL_POLICY_EVALUATION_MODE_UNSPECIFIED": 0,
+                            "ENABLE": 1,
+                            "DISABLE": 2
+                          }
+                        }
+                      }
+                    },
+                    "AdmissionWhitelistPattern": {
+                      "fields": {
+                        "namePattern": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AdmissionRule": {
+                      "fields": {
+                        "evaluationMode": {
+                          "type": "EvaluationMode",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requireAttestationsBy": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enforcementMode": {
+                          "type": "EnforcementMode",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "EvaluationMode": {
+                          "values": {
+                            "EVALUATION_MODE_UNSPECIFIED": 0,
+                            "ALWAYS_ALLOW": 1,
+                            "REQUIRE_ATTESTATION": 2,
+                            "ALWAYS_DENY": 3
+                          }
+                        },
+                        "EnforcementMode": {
+                          "values": {
+                            "ENFORCEMENT_MODE_UNSPECIFIED": 0,
+                            "ENFORCED_BLOCK_AND_AUDIT_LOG": 1,
+                            "DRYRUN_AUDIT_LOG_ONLY": 2
+                          }
+                        }
+                      }
+                    },
+                    "Attestor": {
+                      "options": {
+                        "(google.api.resource).type": "binaryauthorization.googleapis.com/Attestor",
+                        "(google.api.resource).pattern": "projects/{project}/attestors/{attestor}"
+                      },
+                      "oneofs": {
+                        "attestorType": {
+                          "oneof": [
+                            "userOwnedDrydockNote"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "userOwnedDrydockNote": {
+                          "type": "UserOwnedDrydockNote",
+                          "id": 3
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "UserOwnedDrydockNote": {
+                      "fields": {
+                        "noteReference": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "publicKeys": {
+                          "rule": "repeated",
+                          "type": "AttestorPublicKey",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "delegationServiceAccountEmail": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "PkixPublicKey": {
+                      "fields": {
+                        "publicKeyPem": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "signatureAlgorithm": {
+                          "type": "SignatureAlgorithm",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "SignatureAlgorithm": {
+                          "options": {
+                            "allow_alias": true
+                          },
+                          "values": {
+                            "SIGNATURE_ALGORITHM_UNSPECIFIED": 0,
+                            "RSA_PSS_2048_SHA256": 1,
+                            "RSA_PSS_3072_SHA256": 2,
+                            "RSA_PSS_4096_SHA256": 3,
+                            "RSA_PSS_4096_SHA512": 4,
+                            "RSA_SIGN_PKCS1_2048_SHA256": 5,
+                            "RSA_SIGN_PKCS1_3072_SHA256": 6,
+                            "RSA_SIGN_PKCS1_4096_SHA256": 7,
+                            "RSA_SIGN_PKCS1_4096_SHA512": 8,
+                            "ECDSA_P256_SHA256": 9,
+                            "EC_SIGN_P256_SHA256": 9,
+                            "ECDSA_P384_SHA384": 10,
+                            "EC_SIGN_P384_SHA384": 10,
+                            "ECDSA_P521_SHA512": 11,
+                            "EC_SIGN_P521_SHA512": 11
+                          }
+                        }
+                      }
+                    },
+                    "AttestorPublicKey": {
+                      "oneofs": {
+                        "publicKey": {
+                          "oneof": [
+                            "asciiArmoredPgpPublicKey",
+                            "pkixPublicKey"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "comment": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "id": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "asciiArmoredPgpPublicKey": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "pkixPublicKey": {
+                          "type": "PkixPublicKey",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "BinauthzManagementServiceV1Beta1": {
+                      "options": {
+                        "(google.api.default_host)": "binaryauthorization.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "GetPolicy": {
+                          "requestType": "GetPolicyRequest",
+                          "responseType": "Policy",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/policy}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/policy}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdatePolicy": {
+                          "requestType": "UpdatePolicyRequest",
+                          "responseType": "Policy",
+                          "options": {
+                            "(google.api.http).put": "/v1beta1/{policy.name=projects/*/policy}",
+                            "(google.api.http).body": "policy",
+                            "(google.api.method_signature)": "policy"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "put": "/v1beta1/{policy.name=projects/*/policy}",
+                                "body": "policy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "policy"
+                            }
+                          ]
+                        },
+                        "CreateAttestor": {
+                          "requestType": "CreateAttestorRequest",
+                          "responseType": "Attestor",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*}/attestors",
+                            "(google.api.http).body": "attestor",
+                            "(google.api.method_signature)": "parent,attestor_id,attestor"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*}/attestors",
+                                "body": "attestor"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,attestor_id,attestor"
+                            }
+                          ]
+                        },
+                        "GetAttestor": {
+                          "requestType": "GetAttestorRequest",
+                          "responseType": "Attestor",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/attestors/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/attestors/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateAttestor": {
+                          "requestType": "UpdateAttestorRequest",
+                          "responseType": "Attestor",
+                          "options": {
+                            "(google.api.http).put": "/v1beta1/{attestor.name=projects/*/attestors/*}",
+                            "(google.api.http).body": "attestor",
+                            "(google.api.method_signature)": "attestor"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "put": "/v1beta1/{attestor.name=projects/*/attestors/*}",
+                                "body": "attestor"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "attestor"
+                            }
+                          ]
+                        },
+                        "ListAttestors": {
+                          "requestType": "ListAttestorsRequest",
+                          "responseType": "ListAttestorsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*}/attestors",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*}/attestors"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "DeleteAttestor": {
+                          "requestType": "DeleteAttestorRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/attestors/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/attestors/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "GetPolicyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "binaryauthorization.googleapis.com/Policy"
+                          }
+                        }
+                      }
+                    },
+                    "SystemPolicyV1Beta1": {
+                      "options": {
+                        "(google.api.default_host)": "binaryauthorization.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "GetSystemPolicy": {
+                          "requestType": "GetSystemPolicyRequest",
+                          "responseType": "Policy",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=locations/*/policy}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=locations/*/policy}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "UpdatePolicyRequest": {
+                      "fields": {
+                        "policy": {
+                          "type": "Policy",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CreateAttestorRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
+                        },
+                        "attestorId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "attestor": {
+                          "type": "Attestor",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetAttestorRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "binaryauthorization.googleapis.com/Attestor"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateAttestorRequest": {
+                      "fields": {
+                        "attestor": {
+                          "type": "Attestor",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListAttestorsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListAttestorsResponse": {
+                      "fields": {
+                        "attestors": {
+                          "rule": "repeated",
+                          "type": "Attestor",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteAttestorRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "binaryauthorization.googleapis.com/Attestor"
+                          }
+                        }
+                      }
+                    },
+                    "GetSystemPolicyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "binaryauthorization.googleapis.com/Policy"
+                          }
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -983,10 +1749,6 @@
                   "rule": "repeated",
                   "type": "ClientLibrarySettings",
                   "id": 109
-                },
-                "protoReferenceDocumentationUri": {
-                  "type": "string",
-                  "id": 110
                 }
               }
             },
@@ -1044,31 +1806,6 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
-                },
-                "renamedServices": {
-                  "keyType": "string",
-                  "type": "string",
-                  "id": 2
-                },
-                "renamedResources": {
-                  "keyType": "string",
-                  "type": "string",
-                  "id": 3
-                },
-                "ignoredResources": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 4
-                },
-                "forcedNamespaceAliases": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 5
-                },
-                "handwrittenSignatures": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 6
                 }
               }
             },
@@ -1128,10 +1865,7 @@
                 "CLOUD": 1,
                 "ADS": 2,
                 "PHOTOS": 3,
-                "STREET_VIEW": 4,
-                "SHOPPING": 5,
-                "GEO": 6,
-                "GENERATIVE_AI": 7
+                "STREET_VIEW": 4
               }
             },
             "ClientLibraryDestination": {
@@ -1332,25 +2066,6 @@
                   "rule": "repeated",
                   "type": "UninterpretedOption",
                   "id": 999
-                },
-                "declaration": {
-                  "rule": "repeated",
-                  "type": "Declaration",
-                  "id": 2,
-                  "options": {
-                    "retention": "RETENTION_SOURCE"
-                  }
-                },
-                "features": {
-                  "type": "FeatureSet",
-                  "id": 50
-                },
-                "verification": {
-                  "type": "VerificationState",
-                  "id": 3,
-                  "options": {
-                    "default": "UNVERIFIED"
-                  }
                 }
               },
               "extensions": [
@@ -1358,45 +2073,7 @@
                   1000,
                   536870911
                 ]
-              ],
-              "nested": {
-                "Declaration": {
-                  "fields": {
-                    "number": {
-                      "type": "int32",
-                      "id": 1
-                    },
-                    "fullName": {
-                      "type": "string",
-                      "id": 2
-                    },
-                    "type": {
-                      "type": "string",
-                      "id": 3
-                    },
-                    "reserved": {
-                      "type": "bool",
-                      "id": 5
-                    },
-                    "repeated": {
-                      "type": "bool",
-                      "id": 6
-                    }
-                  },
-                  "reserved": [
-                    [
-                      4,
-                      4
-                    ]
-                  ]
-                },
-                "VerificationState": {
-                  "values": {
-                    "DECLARATION": 0,
-                    "UNVERIFIED": 1
-                  }
-                }
-              }
+              ]
             },
             "FieldDescriptorProto": {
               "fields": {
@@ -1709,10 +2386,6 @@
                   "type": "string",
                   "id": 45
                 },
-                "features": {
-                  "type": "FeatureSet",
-                  "id": 50
-                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -1774,10 +2447,6 @@
                   "options": {
                     "deprecated": true
                   }
-                },
-                "features": {
-                  "type": "FeatureSet",
-                  "id": 12
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -1873,22 +2542,9 @@
                   "type": "OptionRetention",
                   "id": 17
                 },
-                "targets": {
-                  "rule": "repeated",
+                "target": {
                   "type": "OptionTargetType",
-                  "id": 19,
-                  "options": {
-                    "packed": false
-                  }
-                },
-                "editionDefaults": {
-                  "rule": "repeated",
-                  "type": "EditionDefault",
-                  "id": 20
-                },
-                "features": {
-                  "type": "FeatureSet",
-                  "id": 21
+                  "id": 18
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -1906,10 +2562,6 @@
                 [
                   4,
                   4
-                ],
-                [
-                  18,
-                  18
                 ]
               ],
               "nested": {
@@ -1947,27 +2599,11 @@
                     "TARGET_TYPE_SERVICE": 8,
                     "TARGET_TYPE_METHOD": 9
                   }
-                },
-                "EditionDefault": {
-                  "fields": {
-                    "edition": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "value": {
-                      "type": "string",
-                      "id": 2
-                    }
-                  }
                 }
               }
             },
             "OneofOptions": {
               "fields": {
-                "features": {
-                  "type": "FeatureSet",
-                  "id": 1
-                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -2001,10 +2637,6 @@
                     "deprecated": true
                   }
                 },
-                "features": {
-                  "type": "FeatureSet",
-                  "id": 7
-                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -2033,17 +2665,6 @@
                     "default": false
                   }
                 },
-                "features": {
-                  "type": "FeatureSet",
-                  "id": 2
-                },
-                "debugRedact": {
-                  "type": "bool",
-                  "id": 3,
-                  "options": {
-                    "default": false
-                  }
-                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -2059,10 +2680,6 @@
             },
             "ServiceOptions": {
               "fields": {
-                "features": {
-                  "type": "FeatureSet",
-                  "id": 34
-                },
                 "deprecated": {
                   "type": "bool",
                   "id": 33,
@@ -2098,10 +2715,6 @@
                   "options": {
                     "default": "IDEMPOTENCY_UNKNOWN"
                   }
-                },
-                "features": {
-                  "type": "FeatureSet",
-                  "id": 35
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -2170,137 +2783,6 @@
                       "type": "bool",
                       "id": 2
                     }
-                  }
-                }
-              }
-            },
-            "FeatureSet": {
-              "fields": {
-                "fieldPresence": {
-                  "type": "FieldPresence",
-                  "id": 1,
-                  "options": {
-                    "retention": "RETENTION_RUNTIME",
-                    "targets": "TARGET_TYPE_FILE",
-                    "edition_defaults.edition": "2023",
-                    "edition_defaults.value": "EXPLICIT"
-                  }
-                },
-                "enumType": {
-                  "type": "EnumType",
-                  "id": 2,
-                  "options": {
-                    "retention": "RETENTION_RUNTIME",
-                    "targets": "TARGET_TYPE_FILE",
-                    "edition_defaults.edition": "2023",
-                    "edition_defaults.value": "OPEN"
-                  }
-                },
-                "repeatedFieldEncoding": {
-                  "type": "RepeatedFieldEncoding",
-                  "id": 3,
-                  "options": {
-                    "retention": "RETENTION_RUNTIME",
-                    "targets": "TARGET_TYPE_FILE",
-                    "edition_defaults.edition": "2023",
-                    "edition_defaults.value": "PACKED"
-                  }
-                },
-                "stringFieldValidation": {
-                  "type": "StringFieldValidation",
-                  "id": 4,
-                  "options": {
-                    "retention": "RETENTION_RUNTIME",
-                    "targets": "TARGET_TYPE_FILE",
-                    "edition_defaults.edition": "2023",
-                    "edition_defaults.value": "MANDATORY"
-                  }
-                },
-                "messageEncoding": {
-                  "type": "MessageEncoding",
-                  "id": 5,
-                  "options": {
-                    "retention": "RETENTION_RUNTIME",
-                    "targets": "TARGET_TYPE_FILE",
-                    "edition_defaults.edition": "2023",
-                    "edition_defaults.value": "LENGTH_PREFIXED"
-                  }
-                },
-                "jsonFormat": {
-                  "type": "JsonFormat",
-                  "id": 6,
-                  "options": {
-                    "retention": "RETENTION_RUNTIME",
-                    "targets": "TARGET_TYPE_FILE",
-                    "edition_defaults.edition": "2023",
-                    "edition_defaults.value": "ALLOW"
-                  }
-                },
-                "rawFeatures": {
-                  "type": "FeatureSet",
-                  "id": 999,
-                  "options": {
-                    "targets": "TARGET_TYPE_UNKNOWN"
-                  }
-                }
-              },
-              "extensions": [
-                [
-                  1000,
-                  1000
-                ],
-                [
-                  1001,
-                  1001
-                ],
-                [
-                  9995,
-                  9999
-                ]
-              ],
-              "nested": {
-                "FieldPresence": {
-                  "values": {
-                    "FIELD_PRESENCE_UNKNOWN": 0,
-                    "EXPLICIT": 1,
-                    "IMPLICIT": 2,
-                    "LEGACY_REQUIRED": 3
-                  }
-                },
-                "EnumType": {
-                  "values": {
-                    "ENUM_TYPE_UNKNOWN": 0,
-                    "OPEN": 1,
-                    "CLOSED": 2
-                  }
-                },
-                "RepeatedFieldEncoding": {
-                  "values": {
-                    "REPEATED_FIELD_ENCODING_UNKNOWN": 0,
-                    "PACKED": 1,
-                    "EXPANDED": 2
-                  }
-                },
-                "StringFieldValidation": {
-                  "values": {
-                    "STRING_FIELD_VALIDATION_UNKNOWN": 0,
-                    "MANDATORY": 1,
-                    "HINT": 2,
-                    "NONE": 3
-                  }
-                },
-                "MessageEncoding": {
-                  "values": {
-                    "MESSAGE_ENCODING_UNKNOWN": 0,
-                    "LENGTH_PREFIXED": 1,
-                    "DELIMITED": 2
-                  }
-                },
-                "JsonFormat": {
-                  "values": {
-                    "JSON_FORMAT_UNKNOWN": 0,
-                    "ALLOW": 1,
-                    "LEGACY_BEST_EFFORT": 2
                   }
                 }
               }

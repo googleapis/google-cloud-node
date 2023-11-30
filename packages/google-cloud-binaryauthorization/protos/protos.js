@@ -5434,6 +5434,6723 @@
                     return v1;
                 })();
     
+                binaryauthorization.v1beta1 = (function() {
+    
+                    /**
+                     * Namespace v1beta1.
+                     * @memberof google.cloud.binaryauthorization
+                     * @namespace
+                     */
+                    var v1beta1 = {};
+    
+                    v1beta1.ContinuousValidationEvent = (function() {
+    
+                        /**
+                         * Properties of a ContinuousValidationEvent.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @interface IContinuousValidationEvent
+                         * @property {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IContinuousValidationPodEvent|null} [podEvent] ContinuousValidationEvent podEvent
+                         * @property {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IConfigErrorEvent|null} [configErrorEvent] ContinuousValidationEvent configErrorEvent
+                         */
+    
+                        /**
+                         * Constructs a new ContinuousValidationEvent.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @classdesc Represents a ContinuousValidationEvent.
+                         * @implements IContinuousValidationEvent
+                         * @constructor
+                         * @param {google.cloud.binaryauthorization.v1beta1.IContinuousValidationEvent=} [properties] Properties to set
+                         */
+                        function ContinuousValidationEvent(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ContinuousValidationEvent podEvent.
+                         * @member {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IContinuousValidationPodEvent|null|undefined} podEvent
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent
+                         * @instance
+                         */
+                        ContinuousValidationEvent.prototype.podEvent = null;
+    
+                        /**
+                         * ContinuousValidationEvent configErrorEvent.
+                         * @member {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IConfigErrorEvent|null|undefined} configErrorEvent
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent
+                         * @instance
+                         */
+                        ContinuousValidationEvent.prototype.configErrorEvent = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ContinuousValidationEvent eventType.
+                         * @member {"podEvent"|"configErrorEvent"|undefined} eventType
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent
+                         * @instance
+                         */
+                        Object.defineProperty(ContinuousValidationEvent.prototype, "eventType", {
+                            get: $util.oneOfGetter($oneOfFields = ["podEvent", "configErrorEvent"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ContinuousValidationEvent instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IContinuousValidationEvent=} [properties] Properties to set
+                         * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent} ContinuousValidationEvent instance
+                         */
+                        ContinuousValidationEvent.create = function create(properties) {
+                            return new ContinuousValidationEvent(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ContinuousValidationEvent message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IContinuousValidationEvent} message ContinuousValidationEvent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ContinuousValidationEvent.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.podEvent != null && Object.hasOwnProperty.call(message, "podEvent"))
+                                $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.encode(message.podEvent, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.configErrorEvent != null && Object.hasOwnProperty.call(message, "configErrorEvent"))
+                                $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent.encode(message.configErrorEvent, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ContinuousValidationEvent message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IContinuousValidationEvent} message ContinuousValidationEvent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ContinuousValidationEvent.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ContinuousValidationEvent message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent} ContinuousValidationEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ContinuousValidationEvent.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.podEvent = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.configErrorEvent = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ContinuousValidationEvent message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent} ContinuousValidationEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ContinuousValidationEvent.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ContinuousValidationEvent message.
+                         * @function verify
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ContinuousValidationEvent.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.podEvent != null && message.hasOwnProperty("podEvent")) {
+                                properties.eventType = 1;
+                                {
+                                    var error = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.verify(message.podEvent);
+                                    if (error)
+                                        return "podEvent." + error;
+                                }
+                            }
+                            if (message.configErrorEvent != null && message.hasOwnProperty("configErrorEvent")) {
+                                if (properties.eventType === 1)
+                                    return "eventType: multiple values";
+                                properties.eventType = 1;
+                                {
+                                    var error = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent.verify(message.configErrorEvent);
+                                    if (error)
+                                        return "configErrorEvent." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ContinuousValidationEvent message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent} ContinuousValidationEvent
+                         */
+                        ContinuousValidationEvent.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent)
+                                return object;
+                            var message = new $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent();
+                            if (object.podEvent != null) {
+                                if (typeof object.podEvent !== "object")
+                                    throw TypeError(".google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.podEvent: object expected");
+                                message.podEvent = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.fromObject(object.podEvent);
+                            }
+                            if (object.configErrorEvent != null) {
+                                if (typeof object.configErrorEvent !== "object")
+                                    throw TypeError(".google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.configErrorEvent: object expected");
+                                message.configErrorEvent = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent.fromObject(object.configErrorEvent);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ContinuousValidationEvent message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent} message ContinuousValidationEvent
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ContinuousValidationEvent.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.podEvent != null && message.hasOwnProperty("podEvent")) {
+                                object.podEvent = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.toObject(message.podEvent, options);
+                                if (options.oneofs)
+                                    object.eventType = "podEvent";
+                            }
+                            if (message.configErrorEvent != null && message.hasOwnProperty("configErrorEvent")) {
+                                object.configErrorEvent = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent.toObject(message.configErrorEvent, options);
+                                if (options.oneofs)
+                                    object.eventType = "configErrorEvent";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ContinuousValidationEvent to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ContinuousValidationEvent.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ContinuousValidationEvent
+                         * @function getTypeUrl
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ContinuousValidationEvent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent";
+                        };
+    
+                        ContinuousValidationEvent.ContinuousValidationPodEvent = (function() {
+    
+                            /**
+                             * Properties of a ContinuousValidationPodEvent.
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent
+                             * @interface IContinuousValidationPodEvent
+                             * @property {string|null} [podNamespace] ContinuousValidationPodEvent podNamespace
+                             * @property {string|null} [pod] ContinuousValidationPodEvent pod
+                             * @property {string|null} [policyName] ContinuousValidationPodEvent policyName
+                             * @property {google.protobuf.ITimestamp|null} [deployTime] ContinuousValidationPodEvent deployTime
+                             * @property {google.protobuf.ITimestamp|null} [endTime] ContinuousValidationPodEvent endTime
+                             * @property {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.PolicyConformanceVerdict|null} [verdict] ContinuousValidationPodEvent verdict
+                             * @property {Array.<google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.IImageDetails>|null} [images] ContinuousValidationPodEvent images
+                             */
+    
+                            /**
+                             * Constructs a new ContinuousValidationPodEvent.
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent
+                             * @classdesc Represents a ContinuousValidationPodEvent.
+                             * @implements IContinuousValidationPodEvent
+                             * @constructor
+                             * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IContinuousValidationPodEvent=} [properties] Properties to set
+                             */
+                            function ContinuousValidationPodEvent(properties) {
+                                this.images = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ContinuousValidationPodEvent podNamespace.
+                             * @member {string} podNamespace
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent
+                             * @instance
+                             */
+                            ContinuousValidationPodEvent.prototype.podNamespace = "";
+    
+                            /**
+                             * ContinuousValidationPodEvent pod.
+                             * @member {string} pod
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent
+                             * @instance
+                             */
+                            ContinuousValidationPodEvent.prototype.pod = "";
+    
+                            /**
+                             * ContinuousValidationPodEvent policyName.
+                             * @member {string} policyName
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent
+                             * @instance
+                             */
+                            ContinuousValidationPodEvent.prototype.policyName = "";
+    
+                            /**
+                             * ContinuousValidationPodEvent deployTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} deployTime
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent
+                             * @instance
+                             */
+                            ContinuousValidationPodEvent.prototype.deployTime = null;
+    
+                            /**
+                             * ContinuousValidationPodEvent endTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent
+                             * @instance
+                             */
+                            ContinuousValidationPodEvent.prototype.endTime = null;
+    
+                            /**
+                             * ContinuousValidationPodEvent verdict.
+                             * @member {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.PolicyConformanceVerdict} verdict
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent
+                             * @instance
+                             */
+                            ContinuousValidationPodEvent.prototype.verdict = 0;
+    
+                            /**
+                             * ContinuousValidationPodEvent images.
+                             * @member {Array.<google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.IImageDetails>} images
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent
+                             * @instance
+                             */
+                            ContinuousValidationPodEvent.prototype.images = $util.emptyArray;
+    
+                            /**
+                             * Creates a new ContinuousValidationPodEvent instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent
+                             * @static
+                             * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IContinuousValidationPodEvent=} [properties] Properties to set
+                             * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent} ContinuousValidationPodEvent instance
+                             */
+                            ContinuousValidationPodEvent.create = function create(properties) {
+                                return new ContinuousValidationPodEvent(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ContinuousValidationPodEvent message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent
+                             * @static
+                             * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IContinuousValidationPodEvent} message ContinuousValidationPodEvent message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ContinuousValidationPodEvent.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.pod != null && Object.hasOwnProperty.call(message, "pod"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.pod);
+                                if (message.deployTime != null && Object.hasOwnProperty.call(message, "deployTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.deployTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.verdict != null && Object.hasOwnProperty.call(message, "verdict"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.verdict);
+                                if (message.images != null && message.images.length)
+                                    for (var i = 0; i < message.images.length; ++i)
+                                        $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.encode(message.images[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.podNamespace != null && Object.hasOwnProperty.call(message, "podNamespace"))
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.podNamespace);
+                                if (message.policyName != null && Object.hasOwnProperty.call(message, "policyName"))
+                                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.policyName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ContinuousValidationPodEvent message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent
+                             * @static
+                             * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IContinuousValidationPodEvent} message ContinuousValidationPodEvent message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ContinuousValidationPodEvent.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ContinuousValidationPodEvent message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent} ContinuousValidationPodEvent
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ContinuousValidationPodEvent.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 7: {
+                                            message.podNamespace = reader.string();
+                                            break;
+                                        }
+                                    case 1: {
+                                            message.pod = reader.string();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.policyName = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.deployTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.verdict = reader.int32();
+                                            break;
+                                        }
+                                    case 5: {
+                                            if (!(message.images && message.images.length))
+                                                message.images = [];
+                                            message.images.push($root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ContinuousValidationPodEvent message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent} ContinuousValidationPodEvent
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ContinuousValidationPodEvent.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ContinuousValidationPodEvent message.
+                             * @function verify
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ContinuousValidationPodEvent.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.podNamespace != null && message.hasOwnProperty("podNamespace"))
+                                    if (!$util.isString(message.podNamespace))
+                                        return "podNamespace: string expected";
+                                if (message.pod != null && message.hasOwnProperty("pod"))
+                                    if (!$util.isString(message.pod))
+                                        return "pod: string expected";
+                                if (message.policyName != null && message.hasOwnProperty("policyName"))
+                                    if (!$util.isString(message.policyName))
+                                        return "policyName: string expected";
+                                if (message.deployTime != null && message.hasOwnProperty("deployTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.deployTime);
+                                    if (error)
+                                        return "deployTime." + error;
+                                }
+                                if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                    if (error)
+                                        return "endTime." + error;
+                                }
+                                if (message.verdict != null && message.hasOwnProperty("verdict"))
+                                    switch (message.verdict) {
+                                    default:
+                                        return "verdict: enum value expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                                if (message.images != null && message.hasOwnProperty("images")) {
+                                    if (!Array.isArray(message.images))
+                                        return "images: array expected";
+                                    for (var i = 0; i < message.images.length; ++i) {
+                                        var error = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.verify(message.images[i]);
+                                        if (error)
+                                            return "images." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ContinuousValidationPodEvent message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent} ContinuousValidationPodEvent
+                             */
+                            ContinuousValidationPodEvent.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent)
+                                    return object;
+                                var message = new $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent();
+                                if (object.podNamespace != null)
+                                    message.podNamespace = String(object.podNamespace);
+                                if (object.pod != null)
+                                    message.pod = String(object.pod);
+                                if (object.policyName != null)
+                                    message.policyName = String(object.policyName);
+                                if (object.deployTime != null) {
+                                    if (typeof object.deployTime !== "object")
+                                        throw TypeError(".google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.deployTime: object expected");
+                                    message.deployTime = $root.google.protobuf.Timestamp.fromObject(object.deployTime);
+                                }
+                                if (object.endTime != null) {
+                                    if (typeof object.endTime !== "object")
+                                        throw TypeError(".google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.endTime: object expected");
+                                    message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                                }
+                                switch (object.verdict) {
+                                default:
+                                    if (typeof object.verdict === "number") {
+                                        message.verdict = object.verdict;
+                                        break;
+                                    }
+                                    break;
+                                case "POLICY_CONFORMANCE_VERDICT_UNSPECIFIED":
+                                case 0:
+                                    message.verdict = 0;
+                                    break;
+                                case "VIOLATES_POLICY":
+                                case 1:
+                                    message.verdict = 1;
+                                    break;
+                                }
+                                if (object.images) {
+                                    if (!Array.isArray(object.images))
+                                        throw TypeError(".google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.images: array expected");
+                                    message.images = [];
+                                    for (var i = 0; i < object.images.length; ++i) {
+                                        if (typeof object.images[i] !== "object")
+                                            throw TypeError(".google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.images: object expected");
+                                        message.images[i] = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.fromObject(object.images[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ContinuousValidationPodEvent message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent
+                             * @static
+                             * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent} message ContinuousValidationPodEvent
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ContinuousValidationPodEvent.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.images = [];
+                                if (options.defaults) {
+                                    object.pod = "";
+                                    object.deployTime = null;
+                                    object.endTime = null;
+                                    object.verdict = options.enums === String ? "POLICY_CONFORMANCE_VERDICT_UNSPECIFIED" : 0;
+                                    object.podNamespace = "";
+                                    object.policyName = "";
+                                }
+                                if (message.pod != null && message.hasOwnProperty("pod"))
+                                    object.pod = message.pod;
+                                if (message.deployTime != null && message.hasOwnProperty("deployTime"))
+                                    object.deployTime = $root.google.protobuf.Timestamp.toObject(message.deployTime, options);
+                                if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                    object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                                if (message.verdict != null && message.hasOwnProperty("verdict"))
+                                    object.verdict = options.enums === String ? $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.PolicyConformanceVerdict[message.verdict] === undefined ? message.verdict : $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.PolicyConformanceVerdict[message.verdict] : message.verdict;
+                                if (message.images && message.images.length) {
+                                    object.images = [];
+                                    for (var j = 0; j < message.images.length; ++j)
+                                        object.images[j] = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.toObject(message.images[j], options);
+                                }
+                                if (message.podNamespace != null && message.hasOwnProperty("podNamespace"))
+                                    object.podNamespace = message.podNamespace;
+                                if (message.policyName != null && message.hasOwnProperty("policyName"))
+                                    object.policyName = message.policyName;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ContinuousValidationPodEvent to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ContinuousValidationPodEvent.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ContinuousValidationPodEvent
+                             * @function getTypeUrl
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ContinuousValidationPodEvent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent";
+                            };
+    
+                            /**
+                             * PolicyConformanceVerdict enum.
+                             * @name google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.PolicyConformanceVerdict
+                             * @enum {number}
+                             * @property {number} POLICY_CONFORMANCE_VERDICT_UNSPECIFIED=0 POLICY_CONFORMANCE_VERDICT_UNSPECIFIED value
+                             * @property {number} VIOLATES_POLICY=1 VIOLATES_POLICY value
+                             */
+                            ContinuousValidationPodEvent.PolicyConformanceVerdict = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "POLICY_CONFORMANCE_VERDICT_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "VIOLATES_POLICY"] = 1;
+                                return values;
+                            })();
+    
+                            ContinuousValidationPodEvent.ImageDetails = (function() {
+    
+                                /**
+                                 * Properties of an ImageDetails.
+                                 * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent
+                                 * @interface IImageDetails
+                                 * @property {string|null} [image] ImageDetails image
+                                 * @property {string|null} [containerName] ImageDetails containerName
+                                 * @property {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ContainerType|null} [containerType] ImageDetails containerType
+                                 * @property {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.AuditResult|null} [result] ImageDetails result
+                                 * @property {string|null} [description] ImageDetails description
+                                 * @property {Array.<google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ICheckResult>|null} [checkResults] ImageDetails checkResults
+                                 */
+    
+                                /**
+                                 * Constructs a new ImageDetails.
+                                 * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent
+                                 * @classdesc Represents an ImageDetails.
+                                 * @implements IImageDetails
+                                 * @constructor
+                                 * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.IImageDetails=} [properties] Properties to set
+                                 */
+                                function ImageDetails(properties) {
+                                    this.checkResults = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ImageDetails image.
+                                 * @member {string} image
+                                 * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails
+                                 * @instance
+                                 */
+                                ImageDetails.prototype.image = "";
+    
+                                /**
+                                 * ImageDetails containerName.
+                                 * @member {string} containerName
+                                 * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails
+                                 * @instance
+                                 */
+                                ImageDetails.prototype.containerName = "";
+    
+                                /**
+                                 * ImageDetails containerType.
+                                 * @member {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ContainerType} containerType
+                                 * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails
+                                 * @instance
+                                 */
+                                ImageDetails.prototype.containerType = 0;
+    
+                                /**
+                                 * ImageDetails result.
+                                 * @member {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.AuditResult} result
+                                 * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails
+                                 * @instance
+                                 */
+                                ImageDetails.prototype.result = 0;
+    
+                                /**
+                                 * ImageDetails description.
+                                 * @member {string} description
+                                 * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails
+                                 * @instance
+                                 */
+                                ImageDetails.prototype.description = "";
+    
+                                /**
+                                 * ImageDetails checkResults.
+                                 * @member {Array.<google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ICheckResult>} checkResults
+                                 * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails
+                                 * @instance
+                                 */
+                                ImageDetails.prototype.checkResults = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new ImageDetails instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails
+                                 * @static
+                                 * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.IImageDetails=} [properties] Properties to set
+                                 * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails} ImageDetails instance
+                                 */
+                                ImageDetails.create = function create(properties) {
+                                    return new ImageDetails(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ImageDetails message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails
+                                 * @static
+                                 * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.IImageDetails} message ImageDetails message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ImageDetails.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.image != null && Object.hasOwnProperty.call(message, "image"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.image);
+                                    if (message.result != null && Object.hasOwnProperty.call(message, "result"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.result);
+                                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                                    if (message.checkResults != null && message.checkResults.length)
+                                        for (var i = 0; i < message.checkResults.length; ++i)
+                                            $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.encode(message.checkResults[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                    if (message.containerName != null && Object.hasOwnProperty.call(message, "containerName"))
+                                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.containerName);
+                                    if (message.containerType != null && Object.hasOwnProperty.call(message, "containerType"))
+                                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.containerType);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ImageDetails message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails
+                                 * @static
+                                 * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.IImageDetails} message ImageDetails message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ImageDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an ImageDetails message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails} ImageDetails
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ImageDetails.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.image = reader.string();
+                                                break;
+                                            }
+                                        case 5: {
+                                                message.containerName = reader.string();
+                                                break;
+                                            }
+                                        case 6: {
+                                                message.containerType = reader.int32();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.result = reader.int32();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.description = reader.string();
+                                                break;
+                                            }
+                                        case 4: {
+                                                if (!(message.checkResults && message.checkResults.length))
+                                                    message.checkResults = [];
+                                                message.checkResults.push($root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.decode(reader, reader.uint32()));
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an ImageDetails message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails} ImageDetails
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ImageDetails.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an ImageDetails message.
+                                 * @function verify
+                                 * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ImageDetails.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.image != null && message.hasOwnProperty("image"))
+                                        if (!$util.isString(message.image))
+                                            return "image: string expected";
+                                    if (message.containerName != null && message.hasOwnProperty("containerName"))
+                                        if (!$util.isString(message.containerName))
+                                            return "containerName: string expected";
+                                    if (message.containerType != null && message.hasOwnProperty("containerType"))
+                                        switch (message.containerType) {
+                                        default:
+                                            return "containerType: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                            break;
+                                        }
+                                    if (message.result != null && message.hasOwnProperty("result"))
+                                        switch (message.result) {
+                                        default:
+                                            return "result: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
+                                    if (message.description != null && message.hasOwnProperty("description"))
+                                        if (!$util.isString(message.description))
+                                            return "description: string expected";
+                                    if (message.checkResults != null && message.hasOwnProperty("checkResults")) {
+                                        if (!Array.isArray(message.checkResults))
+                                            return "checkResults: array expected";
+                                        for (var i = 0; i < message.checkResults.length; ++i) {
+                                            var error = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.verify(message.checkResults[i]);
+                                            if (error)
+                                                return "checkResults." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an ImageDetails message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails} ImageDetails
+                                 */
+                                ImageDetails.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails)
+                                        return object;
+                                    var message = new $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails();
+                                    if (object.image != null)
+                                        message.image = String(object.image);
+                                    if (object.containerName != null)
+                                        message.containerName = String(object.containerName);
+                                    switch (object.containerType) {
+                                    default:
+                                        if (typeof object.containerType === "number") {
+                                            message.containerType = object.containerType;
+                                            break;
+                                        }
+                                        break;
+                                    case "CONTAINER_TYPE_UNSPECIFIED":
+                                    case 0:
+                                        message.containerType = 0;
+                                        break;
+                                    case "CONTAINER":
+                                    case 1:
+                                        message.containerType = 1;
+                                        break;
+                                    case "INIT_CONTAINER":
+                                    case 2:
+                                        message.containerType = 2;
+                                        break;
+                                    case "EPHEMERAL_CONTAINER":
+                                    case 3:
+                                        message.containerType = 3;
+                                        break;
+                                    }
+                                    switch (object.result) {
+                                    default:
+                                        if (typeof object.result === "number") {
+                                            message.result = object.result;
+                                            break;
+                                        }
+                                        break;
+                                    case "AUDIT_RESULT_UNSPECIFIED":
+                                    case 0:
+                                        message.result = 0;
+                                        break;
+                                    case "ALLOW":
+                                    case 1:
+                                        message.result = 1;
+                                        break;
+                                    case "DENY":
+                                    case 2:
+                                        message.result = 2;
+                                        break;
+                                    }
+                                    if (object.description != null)
+                                        message.description = String(object.description);
+                                    if (object.checkResults) {
+                                        if (!Array.isArray(object.checkResults))
+                                            throw TypeError(".google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.checkResults: array expected");
+                                        message.checkResults = [];
+                                        for (var i = 0; i < object.checkResults.length; ++i) {
+                                            if (typeof object.checkResults[i] !== "object")
+                                                throw TypeError(".google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.checkResults: object expected");
+                                            message.checkResults[i] = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.fromObject(object.checkResults[i]);
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an ImageDetails message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails
+                                 * @static
+                                 * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails} message ImageDetails
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ImageDetails.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.checkResults = [];
+                                    if (options.defaults) {
+                                        object.image = "";
+                                        object.result = options.enums === String ? "AUDIT_RESULT_UNSPECIFIED" : 0;
+                                        object.description = "";
+                                        object.containerName = "";
+                                        object.containerType = options.enums === String ? "CONTAINER_TYPE_UNSPECIFIED" : 0;
+                                    }
+                                    if (message.image != null && message.hasOwnProperty("image"))
+                                        object.image = message.image;
+                                    if (message.result != null && message.hasOwnProperty("result"))
+                                        object.result = options.enums === String ? $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.AuditResult[message.result] === undefined ? message.result : $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.AuditResult[message.result] : message.result;
+                                    if (message.description != null && message.hasOwnProperty("description"))
+                                        object.description = message.description;
+                                    if (message.checkResults && message.checkResults.length) {
+                                        object.checkResults = [];
+                                        for (var j = 0; j < message.checkResults.length; ++j)
+                                            object.checkResults[j] = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.toObject(message.checkResults[j], options);
+                                    }
+                                    if (message.containerName != null && message.hasOwnProperty("containerName"))
+                                        object.containerName = message.containerName;
+                                    if (message.containerType != null && message.hasOwnProperty("containerType"))
+                                        object.containerType = options.enums === String ? $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ContainerType[message.containerType] === undefined ? message.containerType : $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ContainerType[message.containerType] : message.containerType;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ImageDetails to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ImageDetails.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ImageDetails
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ImageDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails";
+                                };
+    
+                                /**
+                                 * ContainerType enum.
+                                 * @name google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ContainerType
+                                 * @enum {number}
+                                 * @property {number} CONTAINER_TYPE_UNSPECIFIED=0 CONTAINER_TYPE_UNSPECIFIED value
+                                 * @property {number} CONTAINER=1 CONTAINER value
+                                 * @property {number} INIT_CONTAINER=2 INIT_CONTAINER value
+                                 * @property {number} EPHEMERAL_CONTAINER=3 EPHEMERAL_CONTAINER value
+                                 */
+                                ImageDetails.ContainerType = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "CONTAINER_TYPE_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "CONTAINER"] = 1;
+                                    values[valuesById[2] = "INIT_CONTAINER"] = 2;
+                                    values[valuesById[3] = "EPHEMERAL_CONTAINER"] = 3;
+                                    return values;
+                                })();
+    
+                                /**
+                                 * AuditResult enum.
+                                 * @name google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.AuditResult
+                                 * @enum {number}
+                                 * @property {number} AUDIT_RESULT_UNSPECIFIED=0 AUDIT_RESULT_UNSPECIFIED value
+                                 * @property {number} ALLOW=1 ALLOW value
+                                 * @property {number} DENY=2 DENY value
+                                 */
+                                ImageDetails.AuditResult = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "AUDIT_RESULT_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "ALLOW"] = 1;
+                                    values[valuesById[2] = "DENY"] = 2;
+                                    return values;
+                                })();
+    
+                                ImageDetails.CheckResult = (function() {
+    
+                                    /**
+                                     * Properties of a CheckResult.
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails
+                                     * @interface ICheckResult
+                                     * @property {string|null} [checkSetIndex] CheckResult checkSetIndex
+                                     * @property {string|null} [checkSetName] CheckResult checkSetName
+                                     * @property {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.ICheckSetScope|null} [checkSetScope] CheckResult checkSetScope
+                                     * @property {string|null} [checkIndex] CheckResult checkIndex
+                                     * @property {string|null} [checkName] CheckResult checkName
+                                     * @property {string|null} [checkType] CheckResult checkType
+                                     * @property {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckVerdict|null} [verdict] CheckResult verdict
+                                     * @property {string|null} [explanation] CheckResult explanation
+                                     */
+    
+                                    /**
+                                     * Constructs a new CheckResult.
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails
+                                     * @classdesc Represents a CheckResult.
+                                     * @implements ICheckResult
+                                     * @constructor
+                                     * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ICheckResult=} [properties] Properties to set
+                                     */
+                                    function CheckResult(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * CheckResult checkSetIndex.
+                                     * @member {string} checkSetIndex
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @instance
+                                     */
+                                    CheckResult.prototype.checkSetIndex = "";
+    
+                                    /**
+                                     * CheckResult checkSetName.
+                                     * @member {string} checkSetName
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @instance
+                                     */
+                                    CheckResult.prototype.checkSetName = "";
+    
+                                    /**
+                                     * CheckResult checkSetScope.
+                                     * @member {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.ICheckSetScope|null|undefined} checkSetScope
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @instance
+                                     */
+                                    CheckResult.prototype.checkSetScope = null;
+    
+                                    /**
+                                     * CheckResult checkIndex.
+                                     * @member {string} checkIndex
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @instance
+                                     */
+                                    CheckResult.prototype.checkIndex = "";
+    
+                                    /**
+                                     * CheckResult checkName.
+                                     * @member {string} checkName
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @instance
+                                     */
+                                    CheckResult.prototype.checkName = "";
+    
+                                    /**
+                                     * CheckResult checkType.
+                                     * @member {string} checkType
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @instance
+                                     */
+                                    CheckResult.prototype.checkType = "";
+    
+                                    /**
+                                     * CheckResult verdict.
+                                     * @member {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckVerdict} verdict
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @instance
+                                     */
+                                    CheckResult.prototype.verdict = 0;
+    
+                                    /**
+                                     * CheckResult explanation.
+                                     * @member {string} explanation
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @instance
+                                     */
+                                    CheckResult.prototype.explanation = "";
+    
+                                    /**
+                                     * Creates a new CheckResult instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @static
+                                     * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ICheckResult=} [properties] Properties to set
+                                     * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult} CheckResult instance
+                                     */
+                                    CheckResult.create = function create(properties) {
+                                        return new CheckResult(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified CheckResult message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @static
+                                     * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ICheckResult} message CheckResult message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    CheckResult.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.checkSetIndex != null && Object.hasOwnProperty.call(message, "checkSetIndex"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.checkSetIndex);
+                                        if (message.checkSetName != null && Object.hasOwnProperty.call(message, "checkSetName"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.checkSetName);
+                                        if (message.checkSetScope != null && Object.hasOwnProperty.call(message, "checkSetScope"))
+                                            $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope.encode(message.checkSetScope, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                        if (message.checkIndex != null && Object.hasOwnProperty.call(message, "checkIndex"))
+                                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.checkIndex);
+                                        if (message.checkName != null && Object.hasOwnProperty.call(message, "checkName"))
+                                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.checkName);
+                                        if (message.checkType != null && Object.hasOwnProperty.call(message, "checkType"))
+                                            writer.uint32(/* id 6, wireType 2 =*/50).string(message.checkType);
+                                        if (message.verdict != null && Object.hasOwnProperty.call(message, "verdict"))
+                                            writer.uint32(/* id 7, wireType 0 =*/56).int32(message.verdict);
+                                        if (message.explanation != null && Object.hasOwnProperty.call(message, "explanation"))
+                                            writer.uint32(/* id 8, wireType 2 =*/66).string(message.explanation);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified CheckResult message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @static
+                                     * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ICheckResult} message CheckResult message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    CheckResult.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a CheckResult message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult} CheckResult
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    CheckResult.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.checkSetIndex = reader.string();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.checkSetName = reader.string();
+                                                    break;
+                                                }
+                                            case 3: {
+                                                    message.checkSetScope = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope.decode(reader, reader.uint32());
+                                                    break;
+                                                }
+                                            case 4: {
+                                                    message.checkIndex = reader.string();
+                                                    break;
+                                                }
+                                            case 5: {
+                                                    message.checkName = reader.string();
+                                                    break;
+                                                }
+                                            case 6: {
+                                                    message.checkType = reader.string();
+                                                    break;
+                                                }
+                                            case 7: {
+                                                    message.verdict = reader.int32();
+                                                    break;
+                                                }
+                                            case 8: {
+                                                    message.explanation = reader.string();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a CheckResult message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult} CheckResult
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    CheckResult.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a CheckResult message.
+                                     * @function verify
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    CheckResult.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.checkSetIndex != null && message.hasOwnProperty("checkSetIndex"))
+                                            if (!$util.isString(message.checkSetIndex))
+                                                return "checkSetIndex: string expected";
+                                        if (message.checkSetName != null && message.hasOwnProperty("checkSetName"))
+                                            if (!$util.isString(message.checkSetName))
+                                                return "checkSetName: string expected";
+                                        if (message.checkSetScope != null && message.hasOwnProperty("checkSetScope")) {
+                                            var error = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope.verify(message.checkSetScope);
+                                            if (error)
+                                                return "checkSetScope." + error;
+                                        }
+                                        if (message.checkIndex != null && message.hasOwnProperty("checkIndex"))
+                                            if (!$util.isString(message.checkIndex))
+                                                return "checkIndex: string expected";
+                                        if (message.checkName != null && message.hasOwnProperty("checkName"))
+                                            if (!$util.isString(message.checkName))
+                                                return "checkName: string expected";
+                                        if (message.checkType != null && message.hasOwnProperty("checkType"))
+                                            if (!$util.isString(message.checkType))
+                                                return "checkType: string expected";
+                                        if (message.verdict != null && message.hasOwnProperty("verdict"))
+                                            switch (message.verdict) {
+                                            default:
+                                                return "verdict: enum value expected";
+                                            case 0:
+                                            case 1:
+                                                break;
+                                            }
+                                        if (message.explanation != null && message.hasOwnProperty("explanation"))
+                                            if (!$util.isString(message.explanation))
+                                                return "explanation: string expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a CheckResult message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult} CheckResult
+                                     */
+                                    CheckResult.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult)
+                                            return object;
+                                        var message = new $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult();
+                                        if (object.checkSetIndex != null)
+                                            message.checkSetIndex = String(object.checkSetIndex);
+                                        if (object.checkSetName != null)
+                                            message.checkSetName = String(object.checkSetName);
+                                        if (object.checkSetScope != null) {
+                                            if (typeof object.checkSetScope !== "object")
+                                                throw TypeError(".google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.checkSetScope: object expected");
+                                            message.checkSetScope = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope.fromObject(object.checkSetScope);
+                                        }
+                                        if (object.checkIndex != null)
+                                            message.checkIndex = String(object.checkIndex);
+                                        if (object.checkName != null)
+                                            message.checkName = String(object.checkName);
+                                        if (object.checkType != null)
+                                            message.checkType = String(object.checkType);
+                                        switch (object.verdict) {
+                                        default:
+                                            if (typeof object.verdict === "number") {
+                                                message.verdict = object.verdict;
+                                                break;
+                                            }
+                                            break;
+                                        case "CHECK_VERDICT_UNSPECIFIED":
+                                        case 0:
+                                            message.verdict = 0;
+                                            break;
+                                        case "NON_CONFORMANT":
+                                        case 1:
+                                            message.verdict = 1;
+                                            break;
+                                        }
+                                        if (object.explanation != null)
+                                            message.explanation = String(object.explanation);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a CheckResult message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @static
+                                     * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult} message CheckResult
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    CheckResult.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.checkSetIndex = "";
+                                            object.checkSetName = "";
+                                            object.checkSetScope = null;
+                                            object.checkIndex = "";
+                                            object.checkName = "";
+                                            object.checkType = "";
+                                            object.verdict = options.enums === String ? "CHECK_VERDICT_UNSPECIFIED" : 0;
+                                            object.explanation = "";
+                                        }
+                                        if (message.checkSetIndex != null && message.hasOwnProperty("checkSetIndex"))
+                                            object.checkSetIndex = message.checkSetIndex;
+                                        if (message.checkSetName != null && message.hasOwnProperty("checkSetName"))
+                                            object.checkSetName = message.checkSetName;
+                                        if (message.checkSetScope != null && message.hasOwnProperty("checkSetScope"))
+                                            object.checkSetScope = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope.toObject(message.checkSetScope, options);
+                                        if (message.checkIndex != null && message.hasOwnProperty("checkIndex"))
+                                            object.checkIndex = message.checkIndex;
+                                        if (message.checkName != null && message.hasOwnProperty("checkName"))
+                                            object.checkName = message.checkName;
+                                        if (message.checkType != null && message.hasOwnProperty("checkType"))
+                                            object.checkType = message.checkType;
+                                        if (message.verdict != null && message.hasOwnProperty("verdict"))
+                                            object.verdict = options.enums === String ? $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckVerdict[message.verdict] === undefined ? message.verdict : $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckVerdict[message.verdict] : message.verdict;
+                                        if (message.explanation != null && message.hasOwnProperty("explanation"))
+                                            object.explanation = message.explanation;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this CheckResult to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    CheckResult.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for CheckResult
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    CheckResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult";
+                                    };
+    
+                                    CheckResult.CheckSetScope = (function() {
+    
+                                        /**
+                                         * Properties of a CheckSetScope.
+                                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                         * @interface ICheckSetScope
+                                         * @property {string|null} [kubernetesServiceAccount] CheckSetScope kubernetesServiceAccount
+                                         * @property {string|null} [kubernetesNamespace] CheckSetScope kubernetesNamespace
+                                         */
+    
+                                        /**
+                                         * Constructs a new CheckSetScope.
+                                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                         * @classdesc Represents a CheckSetScope.
+                                         * @implements ICheckSetScope
+                                         * @constructor
+                                         * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.ICheckSetScope=} [properties] Properties to set
+                                         */
+                                        function CheckSetScope(properties) {
+                                            if (properties)
+                                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                    if (properties[keys[i]] != null)
+                                                        this[keys[i]] = properties[keys[i]];
+                                        }
+    
+                                        /**
+                                         * CheckSetScope kubernetesServiceAccount.
+                                         * @member {string|null|undefined} kubernetesServiceAccount
+                                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope
+                                         * @instance
+                                         */
+                                        CheckSetScope.prototype.kubernetesServiceAccount = null;
+    
+                                        /**
+                                         * CheckSetScope kubernetesNamespace.
+                                         * @member {string|null|undefined} kubernetesNamespace
+                                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope
+                                         * @instance
+                                         */
+                                        CheckSetScope.prototype.kubernetesNamespace = null;
+    
+                                        // OneOf field names bound to virtual getters and setters
+                                        var $oneOfFields;
+    
+                                        /**
+                                         * CheckSetScope scope.
+                                         * @member {"kubernetesServiceAccount"|"kubernetesNamespace"|undefined} scope
+                                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope
+                                         * @instance
+                                         */
+                                        Object.defineProperty(CheckSetScope.prototype, "scope", {
+                                            get: $util.oneOfGetter($oneOfFields = ["kubernetesServiceAccount", "kubernetesNamespace"]),
+                                            set: $util.oneOfSetter($oneOfFields)
+                                        });
+    
+                                        /**
+                                         * Creates a new CheckSetScope instance using the specified properties.
+                                         * @function create
+                                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope
+                                         * @static
+                                         * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.ICheckSetScope=} [properties] Properties to set
+                                         * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope} CheckSetScope instance
+                                         */
+                                        CheckSetScope.create = function create(properties) {
+                                            return new CheckSetScope(properties);
+                                        };
+    
+                                        /**
+                                         * Encodes the specified CheckSetScope message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope.verify|verify} messages.
+                                         * @function encode
+                                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope
+                                         * @static
+                                         * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.ICheckSetScope} message CheckSetScope message or plain object to encode
+                                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                                         * @returns {$protobuf.Writer} Writer
+                                         */
+                                        CheckSetScope.encode = function encode(message, writer) {
+                                            if (!writer)
+                                                writer = $Writer.create();
+                                            if (message.kubernetesServiceAccount != null && Object.hasOwnProperty.call(message, "kubernetesServiceAccount"))
+                                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.kubernetesServiceAccount);
+                                            if (message.kubernetesNamespace != null && Object.hasOwnProperty.call(message, "kubernetesNamespace"))
+                                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.kubernetesNamespace);
+                                            return writer;
+                                        };
+    
+                                        /**
+                                         * Encodes the specified CheckSetScope message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope.verify|verify} messages.
+                                         * @function encodeDelimited
+                                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope
+                                         * @static
+                                         * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.ICheckSetScope} message CheckSetScope message or plain object to encode
+                                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                                         * @returns {$protobuf.Writer} Writer
+                                         */
+                                        CheckSetScope.encodeDelimited = function encodeDelimited(message, writer) {
+                                            return this.encode(message, writer).ldelim();
+                                        };
+    
+                                        /**
+                                         * Decodes a CheckSetScope message from the specified reader or buffer.
+                                         * @function decode
+                                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope
+                                         * @static
+                                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                         * @param {number} [length] Message length if known beforehand
+                                         * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope} CheckSetScope
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        CheckSetScope.decode = function decode(reader, length) {
+                                            if (!(reader instanceof $Reader))
+                                                reader = $Reader.create(reader);
+                                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope();
+                                            while (reader.pos < end) {
+                                                var tag = reader.uint32();
+                                                switch (tag >>> 3) {
+                                                case 1: {
+                                                        message.kubernetesServiceAccount = reader.string();
+                                                        break;
+                                                    }
+                                                case 2: {
+                                                        message.kubernetesNamespace = reader.string();
+                                                        break;
+                                                    }
+                                                default:
+                                                    reader.skipType(tag & 7);
+                                                    break;
+                                                }
+                                            }
+                                            return message;
+                                        };
+    
+                                        /**
+                                         * Decodes a CheckSetScope message from the specified reader or buffer, length delimited.
+                                         * @function decodeDelimited
+                                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope
+                                         * @static
+                                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                         * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope} CheckSetScope
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        CheckSetScope.decodeDelimited = function decodeDelimited(reader) {
+                                            if (!(reader instanceof $Reader))
+                                                reader = new $Reader(reader);
+                                            return this.decode(reader, reader.uint32());
+                                        };
+    
+                                        /**
+                                         * Verifies a CheckSetScope message.
+                                         * @function verify
+                                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope
+                                         * @static
+                                         * @param {Object.<string,*>} message Plain object to verify
+                                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                         */
+                                        CheckSetScope.verify = function verify(message) {
+                                            if (typeof message !== "object" || message === null)
+                                                return "object expected";
+                                            var properties = {};
+                                            if (message.kubernetesServiceAccount != null && message.hasOwnProperty("kubernetesServiceAccount")) {
+                                                properties.scope = 1;
+                                                if (!$util.isString(message.kubernetesServiceAccount))
+                                                    return "kubernetesServiceAccount: string expected";
+                                            }
+                                            if (message.kubernetesNamespace != null && message.hasOwnProperty("kubernetesNamespace")) {
+                                                if (properties.scope === 1)
+                                                    return "scope: multiple values";
+                                                properties.scope = 1;
+                                                if (!$util.isString(message.kubernetesNamespace))
+                                                    return "kubernetesNamespace: string expected";
+                                            }
+                                            return null;
+                                        };
+    
+                                        /**
+                                         * Creates a CheckSetScope message from a plain object. Also converts values to their respective internal types.
+                                         * @function fromObject
+                                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope
+                                         * @static
+                                         * @param {Object.<string,*>} object Plain object
+                                         * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope} CheckSetScope
+                                         */
+                                        CheckSetScope.fromObject = function fromObject(object) {
+                                            if (object instanceof $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope)
+                                                return object;
+                                            var message = new $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope();
+                                            if (object.kubernetesServiceAccount != null)
+                                                message.kubernetesServiceAccount = String(object.kubernetesServiceAccount);
+                                            if (object.kubernetesNamespace != null)
+                                                message.kubernetesNamespace = String(object.kubernetesNamespace);
+                                            return message;
+                                        };
+    
+                                        /**
+                                         * Creates a plain object from a CheckSetScope message. Also converts values to other types if specified.
+                                         * @function toObject
+                                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope
+                                         * @static
+                                         * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope} message CheckSetScope
+                                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                         * @returns {Object.<string,*>} Plain object
+                                         */
+                                        CheckSetScope.toObject = function toObject(message, options) {
+                                            if (!options)
+                                                options = {};
+                                            var object = {};
+                                            if (message.kubernetesServiceAccount != null && message.hasOwnProperty("kubernetesServiceAccount")) {
+                                                object.kubernetesServiceAccount = message.kubernetesServiceAccount;
+                                                if (options.oneofs)
+                                                    object.scope = "kubernetesServiceAccount";
+                                            }
+                                            if (message.kubernetesNamespace != null && message.hasOwnProperty("kubernetesNamespace")) {
+                                                object.kubernetesNamespace = message.kubernetesNamespace;
+                                                if (options.oneofs)
+                                                    object.scope = "kubernetesNamespace";
+                                            }
+                                            return object;
+                                        };
+    
+                                        /**
+                                         * Converts this CheckSetScope to JSON.
+                                         * @function toJSON
+                                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope
+                                         * @instance
+                                         * @returns {Object.<string,*>} JSON object
+                                         */
+                                        CheckSetScope.prototype.toJSON = function toJSON() {
+                                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                        };
+    
+                                        /**
+                                         * Gets the default type url for CheckSetScope
+                                         * @function getTypeUrl
+                                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope
+                                         * @static
+                                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                         * @returns {string} The default type url
+                                         */
+                                        CheckSetScope.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                            if (typeUrlPrefix === undefined) {
+                                                typeUrlPrefix = "type.googleapis.com";
+                                            }
+                                            return typeUrlPrefix + "/google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope";
+                                        };
+    
+                                        return CheckSetScope;
+                                    })();
+    
+                                    /**
+                                     * CheckVerdict enum.
+                                     * @name google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckVerdict
+                                     * @enum {number}
+                                     * @property {number} CHECK_VERDICT_UNSPECIFIED=0 CHECK_VERDICT_UNSPECIFIED value
+                                     * @property {number} NON_CONFORMANT=1 NON_CONFORMANT value
+                                     */
+                                    CheckResult.CheckVerdict = (function() {
+                                        var valuesById = {}, values = Object.create(valuesById);
+                                        values[valuesById[0] = "CHECK_VERDICT_UNSPECIFIED"] = 0;
+                                        values[valuesById[1] = "NON_CONFORMANT"] = 1;
+                                        return values;
+                                    })();
+    
+                                    return CheckResult;
+                                })();
+    
+                                return ImageDetails;
+                            })();
+    
+                            return ContinuousValidationPodEvent;
+                        })();
+    
+                        ContinuousValidationEvent.ConfigErrorEvent = (function() {
+    
+                            /**
+                             * Properties of a ConfigErrorEvent.
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent
+                             * @interface IConfigErrorEvent
+                             * @property {string|null} [description] ConfigErrorEvent description
+                             */
+    
+                            /**
+                             * Constructs a new ConfigErrorEvent.
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent
+                             * @classdesc Represents a ConfigErrorEvent.
+                             * @implements IConfigErrorEvent
+                             * @constructor
+                             * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IConfigErrorEvent=} [properties] Properties to set
+                             */
+                            function ConfigErrorEvent(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ConfigErrorEvent description.
+                             * @member {string} description
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent
+                             * @instance
+                             */
+                            ConfigErrorEvent.prototype.description = "";
+    
+                            /**
+                             * Creates a new ConfigErrorEvent instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent
+                             * @static
+                             * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IConfigErrorEvent=} [properties] Properties to set
+                             * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent} ConfigErrorEvent instance
+                             */
+                            ConfigErrorEvent.create = function create(properties) {
+                                return new ConfigErrorEvent(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ConfigErrorEvent message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent
+                             * @static
+                             * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IConfigErrorEvent} message ConfigErrorEvent message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ConfigErrorEvent.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.description);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ConfigErrorEvent message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent
+                             * @static
+                             * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IConfigErrorEvent} message ConfigErrorEvent message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ConfigErrorEvent.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ConfigErrorEvent message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent} ConfigErrorEvent
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ConfigErrorEvent.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.description = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ConfigErrorEvent message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent} ConfigErrorEvent
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ConfigErrorEvent.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ConfigErrorEvent message.
+                             * @function verify
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ConfigErrorEvent.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.description != null && message.hasOwnProperty("description"))
+                                    if (!$util.isString(message.description))
+                                        return "description: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ConfigErrorEvent message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent} ConfigErrorEvent
+                             */
+                            ConfigErrorEvent.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent)
+                                    return object;
+                                var message = new $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent();
+                                if (object.description != null)
+                                    message.description = String(object.description);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ConfigErrorEvent message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent
+                             * @static
+                             * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent} message ConfigErrorEvent
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ConfigErrorEvent.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.description = "";
+                                if (message.description != null && message.hasOwnProperty("description"))
+                                    object.description = message.description;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ConfigErrorEvent to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ConfigErrorEvent.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ConfigErrorEvent
+                             * @function getTypeUrl
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ConfigErrorEvent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent";
+                            };
+    
+                            return ConfigErrorEvent;
+                        })();
+    
+                        return ContinuousValidationEvent;
+                    })();
+    
+                    v1beta1.Policy = (function() {
+    
+                        /**
+                         * Properties of a Policy.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @interface IPolicy
+                         * @property {string|null} [name] Policy name
+                         * @property {string|null} [description] Policy description
+                         * @property {google.cloud.binaryauthorization.v1beta1.Policy.GlobalPolicyEvaluationMode|null} [globalPolicyEvaluationMode] Policy globalPolicyEvaluationMode
+                         * @property {Array.<google.cloud.binaryauthorization.v1beta1.IAdmissionWhitelistPattern>|null} [admissionWhitelistPatterns] Policy admissionWhitelistPatterns
+                         * @property {Object.<string,google.cloud.binaryauthorization.v1beta1.IAdmissionRule>|null} [clusterAdmissionRules] Policy clusterAdmissionRules
+                         * @property {Object.<string,google.cloud.binaryauthorization.v1beta1.IAdmissionRule>|null} [kubernetesNamespaceAdmissionRules] Policy kubernetesNamespaceAdmissionRules
+                         * @property {Object.<string,google.cloud.binaryauthorization.v1beta1.IAdmissionRule>|null} [kubernetesServiceAccountAdmissionRules] Policy kubernetesServiceAccountAdmissionRules
+                         * @property {Object.<string,google.cloud.binaryauthorization.v1beta1.IAdmissionRule>|null} [istioServiceIdentityAdmissionRules] Policy istioServiceIdentityAdmissionRules
+                         * @property {google.cloud.binaryauthorization.v1beta1.IAdmissionRule|null} [defaultAdmissionRule] Policy defaultAdmissionRule
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] Policy updateTime
+                         */
+    
+                        /**
+                         * Constructs a new Policy.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @classdesc Represents a Policy.
+                         * @implements IPolicy
+                         * @constructor
+                         * @param {google.cloud.binaryauthorization.v1beta1.IPolicy=} [properties] Properties to set
+                         */
+                        function Policy(properties) {
+                            this.admissionWhitelistPatterns = [];
+                            this.clusterAdmissionRules = {};
+                            this.kubernetesNamespaceAdmissionRules = {};
+                            this.kubernetesServiceAccountAdmissionRules = {};
+                            this.istioServiceIdentityAdmissionRules = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Policy name.
+                         * @member {string} name
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Policy
+                         * @instance
+                         */
+                        Policy.prototype.name = "";
+    
+                        /**
+                         * Policy description.
+                         * @member {string} description
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Policy
+                         * @instance
+                         */
+                        Policy.prototype.description = "";
+    
+                        /**
+                         * Policy globalPolicyEvaluationMode.
+                         * @member {google.cloud.binaryauthorization.v1beta1.Policy.GlobalPolicyEvaluationMode} globalPolicyEvaluationMode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Policy
+                         * @instance
+                         */
+                        Policy.prototype.globalPolicyEvaluationMode = 0;
+    
+                        /**
+                         * Policy admissionWhitelistPatterns.
+                         * @member {Array.<google.cloud.binaryauthorization.v1beta1.IAdmissionWhitelistPattern>} admissionWhitelistPatterns
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Policy
+                         * @instance
+                         */
+                        Policy.prototype.admissionWhitelistPatterns = $util.emptyArray;
+    
+                        /**
+                         * Policy clusterAdmissionRules.
+                         * @member {Object.<string,google.cloud.binaryauthorization.v1beta1.IAdmissionRule>} clusterAdmissionRules
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Policy
+                         * @instance
+                         */
+                        Policy.prototype.clusterAdmissionRules = $util.emptyObject;
+    
+                        /**
+                         * Policy kubernetesNamespaceAdmissionRules.
+                         * @member {Object.<string,google.cloud.binaryauthorization.v1beta1.IAdmissionRule>} kubernetesNamespaceAdmissionRules
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Policy
+                         * @instance
+                         */
+                        Policy.prototype.kubernetesNamespaceAdmissionRules = $util.emptyObject;
+    
+                        /**
+                         * Policy kubernetesServiceAccountAdmissionRules.
+                         * @member {Object.<string,google.cloud.binaryauthorization.v1beta1.IAdmissionRule>} kubernetesServiceAccountAdmissionRules
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Policy
+                         * @instance
+                         */
+                        Policy.prototype.kubernetesServiceAccountAdmissionRules = $util.emptyObject;
+    
+                        /**
+                         * Policy istioServiceIdentityAdmissionRules.
+                         * @member {Object.<string,google.cloud.binaryauthorization.v1beta1.IAdmissionRule>} istioServiceIdentityAdmissionRules
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Policy
+                         * @instance
+                         */
+                        Policy.prototype.istioServiceIdentityAdmissionRules = $util.emptyObject;
+    
+                        /**
+                         * Policy defaultAdmissionRule.
+                         * @member {google.cloud.binaryauthorization.v1beta1.IAdmissionRule|null|undefined} defaultAdmissionRule
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Policy
+                         * @instance
+                         */
+                        Policy.prototype.defaultAdmissionRule = null;
+    
+                        /**
+                         * Policy updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Policy
+                         * @instance
+                         */
+                        Policy.prototype.updateTime = null;
+    
+                        /**
+                         * Creates a new Policy instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Policy
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IPolicy=} [properties] Properties to set
+                         * @returns {google.cloud.binaryauthorization.v1beta1.Policy} Policy instance
+                         */
+                        Policy.create = function create(properties) {
+                            return new Policy(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Policy message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.Policy.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Policy
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IPolicy} message Policy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Policy.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.admissionWhitelistPatterns != null && message.admissionWhitelistPatterns.length)
+                                for (var i = 0; i < message.admissionWhitelistPatterns.length; ++i)
+                                    $root.google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern.encode(message.admissionWhitelistPatterns[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.clusterAdmissionRules != null && Object.hasOwnProperty.call(message, "clusterAdmissionRules"))
+                                for (var keys = Object.keys(message.clusterAdmissionRules), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.encode(message.clusterAdmissionRules[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
+                            if (message.defaultAdmissionRule != null && Object.hasOwnProperty.call(message, "defaultAdmissionRule"))
+                                $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.encode(message.defaultAdmissionRule, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.description);
+                            if (message.globalPolicyEvaluationMode != null && Object.hasOwnProperty.call(message, "globalPolicyEvaluationMode"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.globalPolicyEvaluationMode);
+                            if (message.kubernetesServiceAccountAdmissionRules != null && Object.hasOwnProperty.call(message, "kubernetesServiceAccountAdmissionRules"))
+                                for (var keys = Object.keys(message.kubernetesServiceAccountAdmissionRules), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 8, wireType 2 =*/66).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.encode(message.kubernetesServiceAccountAdmissionRules[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
+                            if (message.istioServiceIdentityAdmissionRules != null && Object.hasOwnProperty.call(message, "istioServiceIdentityAdmissionRules"))
+                                for (var keys = Object.keys(message.istioServiceIdentityAdmissionRules), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 9, wireType 2 =*/74).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.encode(message.istioServiceIdentityAdmissionRules[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
+                            if (message.kubernetesNamespaceAdmissionRules != null && Object.hasOwnProperty.call(message, "kubernetesNamespaceAdmissionRules"))
+                                for (var keys = Object.keys(message.kubernetesNamespaceAdmissionRules), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 10, wireType 2 =*/82).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.encode(message.kubernetesNamespaceAdmissionRules[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Policy message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.Policy.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Policy
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IPolicy} message Policy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Policy.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Policy message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Policy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.binaryauthorization.v1beta1.Policy} Policy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Policy.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.binaryauthorization.v1beta1.Policy(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.globalPolicyEvaluationMode = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.admissionWhitelistPatterns && message.admissionWhitelistPatterns.length))
+                                            message.admissionWhitelistPatterns = [];
+                                        message.admissionWhitelistPatterns.push($root.google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        if (message.clusterAdmissionRules === $util.emptyObject)
+                                            message.clusterAdmissionRules = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = null;
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.decode(reader, reader.uint32());
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.clusterAdmissionRules[key] = value;
+                                        break;
+                                    }
+                                case 10: {
+                                        if (message.kubernetesNamespaceAdmissionRules === $util.emptyObject)
+                                            message.kubernetesNamespaceAdmissionRules = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = null;
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.decode(reader, reader.uint32());
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.kubernetesNamespaceAdmissionRules[key] = value;
+                                        break;
+                                    }
+                                case 8: {
+                                        if (message.kubernetesServiceAccountAdmissionRules === $util.emptyObject)
+                                            message.kubernetesServiceAccountAdmissionRules = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = null;
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.decode(reader, reader.uint32());
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.kubernetesServiceAccountAdmissionRules[key] = value;
+                                        break;
+                                    }
+                                case 9: {
+                                        if (message.istioServiceIdentityAdmissionRules === $util.emptyObject)
+                                            message.istioServiceIdentityAdmissionRules = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = null;
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.decode(reader, reader.uint32());
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.istioServiceIdentityAdmissionRules[key] = value;
+                                        break;
+                                    }
+                                case 4: {
+                                        message.defaultAdmissionRule = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Policy message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Policy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.binaryauthorization.v1beta1.Policy} Policy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Policy.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Policy message.
+                         * @function verify
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Policy
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Policy.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.globalPolicyEvaluationMode != null && message.hasOwnProperty("globalPolicyEvaluationMode"))
+                                switch (message.globalPolicyEvaluationMode) {
+                                default:
+                                    return "globalPolicyEvaluationMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.admissionWhitelistPatterns != null && message.hasOwnProperty("admissionWhitelistPatterns")) {
+                                if (!Array.isArray(message.admissionWhitelistPatterns))
+                                    return "admissionWhitelistPatterns: array expected";
+                                for (var i = 0; i < message.admissionWhitelistPatterns.length; ++i) {
+                                    var error = $root.google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern.verify(message.admissionWhitelistPatterns[i]);
+                                    if (error)
+                                        return "admissionWhitelistPatterns." + error;
+                                }
+                            }
+                            if (message.clusterAdmissionRules != null && message.hasOwnProperty("clusterAdmissionRules")) {
+                                if (!$util.isObject(message.clusterAdmissionRules))
+                                    return "clusterAdmissionRules: object expected";
+                                var key = Object.keys(message.clusterAdmissionRules);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.verify(message.clusterAdmissionRules[key[i]]);
+                                    if (error)
+                                        return "clusterAdmissionRules." + error;
+                                }
+                            }
+                            if (message.kubernetesNamespaceAdmissionRules != null && message.hasOwnProperty("kubernetesNamespaceAdmissionRules")) {
+                                if (!$util.isObject(message.kubernetesNamespaceAdmissionRules))
+                                    return "kubernetesNamespaceAdmissionRules: object expected";
+                                var key = Object.keys(message.kubernetesNamespaceAdmissionRules);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.verify(message.kubernetesNamespaceAdmissionRules[key[i]]);
+                                    if (error)
+                                        return "kubernetesNamespaceAdmissionRules." + error;
+                                }
+                            }
+                            if (message.kubernetesServiceAccountAdmissionRules != null && message.hasOwnProperty("kubernetesServiceAccountAdmissionRules")) {
+                                if (!$util.isObject(message.kubernetesServiceAccountAdmissionRules))
+                                    return "kubernetesServiceAccountAdmissionRules: object expected";
+                                var key = Object.keys(message.kubernetesServiceAccountAdmissionRules);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.verify(message.kubernetesServiceAccountAdmissionRules[key[i]]);
+                                    if (error)
+                                        return "kubernetesServiceAccountAdmissionRules." + error;
+                                }
+                            }
+                            if (message.istioServiceIdentityAdmissionRules != null && message.hasOwnProperty("istioServiceIdentityAdmissionRules")) {
+                                if (!$util.isObject(message.istioServiceIdentityAdmissionRules))
+                                    return "istioServiceIdentityAdmissionRules: object expected";
+                                var key = Object.keys(message.istioServiceIdentityAdmissionRules);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.verify(message.istioServiceIdentityAdmissionRules[key[i]]);
+                                    if (error)
+                                        return "istioServiceIdentityAdmissionRules." + error;
+                                }
+                            }
+                            if (message.defaultAdmissionRule != null && message.hasOwnProperty("defaultAdmissionRule")) {
+                                var error = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.verify(message.defaultAdmissionRule);
+                                if (error)
+                                    return "defaultAdmissionRule." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Policy message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Policy
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.binaryauthorization.v1beta1.Policy} Policy
+                         */
+                        Policy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.binaryauthorization.v1beta1.Policy)
+                                return object;
+                            var message = new $root.google.cloud.binaryauthorization.v1beta1.Policy();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            switch (object.globalPolicyEvaluationMode) {
+                            default:
+                                if (typeof object.globalPolicyEvaluationMode === "number") {
+                                    message.globalPolicyEvaluationMode = object.globalPolicyEvaluationMode;
+                                    break;
+                                }
+                                break;
+                            case "GLOBAL_POLICY_EVALUATION_MODE_UNSPECIFIED":
+                            case 0:
+                                message.globalPolicyEvaluationMode = 0;
+                                break;
+                            case "ENABLE":
+                            case 1:
+                                message.globalPolicyEvaluationMode = 1;
+                                break;
+                            case "DISABLE":
+                            case 2:
+                                message.globalPolicyEvaluationMode = 2;
+                                break;
+                            }
+                            if (object.admissionWhitelistPatterns) {
+                                if (!Array.isArray(object.admissionWhitelistPatterns))
+                                    throw TypeError(".google.cloud.binaryauthorization.v1beta1.Policy.admissionWhitelistPatterns: array expected");
+                                message.admissionWhitelistPatterns = [];
+                                for (var i = 0; i < object.admissionWhitelistPatterns.length; ++i) {
+                                    if (typeof object.admissionWhitelistPatterns[i] !== "object")
+                                        throw TypeError(".google.cloud.binaryauthorization.v1beta1.Policy.admissionWhitelistPatterns: object expected");
+                                    message.admissionWhitelistPatterns[i] = $root.google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern.fromObject(object.admissionWhitelistPatterns[i]);
+                                }
+                            }
+                            if (object.clusterAdmissionRules) {
+                                if (typeof object.clusterAdmissionRules !== "object")
+                                    throw TypeError(".google.cloud.binaryauthorization.v1beta1.Policy.clusterAdmissionRules: object expected");
+                                message.clusterAdmissionRules = {};
+                                for (var keys = Object.keys(object.clusterAdmissionRules), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.clusterAdmissionRules[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.binaryauthorization.v1beta1.Policy.clusterAdmissionRules: object expected");
+                                    message.clusterAdmissionRules[keys[i]] = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.fromObject(object.clusterAdmissionRules[keys[i]]);
+                                }
+                            }
+                            if (object.kubernetesNamespaceAdmissionRules) {
+                                if (typeof object.kubernetesNamespaceAdmissionRules !== "object")
+                                    throw TypeError(".google.cloud.binaryauthorization.v1beta1.Policy.kubernetesNamespaceAdmissionRules: object expected");
+                                message.kubernetesNamespaceAdmissionRules = {};
+                                for (var keys = Object.keys(object.kubernetesNamespaceAdmissionRules), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.kubernetesNamespaceAdmissionRules[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.binaryauthorization.v1beta1.Policy.kubernetesNamespaceAdmissionRules: object expected");
+                                    message.kubernetesNamespaceAdmissionRules[keys[i]] = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.fromObject(object.kubernetesNamespaceAdmissionRules[keys[i]]);
+                                }
+                            }
+                            if (object.kubernetesServiceAccountAdmissionRules) {
+                                if (typeof object.kubernetesServiceAccountAdmissionRules !== "object")
+                                    throw TypeError(".google.cloud.binaryauthorization.v1beta1.Policy.kubernetesServiceAccountAdmissionRules: object expected");
+                                message.kubernetesServiceAccountAdmissionRules = {};
+                                for (var keys = Object.keys(object.kubernetesServiceAccountAdmissionRules), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.kubernetesServiceAccountAdmissionRules[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.binaryauthorization.v1beta1.Policy.kubernetesServiceAccountAdmissionRules: object expected");
+                                    message.kubernetesServiceAccountAdmissionRules[keys[i]] = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.fromObject(object.kubernetesServiceAccountAdmissionRules[keys[i]]);
+                                }
+                            }
+                            if (object.istioServiceIdentityAdmissionRules) {
+                                if (typeof object.istioServiceIdentityAdmissionRules !== "object")
+                                    throw TypeError(".google.cloud.binaryauthorization.v1beta1.Policy.istioServiceIdentityAdmissionRules: object expected");
+                                message.istioServiceIdentityAdmissionRules = {};
+                                for (var keys = Object.keys(object.istioServiceIdentityAdmissionRules), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.istioServiceIdentityAdmissionRules[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.binaryauthorization.v1beta1.Policy.istioServiceIdentityAdmissionRules: object expected");
+                                    message.istioServiceIdentityAdmissionRules[keys[i]] = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.fromObject(object.istioServiceIdentityAdmissionRules[keys[i]]);
+                                }
+                            }
+                            if (object.defaultAdmissionRule != null) {
+                                if (typeof object.defaultAdmissionRule !== "object")
+                                    throw TypeError(".google.cloud.binaryauthorization.v1beta1.Policy.defaultAdmissionRule: object expected");
+                                message.defaultAdmissionRule = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.fromObject(object.defaultAdmissionRule);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.binaryauthorization.v1beta1.Policy.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Policy message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Policy
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.Policy} message Policy
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Policy.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.admissionWhitelistPatterns = [];
+                            if (options.objects || options.defaults) {
+                                object.clusterAdmissionRules = {};
+                                object.kubernetesServiceAccountAdmissionRules = {};
+                                object.istioServiceIdentityAdmissionRules = {};
+                                object.kubernetesNamespaceAdmissionRules = {};
+                            }
+                            if (options.defaults) {
+                                object.name = "";
+                                object.defaultAdmissionRule = null;
+                                object.updateTime = null;
+                                object.description = "";
+                                object.globalPolicyEvaluationMode = options.enums === String ? "GLOBAL_POLICY_EVALUATION_MODE_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.admissionWhitelistPatterns && message.admissionWhitelistPatterns.length) {
+                                object.admissionWhitelistPatterns = [];
+                                for (var j = 0; j < message.admissionWhitelistPatterns.length; ++j)
+                                    object.admissionWhitelistPatterns[j] = $root.google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern.toObject(message.admissionWhitelistPatterns[j], options);
+                            }
+                            var keys2;
+                            if (message.clusterAdmissionRules && (keys2 = Object.keys(message.clusterAdmissionRules)).length) {
+                                object.clusterAdmissionRules = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.clusterAdmissionRules[keys2[j]] = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.toObject(message.clusterAdmissionRules[keys2[j]], options);
+                            }
+                            if (message.defaultAdmissionRule != null && message.hasOwnProperty("defaultAdmissionRule"))
+                                object.defaultAdmissionRule = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.toObject(message.defaultAdmissionRule, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.globalPolicyEvaluationMode != null && message.hasOwnProperty("globalPolicyEvaluationMode"))
+                                object.globalPolicyEvaluationMode = options.enums === String ? $root.google.cloud.binaryauthorization.v1beta1.Policy.GlobalPolicyEvaluationMode[message.globalPolicyEvaluationMode] === undefined ? message.globalPolicyEvaluationMode : $root.google.cloud.binaryauthorization.v1beta1.Policy.GlobalPolicyEvaluationMode[message.globalPolicyEvaluationMode] : message.globalPolicyEvaluationMode;
+                            if (message.kubernetesServiceAccountAdmissionRules && (keys2 = Object.keys(message.kubernetesServiceAccountAdmissionRules)).length) {
+                                object.kubernetesServiceAccountAdmissionRules = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.kubernetesServiceAccountAdmissionRules[keys2[j]] = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.toObject(message.kubernetesServiceAccountAdmissionRules[keys2[j]], options);
+                            }
+                            if (message.istioServiceIdentityAdmissionRules && (keys2 = Object.keys(message.istioServiceIdentityAdmissionRules)).length) {
+                                object.istioServiceIdentityAdmissionRules = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.istioServiceIdentityAdmissionRules[keys2[j]] = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.toObject(message.istioServiceIdentityAdmissionRules[keys2[j]], options);
+                            }
+                            if (message.kubernetesNamespaceAdmissionRules && (keys2 = Object.keys(message.kubernetesNamespaceAdmissionRules)).length) {
+                                object.kubernetesNamespaceAdmissionRules = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.kubernetesNamespaceAdmissionRules[keys2[j]] = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.toObject(message.kubernetesNamespaceAdmissionRules[keys2[j]], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Policy to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Policy
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Policy.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Policy
+                         * @function getTypeUrl
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Policy
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Policy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.binaryauthorization.v1beta1.Policy";
+                        };
+    
+                        /**
+                         * GlobalPolicyEvaluationMode enum.
+                         * @name google.cloud.binaryauthorization.v1beta1.Policy.GlobalPolicyEvaluationMode
+                         * @enum {number}
+                         * @property {number} GLOBAL_POLICY_EVALUATION_MODE_UNSPECIFIED=0 GLOBAL_POLICY_EVALUATION_MODE_UNSPECIFIED value
+                         * @property {number} ENABLE=1 ENABLE value
+                         * @property {number} DISABLE=2 DISABLE value
+                         */
+                        Policy.GlobalPolicyEvaluationMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "GLOBAL_POLICY_EVALUATION_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ENABLE"] = 1;
+                            values[valuesById[2] = "DISABLE"] = 2;
+                            return values;
+                        })();
+    
+                        return Policy;
+                    })();
+    
+                    v1beta1.AdmissionWhitelistPattern = (function() {
+    
+                        /**
+                         * Properties of an AdmissionWhitelistPattern.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @interface IAdmissionWhitelistPattern
+                         * @property {string|null} [namePattern] AdmissionWhitelistPattern namePattern
+                         */
+    
+                        /**
+                         * Constructs a new AdmissionWhitelistPattern.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @classdesc Represents an AdmissionWhitelistPattern.
+                         * @implements IAdmissionWhitelistPattern
+                         * @constructor
+                         * @param {google.cloud.binaryauthorization.v1beta1.IAdmissionWhitelistPattern=} [properties] Properties to set
+                         */
+                        function AdmissionWhitelistPattern(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AdmissionWhitelistPattern namePattern.
+                         * @member {string} namePattern
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern
+                         * @instance
+                         */
+                        AdmissionWhitelistPattern.prototype.namePattern = "";
+    
+                        /**
+                         * Creates a new AdmissionWhitelistPattern instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IAdmissionWhitelistPattern=} [properties] Properties to set
+                         * @returns {google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern} AdmissionWhitelistPattern instance
+                         */
+                        AdmissionWhitelistPattern.create = function create(properties) {
+                            return new AdmissionWhitelistPattern(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AdmissionWhitelistPattern message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IAdmissionWhitelistPattern} message AdmissionWhitelistPattern message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdmissionWhitelistPattern.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.namePattern != null && Object.hasOwnProperty.call(message, "namePattern"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.namePattern);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AdmissionWhitelistPattern message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IAdmissionWhitelistPattern} message AdmissionWhitelistPattern message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdmissionWhitelistPattern.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AdmissionWhitelistPattern message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern} AdmissionWhitelistPattern
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdmissionWhitelistPattern.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.namePattern = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AdmissionWhitelistPattern message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern} AdmissionWhitelistPattern
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdmissionWhitelistPattern.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AdmissionWhitelistPattern message.
+                         * @function verify
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AdmissionWhitelistPattern.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.namePattern != null && message.hasOwnProperty("namePattern"))
+                                if (!$util.isString(message.namePattern))
+                                    return "namePattern: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AdmissionWhitelistPattern message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern} AdmissionWhitelistPattern
+                         */
+                        AdmissionWhitelistPattern.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern)
+                                return object;
+                            var message = new $root.google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern();
+                            if (object.namePattern != null)
+                                message.namePattern = String(object.namePattern);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AdmissionWhitelistPattern message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern} message AdmissionWhitelistPattern
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AdmissionWhitelistPattern.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.namePattern = "";
+                            if (message.namePattern != null && message.hasOwnProperty("namePattern"))
+                                object.namePattern = message.namePattern;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AdmissionWhitelistPattern to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AdmissionWhitelistPattern.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AdmissionWhitelistPattern
+                         * @function getTypeUrl
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AdmissionWhitelistPattern.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern";
+                        };
+    
+                        return AdmissionWhitelistPattern;
+                    })();
+    
+                    v1beta1.AdmissionRule = (function() {
+    
+                        /**
+                         * Properties of an AdmissionRule.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @interface IAdmissionRule
+                         * @property {google.cloud.binaryauthorization.v1beta1.AdmissionRule.EvaluationMode|null} [evaluationMode] AdmissionRule evaluationMode
+                         * @property {Array.<string>|null} [requireAttestationsBy] AdmissionRule requireAttestationsBy
+                         * @property {google.cloud.binaryauthorization.v1beta1.AdmissionRule.EnforcementMode|null} [enforcementMode] AdmissionRule enforcementMode
+                         */
+    
+                        /**
+                         * Constructs a new AdmissionRule.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @classdesc Represents an AdmissionRule.
+                         * @implements IAdmissionRule
+                         * @constructor
+                         * @param {google.cloud.binaryauthorization.v1beta1.IAdmissionRule=} [properties] Properties to set
+                         */
+                        function AdmissionRule(properties) {
+                            this.requireAttestationsBy = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AdmissionRule evaluationMode.
+                         * @member {google.cloud.binaryauthorization.v1beta1.AdmissionRule.EvaluationMode} evaluationMode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AdmissionRule
+                         * @instance
+                         */
+                        AdmissionRule.prototype.evaluationMode = 0;
+    
+                        /**
+                         * AdmissionRule requireAttestationsBy.
+                         * @member {Array.<string>} requireAttestationsBy
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AdmissionRule
+                         * @instance
+                         */
+                        AdmissionRule.prototype.requireAttestationsBy = $util.emptyArray;
+    
+                        /**
+                         * AdmissionRule enforcementMode.
+                         * @member {google.cloud.binaryauthorization.v1beta1.AdmissionRule.EnforcementMode} enforcementMode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AdmissionRule
+                         * @instance
+                         */
+                        AdmissionRule.prototype.enforcementMode = 0;
+    
+                        /**
+                         * Creates a new AdmissionRule instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AdmissionRule
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IAdmissionRule=} [properties] Properties to set
+                         * @returns {google.cloud.binaryauthorization.v1beta1.AdmissionRule} AdmissionRule instance
+                         */
+                        AdmissionRule.create = function create(properties) {
+                            return new AdmissionRule(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AdmissionRule message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.AdmissionRule.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AdmissionRule
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IAdmissionRule} message AdmissionRule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdmissionRule.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.evaluationMode != null && Object.hasOwnProperty.call(message, "evaluationMode"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.evaluationMode);
+                            if (message.requireAttestationsBy != null && message.requireAttestationsBy.length)
+                                for (var i = 0; i < message.requireAttestationsBy.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.requireAttestationsBy[i]);
+                            if (message.enforcementMode != null && Object.hasOwnProperty.call(message, "enforcementMode"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.enforcementMode);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AdmissionRule message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.AdmissionRule.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AdmissionRule
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IAdmissionRule} message AdmissionRule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdmissionRule.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AdmissionRule message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AdmissionRule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.binaryauthorization.v1beta1.AdmissionRule} AdmissionRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdmissionRule.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.evaluationMode = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.requireAttestationsBy && message.requireAttestationsBy.length))
+                                            message.requireAttestationsBy = [];
+                                        message.requireAttestationsBy.push(reader.string());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.enforcementMode = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AdmissionRule message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AdmissionRule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.binaryauthorization.v1beta1.AdmissionRule} AdmissionRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdmissionRule.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AdmissionRule message.
+                         * @function verify
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AdmissionRule
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AdmissionRule.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.evaluationMode != null && message.hasOwnProperty("evaluationMode"))
+                                switch (message.evaluationMode) {
+                                default:
+                                    return "evaluationMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.requireAttestationsBy != null && message.hasOwnProperty("requireAttestationsBy")) {
+                                if (!Array.isArray(message.requireAttestationsBy))
+                                    return "requireAttestationsBy: array expected";
+                                for (var i = 0; i < message.requireAttestationsBy.length; ++i)
+                                    if (!$util.isString(message.requireAttestationsBy[i]))
+                                        return "requireAttestationsBy: string[] expected";
+                            }
+                            if (message.enforcementMode != null && message.hasOwnProperty("enforcementMode"))
+                                switch (message.enforcementMode) {
+                                default:
+                                    return "enforcementMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AdmissionRule message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AdmissionRule
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.binaryauthorization.v1beta1.AdmissionRule} AdmissionRule
+                         */
+                        AdmissionRule.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule)
+                                return object;
+                            var message = new $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule();
+                            switch (object.evaluationMode) {
+                            default:
+                                if (typeof object.evaluationMode === "number") {
+                                    message.evaluationMode = object.evaluationMode;
+                                    break;
+                                }
+                                break;
+                            case "EVALUATION_MODE_UNSPECIFIED":
+                            case 0:
+                                message.evaluationMode = 0;
+                                break;
+                            case "ALWAYS_ALLOW":
+                            case 1:
+                                message.evaluationMode = 1;
+                                break;
+                            case "REQUIRE_ATTESTATION":
+                            case 2:
+                                message.evaluationMode = 2;
+                                break;
+                            case "ALWAYS_DENY":
+                            case 3:
+                                message.evaluationMode = 3;
+                                break;
+                            }
+                            if (object.requireAttestationsBy) {
+                                if (!Array.isArray(object.requireAttestationsBy))
+                                    throw TypeError(".google.cloud.binaryauthorization.v1beta1.AdmissionRule.requireAttestationsBy: array expected");
+                                message.requireAttestationsBy = [];
+                                for (var i = 0; i < object.requireAttestationsBy.length; ++i)
+                                    message.requireAttestationsBy[i] = String(object.requireAttestationsBy[i]);
+                            }
+                            switch (object.enforcementMode) {
+                            default:
+                                if (typeof object.enforcementMode === "number") {
+                                    message.enforcementMode = object.enforcementMode;
+                                    break;
+                                }
+                                break;
+                            case "ENFORCEMENT_MODE_UNSPECIFIED":
+                            case 0:
+                                message.enforcementMode = 0;
+                                break;
+                            case "ENFORCED_BLOCK_AND_AUDIT_LOG":
+                            case 1:
+                                message.enforcementMode = 1;
+                                break;
+                            case "DRYRUN_AUDIT_LOG_ONLY":
+                            case 2:
+                                message.enforcementMode = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AdmissionRule message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AdmissionRule
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.AdmissionRule} message AdmissionRule
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AdmissionRule.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.requireAttestationsBy = [];
+                            if (options.defaults) {
+                                object.evaluationMode = options.enums === String ? "EVALUATION_MODE_UNSPECIFIED" : 0;
+                                object.enforcementMode = options.enums === String ? "ENFORCEMENT_MODE_UNSPECIFIED" : 0;
+                            }
+                            if (message.evaluationMode != null && message.hasOwnProperty("evaluationMode"))
+                                object.evaluationMode = options.enums === String ? $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.EvaluationMode[message.evaluationMode] === undefined ? message.evaluationMode : $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.EvaluationMode[message.evaluationMode] : message.evaluationMode;
+                            if (message.requireAttestationsBy && message.requireAttestationsBy.length) {
+                                object.requireAttestationsBy = [];
+                                for (var j = 0; j < message.requireAttestationsBy.length; ++j)
+                                    object.requireAttestationsBy[j] = message.requireAttestationsBy[j];
+                            }
+                            if (message.enforcementMode != null && message.hasOwnProperty("enforcementMode"))
+                                object.enforcementMode = options.enums === String ? $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.EnforcementMode[message.enforcementMode] === undefined ? message.enforcementMode : $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.EnforcementMode[message.enforcementMode] : message.enforcementMode;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AdmissionRule to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AdmissionRule
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AdmissionRule.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AdmissionRule
+                         * @function getTypeUrl
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AdmissionRule
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AdmissionRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.binaryauthorization.v1beta1.AdmissionRule";
+                        };
+    
+                        /**
+                         * EvaluationMode enum.
+                         * @name google.cloud.binaryauthorization.v1beta1.AdmissionRule.EvaluationMode
+                         * @enum {number}
+                         * @property {number} EVALUATION_MODE_UNSPECIFIED=0 EVALUATION_MODE_UNSPECIFIED value
+                         * @property {number} ALWAYS_ALLOW=1 ALWAYS_ALLOW value
+                         * @property {number} REQUIRE_ATTESTATION=2 REQUIRE_ATTESTATION value
+                         * @property {number} ALWAYS_DENY=3 ALWAYS_DENY value
+                         */
+                        AdmissionRule.EvaluationMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "EVALUATION_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ALWAYS_ALLOW"] = 1;
+                            values[valuesById[2] = "REQUIRE_ATTESTATION"] = 2;
+                            values[valuesById[3] = "ALWAYS_DENY"] = 3;
+                            return values;
+                        })();
+    
+                        /**
+                         * EnforcementMode enum.
+                         * @name google.cloud.binaryauthorization.v1beta1.AdmissionRule.EnforcementMode
+                         * @enum {number}
+                         * @property {number} ENFORCEMENT_MODE_UNSPECIFIED=0 ENFORCEMENT_MODE_UNSPECIFIED value
+                         * @property {number} ENFORCED_BLOCK_AND_AUDIT_LOG=1 ENFORCED_BLOCK_AND_AUDIT_LOG value
+                         * @property {number} DRYRUN_AUDIT_LOG_ONLY=2 DRYRUN_AUDIT_LOG_ONLY value
+                         */
+                        AdmissionRule.EnforcementMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ENFORCEMENT_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ENFORCED_BLOCK_AND_AUDIT_LOG"] = 1;
+                            values[valuesById[2] = "DRYRUN_AUDIT_LOG_ONLY"] = 2;
+                            return values;
+                        })();
+    
+                        return AdmissionRule;
+                    })();
+    
+                    v1beta1.Attestor = (function() {
+    
+                        /**
+                         * Properties of an Attestor.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @interface IAttestor
+                         * @property {string|null} [name] Attestor name
+                         * @property {string|null} [description] Attestor description
+                         * @property {google.cloud.binaryauthorization.v1beta1.IUserOwnedDrydockNote|null} [userOwnedDrydockNote] Attestor userOwnedDrydockNote
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] Attestor updateTime
+                         */
+    
+                        /**
+                         * Constructs a new Attestor.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @classdesc Represents an Attestor.
+                         * @implements IAttestor
+                         * @constructor
+                         * @param {google.cloud.binaryauthorization.v1beta1.IAttestor=} [properties] Properties to set
+                         */
+                        function Attestor(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Attestor name.
+                         * @member {string} name
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Attestor
+                         * @instance
+                         */
+                        Attestor.prototype.name = "";
+    
+                        /**
+                         * Attestor description.
+                         * @member {string} description
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Attestor
+                         * @instance
+                         */
+                        Attestor.prototype.description = "";
+    
+                        /**
+                         * Attestor userOwnedDrydockNote.
+                         * @member {google.cloud.binaryauthorization.v1beta1.IUserOwnedDrydockNote|null|undefined} userOwnedDrydockNote
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Attestor
+                         * @instance
+                         */
+                        Attestor.prototype.userOwnedDrydockNote = null;
+    
+                        /**
+                         * Attestor updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Attestor
+                         * @instance
+                         */
+                        Attestor.prototype.updateTime = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Attestor attestorType.
+                         * @member {"userOwnedDrydockNote"|undefined} attestorType
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Attestor
+                         * @instance
+                         */
+                        Object.defineProperty(Attestor.prototype, "attestorType", {
+                            get: $util.oneOfGetter($oneOfFields = ["userOwnedDrydockNote"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new Attestor instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Attestor
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IAttestor=} [properties] Properties to set
+                         * @returns {google.cloud.binaryauthorization.v1beta1.Attestor} Attestor instance
+                         */
+                        Attestor.create = function create(properties) {
+                            return new Attestor(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Attestor message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.Attestor.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Attestor
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IAttestor} message Attestor message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Attestor.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.userOwnedDrydockNote != null && Object.hasOwnProperty.call(message, "userOwnedDrydockNote"))
+                                $root.google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote.encode(message.userOwnedDrydockNote, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.description);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Attestor message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.Attestor.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Attestor
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IAttestor} message Attestor message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Attestor.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an Attestor message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Attestor
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.binaryauthorization.v1beta1.Attestor} Attestor
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Attestor.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.binaryauthorization.v1beta1.Attestor();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.userOwnedDrydockNote = $root.google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an Attestor message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Attestor
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.binaryauthorization.v1beta1.Attestor} Attestor
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Attestor.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an Attestor message.
+                         * @function verify
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Attestor
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Attestor.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.userOwnedDrydockNote != null && message.hasOwnProperty("userOwnedDrydockNote")) {
+                                properties.attestorType = 1;
+                                {
+                                    var error = $root.google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote.verify(message.userOwnedDrydockNote);
+                                    if (error)
+                                        return "userOwnedDrydockNote." + error;
+                                }
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an Attestor message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Attestor
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.binaryauthorization.v1beta1.Attestor} Attestor
+                         */
+                        Attestor.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.binaryauthorization.v1beta1.Attestor)
+                                return object;
+                            var message = new $root.google.cloud.binaryauthorization.v1beta1.Attestor();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.userOwnedDrydockNote != null) {
+                                if (typeof object.userOwnedDrydockNote !== "object")
+                                    throw TypeError(".google.cloud.binaryauthorization.v1beta1.Attestor.userOwnedDrydockNote: object expected");
+                                message.userOwnedDrydockNote = $root.google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote.fromObject(object.userOwnedDrydockNote);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.binaryauthorization.v1beta1.Attestor.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an Attestor message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Attestor
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.Attestor} message Attestor
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Attestor.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.updateTime = null;
+                                object.description = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.userOwnedDrydockNote != null && message.hasOwnProperty("userOwnedDrydockNote")) {
+                                object.userOwnedDrydockNote = $root.google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote.toObject(message.userOwnedDrydockNote, options);
+                                if (options.oneofs)
+                                    object.attestorType = "userOwnedDrydockNote";
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Attestor to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Attestor
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Attestor.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Attestor
+                         * @function getTypeUrl
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Attestor
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Attestor.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.binaryauthorization.v1beta1.Attestor";
+                        };
+    
+                        return Attestor;
+                    })();
+    
+                    v1beta1.UserOwnedDrydockNote = (function() {
+    
+                        /**
+                         * Properties of a UserOwnedDrydockNote.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @interface IUserOwnedDrydockNote
+                         * @property {string|null} [noteReference] UserOwnedDrydockNote noteReference
+                         * @property {Array.<google.cloud.binaryauthorization.v1beta1.IAttestorPublicKey>|null} [publicKeys] UserOwnedDrydockNote publicKeys
+                         * @property {string|null} [delegationServiceAccountEmail] UserOwnedDrydockNote delegationServiceAccountEmail
+                         */
+    
+                        /**
+                         * Constructs a new UserOwnedDrydockNote.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @classdesc Represents a UserOwnedDrydockNote.
+                         * @implements IUserOwnedDrydockNote
+                         * @constructor
+                         * @param {google.cloud.binaryauthorization.v1beta1.IUserOwnedDrydockNote=} [properties] Properties to set
+                         */
+                        function UserOwnedDrydockNote(properties) {
+                            this.publicKeys = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UserOwnedDrydockNote noteReference.
+                         * @member {string} noteReference
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote
+                         * @instance
+                         */
+                        UserOwnedDrydockNote.prototype.noteReference = "";
+    
+                        /**
+                         * UserOwnedDrydockNote publicKeys.
+                         * @member {Array.<google.cloud.binaryauthorization.v1beta1.IAttestorPublicKey>} publicKeys
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote
+                         * @instance
+                         */
+                        UserOwnedDrydockNote.prototype.publicKeys = $util.emptyArray;
+    
+                        /**
+                         * UserOwnedDrydockNote delegationServiceAccountEmail.
+                         * @member {string} delegationServiceAccountEmail
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote
+                         * @instance
+                         */
+                        UserOwnedDrydockNote.prototype.delegationServiceAccountEmail = "";
+    
+                        /**
+                         * Creates a new UserOwnedDrydockNote instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IUserOwnedDrydockNote=} [properties] Properties to set
+                         * @returns {google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote} UserOwnedDrydockNote instance
+                         */
+                        UserOwnedDrydockNote.create = function create(properties) {
+                            return new UserOwnedDrydockNote(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UserOwnedDrydockNote message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IUserOwnedDrydockNote} message UserOwnedDrydockNote message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UserOwnedDrydockNote.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.noteReference != null && Object.hasOwnProperty.call(message, "noteReference"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.noteReference);
+                            if (message.publicKeys != null && message.publicKeys.length)
+                                for (var i = 0; i < message.publicKeys.length; ++i)
+                                    $root.google.cloud.binaryauthorization.v1beta1.AttestorPublicKey.encode(message.publicKeys[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.delegationServiceAccountEmail != null && Object.hasOwnProperty.call(message, "delegationServiceAccountEmail"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.delegationServiceAccountEmail);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UserOwnedDrydockNote message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IUserOwnedDrydockNote} message UserOwnedDrydockNote message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UserOwnedDrydockNote.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a UserOwnedDrydockNote message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote} UserOwnedDrydockNote
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UserOwnedDrydockNote.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.noteReference = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.publicKeys && message.publicKeys.length))
+                                            message.publicKeys = [];
+                                        message.publicKeys.push($root.google.cloud.binaryauthorization.v1beta1.AttestorPublicKey.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        message.delegationServiceAccountEmail = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a UserOwnedDrydockNote message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote} UserOwnedDrydockNote
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UserOwnedDrydockNote.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a UserOwnedDrydockNote message.
+                         * @function verify
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UserOwnedDrydockNote.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.noteReference != null && message.hasOwnProperty("noteReference"))
+                                if (!$util.isString(message.noteReference))
+                                    return "noteReference: string expected";
+                            if (message.publicKeys != null && message.hasOwnProperty("publicKeys")) {
+                                if (!Array.isArray(message.publicKeys))
+                                    return "publicKeys: array expected";
+                                for (var i = 0; i < message.publicKeys.length; ++i) {
+                                    var error = $root.google.cloud.binaryauthorization.v1beta1.AttestorPublicKey.verify(message.publicKeys[i]);
+                                    if (error)
+                                        return "publicKeys." + error;
+                                }
+                            }
+                            if (message.delegationServiceAccountEmail != null && message.hasOwnProperty("delegationServiceAccountEmail"))
+                                if (!$util.isString(message.delegationServiceAccountEmail))
+                                    return "delegationServiceAccountEmail: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a UserOwnedDrydockNote message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote} UserOwnedDrydockNote
+                         */
+                        UserOwnedDrydockNote.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote)
+                                return object;
+                            var message = new $root.google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote();
+                            if (object.noteReference != null)
+                                message.noteReference = String(object.noteReference);
+                            if (object.publicKeys) {
+                                if (!Array.isArray(object.publicKeys))
+                                    throw TypeError(".google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote.publicKeys: array expected");
+                                message.publicKeys = [];
+                                for (var i = 0; i < object.publicKeys.length; ++i) {
+                                    if (typeof object.publicKeys[i] !== "object")
+                                        throw TypeError(".google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote.publicKeys: object expected");
+                                    message.publicKeys[i] = $root.google.cloud.binaryauthorization.v1beta1.AttestorPublicKey.fromObject(object.publicKeys[i]);
+                                }
+                            }
+                            if (object.delegationServiceAccountEmail != null)
+                                message.delegationServiceAccountEmail = String(object.delegationServiceAccountEmail);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a UserOwnedDrydockNote message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote} message UserOwnedDrydockNote
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UserOwnedDrydockNote.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.publicKeys = [];
+                            if (options.defaults) {
+                                object.noteReference = "";
+                                object.delegationServiceAccountEmail = "";
+                            }
+                            if (message.noteReference != null && message.hasOwnProperty("noteReference"))
+                                object.noteReference = message.noteReference;
+                            if (message.publicKeys && message.publicKeys.length) {
+                                object.publicKeys = [];
+                                for (var j = 0; j < message.publicKeys.length; ++j)
+                                    object.publicKeys[j] = $root.google.cloud.binaryauthorization.v1beta1.AttestorPublicKey.toObject(message.publicKeys[j], options);
+                            }
+                            if (message.delegationServiceAccountEmail != null && message.hasOwnProperty("delegationServiceAccountEmail"))
+                                object.delegationServiceAccountEmail = message.delegationServiceAccountEmail;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UserOwnedDrydockNote to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UserOwnedDrydockNote.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UserOwnedDrydockNote
+                         * @function getTypeUrl
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UserOwnedDrydockNote.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote";
+                        };
+    
+                        return UserOwnedDrydockNote;
+                    })();
+    
+                    v1beta1.PkixPublicKey = (function() {
+    
+                        /**
+                         * Properties of a PkixPublicKey.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @interface IPkixPublicKey
+                         * @property {string|null} [publicKeyPem] PkixPublicKey publicKeyPem
+                         * @property {google.cloud.binaryauthorization.v1beta1.PkixPublicKey.SignatureAlgorithm|null} [signatureAlgorithm] PkixPublicKey signatureAlgorithm
+                         */
+    
+                        /**
+                         * Constructs a new PkixPublicKey.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @classdesc Represents a PkixPublicKey.
+                         * @implements IPkixPublicKey
+                         * @constructor
+                         * @param {google.cloud.binaryauthorization.v1beta1.IPkixPublicKey=} [properties] Properties to set
+                         */
+                        function PkixPublicKey(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PkixPublicKey publicKeyPem.
+                         * @member {string} publicKeyPem
+                         * @memberof google.cloud.binaryauthorization.v1beta1.PkixPublicKey
+                         * @instance
+                         */
+                        PkixPublicKey.prototype.publicKeyPem = "";
+    
+                        /**
+                         * PkixPublicKey signatureAlgorithm.
+                         * @member {google.cloud.binaryauthorization.v1beta1.PkixPublicKey.SignatureAlgorithm} signatureAlgorithm
+                         * @memberof google.cloud.binaryauthorization.v1beta1.PkixPublicKey
+                         * @instance
+                         */
+                        PkixPublicKey.prototype.signatureAlgorithm = 0;
+    
+                        /**
+                         * Creates a new PkixPublicKey instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.binaryauthorization.v1beta1.PkixPublicKey
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IPkixPublicKey=} [properties] Properties to set
+                         * @returns {google.cloud.binaryauthorization.v1beta1.PkixPublicKey} PkixPublicKey instance
+                         */
+                        PkixPublicKey.create = function create(properties) {
+                            return new PkixPublicKey(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PkixPublicKey message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.PkixPublicKey.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.PkixPublicKey
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IPkixPublicKey} message PkixPublicKey message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PkixPublicKey.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.publicKeyPem != null && Object.hasOwnProperty.call(message, "publicKeyPem"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.publicKeyPem);
+                            if (message.signatureAlgorithm != null && Object.hasOwnProperty.call(message, "signatureAlgorithm"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.signatureAlgorithm);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PkixPublicKey message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.PkixPublicKey.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.PkixPublicKey
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IPkixPublicKey} message PkixPublicKey message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PkixPublicKey.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PkixPublicKey message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.PkixPublicKey
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.binaryauthorization.v1beta1.PkixPublicKey} PkixPublicKey
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PkixPublicKey.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.binaryauthorization.v1beta1.PkixPublicKey();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.publicKeyPem = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.signatureAlgorithm = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PkixPublicKey message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.PkixPublicKey
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.binaryauthorization.v1beta1.PkixPublicKey} PkixPublicKey
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PkixPublicKey.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PkixPublicKey message.
+                         * @function verify
+                         * @memberof google.cloud.binaryauthorization.v1beta1.PkixPublicKey
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PkixPublicKey.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.publicKeyPem != null && message.hasOwnProperty("publicKeyPem"))
+                                if (!$util.isString(message.publicKeyPem))
+                                    return "publicKeyPem: string expected";
+                            if (message.signatureAlgorithm != null && message.hasOwnProperty("signatureAlgorithm"))
+                                switch (message.signatureAlgorithm) {
+                                default:
+                                    return "signatureAlgorithm: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 9:
+                                case 10:
+                                case 10:
+                                case 11:
+                                case 11:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PkixPublicKey message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.PkixPublicKey
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.binaryauthorization.v1beta1.PkixPublicKey} PkixPublicKey
+                         */
+                        PkixPublicKey.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.binaryauthorization.v1beta1.PkixPublicKey)
+                                return object;
+                            var message = new $root.google.cloud.binaryauthorization.v1beta1.PkixPublicKey();
+                            if (object.publicKeyPem != null)
+                                message.publicKeyPem = String(object.publicKeyPem);
+                            switch (object.signatureAlgorithm) {
+                            default:
+                                if (typeof object.signatureAlgorithm === "number") {
+                                    message.signatureAlgorithm = object.signatureAlgorithm;
+                                    break;
+                                }
+                                break;
+                            case "SIGNATURE_ALGORITHM_UNSPECIFIED":
+                            case 0:
+                                message.signatureAlgorithm = 0;
+                                break;
+                            case "RSA_PSS_2048_SHA256":
+                            case 1:
+                                message.signatureAlgorithm = 1;
+                                break;
+                            case "RSA_PSS_3072_SHA256":
+                            case 2:
+                                message.signatureAlgorithm = 2;
+                                break;
+                            case "RSA_PSS_4096_SHA256":
+                            case 3:
+                                message.signatureAlgorithm = 3;
+                                break;
+                            case "RSA_PSS_4096_SHA512":
+                            case 4:
+                                message.signatureAlgorithm = 4;
+                                break;
+                            case "RSA_SIGN_PKCS1_2048_SHA256":
+                            case 5:
+                                message.signatureAlgorithm = 5;
+                                break;
+                            case "RSA_SIGN_PKCS1_3072_SHA256":
+                            case 6:
+                                message.signatureAlgorithm = 6;
+                                break;
+                            case "RSA_SIGN_PKCS1_4096_SHA256":
+                            case 7:
+                                message.signatureAlgorithm = 7;
+                                break;
+                            case "RSA_SIGN_PKCS1_4096_SHA512":
+                            case 8:
+                                message.signatureAlgorithm = 8;
+                                break;
+                            case "ECDSA_P256_SHA256":
+                            case 9:
+                                message.signatureAlgorithm = 9;
+                                break;
+                            case "EC_SIGN_P256_SHA256":
+                            case 9:
+                                message.signatureAlgorithm = 9;
+                                break;
+                            case "ECDSA_P384_SHA384":
+                            case 10:
+                                message.signatureAlgorithm = 10;
+                                break;
+                            case "EC_SIGN_P384_SHA384":
+                            case 10:
+                                message.signatureAlgorithm = 10;
+                                break;
+                            case "ECDSA_P521_SHA512":
+                            case 11:
+                                message.signatureAlgorithm = 11;
+                                break;
+                            case "EC_SIGN_P521_SHA512":
+                            case 11:
+                                message.signatureAlgorithm = 11;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PkixPublicKey message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.PkixPublicKey
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.PkixPublicKey} message PkixPublicKey
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PkixPublicKey.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.publicKeyPem = "";
+                                object.signatureAlgorithm = options.enums === String ? "SIGNATURE_ALGORITHM_UNSPECIFIED" : 0;
+                            }
+                            if (message.publicKeyPem != null && message.hasOwnProperty("publicKeyPem"))
+                                object.publicKeyPem = message.publicKeyPem;
+                            if (message.signatureAlgorithm != null && message.hasOwnProperty("signatureAlgorithm"))
+                                object.signatureAlgorithm = options.enums === String ? $root.google.cloud.binaryauthorization.v1beta1.PkixPublicKey.SignatureAlgorithm[message.signatureAlgorithm] === undefined ? message.signatureAlgorithm : $root.google.cloud.binaryauthorization.v1beta1.PkixPublicKey.SignatureAlgorithm[message.signatureAlgorithm] : message.signatureAlgorithm;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PkixPublicKey to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.binaryauthorization.v1beta1.PkixPublicKey
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PkixPublicKey.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PkixPublicKey
+                         * @function getTypeUrl
+                         * @memberof google.cloud.binaryauthorization.v1beta1.PkixPublicKey
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PkixPublicKey.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.binaryauthorization.v1beta1.PkixPublicKey";
+                        };
+    
+                        /**
+                         * SignatureAlgorithm enum.
+                         * @name google.cloud.binaryauthorization.v1beta1.PkixPublicKey.SignatureAlgorithm
+                         * @enum {number}
+                         * @property {number} SIGNATURE_ALGORITHM_UNSPECIFIED=0 SIGNATURE_ALGORITHM_UNSPECIFIED value
+                         * @property {number} RSA_PSS_2048_SHA256=1 RSA_PSS_2048_SHA256 value
+                         * @property {number} RSA_PSS_3072_SHA256=2 RSA_PSS_3072_SHA256 value
+                         * @property {number} RSA_PSS_4096_SHA256=3 RSA_PSS_4096_SHA256 value
+                         * @property {number} RSA_PSS_4096_SHA512=4 RSA_PSS_4096_SHA512 value
+                         * @property {number} RSA_SIGN_PKCS1_2048_SHA256=5 RSA_SIGN_PKCS1_2048_SHA256 value
+                         * @property {number} RSA_SIGN_PKCS1_3072_SHA256=6 RSA_SIGN_PKCS1_3072_SHA256 value
+                         * @property {number} RSA_SIGN_PKCS1_4096_SHA256=7 RSA_SIGN_PKCS1_4096_SHA256 value
+                         * @property {number} RSA_SIGN_PKCS1_4096_SHA512=8 RSA_SIGN_PKCS1_4096_SHA512 value
+                         * @property {number} ECDSA_P256_SHA256=9 ECDSA_P256_SHA256 value
+                         * @property {number} EC_SIGN_P256_SHA256=9 EC_SIGN_P256_SHA256 value
+                         * @property {number} ECDSA_P384_SHA384=10 ECDSA_P384_SHA384 value
+                         * @property {number} EC_SIGN_P384_SHA384=10 EC_SIGN_P384_SHA384 value
+                         * @property {number} ECDSA_P521_SHA512=11 ECDSA_P521_SHA512 value
+                         * @property {number} EC_SIGN_P521_SHA512=11 EC_SIGN_P521_SHA512 value
+                         */
+                        PkixPublicKey.SignatureAlgorithm = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SIGNATURE_ALGORITHM_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "RSA_PSS_2048_SHA256"] = 1;
+                            values[valuesById[2] = "RSA_PSS_3072_SHA256"] = 2;
+                            values[valuesById[3] = "RSA_PSS_4096_SHA256"] = 3;
+                            values[valuesById[4] = "RSA_PSS_4096_SHA512"] = 4;
+                            values[valuesById[5] = "RSA_SIGN_PKCS1_2048_SHA256"] = 5;
+                            values[valuesById[6] = "RSA_SIGN_PKCS1_3072_SHA256"] = 6;
+                            values[valuesById[7] = "RSA_SIGN_PKCS1_4096_SHA256"] = 7;
+                            values[valuesById[8] = "RSA_SIGN_PKCS1_4096_SHA512"] = 8;
+                            values[valuesById[9] = "ECDSA_P256_SHA256"] = 9;
+                            values["EC_SIGN_P256_SHA256"] = 9;
+                            values[valuesById[10] = "ECDSA_P384_SHA384"] = 10;
+                            values["EC_SIGN_P384_SHA384"] = 10;
+                            values[valuesById[11] = "ECDSA_P521_SHA512"] = 11;
+                            values["EC_SIGN_P521_SHA512"] = 11;
+                            return values;
+                        })();
+    
+                        return PkixPublicKey;
+                    })();
+    
+                    v1beta1.AttestorPublicKey = (function() {
+    
+                        /**
+                         * Properties of an AttestorPublicKey.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @interface IAttestorPublicKey
+                         * @property {string|null} [comment] AttestorPublicKey comment
+                         * @property {string|null} [id] AttestorPublicKey id
+                         * @property {string|null} [asciiArmoredPgpPublicKey] AttestorPublicKey asciiArmoredPgpPublicKey
+                         * @property {google.cloud.binaryauthorization.v1beta1.IPkixPublicKey|null} [pkixPublicKey] AttestorPublicKey pkixPublicKey
+                         */
+    
+                        /**
+                         * Constructs a new AttestorPublicKey.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @classdesc Represents an AttestorPublicKey.
+                         * @implements IAttestorPublicKey
+                         * @constructor
+                         * @param {google.cloud.binaryauthorization.v1beta1.IAttestorPublicKey=} [properties] Properties to set
+                         */
+                        function AttestorPublicKey(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AttestorPublicKey comment.
+                         * @member {string} comment
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AttestorPublicKey
+                         * @instance
+                         */
+                        AttestorPublicKey.prototype.comment = "";
+    
+                        /**
+                         * AttestorPublicKey id.
+                         * @member {string} id
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AttestorPublicKey
+                         * @instance
+                         */
+                        AttestorPublicKey.prototype.id = "";
+    
+                        /**
+                         * AttestorPublicKey asciiArmoredPgpPublicKey.
+                         * @member {string|null|undefined} asciiArmoredPgpPublicKey
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AttestorPublicKey
+                         * @instance
+                         */
+                        AttestorPublicKey.prototype.asciiArmoredPgpPublicKey = null;
+    
+                        /**
+                         * AttestorPublicKey pkixPublicKey.
+                         * @member {google.cloud.binaryauthorization.v1beta1.IPkixPublicKey|null|undefined} pkixPublicKey
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AttestorPublicKey
+                         * @instance
+                         */
+                        AttestorPublicKey.prototype.pkixPublicKey = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * AttestorPublicKey publicKey.
+                         * @member {"asciiArmoredPgpPublicKey"|"pkixPublicKey"|undefined} publicKey
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AttestorPublicKey
+                         * @instance
+                         */
+                        Object.defineProperty(AttestorPublicKey.prototype, "publicKey", {
+                            get: $util.oneOfGetter($oneOfFields = ["asciiArmoredPgpPublicKey", "pkixPublicKey"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new AttestorPublicKey instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AttestorPublicKey
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IAttestorPublicKey=} [properties] Properties to set
+                         * @returns {google.cloud.binaryauthorization.v1beta1.AttestorPublicKey} AttestorPublicKey instance
+                         */
+                        AttestorPublicKey.create = function create(properties) {
+                            return new AttestorPublicKey(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AttestorPublicKey message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.AttestorPublicKey.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AttestorPublicKey
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IAttestorPublicKey} message AttestorPublicKey message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AttestorPublicKey.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.comment != null && Object.hasOwnProperty.call(message, "comment"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.comment);
+                            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.id);
+                            if (message.asciiArmoredPgpPublicKey != null && Object.hasOwnProperty.call(message, "asciiArmoredPgpPublicKey"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.asciiArmoredPgpPublicKey);
+                            if (message.pkixPublicKey != null && Object.hasOwnProperty.call(message, "pkixPublicKey"))
+                                $root.google.cloud.binaryauthorization.v1beta1.PkixPublicKey.encode(message.pkixPublicKey, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AttestorPublicKey message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.AttestorPublicKey.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AttestorPublicKey
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IAttestorPublicKey} message AttestorPublicKey message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AttestorPublicKey.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AttestorPublicKey message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AttestorPublicKey
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.binaryauthorization.v1beta1.AttestorPublicKey} AttestorPublicKey
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AttestorPublicKey.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.binaryauthorization.v1beta1.AttestorPublicKey();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.comment = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.id = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.asciiArmoredPgpPublicKey = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.pkixPublicKey = $root.google.cloud.binaryauthorization.v1beta1.PkixPublicKey.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AttestorPublicKey message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AttestorPublicKey
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.binaryauthorization.v1beta1.AttestorPublicKey} AttestorPublicKey
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AttestorPublicKey.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AttestorPublicKey message.
+                         * @function verify
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AttestorPublicKey
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AttestorPublicKey.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.comment != null && message.hasOwnProperty("comment"))
+                                if (!$util.isString(message.comment))
+                                    return "comment: string expected";
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                if (!$util.isString(message.id))
+                                    return "id: string expected";
+                            if (message.asciiArmoredPgpPublicKey != null && message.hasOwnProperty("asciiArmoredPgpPublicKey")) {
+                                properties.publicKey = 1;
+                                if (!$util.isString(message.asciiArmoredPgpPublicKey))
+                                    return "asciiArmoredPgpPublicKey: string expected";
+                            }
+                            if (message.pkixPublicKey != null && message.hasOwnProperty("pkixPublicKey")) {
+                                if (properties.publicKey === 1)
+                                    return "publicKey: multiple values";
+                                properties.publicKey = 1;
+                                {
+                                    var error = $root.google.cloud.binaryauthorization.v1beta1.PkixPublicKey.verify(message.pkixPublicKey);
+                                    if (error)
+                                        return "pkixPublicKey." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AttestorPublicKey message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AttestorPublicKey
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.binaryauthorization.v1beta1.AttestorPublicKey} AttestorPublicKey
+                         */
+                        AttestorPublicKey.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.binaryauthorization.v1beta1.AttestorPublicKey)
+                                return object;
+                            var message = new $root.google.cloud.binaryauthorization.v1beta1.AttestorPublicKey();
+                            if (object.comment != null)
+                                message.comment = String(object.comment);
+                            if (object.id != null)
+                                message.id = String(object.id);
+                            if (object.asciiArmoredPgpPublicKey != null)
+                                message.asciiArmoredPgpPublicKey = String(object.asciiArmoredPgpPublicKey);
+                            if (object.pkixPublicKey != null) {
+                                if (typeof object.pkixPublicKey !== "object")
+                                    throw TypeError(".google.cloud.binaryauthorization.v1beta1.AttestorPublicKey.pkixPublicKey: object expected");
+                                message.pkixPublicKey = $root.google.cloud.binaryauthorization.v1beta1.PkixPublicKey.fromObject(object.pkixPublicKey);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AttestorPublicKey message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AttestorPublicKey
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.AttestorPublicKey} message AttestorPublicKey
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AttestorPublicKey.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.comment = "";
+                                object.id = "";
+                            }
+                            if (message.comment != null && message.hasOwnProperty("comment"))
+                                object.comment = message.comment;
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                object.id = message.id;
+                            if (message.asciiArmoredPgpPublicKey != null && message.hasOwnProperty("asciiArmoredPgpPublicKey")) {
+                                object.asciiArmoredPgpPublicKey = message.asciiArmoredPgpPublicKey;
+                                if (options.oneofs)
+                                    object.publicKey = "asciiArmoredPgpPublicKey";
+                            }
+                            if (message.pkixPublicKey != null && message.hasOwnProperty("pkixPublicKey")) {
+                                object.pkixPublicKey = $root.google.cloud.binaryauthorization.v1beta1.PkixPublicKey.toObject(message.pkixPublicKey, options);
+                                if (options.oneofs)
+                                    object.publicKey = "pkixPublicKey";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AttestorPublicKey to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AttestorPublicKey
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AttestorPublicKey.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AttestorPublicKey
+                         * @function getTypeUrl
+                         * @memberof google.cloud.binaryauthorization.v1beta1.AttestorPublicKey
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AttestorPublicKey.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.binaryauthorization.v1beta1.AttestorPublicKey";
+                        };
+    
+                        return AttestorPublicKey;
+                    })();
+    
+                    v1beta1.BinauthzManagementServiceV1Beta1 = (function() {
+    
+                        /**
+                         * Constructs a new BinauthzManagementServiceV1Beta1 service.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @classdesc Represents a BinauthzManagementServiceV1Beta1
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function BinauthzManagementServiceV1Beta1(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (BinauthzManagementServiceV1Beta1.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = BinauthzManagementServiceV1Beta1;
+    
+                        /**
+                         * Creates new BinauthzManagementServiceV1Beta1 service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {BinauthzManagementServiceV1Beta1} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        BinauthzManagementServiceV1Beta1.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1|getPolicy}.
+                         * @memberof google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1
+                         * @typedef GetPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.binaryauthorization.v1beta1.Policy} [response] Policy
+                         */
+    
+                        /**
+                         * Calls GetPolicy.
+                         * @function getPolicy
+                         * @memberof google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1
+                         * @instance
+                         * @param {google.cloud.binaryauthorization.v1beta1.IGetPolicyRequest} request GetPolicyRequest message or plain object
+                         * @param {google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.GetPolicyCallback} callback Node-style callback called with the error, if any, and Policy
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BinauthzManagementServiceV1Beta1.prototype.getPolicy = function getPolicy(request, callback) {
+                            return this.rpcCall(getPolicy, $root.google.cloud.binaryauthorization.v1beta1.GetPolicyRequest, $root.google.cloud.binaryauthorization.v1beta1.Policy, request, callback);
+                        }, "name", { value: "GetPolicy" });
+    
+                        /**
+                         * Calls GetPolicy.
+                         * @function getPolicy
+                         * @memberof google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1
+                         * @instance
+                         * @param {google.cloud.binaryauthorization.v1beta1.IGetPolicyRequest} request GetPolicyRequest message or plain object
+                         * @returns {Promise<google.cloud.binaryauthorization.v1beta1.Policy>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1|updatePolicy}.
+                         * @memberof google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1
+                         * @typedef UpdatePolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.binaryauthorization.v1beta1.Policy} [response] Policy
+                         */
+    
+                        /**
+                         * Calls UpdatePolicy.
+                         * @function updatePolicy
+                         * @memberof google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1
+                         * @instance
+                         * @param {google.cloud.binaryauthorization.v1beta1.IUpdatePolicyRequest} request UpdatePolicyRequest message or plain object
+                         * @param {google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.UpdatePolicyCallback} callback Node-style callback called with the error, if any, and Policy
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BinauthzManagementServiceV1Beta1.prototype.updatePolicy = function updatePolicy(request, callback) {
+                            return this.rpcCall(updatePolicy, $root.google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest, $root.google.cloud.binaryauthorization.v1beta1.Policy, request, callback);
+                        }, "name", { value: "UpdatePolicy" });
+    
+                        /**
+                         * Calls UpdatePolicy.
+                         * @function updatePolicy
+                         * @memberof google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1
+                         * @instance
+                         * @param {google.cloud.binaryauthorization.v1beta1.IUpdatePolicyRequest} request UpdatePolicyRequest message or plain object
+                         * @returns {Promise<google.cloud.binaryauthorization.v1beta1.Policy>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1|createAttestor}.
+                         * @memberof google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1
+                         * @typedef CreateAttestorCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.binaryauthorization.v1beta1.Attestor} [response] Attestor
+                         */
+    
+                        /**
+                         * Calls CreateAttestor.
+                         * @function createAttestor
+                         * @memberof google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1
+                         * @instance
+                         * @param {google.cloud.binaryauthorization.v1beta1.ICreateAttestorRequest} request CreateAttestorRequest message or plain object
+                         * @param {google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.CreateAttestorCallback} callback Node-style callback called with the error, if any, and Attestor
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BinauthzManagementServiceV1Beta1.prototype.createAttestor = function createAttestor(request, callback) {
+                            return this.rpcCall(createAttestor, $root.google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest, $root.google.cloud.binaryauthorization.v1beta1.Attestor, request, callback);
+                        }, "name", { value: "CreateAttestor" });
+    
+                        /**
+                         * Calls CreateAttestor.
+                         * @function createAttestor
+                         * @memberof google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1
+                         * @instance
+                         * @param {google.cloud.binaryauthorization.v1beta1.ICreateAttestorRequest} request CreateAttestorRequest message or plain object
+                         * @returns {Promise<google.cloud.binaryauthorization.v1beta1.Attestor>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1|getAttestor}.
+                         * @memberof google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1
+                         * @typedef GetAttestorCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.binaryauthorization.v1beta1.Attestor} [response] Attestor
+                         */
+    
+                        /**
+                         * Calls GetAttestor.
+                         * @function getAttestor
+                         * @memberof google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1
+                         * @instance
+                         * @param {google.cloud.binaryauthorization.v1beta1.IGetAttestorRequest} request GetAttestorRequest message or plain object
+                         * @param {google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.GetAttestorCallback} callback Node-style callback called with the error, if any, and Attestor
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BinauthzManagementServiceV1Beta1.prototype.getAttestor = function getAttestor(request, callback) {
+                            return this.rpcCall(getAttestor, $root.google.cloud.binaryauthorization.v1beta1.GetAttestorRequest, $root.google.cloud.binaryauthorization.v1beta1.Attestor, request, callback);
+                        }, "name", { value: "GetAttestor" });
+    
+                        /**
+                         * Calls GetAttestor.
+                         * @function getAttestor
+                         * @memberof google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1
+                         * @instance
+                         * @param {google.cloud.binaryauthorization.v1beta1.IGetAttestorRequest} request GetAttestorRequest message or plain object
+                         * @returns {Promise<google.cloud.binaryauthorization.v1beta1.Attestor>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1|updateAttestor}.
+                         * @memberof google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1
+                         * @typedef UpdateAttestorCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.binaryauthorization.v1beta1.Attestor} [response] Attestor
+                         */
+    
+                        /**
+                         * Calls UpdateAttestor.
+                         * @function updateAttestor
+                         * @memberof google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1
+                         * @instance
+                         * @param {google.cloud.binaryauthorization.v1beta1.IUpdateAttestorRequest} request UpdateAttestorRequest message or plain object
+                         * @param {google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.UpdateAttestorCallback} callback Node-style callback called with the error, if any, and Attestor
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BinauthzManagementServiceV1Beta1.prototype.updateAttestor = function updateAttestor(request, callback) {
+                            return this.rpcCall(updateAttestor, $root.google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest, $root.google.cloud.binaryauthorization.v1beta1.Attestor, request, callback);
+                        }, "name", { value: "UpdateAttestor" });
+    
+                        /**
+                         * Calls UpdateAttestor.
+                         * @function updateAttestor
+                         * @memberof google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1
+                         * @instance
+                         * @param {google.cloud.binaryauthorization.v1beta1.IUpdateAttestorRequest} request UpdateAttestorRequest message or plain object
+                         * @returns {Promise<google.cloud.binaryauthorization.v1beta1.Attestor>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1|listAttestors}.
+                         * @memberof google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1
+                         * @typedef ListAttestorsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse} [response] ListAttestorsResponse
+                         */
+    
+                        /**
+                         * Calls ListAttestors.
+                         * @function listAttestors
+                         * @memberof google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1
+                         * @instance
+                         * @param {google.cloud.binaryauthorization.v1beta1.IListAttestorsRequest} request ListAttestorsRequest message or plain object
+                         * @param {google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.ListAttestorsCallback} callback Node-style callback called with the error, if any, and ListAttestorsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BinauthzManagementServiceV1Beta1.prototype.listAttestors = function listAttestors(request, callback) {
+                            return this.rpcCall(listAttestors, $root.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest, $root.google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse, request, callback);
+                        }, "name", { value: "ListAttestors" });
+    
+                        /**
+                         * Calls ListAttestors.
+                         * @function listAttestors
+                         * @memberof google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1
+                         * @instance
+                         * @param {google.cloud.binaryauthorization.v1beta1.IListAttestorsRequest} request ListAttestorsRequest message or plain object
+                         * @returns {Promise<google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1|deleteAttestor}.
+                         * @memberof google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1
+                         * @typedef DeleteAttestorCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteAttestor.
+                         * @function deleteAttestor
+                         * @memberof google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1
+                         * @instance
+                         * @param {google.cloud.binaryauthorization.v1beta1.IDeleteAttestorRequest} request DeleteAttestorRequest message or plain object
+                         * @param {google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.DeleteAttestorCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BinauthzManagementServiceV1Beta1.prototype.deleteAttestor = function deleteAttestor(request, callback) {
+                            return this.rpcCall(deleteAttestor, $root.google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteAttestor" });
+    
+                        /**
+                         * Calls DeleteAttestor.
+                         * @function deleteAttestor
+                         * @memberof google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1
+                         * @instance
+                         * @param {google.cloud.binaryauthorization.v1beta1.IDeleteAttestorRequest} request DeleteAttestorRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        return BinauthzManagementServiceV1Beta1;
+                    })();
+    
+                    v1beta1.GetPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of a GetPolicyRequest.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @interface IGetPolicyRequest
+                         * @property {string|null} [name] GetPolicyRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetPolicyRequest.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @classdesc Represents a GetPolicyRequest.
+                         * @implements IGetPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.binaryauthorization.v1beta1.IGetPolicyRequest=} [properties] Properties to set
+                         */
+                        function GetPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetPolicyRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetPolicyRequest
+                         * @instance
+                         */
+                        GetPolicyRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetPolicyRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IGetPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.binaryauthorization.v1beta1.GetPolicyRequest} GetPolicyRequest instance
+                         */
+                        GetPolicyRequest.create = function create(properties) {
+                            return new GetPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetPolicyRequest message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.GetPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetPolicyRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IGetPolicyRequest} message GetPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.GetPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetPolicyRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IGetPolicyRequest} message GetPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.binaryauthorization.v1beta1.GetPolicyRequest} GetPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetPolicyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.binaryauthorization.v1beta1.GetPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.binaryauthorization.v1beta1.GetPolicyRequest} GetPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.binaryauthorization.v1beta1.GetPolicyRequest} GetPolicyRequest
+                         */
+                        GetPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.binaryauthorization.v1beta1.GetPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.binaryauthorization.v1beta1.GetPolicyRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetPolicyRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.GetPolicyRequest} message GetPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetPolicyRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetPolicyRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.binaryauthorization.v1beta1.GetPolicyRequest";
+                        };
+    
+                        return GetPolicyRequest;
+                    })();
+    
+                    v1beta1.SystemPolicyV1Beta1 = (function() {
+    
+                        /**
+                         * Constructs a new SystemPolicyV1Beta1 service.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @classdesc Represents a SystemPolicyV1Beta1
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function SystemPolicyV1Beta1(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (SystemPolicyV1Beta1.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = SystemPolicyV1Beta1;
+    
+                        /**
+                         * Creates new SystemPolicyV1Beta1 service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {SystemPolicyV1Beta1} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        SystemPolicyV1Beta1.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1|getSystemPolicy}.
+                         * @memberof google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1
+                         * @typedef GetSystemPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.binaryauthorization.v1beta1.Policy} [response] Policy
+                         */
+    
+                        /**
+                         * Calls GetSystemPolicy.
+                         * @function getSystemPolicy
+                         * @memberof google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1
+                         * @instance
+                         * @param {google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest} request GetSystemPolicyRequest message or plain object
+                         * @param {google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1.GetSystemPolicyCallback} callback Node-style callback called with the error, if any, and Policy
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SystemPolicyV1Beta1.prototype.getSystemPolicy = function getSystemPolicy(request, callback) {
+                            return this.rpcCall(getSystemPolicy, $root.google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest, $root.google.cloud.binaryauthorization.v1beta1.Policy, request, callback);
+                        }, "name", { value: "GetSystemPolicy" });
+    
+                        /**
+                         * Calls GetSystemPolicy.
+                         * @function getSystemPolicy
+                         * @memberof google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1
+                         * @instance
+                         * @param {google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest} request GetSystemPolicyRequest message or plain object
+                         * @returns {Promise<google.cloud.binaryauthorization.v1beta1.Policy>} Promise
+                         * @variation 2
+                         */
+    
+                        return SystemPolicyV1Beta1;
+                    })();
+    
+                    v1beta1.UpdatePolicyRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdatePolicyRequest.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @interface IUpdatePolicyRequest
+                         * @property {google.cloud.binaryauthorization.v1beta1.IPolicy|null} [policy] UpdatePolicyRequest policy
+                         */
+    
+                        /**
+                         * Constructs a new UpdatePolicyRequest.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @classdesc Represents an UpdatePolicyRequest.
+                         * @implements IUpdatePolicyRequest
+                         * @constructor
+                         * @param {google.cloud.binaryauthorization.v1beta1.IUpdatePolicyRequest=} [properties] Properties to set
+                         */
+                        function UpdatePolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdatePolicyRequest policy.
+                         * @member {google.cloud.binaryauthorization.v1beta1.IPolicy|null|undefined} policy
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest
+                         * @instance
+                         */
+                        UpdatePolicyRequest.prototype.policy = null;
+    
+                        /**
+                         * Creates a new UpdatePolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IUpdatePolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest} UpdatePolicyRequest instance
+                         */
+                        UpdatePolicyRequest.create = function create(properties) {
+                            return new UpdatePolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdatePolicyRequest message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IUpdatePolicyRequest} message UpdatePolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdatePolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.policy != null && Object.hasOwnProperty.call(message, "policy"))
+                                $root.google.cloud.binaryauthorization.v1beta1.Policy.encode(message.policy, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdatePolicyRequest message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IUpdatePolicyRequest} message UpdatePolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdatePolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdatePolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest} UpdatePolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdatePolicyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.policy = $root.google.cloud.binaryauthorization.v1beta1.Policy.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdatePolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest} UpdatePolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdatePolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdatePolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdatePolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.policy != null && message.hasOwnProperty("policy")) {
+                                var error = $root.google.cloud.binaryauthorization.v1beta1.Policy.verify(message.policy);
+                                if (error)
+                                    return "policy." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdatePolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest} UpdatePolicyRequest
+                         */
+                        UpdatePolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest();
+                            if (object.policy != null) {
+                                if (typeof object.policy !== "object")
+                                    throw TypeError(".google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest.policy: object expected");
+                                message.policy = $root.google.cloud.binaryauthorization.v1beta1.Policy.fromObject(object.policy);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdatePolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest} message UpdatePolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdatePolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.policy = null;
+                            if (message.policy != null && message.hasOwnProperty("policy"))
+                                object.policy = $root.google.cloud.binaryauthorization.v1beta1.Policy.toObject(message.policy, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdatePolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdatePolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdatePolicyRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdatePolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest";
+                        };
+    
+                        return UpdatePolicyRequest;
+                    })();
+    
+                    v1beta1.CreateAttestorRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateAttestorRequest.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @interface ICreateAttestorRequest
+                         * @property {string|null} [parent] CreateAttestorRequest parent
+                         * @property {string|null} [attestorId] CreateAttestorRequest attestorId
+                         * @property {google.cloud.binaryauthorization.v1beta1.IAttestor|null} [attestor] CreateAttestorRequest attestor
+                         */
+    
+                        /**
+                         * Constructs a new CreateAttestorRequest.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @classdesc Represents a CreateAttestorRequest.
+                         * @implements ICreateAttestorRequest
+                         * @constructor
+                         * @param {google.cloud.binaryauthorization.v1beta1.ICreateAttestorRequest=} [properties] Properties to set
+                         */
+                        function CreateAttestorRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateAttestorRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest
+                         * @instance
+                         */
+                        CreateAttestorRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateAttestorRequest attestorId.
+                         * @member {string} attestorId
+                         * @memberof google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest
+                         * @instance
+                         */
+                        CreateAttestorRequest.prototype.attestorId = "";
+    
+                        /**
+                         * CreateAttestorRequest attestor.
+                         * @member {google.cloud.binaryauthorization.v1beta1.IAttestor|null|undefined} attestor
+                         * @memberof google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest
+                         * @instance
+                         */
+                        CreateAttestorRequest.prototype.attestor = null;
+    
+                        /**
+                         * Creates a new CreateAttestorRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.ICreateAttestorRequest=} [properties] Properties to set
+                         * @returns {google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest} CreateAttestorRequest instance
+                         */
+                        CreateAttestorRequest.create = function create(properties) {
+                            return new CreateAttestorRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateAttestorRequest message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.ICreateAttestorRequest} message CreateAttestorRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateAttestorRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.attestorId != null && Object.hasOwnProperty.call(message, "attestorId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.attestorId);
+                            if (message.attestor != null && Object.hasOwnProperty.call(message, "attestor"))
+                                $root.google.cloud.binaryauthorization.v1beta1.Attestor.encode(message.attestor, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateAttestorRequest message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.ICreateAttestorRequest} message CreateAttestorRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateAttestorRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateAttestorRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest} CreateAttestorRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateAttestorRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.attestorId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.attestor = $root.google.cloud.binaryauthorization.v1beta1.Attestor.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateAttestorRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest} CreateAttestorRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateAttestorRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateAttestorRequest message.
+                         * @function verify
+                         * @memberof google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateAttestorRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.attestorId != null && message.hasOwnProperty("attestorId"))
+                                if (!$util.isString(message.attestorId))
+                                    return "attestorId: string expected";
+                            if (message.attestor != null && message.hasOwnProperty("attestor")) {
+                                var error = $root.google.cloud.binaryauthorization.v1beta1.Attestor.verify(message.attestor);
+                                if (error)
+                                    return "attestor." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateAttestorRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest} CreateAttestorRequest
+                         */
+                        CreateAttestorRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest)
+                                return object;
+                            var message = new $root.google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.attestorId != null)
+                                message.attestorId = String(object.attestorId);
+                            if (object.attestor != null) {
+                                if (typeof object.attestor !== "object")
+                                    throw TypeError(".google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest.attestor: object expected");
+                                message.attestor = $root.google.cloud.binaryauthorization.v1beta1.Attestor.fromObject(object.attestor);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateAttestorRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest} message CreateAttestorRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateAttestorRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.attestorId = "";
+                                object.attestor = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.attestorId != null && message.hasOwnProperty("attestorId"))
+                                object.attestorId = message.attestorId;
+                            if (message.attestor != null && message.hasOwnProperty("attestor"))
+                                object.attestor = $root.google.cloud.binaryauthorization.v1beta1.Attestor.toObject(message.attestor, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateAttestorRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateAttestorRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateAttestorRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateAttestorRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest";
+                        };
+    
+                        return CreateAttestorRequest;
+                    })();
+    
+                    v1beta1.GetAttestorRequest = (function() {
+    
+                        /**
+                         * Properties of a GetAttestorRequest.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @interface IGetAttestorRequest
+                         * @property {string|null} [name] GetAttestorRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetAttestorRequest.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @classdesc Represents a GetAttestorRequest.
+                         * @implements IGetAttestorRequest
+                         * @constructor
+                         * @param {google.cloud.binaryauthorization.v1beta1.IGetAttestorRequest=} [properties] Properties to set
+                         */
+                        function GetAttestorRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetAttestorRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetAttestorRequest
+                         * @instance
+                         */
+                        GetAttestorRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetAttestorRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetAttestorRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IGetAttestorRequest=} [properties] Properties to set
+                         * @returns {google.cloud.binaryauthorization.v1beta1.GetAttestorRequest} GetAttestorRequest instance
+                         */
+                        GetAttestorRequest.create = function create(properties) {
+                            return new GetAttestorRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetAttestorRequest message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.GetAttestorRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetAttestorRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IGetAttestorRequest} message GetAttestorRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetAttestorRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetAttestorRequest message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.GetAttestorRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetAttestorRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IGetAttestorRequest} message GetAttestorRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetAttestorRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetAttestorRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetAttestorRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.binaryauthorization.v1beta1.GetAttestorRequest} GetAttestorRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetAttestorRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.binaryauthorization.v1beta1.GetAttestorRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetAttestorRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetAttestorRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.binaryauthorization.v1beta1.GetAttestorRequest} GetAttestorRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetAttestorRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetAttestorRequest message.
+                         * @function verify
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetAttestorRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetAttestorRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetAttestorRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetAttestorRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.binaryauthorization.v1beta1.GetAttestorRequest} GetAttestorRequest
+                         */
+                        GetAttestorRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.binaryauthorization.v1beta1.GetAttestorRequest)
+                                return object;
+                            var message = new $root.google.cloud.binaryauthorization.v1beta1.GetAttestorRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetAttestorRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetAttestorRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.GetAttestorRequest} message GetAttestorRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetAttestorRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetAttestorRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetAttestorRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetAttestorRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetAttestorRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetAttestorRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetAttestorRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.binaryauthorization.v1beta1.GetAttestorRequest";
+                        };
+    
+                        return GetAttestorRequest;
+                    })();
+    
+                    v1beta1.UpdateAttestorRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateAttestorRequest.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @interface IUpdateAttestorRequest
+                         * @property {google.cloud.binaryauthorization.v1beta1.IAttestor|null} [attestor] UpdateAttestorRequest attestor
+                         */
+    
+                        /**
+                         * Constructs a new UpdateAttestorRequest.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @classdesc Represents an UpdateAttestorRequest.
+                         * @implements IUpdateAttestorRequest
+                         * @constructor
+                         * @param {google.cloud.binaryauthorization.v1beta1.IUpdateAttestorRequest=} [properties] Properties to set
+                         */
+                        function UpdateAttestorRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateAttestorRequest attestor.
+                         * @member {google.cloud.binaryauthorization.v1beta1.IAttestor|null|undefined} attestor
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest
+                         * @instance
+                         */
+                        UpdateAttestorRequest.prototype.attestor = null;
+    
+                        /**
+                         * Creates a new UpdateAttestorRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IUpdateAttestorRequest=} [properties] Properties to set
+                         * @returns {google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest} UpdateAttestorRequest instance
+                         */
+                        UpdateAttestorRequest.create = function create(properties) {
+                            return new UpdateAttestorRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateAttestorRequest message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IUpdateAttestorRequest} message UpdateAttestorRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateAttestorRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.attestor != null && Object.hasOwnProperty.call(message, "attestor"))
+                                $root.google.cloud.binaryauthorization.v1beta1.Attestor.encode(message.attestor, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateAttestorRequest message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IUpdateAttestorRequest} message UpdateAttestorRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateAttestorRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateAttestorRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest} UpdateAttestorRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateAttestorRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.attestor = $root.google.cloud.binaryauthorization.v1beta1.Attestor.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateAttestorRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest} UpdateAttestorRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateAttestorRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateAttestorRequest message.
+                         * @function verify
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateAttestorRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.attestor != null && message.hasOwnProperty("attestor")) {
+                                var error = $root.google.cloud.binaryauthorization.v1beta1.Attestor.verify(message.attestor);
+                                if (error)
+                                    return "attestor." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateAttestorRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest} UpdateAttestorRequest
+                         */
+                        UpdateAttestorRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest)
+                                return object;
+                            var message = new $root.google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest();
+                            if (object.attestor != null) {
+                                if (typeof object.attestor !== "object")
+                                    throw TypeError(".google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest.attestor: object expected");
+                                message.attestor = $root.google.cloud.binaryauthorization.v1beta1.Attestor.fromObject(object.attestor);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateAttestorRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest} message UpdateAttestorRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateAttestorRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.attestor = null;
+                            if (message.attestor != null && message.hasOwnProperty("attestor"))
+                                object.attestor = $root.google.cloud.binaryauthorization.v1beta1.Attestor.toObject(message.attestor, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateAttestorRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateAttestorRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateAttestorRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateAttestorRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest";
+                        };
+    
+                        return UpdateAttestorRequest;
+                    })();
+    
+                    v1beta1.ListAttestorsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListAttestorsRequest.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @interface IListAttestorsRequest
+                         * @property {string|null} [parent] ListAttestorsRequest parent
+                         * @property {number|null} [pageSize] ListAttestorsRequest pageSize
+                         * @property {string|null} [pageToken] ListAttestorsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListAttestorsRequest.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @classdesc Represents a ListAttestorsRequest.
+                         * @implements IListAttestorsRequest
+                         * @constructor
+                         * @param {google.cloud.binaryauthorization.v1beta1.IListAttestorsRequest=} [properties] Properties to set
+                         */
+                        function ListAttestorsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAttestorsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest
+                         * @instance
+                         */
+                        ListAttestorsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListAttestorsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest
+                         * @instance
+                         */
+                        ListAttestorsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListAttestorsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest
+                         * @instance
+                         */
+                        ListAttestorsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListAttestorsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IListAttestorsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest} ListAttestorsRequest instance
+                         */
+                        ListAttestorsRequest.create = function create(properties) {
+                            return new ListAttestorsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAttestorsRequest message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IListAttestorsRequest} message ListAttestorsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAttestorsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAttestorsRequest message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IListAttestorsRequest} message ListAttestorsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAttestorsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAttestorsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest} ListAttestorsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAttestorsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAttestorsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest} ListAttestorsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAttestorsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAttestorsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAttestorsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAttestorsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest} ListAttestorsRequest
+                         */
+                        ListAttestorsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest)
+                                return object;
+                            var message = new $root.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAttestorsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest} message ListAttestorsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAttestorsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAttestorsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAttestorsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListAttestorsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListAttestorsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest";
+                        };
+    
+                        return ListAttestorsRequest;
+                    })();
+    
+                    v1beta1.ListAttestorsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListAttestorsResponse.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @interface IListAttestorsResponse
+                         * @property {Array.<google.cloud.binaryauthorization.v1beta1.IAttestor>|null} [attestors] ListAttestorsResponse attestors
+                         * @property {string|null} [nextPageToken] ListAttestorsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListAttestorsResponse.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @classdesc Represents a ListAttestorsResponse.
+                         * @implements IListAttestorsResponse
+                         * @constructor
+                         * @param {google.cloud.binaryauthorization.v1beta1.IListAttestorsResponse=} [properties] Properties to set
+                         */
+                        function ListAttestorsResponse(properties) {
+                            this.attestors = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAttestorsResponse attestors.
+                         * @member {Array.<google.cloud.binaryauthorization.v1beta1.IAttestor>} attestors
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse
+                         * @instance
+                         */
+                        ListAttestorsResponse.prototype.attestors = $util.emptyArray;
+    
+                        /**
+                         * ListAttestorsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse
+                         * @instance
+                         */
+                        ListAttestorsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListAttestorsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IListAttestorsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse} ListAttestorsResponse instance
+                         */
+                        ListAttestorsResponse.create = function create(properties) {
+                            return new ListAttestorsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAttestorsResponse message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IListAttestorsResponse} message ListAttestorsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAttestorsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.attestors != null && message.attestors.length)
+                                for (var i = 0; i < message.attestors.length; ++i)
+                                    $root.google.cloud.binaryauthorization.v1beta1.Attestor.encode(message.attestors[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAttestorsResponse message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IListAttestorsResponse} message ListAttestorsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAttestorsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAttestorsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse} ListAttestorsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAttestorsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.attestors && message.attestors.length))
+                                            message.attestors = [];
+                                        message.attestors.push($root.google.cloud.binaryauthorization.v1beta1.Attestor.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAttestorsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse} ListAttestorsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAttestorsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAttestorsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAttestorsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.attestors != null && message.hasOwnProperty("attestors")) {
+                                if (!Array.isArray(message.attestors))
+                                    return "attestors: array expected";
+                                for (var i = 0; i < message.attestors.length; ++i) {
+                                    var error = $root.google.cloud.binaryauthorization.v1beta1.Attestor.verify(message.attestors[i]);
+                                    if (error)
+                                        return "attestors." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAttestorsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse} ListAttestorsResponse
+                         */
+                        ListAttestorsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse)
+                                return object;
+                            var message = new $root.google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse();
+                            if (object.attestors) {
+                                if (!Array.isArray(object.attestors))
+                                    throw TypeError(".google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse.attestors: array expected");
+                                message.attestors = [];
+                                for (var i = 0; i < object.attestors.length; ++i) {
+                                    if (typeof object.attestors[i] !== "object")
+                                        throw TypeError(".google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse.attestors: object expected");
+                                    message.attestors[i] = $root.google.cloud.binaryauthorization.v1beta1.Attestor.fromObject(object.attestors[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAttestorsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse} message ListAttestorsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAttestorsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.attestors = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.attestors && message.attestors.length) {
+                                object.attestors = [];
+                                for (var j = 0; j < message.attestors.length; ++j)
+                                    object.attestors[j] = $root.google.cloud.binaryauthorization.v1beta1.Attestor.toObject(message.attestors[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAttestorsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAttestorsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListAttestorsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListAttestorsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse";
+                        };
+    
+                        return ListAttestorsResponse;
+                    })();
+    
+                    v1beta1.DeleteAttestorRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteAttestorRequest.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @interface IDeleteAttestorRequest
+                         * @property {string|null} [name] DeleteAttestorRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteAttestorRequest.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @classdesc Represents a DeleteAttestorRequest.
+                         * @implements IDeleteAttestorRequest
+                         * @constructor
+                         * @param {google.cloud.binaryauthorization.v1beta1.IDeleteAttestorRequest=} [properties] Properties to set
+                         */
+                        function DeleteAttestorRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteAttestorRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest
+                         * @instance
+                         */
+                        DeleteAttestorRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteAttestorRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IDeleteAttestorRequest=} [properties] Properties to set
+                         * @returns {google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest} DeleteAttestorRequest instance
+                         */
+                        DeleteAttestorRequest.create = function create(properties) {
+                            return new DeleteAttestorRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteAttestorRequest message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IDeleteAttestorRequest} message DeleteAttestorRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteAttestorRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteAttestorRequest message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IDeleteAttestorRequest} message DeleteAttestorRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteAttestorRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteAttestorRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest} DeleteAttestorRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteAttestorRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteAttestorRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest} DeleteAttestorRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteAttestorRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteAttestorRequest message.
+                         * @function verify
+                         * @memberof google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteAttestorRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteAttestorRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest} DeleteAttestorRequest
+                         */
+                        DeleteAttestorRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest)
+                                return object;
+                            var message = new $root.google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteAttestorRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest} message DeleteAttestorRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteAttestorRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteAttestorRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteAttestorRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteAttestorRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteAttestorRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest";
+                        };
+    
+                        return DeleteAttestorRequest;
+                    })();
+    
+                    v1beta1.GetSystemPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of a GetSystemPolicyRequest.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @interface IGetSystemPolicyRequest
+                         * @property {string|null} [name] GetSystemPolicyRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetSystemPolicyRequest.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @classdesc Represents a GetSystemPolicyRequest.
+                         * @implements IGetSystemPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest=} [properties] Properties to set
+                         */
+                        function GetSystemPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetSystemPolicyRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest
+                         * @instance
+                         */
+                        GetSystemPolicyRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetSystemPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest} GetSystemPolicyRequest instance
+                         */
+                        GetSystemPolicyRequest.create = function create(properties) {
+                            return new GetSystemPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetSystemPolicyRequest message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest} message GetSystemPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSystemPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetSystemPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest} message GetSystemPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSystemPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetSystemPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest} GetSystemPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSystemPolicyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetSystemPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest} GetSystemPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSystemPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetSystemPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetSystemPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetSystemPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest} GetSystemPolicyRequest
+                         */
+                        GetSystemPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetSystemPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest} message GetSystemPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetSystemPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetSystemPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetSystemPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetSystemPolicyRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetSystemPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest";
+                        };
+    
+                        return GetSystemPolicyRequest;
+                    })();
+    
+                    return v1beta1;
+                })();
+    
                 return binaryauthorization;
             })();
     
@@ -7935,7 +14652,6 @@
                  * @property {string|null} [docTagPrefix] Publishing docTagPrefix
                  * @property {google.api.ClientLibraryOrganization|null} [organization] Publishing organization
                  * @property {Array.<google.api.IClientLibrarySettings>|null} [librarySettings] Publishing librarySettings
-                 * @property {string|null} [protoReferenceDocumentationUri] Publishing protoReferenceDocumentationUri
                  */
     
                 /**
@@ -8029,14 +14745,6 @@
                 Publishing.prototype.librarySettings = $util.emptyArray;
     
                 /**
-                 * Publishing protoReferenceDocumentationUri.
-                 * @member {string} protoReferenceDocumentationUri
-                 * @memberof google.api.Publishing
-                 * @instance
-                 */
-                Publishing.prototype.protoReferenceDocumentationUri = "";
-    
-                /**
                  * Creates a new Publishing instance using the specified properties.
                  * @function create
                  * @memberof google.api.Publishing
@@ -8081,8 +14789,6 @@
                     if (message.librarySettings != null && message.librarySettings.length)
                         for (var i = 0; i < message.librarySettings.length; ++i)
                             $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
-                    if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
-                        writer.uint32(/* id 110, wireType 2 =*/882).string(message.protoReferenceDocumentationUri);
                     return writer;
                 };
     
@@ -8157,10 +14863,6 @@
                                 if (!(message.librarySettings && message.librarySettings.length))
                                     message.librarySettings = [];
                                 message.librarySettings.push($root.google.api.ClientLibrarySettings.decode(reader, reader.uint32()));
-                                break;
-                            }
-                        case 110: {
-                                message.protoReferenceDocumentationUri = reader.string();
                                 break;
                             }
                         default:
@@ -8238,9 +14940,6 @@
                         case 2:
                         case 3:
                         case 4:
-                        case 5:
-                        case 6:
-                        case 7:
                             break;
                         }
                     if (message.librarySettings != null && message.hasOwnProperty("librarySettings")) {
@@ -8252,9 +14951,6 @@
                                 return "librarySettings." + error;
                         }
                     }
-                    if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
-                        if (!$util.isString(message.protoReferenceDocumentationUri))
-                            return "protoReferenceDocumentationUri: string expected";
                     return null;
                 };
     
@@ -8324,18 +15020,6 @@
                     case 4:
                         message.organization = 4;
                         break;
-                    case "SHOPPING":
-                    case 5:
-                        message.organization = 5;
-                        break;
-                    case "GEO":
-                    case 6:
-                        message.organization = 6;
-                        break;
-                    case "GENERATIVE_AI":
-                    case 7:
-                        message.organization = 7;
-                        break;
                     }
                     if (object.librarySettings) {
                         if (!Array.isArray(object.librarySettings))
@@ -8347,8 +15031,6 @@
                             message.librarySettings[i] = $root.google.api.ClientLibrarySettings.fromObject(object.librarySettings[i]);
                         }
                     }
-                    if (object.protoReferenceDocumentationUri != null)
-                        message.protoReferenceDocumentationUri = String(object.protoReferenceDocumentationUri);
                     return message;
                 };
     
@@ -8377,7 +15059,6 @@
                         object.githubLabel = "";
                         object.docTagPrefix = "";
                         object.organization = options.enums === String ? "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED" : 0;
-                        object.protoReferenceDocumentationUri = "";
                     }
                     if (message.methodSettings && message.methodSettings.length) {
                         object.methodSettings = [];
@@ -8406,8 +15087,6 @@
                         for (var j = 0; j < message.librarySettings.length; ++j)
                             object.librarySettings[j] = $root.google.api.ClientLibrarySettings.toObject(message.librarySettings[j], options);
                     }
-                    if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
-                        object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
                     return object;
                 };
     
@@ -9570,11 +16249,6 @@
                  * @memberof google.api
                  * @interface IDotnetSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] DotnetSettings common
-                 * @property {Object.<string,string>|null} [renamedServices] DotnetSettings renamedServices
-                 * @property {Object.<string,string>|null} [renamedResources] DotnetSettings renamedResources
-                 * @property {Array.<string>|null} [ignoredResources] DotnetSettings ignoredResources
-                 * @property {Array.<string>|null} [forcedNamespaceAliases] DotnetSettings forcedNamespaceAliases
-                 * @property {Array.<string>|null} [handwrittenSignatures] DotnetSettings handwrittenSignatures
                  */
     
                 /**
@@ -9586,11 +16260,6 @@
                  * @param {google.api.IDotnetSettings=} [properties] Properties to set
                  */
                 function DotnetSettings(properties) {
-                    this.renamedServices = {};
-                    this.renamedResources = {};
-                    this.ignoredResources = [];
-                    this.forcedNamespaceAliases = [];
-                    this.handwrittenSignatures = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -9604,46 +16273,6 @@
                  * @instance
                  */
                 DotnetSettings.prototype.common = null;
-    
-                /**
-                 * DotnetSettings renamedServices.
-                 * @member {Object.<string,string>} renamedServices
-                 * @memberof google.api.DotnetSettings
-                 * @instance
-                 */
-                DotnetSettings.prototype.renamedServices = $util.emptyObject;
-    
-                /**
-                 * DotnetSettings renamedResources.
-                 * @member {Object.<string,string>} renamedResources
-                 * @memberof google.api.DotnetSettings
-                 * @instance
-                 */
-                DotnetSettings.prototype.renamedResources = $util.emptyObject;
-    
-                /**
-                 * DotnetSettings ignoredResources.
-                 * @member {Array.<string>} ignoredResources
-                 * @memberof google.api.DotnetSettings
-                 * @instance
-                 */
-                DotnetSettings.prototype.ignoredResources = $util.emptyArray;
-    
-                /**
-                 * DotnetSettings forcedNamespaceAliases.
-                 * @member {Array.<string>} forcedNamespaceAliases
-                 * @memberof google.api.DotnetSettings
-                 * @instance
-                 */
-                DotnetSettings.prototype.forcedNamespaceAliases = $util.emptyArray;
-    
-                /**
-                 * DotnetSettings handwrittenSignatures.
-                 * @member {Array.<string>} handwrittenSignatures
-                 * @memberof google.api.DotnetSettings
-                 * @instance
-                 */
-                DotnetSettings.prototype.handwrittenSignatures = $util.emptyArray;
     
                 /**
                  * Creates a new DotnetSettings instance using the specified properties.
@@ -9671,21 +16300,6 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
-                        for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
-                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
-                    if (message.renamedResources != null && Object.hasOwnProperty.call(message, "renamedResources"))
-                        for (var keys = Object.keys(message.renamedResources), i = 0; i < keys.length; ++i)
-                            writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedResources[keys[i]]).ldelim();
-                    if (message.ignoredResources != null && message.ignoredResources.length)
-                        for (var i = 0; i < message.ignoredResources.length; ++i)
-                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.ignoredResources[i]);
-                    if (message.forcedNamespaceAliases != null && message.forcedNamespaceAliases.length)
-                        for (var i = 0; i < message.forcedNamespaceAliases.length; ++i)
-                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.forcedNamespaceAliases[i]);
-                    if (message.handwrittenSignatures != null && message.handwrittenSignatures.length)
-                        for (var i = 0; i < message.handwrittenSignatures.length; ++i)
-                            writer.uint32(/* id 6, wireType 2 =*/50).string(message.handwrittenSignatures[i]);
                     return writer;
                 };
     
@@ -9716,76 +16330,12 @@
                 DotnetSettings.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings(), key, value;
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 2: {
-                                if (message.renamedServices === $util.emptyObject)
-                                    message.renamedServices = {};
-                                var end2 = reader.uint32() + reader.pos;
-                                key = "";
-                                value = "";
-                                while (reader.pos < end2) {
-                                    var tag2 = reader.uint32();
-                                    switch (tag2 >>> 3) {
-                                    case 1:
-                                        key = reader.string();
-                                        break;
-                                    case 2:
-                                        value = reader.string();
-                                        break;
-                                    default:
-                                        reader.skipType(tag2 & 7);
-                                        break;
-                                    }
-                                }
-                                message.renamedServices[key] = value;
-                                break;
-                            }
-                        case 3: {
-                                if (message.renamedResources === $util.emptyObject)
-                                    message.renamedResources = {};
-                                var end2 = reader.uint32() + reader.pos;
-                                key = "";
-                                value = "";
-                                while (reader.pos < end2) {
-                                    var tag2 = reader.uint32();
-                                    switch (tag2 >>> 3) {
-                                    case 1:
-                                        key = reader.string();
-                                        break;
-                                    case 2:
-                                        value = reader.string();
-                                        break;
-                                    default:
-                                        reader.skipType(tag2 & 7);
-                                        break;
-                                    }
-                                }
-                                message.renamedResources[key] = value;
-                                break;
-                            }
-                        case 4: {
-                                if (!(message.ignoredResources && message.ignoredResources.length))
-                                    message.ignoredResources = [];
-                                message.ignoredResources.push(reader.string());
-                                break;
-                            }
-                        case 5: {
-                                if (!(message.forcedNamespaceAliases && message.forcedNamespaceAliases.length))
-                                    message.forcedNamespaceAliases = [];
-                                message.forcedNamespaceAliases.push(reader.string());
-                                break;
-                            }
-                        case 6: {
-                                if (!(message.handwrittenSignatures && message.handwrittenSignatures.length))
-                                    message.handwrittenSignatures = [];
-                                message.handwrittenSignatures.push(reader.string());
                                 break;
                             }
                         default:
@@ -9828,43 +16378,6 @@
                         if (error)
                             return "common." + error;
                     }
-                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
-                        if (!$util.isObject(message.renamedServices))
-                            return "renamedServices: object expected";
-                        var key = Object.keys(message.renamedServices);
-                        for (var i = 0; i < key.length; ++i)
-                            if (!$util.isString(message.renamedServices[key[i]]))
-                                return "renamedServices: string{k:string} expected";
-                    }
-                    if (message.renamedResources != null && message.hasOwnProperty("renamedResources")) {
-                        if (!$util.isObject(message.renamedResources))
-                            return "renamedResources: object expected";
-                        var key = Object.keys(message.renamedResources);
-                        for (var i = 0; i < key.length; ++i)
-                            if (!$util.isString(message.renamedResources[key[i]]))
-                                return "renamedResources: string{k:string} expected";
-                    }
-                    if (message.ignoredResources != null && message.hasOwnProperty("ignoredResources")) {
-                        if (!Array.isArray(message.ignoredResources))
-                            return "ignoredResources: array expected";
-                        for (var i = 0; i < message.ignoredResources.length; ++i)
-                            if (!$util.isString(message.ignoredResources[i]))
-                                return "ignoredResources: string[] expected";
-                    }
-                    if (message.forcedNamespaceAliases != null && message.hasOwnProperty("forcedNamespaceAliases")) {
-                        if (!Array.isArray(message.forcedNamespaceAliases))
-                            return "forcedNamespaceAliases: array expected";
-                        for (var i = 0; i < message.forcedNamespaceAliases.length; ++i)
-                            if (!$util.isString(message.forcedNamespaceAliases[i]))
-                                return "forcedNamespaceAliases: string[] expected";
-                    }
-                    if (message.handwrittenSignatures != null && message.hasOwnProperty("handwrittenSignatures")) {
-                        if (!Array.isArray(message.handwrittenSignatures))
-                            return "handwrittenSignatures: array expected";
-                        for (var i = 0; i < message.handwrittenSignatures.length; ++i)
-                            if (!$util.isString(message.handwrittenSignatures[i]))
-                                return "handwrittenSignatures: string[] expected";
-                    }
                     return null;
                 };
     
@@ -9885,41 +16398,6 @@
                             throw TypeError(".google.api.DotnetSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
-                    if (object.renamedServices) {
-                        if (typeof object.renamedServices !== "object")
-                            throw TypeError(".google.api.DotnetSettings.renamedServices: object expected");
-                        message.renamedServices = {};
-                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
-                            message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
-                    }
-                    if (object.renamedResources) {
-                        if (typeof object.renamedResources !== "object")
-                            throw TypeError(".google.api.DotnetSettings.renamedResources: object expected");
-                        message.renamedResources = {};
-                        for (var keys = Object.keys(object.renamedResources), i = 0; i < keys.length; ++i)
-                            message.renamedResources[keys[i]] = String(object.renamedResources[keys[i]]);
-                    }
-                    if (object.ignoredResources) {
-                        if (!Array.isArray(object.ignoredResources))
-                            throw TypeError(".google.api.DotnetSettings.ignoredResources: array expected");
-                        message.ignoredResources = [];
-                        for (var i = 0; i < object.ignoredResources.length; ++i)
-                            message.ignoredResources[i] = String(object.ignoredResources[i]);
-                    }
-                    if (object.forcedNamespaceAliases) {
-                        if (!Array.isArray(object.forcedNamespaceAliases))
-                            throw TypeError(".google.api.DotnetSettings.forcedNamespaceAliases: array expected");
-                        message.forcedNamespaceAliases = [];
-                        for (var i = 0; i < object.forcedNamespaceAliases.length; ++i)
-                            message.forcedNamespaceAliases[i] = String(object.forcedNamespaceAliases[i]);
-                    }
-                    if (object.handwrittenSignatures) {
-                        if (!Array.isArray(object.handwrittenSignatures))
-                            throw TypeError(".google.api.DotnetSettings.handwrittenSignatures: array expected");
-                        message.handwrittenSignatures = [];
-                        for (var i = 0; i < object.handwrittenSignatures.length; ++i)
-                            message.handwrittenSignatures[i] = String(object.handwrittenSignatures[i]);
-                    }
                     return message;
                 };
     
@@ -9936,45 +16414,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults) {
-                        object.ignoredResources = [];
-                        object.forcedNamespaceAliases = [];
-                        object.handwrittenSignatures = [];
-                    }
-                    if (options.objects || options.defaults) {
-                        object.renamedServices = {};
-                        object.renamedResources = {};
-                    }
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
-                    var keys2;
-                    if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
-                        object.renamedServices = {};
-                        for (var j = 0; j < keys2.length; ++j)
-                            object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
-                    }
-                    if (message.renamedResources && (keys2 = Object.keys(message.renamedResources)).length) {
-                        object.renamedResources = {};
-                        for (var j = 0; j < keys2.length; ++j)
-                            object.renamedResources[keys2[j]] = message.renamedResources[keys2[j]];
-                    }
-                    if (message.ignoredResources && message.ignoredResources.length) {
-                        object.ignoredResources = [];
-                        for (var j = 0; j < message.ignoredResources.length; ++j)
-                            object.ignoredResources[j] = message.ignoredResources[j];
-                    }
-                    if (message.forcedNamespaceAliases && message.forcedNamespaceAliases.length) {
-                        object.forcedNamespaceAliases = [];
-                        for (var j = 0; j < message.forcedNamespaceAliases.length; ++j)
-                            object.forcedNamespaceAliases[j] = message.forcedNamespaceAliases[j];
-                    }
-                    if (message.handwrittenSignatures && message.handwrittenSignatures.length) {
-                        object.handwrittenSignatures = [];
-                        for (var j = 0; j < message.handwrittenSignatures.length; ++j)
-                            object.handwrittenSignatures[j] = message.handwrittenSignatures[j];
-                    }
                     return object;
                 };
     
@@ -10952,9 +17395,6 @@
              * @property {number} ADS=2 ADS value
              * @property {number} PHOTOS=3 PHOTOS value
              * @property {number} STREET_VIEW=4 STREET_VIEW value
-             * @property {number} SHOPPING=5 SHOPPING value
-             * @property {number} GEO=6 GEO value
-             * @property {number} GENERATIVE_AI=7 GENERATIVE_AI value
              */
             api.ClientLibraryOrganization = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
@@ -10963,9 +17403,6 @@
                 values[valuesById[2] = "ADS"] = 2;
                 values[valuesById[3] = "PHOTOS"] = 3;
                 values[valuesById[4] = "STREET_VIEW"] = 4;
-                values[valuesById[5] = "SHOPPING"] = 5;
-                values[valuesById[6] = "GEO"] = 6;
-                values[valuesById[7] = "GENERATIVE_AI"] = 7;
                 return values;
             })();
     
@@ -12951,9 +19388,6 @@
                  * @memberof google.protobuf
                  * @interface IExtensionRangeOptions
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ExtensionRangeOptions uninterpretedOption
-                 * @property {Array.<google.protobuf.ExtensionRangeOptions.IDeclaration>|null} [declaration] ExtensionRangeOptions declaration
-                 * @property {google.protobuf.IFeatureSet|null} [features] ExtensionRangeOptions features
-                 * @property {google.protobuf.ExtensionRangeOptions.VerificationState|null} [verification] ExtensionRangeOptions verification
                  */
     
                 /**
@@ -12966,7 +19400,6 @@
                  */
                 function ExtensionRangeOptions(properties) {
                     this.uninterpretedOption = [];
-                    this.declaration = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -12980,30 +19413,6 @@
                  * @instance
                  */
                 ExtensionRangeOptions.prototype.uninterpretedOption = $util.emptyArray;
-    
-                /**
-                 * ExtensionRangeOptions declaration.
-                 * @member {Array.<google.protobuf.ExtensionRangeOptions.IDeclaration>} declaration
-                 * @memberof google.protobuf.ExtensionRangeOptions
-                 * @instance
-                 */
-                ExtensionRangeOptions.prototype.declaration = $util.emptyArray;
-    
-                /**
-                 * ExtensionRangeOptions features.
-                 * @member {google.protobuf.IFeatureSet|null|undefined} features
-                 * @memberof google.protobuf.ExtensionRangeOptions
-                 * @instance
-                 */
-                ExtensionRangeOptions.prototype.features = null;
-    
-                /**
-                 * ExtensionRangeOptions verification.
-                 * @member {google.protobuf.ExtensionRangeOptions.VerificationState} verification
-                 * @memberof google.protobuf.ExtensionRangeOptions
-                 * @instance
-                 */
-                ExtensionRangeOptions.prototype.verification = 1;
     
                 /**
                  * Creates a new ExtensionRangeOptions instance using the specified properties.
@@ -13029,13 +19438,6 @@
                 ExtensionRangeOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.declaration != null && message.declaration.length)
-                        for (var i = 0; i < message.declaration.length; ++i)
-                            $root.google.protobuf.ExtensionRangeOptions.Declaration.encode(message.declaration[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                    if (message.verification != null && Object.hasOwnProperty.call(message, "verification"))
-                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.verification);
-                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 50, wireType 2 =*/402).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -13077,20 +19479,6 @@
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
                                 message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                                break;
-                            }
-                        case 2: {
-                                if (!(message.declaration && message.declaration.length))
-                                    message.declaration = [];
-                                message.declaration.push($root.google.protobuf.ExtensionRangeOptions.Declaration.decode(reader, reader.uint32()));
-                                break;
-                            }
-                        case 50: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 3: {
-                                message.verification = reader.int32();
                                 break;
                             }
                         default:
@@ -13137,28 +19525,6 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
-                    if (message.declaration != null && message.hasOwnProperty("declaration")) {
-                        if (!Array.isArray(message.declaration))
-                            return "declaration: array expected";
-                        for (var i = 0; i < message.declaration.length; ++i) {
-                            var error = $root.google.protobuf.ExtensionRangeOptions.Declaration.verify(message.declaration[i]);
-                            if (error)
-                                return "declaration." + error;
-                        }
-                    }
-                    if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
-                        if (error)
-                            return "features." + error;
-                    }
-                    if (message.verification != null && message.hasOwnProperty("verification"))
-                        switch (message.verification) {
-                        default:
-                            return "verification: enum value expected";
-                        case 0:
-                        case 1:
-                            break;
-                        }
                     return null;
                 };
     
@@ -13184,37 +19550,6 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
-                    if (object.declaration) {
-                        if (!Array.isArray(object.declaration))
-                            throw TypeError(".google.protobuf.ExtensionRangeOptions.declaration: array expected");
-                        message.declaration = [];
-                        for (var i = 0; i < object.declaration.length; ++i) {
-                            if (typeof object.declaration[i] !== "object")
-                                throw TypeError(".google.protobuf.ExtensionRangeOptions.declaration: object expected");
-                            message.declaration[i] = $root.google.protobuf.ExtensionRangeOptions.Declaration.fromObject(object.declaration[i]);
-                        }
-                    }
-                    if (object.features != null) {
-                        if (typeof object.features !== "object")
-                            throw TypeError(".google.protobuf.ExtensionRangeOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
-                    }
-                    switch (object.verification) {
-                    case "DECLARATION":
-                    case 0:
-                        message.verification = 0;
-                        break;
-                    default:
-                        if (typeof object.verification === "number") {
-                            message.verification = object.verification;
-                            break;
-                        }
-                        break;
-                    case "UNVERIFIED":
-                    case 1:
-                        message.verification = 1;
-                        break;
-                    }
                     return message;
                 };
     
@@ -13231,23 +19566,8 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults) {
-                        object.declaration = [];
+                    if (options.arrays || options.defaults)
                         object.uninterpretedOption = [];
-                    }
-                    if (options.defaults) {
-                        object.verification = options.enums === String ? "UNVERIFIED" : 1;
-                        object.features = null;
-                    }
-                    if (message.declaration && message.declaration.length) {
-                        object.declaration = [];
-                        for (var j = 0; j < message.declaration.length; ++j)
-                            object.declaration[j] = $root.google.protobuf.ExtensionRangeOptions.Declaration.toObject(message.declaration[j], options);
-                    }
-                    if (message.verification != null && message.hasOwnProperty("verification"))
-                        object.verification = options.enums === String ? $root.google.protobuf.ExtensionRangeOptions.VerificationState[message.verification] === undefined ? message.verification : $root.google.protobuf.ExtensionRangeOptions.VerificationState[message.verification] : message.verification;
-                    if (message.features != null && message.hasOwnProperty("features"))
-                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -13281,316 +19601,6 @@
                     }
                     return typeUrlPrefix + "/google.protobuf.ExtensionRangeOptions";
                 };
-    
-                ExtensionRangeOptions.Declaration = (function() {
-    
-                    /**
-                     * Properties of a Declaration.
-                     * @memberof google.protobuf.ExtensionRangeOptions
-                     * @interface IDeclaration
-                     * @property {number|null} [number] Declaration number
-                     * @property {string|null} [fullName] Declaration fullName
-                     * @property {string|null} [type] Declaration type
-                     * @property {boolean|null} [reserved] Declaration reserved
-                     * @property {boolean|null} [repeated] Declaration repeated
-                     */
-    
-                    /**
-                     * Constructs a new Declaration.
-                     * @memberof google.protobuf.ExtensionRangeOptions
-                     * @classdesc Represents a Declaration.
-                     * @implements IDeclaration
-                     * @constructor
-                     * @param {google.protobuf.ExtensionRangeOptions.IDeclaration=} [properties] Properties to set
-                     */
-                    function Declaration(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * Declaration number.
-                     * @member {number} number
-                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
-                     * @instance
-                     */
-                    Declaration.prototype.number = 0;
-    
-                    /**
-                     * Declaration fullName.
-                     * @member {string} fullName
-                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
-                     * @instance
-                     */
-                    Declaration.prototype.fullName = "";
-    
-                    /**
-                     * Declaration type.
-                     * @member {string} type
-                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
-                     * @instance
-                     */
-                    Declaration.prototype.type = "";
-    
-                    /**
-                     * Declaration reserved.
-                     * @member {boolean} reserved
-                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
-                     * @instance
-                     */
-                    Declaration.prototype.reserved = false;
-    
-                    /**
-                     * Declaration repeated.
-                     * @member {boolean} repeated
-                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
-                     * @instance
-                     */
-                    Declaration.prototype.repeated = false;
-    
-                    /**
-                     * Creates a new Declaration instance using the specified properties.
-                     * @function create
-                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
-                     * @static
-                     * @param {google.protobuf.ExtensionRangeOptions.IDeclaration=} [properties] Properties to set
-                     * @returns {google.protobuf.ExtensionRangeOptions.Declaration} Declaration instance
-                     */
-                    Declaration.create = function create(properties) {
-                        return new Declaration(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified Declaration message. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
-                     * @static
-                     * @param {google.protobuf.ExtensionRangeOptions.IDeclaration} message Declaration message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    Declaration.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.number != null && Object.hasOwnProperty.call(message, "number"))
-                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.number);
-                        if (message.fullName != null && Object.hasOwnProperty.call(message, "fullName"))
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.fullName);
-                        if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.type);
-                        if (message.reserved != null && Object.hasOwnProperty.call(message, "reserved"))
-                            writer.uint32(/* id 5, wireType 0 =*/40).bool(message.reserved);
-                        if (message.repeated != null && Object.hasOwnProperty.call(message, "repeated"))
-                            writer.uint32(/* id 6, wireType 0 =*/48).bool(message.repeated);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified Declaration message, length delimited. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
-                     * @static
-                     * @param {google.protobuf.ExtensionRangeOptions.IDeclaration} message Declaration message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    Declaration.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a Declaration message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.protobuf.ExtensionRangeOptions.Declaration} Declaration
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    Declaration.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.number = reader.int32();
-                                    break;
-                                }
-                            case 2: {
-                                    message.fullName = reader.string();
-                                    break;
-                                }
-                            case 3: {
-                                    message.type = reader.string();
-                                    break;
-                                }
-                            case 5: {
-                                    message.reserved = reader.bool();
-                                    break;
-                                }
-                            case 6: {
-                                    message.repeated = reader.bool();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a Declaration message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.protobuf.ExtensionRangeOptions.Declaration} Declaration
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    Declaration.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a Declaration message.
-                     * @function verify
-                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    Declaration.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.number != null && message.hasOwnProperty("number"))
-                            if (!$util.isInteger(message.number))
-                                return "number: integer expected";
-                        if (message.fullName != null && message.hasOwnProperty("fullName"))
-                            if (!$util.isString(message.fullName))
-                                return "fullName: string expected";
-                        if (message.type != null && message.hasOwnProperty("type"))
-                            if (!$util.isString(message.type))
-                                return "type: string expected";
-                        if (message.reserved != null && message.hasOwnProperty("reserved"))
-                            if (typeof message.reserved !== "boolean")
-                                return "reserved: boolean expected";
-                        if (message.repeated != null && message.hasOwnProperty("repeated"))
-                            if (typeof message.repeated !== "boolean")
-                                return "repeated: boolean expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a Declaration message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.protobuf.ExtensionRangeOptions.Declaration} Declaration
-                     */
-                    Declaration.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.protobuf.ExtensionRangeOptions.Declaration)
-                            return object;
-                        var message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
-                        if (object.number != null)
-                            message.number = object.number | 0;
-                        if (object.fullName != null)
-                            message.fullName = String(object.fullName);
-                        if (object.type != null)
-                            message.type = String(object.type);
-                        if (object.reserved != null)
-                            message.reserved = Boolean(object.reserved);
-                        if (object.repeated != null)
-                            message.repeated = Boolean(object.repeated);
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a Declaration message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
-                     * @static
-                     * @param {google.protobuf.ExtensionRangeOptions.Declaration} message Declaration
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    Declaration.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.number = 0;
-                            object.fullName = "";
-                            object.type = "";
-                            object.reserved = false;
-                            object.repeated = false;
-                        }
-                        if (message.number != null && message.hasOwnProperty("number"))
-                            object.number = message.number;
-                        if (message.fullName != null && message.hasOwnProperty("fullName"))
-                            object.fullName = message.fullName;
-                        if (message.type != null && message.hasOwnProperty("type"))
-                            object.type = message.type;
-                        if (message.reserved != null && message.hasOwnProperty("reserved"))
-                            object.reserved = message.reserved;
-                        if (message.repeated != null && message.hasOwnProperty("repeated"))
-                            object.repeated = message.repeated;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this Declaration to JSON.
-                     * @function toJSON
-                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    Declaration.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for Declaration
-                     * @function getTypeUrl
-                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    Declaration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.protobuf.ExtensionRangeOptions.Declaration";
-                    };
-    
-                    return Declaration;
-                })();
-    
-                /**
-                 * VerificationState enum.
-                 * @name google.protobuf.ExtensionRangeOptions.VerificationState
-                 * @enum {number}
-                 * @property {number} DECLARATION=0 DECLARATION value
-                 * @property {number} UNVERIFIED=1 UNVERIFIED value
-                 */
-                ExtensionRangeOptions.VerificationState = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "DECLARATION"] = 0;
-                    values[valuesById[1] = "UNVERIFIED"] = 1;
-                    return values;
-                })();
     
                 return ExtensionRangeOptions;
             })();
@@ -15921,7 +21931,6 @@
                  * @property {string|null} [phpNamespace] FileOptions phpNamespace
                  * @property {string|null} [phpMetadataNamespace] FileOptions phpMetadataNamespace
                  * @property {string|null} [rubyPackage] FileOptions rubyPackage
-                 * @property {google.protobuf.IFeatureSet|null} [features] FileOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FileOptions uninterpretedOption
                  * @property {Array.<google.api.IResourceDescriptor>|null} [".google.api.resourceDefinition"] FileOptions .google.api.resourceDefinition
                  */
@@ -16104,14 +22113,6 @@
                 FileOptions.prototype.rubyPackage = "";
     
                 /**
-                 * FileOptions features.
-                 * @member {google.protobuf.IFeatureSet|null|undefined} features
-                 * @memberof google.protobuf.FileOptions
-                 * @instance
-                 */
-                FileOptions.prototype.features = null;
-    
-                /**
                  * FileOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.FileOptions
@@ -16191,8 +22192,6 @@
                         writer.uint32(/* id 44, wireType 2 =*/354).string(message.phpMetadataNamespace);
                     if (message.rubyPackage != null && Object.hasOwnProperty.call(message, "rubyPackage"))
                         writer.uint32(/* id 45, wireType 2 =*/362).string(message.rubyPackage);
-                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 50, wireType 2 =*/402).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -16313,10 +22312,6 @@
                                 message.rubyPackage = reader.string();
                                 break;
                             }
-                        case 50: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
-                                break;
-                            }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
@@ -16430,11 +22425,6 @@
                     if (message.rubyPackage != null && message.hasOwnProperty("rubyPackage"))
                         if (!$util.isString(message.rubyPackage))
                             return "rubyPackage: string expected";
-                    if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
-                        if (error)
-                            return "features." + error;
-                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -16526,11 +22516,6 @@
                         message.phpMetadataNamespace = String(object.phpMetadataNamespace);
                     if (object.rubyPackage != null)
                         message.rubyPackage = String(object.rubyPackage);
-                    if (object.features != null) {
-                        if (typeof object.features !== "object")
-                            throw TypeError(".google.protobuf.FileOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
-                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.FileOptions.uninterpretedOption: array expected");
@@ -16592,7 +22577,6 @@
                         object.phpGenericServices = false;
                         object.phpMetadataNamespace = "";
                         object.rubyPackage = "";
-                        object.features = null;
                     }
                     if (message.javaPackage != null && message.hasOwnProperty("javaPackage"))
                         object.javaPackage = message.javaPackage;
@@ -16634,8 +22618,6 @@
                         object.phpMetadataNamespace = message.phpMetadataNamespace;
                     if (message.rubyPackage != null && message.hasOwnProperty("rubyPackage"))
                         object.rubyPackage = message.rubyPackage;
-                    if (message.features != null && message.hasOwnProperty("features"))
-                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -16705,7 +22687,6 @@
                  * @property {boolean|null} [deprecated] MessageOptions deprecated
                  * @property {boolean|null} [mapEntry] MessageOptions mapEntry
                  * @property {boolean|null} [deprecatedLegacyJsonFieldConflicts] MessageOptions deprecatedLegacyJsonFieldConflicts
-                 * @property {google.protobuf.IFeatureSet|null} [features] MessageOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MessageOptions uninterpretedOption
                  * @property {google.api.IResourceDescriptor|null} [".google.api.resource"] MessageOptions .google.api.resource
                  */
@@ -16767,14 +22748,6 @@
                 MessageOptions.prototype.deprecatedLegacyJsonFieldConflicts = false;
     
                 /**
-                 * MessageOptions features.
-                 * @member {google.protobuf.IFeatureSet|null|undefined} features
-                 * @memberof google.protobuf.MessageOptions
-                 * @instance
-                 */
-                MessageOptions.prototype.features = null;
-    
-                /**
                  * MessageOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.MessageOptions
@@ -16824,8 +22797,6 @@
                         writer.uint32(/* id 7, wireType 0 =*/56).bool(message.mapEntry);
                     if (message.deprecatedLegacyJsonFieldConflicts != null && Object.hasOwnProperty.call(message, "deprecatedLegacyJsonFieldConflicts"))
                         writer.uint32(/* id 11, wireType 0 =*/88).bool(message.deprecatedLegacyJsonFieldConflicts);
-                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -16883,10 +22854,6 @@
                             }
                         case 11: {
                                 message.deprecatedLegacyJsonFieldConflicts = reader.bool();
-                                break;
-                            }
-                        case 12: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -16949,11 +22916,6 @@
                     if (message.deprecatedLegacyJsonFieldConflicts != null && message.hasOwnProperty("deprecatedLegacyJsonFieldConflicts"))
                         if (typeof message.deprecatedLegacyJsonFieldConflicts !== "boolean")
                             return "deprecatedLegacyJsonFieldConflicts: boolean expected";
-                    if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
-                        if (error)
-                            return "features." + error;
-                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -16993,11 +22955,6 @@
                         message.mapEntry = Boolean(object.mapEntry);
                     if (object.deprecatedLegacyJsonFieldConflicts != null)
                         message.deprecatedLegacyJsonFieldConflicts = Boolean(object.deprecatedLegacyJsonFieldConflicts);
-                    if (object.features != null) {
-                        if (typeof object.features !== "object")
-                            throw TypeError(".google.protobuf.MessageOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
-                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.MessageOptions.uninterpretedOption: array expected");
@@ -17037,7 +22994,6 @@
                         object.deprecated = false;
                         object.mapEntry = false;
                         object.deprecatedLegacyJsonFieldConflicts = false;
-                        object.features = null;
                         object[".google.api.resource"] = null;
                     }
                     if (message.messageSetWireFormat != null && message.hasOwnProperty("messageSetWireFormat"))
@@ -17050,8 +23006,6 @@
                         object.mapEntry = message.mapEntry;
                     if (message.deprecatedLegacyJsonFieldConflicts != null && message.hasOwnProperty("deprecatedLegacyJsonFieldConflicts"))
                         object.deprecatedLegacyJsonFieldConflicts = message.deprecatedLegacyJsonFieldConflicts;
-                    if (message.features != null && message.hasOwnProperty("features"))
-                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -17106,9 +23060,7 @@
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {boolean|null} [debugRedact] FieldOptions debugRedact
                  * @property {google.protobuf.FieldOptions.OptionRetention|null} [retention] FieldOptions retention
-                 * @property {Array.<google.protobuf.FieldOptions.OptionTargetType>|null} [targets] FieldOptions targets
-                 * @property {Array.<google.protobuf.FieldOptions.IEditionDefault>|null} [editionDefaults] FieldOptions editionDefaults
-                 * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
+                 * @property {google.protobuf.FieldOptions.OptionTargetType|null} [target] FieldOptions target
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
@@ -17123,8 +23075,6 @@
                  * @param {google.protobuf.IFieldOptions=} [properties] Properties to set
                  */
                 function FieldOptions(properties) {
-                    this.targets = [];
-                    this.editionDefaults = [];
                     this.uninterpretedOption = [];
                     this[".google.api.fieldBehavior"] = [];
                     if (properties)
@@ -17206,28 +23156,12 @@
                 FieldOptions.prototype.retention = 0;
     
                 /**
-                 * FieldOptions targets.
-                 * @member {Array.<google.protobuf.FieldOptions.OptionTargetType>} targets
+                 * FieldOptions target.
+                 * @member {google.protobuf.FieldOptions.OptionTargetType} target
                  * @memberof google.protobuf.FieldOptions
                  * @instance
                  */
-                FieldOptions.prototype.targets = $util.emptyArray;
-    
-                /**
-                 * FieldOptions editionDefaults.
-                 * @member {Array.<google.protobuf.FieldOptions.IEditionDefault>} editionDefaults
-                 * @memberof google.protobuf.FieldOptions
-                 * @instance
-                 */
-                FieldOptions.prototype.editionDefaults = $util.emptyArray;
-    
-                /**
-                 * FieldOptions features.
-                 * @member {google.protobuf.IFeatureSet|null|undefined} features
-                 * @memberof google.protobuf.FieldOptions
-                 * @instance
-                 */
-                FieldOptions.prototype.features = null;
+                FieldOptions.prototype.target = 0;
     
                 /**
                  * FieldOptions uninterpretedOption.
@@ -17295,14 +23229,8 @@
                         writer.uint32(/* id 16, wireType 0 =*/128).bool(message.debugRedact);
                     if (message.retention != null && Object.hasOwnProperty.call(message, "retention"))
                         writer.uint32(/* id 17, wireType 0 =*/136).int32(message.retention);
-                    if (message.targets != null && message.targets.length)
-                        for (var i = 0; i < message.targets.length; ++i)
-                            writer.uint32(/* id 19, wireType 0 =*/152).int32(message.targets[i]);
-                    if (message.editionDefaults != null && message.editionDefaults.length)
-                        for (var i = 0; i < message.editionDefaults.length; ++i)
-                            $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
-                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                    if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+                        writer.uint32(/* id 18, wireType 0 =*/144).int32(message.target);
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -17384,25 +23312,8 @@
                                 message.retention = reader.int32();
                                 break;
                             }
-                        case 19: {
-                                if (!(message.targets && message.targets.length))
-                                    message.targets = [];
-                                if ((tag & 7) === 2) {
-                                    var end2 = reader.uint32() + reader.pos;
-                                    while (reader.pos < end2)
-                                        message.targets.push(reader.int32());
-                                } else
-                                    message.targets.push(reader.int32());
-                                break;
-                            }
-                        case 20: {
-                                if (!(message.editionDefaults && message.editionDefaults.length))
-                                    message.editionDefaults = [];
-                                message.editionDefaults.push($root.google.protobuf.FieldOptions.EditionDefault.decode(reader, reader.uint32()));
-                                break;
-                            }
-                        case 21: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                        case 18: {
+                                message.target = reader.int32();
                                 break;
                             }
                         case 999: {
@@ -17506,40 +23417,22 @@
                         case 2:
                             break;
                         }
-                    if (message.targets != null && message.hasOwnProperty("targets")) {
-                        if (!Array.isArray(message.targets))
-                            return "targets: array expected";
-                        for (var i = 0; i < message.targets.length; ++i)
-                            switch (message.targets[i]) {
-                            default:
-                                return "targets: enum value[] expected";
-                            case 0:
-                            case 1:
-                            case 2:
-                            case 3:
-                            case 4:
-                            case 5:
-                            case 6:
-                            case 7:
-                            case 8:
-                            case 9:
-                                break;
-                            }
-                    }
-                    if (message.editionDefaults != null && message.hasOwnProperty("editionDefaults")) {
-                        if (!Array.isArray(message.editionDefaults))
-                            return "editionDefaults: array expected";
-                        for (var i = 0; i < message.editionDefaults.length; ++i) {
-                            var error = $root.google.protobuf.FieldOptions.EditionDefault.verify(message.editionDefaults[i]);
-                            if (error)
-                                return "editionDefaults." + error;
+                    if (message.target != null && message.hasOwnProperty("target"))
+                        switch (message.target) {
+                        default:
+                            return "target: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                        case 5:
+                        case 6:
+                        case 7:
+                        case 8:
+                        case 9:
+                            break;
                         }
-                    }
-                    if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
-                        if (error)
-                            return "features." + error;
-                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -17659,73 +23552,53 @@
                         message.retention = 2;
                         break;
                     }
-                    if (object.targets) {
-                        if (!Array.isArray(object.targets))
-                            throw TypeError(".google.protobuf.FieldOptions.targets: array expected");
-                        message.targets = [];
-                        for (var i = 0; i < object.targets.length; ++i)
-                            switch (object.targets[i]) {
-                            default:
-                                if (typeof object.targets[i] === "number") {
-                                    message.targets[i] = object.targets[i];
-                                    break;
-                                }
-                            case "TARGET_TYPE_UNKNOWN":
-                            case 0:
-                                message.targets[i] = 0;
-                                break;
-                            case "TARGET_TYPE_FILE":
-                            case 1:
-                                message.targets[i] = 1;
-                                break;
-                            case "TARGET_TYPE_EXTENSION_RANGE":
-                            case 2:
-                                message.targets[i] = 2;
-                                break;
-                            case "TARGET_TYPE_MESSAGE":
-                            case 3:
-                                message.targets[i] = 3;
-                                break;
-                            case "TARGET_TYPE_FIELD":
-                            case 4:
-                                message.targets[i] = 4;
-                                break;
-                            case "TARGET_TYPE_ONEOF":
-                            case 5:
-                                message.targets[i] = 5;
-                                break;
-                            case "TARGET_TYPE_ENUM":
-                            case 6:
-                                message.targets[i] = 6;
-                                break;
-                            case "TARGET_TYPE_ENUM_ENTRY":
-                            case 7:
-                                message.targets[i] = 7;
-                                break;
-                            case "TARGET_TYPE_SERVICE":
-                            case 8:
-                                message.targets[i] = 8;
-                                break;
-                            case "TARGET_TYPE_METHOD":
-                            case 9:
-                                message.targets[i] = 9;
-                                break;
-                            }
-                    }
-                    if (object.editionDefaults) {
-                        if (!Array.isArray(object.editionDefaults))
-                            throw TypeError(".google.protobuf.FieldOptions.editionDefaults: array expected");
-                        message.editionDefaults = [];
-                        for (var i = 0; i < object.editionDefaults.length; ++i) {
-                            if (typeof object.editionDefaults[i] !== "object")
-                                throw TypeError(".google.protobuf.FieldOptions.editionDefaults: object expected");
-                            message.editionDefaults[i] = $root.google.protobuf.FieldOptions.EditionDefault.fromObject(object.editionDefaults[i]);
+                    switch (object.target) {
+                    default:
+                        if (typeof object.target === "number") {
+                            message.target = object.target;
+                            break;
                         }
-                    }
-                    if (object.features != null) {
-                        if (typeof object.features !== "object")
-                            throw TypeError(".google.protobuf.FieldOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        break;
+                    case "TARGET_TYPE_UNKNOWN":
+                    case 0:
+                        message.target = 0;
+                        break;
+                    case "TARGET_TYPE_FILE":
+                    case 1:
+                        message.target = 1;
+                        break;
+                    case "TARGET_TYPE_EXTENSION_RANGE":
+                    case 2:
+                        message.target = 2;
+                        break;
+                    case "TARGET_TYPE_MESSAGE":
+                    case 3:
+                        message.target = 3;
+                        break;
+                    case "TARGET_TYPE_FIELD":
+                    case 4:
+                        message.target = 4;
+                        break;
+                    case "TARGET_TYPE_ONEOF":
+                    case 5:
+                        message.target = 5;
+                        break;
+                    case "TARGET_TYPE_ENUM":
+                    case 6:
+                        message.target = 6;
+                        break;
+                    case "TARGET_TYPE_ENUM_ENTRY":
+                    case 7:
+                        message.target = 7;
+                        break;
+                    case "TARGET_TYPE_SERVICE":
+                    case 8:
+                        message.target = 8;
+                        break;
+                    case "TARGET_TYPE_METHOD":
+                    case 9:
+                        message.target = 9;
+                        break;
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -17804,8 +23677,6 @@
                         options = {};
                     var object = {};
                     if (options.arrays || options.defaults) {
-                        object.targets = [];
-                        object.editionDefaults = [];
                         object.uninterpretedOption = [];
                         object[".google.api.fieldBehavior"] = [];
                     }
@@ -17819,7 +23690,7 @@
                         object.unverifiedLazy = false;
                         object.debugRedact = false;
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
-                        object.features = null;
+                        object.target = options.enums === String ? "TARGET_TYPE_UNKNOWN" : 0;
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
@@ -17840,18 +23711,8 @@
                         object.debugRedact = message.debugRedact;
                     if (message.retention != null && message.hasOwnProperty("retention"))
                         object.retention = options.enums === String ? $root.google.protobuf.FieldOptions.OptionRetention[message.retention] === undefined ? message.retention : $root.google.protobuf.FieldOptions.OptionRetention[message.retention] : message.retention;
-                    if (message.targets && message.targets.length) {
-                        object.targets = [];
-                        for (var j = 0; j < message.targets.length; ++j)
-                            object.targets[j] = options.enums === String ? $root.google.protobuf.FieldOptions.OptionTargetType[message.targets[j]] === undefined ? message.targets[j] : $root.google.protobuf.FieldOptions.OptionTargetType[message.targets[j]] : message.targets[j];
-                    }
-                    if (message.editionDefaults && message.editionDefaults.length) {
-                        object.editionDefaults = [];
-                        for (var j = 0; j < message.editionDefaults.length; ++j)
-                            object.editionDefaults[j] = $root.google.protobuf.FieldOptions.EditionDefault.toObject(message.editionDefaults[j], options);
-                    }
-                    if (message.features != null && message.hasOwnProperty("features"))
-                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                    if (message.target != null && message.hasOwnProperty("target"))
+                        object.target = options.enums === String ? $root.google.protobuf.FieldOptions.OptionTargetType[message.target] === undefined ? message.target : $root.google.protobuf.FieldOptions.OptionTargetType[message.target] : message.target;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -17971,233 +23832,6 @@
                     return values;
                 })();
     
-                FieldOptions.EditionDefault = (function() {
-    
-                    /**
-                     * Properties of an EditionDefault.
-                     * @memberof google.protobuf.FieldOptions
-                     * @interface IEditionDefault
-                     * @property {string|null} [edition] EditionDefault edition
-                     * @property {string|null} [value] EditionDefault value
-                     */
-    
-                    /**
-                     * Constructs a new EditionDefault.
-                     * @memberof google.protobuf.FieldOptions
-                     * @classdesc Represents an EditionDefault.
-                     * @implements IEditionDefault
-                     * @constructor
-                     * @param {google.protobuf.FieldOptions.IEditionDefault=} [properties] Properties to set
-                     */
-                    function EditionDefault(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * EditionDefault edition.
-                     * @member {string} edition
-                     * @memberof google.protobuf.FieldOptions.EditionDefault
-                     * @instance
-                     */
-                    EditionDefault.prototype.edition = "";
-    
-                    /**
-                     * EditionDefault value.
-                     * @member {string} value
-                     * @memberof google.protobuf.FieldOptions.EditionDefault
-                     * @instance
-                     */
-                    EditionDefault.prototype.value = "";
-    
-                    /**
-                     * Creates a new EditionDefault instance using the specified properties.
-                     * @function create
-                     * @memberof google.protobuf.FieldOptions.EditionDefault
-                     * @static
-                     * @param {google.protobuf.FieldOptions.IEditionDefault=} [properties] Properties to set
-                     * @returns {google.protobuf.FieldOptions.EditionDefault} EditionDefault instance
-                     */
-                    EditionDefault.create = function create(properties) {
-                        return new EditionDefault(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified EditionDefault message. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.protobuf.FieldOptions.EditionDefault
-                     * @static
-                     * @param {google.protobuf.FieldOptions.IEditionDefault} message EditionDefault message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    EditionDefault.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.edition);
-                        if (message.value != null && Object.hasOwnProperty.call(message, "value"))
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified EditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.protobuf.FieldOptions.EditionDefault
-                     * @static
-                     * @param {google.protobuf.FieldOptions.IEditionDefault} message EditionDefault message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    EditionDefault.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes an EditionDefault message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.protobuf.FieldOptions.EditionDefault
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.protobuf.FieldOptions.EditionDefault} EditionDefault
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    EditionDefault.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.EditionDefault();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.edition = reader.string();
-                                    break;
-                                }
-                            case 2: {
-                                    message.value = reader.string();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes an EditionDefault message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.protobuf.FieldOptions.EditionDefault
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.protobuf.FieldOptions.EditionDefault} EditionDefault
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    EditionDefault.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies an EditionDefault message.
-                     * @function verify
-                     * @memberof google.protobuf.FieldOptions.EditionDefault
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    EditionDefault.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.edition != null && message.hasOwnProperty("edition"))
-                            if (!$util.isString(message.edition))
-                                return "edition: string expected";
-                        if (message.value != null && message.hasOwnProperty("value"))
-                            if (!$util.isString(message.value))
-                                return "value: string expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates an EditionDefault message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.protobuf.FieldOptions.EditionDefault
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.protobuf.FieldOptions.EditionDefault} EditionDefault
-                     */
-                    EditionDefault.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.protobuf.FieldOptions.EditionDefault)
-                            return object;
-                        var message = new $root.google.protobuf.FieldOptions.EditionDefault();
-                        if (object.edition != null)
-                            message.edition = String(object.edition);
-                        if (object.value != null)
-                            message.value = String(object.value);
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from an EditionDefault message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.protobuf.FieldOptions.EditionDefault
-                     * @static
-                     * @param {google.protobuf.FieldOptions.EditionDefault} message EditionDefault
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    EditionDefault.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.edition = "";
-                            object.value = "";
-                        }
-                        if (message.edition != null && message.hasOwnProperty("edition"))
-                            object.edition = message.edition;
-                        if (message.value != null && message.hasOwnProperty("value"))
-                            object.value = message.value;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this EditionDefault to JSON.
-                     * @function toJSON
-                     * @memberof google.protobuf.FieldOptions.EditionDefault
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    EditionDefault.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for EditionDefault
-                     * @function getTypeUrl
-                     * @memberof google.protobuf.FieldOptions.EditionDefault
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    EditionDefault.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.protobuf.FieldOptions.EditionDefault";
-                    };
-    
-                    return EditionDefault;
-                })();
-    
                 return FieldOptions;
             })();
     
@@ -18207,7 +23841,6 @@
                  * Properties of an OneofOptions.
                  * @memberof google.protobuf
                  * @interface IOneofOptions
-                 * @property {google.protobuf.IFeatureSet|null} [features] OneofOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] OneofOptions uninterpretedOption
                  */
     
@@ -18226,14 +23859,6 @@
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
-    
-                /**
-                 * OneofOptions features.
-                 * @member {google.protobuf.IFeatureSet|null|undefined} features
-                 * @memberof google.protobuf.OneofOptions
-                 * @instance
-                 */
-                OneofOptions.prototype.features = null;
     
                 /**
                  * OneofOptions uninterpretedOption.
@@ -18267,8 +23892,6 @@
                 OneofOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -18306,10 +23929,6 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
-                                break;
-                            }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
@@ -18351,11 +23970,6 @@
                 OneofOptions.verify = function verify(message) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
-                    if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
-                        if (error)
-                            return "features." + error;
-                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -18380,11 +23994,6 @@
                     if (object instanceof $root.google.protobuf.OneofOptions)
                         return object;
                     var message = new $root.google.protobuf.OneofOptions();
-                    if (object.features != null) {
-                        if (typeof object.features !== "object")
-                            throw TypeError(".google.protobuf.OneofOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
-                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.OneofOptions.uninterpretedOption: array expected");
@@ -18413,10 +24022,6 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.uninterpretedOption = [];
-                    if (options.defaults)
-                        object.features = null;
-                    if (message.features != null && message.hasOwnProperty("features"))
-                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -18463,7 +24068,6 @@
                  * @property {boolean|null} [allowAlias] EnumOptions allowAlias
                  * @property {boolean|null} [deprecated] EnumOptions deprecated
                  * @property {boolean|null} [deprecatedLegacyJsonFieldConflicts] EnumOptions deprecatedLegacyJsonFieldConflicts
-                 * @property {google.protobuf.IFeatureSet|null} [features] EnumOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumOptions uninterpretedOption
                  */
     
@@ -18508,14 +24112,6 @@
                 EnumOptions.prototype.deprecatedLegacyJsonFieldConflicts = false;
     
                 /**
-                 * EnumOptions features.
-                 * @member {google.protobuf.IFeatureSet|null|undefined} features
-                 * @memberof google.protobuf.EnumOptions
-                 * @instance
-                 */
-                EnumOptions.prototype.features = null;
-    
-                /**
                  * EnumOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.EnumOptions
@@ -18553,8 +24149,6 @@
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.deprecated);
                     if (message.deprecatedLegacyJsonFieldConflicts != null && Object.hasOwnProperty.call(message, "deprecatedLegacyJsonFieldConflicts"))
                         writer.uint32(/* id 6, wireType 0 =*/48).bool(message.deprecatedLegacyJsonFieldConflicts);
-                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -18602,10 +24196,6 @@
                             }
                         case 6: {
                                 message.deprecatedLegacyJsonFieldConflicts = reader.bool();
-                                break;
-                            }
-                        case 7: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -18658,11 +24248,6 @@
                     if (message.deprecatedLegacyJsonFieldConflicts != null && message.hasOwnProperty("deprecatedLegacyJsonFieldConflicts"))
                         if (typeof message.deprecatedLegacyJsonFieldConflicts !== "boolean")
                             return "deprecatedLegacyJsonFieldConflicts: boolean expected";
-                    if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
-                        if (error)
-                            return "features." + error;
-                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -18693,11 +24278,6 @@
                         message.deprecated = Boolean(object.deprecated);
                     if (object.deprecatedLegacyJsonFieldConflicts != null)
                         message.deprecatedLegacyJsonFieldConflicts = Boolean(object.deprecatedLegacyJsonFieldConflicts);
-                    if (object.features != null) {
-                        if (typeof object.features !== "object")
-                            throw TypeError(".google.protobuf.EnumOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
-                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumOptions.uninterpretedOption: array expected");
@@ -18730,7 +24310,6 @@
                         object.allowAlias = false;
                         object.deprecated = false;
                         object.deprecatedLegacyJsonFieldConflicts = false;
-                        object.features = null;
                     }
                     if (message.allowAlias != null && message.hasOwnProperty("allowAlias"))
                         object.allowAlias = message.allowAlias;
@@ -18738,8 +24317,6 @@
                         object.deprecated = message.deprecated;
                     if (message.deprecatedLegacyJsonFieldConflicts != null && message.hasOwnProperty("deprecatedLegacyJsonFieldConflicts"))
                         object.deprecatedLegacyJsonFieldConflicts = message.deprecatedLegacyJsonFieldConflicts;
-                    if (message.features != null && message.hasOwnProperty("features"))
-                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -18784,8 +24361,6 @@
                  * @memberof google.protobuf
                  * @interface IEnumValueOptions
                  * @property {boolean|null} [deprecated] EnumValueOptions deprecated
-                 * @property {google.protobuf.IFeatureSet|null} [features] EnumValueOptions features
-                 * @property {boolean|null} [debugRedact] EnumValueOptions debugRedact
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumValueOptions uninterpretedOption
                  */
     
@@ -18812,22 +24387,6 @@
                  * @instance
                  */
                 EnumValueOptions.prototype.deprecated = false;
-    
-                /**
-                 * EnumValueOptions features.
-                 * @member {google.protobuf.IFeatureSet|null|undefined} features
-                 * @memberof google.protobuf.EnumValueOptions
-                 * @instance
-                 */
-                EnumValueOptions.prototype.features = null;
-    
-                /**
-                 * EnumValueOptions debugRedact.
-                 * @member {boolean} debugRedact
-                 * @memberof google.protobuf.EnumValueOptions
-                 * @instance
-                 */
-                EnumValueOptions.prototype.debugRedact = false;
     
                 /**
                  * EnumValueOptions uninterpretedOption.
@@ -18863,10 +24422,6 @@
                         writer = $Writer.create();
                     if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         writer.uint32(/* id 1, wireType 0 =*/8).bool(message.deprecated);
-                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                    if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
-                        writer.uint32(/* id 3, wireType 0 =*/24).bool(message.debugRedact);
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -18906,14 +24461,6 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.deprecated = reader.bool();
-                                break;
-                            }
-                        case 2: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 3: {
-                                message.debugRedact = reader.bool();
                                 break;
                             }
                         case 999: {
@@ -18960,14 +24507,6 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
-                    if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
-                        if (error)
-                            return "features." + error;
-                    }
-                    if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
-                        if (typeof message.debugRedact !== "boolean")
-                            return "debugRedact: boolean expected";
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -18994,13 +24533,6 @@
                     var message = new $root.google.protobuf.EnumValueOptions();
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
-                    if (object.features != null) {
-                        if (typeof object.features !== "object")
-                            throw TypeError(".google.protobuf.EnumValueOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
-                    }
-                    if (object.debugRedact != null)
-                        message.debugRedact = Boolean(object.debugRedact);
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: array expected");
@@ -19029,17 +24561,10 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.uninterpretedOption = [];
-                    if (options.defaults) {
+                    if (options.defaults)
                         object.deprecated = false;
-                        object.features = null;
-                        object.debugRedact = false;
-                    }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
-                    if (message.features != null && message.hasOwnProperty("features"))
-                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
-                    if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
-                        object.debugRedact = message.debugRedact;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -19083,7 +24608,6 @@
                  * Properties of a ServiceOptions.
                  * @memberof google.protobuf
                  * @interface IServiceOptions
-                 * @property {google.protobuf.IFeatureSet|null} [features] ServiceOptions features
                  * @property {boolean|null} [deprecated] ServiceOptions deprecated
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
                  * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
@@ -19105,14 +24629,6 @@
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
-    
-                /**
-                 * ServiceOptions features.
-                 * @member {google.protobuf.IFeatureSet|null|undefined} features
-                 * @memberof google.protobuf.ServiceOptions
-                 * @instance
-                 */
-                ServiceOptions.prototype.features = null;
     
                 /**
                  * ServiceOptions deprecated.
@@ -19172,8 +24688,6 @@
                         writer = $Writer.create();
                     if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         writer.uint32(/* id 33, wireType 0 =*/264).bool(message.deprecated);
-                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 34, wireType 2 =*/274).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -19215,10 +24729,6 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 34: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
-                                break;
-                            }
                         case 33: {
                                 message.deprecated = reader.bool();
                                 break;
@@ -19272,11 +24782,6 @@
                 ServiceOptions.verify = function verify(message) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
-                    if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
-                        if (error)
-                            return "features." + error;
-                    }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
@@ -19310,11 +24815,6 @@
                     if (object instanceof $root.google.protobuf.ServiceOptions)
                         return object;
                     var message = new $root.google.protobuf.ServiceOptions();
-                    if (object.features != null) {
-                        if (typeof object.features !== "object")
-                            throw TypeError(".google.protobuf.ServiceOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
-                    }
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     if (object.uninterpretedOption) {
@@ -19351,14 +24851,11 @@
                         object.uninterpretedOption = [];
                     if (options.defaults) {
                         object.deprecated = false;
-                        object.features = null;
                         object[".google.api.defaultHost"] = "";
                         object[".google.api.oauthScopes"] = "";
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
-                    if (message.features != null && message.hasOwnProperty("features"))
-                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -19408,7 +24905,6 @@
                  * @interface IMethodOptions
                  * @property {boolean|null} [deprecated] MethodOptions deprecated
                  * @property {google.protobuf.MethodOptions.IdempotencyLevel|null} [idempotencyLevel] MethodOptions idempotencyLevel
-                 * @property {google.protobuf.IFeatureSet|null} [features] MethodOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MethodOptions uninterpretedOption
                  * @property {google.api.IHttpRule|null} [".google.api.http"] MethodOptions .google.api.http
                  * @property {Array.<string>|null} [".google.api.methodSignature"] MethodOptions .google.api.methodSignature
@@ -19446,14 +24942,6 @@
                  * @instance
                  */
                 MethodOptions.prototype.idempotencyLevel = 0;
-    
-                /**
-                 * MethodOptions features.
-                 * @member {google.protobuf.IFeatureSet|null|undefined} features
-                 * @memberof google.protobuf.MethodOptions
-                 * @instance
-                 */
-                MethodOptions.prototype.features = null;
     
                 /**
                  * MethodOptions uninterpretedOption.
@@ -19507,8 +24995,6 @@
                         writer.uint32(/* id 33, wireType 0 =*/264).bool(message.deprecated);
                     if (message.idempotencyLevel != null && Object.hasOwnProperty.call(message, "idempotencyLevel"))
                         writer.uint32(/* id 34, wireType 0 =*/272).int32(message.idempotencyLevel);
-                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 35, wireType 2 =*/282).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -19557,10 +25043,6 @@
                             }
                         case 34: {
                                 message.idempotencyLevel = reader.int32();
-                                break;
-                            }
-                        case 35: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -19626,11 +25108,6 @@
                         case 2:
                             break;
                         }
-                    if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
-                        if (error)
-                            return "features." + error;
-                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -19689,11 +25166,6 @@
                         message.idempotencyLevel = 2;
                         break;
                     }
-                    if (object.features != null) {
-                        if (typeof object.features !== "object")
-                            throw TypeError(".google.protobuf.MethodOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
-                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.MethodOptions.uninterpretedOption: array expected");
@@ -19739,15 +25211,12 @@
                     if (options.defaults) {
                         object.deprecated = false;
                         object.idempotencyLevel = options.enums === String ? "IDEMPOTENCY_UNKNOWN" : 0;
-                        object.features = null;
                         object[".google.api.http"] = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
                         object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
-                    if (message.features != null && message.hasOwnProperty("features"))
-                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -20434,607 +25903,6 @@
                 })();
     
                 return UninterpretedOption;
-            })();
-    
-            protobuf.FeatureSet = (function() {
-    
-                /**
-                 * Properties of a FeatureSet.
-                 * @memberof google.protobuf
-                 * @interface IFeatureSet
-                 * @property {google.protobuf.FeatureSet.FieldPresence|null} [fieldPresence] FeatureSet fieldPresence
-                 * @property {google.protobuf.FeatureSet.EnumType|null} [enumType] FeatureSet enumType
-                 * @property {google.protobuf.FeatureSet.RepeatedFieldEncoding|null} [repeatedFieldEncoding] FeatureSet repeatedFieldEncoding
-                 * @property {google.protobuf.FeatureSet.StringFieldValidation|null} [stringFieldValidation] FeatureSet stringFieldValidation
-                 * @property {google.protobuf.FeatureSet.MessageEncoding|null} [messageEncoding] FeatureSet messageEncoding
-                 * @property {google.protobuf.FeatureSet.JsonFormat|null} [jsonFormat] FeatureSet jsonFormat
-                 * @property {google.protobuf.IFeatureSet|null} [rawFeatures] FeatureSet rawFeatures
-                 */
-    
-                /**
-                 * Constructs a new FeatureSet.
-                 * @memberof google.protobuf
-                 * @classdesc Represents a FeatureSet.
-                 * @implements IFeatureSet
-                 * @constructor
-                 * @param {google.protobuf.IFeatureSet=} [properties] Properties to set
-                 */
-                function FeatureSet(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * FeatureSet fieldPresence.
-                 * @member {google.protobuf.FeatureSet.FieldPresence} fieldPresence
-                 * @memberof google.protobuf.FeatureSet
-                 * @instance
-                 */
-                FeatureSet.prototype.fieldPresence = 0;
-    
-                /**
-                 * FeatureSet enumType.
-                 * @member {google.protobuf.FeatureSet.EnumType} enumType
-                 * @memberof google.protobuf.FeatureSet
-                 * @instance
-                 */
-                FeatureSet.prototype.enumType = 0;
-    
-                /**
-                 * FeatureSet repeatedFieldEncoding.
-                 * @member {google.protobuf.FeatureSet.RepeatedFieldEncoding} repeatedFieldEncoding
-                 * @memberof google.protobuf.FeatureSet
-                 * @instance
-                 */
-                FeatureSet.prototype.repeatedFieldEncoding = 0;
-    
-                /**
-                 * FeatureSet stringFieldValidation.
-                 * @member {google.protobuf.FeatureSet.StringFieldValidation} stringFieldValidation
-                 * @memberof google.protobuf.FeatureSet
-                 * @instance
-                 */
-                FeatureSet.prototype.stringFieldValidation = 0;
-    
-                /**
-                 * FeatureSet messageEncoding.
-                 * @member {google.protobuf.FeatureSet.MessageEncoding} messageEncoding
-                 * @memberof google.protobuf.FeatureSet
-                 * @instance
-                 */
-                FeatureSet.prototype.messageEncoding = 0;
-    
-                /**
-                 * FeatureSet jsonFormat.
-                 * @member {google.protobuf.FeatureSet.JsonFormat} jsonFormat
-                 * @memberof google.protobuf.FeatureSet
-                 * @instance
-                 */
-                FeatureSet.prototype.jsonFormat = 0;
-    
-                /**
-                 * FeatureSet rawFeatures.
-                 * @member {google.protobuf.IFeatureSet|null|undefined} rawFeatures
-                 * @memberof google.protobuf.FeatureSet
-                 * @instance
-                 */
-                FeatureSet.prototype.rawFeatures = null;
-    
-                /**
-                 * Creates a new FeatureSet instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.FeatureSet
-                 * @static
-                 * @param {google.protobuf.IFeatureSet=} [properties] Properties to set
-                 * @returns {google.protobuf.FeatureSet} FeatureSet instance
-                 */
-                FeatureSet.create = function create(properties) {
-                    return new FeatureSet(properties);
-                };
-    
-                /**
-                 * Encodes the specified FeatureSet message. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.FeatureSet
-                 * @static
-                 * @param {google.protobuf.IFeatureSet} message FeatureSet message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                FeatureSet.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.fieldPresence != null && Object.hasOwnProperty.call(message, "fieldPresence"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.fieldPresence);
-                    if (message.enumType != null && Object.hasOwnProperty.call(message, "enumType"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.enumType);
-                    if (message.repeatedFieldEncoding != null && Object.hasOwnProperty.call(message, "repeatedFieldEncoding"))
-                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.repeatedFieldEncoding);
-                    if (message.stringFieldValidation != null && Object.hasOwnProperty.call(message, "stringFieldValidation"))
-                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.stringFieldValidation);
-                    if (message.messageEncoding != null && Object.hasOwnProperty.call(message, "messageEncoding"))
-                        writer.uint32(/* id 5, wireType 0 =*/40).int32(message.messageEncoding);
-                    if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
-                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jsonFormat);
-                    if (message.rawFeatures != null && Object.hasOwnProperty.call(message, "rawFeatures"))
-                        $root.google.protobuf.FeatureSet.encode(message.rawFeatures, writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified FeatureSet message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.FeatureSet
-                 * @static
-                 * @param {google.protobuf.IFeatureSet} message FeatureSet message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                FeatureSet.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a FeatureSet message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.FeatureSet
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.FeatureSet} FeatureSet
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                FeatureSet.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.fieldPresence = reader.int32();
-                                break;
-                            }
-                        case 2: {
-                                message.enumType = reader.int32();
-                                break;
-                            }
-                        case 3: {
-                                message.repeatedFieldEncoding = reader.int32();
-                                break;
-                            }
-                        case 4: {
-                                message.stringFieldValidation = reader.int32();
-                                break;
-                            }
-                        case 5: {
-                                message.messageEncoding = reader.int32();
-                                break;
-                            }
-                        case 6: {
-                                message.jsonFormat = reader.int32();
-                                break;
-                            }
-                        case 999: {
-                                message.rawFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a FeatureSet message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.FeatureSet
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.FeatureSet} FeatureSet
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                FeatureSet.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a FeatureSet message.
-                 * @function verify
-                 * @memberof google.protobuf.FeatureSet
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                FeatureSet.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
-                        switch (message.fieldPresence) {
-                        default:
-                            return "fieldPresence: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                            break;
-                        }
-                    if (message.enumType != null && message.hasOwnProperty("enumType"))
-                        switch (message.enumType) {
-                        default:
-                            return "enumType: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    if (message.repeatedFieldEncoding != null && message.hasOwnProperty("repeatedFieldEncoding"))
-                        switch (message.repeatedFieldEncoding) {
-                        default:
-                            return "repeatedFieldEncoding: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    if (message.stringFieldValidation != null && message.hasOwnProperty("stringFieldValidation"))
-                        switch (message.stringFieldValidation) {
-                        default:
-                            return "stringFieldValidation: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                            break;
-                        }
-                    if (message.messageEncoding != null && message.hasOwnProperty("messageEncoding"))
-                        switch (message.messageEncoding) {
-                        default:
-                            return "messageEncoding: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
-                        switch (message.jsonFormat) {
-                        default:
-                            return "jsonFormat: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    if (message.rawFeatures != null && message.hasOwnProperty("rawFeatures")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.rawFeatures);
-                        if (error)
-                            return "rawFeatures." + error;
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a FeatureSet message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.FeatureSet
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.FeatureSet} FeatureSet
-                 */
-                FeatureSet.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.FeatureSet)
-                        return object;
-                    var message = new $root.google.protobuf.FeatureSet();
-                    switch (object.fieldPresence) {
-                    default:
-                        if (typeof object.fieldPresence === "number") {
-                            message.fieldPresence = object.fieldPresence;
-                            break;
-                        }
-                        break;
-                    case "FIELD_PRESENCE_UNKNOWN":
-                    case 0:
-                        message.fieldPresence = 0;
-                        break;
-                    case "EXPLICIT":
-                    case 1:
-                        message.fieldPresence = 1;
-                        break;
-                    case "IMPLICIT":
-                    case 2:
-                        message.fieldPresence = 2;
-                        break;
-                    case "LEGACY_REQUIRED":
-                    case 3:
-                        message.fieldPresence = 3;
-                        break;
-                    }
-                    switch (object.enumType) {
-                    default:
-                        if (typeof object.enumType === "number") {
-                            message.enumType = object.enumType;
-                            break;
-                        }
-                        break;
-                    case "ENUM_TYPE_UNKNOWN":
-                    case 0:
-                        message.enumType = 0;
-                        break;
-                    case "OPEN":
-                    case 1:
-                        message.enumType = 1;
-                        break;
-                    case "CLOSED":
-                    case 2:
-                        message.enumType = 2;
-                        break;
-                    }
-                    switch (object.repeatedFieldEncoding) {
-                    default:
-                        if (typeof object.repeatedFieldEncoding === "number") {
-                            message.repeatedFieldEncoding = object.repeatedFieldEncoding;
-                            break;
-                        }
-                        break;
-                    case "REPEATED_FIELD_ENCODING_UNKNOWN":
-                    case 0:
-                        message.repeatedFieldEncoding = 0;
-                        break;
-                    case "PACKED":
-                    case 1:
-                        message.repeatedFieldEncoding = 1;
-                        break;
-                    case "EXPANDED":
-                    case 2:
-                        message.repeatedFieldEncoding = 2;
-                        break;
-                    }
-                    switch (object.stringFieldValidation) {
-                    default:
-                        if (typeof object.stringFieldValidation === "number") {
-                            message.stringFieldValidation = object.stringFieldValidation;
-                            break;
-                        }
-                        break;
-                    case "STRING_FIELD_VALIDATION_UNKNOWN":
-                    case 0:
-                        message.stringFieldValidation = 0;
-                        break;
-                    case "MANDATORY":
-                    case 1:
-                        message.stringFieldValidation = 1;
-                        break;
-                    case "HINT":
-                    case 2:
-                        message.stringFieldValidation = 2;
-                        break;
-                    case "NONE":
-                    case 3:
-                        message.stringFieldValidation = 3;
-                        break;
-                    }
-                    switch (object.messageEncoding) {
-                    default:
-                        if (typeof object.messageEncoding === "number") {
-                            message.messageEncoding = object.messageEncoding;
-                            break;
-                        }
-                        break;
-                    case "MESSAGE_ENCODING_UNKNOWN":
-                    case 0:
-                        message.messageEncoding = 0;
-                        break;
-                    case "LENGTH_PREFIXED":
-                    case 1:
-                        message.messageEncoding = 1;
-                        break;
-                    case "DELIMITED":
-                    case 2:
-                        message.messageEncoding = 2;
-                        break;
-                    }
-                    switch (object.jsonFormat) {
-                    default:
-                        if (typeof object.jsonFormat === "number") {
-                            message.jsonFormat = object.jsonFormat;
-                            break;
-                        }
-                        break;
-                    case "JSON_FORMAT_UNKNOWN":
-                    case 0:
-                        message.jsonFormat = 0;
-                        break;
-                    case "ALLOW":
-                    case 1:
-                        message.jsonFormat = 1;
-                        break;
-                    case "LEGACY_BEST_EFFORT":
-                    case 2:
-                        message.jsonFormat = 2;
-                        break;
-                    }
-                    if (object.rawFeatures != null) {
-                        if (typeof object.rawFeatures !== "object")
-                            throw TypeError(".google.protobuf.FeatureSet.rawFeatures: object expected");
-                        message.rawFeatures = $root.google.protobuf.FeatureSet.fromObject(object.rawFeatures);
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a FeatureSet message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.FeatureSet
-                 * @static
-                 * @param {google.protobuf.FeatureSet} message FeatureSet
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                FeatureSet.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.fieldPresence = options.enums === String ? "FIELD_PRESENCE_UNKNOWN" : 0;
-                        object.enumType = options.enums === String ? "ENUM_TYPE_UNKNOWN" : 0;
-                        object.repeatedFieldEncoding = options.enums === String ? "REPEATED_FIELD_ENCODING_UNKNOWN" : 0;
-                        object.stringFieldValidation = options.enums === String ? "STRING_FIELD_VALIDATION_UNKNOWN" : 0;
-                        object.messageEncoding = options.enums === String ? "MESSAGE_ENCODING_UNKNOWN" : 0;
-                        object.jsonFormat = options.enums === String ? "JSON_FORMAT_UNKNOWN" : 0;
-                        object.rawFeatures = null;
-                    }
-                    if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
-                        object.fieldPresence = options.enums === String ? $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] === undefined ? message.fieldPresence : $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] : message.fieldPresence;
-                    if (message.enumType != null && message.hasOwnProperty("enumType"))
-                        object.enumType = options.enums === String ? $root.google.protobuf.FeatureSet.EnumType[message.enumType] === undefined ? message.enumType : $root.google.protobuf.FeatureSet.EnumType[message.enumType] : message.enumType;
-                    if (message.repeatedFieldEncoding != null && message.hasOwnProperty("repeatedFieldEncoding"))
-                        object.repeatedFieldEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.RepeatedFieldEncoding[message.repeatedFieldEncoding] === undefined ? message.repeatedFieldEncoding : $root.google.protobuf.FeatureSet.RepeatedFieldEncoding[message.repeatedFieldEncoding] : message.repeatedFieldEncoding;
-                    if (message.stringFieldValidation != null && message.hasOwnProperty("stringFieldValidation"))
-                        object.stringFieldValidation = options.enums === String ? $root.google.protobuf.FeatureSet.StringFieldValidation[message.stringFieldValidation] === undefined ? message.stringFieldValidation : $root.google.protobuf.FeatureSet.StringFieldValidation[message.stringFieldValidation] : message.stringFieldValidation;
-                    if (message.messageEncoding != null && message.hasOwnProperty("messageEncoding"))
-                        object.messageEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] === undefined ? message.messageEncoding : $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] : message.messageEncoding;
-                    if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
-                        object.jsonFormat = options.enums === String ? $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] === undefined ? message.jsonFormat : $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] : message.jsonFormat;
-                    if (message.rawFeatures != null && message.hasOwnProperty("rawFeatures"))
-                        object.rawFeatures = $root.google.protobuf.FeatureSet.toObject(message.rawFeatures, options);
-                    return object;
-                };
-    
-                /**
-                 * Converts this FeatureSet to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.FeatureSet
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                FeatureSet.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for FeatureSet
-                 * @function getTypeUrl
-                 * @memberof google.protobuf.FeatureSet
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                FeatureSet.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.protobuf.FeatureSet";
-                };
-    
-                /**
-                 * FieldPresence enum.
-                 * @name google.protobuf.FeatureSet.FieldPresence
-                 * @enum {number}
-                 * @property {number} FIELD_PRESENCE_UNKNOWN=0 FIELD_PRESENCE_UNKNOWN value
-                 * @property {number} EXPLICIT=1 EXPLICIT value
-                 * @property {number} IMPLICIT=2 IMPLICIT value
-                 * @property {number} LEGACY_REQUIRED=3 LEGACY_REQUIRED value
-                 */
-                FeatureSet.FieldPresence = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "FIELD_PRESENCE_UNKNOWN"] = 0;
-                    values[valuesById[1] = "EXPLICIT"] = 1;
-                    values[valuesById[2] = "IMPLICIT"] = 2;
-                    values[valuesById[3] = "LEGACY_REQUIRED"] = 3;
-                    return values;
-                })();
-    
-                /**
-                 * EnumType enum.
-                 * @name google.protobuf.FeatureSet.EnumType
-                 * @enum {number}
-                 * @property {number} ENUM_TYPE_UNKNOWN=0 ENUM_TYPE_UNKNOWN value
-                 * @property {number} OPEN=1 OPEN value
-                 * @property {number} CLOSED=2 CLOSED value
-                 */
-                FeatureSet.EnumType = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "ENUM_TYPE_UNKNOWN"] = 0;
-                    values[valuesById[1] = "OPEN"] = 1;
-                    values[valuesById[2] = "CLOSED"] = 2;
-                    return values;
-                })();
-    
-                /**
-                 * RepeatedFieldEncoding enum.
-                 * @name google.protobuf.FeatureSet.RepeatedFieldEncoding
-                 * @enum {number}
-                 * @property {number} REPEATED_FIELD_ENCODING_UNKNOWN=0 REPEATED_FIELD_ENCODING_UNKNOWN value
-                 * @property {number} PACKED=1 PACKED value
-                 * @property {number} EXPANDED=2 EXPANDED value
-                 */
-                FeatureSet.RepeatedFieldEncoding = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "REPEATED_FIELD_ENCODING_UNKNOWN"] = 0;
-                    values[valuesById[1] = "PACKED"] = 1;
-                    values[valuesById[2] = "EXPANDED"] = 2;
-                    return values;
-                })();
-    
-                /**
-                 * StringFieldValidation enum.
-                 * @name google.protobuf.FeatureSet.StringFieldValidation
-                 * @enum {number}
-                 * @property {number} STRING_FIELD_VALIDATION_UNKNOWN=0 STRING_FIELD_VALIDATION_UNKNOWN value
-                 * @property {number} MANDATORY=1 MANDATORY value
-                 * @property {number} HINT=2 HINT value
-                 * @property {number} NONE=3 NONE value
-                 */
-                FeatureSet.StringFieldValidation = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "STRING_FIELD_VALIDATION_UNKNOWN"] = 0;
-                    values[valuesById[1] = "MANDATORY"] = 1;
-                    values[valuesById[2] = "HINT"] = 2;
-                    values[valuesById[3] = "NONE"] = 3;
-                    return values;
-                })();
-    
-                /**
-                 * MessageEncoding enum.
-                 * @name google.protobuf.FeatureSet.MessageEncoding
-                 * @enum {number}
-                 * @property {number} MESSAGE_ENCODING_UNKNOWN=0 MESSAGE_ENCODING_UNKNOWN value
-                 * @property {number} LENGTH_PREFIXED=1 LENGTH_PREFIXED value
-                 * @property {number} DELIMITED=2 DELIMITED value
-                 */
-                FeatureSet.MessageEncoding = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "MESSAGE_ENCODING_UNKNOWN"] = 0;
-                    values[valuesById[1] = "LENGTH_PREFIXED"] = 1;
-                    values[valuesById[2] = "DELIMITED"] = 2;
-                    return values;
-                })();
-    
-                /**
-                 * JsonFormat enum.
-                 * @name google.protobuf.FeatureSet.JsonFormat
-                 * @enum {number}
-                 * @property {number} JSON_FORMAT_UNKNOWN=0 JSON_FORMAT_UNKNOWN value
-                 * @property {number} ALLOW=1 ALLOW value
-                 * @property {number} LEGACY_BEST_EFFORT=2 LEGACY_BEST_EFFORT value
-                 */
-                FeatureSet.JsonFormat = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "JSON_FORMAT_UNKNOWN"] = 0;
-                    values[valuesById[1] = "ALLOW"] = 1;
-                    values[valuesById[2] = "LEGACY_BEST_EFFORT"] = 2;
-                    return values;
-                })();
-    
-                return FeatureSet;
             })();
     
             protobuf.SourceCodeInfo = (function() {
