@@ -10845,7 +10845,1434 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.analytics.data.v1alpha.AlphaAnalyticsData|createRecurringAudienceList}.
+                         * @memberof google.analytics.data.v1alpha.AlphaAnalyticsData
+                         * @typedef CreateRecurringAudienceListCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.data.v1alpha.RecurringAudienceList} [response] RecurringAudienceList
+                         */
+    
+                        /**
+                         * Calls CreateRecurringAudienceList.
+                         * @function createRecurringAudienceList
+                         * @memberof google.analytics.data.v1alpha.AlphaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest} request CreateRecurringAudienceListRequest message or plain object
+                         * @param {google.analytics.data.v1alpha.AlphaAnalyticsData.CreateRecurringAudienceListCallback} callback Node-style callback called with the error, if any, and RecurringAudienceList
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AlphaAnalyticsData.prototype.createRecurringAudienceList = function createRecurringAudienceList(request, callback) {
+                            return this.rpcCall(createRecurringAudienceList, $root.google.analytics.data.v1alpha.CreateRecurringAudienceListRequest, $root.google.analytics.data.v1alpha.RecurringAudienceList, request, callback);
+                        }, "name", { value: "CreateRecurringAudienceList" });
+    
+                        /**
+                         * Calls CreateRecurringAudienceList.
+                         * @function createRecurringAudienceList
+                         * @memberof google.analytics.data.v1alpha.AlphaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest} request CreateRecurringAudienceListRequest message or plain object
+                         * @returns {Promise<google.analytics.data.v1alpha.RecurringAudienceList>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.data.v1alpha.AlphaAnalyticsData|getRecurringAudienceList}.
+                         * @memberof google.analytics.data.v1alpha.AlphaAnalyticsData
+                         * @typedef GetRecurringAudienceListCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.data.v1alpha.RecurringAudienceList} [response] RecurringAudienceList
+                         */
+    
+                        /**
+                         * Calls GetRecurringAudienceList.
+                         * @function getRecurringAudienceList
+                         * @memberof google.analytics.data.v1alpha.AlphaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1alpha.IGetRecurringAudienceListRequest} request GetRecurringAudienceListRequest message or plain object
+                         * @param {google.analytics.data.v1alpha.AlphaAnalyticsData.GetRecurringAudienceListCallback} callback Node-style callback called with the error, if any, and RecurringAudienceList
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AlphaAnalyticsData.prototype.getRecurringAudienceList = function getRecurringAudienceList(request, callback) {
+                            return this.rpcCall(getRecurringAudienceList, $root.google.analytics.data.v1alpha.GetRecurringAudienceListRequest, $root.google.analytics.data.v1alpha.RecurringAudienceList, request, callback);
+                        }, "name", { value: "GetRecurringAudienceList" });
+    
+                        /**
+                         * Calls GetRecurringAudienceList.
+                         * @function getRecurringAudienceList
+                         * @memberof google.analytics.data.v1alpha.AlphaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1alpha.IGetRecurringAudienceListRequest} request GetRecurringAudienceListRequest message or plain object
+                         * @returns {Promise<google.analytics.data.v1alpha.RecurringAudienceList>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.data.v1alpha.AlphaAnalyticsData|listRecurringAudienceLists}.
+                         * @memberof google.analytics.data.v1alpha.AlphaAnalyticsData
+                         * @typedef ListRecurringAudienceListsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.data.v1alpha.ListRecurringAudienceListsResponse} [response] ListRecurringAudienceListsResponse
+                         */
+    
+                        /**
+                         * Calls ListRecurringAudienceLists.
+                         * @function listRecurringAudienceLists
+                         * @memberof google.analytics.data.v1alpha.AlphaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1alpha.IListRecurringAudienceListsRequest} request ListRecurringAudienceListsRequest message or plain object
+                         * @param {google.analytics.data.v1alpha.AlphaAnalyticsData.ListRecurringAudienceListsCallback} callback Node-style callback called with the error, if any, and ListRecurringAudienceListsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AlphaAnalyticsData.prototype.listRecurringAudienceLists = function listRecurringAudienceLists(request, callback) {
+                            return this.rpcCall(listRecurringAudienceLists, $root.google.analytics.data.v1alpha.ListRecurringAudienceListsRequest, $root.google.analytics.data.v1alpha.ListRecurringAudienceListsResponse, request, callback);
+                        }, "name", { value: "ListRecurringAudienceLists" });
+    
+                        /**
+                         * Calls ListRecurringAudienceLists.
+                         * @function listRecurringAudienceLists
+                         * @memberof google.analytics.data.v1alpha.AlphaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1alpha.IListRecurringAudienceListsRequest} request ListRecurringAudienceListsRequest message or plain object
+                         * @returns {Promise<google.analytics.data.v1alpha.ListRecurringAudienceListsResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return AlphaAnalyticsData;
+                    })();
+    
+                    v1alpha.CreateRecurringAudienceListRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateRecurringAudienceListRequest.
+                         * @memberof google.analytics.data.v1alpha
+                         * @interface ICreateRecurringAudienceListRequest
+                         * @property {string|null} [parent] CreateRecurringAudienceListRequest parent
+                         * @property {google.analytics.data.v1alpha.IRecurringAudienceList|null} [recurringAudienceList] CreateRecurringAudienceListRequest recurringAudienceList
+                         */
+    
+                        /**
+                         * Constructs a new CreateRecurringAudienceListRequest.
+                         * @memberof google.analytics.data.v1alpha
+                         * @classdesc Represents a CreateRecurringAudienceListRequest.
+                         * @implements ICreateRecurringAudienceListRequest
+                         * @constructor
+                         * @param {google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest=} [properties] Properties to set
+                         */
+                        function CreateRecurringAudienceListRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateRecurringAudienceListRequest parent.
+                         * @member {string} parent
+                         * @memberof google.analytics.data.v1alpha.CreateRecurringAudienceListRequest
+                         * @instance
+                         */
+                        CreateRecurringAudienceListRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateRecurringAudienceListRequest recurringAudienceList.
+                         * @member {google.analytics.data.v1alpha.IRecurringAudienceList|null|undefined} recurringAudienceList
+                         * @memberof google.analytics.data.v1alpha.CreateRecurringAudienceListRequest
+                         * @instance
+                         */
+                        CreateRecurringAudienceListRequest.prototype.recurringAudienceList = null;
+    
+                        /**
+                         * Creates a new CreateRecurringAudienceListRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1alpha.CreateRecurringAudienceListRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1alpha.CreateRecurringAudienceListRequest} CreateRecurringAudienceListRequest instance
+                         */
+                        CreateRecurringAudienceListRequest.create = function create(properties) {
+                            return new CreateRecurringAudienceListRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateRecurringAudienceListRequest message. Does not implicitly {@link google.analytics.data.v1alpha.CreateRecurringAudienceListRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1alpha.CreateRecurringAudienceListRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest} message CreateRecurringAudienceListRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateRecurringAudienceListRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.recurringAudienceList != null && Object.hasOwnProperty.call(message, "recurringAudienceList"))
+                                $root.google.analytics.data.v1alpha.RecurringAudienceList.encode(message.recurringAudienceList, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateRecurringAudienceListRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.CreateRecurringAudienceListRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1alpha.CreateRecurringAudienceListRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest} message CreateRecurringAudienceListRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateRecurringAudienceListRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateRecurringAudienceListRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1alpha.CreateRecurringAudienceListRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1alpha.CreateRecurringAudienceListRequest} CreateRecurringAudienceListRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateRecurringAudienceListRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1alpha.CreateRecurringAudienceListRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.recurringAudienceList = $root.google.analytics.data.v1alpha.RecurringAudienceList.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateRecurringAudienceListRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1alpha.CreateRecurringAudienceListRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1alpha.CreateRecurringAudienceListRequest} CreateRecurringAudienceListRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateRecurringAudienceListRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateRecurringAudienceListRequest message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1alpha.CreateRecurringAudienceListRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateRecurringAudienceListRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.recurringAudienceList != null && message.hasOwnProperty("recurringAudienceList")) {
+                                var error = $root.google.analytics.data.v1alpha.RecurringAudienceList.verify(message.recurringAudienceList);
+                                if (error)
+                                    return "recurringAudienceList." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateRecurringAudienceListRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1alpha.CreateRecurringAudienceListRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1alpha.CreateRecurringAudienceListRequest} CreateRecurringAudienceListRequest
+                         */
+                        CreateRecurringAudienceListRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1alpha.CreateRecurringAudienceListRequest)
+                                return object;
+                            var message = new $root.google.analytics.data.v1alpha.CreateRecurringAudienceListRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.recurringAudienceList != null) {
+                                if (typeof object.recurringAudienceList !== "object")
+                                    throw TypeError(".google.analytics.data.v1alpha.CreateRecurringAudienceListRequest.recurringAudienceList: object expected");
+                                message.recurringAudienceList = $root.google.analytics.data.v1alpha.RecurringAudienceList.fromObject(object.recurringAudienceList);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateRecurringAudienceListRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1alpha.CreateRecurringAudienceListRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.CreateRecurringAudienceListRequest} message CreateRecurringAudienceListRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateRecurringAudienceListRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.recurringAudienceList = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.recurringAudienceList != null && message.hasOwnProperty("recurringAudienceList"))
+                                object.recurringAudienceList = $root.google.analytics.data.v1alpha.RecurringAudienceList.toObject(message.recurringAudienceList, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateRecurringAudienceListRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1alpha.CreateRecurringAudienceListRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateRecurringAudienceListRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateRecurringAudienceListRequest
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.CreateRecurringAudienceListRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateRecurringAudienceListRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.CreateRecurringAudienceListRequest";
+                        };
+    
+                        return CreateRecurringAudienceListRequest;
+                    })();
+    
+                    v1alpha.RecurringAudienceList = (function() {
+    
+                        /**
+                         * Properties of a RecurringAudienceList.
+                         * @memberof google.analytics.data.v1alpha
+                         * @interface IRecurringAudienceList
+                         * @property {string|null} [name] RecurringAudienceList name
+                         * @property {string|null} [audience] RecurringAudienceList audience
+                         * @property {string|null} [audienceDisplayName] RecurringAudienceList audienceDisplayName
+                         * @property {Array.<google.analytics.data.v1alpha.IAudienceDimension>|null} [dimensions] RecurringAudienceList dimensions
+                         * @property {number|null} [activeDaysRemaining] RecurringAudienceList activeDaysRemaining
+                         * @property {Array.<string>|null} [audienceLists] RecurringAudienceList audienceLists
+                         */
+    
+                        /**
+                         * Constructs a new RecurringAudienceList.
+                         * @memberof google.analytics.data.v1alpha
+                         * @classdesc Represents a RecurringAudienceList.
+                         * @implements IRecurringAudienceList
+                         * @constructor
+                         * @param {google.analytics.data.v1alpha.IRecurringAudienceList=} [properties] Properties to set
+                         */
+                        function RecurringAudienceList(properties) {
+                            this.dimensions = [];
+                            this.audienceLists = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RecurringAudienceList name.
+                         * @member {string} name
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @instance
+                         */
+                        RecurringAudienceList.prototype.name = "";
+    
+                        /**
+                         * RecurringAudienceList audience.
+                         * @member {string} audience
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @instance
+                         */
+                        RecurringAudienceList.prototype.audience = "";
+    
+                        /**
+                         * RecurringAudienceList audienceDisplayName.
+                         * @member {string} audienceDisplayName
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @instance
+                         */
+                        RecurringAudienceList.prototype.audienceDisplayName = "";
+    
+                        /**
+                         * RecurringAudienceList dimensions.
+                         * @member {Array.<google.analytics.data.v1alpha.IAudienceDimension>} dimensions
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @instance
+                         */
+                        RecurringAudienceList.prototype.dimensions = $util.emptyArray;
+    
+                        /**
+                         * RecurringAudienceList activeDaysRemaining.
+                         * @member {number|null|undefined} activeDaysRemaining
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @instance
+                         */
+                        RecurringAudienceList.prototype.activeDaysRemaining = null;
+    
+                        /**
+                         * RecurringAudienceList audienceLists.
+                         * @member {Array.<string>} audienceLists
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @instance
+                         */
+                        RecurringAudienceList.prototype.audienceLists = $util.emptyArray;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * RecurringAudienceList _activeDaysRemaining.
+                         * @member {"activeDaysRemaining"|undefined} _activeDaysRemaining
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @instance
+                         */
+                        Object.defineProperty(RecurringAudienceList.prototype, "_activeDaysRemaining", {
+                            get: $util.oneOfGetter($oneOfFields = ["activeDaysRemaining"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new RecurringAudienceList instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IRecurringAudienceList=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1alpha.RecurringAudienceList} RecurringAudienceList instance
+                         */
+                        RecurringAudienceList.create = function create(properties) {
+                            return new RecurringAudienceList(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RecurringAudienceList message. Does not implicitly {@link google.analytics.data.v1alpha.RecurringAudienceList.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IRecurringAudienceList} message RecurringAudienceList message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RecurringAudienceList.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.audience != null && Object.hasOwnProperty.call(message, "audience"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.audience);
+                            if (message.audienceDisplayName != null && Object.hasOwnProperty.call(message, "audienceDisplayName"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.audienceDisplayName);
+                            if (message.dimensions != null && message.dimensions.length)
+                                for (var i = 0; i < message.dimensions.length; ++i)
+                                    $root.google.analytics.data.v1alpha.AudienceDimension.encode(message.dimensions[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.activeDaysRemaining != null && Object.hasOwnProperty.call(message, "activeDaysRemaining"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.activeDaysRemaining);
+                            if (message.audienceLists != null && message.audienceLists.length)
+                                for (var i = 0; i < message.audienceLists.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.audienceLists[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RecurringAudienceList message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.RecurringAudienceList.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IRecurringAudienceList} message RecurringAudienceList message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RecurringAudienceList.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RecurringAudienceList message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1alpha.RecurringAudienceList} RecurringAudienceList
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RecurringAudienceList.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1alpha.RecurringAudienceList();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.audience = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.audienceDisplayName = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.dimensions && message.dimensions.length))
+                                            message.dimensions = [];
+                                        message.dimensions.push($root.google.analytics.data.v1alpha.AudienceDimension.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 5: {
+                                        message.activeDaysRemaining = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.audienceLists && message.audienceLists.length))
+                                            message.audienceLists = [];
+                                        message.audienceLists.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RecurringAudienceList message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1alpha.RecurringAudienceList} RecurringAudienceList
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RecurringAudienceList.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RecurringAudienceList message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RecurringAudienceList.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.audience != null && message.hasOwnProperty("audience"))
+                                if (!$util.isString(message.audience))
+                                    return "audience: string expected";
+                            if (message.audienceDisplayName != null && message.hasOwnProperty("audienceDisplayName"))
+                                if (!$util.isString(message.audienceDisplayName))
+                                    return "audienceDisplayName: string expected";
+                            if (message.dimensions != null && message.hasOwnProperty("dimensions")) {
+                                if (!Array.isArray(message.dimensions))
+                                    return "dimensions: array expected";
+                                for (var i = 0; i < message.dimensions.length; ++i) {
+                                    var error = $root.google.analytics.data.v1alpha.AudienceDimension.verify(message.dimensions[i]);
+                                    if (error)
+                                        return "dimensions." + error;
+                                }
+                            }
+                            if (message.activeDaysRemaining != null && message.hasOwnProperty("activeDaysRemaining")) {
+                                properties._activeDaysRemaining = 1;
+                                if (!$util.isInteger(message.activeDaysRemaining))
+                                    return "activeDaysRemaining: integer expected";
+                            }
+                            if (message.audienceLists != null && message.hasOwnProperty("audienceLists")) {
+                                if (!Array.isArray(message.audienceLists))
+                                    return "audienceLists: array expected";
+                                for (var i = 0; i < message.audienceLists.length; ++i)
+                                    if (!$util.isString(message.audienceLists[i]))
+                                        return "audienceLists: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RecurringAudienceList message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1alpha.RecurringAudienceList} RecurringAudienceList
+                         */
+                        RecurringAudienceList.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1alpha.RecurringAudienceList)
+                                return object;
+                            var message = new $root.google.analytics.data.v1alpha.RecurringAudienceList();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.audience != null)
+                                message.audience = String(object.audience);
+                            if (object.audienceDisplayName != null)
+                                message.audienceDisplayName = String(object.audienceDisplayName);
+                            if (object.dimensions) {
+                                if (!Array.isArray(object.dimensions))
+                                    throw TypeError(".google.analytics.data.v1alpha.RecurringAudienceList.dimensions: array expected");
+                                message.dimensions = [];
+                                for (var i = 0; i < object.dimensions.length; ++i) {
+                                    if (typeof object.dimensions[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1alpha.RecurringAudienceList.dimensions: object expected");
+                                    message.dimensions[i] = $root.google.analytics.data.v1alpha.AudienceDimension.fromObject(object.dimensions[i]);
+                                }
+                            }
+                            if (object.activeDaysRemaining != null)
+                                message.activeDaysRemaining = object.activeDaysRemaining | 0;
+                            if (object.audienceLists) {
+                                if (!Array.isArray(object.audienceLists))
+                                    throw TypeError(".google.analytics.data.v1alpha.RecurringAudienceList.audienceLists: array expected");
+                                message.audienceLists = [];
+                                for (var i = 0; i < object.audienceLists.length; ++i)
+                                    message.audienceLists[i] = String(object.audienceLists[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RecurringAudienceList message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @static
+                         * @param {google.analytics.data.v1alpha.RecurringAudienceList} message RecurringAudienceList
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RecurringAudienceList.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.dimensions = [];
+                                object.audienceLists = [];
+                            }
+                            if (options.defaults) {
+                                object.name = "";
+                                object.audience = "";
+                                object.audienceDisplayName = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.audience != null && message.hasOwnProperty("audience"))
+                                object.audience = message.audience;
+                            if (message.audienceDisplayName != null && message.hasOwnProperty("audienceDisplayName"))
+                                object.audienceDisplayName = message.audienceDisplayName;
+                            if (message.dimensions && message.dimensions.length) {
+                                object.dimensions = [];
+                                for (var j = 0; j < message.dimensions.length; ++j)
+                                    object.dimensions[j] = $root.google.analytics.data.v1alpha.AudienceDimension.toObject(message.dimensions[j], options);
+                            }
+                            if (message.activeDaysRemaining != null && message.hasOwnProperty("activeDaysRemaining")) {
+                                object.activeDaysRemaining = message.activeDaysRemaining;
+                                if (options.oneofs)
+                                    object._activeDaysRemaining = "activeDaysRemaining";
+                            }
+                            if (message.audienceLists && message.audienceLists.length) {
+                                object.audienceLists = [];
+                                for (var j = 0; j < message.audienceLists.length; ++j)
+                                    object.audienceLists[j] = message.audienceLists[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RecurringAudienceList to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RecurringAudienceList.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RecurringAudienceList
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RecurringAudienceList.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.RecurringAudienceList";
+                        };
+    
+                        return RecurringAudienceList;
+                    })();
+    
+                    v1alpha.GetRecurringAudienceListRequest = (function() {
+    
+                        /**
+                         * Properties of a GetRecurringAudienceListRequest.
+                         * @memberof google.analytics.data.v1alpha
+                         * @interface IGetRecurringAudienceListRequest
+                         * @property {string|null} [name] GetRecurringAudienceListRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetRecurringAudienceListRequest.
+                         * @memberof google.analytics.data.v1alpha
+                         * @classdesc Represents a GetRecurringAudienceListRequest.
+                         * @implements IGetRecurringAudienceListRequest
+                         * @constructor
+                         * @param {google.analytics.data.v1alpha.IGetRecurringAudienceListRequest=} [properties] Properties to set
+                         */
+                        function GetRecurringAudienceListRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetRecurringAudienceListRequest name.
+                         * @member {string} name
+                         * @memberof google.analytics.data.v1alpha.GetRecurringAudienceListRequest
+                         * @instance
+                         */
+                        GetRecurringAudienceListRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetRecurringAudienceListRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1alpha.GetRecurringAudienceListRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IGetRecurringAudienceListRequest=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1alpha.GetRecurringAudienceListRequest} GetRecurringAudienceListRequest instance
+                         */
+                        GetRecurringAudienceListRequest.create = function create(properties) {
+                            return new GetRecurringAudienceListRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetRecurringAudienceListRequest message. Does not implicitly {@link google.analytics.data.v1alpha.GetRecurringAudienceListRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1alpha.GetRecurringAudienceListRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IGetRecurringAudienceListRequest} message GetRecurringAudienceListRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetRecurringAudienceListRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetRecurringAudienceListRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.GetRecurringAudienceListRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1alpha.GetRecurringAudienceListRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IGetRecurringAudienceListRequest} message GetRecurringAudienceListRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetRecurringAudienceListRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetRecurringAudienceListRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1alpha.GetRecurringAudienceListRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1alpha.GetRecurringAudienceListRequest} GetRecurringAudienceListRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetRecurringAudienceListRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1alpha.GetRecurringAudienceListRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetRecurringAudienceListRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1alpha.GetRecurringAudienceListRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1alpha.GetRecurringAudienceListRequest} GetRecurringAudienceListRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetRecurringAudienceListRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetRecurringAudienceListRequest message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1alpha.GetRecurringAudienceListRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetRecurringAudienceListRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetRecurringAudienceListRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1alpha.GetRecurringAudienceListRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1alpha.GetRecurringAudienceListRequest} GetRecurringAudienceListRequest
+                         */
+                        GetRecurringAudienceListRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1alpha.GetRecurringAudienceListRequest)
+                                return object;
+                            var message = new $root.google.analytics.data.v1alpha.GetRecurringAudienceListRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetRecurringAudienceListRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1alpha.GetRecurringAudienceListRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.GetRecurringAudienceListRequest} message GetRecurringAudienceListRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetRecurringAudienceListRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetRecurringAudienceListRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1alpha.GetRecurringAudienceListRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetRecurringAudienceListRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetRecurringAudienceListRequest
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.GetRecurringAudienceListRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetRecurringAudienceListRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.GetRecurringAudienceListRequest";
+                        };
+    
+                        return GetRecurringAudienceListRequest;
+                    })();
+    
+                    v1alpha.ListRecurringAudienceListsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListRecurringAudienceListsRequest.
+                         * @memberof google.analytics.data.v1alpha
+                         * @interface IListRecurringAudienceListsRequest
+                         * @property {string|null} [parent] ListRecurringAudienceListsRequest parent
+                         * @property {number|null} [pageSize] ListRecurringAudienceListsRequest pageSize
+                         * @property {string|null} [pageToken] ListRecurringAudienceListsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListRecurringAudienceListsRequest.
+                         * @memberof google.analytics.data.v1alpha
+                         * @classdesc Represents a ListRecurringAudienceListsRequest.
+                         * @implements IListRecurringAudienceListsRequest
+                         * @constructor
+                         * @param {google.analytics.data.v1alpha.IListRecurringAudienceListsRequest=} [properties] Properties to set
+                         */
+                        function ListRecurringAudienceListsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListRecurringAudienceListsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsRequest
+                         * @instance
+                         */
+                        ListRecurringAudienceListsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListRecurringAudienceListsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsRequest
+                         * @instance
+                         */
+                        ListRecurringAudienceListsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListRecurringAudienceListsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsRequest
+                         * @instance
+                         */
+                        ListRecurringAudienceListsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListRecurringAudienceListsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IListRecurringAudienceListsRequest=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1alpha.ListRecurringAudienceListsRequest} ListRecurringAudienceListsRequest instance
+                         */
+                        ListRecurringAudienceListsRequest.create = function create(properties) {
+                            return new ListRecurringAudienceListsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListRecurringAudienceListsRequest message. Does not implicitly {@link google.analytics.data.v1alpha.ListRecurringAudienceListsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IListRecurringAudienceListsRequest} message ListRecurringAudienceListsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRecurringAudienceListsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListRecurringAudienceListsRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.ListRecurringAudienceListsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IListRecurringAudienceListsRequest} message ListRecurringAudienceListsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRecurringAudienceListsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListRecurringAudienceListsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1alpha.ListRecurringAudienceListsRequest} ListRecurringAudienceListsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRecurringAudienceListsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1alpha.ListRecurringAudienceListsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListRecurringAudienceListsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1alpha.ListRecurringAudienceListsRequest} ListRecurringAudienceListsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRecurringAudienceListsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListRecurringAudienceListsRequest message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListRecurringAudienceListsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListRecurringAudienceListsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1alpha.ListRecurringAudienceListsRequest} ListRecurringAudienceListsRequest
+                         */
+                        ListRecurringAudienceListsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1alpha.ListRecurringAudienceListsRequest)
+                                return object;
+                            var message = new $root.google.analytics.data.v1alpha.ListRecurringAudienceListsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListRecurringAudienceListsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.ListRecurringAudienceListsRequest} message ListRecurringAudienceListsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListRecurringAudienceListsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListRecurringAudienceListsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListRecurringAudienceListsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListRecurringAudienceListsRequest
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListRecurringAudienceListsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.ListRecurringAudienceListsRequest";
+                        };
+    
+                        return ListRecurringAudienceListsRequest;
+                    })();
+    
+                    v1alpha.ListRecurringAudienceListsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListRecurringAudienceListsResponse.
+                         * @memberof google.analytics.data.v1alpha
+                         * @interface IListRecurringAudienceListsResponse
+                         * @property {Array.<google.analytics.data.v1alpha.IRecurringAudienceList>|null} [recurringAudienceLists] ListRecurringAudienceListsResponse recurringAudienceLists
+                         * @property {string|null} [nextPageToken] ListRecurringAudienceListsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListRecurringAudienceListsResponse.
+                         * @memberof google.analytics.data.v1alpha
+                         * @classdesc Represents a ListRecurringAudienceListsResponse.
+                         * @implements IListRecurringAudienceListsResponse
+                         * @constructor
+                         * @param {google.analytics.data.v1alpha.IListRecurringAudienceListsResponse=} [properties] Properties to set
+                         */
+                        function ListRecurringAudienceListsResponse(properties) {
+                            this.recurringAudienceLists = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListRecurringAudienceListsResponse recurringAudienceLists.
+                         * @member {Array.<google.analytics.data.v1alpha.IRecurringAudienceList>} recurringAudienceLists
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsResponse
+                         * @instance
+                         */
+                        ListRecurringAudienceListsResponse.prototype.recurringAudienceLists = $util.emptyArray;
+    
+                        /**
+                         * ListRecurringAudienceListsResponse nextPageToken.
+                         * @member {string|null|undefined} nextPageToken
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsResponse
+                         * @instance
+                         */
+                        ListRecurringAudienceListsResponse.prototype.nextPageToken = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ListRecurringAudienceListsResponse _nextPageToken.
+                         * @member {"nextPageToken"|undefined} _nextPageToken
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsResponse
+                         * @instance
+                         */
+                        Object.defineProperty(ListRecurringAudienceListsResponse.prototype, "_nextPageToken", {
+                            get: $util.oneOfGetter($oneOfFields = ["nextPageToken"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ListRecurringAudienceListsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsResponse
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IListRecurringAudienceListsResponse=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1alpha.ListRecurringAudienceListsResponse} ListRecurringAudienceListsResponse instance
+                         */
+                        ListRecurringAudienceListsResponse.create = function create(properties) {
+                            return new ListRecurringAudienceListsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListRecurringAudienceListsResponse message. Does not implicitly {@link google.analytics.data.v1alpha.ListRecurringAudienceListsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsResponse
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IListRecurringAudienceListsResponse} message ListRecurringAudienceListsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRecurringAudienceListsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.recurringAudienceLists != null && message.recurringAudienceLists.length)
+                                for (var i = 0; i < message.recurringAudienceLists.length; ++i)
+                                    $root.google.analytics.data.v1alpha.RecurringAudienceList.encode(message.recurringAudienceLists[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListRecurringAudienceListsResponse message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.ListRecurringAudienceListsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsResponse
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IListRecurringAudienceListsResponse} message ListRecurringAudienceListsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRecurringAudienceListsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListRecurringAudienceListsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1alpha.ListRecurringAudienceListsResponse} ListRecurringAudienceListsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRecurringAudienceListsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1alpha.ListRecurringAudienceListsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.recurringAudienceLists && message.recurringAudienceLists.length))
+                                            message.recurringAudienceLists = [];
+                                        message.recurringAudienceLists.push($root.google.analytics.data.v1alpha.RecurringAudienceList.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListRecurringAudienceListsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1alpha.ListRecurringAudienceListsResponse} ListRecurringAudienceListsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRecurringAudienceListsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListRecurringAudienceListsResponse message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListRecurringAudienceListsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.recurringAudienceLists != null && message.hasOwnProperty("recurringAudienceLists")) {
+                                if (!Array.isArray(message.recurringAudienceLists))
+                                    return "recurringAudienceLists: array expected";
+                                for (var i = 0; i < message.recurringAudienceLists.length; ++i) {
+                                    var error = $root.google.analytics.data.v1alpha.RecurringAudienceList.verify(message.recurringAudienceLists[i]);
+                                    if (error)
+                                        return "recurringAudienceLists." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken")) {
+                                properties._nextPageToken = 1;
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListRecurringAudienceListsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1alpha.ListRecurringAudienceListsResponse} ListRecurringAudienceListsResponse
+                         */
+                        ListRecurringAudienceListsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1alpha.ListRecurringAudienceListsResponse)
+                                return object;
+                            var message = new $root.google.analytics.data.v1alpha.ListRecurringAudienceListsResponse();
+                            if (object.recurringAudienceLists) {
+                                if (!Array.isArray(object.recurringAudienceLists))
+                                    throw TypeError(".google.analytics.data.v1alpha.ListRecurringAudienceListsResponse.recurringAudienceLists: array expected");
+                                message.recurringAudienceLists = [];
+                                for (var i = 0; i < object.recurringAudienceLists.length; ++i) {
+                                    if (typeof object.recurringAudienceLists[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1alpha.ListRecurringAudienceListsResponse.recurringAudienceLists: object expected");
+                                    message.recurringAudienceLists[i] = $root.google.analytics.data.v1alpha.RecurringAudienceList.fromObject(object.recurringAudienceLists[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListRecurringAudienceListsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsResponse
+                         * @static
+                         * @param {google.analytics.data.v1alpha.ListRecurringAudienceListsResponse} message ListRecurringAudienceListsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListRecurringAudienceListsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.recurringAudienceLists = [];
+                            if (message.recurringAudienceLists && message.recurringAudienceLists.length) {
+                                object.recurringAudienceLists = [];
+                                for (var j = 0; j < message.recurringAudienceLists.length; ++j)
+                                    object.recurringAudienceLists[j] = $root.google.analytics.data.v1alpha.RecurringAudienceList.toObject(message.recurringAudienceLists[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken")) {
+                                object.nextPageToken = message.nextPageToken;
+                                if (options.oneofs)
+                                    object._nextPageToken = "nextPageToken";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListRecurringAudienceListsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListRecurringAudienceListsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListRecurringAudienceListsResponse
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListRecurringAudienceListsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.ListRecurringAudienceListsResponse";
+                        };
+    
+                        return ListRecurringAudienceListsResponse;
                     })();
     
                     v1alpha.GetAudienceListRequest = (function() {
@@ -11814,6 +13241,8 @@
                          * @property {number|null} [creationQuotaTokensCharged] AudienceList creationQuotaTokensCharged
                          * @property {number|null} [rowCount] AudienceList rowCount
                          * @property {string|null} [errorMessage] AudienceList errorMessage
+                         * @property {number|null} [percentageCompleted] AudienceList percentageCompleted
+                         * @property {string|null} [recurringAudienceList] AudienceList recurringAudienceList
                          */
     
                         /**
@@ -11904,6 +13333,22 @@
                          */
                         AudienceList.prototype.errorMessage = null;
     
+                        /**
+                         * AudienceList percentageCompleted.
+                         * @member {number|null|undefined} percentageCompleted
+                         * @memberof google.analytics.data.v1alpha.AudienceList
+                         * @instance
+                         */
+                        AudienceList.prototype.percentageCompleted = null;
+    
+                        /**
+                         * AudienceList recurringAudienceList.
+                         * @member {string|null|undefined} recurringAudienceList
+                         * @memberof google.analytics.data.v1alpha.AudienceList
+                         * @instance
+                         */
+                        AudienceList.prototype.recurringAudienceList = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -11952,6 +13397,28 @@
                         });
     
                         /**
+                         * AudienceList _percentageCompleted.
+                         * @member {"percentageCompleted"|undefined} _percentageCompleted
+                         * @memberof google.analytics.data.v1alpha.AudienceList
+                         * @instance
+                         */
+                        Object.defineProperty(AudienceList.prototype, "_percentageCompleted", {
+                            get: $util.oneOfGetter($oneOfFields = ["percentageCompleted"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * AudienceList _recurringAudienceList.
+                         * @member {"recurringAudienceList"|undefined} _recurringAudienceList
+                         * @memberof google.analytics.data.v1alpha.AudienceList
+                         * @instance
+                         */
+                        Object.defineProperty(AudienceList.prototype, "_recurringAudienceList", {
+                            get: $util.oneOfGetter($oneOfFields = ["recurringAudienceList"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new AudienceList instance using the specified properties.
                          * @function create
                          * @memberof google.analytics.data.v1alpha.AudienceList
@@ -11994,6 +13461,10 @@
                                 writer.uint32(/* id 8, wireType 0 =*/64).int32(message.rowCount);
                             if (message.errorMessage != null && Object.hasOwnProperty.call(message, "errorMessage"))
                                 writer.uint32(/* id 9, wireType 2 =*/74).string(message.errorMessage);
+                            if (message.percentageCompleted != null && Object.hasOwnProperty.call(message, "percentageCompleted"))
+                                writer.uint32(/* id 11, wireType 1 =*/89).double(message.percentageCompleted);
+                            if (message.recurringAudienceList != null && Object.hasOwnProperty.call(message, "recurringAudienceList"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.recurringAudienceList);
                             return writer;
                         };
     
@@ -12064,6 +13535,14 @@
                                     }
                                 case 9: {
                                         message.errorMessage = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.percentageCompleted = reader.double();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.recurringAudienceList = reader.string();
                                         break;
                                     }
                                 default:
@@ -12153,6 +13632,16 @@
                                 if (!$util.isString(message.errorMessage))
                                     return "errorMessage: string expected";
                             }
+                            if (message.percentageCompleted != null && message.hasOwnProperty("percentageCompleted")) {
+                                properties._percentageCompleted = 1;
+                                if (typeof message.percentageCompleted !== "number")
+                                    return "percentageCompleted: number expected";
+                            }
+                            if (message.recurringAudienceList != null && message.hasOwnProperty("recurringAudienceList")) {
+                                properties._recurringAudienceList = 1;
+                                if (!$util.isString(message.recurringAudienceList))
+                                    return "recurringAudienceList: string expected";
+                            }
                             return null;
                         };
     
@@ -12219,6 +13708,10 @@
                                 message.rowCount = object.rowCount | 0;
                             if (object.errorMessage != null)
                                 message.errorMessage = String(object.errorMessage);
+                            if (object.percentageCompleted != null)
+                                message.percentageCompleted = Number(object.percentageCompleted);
+                            if (object.recurringAudienceList != null)
+                                message.recurringAudienceList = String(object.recurringAudienceList);
                             return message;
                         };
     
@@ -12275,6 +13768,16 @@
                                 object.errorMessage = message.errorMessage;
                                 if (options.oneofs)
                                     object._errorMessage = "errorMessage";
+                            }
+                            if (message.percentageCompleted != null && message.hasOwnProperty("percentageCompleted")) {
+                                object.percentageCompleted = options.json && !isFinite(message.percentageCompleted) ? String(message.percentageCompleted) : message.percentageCompleted;
+                                if (options.oneofs)
+                                    object._percentageCompleted = "percentageCompleted";
+                            }
+                            if (message.recurringAudienceList != null && message.hasOwnProperty("recurringAudienceList")) {
+                                object.recurringAudienceList = message.recurringAudienceList;
+                                if (options.oneofs)
+                                    object._recurringAudienceList = "recurringAudienceList";
                             }
                             return object;
                         };

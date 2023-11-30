@@ -24,6 +24,7 @@ import {
   EnvironmentsClient,
   ExperimentsClient,
   FlowsClient,
+  GeneratorsClient,
   IntentsClient,
   PagesClient,
   SecuritySettingsServiceClient,
@@ -55,6 +56,9 @@ function doStuffWithExperimentsClient(client: ExperimentsClient) {
   client.close();
 }
 function doStuffWithFlowsClient(client: FlowsClient) {
+  client.close();
+}
+function doStuffWithGeneratorsClient(client: GeneratorsClient) {
   client.close();
 }
 function doStuffWithIntentsClient(client: IntentsClient) {
@@ -111,6 +115,9 @@ function main() {
   // check that the client instance can be created
   const flowsClient = new FlowsClient();
   doStuffWithFlowsClient(flowsClient);
+  // check that the client instance can be created
+  const generatorsClient = new GeneratorsClient();
+  doStuffWithGeneratorsClient(generatorsClient);
   // check that the client instance can be created
   const intentsClient = new IntentsClient();
   doStuffWithIntentsClient(intentsClient);

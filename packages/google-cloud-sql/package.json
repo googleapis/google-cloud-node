@@ -43,7 +43,9 @@
     "docs": "jsdoc -c .jsdoc.js",
     "fix": "gts fix",
     "lint": "gts check",
-    "prepare": "npm run compile-protos && npm run compile",
+    "prepare": "npm run compile",
+    "postpack": "minifyProtoJson",
+    "prepare": "npm run compile",
     "system-test": "c8 mocha build/system-test",
     "test": "c8 mocha build/test"
   },
