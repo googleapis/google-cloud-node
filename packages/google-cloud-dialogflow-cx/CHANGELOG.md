@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v4.2.0...dialogflow-cx-v4.3.0) (2023-11-30)
+
+
+### Features
+
+* [dialogflow-cx] added Generator API ([#4837](https://github.com/googleapis/google-cloud-node/issues/4837)) ([34ddf57](https://github.com/googleapis/google-cloud-node/commit/34ddf57e56bb033a4f587c7670898322cd076d6f))
+
 ## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v4.1.0...dialogflow-cx-v4.2.0) (2023-10-18)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.5.0...batch-v1.6.0) (2023-11-30)
+
+
+### Features
+
+* [batch] add a CloudLoggingOption and use_generic_task_monitored_resource fields for users to opt out new batch monitored resource in cloud logging ([#4839](https://github.com/googleapis/google-cloud-node/issues/4839)) ([6cc50d9](https://github.com/googleapis/google-cloud-node/commit/6cc50d9b6c1d897f26228ff3e89fcbcc149570c8))
+
 ## [1.5.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.4.0...batch-v1.5.0) (2023-11-16)
 
 
