@@ -1627,7 +1627,7 @@ describe('storage', () => {
 
     it('should create a file with object retention enabled', async () => {
       const time = new Date();
-      time.setMinutes(time.getSeconds() + 1);
+      time.setMinutes(time.getMinutes() + 1);
       const retention = {mode: 'Unlocked', retainUntilTime: time.toISOString()};
       const file = new File(objectRetentionBucket, fileName);
       await objectRetentionBucket.upload(FILES.big.path, {
