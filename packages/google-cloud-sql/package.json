@@ -1,8 +1,12 @@
 {
   "name": "@google-cloud/sql",
-  "version": "0.1.0",
-  "description": "Sql client for Node.js",
-  "repository": "googleapis/nodejs-sql",
+  "version": "0.2.0",
+  "description": "Cloud SQL Admin API client for Node.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/googleapis/google-cloud-node.git",
+    "directory": "packages/google-cloud-sql"
+  },
   "license": "Apache-2.0",
   "author": "Google LLC",
   "main": "build/src/index.js",
