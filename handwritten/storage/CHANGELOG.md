@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [7.7.0](https://github.com/googleapis/nodejs-storage/compare/v7.6.0...v7.7.0) (2023-11-29)
+
+
+### Features
+
+* Implement object retention lock for bucket / files ([#2365](https://github.com/googleapis/nodejs-storage/issues/2365)) ([c140868](https://github.com/googleapis/nodejs-storage/commit/c140868bb5c7d1f0edd586fb2ca55bc613caf5d4))
+
+
+### Bug Fixes
+
+* TransferManager#downloadFileInChunks issues ([#2373](https://github.com/googleapis/nodejs-storage/issues/2373)) ([65950f3](https://github.com/googleapis/nodejs-storage/commit/65950f3d5c2ed73c56afdf579d7a949b4505e649))
+
 ## [7.6.0](https://github.com/googleapis/nodejs-storage/compare/v7.5.0...v7.6.0) (2023-11-08)
 
 
