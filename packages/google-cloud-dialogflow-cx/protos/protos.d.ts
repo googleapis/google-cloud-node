@@ -32123,6 +32123,1095 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Represents a Generators */
+                    class Generators extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new Generators service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new Generators service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Generators;
+
+                        /**
+                         * Calls ListGenerators.
+                         * @param request ListGeneratorsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListGeneratorsResponse
+                         */
+                        public listGenerators(request: google.cloud.dialogflow.cx.v3.IListGeneratorsRequest, callback: google.cloud.dialogflow.cx.v3.Generators.ListGeneratorsCallback): void;
+
+                        /**
+                         * Calls ListGenerators.
+                         * @param request ListGeneratorsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listGenerators(request: google.cloud.dialogflow.cx.v3.IListGeneratorsRequest): Promise<google.cloud.dialogflow.cx.v3.ListGeneratorsResponse>;
+
+                        /**
+                         * Calls GetGenerator.
+                         * @param request GetGeneratorRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Generator
+                         */
+                        public getGenerator(request: google.cloud.dialogflow.cx.v3.IGetGeneratorRequest, callback: google.cloud.dialogflow.cx.v3.Generators.GetGeneratorCallback): void;
+
+                        /**
+                         * Calls GetGenerator.
+                         * @param request GetGeneratorRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getGenerator(request: google.cloud.dialogflow.cx.v3.IGetGeneratorRequest): Promise<google.cloud.dialogflow.cx.v3.Generator>;
+
+                        /**
+                         * Calls CreateGenerator.
+                         * @param request CreateGeneratorRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Generator
+                         */
+                        public createGenerator(request: google.cloud.dialogflow.cx.v3.ICreateGeneratorRequest, callback: google.cloud.dialogflow.cx.v3.Generators.CreateGeneratorCallback): void;
+
+                        /**
+                         * Calls CreateGenerator.
+                         * @param request CreateGeneratorRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createGenerator(request: google.cloud.dialogflow.cx.v3.ICreateGeneratorRequest): Promise<google.cloud.dialogflow.cx.v3.Generator>;
+
+                        /**
+                         * Calls UpdateGenerator.
+                         * @param request UpdateGeneratorRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Generator
+                         */
+                        public updateGenerator(request: google.cloud.dialogflow.cx.v3.IUpdateGeneratorRequest, callback: google.cloud.dialogflow.cx.v3.Generators.UpdateGeneratorCallback): void;
+
+                        /**
+                         * Calls UpdateGenerator.
+                         * @param request UpdateGeneratorRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updateGenerator(request: google.cloud.dialogflow.cx.v3.IUpdateGeneratorRequest): Promise<google.cloud.dialogflow.cx.v3.Generator>;
+
+                        /**
+                         * Calls DeleteGenerator.
+                         * @param request DeleteGeneratorRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Empty
+                         */
+                        public deleteGenerator(request: google.cloud.dialogflow.cx.v3.IDeleteGeneratorRequest, callback: google.cloud.dialogflow.cx.v3.Generators.DeleteGeneratorCallback): void;
+
+                        /**
+                         * Calls DeleteGenerator.
+                         * @param request DeleteGeneratorRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteGenerator(request: google.cloud.dialogflow.cx.v3.IDeleteGeneratorRequest): Promise<google.protobuf.Empty>;
+                    }
+
+                    namespace Generators {
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Generators|listGenerators}.
+                         * @param error Error, if any
+                         * @param [response] ListGeneratorsResponse
+                         */
+                        type ListGeneratorsCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.ListGeneratorsResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Generators|getGenerator}.
+                         * @param error Error, if any
+                         * @param [response] Generator
+                         */
+                        type GetGeneratorCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.Generator) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Generators|createGenerator}.
+                         * @param error Error, if any
+                         * @param [response] Generator
+                         */
+                        type CreateGeneratorCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.Generator) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Generators|updateGenerator}.
+                         * @param error Error, if any
+                         * @param [response] Generator
+                         */
+                        type UpdateGeneratorCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.Generator) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Generators|deleteGenerator}.
+                         * @param error Error, if any
+                         * @param [response] Empty
+                         */
+                        type DeleteGeneratorCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                    }
+
+                    /** Properties of a Generator. */
+                    interface IGenerator {
+
+                        /** Generator name */
+                        name?: (string|null);
+
+                        /** Generator displayName */
+                        displayName?: (string|null);
+
+                        /** Generator promptText */
+                        promptText?: (google.cloud.dialogflow.cx.v3.IPhrase|null);
+
+                        /** Generator placeholders */
+                        placeholders?: (google.cloud.dialogflow.cx.v3.Generator.IPlaceholder[]|null);
+                    }
+
+                    /** Represents a Generator. */
+                    class Generator implements IGenerator {
+
+                        /**
+                         * Constructs a new Generator.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IGenerator);
+
+                        /** Generator name. */
+                        public name: string;
+
+                        /** Generator displayName. */
+                        public displayName: string;
+
+                        /** Generator promptText. */
+                        public promptText?: (google.cloud.dialogflow.cx.v3.IPhrase|null);
+
+                        /** Generator placeholders. */
+                        public placeholders: google.cloud.dialogflow.cx.v3.Generator.IPlaceholder[];
+
+                        /**
+                         * Creates a new Generator instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Generator instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IGenerator): google.cloud.dialogflow.cx.v3.Generator;
+
+                        /**
+                         * Encodes the specified Generator message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Generator.verify|verify} messages.
+                         * @param message Generator message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IGenerator, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Generator message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Generator.verify|verify} messages.
+                         * @param message Generator message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IGenerator, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Generator message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Generator
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Generator;
+
+                        /**
+                         * Decodes a Generator message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Generator
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Generator;
+
+                        /**
+                         * Verifies a Generator message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Generator message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Generator
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Generator;
+
+                        /**
+                         * Creates a plain object from a Generator message. Also converts values to other types if specified.
+                         * @param message Generator
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.Generator, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Generator to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Generator
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Generator {
+
+                        /** Properties of a Placeholder. */
+                        interface IPlaceholder {
+
+                            /** Placeholder id */
+                            id?: (string|null);
+
+                            /** Placeholder name */
+                            name?: (string|null);
+                        }
+
+                        /** Represents a Placeholder. */
+                        class Placeholder implements IPlaceholder {
+
+                            /**
+                             * Constructs a new Placeholder.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.Generator.IPlaceholder);
+
+                            /** Placeholder id. */
+                            public id: string;
+
+                            /** Placeholder name. */
+                            public name: string;
+
+                            /**
+                             * Creates a new Placeholder instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Placeholder instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.Generator.IPlaceholder): google.cloud.dialogflow.cx.v3.Generator.Placeholder;
+
+                            /**
+                             * Encodes the specified Placeholder message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Generator.Placeholder.verify|verify} messages.
+                             * @param message Placeholder message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.Generator.IPlaceholder, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Placeholder message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Generator.Placeholder.verify|verify} messages.
+                             * @param message Placeholder message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.Generator.IPlaceholder, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Placeholder message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Placeholder
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Generator.Placeholder;
+
+                            /**
+                             * Decodes a Placeholder message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Placeholder
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Generator.Placeholder;
+
+                            /**
+                             * Verifies a Placeholder message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Placeholder message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Placeholder
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Generator.Placeholder;
+
+                            /**
+                             * Creates a plain object from a Placeholder message. Also converts values to other types if specified.
+                             * @param message Placeholder
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.Generator.Placeholder, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Placeholder to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Placeholder
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a Phrase. */
+                    interface IPhrase {
+
+                        /** Phrase text */
+                        text?: (string|null);
+                    }
+
+                    /** Represents a Phrase. */
+                    class Phrase implements IPhrase {
+
+                        /**
+                         * Constructs a new Phrase.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IPhrase);
+
+                        /** Phrase text. */
+                        public text: string;
+
+                        /**
+                         * Creates a new Phrase instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Phrase instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IPhrase): google.cloud.dialogflow.cx.v3.Phrase;
+
+                        /**
+                         * Encodes the specified Phrase message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Phrase.verify|verify} messages.
+                         * @param message Phrase message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IPhrase, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Phrase message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Phrase.verify|verify} messages.
+                         * @param message Phrase message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IPhrase, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Phrase message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Phrase
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Phrase;
+
+                        /**
+                         * Decodes a Phrase message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Phrase
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Phrase;
+
+                        /**
+                         * Verifies a Phrase message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Phrase message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Phrase
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Phrase;
+
+                        /**
+                         * Creates a plain object from a Phrase message. Also converts values to other types if specified.
+                         * @param message Phrase
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.Phrase, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Phrase to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Phrase
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListGeneratorsRequest. */
+                    interface IListGeneratorsRequest {
+
+                        /** ListGeneratorsRequest parent */
+                        parent?: (string|null);
+
+                        /** ListGeneratorsRequest languageCode */
+                        languageCode?: (string|null);
+
+                        /** ListGeneratorsRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListGeneratorsRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a ListGeneratorsRequest. */
+                    class ListGeneratorsRequest implements IListGeneratorsRequest {
+
+                        /**
+                         * Constructs a new ListGeneratorsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IListGeneratorsRequest);
+
+                        /** ListGeneratorsRequest parent. */
+                        public parent: string;
+
+                        /** ListGeneratorsRequest languageCode. */
+                        public languageCode: string;
+
+                        /** ListGeneratorsRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListGeneratorsRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new ListGeneratorsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListGeneratorsRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IListGeneratorsRequest): google.cloud.dialogflow.cx.v3.ListGeneratorsRequest;
+
+                        /**
+                         * Encodes the specified ListGeneratorsRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListGeneratorsRequest.verify|verify} messages.
+                         * @param message ListGeneratorsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IListGeneratorsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListGeneratorsRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListGeneratorsRequest.verify|verify} messages.
+                         * @param message ListGeneratorsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IListGeneratorsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListGeneratorsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListGeneratorsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ListGeneratorsRequest;
+
+                        /**
+                         * Decodes a ListGeneratorsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListGeneratorsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ListGeneratorsRequest;
+
+                        /**
+                         * Verifies a ListGeneratorsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListGeneratorsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListGeneratorsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ListGeneratorsRequest;
+
+                        /**
+                         * Creates a plain object from a ListGeneratorsRequest message. Also converts values to other types if specified.
+                         * @param message ListGeneratorsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.ListGeneratorsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListGeneratorsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListGeneratorsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListGeneratorsResponse. */
+                    interface IListGeneratorsResponse {
+
+                        /** ListGeneratorsResponse generators */
+                        generators?: (google.cloud.dialogflow.cx.v3.IGenerator[]|null);
+
+                        /** ListGeneratorsResponse nextPageToken */
+                        nextPageToken?: (string|null);
+                    }
+
+                    /** Represents a ListGeneratorsResponse. */
+                    class ListGeneratorsResponse implements IListGeneratorsResponse {
+
+                        /**
+                         * Constructs a new ListGeneratorsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IListGeneratorsResponse);
+
+                        /** ListGeneratorsResponse generators. */
+                        public generators: google.cloud.dialogflow.cx.v3.IGenerator[];
+
+                        /** ListGeneratorsResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /**
+                         * Creates a new ListGeneratorsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListGeneratorsResponse instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IListGeneratorsResponse): google.cloud.dialogflow.cx.v3.ListGeneratorsResponse;
+
+                        /**
+                         * Encodes the specified ListGeneratorsResponse message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListGeneratorsResponse.verify|verify} messages.
+                         * @param message ListGeneratorsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IListGeneratorsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListGeneratorsResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListGeneratorsResponse.verify|verify} messages.
+                         * @param message ListGeneratorsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IListGeneratorsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListGeneratorsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListGeneratorsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ListGeneratorsResponse;
+
+                        /**
+                         * Decodes a ListGeneratorsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListGeneratorsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ListGeneratorsResponse;
+
+                        /**
+                         * Verifies a ListGeneratorsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListGeneratorsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListGeneratorsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ListGeneratorsResponse;
+
+                        /**
+                         * Creates a plain object from a ListGeneratorsResponse message. Also converts values to other types if specified.
+                         * @param message ListGeneratorsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.ListGeneratorsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListGeneratorsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListGeneratorsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetGeneratorRequest. */
+                    interface IGetGeneratorRequest {
+
+                        /** GetGeneratorRequest name */
+                        name?: (string|null);
+
+                        /** GetGeneratorRequest languageCode */
+                        languageCode?: (string|null);
+                    }
+
+                    /** Represents a GetGeneratorRequest. */
+                    class GetGeneratorRequest implements IGetGeneratorRequest {
+
+                        /**
+                         * Constructs a new GetGeneratorRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IGetGeneratorRequest);
+
+                        /** GetGeneratorRequest name. */
+                        public name: string;
+
+                        /** GetGeneratorRequest languageCode. */
+                        public languageCode: string;
+
+                        /**
+                         * Creates a new GetGeneratorRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetGeneratorRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IGetGeneratorRequest): google.cloud.dialogflow.cx.v3.GetGeneratorRequest;
+
+                        /**
+                         * Encodes the specified GetGeneratorRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.GetGeneratorRequest.verify|verify} messages.
+                         * @param message GetGeneratorRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IGetGeneratorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetGeneratorRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.GetGeneratorRequest.verify|verify} messages.
+                         * @param message GetGeneratorRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IGetGeneratorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetGeneratorRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetGeneratorRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.GetGeneratorRequest;
+
+                        /**
+                         * Decodes a GetGeneratorRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetGeneratorRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.GetGeneratorRequest;
+
+                        /**
+                         * Verifies a GetGeneratorRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetGeneratorRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetGeneratorRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.GetGeneratorRequest;
+
+                        /**
+                         * Creates a plain object from a GetGeneratorRequest message. Also converts values to other types if specified.
+                         * @param message GetGeneratorRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.GetGeneratorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetGeneratorRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetGeneratorRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CreateGeneratorRequest. */
+                    interface ICreateGeneratorRequest {
+
+                        /** CreateGeneratorRequest parent */
+                        parent?: (string|null);
+
+                        /** CreateGeneratorRequest generator */
+                        generator?: (google.cloud.dialogflow.cx.v3.IGenerator|null);
+
+                        /** CreateGeneratorRequest languageCode */
+                        languageCode?: (string|null);
+                    }
+
+                    /** Represents a CreateGeneratorRequest. */
+                    class CreateGeneratorRequest implements ICreateGeneratorRequest {
+
+                        /**
+                         * Constructs a new CreateGeneratorRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.ICreateGeneratorRequest);
+
+                        /** CreateGeneratorRequest parent. */
+                        public parent: string;
+
+                        /** CreateGeneratorRequest generator. */
+                        public generator?: (google.cloud.dialogflow.cx.v3.IGenerator|null);
+
+                        /** CreateGeneratorRequest languageCode. */
+                        public languageCode: string;
+
+                        /**
+                         * Creates a new CreateGeneratorRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreateGeneratorRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.ICreateGeneratorRequest): google.cloud.dialogflow.cx.v3.CreateGeneratorRequest;
+
+                        /**
+                         * Encodes the specified CreateGeneratorRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.CreateGeneratorRequest.verify|verify} messages.
+                         * @param message CreateGeneratorRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.ICreateGeneratorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreateGeneratorRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.CreateGeneratorRequest.verify|verify} messages.
+                         * @param message CreateGeneratorRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.ICreateGeneratorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreateGeneratorRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreateGeneratorRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.CreateGeneratorRequest;
+
+                        /**
+                         * Decodes a CreateGeneratorRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreateGeneratorRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.CreateGeneratorRequest;
+
+                        /**
+                         * Verifies a CreateGeneratorRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreateGeneratorRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreateGeneratorRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.CreateGeneratorRequest;
+
+                        /**
+                         * Creates a plain object from a CreateGeneratorRequest message. Also converts values to other types if specified.
+                         * @param message CreateGeneratorRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.CreateGeneratorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreateGeneratorRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreateGeneratorRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an UpdateGeneratorRequest. */
+                    interface IUpdateGeneratorRequest {
+
+                        /** UpdateGeneratorRequest generator */
+                        generator?: (google.cloud.dialogflow.cx.v3.IGenerator|null);
+
+                        /** UpdateGeneratorRequest languageCode */
+                        languageCode?: (string|null);
+
+                        /** UpdateGeneratorRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+                    }
+
+                    /** Represents an UpdateGeneratorRequest. */
+                    class UpdateGeneratorRequest implements IUpdateGeneratorRequest {
+
+                        /**
+                         * Constructs a new UpdateGeneratorRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IUpdateGeneratorRequest);
+
+                        /** UpdateGeneratorRequest generator. */
+                        public generator?: (google.cloud.dialogflow.cx.v3.IGenerator|null);
+
+                        /** UpdateGeneratorRequest languageCode. */
+                        public languageCode: string;
+
+                        /** UpdateGeneratorRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /**
+                         * Creates a new UpdateGeneratorRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdateGeneratorRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IUpdateGeneratorRequest): google.cloud.dialogflow.cx.v3.UpdateGeneratorRequest;
+
+                        /**
+                         * Encodes the specified UpdateGeneratorRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.UpdateGeneratorRequest.verify|verify} messages.
+                         * @param message UpdateGeneratorRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IUpdateGeneratorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdateGeneratorRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.UpdateGeneratorRequest.verify|verify} messages.
+                         * @param message UpdateGeneratorRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IUpdateGeneratorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdateGeneratorRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdateGeneratorRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.UpdateGeneratorRequest;
+
+                        /**
+                         * Decodes an UpdateGeneratorRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdateGeneratorRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.UpdateGeneratorRequest;
+
+                        /**
+                         * Verifies an UpdateGeneratorRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdateGeneratorRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdateGeneratorRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.UpdateGeneratorRequest;
+
+                        /**
+                         * Creates a plain object from an UpdateGeneratorRequest message. Also converts values to other types if specified.
+                         * @param message UpdateGeneratorRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.UpdateGeneratorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdateGeneratorRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdateGeneratorRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeleteGeneratorRequest. */
+                    interface IDeleteGeneratorRequest {
+
+                        /** DeleteGeneratorRequest name */
+                        name?: (string|null);
+
+                        /** DeleteGeneratorRequest force */
+                        force?: (boolean|null);
+                    }
+
+                    /** Represents a DeleteGeneratorRequest. */
+                    class DeleteGeneratorRequest implements IDeleteGeneratorRequest {
+
+                        /**
+                         * Constructs a new DeleteGeneratorRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IDeleteGeneratorRequest);
+
+                        /** DeleteGeneratorRequest name. */
+                        public name: string;
+
+                        /** DeleteGeneratorRequest force. */
+                        public force: boolean;
+
+                        /**
+                         * Creates a new DeleteGeneratorRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteGeneratorRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IDeleteGeneratorRequest): google.cloud.dialogflow.cx.v3.DeleteGeneratorRequest;
+
+                        /**
+                         * Encodes the specified DeleteGeneratorRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.DeleteGeneratorRequest.verify|verify} messages.
+                         * @param message DeleteGeneratorRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IDeleteGeneratorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteGeneratorRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.DeleteGeneratorRequest.verify|verify} messages.
+                         * @param message DeleteGeneratorRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IDeleteGeneratorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteGeneratorRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteGeneratorRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.DeleteGeneratorRequest;
+
+                        /**
+                         * Decodes a DeleteGeneratorRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteGeneratorRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.DeleteGeneratorRequest;
+
+                        /**
+                         * Verifies a DeleteGeneratorRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteGeneratorRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteGeneratorRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.DeleteGeneratorRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteGeneratorRequest message. Also converts values to other types if specified.
+                         * @param message DeleteGeneratorRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.DeleteGeneratorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteGeneratorRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteGeneratorRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Represents a SecuritySettingsService */
                     class SecuritySettingsService extends $protobuf.rpc.Service {
 

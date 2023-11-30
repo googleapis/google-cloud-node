@@ -599,6 +599,74 @@
         }
       }
     },
+    "Generators": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GeneratorsClient",
+          "rpcs": {
+            "GetGenerator": {
+              "methods": [
+                "getGenerator"
+              ]
+            },
+            "CreateGenerator": {
+              "methods": [
+                "createGenerator"
+              ]
+            },
+            "UpdateGenerator": {
+              "methods": [
+                "updateGenerator"
+              ]
+            },
+            "DeleteGenerator": {
+              "methods": [
+                "deleteGenerator"
+              ]
+            },
+            "ListGenerators": {
+              "methods": [
+                "listGenerators",
+                "listGeneratorsStream",
+                "listGeneratorsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GeneratorsClient",
+          "rpcs": {
+            "GetGenerator": {
+              "methods": [
+                "getGenerator"
+              ]
+            },
+            "CreateGenerator": {
+              "methods": [
+                "createGenerator"
+              ]
+            },
+            "UpdateGenerator": {
+              "methods": [
+                "updateGenerator"
+              ]
+            },
+            "DeleteGenerator": {
+              "methods": [
+                "deleteGenerator"
+              ]
+            },
+            "ListGenerators": {
+              "methods": [
+                "listGenerators",
+                "listGeneratorsStream",
+                "listGeneratorsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "Intents": {
       "clients": {
         "grpc": {

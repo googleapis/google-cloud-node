@@ -58,6 +58,11 @@
   * [Flows.train_flow](#flows.train_flow)
   * [Flows.update_flow](#flows.update_flow)
   * [Flows.validate_flow](#flows.validate_flow)
+  * [Generators.create_generator](#generators.create_generator)
+  * [Generators.delete_generator](#generators.delete_generator)
+  * [Generators.get_generator](#generators.get_generator)
+  * [Generators.list_generators](#generators.list_generators)
+  * [Generators.update_generator](#generators.update_generator)
   * [Intents.create_intent](#intents.create_intent)
   * [Intents.delete_intent](#intents.delete_intent)
   * [Intents.export_intents](#intents.export_intents)
@@ -1013,6 +1018,91 @@ __Usage:__
 
 
 `node packages/google-cloud-dialogflow-cx/samples/generated/v3/flows.validate_flow.js`
+
+
+-----
+
+
+
+
+### Generators.create_generator
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3/generators.create_generator.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3/generators.create_generator.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3/generators.create_generator.js`
+
+
+-----
+
+
+
+
+### Generators.delete_generator
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3/generators.delete_generator.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3/generators.delete_generator.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3/generators.delete_generator.js`
+
+
+-----
+
+
+
+
+### Generators.get_generator
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3/generators.get_generator.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3/generators.get_generator.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3/generators.get_generator.js`
+
+
+-----
+
+
+
+
+### Generators.list_generators
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3/generators.list_generators.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3/generators.list_generators.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3/generators.list_generators.js`
+
+
+-----
+
+
+
+
+### Generators.update_generator
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3/generators.update_generator.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3/generators.update_generator.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3/generators.update_generator.js`
 
 
 -----
