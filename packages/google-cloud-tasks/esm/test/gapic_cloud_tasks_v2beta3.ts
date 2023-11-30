@@ -16,30 +16,41 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as protos from '../protos/protos';
-import * as assert from 'assert';
+// @ts-ignore
+import * as protos from '../../protos/protos.js';
+import assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as cloudtasksModule from '../src';
+import * as cloudtasksModule from '../src/index.js';
 
 import {PassThrough} from 'stream';
 
 import {protobuf, LocationProtos} from 'google-gax';
+import fs from 'fs';
+import path from 'path';
+import {fileURLToPath} from 'url';
 
+// @ts-ignore
+const dirname = path.dirname(fileURLToPath(import.meta.url));
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
 const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+  JSON.parse(
+    fs.readFileSync(
+      path.join(dirname, '..', '..', 'protos/protos.json'),
+      'utf8'
+    )
+  )
+);
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
   let type = root.lookupType(typeName) as protobuf.Type;
   for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
+    type = type?.fields[field]?.resolvedType as protobuf.Type;
   }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+  return type?.fields[fields[fields.length - 1]]?.defaultValue ?? null;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
@@ -127,38 +138,38 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v2.CloudTasksClient', () => {
+describe('v2beta3.CloudTasksClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath = cloudtasksModule.v2.CloudTasksClient.servicePath;
+      const servicePath = cloudtasksModule.v2beta3.CloudTasksClient.servicePath;
       assert(servicePath);
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint = cloudtasksModule.v2.CloudTasksClient.apiEndpoint;
+      const apiEndpoint = cloudtasksModule.v2beta3.CloudTasksClient.apiEndpoint;
       assert(apiEndpoint);
     });
 
     it('has port', () => {
-      const port = cloudtasksModule.v2.CloudTasksClient.port;
+      const port = cloudtasksModule.v2beta3.CloudTasksClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient();
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         fallback: true,
       });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -168,7 +179,7 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('has close method for the initialized client', done => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -180,7 +191,7 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('has close method for the non-initialized client', done => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -192,7 +203,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -204,7 +215,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -227,22 +238,22 @@ describe('v2.CloudTasksClient', () => {
 
   describe('getQueue', () => {
     it('invokes getQueue without error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.GetQueueRequest()
+        new protos.google.cloud.tasks.v2beta3.GetQueueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.GetQueueRequest',
+        '.google.cloud.tasks.v2beta3.GetQueueRequest',
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.Queue()
+        new protos.google.cloud.tasks.v2beta3.Queue()
       );
       client.innerApiCalls.getQueue = stubSimpleCall(expectedResponse);
       const [response] = await client.getQueue(request);
@@ -258,22 +269,22 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes getQueue without error using callback', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.GetQueueRequest()
+        new protos.google.cloud.tasks.v2beta3.GetQueueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.GetQueueRequest',
+        '.google.cloud.tasks.v2beta3.GetQueueRequest',
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.Queue()
+        new protos.google.cloud.tasks.v2beta3.Queue()
       );
       client.innerApiCalls.getQueue =
         stubSimpleCallWithCallback(expectedResponse);
@@ -282,7 +293,7 @@ describe('v2.CloudTasksClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.tasks.v2.IQueue | null
+            result?: protos.google.cloud.tasks.v2beta3.IQueue | null
           ) => {
             if (err) {
               reject(err);
@@ -305,20 +316,20 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes getQueue with error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.GetQueueRequest()
+        new protos.google.cloud.tasks.v2beta3.GetQueueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.GetQueueRequest',
+        '.google.cloud.tasks.v2beta3.GetQueueRequest',
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getQueue = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getQueue(request), expectedError);
@@ -333,16 +344,16 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes getQueue with closed client', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.GetQueueRequest()
+        new protos.google.cloud.tasks.v2beta3.GetQueueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.GetQueueRequest',
+        '.google.cloud.tasks.v2beta3.GetQueueRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -354,22 +365,22 @@ describe('v2.CloudTasksClient', () => {
 
   describe('createQueue', () => {
     it('invokes createQueue without error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.CreateQueueRequest()
+        new protos.google.cloud.tasks.v2beta3.CreateQueueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.CreateQueueRequest',
+        '.google.cloud.tasks.v2beta3.CreateQueueRequest',
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.Queue()
+        new protos.google.cloud.tasks.v2beta3.Queue()
       );
       client.innerApiCalls.createQueue = stubSimpleCall(expectedResponse);
       const [response] = await client.createQueue(request);
@@ -385,22 +396,22 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes createQueue without error using callback', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.CreateQueueRequest()
+        new protos.google.cloud.tasks.v2beta3.CreateQueueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.CreateQueueRequest',
+        '.google.cloud.tasks.v2beta3.CreateQueueRequest',
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.Queue()
+        new protos.google.cloud.tasks.v2beta3.Queue()
       );
       client.innerApiCalls.createQueue =
         stubSimpleCallWithCallback(expectedResponse);
@@ -409,7 +420,7 @@ describe('v2.CloudTasksClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.tasks.v2.IQueue | null
+            result?: protos.google.cloud.tasks.v2beta3.IQueue | null
           ) => {
             if (err) {
               reject(err);
@@ -432,20 +443,20 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes createQueue with error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.CreateQueueRequest()
+        new protos.google.cloud.tasks.v2beta3.CreateQueueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.CreateQueueRequest',
+        '.google.cloud.tasks.v2beta3.CreateQueueRequest',
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createQueue = stubSimpleCall(
         undefined,
@@ -463,16 +474,16 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes createQueue with closed client', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.CreateQueueRequest()
+        new protos.google.cloud.tasks.v2beta3.CreateQueueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.CreateQueueRequest',
+        '.google.cloud.tasks.v2beta3.CreateQueueRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -484,23 +495,23 @@ describe('v2.CloudTasksClient', () => {
 
   describe('updateQueue', () => {
     it('invokes updateQueue without error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.UpdateQueueRequest()
+        new protos.google.cloud.tasks.v2beta3.UpdateQueueRequest()
       );
       request.queue ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.UpdateQueueRequest',
+        '.google.cloud.tasks.v2beta3.UpdateQueueRequest',
         ['queue', 'name']
       );
       request.queue.name = defaultValue1;
-      const expectedHeaderRequestParams = `queue.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `queue.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.Queue()
+        new protos.google.cloud.tasks.v2beta3.Queue()
       );
       client.innerApiCalls.updateQueue = stubSimpleCall(expectedResponse);
       const [response] = await client.updateQueue(request);
@@ -516,23 +527,23 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes updateQueue without error using callback', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.UpdateQueueRequest()
+        new protos.google.cloud.tasks.v2beta3.UpdateQueueRequest()
       );
       request.queue ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.UpdateQueueRequest',
+        '.google.cloud.tasks.v2beta3.UpdateQueueRequest',
         ['queue', 'name']
       );
       request.queue.name = defaultValue1;
-      const expectedHeaderRequestParams = `queue.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `queue.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.Queue()
+        new protos.google.cloud.tasks.v2beta3.Queue()
       );
       client.innerApiCalls.updateQueue =
         stubSimpleCallWithCallback(expectedResponse);
@@ -541,7 +552,7 @@ describe('v2.CloudTasksClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.tasks.v2.IQueue | null
+            result?: protos.google.cloud.tasks.v2beta3.IQueue | null
           ) => {
             if (err) {
               reject(err);
@@ -564,21 +575,21 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes updateQueue with error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.UpdateQueueRequest()
+        new protos.google.cloud.tasks.v2beta3.UpdateQueueRequest()
       );
       request.queue ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.UpdateQueueRequest',
+        '.google.cloud.tasks.v2beta3.UpdateQueueRequest',
         ['queue', 'name']
       );
       request.queue.name = defaultValue1;
-      const expectedHeaderRequestParams = `queue.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `queue.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateQueue = stubSimpleCall(
         undefined,
@@ -596,17 +607,17 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes updateQueue with closed client', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.UpdateQueueRequest()
+        new protos.google.cloud.tasks.v2beta3.UpdateQueueRequest()
       );
       request.queue ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.UpdateQueueRequest',
+        '.google.cloud.tasks.v2beta3.UpdateQueueRequest',
         ['queue', 'name']
       );
       request.queue.name = defaultValue1;
@@ -618,20 +629,20 @@ describe('v2.CloudTasksClient', () => {
 
   describe('deleteQueue', () => {
     it('invokes deleteQueue without error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.DeleteQueueRequest()
+        new protos.google.cloud.tasks.v2beta3.DeleteQueueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.DeleteQueueRequest',
+        '.google.cloud.tasks.v2beta3.DeleteQueueRequest',
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -649,20 +660,20 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes deleteQueue without error using callback', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.DeleteQueueRequest()
+        new protos.google.cloud.tasks.v2beta3.DeleteQueueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.DeleteQueueRequest',
+        '.google.cloud.tasks.v2beta3.DeleteQueueRequest',
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -696,20 +707,20 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes deleteQueue with error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.DeleteQueueRequest()
+        new protos.google.cloud.tasks.v2beta3.DeleteQueueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.DeleteQueueRequest',
+        '.google.cloud.tasks.v2beta3.DeleteQueueRequest',
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteQueue = stubSimpleCall(
         undefined,
@@ -727,16 +738,16 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes deleteQueue with closed client', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.DeleteQueueRequest()
+        new protos.google.cloud.tasks.v2beta3.DeleteQueueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.DeleteQueueRequest',
+        '.google.cloud.tasks.v2beta3.DeleteQueueRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -748,22 +759,22 @@ describe('v2.CloudTasksClient', () => {
 
   describe('purgeQueue', () => {
     it('invokes purgeQueue without error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.PurgeQueueRequest()
+        new protos.google.cloud.tasks.v2beta3.PurgeQueueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.PurgeQueueRequest',
+        '.google.cloud.tasks.v2beta3.PurgeQueueRequest',
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.Queue()
+        new protos.google.cloud.tasks.v2beta3.Queue()
       );
       client.innerApiCalls.purgeQueue = stubSimpleCall(expectedResponse);
       const [response] = await client.purgeQueue(request);
@@ -779,22 +790,22 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes purgeQueue without error using callback', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.PurgeQueueRequest()
+        new protos.google.cloud.tasks.v2beta3.PurgeQueueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.PurgeQueueRequest',
+        '.google.cloud.tasks.v2beta3.PurgeQueueRequest',
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.Queue()
+        new protos.google.cloud.tasks.v2beta3.Queue()
       );
       client.innerApiCalls.purgeQueue =
         stubSimpleCallWithCallback(expectedResponse);
@@ -803,7 +814,7 @@ describe('v2.CloudTasksClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.tasks.v2.IQueue | null
+            result?: protos.google.cloud.tasks.v2beta3.IQueue | null
           ) => {
             if (err) {
               reject(err);
@@ -826,20 +837,20 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes purgeQueue with error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.PurgeQueueRequest()
+        new protos.google.cloud.tasks.v2beta3.PurgeQueueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.PurgeQueueRequest',
+        '.google.cloud.tasks.v2beta3.PurgeQueueRequest',
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.purgeQueue = stubSimpleCall(
         undefined,
@@ -857,16 +868,16 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes purgeQueue with closed client', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.PurgeQueueRequest()
+        new protos.google.cloud.tasks.v2beta3.PurgeQueueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.PurgeQueueRequest',
+        '.google.cloud.tasks.v2beta3.PurgeQueueRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -878,22 +889,22 @@ describe('v2.CloudTasksClient', () => {
 
   describe('pauseQueue', () => {
     it('invokes pauseQueue without error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.PauseQueueRequest()
+        new protos.google.cloud.tasks.v2beta3.PauseQueueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.PauseQueueRequest',
+        '.google.cloud.tasks.v2beta3.PauseQueueRequest',
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.Queue()
+        new protos.google.cloud.tasks.v2beta3.Queue()
       );
       client.innerApiCalls.pauseQueue = stubSimpleCall(expectedResponse);
       const [response] = await client.pauseQueue(request);
@@ -909,22 +920,22 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes pauseQueue without error using callback', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.PauseQueueRequest()
+        new protos.google.cloud.tasks.v2beta3.PauseQueueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.PauseQueueRequest',
+        '.google.cloud.tasks.v2beta3.PauseQueueRequest',
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.Queue()
+        new protos.google.cloud.tasks.v2beta3.Queue()
       );
       client.innerApiCalls.pauseQueue =
         stubSimpleCallWithCallback(expectedResponse);
@@ -933,7 +944,7 @@ describe('v2.CloudTasksClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.tasks.v2.IQueue | null
+            result?: protos.google.cloud.tasks.v2beta3.IQueue | null
           ) => {
             if (err) {
               reject(err);
@@ -956,20 +967,20 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes pauseQueue with error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.PauseQueueRequest()
+        new protos.google.cloud.tasks.v2beta3.PauseQueueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.PauseQueueRequest',
+        '.google.cloud.tasks.v2beta3.PauseQueueRequest',
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.pauseQueue = stubSimpleCall(
         undefined,
@@ -987,16 +998,16 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes pauseQueue with closed client', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.PauseQueueRequest()
+        new protos.google.cloud.tasks.v2beta3.PauseQueueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.PauseQueueRequest',
+        '.google.cloud.tasks.v2beta3.PauseQueueRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1008,22 +1019,22 @@ describe('v2.CloudTasksClient', () => {
 
   describe('resumeQueue', () => {
     it('invokes resumeQueue without error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.ResumeQueueRequest()
+        new protos.google.cloud.tasks.v2beta3.ResumeQueueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.ResumeQueueRequest',
+        '.google.cloud.tasks.v2beta3.ResumeQueueRequest',
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.Queue()
+        new protos.google.cloud.tasks.v2beta3.Queue()
       );
       client.innerApiCalls.resumeQueue = stubSimpleCall(expectedResponse);
       const [response] = await client.resumeQueue(request);
@@ -1039,22 +1050,22 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes resumeQueue without error using callback', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.ResumeQueueRequest()
+        new protos.google.cloud.tasks.v2beta3.ResumeQueueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.ResumeQueueRequest',
+        '.google.cloud.tasks.v2beta3.ResumeQueueRequest',
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.Queue()
+        new protos.google.cloud.tasks.v2beta3.Queue()
       );
       client.innerApiCalls.resumeQueue =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1063,7 +1074,7 @@ describe('v2.CloudTasksClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.tasks.v2.IQueue | null
+            result?: protos.google.cloud.tasks.v2beta3.IQueue | null
           ) => {
             if (err) {
               reject(err);
@@ -1086,20 +1097,20 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes resumeQueue with error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.ResumeQueueRequest()
+        new protos.google.cloud.tasks.v2beta3.ResumeQueueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.ResumeQueueRequest',
+        '.google.cloud.tasks.v2beta3.ResumeQueueRequest',
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resumeQueue = stubSimpleCall(
         undefined,
@@ -1117,16 +1128,16 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes resumeQueue with closed client', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.ResumeQueueRequest()
+        new protos.google.cloud.tasks.v2beta3.ResumeQueueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.ResumeQueueRequest',
+        '.google.cloud.tasks.v2beta3.ResumeQueueRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1138,7 +1149,7 @@ describe('v2.CloudTasksClient', () => {
 
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1151,7 +1162,7 @@ describe('v2.CloudTasksClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1169,7 +1180,7 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes getIamPolicy without error using callback', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1182,7 +1193,7 @@ describe('v2.CloudTasksClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1216,7 +1227,7 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes getIamPolicy with error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1229,7 +1240,7 @@ describe('v2.CloudTasksClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIamPolicy = stubSimpleCall(
         undefined,
@@ -1247,7 +1258,7 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes getIamPolicy with closed client', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1268,7 +1279,7 @@ describe('v2.CloudTasksClient', () => {
 
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1281,7 +1292,7 @@ describe('v2.CloudTasksClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1299,7 +1310,7 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes setIamPolicy without error using callback', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1312,7 +1323,7 @@ describe('v2.CloudTasksClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1346,7 +1357,7 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes setIamPolicy with error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1359,7 +1370,7 @@ describe('v2.CloudTasksClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setIamPolicy = stubSimpleCall(
         undefined,
@@ -1377,7 +1388,7 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes setIamPolicy with closed client', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1398,7 +1409,7 @@ describe('v2.CloudTasksClient', () => {
 
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1411,7 +1422,7 @@ describe('v2.CloudTasksClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -1430,7 +1441,7 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes testIamPermissions without error using callback', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1443,7 +1454,7 @@ describe('v2.CloudTasksClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -1477,7 +1488,7 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes testIamPermissions with error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1490,7 +1501,7 @@ describe('v2.CloudTasksClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,
@@ -1508,7 +1519,7 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes testIamPermissions with closed client', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1529,22 +1540,22 @@ describe('v2.CloudTasksClient', () => {
 
   describe('getTask', () => {
     it('invokes getTask without error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.GetTaskRequest()
+        new protos.google.cloud.tasks.v2beta3.GetTaskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.GetTaskRequest',
+        '.google.cloud.tasks.v2beta3.GetTaskRequest',
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.Task()
+        new protos.google.cloud.tasks.v2beta3.Task()
       );
       client.innerApiCalls.getTask = stubSimpleCall(expectedResponse);
       const [response] = await client.getTask(request);
@@ -1560,22 +1571,22 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes getTask without error using callback', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.GetTaskRequest()
+        new protos.google.cloud.tasks.v2beta3.GetTaskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.GetTaskRequest',
+        '.google.cloud.tasks.v2beta3.GetTaskRequest',
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.Task()
+        new protos.google.cloud.tasks.v2beta3.Task()
       );
       client.innerApiCalls.getTask =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1584,7 +1595,7 @@ describe('v2.CloudTasksClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.tasks.v2.ITask | null
+            result?: protos.google.cloud.tasks.v2beta3.ITask | null
           ) => {
             if (err) {
               reject(err);
@@ -1607,20 +1618,20 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes getTask with error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.GetTaskRequest()
+        new protos.google.cloud.tasks.v2beta3.GetTaskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.GetTaskRequest',
+        '.google.cloud.tasks.v2beta3.GetTaskRequest',
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTask = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getTask(request), expectedError);
@@ -1635,16 +1646,16 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes getTask with closed client', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.GetTaskRequest()
+        new protos.google.cloud.tasks.v2beta3.GetTaskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.GetTaskRequest',
+        '.google.cloud.tasks.v2beta3.GetTaskRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1656,22 +1667,22 @@ describe('v2.CloudTasksClient', () => {
 
   describe('createTask', () => {
     it('invokes createTask without error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.CreateTaskRequest()
+        new protos.google.cloud.tasks.v2beta3.CreateTaskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.CreateTaskRequest',
+        '.google.cloud.tasks.v2beta3.CreateTaskRequest',
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.Task()
+        new protos.google.cloud.tasks.v2beta3.Task()
       );
       client.innerApiCalls.createTask = stubSimpleCall(expectedResponse);
       const [response] = await client.createTask(request);
@@ -1687,22 +1698,22 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes createTask without error using callback', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.CreateTaskRequest()
+        new protos.google.cloud.tasks.v2beta3.CreateTaskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.CreateTaskRequest',
+        '.google.cloud.tasks.v2beta3.CreateTaskRequest',
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.Task()
+        new protos.google.cloud.tasks.v2beta3.Task()
       );
       client.innerApiCalls.createTask =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1711,7 +1722,7 @@ describe('v2.CloudTasksClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.tasks.v2.ITask | null
+            result?: protos.google.cloud.tasks.v2beta3.ITask | null
           ) => {
             if (err) {
               reject(err);
@@ -1734,20 +1745,20 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes createTask with error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.CreateTaskRequest()
+        new protos.google.cloud.tasks.v2beta3.CreateTaskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.CreateTaskRequest',
+        '.google.cloud.tasks.v2beta3.CreateTaskRequest',
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTask = stubSimpleCall(
         undefined,
@@ -1765,16 +1776,16 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes createTask with closed client', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.CreateTaskRequest()
+        new protos.google.cloud.tasks.v2beta3.CreateTaskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.CreateTaskRequest',
+        '.google.cloud.tasks.v2beta3.CreateTaskRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1786,20 +1797,20 @@ describe('v2.CloudTasksClient', () => {
 
   describe('deleteTask', () => {
     it('invokes deleteTask without error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.DeleteTaskRequest()
+        new protos.google.cloud.tasks.v2beta3.DeleteTaskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.DeleteTaskRequest',
+        '.google.cloud.tasks.v2beta3.DeleteTaskRequest',
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1817,20 +1828,20 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes deleteTask without error using callback', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.DeleteTaskRequest()
+        new protos.google.cloud.tasks.v2beta3.DeleteTaskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.DeleteTaskRequest',
+        '.google.cloud.tasks.v2beta3.DeleteTaskRequest',
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1864,20 +1875,20 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes deleteTask with error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.DeleteTaskRequest()
+        new protos.google.cloud.tasks.v2beta3.DeleteTaskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.DeleteTaskRequest',
+        '.google.cloud.tasks.v2beta3.DeleteTaskRequest',
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTask = stubSimpleCall(
         undefined,
@@ -1895,16 +1906,16 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes deleteTask with closed client', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.DeleteTaskRequest()
+        new protos.google.cloud.tasks.v2beta3.DeleteTaskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.DeleteTaskRequest',
+        '.google.cloud.tasks.v2beta3.DeleteTaskRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1916,22 +1927,22 @@ describe('v2.CloudTasksClient', () => {
 
   describe('runTask', () => {
     it('invokes runTask without error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.RunTaskRequest()
+        new protos.google.cloud.tasks.v2beta3.RunTaskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.RunTaskRequest',
+        '.google.cloud.tasks.v2beta3.RunTaskRequest',
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.Task()
+        new protos.google.cloud.tasks.v2beta3.Task()
       );
       client.innerApiCalls.runTask = stubSimpleCall(expectedResponse);
       const [response] = await client.runTask(request);
@@ -1947,22 +1958,22 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes runTask without error using callback', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.RunTaskRequest()
+        new protos.google.cloud.tasks.v2beta3.RunTaskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.RunTaskRequest',
+        '.google.cloud.tasks.v2beta3.RunTaskRequest',
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.Task()
+        new protos.google.cloud.tasks.v2beta3.Task()
       );
       client.innerApiCalls.runTask =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1971,7 +1982,7 @@ describe('v2.CloudTasksClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.tasks.v2.ITask | null
+            result?: protos.google.cloud.tasks.v2beta3.ITask | null
           ) => {
             if (err) {
               reject(err);
@@ -1994,20 +2005,20 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes runTask with error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.RunTaskRequest()
+        new protos.google.cloud.tasks.v2beta3.RunTaskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.RunTaskRequest',
+        '.google.cloud.tasks.v2beta3.RunTaskRequest',
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.runTask = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.runTask(request), expectedError);
@@ -2022,16 +2033,16 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes runTask with closed client', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.RunTaskRequest()
+        new protos.google.cloud.tasks.v2beta3.RunTaskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.RunTaskRequest',
+        '.google.cloud.tasks.v2beta3.RunTaskRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2041,26 +2052,182 @@ describe('v2.CloudTasksClient', () => {
     });
   });
 
-  describe('listQueues', () => {
-    it('invokes listQueues without error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+  describe('bufferTask', () => {
+    it('invokes bufferTask without error', async () => {
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.ListQueuesRequest()
+        new protos.google.cloud.tasks.v2beta3.BufferTaskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.ListQueuesRequest',
+        '.google.cloud.tasks.v2beta3.BufferTaskRequest',
+        ['queue']
+      );
+      request.queue = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta3.BufferTaskRequest',
+        ['taskId']
+      );
+      request.taskId = defaultValue2;
+      const expectedHeaderRequestParams = `queue=${
+        defaultValue1 ?? ''
+      }&task_id=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.tasks.v2beta3.BufferTaskResponse()
+      );
+      client.innerApiCalls.bufferTask = stubSimpleCall(expectedResponse);
+      const [response] = await client.bufferTask(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.bufferTask as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bufferTask as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes bufferTask without error using callback', async () => {
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tasks.v2beta3.BufferTaskRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta3.BufferTaskRequest',
+        ['queue']
+      );
+      request.queue = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta3.BufferTaskRequest',
+        ['taskId']
+      );
+      request.taskId = defaultValue2;
+      const expectedHeaderRequestParams = `queue=${
+        defaultValue1 ?? ''
+      }&task_id=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.tasks.v2beta3.BufferTaskResponse()
+      );
+      client.innerApiCalls.bufferTask =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.bufferTask(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.tasks.v2beta3.IBufferTaskResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.bufferTask as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bufferTask as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes bufferTask with error', async () => {
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tasks.v2beta3.BufferTaskRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta3.BufferTaskRequest',
+        ['queue']
+      );
+      request.queue = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta3.BufferTaskRequest',
+        ['taskId']
+      );
+      request.taskId = defaultValue2;
+      const expectedHeaderRequestParams = `queue=${
+        defaultValue1 ?? ''
+      }&task_id=${defaultValue2 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.bufferTask = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.bufferTask(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.bufferTask as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bufferTask as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes bufferTask with closed client', async () => {
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tasks.v2beta3.BufferTaskRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta3.BufferTaskRequest',
+        ['queue']
+      );
+      request.queue = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta3.BufferTaskRequest',
+        ['taskId']
+      );
+      request.taskId = defaultValue2;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.bufferTask(request), expectedError);
+    });
+  });
+
+  describe('listQueues', () => {
+    it('invokes listQueues without error', async () => {
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tasks.v2beta3.ListQueuesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta3.ListQueuesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.tasks.v2.Queue()),
-        generateSampleMessage(new protos.google.cloud.tasks.v2.Queue()),
-        generateSampleMessage(new protos.google.cloud.tasks.v2.Queue()),
+        generateSampleMessage(new protos.google.cloud.tasks.v2beta3.Queue()),
+        generateSampleMessage(new protos.google.cloud.tasks.v2beta3.Queue()),
+        generateSampleMessage(new protos.google.cloud.tasks.v2beta3.Queue()),
       ];
       client.innerApiCalls.listQueues = stubSimpleCall(expectedResponse);
       const [response] = await client.listQueues(request);
@@ -2076,24 +2243,24 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes listQueues without error using callback', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.ListQueuesRequest()
+        new protos.google.cloud.tasks.v2beta3.ListQueuesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.ListQueuesRequest',
+        '.google.cloud.tasks.v2beta3.ListQueuesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.tasks.v2.Queue()),
-        generateSampleMessage(new protos.google.cloud.tasks.v2.Queue()),
-        generateSampleMessage(new protos.google.cloud.tasks.v2.Queue()),
+        generateSampleMessage(new protos.google.cloud.tasks.v2beta3.Queue()),
+        generateSampleMessage(new protos.google.cloud.tasks.v2beta3.Queue()),
+        generateSampleMessage(new protos.google.cloud.tasks.v2beta3.Queue()),
       ];
       client.innerApiCalls.listQueues =
         stubSimpleCallWithCallback(expectedResponse);
@@ -2102,7 +2269,7 @@ describe('v2.CloudTasksClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.tasks.v2.IQueue[] | null
+            result?: protos.google.cloud.tasks.v2beta3.IQueue[] | null
           ) => {
             if (err) {
               reject(err);
@@ -2125,20 +2292,20 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes listQueues with error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.ListQueuesRequest()
+        new protos.google.cloud.tasks.v2beta3.ListQueuesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.ListQueuesRequest',
+        '.google.cloud.tasks.v2beta3.ListQueuesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listQueues = stubSimpleCall(
         undefined,
@@ -2156,33 +2323,36 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes listQueuesStream without error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.ListQueuesRequest()
+        new protos.google.cloud.tasks.v2beta3.ListQueuesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.ListQueuesRequest',
+        '.google.cloud.tasks.v2beta3.ListQueuesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.tasks.v2.Queue()),
-        generateSampleMessage(new protos.google.cloud.tasks.v2.Queue()),
-        generateSampleMessage(new protos.google.cloud.tasks.v2.Queue()),
+        generateSampleMessage(new protos.google.cloud.tasks.v2beta3.Queue()),
+        generateSampleMessage(new protos.google.cloud.tasks.v2beta3.Queue()),
+        generateSampleMessage(new protos.google.cloud.tasks.v2beta3.Queue()),
       ];
       client.descriptors.page.listQueues.createStream =
         stubPageStreamingCall(expectedResponse);
       const stream = client.listQueuesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.tasks.v2.Queue[] = [];
-        stream.on('data', (response: protos.google.cloud.tasks.v2.Queue) => {
-          responses.push(response);
-        });
+        const responses: protos.google.cloud.tasks.v2beta3.Queue[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.tasks.v2beta3.Queue) => {
+            responses.push(response);
+          }
+        );
         stream.on('end', () => {
           resolve(responses);
         });
@@ -2207,20 +2377,20 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes listQueuesStream with error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.ListQueuesRequest()
+        new protos.google.cloud.tasks.v2beta3.ListQueuesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.ListQueuesRequest',
+        '.google.cloud.tasks.v2beta3.ListQueuesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listQueues.createStream = stubPageStreamingCall(
         undefined,
@@ -2228,10 +2398,13 @@ describe('v2.CloudTasksClient', () => {
       );
       const stream = client.listQueuesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.tasks.v2.Queue[] = [];
-        stream.on('data', (response: protos.google.cloud.tasks.v2.Queue) => {
-          responses.push(response);
-        });
+        const responses: protos.google.cloud.tasks.v2beta3.Queue[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.tasks.v2beta3.Queue) => {
+            responses.push(response);
+          }
+        );
         stream.on('end', () => {
           resolve(responses);
         });
@@ -2255,28 +2428,28 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('uses async iteration with listQueues without error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.ListQueuesRequest()
+        new protos.google.cloud.tasks.v2beta3.ListQueuesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.ListQueuesRequest',
+        '.google.cloud.tasks.v2beta3.ListQueuesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.tasks.v2.Queue()),
-        generateSampleMessage(new protos.google.cloud.tasks.v2.Queue()),
-        generateSampleMessage(new protos.google.cloud.tasks.v2.Queue()),
+        generateSampleMessage(new protos.google.cloud.tasks.v2beta3.Queue()),
+        generateSampleMessage(new protos.google.cloud.tasks.v2beta3.Queue()),
+        generateSampleMessage(new protos.google.cloud.tasks.v2beta3.Queue()),
       ];
       client.descriptors.page.listQueues.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.tasks.v2.IQueue[] = [];
+      const responses: protos.google.cloud.tasks.v2beta3.IQueue[] = [];
       const iterable = client.listQueuesAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -2298,20 +2471,20 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('uses async iteration with listQueues with error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.ListQueuesRequest()
+        new protos.google.cloud.tasks.v2beta3.ListQueuesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.ListQueuesRequest',
+        '.google.cloud.tasks.v2beta3.ListQueuesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listQueues.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -2319,7 +2492,7 @@ describe('v2.CloudTasksClient', () => {
       );
       const iterable = client.listQueuesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.tasks.v2.IQueue[] = [];
+        const responses: protos.google.cloud.tasks.v2beta3.IQueue[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -2342,24 +2515,24 @@ describe('v2.CloudTasksClient', () => {
 
   describe('listTasks', () => {
     it('invokes listTasks without error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.ListTasksRequest()
+        new protos.google.cloud.tasks.v2beta3.ListTasksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.ListTasksRequest',
+        '.google.cloud.tasks.v2beta3.ListTasksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.tasks.v2.Task()),
-        generateSampleMessage(new protos.google.cloud.tasks.v2.Task()),
-        generateSampleMessage(new protos.google.cloud.tasks.v2.Task()),
+        generateSampleMessage(new protos.google.cloud.tasks.v2beta3.Task()),
+        generateSampleMessage(new protos.google.cloud.tasks.v2beta3.Task()),
+        generateSampleMessage(new protos.google.cloud.tasks.v2beta3.Task()),
       ];
       client.innerApiCalls.listTasks = stubSimpleCall(expectedResponse);
       const [response] = await client.listTasks(request);
@@ -2375,24 +2548,24 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes listTasks without error using callback', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.ListTasksRequest()
+        new protos.google.cloud.tasks.v2beta3.ListTasksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.ListTasksRequest',
+        '.google.cloud.tasks.v2beta3.ListTasksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.tasks.v2.Task()),
-        generateSampleMessage(new protos.google.cloud.tasks.v2.Task()),
-        generateSampleMessage(new protos.google.cloud.tasks.v2.Task()),
+        generateSampleMessage(new protos.google.cloud.tasks.v2beta3.Task()),
+        generateSampleMessage(new protos.google.cloud.tasks.v2beta3.Task()),
+        generateSampleMessage(new protos.google.cloud.tasks.v2beta3.Task()),
       ];
       client.innerApiCalls.listTasks =
         stubSimpleCallWithCallback(expectedResponse);
@@ -2401,7 +2574,7 @@ describe('v2.CloudTasksClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.tasks.v2.ITask[] | null
+            result?: protos.google.cloud.tasks.v2beta3.ITask[] | null
           ) => {
             if (err) {
               reject(err);
@@ -2424,20 +2597,20 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes listTasks with error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.ListTasksRequest()
+        new protos.google.cloud.tasks.v2beta3.ListTasksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.ListTasksRequest',
+        '.google.cloud.tasks.v2beta3.ListTasksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTasks = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listTasks(request), expectedError);
@@ -2452,33 +2625,36 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes listTasksStream without error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.ListTasksRequest()
+        new protos.google.cloud.tasks.v2beta3.ListTasksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.ListTasksRequest',
+        '.google.cloud.tasks.v2beta3.ListTasksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.tasks.v2.Task()),
-        generateSampleMessage(new protos.google.cloud.tasks.v2.Task()),
-        generateSampleMessage(new protos.google.cloud.tasks.v2.Task()),
+        generateSampleMessage(new protos.google.cloud.tasks.v2beta3.Task()),
+        generateSampleMessage(new protos.google.cloud.tasks.v2beta3.Task()),
+        generateSampleMessage(new protos.google.cloud.tasks.v2beta3.Task()),
       ];
       client.descriptors.page.listTasks.createStream =
         stubPageStreamingCall(expectedResponse);
       const stream = client.listTasksStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.tasks.v2.Task[] = [];
-        stream.on('data', (response: protos.google.cloud.tasks.v2.Task) => {
-          responses.push(response);
-        });
+        const responses: protos.google.cloud.tasks.v2beta3.Task[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.tasks.v2beta3.Task) => {
+            responses.push(response);
+          }
+        );
         stream.on('end', () => {
           resolve(responses);
         });
@@ -2503,20 +2679,20 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('invokes listTasksStream with error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.ListTasksRequest()
+        new protos.google.cloud.tasks.v2beta3.ListTasksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.ListTasksRequest',
+        '.google.cloud.tasks.v2beta3.ListTasksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTasks.createStream = stubPageStreamingCall(
         undefined,
@@ -2524,10 +2700,13 @@ describe('v2.CloudTasksClient', () => {
       );
       const stream = client.listTasksStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.tasks.v2.Task[] = [];
-        stream.on('data', (response: protos.google.cloud.tasks.v2.Task) => {
-          responses.push(response);
-        });
+        const responses: protos.google.cloud.tasks.v2beta3.Task[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.tasks.v2beta3.Task) => {
+            responses.push(response);
+          }
+        );
         stream.on('end', () => {
           resolve(responses);
         });
@@ -2551,28 +2730,28 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('uses async iteration with listTasks without error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.ListTasksRequest()
+        new protos.google.cloud.tasks.v2beta3.ListTasksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.ListTasksRequest',
+        '.google.cloud.tasks.v2beta3.ListTasksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.tasks.v2.Task()),
-        generateSampleMessage(new protos.google.cloud.tasks.v2.Task()),
-        generateSampleMessage(new protos.google.cloud.tasks.v2.Task()),
+        generateSampleMessage(new protos.google.cloud.tasks.v2beta3.Task()),
+        generateSampleMessage(new protos.google.cloud.tasks.v2beta3.Task()),
+        generateSampleMessage(new protos.google.cloud.tasks.v2beta3.Task()),
       ];
       client.descriptors.page.listTasks.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.tasks.v2.ITask[] = [];
+      const responses: protos.google.cloud.tasks.v2beta3.ITask[] = [];
       const iterable = client.listTasksAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -2593,20 +2772,20 @@ describe('v2.CloudTasksClient', () => {
     });
 
     it('uses async iteration with listTasks with error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.tasks.v2.ListTasksRequest()
+        new protos.google.cloud.tasks.v2beta3.ListTasksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.tasks.v2.ListTasksRequest',
+        '.google.cloud.tasks.v2beta3.ListTasksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTasks.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -2614,7 +2793,7 @@ describe('v2.CloudTasksClient', () => {
       );
       const iterable = client.listTasksAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.tasks.v2.ITask[] = [];
+        const responses: protos.google.cloud.tasks.v2beta3.ITask[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -2635,7 +2814,7 @@ describe('v2.CloudTasksClient', () => {
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2665,7 +2844,7 @@ describe('v2.CloudTasksClient', () => {
       );
     });
     it('invokes getLocation without error using callback', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2709,7 +2888,7 @@ describe('v2.CloudTasksClient', () => {
       assert((client.locationsClient.getLocation as SinonStub).getCall(0));
     });
     it('invokes getLocation with error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2744,7 +2923,7 @@ describe('v2.CloudTasksClient', () => {
   });
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2792,7 +2971,7 @@ describe('v2.CloudTasksClient', () => {
       );
     });
     it('uses async iteration with listLocations with error', async () => {
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2839,7 +3018,7 @@ describe('v2.CloudTasksClient', () => {
         project: 'projectValue',
         location: 'locationValue',
       };
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2887,7 +3066,7 @@ describe('v2.CloudTasksClient', () => {
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2927,7 +3106,7 @@ describe('v2.CloudTasksClient', () => {
         location: 'locationValue',
         queue: 'queueValue',
       };
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2992,7 +3171,7 @@ describe('v2.CloudTasksClient', () => {
         queue: 'queueValue',
         task: 'taskValue',
       };
-      const client = new cloudtasksModule.v2.CloudTasksClient({
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });

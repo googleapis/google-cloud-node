@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* global window */
-import type * as gax from 'google-gax';
+import * as gax from 'google-gax';
 import type {
   Callback,
   CallOptions,
@@ -29,15 +29,35 @@ import type {
   LocationProtos,
 } from 'google-gax';
 import {Transform} from 'stream';
-import * as protos from '../../protos/protos';
-import jsonProtos = require('../../protos/protos.json');
+// @ts-ignore
+import type * as protos from '../../../protos/protos.js';
+import * as cloud_tasks_client_config from './cloud_tasks_client_config.json';
+import fs from 'fs';
+import path from 'path';
+import {fileURLToPath} from 'url';
+// @ts-ignore
+const dirname = path.dirname(fileURLToPath(import.meta.url));
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v2beta3/cloud_tasks_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './cloud_tasks_client_config.json';
-const version = require('../../../package.json').version;
+const gapicConfig = JSON.parse(
+  fs.readFileSync(path.join(dirname, 'cloud_tasks_client_config.json'), 'utf8')
+);
+const jsonProtos = JSON.parse(
+  fs.readFileSync(
+    path.join(dirname, '..', '..', '..', 'protos/protos.json'),
+    'utf8'
+  )
+);
+const version = JSON.parse(
+  fs.readFileSync(
+    path.join(dirname, '..', '..', '..', '..', 'package.json'),
+    'utf8'
+  )
+).version;
 
 /**
  *  Cloud Tasks allows developers to manage the execution of background
@@ -94,7 +114,8 @@ export class CloudTasksClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
+   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
+   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -102,7 +123,7 @@ export class CloudTasksClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new CloudTasksClient({fallback: true}, gax);
+   *     const client = new CloudTasksClient({fallback: 'rest'}, gax);
    *     ```
    */
   constructor(
@@ -133,7 +154,7 @@ export class CloudTasksClient {
 
     // Load google-gax module synchronously if needed
     if (!gaxInstance) {
-      gaxInstance = require('google-gax') as typeof gax;
+      gaxInstance = gax as typeof gax;
     }
 
     // Choose either gRPC or proto-over-HTTP implementation of google-gax.
@@ -172,14 +193,24 @@ export class CloudTasksClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else {
+    } else if (opts.fallback === 'rest') {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
+    // Add ESM headers
+    const isEsm = true;
+    if (opts.libVersion && isEsm) {
+      clientHeader.push(`${opts.libVersion}-esm`);
+    } else if (opts.libVersion && !isEsm) {
+      clientHeader.push(`${opts.libVersion}-cjs`);
+    }
+
     // Load the applicable protos.
-    this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
+    this._protos = this._gaxGrpc.loadProtoJSON(
+      jsonProtos as gax.protobuf.INamespace
+    );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.

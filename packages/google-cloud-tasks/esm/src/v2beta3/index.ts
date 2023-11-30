@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {CloudTasksClient} from './cloud_tasks_client';
+export {CloudTasksClient} from './cloud_tasks_client.js';
