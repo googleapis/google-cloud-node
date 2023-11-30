@@ -41,8 +41,8 @@ function main(name, author) {
    */
   // const commitMessage = 'abc123'
   /**
-   *  Optional. Full file paths to commit including filename, rooted at workspace root. If
-   *  left empty, all files will be committed.
+   *  Optional. Full file paths to commit including filename, rooted at workspace
+   *  root. If left empty, all files will be committed.
    */
   // const paths = ['abc','def']
 

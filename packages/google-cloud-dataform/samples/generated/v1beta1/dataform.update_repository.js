@@ -29,8 +29,8 @@ function main(repository) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Optional. Specifies the fields to be updated in the repository. If left unset,
-   *  all fields will be updated.
+   *  Optional. Specifies the fields to be updated in the repository. If left
+   *  unset, all fields will be updated.
    */
   // const updateMask = {}
   /**

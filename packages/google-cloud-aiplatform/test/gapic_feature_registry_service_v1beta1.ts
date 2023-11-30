@@ -1210,7 +1210,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
             err?: Error | null,
             result?: LROperation<
               protos.google.cloud.aiplatform.v1beta1.IFeature,
-              protos.google.cloud.aiplatform.v1beta1.ICreateRegistryFeatureOperationMetadata
+              protos.google.cloud.aiplatform.v1beta1.ICreateFeatureOperationMetadata
             > | null
           ) => {
             if (err) {
@@ -1223,7 +1223,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
       });
       const operation = (await promise) as LROperation<
         protos.google.cloud.aiplatform.v1beta1.IFeature,
-        protos.google.cloud.aiplatform.v1beta1.ICreateRegistryFeatureOperationMetadata
+        protos.google.cloud.aiplatform.v1beta1.ICreateFeatureOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);

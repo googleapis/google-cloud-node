@@ -185,6 +185,9 @@ export class UserEventServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      enginePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}'
+      ),
       projectLocationCollectionDataStorePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}'
@@ -1269,6 +1272,73 @@ export class UserEventServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified engine resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} engine
+   * @returns {string} Resource name string.
+   */
+  enginePath(
+    project: string,
+    location: string,
+    collection: string,
+    engine: string
+  ) {
+    return this.pathTemplates.enginePathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      engine: engine,
+    });
+  }
+
+  /**
+   * Parse the project from Engine resource.
+   *
+   * @param {string} engineName
+   *   A fully-qualified path representing Engine resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEngineName(engineName: string) {
+    return this.pathTemplates.enginePathTemplate.match(engineName).project;
+  }
+
+  /**
+   * Parse the location from Engine resource.
+   *
+   * @param {string} engineName
+   *   A fully-qualified path representing Engine resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEngineName(engineName: string) {
+    return this.pathTemplates.enginePathTemplate.match(engineName).location;
+  }
+
+  /**
+   * Parse the collection from Engine resource.
+   *
+   * @param {string} engineName
+   *   A fully-qualified path representing Engine resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromEngineName(engineName: string) {
+    return this.pathTemplates.enginePathTemplate.match(engineName).collection;
+  }
+
+  /**
+   * Parse the engine from Engine resource.
+   *
+   * @param {string} engineName
+   *   A fully-qualified path representing Engine resource.
+   * @returns {string} A string representing the engine.
+   */
+  matchEngineFromEngineName(engineName: string) {
+    return this.pathTemplates.enginePathTemplate.match(engineName).engine;
+  }
 
   /**
    * Return a fully-qualified projectLocationCollectionDataStore resource name string.

@@ -29,8 +29,8 @@ function main(parent, compilationResult) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The repository in which to create the compilation result. Must be in the
-   *  format `projects/* /locations/* /repositories/*`.
+   *  Required. The repository in which to create the compilation result. Must be
+   *  in the format `projects/* /locations/* /repositories/*`.
    */
   // const parent = 'abc123'
   /**

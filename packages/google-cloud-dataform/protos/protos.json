@@ -2426,6 +2426,78 @@
                             }
                           ]
                         },
+                        "CommitRepositoryChanges": {
+                          "requestType": "CommitRepositoryChangesRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/repositories/*}:commit",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/repositories/*}:commit",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "ReadRepositoryFile": {
+                          "requestType": "ReadRepositoryFileRequest",
+                          "responseType": "ReadRepositoryFileResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/repositories/*}:readFile"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/repositories/*}:readFile"
+                              }
+                            }
+                          ]
+                        },
+                        "QueryRepositoryDirectoryContents": {
+                          "requestType": "QueryRepositoryDirectoryContentsRequest",
+                          "responseType": "QueryRepositoryDirectoryContentsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/repositories/*}:queryDirectoryContents"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/repositories/*}:queryDirectoryContents"
+                              }
+                            }
+                          ]
+                        },
+                        "FetchRepositoryHistory": {
+                          "requestType": "FetchRepositoryHistoryRequest",
+                          "responseType": "FetchRepositoryHistoryResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/repositories/*}:fetchHistory"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/repositories/*}:fetchHistory"
+                              }
+                            }
+                          ]
+                        },
+                        "ComputeRepositoryAccessTokenStatus": {
+                          "requestType": "ComputeRepositoryAccessTokenStatusRequest",
+                          "responseType": "ComputeRepositoryAccessTokenStatusResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/repositories/*}:computeAccessTokenStatus"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/repositories/*}:computeAccessTokenStatus"
+                              }
+                            }
+                          ]
+                        },
                         "FetchRemoteBranches": {
                           "requestType": "FetchRemoteBranchesRequest",
                           "responseType": "FetchRemoteBranchesResponse",
@@ -2760,6 +2832,100 @@
                             }
                           ]
                         },
+                        "ListReleaseConfigs": {
+                          "requestType": "ListReleaseConfigsRequest",
+                          "responseType": "ListReleaseConfigsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/repositories/*}/releaseConfigs",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*/repositories/*}/releaseConfigs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetReleaseConfig": {
+                          "requestType": "GetReleaseConfigRequest",
+                          "responseType": "ReleaseConfig",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/repositories/*/releaseConfigs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/repositories/*/releaseConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateReleaseConfig": {
+                          "requestType": "CreateReleaseConfigRequest",
+                          "responseType": "ReleaseConfig",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/repositories/*}/releaseConfigs",
+                            "(google.api.http).body": "release_config",
+                            "(google.api.method_signature)": "parent,release_config,release_config_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*/repositories/*}/releaseConfigs",
+                                "body": "release_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,release_config,release_config_id"
+                            }
+                          ]
+                        },
+                        "UpdateReleaseConfig": {
+                          "requestType": "UpdateReleaseConfigRequest",
+                          "responseType": "ReleaseConfig",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta1/{release_config.name=projects/*/locations/*/repositories/*/releaseConfigs/*}",
+                            "(google.api.http).body": "release_config",
+                            "(google.api.method_signature)": "release_config,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{release_config.name=projects/*/locations/*/repositories/*/releaseConfigs/*}",
+                                "body": "release_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "release_config,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteReleaseConfig": {
+                          "requestType": "DeleteReleaseConfigRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/repositories/*/releaseConfigs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/locations/*/repositories/*/releaseConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "ListCompilationResults": {
                           "requestType": "ListCompilationResultsRequest",
                           "responseType": "ListCompilationResultsResponse",
@@ -2827,6 +2993,100 @@
                               "(google.api.http)": {
                                 "get": "/v1beta1/{name=projects/*/locations/*/repositories/*/compilationResults/*}:query"
                               }
+                            }
+                          ]
+                        },
+                        "ListWorkflowConfigs": {
+                          "requestType": "ListWorkflowConfigsRequest",
+                          "responseType": "ListWorkflowConfigsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/repositories/*}/workflowConfigs",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*/repositories/*}/workflowConfigs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetWorkflowConfig": {
+                          "requestType": "GetWorkflowConfigRequest",
+                          "responseType": "WorkflowConfig",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/repositories/*/workflowConfigs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/repositories/*/workflowConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateWorkflowConfig": {
+                          "requestType": "CreateWorkflowConfigRequest",
+                          "responseType": "WorkflowConfig",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/repositories/*}/workflowConfigs",
+                            "(google.api.http).body": "workflow_config",
+                            "(google.api.method_signature)": "parent,workflow_config,workflow_config_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*/repositories/*}/workflowConfigs",
+                                "body": "workflow_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,workflow_config,workflow_config_id"
+                            }
+                          ]
+                        },
+                        "UpdateWorkflowConfig": {
+                          "requestType": "UpdateWorkflowConfigRequest",
+                          "responseType": "WorkflowConfig",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta1/{workflow_config.name=projects/*/locations/*/repositories/*/workflowConfigs/*}",
+                            "(google.api.http).body": "workflow_config",
+                            "(google.api.method_signature)": "workflow_config,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{workflow_config.name=projects/*/locations/*/repositories/*/workflowConfigs/*}",
+                                "body": "workflow_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "workflow_config,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteWorkflowConfig": {
+                          "requestType": "DeleteWorkflowConfigRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/repositories/*/workflowConfigs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/locations/*/repositories/*/workflowConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
                             }
                           ]
                         },
@@ -2949,9 +3209,53 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "displayName": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "gitRemoteSettings": {
                           "type": "GitRemoteSettings",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "npmrcEnvironmentVariablesSecretVersion": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                          }
+                        },
+                        "workspaceCompilationOverrides": {
+                          "type": "WorkspaceCompilationOverrides",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "setAuthenticatedUserAdmin": {
+                          "type": "bool",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 10,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -2978,25 +3282,77 @@
                               "type": "string",
                               "id": 3,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.field_behavior)": "OPTIONAL",
                                 "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                              }
+                            },
+                            "sshAuthenticationConfig": {
+                              "type": "SshAuthenticationConfig",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
                             "tokenStatus": {
                               "type": "TokenStatus",
                               "id": 4,
                               "options": {
+                                "deprecated": true,
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             }
                           },
                           "nested": {
+                            "SshAuthenticationConfig": {
+                              "fields": {
+                                "userPrivateKeySecretVersion": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                                  }
+                                },
+                                "hostPublicKey": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
                             "TokenStatus": {
                               "values": {
                                 "TOKEN_STATUS_UNSPECIFIED": 0,
                                 "NOT_FOUND": 1,
                                 "INVALID": 2,
                                 "VALID": 3
+                              }
+                            }
+                          }
+                        },
+                        "WorkspaceCompilationOverrides": {
+                          "fields": {
+                            "defaultDatabase": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "schemaSuffix": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "tablePrefix": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -3130,6 +3486,266 @@
                         "force": {
                           "type": "bool",
                           "id": 2
+                        }
+                      }
+                    },
+                    "CommitRepositoryChangesRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataform.googleapis.com/Repository"
+                          }
+                        },
+                        "commitMetadata": {
+                          "type": "CommitMetadata",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requiredHeadCommitSha": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "fileOperations": {
+                          "keyType": "string",
+                          "type": "FileOperation",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "FileOperation": {
+                          "oneofs": {
+                            "operation": {
+                              "oneof": [
+                                "writeFile",
+                                "deleteFile"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "writeFile": {
+                              "type": "WriteFile",
+                              "id": 1
+                            },
+                            "deleteFile": {
+                              "type": "DeleteFile",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "WriteFile": {
+                              "fields": {
+                                "contents": {
+                                  "type": "bytes",
+                                  "id": 1
+                                }
+                              }
+                            },
+                            "DeleteFile": {
+                              "fields": {}
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ReadRepositoryFileRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataform.googleapis.com/Repository"
+                          }
+                        },
+                        "commitSha": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "path": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ReadRepositoryFileResponse": {
+                      "fields": {
+                        "contents": {
+                          "type": "bytes",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "QueryRepositoryDirectoryContentsRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataform.googleapis.com/Repository"
+                          }
+                        },
+                        "commitSha": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "path": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "QueryRepositoryDirectoryContentsResponse": {
+                      "fields": {
+                        "directoryEntries": {
+                          "rule": "repeated",
+                          "type": "DirectoryEntry",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "FetchRepositoryHistoryRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataform.googleapis.com/Repository"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "FetchRepositoryHistoryResponse": {
+                      "fields": {
+                        "commits": {
+                          "rule": "repeated",
+                          "type": "CommitLogEntry",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CommitLogEntry": {
+                      "fields": {
+                        "commitTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "commitSha": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "author": {
+                          "type": "CommitAuthor",
+                          "id": 3
+                        },
+                        "commitMessage": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "CommitMetadata": {
+                      "fields": {
+                        "author": {
+                          "type": "CommitAuthor",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "commitMessage": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ComputeRepositoryAccessTokenStatusRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataform.googleapis.com/Repository"
+                          }
+                        }
+                      }
+                    },
+                    "ComputeRepositoryAccessTokenStatusResponse": {
+                      "fields": {
+                        "tokenStatus": {
+                          "type": "TokenStatus",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "TokenStatus": {
+                          "values": {
+                            "TOKEN_STATUS_UNSPECIFIED": 0,
+                            "NOT_FOUND": 1,
+                            "INVALID": 2,
+                            "VALID": 3
+                          }
                         }
                       }
                     },
@@ -3549,27 +4165,25 @@
                           "type": "string",
                           "id": 2
                         }
+                      }
+                    },
+                    "DirectoryEntry": {
+                      "oneofs": {
+                        "entry": {
+                          "oneof": [
+                            "file",
+                            "directory"
+                          ]
+                        }
                       },
-                      "nested": {
-                        "DirectoryEntry": {
-                          "oneofs": {
-                            "entry": {
-                              "oneof": [
-                                "file",
-                                "directory"
-                              ]
-                            }
-                          },
-                          "fields": {
-                            "file": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "directory": {
-                              "type": "string",
-                              "id": 2
-                            }
-                          }
+                      "fields": {
+                        "file": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "directory": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -3762,6 +4376,206 @@
                     "InstallNpmPackagesResponse": {
                       "fields": {}
                     },
+                    "ReleaseConfig": {
+                      "options": {
+                        "(google.api.resource).type": "dataform.googleapis.com/ReleaseConfig",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}/releaseConfigs/{release_config}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "gitCommitish": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "codeCompilationConfig": {
+                          "type": "CodeCompilationConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "cronSchedule": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "timeZone": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "recentScheduledReleaseRecords": {
+                          "rule": "repeated",
+                          "type": "ScheduledReleaseRecord",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "releaseCompilationResult": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "dataform.googleapis.com/CompilationResult"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ScheduledReleaseRecord": {
+                          "oneofs": {
+                            "result": {
+                              "oneof": [
+                                "compilationResult",
+                                "errorStatus"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "releaseTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 1
+                            },
+                            "compilationResult": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.resource_reference).type": "dataform.googleapis.com/CompilationResult"
+                              }
+                            },
+                            "errorStatus": {
+                              "type": "google.rpc.Status",
+                              "id": 3
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ListReleaseConfigsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataform.googleapis.com/Repository"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListReleaseConfigsResponse": {
+                      "fields": {
+                        "releaseConfigs": {
+                          "rule": "repeated",
+                          "type": "ReleaseConfig",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetReleaseConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataform.googleapis.com/ReleaseConfig"
+                          }
+                        }
+                      }
+                    },
+                    "CreateReleaseConfigRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataform.googleapis.com/Repository"
+                          }
+                        },
+                        "releaseConfig": {
+                          "type": "ReleaseConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "releaseConfigId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateReleaseConfigRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "releaseConfig": {
+                          "type": "ReleaseConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteReleaseConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataform.googleapis.com/ReleaseConfig"
+                          }
+                        }
+                      }
+                    },
                     "CompilationResult": {
                       "options": {
                         "(google.api.resource).type": "dataform.googleapis.com/CompilationResult",
@@ -3771,7 +4585,8 @@
                         "source": {
                           "oneof": [
                             "gitCommitish",
-                            "workspace"
+                            "workspace",
+                            "releaseConfig"
                           ]
                         }
                       },
@@ -3798,11 +4613,26 @@
                             "(google.api.resource_reference).type": "dataform.googleapis.com/Workspace"
                           }
                         },
+                        "releaseConfig": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "(google.api.resource_reference).type": "dataform.googleapis.com/ReleaseConfig"
+                          }
+                        },
                         "codeCompilationConfig": {
                           "type": "CodeCompilationConfig",
                           "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "resolvedGitCommitSha": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
                         "dataformCoreVersion": {
@@ -3822,67 +4652,6 @@
                         }
                       },
                       "nested": {
-                        "CodeCompilationConfig": {
-                          "fields": {
-                            "defaultDatabase": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "defaultSchema": {
-                              "type": "string",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "defaultLocation": {
-                              "type": "string",
-                              "id": 8,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "assertionSchema": {
-                              "type": "string",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "vars": {
-                              "keyType": "string",
-                              "type": "string",
-                              "id": 4,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "databaseSuffix": {
-                              "type": "string",
-                              "id": 5,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "schemaSuffix": {
-                              "type": "string",
-                              "id": 6,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "tablePrefix": {
-                              "type": "string",
-                              "id": 7,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          }
-                        },
                         "CompilationError": {
                           "fields": {
                             "message": {
@@ -3913,6 +4682,67 @@
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             }
+                          }
+                        }
+                      }
+                    },
+                    "CodeCompilationConfig": {
+                      "fields": {
+                        "defaultDatabase": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "defaultSchema": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "defaultLocation": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "assertionSchema": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "vars": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "databaseSuffix": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "schemaSuffix": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "tablePrefix": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -4313,10 +5143,259 @@
                         }
                       }
                     },
+                    "WorkflowConfig": {
+                      "options": {
+                        "(google.api.resource).type": "dataform.googleapis.com/WorkflowConfig",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}/workflowConfigs/{workflow_config}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "releaseConfig": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataform.googleapis.com/ReleaseConfig"
+                          }
+                        },
+                        "invocationConfig": {
+                          "type": "InvocationConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "cronSchedule": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "timeZone": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "recentScheduledExecutionRecords": {
+                          "rule": "repeated",
+                          "type": "ScheduledExecutionRecord",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ScheduledExecutionRecord": {
+                          "oneofs": {
+                            "result": {
+                              "oneof": [
+                                "workflowInvocation",
+                                "errorStatus"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "executionTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 1
+                            },
+                            "workflowInvocation": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.resource_reference).type": "dataform.googleapis.com/WorkflowInvocation"
+                              }
+                            },
+                            "errorStatus": {
+                              "type": "google.rpc.Status",
+                              "id": 3
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "InvocationConfig": {
+                      "fields": {
+                        "includedTargets": {
+                          "rule": "repeated",
+                          "type": "Target",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "includedTags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "transitiveDependenciesIncluded": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "transitiveDependentsIncluded": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "fullyRefreshIncrementalTablesEnabled": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListWorkflowConfigsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataform.googleapis.com/Repository"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListWorkflowConfigsResponse": {
+                      "fields": {
+                        "workflowConfigs": {
+                          "rule": "repeated",
+                          "type": "WorkflowConfig",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetWorkflowConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataform.googleapis.com/WorkflowConfig"
+                          }
+                        }
+                      }
+                    },
+                    "CreateWorkflowConfigRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataform.googleapis.com/Repository"
+                          }
+                        },
+                        "workflowConfig": {
+                          "type": "WorkflowConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "workflowConfigId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateWorkflowConfigRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "workflowConfig": {
+                          "type": "WorkflowConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteWorkflowConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataform.googleapis.com/WorkflowConfig"
+                          }
+                        }
+                      }
+                    },
                     "WorkflowInvocation": {
                       "options": {
                         "(google.api.resource).type": "dataform.googleapis.com/WorkflowInvocation",
                         "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}/workflowInvocations/{workflow_invocation}"
+                      },
+                      "oneofs": {
+                        "compilationSource": {
+                          "oneof": [
+                            "compilationResult",
+                            "workflowConfig"
+                          ]
+                        }
                       },
                       "fields": {
                         "name": {
@@ -4332,6 +5411,14 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE",
                             "(google.api.resource_reference).type": "dataform.googleapis.com/CompilationResult"
+                          }
+                        },
+                        "workflowConfig": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "(google.api.resource_reference).type": "dataform.googleapis.com/WorkflowConfig"
                           }
                         },
                         "invocationConfig": {
@@ -4357,47 +5444,6 @@
                         }
                       },
                       "nested": {
-                        "InvocationConfig": {
-                          "fields": {
-                            "includedTargets": {
-                              "rule": "repeated",
-                              "type": "Target",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "IMMUTABLE"
-                              }
-                            },
-                            "includedTags": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "IMMUTABLE"
-                              }
-                            },
-                            "transitiveDependenciesIncluded": {
-                              "type": "bool",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "IMMUTABLE"
-                              }
-                            },
-                            "transitiveDependentsIncluded": {
-                              "type": "bool",
-                              "id": 4,
-                              "options": {
-                                "(google.api.field_behavior)": "IMMUTABLE"
-                              }
-                            },
-                            "fullyRefreshIncrementalTablesEnabled": {
-                              "type": "bool",
-                              "id": 5,
-                              "options": {
-                                "(google.api.field_behavior)": "IMMUTABLE"
-                              }
-                            }
-                          }
-                        },
                         "State": {
                           "values": {
                             "STATE_UNSPECIFIED": 0,
@@ -4430,6 +5476,20 @@
                         "pageToken": {
                           "type": "string",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -6092,6 +7152,18 @@
                   "id": 2
                 }
               }
+            },
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
+                }
+              }
             }
           }
         },
@@ -6114,6 +7186,35 @@
                 "endTime": {
                   "type": "google.protobuf.Timestamp",
                   "id": 2
+                }
+              }
+            }
+          }
+        },
+        "rpc": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
+            "java_multiple_files": true,
+            "java_outer_classname": "StatusProto",
+            "java_package": "com.google.rpc",
+            "objc_class_prefix": "RPC"
+          },
+          "nested": {
+            "Status": {
+              "fields": {
+                "code": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "message": {
+                  "type": "string",
+                  "id": 2
+                },
+                "details": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Any",
+                  "id": 3
                 }
               }
             }

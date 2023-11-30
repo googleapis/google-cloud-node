@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-container",
-        "version": "5.3.0",
+        "version": "5.4.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -230,7 +230,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 177,
+                    "end": 183,
                     "type": "FULL"
                 }
             ],
@@ -346,6 +346,10 @@
                     {
                         "name": "disk_size_gb",
                         "type": "TYPE_INT64"
+                    },
+                    {
+                        "name": "resource_manager_tags",
+                        "type": ".google.container.v1.ResourceManagerTags"
                     }
                 ],
                 "resultType": ".google.container.v1.Operation",

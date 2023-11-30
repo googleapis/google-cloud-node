@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-aiplatform",
-        "version": "3.4.0",
+        "version": "3.7.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -2118,7 +2118,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 63,
+                    "end": 69,
                     "type": "FULL"
                 }
             ],
@@ -2134,6 +2134,14 @@
                     {
                         "name": "feature_view",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "data_key",
+                        "type": ".google.cloud.aiplatform.v1beta1.FeatureViewDataKey"
+                    },
+                    {
+                        "name": "data_format",
+                        "type": ".google.cloud.aiplatform.v1beta1.FeatureViewDataFormat"
                     },
                     {
                         "name": "format",
@@ -2446,7 +2454,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 72,
                     "type": "FULL"
                 }
             ],
@@ -2494,7 +2502,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 56,
+                    "end": 57,
                     "type": "FULL"
                 }
             ],
@@ -2534,7 +2542,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 117,
+                    "end": 123,
                     "type": "FULL"
                 }
             ],
@@ -3294,7 +3302,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 72,
                     "type": "FULL"
                 }
             ],
@@ -3386,7 +3394,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 56,
+                    "end": 57,
                     "type": "FULL"
                 }
             ],
@@ -3426,7 +3434,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 117,
+                    "end": 123,
                     "type": "FULL"
                 }
             ],
@@ -6095,6 +6103,50 @@
                     "service": {
                         "shortName": "JobService",
                         "fullName": "google.cloud.aiplatform.v1beta1.JobService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_LlmUtilityService_ComputeTokens_async",
+            "title": "DatasetService computeTokens Sample",
+            "origin": "API_DEFINITION",
+            "description": " Return a list of tokens based on the input text.",
+            "canonical": true,
+            "file": "llm_utility_service.compute_tokens.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 61,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ComputeTokens",
+                "fullName": "google.cloud.aiplatform.v1beta1.LlmUtilityService.ComputeTokens",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "endpoint",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "instances",
+                        "type": "TYPE_MESSAGE[]"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.ComputeTokensResponse",
+                "client": {
+                    "shortName": "LlmUtilityServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.LlmUtilityServiceClient"
+                },
+                "method": {
+                    "shortName": "ComputeTokens",
+                    "fullName": "google.cloud.aiplatform.v1beta1.LlmUtilityService.ComputeTokens",
+                    "service": {
+                        "shortName": "LlmUtilityService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.LlmUtilityService"
                     }
                 }
             }
@@ -9368,6 +9420,50 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1beta1_generated_PipelineService_BatchDeletePipelineJobs_async",
+            "title": "DatasetService batchDeletePipelineJobs Sample",
+            "origin": "API_DEFINITION",
+            "description": " Batch deletes PipelineJobs The Operation is atomic. If it fails, none of the PipelineJobs are deleted. If it succeeds, all of the PipelineJobs are deleted.",
+            "canonical": true,
+            "file": "pipeline_service.batch_delete_pipeline_jobs.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "BatchDeletePipelineJobs",
+                "fullName": "google.cloud.aiplatform.v1beta1.PipelineService.BatchDeletePipelineJobs",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "names",
+                        "type": "TYPE_STRING[]"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "PipelineServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PipelineServiceClient"
+                },
+                "method": {
+                    "shortName": "BatchDeletePipelineJobs",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PipelineService.BatchDeletePipelineJobs",
+                    "service": {
+                        "shortName": "PipelineService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.PipelineService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1beta1_generated_PipelineService_CancelPipelineJob_async",
             "title": "DatasetService cancelPipelineJob Sample",
             "origin": "API_DEFINITION",
@@ -9500,6 +9596,150 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1beta1_generated_PredictionService_DirectPredict_async",
+            "title": "DatasetService directPredict Sample",
+            "origin": "API_DEFINITION",
+            "description": " Perform an unary online prediction request for Vertex first-party products and frameworks.",
+            "canonical": true,
+            "file": "prediction_service.direct_predict.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DirectPredict",
+                "fullName": "google.cloud.aiplatform.v1beta1.PredictionService.DirectPredict",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "endpoint",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "inputs",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "parameters",
+                        "type": ".google.cloud.aiplatform.v1beta1.Tensor"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.DirectPredictResponse",
+                "client": {
+                    "shortName": "PredictionServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PredictionServiceClient"
+                },
+                "method": {
+                    "shortName": "DirectPredict",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PredictionService.DirectPredict",
+                    "service": {
+                        "shortName": "PredictionService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.PredictionService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_PredictionService_DirectRawPredict_async",
+            "title": "DatasetService directRawPredict Sample",
+            "origin": "API_DEFINITION",
+            "description": " Perform an online prediction request through gRPC.",
+            "canonical": true,
+            "file": "prediction_service.direct_raw_predict.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 68,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DirectRawPredict",
+                "fullName": "google.cloud.aiplatform.v1beta1.PredictionService.DirectRawPredict",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "endpoint",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "method_name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "input",
+                        "type": "TYPE_BYTES"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.DirectRawPredictResponse",
+                "client": {
+                    "shortName": "PredictionServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PredictionServiceClient"
+                },
+                "method": {
+                    "shortName": "DirectRawPredict",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PredictionService.DirectRawPredict",
+                    "service": {
+                        "shortName": "PredictionService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.PredictionService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_PredictionService_StreamingPredict_async",
+            "title": "DatasetService streamingPredict Sample",
+            "origin": "API_DEFINITION",
+            "description": " Perform a streaming online prediction request for Vertex first-party products and frameworks.",
+            "canonical": true,
+            "file": "prediction_service.streaming_predict.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "StreamingPredict",
+                "fullName": "google.cloud.aiplatform.v1beta1.PredictionService.StreamingPredict",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "endpoint",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "inputs",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "parameters",
+                        "type": ".google.cloud.aiplatform.v1beta1.Tensor"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.StreamingPredictResponse",
+                "client": {
+                    "shortName": "PredictionServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PredictionServiceClient"
+                },
+                "method": {
+                    "shortName": "StreamingPredict",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PredictionService.StreamingPredict",
+                    "service": {
+                        "shortName": "PredictionService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.PredictionService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1beta1_generated_PredictionService_ServerStreamingPredict_async",
             "title": "DatasetService serverStreamingPredict Sample",
             "origin": "API_DEFINITION",
@@ -9548,6 +9788,54 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1beta1_generated_PredictionService_StreamingRawPredict_async",
+            "title": "DatasetService streamingRawPredict Sample",
+            "origin": "API_DEFINITION",
+            "description": " Perform a streaming online prediction request through gRPC.",
+            "canonical": true,
+            "file": "prediction_service.streaming_raw_predict.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "StreamingRawPredict",
+                "fullName": "google.cloud.aiplatform.v1beta1.PredictionService.StreamingRawPredict",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "endpoint",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "method_name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "input",
+                        "type": "TYPE_BYTES"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.StreamingRawPredictResponse",
+                "client": {
+                    "shortName": "PredictionServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PredictionServiceClient"
+                },
+                "method": {
+                    "shortName": "StreamingRawPredict",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PredictionService.StreamingRawPredict",
+                    "service": {
+                        "shortName": "PredictionService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.PredictionService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1beta1_generated_PredictionService_Explain_async",
             "title": "DatasetService explain Sample",
             "origin": "API_DEFINITION",
@@ -9558,7 +9846,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 94,
+                    "end": 103,
                     "type": "FULL"
                 }
             ],
@@ -9582,6 +9870,10 @@
                     {
                         "name": "explanation_spec_override",
                         "type": ".google.cloud.aiplatform.v1beta1.ExplanationSpecOverride"
+                    },
+                    {
+                        "name": "concurrent_explanation_spec_override",
+                        "type": "TYPE_MESSAGE[]"
                     },
                     {
                         "name": "deployed_model_id",

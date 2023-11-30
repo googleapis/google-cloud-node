@@ -13,6 +13,7 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Contact_center_insights.bulk_analyze_conversations](#contact_center_insights.bulk_analyze_conversations)
+  * [Contact_center_insights.bulk_delete_conversations](#contact_center_insights.bulk_delete_conversations)
   * [Contact_center_insights.calculate_issue_model_stats](#contact_center_insights.calculate_issue_model_stats)
   * [Contact_center_insights.calculate_stats](#contact_center_insights.calculate_stats)
   * [Contact_center_insights.create_analysis](#contact_center_insights.create_analysis)
@@ -77,6 +78,23 @@ __Usage:__
 
 
 `node packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.bulk_analyze_conversations.js`
+
+
+-----
+
+
+
+
+### Contact_center_insights.bulk_delete_conversations
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.bulk_delete_conversations.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.bulk_delete_conversations.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.bulk_delete_conversations.js`
 
 
 -----

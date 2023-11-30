@@ -1566,6 +1566,30 @@
         }
       }
     },
+    "LlmUtilityService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "LlmUtilityServiceClient",
+          "rpcs": {
+            "ComputeTokens": {
+              "methods": [
+                "computeTokens"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "LlmUtilityServiceClient",
+          "rpcs": {
+            "ComputeTokens": {
+              "methods": [
+                "computeTokens"
+              ]
+            }
+          }
+        }
+      }
+    },
     "MatchService": {
       "clients": {
         "grpc": {
@@ -2353,6 +2377,11 @@
                 "deletePipelineJob"
               ]
             },
+            "BatchDeletePipelineJobs": {
+              "methods": [
+                "batchDeletePipelineJobs"
+              ]
+            },
             "ListTrainingPipelines": {
               "methods": [
                 "listTrainingPipelines",
@@ -2412,6 +2441,11 @@
                 "deletePipelineJob"
               ]
             },
+            "BatchDeletePipelineJobs": {
+              "methods": [
+                "batchDeletePipelineJobs"
+              ]
+            },
             "ListTrainingPipelines": {
               "methods": [
                 "listTrainingPipelines",
@@ -2445,6 +2479,16 @@
                 "rawPredict"
               ]
             },
+            "DirectPredict": {
+              "methods": [
+                "directPredict"
+              ]
+            },
+            "DirectRawPredict": {
+              "methods": [
+                "directRawPredict"
+              ]
+            },
             "Explain": {
               "methods": [
                 "explain"
@@ -2455,9 +2499,19 @@
                 "countTokens"
               ]
             },
+            "StreamingPredict": {
+              "methods": [
+                "streamingPredict"
+              ]
+            },
             "ServerStreamingPredict": {
               "methods": [
                 "serverStreamingPredict"
+              ]
+            },
+            "StreamingRawPredict": {
+              "methods": [
+                "streamingRawPredict"
               ]
             }
           }
@@ -2473,6 +2527,16 @@
             "RawPredict": {
               "methods": [
                 "rawPredict"
+              ]
+            },
+            "DirectPredict": {
+              "methods": [
+                "directPredict"
+              ]
+            },
+            "DirectRawPredict": {
+              "methods": [
+                "directRawPredict"
               ]
             },
             "Explain": {

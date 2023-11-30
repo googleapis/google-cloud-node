@@ -29,8 +29,8 @@ function main(parent, repository, repositoryId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The location in which to create the repository. Must be in the format
-   *  `projects/* /locations/*`.
+   *  Required. The location in which to create the repository. Must be in the
+   *  format `projects/* /locations/*`.
    */
   // const parent = 'abc123'
   /**
@@ -38,8 +38,8 @@ function main(parent, repository, repositoryId) {
    */
   // const repository = {}
   /**
-   *  Required. The ID to use for the repository, which will become the final component of
-   *  the repository's resource name.
+   *  Required. The ID to use for the repository, which will become the final
+   *  component of the repository's resource name.
    */
   // const repositoryId = 'abc123'
 

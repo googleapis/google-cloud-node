@@ -30,7 +30,8 @@ function main(parent, deliveryPipelineId, deliveryPipeline) {
    */
   /**
    *  Required. The parent collection in which the `DeliveryPipeline` should be
-   *  created. Format should be projects/{project_id}/locations/{location_name}.
+   *  created. Format should be
+   *  `projects/{project_id}/locations/{location_name}`.
    */
   // const parent = 'abc123'
   /**

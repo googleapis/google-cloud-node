@@ -39,9 +39,15 @@ function main(featureView) {
    */
   // const featureView = 'abc123'
   /**
-   *  Specify response data format. If not set, KeyValue format will be used.
+   *  Optional. The request key to fetch feature values for.
    */
-  // const format = {}
+  // const dataKey = {}
+  /**
+   *  Optional. Response data format. If not set,
+   *  FeatureViewDataFormat.KEY_VALUE google.cloud.aiplatform.v1beta1.FeatureViewDataFormat.KEY_VALUE 
+   *  will be used.
+   */
+  // const dataFormat = {}
 
   // Imports the Aiplatform library
   const {FeatureOnlineStoreServiceClient} = require('@google-cloud/aiplatform').v1beta1;

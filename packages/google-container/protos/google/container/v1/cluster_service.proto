@@ -831,6 +831,9 @@ message NodeConfig {
 
   // Parameters for node pools to be backed by shared sole tenant node groups.
   SoleTenantConfig sole_tenant_config = 42;
+
+  // A map of resource manager tag keys and values to be attached to the nodes.
+  ResourceManagerTags resource_manager_tags = 45;
 }
 
 // Specifies options for controlling advanced machine features.
@@ -1972,6 +1975,9 @@ message Cluster {
 
   // Beta APIs Config
   K8sBetaAPIConfig enable_k8s_beta_apis = 143;
+
+  // GKE Enterprise Configuration.
+  EnterpriseConfig enterprise_config = 149;
 }
 
 // K8sBetaAPIConfig , configuration for beta APIs
@@ -2005,6 +2011,10 @@ message SecurityPostureConfig {
 
     // Applies basic vulnerability scanning on the cluster.
     VULNERABILITY_BASIC = 2;
+
+    // Applies the Security Posture's vulnerability on cluster Enterprise level
+    // features.
+    VULNERABILITY_ENTERPRISE = 3;
   }
 
   // Sets which mode to use for Security Posture features.
@@ -2022,6 +2032,10 @@ message NodePoolAutoConfig {
   // the client during cluster creation. Each tag within the list
   // must comply with RFC1035.
   NetworkTags network_tags = 1;
+
+  // Resource manager tag keys and values to be attached to the nodes
+  // for managing Compute Engine firewalls using Network Firewall Policies.
+  ResourceManagerTags resource_manager_tags = 2;
 }
 
 // Subset of Nodepool message that has defaults.
@@ -2253,6 +2267,10 @@ message ClusterUpdate {
 
   // Desired Beta APIs to be enabled for cluster.
   K8sBetaAPIConfig desired_k8s_beta_apis = 131;
+
+  // The desired resource manager tags that apply to all auto-provisioned node
+  // pools in autopilot clusters and node auto-provisioning enabled clusters.
+  ResourceManagerTags desired_node_pool_auto_config_resource_manager_tags = 136;
 }
 
 // AdditionalPodRangesConfig is the configuration for additional pod secondary
@@ -2415,6 +2433,10 @@ message Operation {
     // [documentation on
     // resizes](https://cloud.google.com/kubernetes-engine/docs/concepts/maintenance-windows-and-exclusions#repairs).
     RESIZE_CLUSTER = 18;
+
+    // Fleet features of GKE Enterprise are being upgraded. The cluster should
+    // be assumed to be blocked for other upgrades until the operation finishes.
+    FLEET_FEATURE_UPGRADE = 19;
   }
 
   // The server-assigned ID for the operation.
@@ -2725,6 +2747,11 @@ message UpdateNodePoolRequest {
   // Initiates an upgrade operation that migrates the nodes in the
   // node pool to the specified disk size.
   int64 disk_size_gb = 38 [(google.api.field_behavior) = OPTIONAL];
+
+  // Desired resource manager tag keys and values to be attached to the nodes
+  // for managing Compute Engine firewalls using Network Firewall Policies.
+  // Existing tags will be replaced with new values.
+  ResourceManagerTags resource_manager_tags = 39;
 }
 
 // SetNodePoolAutoscalingRequest sets the autoscaler settings of a node pool.
@@ -3455,6 +3482,14 @@ message NodePool {
     string policy_name = 3;
   }
 
+  // QueuedProvisioning defines the queued provisioning used by the node pool.
+  message QueuedProvisioning {
+    // Denotes that this nodepool is QRM specific, meaning nodes can be only
+    // obtained through queuing via the Cluster Autoscaler ProvisioningRequest
+    // API.
+    bool enabled = 1;
+  }
+
   // The name of the node pool.
   string name = 1;
 
@@ -3537,6 +3572,9 @@ message NodePool {
   // fields, and may be sent on update requests to ensure the client has an
   // up-to-date value before proceeding.
   string etag = 110;
+
+  // Specifies the configuration of queued provisioning.
+  QueuedProvisioning queued_provisioning = 112;
 
   // Enable best effort provisioning for nodes
   BestEffortProvisioning best_effort_provisioning = 113;
@@ -5062,6 +5100,9 @@ message AdvancedDatapathObservabilityConfig {
 
   // Method used to make Relay available
   RelayMode relay_mode = 2;
+
+  // Enable Relay component
+  optional bool enable_relay = 3;
 }
 
 // NodePoolLoggingConfig specifies logging configuration for nodepools.
@@ -5210,27 +5251,80 @@ enum IPv6AccessType {
 }
 
 // LocalNvmeSsdBlockConfig contains configuration for using raw-block local
-// NVMe SSD.
+// NVMe SSDs
 message LocalNvmeSsdBlockConfig {
-  // The number of raw-block local NVMe SSD disks to be attached to the node.
-  // Each local SSD is 375 GB in size. If zero, it means no raw-block local NVMe
-  // SSD disks to be attached to the node.
-  // The limit for this value is dependent upon the maximum number of
-  // disks available on a machine per zone. See:
+  // Number of local NVMe SSDs to use.  The limit for this value is dependent
+  // upon the maximum number of disk available on a machine per zone. See:
   // https://cloud.google.com/compute/docs/disks/local-ssd
   // for more information.
+  //
+  // A zero (or unset) value has different meanings depending on machine type
+  // being used:
+  // 1. For pre-Gen3 machines, which support flexible numbers of local ssds,
+  // zero (or unset) means to disable using local SSDs as ephemeral storage.
+  // 2. For Gen3 machines which dictate a specific number of local ssds, zero
+  // (or unset) means to use the default number of local ssds that goes with
+  // that machine type. For example, for a c3-standard-8-lssd machine, 2 local
+  // ssds would be provisioned. For c3-standard-8 (which doesn't support local
+  // ssds), 0 will be provisioned. See
+  // https://cloud.google.com/compute/docs/disks/local-ssd#choose_number_local_ssds
+  // for more info.
   int32 local_ssd_count = 1;
 }
 
 // EphemeralStorageLocalSsdConfig contains configuration for the node ephemeral
-// storage using Local SSD.
+// storage using Local SSDs.
 message EphemeralStorageLocalSsdConfig {
   // Number of local SSDs to use to back ephemeral storage. Uses NVMe
-  // interfaces. Each local SSD is 375 GB in size.
-  // If zero, it means to disable using local SSDs as ephemeral storage.
-  // The limit for this value is dependent upon the maximum number of
-  // disks available on a machine per zone. See:
+  // interfaces.
+  //
+  // A zero (or unset) value has different meanings depending on machine type
+  // being used:
+  // 1. For pre-Gen3 machines, which support flexible numbers of local ssds,
+  // zero (or unset) means to disable using local SSDs as ephemeral storage. The
+  // limit for this value is dependent upon the maximum number of disk
+  // available on a machine per zone. See:
   // https://cloud.google.com/compute/docs/disks/local-ssd
   // for more information.
+  // 2. For Gen3 machines which dictate a specific number of local ssds, zero
+  // (or unset) means to use the default number of local ssds that goes with
+  // that machine type. For example, for a c3-standard-8-lssd machine, 2 local
+  // ssds would be provisioned. For c3-standard-8 (which doesn't support local
+  // ssds), 0 will be provisioned. See
+  // https://cloud.google.com/compute/docs/disks/local-ssd#choose_number_local_ssds
+  // for more info.
   int32 local_ssd_count = 1;
+}
+
+// A map of resource manager tag keys and values to be attached to the nodes
+// for managing Compute Engine firewalls using Network Firewall Policies.
+// Tags must be according to specifications in
+// https://cloud.google.com/vpc/docs/tags-firewalls-overview#specifications.
+// A maximum of 5 tag key-value pairs can be specified.
+// Existing tags will be replaced with new values.
+message ResourceManagerTags {
+  // TagKeyValue must be in one of the following formats ([KEY]=[VALUE])
+  // 1. `tagKeys/{tag_key_id}=tagValues/{tag_value_id}`
+  // 2. `{org_id}/{tag_key_name}={tag_value_name}`
+  // 3. `{project_id}/{tag_key_name}={tag_value_name}`
+  map<string, string> tags = 1;
+}
+
+// EnterpriseConfig is the cluster enterprise configuration.
+message EnterpriseConfig {
+  // Premium tiers for GKE Cluster.
+  enum ClusterTier {
+    // CLUSTER_TIER_UNSPECIFIED is when cluster_tier is not set.
+    CLUSTER_TIER_UNSPECIFIED = 0;
+
+    // STANDARD indicates a standard GKE cluster.
+    STANDARD = 1;
+
+    // ENTERPRISE indicates a GKE Enterprise cluster.
+    ENTERPRISE = 2;
+  }
+
+  // Output only. [Output only] cluster_tier specifies the premium tier of the
+  // cluster.
+  ClusterTier cluster_tier = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
 }

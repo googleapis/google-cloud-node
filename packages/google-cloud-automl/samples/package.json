@@ -16,9 +16,9 @@
     "!test/"
   ],
   "dependencies": {
-    "@google-cloud/automl": "^4.0.2",
+    "@google-cloud/automl": "^4.0.3",
     "csv": "^6.0.0",
-    "mathjs": "^11.0.0",
+    "mathjs": "^12.0.0",
     "yargs": "^17.0.0"
   },
   "devDependencies": {

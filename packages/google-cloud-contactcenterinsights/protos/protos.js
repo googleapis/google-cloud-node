@@ -462,6 +462,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|bulkDeleteConversations}.
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @typedef BulkDeleteConversationsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls BulkDeleteConversations.
+                         * @function bulkDeleteConversations
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @instance
+                         * @param {google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsRequest} request BulkDeleteConversationsRequest message or plain object
+                         * @param {google.cloud.contactcenterinsights.v1.ContactCenterInsights.BulkDeleteConversationsCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ContactCenterInsights.prototype.bulkDeleteConversations = function bulkDeleteConversations(request, callback) {
+                            return this.rpcCall(bulkDeleteConversations, $root.google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "BulkDeleteConversations" });
+    
+                        /**
+                         * Calls BulkDeleteConversations.
+                         * @function bulkDeleteConversations
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @instance
+                         * @param {google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsRequest} request BulkDeleteConversationsRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|ingestConversations}.
                          * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
                          * @typedef IngestConversationsCallback
@@ -5067,6 +5100,8 @@
                          * @property {google.cloud.contactcenterinsights.v1.IngestConversationsRequest.ITranscriptObjectConfig|null} [transcriptObjectConfig] IngestConversationsRequest transcriptObjectConfig
                          * @property {string|null} [parent] IngestConversationsRequest parent
                          * @property {google.cloud.contactcenterinsights.v1.IngestConversationsRequest.IConversationConfig|null} [conversationConfig] IngestConversationsRequest conversationConfig
+                         * @property {google.cloud.contactcenterinsights.v1.IRedactionConfig|null} [redactionConfig] IngestConversationsRequest redactionConfig
+                         * @property {google.cloud.contactcenterinsights.v1.ISpeechConfig|null} [speechConfig] IngestConversationsRequest speechConfig
                          */
     
                         /**
@@ -5115,6 +5150,22 @@
                          * @instance
                          */
                         IngestConversationsRequest.prototype.conversationConfig = null;
+    
+                        /**
+                         * IngestConversationsRequest redactionConfig.
+                         * @member {google.cloud.contactcenterinsights.v1.IRedactionConfig|null|undefined} redactionConfig
+                         * @memberof google.cloud.contactcenterinsights.v1.IngestConversationsRequest
+                         * @instance
+                         */
+                        IngestConversationsRequest.prototype.redactionConfig = null;
+    
+                        /**
+                         * IngestConversationsRequest speechConfig.
+                         * @member {google.cloud.contactcenterinsights.v1.ISpeechConfig|null|undefined} speechConfig
+                         * @memberof google.cloud.contactcenterinsights.v1.IngestConversationsRequest
+                         * @instance
+                         */
+                        IngestConversationsRequest.prototype.speechConfig = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -5173,6 +5224,10 @@
                                 $root.google.cloud.contactcenterinsights.v1.IngestConversationsRequest.TranscriptObjectConfig.encode(message.transcriptObjectConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.conversationConfig != null && Object.hasOwnProperty.call(message, "conversationConfig"))
                                 $root.google.cloud.contactcenterinsights.v1.IngestConversationsRequest.ConversationConfig.encode(message.conversationConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.redactionConfig != null && Object.hasOwnProperty.call(message, "redactionConfig"))
+                                $root.google.cloud.contactcenterinsights.v1.RedactionConfig.encode(message.redactionConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.speechConfig != null && Object.hasOwnProperty.call(message, "speechConfig"))
+                                $root.google.cloud.contactcenterinsights.v1.SpeechConfig.encode(message.speechConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -5221,6 +5276,14 @@
                                     }
                                 case 4: {
                                         message.conversationConfig = $root.google.cloud.contactcenterinsights.v1.IngestConversationsRequest.ConversationConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.redactionConfig = $root.google.cloud.contactcenterinsights.v1.RedactionConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.speechConfig = $root.google.cloud.contactcenterinsights.v1.SpeechConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -5283,6 +5346,16 @@
                                 if (error)
                                     return "conversationConfig." + error;
                             }
+                            if (message.redactionConfig != null && message.hasOwnProperty("redactionConfig")) {
+                                var error = $root.google.cloud.contactcenterinsights.v1.RedactionConfig.verify(message.redactionConfig);
+                                if (error)
+                                    return "redactionConfig." + error;
+                            }
+                            if (message.speechConfig != null && message.hasOwnProperty("speechConfig")) {
+                                var error = $root.google.cloud.contactcenterinsights.v1.SpeechConfig.verify(message.speechConfig);
+                                if (error)
+                                    return "speechConfig." + error;
+                            }
                             return null;
                         };
     
@@ -5315,6 +5388,16 @@
                                     throw TypeError(".google.cloud.contactcenterinsights.v1.IngestConversationsRequest.conversationConfig: object expected");
                                 message.conversationConfig = $root.google.cloud.contactcenterinsights.v1.IngestConversationsRequest.ConversationConfig.fromObject(object.conversationConfig);
                             }
+                            if (object.redactionConfig != null) {
+                                if (typeof object.redactionConfig !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.IngestConversationsRequest.redactionConfig: object expected");
+                                message.redactionConfig = $root.google.cloud.contactcenterinsights.v1.RedactionConfig.fromObject(object.redactionConfig);
+                            }
+                            if (object.speechConfig != null) {
+                                if (typeof object.speechConfig !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.IngestConversationsRequest.speechConfig: object expected");
+                                message.speechConfig = $root.google.cloud.contactcenterinsights.v1.SpeechConfig.fromObject(object.speechConfig);
+                            }
                             return message;
                         };
     
@@ -5334,6 +5417,8 @@
                             if (options.defaults) {
                                 object.parent = "";
                                 object.conversationConfig = null;
+                                object.redactionConfig = null;
+                                object.speechConfig = null;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -5349,6 +5434,10 @@
                             }
                             if (message.conversationConfig != null && message.hasOwnProperty("conversationConfig"))
                                 object.conversationConfig = $root.google.cloud.contactcenterinsights.v1.IngestConversationsRequest.ConversationConfig.toObject(message.conversationConfig, options);
+                            if (message.redactionConfig != null && message.hasOwnProperty("redactionConfig"))
+                                object.redactionConfig = $root.google.cloud.contactcenterinsights.v1.RedactionConfig.toObject(message.redactionConfig, options);
+                            if (message.speechConfig != null && message.hasOwnProperty("speechConfig"))
+                                object.speechConfig = $root.google.cloud.contactcenterinsights.v1.SpeechConfig.toObject(message.speechConfig, options);
                             return object;
                         };
     
@@ -5385,6 +5474,7 @@
                              * @memberof google.cloud.contactcenterinsights.v1.IngestConversationsRequest
                              * @interface IGcsSource
                              * @property {string|null} [bucketUri] GcsSource bucketUri
+                             * @property {google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource.BucketObjectType|null} [bucketObjectType] GcsSource bucketObjectType
                              */
     
                             /**
@@ -5409,6 +5499,14 @@
                              * @instance
                              */
                             GcsSource.prototype.bucketUri = "";
+    
+                            /**
+                             * GcsSource bucketObjectType.
+                             * @member {google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource.BucketObjectType} bucketObjectType
+                             * @memberof google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource
+                             * @instance
+                             */
+                            GcsSource.prototype.bucketObjectType = 0;
     
                             /**
                              * Creates a new GcsSource instance using the specified properties.
@@ -5436,6 +5534,8 @@
                                     writer = $Writer.create();
                                 if (message.bucketUri != null && Object.hasOwnProperty.call(message, "bucketUri"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.bucketUri);
+                                if (message.bucketObjectType != null && Object.hasOwnProperty.call(message, "bucketObjectType"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.bucketObjectType);
                                 return writer;
                             };
     
@@ -5472,6 +5572,10 @@
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.bucketUri = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.bucketObjectType = reader.int32();
                                             break;
                                         }
                                     default:
@@ -5512,6 +5616,15 @@
                                 if (message.bucketUri != null && message.hasOwnProperty("bucketUri"))
                                     if (!$util.isString(message.bucketUri))
                                         return "bucketUri: string expected";
+                                if (message.bucketObjectType != null && message.hasOwnProperty("bucketObjectType"))
+                                    switch (message.bucketObjectType) {
+                                    default:
+                                        return "bucketObjectType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
                                 return null;
                             };
     
@@ -5529,6 +5642,26 @@
                                 var message = new $root.google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource();
                                 if (object.bucketUri != null)
                                     message.bucketUri = String(object.bucketUri);
+                                switch (object.bucketObjectType) {
+                                default:
+                                    if (typeof object.bucketObjectType === "number") {
+                                        message.bucketObjectType = object.bucketObjectType;
+                                        break;
+                                    }
+                                    break;
+                                case "BUCKET_OBJECT_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.bucketObjectType = 0;
+                                    break;
+                                case "TRANSCRIPT":
+                                case 1:
+                                    message.bucketObjectType = 1;
+                                    break;
+                                case "AUDIO":
+                                case 2:
+                                    message.bucketObjectType = 2;
+                                    break;
+                                }
                                 return message;
                             };
     
@@ -5545,10 +5678,14 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.bucketUri = "";
+                                    object.bucketObjectType = options.enums === String ? "BUCKET_OBJECT_TYPE_UNSPECIFIED" : 0;
+                                }
                                 if (message.bucketUri != null && message.hasOwnProperty("bucketUri"))
                                     object.bucketUri = message.bucketUri;
+                                if (message.bucketObjectType != null && message.hasOwnProperty("bucketObjectType"))
+                                    object.bucketObjectType = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource.BucketObjectType[message.bucketObjectType] === undefined ? message.bucketObjectType : $root.google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource.BucketObjectType[message.bucketObjectType] : message.bucketObjectType;
                                 return object;
                             };
     
@@ -5577,6 +5714,22 @@
                                 }
                                 return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource";
                             };
+    
+                            /**
+                             * BucketObjectType enum.
+                             * @name google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource.BucketObjectType
+                             * @enum {number}
+                             * @property {number} BUCKET_OBJECT_TYPE_UNSPECIFIED=0 BUCKET_OBJECT_TYPE_UNSPECIFIED value
+                             * @property {number} TRANSCRIPT=1 TRANSCRIPT value
+                             * @property {number} AUDIO=2 AUDIO value
+                             */
+                            GcsSource.BucketObjectType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "BUCKET_OBJECT_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "TRANSCRIPT"] = 1;
+                                values[valuesById[2] = "AUDIO"] = 2;
+                                return values;
+                            })();
     
                             return GcsSource;
                         })();
@@ -5815,6 +5968,8 @@
                              * @memberof google.cloud.contactcenterinsights.v1.IngestConversationsRequest
                              * @interface IConversationConfig
                              * @property {string|null} [agentId] ConversationConfig agentId
+                             * @property {number|null} [agentChannel] ConversationConfig agentChannel
+                             * @property {number|null} [customerChannel] ConversationConfig customerChannel
                              */
     
                             /**
@@ -5839,6 +5994,22 @@
                              * @instance
                              */
                             ConversationConfig.prototype.agentId = "";
+    
+                            /**
+                             * ConversationConfig agentChannel.
+                             * @member {number} agentChannel
+                             * @memberof google.cloud.contactcenterinsights.v1.IngestConversationsRequest.ConversationConfig
+                             * @instance
+                             */
+                            ConversationConfig.prototype.agentChannel = 0;
+    
+                            /**
+                             * ConversationConfig customerChannel.
+                             * @member {number} customerChannel
+                             * @memberof google.cloud.contactcenterinsights.v1.IngestConversationsRequest.ConversationConfig
+                             * @instance
+                             */
+                            ConversationConfig.prototype.customerChannel = 0;
     
                             /**
                              * Creates a new ConversationConfig instance using the specified properties.
@@ -5866,6 +6037,10 @@
                                     writer = $Writer.create();
                                 if (message.agentId != null && Object.hasOwnProperty.call(message, "agentId"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.agentId);
+                                if (message.agentChannel != null && Object.hasOwnProperty.call(message, "agentChannel"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.agentChannel);
+                                if (message.customerChannel != null && Object.hasOwnProperty.call(message, "customerChannel"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.customerChannel);
                                 return writer;
                             };
     
@@ -5902,6 +6077,14 @@
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.agentId = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.agentChannel = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.customerChannel = reader.int32();
                                             break;
                                         }
                                     default:
@@ -5942,6 +6125,12 @@
                                 if (message.agentId != null && message.hasOwnProperty("agentId"))
                                     if (!$util.isString(message.agentId))
                                         return "agentId: string expected";
+                                if (message.agentChannel != null && message.hasOwnProperty("agentChannel"))
+                                    if (!$util.isInteger(message.agentChannel))
+                                        return "agentChannel: integer expected";
+                                if (message.customerChannel != null && message.hasOwnProperty("customerChannel"))
+                                    if (!$util.isInteger(message.customerChannel))
+                                        return "customerChannel: integer expected";
                                 return null;
                             };
     
@@ -5959,6 +6148,10 @@
                                 var message = new $root.google.cloud.contactcenterinsights.v1.IngestConversationsRequest.ConversationConfig();
                                 if (object.agentId != null)
                                     message.agentId = String(object.agentId);
+                                if (object.agentChannel != null)
+                                    message.agentChannel = object.agentChannel | 0;
+                                if (object.customerChannel != null)
+                                    message.customerChannel = object.customerChannel | 0;
                                 return message;
                             };
     
@@ -5975,10 +6168,17 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.agentId = "";
+                                    object.agentChannel = 0;
+                                    object.customerChannel = 0;
+                                }
                                 if (message.agentId != null && message.hasOwnProperty("agentId"))
                                     object.agentId = message.agentId;
+                                if (message.agentChannel != null && message.hasOwnProperty("agentChannel"))
+                                    object.agentChannel = message.agentChannel;
+                                if (message.customerChannel != null && message.hasOwnProperty("customerChannel"))
+                                    object.customerChannel = message.customerChannel;
                                 return object;
                             };
     
@@ -8249,6 +8449,7 @@
                          * @property {number|null} [completedAnalysesCount] BulkAnalyzeConversationsMetadata completedAnalysesCount
                          * @property {number|null} [failedAnalysesCount] BulkAnalyzeConversationsMetadata failedAnalysesCount
                          * @property {number|null} [totalRequestedAnalysesCount] BulkAnalyzeConversationsMetadata totalRequestedAnalysesCount
+                         * @property {Array.<google.rpc.IStatus>|null} [partialErrors] BulkAnalyzeConversationsMetadata partialErrors
                          */
     
                         /**
@@ -8260,6 +8461,7 @@
                          * @param {google.cloud.contactcenterinsights.v1.IBulkAnalyzeConversationsMetadata=} [properties] Properties to set
                          */
                         function BulkAnalyzeConversationsMetadata(properties) {
+                            this.partialErrors = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -8315,6 +8517,14 @@
                         BulkAnalyzeConversationsMetadata.prototype.totalRequestedAnalysesCount = 0;
     
                         /**
+                         * BulkAnalyzeConversationsMetadata partialErrors.
+                         * @member {Array.<google.rpc.IStatus>} partialErrors
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsMetadata
+                         * @instance
+                         */
+                        BulkAnalyzeConversationsMetadata.prototype.partialErrors = $util.emptyArray;
+    
+                        /**
                          * Creates a new BulkAnalyzeConversationsMetadata instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsMetadata
@@ -8350,6 +8560,9 @@
                                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.failedAnalysesCount);
                             if (message.totalRequestedAnalysesCount != null && Object.hasOwnProperty.call(message, "totalRequestedAnalysesCount"))
                                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.totalRequestedAnalysesCount);
+                            if (message.partialErrors != null && message.partialErrors.length)
+                                for (var i = 0; i < message.partialErrors.length; ++i)
+                                    $root.google.rpc.Status.encode(message.partialErrors[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
@@ -8406,6 +8619,12 @@
                                     }
                                 case 6: {
                                         message.totalRequestedAnalysesCount = reader.int32();
+                                        break;
+                                    }
+                                case 7: {
+                                        if (!(message.partialErrors && message.partialErrors.length))
+                                            message.partialErrors = [];
+                                        message.partialErrors.push($root.google.rpc.Status.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -8467,6 +8686,15 @@
                             if (message.totalRequestedAnalysesCount != null && message.hasOwnProperty("totalRequestedAnalysesCount"))
                                 if (!$util.isInteger(message.totalRequestedAnalysesCount))
                                     return "totalRequestedAnalysesCount: integer expected";
+                            if (message.partialErrors != null && message.hasOwnProperty("partialErrors")) {
+                                if (!Array.isArray(message.partialErrors))
+                                    return "partialErrors: array expected";
+                                for (var i = 0; i < message.partialErrors.length; ++i) {
+                                    var error = $root.google.rpc.Status.verify(message.partialErrors[i]);
+                                    if (error)
+                                        return "partialErrors." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -8503,6 +8731,16 @@
                                 message.failedAnalysesCount = object.failedAnalysesCount | 0;
                             if (object.totalRequestedAnalysesCount != null)
                                 message.totalRequestedAnalysesCount = object.totalRequestedAnalysesCount | 0;
+                            if (object.partialErrors) {
+                                if (!Array.isArray(object.partialErrors))
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsMetadata.partialErrors: array expected");
+                                message.partialErrors = [];
+                                for (var i = 0; i < object.partialErrors.length; ++i) {
+                                    if (typeof object.partialErrors[i] !== "object")
+                                        throw TypeError(".google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsMetadata.partialErrors: object expected");
+                                    message.partialErrors[i] = $root.google.rpc.Status.fromObject(object.partialErrors[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -8519,6 +8757,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.partialErrors = [];
                             if (options.defaults) {
                                 object.createTime = null;
                                 object.endTime = null;
@@ -8539,6 +8779,11 @@
                                 object.failedAnalysesCount = message.failedAnalysesCount;
                             if (message.totalRequestedAnalysesCount != null && message.hasOwnProperty("totalRequestedAnalysesCount"))
                                 object.totalRequestedAnalysesCount = message.totalRequestedAnalysesCount;
+                            if (message.partialErrors && message.partialErrors.length) {
+                                object.partialErrors = [];
+                                for (var j = 0; j < message.partialErrors.length; ++j)
+                                    object.partialErrors[j] = $root.google.rpc.Status.toObject(message.partialErrors[j], options);
+                            }
                             return object;
                         };
     
@@ -8796,6 +9041,764 @@
                         };
     
                         return BulkAnalyzeConversationsResponse;
+                    })();
+    
+                    v1.BulkDeleteConversationsRequest = (function() {
+    
+                        /**
+                         * Properties of a BulkDeleteConversationsRequest.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IBulkDeleteConversationsRequest
+                         * @property {string|null} [parent] BulkDeleteConversationsRequest parent
+                         * @property {string|null} [filter] BulkDeleteConversationsRequest filter
+                         * @property {number|null} [maxDeleteCount] BulkDeleteConversationsRequest maxDeleteCount
+                         * @property {boolean|null} [force] BulkDeleteConversationsRequest force
+                         */
+    
+                        /**
+                         * Constructs a new BulkDeleteConversationsRequest.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents a BulkDeleteConversationsRequest.
+                         * @implements IBulkDeleteConversationsRequest
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsRequest=} [properties] Properties to set
+                         */
+                        function BulkDeleteConversationsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BulkDeleteConversationsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest
+                         * @instance
+                         */
+                        BulkDeleteConversationsRequest.prototype.parent = "";
+    
+                        /**
+                         * BulkDeleteConversationsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest
+                         * @instance
+                         */
+                        BulkDeleteConversationsRequest.prototype.filter = "";
+    
+                        /**
+                         * BulkDeleteConversationsRequest maxDeleteCount.
+                         * @member {number} maxDeleteCount
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest
+                         * @instance
+                         */
+                        BulkDeleteConversationsRequest.prototype.maxDeleteCount = 0;
+    
+                        /**
+                         * BulkDeleteConversationsRequest force.
+                         * @member {boolean} force
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest
+                         * @instance
+                         */
+                        BulkDeleteConversationsRequest.prototype.force = false;
+    
+                        /**
+                         * Creates a new BulkDeleteConversationsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest} BulkDeleteConversationsRequest instance
+                         */
+                        BulkDeleteConversationsRequest.create = function create(properties) {
+                            return new BulkDeleteConversationsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BulkDeleteConversationsRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsRequest} message BulkDeleteConversationsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BulkDeleteConversationsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.filter);
+                            if (message.maxDeleteCount != null && Object.hasOwnProperty.call(message, "maxDeleteCount"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.maxDeleteCount);
+                            if (message.force != null && Object.hasOwnProperty.call(message, "force"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.force);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BulkDeleteConversationsRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsRequest} message BulkDeleteConversationsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BulkDeleteConversationsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BulkDeleteConversationsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest} BulkDeleteConversationsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BulkDeleteConversationsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.maxDeleteCount = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.force = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BulkDeleteConversationsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest} BulkDeleteConversationsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BulkDeleteConversationsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BulkDeleteConversationsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BulkDeleteConversationsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.maxDeleteCount != null && message.hasOwnProperty("maxDeleteCount"))
+                                if (!$util.isInteger(message.maxDeleteCount))
+                                    return "maxDeleteCount: integer expected";
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                if (typeof message.force !== "boolean")
+                                    return "force: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BulkDeleteConversationsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest} BulkDeleteConversationsRequest
+                         */
+                        BulkDeleteConversationsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest)
+                                return object;
+                            var message = new $root.google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.maxDeleteCount != null)
+                                message.maxDeleteCount = object.maxDeleteCount | 0;
+                            if (object.force != null)
+                                message.force = Boolean(object.force);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BulkDeleteConversationsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest} message BulkDeleteConversationsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BulkDeleteConversationsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.filter = "";
+                                object.maxDeleteCount = 0;
+                                object.force = false;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.maxDeleteCount != null && message.hasOwnProperty("maxDeleteCount"))
+                                object.maxDeleteCount = message.maxDeleteCount;
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                object.force = message.force;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BulkDeleteConversationsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BulkDeleteConversationsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BulkDeleteConversationsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BulkDeleteConversationsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest";
+                        };
+    
+                        return BulkDeleteConversationsRequest;
+                    })();
+    
+                    v1.BulkDeleteConversationsMetadata = (function() {
+    
+                        /**
+                         * Properties of a BulkDeleteConversationsMetadata.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IBulkDeleteConversationsMetadata
+                         * @property {google.protobuf.ITimestamp|null} [createTime] BulkDeleteConversationsMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] BulkDeleteConversationsMetadata endTime
+                         * @property {google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsRequest|null} [request] BulkDeleteConversationsMetadata request
+                         * @property {Array.<google.rpc.IStatus>|null} [partialErrors] BulkDeleteConversationsMetadata partialErrors
+                         */
+    
+                        /**
+                         * Constructs a new BulkDeleteConversationsMetadata.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents a BulkDeleteConversationsMetadata.
+                         * @implements IBulkDeleteConversationsMetadata
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsMetadata=} [properties] Properties to set
+                         */
+                        function BulkDeleteConversationsMetadata(properties) {
+                            this.partialErrors = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BulkDeleteConversationsMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata
+                         * @instance
+                         */
+                        BulkDeleteConversationsMetadata.prototype.createTime = null;
+    
+                        /**
+                         * BulkDeleteConversationsMetadata endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata
+                         * @instance
+                         */
+                        BulkDeleteConversationsMetadata.prototype.endTime = null;
+    
+                        /**
+                         * BulkDeleteConversationsMetadata request.
+                         * @member {google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsRequest|null|undefined} request
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata
+                         * @instance
+                         */
+                        BulkDeleteConversationsMetadata.prototype.request = null;
+    
+                        /**
+                         * BulkDeleteConversationsMetadata partialErrors.
+                         * @member {Array.<google.rpc.IStatus>} partialErrors
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata
+                         * @instance
+                         */
+                        BulkDeleteConversationsMetadata.prototype.partialErrors = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BulkDeleteConversationsMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata} BulkDeleteConversationsMetadata instance
+                         */
+                        BulkDeleteConversationsMetadata.create = function create(properties) {
+                            return new BulkDeleteConversationsMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BulkDeleteConversationsMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsMetadata} message BulkDeleteConversationsMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BulkDeleteConversationsMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.request != null && Object.hasOwnProperty.call(message, "request"))
+                                $root.google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest.encode(message.request, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.partialErrors != null && message.partialErrors.length)
+                                for (var i = 0; i < message.partialErrors.length; ++i)
+                                    $root.google.rpc.Status.encode(message.partialErrors[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BulkDeleteConversationsMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsMetadata} message BulkDeleteConversationsMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BulkDeleteConversationsMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BulkDeleteConversationsMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata} BulkDeleteConversationsMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BulkDeleteConversationsMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.request = $root.google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.partialErrors && message.partialErrors.length))
+                                            message.partialErrors = [];
+                                        message.partialErrors.push($root.google.rpc.Status.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BulkDeleteConversationsMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata} BulkDeleteConversationsMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BulkDeleteConversationsMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BulkDeleteConversationsMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BulkDeleteConversationsMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.request != null && message.hasOwnProperty("request")) {
+                                var error = $root.google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest.verify(message.request);
+                                if (error)
+                                    return "request." + error;
+                            }
+                            if (message.partialErrors != null && message.hasOwnProperty("partialErrors")) {
+                                if (!Array.isArray(message.partialErrors))
+                                    return "partialErrors: array expected";
+                                for (var i = 0; i < message.partialErrors.length; ++i) {
+                                    var error = $root.google.rpc.Status.verify(message.partialErrors[i]);
+                                    if (error)
+                                        return "partialErrors." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BulkDeleteConversationsMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata} BulkDeleteConversationsMetadata
+                         */
+                        BulkDeleteConversationsMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata)
+                                return object;
+                            var message = new $root.google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            if (object.request != null) {
+                                if (typeof object.request !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata.request: object expected");
+                                message.request = $root.google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest.fromObject(object.request);
+                            }
+                            if (object.partialErrors) {
+                                if (!Array.isArray(object.partialErrors))
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata.partialErrors: array expected");
+                                message.partialErrors = [];
+                                for (var i = 0; i < object.partialErrors.length; ++i) {
+                                    if (typeof object.partialErrors[i] !== "object")
+                                        throw TypeError(".google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata.partialErrors: object expected");
+                                    message.partialErrors[i] = $root.google.rpc.Status.fromObject(object.partialErrors[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BulkDeleteConversationsMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata} message BulkDeleteConversationsMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BulkDeleteConversationsMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.partialErrors = [];
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.endTime = null;
+                                object.request = null;
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.request != null && message.hasOwnProperty("request"))
+                                object.request = $root.google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest.toObject(message.request, options);
+                            if (message.partialErrors && message.partialErrors.length) {
+                                object.partialErrors = [];
+                                for (var j = 0; j < message.partialErrors.length; ++j)
+                                    object.partialErrors[j] = $root.google.rpc.Status.toObject(message.partialErrors[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BulkDeleteConversationsMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BulkDeleteConversationsMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BulkDeleteConversationsMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BulkDeleteConversationsMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata";
+                        };
+    
+                        return BulkDeleteConversationsMetadata;
+                    })();
+    
+                    v1.BulkDeleteConversationsResponse = (function() {
+    
+                        /**
+                         * Properties of a BulkDeleteConversationsResponse.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IBulkDeleteConversationsResponse
+                         */
+    
+                        /**
+                         * Constructs a new BulkDeleteConversationsResponse.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents a BulkDeleteConversationsResponse.
+                         * @implements IBulkDeleteConversationsResponse
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsResponse=} [properties] Properties to set
+                         */
+                        function BulkDeleteConversationsResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new BulkDeleteConversationsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse} BulkDeleteConversationsResponse instance
+                         */
+                        BulkDeleteConversationsResponse.create = function create(properties) {
+                            return new BulkDeleteConversationsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BulkDeleteConversationsResponse message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsResponse} message BulkDeleteConversationsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BulkDeleteConversationsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BulkDeleteConversationsResponse message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsResponse} message BulkDeleteConversationsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BulkDeleteConversationsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BulkDeleteConversationsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse} BulkDeleteConversationsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BulkDeleteConversationsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BulkDeleteConversationsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse} BulkDeleteConversationsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BulkDeleteConversationsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BulkDeleteConversationsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BulkDeleteConversationsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BulkDeleteConversationsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse} BulkDeleteConversationsResponse
+                         */
+                        BulkDeleteConversationsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse)
+                                return object;
+                            return new $root.google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from a BulkDeleteConversationsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse} message BulkDeleteConversationsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BulkDeleteConversationsResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this BulkDeleteConversationsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BulkDeleteConversationsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BulkDeleteConversationsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BulkDeleteConversationsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse";
+                        };
+    
+                        return BulkDeleteConversationsResponse;
                     })();
     
                     v1.ExportInsightsDataRequest = (function() {

@@ -394,6 +394,136 @@ describe('v1.CloudDeployClient', () => {
     });
   });
 
+  describe('rollbackTarget', () => {
+    it('invokes rollbackTarget without error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.RollbackTargetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.RollbackTargetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.RollbackTargetResponse()
+      );
+      client.innerApiCalls.rollbackTarget = stubSimpleCall(expectedResponse);
+      const [response] = await client.rollbackTarget(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.rollbackTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.rollbackTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes rollbackTarget without error using callback', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.RollbackTargetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.RollbackTargetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.RollbackTargetResponse()
+      );
+      client.innerApiCalls.rollbackTarget =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.rollbackTarget(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.deploy.v1.IRollbackTargetResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.rollbackTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.rollbackTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes rollbackTarget with error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.RollbackTargetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.RollbackTargetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.rollbackTarget = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.rollbackTarget(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.rollbackTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.rollbackTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes rollbackTarget with closed client', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.RollbackTargetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.RollbackTargetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.rollbackTarget(request), expectedError);
+    });
+  });
+
   describe('getTarget', () => {
     it('invokes getTarget without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
@@ -1936,6 +2066,397 @@ describe('v1.CloudDeployClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getConfig(request), expectedError);
+    });
+  });
+
+  describe('getAutomation', () => {
+    it('invokes getAutomation without error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.GetAutomationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.GetAutomationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.Automation()
+      );
+      client.innerApiCalls.getAutomation = stubSimpleCall(expectedResponse);
+      const [response] = await client.getAutomation(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAutomation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAutomation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAutomation without error using callback', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.GetAutomationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.GetAutomationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.Automation()
+      );
+      client.innerApiCalls.getAutomation =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getAutomation(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.deploy.v1.IAutomation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAutomation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAutomation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAutomation with error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.GetAutomationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.GetAutomationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getAutomation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getAutomation(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getAutomation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAutomation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAutomation with closed client', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.GetAutomationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.GetAutomationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getAutomation(request), expectedError);
+    });
+  });
+
+  describe('getAutomationRun', () => {
+    it('invokes getAutomationRun without error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.GetAutomationRunRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.GetAutomationRunRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.AutomationRun()
+      );
+      client.innerApiCalls.getAutomationRun = stubSimpleCall(expectedResponse);
+      const [response] = await client.getAutomationRun(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAutomationRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAutomationRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAutomationRun without error using callback', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.GetAutomationRunRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.GetAutomationRunRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.AutomationRun()
+      );
+      client.innerApiCalls.getAutomationRun =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getAutomationRun(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.deploy.v1.IAutomationRun | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAutomationRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAutomationRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAutomationRun with error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.GetAutomationRunRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.GetAutomationRunRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getAutomationRun = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getAutomationRun(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getAutomationRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAutomationRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAutomationRun with closed client', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.GetAutomationRunRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.GetAutomationRunRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getAutomationRun(request), expectedError);
+    });
+  });
+
+  describe('cancelAutomationRun', () => {
+    it('invokes cancelAutomationRun without error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.CancelAutomationRunRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.CancelAutomationRunRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.CancelAutomationRunResponse()
+      );
+      client.innerApiCalls.cancelAutomationRun =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.cancelAutomationRun(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.cancelAutomationRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelAutomationRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes cancelAutomationRun without error using callback', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.CancelAutomationRunRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.CancelAutomationRunRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.CancelAutomationRunResponse()
+      );
+      client.innerApiCalls.cancelAutomationRun =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.cancelAutomationRun(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.deploy.v1.ICancelAutomationRunResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.cancelAutomationRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelAutomationRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes cancelAutomationRun with error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.CancelAutomationRunRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.CancelAutomationRunRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.cancelAutomationRun = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.cancelAutomationRun(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.cancelAutomationRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelAutomationRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes cancelAutomationRun with closed client', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.CancelAutomationRunRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.CancelAutomationRunRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.cancelAutomationRun(request), expectedError);
     });
   });
 
@@ -3496,6 +4017,592 @@ describe('v1.CloudDeployClient', () => {
     });
   });
 
+  describe('createAutomation', () => {
+    it('invokes createAutomation without error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.CreateAutomationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.CreateAutomationRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createAutomation =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createAutomation(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAutomation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAutomation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAutomation without error using callback', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.CreateAutomationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.CreateAutomationRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createAutomation =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createAutomation(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.deploy.v1.IAutomation,
+              protos.google.cloud.deploy.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.deploy.v1.IAutomation,
+        protos.google.cloud.deploy.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAutomation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAutomation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAutomation with call error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.CreateAutomationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.CreateAutomationRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createAutomation = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createAutomation(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createAutomation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAutomation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAutomation with LRO error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.CreateAutomationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.CreateAutomationRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createAutomation = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createAutomation(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createAutomation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAutomation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateAutomationProgress without error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateAutomationProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateAutomationProgress with error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateAutomationProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateAutomation', () => {
+    it('invokes updateAutomation without error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.UpdateAutomationRequest()
+      );
+      request.automation ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.UpdateAutomationRequest',
+        ['automation', 'name']
+      );
+      request.automation.name = defaultValue1;
+      const expectedHeaderRequestParams = `automation.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateAutomation =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateAutomation(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateAutomation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAutomation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAutomation without error using callback', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.UpdateAutomationRequest()
+      );
+      request.automation ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.UpdateAutomationRequest',
+        ['automation', 'name']
+      );
+      request.automation.name = defaultValue1;
+      const expectedHeaderRequestParams = `automation.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateAutomation =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateAutomation(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.deploy.v1.IAutomation,
+              protos.google.cloud.deploy.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.deploy.v1.IAutomation,
+        protos.google.cloud.deploy.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateAutomation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAutomation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAutomation with call error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.UpdateAutomationRequest()
+      );
+      request.automation ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.UpdateAutomationRequest',
+        ['automation', 'name']
+      );
+      request.automation.name = defaultValue1;
+      const expectedHeaderRequestParams = `automation.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateAutomation = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateAutomation(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateAutomation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAutomation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAutomation with LRO error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.UpdateAutomationRequest()
+      );
+      request.automation ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.UpdateAutomationRequest',
+        ['automation', 'name']
+      );
+      request.automation.name = defaultValue1;
+      const expectedHeaderRequestParams = `automation.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateAutomation = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updateAutomation(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateAutomation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAutomation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateAutomationProgress without error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateAutomationProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateAutomationProgress with error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateAutomationProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteAutomation', () => {
+    it('invokes deleteAutomation without error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.DeleteAutomationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.DeleteAutomationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteAutomation =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteAutomation(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteAutomation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAutomation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAutomation without error using callback', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.DeleteAutomationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.DeleteAutomationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteAutomation =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteAutomation(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.deploy.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.deploy.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteAutomation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAutomation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAutomation with call error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.DeleteAutomationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.DeleteAutomationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteAutomation = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteAutomation(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteAutomation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAutomation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAutomation with LRO error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.DeleteAutomationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.DeleteAutomationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteAutomation = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteAutomation(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteAutomation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAutomation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteAutomationProgress without error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteAutomationProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteAutomationProgress with error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteAutomationProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('listDeliveryPipelines', () => {
     it('invokes listDeliveryPipelines without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
@@ -5036,6 +6143,633 @@ describe('v1.CloudDeployClient', () => {
       );
     });
   });
+
+  describe('listAutomations', () => {
+    it('invokes listAutomations without error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.ListAutomationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListAutomationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.deploy.v1.Automation()),
+        generateSampleMessage(new protos.google.cloud.deploy.v1.Automation()),
+        generateSampleMessage(new protos.google.cloud.deploy.v1.Automation()),
+      ];
+      client.innerApiCalls.listAutomations = stubSimpleCall(expectedResponse);
+      const [response] = await client.listAutomations(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAutomations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAutomations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAutomations without error using callback', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.ListAutomationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListAutomationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.deploy.v1.Automation()),
+        generateSampleMessage(new protos.google.cloud.deploy.v1.Automation()),
+        generateSampleMessage(new protos.google.cloud.deploy.v1.Automation()),
+      ];
+      client.innerApiCalls.listAutomations =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listAutomations(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.deploy.v1.IAutomation[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAutomations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAutomations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAutomations with error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.ListAutomationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListAutomationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listAutomations = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listAutomations(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listAutomations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAutomations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAutomationsStream without error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.ListAutomationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListAutomationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.deploy.v1.Automation()),
+        generateSampleMessage(new protos.google.cloud.deploy.v1.Automation()),
+        generateSampleMessage(new protos.google.cloud.deploy.v1.Automation()),
+      ];
+      client.descriptors.page.listAutomations.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listAutomationsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.deploy.v1.Automation[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.deploy.v1.Automation) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listAutomations.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAutomations, request)
+      );
+      assert(
+        (client.descriptors.page.listAutomations.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listAutomationsStream with error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.ListAutomationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListAutomationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAutomations.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listAutomationsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.deploy.v1.Automation[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.deploy.v1.Automation) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listAutomations.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAutomations, request)
+      );
+      assert(
+        (client.descriptors.page.listAutomations.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listAutomations without error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.ListAutomationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListAutomationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.deploy.v1.Automation()),
+        generateSampleMessage(new protos.google.cloud.deploy.v1.Automation()),
+        generateSampleMessage(new protos.google.cloud.deploy.v1.Automation()),
+      ];
+      client.descriptors.page.listAutomations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.deploy.v1.IAutomation[] = [];
+      const iterable = client.listAutomationsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAutomations.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listAutomations.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listAutomations with error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.ListAutomationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListAutomationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAutomations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listAutomationsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.deploy.v1.IAutomation[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAutomations.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listAutomations.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('listAutomationRuns', () => {
+    it('invokes listAutomationRuns without error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.ListAutomationRunsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListAutomationRunsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.deploy.v1.AutomationRun()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.deploy.v1.AutomationRun()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.deploy.v1.AutomationRun()
+        ),
+      ];
+      client.innerApiCalls.listAutomationRuns =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listAutomationRuns(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAutomationRuns as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAutomationRuns as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAutomationRuns without error using callback', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.ListAutomationRunsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListAutomationRunsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.deploy.v1.AutomationRun()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.deploy.v1.AutomationRun()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.deploy.v1.AutomationRun()
+        ),
+      ];
+      client.innerApiCalls.listAutomationRuns =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listAutomationRuns(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.deploy.v1.IAutomationRun[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAutomationRuns as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAutomationRuns as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAutomationRuns with error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.ListAutomationRunsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListAutomationRunsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listAutomationRuns = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listAutomationRuns(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listAutomationRuns as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAutomationRuns as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAutomationRunsStream without error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.ListAutomationRunsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListAutomationRunsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.deploy.v1.AutomationRun()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.deploy.v1.AutomationRun()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.deploy.v1.AutomationRun()
+        ),
+      ];
+      client.descriptors.page.listAutomationRuns.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listAutomationRunsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.deploy.v1.AutomationRun[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.deploy.v1.AutomationRun) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listAutomationRuns.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAutomationRuns, request)
+      );
+      assert(
+        (client.descriptors.page.listAutomationRuns.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listAutomationRunsStream with error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.ListAutomationRunsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListAutomationRunsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAutomationRuns.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listAutomationRunsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.deploy.v1.AutomationRun[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.deploy.v1.AutomationRun) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listAutomationRuns.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAutomationRuns, request)
+      );
+      assert(
+        (client.descriptors.page.listAutomationRuns.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listAutomationRuns without error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.ListAutomationRunsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListAutomationRunsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.deploy.v1.AutomationRun()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.deploy.v1.AutomationRun()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.deploy.v1.AutomationRun()
+        ),
+      ];
+      client.descriptors.page.listAutomationRuns.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.deploy.v1.IAutomationRun[] = [];
+      const iterable = client.listAutomationRunsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAutomationRuns.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listAutomationRuns.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listAutomationRuns with error', async () => {
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.deploy.v1.ListAutomationRunsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListAutomationRunsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAutomationRuns.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listAutomationRunsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.deploy.v1.IAutomationRun[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAutomationRuns.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listAutomationRuns.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new clouddeployModule.v1.CloudDeployClient({
@@ -5865,6 +7599,159 @@ describe('v1.CloudDeployClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('automation', () => {
+      const fakePath = '/rendered/path/automation';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        delivery_pipeline: 'deliveryPipelineValue',
+        automation: 'automationValue',
+      };
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.automationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.automationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('automationPath', () => {
+        const result = client.automationPath(
+          'projectValue',
+          'locationValue',
+          'deliveryPipelineValue',
+          'automationValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.automationPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromAutomationName', () => {
+        const result = client.matchProjectFromAutomationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.automationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromAutomationName', () => {
+        const result = client.matchLocationFromAutomationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.automationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDeliveryPipelineFromAutomationName', () => {
+        const result = client.matchDeliveryPipelineFromAutomationName(fakePath);
+        assert.strictEqual(result, 'deliveryPipelineValue');
+        assert(
+          (client.pathTemplates.automationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAutomationFromAutomationName', () => {
+        const result = client.matchAutomationFromAutomationName(fakePath);
+        assert.strictEqual(result, 'automationValue');
+        assert(
+          (client.pathTemplates.automationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('automationRun', () => {
+      const fakePath = '/rendered/path/automationRun';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        delivery_pipeline: 'deliveryPipelineValue',
+        automation_run: 'automationRunValue',
+      };
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.automationRunPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.automationRunPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('automationRunPath', () => {
+        const result = client.automationRunPath(
+          'projectValue',
+          'locationValue',
+          'deliveryPipelineValue',
+          'automationRunValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.automationRunPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromAutomationRunName', () => {
+        const result = client.matchProjectFromAutomationRunName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.automationRunPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromAutomationRunName', () => {
+        const result = client.matchLocationFromAutomationRunName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.automationRunPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDeliveryPipelineFromAutomationRunName', () => {
+        const result =
+          client.matchDeliveryPipelineFromAutomationRunName(fakePath);
+        assert.strictEqual(result, 'deliveryPipelineValue');
+        assert(
+          (client.pathTemplates.automationRunPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAutomationRunFromAutomationRunName', () => {
+        const result = client.matchAutomationRunFromAutomationRunName(fakePath);
+        assert.strictEqual(result, 'automationRunValue');
+        assert(
+          (client.pathTemplates.automationRunPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('build', () => {
       const fakePath = '/rendered/path/build';
       const expectedParameters = {
@@ -6104,6 +7991,70 @@ describe('v1.CloudDeployClient', () => {
         assert.strictEqual(result, 'deliveryPipelineValue');
         assert(
           (client.pathTemplates.deliveryPipelinePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('job', () => {
+      const fakePath = '/rendered/path/job';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        job: 'jobValue',
+      };
+      const client = new clouddeployModule.v1.CloudDeployClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.jobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.jobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('jobPath', () => {
+        const result = client.jobPath(
+          'projectValue',
+          'locationValue',
+          'jobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.jobPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromJobName', () => {
+        const result = client.matchProjectFromJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.jobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromJobName', () => {
+        const result = client.matchLocationFromJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.jobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchJobFromJobName', () => {
+        const result = client.matchJobFromJobName(fakePath);
+        assert.strictEqual(result, 'jobValue');
+        assert(
+          (client.pathTemplates.jobPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

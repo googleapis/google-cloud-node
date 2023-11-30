@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. The name of the `Target` to delete. Format should be
-   *  projects/{project_id}/locations/{location_name}/targets/{target_name}.
+   *  `projects/{project_id}/locations/{location_name}/targets/{target_name}`.
    */
   // const name = 'abc123'
   /**

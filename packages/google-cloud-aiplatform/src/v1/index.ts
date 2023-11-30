@@ -18,11 +18,15 @@
 
 export {DatasetServiceClient} from './dataset_service_client';
 export {EndpointServiceClient} from './endpoint_service_client';
+export {FeatureOnlineStoreAdminServiceClient} from './feature_online_store_admin_service_client';
+export {FeatureOnlineStoreServiceClient} from './feature_online_store_service_client';
+export {FeatureRegistryServiceClient} from './feature_registry_service_client';
 export {FeaturestoreOnlineServingServiceClient} from './featurestore_online_serving_service_client';
 export {FeaturestoreServiceClient} from './featurestore_service_client';
 export {IndexEndpointServiceClient} from './index_endpoint_service_client';
 export {IndexServiceClient} from './index_service_client';
 export {JobServiceClient} from './job_service_client';
+export {LlmUtilityServiceClient} from './llm_utility_service_client';
 export {MatchServiceClient} from './match_service_client';
 export {MetadataServiceClient} from './metadata_service_client';
 export {MigrationServiceClient} from './migration_service_client';

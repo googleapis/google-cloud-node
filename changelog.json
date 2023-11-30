@@ -4,6 +4,443 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "489c5075229a2060ae569e23ad0daa49f41344c2",
+          "message": "[recaptchaenterprise] added required annotations",
+          "issues": [
+            "4801"
+          ],
+          "breakingChangeNote": "[recaptchaenterprise] added required annotations ([#4801](https://github.com/googleapis/google-cloud-node/issues/4801))"
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "e65f5b7c-31f1-4b9e-9d07-0a5f651c2415",
+      "createTime": "2023-11-16T05:29:20.855Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7e95257cb371509efce1e5b83a730cb1a1db4492",
+          "message": "[discoveryengine] add data store and engine services",
+          "issues": [
+            "4810"
+          ]
+        }
+      ],
+      "version": "1.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "d1d244b6-c25d-4ddb-be43-b6d41e9d2d9d",
+      "createTime": "2023-11-16T05:29:20.847Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f885b6565848041517d71214874aa8fbce9d4fa2",
+          "message": "[confidentialcomputing] Add a new field `token_type` to `TokenOptions` message proto",
+          "issues": [
+            "4808"
+          ]
+        }
+      ],
+      "version": "1.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/confidentialcomputing",
+      "id": "e3deb7e3-90b1-4aad-a3da-1b8700556a6d",
+      "createTime": "2023-11-16T05:29:20.840Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8ab0e5b463557c041415077d61700910579e8c6d",
+          "message": "[batch] add a CloudLoggingOption and use_generic_task_monitored_resource fields for users to opt out new batch monitored resource in cloud logging",
+          "issues": [
+            "4812"
+          ]
+        }
+      ],
+      "version": "1.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "0869dfbb-358e-44d2-be7a-ac545e9b9c92",
+      "createTime": "2023-11-16T05:29:20.831Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9da950110296e4fed58de27f35284091616ea1b7",
+          "message": "[aiplatform] add protected_artifact_location_id to CustomJob",
+          "issues": [
+            "4809"
+          ]
+        }
+      ],
+      "version": "3.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "bf717157-3778-4c5d-a958-b33073bd7039",
+      "createTime": "2023-11-16T05:29:20.822Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "279e77c39982c98fb2f9f6b9305ee9097ae10352",
+          "message": "[analytics-data] add the `SheetExportAudienceList` method to the Data API v1 alpha",
+          "issues": [
+            "4804"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/data",
+      "id": "5115bdbd-a42e-4b0e-8345-9dd22831a36f",
+      "createTime": "2023-11-16T05:29:20.815Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "6e2643f2d758a87f3367101d8f2cfafa3d6adeb6",
+          "message": "Initial release of @google-cloud/edgenetwork",
+          "issues": [
+            "4806"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgenetwork",
+      "id": "c61df490-8a97-4e48-80d1-3a8228abfacc",
+      "createTime": "2023-11-09T23:58:19.637Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a2ffd6d854a6882e7d1f4226735654b66fd6937e",
+          "message": "Add open lineage support",
+          "issues": [
+            "4793"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/lineage",
+      "id": "e057fbbf-0979-484e-bb43-68b518c7bf4b",
+      "createTime": "2023-11-09T23:58:19.629Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "61cb5c91e054639da95268ab13ae99f909d261c8",
+          "message": "Add Optimized to FeatureOnlineStore",
+          "issues": [
+            "4790"
+          ]
+        }
+      ],
+      "version": "3.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "d604748c-cb2a-4e9a-a56e-d449b1900efc",
+      "createTime": "2023-11-09T23:58:19.620Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "692e10f7734a4d2bf6b94fb46e5656b16ea54685",
+          "message": "[dlp] Introduce Discovery API protos and methods",
+          "issues": [
+            "4761"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dlp",
+      "id": "3a57f97c-8099-462d-9b52-20ce7711fb39",
+      "createTime": "2023-11-03T21:03:58.656Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ff42e4ee2fde54c1f370a16a065705e1f69f8b64",
+          "message": "[cloudbuild] Add optional field \"SourceFetcher\" to choose source fetcher tool",
+          "issues": [
+            "4784"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "d5c89e45-5982-4099-88dc-24b6593dfb7d",
+      "createTime": "2023-11-03T21:03:58.648Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0bccdc4c9704a108cde379e8066965b016b91d2f",
+          "message": "Add a new cluster field for the cluster tier of GKE clusters",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "0bccdc4c9704a108cde379e8066965b016b91d2f",
+          "message": "[container] added EnterpriseConfig",
+          "issues": [
+            "4774"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "0bccdc4c9704a108cde379e8066965b016b91d2f",
+          "message": "Add a new cluster field for the cluster tier of GKE clusters",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "0bccdc4c9704a108cde379e8066965b016b91d2f",
+          "message": "[container] added EnterpriseConfig",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "0bccdc4c9704a108cde379e8066965b016b91d2f",
+          "message": "[container] add ResourceManagerTags API to attach tags on the underlying Compute Engine VMs of GKE Nodes which can be used to selectively enforce Cloud Firewall network firewall policies",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "0bccdc4c9704a108cde379e8066965b016b91d2f",
+          "message": "[container] add ResourceManagerTags API to attach tags on the underlying Compute Engine VMs of GKE Nodes which can be used to selectively enforce Cloud Firewall network firewall policies",
+          "issues": []
+        }
+      ],
+      "version": "5.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "0d7b26c2-7a98-4b0d-8ef2-668a49954f6e",
+      "createTime": "2023-11-03T21:03:58.640Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b71e06c8c53f7425a6fe5ac265d7d278e15b5499",
+          "message": "[sql] a new value `LOCAL_INFILE_OFF` is added to enum `SqlExternalSyncSettingErrorType`",
+          "issues": [
+            "4728"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "c186778f-1d4a-4319-b4ca-e05b90053435",
+      "createTime": "2023-11-03T21:03:58.629Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "10e783c1039c2cb192be636d0aff1c78e3c84e73",
+          "message": "Support MP3, TranscriptNormalization and SpeakerLabels in STT V1 API",
+          "issues": [
+            "4775"
+          ]
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "1c08e6a9-a349-41b8-b3e4-946fdb396208",
+      "createTime": "2023-11-03T21:03:58.621Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e1ca3103786e35ee41710aebd4b216a7d33a5115",
+          "message": "Update dependency mathjs to v12",
+          "issues": [
+            "4765"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/language",
+      "id": "1f4e8a23-71d1-4252-80e3-fd9b85518e92",
+      "createTime": "2023-11-03T21:03:58.613Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c2f34cd5f7a3a8a99b2c56348f0f48a41fb4d32e",
+          "message": "[deploy] add Automation API and Rollback API",
+          "issues": [
+            "4787"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/deploy",
+      "id": "c67c9c37-3f71-4803-af27-cc49c1a6e5df",
+      "createTime": "2023-11-03T21:03:58.606Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8d1ae22ced4e3f56a9d9b728140d1ec5c3e1cdde",
+          "message": "[dataproc] support required_registration_fraction for secondary workers",
+          "issues": [
+            "4786"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "6852d8ab-2a36-4527-b0c8-623191bb01db",
+      "createTime": "2023-11-03T21:03:58.599Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ca497563124fbb8977f0e93b6af2cbf3a45f1088",
+          "message": "Add relativeResourceName and linkedResourceName to search result",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "ca497563124fbb8977f0e93b6af2cbf3a45f1088",
+          "message": "[dataplex] DataQualityDimension is now part of the DataQualityDimensionResult message",
+          "issues": [
+            "4776"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "77581a8b-b05f-43cc-876f-7f891053e5b0",
+      "createTime": "2023-11-03T21:03:58.589Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "50712d88b6b2437a7536aa7525bd177cb1ea3903",
+          "message": "Support for ReleaseConfigs",
+          "issues": [
+            "4764"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataform",
+      "id": "887c1ae4-3086-4a94-9def-303d59a243a9",
+      "createTime": "2023-11-03T21:03:58.582Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e7129c613335a9495c11c5c3dd87986f21d84339",
+          "message": "[contactcenterinsights] Launch BulkDelete API, and bulk audio import via the IngestConversations API",
+          "issues": [
+            "4789"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contact-center-insights",
+      "id": "7daeabaa-cb9f-4f48-9fd5-d17556784723",
+      "createTime": "2023-11-03T21:03:58.574Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e1ca3103786e35ee41710aebd4b216a7d33a5115",
+          "message": "Update dependency mathjs to v12",
+          "issues": [
+            "4765"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "4.0.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/automl",
+      "id": "5d736531-67df-4e00-956a-0d5e92d7203e",
+      "createTime": "2023-11-03T21:03:58.565Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d1f0a31372a93d8230cf3374e857bf4b1d2436fe",
+          "message": "[alloydb] Add new field in `GenerateClientCertificate` v1 API to allow AlloyDB connectors request client certs with metadata exchange support",
+          "issues": [
+            "4785"
+          ]
+        }
+      ],
+      "version": "1.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "44326fa8-ff59-4830-bec3-ebfd83a0499f",
+      "createTime": "2023-11-03T21:03:58.558Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "489e188d97af302f96299a5b40eb5e07020972fc",
+          "message": "Change CreateFeature metadata",
+          "issues": [
+            "4782"
+          ],
+          "scope": "aiplatform/v1beta1"
+        },
+        {
+          "type": "feat",
+          "sha": "489e188d97af302f96299a5b40eb5e07020972fc",
+          "message": "Adding new fields for concurrent explanations",
+          "issues": []
+        }
+      ],
+      "version": "3.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "897ff3d0-cdfe-4dc2-90c2-7606b6f0207e",
+      "createTime": "2023-11-03T21:03:58.550Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "5430bbfac12cac791e96e3411165d3f1d1ada3ae",
           "message": "[places] new features for Places GA",
@@ -19821,5 +20258,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-10-24T16:52:09.248Z"
+  "updateTime": "2023-11-16T05:29:20.855Z"
 }

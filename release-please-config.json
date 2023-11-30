@@ -157,7 +157,7 @@
     "packages/google-storagetransfer": {},
     "packages/grafeas": {},
     "packages/typeless-sample-bot": {},
-    "packages/google-api-cloudquotas": {}
+    "packages/google-api-cloudquotas": {},
   },
   "plugins": [
     {

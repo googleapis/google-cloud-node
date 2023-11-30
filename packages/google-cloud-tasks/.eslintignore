@@ -4,4 +4,8 @@ test/fixtures
 build/
 docs/
 protos/
-samples/generated/
+samples/
+esm/src/**/*.d.ts
+esm/test/**/*.d.ts
+esm/system-test/**/*.d.ts
+esm/system-test/fixtures/sample/src/*.ts

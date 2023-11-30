@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-sql",
-        "version": "0.1.0",
+        "version": "0.2.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -1865,7 +1865,7 @@
                     },
                     {
                         "name": "sync_parallel_level",
-                        "type": ".google.cloud.sql.v1.SqlInstancesStartExternalSyncRequest.ExternalSyncParallelLevel"
+                        "type": ".google.cloud.sql.v1.ExternalSyncParallelLevel"
                     }
                 ],
                 "resultType": ".google.cloud.sql.v1.Operation",

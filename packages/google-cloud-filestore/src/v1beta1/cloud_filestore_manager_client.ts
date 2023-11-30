@@ -1417,12 +1417,12 @@ export class CloudFilestoreManagerClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required.
-   *   projects/{project_id}/locations/{location_id}/instances/{instance_id}. The
-   *   resource name of the instance, in the format
+   *   `projects/{project_id}/locations/{location_id}/instances/{instance_id}`.
+   *   The resource name of the instance, in the format
    * @param {string} request.targetSnapshotId
    *   Required. The snapshot resource ID, in the format 'my-snapshot', where the
    *   specified ID is the {snapshot_id} of the fully qualified name like
-   *   projects/{project_id}/locations/{location_id}/instances/{instance_id}/snapshots/{snapshot_id}
+   *   `projects/{project_id}/locations/{location_id}/instances/{instance_id}/snapshots/{snapshot_id}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

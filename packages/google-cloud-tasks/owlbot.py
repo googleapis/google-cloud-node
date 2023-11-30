@@ -20,15 +20,16 @@ import pathlib
 
 
 def patch(library: pathlib.Path):
-    s.replace(library / 'src/*/cloud_tasks_client_config.json',
+    s.replace(library / 'esm/src/*/cloud_tasks_client_config.json',
             '"initial_rpc_timeout_millis": 60000',
             '"initial_rpc_timeout_millis": 20000')
-    s.replace(library / 'src/*/cloud_tasks_client_config.json',
+    s.replace(library / 'esm/src/*/cloud_tasks_client_config.json',
             '"max_rpc_timeout_millis": 60000',
             '"max_rpc_timeout_millis": 20000')
 
 
 node.owlbot_main(relative_dir="packages/google-cloud-tasks",
-    staging_excludes=["README.md", "package.json"],
+    templates_exclides=['esm/src/index.ts'],
+    staging_excludes=["README.md", "package.json", 'esm/src/index.ts'],
     patch_staging=patch
 )

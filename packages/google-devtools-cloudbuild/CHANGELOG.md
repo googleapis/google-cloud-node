@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v4.0.1...cloudbuild-v4.1.0) (2023-11-03)
+
+
+### Features
+
+* [cloudbuild] Add optional field "SourceFetcher" to choose source fetcher tool ([#4784](https://github.com/googleapis/google-cloud-node/issues/4784)) ([ff42e4e](https://github.com/googleapis/google-cloud-node/commit/ff42e4ee2fde54c1f370a16a065705e1f69f8b64))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v4.0.0...cloudbuild-v4.0.1) (2023-09-06)
 
 
