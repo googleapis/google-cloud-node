@@ -27,6 +27,7 @@ function main() {
   const environmentsClient = new cx.EnvironmentsClient();
   const experimentsClient = new cx.ExperimentsClient();
   const flowsClient = new cx.FlowsClient();
+  const generatorsClient = new cx.GeneratorsClient();
   const intentsClient = new cx.IntentsClient();
   const pagesClient = new cx.PagesClient();
   const securitySettingsServiceClient = new cx.SecuritySettingsServiceClient();

@@ -29,18 +29,17 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent resource to create analyses in.
+   *  Required. The parent resource to delete conversations from.
    *  Format:
    *  projects/{project}/locations/{location}
    */
   // const parent = 'abc123'
   /**
-   *  Filter used to select the subset of conversations to analyze.
+   *  Filter used to select the subset of conversations to delete.
    */
   // const filter = 'abc123'
   /**
-   *  Maximum number of conversations to delete. The default is 1000. It can be
-   *  changed by setting the `max_delete_count` field.
+   *  Maximum number of conversations to delete.
    */
   // const maxDeleteCount = 1234
   /**
