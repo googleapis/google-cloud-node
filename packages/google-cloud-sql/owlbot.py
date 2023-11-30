@@ -1,5 +1,7 @@
 import json
 import logging
+import synthtool as s
+import synthtool.gcp as gcp
 import synthtool.languages.node_mono_repo as node
 from pathlib import Path
 from synthtool import shell
