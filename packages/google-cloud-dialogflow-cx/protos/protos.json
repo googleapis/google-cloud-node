@@ -412,6 +412,13 @@
                               "options": {
                                 "proto3_optional": true
                               }
+                            },
+                            "answerFeedbackSettings": {
+                              "type": "AnswerFeedbackSettings",
+                              "id": 38,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -464,6 +471,17 @@
                                   "id": 1,
                                   "options": {
                                     "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "AnswerFeedbackSettings": {
+                              "fields": {
+                                "enableAnswerFeedback": {
+                                  "type": "bool",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
                                   }
                                 }
                               }
@@ -835,6 +853,18 @@
                             }
                           }
                         },
+                        "BargeInConfig": {
+                          "fields": {
+                            "noBargeInDuration": {
+                              "type": "google.protobuf.Duration",
+                              "id": 1
+                            },
+                            "totalDuration": {
+                              "type": "google.protobuf.Duration",
+                              "id": 2
+                            }
+                          }
+                        },
                         "InputAudioConfig": {
                           "fields": {
                             "audioEncoding": {
@@ -868,6 +898,10 @@
                             "singleUtterance": {
                               "type": "bool",
                               "id": 8
+                            },
+                            "bargeInConfig": {
+                              "type": "BargeInConfig",
+                              "id": 15
                             }
                           }
                         },
@@ -2858,24 +2892,6 @@
                             "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/dialogflow"
                           },
                           "methods": {
-                            "ListEntityTypes": {
-                              "requestType": "ListEntityTypesRequest",
-                              "responseType": "ListEntityTypesResponse",
-                              "options": {
-                                "(google.api.http).get": "/v3/{parent=projects/*/locations/*/agents/*}/entityTypes",
-                                "(google.api.method_signature)": "parent"
-                              },
-                              "parsedOptions": [
-                                {
-                                  "(google.api.http)": {
-                                    "get": "/v3/{parent=projects/*/locations/*/agents/*}/entityTypes"
-                                  }
-                                },
-                                {
-                                  "(google.api.method_signature)": "parent"
-                                }
-                              ]
-                            },
                             "GetEntityType": {
                               "requestType": "GetEntityTypeRequest",
                               "responseType": "EntityType",
@@ -2949,6 +2965,24 @@
                                 },
                                 {
                                   "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "ListEntityTypes": {
+                              "requestType": "ListEntityTypesRequest",
+                              "responseType": "ListEntityTypesResponse",
+                              "options": {
+                                "(google.api.http).get": "/v3/{parent=projects/*/locations/*/agents/*}/entityTypes",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v3/{parent=projects/*/locations/*/agents/*}/entityTypes"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
                                 }
                               ]
                             }
@@ -5409,6 +5443,108 @@
                                   }
                                 }
                               ]
+                            },
+                            "SubmitAnswerFeedback": {
+                              "requestType": "SubmitAnswerFeedbackRequest",
+                              "responseType": "AnswerFeedback",
+                              "options": {
+                                "(google.api.http).post": "/v3/{session=projects/*/locations/*/agents/*/sessions/*}:submitAnswerFeedback",
+                                "(google.api.http).body": "*"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v3/{session=projects/*/locations/*/agents/*/sessions/*}:submitAnswerFeedback",
+                                    "body": "*"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "AnswerFeedback": {
+                          "fields": {
+                            "rating": {
+                              "type": "Rating",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "ratingReason": {
+                              "type": "RatingReason",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "customRating": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Rating": {
+                              "values": {
+                                "RATING_UNSPECIFIED": 0,
+                                "THUMBS_UP": 1,
+                                "THUMBS_DOWN": 2
+                              }
+                            },
+                            "RatingReason": {
+                              "fields": {
+                                "reasonLabels": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "feedback": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "SubmitAnswerFeedbackRequest": {
+                          "fields": {
+                            "session": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Session"
+                              }
+                            },
+                            "responseId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "answerFeedback": {
+                              "type": "AnswerFeedback",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -5721,6 +5857,113 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "endUserMetadata": {
+                              "type": "google.protobuf.Struct",
+                              "id": 18,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "searchConfig": {
+                              "type": "SearchConfig",
+                              "id": 20,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "SearchConfig": {
+                          "fields": {
+                            "boostSpecs": {
+                              "rule": "repeated",
+                              "type": "BoostSpecs",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "filterSpecs": {
+                              "rule": "repeated",
+                              "type": "FilterSpecs",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "BoostSpec": {
+                          "fields": {
+                            "conditionBoostSpecs": {
+                              "rule": "repeated",
+                              "type": "ConditionBoostSpec",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "ConditionBoostSpec": {
+                              "fields": {
+                                "condition": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "boost": {
+                                  "type": "float",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "BoostSpecs": {
+                          "fields": {
+                            "dataStores": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "discoveryengine.googleapis.com/DataStore"
+                              }
+                            },
+                            "spec": {
+                              "rule": "repeated",
+                              "type": "BoostSpec",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "FilterSpecs": {
+                          "fields": {
+                            "dataStores": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "discoveryengine.googleapis.com/DataStore"
+                              }
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -5858,6 +6101,10 @@
                             "advancedSettings": {
                               "type": "AdvancedSettings",
                               "id": 21
+                            },
+                            "allowAnswerFeedback": {
+                              "type": "bool",
+                              "id": 32
                             }
                           }
                         },
@@ -7789,6 +8036,278 @@
                             }
                           }
                         },
+                        "Generators": {
+                          "options": {
+                            "(google.api.default_host)": "dialogflow.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/dialogflow"
+                          },
+                          "methods": {
+                            "ListGenerators": {
+                              "requestType": "ListGeneratorsRequest",
+                              "responseType": "ListGeneratorsResponse",
+                              "options": {
+                                "(google.api.http).get": "/v3/{parent=projects/*/locations/*/agents/*}/generators",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v3/{parent=projects/*/locations/*/agents/*}/generators"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "GetGenerator": {
+                              "requestType": "GetGeneratorRequest",
+                              "responseType": "Generator",
+                              "options": {
+                                "(google.api.http).get": "/v3/{name=projects/*/locations/*/agents/*/generators/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v3/{name=projects/*/locations/*/agents/*/generators/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "CreateGenerator": {
+                              "requestType": "CreateGeneratorRequest",
+                              "responseType": "Generator",
+                              "options": {
+                                "(google.api.http).post": "/v3/{parent=projects/*/locations/*/agents/*}/generators",
+                                "(google.api.http).body": "generator",
+                                "(google.api.method_signature)": "parent,generator"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v3/{parent=projects/*/locations/*/agents/*}/generators",
+                                    "body": "generator"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,generator"
+                                }
+                              ]
+                            },
+                            "UpdateGenerator": {
+                              "requestType": "UpdateGeneratorRequest",
+                              "responseType": "Generator",
+                              "options": {
+                                "(google.api.http).patch": "/v3/{generator.name=projects/*/locations/*/agents/*/generators/*}",
+                                "(google.api.http).body": "generator",
+                                "(google.api.method_signature)": "generator,update_mask"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v3/{generator.name=projects/*/locations/*/agents/*/generators/*}",
+                                    "body": "generator"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "generator,update_mask"
+                                }
+                              ]
+                            },
+                            "DeleteGenerator": {
+                              "requestType": "DeleteGeneratorRequest",
+                              "responseType": "google.protobuf.Empty",
+                              "options": {
+                                "(google.api.http).delete": "/v3/{name=projects/*/locations/*/agents/*/generators/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v3/{name=projects/*/locations/*/agents/*/generators/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "Generator": {
+                          "options": {
+                            "(google.api.resource).type": "dialogflow.googleapis.com/Generator",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/agents/{agent}/generators/{generator}"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "promptText": {
+                              "type": "Phrase",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "placeholders": {
+                              "rule": "repeated",
+                              "type": "Placeholder",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Placeholder": {
+                              "fields": {
+                                "id": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "Phrase": {
+                          "fields": {
+                            "text": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "ListGeneratorsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Generator"
+                              }
+                            },
+                            "languageCode": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 3
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "ListGeneratorsResponse": {
+                          "fields": {
+                            "generators": {
+                              "rule": "repeated",
+                              "type": "Generator",
+                              "id": 1
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "GetGeneratorRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Generator"
+                              }
+                            },
+                            "languageCode": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "CreateGeneratorRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Generator"
+                              }
+                            },
+                            "generator": {
+                              "type": "Generator",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "languageCode": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "UpdateGeneratorRequest": {
+                          "fields": {
+                            "generator": {
+                              "type": "Generator",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "languageCode": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "DeleteGeneratorRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Generator"
+                              }
+                            },
+                            "force": {
+                              "type": "bool",
+                              "id": 2
+                            }
+                          }
+                        },
                         "SecuritySettingsService": {
                           "options": {
                             "(google.api.default_host)": "dialogflow.googleapis.com",
@@ -8898,6 +9417,13 @@
                               "options": {
                                 "proto3_optional": true
                               }
+                            },
+                            "answerFeedbackSettings": {
+                              "type": "AnswerFeedbackSettings",
+                              "id": 38,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -8950,6 +9476,17 @@
                                   "id": 1,
                                   "options": {
                                     "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "AnswerFeedbackSettings": {
+                              "fields": {
+                                "enableAnswerFeedback": {
+                                  "type": "bool",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
                                   }
                                 }
                               }
@@ -9321,6 +9858,18 @@
                             }
                           }
                         },
+                        "BargeInConfig": {
+                          "fields": {
+                            "noBargeInDuration": {
+                              "type": "google.protobuf.Duration",
+                              "id": 1
+                            },
+                            "totalDuration": {
+                              "type": "google.protobuf.Duration",
+                              "id": 2
+                            }
+                          }
+                        },
                         "InputAudioConfig": {
                           "fields": {
                             "audioEncoding": {
@@ -9354,6 +9903,10 @@
                             "singleUtterance": {
                               "type": "bool",
                               "id": 8
+                            },
+                            "bargeInConfig": {
+                              "type": "BargeInConfig",
+                              "id": 15
                             }
                           }
                         },
@@ -11332,24 +11885,6 @@
                             "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/dialogflow"
                           },
                           "methods": {
-                            "ListEntityTypes": {
-                              "requestType": "ListEntityTypesRequest",
-                              "responseType": "ListEntityTypesResponse",
-                              "options": {
-                                "(google.api.http).get": "/v3beta1/{parent=projects/*/locations/*/agents/*}/entityTypes",
-                                "(google.api.method_signature)": "parent"
-                              },
-                              "parsedOptions": [
-                                {
-                                  "(google.api.http)": {
-                                    "get": "/v3beta1/{parent=projects/*/locations/*/agents/*}/entityTypes"
-                                  }
-                                },
-                                {
-                                  "(google.api.method_signature)": "parent"
-                                }
-                              ]
-                            },
                             "GetEntityType": {
                               "requestType": "GetEntityTypeRequest",
                               "responseType": "EntityType",
@@ -11423,6 +11958,24 @@
                                 },
                                 {
                                   "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "ListEntityTypes": {
+                              "requestType": "ListEntityTypesRequest",
+                              "responseType": "ListEntityTypesResponse",
+                              "options": {
+                                "(google.api.http).get": "/v3beta1/{parent=projects/*/locations/*/agents/*}/entityTypes",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v3beta1/{parent=projects/*/locations/*/agents/*}/entityTypes"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
                                 }
                               ]
                             }
@@ -13883,6 +14436,108 @@
                                   }
                                 }
                               ]
+                            },
+                            "SubmitAnswerFeedback": {
+                              "requestType": "SubmitAnswerFeedbackRequest",
+                              "responseType": "AnswerFeedback",
+                              "options": {
+                                "(google.api.http).post": "/v3beta1/{session=projects/*/locations/*/agents/*/sessions/*}:submitAnswerFeedback",
+                                "(google.api.http).body": "*"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v3beta1/{session=projects/*/locations/*/agents/*/sessions/*}:submitAnswerFeedback",
+                                    "body": "*"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "AnswerFeedback": {
+                          "fields": {
+                            "rating": {
+                              "type": "Rating",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "ratingReason": {
+                              "type": "RatingReason",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "customRating": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Rating": {
+                              "values": {
+                                "RATING_UNSPECIFIED": 0,
+                                "THUMBS_UP": 1,
+                                "THUMBS_DOWN": 2
+                              }
+                            },
+                            "RatingReason": {
+                              "fields": {
+                                "reasonLabels": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "feedback": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "SubmitAnswerFeedbackRequest": {
+                          "fields": {
+                            "session": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Session"
+                              }
+                            },
+                            "responseId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "answerFeedback": {
+                              "type": "AnswerFeedback",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -14195,6 +14850,113 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "endUserMetadata": {
+                              "type": "google.protobuf.Struct",
+                              "id": 18,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "searchConfig": {
+                              "type": "SearchConfig",
+                              "id": 20,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "SearchConfig": {
+                          "fields": {
+                            "boostSpecs": {
+                              "rule": "repeated",
+                              "type": "BoostSpecs",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "filterSpecs": {
+                              "rule": "repeated",
+                              "type": "FilterSpecs",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "BoostSpec": {
+                          "fields": {
+                            "conditionBoostSpecs": {
+                              "rule": "repeated",
+                              "type": "ConditionBoostSpec",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "ConditionBoostSpec": {
+                              "fields": {
+                                "condition": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "boost": {
+                                  "type": "float",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "BoostSpecs": {
+                          "fields": {
+                            "dataStores": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "discoveryengine.googleapis.com/DataStore"
+                              }
+                            },
+                            "spec": {
+                              "rule": "repeated",
+                              "type": "BoostSpec",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "FilterSpecs": {
+                          "fields": {
+                            "dataStores": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "discoveryengine.googleapis.com/DataStore"
+                              }
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -14332,6 +15094,10 @@
                             "advancedSettings": {
                               "type": "AdvancedSettings",
                               "id": 21
+                            },
+                            "allowAnswerFeedback": {
+                              "type": "bool",
+                              "id": 32
                             }
                           }
                         },
@@ -16260,6 +17026,278 @@
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/Experiment"
                               }
+                            }
+                          }
+                        },
+                        "Generators": {
+                          "options": {
+                            "(google.api.default_host)": "dialogflow.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/dialogflow"
+                          },
+                          "methods": {
+                            "ListGenerators": {
+                              "requestType": "ListGeneratorsRequest",
+                              "responseType": "ListGeneratorsResponse",
+                              "options": {
+                                "(google.api.http).get": "/v3beta1/{parent=projects/*/locations/*/agents/*}/generators",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v3beta1/{parent=projects/*/locations/*/agents/*}/generators"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "GetGenerator": {
+                              "requestType": "GetGeneratorRequest",
+                              "responseType": "Generator",
+                              "options": {
+                                "(google.api.http).get": "/v3beta1/{name=projects/*/locations/*/agents/*/generators/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v3beta1/{name=projects/*/locations/*/agents/*/generators/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "CreateGenerator": {
+                              "requestType": "CreateGeneratorRequest",
+                              "responseType": "Generator",
+                              "options": {
+                                "(google.api.http).post": "/v3beta1/{parent=projects/*/locations/*/agents/*}/generators",
+                                "(google.api.http).body": "generator",
+                                "(google.api.method_signature)": "parent,generator"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v3beta1/{parent=projects/*/locations/*/agents/*}/generators",
+                                    "body": "generator"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,generator"
+                                }
+                              ]
+                            },
+                            "UpdateGenerator": {
+                              "requestType": "UpdateGeneratorRequest",
+                              "responseType": "Generator",
+                              "options": {
+                                "(google.api.http).patch": "/v3beta1/{generator.name=projects/*/locations/*/agents/*/generators/*}",
+                                "(google.api.http).body": "generator",
+                                "(google.api.method_signature)": "generator,update_mask"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v3beta1/{generator.name=projects/*/locations/*/agents/*/generators/*}",
+                                    "body": "generator"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "generator,update_mask"
+                                }
+                              ]
+                            },
+                            "DeleteGenerator": {
+                              "requestType": "DeleteGeneratorRequest",
+                              "responseType": "google.protobuf.Empty",
+                              "options": {
+                                "(google.api.http).delete": "/v3beta1/{name=projects/*/locations/*/agents/*/generators/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v3beta1/{name=projects/*/locations/*/agents/*/generators/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "Generator": {
+                          "options": {
+                            "(google.api.resource).type": "dialogflow.googleapis.com/Generator",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/agents/{agent}/generators/{generator}"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "promptText": {
+                              "type": "Phrase",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "placeholders": {
+                              "rule": "repeated",
+                              "type": "Placeholder",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Placeholder": {
+                              "fields": {
+                                "id": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "Phrase": {
+                          "fields": {
+                            "text": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "ListGeneratorsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Generator"
+                              }
+                            },
+                            "languageCode": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 3
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "ListGeneratorsResponse": {
+                          "fields": {
+                            "generators": {
+                              "rule": "repeated",
+                              "type": "Generator",
+                              "id": 1
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "GetGeneratorRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Generator"
+                              }
+                            },
+                            "languageCode": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "CreateGeneratorRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Generator"
+                              }
+                            },
+                            "generator": {
+                              "type": "Generator",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "languageCode": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "UpdateGeneratorRequest": {
+                          "fields": {
+                            "generator": {
+                              "type": "Generator",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "languageCode": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "DeleteGeneratorRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Generator"
+                              }
+                            },
+                            "force": {
+                              "type": "bool",
+                              "id": 2
                             }
                           }
                         },

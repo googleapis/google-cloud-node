@@ -28,7 +28,23 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "DirectPredict": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DirectRawPredict": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "StreamingPredict": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "ServerStreamingPredict": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "StreamingRawPredict": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },

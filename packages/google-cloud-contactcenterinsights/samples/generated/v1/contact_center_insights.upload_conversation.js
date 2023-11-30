@@ -45,13 +45,13 @@ function main(parent, conversation) {
    */
   // const conversationId = 'abc123'
   /**
-   *  Optional. DLP settings for transcript redaction. Optional, will default to
-   *  the config specified in Settings.
+   *  Optional. DLP settings for transcript redaction. Will default to the config
+   *  specified in Settings.
    */
   // const redactionConfig = {}
   /**
-   *  Optional. Default Speech-to-Text configuration. Optional, will default to
-   *  the config specified in Settings.
+   *  Optional. Speech-to-Text configuration. Will default to the config
+   *  specified in Settings.
    */
   // const speechConfig = {}
 

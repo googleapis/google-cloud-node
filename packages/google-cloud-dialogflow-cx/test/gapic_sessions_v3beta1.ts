@@ -595,6 +595,137 @@ describe('v3beta1.SessionsClient', () => {
     });
   });
 
+  describe('submitAnswerFeedback', () => {
+    it('invokes submitAnswerFeedback without error', async () => {
+      const client = new sessionsModule.v3beta1.SessionsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.SubmitAnswerFeedbackRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.SubmitAnswerFeedbackRequest',
+        ['session']
+      );
+      request.session = defaultValue1;
+      const expectedHeaderRequestParams = `session=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.AnswerFeedback()
+      );
+      client.innerApiCalls.submitAnswerFeedback =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.submitAnswerFeedback(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.submitAnswerFeedback as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.submitAnswerFeedback as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes submitAnswerFeedback without error using callback', async () => {
+      const client = new sessionsModule.v3beta1.SessionsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.SubmitAnswerFeedbackRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.SubmitAnswerFeedbackRequest',
+        ['session']
+      );
+      request.session = defaultValue1;
+      const expectedHeaderRequestParams = `session=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.AnswerFeedback()
+      );
+      client.innerApiCalls.submitAnswerFeedback =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.submitAnswerFeedback(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.dialogflow.cx.v3beta1.IAnswerFeedback | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.submitAnswerFeedback as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.submitAnswerFeedback as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes submitAnswerFeedback with error', async () => {
+      const client = new sessionsModule.v3beta1.SessionsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.SubmitAnswerFeedbackRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.SubmitAnswerFeedbackRequest',
+        ['session']
+      );
+      request.session = defaultValue1;
+      const expectedHeaderRequestParams = `session=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.submitAnswerFeedback = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.submitAnswerFeedback(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.submitAnswerFeedback as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.submitAnswerFeedback as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes submitAnswerFeedback with closed client', async () => {
+      const client = new sessionsModule.v3beta1.SessionsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.SubmitAnswerFeedbackRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.SubmitAnswerFeedbackRequest',
+        ['session']
+      );
+      request.session = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.submitAnswerFeedback(request), expectedError);
+    });
+  });
+
   describe('streamingDetectIntent', () => {
     it('invokes streamingDetectIntent without error', async () => {
       const client = new sessionsModule.v3beta1.SessionsClient({
@@ -1790,6 +1921,82 @@ describe('v3beta1.SessionsClient', () => {
       });
     });
 
+    describe('generator', () => {
+      const fakePath = '/rendered/path/generator';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        agent: 'agentValue',
+        generator: 'generatorValue',
+      };
+      const client = new sessionsModule.v3beta1.SessionsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.generatorPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.generatorPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('generatorPath', () => {
+        const result = client.generatorPath(
+          'projectValue',
+          'locationValue',
+          'agentValue',
+          'generatorValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.generatorPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromGeneratorName', () => {
+        const result = client.matchProjectFromGeneratorName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.generatorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromGeneratorName', () => {
+        const result = client.matchLocationFromGeneratorName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.generatorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAgentFromGeneratorName', () => {
+        const result = client.matchAgentFromGeneratorName(fakePath);
+        assert.strictEqual(result, 'agentValue');
+        assert(
+          (client.pathTemplates.generatorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchGeneratorFromGeneratorName', () => {
+        const result = client.matchGeneratorFromGeneratorName(fakePath);
+        assert.strictEqual(result, 'generatorValue');
+        assert(
+          (client.pathTemplates.generatorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('intent', () => {
       const fakePath = '/rendered/path/intent';
       const expectedParameters = {
@@ -2669,6 +2876,186 @@ describe('v3beta1.SessionsClient', () => {
           (
             client.pathTemplates
               .projectLocationAgentTransitionRouteGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationCollectionDataStore', () => {
+      const fakePath = '/rendered/path/projectLocationCollectionDataStore';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+        data_store: 'dataStoreValue',
+      };
+      const client = new sessionsModule.v3beta1.SessionsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationCollectionDataStorePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationCollectionDataStorePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationCollectionDataStorePath', () => {
+        const result = client.projectLocationCollectionDataStorePath(
+          'projectValue',
+          'locationValue',
+          'collectionValue',
+          'dataStoreValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationCollectionDataStorePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationCollectionDataStoreName', () => {
+        const result =
+          client.matchProjectFromProjectLocationCollectionDataStoreName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationCollectionDataStorePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationCollectionDataStoreName', () => {
+        const result =
+          client.matchLocationFromProjectLocationCollectionDataStoreName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationCollectionDataStorePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCollectionFromProjectLocationCollectionDataStoreName', () => {
+        const result =
+          client.matchCollectionFromProjectLocationCollectionDataStoreName(
+            fakePath
+          );
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationCollectionDataStorePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationCollectionDataStoreName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationCollectionDataStoreName(
+            fakePath
+          );
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationCollectionDataStorePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationDataStore', () => {
+      const fakePath = '/rendered/path/projectLocationDataStore';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        data_store: 'dataStoreValue',
+      };
+      const client = new sessionsModule.v3beta1.SessionsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationDataStorePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectLocationDataStorePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationDataStorePath', () => {
+        const result = client.projectLocationDataStorePath(
+          'projectValue',
+          'locationValue',
+          'dataStoreValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationDataStorePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationDataStoreName', () => {
+        const result =
+          client.matchProjectFromProjectLocationDataStoreName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationDataStorePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationDataStoreName', () => {
+        const result =
+          client.matchLocationFromProjectLocationDataStoreName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationDataStorePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationDataStoreName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationDataStoreName(fakePath);
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationDataStorePathTemplate
               .match as SinonStub
           )
             .getCall(-1)

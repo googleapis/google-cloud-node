@@ -3011,11 +3011,11 @@ export class ContactCenterInsightsClient {
    *   This value should be 4-64 characters and must match the regular
    *   expression `^{@link protos.0-9|a-z0-9-]{4,64}$`. Valid characters are `[a-z}-`
    * @param {google.cloud.contactcenterinsights.v1.RedactionConfig} [request.redactionConfig]
-   *   Optional. DLP settings for transcript redaction. Optional, will default to
-   *   the config specified in Settings.
+   *   Optional. DLP settings for transcript redaction. Will default to the config
+   *   specified in Settings.
    * @param {google.cloud.contactcenterinsights.v1.SpeechConfig} [request.speechConfig]
-   *   Optional. Default Speech-to-Text configuration. Optional, will default to
-   *   the config specified in Settings.
+   *   Optional. Speech-to-Text configuration. Will default to the config
+   *   specified in Settings.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3438,14 +3438,13 @@ export class ContactCenterInsightsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource to create analyses in.
+   *   Required. The parent resource to delete conversations from.
    *   Format:
    *   projects/{project}/locations/{location}
    * @param {string} request.filter
-   *   Filter used to select the subset of conversations to analyze.
+   *   Filter used to select the subset of conversations to delete.
    * @param {number} request.maxDeleteCount
-   *   Maximum number of conversations to delete. The default is 1000. It can be
-   *   changed by setting the `max_delete_count` field.
+   *   Maximum number of conversations to delete.
    * @param {boolean} request.force
    *   If set to true, all of this conversation's analyses will also be deleted.
    *   Otherwise, the request will only succeed if the conversation has no
