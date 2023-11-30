@@ -2252,7 +2252,8 @@
                       "values": {
                         "VULNERABILITY_MODE_UNSPECIFIED": 0,
                         "VULNERABILITY_DISABLED": 1,
-                        "VULNERABILITY_BASIC": 2
+                        "VULNERABILITY_BASIC": 2,
+                        "VULNERABILITY_ENTERPRISE": 3
                       }
                     }
                   }
@@ -3768,6 +3769,10 @@
                       "type": "string",
                       "id": 110
                     },
+                    "queuedProvisioning": {
+                      "type": "QueuedProvisioning",
+                      "id": 112
+                    },
                     "bestEffortProvisioning": {
                       "type": "BestEffortProvisioning",
                       "id": 113
@@ -3897,6 +3902,14 @@
                             "TYPE_UNSPECIFIED": 0,
                             "COMPACT": 1
                           }
+                        }
+                      }
+                    },
+                    "QueuedProvisioning": {
+                      "fields": {
+                        "enabled": {
+                          "type": "bool",
+                          "id": 1
                         }
                       }
                     }
@@ -5512,6 +5525,13 @@
                   }
                 },
                 "AdvancedDatapathObservabilityConfig": {
+                  "oneofs": {
+                    "_enableRelay": {
+                      "oneof": [
+                        "enableRelay"
+                      ]
+                    }
+                  },
                   "fields": {
                     "enableMetrics": {
                       "type": "bool",
@@ -5520,6 +5540,13 @@
                     "relayMode": {
                       "type": "RelayMode",
                       "id": 2
+                    },
+                    "enableRelay": {
+                      "type": "bool",
+                      "id": 3,
+                      "options": {
+                        "proto3_optional": true
+                      }
                     }
                   },
                   "nested": {
@@ -9986,6 +10013,10 @@
                       "type": "string",
                       "id": 110
                     },
+                    "queuedProvisioning": {
+                      "type": "QueuedProvisioning",
+                      "id": 112
+                    },
                     "bestEffortProvisioning": {
                       "type": "BestEffortProvisioning",
                       "id": 113
@@ -10113,6 +10144,14 @@
                             "TYPE_UNSPECIFIED": 0,
                             "COMPACT": 1
                           }
+                        }
+                      }
+                    },
+                    "QueuedProvisioning": {
+                      "fields": {
+                        "enabled": {
+                          "type": "bool",
+                          "id": 1
                         }
                       }
                     }
@@ -11646,6 +11685,25 @@
                 "Master": {
                   "fields": {}
                 },
+                "AutopilotConversionStatus": {
+                  "fields": {
+                    "state": {
+                      "type": "State",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "State": {
+                      "values": {
+                        "STATE_UNSPECIFIED": 0,
+                        "DONE": 5
+                      }
+                    }
+                  }
+                },
                 "Autopilot": {
                   "fields": {
                     "enabled": {
@@ -11655,6 +11713,10 @@
                     "workloadPolicyConfig": {
                       "type": "WorkloadPolicyConfig",
                       "id": 2
+                    },
+                    "conversionStatus": {
+                      "type": "AutopilotConversionStatus",
+                      "id": 3
                     }
                   }
                 },
@@ -11897,6 +11959,13 @@
                   }
                 },
                 "AdvancedDatapathObservabilityConfig": {
+                  "oneofs": {
+                    "_enableRelay": {
+                      "oneof": [
+                        "enableRelay"
+                      ]
+                    }
+                  },
                   "fields": {
                     "enableMetrics": {
                       "type": "bool",
@@ -11905,6 +11974,13 @@
                     "relayMode": {
                       "type": "RelayMode",
                       "id": 2
+                    },
+                    "enableRelay": {
+                      "type": "bool",
+                      "id": 3,
+                      "options": {
+                        "proto3_optional": true
+                      }
                     }
                   },
                   "nested": {
