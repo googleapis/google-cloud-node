@@ -2479,6 +2479,16 @@
                 "rawPredict"
               ]
             },
+            "DirectPredict": {
+              "methods": [
+                "directPredict"
+              ]
+            },
+            "DirectRawPredict": {
+              "methods": [
+                "directRawPredict"
+              ]
+            },
             "Explain": {
               "methods": [
                 "explain"
@@ -2489,9 +2499,19 @@
                 "countTokens"
               ]
             },
+            "StreamingPredict": {
+              "methods": [
+                "streamingPredict"
+              ]
+            },
             "ServerStreamingPredict": {
               "methods": [
                 "serverStreamingPredict"
+              ]
+            },
+            "StreamingRawPredict": {
+              "methods": [
+                "streamingRawPredict"
               ]
             }
           }
@@ -2507,6 +2527,16 @@
             "RawPredict": {
               "methods": [
                 "rawPredict"
+              ]
+            },
+            "DirectPredict": {
+              "methods": [
+                "directPredict"
+              ]
+            },
+            "DirectRawPredict": {
+              "methods": [
+                "directRawPredict"
               ]
             },
             "Explain": {
