@@ -186,6 +186,9 @@ export class AlphaAnalyticsDataClient {
       propertyPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}'
       ),
+      recurringAudienceListPathTemplate: new this._gaxModule.PathTemplate(
+        'properties/{property}/recurringAudienceLists/{recurring_audience_list}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -196,6 +199,11 @@ export class AlphaAnalyticsDataClient {
         'pageToken',
         'nextPageToken',
         'audienceLists'
+      ),
+      listRecurringAudienceLists: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'recurringAudienceLists'
       ),
     };
 
@@ -286,6 +294,9 @@ export class AlphaAnalyticsDataClient {
       'sheetExportAudienceList',
       'getAudienceList',
       'listAudienceLists',
+      'createRecurringAudienceList',
+      'getRecurringAudienceList',
+      'listRecurringAudienceLists',
     ];
     for (const methodName of alphaAnalyticsDataStubMethods) {
       const callPromise = this.alphaAnalyticsDataStub.then(
@@ -920,6 +931,238 @@ export class AlphaAnalyticsDataClient {
     this.initialize();
     return this.innerApiCalls.getAudienceList(request, options, callback);
   }
+  /**
+   * Creates a recurring audience list. Recurring audience lists produces new
+   * audience lists each day. Audience lists are users in an audience at the
+   * time of the list's creation.
+   *
+   * A recurring audience list ensures that you have audience list based on the
+   * most recent data available for use each day. If you manually create
+   * audience list, you don't know when an audience list based on an additional
+   * day's data is available. This recurring audience list automates the
+   * creation of an audience list when an additional day's data is available.
+   * You will consume fewer quota tokens by using recurring audience list versus
+   * manually creating audience list at various times of day trying to guess
+   * when an additional day's data is ready.
+   *
+   * This method is introduced at alpha stability with the intention of
+   * gathering feedback on syntax and capabilities before entering beta. To give
+   * your feedback on this API, complete the
+   * [Google Analytics Audience Export API
+   * Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this recurring audience list will be
+   *   created. Format: `properties/{property}`
+   * @param {google.analytics.data.v1alpha.RecurringAudienceList} request.recurringAudienceList
+   *   Required. The recurring audience list to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1alpha.RecurringAudienceList|RecurringAudienceList}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.create_recurring_audience_list.js</caption>
+   * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_CreateRecurringAudienceList_async
+   */
+  createRecurringAudienceList(
+    request?: protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IRecurringAudienceList,
+      (
+        | protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createRecurringAudienceList(
+    request: protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IRecurringAudienceList,
+      | protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createRecurringAudienceList(
+    request: protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IRecurringAudienceList,
+      | protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createRecurringAudienceList(
+    request?: protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.data.v1alpha.IRecurringAudienceList,
+          | protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.data.v1alpha.IRecurringAudienceList,
+      | protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IRecurringAudienceList,
+      (
+        | protos.google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createRecurringAudienceList(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Gets configuration metadata about a specific recurring audience list. This
+   * method can be used to understand a recurring audience list's state after it
+   * has been created. For example, a recurring audience list resource will
+   * generate audience list instances for each day, and this method can be used
+   * to get the resource name of the most recent audience list instance.
+   *
+   * This method is introduced at alpha stability with the intention of
+   * gathering feedback on syntax and capabilities before entering beta. To give
+   * your feedback on this API, complete the
+   * [Google Analytics Audience Export API
+   * Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The recurring audience list resource name.
+   *   Format:
+   *   `properties/{property}/recurringAudienceLists/{recurring_audience_list}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1alpha.RecurringAudienceList|RecurringAudienceList}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.get_recurring_audience_list.js</caption>
+   * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_GetRecurringAudienceList_async
+   */
+  getRecurringAudienceList(
+    request?: protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IRecurringAudienceList,
+      (
+        | protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getRecurringAudienceList(
+    request: protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IRecurringAudienceList,
+      | protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getRecurringAudienceList(
+    request: protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IRecurringAudienceList,
+      | protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getRecurringAudienceList(
+    request?: protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.data.v1alpha.IRecurringAudienceList,
+          | protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.data.v1alpha.IRecurringAudienceList,
+      | protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IRecurringAudienceList,
+      (
+        | protos.google.analytics.data.v1alpha.IGetRecurringAudienceListRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getRecurringAudienceList(
+      request,
+      options,
+      callback
+    );
+  }
 
   /**
    * Creates an audience list for later retrieval. This method quickly returns
@@ -1307,6 +1550,237 @@ export class AlphaAnalyticsDataClient {
       callSettings
     ) as AsyncIterable<protos.google.analytics.data.v1alpha.IAudienceList>;
   }
+  /**
+   * Lists all recurring audience lists for a property. This method can be used
+   * for you to find and reuse existing recurring audience lists rather than
+   * creating unnecessary new recurring audience lists. The same audience can
+   * have multiple recurring audience lists that represent different dimension
+   * combinations; for example, just the dimension `deviceId` or both the
+   * dimensions `deviceId` and `userId`.
+   *
+   * This method is introduced at alpha stability with the intention of
+   * gathering feedback on syntax and capabilities before entering beta. To give
+   * your feedback on this API, complete the
+   * [Google Analytics Audience Export API
+   * Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. All recurring audience lists for this property will be listed in
+   *   the response. Format: `properties/{property}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of recurring audience lists to return. The
+   *   service may return fewer than this value. If unspecified, at most 200
+   *   recurring audience lists will be returned. The maximum value is 1000
+   *   (higher values will be coerced to the maximum).
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListRecurringAudienceLists` call. Provide this to retrieve the subsequent
+   *   page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListRecurringAudienceLists` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.analytics.data.v1alpha.RecurringAudienceList|RecurringAudienceList}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listRecurringAudienceListsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listRecurringAudienceLists(
+    request?: protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IRecurringAudienceList[],
+      protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest | null,
+      protos.google.analytics.data.v1alpha.IListRecurringAudienceListsResponse,
+    ]
+  >;
+  listRecurringAudienceLists(
+    request: protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
+      | protos.google.analytics.data.v1alpha.IListRecurringAudienceListsResponse
+      | null
+      | undefined,
+      protos.google.analytics.data.v1alpha.IRecurringAudienceList
+    >
+  ): void;
+  listRecurringAudienceLists(
+    request: protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
+    callback: PaginationCallback<
+      protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
+      | protos.google.analytics.data.v1alpha.IListRecurringAudienceListsResponse
+      | null
+      | undefined,
+      protos.google.analytics.data.v1alpha.IRecurringAudienceList
+    >
+  ): void;
+  listRecurringAudienceLists(
+    request?: protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
+          | protos.google.analytics.data.v1alpha.IListRecurringAudienceListsResponse
+          | null
+          | undefined,
+          protos.google.analytics.data.v1alpha.IRecurringAudienceList
+        >,
+    callback?: PaginationCallback<
+      protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
+      | protos.google.analytics.data.v1alpha.IListRecurringAudienceListsResponse
+      | null
+      | undefined,
+      protos.google.analytics.data.v1alpha.IRecurringAudienceList
+    >
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IRecurringAudienceList[],
+      protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest | null,
+      protos.google.analytics.data.v1alpha.IListRecurringAudienceListsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listRecurringAudienceLists(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. All recurring audience lists for this property will be listed in
+   *   the response. Format: `properties/{property}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of recurring audience lists to return. The
+   *   service may return fewer than this value. If unspecified, at most 200
+   *   recurring audience lists will be returned. The maximum value is 1000
+   *   (higher values will be coerced to the maximum).
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListRecurringAudienceLists` call. Provide this to retrieve the subsequent
+   *   page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListRecurringAudienceLists` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.analytics.data.v1alpha.RecurringAudienceList|RecurringAudienceList} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listRecurringAudienceListsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listRecurringAudienceListsStream(
+    request?: protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listRecurringAudienceLists'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listRecurringAudienceLists.createStream(
+      this.innerApiCalls.listRecurringAudienceLists as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listRecurringAudienceLists`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. All recurring audience lists for this property will be listed in
+   *   the response. Format: `properties/{property}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of recurring audience lists to return. The
+   *   service may return fewer than this value. If unspecified, at most 200
+   *   recurring audience lists will be returned. The maximum value is 1000
+   *   (higher values will be coerced to the maximum).
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListRecurringAudienceLists` call. Provide this to retrieve the subsequent
+   *   page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListRecurringAudienceLists` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.analytics.data.v1alpha.RecurringAudienceList|RecurringAudienceList}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.list_recurring_audience_lists.js</caption>
+   * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_ListRecurringAudienceLists_async
+   */
+  listRecurringAudienceListsAsync(
+    request?: protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.analytics.data.v1alpha.IRecurringAudienceList> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listRecurringAudienceLists'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listRecurringAudienceLists.asyncIterate(
+      this.innerApiCalls['listRecurringAudienceLists'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.analytics.data.v1alpha.IRecurringAudienceList>;
+  }
   // --------------------
   // -- Path templates --
   // --------------------
@@ -1370,6 +1844,50 @@ export class AlphaAnalyticsDataClient {
    */
   matchPropertyFromPropertyName(propertyName: string) {
     return this.pathTemplates.propertyPathTemplate.match(propertyName).property;
+  }
+
+  /**
+   * Return a fully-qualified recurringAudienceList resource name string.
+   *
+   * @param {string} property
+   * @param {string} recurring_audience_list
+   * @returns {string} Resource name string.
+   */
+  recurringAudienceListPath(property: string, recurringAudienceList: string) {
+    return this.pathTemplates.recurringAudienceListPathTemplate.render({
+      property: property,
+      recurring_audience_list: recurringAudienceList,
+    });
+  }
+
+  /**
+   * Parse the property from RecurringAudienceList resource.
+   *
+   * @param {string} recurringAudienceListName
+   *   A fully-qualified path representing RecurringAudienceList resource.
+   * @returns {string} A string representing the property.
+   */
+  matchPropertyFromRecurringAudienceListName(
+    recurringAudienceListName: string
+  ) {
+    return this.pathTemplates.recurringAudienceListPathTemplate.match(
+      recurringAudienceListName
+    ).property;
+  }
+
+  /**
+   * Parse the recurring_audience_list from RecurringAudienceList resource.
+   *
+   * @param {string} recurringAudienceListName
+   *   A fully-qualified path representing RecurringAudienceList resource.
+   * @returns {string} A string representing the recurring_audience_list.
+   */
+  matchRecurringAudienceListFromRecurringAudienceListName(
+    recurringAudienceListName: string
+  ) {
+    return this.pathTemplates.recurringAudienceListPathTemplate.match(
+      recurringAudienceListName
+    ).recurring_audience_list;
   }
 
   /**

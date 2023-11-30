@@ -1366,6 +1366,7 @@
                          * @property {string|null} [name] AnnotateAssessmentRequest name
                          * @property {google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Annotation|null} [annotation] AnnotateAssessmentRequest annotation
                          * @property {Array.<google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Reason>|null} [reasons] AnnotateAssessmentRequest reasons
+                         * @property {string|null} [accountId] AnnotateAssessmentRequest accountId
                          * @property {Uint8Array|null} [hashedAccountId] AnnotateAssessmentRequest hashedAccountId
                          * @property {google.cloud.recaptchaenterprise.v1.ITransactionEvent|null} [transactionEvent] AnnotateAssessmentRequest transactionEvent
                          */
@@ -1409,6 +1410,14 @@
                          * @instance
                          */
                         AnnotateAssessmentRequest.prototype.reasons = $util.emptyArray;
+    
+                        /**
+                         * AnnotateAssessmentRequest accountId.
+                         * @member {string} accountId
+                         * @memberof google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest
+                         * @instance
+                         */
+                        AnnotateAssessmentRequest.prototype.accountId = "";
     
                         /**
                          * AnnotateAssessmentRequest hashedAccountId.
@@ -1464,6 +1473,8 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.hashedAccountId);
                             if (message.transactionEvent != null && Object.hasOwnProperty.call(message, "transactionEvent"))
                                 $root.google.cloud.recaptchaenterprise.v1.TransactionEvent.encode(message.transactionEvent, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.accountId != null && Object.hasOwnProperty.call(message, "accountId"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.accountId);
                             return writer;
                         };
     
@@ -1515,6 +1526,10 @@
                                                 message.reasons.push(reader.int32());
                                         } else
                                             message.reasons.push(reader.int32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.accountId = reader.string();
                                         break;
                                     }
                                 case 4: {
@@ -1599,6 +1614,9 @@
                                         break;
                                     }
                             }
+                            if (message.accountId != null && message.hasOwnProperty("accountId"))
+                                if (!$util.isString(message.accountId))
+                                    return "accountId: string expected";
                             if (message.hashedAccountId != null && message.hasOwnProperty("hashedAccountId"))
                                 if (!(message.hashedAccountId && typeof message.hashedAccountId.length === "number" || $util.isString(message.hashedAccountId)))
                                     return "hashedAccountId: buffer expected";
@@ -1725,6 +1743,8 @@
                                         break;
                                     }
                             }
+                            if (object.accountId != null)
+                                message.accountId = String(object.accountId);
                             if (object.hashedAccountId != null)
                                 if (typeof object.hashedAccountId === "string")
                                     $util.base64.decode(object.hashedAccountId, message.hashedAccountId = $util.newBuffer($util.base64.length(object.hashedAccountId)), 0);
@@ -1764,6 +1784,7 @@
                                         object.hashedAccountId = $util.newBuffer(object.hashedAccountId);
                                 }
                                 object.transactionEvent = null;
+                                object.accountId = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1778,6 +1799,8 @@
                                 object.hashedAccountId = options.bytes === String ? $util.base64.encode(message.hashedAccountId, 0, message.hashedAccountId.length) : options.bytes === Array ? Array.prototype.slice.call(message.hashedAccountId) : message.hashedAccountId;
                             if (message.transactionEvent != null && message.hasOwnProperty("transactionEvent"))
                                 object.transactionEvent = $root.google.cloud.recaptchaenterprise.v1.TransactionEvent.toObject(message.transactionEvent, options);
+                            if (message.accountId != null && message.hasOwnProperty("accountId"))
+                                object.accountId = message.accountId;
                             return object;
                         };
     
@@ -3527,6 +3550,7 @@
                          * @property {Array.<string>|null} [headers] Event headers
                          * @property {boolean|null} [firewallPolicyEvaluation] Event firewallPolicyEvaluation
                          * @property {google.cloud.recaptchaenterprise.v1.ITransactionData|null} [transactionData] Event transactionData
+                         * @property {google.cloud.recaptchaenterprise.v1.IUserInfo|null} [userInfo] Event userInfo
                          */
     
                         /**
@@ -3650,6 +3674,14 @@
                         Event.prototype.transactionData = null;
     
                         /**
+                         * Event userInfo.
+                         * @member {google.cloud.recaptchaenterprise.v1.IUserInfo|null|undefined} userInfo
+                         * @memberof google.cloud.recaptchaenterprise.v1.Event
+                         * @instance
+                         */
+                        Event.prototype.userInfo = null;
+    
+                        /**
                          * Creates a new Event instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.recaptchaenterprise.v1.Event
@@ -3700,6 +3732,8 @@
                                 $root.google.cloud.recaptchaenterprise.v1.TransactionData.encode(message.transactionData, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             if (message.express != null && Object.hasOwnProperty.call(message, "express"))
                                 writer.uint32(/* id 14, wireType 0 =*/112).bool(message.express);
+                            if (message.userInfo != null && Object.hasOwnProperty.call(message, "userInfo"))
+                                $root.google.cloud.recaptchaenterprise.v1.UserInfo.encode(message.userInfo, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                             return writer;
                         };
     
@@ -3788,6 +3822,10 @@
                                         message.transactionData = $root.google.cloud.recaptchaenterprise.v1.TransactionData.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 15: {
+                                        message.userInfo = $root.google.cloud.recaptchaenterprise.v1.UserInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -3868,6 +3906,11 @@
                                 if (error)
                                     return "transactionData." + error;
                             }
+                            if (message.userInfo != null && message.hasOwnProperty("userInfo")) {
+                                var error = $root.google.cloud.recaptchaenterprise.v1.UserInfo.verify(message.userInfo);
+                                if (error)
+                                    return "userInfo." + error;
+                            }
                             return null;
                         };
     
@@ -3920,6 +3963,11 @@
                                     throw TypeError(".google.cloud.recaptchaenterprise.v1.Event.transactionData: object expected");
                                 message.transactionData = $root.google.cloud.recaptchaenterprise.v1.TransactionData.fromObject(object.transactionData);
                             }
+                            if (object.userInfo != null) {
+                                if (typeof object.userInfo !== "object")
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.Event.userInfo: object expected");
+                                message.userInfo = $root.google.cloud.recaptchaenterprise.v1.UserInfo.fromObject(object.userInfo);
+                            }
                             return message;
                         };
     
@@ -3957,6 +4005,7 @@
                                 object.firewallPolicyEvaluation = false;
                                 object.transactionData = null;
                                 object.express = false;
+                                object.userInfo = null;
                             }
                             if (message.token != null && message.hasOwnProperty("token"))
                                 object.token = message.token;
@@ -3987,6 +4036,8 @@
                                 object.transactionData = $root.google.cloud.recaptchaenterprise.v1.TransactionData.toObject(message.transactionData, options);
                             if (message.express != null && message.hasOwnProperty("express"))
                                 object.express = message.express;
+                            if (message.userInfo != null && message.hasOwnProperty("userInfo"))
+                                object.userInfo = $root.google.cloud.recaptchaenterprise.v1.UserInfo.toObject(message.userInfo, options);
                             return object;
                         };
     
@@ -5809,6 +5860,562 @@
                         })();
     
                         return TransactionData;
+                    })();
+    
+                    v1.UserInfo = (function() {
+    
+                        /**
+                         * Properties of a UserInfo.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IUserInfo
+                         * @property {google.protobuf.ITimestamp|null} [createAccountTime] UserInfo createAccountTime
+                         * @property {string|null} [accountId] UserInfo accountId
+                         * @property {Array.<google.cloud.recaptchaenterprise.v1.IUserId>|null} [userIds] UserInfo userIds
+                         */
+    
+                        /**
+                         * Constructs a new UserInfo.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a UserInfo.
+                         * @implements IUserInfo
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IUserInfo=} [properties] Properties to set
+                         */
+                        function UserInfo(properties) {
+                            this.userIds = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UserInfo createAccountTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createAccountTime
+                         * @memberof google.cloud.recaptchaenterprise.v1.UserInfo
+                         * @instance
+                         */
+                        UserInfo.prototype.createAccountTime = null;
+    
+                        /**
+                         * UserInfo accountId.
+                         * @member {string} accountId
+                         * @memberof google.cloud.recaptchaenterprise.v1.UserInfo
+                         * @instance
+                         */
+                        UserInfo.prototype.accountId = "";
+    
+                        /**
+                         * UserInfo userIds.
+                         * @member {Array.<google.cloud.recaptchaenterprise.v1.IUserId>} userIds
+                         * @memberof google.cloud.recaptchaenterprise.v1.UserInfo
+                         * @instance
+                         */
+                        UserInfo.prototype.userIds = $util.emptyArray;
+    
+                        /**
+                         * Creates a new UserInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.UserInfo
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IUserInfo=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.UserInfo} UserInfo instance
+                         */
+                        UserInfo.create = function create(properties) {
+                            return new UserInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UserInfo message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.UserInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.UserInfo
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IUserInfo} message UserInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UserInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createAccountTime != null && Object.hasOwnProperty.call(message, "createAccountTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createAccountTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.accountId != null && Object.hasOwnProperty.call(message, "accountId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.accountId);
+                            if (message.userIds != null && message.userIds.length)
+                                for (var i = 0; i < message.userIds.length; ++i)
+                                    $root.google.cloud.recaptchaenterprise.v1.UserId.encode(message.userIds[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UserInfo message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.UserInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.UserInfo
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IUserInfo} message UserInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UserInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a UserInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.UserInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.UserInfo} UserInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UserInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.UserInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.createAccountTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.accountId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.userIds && message.userIds.length))
+                                            message.userIds = [];
+                                        message.userIds.push($root.google.cloud.recaptchaenterprise.v1.UserId.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a UserInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.UserInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.UserInfo} UserInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UserInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a UserInfo message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.UserInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UserInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createAccountTime != null && message.hasOwnProperty("createAccountTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createAccountTime);
+                                if (error)
+                                    return "createAccountTime." + error;
+                            }
+                            if (message.accountId != null && message.hasOwnProperty("accountId"))
+                                if (!$util.isString(message.accountId))
+                                    return "accountId: string expected";
+                            if (message.userIds != null && message.hasOwnProperty("userIds")) {
+                                if (!Array.isArray(message.userIds))
+                                    return "userIds: array expected";
+                                for (var i = 0; i < message.userIds.length; ++i) {
+                                    var error = $root.google.cloud.recaptchaenterprise.v1.UserId.verify(message.userIds[i]);
+                                    if (error)
+                                        return "userIds." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a UserInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.UserInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.UserInfo} UserInfo
+                         */
+                        UserInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.UserInfo)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.UserInfo();
+                            if (object.createAccountTime != null) {
+                                if (typeof object.createAccountTime !== "object")
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.UserInfo.createAccountTime: object expected");
+                                message.createAccountTime = $root.google.protobuf.Timestamp.fromObject(object.createAccountTime);
+                            }
+                            if (object.accountId != null)
+                                message.accountId = String(object.accountId);
+                            if (object.userIds) {
+                                if (!Array.isArray(object.userIds))
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.UserInfo.userIds: array expected");
+                                message.userIds = [];
+                                for (var i = 0; i < object.userIds.length; ++i) {
+                                    if (typeof object.userIds[i] !== "object")
+                                        throw TypeError(".google.cloud.recaptchaenterprise.v1.UserInfo.userIds: object expected");
+                                    message.userIds[i] = $root.google.cloud.recaptchaenterprise.v1.UserId.fromObject(object.userIds[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a UserInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.UserInfo
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.UserInfo} message UserInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UserInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.userIds = [];
+                            if (options.defaults) {
+                                object.createAccountTime = null;
+                                object.accountId = "";
+                            }
+                            if (message.createAccountTime != null && message.hasOwnProperty("createAccountTime"))
+                                object.createAccountTime = $root.google.protobuf.Timestamp.toObject(message.createAccountTime, options);
+                            if (message.accountId != null && message.hasOwnProperty("accountId"))
+                                object.accountId = message.accountId;
+                            if (message.userIds && message.userIds.length) {
+                                object.userIds = [];
+                                for (var j = 0; j < message.userIds.length; ++j)
+                                    object.userIds[j] = $root.google.cloud.recaptchaenterprise.v1.UserId.toObject(message.userIds[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UserInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.UserInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UserInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UserInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.recaptchaenterprise.v1.UserInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UserInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.UserInfo";
+                        };
+    
+                        return UserInfo;
+                    })();
+    
+                    v1.UserId = (function() {
+    
+                        /**
+                         * Properties of a UserId.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IUserId
+                         * @property {string|null} [email] UserId email
+                         * @property {string|null} [phoneNumber] UserId phoneNumber
+                         * @property {string|null} [username] UserId username
+                         */
+    
+                        /**
+                         * Constructs a new UserId.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a UserId.
+                         * @implements IUserId
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IUserId=} [properties] Properties to set
+                         */
+                        function UserId(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UserId email.
+                         * @member {string|null|undefined} email
+                         * @memberof google.cloud.recaptchaenterprise.v1.UserId
+                         * @instance
+                         */
+                        UserId.prototype.email = null;
+    
+                        /**
+                         * UserId phoneNumber.
+                         * @member {string|null|undefined} phoneNumber
+                         * @memberof google.cloud.recaptchaenterprise.v1.UserId
+                         * @instance
+                         */
+                        UserId.prototype.phoneNumber = null;
+    
+                        /**
+                         * UserId username.
+                         * @member {string|null|undefined} username
+                         * @memberof google.cloud.recaptchaenterprise.v1.UserId
+                         * @instance
+                         */
+                        UserId.prototype.username = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * UserId idOneof.
+                         * @member {"email"|"phoneNumber"|"username"|undefined} idOneof
+                         * @memberof google.cloud.recaptchaenterprise.v1.UserId
+                         * @instance
+                         */
+                        Object.defineProperty(UserId.prototype, "idOneof", {
+                            get: $util.oneOfGetter($oneOfFields = ["email", "phoneNumber", "username"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new UserId instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.UserId
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IUserId=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.UserId} UserId instance
+                         */
+                        UserId.create = function create(properties) {
+                            return new UserId(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UserId message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.UserId.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.UserId
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IUserId} message UserId message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UserId.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.email != null && Object.hasOwnProperty.call(message, "email"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.email);
+                            if (message.phoneNumber != null && Object.hasOwnProperty.call(message, "phoneNumber"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.phoneNumber);
+                            if (message.username != null && Object.hasOwnProperty.call(message, "username"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.username);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UserId message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.UserId.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.UserId
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IUserId} message UserId message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UserId.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a UserId message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.UserId
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.UserId} UserId
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UserId.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.UserId();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.email = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.phoneNumber = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.username = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a UserId message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.UserId
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.UserId} UserId
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UserId.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a UserId message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.UserId
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UserId.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.email != null && message.hasOwnProperty("email")) {
+                                properties.idOneof = 1;
+                                if (!$util.isString(message.email))
+                                    return "email: string expected";
+                            }
+                            if (message.phoneNumber != null && message.hasOwnProperty("phoneNumber")) {
+                                if (properties.idOneof === 1)
+                                    return "idOneof: multiple values";
+                                properties.idOneof = 1;
+                                if (!$util.isString(message.phoneNumber))
+                                    return "phoneNumber: string expected";
+                            }
+                            if (message.username != null && message.hasOwnProperty("username")) {
+                                if (properties.idOneof === 1)
+                                    return "idOneof: multiple values";
+                                properties.idOneof = 1;
+                                if (!$util.isString(message.username))
+                                    return "username: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a UserId message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.UserId
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.UserId} UserId
+                         */
+                        UserId.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.UserId)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.UserId();
+                            if (object.email != null)
+                                message.email = String(object.email);
+                            if (object.phoneNumber != null)
+                                message.phoneNumber = String(object.phoneNumber);
+                            if (object.username != null)
+                                message.username = String(object.username);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a UserId message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.UserId
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.UserId} message UserId
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UserId.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.email != null && message.hasOwnProperty("email")) {
+                                object.email = message.email;
+                                if (options.oneofs)
+                                    object.idOneof = "email";
+                            }
+                            if (message.phoneNumber != null && message.hasOwnProperty("phoneNumber")) {
+                                object.phoneNumber = message.phoneNumber;
+                                if (options.oneofs)
+                                    object.idOneof = "phoneNumber";
+                            }
+                            if (message.username != null && message.hasOwnProperty("username")) {
+                                object.username = message.username;
+                                if (options.oneofs)
+                                    object.idOneof = "username";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UserId to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.UserId
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UserId.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UserId
+                         * @function getTypeUrl
+                         * @memberof google.cloud.recaptchaenterprise.v1.UserId
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UserId.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.UserId";
+                        };
+    
+                        return UserId;
                     })();
     
                     v1.RiskAnalysis = (function() {

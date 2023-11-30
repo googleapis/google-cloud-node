@@ -23,6 +23,7 @@ export {EntityTypesClient} from './entity_types_client';
 export {EnvironmentsClient} from './environments_client';
 export {ExperimentsClient} from './experiments_client';
 export {FlowsClient} from './flows_client';
+export {GeneratorsClient} from './generators_client';
 export {IntentsClient} from './intents_client';
 export {PagesClient} from './pages_client';
 export {SecuritySettingsServiceClient} from './security_settings_service_client';

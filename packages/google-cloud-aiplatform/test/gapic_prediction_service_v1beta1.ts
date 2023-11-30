@@ -87,6 +87,20 @@ function stubServerStreamingCall<ResponseType>(
   return sinon.stub().returns(mockStream);
 }
 
+function stubBidiStreamingCall<ResponseType>(
+  response?: ResponseType,
+  error?: Error
+) {
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : sinon.stub().callsArgWith(2, null, response);
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  return sinon.stub().returns(mockStream);
+}
+
 function stubAsyncIterationCall<ResponseType>(
   responses?: ResponseType[],
   error?: Error
@@ -476,6 +490,274 @@ describe('v1beta1.PredictionServiceClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.rawPredict(request), expectedError);
+    });
+  });
+
+  describe('directPredict', () => {
+    it('invokes directPredict without error', async () => {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DirectPredictRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DirectPredictRequest',
+        ['endpoint']
+      );
+      request.endpoint = defaultValue1;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DirectPredictResponse()
+      );
+      client.innerApiCalls.directPredict = stubSimpleCall(expectedResponse);
+      const [response] = await client.directPredict(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.directPredict as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.directPredict as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes directPredict without error using callback', async () => {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DirectPredictRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DirectPredictRequest',
+        ['endpoint']
+      );
+      request.endpoint = defaultValue1;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DirectPredictResponse()
+      );
+      client.innerApiCalls.directPredict =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.directPredict(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1beta1.IDirectPredictResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.directPredict as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.directPredict as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes directPredict with error', async () => {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DirectPredictRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DirectPredictRequest',
+        ['endpoint']
+      );
+      request.endpoint = defaultValue1;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.directPredict = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.directPredict(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.directPredict as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.directPredict as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes directPredict with closed client', async () => {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DirectPredictRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DirectPredictRequest',
+        ['endpoint']
+      );
+      request.endpoint = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.directPredict(request), expectedError);
+    });
+  });
+
+  describe('directRawPredict', () => {
+    it('invokes directRawPredict without error', async () => {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DirectRawPredictRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DirectRawPredictRequest',
+        ['endpoint']
+      );
+      request.endpoint = defaultValue1;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DirectRawPredictResponse()
+      );
+      client.innerApiCalls.directRawPredict = stubSimpleCall(expectedResponse);
+      const [response] = await client.directRawPredict(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.directRawPredict as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.directRawPredict as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes directRawPredict without error using callback', async () => {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DirectRawPredictRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DirectRawPredictRequest',
+        ['endpoint']
+      );
+      request.endpoint = defaultValue1;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DirectRawPredictResponse()
+      );
+      client.innerApiCalls.directRawPredict =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.directRawPredict(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1beta1.IDirectRawPredictResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.directRawPredict as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.directRawPredict as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes directRawPredict with error', async () => {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DirectRawPredictRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DirectRawPredictRequest',
+        ['endpoint']
+      );
+      request.endpoint = defaultValue1;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.directRawPredict = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.directRawPredict(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.directRawPredict as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.directRawPredict as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes directRawPredict with closed client', async () => {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DirectRawPredictRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DirectRawPredictRequest',
+        ['endpoint']
+      );
+      request.endpoint = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.directRawPredict(request), expectedError);
     });
   });
 
@@ -872,6 +1154,190 @@ describe('v1beta1.PredictionServiceClient', () => {
         });
       });
       await assert.rejects(promise, expectedError);
+    });
+  });
+
+  describe('streamingPredict', () => {
+    it('invokes streamingPredict without error', async () => {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.StreamingPredictRequest()
+      );
+
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.StreamingPredictResponse()
+      );
+      client.innerApiCalls.streamingPredict =
+        stubBidiStreamingCall(expectedResponse);
+      const stream = client.streamingPredict();
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.aiplatform.v1beta1.StreamingPredictResponse
+          ) => {
+            resolve(response);
+          }
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+        stream.write(request);
+        stream.end();
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.streamingPredict as SinonStub)
+          .getCall(0)
+          .calledWith(null)
+      );
+      assert.deepStrictEqual(
+        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
+          .args[0],
+        request
+      );
+    });
+
+    it('invokes streamingPredict with error', async () => {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.StreamingPredictRequest()
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.streamingPredict = stubBidiStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.streamingPredict();
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.aiplatform.v1beta1.StreamingPredictResponse
+          ) => {
+            resolve(response);
+          }
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+        stream.write(request);
+        stream.end();
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.innerApiCalls.streamingPredict as SinonStub)
+          .getCall(0)
+          .calledWith(null)
+      );
+      assert.deepStrictEqual(
+        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
+          .args[0],
+        request
+      );
+    });
+  });
+
+  describe('streamingRawPredict', () => {
+    it('invokes streamingRawPredict without error', async () => {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.StreamingRawPredictRequest()
+      );
+
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.StreamingRawPredictResponse()
+      );
+      client.innerApiCalls.streamingRawPredict =
+        stubBidiStreamingCall(expectedResponse);
+      const stream = client.streamingRawPredict();
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.aiplatform.v1beta1.StreamingRawPredictResponse
+          ) => {
+            resolve(response);
+          }
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+        stream.write(request);
+        stream.end();
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.streamingRawPredict as SinonStub)
+          .getCall(0)
+          .calledWith(null)
+      );
+      assert.deepStrictEqual(
+        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
+          .args[0],
+        request
+      );
+    });
+
+    it('invokes streamingRawPredict with error', async () => {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.StreamingRawPredictRequest()
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.streamingRawPredict = stubBidiStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.streamingRawPredict();
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.aiplatform.v1beta1.StreamingRawPredictResponse
+          ) => {
+            resolve(response);
+          }
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+        stream.write(request);
+        stream.end();
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.innerApiCalls.streamingRawPredict as SinonStub)
+          .getCall(0)
+          .calledWith(null)
+      );
+      assert.deepStrictEqual(
+        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
+          .args[0],
+        request
+      );
     });
   });
   describe('getIamPolicy', () => {
