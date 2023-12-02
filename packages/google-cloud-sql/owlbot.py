@@ -20,7 +20,7 @@ from pathlib import Path
 from synthtool import shell
 
 def patch(library: Path):
-  s.replace(library / "src/v*/sql_backup_runs_service_client.ts", "id: request.id", "id: request.id?.toString()") 
+  s.replace(library / "src/v*/sql_backup_runs_service_client.ts", "id: request.id ?? ''", "id: request.id?.toString() ?? ''") 
   s.replace(library / "src/*/index.ts", "export {SqlAvailableDatabaseVersionsServiceClient} from './sql_available_database_versions_service_client';", "")
   s.replace(library / "src/*/index.ts", "export {SqlEventsServiceClient} from './sql_events_service_client';", "")
   s.replace(library / "src/*/index.ts", "export {SqlIamPoliciesServiceClient} from './sql_iam_policies_service_client';", "")
