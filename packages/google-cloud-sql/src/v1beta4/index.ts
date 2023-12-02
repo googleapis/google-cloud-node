@@ -20,7 +20,7 @@ export {SqlBackupRunsServiceClient} from './sql_backup_runs_service_client';
 export {SqlConnectServiceClient} from './sql_connect_service_client';
 export {SqlDatabasesServiceClient} from './sql_databases_service_client';
 export {SqlFlagsServiceClient} from './sql_flags_service_client';
-export {SqlIamPoliciesServiceClient} from './sql_iam_policies_service_client';
+
 export {SqlInstancesServiceClient} from './sql_instances_service_client';
 export {SqlOperationsServiceClient} from './sql_operations_service_client';
 export {SqlSslCertsServiceClient} from './sql_ssl_certs_service_client';
