@@ -498,14 +498,16 @@ export class RecaptchaEnterpriseServiceClient {
    *   be left empty to provide reasons that apply to an event without concluding
    *   whether the event is legitimate or fraudulent.
    * @param {number[]} [request.reasons]
-   *   Optional. Optional reasons for the annotation that will be assigned to the
-   *   Event.
+   *   Optional. Reasons for the annotation that are assigned to the event.
+   * @param {string} [request.accountId]
+   *   Optional. A stable account identifier to apply to the assessment. This is
+   *   an alternative to setting `account_id` in `CreateAssessment`, for example
+   *   when a stable account identifier is not yet known in the initial request.
    * @param {Buffer} [request.hashedAccountId]
-   *   Optional. Unique stable hashed user identifier to apply to the assessment.
-   *   This is an alternative to setting the hashed_account_id in
-   *   CreateAssessment, for example when the account identifier is not yet known
-   *   in the initial request. It is recommended that the identifier is hashed
-   *   using hmac-sha256 with stable secret.
+   *   Optional. A stable hashed account identifier to apply to the assessment.
+   *   This is an alternative to setting `hashed_account_id` in
+   *   `CreateAssessment`, for example when a stable account identifier is not yet
+   *   known in the initial request.
    * @param {google.cloud.recaptchaenterprise.v1.TransactionEvent} [request.transactionEvent]
    *   Optional. If the assessment is part of a payment transaction, provide
    *   details on payment lifecycle events that occur in the transaction.

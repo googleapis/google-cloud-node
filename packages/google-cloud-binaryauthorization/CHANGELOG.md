@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v3.1.0...binary-authorization-v3.2.0) (2023-11-30)
+
+
+### Features
+
+* [binaryauthorization] add container_name, container_type fields to Continuous Validation Logs ([#4848](https://github.com/googleapis/google-cloud-node/issues/4848)) ([a3d7006](https://github.com/googleapis/google-cloud-node/commit/a3d7006c6b9897021df87d23c3f6265bcc623145))
+
 ## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v3.0.0...binary-authorization-v3.1.0) (2023-09-06)
 
 

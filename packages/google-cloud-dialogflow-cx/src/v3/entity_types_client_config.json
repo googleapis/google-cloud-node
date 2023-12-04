@@ -23,11 +23,6 @@
         }
       },
       "methods": {
-        "ListEntityTypes": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "default"
-        },
         "GetEntityType": {
           "timeout_millis": 60000,
           "retry_codes_name": "unavailable",
@@ -44,6 +39,11 @@
           "retry_params_name": "default"
         },
         "DeleteEntityType": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "default"
+        },
+        "ListEntityTypes": {
           "timeout_millis": 60000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "default"

@@ -33,6 +33,8 @@ const ExperimentsClient = v3.ExperimentsClient;
 type ExperimentsClient = v3.ExperimentsClient;
 const FlowsClient = v3.FlowsClient;
 type FlowsClient = v3.FlowsClient;
+const GeneratorsClient = v3.GeneratorsClient;
+type GeneratorsClient = v3.GeneratorsClient;
 const IntentsClient = v3.IntentsClient;
 type IntentsClient = v3.IntentsClient;
 const PagesClient = v3.PagesClient;
@@ -62,6 +64,7 @@ export {
   EnvironmentsClient,
   ExperimentsClient,
   FlowsClient,
+  GeneratorsClient,
   IntentsClient,
   PagesClient,
   SecuritySettingsServiceClient,
@@ -82,6 +85,7 @@ export default {
   EnvironmentsClient,
   ExperimentsClient,
   FlowsClient,
+  GeneratorsClient,
   IntentsClient,
   PagesClient,
   SecuritySettingsServiceClient,

@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/tasks-v4.0.1...tasks-v4.1.0) (2023-11-30)
+
+
+### Features
+
+* [tasks] publish cloud tasks in esm and cjs ([#4720](https://github.com/googleapis/google-cloud-node/issues/4720)) ([6773a05](https://github.com/googleapis/google-cloud-node/commit/6773a05ce96d64e4a1034e8b63ef6ec0d6688fd2))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/tasks-v4.0.0...tasks-v4.0.1) (2023-09-06)
 
 

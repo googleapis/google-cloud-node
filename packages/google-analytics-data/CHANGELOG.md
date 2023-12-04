@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.1.0...data-v4.2.0) (2023-11-30)
+
+
+### Features
+
+* [analytics-data] add `CreateRecurringAudienceList`, `GetRecurringAudienceList`, `ListRecurringAudienceLists` methods to the Data API v1 alpha ([#4851](https://github.com/googleapis/google-cloud-node/issues/4851)) ([400c893](https://github.com/googleapis/google-cloud-node/commit/400c893def58322eb686fc16841622b8aeb83b14))
+
 ## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.0.1...data-v4.1.0) (2023-11-16)
 
 
