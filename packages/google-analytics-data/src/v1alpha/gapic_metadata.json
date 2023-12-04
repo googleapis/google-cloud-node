@@ -30,6 +30,16 @@
                 "getAudienceList"
               ]
             },
+            "CreateRecurringAudienceList": {
+              "methods": [
+                "createRecurringAudienceList"
+              ]
+            },
+            "GetRecurringAudienceList": {
+              "methods": [
+                "getRecurringAudienceList"
+              ]
+            },
             "CreateAudienceList": {
               "methods": [
                 "createAudienceList"
@@ -40,6 +50,13 @@
                 "listAudienceLists",
                 "listAudienceListsStream",
                 "listAudienceListsAsync"
+              ]
+            },
+            "ListRecurringAudienceLists": {
+              "methods": [
+                "listRecurringAudienceLists",
+                "listRecurringAudienceListsStream",
+                "listRecurringAudienceListsAsync"
               ]
             }
           }
@@ -67,6 +84,16 @@
                 "getAudienceList"
               ]
             },
+            "CreateRecurringAudienceList": {
+              "methods": [
+                "createRecurringAudienceList"
+              ]
+            },
+            "GetRecurringAudienceList": {
+              "methods": [
+                "getRecurringAudienceList"
+              ]
+            },
             "CreateAudienceList": {
               "methods": [
                 "createAudienceList"
@@ -77,6 +104,13 @@
                 "listAudienceLists",
                 "listAudienceListsStream",
                 "listAudienceListsAsync"
+              ]
+            },
+            "ListRecurringAudienceLists": {
+              "methods": [
+                "listRecurringAudienceLists",
+                "listRecurringAudienceListsStream",
+                "listRecurringAudienceListsAsync"
               ]
             }
           }
