@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const reports = require('@google-cloud/reports');
+const reports = require('@google-shopping/reports');
 
 function main() {
   const reportServiceClient = new reports.ReportServiceClient();
