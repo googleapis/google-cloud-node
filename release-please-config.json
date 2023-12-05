@@ -158,7 +158,8 @@
     "packages/grafeas": {},
     "packages/typeless-sample-bot": {},
     "packages/google-cloud-edgenetwork": {},
-    "packages/google-shopping-merchant-reports": {}
+    "packages/google-shopping-merchant-reports": {},
+    "packages/google-shopping-merchant-inventories": {}
   },
   "plugins": [
     {
