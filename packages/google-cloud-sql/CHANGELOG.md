@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.2.0...sql-v0.3.0) (2023-12-05)
+
+
+### Features
+
+* [sql] added Demote RPC ([#4844](https://github.com/googleapis/google-cloud-node/issues/4844)) ([bf17c1b](https://github.com/googleapis/google-cloud-node/commit/bf17c1b4cd2e8bf72d4933f5f55be40c463d7490))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.1.0...sql-v0.2.0) (2023-11-03)
 
 

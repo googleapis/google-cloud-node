@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v3.2.0...deploy-v3.3.0) (2023-12-05)
+
+
+### Features
+
+* [deploy] Add custom target type support ([#4860](https://github.com/googleapis/google-cloud-node/issues/4860)) ([2745e24](https://github.com/googleapis/google-cloud-node/commit/2745e248eb6c808a446804147c5aaa738c6cf85b))
+
 ## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v3.1.0...deploy-v3.2.0) (2023-11-03)
 
 
