@@ -501,12 +501,7 @@ export class SqlBackupRunsServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
         id:
-          request.id
-            ?.toString()
-            ?.toString()
-            ?.toString()
-            ?.toString()
-            ?.toString() ?? '',
+          request.id?.toString() ?? '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
