@@ -158,7 +158,7 @@
     "packages/grafeas": {},
     "packages/typeless-sample-bot": {},
     "packages/google-cloud-edgenetwork": {},
-    "packages/google-shopping-merchant-inventories": {}
+    "packages/google-shopping-merchant-inventories": {},
   },
   "plugins": [
     {
