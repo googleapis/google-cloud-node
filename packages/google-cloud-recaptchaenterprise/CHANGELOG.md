@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.0.0...recaptcha-enterprise-v5.1.0) (2023-11-30)
+
+
+### Features
+
+* [recaptchaenterprise] added AnnotateAssessmentRequest.account_id ([#4843](https://github.com/googleapis/google-cloud-node/issues/4843)) ([4b7d541](https://github.com/googleapis/google-cloud-node/commit/4b7d541718867ab49dc048be8f73d4d9ee7fb542))
+
 ## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v4.1.0...recaptcha-enterprise-v5.0.0) (2023-11-16)
 
 

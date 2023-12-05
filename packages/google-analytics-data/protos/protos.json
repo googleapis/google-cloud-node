@@ -1163,6 +1163,204 @@
                               "(google.api.method_signature)": "parent"
                             }
                           ]
+                        },
+                        "CreateRecurringAudienceList": {
+                          "requestType": "CreateRecurringAudienceListRequest",
+                          "responseType": "RecurringAudienceList",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=properties/*}/recurringAudienceLists",
+                            "(google.api.http).body": "recurring_audience_list",
+                            "(google.api.method_signature)": "parent,recurring_audience_list"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=properties/*}/recurringAudienceLists",
+                                "body": "recurring_audience_list"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,recurring_audience_list"
+                            }
+                          ]
+                        },
+                        "GetRecurringAudienceList": {
+                          "requestType": "GetRecurringAudienceListRequest",
+                          "responseType": "RecurringAudienceList",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/recurringAudienceLists/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/recurringAudienceLists/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListRecurringAudienceLists": {
+                          "requestType": "ListRecurringAudienceListsRequest",
+                          "responseType": "ListRecurringAudienceListsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{parent=properties/*}/recurringAudienceLists",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=properties/*}/recurringAudienceLists"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "CreateRecurringAudienceListRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsdata.googleapis.com/RecurringAudienceList"
+                          }
+                        },
+                        "recurringAudienceList": {
+                          "type": "RecurringAudienceList",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "RecurringAudienceList": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsdata.googleapis.com/RecurringAudienceList",
+                        "(google.api.resource).pattern": "properties/{property}/recurringAudienceLists/{recurring_audience_list}",
+                        "(google.api.resource).plural": "recurringAudienceLists",
+                        "(google.api.resource).singular": "recurringAudienceList"
+                      },
+                      "oneofs": {
+                        "_activeDaysRemaining": {
+                          "oneof": [
+                            "activeDaysRemaining"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "audience": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "audienceDisplayName": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "dimensions": {
+                          "rule": "repeated",
+                          "type": "AudienceDimension",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "activeDaysRemaining": {
+                          "type": "int32",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "audienceLists": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "GetRecurringAudienceListRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsdata.googleapis.com/RecurringAudienceList"
+                          }
+                        }
+                      }
+                    },
+                    "ListRecurringAudienceListsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsdata.googleapis.com/RecurringAudienceList"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListRecurringAudienceListsResponse": {
+                      "oneofs": {
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "recurringAudienceLists": {
+                          "rule": "repeated",
+                          "type": "RecurringAudienceList",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -1273,6 +1471,16 @@
                           "oneof": [
                             "errorMessage"
                           ]
+                        },
+                        "_percentageCompleted": {
+                          "oneof": [
+                            "percentageCompleted"
+                          ]
+                        },
+                        "_recurringAudienceList": {
+                          "oneof": [
+                            "recurringAudienceList"
+                          ]
                         }
                       },
                       "fields": {
@@ -1339,6 +1547,22 @@
                         "errorMessage": {
                           "type": "string",
                           "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "percentageCompleted": {
+                          "type": "double",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "recurringAudienceList": {
+                          "type": "string",
+                          "id": 12,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true

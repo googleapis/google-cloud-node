@@ -20,6 +20,7 @@ import "google/api/annotations.proto";
 import "google/api/client.proto";
 import "google/api/field_behavior.proto";
 import "google/cloud/sql/v1beta4/cloud_sql_resources.proto";
+import "google/protobuf/duration.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 
@@ -180,6 +181,15 @@ service SqlInstancesService {
     };
   }
 
+  // Demotes an existing standalone instance to be a Cloud SQL read replica
+  // for an external database server.
+  rpc Demote(SqlInstancesDemoteRequest) returns (Operation) {
+    option (google.api.http) = {
+      post: "/sql/v1beta4/projects/{project}/instances/{instance}/demote"
+      body: "body"
+    };
+  }
+
   // Exports data from a Cloud SQL instance to a Cloud Storage bucket as a SQL
   // dump or CSV file.
   rpc Export(SqlInstancesExportRequest) returns (Operation) {
@@ -269,6 +279,13 @@ service SqlInstancesService {
   rpc PromoteReplica(SqlInstancesPromoteReplicaRequest) returns (Operation) {
     option (google.api.http) = {
       post: "/sql/v1beta4/projects/{project}/instances/{instance}/promoteReplica"
+    };
+  }
+
+  // Switches over from the primary instance to a replica instance.
+  rpc Switchover(SqlInstancesSwitchoverRequest) returns (Operation) {
+    option (google.api.http) = {
+      post: "/sql/v1beta4/projects/{project}/instances/{instance}/switchover"
     };
   }
 
@@ -628,6 +645,18 @@ message SqlInstancesDemoteMasterRequest {
   InstancesDemoteMasterRequest body = 100;
 }
 
+// Instance demote request.
+message SqlInstancesDemoteRequest {
+  // Required. The name of the Cloud SQL instance.
+  string instance = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The project ID of the project that contains the instance.
+  string project = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // The request body.
+  InstancesDemoteRequest body = 100;
+}
+
 message SqlInstancesExportRequest {
   // The Cloud SQL instance ID. This doesn't include the project ID.
   string instance = 1;
@@ -724,6 +753,26 @@ message SqlInstancesPromoteReplicaRequest {
 
   // ID of the project that contains the read replica.
   string project = 2;
+
+  // Set to true if the promote operation should attempt to re-add the original
+  // primary as a replica when it comes back online. Otherwise, if this value is
+  // false or not set, the original primary will be a standalone instance.
+  bool failover = 3;
+}
+
+// Instance switchover request.
+message SqlInstancesSwitchoverRequest {
+  // Cloud SQL read replica instance name.
+  string instance = 1;
+
+  // ID of the project that contains the replica.
+  string project = 2;
+
+  // Optional. (MySQL only) Cloud SQL instance operations timeout, which is a
+  // sum of all database operations. Default value is 10 minutes and can be
+  // modified to a maximum value of 24 hours.
+  google.protobuf.Duration db_timeout = 3
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 message SqlInstancesResetSslConfigRequest {

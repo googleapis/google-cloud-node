@@ -7949,8 +7949,14 @@ export namespace google {
                     /** DataQualityResult passed */
                     passed?: (boolean|null);
 
+                    /** DataQualityResult score */
+                    score?: (number|null);
+
                     /** DataQualityResult dimensions */
                     dimensions?: (google.cloud.dataplex.v1.IDataQualityDimensionResult[]|null);
+
+                    /** DataQualityResult columns */
+                    columns?: (google.cloud.dataplex.v1.IDataQualityColumnResult[]|null);
 
                     /** DataQualityResult rules */
                     rules?: (google.cloud.dataplex.v1.IDataQualityRuleResult[]|null);
@@ -7977,8 +7983,14 @@ export namespace google {
                     /** DataQualityResult passed. */
                     public passed: boolean;
 
+                    /** DataQualityResult score. */
+                    public score?: (number|null);
+
                     /** DataQualityResult dimensions. */
                     public dimensions: google.cloud.dataplex.v1.IDataQualityDimensionResult[];
+
+                    /** DataQualityResult columns. */
+                    public columns: google.cloud.dataplex.v1.IDataQualityColumnResult[];
 
                     /** DataQualityResult rules. */
                     public rules: google.cloud.dataplex.v1.IDataQualityRuleResult[];
@@ -7991,6 +8003,9 @@ export namespace google {
 
                     /** DataQualityResult postScanActionsResult. */
                     public postScanActionsResult?: (google.cloud.dataplex.v1.DataQualityResult.IPostScanActionsResult|null);
+
+                    /** DataQualityResult _score. */
+                    public _score?: "score";
 
                     /**
                      * Creates a new DataQualityResult instance using the specified properties.
@@ -8428,6 +8443,9 @@ export namespace google {
 
                     /** DataQualityDimensionResult passed */
                     passed?: (boolean|null);
+
+                    /** DataQualityDimensionResult score */
+                    score?: (number|null);
                 }
 
                 /** Represents a DataQualityDimensionResult. */
@@ -8444,6 +8462,12 @@ export namespace google {
 
                     /** DataQualityDimensionResult passed. */
                     public passed: boolean;
+
+                    /** DataQualityDimensionResult score. */
+                    public score?: (number|null);
+
+                    /** DataQualityDimensionResult _score. */
+                    public _score?: "score";
 
                     /**
                      * Creates a new DataQualityDimensionResult instance using the specified properties.
@@ -9616,6 +9640,112 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+                }
+
+                /** Properties of a DataQualityColumnResult. */
+                interface IDataQualityColumnResult {
+
+                    /** DataQualityColumnResult column */
+                    column?: (string|null);
+
+                    /** DataQualityColumnResult score */
+                    score?: (number|null);
+                }
+
+                /** Represents a DataQualityColumnResult. */
+                class DataQualityColumnResult implements IDataQualityColumnResult {
+
+                    /**
+                     * Constructs a new DataQualityColumnResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IDataQualityColumnResult);
+
+                    /** DataQualityColumnResult column. */
+                    public column: string;
+
+                    /** DataQualityColumnResult score. */
+                    public score?: (number|null);
+
+                    /** DataQualityColumnResult _score. */
+                    public _score?: "score";
+
+                    /**
+                     * Creates a new DataQualityColumnResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataQualityColumnResult instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IDataQualityColumnResult): google.cloud.dataplex.v1.DataQualityColumnResult;
+
+                    /**
+                     * Encodes the specified DataQualityColumnResult message. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityColumnResult.verify|verify} messages.
+                     * @param message DataQualityColumnResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IDataQualityColumnResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataQualityColumnResult message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityColumnResult.verify|verify} messages.
+                     * @param message DataQualityColumnResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IDataQualityColumnResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataQualityColumnResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataQualityColumnResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DataQualityColumnResult;
+
+                    /**
+                     * Decodes a DataQualityColumnResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataQualityColumnResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DataQualityColumnResult;
+
+                    /**
+                     * Verifies a DataQualityColumnResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataQualityColumnResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataQualityColumnResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DataQualityColumnResult;
+
+                    /**
+                     * Creates a plain object from a DataQualityColumnResult message. Also converts values to other types if specified.
+                     * @param message DataQualityColumnResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.DataQualityColumnResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataQualityColumnResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataQualityColumnResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Represents a DataTaxonomyService */
@@ -22741,7 +22871,10 @@ export namespace google {
                         BIGQUERY_POLICY_TAG_CREATE = 11,
                         BIGQUERY_POLICY_TAG_DELETE = 12,
                         BIGQUERY_POLICY_TAG_SET_IAM_POLICY = 13,
-                        ACCESS_POLICY_UPDATE = 14
+                        ACCESS_POLICY_UPDATE = 14,
+                        GOVERNANCE_RULE_MATCHED_RESOURCES = 15,
+                        GOVERNANCE_RULE_SEARCH_LIMIT_EXCEEDS = 16,
+                        GOVERNANCE_RULE_ERRORS = 17
                     }
                 }
 
@@ -23079,6 +23212,15 @@ export namespace google {
 
                         /** DataQualityResult dimensionPassed */
                         dimensionPassed?: ({ [k: string]: boolean }|null);
+
+                        /** DataQualityResult score */
+                        score?: (number|null);
+
+                        /** DataQualityResult dimensionScore */
+                        dimensionScore?: ({ [k: string]: number }|null);
+
+                        /** DataQualityResult columnScore */
+                        columnScore?: ({ [k: string]: number }|null);
                     }
 
                     /** Represents a DataQualityResult. */
@@ -23098,6 +23240,15 @@ export namespace google {
 
                         /** DataQualityResult dimensionPassed. */
                         public dimensionPassed: { [k: string]: boolean };
+
+                        /** DataQualityResult score. */
+                        public score: number;
+
+                        /** DataQualityResult dimensionScore. */
+                        public dimensionScore: { [k: string]: number };
+
+                        /** DataQualityResult columnScore. */
+                        public columnScore: { [k: string]: number };
 
                         /**
                          * Creates a new DataQualityResult instance using the specified properties.

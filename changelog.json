@@ -4,6 +4,142 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "6773a05ce96d64e4a1034e8b63ef6ec0d6688fd2",
+          "message": "[tasks] publish cloud tasks in esm and cjs",
+          "issues": [
+            "4720"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "c6768144-e5e0-462e-b8d2-5caa5fb3f28c",
+      "createTime": "2023-11-30T06:32:49.275Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4b7d541718867ab49dc048be8f73d4d9ee7fb542",
+          "message": "[recaptchaenterprise] added AnnotateAssessmentRequest.account_id",
+          "issues": [
+            "4843"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "6d1f50d4-a790-41b6-8cd8-44886bd343c8",
+      "createTime": "2023-11-30T06:32:49.267Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "34ddf57e56bb033a4f587c7670898322cd076d6f",
+          "message": "[dialogflow-cx] added Generator API",
+          "issues": [
+            "4837"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "55217aab-9ad0-44d2-9add-d721499fd69f",
+      "createTime": "2023-11-30T06:32:49.258Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "da536e93659f38469fac2a7903c11c96c92c9074",
+          "message": "[dataplex] added DataQualityResult.score, dimension_score, column_score",
+          "issues": [
+            "4835"
+          ]
+        }
+      ],
+      "version": "3.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "ada54fb0-fb93-45ef-9b98-ce84b549dc21",
+      "createTime": "2023-11-30T06:32:49.232Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a3d7006c6b9897021df87d23c3f6265bcc623145",
+          "message": "[binaryauthorization] add container_name, container_type fields to Continuous Validation Logs",
+          "issues": [
+            "4848"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/binary-authorization",
+      "id": "43a10023-dc3e-4e73-acbf-1897a82a6804",
+      "createTime": "2023-11-30T06:32:49.224Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "6cc50d9b6c1d897f26228ff3e89fcbcc149570c8",
+          "message": "[batch] add a CloudLoggingOption and use_generic_task_monitored_resource fields for users to opt out new batch monitored resource in cloud logging",
+          "issues": [
+            "4839"
+          ]
+        }
+      ],
+      "version": "1.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "ba5aa5fa-5626-41d1-8b22-a44f97bc8635",
+      "createTime": "2023-11-30T06:32:49.214Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "736ff8bf73959cbc6e0caa0125bf4dd2ba0776dc",
+          "message": "Add grpc_ports to UploadModel ModelContainerSpec",
+          "issues": [
+            "4836"
+          ]
+        }
+      ],
+      "version": "3.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "68f03335-3ac5-42fa-99d7-dae2c7265437",
+      "createTime": "2023-11-30T06:32:49.205Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "400c893def58322eb686fc16841622b8aeb83b14",
+          "message": "[analytics-data] add `CreateRecurringAudienceList`, `GetRecurringAudienceList`, `ListRecurringAudienceLists` methods to the Data API v1 alpha",
+          "issues": [
+            "4851"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/data",
+      "id": "a96ac295-3216-4f50-8707-a41d12254465",
+      "createTime": "2023-11-30T06:32:49.197Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "489c5075229a2060ae569e23ad0daa49f41344c2",
           "message": "[recaptchaenterprise] added required annotations",
@@ -20258,5 +20394,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-11-16T05:29:20.855Z"
+  "updateTime": "2023-11-30T06:32:49.275Z"
 }

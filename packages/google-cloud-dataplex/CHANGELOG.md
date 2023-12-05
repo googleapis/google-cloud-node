@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.3.0...dataplex-v3.4.0) (2023-11-30)
+
+
+### Features
+
+* [dataplex] added DataQualityResult.score, dimension_score, column_score ([#4835](https://github.com/googleapis/google-cloud-node/issues/4835)) ([da536e9](https://github.com/googleapis/google-cloud-node/commit/da536e93659f38469fac2a7903c11c96c92c9074))
+
 ## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.2.0...dataplex-v3.3.0) (2023-11-03)
 
 

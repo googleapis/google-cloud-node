@@ -833,11 +833,25 @@
                           "type": "google.protobuf.BoolValue",
                           "id": 7
                         },
+                        "sslMode": {
+                          "type": "SslMode",
+                          "id": 8
+                        },
                         "pscConfig": {
                           "type": "PscConfig",
                           "id": 9,
                           "options": {
                             "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SslMode": {
+                          "values": {
+                            "SSL_MODE_UNSPECIFIED": 0,
+                            "ALLOW_UNENCRYPTED_AND_ENCRYPTED": 1,
+                            "ENCRYPTED_ONLY": 2,
+                            "TRUSTED_CLIENT_CERTIFICATE_REQUIRED": 3
                           }
                         }
                       }
@@ -861,7 +875,10 @@
                         "allowedConsumerProjects": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2147,6 +2164,22 @@
                             }
                           ]
                         },
+                        "Demote": {
+                          "requestType": "SqlInstancesDemoteRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/projects/{project}/instances/{instance}/demote",
+                            "(google.api.http).body": "body"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/projects/{project}/instances/{instance}/demote",
+                                "body": "body"
+                              }
+                            }
+                          ]
+                        },
                         "Export": {
                           "requestType": "SqlInstancesExportRequest",
                           "responseType": "Operation",
@@ -2295,6 +2328,20 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v1/projects/{project}/instances/{instance}/promoteReplica"
+                              }
+                            }
+                          ]
+                        },
+                        "Switchover": {
+                          "requestType": "SqlInstancesSwitchoverRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/projects/{project}/instances/{instance}/switchover"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/projects/{project}/instances/{instance}/switchover"
                               }
                             }
                           ]
@@ -2601,6 +2648,31 @@
                         }
                       }
                     },
+                    "SqlInstancesDemoteRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "body": {
+                          "type": "InstancesDemoteRequest",
+                          "id": 100,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "SqlInstancesExportRequest": {
                       "fields": {
                         "instance": {
@@ -2730,6 +2802,29 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "failover": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "SqlInstancesSwitchoverRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "dbTimeout": {
+                          "type": "google.protobuf.Duration",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -3102,6 +3197,17 @@
                         }
                       }
                     },
+                    "InstancesDemoteRequest": {
+                      "fields": {
+                        "demoteContext": {
+                          "type": "DemoteContext",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "InstancesExportRequest": {
                       "fields": {
                         "exportContext": {
@@ -3344,6 +3450,11 @@
                           "oneof": [
                             "primaryDnsName"
                           ]
+                        },
+                        "_writeEndpoint": {
+                          "oneof": [
+                            "writeEndpoint"
+                          ]
                         }
                       },
                       "fields": {
@@ -3536,6 +3647,15 @@
                           "type": "string",
                           "id": 51,
                           "options": {
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "writeEndpoint": {
+                          "type": "string",
+                          "id": 52,
+                          "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
                           }
@@ -3702,6 +3822,21 @@
                         }
                       }
                     },
+                    "DemoteContext": {
+                      "fields": {
+                        "kind": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "sourceRepresentativeInstanceName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "FailoverContext": {
                       "fields": {
                         "settingsVersion": {
@@ -3811,7 +3946,8 @@
                             "INVALID_FILE_INFO": 32,
                             "UNSUPPORTED_DATABASE_SETTINGS": 33,
                             "MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE": 34,
-                            "LOCAL_INFILE_OFF": 35
+                            "LOCAL_INFILE_OFF": 35,
+                            "TURN_ON_PITR_AFTER_PROMOTE": 36
                           }
                         }
                       }
@@ -3869,6 +4005,13 @@
                         "failoverTarget": {
                           "type": "google.protobuf.BoolValue",
                           "id": 3
+                        },
+                        "cascadableReplica": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4527,7 +4670,10 @@
                           "values": {
                             "BUILT_IN": 0,
                             "CLOUD_IAM_USER": 1,
-                            "CLOUD_IAM_SERVICE_ACCOUNT": 2
+                            "CLOUD_IAM_SERVICE_ACCOUNT": 2,
+                            "CLOUD_IAM_GROUP": 3,
+                            "CLOUD_IAM_GROUP_USER": 4,
+                            "CLOUD_IAM_GROUP_SERVICE_ACCOUNT": 5
                           }
                         },
                         "DualPasswordType": {
@@ -4835,6 +4981,22 @@
                             }
                           ]
                         },
+                        "Demote": {
+                          "requestType": "SqlInstancesDemoteRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/sql/v1beta4/projects/{project}/instances/{instance}/demote",
+                            "(google.api.http).body": "body"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/sql/v1beta4/projects/{project}/instances/{instance}/demote",
+                                "body": "body"
+                              }
+                            }
+                          ]
+                        },
                         "Export": {
                           "requestType": "SqlInstancesExportRequest",
                           "responseType": "Operation",
@@ -4983,6 +5145,20 @@
                             {
                               "(google.api.http)": {
                                 "post": "/sql/v1beta4/projects/{project}/instances/{instance}/promoteReplica"
+                              }
+                            }
+                          ]
+                        },
+                        "Switchover": {
+                          "requestType": "SqlInstancesSwitchoverRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/sql/v1beta4/projects/{project}/instances/{instance}/switchover"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/sql/v1beta4/projects/{project}/instances/{instance}/switchover"
                               }
                             }
                           ]
@@ -5561,6 +5737,28 @@
                         }
                       }
                     },
+                    "SqlInstancesDemoteRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "body": {
+                          "type": "InstancesDemoteRequest",
+                          "id": 100
+                        }
+                      }
+                    },
                     "SqlInstancesExportRequest": {
                       "fields": {
                         "instance": {
@@ -5690,6 +5888,29 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "failover": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "SqlInstancesSwitchoverRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "dbTimeout": {
+                          "type": "google.protobuf.Duration",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -6567,6 +6788,11 @@
                           "oneof": [
                             "primaryDnsName"
                           ]
+                        },
+                        "_writeEndpoint": {
+                          "oneof": [
+                            "writeEndpoint"
+                          ]
                         }
                       },
                       "fields": {
@@ -6759,6 +6985,15 @@
                           "type": "string",
                           "id": 51,
                           "options": {
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "writeEndpoint": {
+                          "type": "string",
+                          "id": 52,
+                          "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
                           }
@@ -6942,6 +7177,21 @@
                         "caCertificate": {
                           "type": "string",
                           "id": 6
+                        }
+                      }
+                    },
+                    "DemoteContext": {
+                      "fields": {
+                        "kind": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "sourceRepresentativeInstanceName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -7285,6 +7535,17 @@
                         }
                       }
                     },
+                    "InstancesDemoteRequest": {
+                      "fields": {
+                        "demoteContext": {
+                          "type": "DemoteContext",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "InstancesExportRequest": {
                       "fields": {
                         "exportContext": {
@@ -7476,7 +7737,8 @@
                             "INVALID_FILE_INFO": 32,
                             "UNSUPPORTED_DATABASE_SETTINGS": 33,
                             "MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE": 34,
-                            "LOCAL_INFILE_OFF": 35
+                            "LOCAL_INFILE_OFF": 35,
+                            "TURN_ON_PITR_AFTER_PROMOTE": 36
                           }
                         }
                       }
@@ -7515,11 +7777,25 @@
                           "type": "google.protobuf.BoolValue",
                           "id": 7
                         },
+                        "sslMode": {
+                          "type": "SslMode",
+                          "id": 8
+                        },
                         "pscConfig": {
                           "type": "PscConfig",
                           "id": 9,
                           "options": {
                             "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SslMode": {
+                          "values": {
+                            "SSL_MODE_UNSPECIFIED": 0,
+                            "ALLOW_UNENCRYPTED_AND_ENCRYPTED": 1,
+                            "ENCRYPTED_ONLY": 2,
+                            "TRUSTED_CLIENT_CERTIFICATE_REQUIRED": 3
                           }
                         }
                       }
@@ -7543,7 +7819,10 @@
                         "allowedConsumerProjects": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -7991,6 +8270,13 @@
                         "failoverTarget": {
                           "type": "google.protobuf.BoolValue",
                           "id": 3
+                        },
+                        "cascadableReplica": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -9072,7 +9358,10 @@
                           "values": {
                             "BUILT_IN": 0,
                             "CLOUD_IAM_USER": 1,
-                            "CLOUD_IAM_SERVICE_ACCOUNT": 2
+                            "CLOUD_IAM_SERVICE_ACCOUNT": 2,
+                            "CLOUD_IAM_GROUP": 3,
+                            "CLOUD_IAM_GROUP_USER": 4,
+                            "CLOUD_IAM_GROUP_SERVICE_ACCOUNT": 5
                           }
                         },
                         "DualPasswordType": {

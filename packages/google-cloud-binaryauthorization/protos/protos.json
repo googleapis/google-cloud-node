@@ -744,6 +744,14 @@
                                   "type": "string",
                                   "id": 1
                                 },
+                                "containerName": {
+                                  "type": "string",
+                                  "id": 5
+                                },
+                                "containerType": {
+                                  "type": "ContainerType",
+                                  "id": 6
+                                },
                                 "result": {
                                   "type": "AuditResult",
                                   "id": 2
@@ -759,6 +767,14 @@
                                 }
                               },
                               "nested": {
+                                "ContainerType": {
+                                  "values": {
+                                    "CONTAINER_TYPE_UNSPECIFIED": 0,
+                                    "CONTAINER": 1,
+                                    "INIT_CONTAINER": 2,
+                                    "EPHEMERAL_CONTAINER": 3
+                                  }
+                                },
                                 "AuditResult": {
                                   "values": {
                                     "AUDIT_RESULT_UNSPECIFIED": 0,
