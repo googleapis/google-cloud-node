@@ -100,9 +100,8 @@ async function callListRegionalInventories() {
   };
 
   // Run request
-  const iterable = await inventoriesClient.listRegionalInventoriesAsync(
-    request
-  );
+  const iterable =
+    await inventoriesClient.listRegionalInventoriesAsync(request);
   for await (const response of iterable) {
     console.log(response);
   }
