@@ -1157,7 +1157,9 @@ export namespace google {
                     enum SqlApiWarningCode {
                         SQL_API_WARNING_CODE_UNSPECIFIED = 0,
                         REGION_UNREACHABLE = 1,
-                        MAX_RESULTS_EXCEEDS_LIMIT = 2
+                        MAX_RESULTS_EXCEEDS_LIMIT = 2,
+                        COMPROMISED_CREDENTIALS = 3,
+                        INTERNAL_STATE_FAILURE = 4
                     }
                 }
 
@@ -4846,6 +4848,9 @@ export namespace google {
                     /** Operation error */
                     error?: (google.cloud.sql.v1.IOperationErrors|null);
 
+                    /** Operation apiWarning */
+                    apiWarning?: (google.cloud.sql.v1.IApiWarning|null);
+
                     /** Operation operationType */
                     operationType?: (google.cloud.sql.v1.Operation.SqlOperationType|keyof typeof google.cloud.sql.v1.Operation.SqlOperationType|null);
 
@@ -4903,6 +4908,9 @@ export namespace google {
 
                     /** Operation error. */
                     public error?: (google.cloud.sql.v1.IOperationErrors|null);
+
+                    /** Operation apiWarning. */
+                    public apiWarning?: (google.cloud.sql.v1.IApiWarning|null);
 
                     /** Operation operationType. */
                     public operationType: (google.cloud.sql.v1.Operation.SqlOperationType|keyof typeof google.cloud.sql.v1.Operation.SqlOperationType);
@@ -5292,6 +5300,9 @@ export namespace google {
 
                     /** PasswordValidationPolicy enablePasswordPolicy */
                     enablePasswordPolicy?: (google.protobuf.IBoolValue|null);
+
+                    /** PasswordValidationPolicy disallowCompromisedCredentials */
+                    disallowCompromisedCredentials?: (google.protobuf.IBoolValue|null);
                 }
 
                 /** Represents a PasswordValidationPolicy. */
@@ -5320,6 +5331,9 @@ export namespace google {
 
                     /** PasswordValidationPolicy enablePasswordPolicy. */
                     public enablePasswordPolicy?: (google.protobuf.IBoolValue|null);
+
+                    /** PasswordValidationPolicy disallowCompromisedCredentials. */
+                    public disallowCompromisedCredentials?: (google.protobuf.IBoolValue|null);
 
                     /**
                      * Creates a new PasswordValidationPolicy instance using the specified properties.
@@ -6467,7 +6481,8 @@ export namespace google {
                 enum SqlUpdateTrack {
                     SQL_UPDATE_TRACK_UNSPECIFIED = 0,
                     canary = 1,
-                    stable = 2
+                    stable = 2,
+                    week5 = 3
                 }
 
                 /** Represents a SqlConnectService */

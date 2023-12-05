@@ -314,7 +314,9 @@
                           "values": {
                             "SQL_API_WARNING_CODE_UNSPECIFIED": 0,
                             "REGION_UNREACHABLE": 1,
-                            "MAX_RESULTS_EXCEEDS_LIMIT": 2
+                            "MAX_RESULTS_EXCEEDS_LIMIT": 2,
+                            "COMPROMISED_CREDENTIALS": 3,
+                            "INTERNAL_STATE_FAILURE": 4
                           }
                         }
                       }
@@ -1087,6 +1089,10 @@
                           "type": "OperationErrors",
                           "id": 8
                         },
+                        "apiWarning": {
+                          "type": "ApiWarning",
+                          "id": 19
+                        },
                         "operationType": {
                           "type": "SqlOperationType",
                           "id": 9
@@ -1245,6 +1251,10 @@
                         "enablePasswordPolicy": {
                           "type": "google.protobuf.BoolValue",
                           "id": 6
+                        },
+                        "disallowCompromisedCredentials": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 7
                         }
                       },
                       "nested": {
@@ -1645,7 +1655,8 @@
                       "values": {
                         "SQL_UPDATE_TRACK_UNSPECIFIED": 0,
                         "canary": 1,
-                        "stable": 2
+                        "stable": 2,
+                        "week5": 3
                       }
                     },
                     "SqlConnectService": {
