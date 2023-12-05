@@ -40,6 +40,11 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "Demote": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "Export": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
@@ -86,6 +91,11 @@
           "retry_params_name": "default"
         },
         "PromoteReplica": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "Switchover": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
