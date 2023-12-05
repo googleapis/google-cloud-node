@@ -52,7 +52,7 @@ function main(parent, query) {
   // const pageToken = 'abc123'
 
   // Imports the Reports library
-  const {ReportServiceClient} = require('@google-cloud/reports').v1beta;
+  const {ReportServiceClient} = require('@google-shopping/reports').v1beta;
 
   // Instantiates a client
   const reportsClient = new ReportServiceClient();
