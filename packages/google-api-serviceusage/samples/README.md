@@ -14,7 +14,6 @@
 * [Samples](#samples)
   * [Service_usage.batch_enable_services](#service_usage.batch_enable_services)
   * [Service_usage.batch_get_services](#service_usage.batch_get_services)
-  * [Service_usage.disable_service](#service_usage.disable_service)
   * [Service_usage.enable_service](#service_usage.enable_service)
   * [Service_usage.get_service](#service_usage.get_service)
   * [Service_usage.list_services](#service_usage.list_services)
@@ -81,23 +80,6 @@ __Usage:__
 
 
 `node packages/google-api-serviceusage/samples/generated/v1/service_usage.batch_get_services.js`
-
-
------
-
-
-
-
-### Service_usage.disable_service
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1/service_usage.disable_service.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/generated/v1/service_usage.disable_service.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-api-serviceusage/samples/generated/v1/service_usage.disable_service.js`
 
 
 -----
