@@ -21,7 +21,7 @@
 'use strict';
 
 function main(parent) {
-  // [START clouddeploy_v1_generated_CloudDeploy_ListAutomations_async]
+  // [START clouddeploy_v1_generated_CloudDeploy_ListCustomTargetTypes_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,32 +29,32 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent `Delivery Pipeline`, which owns this collection of
-   *  automations. Format must be
-   *  `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
+   *  Required. The parent that owns this collection of custom target types.
+   *  Format must be `projects/{project_id}/locations/{location_name}`.
    */
   // const parent = 'abc123'
   /**
-   *  The maximum number of automations to return. The service may return
-   *  fewer than this value. If unspecified, at most 50 automations will
-   *  be returned. The maximum value is 1000; values above 1000 will be set
-   *  to 1000.
+   *  Optional. The maximum number of `CustomTargetType` objects to return. The
+   *  service may return fewer than this value. If unspecified, at most 50
+   *  `CustomTargetType` objects will be returned. The maximum value is 1000;
+   *  values above 1000 will be set to 1000.
    */
   // const pageSize = 1234
   /**
-   *  A page token, received from a previous `ListAutomations` call.
-   *  Provide this to retrieve the subsequent page.
+   *  Optional. A page token, received from a previous `ListCustomTargetTypes`
+   *  call. Provide this to retrieve the subsequent page.
    *  When paginating, all other provided parameters match
    *  the call that provided the page token.
    */
   // const pageToken = 'abc123'
   /**
-   *  Filter automations to be returned. All fields can be used in the
-   *  filter.
+   *  Optional. Filter custom target types to be returned. See
+   *  https://google.aip.dev/160 for more details.
    */
   // const filter = 'abc123'
   /**
-   *  Field to sort by.
+   *  Optional. Field to sort by. See https://google.aip.dev/132#ordering for
+   *  more details.
    */
   // const orderBy = 'abc123'
 
@@ -64,21 +64,21 @@ function main(parent) {
   // Instantiates a client
   const deployClient = new CloudDeployClient();
 
-  async function callListAutomations() {
+  async function callListCustomTargetTypes() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = await deployClient.listAutomationsAsync(request);
+    const iterable = await deployClient.listCustomTargetTypesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
   }
 
-  callListAutomations();
-  // [END clouddeploy_v1_generated_CloudDeploy_ListAutomations_async]
+  callListCustomTargetTypes();
+  // [END clouddeploy_v1_generated_CloudDeploy_ListCustomTargetTypes_async]
 }
 
 process.on('unhandledRejection', err => {

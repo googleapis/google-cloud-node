@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START clouddeploy_v1_generated_CloudDeploy_ListAutomations_async]
+function main(name) {
+  // [START clouddeploy_v1_generated_CloudDeploy_GetCustomTargetType_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,34 +29,10 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent `Delivery Pipeline`, which owns this collection of
-   *  automations. Format must be
-   *  `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
+   *  Required. Name of the `CustomTargetType`. Format must be
+   *  `projects/{project_id}/locations/{location_name}/customTargetTypes/{custom_target_type}`.
    */
-  // const parent = 'abc123'
-  /**
-   *  The maximum number of automations to return. The service may return
-   *  fewer than this value. If unspecified, at most 50 automations will
-   *  be returned. The maximum value is 1000; values above 1000 will be set
-   *  to 1000.
-   */
-  // const pageSize = 1234
-  /**
-   *  A page token, received from a previous `ListAutomations` call.
-   *  Provide this to retrieve the subsequent page.
-   *  When paginating, all other provided parameters match
-   *  the call that provided the page token.
-   */
-  // const pageToken = 'abc123'
-  /**
-   *  Filter automations to be returned. All fields can be used in the
-   *  filter.
-   */
-  // const filter = 'abc123'
-  /**
-   *  Field to sort by.
-   */
-  // const orderBy = 'abc123'
+  // const name = 'abc123'
 
   // Imports the Deploy library
   const {CloudDeployClient} = require('@google-cloud/deploy').v1;
@@ -64,21 +40,19 @@ function main(parent) {
   // Instantiates a client
   const deployClient = new CloudDeployClient();
 
-  async function callListAutomations() {
+  async function callGetCustomTargetType() {
     // Construct request
     const request = {
-      parent,
+      name,
     };
 
     // Run request
-    const iterable = await deployClient.listAutomationsAsync(request);
-    for await (const response of iterable) {
-        console.log(response);
-    }
+    const response = await deployClient.getCustomTargetType(request);
+    console.log(response);
   }
 
-  callListAutomations();
-  // [END clouddeploy_v1_generated_CloudDeploy_ListAutomations_async]
+  callGetCustomTargetType();
+  // [END clouddeploy_v1_generated_CloudDeploy_GetCustomTargetType_async]
 }
 
 process.on('unhandledRejection', err => {
