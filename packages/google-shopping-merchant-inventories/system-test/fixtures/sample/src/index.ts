@@ -19,7 +19,7 @@
 import {
   LocalInventoryServiceClient,
   RegionalInventoryServiceClient,
-} from '@google-cloud/inventories';
+} from '@google-shopping/inventories';
 
 // check that the client class type name can be used
 function doStuffWithLocalInventoryServiceClient(
