@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.4.0...dataplex-v3.5.0) (2023-12-05)
+
+
+### Features
+
+* [dataplex] add data quality score to DataQualityResult ([#4856](https://github.com/googleapis/google-cloud-node/issues/4856)) ([fc9471b](https://github.com/googleapis/google-cloud-node/commit/fc9471b804d94a96d382237fbd369f85991f89d1))
+
 ## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.3.0...dataplex-v3.4.0) (2023-11-30)
 
 

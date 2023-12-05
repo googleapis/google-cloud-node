@@ -5,6 +5,126 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "e543064da874ff4f907d51b470bab56190859df7",
+          "message": "Add initial files for google.shopping.merchant.inventories.v1beta",
+          "issues": [
+            "4830"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/inventories",
+      "id": "6312ff92-cffd-4861-92d9-caa79df02b13",
+      "createTime": "2023-12-05T18:42:54.154Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e4a25c21ffc83410fff395341d7ae2c88c877ac2",
+          "message": "Add initial files for google.shopping.merchant.reports.v1beta",
+          "issues": [
+            "4815"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reports",
+      "id": "7057cff4-82db-4d75-b7ae-25dbdf9f676c",
+      "createTime": "2023-12-05T18:42:54.146Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "1bfe0afb72f5670602ac06bd5fd5dffb384fdbf0",
+          "message": "[edgenetwork] Change Java package",
+          "issues": [
+            "4855"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgenetwork",
+      "id": "ba36257b-654a-4c32-8731-005445f858da",
+      "createTime": "2023-12-05T18:42:54.138Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b5a7587dea8ebcfbd5f0218373b1430e5772cd24",
+          "message": "Update dependency mime to v4",
+          "issues": [
+            "4853"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dlp",
+      "id": "53e24d86-f16b-4947-a02b-adf2da0f6b59",
+      "createTime": "2023-12-05T18:42:54.130Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "bf17c1b4cd2e8bf72d4933f5f55be40c463d7490",
+          "message": "[sql] added Demote RPC",
+          "issues": [
+            "4844"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "1c53e9be-68a4-4aec-ac76-7e93d5141f28",
+      "createTime": "2023-12-05T18:42:54.121Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2745e248eb6c808a446804147c5aaa738c6cf85b",
+          "message": "[deploy] Add custom target type support",
+          "issues": [
+            "4860"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/deploy",
+      "id": "a08b293a-7c15-4f93-a93d-c9a9c8345762",
+      "createTime": "2023-12-05T18:42:54.112Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "fc9471b804d94a96d382237fbd369f85991f89d1",
+          "message": "[dataplex] add data quality score to DataQualityResult",
+          "issues": [
+            "4856"
+          ]
+        }
+      ],
+      "version": "3.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "981c7863-cac2-4844-99c9-1d5d2bb85741",
+      "createTime": "2023-12-05T18:42:54.104Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "6773a05ce96d64e4a1034e8b63ef6ec0d6688fd2",
           "message": "[tasks] publish cloud tasks in esm and cjs",
           "issues": [
@@ -20394,5 +20514,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-11-30T06:32:49.275Z"
+  "updateTime": "2023-12-05T18:42:54.154Z"
 }
