@@ -21,7 +21,7 @@
 'use strict';
 
 function main() {
-  // [START sqladmin_v1_generated_SqlInstancesService_PromoteReplica_async]
+  // [START sqladmin_v1beta4_generated_SqlInstancesService_Switchover_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -33,34 +33,34 @@ function main() {
    */
   // const instance = 'abc123'
   /**
-   *  ID of the project that contains the read replica.
+   *  ID of the project that contains the replica.
    */
   // const project = 'my-project'
   /**
-   *  Set to true if the promote operation should attempt to re-add the original
-   *  primary as a replica when it comes back online. Otherwise, if this value is
-   *  false or not set, the original primary will be a standalone instance.
+   *  Optional. (MySQL only) Cloud SQL instance operations timeout, which is a
+   *  sum of all database operations. Default value is 10 minutes and can be
+   *  modified to a maximum value of 24 hours.
    */
-  // const failover = true
+  // const dbTimeout = {}
 
   // Imports the Sql library
-  const {SqlInstancesServiceClient} = require('@google-cloud/sql').v1;
+  const {SqlInstancesServiceClient} = require('@google-cloud/sql').v1beta4;
 
   // Instantiates a client
   const sqlClient = new SqlInstancesServiceClient();
 
-  async function callPromoteReplica() {
+  async function callSwitchover() {
     // Construct request
     const request = {
     };
 
     // Run request
-    const response = await sqlClient.promoteReplica(request);
+    const response = await sqlClient.switchover(request);
     console.log(response);
   }
 
-  callPromoteReplica();
-  // [END sqladmin_v1_generated_SqlInstancesService_PromoteReplica_async]
+  callSwitchover();
+  // [END sqladmin_v1beta4_generated_SqlInstancesService_Switchover_async]
 }
 
 process.on('unhandledRejection', err => {
