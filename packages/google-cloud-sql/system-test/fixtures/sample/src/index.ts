@@ -17,17 +17,17 @@
 // ** All changes to this file may be overwritten. **
 
 import {
-  SqlAvailableDatabaseVersionsServiceClient,
+  
   SqlBackupRunsServiceClient,
   SqlConnectServiceClient,
   SqlDatabasesServiceClient,
-  SqlEventsServiceClient,
+  
   SqlFlagsServiceClient,
-  SqlIamPoliciesServiceClient,
-  SqlInstanceNamesServiceClient,
+  
+  
   SqlInstancesServiceClient,
   SqlOperationsServiceClient,
-  SqlRegionsServiceClient,
+  
   SqlSslCertsServiceClient,
   SqlTiersServiceClient,
   SqlUsersServiceClient,
