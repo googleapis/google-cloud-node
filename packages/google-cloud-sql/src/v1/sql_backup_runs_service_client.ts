@@ -399,7 +399,13 @@ export class SqlBackupRunsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
         instance: request.instance ?? '',
-        id: request.id?.toString()?.toString()?.toString()?.toString()?.toString() ?? '',
+        id:
+          request.id
+            ?.toString()
+            ?.toString()
+            ?.toString()
+            ?.toString()
+            ?.toString() ?? '',
       });
     this.initialize();
     return this.innerApiCalls.delete(request, options, callback);
@@ -489,7 +495,13 @@ export class SqlBackupRunsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
         instance: request.instance ?? '',
-        id: request.id?.toString()?.toString()?.toString()?.toString()?.toString() ?? '',
+        id:
+          request.id
+            ?.toString()
+            ?.toString()
+            ?.toString()
+            ?.toString()
+            ?.toString() ?? '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
