@@ -25,6 +25,11 @@
                 "getTarget"
               ]
             },
+            "GetCustomTargetType": {
+              "methods": [
+                "getCustomTargetType"
+              ]
+            },
             "GetRelease": {
               "methods": [
                 "getRelease"
@@ -125,6 +130,21 @@
                 "deleteTarget"
               ]
             },
+            "CreateCustomTargetType": {
+              "methods": [
+                "createCustomTargetType"
+              ]
+            },
+            "UpdateCustomTargetType": {
+              "methods": [
+                "updateCustomTargetType"
+              ]
+            },
+            "DeleteCustomTargetType": {
+              "methods": [
+                "deleteCustomTargetType"
+              ]
+            },
             "CreateRelease": {
               "methods": [
                 "createRelease"
@@ -162,6 +182,13 @@
                 "listTargets",
                 "listTargetsStream",
                 "listTargetsAsync"
+              ]
+            },
+            "ListCustomTargetTypes": {
+              "methods": [
+                "listCustomTargetTypes",
+                "listCustomTargetTypesStream",
+                "listCustomTargetTypesAsync"
               ]
             },
             "ListReleases": {
@@ -219,6 +246,11 @@
                 "getTarget"
               ]
             },
+            "GetCustomTargetType": {
+              "methods": [
+                "getCustomTargetType"
+              ]
+            },
             "GetRelease": {
               "methods": [
                 "getRelease"
@@ -319,6 +351,21 @@
                 "deleteTarget"
               ]
             },
+            "CreateCustomTargetType": {
+              "methods": [
+                "createCustomTargetType"
+              ]
+            },
+            "UpdateCustomTargetType": {
+              "methods": [
+                "updateCustomTargetType"
+              ]
+            },
+            "DeleteCustomTargetType": {
+              "methods": [
+                "deleteCustomTargetType"
+              ]
+            },
             "CreateRelease": {
               "methods": [
                 "createRelease"
@@ -356,6 +403,13 @@
                 "listTargets",
                 "listTargetsStream",
                 "listTargetsAsync"
+              ]
+            },
+            "ListCustomTargetTypes": {
+              "methods": [
+                "listCustomTargetTypes",
+                "listCustomTargetTypesStream",
+                "listCustomTargetTypesAsync"
               ]
             },
             "ListReleases": {

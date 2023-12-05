@@ -18,16 +18,19 @@
   * [Cloud_deploy.cancel_automation_run](#cloud_deploy.cancel_automation_run)
   * [Cloud_deploy.cancel_rollout](#cloud_deploy.cancel_rollout)
   * [Cloud_deploy.create_automation](#cloud_deploy.create_automation)
+  * [Cloud_deploy.create_custom_target_type](#cloud_deploy.create_custom_target_type)
   * [Cloud_deploy.create_delivery_pipeline](#cloud_deploy.create_delivery_pipeline)
   * [Cloud_deploy.create_release](#cloud_deploy.create_release)
   * [Cloud_deploy.create_rollout](#cloud_deploy.create_rollout)
   * [Cloud_deploy.create_target](#cloud_deploy.create_target)
   * [Cloud_deploy.delete_automation](#cloud_deploy.delete_automation)
+  * [Cloud_deploy.delete_custom_target_type](#cloud_deploy.delete_custom_target_type)
   * [Cloud_deploy.delete_delivery_pipeline](#cloud_deploy.delete_delivery_pipeline)
   * [Cloud_deploy.delete_target](#cloud_deploy.delete_target)
   * [Cloud_deploy.get_automation](#cloud_deploy.get_automation)
   * [Cloud_deploy.get_automation_run](#cloud_deploy.get_automation_run)
   * [Cloud_deploy.get_config](#cloud_deploy.get_config)
+  * [Cloud_deploy.get_custom_target_type](#cloud_deploy.get_custom_target_type)
   * [Cloud_deploy.get_delivery_pipeline](#cloud_deploy.get_delivery_pipeline)
   * [Cloud_deploy.get_job_run](#cloud_deploy.get_job_run)
   * [Cloud_deploy.get_release](#cloud_deploy.get_release)
@@ -36,6 +39,7 @@
   * [Cloud_deploy.ignore_job](#cloud_deploy.ignore_job)
   * [Cloud_deploy.list_automation_runs](#cloud_deploy.list_automation_runs)
   * [Cloud_deploy.list_automations](#cloud_deploy.list_automations)
+  * [Cloud_deploy.list_custom_target_types](#cloud_deploy.list_custom_target_types)
   * [Cloud_deploy.list_delivery_pipelines](#cloud_deploy.list_delivery_pipelines)
   * [Cloud_deploy.list_job_runs](#cloud_deploy.list_job_runs)
   * [Cloud_deploy.list_releases](#cloud_deploy.list_releases)
@@ -45,6 +49,7 @@
   * [Cloud_deploy.rollback_target](#cloud_deploy.rollback_target)
   * [Cloud_deploy.terminate_job_run](#cloud_deploy.terminate_job_run)
   * [Cloud_deploy.update_automation](#cloud_deploy.update_automation)
+  * [Cloud_deploy.update_custom_target_type](#cloud_deploy.update_custom_target_type)
   * [Cloud_deploy.update_delivery_pipeline](#cloud_deploy.update_delivery_pipeline)
   * [Cloud_deploy.update_target](#cloud_deploy.update_target)
   * [Quickstart](#quickstart)
@@ -166,6 +171,23 @@ __Usage:__
 
 
 
+### Cloud_deploy.create_custom_target_type
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.create_custom_target_type.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.create_custom_target_type.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.create_custom_target_type.js`
+
+
+-----
+
+
+
+
 ### Cloud_deploy.create_delivery_pipeline
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.create_delivery_pipeline.js).
@@ -251,6 +273,23 @@ __Usage:__
 
 
 
+### Cloud_deploy.delete_custom_target_type
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.delete_custom_target_type.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.delete_custom_target_type.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.delete_custom_target_type.js`
+
+
+-----
+
+
+
+
 ### Cloud_deploy.delete_delivery_pipeline
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.delete_delivery_pipeline.js).
@@ -329,6 +368,23 @@ __Usage:__
 
 
 `node packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_config.js`
+
+
+-----
+
+
+
+
+### Cloud_deploy.get_custom_target_type
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_custom_target_type.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_custom_target_type.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_custom_target_type.js`
 
 
 -----
@@ -465,6 +521,23 @@ __Usage:__
 
 
 `node packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_automations.js`
+
+
+-----
+
+
+
+
+### Cloud_deploy.list_custom_target_types
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_custom_target_types.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_custom_target_types.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_custom_target_types.js`
 
 
 -----
@@ -618,6 +691,23 @@ __Usage:__
 
 
 `node packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.update_automation.js`
+
+
+-----
+
+
+
+
+### Cloud_deploy.update_custom_target_type
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.update_custom_target_type.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.update_custom_target_type.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.update_custom_target_type.js`
 
 
 -----

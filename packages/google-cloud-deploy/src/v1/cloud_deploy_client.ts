@@ -208,6 +208,9 @@ export class CloudDeployClient {
       configPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/config'
       ),
+      customTargetTypePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/customTargetTypes/{custom_target_type}'
+      ),
       deliveryPipelinePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/deliveryPipelines/{delivery_pipeline}'
       ),
@@ -256,6 +259,11 @@ export class CloudDeployClient {
         'pageToken',
         'nextPageToken',
         'targets'
+      ),
+      listCustomTargetTypes: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'customTargetTypes'
       ),
       listReleases: new this._gaxModule.PageDescriptor(
         'pageToken',
@@ -392,6 +400,24 @@ export class CloudDeployClient {
     const deleteTargetMetadata = protoFilesRoot.lookup(
       '.google.cloud.deploy.v1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const createCustomTargetTypeResponse = protoFilesRoot.lookup(
+      '.google.cloud.deploy.v1.CustomTargetType'
+    ) as gax.protobuf.Type;
+    const createCustomTargetTypeMetadata = protoFilesRoot.lookup(
+      '.google.cloud.deploy.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const updateCustomTargetTypeResponse = protoFilesRoot.lookup(
+      '.google.cloud.deploy.v1.CustomTargetType'
+    ) as gax.protobuf.Type;
+    const updateCustomTargetTypeMetadata = protoFilesRoot.lookup(
+      '.google.cloud.deploy.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteCustomTargetTypeResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteCustomTargetTypeMetadata = protoFilesRoot.lookup(
+      '.google.cloud.deploy.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
     const createReleaseResponse = protoFilesRoot.lookup(
       '.google.cloud.deploy.v1.Release'
     ) as gax.protobuf.Type;
@@ -465,6 +491,33 @@ export class CloudDeployClient {
         this.operationsClient,
         deleteTargetResponse.decode.bind(deleteTargetResponse),
         deleteTargetMetadata.decode.bind(deleteTargetMetadata)
+      ),
+      createCustomTargetType: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createCustomTargetTypeResponse.decode.bind(
+          createCustomTargetTypeResponse
+        ),
+        createCustomTargetTypeMetadata.decode.bind(
+          createCustomTargetTypeMetadata
+        )
+      ),
+      updateCustomTargetType: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateCustomTargetTypeResponse.decode.bind(
+          updateCustomTargetTypeResponse
+        ),
+        updateCustomTargetTypeMetadata.decode.bind(
+          updateCustomTargetTypeMetadata
+        )
+      ),
+      deleteCustomTargetType: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteCustomTargetTypeResponse.decode.bind(
+          deleteCustomTargetTypeResponse
+        ),
+        deleteCustomTargetTypeMetadata.decode.bind(
+          deleteCustomTargetTypeMetadata
+        )
       ),
       createRelease: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -554,6 +607,11 @@ export class CloudDeployClient {
       'createTarget',
       'updateTarget',
       'deleteTarget',
+      'listCustomTargetTypes',
+      'getCustomTargetType',
+      'createCustomTargetType',
+      'updateCustomTargetType',
+      'deleteCustomTargetType',
       'listReleases',
       'getRelease',
       'createRelease',
@@ -939,6 +997,97 @@ export class CloudDeployClient {
       });
     this.initialize();
     return this.innerApiCalls.getTarget(request, options, callback);
+  }
+  /**
+   * Gets details of a single CustomTargetType.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the `CustomTargetType`. Format must be
+   *   `projects/{project_id}/locations/{location_name}/customTargetTypes/{custom_target_type}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.deploy.v1.CustomTargetType|CustomTargetType}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_deploy.get_custom_target_type.js</caption>
+   * region_tag:clouddeploy_v1_generated_CloudDeploy_GetCustomTargetType_async
+   */
+  getCustomTargetType(
+    request?: protos.google.cloud.deploy.v1.IGetCustomTargetTypeRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.deploy.v1.ICustomTargetType,
+      protos.google.cloud.deploy.v1.IGetCustomTargetTypeRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getCustomTargetType(
+    request: protos.google.cloud.deploy.v1.IGetCustomTargetTypeRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.deploy.v1.ICustomTargetType,
+      | protos.google.cloud.deploy.v1.IGetCustomTargetTypeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getCustomTargetType(
+    request: protos.google.cloud.deploy.v1.IGetCustomTargetTypeRequest,
+    callback: Callback<
+      protos.google.cloud.deploy.v1.ICustomTargetType,
+      | protos.google.cloud.deploy.v1.IGetCustomTargetTypeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getCustomTargetType(
+    request?: protos.google.cloud.deploy.v1.IGetCustomTargetTypeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.deploy.v1.ICustomTargetType,
+          | protos.google.cloud.deploy.v1.IGetCustomTargetTypeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.deploy.v1.ICustomTargetType,
+      | protos.google.cloud.deploy.v1.IGetCustomTargetTypeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.deploy.v1.ICustomTargetType,
+      protos.google.cloud.deploy.v1.IGetCustomTargetTypeRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getCustomTargetType(request, options, callback);
   }
   /**
    * Gets details of a single Release.
@@ -3120,6 +3269,500 @@ export class CloudDeployClient {
     >;
   }
   /**
+   * Creates a new CustomTargetType in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent collection in which the `CustomTargetType` should be
+   *   created in. Format should be
+   *   `projects/{project_id}/locations/{location_name}`.
+   * @param {string} request.customTargetTypeId
+   *   Required. ID of the `CustomTargetType`.
+   * @param {google.cloud.deploy.v1.CustomTargetType} request.customTargetType
+   *   Required. The `CustomTargetType` to create.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set to true, the request is validated and the user is provided
+   *   with an expected result, but no actual change is made.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_deploy.create_custom_target_type.js</caption>
+   * region_tag:clouddeploy_v1_generated_CloudDeploy_CreateCustomTargetType_async
+   */
+  createCustomTargetType(
+    request?: protos.google.cloud.deploy.v1.ICreateCustomTargetTypeRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.deploy.v1.ICustomTargetType,
+        protos.google.cloud.deploy.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createCustomTargetType(
+    request: protos.google.cloud.deploy.v1.ICreateCustomTargetTypeRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.deploy.v1.ICustomTargetType,
+        protos.google.cloud.deploy.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createCustomTargetType(
+    request: protos.google.cloud.deploy.v1.ICreateCustomTargetTypeRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.deploy.v1.ICustomTargetType,
+        protos.google.cloud.deploy.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createCustomTargetType(
+    request?: protos.google.cloud.deploy.v1.ICreateCustomTargetTypeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.deploy.v1.ICustomTargetType,
+            protos.google.cloud.deploy.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.deploy.v1.ICustomTargetType,
+        protos.google.cloud.deploy.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.deploy.v1.ICustomTargetType,
+        protos.google.cloud.deploy.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createCustomTargetType(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `createCustomTargetType()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_deploy.create_custom_target_type.js</caption>
+   * region_tag:clouddeploy_v1_generated_CloudDeploy_CreateCustomTargetType_async
+   */
+  async checkCreateCustomTargetTypeProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.deploy.v1.CustomTargetType,
+      protos.google.cloud.deploy.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createCustomTargetType,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.deploy.v1.CustomTargetType,
+      protos.google.cloud.deploy.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Updates a single CustomTargetType.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Field mask is used to specify the fields to be overwritten in the
+   *   `CustomTargetType` resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten.
+   * @param {google.cloud.deploy.v1.CustomTargetType} request.customTargetType
+   *   Required. The `CustomTargetType` to update.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {boolean} [request.allowMissing]
+   *   Optional. If set to true, updating a `CustomTargetType` that does not exist
+   *   will result in the creation of a new `CustomTargetType`.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set to true, the request is validated and the user is provided
+   *   with an expected result, but no actual change is made.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_deploy.update_custom_target_type.js</caption>
+   * region_tag:clouddeploy_v1_generated_CloudDeploy_UpdateCustomTargetType_async
+   */
+  updateCustomTargetType(
+    request?: protos.google.cloud.deploy.v1.IUpdateCustomTargetTypeRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.deploy.v1.ICustomTargetType,
+        protos.google.cloud.deploy.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateCustomTargetType(
+    request: protos.google.cloud.deploy.v1.IUpdateCustomTargetTypeRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.deploy.v1.ICustomTargetType,
+        protos.google.cloud.deploy.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateCustomTargetType(
+    request: protos.google.cloud.deploy.v1.IUpdateCustomTargetTypeRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.deploy.v1.ICustomTargetType,
+        protos.google.cloud.deploy.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateCustomTargetType(
+    request?: protos.google.cloud.deploy.v1.IUpdateCustomTargetTypeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.deploy.v1.ICustomTargetType,
+            protos.google.cloud.deploy.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.deploy.v1.ICustomTargetType,
+        protos.google.cloud.deploy.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.deploy.v1.ICustomTargetType,
+        protos.google.cloud.deploy.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'custom_target_type.name': request.customTargetType!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateCustomTargetType(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `updateCustomTargetType()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_deploy.update_custom_target_type.js</caption>
+   * region_tag:clouddeploy_v1_generated_CloudDeploy_UpdateCustomTargetType_async
+   */
+  async checkUpdateCustomTargetTypeProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.deploy.v1.CustomTargetType,
+      protos.google.cloud.deploy.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateCustomTargetType,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.deploy.v1.CustomTargetType,
+      protos.google.cloud.deploy.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes a single CustomTargetType.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the `CustomTargetType` to delete. Format must be
+   *   `projects/{project_id}/locations/{location_name}/customTargetTypes/{custom_target_type}`.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {boolean} [request.allowMissing]
+   *   Optional. If set to true, then deleting an already deleted or non-existing
+   *   `CustomTargetType` will succeed.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set to true, the request is validated but no actual change is
+   *   made.
+   * @param {string} [request.etag]
+   *   Optional. This checksum is computed by the server based on the value of
+   *   other fields, and may be sent on update and delete requests to ensure the
+   *   client has an up-to-date value before proceeding.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_deploy.delete_custom_target_type.js</caption>
+   * region_tag:clouddeploy_v1_generated_CloudDeploy_DeleteCustomTargetType_async
+   */
+  deleteCustomTargetType(
+    request?: protos.google.cloud.deploy.v1.IDeleteCustomTargetTypeRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.deploy.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteCustomTargetType(
+    request: protos.google.cloud.deploy.v1.IDeleteCustomTargetTypeRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.deploy.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteCustomTargetType(
+    request: protos.google.cloud.deploy.v1.IDeleteCustomTargetTypeRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.deploy.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteCustomTargetType(
+    request?: protos.google.cloud.deploy.v1.IDeleteCustomTargetTypeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.deploy.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.deploy.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.deploy.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteCustomTargetType(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteCustomTargetType()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_deploy.delete_custom_target_type.js</caption>
+   * region_tag:clouddeploy_v1_generated_CloudDeploy_DeleteCustomTargetType_async
+   */
+  async checkDeleteCustomTargetTypeProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.deploy.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteCustomTargetType,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.deploy.v1.OperationMetadata
+    >;
+  }
+  /**
    * Creates a new Release in a given project and location.
    *
    * @param {Object} request
@@ -4369,6 +5012,234 @@ export class CloudDeployClient {
     ) as AsyncIterable<protos.google.cloud.deploy.v1.ITarget>;
   }
   /**
+   * Lists CustomTargetTypes in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent that owns this collection of custom target types.
+   *   Format must be `projects/{project_id}/locations/{location_name}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of `CustomTargetType` objects to return. The
+   *   service may return fewer than this value. If unspecified, at most 50
+   *   `CustomTargetType` objects will be returned. The maximum value is 1000;
+   *   values above 1000 will be set to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListCustomTargetTypes`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other provided parameters match
+   *   the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Filter custom target types to be returned. See
+   *   https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for
+   *   more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.deploy.v1.CustomTargetType|CustomTargetType}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listCustomTargetTypesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listCustomTargetTypes(
+    request?: protos.google.cloud.deploy.v1.IListCustomTargetTypesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.deploy.v1.ICustomTargetType[],
+      protos.google.cloud.deploy.v1.IListCustomTargetTypesRequest | null,
+      protos.google.cloud.deploy.v1.IListCustomTargetTypesResponse,
+    ]
+  >;
+  listCustomTargetTypes(
+    request: protos.google.cloud.deploy.v1.IListCustomTargetTypesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.deploy.v1.IListCustomTargetTypesRequest,
+      | protos.google.cloud.deploy.v1.IListCustomTargetTypesResponse
+      | null
+      | undefined,
+      protos.google.cloud.deploy.v1.ICustomTargetType
+    >
+  ): void;
+  listCustomTargetTypes(
+    request: protos.google.cloud.deploy.v1.IListCustomTargetTypesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.deploy.v1.IListCustomTargetTypesRequest,
+      | protos.google.cloud.deploy.v1.IListCustomTargetTypesResponse
+      | null
+      | undefined,
+      protos.google.cloud.deploy.v1.ICustomTargetType
+    >
+  ): void;
+  listCustomTargetTypes(
+    request?: protos.google.cloud.deploy.v1.IListCustomTargetTypesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.deploy.v1.IListCustomTargetTypesRequest,
+          | protos.google.cloud.deploy.v1.IListCustomTargetTypesResponse
+          | null
+          | undefined,
+          protos.google.cloud.deploy.v1.ICustomTargetType
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.deploy.v1.IListCustomTargetTypesRequest,
+      | protos.google.cloud.deploy.v1.IListCustomTargetTypesResponse
+      | null
+      | undefined,
+      protos.google.cloud.deploy.v1.ICustomTargetType
+    >
+  ): Promise<
+    [
+      protos.google.cloud.deploy.v1.ICustomTargetType[],
+      protos.google.cloud.deploy.v1.IListCustomTargetTypesRequest | null,
+      protos.google.cloud.deploy.v1.IListCustomTargetTypesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listCustomTargetTypes(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent that owns this collection of custom target types.
+   *   Format must be `projects/{project_id}/locations/{location_name}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of `CustomTargetType` objects to return. The
+   *   service may return fewer than this value. If unspecified, at most 50
+   *   `CustomTargetType` objects will be returned. The maximum value is 1000;
+   *   values above 1000 will be set to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListCustomTargetTypes`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other provided parameters match
+   *   the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Filter custom target types to be returned. See
+   *   https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for
+   *   more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.deploy.v1.CustomTargetType|CustomTargetType} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listCustomTargetTypesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listCustomTargetTypesStream(
+    request?: protos.google.cloud.deploy.v1.IListCustomTargetTypesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listCustomTargetTypes'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listCustomTargetTypes.createStream(
+      this.innerApiCalls.listCustomTargetTypes as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listCustomTargetTypes`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent that owns this collection of custom target types.
+   *   Format must be `projects/{project_id}/locations/{location_name}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of `CustomTargetType` objects to return. The
+   *   service may return fewer than this value. If unspecified, at most 50
+   *   `CustomTargetType` objects will be returned. The maximum value is 1000;
+   *   values above 1000 will be set to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListCustomTargetTypes`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other provided parameters match
+   *   the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Filter custom target types to be returned. See
+   *   https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for
+   *   more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.deploy.v1.CustomTargetType|CustomTargetType}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_deploy.list_custom_target_types.js</caption>
+   * region_tag:clouddeploy_v1_generated_CloudDeploy_ListCustomTargetTypes_async
+   */
+  listCustomTargetTypesAsync(
+    request?: protos.google.cloud.deploy.v1.IListCustomTargetTypesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.deploy.v1.ICustomTargetType> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listCustomTargetTypes'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listCustomTargetTypes.asyncIterate(
+      this.innerApiCalls['listCustomTargetTypes'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.deploy.v1.ICustomTargetType>;
+  }
+  /**
    * Lists Releases in a given project and location.
    *
    * @param {Object} request
@@ -5032,8 +5903,8 @@ export class CloudDeployClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, which owns this collection of automations. Format
-   *   must be
+   *   Required. The parent `Delivery Pipeline`, which owns this collection of
+   *   automations. Format must be
    *   `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
    * @param {number} request.pageSize
    *   The maximum number of automations to return. The service may return
@@ -5137,8 +6008,8 @@ export class CloudDeployClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, which owns this collection of automations. Format
-   *   must be
+   *   Required. The parent `Delivery Pipeline`, which owns this collection of
+   *   automations. Format must be
    *   `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
    * @param {number} request.pageSize
    *   The maximum number of automations to return. The service may return
@@ -5196,8 +6067,8 @@ export class CloudDeployClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, which owns this collection of automations. Format
-   *   must be
+   *   Required. The parent `Delivery Pipeline`, which owns this collection of
+   *   automations. Format must be
    *   `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
    * @param {number} request.pageSize
    *   The maximum number of automations to return. The service may return
@@ -5254,8 +6125,8 @@ export class CloudDeployClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, which owns this collection of automationRuns. Format
-   *   must be
+   *   Required. The parent `Delivery Pipeline`, which owns this collection of
+   *   automationRuns. Format must be
    *   `projects/{project}/locations/{location}/deliveryPipelines/{delivery_pipeline}`.
    * @param {number} request.pageSize
    *   The maximum number of automationRuns to return. The service may return
@@ -5365,8 +6236,8 @@ export class CloudDeployClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, which owns this collection of automationRuns. Format
-   *   must be
+   *   Required. The parent `Delivery Pipeline`, which owns this collection of
+   *   automationRuns. Format must be
    *   `projects/{project}/locations/{location}/deliveryPipelines/{delivery_pipeline}`.
    * @param {number} request.pageSize
    *   The maximum number of automationRuns to return. The service may return
@@ -5424,8 +6295,8 @@ export class CloudDeployClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, which owns this collection of automationRuns. Format
-   *   must be
+   *   Required. The parent `Delivery Pipeline`, which owns this collection of
+   *   automationRuns. Format must be
    *   `projects/{project}/locations/{location}/deliveryPipelines/{delivery_pipeline}`.
    * @param {number} request.pageSize
    *   The maximum number of automationRuns to return. The service may return
@@ -6145,6 +7016,65 @@ export class CloudDeployClient {
    */
   matchLocationFromConfigName(configName: string) {
     return this.pathTemplates.configPathTemplate.match(configName).location;
+  }
+
+  /**
+   * Return a fully-qualified customTargetType resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} custom_target_type
+   * @returns {string} Resource name string.
+   */
+  customTargetTypePath(
+    project: string,
+    location: string,
+    customTargetType: string
+  ) {
+    return this.pathTemplates.customTargetTypePathTemplate.render({
+      project: project,
+      location: location,
+      custom_target_type: customTargetType,
+    });
+  }
+
+  /**
+   * Parse the project from CustomTargetType resource.
+   *
+   * @param {string} customTargetTypeName
+   *   A fully-qualified path representing CustomTargetType resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCustomTargetTypeName(customTargetTypeName: string) {
+    return this.pathTemplates.customTargetTypePathTemplate.match(
+      customTargetTypeName
+    ).project;
+  }
+
+  /**
+   * Parse the location from CustomTargetType resource.
+   *
+   * @param {string} customTargetTypeName
+   *   A fully-qualified path representing CustomTargetType resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCustomTargetTypeName(customTargetTypeName: string) {
+    return this.pathTemplates.customTargetTypePathTemplate.match(
+      customTargetTypeName
+    ).location;
+  }
+
+  /**
+   * Parse the custom_target_type from CustomTargetType resource.
+   *
+   * @param {string} customTargetTypeName
+   *   A fully-qualified path representing CustomTargetType resource.
+   * @returns {string} A string representing the custom_target_type.
+   */
+  matchCustomTargetTypeFromCustomTargetTypeName(customTargetTypeName: string) {
+    return this.pathTemplates.customTargetTypePathTemplate.match(
+      customTargetTypeName
+    ).custom_target_type;
   }
 
   /**

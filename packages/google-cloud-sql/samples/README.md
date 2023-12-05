@@ -29,6 +29,7 @@
   * [Sql_instances_service.clone](#sql_instances_service.clone)
   * [Sql_instances_service.create_ephemeral](#sql_instances_service.create_ephemeral)
   * [Sql_instances_service.delete](#sql_instances_service.delete)
+  * [Sql_instances_service.demote](#sql_instances_service.demote)
   * [Sql_instances_service.demote_master](#sql_instances_service.demote_master)
   * [Sql_instances_service.export](#sql_instances_service.export)
   * [Sql_instances_service.failover](#sql_instances_service.failover)
@@ -52,6 +53,7 @@
   * [Sql_instances_service.start_external_sync](#sql_instances_service.start_external_sync)
   * [Sql_instances_service.start_replica](#sql_instances_service.start_replica)
   * [Sql_instances_service.stop_replica](#sql_instances_service.stop_replica)
+  * [Sql_instances_service.switchover](#sql_instances_service.switchover)
   * [Sql_instances_service.truncate_log](#sql_instances_service.truncate_log)
   * [Sql_instances_service.update](#sql_instances_service.update)
   * [Sql_instances_service.verify_external_sync_settings](#sql_instances_service.verify_external_sync_settings)
@@ -85,6 +87,7 @@
   * [Sql_instances_service.clone](#sql_instances_service.clone)
   * [Sql_instances_service.create_ephemeral](#sql_instances_service.create_ephemeral)
   * [Sql_instances_service.delete](#sql_instances_service.delete)
+  * [Sql_instances_service.demote](#sql_instances_service.demote)
   * [Sql_instances_service.demote_master](#sql_instances_service.demote_master)
   * [Sql_instances_service.export](#sql_instances_service.export)
   * [Sql_instances_service.failover](#sql_instances_service.failover)
@@ -108,6 +111,7 @@
   * [Sql_instances_service.start_external_sync](#sql_instances_service.start_external_sync)
   * [Sql_instances_service.start_replica](#sql_instances_service.start_replica)
   * [Sql_instances_service.stop_replica](#sql_instances_service.stop_replica)
+  * [Sql_instances_service.switchover](#sql_instances_service.switchover)
   * [Sql_instances_service.truncate_log](#sql_instances_service.truncate_log)
   * [Sql_instances_service.update](#sql_instances_service.update)
   * [Sql_instances_service.verify_external_sync_settings](#sql_instances_service.verify_external_sync_settings)
@@ -423,6 +427,23 @@ __Usage:__
 
 
 `node packages/google-cloud-sql/samples/generated/v1/sql_instances_service.delete.js`
+
+
+-----
+
+
+
+
+### Sql_instances_service.demote
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.demote.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.demote.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-sql/samples/generated/v1/sql_instances_service.demote.js`
 
 
 -----
@@ -814,6 +835,23 @@ __Usage:__
 
 
 `node packages/google-cloud-sql/samples/generated/v1/sql_instances_service.stop_replica.js`
+
+
+-----
+
+
+
+
+### Sql_instances_service.switchover
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.switchover.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.switchover.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-sql/samples/generated/v1/sql_instances_service.switchover.js`
 
 
 -----
@@ -1382,6 +1420,23 @@ __Usage:__
 
 
 
+### Sql_instances_service.demote
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.demote.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.demote.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.demote.js`
+
+
+-----
+
+
+
+
 ### Sql_instances_service.demote_master
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.demote_master.js).
@@ -1766,6 +1821,23 @@ __Usage:__
 
 
 `node packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.stop_replica.js`
+
+
+-----
+
+
+
+
+### Sql_instances_service.switchover
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.switchover.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.switchover.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.switchover.js`
 
 
 -----

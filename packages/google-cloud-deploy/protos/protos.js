@@ -1201,6 +1201,171 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|listCustomTargetTypes}.
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @typedef ListCustomTargetTypesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.deploy.v1.ListCustomTargetTypesResponse} [response] ListCustomTargetTypesResponse
+                         */
+    
+                        /**
+                         * Calls ListCustomTargetTypes.
+                         * @function listCustomTargetTypes
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @instance
+                         * @param {google.cloud.deploy.v1.IListCustomTargetTypesRequest} request ListCustomTargetTypesRequest message or plain object
+                         * @param {google.cloud.deploy.v1.CloudDeploy.ListCustomTargetTypesCallback} callback Node-style callback called with the error, if any, and ListCustomTargetTypesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudDeploy.prototype.listCustomTargetTypes = function listCustomTargetTypes(request, callback) {
+                            return this.rpcCall(listCustomTargetTypes, $root.google.cloud.deploy.v1.ListCustomTargetTypesRequest, $root.google.cloud.deploy.v1.ListCustomTargetTypesResponse, request, callback);
+                        }, "name", { value: "ListCustomTargetTypes" });
+    
+                        /**
+                         * Calls ListCustomTargetTypes.
+                         * @function listCustomTargetTypes
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @instance
+                         * @param {google.cloud.deploy.v1.IListCustomTargetTypesRequest} request ListCustomTargetTypesRequest message or plain object
+                         * @returns {Promise<google.cloud.deploy.v1.ListCustomTargetTypesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|getCustomTargetType}.
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @typedef GetCustomTargetTypeCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.deploy.v1.CustomTargetType} [response] CustomTargetType
+                         */
+    
+                        /**
+                         * Calls GetCustomTargetType.
+                         * @function getCustomTargetType
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @instance
+                         * @param {google.cloud.deploy.v1.IGetCustomTargetTypeRequest} request GetCustomTargetTypeRequest message or plain object
+                         * @param {google.cloud.deploy.v1.CloudDeploy.GetCustomTargetTypeCallback} callback Node-style callback called with the error, if any, and CustomTargetType
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudDeploy.prototype.getCustomTargetType = function getCustomTargetType(request, callback) {
+                            return this.rpcCall(getCustomTargetType, $root.google.cloud.deploy.v1.GetCustomTargetTypeRequest, $root.google.cloud.deploy.v1.CustomTargetType, request, callback);
+                        }, "name", { value: "GetCustomTargetType" });
+    
+                        /**
+                         * Calls GetCustomTargetType.
+                         * @function getCustomTargetType
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @instance
+                         * @param {google.cloud.deploy.v1.IGetCustomTargetTypeRequest} request GetCustomTargetTypeRequest message or plain object
+                         * @returns {Promise<google.cloud.deploy.v1.CustomTargetType>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|createCustomTargetType}.
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @typedef CreateCustomTargetTypeCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateCustomTargetType.
+                         * @function createCustomTargetType
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @instance
+                         * @param {google.cloud.deploy.v1.ICreateCustomTargetTypeRequest} request CreateCustomTargetTypeRequest message or plain object
+                         * @param {google.cloud.deploy.v1.CloudDeploy.CreateCustomTargetTypeCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudDeploy.prototype.createCustomTargetType = function createCustomTargetType(request, callback) {
+                            return this.rpcCall(createCustomTargetType, $root.google.cloud.deploy.v1.CreateCustomTargetTypeRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateCustomTargetType" });
+    
+                        /**
+                         * Calls CreateCustomTargetType.
+                         * @function createCustomTargetType
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @instance
+                         * @param {google.cloud.deploy.v1.ICreateCustomTargetTypeRequest} request CreateCustomTargetTypeRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|updateCustomTargetType}.
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @typedef UpdateCustomTargetTypeCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateCustomTargetType.
+                         * @function updateCustomTargetType
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @instance
+                         * @param {google.cloud.deploy.v1.IUpdateCustomTargetTypeRequest} request UpdateCustomTargetTypeRequest message or plain object
+                         * @param {google.cloud.deploy.v1.CloudDeploy.UpdateCustomTargetTypeCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudDeploy.prototype.updateCustomTargetType = function updateCustomTargetType(request, callback) {
+                            return this.rpcCall(updateCustomTargetType, $root.google.cloud.deploy.v1.UpdateCustomTargetTypeRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateCustomTargetType" });
+    
+                        /**
+                         * Calls UpdateCustomTargetType.
+                         * @function updateCustomTargetType
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @instance
+                         * @param {google.cloud.deploy.v1.IUpdateCustomTargetTypeRequest} request UpdateCustomTargetTypeRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|deleteCustomTargetType}.
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @typedef DeleteCustomTargetTypeCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteCustomTargetType.
+                         * @function deleteCustomTargetType
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @instance
+                         * @param {google.cloud.deploy.v1.IDeleteCustomTargetTypeRequest} request DeleteCustomTargetTypeRequest message or plain object
+                         * @param {google.cloud.deploy.v1.CloudDeploy.DeleteCustomTargetTypeCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudDeploy.prototype.deleteCustomTargetType = function deleteCustomTargetType(request, callback) {
+                            return this.rpcCall(deleteCustomTargetType, $root.google.cloud.deploy.v1.DeleteCustomTargetTypeRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteCustomTargetType" });
+    
+                        /**
+                         * Calls DeleteCustomTargetType.
+                         * @function deleteCustomTargetType
+                         * @memberof google.cloud.deploy.v1.CloudDeploy
+                         * @instance
+                         * @param {google.cloud.deploy.v1.IDeleteCustomTargetTypeRequest} request DeleteCustomTargetTypeRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|listReleases}.
                          * @memberof google.cloud.deploy.v1.CloudDeploy
                          * @typedef ListReleasesCallback
@@ -6303,6 +6468,9 @@
                          * @memberof google.cloud.deploy.v1
                          * @interface ICloudRunConfig
                          * @property {boolean|null} [automaticTrafficControl] CloudRunConfig automaticTrafficControl
+                         * @property {Array.<string>|null} [canaryRevisionTags] CloudRunConfig canaryRevisionTags
+                         * @property {Array.<string>|null} [priorRevisionTags] CloudRunConfig priorRevisionTags
+                         * @property {Array.<string>|null} [stableRevisionTags] CloudRunConfig stableRevisionTags
                          */
     
                         /**
@@ -6314,6 +6482,9 @@
                          * @param {google.cloud.deploy.v1.ICloudRunConfig=} [properties] Properties to set
                          */
                         function CloudRunConfig(properties) {
+                            this.canaryRevisionTags = [];
+                            this.priorRevisionTags = [];
+                            this.stableRevisionTags = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -6327,6 +6498,30 @@
                          * @instance
                          */
                         CloudRunConfig.prototype.automaticTrafficControl = false;
+    
+                        /**
+                         * CloudRunConfig canaryRevisionTags.
+                         * @member {Array.<string>} canaryRevisionTags
+                         * @memberof google.cloud.deploy.v1.CloudRunConfig
+                         * @instance
+                         */
+                        CloudRunConfig.prototype.canaryRevisionTags = $util.emptyArray;
+    
+                        /**
+                         * CloudRunConfig priorRevisionTags.
+                         * @member {Array.<string>} priorRevisionTags
+                         * @memberof google.cloud.deploy.v1.CloudRunConfig
+                         * @instance
+                         */
+                        CloudRunConfig.prototype.priorRevisionTags = $util.emptyArray;
+    
+                        /**
+                         * CloudRunConfig stableRevisionTags.
+                         * @member {Array.<string>} stableRevisionTags
+                         * @memberof google.cloud.deploy.v1.CloudRunConfig
+                         * @instance
+                         */
+                        CloudRunConfig.prototype.stableRevisionTags = $util.emptyArray;
     
                         /**
                          * Creates a new CloudRunConfig instance using the specified properties.
@@ -6354,6 +6549,15 @@
                                 writer = $Writer.create();
                             if (message.automaticTrafficControl != null && Object.hasOwnProperty.call(message, "automaticTrafficControl"))
                                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.automaticTrafficControl);
+                            if (message.canaryRevisionTags != null && message.canaryRevisionTags.length)
+                                for (var i = 0; i < message.canaryRevisionTags.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.canaryRevisionTags[i]);
+                            if (message.priorRevisionTags != null && message.priorRevisionTags.length)
+                                for (var i = 0; i < message.priorRevisionTags.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.priorRevisionTags[i]);
+                            if (message.stableRevisionTags != null && message.stableRevisionTags.length)
+                                for (var i = 0; i < message.stableRevisionTags.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.stableRevisionTags[i]);
                             return writer;
                         };
     
@@ -6390,6 +6594,24 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.automaticTrafficControl = reader.bool();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.canaryRevisionTags && message.canaryRevisionTags.length))
+                                            message.canaryRevisionTags = [];
+                                        message.canaryRevisionTags.push(reader.string());
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.priorRevisionTags && message.priorRevisionTags.length))
+                                            message.priorRevisionTags = [];
+                                        message.priorRevisionTags.push(reader.string());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.stableRevisionTags && message.stableRevisionTags.length))
+                                            message.stableRevisionTags = [];
+                                        message.stableRevisionTags.push(reader.string());
                                         break;
                                     }
                                 default:
@@ -6430,6 +6652,27 @@
                             if (message.automaticTrafficControl != null && message.hasOwnProperty("automaticTrafficControl"))
                                 if (typeof message.automaticTrafficControl !== "boolean")
                                     return "automaticTrafficControl: boolean expected";
+                            if (message.canaryRevisionTags != null && message.hasOwnProperty("canaryRevisionTags")) {
+                                if (!Array.isArray(message.canaryRevisionTags))
+                                    return "canaryRevisionTags: array expected";
+                                for (var i = 0; i < message.canaryRevisionTags.length; ++i)
+                                    if (!$util.isString(message.canaryRevisionTags[i]))
+                                        return "canaryRevisionTags: string[] expected";
+                            }
+                            if (message.priorRevisionTags != null && message.hasOwnProperty("priorRevisionTags")) {
+                                if (!Array.isArray(message.priorRevisionTags))
+                                    return "priorRevisionTags: array expected";
+                                for (var i = 0; i < message.priorRevisionTags.length; ++i)
+                                    if (!$util.isString(message.priorRevisionTags[i]))
+                                        return "priorRevisionTags: string[] expected";
+                            }
+                            if (message.stableRevisionTags != null && message.hasOwnProperty("stableRevisionTags")) {
+                                if (!Array.isArray(message.stableRevisionTags))
+                                    return "stableRevisionTags: array expected";
+                                for (var i = 0; i < message.stableRevisionTags.length; ++i)
+                                    if (!$util.isString(message.stableRevisionTags[i]))
+                                        return "stableRevisionTags: string[] expected";
+                            }
                             return null;
                         };
     
@@ -6447,6 +6690,27 @@
                             var message = new $root.google.cloud.deploy.v1.CloudRunConfig();
                             if (object.automaticTrafficControl != null)
                                 message.automaticTrafficControl = Boolean(object.automaticTrafficControl);
+                            if (object.canaryRevisionTags) {
+                                if (!Array.isArray(object.canaryRevisionTags))
+                                    throw TypeError(".google.cloud.deploy.v1.CloudRunConfig.canaryRevisionTags: array expected");
+                                message.canaryRevisionTags = [];
+                                for (var i = 0; i < object.canaryRevisionTags.length; ++i)
+                                    message.canaryRevisionTags[i] = String(object.canaryRevisionTags[i]);
+                            }
+                            if (object.priorRevisionTags) {
+                                if (!Array.isArray(object.priorRevisionTags))
+                                    throw TypeError(".google.cloud.deploy.v1.CloudRunConfig.priorRevisionTags: array expected");
+                                message.priorRevisionTags = [];
+                                for (var i = 0; i < object.priorRevisionTags.length; ++i)
+                                    message.priorRevisionTags[i] = String(object.priorRevisionTags[i]);
+                            }
+                            if (object.stableRevisionTags) {
+                                if (!Array.isArray(object.stableRevisionTags))
+                                    throw TypeError(".google.cloud.deploy.v1.CloudRunConfig.stableRevisionTags: array expected");
+                                message.stableRevisionTags = [];
+                                for (var i = 0; i < object.stableRevisionTags.length; ++i)
+                                    message.stableRevisionTags[i] = String(object.stableRevisionTags[i]);
+                            }
                             return message;
                         };
     
@@ -6463,10 +6727,30 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.canaryRevisionTags = [];
+                                object.priorRevisionTags = [];
+                                object.stableRevisionTags = [];
+                            }
                             if (options.defaults)
                                 object.automaticTrafficControl = false;
                             if (message.automaticTrafficControl != null && message.hasOwnProperty("automaticTrafficControl"))
                                 object.automaticTrafficControl = message.automaticTrafficControl;
+                            if (message.canaryRevisionTags && message.canaryRevisionTags.length) {
+                                object.canaryRevisionTags = [];
+                                for (var j = 0; j < message.canaryRevisionTags.length; ++j)
+                                    object.canaryRevisionTags[j] = message.canaryRevisionTags[j];
+                            }
+                            if (message.priorRevisionTags && message.priorRevisionTags.length) {
+                                object.priorRevisionTags = [];
+                                for (var j = 0; j < message.priorRevisionTags.length; ++j)
+                                    object.priorRevisionTags[j] = message.priorRevisionTags[j];
+                            }
+                            if (message.stableRevisionTags && message.stableRevisionTags.length) {
+                                object.stableRevisionTags = [];
+                                for (var j = 0; j < message.stableRevisionTags.length; ++j)
+                                    object.stableRevisionTags[j] = message.stableRevisionTags[j];
+                            }
                             return object;
                         };
     
@@ -10276,6 +10560,7 @@
                          * @property {google.cloud.deploy.v1.IAnthosCluster|null} [anthosCluster] Target anthosCluster
                          * @property {google.cloud.deploy.v1.ICloudRunLocation|null} [run] Target run
                          * @property {google.cloud.deploy.v1.IMultiTarget|null} [multiTarget] Target multiTarget
+                         * @property {google.cloud.deploy.v1.ICustomTarget|null} [customTarget] Target customTarget
                          * @property {string|null} [etag] Target etag
                          * @property {Array.<google.cloud.deploy.v1.IExecutionConfig>|null} [executionConfigs] Target executionConfigs
                          * @property {Object.<string,string>|null} [deployParameters] Target deployParameters
@@ -10405,6 +10690,14 @@
                         Target.prototype.multiTarget = null;
     
                         /**
+                         * Target customTarget.
+                         * @member {google.cloud.deploy.v1.ICustomTarget|null|undefined} customTarget
+                         * @memberof google.cloud.deploy.v1.Target
+                         * @instance
+                         */
+                        Target.prototype.customTarget = null;
+    
+                        /**
                          * Target etag.
                          * @member {string} etag
                          * @memberof google.cloud.deploy.v1.Target
@@ -10433,12 +10726,12 @@
     
                         /**
                          * Target deploymentTarget.
-                         * @member {"gke"|"anthosCluster"|"run"|"multiTarget"|undefined} deploymentTarget
+                         * @member {"gke"|"anthosCluster"|"run"|"multiTarget"|"customTarget"|undefined} deploymentTarget
                          * @memberof google.cloud.deploy.v1.Target
                          * @instance
                          */
                         Object.defineProperty(Target.prototype, "deploymentTarget", {
-                            get: $util.oneOfGetter($oneOfFields = ["gke", "anthosCluster", "run", "multiTarget"]),
+                            get: $util.oneOfGetter($oneOfFields = ["gke", "anthosCluster", "run", "multiTarget", "customTarget"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -10502,6 +10795,8 @@
                             if (message.deployParameters != null && Object.hasOwnProperty.call(message, "deployParameters"))
                                 for (var keys = Object.keys(message.deployParameters), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 20, wireType 2 =*/162).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.deployParameters[keys[i]]).ldelim();
+                            if (message.customTarget != null && Object.hasOwnProperty.call(message, "customTarget"))
+                                $root.google.cloud.deploy.v1.CustomTarget.encode(message.customTarget, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
                             return writer;
                         };
     
@@ -10624,6 +10919,10 @@
                                     }
                                 case 19: {
                                         message.multiTarget = $root.google.cloud.deploy.v1.MultiTarget.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 21: {
+                                        message.customTarget = $root.google.cloud.deploy.v1.CustomTarget.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 12: {
@@ -10774,6 +11073,16 @@
                                         return "multiTarget." + error;
                                 }
                             }
+                            if (message.customTarget != null && message.hasOwnProperty("customTarget")) {
+                                if (properties.deploymentTarget === 1)
+                                    return "deploymentTarget: multiple values";
+                                properties.deploymentTarget = 1;
+                                {
+                                    var error = $root.google.cloud.deploy.v1.CustomTarget.verify(message.customTarget);
+                                    if (error)
+                                        return "customTarget." + error;
+                                }
+                            }
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 if (!$util.isString(message.etag))
                                     return "etag: string expected";
@@ -10862,6 +11171,11 @@
                                 if (typeof object.multiTarget !== "object")
                                     throw TypeError(".google.cloud.deploy.v1.Target.multiTarget: object expected");
                                 message.multiTarget = $root.google.cloud.deploy.v1.MultiTarget.fromObject(object.multiTarget);
+                            }
+                            if (object.customTarget != null) {
+                                if (typeof object.customTarget !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.Target.customTarget: object expected");
+                                message.customTarget = $root.google.cloud.deploy.v1.CustomTarget.fromObject(object.customTarget);
                             }
                             if (object.etag != null)
                                 message.etag = String(object.etag);
@@ -10971,6 +11285,11 @@
                                 object.deployParameters = {};
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.deployParameters[keys2[j]] = message.deployParameters[keys2[j]];
+                            }
+                            if (message.customTarget != null && message.hasOwnProperty("customTarget")) {
+                                object.customTarget = $root.google.cloud.deploy.v1.CustomTarget.toObject(message.customTarget, options);
+                                if (options.oneofs)
+                                    object.deploymentTarget = "customTarget";
                             }
                             return object;
                         };
@@ -12803,6 +13122,209 @@
                         return MultiTarget;
                     })();
     
+                    v1.CustomTarget = (function() {
+    
+                        /**
+                         * Properties of a CustomTarget.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface ICustomTarget
+                         * @property {string|null} [customTargetType] CustomTarget customTargetType
+                         */
+    
+                        /**
+                         * Constructs a new CustomTarget.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a CustomTarget.
+                         * @implements ICustomTarget
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.ICustomTarget=} [properties] Properties to set
+                         */
+                        function CustomTarget(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CustomTarget customTargetType.
+                         * @member {string} customTargetType
+                         * @memberof google.cloud.deploy.v1.CustomTarget
+                         * @instance
+                         */
+                        CustomTarget.prototype.customTargetType = "";
+    
+                        /**
+                         * Creates a new CustomTarget instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.CustomTarget
+                         * @static
+                         * @param {google.cloud.deploy.v1.ICustomTarget=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.CustomTarget} CustomTarget instance
+                         */
+                        CustomTarget.create = function create(properties) {
+                            return new CustomTarget(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CustomTarget message. Does not implicitly {@link google.cloud.deploy.v1.CustomTarget.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.CustomTarget
+                         * @static
+                         * @param {google.cloud.deploy.v1.ICustomTarget} message CustomTarget message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomTarget.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.customTargetType != null && Object.hasOwnProperty.call(message, "customTargetType"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.customTargetType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CustomTarget message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.CustomTarget.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.CustomTarget
+                         * @static
+                         * @param {google.cloud.deploy.v1.ICustomTarget} message CustomTarget message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomTarget.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CustomTarget message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.CustomTarget
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.CustomTarget} CustomTarget
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomTarget.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.CustomTarget();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.customTargetType = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CustomTarget message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.CustomTarget
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.CustomTarget} CustomTarget
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomTarget.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CustomTarget message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.CustomTarget
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CustomTarget.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.customTargetType != null && message.hasOwnProperty("customTargetType"))
+                                if (!$util.isString(message.customTargetType))
+                                    return "customTargetType: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CustomTarget message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.CustomTarget
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.CustomTarget} CustomTarget
+                         */
+                        CustomTarget.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.CustomTarget)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.CustomTarget();
+                            if (object.customTargetType != null)
+                                message.customTargetType = String(object.customTargetType);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CustomTarget message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.CustomTarget
+                         * @static
+                         * @param {google.cloud.deploy.v1.CustomTarget} message CustomTarget
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CustomTarget.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.customTargetType = "";
+                            if (message.customTargetType != null && message.hasOwnProperty("customTargetType"))
+                                object.customTargetType = message.customTargetType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CustomTarget to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.CustomTarget
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CustomTarget.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CustomTarget
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.CustomTarget
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CustomTarget.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.CustomTarget";
+                        };
+    
+                        return CustomTarget;
+                    })();
+    
                     v1.ListTargetsRequest = (function() {
     
                         /**
@@ -14493,6 +15015,3264 @@
                         return DeleteTargetRequest;
                     })();
     
+                    v1.CustomTargetType = (function() {
+    
+                        /**
+                         * Properties of a CustomTargetType.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface ICustomTargetType
+                         * @property {string|null} [name] CustomTargetType name
+                         * @property {string|null} [customTargetTypeId] CustomTargetType customTargetTypeId
+                         * @property {string|null} [uid] CustomTargetType uid
+                         * @property {string|null} [description] CustomTargetType description
+                         * @property {Object.<string,string>|null} [annotations] CustomTargetType annotations
+                         * @property {Object.<string,string>|null} [labels] CustomTargetType labels
+                         * @property {google.protobuf.ITimestamp|null} [createTime] CustomTargetType createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] CustomTargetType updateTime
+                         * @property {string|null} [etag] CustomTargetType etag
+                         * @property {google.cloud.deploy.v1.ICustomTargetSkaffoldActions|null} [customActions] CustomTargetType customActions
+                         */
+    
+                        /**
+                         * Constructs a new CustomTargetType.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a CustomTargetType.
+                         * @implements ICustomTargetType
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.ICustomTargetType=} [properties] Properties to set
+                         */
+                        function CustomTargetType(properties) {
+                            this.annotations = {};
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CustomTargetType name.
+                         * @member {string} name
+                         * @memberof google.cloud.deploy.v1.CustomTargetType
+                         * @instance
+                         */
+                        CustomTargetType.prototype.name = "";
+    
+                        /**
+                         * CustomTargetType customTargetTypeId.
+                         * @member {string} customTargetTypeId
+                         * @memberof google.cloud.deploy.v1.CustomTargetType
+                         * @instance
+                         */
+                        CustomTargetType.prototype.customTargetTypeId = "";
+    
+                        /**
+                         * CustomTargetType uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.deploy.v1.CustomTargetType
+                         * @instance
+                         */
+                        CustomTargetType.prototype.uid = "";
+    
+                        /**
+                         * CustomTargetType description.
+                         * @member {string} description
+                         * @memberof google.cloud.deploy.v1.CustomTargetType
+                         * @instance
+                         */
+                        CustomTargetType.prototype.description = "";
+    
+                        /**
+                         * CustomTargetType annotations.
+                         * @member {Object.<string,string>} annotations
+                         * @memberof google.cloud.deploy.v1.CustomTargetType
+                         * @instance
+                         */
+                        CustomTargetType.prototype.annotations = $util.emptyObject;
+    
+                        /**
+                         * CustomTargetType labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.deploy.v1.CustomTargetType
+                         * @instance
+                         */
+                        CustomTargetType.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * CustomTargetType createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.deploy.v1.CustomTargetType
+                         * @instance
+                         */
+                        CustomTargetType.prototype.createTime = null;
+    
+                        /**
+                         * CustomTargetType updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.deploy.v1.CustomTargetType
+                         * @instance
+                         */
+                        CustomTargetType.prototype.updateTime = null;
+    
+                        /**
+                         * CustomTargetType etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.deploy.v1.CustomTargetType
+                         * @instance
+                         */
+                        CustomTargetType.prototype.etag = "";
+    
+                        /**
+                         * CustomTargetType customActions.
+                         * @member {google.cloud.deploy.v1.ICustomTargetSkaffoldActions|null|undefined} customActions
+                         * @memberof google.cloud.deploy.v1.CustomTargetType
+                         * @instance
+                         */
+                        CustomTargetType.prototype.customActions = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * CustomTargetType definition.
+                         * @member {"customActions"|undefined} definition
+                         * @memberof google.cloud.deploy.v1.CustomTargetType
+                         * @instance
+                         */
+                        Object.defineProperty(CustomTargetType.prototype, "definition", {
+                            get: $util.oneOfGetter($oneOfFields = ["customActions"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new CustomTargetType instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.CustomTargetType
+                         * @static
+                         * @param {google.cloud.deploy.v1.ICustomTargetType=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.CustomTargetType} CustomTargetType instance
+                         */
+                        CustomTargetType.create = function create(properties) {
+                            return new CustomTargetType(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CustomTargetType message. Does not implicitly {@link google.cloud.deploy.v1.CustomTargetType.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.CustomTargetType
+                         * @static
+                         * @param {google.cloud.deploy.v1.ICustomTargetType} message CustomTargetType message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomTargetType.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.customTargetTypeId != null && Object.hasOwnProperty.call(message, "customTargetTypeId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.customTargetTypeId);
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.uid);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.description);
+                            if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                                for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.etag);
+                            if (message.customActions != null && Object.hasOwnProperty.call(message, "customActions"))
+                                $root.google.cloud.deploy.v1.CustomTargetSkaffoldActions.encode(message.customActions, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CustomTargetType message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.CustomTargetType.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.CustomTargetType
+                         * @static
+                         * @param {google.cloud.deploy.v1.ICustomTargetType} message CustomTargetType message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomTargetType.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CustomTargetType message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.CustomTargetType
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.CustomTargetType} CustomTargetType
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomTargetType.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.CustomTargetType(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.customTargetTypeId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        if (message.annotations === $util.emptyObject)
+                                            message.annotations = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.annotations[key] = value;
+                                        break;
+                                    }
+                                case 6: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 7: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.customActions = $root.google.cloud.deploy.v1.CustomTargetSkaffoldActions.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CustomTargetType message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.CustomTargetType
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.CustomTargetType} CustomTargetType
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomTargetType.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CustomTargetType message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.CustomTargetType
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CustomTargetType.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.customTargetTypeId != null && message.hasOwnProperty("customTargetTypeId"))
+                                if (!$util.isString(message.customTargetTypeId))
+                                    return "customTargetTypeId: string expected";
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                                if (!$util.isObject(message.annotations))
+                                    return "annotations: object expected";
+                                var key = Object.keys(message.annotations);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.annotations[key[i]]))
+                                        return "annotations: string{k:string} expected";
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            if (message.customActions != null && message.hasOwnProperty("customActions")) {
+                                properties.definition = 1;
+                                {
+                                    var error = $root.google.cloud.deploy.v1.CustomTargetSkaffoldActions.verify(message.customActions);
+                                    if (error)
+                                        return "customActions." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CustomTargetType message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.CustomTargetType
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.CustomTargetType} CustomTargetType
+                         */
+                        CustomTargetType.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.CustomTargetType)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.CustomTargetType();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.customTargetTypeId != null)
+                                message.customTargetTypeId = String(object.customTargetTypeId);
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.annotations) {
+                                if (typeof object.annotations !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.CustomTargetType.annotations: object expected");
+                                message.annotations = {};
+                                for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
+                                    message.annotations[keys[i]] = String(object.annotations[keys[i]]);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.CustomTargetType.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.CustomTargetType.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.CustomTargetType.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            if (object.customActions != null) {
+                                if (typeof object.customActions !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.CustomTargetType.customActions: object expected");
+                                message.customActions = $root.google.cloud.deploy.v1.CustomTargetSkaffoldActions.fromObject(object.customActions);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CustomTargetType message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.CustomTargetType
+                         * @static
+                         * @param {google.cloud.deploy.v1.CustomTargetType} message CustomTargetType
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CustomTargetType.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults) {
+                                object.annotations = {};
+                                object.labels = {};
+                            }
+                            if (options.defaults) {
+                                object.name = "";
+                                object.customTargetTypeId = "";
+                                object.uid = "";
+                                object.description = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.etag = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.customTargetTypeId != null && message.hasOwnProperty("customTargetTypeId"))
+                                object.customTargetTypeId = message.customTargetTypeId;
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            var keys2;
+                            if (message.annotations && (keys2 = Object.keys(message.annotations)).length) {
+                                object.annotations = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.annotations[keys2[j]] = message.annotations[keys2[j]];
+                            }
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            if (message.customActions != null && message.hasOwnProperty("customActions")) {
+                                object.customActions = $root.google.cloud.deploy.v1.CustomTargetSkaffoldActions.toObject(message.customActions, options);
+                                if (options.oneofs)
+                                    object.definition = "customActions";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CustomTargetType to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.CustomTargetType
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CustomTargetType.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CustomTargetType
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.CustomTargetType
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CustomTargetType.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.CustomTargetType";
+                        };
+    
+                        return CustomTargetType;
+                    })();
+    
+                    v1.CustomTargetSkaffoldActions = (function() {
+    
+                        /**
+                         * Properties of a CustomTargetSkaffoldActions.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface ICustomTargetSkaffoldActions
+                         * @property {string|null} [renderAction] CustomTargetSkaffoldActions renderAction
+                         * @property {string|null} [deployAction] CustomTargetSkaffoldActions deployAction
+                         * @property {Array.<google.cloud.deploy.v1.ISkaffoldModules>|null} [includeSkaffoldModules] CustomTargetSkaffoldActions includeSkaffoldModules
+                         */
+    
+                        /**
+                         * Constructs a new CustomTargetSkaffoldActions.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a CustomTargetSkaffoldActions.
+                         * @implements ICustomTargetSkaffoldActions
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.ICustomTargetSkaffoldActions=} [properties] Properties to set
+                         */
+                        function CustomTargetSkaffoldActions(properties) {
+                            this.includeSkaffoldModules = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CustomTargetSkaffoldActions renderAction.
+                         * @member {string} renderAction
+                         * @memberof google.cloud.deploy.v1.CustomTargetSkaffoldActions
+                         * @instance
+                         */
+                        CustomTargetSkaffoldActions.prototype.renderAction = "";
+    
+                        /**
+                         * CustomTargetSkaffoldActions deployAction.
+                         * @member {string} deployAction
+                         * @memberof google.cloud.deploy.v1.CustomTargetSkaffoldActions
+                         * @instance
+                         */
+                        CustomTargetSkaffoldActions.prototype.deployAction = "";
+    
+                        /**
+                         * CustomTargetSkaffoldActions includeSkaffoldModules.
+                         * @member {Array.<google.cloud.deploy.v1.ISkaffoldModules>} includeSkaffoldModules
+                         * @memberof google.cloud.deploy.v1.CustomTargetSkaffoldActions
+                         * @instance
+                         */
+                        CustomTargetSkaffoldActions.prototype.includeSkaffoldModules = $util.emptyArray;
+    
+                        /**
+                         * Creates a new CustomTargetSkaffoldActions instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.CustomTargetSkaffoldActions
+                         * @static
+                         * @param {google.cloud.deploy.v1.ICustomTargetSkaffoldActions=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.CustomTargetSkaffoldActions} CustomTargetSkaffoldActions instance
+                         */
+                        CustomTargetSkaffoldActions.create = function create(properties) {
+                            return new CustomTargetSkaffoldActions(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CustomTargetSkaffoldActions message. Does not implicitly {@link google.cloud.deploy.v1.CustomTargetSkaffoldActions.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.CustomTargetSkaffoldActions
+                         * @static
+                         * @param {google.cloud.deploy.v1.ICustomTargetSkaffoldActions} message CustomTargetSkaffoldActions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomTargetSkaffoldActions.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.renderAction != null && Object.hasOwnProperty.call(message, "renderAction"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.renderAction);
+                            if (message.deployAction != null && Object.hasOwnProperty.call(message, "deployAction"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.deployAction);
+                            if (message.includeSkaffoldModules != null && message.includeSkaffoldModules.length)
+                                for (var i = 0; i < message.includeSkaffoldModules.length; ++i)
+                                    $root.google.cloud.deploy.v1.SkaffoldModules.encode(message.includeSkaffoldModules[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CustomTargetSkaffoldActions message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.CustomTargetSkaffoldActions.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.CustomTargetSkaffoldActions
+                         * @static
+                         * @param {google.cloud.deploy.v1.ICustomTargetSkaffoldActions} message CustomTargetSkaffoldActions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomTargetSkaffoldActions.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CustomTargetSkaffoldActions message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.CustomTargetSkaffoldActions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.CustomTargetSkaffoldActions} CustomTargetSkaffoldActions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomTargetSkaffoldActions.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.CustomTargetSkaffoldActions();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.renderAction = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.deployAction = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.includeSkaffoldModules && message.includeSkaffoldModules.length))
+                                            message.includeSkaffoldModules = [];
+                                        message.includeSkaffoldModules.push($root.google.cloud.deploy.v1.SkaffoldModules.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CustomTargetSkaffoldActions message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.CustomTargetSkaffoldActions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.CustomTargetSkaffoldActions} CustomTargetSkaffoldActions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomTargetSkaffoldActions.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CustomTargetSkaffoldActions message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.CustomTargetSkaffoldActions
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CustomTargetSkaffoldActions.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.renderAction != null && message.hasOwnProperty("renderAction"))
+                                if (!$util.isString(message.renderAction))
+                                    return "renderAction: string expected";
+                            if (message.deployAction != null && message.hasOwnProperty("deployAction"))
+                                if (!$util.isString(message.deployAction))
+                                    return "deployAction: string expected";
+                            if (message.includeSkaffoldModules != null && message.hasOwnProperty("includeSkaffoldModules")) {
+                                if (!Array.isArray(message.includeSkaffoldModules))
+                                    return "includeSkaffoldModules: array expected";
+                                for (var i = 0; i < message.includeSkaffoldModules.length; ++i) {
+                                    var error = $root.google.cloud.deploy.v1.SkaffoldModules.verify(message.includeSkaffoldModules[i]);
+                                    if (error)
+                                        return "includeSkaffoldModules." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CustomTargetSkaffoldActions message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.CustomTargetSkaffoldActions
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.CustomTargetSkaffoldActions} CustomTargetSkaffoldActions
+                         */
+                        CustomTargetSkaffoldActions.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.CustomTargetSkaffoldActions)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.CustomTargetSkaffoldActions();
+                            if (object.renderAction != null)
+                                message.renderAction = String(object.renderAction);
+                            if (object.deployAction != null)
+                                message.deployAction = String(object.deployAction);
+                            if (object.includeSkaffoldModules) {
+                                if (!Array.isArray(object.includeSkaffoldModules))
+                                    throw TypeError(".google.cloud.deploy.v1.CustomTargetSkaffoldActions.includeSkaffoldModules: array expected");
+                                message.includeSkaffoldModules = [];
+                                for (var i = 0; i < object.includeSkaffoldModules.length; ++i) {
+                                    if (typeof object.includeSkaffoldModules[i] !== "object")
+                                        throw TypeError(".google.cloud.deploy.v1.CustomTargetSkaffoldActions.includeSkaffoldModules: object expected");
+                                    message.includeSkaffoldModules[i] = $root.google.cloud.deploy.v1.SkaffoldModules.fromObject(object.includeSkaffoldModules[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CustomTargetSkaffoldActions message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.CustomTargetSkaffoldActions
+                         * @static
+                         * @param {google.cloud.deploy.v1.CustomTargetSkaffoldActions} message CustomTargetSkaffoldActions
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CustomTargetSkaffoldActions.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.includeSkaffoldModules = [];
+                            if (options.defaults) {
+                                object.renderAction = "";
+                                object.deployAction = "";
+                            }
+                            if (message.renderAction != null && message.hasOwnProperty("renderAction"))
+                                object.renderAction = message.renderAction;
+                            if (message.deployAction != null && message.hasOwnProperty("deployAction"))
+                                object.deployAction = message.deployAction;
+                            if (message.includeSkaffoldModules && message.includeSkaffoldModules.length) {
+                                object.includeSkaffoldModules = [];
+                                for (var j = 0; j < message.includeSkaffoldModules.length; ++j)
+                                    object.includeSkaffoldModules[j] = $root.google.cloud.deploy.v1.SkaffoldModules.toObject(message.includeSkaffoldModules[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CustomTargetSkaffoldActions to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.CustomTargetSkaffoldActions
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CustomTargetSkaffoldActions.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CustomTargetSkaffoldActions
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.CustomTargetSkaffoldActions
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CustomTargetSkaffoldActions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.CustomTargetSkaffoldActions";
+                        };
+    
+                        return CustomTargetSkaffoldActions;
+                    })();
+    
+                    v1.SkaffoldModules = (function() {
+    
+                        /**
+                         * Properties of a SkaffoldModules.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface ISkaffoldModules
+                         * @property {Array.<string>|null} [configs] SkaffoldModules configs
+                         * @property {google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGitSource|null} [git] SkaffoldModules git
+                         * @property {google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGCSSource|null} [googleCloudStorage] SkaffoldModules googleCloudStorage
+                         */
+    
+                        /**
+                         * Constructs a new SkaffoldModules.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a SkaffoldModules.
+                         * @implements ISkaffoldModules
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.ISkaffoldModules=} [properties] Properties to set
+                         */
+                        function SkaffoldModules(properties) {
+                            this.configs = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SkaffoldModules configs.
+                         * @member {Array.<string>} configs
+                         * @memberof google.cloud.deploy.v1.SkaffoldModules
+                         * @instance
+                         */
+                        SkaffoldModules.prototype.configs = $util.emptyArray;
+    
+                        /**
+                         * SkaffoldModules git.
+                         * @member {google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGitSource|null|undefined} git
+                         * @memberof google.cloud.deploy.v1.SkaffoldModules
+                         * @instance
+                         */
+                        SkaffoldModules.prototype.git = null;
+    
+                        /**
+                         * SkaffoldModules googleCloudStorage.
+                         * @member {google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGCSSource|null|undefined} googleCloudStorage
+                         * @memberof google.cloud.deploy.v1.SkaffoldModules
+                         * @instance
+                         */
+                        SkaffoldModules.prototype.googleCloudStorage = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * SkaffoldModules source.
+                         * @member {"git"|"googleCloudStorage"|undefined} source
+                         * @memberof google.cloud.deploy.v1.SkaffoldModules
+                         * @instance
+                         */
+                        Object.defineProperty(SkaffoldModules.prototype, "source", {
+                            get: $util.oneOfGetter($oneOfFields = ["git", "googleCloudStorage"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new SkaffoldModules instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.SkaffoldModules
+                         * @static
+                         * @param {google.cloud.deploy.v1.ISkaffoldModules=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.SkaffoldModules} SkaffoldModules instance
+                         */
+                        SkaffoldModules.create = function create(properties) {
+                            return new SkaffoldModules(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SkaffoldModules message. Does not implicitly {@link google.cloud.deploy.v1.SkaffoldModules.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.SkaffoldModules
+                         * @static
+                         * @param {google.cloud.deploy.v1.ISkaffoldModules} message SkaffoldModules message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SkaffoldModules.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.configs != null && message.configs.length)
+                                for (var i = 0; i < message.configs.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.configs[i]);
+                            if (message.git != null && Object.hasOwnProperty.call(message, "git"))
+                                $root.google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource.encode(message.git, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.googleCloudStorage != null && Object.hasOwnProperty.call(message, "googleCloudStorage"))
+                                $root.google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource.encode(message.googleCloudStorage, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SkaffoldModules message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.SkaffoldModules.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.SkaffoldModules
+                         * @static
+                         * @param {google.cloud.deploy.v1.ISkaffoldModules} message SkaffoldModules message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SkaffoldModules.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SkaffoldModules message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.SkaffoldModules
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.SkaffoldModules} SkaffoldModules
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SkaffoldModules.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.SkaffoldModules();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.configs && message.configs.length))
+                                            message.configs = [];
+                                        message.configs.push(reader.string());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.git = $root.google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.googleCloudStorage = $root.google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SkaffoldModules message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.SkaffoldModules
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.SkaffoldModules} SkaffoldModules
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SkaffoldModules.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SkaffoldModules message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.SkaffoldModules
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SkaffoldModules.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.configs != null && message.hasOwnProperty("configs")) {
+                                if (!Array.isArray(message.configs))
+                                    return "configs: array expected";
+                                for (var i = 0; i < message.configs.length; ++i)
+                                    if (!$util.isString(message.configs[i]))
+                                        return "configs: string[] expected";
+                            }
+                            if (message.git != null && message.hasOwnProperty("git")) {
+                                properties.source = 1;
+                                {
+                                    var error = $root.google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource.verify(message.git);
+                                    if (error)
+                                        return "git." + error;
+                                }
+                            }
+                            if (message.googleCloudStorage != null && message.hasOwnProperty("googleCloudStorage")) {
+                                if (properties.source === 1)
+                                    return "source: multiple values";
+                                properties.source = 1;
+                                {
+                                    var error = $root.google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource.verify(message.googleCloudStorage);
+                                    if (error)
+                                        return "googleCloudStorage." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SkaffoldModules message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.SkaffoldModules
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.SkaffoldModules} SkaffoldModules
+                         */
+                        SkaffoldModules.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.SkaffoldModules)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.SkaffoldModules();
+                            if (object.configs) {
+                                if (!Array.isArray(object.configs))
+                                    throw TypeError(".google.cloud.deploy.v1.SkaffoldModules.configs: array expected");
+                                message.configs = [];
+                                for (var i = 0; i < object.configs.length; ++i)
+                                    message.configs[i] = String(object.configs[i]);
+                            }
+                            if (object.git != null) {
+                                if (typeof object.git !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.SkaffoldModules.git: object expected");
+                                message.git = $root.google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource.fromObject(object.git);
+                            }
+                            if (object.googleCloudStorage != null) {
+                                if (typeof object.googleCloudStorage !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.SkaffoldModules.googleCloudStorage: object expected");
+                                message.googleCloudStorage = $root.google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource.fromObject(object.googleCloudStorage);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SkaffoldModules message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.SkaffoldModules
+                         * @static
+                         * @param {google.cloud.deploy.v1.SkaffoldModules} message SkaffoldModules
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SkaffoldModules.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.configs = [];
+                            if (message.configs && message.configs.length) {
+                                object.configs = [];
+                                for (var j = 0; j < message.configs.length; ++j)
+                                    object.configs[j] = message.configs[j];
+                            }
+                            if (message.git != null && message.hasOwnProperty("git")) {
+                                object.git = $root.google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource.toObject(message.git, options);
+                                if (options.oneofs)
+                                    object.source = "git";
+                            }
+                            if (message.googleCloudStorage != null && message.hasOwnProperty("googleCloudStorage")) {
+                                object.googleCloudStorage = $root.google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource.toObject(message.googleCloudStorage, options);
+                                if (options.oneofs)
+                                    object.source = "googleCloudStorage";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SkaffoldModules to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.SkaffoldModules
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SkaffoldModules.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SkaffoldModules
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.SkaffoldModules
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SkaffoldModules.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.SkaffoldModules";
+                        };
+    
+                        SkaffoldModules.SkaffoldGitSource = (function() {
+    
+                            /**
+                             * Properties of a SkaffoldGitSource.
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules
+                             * @interface ISkaffoldGitSource
+                             * @property {string|null} [repo] SkaffoldGitSource repo
+                             * @property {string|null} [path] SkaffoldGitSource path
+                             * @property {string|null} [ref] SkaffoldGitSource ref
+                             */
+    
+                            /**
+                             * Constructs a new SkaffoldGitSource.
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules
+                             * @classdesc Represents a SkaffoldGitSource.
+                             * @implements ISkaffoldGitSource
+                             * @constructor
+                             * @param {google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGitSource=} [properties] Properties to set
+                             */
+                            function SkaffoldGitSource(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SkaffoldGitSource repo.
+                             * @member {string} repo
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource
+                             * @instance
+                             */
+                            SkaffoldGitSource.prototype.repo = "";
+    
+                            /**
+                             * SkaffoldGitSource path.
+                             * @member {string} path
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource
+                             * @instance
+                             */
+                            SkaffoldGitSource.prototype.path = "";
+    
+                            /**
+                             * SkaffoldGitSource ref.
+                             * @member {string} ref
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource
+                             * @instance
+                             */
+                            SkaffoldGitSource.prototype.ref = "";
+    
+                            /**
+                             * Creates a new SkaffoldGitSource instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource
+                             * @static
+                             * @param {google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGitSource=} [properties] Properties to set
+                             * @returns {google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource} SkaffoldGitSource instance
+                             */
+                            SkaffoldGitSource.create = function create(properties) {
+                                return new SkaffoldGitSource(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SkaffoldGitSource message. Does not implicitly {@link google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource
+                             * @static
+                             * @param {google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGitSource} message SkaffoldGitSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SkaffoldGitSource.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.repo != null && Object.hasOwnProperty.call(message, "repo"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.repo);
+                                if (message.path != null && Object.hasOwnProperty.call(message, "path"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.path);
+                                if (message.ref != null && Object.hasOwnProperty.call(message, "ref"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.ref);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SkaffoldGitSource message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource
+                             * @static
+                             * @param {google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGitSource} message SkaffoldGitSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SkaffoldGitSource.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SkaffoldGitSource message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource} SkaffoldGitSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SkaffoldGitSource.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.repo = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.path = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.ref = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SkaffoldGitSource message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource} SkaffoldGitSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SkaffoldGitSource.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SkaffoldGitSource message.
+                             * @function verify
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SkaffoldGitSource.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.repo != null && message.hasOwnProperty("repo"))
+                                    if (!$util.isString(message.repo))
+                                        return "repo: string expected";
+                                if (message.path != null && message.hasOwnProperty("path"))
+                                    if (!$util.isString(message.path))
+                                        return "path: string expected";
+                                if (message.ref != null && message.hasOwnProperty("ref"))
+                                    if (!$util.isString(message.ref))
+                                        return "ref: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SkaffoldGitSource message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource} SkaffoldGitSource
+                             */
+                            SkaffoldGitSource.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource)
+                                    return object;
+                                var message = new $root.google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource();
+                                if (object.repo != null)
+                                    message.repo = String(object.repo);
+                                if (object.path != null)
+                                    message.path = String(object.path);
+                                if (object.ref != null)
+                                    message.ref = String(object.ref);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SkaffoldGitSource message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource
+                             * @static
+                             * @param {google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource} message SkaffoldGitSource
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SkaffoldGitSource.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.repo = "";
+                                    object.path = "";
+                                    object.ref = "";
+                                }
+                                if (message.repo != null && message.hasOwnProperty("repo"))
+                                    object.repo = message.repo;
+                                if (message.path != null && message.hasOwnProperty("path"))
+                                    object.path = message.path;
+                                if (message.ref != null && message.hasOwnProperty("ref"))
+                                    object.ref = message.ref;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SkaffoldGitSource to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SkaffoldGitSource.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SkaffoldGitSource
+                             * @function getTypeUrl
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SkaffoldGitSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource";
+                            };
+    
+                            return SkaffoldGitSource;
+                        })();
+    
+                        SkaffoldModules.SkaffoldGCSSource = (function() {
+    
+                            /**
+                             * Properties of a SkaffoldGCSSource.
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules
+                             * @interface ISkaffoldGCSSource
+                             * @property {string|null} [source] SkaffoldGCSSource source
+                             * @property {string|null} [path] SkaffoldGCSSource path
+                             */
+    
+                            /**
+                             * Constructs a new SkaffoldGCSSource.
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules
+                             * @classdesc Represents a SkaffoldGCSSource.
+                             * @implements ISkaffoldGCSSource
+                             * @constructor
+                             * @param {google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGCSSource=} [properties] Properties to set
+                             */
+                            function SkaffoldGCSSource(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SkaffoldGCSSource source.
+                             * @member {string} source
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource
+                             * @instance
+                             */
+                            SkaffoldGCSSource.prototype.source = "";
+    
+                            /**
+                             * SkaffoldGCSSource path.
+                             * @member {string} path
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource
+                             * @instance
+                             */
+                            SkaffoldGCSSource.prototype.path = "";
+    
+                            /**
+                             * Creates a new SkaffoldGCSSource instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource
+                             * @static
+                             * @param {google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGCSSource=} [properties] Properties to set
+                             * @returns {google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource} SkaffoldGCSSource instance
+                             */
+                            SkaffoldGCSSource.create = function create(properties) {
+                                return new SkaffoldGCSSource(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SkaffoldGCSSource message. Does not implicitly {@link google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource
+                             * @static
+                             * @param {google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGCSSource} message SkaffoldGCSSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SkaffoldGCSSource.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.source != null && Object.hasOwnProperty.call(message, "source"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.source);
+                                if (message.path != null && Object.hasOwnProperty.call(message, "path"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.path);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SkaffoldGCSSource message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource
+                             * @static
+                             * @param {google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGCSSource} message SkaffoldGCSSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SkaffoldGCSSource.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SkaffoldGCSSource message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource} SkaffoldGCSSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SkaffoldGCSSource.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.source = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.path = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SkaffoldGCSSource message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource} SkaffoldGCSSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SkaffoldGCSSource.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SkaffoldGCSSource message.
+                             * @function verify
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SkaffoldGCSSource.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.source != null && message.hasOwnProperty("source"))
+                                    if (!$util.isString(message.source))
+                                        return "source: string expected";
+                                if (message.path != null && message.hasOwnProperty("path"))
+                                    if (!$util.isString(message.path))
+                                        return "path: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SkaffoldGCSSource message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource} SkaffoldGCSSource
+                             */
+                            SkaffoldGCSSource.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource)
+                                    return object;
+                                var message = new $root.google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource();
+                                if (object.source != null)
+                                    message.source = String(object.source);
+                                if (object.path != null)
+                                    message.path = String(object.path);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SkaffoldGCSSource message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource
+                             * @static
+                             * @param {google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource} message SkaffoldGCSSource
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SkaffoldGCSSource.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.source = "";
+                                    object.path = "";
+                                }
+                                if (message.source != null && message.hasOwnProperty("source"))
+                                    object.source = message.source;
+                                if (message.path != null && message.hasOwnProperty("path"))
+                                    object.path = message.path;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SkaffoldGCSSource to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SkaffoldGCSSource.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SkaffoldGCSSource
+                             * @function getTypeUrl
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SkaffoldGCSSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource";
+                            };
+    
+                            return SkaffoldGCSSource;
+                        })();
+    
+                        return SkaffoldModules;
+                    })();
+    
+                    v1.ListCustomTargetTypesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListCustomTargetTypesRequest.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IListCustomTargetTypesRequest
+                         * @property {string|null} [parent] ListCustomTargetTypesRequest parent
+                         * @property {number|null} [pageSize] ListCustomTargetTypesRequest pageSize
+                         * @property {string|null} [pageToken] ListCustomTargetTypesRequest pageToken
+                         * @property {string|null} [filter] ListCustomTargetTypesRequest filter
+                         * @property {string|null} [orderBy] ListCustomTargetTypesRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListCustomTargetTypesRequest.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a ListCustomTargetTypesRequest.
+                         * @implements IListCustomTargetTypesRequest
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IListCustomTargetTypesRequest=} [properties] Properties to set
+                         */
+                        function ListCustomTargetTypesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListCustomTargetTypesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.deploy.v1.ListCustomTargetTypesRequest
+                         * @instance
+                         */
+                        ListCustomTargetTypesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListCustomTargetTypesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.deploy.v1.ListCustomTargetTypesRequest
+                         * @instance
+                         */
+                        ListCustomTargetTypesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListCustomTargetTypesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.deploy.v1.ListCustomTargetTypesRequest
+                         * @instance
+                         */
+                        ListCustomTargetTypesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListCustomTargetTypesRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.deploy.v1.ListCustomTargetTypesRequest
+                         * @instance
+                         */
+                        ListCustomTargetTypesRequest.prototype.filter = "";
+    
+                        /**
+                         * ListCustomTargetTypesRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.deploy.v1.ListCustomTargetTypesRequest
+                         * @instance
+                         */
+                        ListCustomTargetTypesRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListCustomTargetTypesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.ListCustomTargetTypesRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IListCustomTargetTypesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.ListCustomTargetTypesRequest} ListCustomTargetTypesRequest instance
+                         */
+                        ListCustomTargetTypesRequest.create = function create(properties) {
+                            return new ListCustomTargetTypesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListCustomTargetTypesRequest message. Does not implicitly {@link google.cloud.deploy.v1.ListCustomTargetTypesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.ListCustomTargetTypesRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IListCustomTargetTypesRequest} message ListCustomTargetTypesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCustomTargetTypesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListCustomTargetTypesRequest message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.ListCustomTargetTypesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.ListCustomTargetTypesRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IListCustomTargetTypesRequest} message ListCustomTargetTypesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCustomTargetTypesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListCustomTargetTypesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.ListCustomTargetTypesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.ListCustomTargetTypesRequest} ListCustomTargetTypesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCustomTargetTypesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.ListCustomTargetTypesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListCustomTargetTypesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.ListCustomTargetTypesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.ListCustomTargetTypesRequest} ListCustomTargetTypesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCustomTargetTypesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListCustomTargetTypesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.ListCustomTargetTypesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListCustomTargetTypesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListCustomTargetTypesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.ListCustomTargetTypesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.ListCustomTargetTypesRequest} ListCustomTargetTypesRequest
+                         */
+                        ListCustomTargetTypesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.ListCustomTargetTypesRequest)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.ListCustomTargetTypesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListCustomTargetTypesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.ListCustomTargetTypesRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.ListCustomTargetTypesRequest} message ListCustomTargetTypesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListCustomTargetTypesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListCustomTargetTypesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.ListCustomTargetTypesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListCustomTargetTypesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListCustomTargetTypesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.ListCustomTargetTypesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListCustomTargetTypesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.ListCustomTargetTypesRequest";
+                        };
+    
+                        return ListCustomTargetTypesRequest;
+                    })();
+    
+                    v1.ListCustomTargetTypesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListCustomTargetTypesResponse.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IListCustomTargetTypesResponse
+                         * @property {Array.<google.cloud.deploy.v1.ICustomTargetType>|null} [customTargetTypes] ListCustomTargetTypesResponse customTargetTypes
+                         * @property {string|null} [nextPageToken] ListCustomTargetTypesResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListCustomTargetTypesResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListCustomTargetTypesResponse.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a ListCustomTargetTypesResponse.
+                         * @implements IListCustomTargetTypesResponse
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IListCustomTargetTypesResponse=} [properties] Properties to set
+                         */
+                        function ListCustomTargetTypesResponse(properties) {
+                            this.customTargetTypes = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListCustomTargetTypesResponse customTargetTypes.
+                         * @member {Array.<google.cloud.deploy.v1.ICustomTargetType>} customTargetTypes
+                         * @memberof google.cloud.deploy.v1.ListCustomTargetTypesResponse
+                         * @instance
+                         */
+                        ListCustomTargetTypesResponse.prototype.customTargetTypes = $util.emptyArray;
+    
+                        /**
+                         * ListCustomTargetTypesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.deploy.v1.ListCustomTargetTypesResponse
+                         * @instance
+                         */
+                        ListCustomTargetTypesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListCustomTargetTypesResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.deploy.v1.ListCustomTargetTypesResponse
+                         * @instance
+                         */
+                        ListCustomTargetTypesResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListCustomTargetTypesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.ListCustomTargetTypesResponse
+                         * @static
+                         * @param {google.cloud.deploy.v1.IListCustomTargetTypesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.ListCustomTargetTypesResponse} ListCustomTargetTypesResponse instance
+                         */
+                        ListCustomTargetTypesResponse.create = function create(properties) {
+                            return new ListCustomTargetTypesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListCustomTargetTypesResponse message. Does not implicitly {@link google.cloud.deploy.v1.ListCustomTargetTypesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.ListCustomTargetTypesResponse
+                         * @static
+                         * @param {google.cloud.deploy.v1.IListCustomTargetTypesResponse} message ListCustomTargetTypesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCustomTargetTypesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.customTargetTypes != null && message.customTargetTypes.length)
+                                for (var i = 0; i < message.customTargetTypes.length; ++i)
+                                    $root.google.cloud.deploy.v1.CustomTargetType.encode(message.customTargetTypes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListCustomTargetTypesResponse message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.ListCustomTargetTypesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.ListCustomTargetTypesResponse
+                         * @static
+                         * @param {google.cloud.deploy.v1.IListCustomTargetTypesResponse} message ListCustomTargetTypesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCustomTargetTypesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListCustomTargetTypesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.ListCustomTargetTypesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.ListCustomTargetTypesResponse} ListCustomTargetTypesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCustomTargetTypesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.ListCustomTargetTypesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.customTargetTypes && message.customTargetTypes.length))
+                                            message.customTargetTypes = [];
+                                        message.customTargetTypes.push($root.google.cloud.deploy.v1.CustomTargetType.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListCustomTargetTypesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.ListCustomTargetTypesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.ListCustomTargetTypesResponse} ListCustomTargetTypesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCustomTargetTypesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListCustomTargetTypesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.ListCustomTargetTypesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListCustomTargetTypesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.customTargetTypes != null && message.hasOwnProperty("customTargetTypes")) {
+                                if (!Array.isArray(message.customTargetTypes))
+                                    return "customTargetTypes: array expected";
+                                for (var i = 0; i < message.customTargetTypes.length; ++i) {
+                                    var error = $root.google.cloud.deploy.v1.CustomTargetType.verify(message.customTargetTypes[i]);
+                                    if (error)
+                                        return "customTargetTypes." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListCustomTargetTypesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.ListCustomTargetTypesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.ListCustomTargetTypesResponse} ListCustomTargetTypesResponse
+                         */
+                        ListCustomTargetTypesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.ListCustomTargetTypesResponse)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.ListCustomTargetTypesResponse();
+                            if (object.customTargetTypes) {
+                                if (!Array.isArray(object.customTargetTypes))
+                                    throw TypeError(".google.cloud.deploy.v1.ListCustomTargetTypesResponse.customTargetTypes: array expected");
+                                message.customTargetTypes = [];
+                                for (var i = 0; i < object.customTargetTypes.length; ++i) {
+                                    if (typeof object.customTargetTypes[i] !== "object")
+                                        throw TypeError(".google.cloud.deploy.v1.ListCustomTargetTypesResponse.customTargetTypes: object expected");
+                                    message.customTargetTypes[i] = $root.google.cloud.deploy.v1.CustomTargetType.fromObject(object.customTargetTypes[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.deploy.v1.ListCustomTargetTypesResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListCustomTargetTypesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.ListCustomTargetTypesResponse
+                         * @static
+                         * @param {google.cloud.deploy.v1.ListCustomTargetTypesResponse} message ListCustomTargetTypesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListCustomTargetTypesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.customTargetTypes = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.customTargetTypes && message.customTargetTypes.length) {
+                                object.customTargetTypes = [];
+                                for (var j = 0; j < message.customTargetTypes.length; ++j)
+                                    object.customTargetTypes[j] = $root.google.cloud.deploy.v1.CustomTargetType.toObject(message.customTargetTypes[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListCustomTargetTypesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.ListCustomTargetTypesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListCustomTargetTypesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListCustomTargetTypesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.ListCustomTargetTypesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListCustomTargetTypesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.ListCustomTargetTypesResponse";
+                        };
+    
+                        return ListCustomTargetTypesResponse;
+                    })();
+    
+                    v1.GetCustomTargetTypeRequest = (function() {
+    
+                        /**
+                         * Properties of a GetCustomTargetTypeRequest.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IGetCustomTargetTypeRequest
+                         * @property {string|null} [name] GetCustomTargetTypeRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetCustomTargetTypeRequest.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a GetCustomTargetTypeRequest.
+                         * @implements IGetCustomTargetTypeRequest
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IGetCustomTargetTypeRequest=} [properties] Properties to set
+                         */
+                        function GetCustomTargetTypeRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetCustomTargetTypeRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.deploy.v1.GetCustomTargetTypeRequest
+                         * @instance
+                         */
+                        GetCustomTargetTypeRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetCustomTargetTypeRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.GetCustomTargetTypeRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IGetCustomTargetTypeRequest=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.GetCustomTargetTypeRequest} GetCustomTargetTypeRequest instance
+                         */
+                        GetCustomTargetTypeRequest.create = function create(properties) {
+                            return new GetCustomTargetTypeRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetCustomTargetTypeRequest message. Does not implicitly {@link google.cloud.deploy.v1.GetCustomTargetTypeRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.GetCustomTargetTypeRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IGetCustomTargetTypeRequest} message GetCustomTargetTypeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetCustomTargetTypeRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetCustomTargetTypeRequest message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.GetCustomTargetTypeRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.GetCustomTargetTypeRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IGetCustomTargetTypeRequest} message GetCustomTargetTypeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetCustomTargetTypeRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetCustomTargetTypeRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.GetCustomTargetTypeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.GetCustomTargetTypeRequest} GetCustomTargetTypeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetCustomTargetTypeRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.GetCustomTargetTypeRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetCustomTargetTypeRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.GetCustomTargetTypeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.GetCustomTargetTypeRequest} GetCustomTargetTypeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetCustomTargetTypeRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetCustomTargetTypeRequest message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.GetCustomTargetTypeRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetCustomTargetTypeRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetCustomTargetTypeRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.GetCustomTargetTypeRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.GetCustomTargetTypeRequest} GetCustomTargetTypeRequest
+                         */
+                        GetCustomTargetTypeRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.GetCustomTargetTypeRequest)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.GetCustomTargetTypeRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetCustomTargetTypeRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.GetCustomTargetTypeRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.GetCustomTargetTypeRequest} message GetCustomTargetTypeRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetCustomTargetTypeRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetCustomTargetTypeRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.GetCustomTargetTypeRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetCustomTargetTypeRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetCustomTargetTypeRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.GetCustomTargetTypeRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetCustomTargetTypeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.GetCustomTargetTypeRequest";
+                        };
+    
+                        return GetCustomTargetTypeRequest;
+                    })();
+    
+                    v1.CreateCustomTargetTypeRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateCustomTargetTypeRequest.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface ICreateCustomTargetTypeRequest
+                         * @property {string|null} [parent] CreateCustomTargetTypeRequest parent
+                         * @property {string|null} [customTargetTypeId] CreateCustomTargetTypeRequest customTargetTypeId
+                         * @property {google.cloud.deploy.v1.ICustomTargetType|null} [customTargetType] CreateCustomTargetTypeRequest customTargetType
+                         * @property {string|null} [requestId] CreateCustomTargetTypeRequest requestId
+                         * @property {boolean|null} [validateOnly] CreateCustomTargetTypeRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new CreateCustomTargetTypeRequest.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a CreateCustomTargetTypeRequest.
+                         * @implements ICreateCustomTargetTypeRequest
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.ICreateCustomTargetTypeRequest=} [properties] Properties to set
+                         */
+                        function CreateCustomTargetTypeRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateCustomTargetTypeRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.deploy.v1.CreateCustomTargetTypeRequest
+                         * @instance
+                         */
+                        CreateCustomTargetTypeRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateCustomTargetTypeRequest customTargetTypeId.
+                         * @member {string} customTargetTypeId
+                         * @memberof google.cloud.deploy.v1.CreateCustomTargetTypeRequest
+                         * @instance
+                         */
+                        CreateCustomTargetTypeRequest.prototype.customTargetTypeId = "";
+    
+                        /**
+                         * CreateCustomTargetTypeRequest customTargetType.
+                         * @member {google.cloud.deploy.v1.ICustomTargetType|null|undefined} customTargetType
+                         * @memberof google.cloud.deploy.v1.CreateCustomTargetTypeRequest
+                         * @instance
+                         */
+                        CreateCustomTargetTypeRequest.prototype.customTargetType = null;
+    
+                        /**
+                         * CreateCustomTargetTypeRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.deploy.v1.CreateCustomTargetTypeRequest
+                         * @instance
+                         */
+                        CreateCustomTargetTypeRequest.prototype.requestId = "";
+    
+                        /**
+                         * CreateCustomTargetTypeRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.deploy.v1.CreateCustomTargetTypeRequest
+                         * @instance
+                         */
+                        CreateCustomTargetTypeRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new CreateCustomTargetTypeRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.CreateCustomTargetTypeRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.ICreateCustomTargetTypeRequest=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.CreateCustomTargetTypeRequest} CreateCustomTargetTypeRequest instance
+                         */
+                        CreateCustomTargetTypeRequest.create = function create(properties) {
+                            return new CreateCustomTargetTypeRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateCustomTargetTypeRequest message. Does not implicitly {@link google.cloud.deploy.v1.CreateCustomTargetTypeRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.CreateCustomTargetTypeRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.ICreateCustomTargetTypeRequest} message CreateCustomTargetTypeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateCustomTargetTypeRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.customTargetTypeId != null && Object.hasOwnProperty.call(message, "customTargetTypeId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.customTargetTypeId);
+                            if (message.customTargetType != null && Object.hasOwnProperty.call(message, "customTargetType"))
+                                $root.google.cloud.deploy.v1.CustomTargetType.encode(message.customTargetType, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateCustomTargetTypeRequest message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.CreateCustomTargetTypeRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.CreateCustomTargetTypeRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.ICreateCustomTargetTypeRequest} message CreateCustomTargetTypeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateCustomTargetTypeRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateCustomTargetTypeRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.CreateCustomTargetTypeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.CreateCustomTargetTypeRequest} CreateCustomTargetTypeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateCustomTargetTypeRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.CreateCustomTargetTypeRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.customTargetTypeId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.customTargetType = $root.google.cloud.deploy.v1.CustomTargetType.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateCustomTargetTypeRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.CreateCustomTargetTypeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.CreateCustomTargetTypeRequest} CreateCustomTargetTypeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateCustomTargetTypeRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateCustomTargetTypeRequest message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.CreateCustomTargetTypeRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateCustomTargetTypeRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.customTargetTypeId != null && message.hasOwnProperty("customTargetTypeId"))
+                                if (!$util.isString(message.customTargetTypeId))
+                                    return "customTargetTypeId: string expected";
+                            if (message.customTargetType != null && message.hasOwnProperty("customTargetType")) {
+                                var error = $root.google.cloud.deploy.v1.CustomTargetType.verify(message.customTargetType);
+                                if (error)
+                                    return "customTargetType." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateCustomTargetTypeRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.CreateCustomTargetTypeRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.CreateCustomTargetTypeRequest} CreateCustomTargetTypeRequest
+                         */
+                        CreateCustomTargetTypeRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.CreateCustomTargetTypeRequest)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.CreateCustomTargetTypeRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.customTargetTypeId != null)
+                                message.customTargetTypeId = String(object.customTargetTypeId);
+                            if (object.customTargetType != null) {
+                                if (typeof object.customTargetType !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.CreateCustomTargetTypeRequest.customTargetType: object expected");
+                                message.customTargetType = $root.google.cloud.deploy.v1.CustomTargetType.fromObject(object.customTargetType);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateCustomTargetTypeRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.CreateCustomTargetTypeRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.CreateCustomTargetTypeRequest} message CreateCustomTargetTypeRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateCustomTargetTypeRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.customTargetTypeId = "";
+                                object.customTargetType = null;
+                                object.requestId = "";
+                                object.validateOnly = false;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.customTargetTypeId != null && message.hasOwnProperty("customTargetTypeId"))
+                                object.customTargetTypeId = message.customTargetTypeId;
+                            if (message.customTargetType != null && message.hasOwnProperty("customTargetType"))
+                                object.customTargetType = $root.google.cloud.deploy.v1.CustomTargetType.toObject(message.customTargetType, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateCustomTargetTypeRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.CreateCustomTargetTypeRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateCustomTargetTypeRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateCustomTargetTypeRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.CreateCustomTargetTypeRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateCustomTargetTypeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.CreateCustomTargetTypeRequest";
+                        };
+    
+                        return CreateCustomTargetTypeRequest;
+                    })();
+    
+                    v1.UpdateCustomTargetTypeRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateCustomTargetTypeRequest.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IUpdateCustomTargetTypeRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateCustomTargetTypeRequest updateMask
+                         * @property {google.cloud.deploy.v1.ICustomTargetType|null} [customTargetType] UpdateCustomTargetTypeRequest customTargetType
+                         * @property {string|null} [requestId] UpdateCustomTargetTypeRequest requestId
+                         * @property {boolean|null} [allowMissing] UpdateCustomTargetTypeRequest allowMissing
+                         * @property {boolean|null} [validateOnly] UpdateCustomTargetTypeRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new UpdateCustomTargetTypeRequest.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents an UpdateCustomTargetTypeRequest.
+                         * @implements IUpdateCustomTargetTypeRequest
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IUpdateCustomTargetTypeRequest=} [properties] Properties to set
+                         */
+                        function UpdateCustomTargetTypeRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateCustomTargetTypeRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.deploy.v1.UpdateCustomTargetTypeRequest
+                         * @instance
+                         */
+                        UpdateCustomTargetTypeRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateCustomTargetTypeRequest customTargetType.
+                         * @member {google.cloud.deploy.v1.ICustomTargetType|null|undefined} customTargetType
+                         * @memberof google.cloud.deploy.v1.UpdateCustomTargetTypeRequest
+                         * @instance
+                         */
+                        UpdateCustomTargetTypeRequest.prototype.customTargetType = null;
+    
+                        /**
+                         * UpdateCustomTargetTypeRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.deploy.v1.UpdateCustomTargetTypeRequest
+                         * @instance
+                         */
+                        UpdateCustomTargetTypeRequest.prototype.requestId = "";
+    
+                        /**
+                         * UpdateCustomTargetTypeRequest allowMissing.
+                         * @member {boolean} allowMissing
+                         * @memberof google.cloud.deploy.v1.UpdateCustomTargetTypeRequest
+                         * @instance
+                         */
+                        UpdateCustomTargetTypeRequest.prototype.allowMissing = false;
+    
+                        /**
+                         * UpdateCustomTargetTypeRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.deploy.v1.UpdateCustomTargetTypeRequest
+                         * @instance
+                         */
+                        UpdateCustomTargetTypeRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new UpdateCustomTargetTypeRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.UpdateCustomTargetTypeRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IUpdateCustomTargetTypeRequest=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.UpdateCustomTargetTypeRequest} UpdateCustomTargetTypeRequest instance
+                         */
+                        UpdateCustomTargetTypeRequest.create = function create(properties) {
+                            return new UpdateCustomTargetTypeRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateCustomTargetTypeRequest message. Does not implicitly {@link google.cloud.deploy.v1.UpdateCustomTargetTypeRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.UpdateCustomTargetTypeRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IUpdateCustomTargetTypeRequest} message UpdateCustomTargetTypeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateCustomTargetTypeRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.customTargetType != null && Object.hasOwnProperty.call(message, "customTargetType"))
+                                $root.google.cloud.deploy.v1.CustomTargetType.encode(message.customTargetType, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            if (message.allowMissing != null && Object.hasOwnProperty.call(message, "allowMissing"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.allowMissing);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateCustomTargetTypeRequest message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.UpdateCustomTargetTypeRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.UpdateCustomTargetTypeRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IUpdateCustomTargetTypeRequest} message UpdateCustomTargetTypeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateCustomTargetTypeRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateCustomTargetTypeRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.UpdateCustomTargetTypeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.UpdateCustomTargetTypeRequest} UpdateCustomTargetTypeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateCustomTargetTypeRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.UpdateCustomTargetTypeRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.customTargetType = $root.google.cloud.deploy.v1.CustomTargetType.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.allowMissing = reader.bool();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateCustomTargetTypeRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.UpdateCustomTargetTypeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.UpdateCustomTargetTypeRequest} UpdateCustomTargetTypeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateCustomTargetTypeRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateCustomTargetTypeRequest message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.UpdateCustomTargetTypeRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateCustomTargetTypeRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.customTargetType != null && message.hasOwnProperty("customTargetType")) {
+                                var error = $root.google.cloud.deploy.v1.CustomTargetType.verify(message.customTargetType);
+                                if (error)
+                                    return "customTargetType." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                if (typeof message.allowMissing !== "boolean")
+                                    return "allowMissing: boolean expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateCustomTargetTypeRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.UpdateCustomTargetTypeRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.UpdateCustomTargetTypeRequest} UpdateCustomTargetTypeRequest
+                         */
+                        UpdateCustomTargetTypeRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.UpdateCustomTargetTypeRequest)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.UpdateCustomTargetTypeRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.UpdateCustomTargetTypeRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.customTargetType != null) {
+                                if (typeof object.customTargetType !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.UpdateCustomTargetTypeRequest.customTargetType: object expected");
+                                message.customTargetType = $root.google.cloud.deploy.v1.CustomTargetType.fromObject(object.customTargetType);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            if (object.allowMissing != null)
+                                message.allowMissing = Boolean(object.allowMissing);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateCustomTargetTypeRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.UpdateCustomTargetTypeRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.UpdateCustomTargetTypeRequest} message UpdateCustomTargetTypeRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateCustomTargetTypeRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.customTargetType = null;
+                                object.requestId = "";
+                                object.allowMissing = false;
+                                object.validateOnly = false;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.customTargetType != null && message.hasOwnProperty("customTargetType"))
+                                object.customTargetType = $root.google.cloud.deploy.v1.CustomTargetType.toObject(message.customTargetType, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                object.allowMissing = message.allowMissing;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateCustomTargetTypeRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.UpdateCustomTargetTypeRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateCustomTargetTypeRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateCustomTargetTypeRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.UpdateCustomTargetTypeRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateCustomTargetTypeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.UpdateCustomTargetTypeRequest";
+                        };
+    
+                        return UpdateCustomTargetTypeRequest;
+                    })();
+    
+                    v1.DeleteCustomTargetTypeRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteCustomTargetTypeRequest.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IDeleteCustomTargetTypeRequest
+                         * @property {string|null} [name] DeleteCustomTargetTypeRequest name
+                         * @property {string|null} [requestId] DeleteCustomTargetTypeRequest requestId
+                         * @property {boolean|null} [allowMissing] DeleteCustomTargetTypeRequest allowMissing
+                         * @property {boolean|null} [validateOnly] DeleteCustomTargetTypeRequest validateOnly
+                         * @property {string|null} [etag] DeleteCustomTargetTypeRequest etag
+                         */
+    
+                        /**
+                         * Constructs a new DeleteCustomTargetTypeRequest.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a DeleteCustomTargetTypeRequest.
+                         * @implements IDeleteCustomTargetTypeRequest
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IDeleteCustomTargetTypeRequest=} [properties] Properties to set
+                         */
+                        function DeleteCustomTargetTypeRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteCustomTargetTypeRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.deploy.v1.DeleteCustomTargetTypeRequest
+                         * @instance
+                         */
+                        DeleteCustomTargetTypeRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteCustomTargetTypeRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.deploy.v1.DeleteCustomTargetTypeRequest
+                         * @instance
+                         */
+                        DeleteCustomTargetTypeRequest.prototype.requestId = "";
+    
+                        /**
+                         * DeleteCustomTargetTypeRequest allowMissing.
+                         * @member {boolean} allowMissing
+                         * @memberof google.cloud.deploy.v1.DeleteCustomTargetTypeRequest
+                         * @instance
+                         */
+                        DeleteCustomTargetTypeRequest.prototype.allowMissing = false;
+    
+                        /**
+                         * DeleteCustomTargetTypeRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.deploy.v1.DeleteCustomTargetTypeRequest
+                         * @instance
+                         */
+                        DeleteCustomTargetTypeRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * DeleteCustomTargetTypeRequest etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.deploy.v1.DeleteCustomTargetTypeRequest
+                         * @instance
+                         */
+                        DeleteCustomTargetTypeRequest.prototype.etag = "";
+    
+                        /**
+                         * Creates a new DeleteCustomTargetTypeRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.DeleteCustomTargetTypeRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IDeleteCustomTargetTypeRequest=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.DeleteCustomTargetTypeRequest} DeleteCustomTargetTypeRequest instance
+                         */
+                        DeleteCustomTargetTypeRequest.create = function create(properties) {
+                            return new DeleteCustomTargetTypeRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteCustomTargetTypeRequest message. Does not implicitly {@link google.cloud.deploy.v1.DeleteCustomTargetTypeRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.DeleteCustomTargetTypeRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IDeleteCustomTargetTypeRequest} message DeleteCustomTargetTypeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteCustomTargetTypeRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            if (message.allowMissing != null && Object.hasOwnProperty.call(message, "allowMissing"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.allowMissing);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.validateOnly);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.etag);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteCustomTargetTypeRequest message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.DeleteCustomTargetTypeRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.DeleteCustomTargetTypeRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.IDeleteCustomTargetTypeRequest} message DeleteCustomTargetTypeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteCustomTargetTypeRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteCustomTargetTypeRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.DeleteCustomTargetTypeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.DeleteCustomTargetTypeRequest} DeleteCustomTargetTypeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteCustomTargetTypeRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.DeleteCustomTargetTypeRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.allowMissing = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteCustomTargetTypeRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.DeleteCustomTargetTypeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.DeleteCustomTargetTypeRequest} DeleteCustomTargetTypeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteCustomTargetTypeRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteCustomTargetTypeRequest message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.DeleteCustomTargetTypeRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteCustomTargetTypeRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                if (typeof message.allowMissing !== "boolean")
+                                    return "allowMissing: boolean expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteCustomTargetTypeRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.DeleteCustomTargetTypeRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.DeleteCustomTargetTypeRequest} DeleteCustomTargetTypeRequest
+                         */
+                        DeleteCustomTargetTypeRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.DeleteCustomTargetTypeRequest)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.DeleteCustomTargetTypeRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            if (object.allowMissing != null)
+                                message.allowMissing = Boolean(object.allowMissing);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteCustomTargetTypeRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.DeleteCustomTargetTypeRequest
+                         * @static
+                         * @param {google.cloud.deploy.v1.DeleteCustomTargetTypeRequest} message DeleteCustomTargetTypeRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteCustomTargetTypeRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                                object.allowMissing = false;
+                                object.validateOnly = false;
+                                object.etag = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                object.allowMissing = message.allowMissing;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteCustomTargetTypeRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.DeleteCustomTargetTypeRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteCustomTargetTypeRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteCustomTargetTypeRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.DeleteCustomTargetTypeRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteCustomTargetTypeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.DeleteCustomTargetTypeRequest";
+                        };
+    
+                        return DeleteCustomTargetTypeRequest;
+                    })();
+    
                     v1.TargetAttribute = (function() {
     
                         /**
@@ -14775,6 +18555,7 @@
                          * @property {Array.<google.cloud.deploy.v1.IBuildArtifact>|null} [buildArtifacts] Release buildArtifacts
                          * @property {google.cloud.deploy.v1.IDeliveryPipeline|null} [deliveryPipelineSnapshot] Release deliveryPipelineSnapshot
                          * @property {Array.<google.cloud.deploy.v1.ITarget>|null} [targetSnapshots] Release targetSnapshots
+                         * @property {Array.<google.cloud.deploy.v1.ICustomTargetType>|null} [customTargetTypeSnapshots] Release customTargetTypeSnapshots
                          * @property {google.cloud.deploy.v1.Release.RenderState|null} [renderState] Release renderState
                          * @property {string|null} [etag] Release etag
                          * @property {string|null} [skaffoldVersion] Release skaffoldVersion
@@ -14797,6 +18578,7 @@
                             this.labels = {};
                             this.buildArtifacts = [];
                             this.targetSnapshots = [];
+                            this.customTargetTypeSnapshots = [];
                             this.targetArtifacts = {};
                             this.targetRenders = {};
                             this.deployParameters = {};
@@ -14917,6 +18699,14 @@
                          * @instance
                          */
                         Release.prototype.targetSnapshots = $util.emptyArray;
+    
+                        /**
+                         * Release customTargetTypeSnapshots.
+                         * @member {Array.<google.cloud.deploy.v1.ICustomTargetType>} customTargetTypeSnapshots
+                         * @memberof google.cloud.deploy.v1.Release
+                         * @instance
+                         */
+                        Release.prototype.customTargetTypeSnapshots = $util.emptyArray;
     
                         /**
                          * Release renderState.
@@ -15051,6 +18841,9 @@
                             if (message.deployParameters != null && Object.hasOwnProperty.call(message, "deployParameters"))
                                 for (var keys = Object.keys(message.deployParameters), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 25, wireType 2 =*/202).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.deployParameters[keys[i]]).ldelim();
+                            if (message.customTargetTypeSnapshots != null && message.customTargetTypeSnapshots.length)
+                                for (var i = 0; i < message.customTargetTypeSnapshots.length; ++i)
+                                    $root.google.cloud.deploy.v1.CustomTargetType.encode(message.customTargetTypeSnapshots[i], writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
                             return writer;
                         };
     
@@ -15181,6 +18974,12 @@
                                         if (!(message.targetSnapshots && message.targetSnapshots.length))
                                             message.targetSnapshots = [];
                                         message.targetSnapshots.push($root.google.cloud.deploy.v1.Target.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 27: {
+                                        if (!(message.customTargetTypeSnapshots && message.customTargetTypeSnapshots.length))
+                                            message.customTargetTypeSnapshots = [];
+                                        message.customTargetTypeSnapshots.push($root.google.cloud.deploy.v1.CustomTargetType.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 case 13: {
@@ -15375,6 +19174,15 @@
                                         return "targetSnapshots." + error;
                                 }
                             }
+                            if (message.customTargetTypeSnapshots != null && message.hasOwnProperty("customTargetTypeSnapshots")) {
+                                if (!Array.isArray(message.customTargetTypeSnapshots))
+                                    return "customTargetTypeSnapshots: array expected";
+                                for (var i = 0; i < message.customTargetTypeSnapshots.length; ++i) {
+                                    var error = $root.google.cloud.deploy.v1.CustomTargetType.verify(message.customTargetTypeSnapshots[i]);
+                                    if (error)
+                                        return "customTargetTypeSnapshots." + error;
+                                }
+                            }
                             if (message.renderState != null && message.hasOwnProperty("renderState"))
                                 switch (message.renderState) {
                                 default:
@@ -15505,6 +19313,16 @@
                                     message.targetSnapshots[i] = $root.google.cloud.deploy.v1.Target.fromObject(object.targetSnapshots[i]);
                                 }
                             }
+                            if (object.customTargetTypeSnapshots) {
+                                if (!Array.isArray(object.customTargetTypeSnapshots))
+                                    throw TypeError(".google.cloud.deploy.v1.Release.customTargetTypeSnapshots: array expected");
+                                message.customTargetTypeSnapshots = [];
+                                for (var i = 0; i < object.customTargetTypeSnapshots.length; ++i) {
+                                    if (typeof object.customTargetTypeSnapshots[i] !== "object")
+                                        throw TypeError(".google.cloud.deploy.v1.Release.customTargetTypeSnapshots: object expected");
+                                    message.customTargetTypeSnapshots[i] = $root.google.cloud.deploy.v1.CustomTargetType.fromObject(object.customTargetTypeSnapshots[i]);
+                                }
+                            }
                             switch (object.renderState) {
                             default:
                                 if (typeof object.renderState === "number") {
@@ -15584,6 +19402,7 @@
                             if (options.arrays || options.defaults) {
                                 object.buildArtifacts = [];
                                 object.targetSnapshots = [];
+                                object.customTargetTypeSnapshots = [];
                             }
                             if (options.objects || options.defaults) {
                                 object.annotations = {};
@@ -15671,6 +19490,11 @@
                                 object.deployParameters = {};
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.deployParameters[keys2[j]] = message.deployParameters[keys2[j]];
+                            }
+                            if (message.customTargetTypeSnapshots && message.customTargetTypeSnapshots.length) {
+                                object.customTargetTypeSnapshots = [];
+                                for (var j = 0; j < message.customTargetTypeSnapshots.length; ++j)
+                                    object.customTargetTypeSnapshots[j] = $root.google.cloud.deploy.v1.CustomTargetType.toObject(message.customTargetTypeSnapshots[j], options);
                             }
                             return object;
                         };
@@ -15938,6 +19762,8 @@
                                     case 3:
                                     case 4:
                                     case 5:
+                                    case 6:
+                                    case 7:
                                         break;
                                     }
                                 if (message.failureMessage != null && message.hasOwnProperty("failureMessage"))
@@ -16019,6 +19845,14 @@
                                 case "CUSTOM_ACTION_NOT_FOUND":
                                 case 5:
                                     message.failureCause = 5;
+                                    break;
+                                case "DEPLOYMENT_STRATEGY_NOT_SUPPORTED":
+                                case 6:
+                                    message.failureCause = 6;
+                                    break;
+                                case "RENDER_FEATURE_NOT_SUPPORTED":
+                                case 7:
+                                    message.failureCause = 7;
                                     break;
                                 }
                                 if (object.failureMessage != null)
@@ -16113,6 +19947,8 @@
                              * @property {number} CLOUD_BUILD_REQUEST_FAILED=3 CLOUD_BUILD_REQUEST_FAILED value
                              * @property {number} VERIFICATION_CONFIG_NOT_FOUND=4 VERIFICATION_CONFIG_NOT_FOUND value
                              * @property {number} CUSTOM_ACTION_NOT_FOUND=5 CUSTOM_ACTION_NOT_FOUND value
+                             * @property {number} DEPLOYMENT_STRATEGY_NOT_SUPPORTED=6 DEPLOYMENT_STRATEGY_NOT_SUPPORTED value
+                             * @property {number} RENDER_FEATURE_NOT_SUPPORTED=7 RENDER_FEATURE_NOT_SUPPORTED value
                              */
                             TargetRender.FailureCause = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
@@ -16122,6 +19958,8 @@
                                 values[valuesById[3] = "CLOUD_BUILD_REQUEST_FAILED"] = 3;
                                 values[valuesById[4] = "VERIFICATION_CONFIG_NOT_FOUND"] = 4;
                                 values[valuesById[5] = "CUSTOM_ACTION_NOT_FOUND"] = 5;
+                                values[valuesById[6] = "DEPLOYMENT_STRATEGY_NOT_SUPPORTED"] = 6;
+                                values[valuesById[7] = "RENDER_FEATURE_NOT_SUPPORTED"] = 7;
                                 return values;
                             })();
     
@@ -18148,6 +21986,7 @@
                          * @memberof google.cloud.deploy.v1
                          * @interface IRenderMetadata
                          * @property {google.cloud.deploy.v1.ICloudRunRenderMetadata|null} [cloudRun] RenderMetadata cloudRun
+                         * @property {google.cloud.deploy.v1.ICustomMetadata|null} [custom] RenderMetadata custom
                          */
     
                         /**
@@ -18172,6 +22011,14 @@
                          * @instance
                          */
                         RenderMetadata.prototype.cloudRun = null;
+    
+                        /**
+                         * RenderMetadata custom.
+                         * @member {google.cloud.deploy.v1.ICustomMetadata|null|undefined} custom
+                         * @memberof google.cloud.deploy.v1.RenderMetadata
+                         * @instance
+                         */
+                        RenderMetadata.prototype.custom = null;
     
                         /**
                          * Creates a new RenderMetadata instance using the specified properties.
@@ -18199,6 +22046,8 @@
                                 writer = $Writer.create();
                             if (message.cloudRun != null && Object.hasOwnProperty.call(message, "cloudRun"))
                                 $root.google.cloud.deploy.v1.CloudRunRenderMetadata.encode(message.cloudRun, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.custom != null && Object.hasOwnProperty.call(message, "custom"))
+                                $root.google.cloud.deploy.v1.CustomMetadata.encode(message.custom, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             return writer;
                         };
     
@@ -18235,6 +22084,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.cloudRun = $root.google.cloud.deploy.v1.CloudRunRenderMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.custom = $root.google.cloud.deploy.v1.CustomMetadata.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -18277,6 +22130,11 @@
                                 if (error)
                                     return "cloudRun." + error;
                             }
+                            if (message.custom != null && message.hasOwnProperty("custom")) {
+                                var error = $root.google.cloud.deploy.v1.CustomMetadata.verify(message.custom);
+                                if (error)
+                                    return "custom." + error;
+                            }
                             return null;
                         };
     
@@ -18297,6 +22155,11 @@
                                     throw TypeError(".google.cloud.deploy.v1.RenderMetadata.cloudRun: object expected");
                                 message.cloudRun = $root.google.cloud.deploy.v1.CloudRunRenderMetadata.fromObject(object.cloudRun);
                             }
+                            if (object.custom != null) {
+                                if (typeof object.custom !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.RenderMetadata.custom: object expected");
+                                message.custom = $root.google.cloud.deploy.v1.CustomMetadata.fromObject(object.custom);
+                            }
                             return message;
                         };
     
@@ -18313,10 +22176,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.cloudRun = null;
+                                object.custom = null;
+                            }
                             if (message.cloudRun != null && message.hasOwnProperty("cloudRun"))
                                 object.cloudRun = $root.google.cloud.deploy.v1.CloudRunRenderMetadata.toObject(message.cloudRun, options);
+                            if (message.custom != null && message.hasOwnProperty("custom"))
+                                object.custom = $root.google.cloud.deploy.v1.CustomMetadata.toObject(message.custom, options);
                             return object;
                         };
     
@@ -20035,6 +23902,7 @@
                                 case 5:
                                 case 6:
                                 case 7:
+                                case 8:
                                     break;
                                 }
                             if (message.phases != null && message.hasOwnProperty("phases")) {
@@ -20250,6 +24118,10 @@
                             case "CLOUD_BUILD_REQUEST_FAILED":
                             case 7:
                                 message.deployFailureCause = 7;
+                                break;
+                            case "OPERATION_FEATURE_NOT_SUPPORTED":
+                            case 8:
+                                message.deployFailureCause = 8;
                                 break;
                             }
                             if (object.phases) {
@@ -20472,6 +24344,7 @@
                          * @property {number} RELEASE_ABANDONED=5 RELEASE_ABANDONED value
                          * @property {number} VERIFICATION_CONFIG_NOT_FOUND=6 VERIFICATION_CONFIG_NOT_FOUND value
                          * @property {number} CLOUD_BUILD_REQUEST_FAILED=7 CLOUD_BUILD_REQUEST_FAILED value
+                         * @property {number} OPERATION_FEATURE_NOT_SUPPORTED=8 OPERATION_FEATURE_NOT_SUPPORTED value
                          */
                         Rollout.FailureCause = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -20483,6 +24356,7 @@
                             values[valuesById[5] = "RELEASE_ABANDONED"] = 5;
                             values[valuesById[6] = "VERIFICATION_CONFIG_NOT_FOUND"] = 6;
                             values[valuesById[7] = "CLOUD_BUILD_REQUEST_FAILED"] = 7;
+                            values[valuesById[8] = "OPERATION_FEATURE_NOT_SUPPORTED"] = 8;
                             return values;
                         })();
     
@@ -20497,6 +24371,7 @@
                          * @interface IMetadata
                          * @property {google.cloud.deploy.v1.ICloudRunMetadata|null} [cloudRun] Metadata cloudRun
                          * @property {google.cloud.deploy.v1.IAutomationRolloutMetadata|null} [automation] Metadata automation
+                         * @property {google.cloud.deploy.v1.ICustomMetadata|null} [custom] Metadata custom
                          */
     
                         /**
@@ -20531,6 +24406,14 @@
                         Metadata.prototype.automation = null;
     
                         /**
+                         * Metadata custom.
+                         * @member {google.cloud.deploy.v1.ICustomMetadata|null|undefined} custom
+                         * @memberof google.cloud.deploy.v1.Metadata
+                         * @instance
+                         */
+                        Metadata.prototype.custom = null;
+    
+                        /**
                          * Creates a new Metadata instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.deploy.v1.Metadata
@@ -20558,6 +24441,8 @@
                                 $root.google.cloud.deploy.v1.CloudRunMetadata.encode(message.cloudRun, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.automation != null && Object.hasOwnProperty.call(message, "automation"))
                                 $root.google.cloud.deploy.v1.AutomationRolloutMetadata.encode(message.automation, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.custom != null && Object.hasOwnProperty.call(message, "custom"))
+                                $root.google.cloud.deploy.v1.CustomMetadata.encode(message.custom, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -20598,6 +24483,10 @@
                                     }
                                 case 2: {
                                         message.automation = $root.google.cloud.deploy.v1.AutomationRolloutMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.custom = $root.google.cloud.deploy.v1.CustomMetadata.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -20645,6 +24534,11 @@
                                 if (error)
                                     return "automation." + error;
                             }
+                            if (message.custom != null && message.hasOwnProperty("custom")) {
+                                var error = $root.google.cloud.deploy.v1.CustomMetadata.verify(message.custom);
+                                if (error)
+                                    return "custom." + error;
+                            }
                             return null;
                         };
     
@@ -20670,6 +24564,11 @@
                                     throw TypeError(".google.cloud.deploy.v1.Metadata.automation: object expected");
                                 message.automation = $root.google.cloud.deploy.v1.AutomationRolloutMetadata.fromObject(object.automation);
                             }
+                            if (object.custom != null) {
+                                if (typeof object.custom !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.Metadata.custom: object expected");
+                                message.custom = $root.google.cloud.deploy.v1.CustomMetadata.fromObject(object.custom);
+                            }
                             return message;
                         };
     
@@ -20689,11 +24588,14 @@
                             if (options.defaults) {
                                 object.cloudRun = null;
                                 object.automation = null;
+                                object.custom = null;
                             }
                             if (message.cloudRun != null && message.hasOwnProperty("cloudRun"))
                                 object.cloudRun = $root.google.cloud.deploy.v1.CloudRunMetadata.toObject(message.cloudRun, options);
                             if (message.automation != null && message.hasOwnProperty("automation"))
                                 object.automation = $root.google.cloud.deploy.v1.AutomationRolloutMetadata.toObject(message.automation, options);
+                            if (message.custom != null && message.hasOwnProperty("custom"))
+                                object.custom = $root.google.cloud.deploy.v1.CustomMetadata.toObject(message.custom, options);
                             return object;
                         };
     
@@ -20733,6 +24635,8 @@
                          * @memberof google.cloud.deploy.v1
                          * @interface IDeployJobRunMetadata
                          * @property {google.cloud.deploy.v1.ICloudRunMetadata|null} [cloudRun] DeployJobRunMetadata cloudRun
+                         * @property {google.cloud.deploy.v1.ICustomTargetDeployMetadata|null} [customTarget] DeployJobRunMetadata customTarget
+                         * @property {google.cloud.deploy.v1.ICustomMetadata|null} [custom] DeployJobRunMetadata custom
                          */
     
                         /**
@@ -20757,6 +24661,22 @@
                          * @instance
                          */
                         DeployJobRunMetadata.prototype.cloudRun = null;
+    
+                        /**
+                         * DeployJobRunMetadata customTarget.
+                         * @member {google.cloud.deploy.v1.ICustomTargetDeployMetadata|null|undefined} customTarget
+                         * @memberof google.cloud.deploy.v1.DeployJobRunMetadata
+                         * @instance
+                         */
+                        DeployJobRunMetadata.prototype.customTarget = null;
+    
+                        /**
+                         * DeployJobRunMetadata custom.
+                         * @member {google.cloud.deploy.v1.ICustomMetadata|null|undefined} custom
+                         * @memberof google.cloud.deploy.v1.DeployJobRunMetadata
+                         * @instance
+                         */
+                        DeployJobRunMetadata.prototype.custom = null;
     
                         /**
                          * Creates a new DeployJobRunMetadata instance using the specified properties.
@@ -20784,6 +24704,10 @@
                                 writer = $Writer.create();
                             if (message.cloudRun != null && Object.hasOwnProperty.call(message, "cloudRun"))
                                 $root.google.cloud.deploy.v1.CloudRunMetadata.encode(message.cloudRun, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.customTarget != null && Object.hasOwnProperty.call(message, "customTarget"))
+                                $root.google.cloud.deploy.v1.CustomTargetDeployMetadata.encode(message.customTarget, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.custom != null && Object.hasOwnProperty.call(message, "custom"))
+                                $root.google.cloud.deploy.v1.CustomMetadata.encode(message.custom, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -20820,6 +24744,14 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.cloudRun = $root.google.cloud.deploy.v1.CloudRunMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.customTarget = $root.google.cloud.deploy.v1.CustomTargetDeployMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.custom = $root.google.cloud.deploy.v1.CustomMetadata.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -20862,6 +24794,16 @@
                                 if (error)
                                     return "cloudRun." + error;
                             }
+                            if (message.customTarget != null && message.hasOwnProperty("customTarget")) {
+                                var error = $root.google.cloud.deploy.v1.CustomTargetDeployMetadata.verify(message.customTarget);
+                                if (error)
+                                    return "customTarget." + error;
+                            }
+                            if (message.custom != null && message.hasOwnProperty("custom")) {
+                                var error = $root.google.cloud.deploy.v1.CustomMetadata.verify(message.custom);
+                                if (error)
+                                    return "custom." + error;
+                            }
                             return null;
                         };
     
@@ -20882,6 +24824,16 @@
                                     throw TypeError(".google.cloud.deploy.v1.DeployJobRunMetadata.cloudRun: object expected");
                                 message.cloudRun = $root.google.cloud.deploy.v1.CloudRunMetadata.fromObject(object.cloudRun);
                             }
+                            if (object.customTarget != null) {
+                                if (typeof object.customTarget !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.DeployJobRunMetadata.customTarget: object expected");
+                                message.customTarget = $root.google.cloud.deploy.v1.CustomTargetDeployMetadata.fromObject(object.customTarget);
+                            }
+                            if (object.custom != null) {
+                                if (typeof object.custom !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.DeployJobRunMetadata.custom: object expected");
+                                message.custom = $root.google.cloud.deploy.v1.CustomMetadata.fromObject(object.custom);
+                            }
                             return message;
                         };
     
@@ -20898,10 +24850,17 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.cloudRun = null;
+                                object.customTarget = null;
+                                object.custom = null;
+                            }
                             if (message.cloudRun != null && message.hasOwnProperty("cloudRun"))
                                 object.cloudRun = $root.google.cloud.deploy.v1.CloudRunMetadata.toObject(message.cloudRun, options);
+                            if (message.customTarget != null && message.hasOwnProperty("customTarget"))
+                                object.customTarget = $root.google.cloud.deploy.v1.CustomTargetDeployMetadata.toObject(message.customTarget, options);
+                            if (message.custom != null && message.hasOwnProperty("custom"))
+                                object.custom = $root.google.cloud.deploy.v1.CustomMetadata.toObject(message.custom, options);
                             return object;
                         };
     
@@ -21224,6 +25183,209 @@
                         return CloudRunMetadata;
                     })();
     
+                    v1.CustomTargetDeployMetadata = (function() {
+    
+                        /**
+                         * Properties of a CustomTargetDeployMetadata.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface ICustomTargetDeployMetadata
+                         * @property {string|null} [skipMessage] CustomTargetDeployMetadata skipMessage
+                         */
+    
+                        /**
+                         * Constructs a new CustomTargetDeployMetadata.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a CustomTargetDeployMetadata.
+                         * @implements ICustomTargetDeployMetadata
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.ICustomTargetDeployMetadata=} [properties] Properties to set
+                         */
+                        function CustomTargetDeployMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CustomTargetDeployMetadata skipMessage.
+                         * @member {string} skipMessage
+                         * @memberof google.cloud.deploy.v1.CustomTargetDeployMetadata
+                         * @instance
+                         */
+                        CustomTargetDeployMetadata.prototype.skipMessage = "";
+    
+                        /**
+                         * Creates a new CustomTargetDeployMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.CustomTargetDeployMetadata
+                         * @static
+                         * @param {google.cloud.deploy.v1.ICustomTargetDeployMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.CustomTargetDeployMetadata} CustomTargetDeployMetadata instance
+                         */
+                        CustomTargetDeployMetadata.create = function create(properties) {
+                            return new CustomTargetDeployMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CustomTargetDeployMetadata message. Does not implicitly {@link google.cloud.deploy.v1.CustomTargetDeployMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.CustomTargetDeployMetadata
+                         * @static
+                         * @param {google.cloud.deploy.v1.ICustomTargetDeployMetadata} message CustomTargetDeployMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomTargetDeployMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.skipMessage != null && Object.hasOwnProperty.call(message, "skipMessage"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.skipMessage);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CustomTargetDeployMetadata message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.CustomTargetDeployMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.CustomTargetDeployMetadata
+                         * @static
+                         * @param {google.cloud.deploy.v1.ICustomTargetDeployMetadata} message CustomTargetDeployMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomTargetDeployMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CustomTargetDeployMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.CustomTargetDeployMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.CustomTargetDeployMetadata} CustomTargetDeployMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomTargetDeployMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.CustomTargetDeployMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.skipMessage = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CustomTargetDeployMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.CustomTargetDeployMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.CustomTargetDeployMetadata} CustomTargetDeployMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomTargetDeployMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CustomTargetDeployMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.CustomTargetDeployMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CustomTargetDeployMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.skipMessage != null && message.hasOwnProperty("skipMessage"))
+                                if (!$util.isString(message.skipMessage))
+                                    return "skipMessage: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CustomTargetDeployMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.CustomTargetDeployMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.CustomTargetDeployMetadata} CustomTargetDeployMetadata
+                         */
+                        CustomTargetDeployMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.CustomTargetDeployMetadata)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.CustomTargetDeployMetadata();
+                            if (object.skipMessage != null)
+                                message.skipMessage = String(object.skipMessage);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CustomTargetDeployMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.CustomTargetDeployMetadata
+                         * @static
+                         * @param {google.cloud.deploy.v1.CustomTargetDeployMetadata} message CustomTargetDeployMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CustomTargetDeployMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.skipMessage = "";
+                            if (message.skipMessage != null && message.hasOwnProperty("skipMessage"))
+                                object.skipMessage = message.skipMessage;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CustomTargetDeployMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.CustomTargetDeployMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CustomTargetDeployMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CustomTargetDeployMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.CustomTargetDeployMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CustomTargetDeployMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.CustomTargetDeployMetadata";
+                        };
+    
+                        return CustomTargetDeployMetadata;
+                    })();
+    
                     v1.AutomationRolloutMetadata = (function() {
     
                         /**
@@ -21505,6 +25667,244 @@
                         };
     
                         return AutomationRolloutMetadata;
+                    })();
+    
+                    v1.CustomMetadata = (function() {
+    
+                        /**
+                         * Properties of a CustomMetadata.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface ICustomMetadata
+                         * @property {Object.<string,string>|null} [values] CustomMetadata values
+                         */
+    
+                        /**
+                         * Constructs a new CustomMetadata.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a CustomMetadata.
+                         * @implements ICustomMetadata
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.ICustomMetadata=} [properties] Properties to set
+                         */
+                        function CustomMetadata(properties) {
+                            this.values = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CustomMetadata values.
+                         * @member {Object.<string,string>} values
+                         * @memberof google.cloud.deploy.v1.CustomMetadata
+                         * @instance
+                         */
+                        CustomMetadata.prototype.values = $util.emptyObject;
+    
+                        /**
+                         * Creates a new CustomMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.CustomMetadata
+                         * @static
+                         * @param {google.cloud.deploy.v1.ICustomMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.CustomMetadata} CustomMetadata instance
+                         */
+                        CustomMetadata.create = function create(properties) {
+                            return new CustomMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CustomMetadata message. Does not implicitly {@link google.cloud.deploy.v1.CustomMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.CustomMetadata
+                         * @static
+                         * @param {google.cloud.deploy.v1.ICustomMetadata} message CustomMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.values != null && Object.hasOwnProperty.call(message, "values"))
+                                for (var keys = Object.keys(message.values), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.values[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CustomMetadata message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.CustomMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.CustomMetadata
+                         * @static
+                         * @param {google.cloud.deploy.v1.ICustomMetadata} message CustomMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CustomMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.CustomMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.CustomMetadata} CustomMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.CustomMetadata(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (message.values === $util.emptyObject)
+                                            message.values = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.values[key] = value;
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CustomMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.CustomMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.CustomMetadata} CustomMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CustomMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.CustomMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CustomMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.values != null && message.hasOwnProperty("values")) {
+                                if (!$util.isObject(message.values))
+                                    return "values: object expected";
+                                var key = Object.keys(message.values);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.values[key[i]]))
+                                        return "values: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CustomMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.CustomMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.CustomMetadata} CustomMetadata
+                         */
+                        CustomMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.CustomMetadata)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.CustomMetadata();
+                            if (object.values) {
+                                if (typeof object.values !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.CustomMetadata.values: object expected");
+                                message.values = {};
+                                for (var keys = Object.keys(object.values), i = 0; i < keys.length; ++i)
+                                    message.values[keys[i]] = String(object.values[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CustomMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.CustomMetadata
+                         * @static
+                         * @param {google.cloud.deploy.v1.CustomMetadata} message CustomMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CustomMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.values = {};
+                            var keys2;
+                            if (message.values && (keys2 = Object.keys(message.values)).length) {
+                                object.values = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.values[keys2[j]] = message.values[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CustomMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.CustomMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CustomMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CustomMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.CustomMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CustomMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.CustomMetadata";
+                        };
+    
+                        return CustomMetadata;
                     })();
     
                     v1.Phase = (function() {
@@ -28950,6 +33350,7 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.failureMessage != null && message.hasOwnProperty("failureMessage"))
@@ -29012,6 +33413,10 @@
                             case "CLOUD_BUILD_REQUEST_FAILED":
                             case 5:
                                 message.failureCause = 5;
+                                break;
+                            case "DEPLOY_FEATURE_NOT_SUPPORTED":
+                            case 6:
+                                message.failureCause = 6;
                                 break;
                             }
                             if (object.failureMessage != null)
@@ -29098,6 +33503,7 @@
                          * @property {number} DEADLINE_EXCEEDED=3 DEADLINE_EXCEEDED value
                          * @property {number} MISSING_RESOURCES_FOR_CANARY=4 MISSING_RESOURCES_FOR_CANARY value
                          * @property {number} CLOUD_BUILD_REQUEST_FAILED=5 CLOUD_BUILD_REQUEST_FAILED value
+                         * @property {number} DEPLOY_FEATURE_NOT_SUPPORTED=6 DEPLOY_FEATURE_NOT_SUPPORTED value
                          */
                         DeployJobRun.FailureCause = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -29107,6 +33513,7 @@
                             values[valuesById[3] = "DEADLINE_EXCEEDED"] = 3;
                             values[valuesById[4] = "MISSING_RESOURCES_FOR_CANARY"] = 4;
                             values[valuesById[5] = "CLOUD_BUILD_REQUEST_FAILED"] = 5;
+                            values[valuesById[6] = "DEPLOY_FEATURE_NOT_SUPPORTED"] = 6;
                             return values;
                         })();
     
