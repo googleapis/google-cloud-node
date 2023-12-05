@@ -1712,6 +1712,10 @@
                           "type": "string",
                           "id": 17
                         },
+                        "dataStats": {
+                          "type": "DataStats",
+                          "id": 21
+                        },
                         "encryptionSpec": {
                           "type": "EncryptionSpec",
                           "id": 24
@@ -1764,6 +1768,34 @@
                                 "ARTIFACT": 1,
                                 "IMAGE": 2
                               }
+                            }
+                          }
+                        },
+                        "DataStats": {
+                          "fields": {
+                            "trainingDataItemsCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "validationDataItemsCount": {
+                              "type": "int64",
+                              "id": 2
+                            },
+                            "testDataItemsCount": {
+                              "type": "int64",
+                              "id": 3
+                            },
+                            "trainingAnnotationsCount": {
+                              "type": "int64",
+                              "id": 4
+                            },
+                            "validationAnnotationsCount": {
+                              "type": "int64",
+                              "id": 5
+                            },
+                            "testAnnotationsCount": {
+                              "type": "int64",
+                              "id": 6
                             }
                           }
                         },
@@ -1945,7 +1977,8 @@
                             "CUSTOM": 2,
                             "BQML": 3,
                             "MODEL_GARDEN": 4,
-                            "GENIE": 5
+                            "GENIE": 5,
+                            "CUSTOM_TEXT_EMBEDDING": 6
                           }
                         }
                       }
@@ -2759,7 +2792,8 @@
                         },
                         "split": {
                           "oneof": [
-                            "fractionSplit"
+                            "fractionSplit",
+                            "filterSplit"
                           ]
                         }
                       },
@@ -2772,9 +2806,33 @@
                           "type": "ExportFractionSplit",
                           "id": 5
                         },
+                        "filterSplit": {
+                          "type": "ExportFilterSplit",
+                          "id": 7
+                        },
                         "annotationsFilter": {
                           "type": "string",
                           "id": 2
+                        },
+                        "savedQueryId": {
+                          "type": "string",
+                          "id": 11
+                        },
+                        "annotationSchemaUri": {
+                          "type": "string",
+                          "id": 12
+                        },
+                        "exportUse": {
+                          "type": "ExportUse",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "ExportUse": {
+                          "values": {
+                            "EXPORT_USE_UNSPECIFIED": 0,
+                            "CUSTOM_CODE_TRAINING": 6
+                          }
                         }
                       }
                     },
@@ -2791,6 +2849,31 @@
                         "testFraction": {
                           "type": "double",
                           "id": 3
+                        }
+                      }
+                    },
+                    "ExportFilterSplit": {
+                      "fields": {
+                        "trainingFilter": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validationFilter": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "testFilter": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -3442,6 +3525,10 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 1
+                        },
+                        "dataStats": {
+                          "type": "Model.DataStats",
+                          "id": 2
                         }
                       }
                     },
