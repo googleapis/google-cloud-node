@@ -347,6 +347,124 @@
                             }
                           ]
                         },
+                        "ListCustomTargetTypes": {
+                          "requestType": "ListCustomTargetTypesRequest",
+                          "responseType": "ListCustomTargetTypesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/customTargetTypes",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/customTargetTypes"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetCustomTargetType": {
+                          "requestType": "GetCustomTargetTypeRequest",
+                          "responseType": "CustomTargetType",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/customTargetTypes/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/customTargetTypes/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateCustomTargetType": {
+                          "requestType": "CreateCustomTargetTypeRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/customTargetTypes",
+                            "(google.api.http).body": "custom_target_type",
+                            "(google.api.method_signature)": "parent,custom_target_type,custom_target_type_id",
+                            "(google.longrunning.operation_info).response_type": "CustomTargetType",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/customTargetTypes",
+                                "body": "custom_target_type"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,custom_target_type,custom_target_type_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "CustomTargetType",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateCustomTargetType": {
+                          "requestType": "UpdateCustomTargetTypeRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{custom_target_type.name=projects/*/locations/*/customTargetTypes/*}",
+                            "(google.api.http).body": "custom_target_type",
+                            "(google.api.method_signature)": "custom_target_type,update_mask",
+                            "(google.longrunning.operation_info).response_type": "CustomTargetType",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{custom_target_type.name=projects/*/locations/*/customTargetTypes/*}",
+                                "body": "custom_target_type"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "custom_target_type,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "CustomTargetType",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteCustomTargetType": {
+                          "requestType": "DeleteCustomTargetTypeRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/customTargetTypes/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/customTargetTypes/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "ListReleases": {
                           "requestType": "ListReleasesRequest",
                           "responseType": "ListReleasesResponse",
@@ -1240,6 +1358,30 @@
                         "automaticTrafficControl": {
                           "type": "bool",
                           "id": 1
+                        },
+                        "canaryRevisionTags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "priorRevisionTags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "stableRevisionTags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1598,7 +1740,8 @@
                             "gke",
                             "anthosCluster",
                             "run",
-                            "multiTarget"
+                            "multiTarget",
+                            "customTarget"
                           ]
                         }
                       },
@@ -1692,6 +1835,13 @@
                         "multiTarget": {
                           "type": "MultiTarget",
                           "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "customTarget": {
+                          "type": "CustomTarget",
+                          "id": 21,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -1890,6 +2040,18 @@
                         }
                       }
                     },
+                    "CustomTarget": {
+                      "fields": {
+                        "customTargetType": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "clouddeploy.googleapis.com/CustomTargetType"
+                          }
+                        }
+                      }
+                    },
                     "ListTargetsRequest": {
                       "fields": {
                         "parent": {
@@ -2079,6 +2241,378 @@
                         }
                       }
                     },
+                    "CustomTargetType": {
+                      "options": {
+                        "(google.api.resource).type": "clouddeploy.googleapis.com/CustomTargetType",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/customTargetTypes/{custom_target_type}"
+                      },
+                      "oneofs": {
+                        "definition": {
+                          "oneof": [
+                            "customActions"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "customTargetTypeId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "annotations": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "customActions": {
+                          "type": "CustomTargetSkaffoldActions",
+                          "id": 10
+                        }
+                      }
+                    },
+                    "CustomTargetSkaffoldActions": {
+                      "fields": {
+                        "renderAction": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "deployAction": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "includeSkaffoldModules": {
+                          "rule": "repeated",
+                          "type": "SkaffoldModules",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SkaffoldModules": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "git",
+                            "googleCloudStorage"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "configs": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "git": {
+                          "type": "SkaffoldGitSource",
+                          "id": 2
+                        },
+                        "googleCloudStorage": {
+                          "type": "SkaffoldGCSSource",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "SkaffoldGitSource": {
+                          "fields": {
+                            "repo": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "path": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "ref": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "SkaffoldGCSSource": {
+                          "fields": {
+                            "source": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "path": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ListCustomTargetTypesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "clouddeploy.googleapis.com/CustomTargetType"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListCustomTargetTypesResponse": {
+                      "fields": {
+                        "customTargetTypes": {
+                          "rule": "repeated",
+                          "type": "CustomTargetType",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetCustomTargetTypeRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "clouddeploy.googleapis.com/CustomTargetType"
+                          }
+                        }
+                      }
+                    },
+                    "CreateCustomTargetTypeRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "clouddeploy.googleapis.com/CustomTargetType"
+                          }
+                        },
+                        "customTargetTypeId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "customTargetType": {
+                          "type": "CustomTargetType",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateCustomTargetTypeRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "customTargetType": {
+                          "type": "CustomTargetType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "allowMissing": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteCustomTargetTypeRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "clouddeploy.googleapis.com/CustomTargetType"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "allowMissing": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "TargetAttribute": {
                       "fields": {
                         "id": {
@@ -2178,6 +2712,14 @@
                           "rule": "repeated",
                           "type": "Target",
                           "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "customTargetTypeSnapshots": {
+                          "rule": "repeated",
+                          "type": "CustomTargetType",
+                          "id": 27,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -2293,7 +2835,9 @@
                                 "EXECUTION_FAILED": 2,
                                 "CLOUD_BUILD_REQUEST_FAILED": 3,
                                 "VERIFICATION_CONFIG_NOT_FOUND": 4,
-                                "CUSTOM_ACTION_NOT_FOUND": 5
+                                "CUSTOM_ACTION_NOT_FOUND": 5,
+                                "DEPLOYMENT_STRATEGY_NOT_SUPPORTED": 6,
+                                "RENDER_FEATURE_NOT_SUPPORTED": 7
                               }
                             }
                           }
@@ -2455,6 +2999,13 @@
                         "cloudRun": {
                           "type": "CloudRunRenderMetadata",
                           "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "custom": {
+                          "type": "CustomMetadata",
+                          "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -2759,7 +3310,8 @@
                             "RELEASE_FAILED": 4,
                             "RELEASE_ABANDONED": 5,
                             "VERIFICATION_CONFIG_NOT_FOUND": 6,
-                            "CLOUD_BUILD_REQUEST_FAILED": 7
+                            "CLOUD_BUILD_REQUEST_FAILED": 7,
+                            "OPERATION_FEATURE_NOT_SUPPORTED": 8
                           }
                         }
                       }
@@ -2779,6 +3331,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "custom": {
+                          "type": "CustomMetadata",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -2787,6 +3346,20 @@
                         "cloudRun": {
                           "type": "CloudRunMetadata",
                           "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "customTarget": {
+                          "type": "CustomTargetDeployMetadata",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "custom": {
+                          "type": "CustomMetadata",
+                          "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -2828,6 +3401,17 @@
                         }
                       }
                     },
+                    "CustomTargetDeployMetadata": {
+                      "fields": {
+                        "skipMessage": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
                     "AutomationRolloutMetadata": {
                       "fields": {
                         "promoteAutomationRun": {
@@ -2849,6 +3433,18 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "CustomMetadata": {
+                      "fields": {
+                        "values": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -3591,7 +4187,8 @@
                             "EXECUTION_FAILED": 2,
                             "DEADLINE_EXCEEDED": 3,
                             "MISSING_RESOURCES_FOR_CANARY": 4,
-                            "CLOUD_BUILD_REQUEST_FAILED": 5
+                            "CLOUD_BUILD_REQUEST_FAILED": 5,
+                            "DEPLOY_FEATURE_NOT_SUPPORTED": 6
                           }
                         }
                       }

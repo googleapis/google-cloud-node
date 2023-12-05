@@ -461,6 +461,76 @@ export namespace google {
                     public deleteTarget(request: google.cloud.deploy.v1.IDeleteTargetRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls ListCustomTargetTypes.
+                     * @param request ListCustomTargetTypesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListCustomTargetTypesResponse
+                     */
+                    public listCustomTargetTypes(request: google.cloud.deploy.v1.IListCustomTargetTypesRequest, callback: google.cloud.deploy.v1.CloudDeploy.ListCustomTargetTypesCallback): void;
+
+                    /**
+                     * Calls ListCustomTargetTypes.
+                     * @param request ListCustomTargetTypesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listCustomTargetTypes(request: google.cloud.deploy.v1.IListCustomTargetTypesRequest): Promise<google.cloud.deploy.v1.ListCustomTargetTypesResponse>;
+
+                    /**
+                     * Calls GetCustomTargetType.
+                     * @param request GetCustomTargetTypeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and CustomTargetType
+                     */
+                    public getCustomTargetType(request: google.cloud.deploy.v1.IGetCustomTargetTypeRequest, callback: google.cloud.deploy.v1.CloudDeploy.GetCustomTargetTypeCallback): void;
+
+                    /**
+                     * Calls GetCustomTargetType.
+                     * @param request GetCustomTargetTypeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getCustomTargetType(request: google.cloud.deploy.v1.IGetCustomTargetTypeRequest): Promise<google.cloud.deploy.v1.CustomTargetType>;
+
+                    /**
+                     * Calls CreateCustomTargetType.
+                     * @param request CreateCustomTargetTypeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createCustomTargetType(request: google.cloud.deploy.v1.ICreateCustomTargetTypeRequest, callback: google.cloud.deploy.v1.CloudDeploy.CreateCustomTargetTypeCallback): void;
+
+                    /**
+                     * Calls CreateCustomTargetType.
+                     * @param request CreateCustomTargetTypeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createCustomTargetType(request: google.cloud.deploy.v1.ICreateCustomTargetTypeRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateCustomTargetType.
+                     * @param request UpdateCustomTargetTypeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateCustomTargetType(request: google.cloud.deploy.v1.IUpdateCustomTargetTypeRequest, callback: google.cloud.deploy.v1.CloudDeploy.UpdateCustomTargetTypeCallback): void;
+
+                    /**
+                     * Calls UpdateCustomTargetType.
+                     * @param request UpdateCustomTargetTypeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateCustomTargetType(request: google.cloud.deploy.v1.IUpdateCustomTargetTypeRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteCustomTargetType.
+                     * @param request DeleteCustomTargetTypeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteCustomTargetType(request: google.cloud.deploy.v1.IDeleteCustomTargetTypeRequest, callback: google.cloud.deploy.v1.CloudDeploy.DeleteCustomTargetTypeCallback): void;
+
+                    /**
+                     * Calls DeleteCustomTargetType.
+                     * @param request DeleteCustomTargetTypeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteCustomTargetType(request: google.cloud.deploy.v1.IDeleteCustomTargetTypeRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls ListReleases.
                      * @param request ListReleasesRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListReleasesResponse
@@ -875,6 +945,41 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteTargetCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|listCustomTargetTypes}.
+                     * @param error Error, if any
+                     * @param [response] ListCustomTargetTypesResponse
+                     */
+                    type ListCustomTargetTypesCallback = (error: (Error|null), response?: google.cloud.deploy.v1.ListCustomTargetTypesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|getCustomTargetType}.
+                     * @param error Error, if any
+                     * @param [response] CustomTargetType
+                     */
+                    type GetCustomTargetTypeCallback = (error: (Error|null), response?: google.cloud.deploy.v1.CustomTargetType) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|createCustomTargetType}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateCustomTargetTypeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|updateCustomTargetType}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateCustomTargetTypeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|deleteCustomTargetType}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteCustomTargetTypeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|listReleases}.
@@ -2721,6 +2826,15 @@ export namespace google {
 
                     /** CloudRunConfig automaticTrafficControl */
                     automaticTrafficControl?: (boolean|null);
+
+                    /** CloudRunConfig canaryRevisionTags */
+                    canaryRevisionTags?: (string[]|null);
+
+                    /** CloudRunConfig priorRevisionTags */
+                    priorRevisionTags?: (string[]|null);
+
+                    /** CloudRunConfig stableRevisionTags */
+                    stableRevisionTags?: (string[]|null);
                 }
 
                 /** Represents a CloudRunConfig. */
@@ -2734,6 +2848,15 @@ export namespace google {
 
                     /** CloudRunConfig automaticTrafficControl. */
                     public automaticTrafficControl: boolean;
+
+                    /** CloudRunConfig canaryRevisionTags. */
+                    public canaryRevisionTags: string[];
+
+                    /** CloudRunConfig priorRevisionTags. */
+                    public priorRevisionTags: string[];
+
+                    /** CloudRunConfig stableRevisionTags. */
+                    public stableRevisionTags: string[];
 
                     /**
                      * Creates a new CloudRunConfig instance using the specified properties.
@@ -4414,6 +4537,9 @@ export namespace google {
                     /** Target multiTarget */
                     multiTarget?: (google.cloud.deploy.v1.IMultiTarget|null);
 
+                    /** Target customTarget */
+                    customTarget?: (google.cloud.deploy.v1.ICustomTarget|null);
+
                     /** Target etag */
                     etag?: (string|null);
 
@@ -4472,6 +4598,9 @@ export namespace google {
                     /** Target multiTarget. */
                     public multiTarget?: (google.cloud.deploy.v1.IMultiTarget|null);
 
+                    /** Target customTarget. */
+                    public customTarget?: (google.cloud.deploy.v1.ICustomTarget|null);
+
                     /** Target etag. */
                     public etag: string;
 
@@ -4482,7 +4611,7 @@ export namespace google {
                     public deployParameters: { [k: string]: string };
 
                     /** Target deploymentTarget. */
-                    public deploymentTarget?: ("gke"|"anthosCluster"|"run"|"multiTarget");
+                    public deploymentTarget?: ("gke"|"anthosCluster"|"run"|"multiTarget"|"customTarget");
 
                     /**
                      * Creates a new Target instance using the specified properties.
@@ -5317,6 +5446,103 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a CustomTarget. */
+                interface ICustomTarget {
+
+                    /** CustomTarget customTargetType */
+                    customTargetType?: (string|null);
+                }
+
+                /** Represents a CustomTarget. */
+                class CustomTarget implements ICustomTarget {
+
+                    /**
+                     * Constructs a new CustomTarget.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.ICustomTarget);
+
+                    /** CustomTarget customTargetType. */
+                    public customTargetType: string;
+
+                    /**
+                     * Creates a new CustomTarget instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CustomTarget instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.ICustomTarget): google.cloud.deploy.v1.CustomTarget;
+
+                    /**
+                     * Encodes the specified CustomTarget message. Does not implicitly {@link google.cloud.deploy.v1.CustomTarget.verify|verify} messages.
+                     * @param message CustomTarget message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.ICustomTarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CustomTarget message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.CustomTarget.verify|verify} messages.
+                     * @param message CustomTarget message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.ICustomTarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CustomTarget message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CustomTarget
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.CustomTarget;
+
+                    /**
+                     * Decodes a CustomTarget message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CustomTarget
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.CustomTarget;
+
+                    /**
+                     * Verifies a CustomTarget message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CustomTarget message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CustomTarget
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.CustomTarget;
+
+                    /**
+                     * Creates a plain object from a CustomTarget message. Also converts values to other types if specified.
+                     * @param message CustomTarget
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.CustomTarget, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CustomTarget to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CustomTarget
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a ListTargetsRequest. */
                 interface IListTargetsRequest {
 
@@ -6007,6 +6233,1286 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a CustomTargetType. */
+                interface ICustomTargetType {
+
+                    /** CustomTargetType name */
+                    name?: (string|null);
+
+                    /** CustomTargetType customTargetTypeId */
+                    customTargetTypeId?: (string|null);
+
+                    /** CustomTargetType uid */
+                    uid?: (string|null);
+
+                    /** CustomTargetType description */
+                    description?: (string|null);
+
+                    /** CustomTargetType annotations */
+                    annotations?: ({ [k: string]: string }|null);
+
+                    /** CustomTargetType labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** CustomTargetType createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CustomTargetType updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CustomTargetType etag */
+                    etag?: (string|null);
+
+                    /** CustomTargetType customActions */
+                    customActions?: (google.cloud.deploy.v1.ICustomTargetSkaffoldActions|null);
+                }
+
+                /** Represents a CustomTargetType. */
+                class CustomTargetType implements ICustomTargetType {
+
+                    /**
+                     * Constructs a new CustomTargetType.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.ICustomTargetType);
+
+                    /** CustomTargetType name. */
+                    public name: string;
+
+                    /** CustomTargetType customTargetTypeId. */
+                    public customTargetTypeId: string;
+
+                    /** CustomTargetType uid. */
+                    public uid: string;
+
+                    /** CustomTargetType description. */
+                    public description: string;
+
+                    /** CustomTargetType annotations. */
+                    public annotations: { [k: string]: string };
+
+                    /** CustomTargetType labels. */
+                    public labels: { [k: string]: string };
+
+                    /** CustomTargetType createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CustomTargetType updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CustomTargetType etag. */
+                    public etag: string;
+
+                    /** CustomTargetType customActions. */
+                    public customActions?: (google.cloud.deploy.v1.ICustomTargetSkaffoldActions|null);
+
+                    /** CustomTargetType definition. */
+                    public definition?: "customActions";
+
+                    /**
+                     * Creates a new CustomTargetType instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CustomTargetType instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.ICustomTargetType): google.cloud.deploy.v1.CustomTargetType;
+
+                    /**
+                     * Encodes the specified CustomTargetType message. Does not implicitly {@link google.cloud.deploy.v1.CustomTargetType.verify|verify} messages.
+                     * @param message CustomTargetType message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.ICustomTargetType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CustomTargetType message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.CustomTargetType.verify|verify} messages.
+                     * @param message CustomTargetType message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.ICustomTargetType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CustomTargetType message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CustomTargetType
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.CustomTargetType;
+
+                    /**
+                     * Decodes a CustomTargetType message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CustomTargetType
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.CustomTargetType;
+
+                    /**
+                     * Verifies a CustomTargetType message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CustomTargetType message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CustomTargetType
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.CustomTargetType;
+
+                    /**
+                     * Creates a plain object from a CustomTargetType message. Also converts values to other types if specified.
+                     * @param message CustomTargetType
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.CustomTargetType, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CustomTargetType to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CustomTargetType
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CustomTargetSkaffoldActions. */
+                interface ICustomTargetSkaffoldActions {
+
+                    /** CustomTargetSkaffoldActions renderAction */
+                    renderAction?: (string|null);
+
+                    /** CustomTargetSkaffoldActions deployAction */
+                    deployAction?: (string|null);
+
+                    /** CustomTargetSkaffoldActions includeSkaffoldModules */
+                    includeSkaffoldModules?: (google.cloud.deploy.v1.ISkaffoldModules[]|null);
+                }
+
+                /** Represents a CustomTargetSkaffoldActions. */
+                class CustomTargetSkaffoldActions implements ICustomTargetSkaffoldActions {
+
+                    /**
+                     * Constructs a new CustomTargetSkaffoldActions.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.ICustomTargetSkaffoldActions);
+
+                    /** CustomTargetSkaffoldActions renderAction. */
+                    public renderAction: string;
+
+                    /** CustomTargetSkaffoldActions deployAction. */
+                    public deployAction: string;
+
+                    /** CustomTargetSkaffoldActions includeSkaffoldModules. */
+                    public includeSkaffoldModules: google.cloud.deploy.v1.ISkaffoldModules[];
+
+                    /**
+                     * Creates a new CustomTargetSkaffoldActions instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CustomTargetSkaffoldActions instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.ICustomTargetSkaffoldActions): google.cloud.deploy.v1.CustomTargetSkaffoldActions;
+
+                    /**
+                     * Encodes the specified CustomTargetSkaffoldActions message. Does not implicitly {@link google.cloud.deploy.v1.CustomTargetSkaffoldActions.verify|verify} messages.
+                     * @param message CustomTargetSkaffoldActions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.ICustomTargetSkaffoldActions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CustomTargetSkaffoldActions message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.CustomTargetSkaffoldActions.verify|verify} messages.
+                     * @param message CustomTargetSkaffoldActions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.ICustomTargetSkaffoldActions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CustomTargetSkaffoldActions message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CustomTargetSkaffoldActions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.CustomTargetSkaffoldActions;
+
+                    /**
+                     * Decodes a CustomTargetSkaffoldActions message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CustomTargetSkaffoldActions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.CustomTargetSkaffoldActions;
+
+                    /**
+                     * Verifies a CustomTargetSkaffoldActions message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CustomTargetSkaffoldActions message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CustomTargetSkaffoldActions
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.CustomTargetSkaffoldActions;
+
+                    /**
+                     * Creates a plain object from a CustomTargetSkaffoldActions message. Also converts values to other types if specified.
+                     * @param message CustomTargetSkaffoldActions
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.CustomTargetSkaffoldActions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CustomTargetSkaffoldActions to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CustomTargetSkaffoldActions
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SkaffoldModules. */
+                interface ISkaffoldModules {
+
+                    /** SkaffoldModules configs */
+                    configs?: (string[]|null);
+
+                    /** SkaffoldModules git */
+                    git?: (google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGitSource|null);
+
+                    /** SkaffoldModules googleCloudStorage */
+                    googleCloudStorage?: (google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGCSSource|null);
+                }
+
+                /** Represents a SkaffoldModules. */
+                class SkaffoldModules implements ISkaffoldModules {
+
+                    /**
+                     * Constructs a new SkaffoldModules.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.ISkaffoldModules);
+
+                    /** SkaffoldModules configs. */
+                    public configs: string[];
+
+                    /** SkaffoldModules git. */
+                    public git?: (google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGitSource|null);
+
+                    /** SkaffoldModules googleCloudStorage. */
+                    public googleCloudStorage?: (google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGCSSource|null);
+
+                    /** SkaffoldModules source. */
+                    public source?: ("git"|"googleCloudStorage");
+
+                    /**
+                     * Creates a new SkaffoldModules instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SkaffoldModules instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.ISkaffoldModules): google.cloud.deploy.v1.SkaffoldModules;
+
+                    /**
+                     * Encodes the specified SkaffoldModules message. Does not implicitly {@link google.cloud.deploy.v1.SkaffoldModules.verify|verify} messages.
+                     * @param message SkaffoldModules message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.ISkaffoldModules, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SkaffoldModules message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.SkaffoldModules.verify|verify} messages.
+                     * @param message SkaffoldModules message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.ISkaffoldModules, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SkaffoldModules message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SkaffoldModules
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.SkaffoldModules;
+
+                    /**
+                     * Decodes a SkaffoldModules message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SkaffoldModules
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.SkaffoldModules;
+
+                    /**
+                     * Verifies a SkaffoldModules message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SkaffoldModules message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SkaffoldModules
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.SkaffoldModules;
+
+                    /**
+                     * Creates a plain object from a SkaffoldModules message. Also converts values to other types if specified.
+                     * @param message SkaffoldModules
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.SkaffoldModules, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SkaffoldModules to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SkaffoldModules
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SkaffoldModules {
+
+                    /** Properties of a SkaffoldGitSource. */
+                    interface ISkaffoldGitSource {
+
+                        /** SkaffoldGitSource repo */
+                        repo?: (string|null);
+
+                        /** SkaffoldGitSource path */
+                        path?: (string|null);
+
+                        /** SkaffoldGitSource ref */
+                        ref?: (string|null);
+                    }
+
+                    /** Represents a SkaffoldGitSource. */
+                    class SkaffoldGitSource implements ISkaffoldGitSource {
+
+                        /**
+                         * Constructs a new SkaffoldGitSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGitSource);
+
+                        /** SkaffoldGitSource repo. */
+                        public repo: string;
+
+                        /** SkaffoldGitSource path. */
+                        public path: string;
+
+                        /** SkaffoldGitSource ref. */
+                        public ref: string;
+
+                        /**
+                         * Creates a new SkaffoldGitSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SkaffoldGitSource instance
+                         */
+                        public static create(properties?: google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGitSource): google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource;
+
+                        /**
+                         * Encodes the specified SkaffoldGitSource message. Does not implicitly {@link google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource.verify|verify} messages.
+                         * @param message SkaffoldGitSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGitSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SkaffoldGitSource message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource.verify|verify} messages.
+                         * @param message SkaffoldGitSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGitSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SkaffoldGitSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SkaffoldGitSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource;
+
+                        /**
+                         * Decodes a SkaffoldGitSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SkaffoldGitSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource;
+
+                        /**
+                         * Verifies a SkaffoldGitSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SkaffoldGitSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SkaffoldGitSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource;
+
+                        /**
+                         * Creates a plain object from a SkaffoldGitSource message. Also converts values to other types if specified.
+                         * @param message SkaffoldGitSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SkaffoldGitSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SkaffoldGitSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SkaffoldGCSSource. */
+                    interface ISkaffoldGCSSource {
+
+                        /** SkaffoldGCSSource source */
+                        source?: (string|null);
+
+                        /** SkaffoldGCSSource path */
+                        path?: (string|null);
+                    }
+
+                    /** Represents a SkaffoldGCSSource. */
+                    class SkaffoldGCSSource implements ISkaffoldGCSSource {
+
+                        /**
+                         * Constructs a new SkaffoldGCSSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGCSSource);
+
+                        /** SkaffoldGCSSource source. */
+                        public source: string;
+
+                        /** SkaffoldGCSSource path. */
+                        public path: string;
+
+                        /**
+                         * Creates a new SkaffoldGCSSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SkaffoldGCSSource instance
+                         */
+                        public static create(properties?: google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGCSSource): google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource;
+
+                        /**
+                         * Encodes the specified SkaffoldGCSSource message. Does not implicitly {@link google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource.verify|verify} messages.
+                         * @param message SkaffoldGCSSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGCSSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SkaffoldGCSSource message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource.verify|verify} messages.
+                         * @param message SkaffoldGCSSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGCSSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SkaffoldGCSSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SkaffoldGCSSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource;
+
+                        /**
+                         * Decodes a SkaffoldGCSSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SkaffoldGCSSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource;
+
+                        /**
+                         * Verifies a SkaffoldGCSSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SkaffoldGCSSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SkaffoldGCSSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource;
+
+                        /**
+                         * Creates a plain object from a SkaffoldGCSSource message. Also converts values to other types if specified.
+                         * @param message SkaffoldGCSSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SkaffoldGCSSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SkaffoldGCSSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a ListCustomTargetTypesRequest. */
+                interface IListCustomTargetTypesRequest {
+
+                    /** ListCustomTargetTypesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListCustomTargetTypesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListCustomTargetTypesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListCustomTargetTypesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListCustomTargetTypesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListCustomTargetTypesRequest. */
+                class ListCustomTargetTypesRequest implements IListCustomTargetTypesRequest {
+
+                    /**
+                     * Constructs a new ListCustomTargetTypesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IListCustomTargetTypesRequest);
+
+                    /** ListCustomTargetTypesRequest parent. */
+                    public parent: string;
+
+                    /** ListCustomTargetTypesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListCustomTargetTypesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListCustomTargetTypesRequest filter. */
+                    public filter: string;
+
+                    /** ListCustomTargetTypesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListCustomTargetTypesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListCustomTargetTypesRequest instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IListCustomTargetTypesRequest): google.cloud.deploy.v1.ListCustomTargetTypesRequest;
+
+                    /**
+                     * Encodes the specified ListCustomTargetTypesRequest message. Does not implicitly {@link google.cloud.deploy.v1.ListCustomTargetTypesRequest.verify|verify} messages.
+                     * @param message ListCustomTargetTypesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IListCustomTargetTypesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListCustomTargetTypesRequest message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.ListCustomTargetTypesRequest.verify|verify} messages.
+                     * @param message ListCustomTargetTypesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IListCustomTargetTypesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListCustomTargetTypesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListCustomTargetTypesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.ListCustomTargetTypesRequest;
+
+                    /**
+                     * Decodes a ListCustomTargetTypesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListCustomTargetTypesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.ListCustomTargetTypesRequest;
+
+                    /**
+                     * Verifies a ListCustomTargetTypesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListCustomTargetTypesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListCustomTargetTypesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.ListCustomTargetTypesRequest;
+
+                    /**
+                     * Creates a plain object from a ListCustomTargetTypesRequest message. Also converts values to other types if specified.
+                     * @param message ListCustomTargetTypesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.ListCustomTargetTypesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListCustomTargetTypesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListCustomTargetTypesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListCustomTargetTypesResponse. */
+                interface IListCustomTargetTypesResponse {
+
+                    /** ListCustomTargetTypesResponse customTargetTypes */
+                    customTargetTypes?: (google.cloud.deploy.v1.ICustomTargetType[]|null);
+
+                    /** ListCustomTargetTypesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListCustomTargetTypesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListCustomTargetTypesResponse. */
+                class ListCustomTargetTypesResponse implements IListCustomTargetTypesResponse {
+
+                    /**
+                     * Constructs a new ListCustomTargetTypesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IListCustomTargetTypesResponse);
+
+                    /** ListCustomTargetTypesResponse customTargetTypes. */
+                    public customTargetTypes: google.cloud.deploy.v1.ICustomTargetType[];
+
+                    /** ListCustomTargetTypesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListCustomTargetTypesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListCustomTargetTypesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListCustomTargetTypesResponse instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IListCustomTargetTypesResponse): google.cloud.deploy.v1.ListCustomTargetTypesResponse;
+
+                    /**
+                     * Encodes the specified ListCustomTargetTypesResponse message. Does not implicitly {@link google.cloud.deploy.v1.ListCustomTargetTypesResponse.verify|verify} messages.
+                     * @param message ListCustomTargetTypesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IListCustomTargetTypesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListCustomTargetTypesResponse message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.ListCustomTargetTypesResponse.verify|verify} messages.
+                     * @param message ListCustomTargetTypesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IListCustomTargetTypesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListCustomTargetTypesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListCustomTargetTypesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.ListCustomTargetTypesResponse;
+
+                    /**
+                     * Decodes a ListCustomTargetTypesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListCustomTargetTypesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.ListCustomTargetTypesResponse;
+
+                    /**
+                     * Verifies a ListCustomTargetTypesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListCustomTargetTypesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListCustomTargetTypesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.ListCustomTargetTypesResponse;
+
+                    /**
+                     * Creates a plain object from a ListCustomTargetTypesResponse message. Also converts values to other types if specified.
+                     * @param message ListCustomTargetTypesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.ListCustomTargetTypesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListCustomTargetTypesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListCustomTargetTypesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetCustomTargetTypeRequest. */
+                interface IGetCustomTargetTypeRequest {
+
+                    /** GetCustomTargetTypeRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetCustomTargetTypeRequest. */
+                class GetCustomTargetTypeRequest implements IGetCustomTargetTypeRequest {
+
+                    /**
+                     * Constructs a new GetCustomTargetTypeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IGetCustomTargetTypeRequest);
+
+                    /** GetCustomTargetTypeRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetCustomTargetTypeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetCustomTargetTypeRequest instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IGetCustomTargetTypeRequest): google.cloud.deploy.v1.GetCustomTargetTypeRequest;
+
+                    /**
+                     * Encodes the specified GetCustomTargetTypeRequest message. Does not implicitly {@link google.cloud.deploy.v1.GetCustomTargetTypeRequest.verify|verify} messages.
+                     * @param message GetCustomTargetTypeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IGetCustomTargetTypeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetCustomTargetTypeRequest message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.GetCustomTargetTypeRequest.verify|verify} messages.
+                     * @param message GetCustomTargetTypeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IGetCustomTargetTypeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetCustomTargetTypeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetCustomTargetTypeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.GetCustomTargetTypeRequest;
+
+                    /**
+                     * Decodes a GetCustomTargetTypeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetCustomTargetTypeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.GetCustomTargetTypeRequest;
+
+                    /**
+                     * Verifies a GetCustomTargetTypeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetCustomTargetTypeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetCustomTargetTypeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.GetCustomTargetTypeRequest;
+
+                    /**
+                     * Creates a plain object from a GetCustomTargetTypeRequest message. Also converts values to other types if specified.
+                     * @param message GetCustomTargetTypeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.GetCustomTargetTypeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetCustomTargetTypeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetCustomTargetTypeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateCustomTargetTypeRequest. */
+                interface ICreateCustomTargetTypeRequest {
+
+                    /** CreateCustomTargetTypeRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateCustomTargetTypeRequest customTargetTypeId */
+                    customTargetTypeId?: (string|null);
+
+                    /** CreateCustomTargetTypeRequest customTargetType */
+                    customTargetType?: (google.cloud.deploy.v1.ICustomTargetType|null);
+
+                    /** CreateCustomTargetTypeRequest requestId */
+                    requestId?: (string|null);
+
+                    /** CreateCustomTargetTypeRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a CreateCustomTargetTypeRequest. */
+                class CreateCustomTargetTypeRequest implements ICreateCustomTargetTypeRequest {
+
+                    /**
+                     * Constructs a new CreateCustomTargetTypeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.ICreateCustomTargetTypeRequest);
+
+                    /** CreateCustomTargetTypeRequest parent. */
+                    public parent: string;
+
+                    /** CreateCustomTargetTypeRequest customTargetTypeId. */
+                    public customTargetTypeId: string;
+
+                    /** CreateCustomTargetTypeRequest customTargetType. */
+                    public customTargetType?: (google.cloud.deploy.v1.ICustomTargetType|null);
+
+                    /** CreateCustomTargetTypeRequest requestId. */
+                    public requestId: string;
+
+                    /** CreateCustomTargetTypeRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new CreateCustomTargetTypeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateCustomTargetTypeRequest instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.ICreateCustomTargetTypeRequest): google.cloud.deploy.v1.CreateCustomTargetTypeRequest;
+
+                    /**
+                     * Encodes the specified CreateCustomTargetTypeRequest message. Does not implicitly {@link google.cloud.deploy.v1.CreateCustomTargetTypeRequest.verify|verify} messages.
+                     * @param message CreateCustomTargetTypeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.ICreateCustomTargetTypeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateCustomTargetTypeRequest message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.CreateCustomTargetTypeRequest.verify|verify} messages.
+                     * @param message CreateCustomTargetTypeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.ICreateCustomTargetTypeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateCustomTargetTypeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateCustomTargetTypeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.CreateCustomTargetTypeRequest;
+
+                    /**
+                     * Decodes a CreateCustomTargetTypeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateCustomTargetTypeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.CreateCustomTargetTypeRequest;
+
+                    /**
+                     * Verifies a CreateCustomTargetTypeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateCustomTargetTypeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateCustomTargetTypeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.CreateCustomTargetTypeRequest;
+
+                    /**
+                     * Creates a plain object from a CreateCustomTargetTypeRequest message. Also converts values to other types if specified.
+                     * @param message CreateCustomTargetTypeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.CreateCustomTargetTypeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateCustomTargetTypeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateCustomTargetTypeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateCustomTargetTypeRequest. */
+                interface IUpdateCustomTargetTypeRequest {
+
+                    /** UpdateCustomTargetTypeRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateCustomTargetTypeRequest customTargetType */
+                    customTargetType?: (google.cloud.deploy.v1.ICustomTargetType|null);
+
+                    /** UpdateCustomTargetTypeRequest requestId */
+                    requestId?: (string|null);
+
+                    /** UpdateCustomTargetTypeRequest allowMissing */
+                    allowMissing?: (boolean|null);
+
+                    /** UpdateCustomTargetTypeRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents an UpdateCustomTargetTypeRequest. */
+                class UpdateCustomTargetTypeRequest implements IUpdateCustomTargetTypeRequest {
+
+                    /**
+                     * Constructs a new UpdateCustomTargetTypeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IUpdateCustomTargetTypeRequest);
+
+                    /** UpdateCustomTargetTypeRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateCustomTargetTypeRequest customTargetType. */
+                    public customTargetType?: (google.cloud.deploy.v1.ICustomTargetType|null);
+
+                    /** UpdateCustomTargetTypeRequest requestId. */
+                    public requestId: string;
+
+                    /** UpdateCustomTargetTypeRequest allowMissing. */
+                    public allowMissing: boolean;
+
+                    /** UpdateCustomTargetTypeRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new UpdateCustomTargetTypeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateCustomTargetTypeRequest instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IUpdateCustomTargetTypeRequest): google.cloud.deploy.v1.UpdateCustomTargetTypeRequest;
+
+                    /**
+                     * Encodes the specified UpdateCustomTargetTypeRequest message. Does not implicitly {@link google.cloud.deploy.v1.UpdateCustomTargetTypeRequest.verify|verify} messages.
+                     * @param message UpdateCustomTargetTypeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IUpdateCustomTargetTypeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateCustomTargetTypeRequest message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.UpdateCustomTargetTypeRequest.verify|verify} messages.
+                     * @param message UpdateCustomTargetTypeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IUpdateCustomTargetTypeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateCustomTargetTypeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateCustomTargetTypeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.UpdateCustomTargetTypeRequest;
+
+                    /**
+                     * Decodes an UpdateCustomTargetTypeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateCustomTargetTypeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.UpdateCustomTargetTypeRequest;
+
+                    /**
+                     * Verifies an UpdateCustomTargetTypeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateCustomTargetTypeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateCustomTargetTypeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.UpdateCustomTargetTypeRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateCustomTargetTypeRequest message. Also converts values to other types if specified.
+                     * @param message UpdateCustomTargetTypeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.UpdateCustomTargetTypeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateCustomTargetTypeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateCustomTargetTypeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteCustomTargetTypeRequest. */
+                interface IDeleteCustomTargetTypeRequest {
+
+                    /** DeleteCustomTargetTypeRequest name */
+                    name?: (string|null);
+
+                    /** DeleteCustomTargetTypeRequest requestId */
+                    requestId?: (string|null);
+
+                    /** DeleteCustomTargetTypeRequest allowMissing */
+                    allowMissing?: (boolean|null);
+
+                    /** DeleteCustomTargetTypeRequest validateOnly */
+                    validateOnly?: (boolean|null);
+
+                    /** DeleteCustomTargetTypeRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a DeleteCustomTargetTypeRequest. */
+                class DeleteCustomTargetTypeRequest implements IDeleteCustomTargetTypeRequest {
+
+                    /**
+                     * Constructs a new DeleteCustomTargetTypeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IDeleteCustomTargetTypeRequest);
+
+                    /** DeleteCustomTargetTypeRequest name. */
+                    public name: string;
+
+                    /** DeleteCustomTargetTypeRequest requestId. */
+                    public requestId: string;
+
+                    /** DeleteCustomTargetTypeRequest allowMissing. */
+                    public allowMissing: boolean;
+
+                    /** DeleteCustomTargetTypeRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /** DeleteCustomTargetTypeRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new DeleteCustomTargetTypeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteCustomTargetTypeRequest instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IDeleteCustomTargetTypeRequest): google.cloud.deploy.v1.DeleteCustomTargetTypeRequest;
+
+                    /**
+                     * Encodes the specified DeleteCustomTargetTypeRequest message. Does not implicitly {@link google.cloud.deploy.v1.DeleteCustomTargetTypeRequest.verify|verify} messages.
+                     * @param message DeleteCustomTargetTypeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IDeleteCustomTargetTypeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteCustomTargetTypeRequest message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.DeleteCustomTargetTypeRequest.verify|verify} messages.
+                     * @param message DeleteCustomTargetTypeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IDeleteCustomTargetTypeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteCustomTargetTypeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteCustomTargetTypeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.DeleteCustomTargetTypeRequest;
+
+                    /**
+                     * Decodes a DeleteCustomTargetTypeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteCustomTargetTypeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.DeleteCustomTargetTypeRequest;
+
+                    /**
+                     * Verifies a DeleteCustomTargetTypeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteCustomTargetTypeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteCustomTargetTypeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.DeleteCustomTargetTypeRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteCustomTargetTypeRequest message. Also converts values to other types if specified.
+                     * @param message DeleteCustomTargetTypeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.DeleteCustomTargetTypeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteCustomTargetTypeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteCustomTargetTypeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a TargetAttribute. */
                 interface ITargetAttribute {
 
@@ -6155,6 +7661,9 @@ export namespace google {
                     /** Release targetSnapshots */
                     targetSnapshots?: (google.cloud.deploy.v1.ITarget[]|null);
 
+                    /** Release customTargetTypeSnapshots */
+                    customTargetTypeSnapshots?: (google.cloud.deploy.v1.ICustomTargetType[]|null);
+
                     /** Release renderState */
                     renderState?: (google.cloud.deploy.v1.Release.RenderState|keyof typeof google.cloud.deploy.v1.Release.RenderState|null);
 
@@ -6227,6 +7736,9 @@ export namespace google {
 
                     /** Release targetSnapshots. */
                     public targetSnapshots: google.cloud.deploy.v1.ITarget[];
+
+                    /** Release customTargetTypeSnapshots. */
+                    public customTargetTypeSnapshots: google.cloud.deploy.v1.ICustomTargetType[];
 
                     /** Release renderState. */
                     public renderState: (google.cloud.deploy.v1.Release.RenderState|keyof typeof google.cloud.deploy.v1.Release.RenderState);
@@ -6475,7 +7987,9 @@ export namespace google {
                             EXECUTION_FAILED = 2,
                             CLOUD_BUILD_REQUEST_FAILED = 3,
                             VERIFICATION_CONFIG_NOT_FOUND = 4,
-                            CUSTOM_ACTION_NOT_FOUND = 5
+                            CUSTOM_ACTION_NOT_FOUND = 5,
+                            DEPLOYMENT_STRATEGY_NOT_SUPPORTED = 6,
+                            RENDER_FEATURE_NOT_SUPPORTED = 7
                         }
                     }
 
@@ -7333,6 +8847,9 @@ export namespace google {
 
                     /** RenderMetadata cloudRun */
                     cloudRun?: (google.cloud.deploy.v1.ICloudRunRenderMetadata|null);
+
+                    /** RenderMetadata custom */
+                    custom?: (google.cloud.deploy.v1.ICustomMetadata|null);
                 }
 
                 /** Represents a RenderMetadata. */
@@ -7346,6 +8863,9 @@ export namespace google {
 
                     /** RenderMetadata cloudRun. */
                     public cloudRun?: (google.cloud.deploy.v1.ICloudRunRenderMetadata|null);
+
+                    /** RenderMetadata custom. */
+                    public custom?: (google.cloud.deploy.v1.ICustomMetadata|null);
 
                     /**
                      * Creates a new RenderMetadata instance using the specified properties.
@@ -8131,7 +9651,8 @@ export namespace google {
                         RELEASE_FAILED = 4,
                         RELEASE_ABANDONED = 5,
                         VERIFICATION_CONFIG_NOT_FOUND = 6,
-                        CLOUD_BUILD_REQUEST_FAILED = 7
+                        CLOUD_BUILD_REQUEST_FAILED = 7,
+                        OPERATION_FEATURE_NOT_SUPPORTED = 8
                     }
                 }
 
@@ -8143,6 +9664,9 @@ export namespace google {
 
                     /** Metadata automation */
                     automation?: (google.cloud.deploy.v1.IAutomationRolloutMetadata|null);
+
+                    /** Metadata custom */
+                    custom?: (google.cloud.deploy.v1.ICustomMetadata|null);
                 }
 
                 /** Represents a Metadata. */
@@ -8159,6 +9683,9 @@ export namespace google {
 
                     /** Metadata automation. */
                     public automation?: (google.cloud.deploy.v1.IAutomationRolloutMetadata|null);
+
+                    /** Metadata custom. */
+                    public custom?: (google.cloud.deploy.v1.ICustomMetadata|null);
 
                     /**
                      * Creates a new Metadata instance using the specified properties.
@@ -8243,6 +9770,12 @@ export namespace google {
 
                     /** DeployJobRunMetadata cloudRun */
                     cloudRun?: (google.cloud.deploy.v1.ICloudRunMetadata|null);
+
+                    /** DeployJobRunMetadata customTarget */
+                    customTarget?: (google.cloud.deploy.v1.ICustomTargetDeployMetadata|null);
+
+                    /** DeployJobRunMetadata custom */
+                    custom?: (google.cloud.deploy.v1.ICustomMetadata|null);
                 }
 
                 /** Represents a DeployJobRunMetadata. */
@@ -8256,6 +9789,12 @@ export namespace google {
 
                     /** DeployJobRunMetadata cloudRun. */
                     public cloudRun?: (google.cloud.deploy.v1.ICloudRunMetadata|null);
+
+                    /** DeployJobRunMetadata customTarget. */
+                    public customTarget?: (google.cloud.deploy.v1.ICustomTargetDeployMetadata|null);
+
+                    /** DeployJobRunMetadata custom. */
+                    public custom?: (google.cloud.deploy.v1.ICustomMetadata|null);
 
                     /**
                      * Creates a new DeployJobRunMetadata instance using the specified properties.
@@ -8450,6 +9989,103 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a CustomTargetDeployMetadata. */
+                interface ICustomTargetDeployMetadata {
+
+                    /** CustomTargetDeployMetadata skipMessage */
+                    skipMessage?: (string|null);
+                }
+
+                /** Represents a CustomTargetDeployMetadata. */
+                class CustomTargetDeployMetadata implements ICustomTargetDeployMetadata {
+
+                    /**
+                     * Constructs a new CustomTargetDeployMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.ICustomTargetDeployMetadata);
+
+                    /** CustomTargetDeployMetadata skipMessage. */
+                    public skipMessage: string;
+
+                    /**
+                     * Creates a new CustomTargetDeployMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CustomTargetDeployMetadata instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.ICustomTargetDeployMetadata): google.cloud.deploy.v1.CustomTargetDeployMetadata;
+
+                    /**
+                     * Encodes the specified CustomTargetDeployMetadata message. Does not implicitly {@link google.cloud.deploy.v1.CustomTargetDeployMetadata.verify|verify} messages.
+                     * @param message CustomTargetDeployMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.ICustomTargetDeployMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CustomTargetDeployMetadata message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.CustomTargetDeployMetadata.verify|verify} messages.
+                     * @param message CustomTargetDeployMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.ICustomTargetDeployMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CustomTargetDeployMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CustomTargetDeployMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.CustomTargetDeployMetadata;
+
+                    /**
+                     * Decodes a CustomTargetDeployMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CustomTargetDeployMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.CustomTargetDeployMetadata;
+
+                    /**
+                     * Verifies a CustomTargetDeployMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CustomTargetDeployMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CustomTargetDeployMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.CustomTargetDeployMetadata;
+
+                    /**
+                     * Creates a plain object from a CustomTargetDeployMetadata message. Also converts values to other types if specified.
+                     * @param message CustomTargetDeployMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.CustomTargetDeployMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CustomTargetDeployMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CustomTargetDeployMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an AutomationRolloutMetadata. */
                 interface IAutomationRolloutMetadata {
 
@@ -8553,6 +10189,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for AutomationRolloutMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CustomMetadata. */
+                interface ICustomMetadata {
+
+                    /** CustomMetadata values */
+                    values?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a CustomMetadata. */
+                class CustomMetadata implements ICustomMetadata {
+
+                    /**
+                     * Constructs a new CustomMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.ICustomMetadata);
+
+                    /** CustomMetadata values. */
+                    public values: { [k: string]: string };
+
+                    /**
+                     * Creates a new CustomMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CustomMetadata instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.ICustomMetadata): google.cloud.deploy.v1.CustomMetadata;
+
+                    /**
+                     * Encodes the specified CustomMetadata message. Does not implicitly {@link google.cloud.deploy.v1.CustomMetadata.verify|verify} messages.
+                     * @param message CustomMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.ICustomMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CustomMetadata message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.CustomMetadata.verify|verify} messages.
+                     * @param message CustomMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.ICustomMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CustomMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CustomMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.CustomMetadata;
+
+                    /**
+                     * Decodes a CustomMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CustomMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.CustomMetadata;
+
+                    /**
+                     * Verifies a CustomMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CustomMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CustomMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.CustomMetadata;
+
+                    /**
+                     * Creates a plain object from a CustomMetadata message. Also converts values to other types if specified.
+                     * @param message CustomMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.CustomMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CustomMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CustomMetadata
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -11721,7 +13454,8 @@ export namespace google {
                         EXECUTION_FAILED = 2,
                         DEADLINE_EXCEEDED = 3,
                         MISSING_RESOURCES_FOR_CANARY = 4,
-                        CLOUD_BUILD_REQUEST_FAILED = 5
+                        CLOUD_BUILD_REQUEST_FAILED = 5,
+                        DEPLOY_FEATURE_NOT_SUPPORTED = 6
                     }
                 }
 

@@ -36,6 +36,12 @@ function main() {
    *  ID of the project that contains the read replica.
    */
   // const project = 'my-project'
+  /**
+   *  Set to true if the promote operation should attempt to re-add the original
+   *  primary as a replica when it comes back online. Otherwise, if this value is
+   *  false or not set, the original primary will be a standalone instance.
+   */
+  // const failover = true
 
   // Imports the Sql library
   const {SqlInstancesServiceClient} = require('@google-cloud/sql').v1beta4;

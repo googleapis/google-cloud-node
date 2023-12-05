@@ -2160,15 +2160,38 @@
                       }
                     },
                     "DataQualityResult": {
+                      "oneofs": {
+                        "_score": {
+                          "oneof": [
+                            "score"
+                          ]
+                        }
+                      },
                       "fields": {
                         "passed": {
                           "type": "bool",
                           "id": 5
                         },
+                        "score": {
+                          "type": "float",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
                         "dimensions": {
                           "rule": "repeated",
                           "type": "DataQualityDimensionResult",
                           "id": 2
+                        },
+                        "columns": {
+                          "rule": "repeated",
+                          "type": "DataQualityColumnResult",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "rules": {
                           "rule": "repeated",
@@ -2268,6 +2291,13 @@
                       }
                     },
                     "DataQualityDimensionResult": {
+                      "oneofs": {
+                        "_score": {
+                          "oneof": [
+                            "score"
+                          ]
+                        }
+                      },
                       "fields": {
                         "dimension": {
                           "type": "DataQualityDimension",
@@ -2279,6 +2309,14 @@
                         "passed": {
                           "type": "bool",
                           "id": 3
+                        },
+                        "score": {
+                          "type": "float",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -2512,6 +2550,32 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
+                          }
+                        }
+                      }
+                    },
+                    "DataQualityColumnResult": {
+                      "oneofs": {
+                        "_score": {
+                          "oneof": [
+                            "score"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "column": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "score": {
+                          "type": "float",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
                           }
                         }
                       }
