@@ -7628,6 +7628,9 @@ export namespace google {
                     /** SearchRelatedAccountGroupMembershipsRequest project */
                     project?: (string|null);
 
+                    /** SearchRelatedAccountGroupMembershipsRequest accountId */
+                    accountId?: (string|null);
+
                     /** SearchRelatedAccountGroupMembershipsRequest hashedAccountId */
                     hashedAccountId?: (Uint8Array|string|null);
 
@@ -7649,6 +7652,9 @@ export namespace google {
 
                     /** SearchRelatedAccountGroupMembershipsRequest project. */
                     public project: string;
+
+                    /** SearchRelatedAccountGroupMembershipsRequest accountId. */
+                    public accountId: string;
 
                     /** SearchRelatedAccountGroupMembershipsRequest hashedAccountId. */
                     public hashedAccountId: (Uint8Array|string);
@@ -7846,6 +7852,9 @@ export namespace google {
                     /** RelatedAccountGroupMembership name */
                     name?: (string|null);
 
+                    /** RelatedAccountGroupMembership accountId */
+                    accountId?: (string|null);
+
                     /** RelatedAccountGroupMembership hashedAccountId */
                     hashedAccountId?: (Uint8Array|string|null);
                 }
@@ -7861,6 +7870,9 @@ export namespace google {
 
                     /** RelatedAccountGroupMembership name. */
                     public name: string;
+
+                    /** RelatedAccountGroupMembership accountId. */
+                    public accountId: string;
 
                     /** RelatedAccountGroupMembership hashedAccountId. */
                     public hashedAccountId: (Uint8Array|string);
