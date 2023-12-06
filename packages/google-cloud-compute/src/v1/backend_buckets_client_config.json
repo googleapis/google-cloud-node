@@ -36,6 +36,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "GetIamPolicy": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "Insert": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
@@ -49,6 +53,14 @@
           "retry_params_name": "default"
         },
         "SetEdgeSecurityPolicy": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "SetIamPolicy": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "TestIamPermissions": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },

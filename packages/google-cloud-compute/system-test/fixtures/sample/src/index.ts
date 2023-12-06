@@ -91,6 +91,7 @@ import {
   SecurityPoliciesClient,
   ServiceAttachmentsClient,
   SnapshotsClient,
+  SnapshotSettingsServiceClient,
   SslCertificatesClient,
   SslPoliciesClient,
   SubnetworksClient,
@@ -384,6 +385,11 @@ function doStuffWithServiceAttachmentsClient(client: ServiceAttachmentsClient) {
   client.close();
 }
 function doStuffWithSnapshotsClient(client: SnapshotsClient) {
+  client.close();
+}
+function doStuffWithSnapshotSettingsServiceClient(
+  client: SnapshotSettingsServiceClient
+) {
   client.close();
 }
 function doStuffWithSslCertificatesClient(client: SslCertificatesClient) {
@@ -685,6 +691,9 @@ function main() {
   // check that the client instance can be created
   const snapshotsClient = new SnapshotsClient();
   doStuffWithSnapshotsClient(snapshotsClient);
+  // check that the client instance can be created
+  const snapshotSettingsServiceClient = new SnapshotSettingsServiceClient();
+  doStuffWithSnapshotSettingsServiceClient(snapshotSettingsServiceClient);
   // check that the client instance can be created
   const sslCertificatesClient = new SslCertificatesClient();
   doStuffWithSslCertificatesClient(sslCertificatesClient);

@@ -90,6 +90,7 @@ export {RoutesClient} from './routes_client';
 export {SecurityPoliciesClient} from './security_policies_client';
 export {ServiceAttachmentsClient} from './service_attachments_client';
 export {SnapshotsClient} from './snapshots_client';
+export {SnapshotSettingsServiceClient} from './snapshot_settings_service_client';
 export {SslCertificatesClient} from './ssl_certificates_client';
 export {SslPoliciesClient} from './ssl_policies_client';
 export {SubnetworksClient} from './subnetworks_client';
