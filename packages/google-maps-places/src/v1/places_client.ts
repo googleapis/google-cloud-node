@@ -37,10 +37,11 @@ const version = require('../../../package.json').version;
 
 /**
  *  Service definition for the Places API.
- *  Note: every request actually requires a field mask set outside of the request
- *  proto (all/'*' is not assumed).  That can be set via either a side channel
- *  (SystemParameterContext) over RPC, or a header (X-Goog-FieldMask) over HTTP.
- *  See: https://cloud.google.com/apis/docs/system-parameters
+ *  Note: every request actually requires a field mask set outside of
+ *  the request proto (all/'*', is not assumed).  That can be set via either a
+ *  side channel (SystemParameterContext) over RPC, or a header
+ *  (X-Goog-FieldMask) over HTTP. See:
+ *  https://cloud.google.com/apis/docs/system-parameters
  * @class
  * @memberof v1
  */
@@ -348,13 +349,17 @@ export class PlacesClient {
    *   affect results based on applicable law.
    *
    *   For more information, see
-   *   http://www.unicode.org/reports/tr35/#unicode_region_subtag.
+   *   https://www.unicode.org/cldr/charts/latest/supplemental/territory_language_information.html.
    *
    *
    *   Note that 3-digit region codes are not currently supported.
    * @param {string[]} request.includedTypes
    *   Included Place type (eg, "restaurant" or "gas_station") from
-   *   https://developers.google.com/places/supported_types.
+   *   https://developers.google.com/maps/documentation/places/web-service/place-types.
+   *
+   *   Up to 50 types from [Table
+   *   A](https://developers.google.com/maps/documentation/places/web-service/place-types#table-a)
+   *   may be specified.
    *
    *   If there are any conflicting types, i.e. a type appears in both
    *   included_types and excluded_types, an INVALID_ARGUMENT error is
@@ -363,11 +368,15 @@ export class PlacesClient {
    *   If a Place type is specified with multiple type restrictions, only places
    *   that satisfy all of the restrictions are returned. For example, if we
    *   have {included_types = ["restaurant"], excluded_primary_types =
-   *   ["restaurant"]}, the returned places are POIs that provide "restaurant"
+   *   ["restaurant"]}, the returned places provide "restaurant"
    *   related services but do not operate primarily as "restaurants".
    * @param {string[]} request.excludedTypes
    *   Excluded Place type (eg, "restaurant" or "gas_station") from
-   *   https://developers.google.com/places/supported_types.
+   *   https://developers.google.com/maps/documentation/places/web-service/place-types.
+   *
+   *   Up to 50 types from [Table
+   *   A](https://developers.google.com/maps/documentation/places/web-service/place-types#table-a)
+   *   may be specified.
    *
    *   If the client provides both included_types (e.g. restaurant) and
    *   excluded_types (e.g. cafe), then the response should include places that
@@ -380,11 +389,17 @@ export class PlacesClient {
    *   If a Place type is specified with multiple type restrictions, only places
    *   that satisfy all of the restrictions are returned. For example, if we
    *   have {included_types = ["restaurant"], excluded_primary_types =
-   *   ["restaurant"]}, the returned places are POIs that provide "restaurant"
+   *   ["restaurant"]}, the returned places provide "restaurant"
    *   related services but do not operate primarily as "restaurants".
    * @param {string[]} request.includedPrimaryTypes
    *   Included primary Place type (e.g. "restaurant" or "gas_station") from
-   *   https://developers.google.com/places/supported_types.
+   *   https://developers.google.com/maps/documentation/places/web-service/place-types.
+   *   A place can only have a single primary type from the supported types table
+   *   associated with it.
+   *
+   *   Up to 50 types from [Table
+   *   A](https://developers.google.com/maps/documentation/places/web-service/place-types#table-a)
+   *   may be specified.
    *
    *   If there are any conflicting primary types, i.e. a type appears in both
    *   included_primary_types and excluded_primary_types, an INVALID_ARGUMENT
@@ -393,11 +408,15 @@ export class PlacesClient {
    *   If a Place type is specified with multiple type restrictions, only places
    *   that satisfy all of the restrictions are returned. For example, if we
    *   have {included_types = ["restaurant"], excluded_primary_types =
-   *   ["restaurant"]}, the returned places are POIs that provide "restaurant"
+   *   ["restaurant"]}, the returned places provide "restaurant"
    *   related services but do not operate primarily as "restaurants".
    * @param {string[]} request.excludedPrimaryTypes
    *   Excluded primary Place type (e.g. "restaurant" or "gas_station") from
-   *   https://developers.google.com/places/supported_types.
+   *   https://developers.google.com/maps/documentation/places/web-service/place-types.
+   *
+   *   Up to 50 types from [Table
+   *   A](https://developers.google.com/maps/documentation/places/web-service/place-types#table-a)
+   *   may be specified.
    *
    *   If there are any conflicting primary types, i.e. a type appears in both
    *   included_primary_types and excluded_primary_types, an INVALID_ARGUMENT
@@ -406,10 +425,10 @@ export class PlacesClient {
    *   If a Place type is specified with multiple type restrictions, only places
    *   that satisfy all of the restrictions are returned. For example, if we
    *   have {included_types = ["restaurant"], excluded_primary_types =
-   *   ["restaurant"]}, the returned places are POIs that provide "restaurant"
+   *   ["restaurant"]}, the returned places provide "restaurant"
    *   related services but do not operate primarily as "restaurants".
    * @param {number} request.maxResultCount
-   *   Maximum number of results to return. It must be between 1 and 20,
+   *   Maximum number of results to return. It must be between 1 and 20 (default),
    *   inclusively. If the number is unset, it falls back to the upper limit. If
    *   the number is set to negative or exceeds the upper limit, an
    *   INVALID_ARGUMENT error is returned.
@@ -510,7 +529,7 @@ export class PlacesClient {
    *   affect results based on applicable law.
    *
    *   For more information, see
-   *   http://www.unicode.org/reports/tr35/#unicode_region_subtag.
+   *   https://www.unicode.org/cldr/charts/latest/supplemental/territory_language_information.html.
    *
    *
    *   Note that 3-digit region codes are not currently supported.
@@ -518,23 +537,22 @@ export class PlacesClient {
    *   How results will be ranked in the response.
    * @param {string} request.includedType
    *   The requested place type. Full list of types supported:
-   *   https://developers.google.com/places/supported_types. Only support one
-   *   included type.
+   *   https://developers.google.com/maps/documentation/places/web-service/place-types.
+   *   Only support one included type.
    * @param {boolean} request.openNow
-   *   Used to restrict the search to places that are open at a specific time.
-   *   open_now marks if a business is currently open.
+   *   Used to restrict the search to places that are currently open.  The default
+   *   is false.
    * @param {number} request.minRating
    *   Filter out results whose average user rating is strictly less than this
-   *   limit. A valid value must be an float between 0 and 5 (inclusively) at a
-   *   0.5 cadence i.e. [0, 0.5, 1.0, ... , 5.0] inclusively. This is to keep
-   *   parity with LocalRefinement_UserRating. The input rating will round up to
-   *   the nearest 0.5(ceiling). For instance, a rating of 0.6 will eliminate all
-   *   results with a less than 1.0 rating.
+   *   limit. A valid value must be a float between 0 and 5 (inclusively) at a
+   *   0.5 cadence i.e. [0, 0.5, 1.0, ... , 5.0] inclusively. The input rating
+   *   will round up to the nearest 0.5(ceiling). For instance, a rating of 0.6
+   *   will eliminate all results with a less than 1.0 rating.
    * @param {number} request.maxResultCount
    *   Maximum number of results to return. It must be between 1 and 20,
-   *   inclusively. If the number is unset, it falls back to the upper limit. If
-   *   the number is set to negative or exceeds the upper limit, an
-   *   INVALID_ARGUMENT error is returned.
+   *   inclusively. The default is 20.  If the number is unset, it falls back to
+   *   the upper limit. If the number is set to negative or exceeds the upper
+   *   limit, an INVALID_ARGUMENT error is returned.
    * @param {number[]} request.priceLevels
    *   Used to restrict the search to places that are marked as certain price
    *   levels. Users can choose any combinations of price levels. Default to
@@ -627,9 +645,13 @@ export class PlacesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of a photo. It is returned in Place's
-   *   photos.name field. Format:
-   *   places/<place_id>/photos/<photo_reference>/media.
+   *   Required. The resource name of a photo media in the format:
+   *   `places/{place_id}/photos/{photo_reference}/media`.
+   *
+   *   The resource name of a photo as returned in a Place object's `photos.name`
+   *   field comes with the format
+   *   `places/{place_id}/photos/{photo_reference}`. You need to append `/media`
+   *   at the end of the photo resource to get the photo media resource name.
    * @param {number} [request.maxWidthPx]
    *   Optional. Specifies the maximum desired width, in pixels, of the image. If
    *   the image is smaller than the values specified, the original image will be
@@ -658,7 +680,7 @@ export class PlacesClient {
    *   Optional. If set, skip the default HTTP redirect behavior and render a text
    *   format (for example, in JSON format for HTTP use case) response. If not
    *   set, an HTTP redirect will be issued to redirect the call to the image
-   *   midea. This option is ignored for non-HTTP requests.
+   *   media. This option is ignored for non-HTTP requests.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -735,13 +757,14 @@ export class PlacesClient {
     return this.innerApiCalls.getPhotoMedia(request, options, callback);
   }
   /**
-   * Get a Place with a place id (in a name) string.
+   * Get place details with a place id (in a name) string.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. A place_id returned in a Place (with "places/" prefix), or
-   *   equivalently the name in the same Place. Format: places/<place_id>.
+   *   Required. A place ID returned in a Place (with "places/" prefix), or
+   *   equivalently the name in the same Place. Format:
+   *   `places/{place_id}`.
    * @param {string} [request.languageCode]
    *   Optional. Place details will be displayed with the preferred language if
    *   available.
@@ -754,7 +777,7 @@ export class PlacesClient {
    *   details, like region-specific place name, if available. The parameter can
    *   affect results based on applicable law.
    *   For more information, see
-   *   http://www.unicode.org/reports/tr35/#unicode_region_subtag.
+   *   https://www.unicode.org/cldr/charts/latest/supplemental/territory_language_information.html.
    *
    *
    *   Note that 3-digit region codes are not currently supported.
