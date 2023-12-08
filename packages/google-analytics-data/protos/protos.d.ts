@@ -12760,6 +12760,62 @@ export namespace google {
                      * @returns Promise
                      */
                     public checkCompatibility(request: google.analytics.data.v1beta.ICheckCompatibilityRequest): Promise<google.analytics.data.v1beta.CheckCompatibilityResponse>;
+
+                    /**
+                     * Calls CreateAudienceExport.
+                     * @param request CreateAudienceExportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createAudienceExport(request: google.analytics.data.v1beta.ICreateAudienceExportRequest, callback: google.analytics.data.v1beta.BetaAnalyticsData.CreateAudienceExportCallback): void;
+
+                    /**
+                     * Calls CreateAudienceExport.
+                     * @param request CreateAudienceExportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createAudienceExport(request: google.analytics.data.v1beta.ICreateAudienceExportRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls QueryAudienceExport.
+                     * @param request QueryAudienceExportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and QueryAudienceExportResponse
+                     */
+                    public queryAudienceExport(request: google.analytics.data.v1beta.IQueryAudienceExportRequest, callback: google.analytics.data.v1beta.BetaAnalyticsData.QueryAudienceExportCallback): void;
+
+                    /**
+                     * Calls QueryAudienceExport.
+                     * @param request QueryAudienceExportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public queryAudienceExport(request: google.analytics.data.v1beta.IQueryAudienceExportRequest): Promise<google.analytics.data.v1beta.QueryAudienceExportResponse>;
+
+                    /**
+                     * Calls GetAudienceExport.
+                     * @param request GetAudienceExportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AudienceExport
+                     */
+                    public getAudienceExport(request: google.analytics.data.v1beta.IGetAudienceExportRequest, callback: google.analytics.data.v1beta.BetaAnalyticsData.GetAudienceExportCallback): void;
+
+                    /**
+                     * Calls GetAudienceExport.
+                     * @param request GetAudienceExportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getAudienceExport(request: google.analytics.data.v1beta.IGetAudienceExportRequest): Promise<google.analytics.data.v1beta.AudienceExport>;
+
+                    /**
+                     * Calls ListAudienceExports.
+                     * @param request ListAudienceExportsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAudienceExportsResponse
+                     */
+                    public listAudienceExports(request: google.analytics.data.v1beta.IListAudienceExportsRequest, callback: google.analytics.data.v1beta.BetaAnalyticsData.ListAudienceExportsCallback): void;
+
+                    /**
+                     * Calls ListAudienceExports.
+                     * @param request ListAudienceExportsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAudienceExports(request: google.analytics.data.v1beta.IListAudienceExportsRequest): Promise<google.analytics.data.v1beta.ListAudienceExportsResponse>;
                 }
 
                 namespace BetaAnalyticsData {
@@ -12812,6 +12868,34 @@ export namespace google {
                      * @param [response] CheckCompatibilityResponse
                      */
                     type CheckCompatibilityCallback = (error: (Error|null), response?: google.analytics.data.v1beta.CheckCompatibilityResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData|createAudienceExport}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateAudienceExportCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData|queryAudienceExport}.
+                     * @param error Error, if any
+                     * @param [response] QueryAudienceExportResponse
+                     */
+                    type QueryAudienceExportCallback = (error: (Error|null), response?: google.analytics.data.v1beta.QueryAudienceExportResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData|getAudienceExport}.
+                     * @param error Error, if any
+                     * @param [response] AudienceExport
+                     */
+                    type GetAudienceExportCallback = (error: (Error|null), response?: google.analytics.data.v1beta.AudienceExport) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData|listAudienceExports}.
+                     * @param error Error, if any
+                     * @param [response] ListAudienceExportsResponse
+                     */
+                    type ListAudienceExportsCallback = (error: (Error|null), response?: google.analytics.data.v1beta.ListAudienceExportsResponse) => void;
                 }
 
                 /** Properties of a CheckCompatibilityRequest. */
@@ -14574,6 +14658,1207 @@ export namespace google {
 
                     /**
                      * Gets the default type url for RunRealtimeReportResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetAudienceExportRequest. */
+                interface IGetAudienceExportRequest {
+
+                    /** GetAudienceExportRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetAudienceExportRequest. */
+                class GetAudienceExportRequest implements IGetAudienceExportRequest {
+
+                    /**
+                     * Constructs a new GetAudienceExportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IGetAudienceExportRequest);
+
+                    /** GetAudienceExportRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetAudienceExportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetAudienceExportRequest instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IGetAudienceExportRequest): google.analytics.data.v1beta.GetAudienceExportRequest;
+
+                    /**
+                     * Encodes the specified GetAudienceExportRequest message. Does not implicitly {@link google.analytics.data.v1beta.GetAudienceExportRequest.verify|verify} messages.
+                     * @param message GetAudienceExportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IGetAudienceExportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetAudienceExportRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.GetAudienceExportRequest.verify|verify} messages.
+                     * @param message GetAudienceExportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IGetAudienceExportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetAudienceExportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetAudienceExportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.GetAudienceExportRequest;
+
+                    /**
+                     * Decodes a GetAudienceExportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetAudienceExportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.GetAudienceExportRequest;
+
+                    /**
+                     * Verifies a GetAudienceExportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetAudienceExportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetAudienceExportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.GetAudienceExportRequest;
+
+                    /**
+                     * Creates a plain object from a GetAudienceExportRequest message. Also converts values to other types if specified.
+                     * @param message GetAudienceExportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.GetAudienceExportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetAudienceExportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetAudienceExportRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAudienceExportsRequest. */
+                interface IListAudienceExportsRequest {
+
+                    /** ListAudienceExportsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListAudienceExportsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAudienceExportsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListAudienceExportsRequest. */
+                class ListAudienceExportsRequest implements IListAudienceExportsRequest {
+
+                    /**
+                     * Constructs a new ListAudienceExportsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IListAudienceExportsRequest);
+
+                    /** ListAudienceExportsRequest parent. */
+                    public parent: string;
+
+                    /** ListAudienceExportsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAudienceExportsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListAudienceExportsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAudienceExportsRequest instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IListAudienceExportsRequest): google.analytics.data.v1beta.ListAudienceExportsRequest;
+
+                    /**
+                     * Encodes the specified ListAudienceExportsRequest message. Does not implicitly {@link google.analytics.data.v1beta.ListAudienceExportsRequest.verify|verify} messages.
+                     * @param message ListAudienceExportsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IListAudienceExportsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAudienceExportsRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.ListAudienceExportsRequest.verify|verify} messages.
+                     * @param message ListAudienceExportsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IListAudienceExportsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAudienceExportsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAudienceExportsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.ListAudienceExportsRequest;
+
+                    /**
+                     * Decodes a ListAudienceExportsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAudienceExportsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.ListAudienceExportsRequest;
+
+                    /**
+                     * Verifies a ListAudienceExportsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAudienceExportsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAudienceExportsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.ListAudienceExportsRequest;
+
+                    /**
+                     * Creates a plain object from a ListAudienceExportsRequest message. Also converts values to other types if specified.
+                     * @param message ListAudienceExportsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.ListAudienceExportsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAudienceExportsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAudienceExportsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAudienceExportsResponse. */
+                interface IListAudienceExportsResponse {
+
+                    /** ListAudienceExportsResponse audienceExports */
+                    audienceExports?: (google.analytics.data.v1beta.IAudienceExport[]|null);
+
+                    /** ListAudienceExportsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListAudienceExportsResponse. */
+                class ListAudienceExportsResponse implements IListAudienceExportsResponse {
+
+                    /**
+                     * Constructs a new ListAudienceExportsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IListAudienceExportsResponse);
+
+                    /** ListAudienceExportsResponse audienceExports. */
+                    public audienceExports: google.analytics.data.v1beta.IAudienceExport[];
+
+                    /** ListAudienceExportsResponse nextPageToken. */
+                    public nextPageToken?: (string|null);
+
+                    /** ListAudienceExportsResponse _nextPageToken. */
+                    public _nextPageToken?: "nextPageToken";
+
+                    /**
+                     * Creates a new ListAudienceExportsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAudienceExportsResponse instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IListAudienceExportsResponse): google.analytics.data.v1beta.ListAudienceExportsResponse;
+
+                    /**
+                     * Encodes the specified ListAudienceExportsResponse message. Does not implicitly {@link google.analytics.data.v1beta.ListAudienceExportsResponse.verify|verify} messages.
+                     * @param message ListAudienceExportsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IListAudienceExportsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAudienceExportsResponse message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.ListAudienceExportsResponse.verify|verify} messages.
+                     * @param message ListAudienceExportsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IListAudienceExportsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAudienceExportsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAudienceExportsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.ListAudienceExportsResponse;
+
+                    /**
+                     * Decodes a ListAudienceExportsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAudienceExportsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.ListAudienceExportsResponse;
+
+                    /**
+                     * Verifies a ListAudienceExportsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAudienceExportsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAudienceExportsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.ListAudienceExportsResponse;
+
+                    /**
+                     * Creates a plain object from a ListAudienceExportsResponse message. Also converts values to other types if specified.
+                     * @param message ListAudienceExportsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.ListAudienceExportsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAudienceExportsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAudienceExportsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateAudienceExportRequest. */
+                interface ICreateAudienceExportRequest {
+
+                    /** CreateAudienceExportRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateAudienceExportRequest audienceExport */
+                    audienceExport?: (google.analytics.data.v1beta.IAudienceExport|null);
+                }
+
+                /** Represents a CreateAudienceExportRequest. */
+                class CreateAudienceExportRequest implements ICreateAudienceExportRequest {
+
+                    /**
+                     * Constructs a new CreateAudienceExportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.ICreateAudienceExportRequest);
+
+                    /** CreateAudienceExportRequest parent. */
+                    public parent: string;
+
+                    /** CreateAudienceExportRequest audienceExport. */
+                    public audienceExport?: (google.analytics.data.v1beta.IAudienceExport|null);
+
+                    /**
+                     * Creates a new CreateAudienceExportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateAudienceExportRequest instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.ICreateAudienceExportRequest): google.analytics.data.v1beta.CreateAudienceExportRequest;
+
+                    /**
+                     * Encodes the specified CreateAudienceExportRequest message. Does not implicitly {@link google.analytics.data.v1beta.CreateAudienceExportRequest.verify|verify} messages.
+                     * @param message CreateAudienceExportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.ICreateAudienceExportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateAudienceExportRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.CreateAudienceExportRequest.verify|verify} messages.
+                     * @param message CreateAudienceExportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.ICreateAudienceExportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateAudienceExportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateAudienceExportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.CreateAudienceExportRequest;
+
+                    /**
+                     * Decodes a CreateAudienceExportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateAudienceExportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.CreateAudienceExportRequest;
+
+                    /**
+                     * Verifies a CreateAudienceExportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateAudienceExportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateAudienceExportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.CreateAudienceExportRequest;
+
+                    /**
+                     * Creates a plain object from a CreateAudienceExportRequest message. Also converts values to other types if specified.
+                     * @param message CreateAudienceExportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.CreateAudienceExportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateAudienceExportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateAudienceExportRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AudienceExport. */
+                interface IAudienceExport {
+
+                    /** AudienceExport name */
+                    name?: (string|null);
+
+                    /** AudienceExport audience */
+                    audience?: (string|null);
+
+                    /** AudienceExport audienceDisplayName */
+                    audienceDisplayName?: (string|null);
+
+                    /** AudienceExport dimensions */
+                    dimensions?: (google.analytics.data.v1beta.IAudienceDimension[]|null);
+
+                    /** AudienceExport state */
+                    state?: (google.analytics.data.v1beta.AudienceExport.State|keyof typeof google.analytics.data.v1beta.AudienceExport.State|null);
+
+                    /** AudienceExport beginCreatingTime */
+                    beginCreatingTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AudienceExport creationQuotaTokensCharged */
+                    creationQuotaTokensCharged?: (number|null);
+
+                    /** AudienceExport rowCount */
+                    rowCount?: (number|null);
+
+                    /** AudienceExport errorMessage */
+                    errorMessage?: (string|null);
+
+                    /** AudienceExport percentageCompleted */
+                    percentageCompleted?: (number|null);
+                }
+
+                /** Represents an AudienceExport. */
+                class AudienceExport implements IAudienceExport {
+
+                    /**
+                     * Constructs a new AudienceExport.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IAudienceExport);
+
+                    /** AudienceExport name. */
+                    public name: string;
+
+                    /** AudienceExport audience. */
+                    public audience: string;
+
+                    /** AudienceExport audienceDisplayName. */
+                    public audienceDisplayName: string;
+
+                    /** AudienceExport dimensions. */
+                    public dimensions: google.analytics.data.v1beta.IAudienceDimension[];
+
+                    /** AudienceExport state. */
+                    public state?: (google.analytics.data.v1beta.AudienceExport.State|keyof typeof google.analytics.data.v1beta.AudienceExport.State|null);
+
+                    /** AudienceExport beginCreatingTime. */
+                    public beginCreatingTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AudienceExport creationQuotaTokensCharged. */
+                    public creationQuotaTokensCharged: number;
+
+                    /** AudienceExport rowCount. */
+                    public rowCount?: (number|null);
+
+                    /** AudienceExport errorMessage. */
+                    public errorMessage?: (string|null);
+
+                    /** AudienceExport percentageCompleted. */
+                    public percentageCompleted?: (number|null);
+
+                    /** AudienceExport _state. */
+                    public _state?: "state";
+
+                    /** AudienceExport _beginCreatingTime. */
+                    public _beginCreatingTime?: "beginCreatingTime";
+
+                    /** AudienceExport _rowCount. */
+                    public _rowCount?: "rowCount";
+
+                    /** AudienceExport _errorMessage. */
+                    public _errorMessage?: "errorMessage";
+
+                    /** AudienceExport _percentageCompleted. */
+                    public _percentageCompleted?: "percentageCompleted";
+
+                    /**
+                     * Creates a new AudienceExport instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AudienceExport instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IAudienceExport): google.analytics.data.v1beta.AudienceExport;
+
+                    /**
+                     * Encodes the specified AudienceExport message. Does not implicitly {@link google.analytics.data.v1beta.AudienceExport.verify|verify} messages.
+                     * @param message AudienceExport message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IAudienceExport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AudienceExport message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.AudienceExport.verify|verify} messages.
+                     * @param message AudienceExport message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IAudienceExport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AudienceExport message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AudienceExport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.AudienceExport;
+
+                    /**
+                     * Decodes an AudienceExport message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AudienceExport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.AudienceExport;
+
+                    /**
+                     * Verifies an AudienceExport message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AudienceExport message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AudienceExport
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.AudienceExport;
+
+                    /**
+                     * Creates a plain object from an AudienceExport message. Also converts values to other types if specified.
+                     * @param message AudienceExport
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.AudienceExport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AudienceExport to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AudienceExport
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AudienceExport {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        ACTIVE = 2,
+                        FAILED = 3
+                    }
+                }
+
+                /** Properties of an AudienceExportMetadata. */
+                interface IAudienceExportMetadata {
+                }
+
+                /** Represents an AudienceExportMetadata. */
+                class AudienceExportMetadata implements IAudienceExportMetadata {
+
+                    /**
+                     * Constructs a new AudienceExportMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IAudienceExportMetadata);
+
+                    /**
+                     * Creates a new AudienceExportMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AudienceExportMetadata instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IAudienceExportMetadata): google.analytics.data.v1beta.AudienceExportMetadata;
+
+                    /**
+                     * Encodes the specified AudienceExportMetadata message. Does not implicitly {@link google.analytics.data.v1beta.AudienceExportMetadata.verify|verify} messages.
+                     * @param message AudienceExportMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IAudienceExportMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AudienceExportMetadata message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.AudienceExportMetadata.verify|verify} messages.
+                     * @param message AudienceExportMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IAudienceExportMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AudienceExportMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AudienceExportMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.AudienceExportMetadata;
+
+                    /**
+                     * Decodes an AudienceExportMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AudienceExportMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.AudienceExportMetadata;
+
+                    /**
+                     * Verifies an AudienceExportMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AudienceExportMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AudienceExportMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.AudienceExportMetadata;
+
+                    /**
+                     * Creates a plain object from an AudienceExportMetadata message. Also converts values to other types if specified.
+                     * @param message AudienceExportMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.AudienceExportMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AudienceExportMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AudienceExportMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a QueryAudienceExportRequest. */
+                interface IQueryAudienceExportRequest {
+
+                    /** QueryAudienceExportRequest name */
+                    name?: (string|null);
+
+                    /** QueryAudienceExportRequest offset */
+                    offset?: (number|Long|string|null);
+
+                    /** QueryAudienceExportRequest limit */
+                    limit?: (number|Long|string|null);
+                }
+
+                /** Represents a QueryAudienceExportRequest. */
+                class QueryAudienceExportRequest implements IQueryAudienceExportRequest {
+
+                    /**
+                     * Constructs a new QueryAudienceExportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IQueryAudienceExportRequest);
+
+                    /** QueryAudienceExportRequest name. */
+                    public name: string;
+
+                    /** QueryAudienceExportRequest offset. */
+                    public offset: (number|Long|string);
+
+                    /** QueryAudienceExportRequest limit. */
+                    public limit: (number|Long|string);
+
+                    /**
+                     * Creates a new QueryAudienceExportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryAudienceExportRequest instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IQueryAudienceExportRequest): google.analytics.data.v1beta.QueryAudienceExportRequest;
+
+                    /**
+                     * Encodes the specified QueryAudienceExportRequest message. Does not implicitly {@link google.analytics.data.v1beta.QueryAudienceExportRequest.verify|verify} messages.
+                     * @param message QueryAudienceExportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IQueryAudienceExportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryAudienceExportRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.QueryAudienceExportRequest.verify|verify} messages.
+                     * @param message QueryAudienceExportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IQueryAudienceExportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryAudienceExportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryAudienceExportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.QueryAudienceExportRequest;
+
+                    /**
+                     * Decodes a QueryAudienceExportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryAudienceExportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.QueryAudienceExportRequest;
+
+                    /**
+                     * Verifies a QueryAudienceExportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryAudienceExportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryAudienceExportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.QueryAudienceExportRequest;
+
+                    /**
+                     * Creates a plain object from a QueryAudienceExportRequest message. Also converts values to other types if specified.
+                     * @param message QueryAudienceExportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.QueryAudienceExportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryAudienceExportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryAudienceExportRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a QueryAudienceExportResponse. */
+                interface IQueryAudienceExportResponse {
+
+                    /** QueryAudienceExportResponse audienceExport */
+                    audienceExport?: (google.analytics.data.v1beta.IAudienceExport|null);
+
+                    /** QueryAudienceExportResponse audienceRows */
+                    audienceRows?: (google.analytics.data.v1beta.IAudienceRow[]|null);
+
+                    /** QueryAudienceExportResponse rowCount */
+                    rowCount?: (number|null);
+                }
+
+                /** Represents a QueryAudienceExportResponse. */
+                class QueryAudienceExportResponse implements IQueryAudienceExportResponse {
+
+                    /**
+                     * Constructs a new QueryAudienceExportResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IQueryAudienceExportResponse);
+
+                    /** QueryAudienceExportResponse audienceExport. */
+                    public audienceExport?: (google.analytics.data.v1beta.IAudienceExport|null);
+
+                    /** QueryAudienceExportResponse audienceRows. */
+                    public audienceRows: google.analytics.data.v1beta.IAudienceRow[];
+
+                    /** QueryAudienceExportResponse rowCount. */
+                    public rowCount?: (number|null);
+
+                    /** QueryAudienceExportResponse _audienceExport. */
+                    public _audienceExport?: "audienceExport";
+
+                    /** QueryAudienceExportResponse _rowCount. */
+                    public _rowCount?: "rowCount";
+
+                    /**
+                     * Creates a new QueryAudienceExportResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryAudienceExportResponse instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IQueryAudienceExportResponse): google.analytics.data.v1beta.QueryAudienceExportResponse;
+
+                    /**
+                     * Encodes the specified QueryAudienceExportResponse message. Does not implicitly {@link google.analytics.data.v1beta.QueryAudienceExportResponse.verify|verify} messages.
+                     * @param message QueryAudienceExportResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IQueryAudienceExportResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryAudienceExportResponse message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.QueryAudienceExportResponse.verify|verify} messages.
+                     * @param message QueryAudienceExportResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IQueryAudienceExportResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryAudienceExportResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryAudienceExportResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.QueryAudienceExportResponse;
+
+                    /**
+                     * Decodes a QueryAudienceExportResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryAudienceExportResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.QueryAudienceExportResponse;
+
+                    /**
+                     * Verifies a QueryAudienceExportResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryAudienceExportResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryAudienceExportResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.QueryAudienceExportResponse;
+
+                    /**
+                     * Creates a plain object from a QueryAudienceExportResponse message. Also converts values to other types if specified.
+                     * @param message QueryAudienceExportResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.QueryAudienceExportResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryAudienceExportResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryAudienceExportResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AudienceRow. */
+                interface IAudienceRow {
+
+                    /** AudienceRow dimensionValues */
+                    dimensionValues?: (google.analytics.data.v1beta.IAudienceDimensionValue[]|null);
+                }
+
+                /** Represents an AudienceRow. */
+                class AudienceRow implements IAudienceRow {
+
+                    /**
+                     * Constructs a new AudienceRow.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IAudienceRow);
+
+                    /** AudienceRow dimensionValues. */
+                    public dimensionValues: google.analytics.data.v1beta.IAudienceDimensionValue[];
+
+                    /**
+                     * Creates a new AudienceRow instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AudienceRow instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IAudienceRow): google.analytics.data.v1beta.AudienceRow;
+
+                    /**
+                     * Encodes the specified AudienceRow message. Does not implicitly {@link google.analytics.data.v1beta.AudienceRow.verify|verify} messages.
+                     * @param message AudienceRow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IAudienceRow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AudienceRow message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.AudienceRow.verify|verify} messages.
+                     * @param message AudienceRow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IAudienceRow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AudienceRow message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AudienceRow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.AudienceRow;
+
+                    /**
+                     * Decodes an AudienceRow message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AudienceRow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.AudienceRow;
+
+                    /**
+                     * Verifies an AudienceRow message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AudienceRow message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AudienceRow
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.AudienceRow;
+
+                    /**
+                     * Creates a plain object from an AudienceRow message. Also converts values to other types if specified.
+                     * @param message AudienceRow
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.AudienceRow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AudienceRow to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AudienceRow
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AudienceDimension. */
+                interface IAudienceDimension {
+
+                    /** AudienceDimension dimensionName */
+                    dimensionName?: (string|null);
+                }
+
+                /** Represents an AudienceDimension. */
+                class AudienceDimension implements IAudienceDimension {
+
+                    /**
+                     * Constructs a new AudienceDimension.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IAudienceDimension);
+
+                    /** AudienceDimension dimensionName. */
+                    public dimensionName: string;
+
+                    /**
+                     * Creates a new AudienceDimension instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AudienceDimension instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IAudienceDimension): google.analytics.data.v1beta.AudienceDimension;
+
+                    /**
+                     * Encodes the specified AudienceDimension message. Does not implicitly {@link google.analytics.data.v1beta.AudienceDimension.verify|verify} messages.
+                     * @param message AudienceDimension message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IAudienceDimension, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AudienceDimension message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.AudienceDimension.verify|verify} messages.
+                     * @param message AudienceDimension message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IAudienceDimension, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AudienceDimension message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AudienceDimension
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.AudienceDimension;
+
+                    /**
+                     * Decodes an AudienceDimension message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AudienceDimension
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.AudienceDimension;
+
+                    /**
+                     * Verifies an AudienceDimension message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AudienceDimension message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AudienceDimension
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.AudienceDimension;
+
+                    /**
+                     * Creates a plain object from an AudienceDimension message. Also converts values to other types if specified.
+                     * @param message AudienceDimension
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.AudienceDimension, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AudienceDimension to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AudienceDimension
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AudienceDimensionValue. */
+                interface IAudienceDimensionValue {
+
+                    /** AudienceDimensionValue value */
+                    value?: (string|null);
+                }
+
+                /** Represents an AudienceDimensionValue. */
+                class AudienceDimensionValue implements IAudienceDimensionValue {
+
+                    /**
+                     * Constructs a new AudienceDimensionValue.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IAudienceDimensionValue);
+
+                    /** AudienceDimensionValue value. */
+                    public value?: (string|null);
+
+                    /** AudienceDimensionValue oneValue. */
+                    public oneValue?: "value";
+
+                    /**
+                     * Creates a new AudienceDimensionValue instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AudienceDimensionValue instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IAudienceDimensionValue): google.analytics.data.v1beta.AudienceDimensionValue;
+
+                    /**
+                     * Encodes the specified AudienceDimensionValue message. Does not implicitly {@link google.analytics.data.v1beta.AudienceDimensionValue.verify|verify} messages.
+                     * @param message AudienceDimensionValue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IAudienceDimensionValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AudienceDimensionValue message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.AudienceDimensionValue.verify|verify} messages.
+                     * @param message AudienceDimensionValue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IAudienceDimensionValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AudienceDimensionValue message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AudienceDimensionValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.AudienceDimensionValue;
+
+                    /**
+                     * Decodes an AudienceDimensionValue message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AudienceDimensionValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.AudienceDimensionValue;
+
+                    /**
+                     * Verifies an AudienceDimensionValue message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AudienceDimensionValue message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AudienceDimensionValue
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.AudienceDimensionValue;
+
+                    /**
+                     * Creates a plain object from an AudienceDimensionValue message. Also converts values to other types if specified.
+                     * @param message AudienceDimensionValue
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.AudienceDimensionValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AudienceDimensionValue to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AudienceDimensionValue
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -17235,6 +18520,9 @@ export namespace google {
 
                     /** ResponseMetaData subjectToThresholding */
                     subjectToThresholding?: (boolean|null);
+
+                    /** ResponseMetaData samplingMetadatas */
+                    samplingMetadatas?: (google.analytics.data.v1beta.ISamplingMetadata[]|null);
                 }
 
                 /** Represents a ResponseMetaData. */
@@ -17263,6 +18551,9 @@ export namespace google {
 
                     /** ResponseMetaData subjectToThresholding. */
                     public subjectToThresholding?: (boolean|null);
+
+                    /** ResponseMetaData samplingMetadatas. */
+                    public samplingMetadatas: google.analytics.data.v1beta.ISamplingMetadata[];
 
                     /** ResponseMetaData _schemaRestrictionResponse. */
                     public _schemaRestrictionResponse?: "schemaRestrictionResponse";
@@ -17564,6 +18855,109 @@ export namespace google {
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
+                }
+
+                /** Properties of a SamplingMetadata. */
+                interface ISamplingMetadata {
+
+                    /** SamplingMetadata samplesReadCount */
+                    samplesReadCount?: (number|Long|string|null);
+
+                    /** SamplingMetadata samplingSpaceSize */
+                    samplingSpaceSize?: (number|Long|string|null);
+                }
+
+                /** Represents a SamplingMetadata. */
+                class SamplingMetadata implements ISamplingMetadata {
+
+                    /**
+                     * Constructs a new SamplingMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.ISamplingMetadata);
+
+                    /** SamplingMetadata samplesReadCount. */
+                    public samplesReadCount: (number|Long|string);
+
+                    /** SamplingMetadata samplingSpaceSize. */
+                    public samplingSpaceSize: (number|Long|string);
+
+                    /**
+                     * Creates a new SamplingMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SamplingMetadata instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.ISamplingMetadata): google.analytics.data.v1beta.SamplingMetadata;
+
+                    /**
+                     * Encodes the specified SamplingMetadata message. Does not implicitly {@link google.analytics.data.v1beta.SamplingMetadata.verify|verify} messages.
+                     * @param message SamplingMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.ISamplingMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SamplingMetadata message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.SamplingMetadata.verify|verify} messages.
+                     * @param message SamplingMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.ISamplingMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SamplingMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SamplingMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.SamplingMetadata;
+
+                    /**
+                     * Decodes a SamplingMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SamplingMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.SamplingMetadata;
+
+                    /**
+                     * Verifies a SamplingMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SamplingMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SamplingMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.SamplingMetadata;
+
+                    /**
+                     * Creates a plain object from a SamplingMetadata message. Also converts values to other types if specified.
+                     * @param message SamplingMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.SamplingMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SamplingMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SamplingMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a DimensionHeader. */
@@ -18522,10 +19916,16 @@ export namespace google {
                     constructor(properties?: google.analytics.data.v1beta.IQuotaStatus);
 
                     /** QuotaStatus consumed. */
-                    public consumed: number;
+                    public consumed?: (number|null);
 
                     /** QuotaStatus remaining. */
-                    public remaining: number;
+                    public remaining?: (number|null);
+
+                    /** QuotaStatus _consumed. */
+                    public _consumed?: "consumed";
+
+                    /** QuotaStatus _remaining. */
+                    public _remaining?: "remaining";
 
                     /**
                      * Creates a new QuotaStatus instance using the specified properties.

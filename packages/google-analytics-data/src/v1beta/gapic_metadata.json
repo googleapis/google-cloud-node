@@ -44,6 +44,28 @@
               "methods": [
                 "checkCompatibility"
               ]
+            },
+            "QueryAudienceExport": {
+              "methods": [
+                "queryAudienceExport"
+              ]
+            },
+            "GetAudienceExport": {
+              "methods": [
+                "getAudienceExport"
+              ]
+            },
+            "CreateAudienceExport": {
+              "methods": [
+                "createAudienceExport"
+              ]
+            },
+            "ListAudienceExports": {
+              "methods": [
+                "listAudienceExports",
+                "listAudienceExportsStream",
+                "listAudienceExportsAsync"
+              ]
             }
           }
         },
@@ -83,6 +105,28 @@
             "CheckCompatibility": {
               "methods": [
                 "checkCompatibility"
+              ]
+            },
+            "QueryAudienceExport": {
+              "methods": [
+                "queryAudienceExport"
+              ]
+            },
+            "GetAudienceExport": {
+              "methods": [
+                "getAudienceExport"
+              ]
+            },
+            "CreateAudienceExport": {
+              "methods": [
+                "createAudienceExport"
+              ]
+            },
+            "ListAudienceExports": {
+              "methods": [
+                "listAudienceExports",
+                "listAudienceExportsStream",
+                "listAudienceExportsAsync"
               ]
             }
           }
