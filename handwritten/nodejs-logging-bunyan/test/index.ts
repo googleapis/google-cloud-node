@@ -26,6 +26,7 @@ interface Options {
     service: string;
   };
   apiEndpoint: string;
+  jsonFieldsToTruncate: string[];
 }
 interface FakeLogType {
   entry?: () => void;
@@ -106,6 +107,9 @@ describe('logging-bunyan', () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let loggingBunyan: any;
 
+  const TRUNCATE_FIELD =
+    'jsonPayload.fields.metadata.structValue.fields.custom.stringValue';
+
   const OPTIONS = {
     logName: 'log-name',
     resource: {},
@@ -113,6 +117,7 @@ describe('logging-bunyan', () => {
       service: 'fake-service',
     },
     apiEndpoint: 'fake.local',
+    jsonFieldsToTruncate: [TRUNCATE_FIELD],
   };
 
   const RECORD = {
@@ -149,7 +154,15 @@ describe('logging-bunyan', () => {
       assert.strictEqual(fakeLogName_, OPTIONS.logName);
     });
 
-    it('should localize Log instance using default name, options', () => {
+    it('should localize Log instance using provided jsonFieldsToTruncate in options', () => {
+      assert.strictEqual(fakeLoggingOptions_, OPTIONS);
+      assert.strictEqual(
+        fakeLogOptions_.jsonFieldsToTruncate,
+        OPTIONS.jsonFieldsToTruncate
+      );
+    });
+
+    it('should localize Log instance using default name, removeCircular and maxEntrySize options', () => {
       const optionsWithoutLogName: Options = Object.assign({}, OPTIONS);
       delete optionsWithoutLogName.logName;
       new loggingBunyanLib.LoggingBunyan(optionsWithoutLogName);
@@ -158,6 +171,7 @@ describe('logging-bunyan', () => {
       assert.deepStrictEqual(fakeLogOptions_, {
         removeCircular: true,
         maxEntrySize: 250000,
+        jsonFieldsToTruncate: [TRUNCATE_FIELD],
       });
     });
 

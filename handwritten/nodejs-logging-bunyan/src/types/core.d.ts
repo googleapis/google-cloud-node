@@ -78,9 +78,16 @@ export interface Options {
    * Defaults to `logging.googleapis.com`.
    */
   apiEndpoint?: string;
-  // An attempt will be made to truncate messages larger than maxEntrySize.
-  // Please note that this parameter is ignored when redirectToStdout is set.
+  /**
+   * An attempt will be made to truncate messages larger than maxEntrySize.
+   * Please note that this parameter is ignored when redirectToStdout is set.
+   */
   maxEntrySize?: number;
+  /**
+   * A list of JSON properties at the given full path to be truncated.
+   * Received values will be prepended to predefined list in the order received and duplicates discarded.
+   */
+  jsonFieldsToTruncate?: string[];
   // A default global callback to be used for {@link LoggingBunyan} write calls
   // when callback is not supplied by caller in function parameters
   defaultCallback?: ApiResponseCallback;

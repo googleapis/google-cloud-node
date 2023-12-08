@@ -150,7 +150,10 @@ export function getCurrentTraceFromAgent() {
  *     attempted before returning the error.
  * @param {constructor} [options.promise] Custom promise module to use instead
  *     of native Promises.
- *
+ * @param {constructor} [options.promise] Custom promise module to use instead
+ *     of native Promises.
+ * @param {number} [options.maxEntrySize] Max size limit of a log entry.
+ * @param {string[]} [options.jsonFieldsToTruncate] A list of JSON properties at the given full path to be truncated.
  * @example Import the client library
  * ```
  * const {LoggingBunyan} = require('@google-cloud/logging-bunyan');
@@ -199,6 +202,7 @@ export class LoggingBunyan extends Writable {
         // 250,000 has been chosen to keep us comfortably within the
         // 256,000 limit.
         maxEntrySize: options.maxEntrySize || 250000,
+        jsonFieldsToTruncate: options.jsonFieldsToTruncate,
       });
     } else {
       const logSyncOptions: LogSyncOptions = {
