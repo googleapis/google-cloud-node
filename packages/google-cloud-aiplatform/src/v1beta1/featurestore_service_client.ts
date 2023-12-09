@@ -406,6 +406,9 @@ export class FeaturestoreServiceClient {
               post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/publishers/*/models/*}:getIamPolicy',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
             },
             {
@@ -419,6 +422,9 @@ export class FeaturestoreServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/publishers/*/models/*}:getIamPolicy',
             },
           ],
         },
@@ -628,6 +634,9 @@ export class FeaturestoreServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}:cancel',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}:cancel',
@@ -916,6 +925,10 @@ export class FeaturestoreServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
             },
             {
@@ -1156,6 +1169,9 @@ export class FeaturestoreServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
             },
             {
@@ -1374,6 +1390,9 @@ export class FeaturestoreServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/endpoints/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*}/operations',
@@ -1610,6 +1629,9 @@ export class FeaturestoreServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}:wait',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}:wait',
@@ -5029,7 +5051,7 @@ export class FeaturestoreServiceClient {
    *
    *   When paginating, all other parameters provided to
    *   {@link protos.google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures}
-   *   or or
+   *   or
    *   {@link protos.google.cloud.aiplatform.v1beta1.FeatureRegistryService.ListFeatures|FeatureRegistryService.ListFeatures}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
@@ -5183,7 +5205,7 @@ export class FeaturestoreServiceClient {
    *
    *   When paginating, all other parameters provided to
    *   {@link protos.google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures}
-   *   or or
+   *   or
    *   {@link protos.google.cloud.aiplatform.v1beta1.FeatureRegistryService.ListFeatures|FeatureRegistryService.ListFeatures}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
@@ -5285,7 +5307,7 @@ export class FeaturestoreServiceClient {
    *
    *   When paginating, all other parameters provided to
    *   {@link protos.google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures}
-   *   or or
+   *   or
    *   {@link protos.google.cloud.aiplatform.v1beta1.FeatureRegistryService.ListFeatures|FeatureRegistryService.ListFeatures}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
