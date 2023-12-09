@@ -2513,6 +2513,11 @@
               "methods": [
                 "streamingRawPredict"
               ]
+            },
+            "StreamGenerateContent": {
+              "methods": [
+                "streamGenerateContent"
+              ]
             }
           }
         },

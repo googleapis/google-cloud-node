@@ -37,23 +37,18 @@ import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
- * `src/v1beta1/specialist_pool_service_client_config.json`.
+ * `src/v1/deployment_resource_pool_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './specialist_pool_service_client_config.json';
+import * as gapicConfig from './deployment_resource_pool_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  A service for creating and managing Customer SpecialistPools.
- *  When customers start Data Labeling jobs, they can reuse/create Specialist
- *  Pools to bring their own Specialists to label the data.
- *  Customers can add/remove Managers for the Specialist Pool on Cloud console,
- *  then Managers will get email notifications to manage Specialists and tasks on
- *  CrowdCompute console.
+ *  A service that manages the DeploymentResourcePool resource.
  * @class
- * @memberof v1beta1
+ * @memberof v1
  */
-export class SpecialistPoolServiceClient {
+export class DeploymentResourcePoolServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -74,10 +69,10 @@ export class SpecialistPoolServiceClient {
   locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  specialistPoolServiceStub?: Promise<{[name: string]: Function}>;
+  deploymentResourcePoolServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of SpecialistPoolServiceClient.
+   * Construct an instance of DeploymentResourcePoolServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -112,7 +107,7 @@ export class SpecialistPoolServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new SpecialistPoolServiceClient({fallback: true}, gax);
+   *     const client = new DeploymentResourcePoolServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -121,7 +116,7 @@ export class SpecialistPoolServiceClient {
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this
-      .constructor as typeof SpecialistPoolServiceClient;
+      .constructor as typeof DeploymentResourcePoolServiceClient;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     this._providedCustomServicePath = !!(
@@ -286,11 +281,11 @@ export class SpecialistPoolServiceClient {
       nasTrialDetailPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/nasJobs/{nas_job}/nasTrialDetails/{nas_trial_detail}'
       ),
-      persistentResourcePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/persistentResources/{persistent_resource}'
-      ),
       pipelineJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}'
+      ),
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
       ),
       projectLocationEndpointPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/endpoints/{endpoint}'
@@ -346,10 +341,15 @@ export class SpecialistPoolServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listSpecialistPools: new this._gaxModule.PageDescriptor(
+      listDeploymentResourcePools: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'specialistPools'
+        'deploymentResourcePools'
+      ),
+      queryDeployedModels: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'deployedModels'
       ),
     };
 
@@ -367,34 +367,22 @@ export class SpecialistPoolServiceClient {
         {
           selector: 'google.cloud.location.Locations.GetLocation',
           get: '/ui/{name=projects/*/locations/*}',
-          additional_bindings: [
-            {get: '/v1beta1/{name=projects/*/locations/*}'},
-          ],
+          additional_bindings: [{get: '/v1/{name=projects/*/locations/*}'}],
         },
         {
           selector: 'google.cloud.location.Locations.ListLocations',
           get: '/ui/{name=projects/*}/locations',
-          additional_bindings: [{get: '/v1beta1/{name=projects/*}/locations'}],
+          additional_bindings: [{get: '/v1/{name=projects/*}/locations'}],
         },
         {
           selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
-          post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
-          body: '*',
+          post: '/v1/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
           additional_bindings: [
             {
-              post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
+              post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
             },
             {
-              post: '/v1beta1/{resource=projects/*/locations/*/models/*}:getIamPolicy',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/endpoints/*}:getIamPolicy',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/publishers/*/models/*}:getIamPolicy',
+              post: '/v1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
@@ -418,23 +406,15 @@ export class SpecialistPoolServiceClient {
         },
         {
           selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
-          post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
+          post: '/v1/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
           body: '*',
           additional_bindings: [
             {
-              post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
+              post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
               body: '*',
             },
             {
-              post: '/v1beta1/{resource=projects/*/locations/*/models/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/endpoints/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',
+              post: '/v1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',
               body: '*',
             },
             {
@@ -461,20 +441,13 @@ export class SpecialistPoolServiceClient {
         },
         {
           selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
-          post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
-          body: '*',
+          post: '/v1/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
           additional_bindings: [
             {
-              post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
+              post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
             },
             {
-              post: '/v1beta1/{resource=projects/*/locations/*/models/*}:testIamPermissions',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/endpoints/*}:testIamPermissions',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',
+              post: '/v1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
@@ -596,116 +569,93 @@ export class SpecialistPoolServiceClient {
             {
               post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',
             },
+            {post: '/v1/{name=projects/*/locations/*/operations/*}:cancel'},
             {
-              post: '/v1beta1/{name=projects/*/locations/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/edgeDevices/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/customJobs/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/models/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/studies/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/models/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',
             },
           ],
         },
@@ -858,170 +808,135 @@ export class SpecialistPoolServiceClient {
               delete:
                 '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
-            {delete: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
+            {delete: '/v1/{name=projects/*/locations/*/operations/*}'},
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/datasets/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/edgeDevices/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/customJobs/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/indexes/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
+            },
+            {delete: '/v1/{name=projects/*/locations/*/models/*/operations/*}'},
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/studies/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/indexes/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/schedules/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/models/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/solvers/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/featureGroups/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/tensorboards/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/featureGroups/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
           ],
         },
@@ -1131,129 +1046,93 @@ export class SpecialistPoolServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
             },
-            {get: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
+            {get: '/v1/{name=projects/*/locations/*/operations/*}'},
+            {get: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}'},
             {
-              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',
+            },
+            {get: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}'},
+            {
+              get: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/edgeDevices/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
+            },
+            {get: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}'},
+            {
+              get: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
+            },
+            {get: '/v1/{name=projects/*/locations/*/models/*/operations/*}'},
+            {
+              get: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
+            },
+            {get: '/v1/{name=projects/*/locations/*/studies/*/operations/*}'},
+            {
+              get: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
+            },
+            {get: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}'},
+            {
+              get: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/customJobs/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/indexes/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/featureGroups/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/models/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/solvers/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
             },
           ],
         },
@@ -1354,127 +1233,91 @@ export class SpecialistPoolServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
             },
-            {get: '/v1beta1/{name=projects/*/locations/*}/operations'},
+            {get: '/v1/{name=projects/*/locations/*}/operations'},
+            {get: '/v1/{name=projects/*/locations/*/datasets/*}/operations'},
             {
-              get: '/v1beta1/{name=projects/*/locations/*/datasets/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*}/operations',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*}/operations',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*}/operations',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',
+            },
+            {get: '/v1/{name=projects/*/locations/*/endpoints/*}/operations'},
+            {
+              get: '/v1/{name=projects/*/locations/*/featurestores/*}/operations',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*}/operations',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/edgeDevices/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',
+            },
+            {get: '/v1/{name=projects/*/locations/*/customJobs/*}/operations'},
+            {
+              get: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/endpoints/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',
+            },
+            {get: '/v1/{name=projects/*/locations/*/indexes/*}/operations'},
+            {
+              get: '/v1/{name=projects/*/locations/*/indexEndpoints/*}/operations',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/migratableResources/*}/operations',
+            },
+            {get: '/v1/{name=projects/*/locations/*/models/*}/operations'},
+            {
+              get: '/v1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
+            },
+            {get: '/v1/{name=projects/*/locations/*/studies/*}/operations'},
+            {
+              get: '/v1/{name=projects/*/locations/*/studies/*/trials/*}/operations',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/extensions/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/trainingPipelines/*}/operations',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/pipelineJobs/*}/operations',
+            },
+            {get: '/v1/{name=projects/*/locations/*/schedules/*}/operations'},
+            {
+              get: '/v1/{name=projects/*/locations/*/specialistPools/*}/operations',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/featurestores/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/tensorboards/*}/operations',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*}/operations',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}/operations',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/customJobs/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}/operations',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/indexes/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/migratableResources/*}/operations',
-            },
-            {get: '/v1beta1/{name=projects/*/locations/*/models/*}/operations'},
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/solvers/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/studies/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/schedules/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
             },
           ],
         },
@@ -1593,126 +1436,105 @@ export class SpecialistPoolServiceClient {
             {
               post: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
             },
-            {post: '/v1beta1/{name=projects/*/locations/*/operations/*}:wait'},
+            {post: '/v1/{name=projects/*/locations/*/operations/*}:wait'},
             {
-              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/edgeDevices/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/customJobs/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/models/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/indexes/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/studies/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/models/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
             },
           ],
         },
@@ -1721,46 +1543,43 @@ export class SpecialistPoolServiceClient {
     this.operationsClient = this._gaxModule
       .lro(lroOptions)
       .operationsClient(opts);
-    const createSpecialistPoolResponse = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.SpecialistPool'
+    const createDeploymentResourcePoolResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.DeploymentResourcePool'
     ) as gax.protobuf.Type;
-    const createSpecialistPoolMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.CreateSpecialistPoolOperationMetadata'
+    const createDeploymentResourcePoolMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.CreateDeploymentResourcePoolOperationMetadata'
     ) as gax.protobuf.Type;
-    const deleteSpecialistPoolResponse = protoFilesRoot.lookup(
+    const deleteDeploymentResourcePoolResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
-    const deleteSpecialistPoolMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata'
-    ) as gax.protobuf.Type;
-    const updateSpecialistPoolResponse = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.SpecialistPool'
-    ) as gax.protobuf.Type;
-    const updateSpecialistPoolMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.UpdateSpecialistPoolOperationMetadata'
+    const deleteDeploymentResourcePoolMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.DeleteOperationMetadata'
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
-      createSpecialistPool: new this._gaxModule.LongrunningDescriptor(
+      createDeploymentResourcePool: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createSpecialistPoolResponse.decode.bind(createSpecialistPoolResponse),
-        createSpecialistPoolMetadata.decode.bind(createSpecialistPoolMetadata)
+        createDeploymentResourcePoolResponse.decode.bind(
+          createDeploymentResourcePoolResponse
+        ),
+        createDeploymentResourcePoolMetadata.decode.bind(
+          createDeploymentResourcePoolMetadata
+        )
       ),
-      deleteSpecialistPool: new this._gaxModule.LongrunningDescriptor(
+      deleteDeploymentResourcePool: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteSpecialistPoolResponse.decode.bind(deleteSpecialistPoolResponse),
-        deleteSpecialistPoolMetadata.decode.bind(deleteSpecialistPoolMetadata)
-      ),
-      updateSpecialistPool: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        updateSpecialistPoolResponse.decode.bind(updateSpecialistPoolResponse),
-        updateSpecialistPoolMetadata.decode.bind(updateSpecialistPoolMetadata)
+        deleteDeploymentResourcePoolResponse.decode.bind(
+          deleteDeploymentResourcePoolResponse
+        ),
+        deleteDeploymentResourcePoolMetadata.decode.bind(
+          deleteDeploymentResourcePoolMetadata
+        )
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.aiplatform.v1beta1.SpecialistPoolService',
+      'google.cloud.aiplatform.v1.DeploymentResourcePoolService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -1788,35 +1607,35 @@ export class SpecialistPoolServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.specialistPoolServiceStub) {
-      return this.specialistPoolServiceStub;
+    if (this.deploymentResourcePoolServiceStub) {
+      return this.deploymentResourcePoolServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.aiplatform.v1beta1.SpecialistPoolService.
-    this.specialistPoolServiceStub = this._gaxGrpc.createStub(
+    // google.cloud.aiplatform.v1.DeploymentResourcePoolService.
+    this.deploymentResourcePoolServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.aiplatform.v1beta1.SpecialistPoolService'
+            'google.cloud.aiplatform.v1.DeploymentResourcePoolService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.aiplatform.v1beta1
-            .SpecialistPoolService,
+          (this._protos as any).google.cloud.aiplatform.v1
+            .DeploymentResourcePoolService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const specialistPoolServiceStubMethods = [
-      'createSpecialistPool',
-      'getSpecialistPool',
-      'listSpecialistPools',
-      'deleteSpecialistPool',
-      'updateSpecialistPool',
+    const deploymentResourcePoolServiceStubMethods = [
+      'createDeploymentResourcePool',
+      'getDeploymentResourcePool',
+      'listDeploymentResourcePools',
+      'deleteDeploymentResourcePool',
+      'queryDeployedModels',
     ];
-    for (const methodName of specialistPoolServiceStubMethods) {
-      const callPromise = this.specialistPoolServiceStub.then(
+    for (const methodName of deploymentResourcePoolServiceStubMethods) {
+      const callPromise = this.deploymentResourcePoolServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -1844,7 +1663,7 @@ export class SpecialistPoolServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.specialistPoolServiceStub;
+    return this.deploymentResourcePoolServiceStub;
   }
 
   /**
@@ -1901,80 +1720,80 @@ export class SpecialistPoolServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Gets a SpecialistPool.
+   * Get a DeploymentResourcePool.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the SpecialistPool resource.
-   *   The form is
-   *   `projects/{project}/locations/{location}/specialistPools/{specialist_pool}`.
+   *   Required. The name of the DeploymentResourcePool to retrieve.
+   *   Format:
+   *   `projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.SpecialistPool|SpecialistPool}.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.DeploymentResourcePool|DeploymentResourcePool}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/specialist_pool_service.get_specialist_pool.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_SpecialistPoolService_GetSpecialistPool_async
+   * @example <caption>include:samples/generated/v1/deployment_resource_pool_service.get_deployment_resource_pool.js</caption>
+   * region_tag:aiplatform_v1_generated_DeploymentResourcePoolService_GetDeploymentResourcePool_async
    */
-  getSpecialistPool(
-    request?: protos.google.cloud.aiplatform.v1beta1.IGetSpecialistPoolRequest,
+  getDeploymentResourcePool(
+    request?: protos.google.cloud.aiplatform.v1.IGetDeploymentResourcePoolRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.aiplatform.v1beta1.ISpecialistPool,
+      protos.google.cloud.aiplatform.v1.IDeploymentResourcePool,
       (
-        | protos.google.cloud.aiplatform.v1beta1.IGetSpecialistPoolRequest
+        | protos.google.cloud.aiplatform.v1.IGetDeploymentResourcePoolRequest
         | undefined
       ),
       {} | undefined,
     ]
   >;
-  getSpecialistPool(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetSpecialistPoolRequest,
+  getDeploymentResourcePool(
+    request: protos.google.cloud.aiplatform.v1.IGetDeploymentResourcePoolRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ISpecialistPool,
-      | protos.google.cloud.aiplatform.v1beta1.IGetSpecialistPoolRequest
+      protos.google.cloud.aiplatform.v1.IDeploymentResourcePool,
+      | protos.google.cloud.aiplatform.v1.IGetDeploymentResourcePoolRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  getSpecialistPool(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetSpecialistPoolRequest,
+  getDeploymentResourcePool(
+    request: protos.google.cloud.aiplatform.v1.IGetDeploymentResourcePoolRequest,
     callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ISpecialistPool,
-      | protos.google.cloud.aiplatform.v1beta1.IGetSpecialistPoolRequest
+      protos.google.cloud.aiplatform.v1.IDeploymentResourcePool,
+      | protos.google.cloud.aiplatform.v1.IGetDeploymentResourcePoolRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  getSpecialistPool(
-    request?: protos.google.cloud.aiplatform.v1beta1.IGetSpecialistPoolRequest,
+  getDeploymentResourcePool(
+    request?: protos.google.cloud.aiplatform.v1.IGetDeploymentResourcePoolRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.aiplatform.v1beta1.ISpecialistPool,
-          | protos.google.cloud.aiplatform.v1beta1.IGetSpecialistPoolRequest
+          protos.google.cloud.aiplatform.v1.IDeploymentResourcePool,
+          | protos.google.cloud.aiplatform.v1.IGetDeploymentResourcePoolRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ISpecialistPool,
-      | protos.google.cloud.aiplatform.v1beta1.IGetSpecialistPoolRequest
+      protos.google.cloud.aiplatform.v1.IDeploymentResourcePool,
+      | protos.google.cloud.aiplatform.v1.IGetDeploymentResourcePoolRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.aiplatform.v1beta1.ISpecialistPool,
+      protos.google.cloud.aiplatform.v1.IDeploymentResourcePool,
       (
-        | protos.google.cloud.aiplatform.v1beta1.IGetSpecialistPoolRequest
+        | protos.google.cloud.aiplatform.v1.IGetDeploymentResourcePoolRequest
         | undefined
       ),
       {} | undefined,
@@ -1996,19 +1815,30 @@ export class SpecialistPoolServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSpecialistPool(request, options, callback);
+    return this.innerApiCalls.getDeploymentResourcePool(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
-   * Creates a SpecialistPool.
+   * Create a DeploymentResourcePool.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent Project name for the new SpecialistPool.
-   *   The form is `projects/{project}/locations/{location}`.
-   * @param {google.cloud.aiplatform.v1beta1.SpecialistPool} request.specialistPool
-   *   Required. The SpecialistPool to create.
+   *   Required. The parent location resource where this DeploymentResourcePool
+   *   will be created. Format: `projects/{project}/locations/{location}`
+   * @param {google.cloud.aiplatform.v1.DeploymentResourcePool} request.deploymentResourcePool
+   *   Required. The DeploymentResourcePool to create.
+   * @param {string} request.deploymentResourcePoolId
+   *   Required. The ID to use for the DeploymentResourcePool, which
+   *   will become the final component of the DeploymentResourcePool's resource
+   *   name.
+   *
+   *   The maximum length is 63 characters, and valid characters
+   *   are `/^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$/`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2017,61 +1847,61 @@ export class SpecialistPoolServiceClient {
    *   you can `await` for.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/specialist_pool_service.create_specialist_pool.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_SpecialistPoolService_CreateSpecialistPool_async
+   * @example <caption>include:samples/generated/v1/deployment_resource_pool_service.create_deployment_resource_pool.js</caption>
+   * region_tag:aiplatform_v1_generated_DeploymentResourcePoolService_CreateDeploymentResourcePool_async
    */
-  createSpecialistPool(
-    request?: protos.google.cloud.aiplatform.v1beta1.ICreateSpecialistPoolRequest,
+  createDeploymentResourcePool(
+    request?: protos.google.cloud.aiplatform.v1.ICreateDeploymentResourcePoolRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.aiplatform.v1beta1.ISpecialistPool,
-        protos.google.cloud.aiplatform.v1beta1.ICreateSpecialistPoolOperationMetadata
+        protos.google.cloud.aiplatform.v1.IDeploymentResourcePool,
+        protos.google.cloud.aiplatform.v1.ICreateDeploymentResourcePoolOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
     ]
   >;
-  createSpecialistPool(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateSpecialistPoolRequest,
+  createDeploymentResourcePool(
+    request: protos.google.cloud.aiplatform.v1.ICreateDeploymentResourcePoolRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.aiplatform.v1beta1.ISpecialistPool,
-        protos.google.cloud.aiplatform.v1beta1.ICreateSpecialistPoolOperationMetadata
+        protos.google.cloud.aiplatform.v1.IDeploymentResourcePool,
+        protos.google.cloud.aiplatform.v1.ICreateDeploymentResourcePoolOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  createSpecialistPool(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateSpecialistPoolRequest,
+  createDeploymentResourcePool(
+    request: protos.google.cloud.aiplatform.v1.ICreateDeploymentResourcePoolRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.aiplatform.v1beta1.ISpecialistPool,
-        protos.google.cloud.aiplatform.v1beta1.ICreateSpecialistPoolOperationMetadata
+        protos.google.cloud.aiplatform.v1.IDeploymentResourcePool,
+        protos.google.cloud.aiplatform.v1.ICreateDeploymentResourcePoolOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  createSpecialistPool(
-    request?: protos.google.cloud.aiplatform.v1beta1.ICreateSpecialistPoolRequest,
+  createDeploymentResourcePool(
+    request?: protos.google.cloud.aiplatform.v1.ICreateDeploymentResourcePoolRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.aiplatform.v1beta1.ISpecialistPool,
-            protos.google.cloud.aiplatform.v1beta1.ICreateSpecialistPoolOperationMetadata
+            protos.google.cloud.aiplatform.v1.IDeploymentResourcePool,
+            protos.google.cloud.aiplatform.v1.ICreateDeploymentResourcePoolOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.aiplatform.v1beta1.ISpecialistPool,
-        protos.google.cloud.aiplatform.v1beta1.ICreateSpecialistPoolOperationMetadata
+        protos.google.cloud.aiplatform.v1.IDeploymentResourcePool,
+        protos.google.cloud.aiplatform.v1.ICreateDeploymentResourcePoolOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -2079,8 +1909,8 @@ export class SpecialistPoolServiceClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.aiplatform.v1beta1.ISpecialistPool,
-        protos.google.cloud.aiplatform.v1beta1.ICreateSpecialistPoolOperationMetadata
+        protos.google.cloud.aiplatform.v1.IDeploymentResourcePool,
+        protos.google.cloud.aiplatform.v1.ICreateDeploymentResourcePoolOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
@@ -2102,25 +1932,29 @@ export class SpecialistPoolServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createSpecialistPool(request, options, callback);
+    return this.innerApiCalls.createDeploymentResourcePool(
+      request,
+      options,
+      callback
+    );
   }
   /**
-   * Check the status of the long running operation returned by `createSpecialistPool()`.
+   * Check the status of the long running operation returned by `createDeploymentResourcePool()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/specialist_pool_service.create_specialist_pool.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_SpecialistPoolService_CreateSpecialistPool_async
+   * @example <caption>include:samples/generated/v1/deployment_resource_pool_service.create_deployment_resource_pool.js</caption>
+   * region_tag:aiplatform_v1_generated_DeploymentResourcePoolService_CreateDeploymentResourcePool_async
    */
-  async checkCreateSpecialistPoolProgress(
+  async checkCreateDeploymentResourcePoolProgress(
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.aiplatform.v1beta1.SpecialistPool,
-      protos.google.cloud.aiplatform.v1beta1.CreateSpecialistPoolOperationMetadata
+      protos.google.cloud.aiplatform.v1.DeploymentResourcePool,
+      protos.google.cloud.aiplatform.v1.CreateDeploymentResourcePoolOperationMetadata
     >
   > {
     const request =
@@ -2130,26 +1964,23 @@ export class SpecialistPoolServiceClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
-      this.descriptors.longrunning.createSpecialistPool,
+      this.descriptors.longrunning.createDeploymentResourcePool,
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.aiplatform.v1beta1.SpecialistPool,
-      protos.google.cloud.aiplatform.v1beta1.CreateSpecialistPoolOperationMetadata
+      protos.google.cloud.aiplatform.v1.DeploymentResourcePool,
+      protos.google.cloud.aiplatform.v1.CreateDeploymentResourcePoolOperationMetadata
     >;
   }
   /**
-   * Deletes a SpecialistPool as well as all Specialists in the pool.
+   * Delete a DeploymentResourcePool.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the SpecialistPool to delete. Format:
-   *   `projects/{project}/locations/{location}/specialistPools/{specialist_pool}`
-   * @param {boolean} request.force
-   *   If set to true, any specialist managers in this SpecialistPool will also be
-   *   deleted. (Otherwise, the request will only work if the SpecialistPool has
-   *   no specialist managers.)
+   *   Required. The name of the DeploymentResourcePool to delete.
+   *   Format:
+   *   `projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2158,53 +1989,53 @@ export class SpecialistPoolServiceClient {
    *   you can `await` for.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/specialist_pool_service.delete_specialist_pool.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_SpecialistPoolService_DeleteSpecialistPool_async
+   * @example <caption>include:samples/generated/v1/deployment_resource_pool_service.delete_deployment_resource_pool.js</caption>
+   * region_tag:aiplatform_v1_generated_DeploymentResourcePoolService_DeleteDeploymentResourcePool_async
    */
-  deleteSpecialistPool(
-    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteSpecialistPoolRequest,
+  deleteDeploymentResourcePool(
+    request?: protos.google.cloud.aiplatform.v1.IDeleteDeploymentResourcePoolRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
     ]
   >;
-  deleteSpecialistPool(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteSpecialistPoolRequest,
+  deleteDeploymentResourcePool(
+    request: protos.google.cloud.aiplatform.v1.IDeleteDeploymentResourcePoolRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  deleteSpecialistPool(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteSpecialistPoolRequest,
+  deleteDeploymentResourcePool(
+    request: protos.google.cloud.aiplatform.v1.IDeleteDeploymentResourcePoolRequest,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  deleteSpecialistPool(
-    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteSpecialistPoolRequest,
+  deleteDeploymentResourcePool(
+    request?: protos.google.cloud.aiplatform.v1.IDeleteDeploymentResourcePoolRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
-            protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
@@ -2212,7 +2043,7 @@ export class SpecialistPoolServiceClient {
     callback?: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -2221,7 +2052,7 @@ export class SpecialistPoolServiceClient {
     [
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
@@ -2243,25 +2074,29 @@ export class SpecialistPoolServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteSpecialistPool(request, options, callback);
+    return this.innerApiCalls.deleteDeploymentResourcePool(
+      request,
+      options,
+      callback
+    );
   }
   /**
-   * Check the status of the long running operation returned by `deleteSpecialistPool()`.
+   * Check the status of the long running operation returned by `deleteDeploymentResourcePool()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/specialist_pool_service.delete_specialist_pool.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_SpecialistPoolService_DeleteSpecialistPool_async
+   * @example <caption>include:samples/generated/v1/deployment_resource_pool_service.delete_deployment_resource_pool.js</caption>
+   * region_tag:aiplatform_v1_generated_DeploymentResourcePoolService_DeleteDeploymentResourcePool_async
    */
-  async checkDeleteSpecialistPoolProgress(
+  async checkDeleteDeploymentResourcePoolProgress(
     name: string
   ): Promise<
     LROperation<
       protos.google.protobuf.Empty,
-      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
+      protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
     const request =
@@ -2271,237 +2106,98 @@ export class SpecialistPoolServiceClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
-      this.descriptors.longrunning.deleteSpecialistPool,
+      this.descriptors.longrunning.deleteDeploymentResourcePool,
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
-      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
+      protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >;
   }
   /**
-   * Updates a SpecialistPool.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.aiplatform.v1beta1.SpecialistPool} request.specialistPool
-   *   Required. The SpecialistPool which replaces the resource on the server.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The update mask applies to the resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/specialist_pool_service.update_specialist_pool.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_SpecialistPoolService_UpdateSpecialistPool_async
-   */
-  updateSpecialistPool(
-    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateSpecialistPoolRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.ISpecialistPool,
-        protos.google.cloud.aiplatform.v1beta1.IUpdateSpecialistPoolOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
-  updateSpecialistPool(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateSpecialistPoolRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.ISpecialistPool,
-        protos.google.cloud.aiplatform.v1beta1.IUpdateSpecialistPoolOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateSpecialistPool(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateSpecialistPoolRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.ISpecialistPool,
-        protos.google.cloud.aiplatform.v1beta1.IUpdateSpecialistPoolOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateSpecialistPool(
-    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateSpecialistPoolRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.aiplatform.v1beta1.ISpecialistPool,
-            protos.google.cloud.aiplatform.v1beta1.IUpdateSpecialistPoolOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.ISpecialistPool,
-        protos.google.cloud.aiplatform.v1beta1.IUpdateSpecialistPoolOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.ISpecialistPool,
-        protos.google.cloud.aiplatform.v1beta1.IUpdateSpecialistPoolOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'specialist_pool.name': request.specialistPool!.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.updateSpecialistPool(request, options, callback);
-  }
-  /**
-   * Check the status of the long running operation returned by `updateSpecialistPool()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/specialist_pool_service.update_specialist_pool.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_SpecialistPoolService_UpdateSpecialistPool_async
-   */
-  async checkUpdateSpecialistPoolProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.aiplatform.v1beta1.SpecialistPool,
-      protos.google.cloud.aiplatform.v1beta1.UpdateSpecialistPoolOperationMetadata
-    >
-  > {
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateSpecialistPool,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.aiplatform.v1beta1.SpecialistPool,
-      protos.google.cloud.aiplatform.v1beta1.UpdateSpecialistPoolOperationMetadata
-    >;
-  }
-  /**
-   * Lists SpecialistPools in a Location.
+   * List DeploymentResourcePools in a location.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the SpecialistPool's parent resource.
-   *   Format: `projects/{project}/locations/{location}`
+   *   Required. The parent Location which owns this collection of
+   *   DeploymentResourcePools. Format: `projects/{project}/locations/{location}`
    * @param {number} request.pageSize
-   *   The standard list page size.
+   *   The maximum number of DeploymentResourcePools to return. The service may
+   *   return fewer than this value.
    * @param {string} request.pageToken
-   *   The standard list page token.
-   *   Typically obtained by
-   *   {@link protos.google.cloud.aiplatform.v1beta1.ListSpecialistPoolsResponse.next_page_token|ListSpecialistPoolsResponse.next_page_token}
-   *   of the previous
-   *   {@link protos.google.cloud.aiplatform.v1beta1.SpecialistPoolService.ListSpecialistPools|SpecialistPoolService.ListSpecialistPools}
-   *   call. Return first page if empty.
-   * @param {google.protobuf.FieldMask} request.readMask
-   *   Mask specifying which fields to read. FieldMask represents a set of
+   *   A page token, received from a previous `ListDeploymentResourcePools` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListDeploymentResourcePools` must match the call that provided the page
+   *   token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.SpecialistPool|SpecialistPool}.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.DeploymentResourcePool|DeploymentResourcePool}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
-   *   We recommend using `listSpecialistPoolsAsync()`
+   *   We recommend using `listDeploymentResourcePoolsAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listSpecialistPools(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsRequest,
+  listDeploymentResourcePools(
+    request?: protos.google.cloud.aiplatform.v1.IListDeploymentResourcePoolsRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.aiplatform.v1beta1.ISpecialistPool[],
-      protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsResponse,
+      protos.google.cloud.aiplatform.v1.IDeploymentResourcePool[],
+      protos.google.cloud.aiplatform.v1.IListDeploymentResourcePoolsRequest | null,
+      protos.google.cloud.aiplatform.v1.IListDeploymentResourcePoolsResponse,
     ]
   >;
-  listSpecialistPools(
-    request: protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsRequest,
+  listDeploymentResourcePools(
+    request: protos.google.cloud.aiplatform.v1.IListDeploymentResourcePoolsRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsResponse
+      protos.google.cloud.aiplatform.v1.IListDeploymentResourcePoolsRequest,
+      | protos.google.cloud.aiplatform.v1.IListDeploymentResourcePoolsResponse
       | null
       | undefined,
-      protos.google.cloud.aiplatform.v1beta1.ISpecialistPool
+      protos.google.cloud.aiplatform.v1.IDeploymentResourcePool
     >
   ): void;
-  listSpecialistPools(
-    request: protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsRequest,
+  listDeploymentResourcePools(
+    request: protos.google.cloud.aiplatform.v1.IListDeploymentResourcePoolsRequest,
     callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsResponse
+      protos.google.cloud.aiplatform.v1.IListDeploymentResourcePoolsRequest,
+      | protos.google.cloud.aiplatform.v1.IListDeploymentResourcePoolsResponse
       | null
       | undefined,
-      protos.google.cloud.aiplatform.v1beta1.ISpecialistPool
+      protos.google.cloud.aiplatform.v1.IDeploymentResourcePool
     >
   ): void;
-  listSpecialistPools(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsRequest,
+  listDeploymentResourcePools(
+    request?: protos.google.cloud.aiplatform.v1.IListDeploymentResourcePoolsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsRequest,
-          | protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsResponse
+          protos.google.cloud.aiplatform.v1.IListDeploymentResourcePoolsRequest,
+          | protos.google.cloud.aiplatform.v1.IListDeploymentResourcePoolsResponse
           | null
           | undefined,
-          protos.google.cloud.aiplatform.v1beta1.ISpecialistPool
+          protos.google.cloud.aiplatform.v1.IDeploymentResourcePool
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsResponse
+      protos.google.cloud.aiplatform.v1.IListDeploymentResourcePoolsRequest,
+      | protos.google.cloud.aiplatform.v1.IListDeploymentResourcePoolsResponse
       | null
       | undefined,
-      protos.google.cloud.aiplatform.v1beta1.ISpecialistPool
+      protos.google.cloud.aiplatform.v1.IDeploymentResourcePool
     >
   ): Promise<
     [
-      protos.google.cloud.aiplatform.v1beta1.ISpecialistPool[],
-      protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsResponse,
+      protos.google.cloud.aiplatform.v1.IDeploymentResourcePool[],
+      protos.google.cloud.aiplatform.v1.IListDeploymentResourcePoolsRequest | null,
+      protos.google.cloud.aiplatform.v1.IListDeploymentResourcePoolsResponse,
     ]
   > | void {
     request = request || {};
@@ -2520,7 +2216,11 @@ export class SpecialistPoolServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSpecialistPools(request, options, callback);
+    return this.innerApiCalls.listDeploymentResourcePools(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
@@ -2528,32 +2228,31 @@ export class SpecialistPoolServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the SpecialistPool's parent resource.
-   *   Format: `projects/{project}/locations/{location}`
+   *   Required. The parent Location which owns this collection of
+   *   DeploymentResourcePools. Format: `projects/{project}/locations/{location}`
    * @param {number} request.pageSize
-   *   The standard list page size.
+   *   The maximum number of DeploymentResourcePools to return. The service may
+   *   return fewer than this value.
    * @param {string} request.pageToken
-   *   The standard list page token.
-   *   Typically obtained by
-   *   {@link protos.google.cloud.aiplatform.v1beta1.ListSpecialistPoolsResponse.next_page_token|ListSpecialistPoolsResponse.next_page_token}
-   *   of the previous
-   *   {@link protos.google.cloud.aiplatform.v1beta1.SpecialistPoolService.ListSpecialistPools|SpecialistPoolService.ListSpecialistPools}
-   *   call. Return first page if empty.
-   * @param {google.protobuf.FieldMask} request.readMask
-   *   Mask specifying which fields to read. FieldMask represents a set of
+   *   A page token, received from a previous `ListDeploymentResourcePools` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListDeploymentResourcePools` must match the call that provided the page
+   *   token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.SpecialistPool|SpecialistPool} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.DeploymentResourcePool|DeploymentResourcePool} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listSpecialistPoolsAsync()`
+   *   We recommend using `listDeploymentResourcePoolsAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listSpecialistPoolsStream(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsRequest,
+  listDeploymentResourcePoolsStream(
+    request?: protos.google.cloud.aiplatform.v1.IListDeploymentResourcePoolsRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -2564,52 +2263,51 @@ export class SpecialistPoolServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listSpecialistPools'];
+    const defaultCallSettings = this._defaults['listDeploymentResourcePools'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listSpecialistPools.createStream(
-      this.innerApiCalls.listSpecialistPools as GaxCall,
+    return this.descriptors.page.listDeploymentResourcePools.createStream(
+      this.innerApiCalls.listDeploymentResourcePools as GaxCall,
       request,
       callSettings
     );
   }
 
   /**
-   * Equivalent to `listSpecialistPools`, but returns an iterable object.
+   * Equivalent to `listDeploymentResourcePools`, but returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the SpecialistPool's parent resource.
-   *   Format: `projects/{project}/locations/{location}`
+   *   Required. The parent Location which owns this collection of
+   *   DeploymentResourcePools. Format: `projects/{project}/locations/{location}`
    * @param {number} request.pageSize
-   *   The standard list page size.
+   *   The maximum number of DeploymentResourcePools to return. The service may
+   *   return fewer than this value.
    * @param {string} request.pageToken
-   *   The standard list page token.
-   *   Typically obtained by
-   *   {@link protos.google.cloud.aiplatform.v1beta1.ListSpecialistPoolsResponse.next_page_token|ListSpecialistPoolsResponse.next_page_token}
-   *   of the previous
-   *   {@link protos.google.cloud.aiplatform.v1beta1.SpecialistPoolService.ListSpecialistPools|SpecialistPoolService.ListSpecialistPools}
-   *   call. Return first page if empty.
-   * @param {google.protobuf.FieldMask} request.readMask
-   *   Mask specifying which fields to read. FieldMask represents a set of
+   *   A page token, received from a previous `ListDeploymentResourcePools` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListDeploymentResourcePools` must match the call that provided the page
+   *   token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
    *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.aiplatform.v1beta1.SpecialistPool|SpecialistPool}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.aiplatform.v1.DeploymentResourcePool|DeploymentResourcePool}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/specialist_pool_service.list_specialist_pools.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_SpecialistPoolService_ListSpecialistPools_async
+   * @example <caption>include:samples/generated/v1/deployment_resource_pool_service.list_deployment_resource_pools.js</caption>
+   * region_tag:aiplatform_v1_generated_DeploymentResourcePoolService_ListDeploymentResourcePools_async
    */
-  listSpecialistPoolsAsync(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsRequest,
+  listDeploymentResourcePoolsAsync(
+    request?: protos.google.cloud.aiplatform.v1.IListDeploymentResourcePoolsRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.ISpecialistPool> {
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1.IDeploymentResourcePool> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2618,14 +2316,224 @@ export class SpecialistPoolServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listSpecialistPools'];
+    const defaultCallSettings = this._defaults['listDeploymentResourcePools'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listSpecialistPools.asyncIterate(
-      this.innerApiCalls['listSpecialistPools'] as GaxCall,
+    return this.descriptors.page.listDeploymentResourcePools.asyncIterate(
+      this.innerApiCalls['listDeploymentResourcePools'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.ISpecialistPool>;
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IDeploymentResourcePool>;
+  }
+  /**
+   * List DeployedModels that have been deployed on this DeploymentResourcePool.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.deploymentResourcePool
+   *   Required. The name of the target DeploymentResourcePool to query.
+   *   Format:
+   *   `projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}`
+   * @param {number} request.pageSize
+   *   The maximum number of DeployedModels to return. The service may return
+   *   fewer than this value.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `QueryDeployedModels` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `QueryDeployedModels` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.DeployedModel|DeployedModel}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `queryDeployedModelsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  queryDeployedModels(
+    request?: protos.google.cloud.aiplatform.v1.IQueryDeployedModelsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IDeployedModel[],
+      protos.google.cloud.aiplatform.v1.IQueryDeployedModelsRequest | null,
+      protos.google.cloud.aiplatform.v1.IQueryDeployedModelsResponse,
+    ]
+  >;
+  queryDeployedModels(
+    request: protos.google.cloud.aiplatform.v1.IQueryDeployedModelsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IQueryDeployedModelsRequest,
+      | protos.google.cloud.aiplatform.v1.IQueryDeployedModelsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IDeployedModel
+    >
+  ): void;
+  queryDeployedModels(
+    request: protos.google.cloud.aiplatform.v1.IQueryDeployedModelsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IQueryDeployedModelsRequest,
+      | protos.google.cloud.aiplatform.v1.IQueryDeployedModelsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IDeployedModel
+    >
+  ): void;
+  queryDeployedModels(
+    request?: protos.google.cloud.aiplatform.v1.IQueryDeployedModelsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IQueryDeployedModelsRequest,
+          | protos.google.cloud.aiplatform.v1.IQueryDeployedModelsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IDeployedModel
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IQueryDeployedModelsRequest,
+      | protos.google.cloud.aiplatform.v1.IQueryDeployedModelsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IDeployedModel
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IDeployedModel[],
+      protos.google.cloud.aiplatform.v1.IQueryDeployedModelsRequest | null,
+      protos.google.cloud.aiplatform.v1.IQueryDeployedModelsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        deployment_resource_pool: request.deploymentResourcePool ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.queryDeployedModels(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.deploymentResourcePool
+   *   Required. The name of the target DeploymentResourcePool to query.
+   *   Format:
+   *   `projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}`
+   * @param {number} request.pageSize
+   *   The maximum number of DeployedModels to return. The service may return
+   *   fewer than this value.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `QueryDeployedModels` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `QueryDeployedModels` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.DeployedModel|DeployedModel} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `queryDeployedModelsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  queryDeployedModelsStream(
+    request?: protos.google.cloud.aiplatform.v1.IQueryDeployedModelsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        deployment_resource_pool: request.deploymentResourcePool ?? '',
+      });
+    const defaultCallSettings = this._defaults['queryDeployedModels'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.queryDeployedModels.createStream(
+      this.innerApiCalls.queryDeployedModels as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `queryDeployedModels`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.deploymentResourcePool
+   *   Required. The name of the target DeploymentResourcePool to query.
+   *   Format:
+   *   `projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}`
+   * @param {number} request.pageSize
+   *   The maximum number of DeployedModels to return. The service may return
+   *   fewer than this value.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `QueryDeployedModels` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `QueryDeployedModels` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.aiplatform.v1.DeployedModel|DeployedModel}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/deployment_resource_pool_service.query_deployed_models.js</caption>
+   * region_tag:aiplatform_v1_generated_DeploymentResourcePoolService_QueryDeployedModels_async
+   */
+  queryDeployedModelsAsync(
+    request?: protos.google.cloud.aiplatform.v1.IQueryDeployedModelsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1.IDeployedModel> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        deployment_resource_pool: request.deploymentResourcePool ?? '',
+      });
+    const defaultCallSettings = this._defaults['queryDeployedModels'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.queryDeployedModels.asyncIterate(
+      this.innerApiCalls['queryDeployedModels'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IDeployedModel>;
   }
   /**
    * Gets the access control policy for a resource. Returns an empty policy
@@ -4937,67 +4845,6 @@ export class SpecialistPoolServiceClient {
   }
 
   /**
-   * Return a fully-qualified persistentResource resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} persistent_resource
-   * @returns {string} Resource name string.
-   */
-  persistentResourcePath(
-    project: string,
-    location: string,
-    persistentResource: string
-  ) {
-    return this.pathTemplates.persistentResourcePathTemplate.render({
-      project: project,
-      location: location,
-      persistent_resource: persistentResource,
-    });
-  }
-
-  /**
-   * Parse the project from PersistentResource resource.
-   *
-   * @param {string} persistentResourceName
-   *   A fully-qualified path representing PersistentResource resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromPersistentResourceName(persistentResourceName: string) {
-    return this.pathTemplates.persistentResourcePathTemplate.match(
-      persistentResourceName
-    ).project;
-  }
-
-  /**
-   * Parse the location from PersistentResource resource.
-   *
-   * @param {string} persistentResourceName
-   *   A fully-qualified path representing PersistentResource resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromPersistentResourceName(persistentResourceName: string) {
-    return this.pathTemplates.persistentResourcePathTemplate.match(
-      persistentResourceName
-    ).location;
-  }
-
-  /**
-   * Parse the persistent_resource from PersistentResource resource.
-   *
-   * @param {string} persistentResourceName
-   *   A fully-qualified path representing PersistentResource resource.
-   * @returns {string} A string representing the persistent_resource.
-   */
-  matchPersistentResourceFromPersistentResourceName(
-    persistentResourceName: string
-  ) {
-    return this.pathTemplates.persistentResourcePathTemplate.match(
-      persistentResourceName
-    ).persistent_resource;
-  }
-
-  /**
    * Return a fully-qualified pipelineJob resource name string.
    *
    * @param {string} project
@@ -5047,6 +4894,29 @@ export class SpecialistPoolServiceClient {
   matchPipelineJobFromPipelineJobName(pipelineJobName: string) {
     return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName)
       .pipeline_job;
+  }
+
+  /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectPath(project: string) {
+    return this.pathTemplates.projectPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from Project resource.
+   *
+   * @param {string} projectName
+   *   A fully-qualified path representing Project resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectName(projectName: string) {
+    return this.pathTemplates.projectPathTemplate.match(projectName).project;
   }
 
   /**
@@ -6120,8 +5990,8 @@ export class SpecialistPoolServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.specialistPoolServiceStub && !this._terminated) {
-      return this.specialistPoolServiceStub.then(stub => {
+    if (this.deploymentResourcePoolServiceStub && !this._terminated) {
+      return this.deploymentResourcePoolServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.iamClient.close();

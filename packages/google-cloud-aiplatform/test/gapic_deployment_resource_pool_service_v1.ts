@@ -21,7 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as vizierserviceModule from '../src';
+import * as deploymentresourcepoolserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
@@ -165,66 +165,83 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1.VizierServiceClient', () => {
+describe('v1.DeploymentResourcePoolServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
       const servicePath =
-        vizierserviceModule.v1.VizierServiceClient.servicePath;
+        deploymentresourcepoolserviceModule.v1
+          .DeploymentResourcePoolServiceClient.servicePath;
       assert(servicePath);
     });
 
     it('has apiEndpoint', () => {
       const apiEndpoint =
-        vizierserviceModule.v1.VizierServiceClient.apiEndpoint;
+        deploymentresourcepoolserviceModule.v1
+          .DeploymentResourcePoolServiceClient.apiEndpoint;
       assert(apiEndpoint);
     });
 
     it('has port', () => {
-      const port = vizierserviceModule.v1.VizierServiceClient.port;
+      const port =
+        deploymentresourcepoolserviceModule.v1
+          .DeploymentResourcePoolServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient();
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        fallback: true,
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            fallback: true,
+          }
+        );
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.vizierServiceStub, undefined);
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      assert.strictEqual(client.deploymentResourcePoolServiceStub, undefined);
       await client.initialize();
-      assert(client.vizierServiceStub);
+      assert(client.deploymentResourcePoolServiceStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
-      assert(client.vizierServiceStub);
+      assert(client.deploymentResourcePoolServiceStub);
       client.close().then(() => {
         done();
       });
     });
 
     it('has close method for the non-initialized client', done => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.vizierServiceStub, undefined);
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      assert.strictEqual(client.deploymentResourcePoolServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -232,10 +249,13 @@ describe('v1.VizierServiceClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
       const result = await client.getProjectId();
       assert.strictEqual(result, fakeProjectId);
@@ -244,10 +264,13 @@ describe('v1.VizierServiceClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.auth.getProjectId = sinon
         .stub()
         .callsArgWith(0, null, fakeProjectId);
@@ -265,839 +288,71 @@ describe('v1.VizierServiceClient', () => {
     });
   });
 
-  describe('createStudy', () => {
-    it('invokes createStudy without error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateStudyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CreateStudyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Study()
-      );
-      client.innerApiCalls.createStudy = stubSimpleCall(expectedResponse);
-      const [response] = await client.createStudy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createStudy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createStudy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createStudy without error using callback', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateStudyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CreateStudyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Study()
-      );
-      client.innerApiCalls.createStudy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createStudy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.IStudy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
+  describe('getDeploymentResourcePool', () => {
+    it('invokes getDeploymentResourcePool without error', async () => {
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
           }
         );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createStudy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createStudy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createStudy with error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateStudyRequest()
+        new protos.google.cloud.aiplatform.v1.GetDeploymentResourcePoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CreateStudyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createStudy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createStudy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createStudy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createStudy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createStudy with closed client', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateStudyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CreateStudyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.createStudy(request), expectedError);
-    });
-  });
-
-  describe('getStudy', () => {
-    it('invokes getStudy without error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetStudyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.GetStudyRequest',
+        '.google.cloud.aiplatform.v1.GetDeploymentResourcePoolRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Study()
+        new protos.google.cloud.aiplatform.v1.DeploymentResourcePool()
       );
-      client.innerApiCalls.getStudy = stubSimpleCall(expectedResponse);
-      const [response] = await client.getStudy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getStudy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getStudy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getStudy without error using callback', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetStudyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.GetStudyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Study()
-      );
-      client.innerApiCalls.getStudy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getStudy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.IStudy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getStudy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getStudy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getStudy with error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetStudyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.GetStudyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getStudy = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getStudy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getStudy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getStudy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getStudy with closed client', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetStudyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.GetStudyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getStudy(request), expectedError);
-    });
-  });
-
-  describe('deleteStudy', () => {
-    it('invokes deleteStudy without error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteStudyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.DeleteStudyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteStudy = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteStudy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteStudy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteStudy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteStudy without error using callback', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteStudyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.DeleteStudyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteStudy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteStudy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteStudy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteStudy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteStudy with error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteStudyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.DeleteStudyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteStudy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteStudy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteStudy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteStudy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteStudy with closed client', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteStudyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.DeleteStudyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.deleteStudy(request), expectedError);
-    });
-  });
-
-  describe('lookupStudy', () => {
-    it('invokes lookupStudy without error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.LookupStudyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.LookupStudyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Study()
-      );
-      client.innerApiCalls.lookupStudy = stubSimpleCall(expectedResponse);
-      const [response] = await client.lookupStudy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.lookupStudy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.lookupStudy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes lookupStudy without error using callback', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.LookupStudyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.LookupStudyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Study()
-      );
-      client.innerApiCalls.lookupStudy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.lookupStudy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.IStudy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.lookupStudy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.lookupStudy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes lookupStudy with error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.LookupStudyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.LookupStudyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.lookupStudy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.lookupStudy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.lookupStudy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.lookupStudy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes lookupStudy with closed client', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.LookupStudyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.LookupStudyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.lookupStudy(request), expectedError);
-    });
-  });
-
-  describe('createTrial', () => {
-    it('invokes createTrial without error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateTrialRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CreateTrialRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Trial()
-      );
-      client.innerApiCalls.createTrial = stubSimpleCall(expectedResponse);
-      const [response] = await client.createTrial(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createTrial as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createTrial as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createTrial without error using callback', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateTrialRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CreateTrialRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Trial()
-      );
-      client.innerApiCalls.createTrial =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createTrial(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.ITrial | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createTrial as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createTrial as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createTrial with error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateTrialRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CreateTrialRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createTrial = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createTrial(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createTrial as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createTrial as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createTrial with closed client', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateTrialRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CreateTrialRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.createTrial(request), expectedError);
-    });
-  });
-
-  describe('getTrial', () => {
-    it('invokes getTrial without error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetTrialRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.GetTrialRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Trial()
-      );
-      client.innerApiCalls.getTrial = stubSimpleCall(expectedResponse);
-      const [response] = await client.getTrial(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getTrial as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getTrial as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getTrial without error using callback', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetTrialRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.GetTrialRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Trial()
-      );
-      client.innerApiCalls.getTrial =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getTrial(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.ITrial | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getTrial as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getTrial as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getTrial with error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetTrialRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.GetTrialRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getTrial = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getTrial(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getTrial as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getTrial as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getTrial with closed client', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetTrialRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.GetTrialRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getTrial(request), expectedError);
-    });
-  });
-
-  describe('addTrialMeasurement', () => {
-    it('invokes addTrialMeasurement without error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.AddTrialMeasurementRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.AddTrialMeasurementRequest',
-        ['trialName']
-      );
-      request.trialName = defaultValue1;
-      const expectedHeaderRequestParams = `trial_name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Trial()
-      );
-      client.innerApiCalls.addTrialMeasurement =
+      client.innerApiCalls.getDeploymentResourcePool =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.addTrialMeasurement(request);
+      const [response] = await client.getDeploymentResourcePool(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.addTrialMeasurement as SinonStub
+        client.innerApiCalls.getDeploymentResourcePool as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.addTrialMeasurement as SinonStub
+        client.innerApiCalls.getDeploymentResourcePool as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes addTrialMeasurement without error using callback', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes getDeploymentResourcePool without error using callback', async () => {
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.AddTrialMeasurementRequest()
+        new protos.google.cloud.aiplatform.v1.GetDeploymentResourcePoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.AddTrialMeasurementRequest',
-        ['trialName']
+        '.google.cloud.aiplatform.v1.GetDeploymentResourcePoolRequest',
+        ['name']
       );
-      request.trialName = defaultValue1;
-      const expectedHeaderRequestParams = `trial_name=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Trial()
+        new protos.google.cloud.aiplatform.v1.DeploymentResourcePool()
       );
-      client.innerApiCalls.addTrialMeasurement =
+      client.innerApiCalls.getDeploymentResourcePool =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.addTrialMeasurement(
+        client.getDeploymentResourcePool(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.ITrial | null
+            result?: protos.google.cloud.aiplatform.v1.IDeploymentResourcePool | null
           ) => {
             if (err) {
               reject(err);
@@ -1110,595 +365,93 @@ describe('v1.VizierServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.addTrialMeasurement as SinonStub
+        client.innerApiCalls.getDeploymentResourcePool as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.addTrialMeasurement as SinonStub
+        client.innerApiCalls.getDeploymentResourcePool as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes addTrialMeasurement with error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes getDeploymentResourcePool with error', async () => {
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.AddTrialMeasurementRequest()
+        new protos.google.cloud.aiplatform.v1.GetDeploymentResourcePoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.AddTrialMeasurementRequest',
-        ['trialName']
+        '.google.cloud.aiplatform.v1.GetDeploymentResourcePoolRequest',
+        ['name']
       );
-      request.trialName = defaultValue1;
-      const expectedHeaderRequestParams = `trial_name=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.addTrialMeasurement = stubSimpleCall(
+      client.innerApiCalls.getDeploymentResourcePool = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.addTrialMeasurement(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.addTrialMeasurement as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.addTrialMeasurement as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes addTrialMeasurement with closed client', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.AddTrialMeasurementRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.AddTrialMeasurementRequest',
-        ['trialName']
-      );
-      request.trialName = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.addTrialMeasurement(request), expectedError);
-    });
-  });
-
-  describe('completeTrial', () => {
-    it('invokes completeTrial without error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CompleteTrialRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CompleteTrialRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Trial()
-      );
-      client.innerApiCalls.completeTrial = stubSimpleCall(expectedResponse);
-      const [response] = await client.completeTrial(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.completeTrial as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.completeTrial as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes completeTrial without error using callback', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CompleteTrialRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CompleteTrialRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Trial()
-      );
-      client.innerApiCalls.completeTrial =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.completeTrial(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.ITrial | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.completeTrial as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.completeTrial as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes completeTrial with error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CompleteTrialRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CompleteTrialRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.completeTrial = stubSimpleCall(
-        undefined,
+      await assert.rejects(
+        client.getDeploymentResourcePool(request),
         expectedError
       );
-      await assert.rejects(client.completeTrial(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.completeTrial as SinonStub
+        client.innerApiCalls.getDeploymentResourcePool as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.completeTrial as SinonStub
+        client.innerApiCalls.getDeploymentResourcePool as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes completeTrial with closed client', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes getDeploymentResourcePool with closed client', async () => {
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CompleteTrialRequest()
+        new protos.google.cloud.aiplatform.v1.GetDeploymentResourcePoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CompleteTrialRequest',
+        '.google.cloud.aiplatform.v1.GetDeploymentResourcePoolRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.completeTrial(request), expectedError);
-    });
-  });
-
-  describe('deleteTrial', () => {
-    it('invokes deleteTrial without error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteTrialRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.DeleteTrialRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteTrial = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteTrial(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteTrial as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteTrial as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteTrial without error using callback', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteTrialRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.DeleteTrialRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteTrial =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteTrial(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteTrial as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteTrial as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteTrial with error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteTrialRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.DeleteTrialRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteTrial = stubSimpleCall(
-        undefined,
+      await assert.rejects(
+        client.getDeploymentResourcePool(request),
         expectedError
       );
-      await assert.rejects(client.deleteTrial(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteTrial as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteTrial as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteTrial with closed client', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteTrialRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.DeleteTrialRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.deleteTrial(request), expectedError);
     });
   });
 
-  describe('stopTrial', () => {
-    it('invokes stopTrial without error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.StopTrialRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.StopTrialRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Trial()
-      );
-      client.innerApiCalls.stopTrial = stubSimpleCall(expectedResponse);
-      const [response] = await client.stopTrial(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.stopTrial as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.stopTrial as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes stopTrial without error using callback', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.StopTrialRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.StopTrialRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Trial()
-      );
-      client.innerApiCalls.stopTrial =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.stopTrial(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.ITrial | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
+  describe('createDeploymentResourcePool', () => {
+    it('invokes createDeploymentResourcePool without error', async () => {
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
           }
         );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.stopTrial as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.stopTrial as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes stopTrial with error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.StopTrialRequest()
+        new protos.google.cloud.aiplatform.v1.CreateDeploymentResourcePoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.StopTrialRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.stopTrial = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.stopTrial(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.stopTrial as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.stopTrial as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes stopTrial with closed client', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.StopTrialRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.StopTrialRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.stopTrial(request), expectedError);
-    });
-  });
-
-  describe('listOptimalTrials', () => {
-    it('invokes listOptimalTrials without error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListOptimalTrialsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListOptimalTrialsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListOptimalTrialsResponse()
-      );
-      client.innerApiCalls.listOptimalTrials = stubSimpleCall(expectedResponse);
-      const [response] = await client.listOptimalTrials(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listOptimalTrials as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listOptimalTrials as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listOptimalTrials without error using callback', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListOptimalTrialsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListOptimalTrialsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListOptimalTrialsResponse()
-      );
-      client.innerApiCalls.listOptimalTrials =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listOptimalTrials(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.IListOptimalTrialsResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listOptimalTrials as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listOptimalTrials as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listOptimalTrials with error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListOptimalTrialsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListOptimalTrialsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listOptimalTrials = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listOptimalTrials(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listOptimalTrials as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listOptimalTrials as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listOptimalTrials with closed client', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListOptimalTrialsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListOptimalTrialsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.listOptimalTrials(request), expectedError);
-    });
-  });
-
-  describe('suggestTrials', () => {
-    it('invokes suggestTrials without error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.SuggestTrialsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.SuggestTrialsRequest',
+        '.google.cloud.aiplatform.v1.CreateDeploymentResourcePoolRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1706,32 +459,35 @@ describe('v1.VizierServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.suggestTrials =
+      client.innerApiCalls.createDeploymentResourcePool =
         stubLongRunningCall(expectedResponse);
-      const [operation] = await client.suggestTrials(request);
+      const [operation] = await client.createDeploymentResourcePool(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.suggestTrials as SinonStub
+        client.innerApiCalls.createDeploymentResourcePool as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.suggestTrials as SinonStub
+        client.innerApiCalls.createDeploymentResourcePool as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes suggestTrials without error using callback', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes createDeploymentResourcePool without error using callback', async () => {
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.SuggestTrialsRequest()
+        new protos.google.cloud.aiplatform.v1.CreateDeploymentResourcePoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.SuggestTrialsRequest',
+        '.google.cloud.aiplatform.v1.CreateDeploymentResourcePoolRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1739,16 +495,16 @@ describe('v1.VizierServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.suggestTrials =
+      client.innerApiCalls.createDeploymentResourcePool =
         stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.suggestTrials(
+        client.createDeploymentResourcePool(
           request,
           (
             err?: Error | null,
             result?: LROperation<
-              protos.google.cloud.aiplatform.v1.ISuggestTrialsResponse,
-              protos.google.cloud.aiplatform.v1.ISuggestTrialsMetadata
+              protos.google.cloud.aiplatform.v1.IDeploymentResourcePool,
+              protos.google.cloud.aiplatform.v1.ICreateDeploymentResourcePoolOperationMetadata
             > | null
           ) => {
             if (err) {
@@ -1760,287 +516,102 @@ describe('v1.VizierServiceClient', () => {
         );
       });
       const operation = (await promise) as LROperation<
-        protos.google.cloud.aiplatform.v1.ISuggestTrialsResponse,
-        protos.google.cloud.aiplatform.v1.ISuggestTrialsMetadata
+        protos.google.cloud.aiplatform.v1.IDeploymentResourcePool,
+        protos.google.cloud.aiplatform.v1.ICreateDeploymentResourcePoolOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.suggestTrials as SinonStub
+        client.innerApiCalls.createDeploymentResourcePool as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.suggestTrials as SinonStub
+        client.innerApiCalls.createDeploymentResourcePool as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes suggestTrials with call error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.SuggestTrialsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.SuggestTrialsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.suggestTrials = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.suggestTrials(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.suggestTrials as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.suggestTrials as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes suggestTrials with LRO error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.SuggestTrialsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.SuggestTrialsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.suggestTrials = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.suggestTrials(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.suggestTrials as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.suggestTrials as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkSuggestTrialsProgress without error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkSuggestTrialsProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkSuggestTrialsProgress with error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkSuggestTrialsProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('checkTrialEarlyStoppingState', () => {
-    it('invokes checkTrialEarlyStoppingState without error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CheckTrialEarlyStoppingStateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CheckTrialEarlyStoppingStateRequest',
-        ['trialName']
-      );
-      request.trialName = defaultValue1;
-      const expectedHeaderRequestParams = `trial_name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.checkTrialEarlyStoppingState =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.checkTrialEarlyStoppingState(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.checkTrialEarlyStoppingState as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.checkTrialEarlyStoppingState as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkTrialEarlyStoppingState without error using callback', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CheckTrialEarlyStoppingStateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CheckTrialEarlyStoppingStateRequest',
-        ['trialName']
-      );
-      request.trialName = defaultValue1;
-      const expectedHeaderRequestParams = `trial_name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.checkTrialEarlyStoppingState =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.checkTrialEarlyStoppingState(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.aiplatform.v1.ICheckTrialEarlyStoppingStateResponse,
-              protos.google.cloud.aiplatform.v1.ICheckTrialEarlyStoppingStateMetatdata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
+    it('invokes createDeploymentResourcePool with call error', async () => {
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
           }
         );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.aiplatform.v1.ICheckTrialEarlyStoppingStateResponse,
-        protos.google.cloud.aiplatform.v1.ICheckTrialEarlyStoppingStateMetatdata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.checkTrialEarlyStoppingState as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.checkTrialEarlyStoppingState as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkTrialEarlyStoppingState with call error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CheckTrialEarlyStoppingStateRequest()
+        new protos.google.cloud.aiplatform.v1.CreateDeploymentResourcePoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CheckTrialEarlyStoppingStateRequest',
-        ['trialName']
+        '.google.cloud.aiplatform.v1.CreateDeploymentResourcePoolRequest',
+        ['parent']
       );
-      request.trialName = defaultValue1;
-      const expectedHeaderRequestParams = `trial_name=${defaultValue1}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.checkTrialEarlyStoppingState = stubLongRunningCall(
+      client.innerApiCalls.createDeploymentResourcePool = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(
-        client.checkTrialEarlyStoppingState(request),
+        client.createDeploymentResourcePool(request),
         expectedError
       );
       const actualRequest = (
-        client.innerApiCalls.checkTrialEarlyStoppingState as SinonStub
+        client.innerApiCalls.createDeploymentResourcePool as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.checkTrialEarlyStoppingState as SinonStub
+        client.innerApiCalls.createDeploymentResourcePool as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes checkTrialEarlyStoppingState with LRO error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes createDeploymentResourcePool with LRO error', async () => {
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CheckTrialEarlyStoppingStateRequest()
+        new protos.google.cloud.aiplatform.v1.CreateDeploymentResourcePoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CheckTrialEarlyStoppingStateRequest',
-        ['trialName']
+        '.google.cloud.aiplatform.v1.CreateDeploymentResourcePoolRequest',
+        ['parent']
       );
-      request.trialName = defaultValue1;
-      const expectedHeaderRequestParams = `trial_name=${defaultValue1}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.checkTrialEarlyStoppingState = stubLongRunningCall(
+      client.innerApiCalls.createDeploymentResourcePool = stubLongRunningCall(
         undefined,
         undefined,
         expectedError
       );
-      const [operation] = await client.checkTrialEarlyStoppingState(request);
+      const [operation] = await client.createDeploymentResourcePool(request);
       await assert.rejects(operation.promise(), expectedError);
       const actualRequest = (
-        client.innerApiCalls.checkTrialEarlyStoppingState as SinonStub
+        client.innerApiCalls.createDeploymentResourcePool as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.checkTrialEarlyStoppingState as SinonStub
+        client.innerApiCalls.createDeploymentResourcePool as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes checkCheckTrialEarlyStoppingStateProgress without error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes checkCreateDeploymentResourcePoolProgress without error', async () => {
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -2051,7 +622,7 @@ describe('v1.VizierServiceClient', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
-        await client.checkCheckTrialEarlyStoppingStateProgress(
+        await client.checkCreateDeploymentResourcePoolProgress(
           expectedResponse.name
         );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
@@ -2059,11 +630,14 @@ describe('v1.VizierServiceClient', () => {
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
 
-    it('invokes checkCheckTrialEarlyStoppingStateProgress with error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes checkCreateDeploymentResourcePoolProgress with error', async () => {
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -2072,75 +646,312 @@ describe('v1.VizierServiceClient', () => {
         expectedError
       );
       await assert.rejects(
-        client.checkCheckTrialEarlyStoppingStateProgress(''),
+        client.checkCreateDeploymentResourcePoolProgress(''),
         expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
-  describe('listStudies', () => {
-    it('invokes listStudies without error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+  describe('deleteDeploymentResourcePool', () => {
+    it('invokes deleteDeploymentResourcePool without error', async () => {
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListStudiesRequest()
+        new protos.google.cloud.aiplatform.v1.DeleteDeploymentResourcePoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListStudiesRequest',
-        ['parent']
+        '.google.cloud.aiplatform.v1.DeleteDeploymentResourcePoolRequest',
+        ['name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Study()),
-        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Study()),
-        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Study()),
-      ];
-      client.innerApiCalls.listStudies = stubSimpleCall(expectedResponse);
-      const [response] = await client.listStudies(request);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteDeploymentResourcePool =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteDeploymentResourcePool(request);
+      const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.listStudies as SinonStub
+        client.innerApiCalls.deleteDeploymentResourcePool as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listStudies as SinonStub
+        client.innerApiCalls.deleteDeploymentResourcePool as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listStudies without error using callback', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes deleteDeploymentResourcePool without error using callback', async () => {
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListStudiesRequest()
+        new protos.google.cloud.aiplatform.v1.DeleteDeploymentResourcePoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListStudiesRequest',
+        '.google.cloud.aiplatform.v1.DeleteDeploymentResourcePoolRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteDeploymentResourcePool =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteDeploymentResourcePool(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteDeploymentResourcePool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDeploymentResourcePool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteDeploymentResourcePool with call error', async () => {
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.DeleteDeploymentResourcePoolRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.DeleteDeploymentResourcePoolRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteDeploymentResourcePool = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.deleteDeploymentResourcePool(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDeploymentResourcePool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDeploymentResourcePool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteDeploymentResourcePool with LRO error', async () => {
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.DeleteDeploymentResourcePoolRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.DeleteDeploymentResourcePoolRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteDeploymentResourcePool = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteDeploymentResourcePool(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteDeploymentResourcePool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDeploymentResourcePool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteDeploymentResourcePoolProgress without error', async () => {
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkDeleteDeploymentResourcePoolProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteDeploymentResourcePoolProgress with error', async () => {
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteDeploymentResourcePoolProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('listDeploymentResourcePools', () => {
+    it('invokes listDeploymentResourcePools without error', async () => {
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListDeploymentResourcePoolsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListDeploymentResourcePoolsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Study()),
-        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Study()),
-        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Study()),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.DeploymentResourcePool()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.DeploymentResourcePool()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.DeploymentResourcePool()
+        ),
       ];
-      client.innerApiCalls.listStudies =
+      client.innerApiCalls.listDeploymentResourcePools =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listDeploymentResourcePools(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listDeploymentResourcePools as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDeploymentResourcePools as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listDeploymentResourcePools without error using callback', async () => {
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListDeploymentResourcePoolsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListDeploymentResourcePoolsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.DeploymentResourcePool()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.DeploymentResourcePool()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.DeploymentResourcePool()
+        ),
+      ];
+      client.innerApiCalls.listDeploymentResourcePools =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.listStudies(
+        client.listDeploymentResourcePools(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.IStudy[] | null
+            result?:
+              | protos.google.cloud.aiplatform.v1.IDeploymentResourcePool[]
+              | null
           ) => {
             if (err) {
               reject(err);
@@ -2153,74 +964,92 @@ describe('v1.VizierServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.listStudies as SinonStub
+        client.innerApiCalls.listDeploymentResourcePools as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listStudies as SinonStub
+        client.innerApiCalls.listDeploymentResourcePools as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listStudies with error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes listDeploymentResourcePools with error', async () => {
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListStudiesRequest()
+        new protos.google.cloud.aiplatform.v1.ListDeploymentResourcePoolsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListStudiesRequest',
+        '.google.cloud.aiplatform.v1.ListDeploymentResourcePoolsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.listStudies = stubSimpleCall(
+      client.innerApiCalls.listDeploymentResourcePools = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.listStudies(request), expectedError);
+      await assert.rejects(
+        client.listDeploymentResourcePools(request),
+        expectedError
+      );
       const actualRequest = (
-        client.innerApiCalls.listStudies as SinonStub
+        client.innerApiCalls.listDeploymentResourcePools as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listStudies as SinonStub
+        client.innerApiCalls.listDeploymentResourcePools as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listStudiesStream without error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes listDeploymentResourcePoolsStream without error', async () => {
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListStudiesRequest()
+        new protos.google.cloud.aiplatform.v1.ListDeploymentResourcePoolsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListStudiesRequest',
+        '.google.cloud.aiplatform.v1.ListDeploymentResourcePoolsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Study()),
-        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Study()),
-        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Study()),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.DeploymentResourcePool()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.DeploymentResourcePool()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.DeploymentResourcePool()
+        ),
       ];
-      client.descriptors.page.listStudies.createStream =
+      client.descriptors.page.listDeploymentResourcePools.createStream =
         stubPageStreamingCall(expectedResponse);
-      const stream = client.listStudiesStream(request);
+      const stream = client.listDeploymentResourcePoolsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1.Study[] = [];
+        const responses: protos.google.cloud.aiplatform.v1.DeploymentResourcePool[] =
+          [];
         stream.on(
           'data',
-          (response: protos.google.cloud.aiplatform.v1.Study) => {
+          (
+            response: protos.google.cloud.aiplatform.v1.DeploymentResourcePool
+          ) => {
             responses.push(response);
           }
         );
@@ -2234,12 +1063,18 @@ describe('v1.VizierServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listStudies.createStream as SinonStub)
+        (
+          client.descriptors.page.listDeploymentResourcePools
+            .createStream as SinonStub
+        )
           .getCall(0)
-          .calledWith(client.innerApiCalls.listStudies, request)
+          .calledWith(client.innerApiCalls.listDeploymentResourcePools, request)
       );
       assert(
-        (client.descriptors.page.listStudies.createStream as SinonStub)
+        (
+          client.descriptors.page.listDeploymentResourcePools
+            .createStream as SinonStub
+        )
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
@@ -2247,32 +1082,36 @@ describe('v1.VizierServiceClient', () => {
       );
     });
 
-    it('invokes listStudiesStream with error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes listDeploymentResourcePoolsStream with error', async () => {
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListStudiesRequest()
+        new protos.google.cloud.aiplatform.v1.ListDeploymentResourcePoolsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListStudiesRequest',
+        '.google.cloud.aiplatform.v1.ListDeploymentResourcePoolsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listStudies.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listStudiesStream(request);
+      client.descriptors.page.listDeploymentResourcePools.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listDeploymentResourcePoolsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1.Study[] = [];
+        const responses: protos.google.cloud.aiplatform.v1.DeploymentResourcePool[] =
+          [];
         stream.on(
           'data',
-          (response: protos.google.cloud.aiplatform.v1.Study) => {
+          (
+            response: protos.google.cloud.aiplatform.v1.DeploymentResourcePool
+          ) => {
             responses.push(response);
           }
         );
@@ -2285,12 +1124,18 @@ describe('v1.VizierServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listStudies.createStream as SinonStub)
+        (
+          client.descriptors.page.listDeploymentResourcePools
+            .createStream as SinonStub
+        )
           .getCall(0)
-          .calledWith(client.innerApiCalls.listStudies, request)
+          .calledWith(client.innerApiCalls.listDeploymentResourcePools, request)
       );
       assert(
-        (client.descriptors.page.listStudies.createStream as SinonStub)
+        (
+          client.descriptors.page.listDeploymentResourcePools
+            .createStream as SinonStub
+        )
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
@@ -2298,42 +1143,56 @@ describe('v1.VizierServiceClient', () => {
       );
     });
 
-    it('uses async iteration with listStudies without error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('uses async iteration with listDeploymentResourcePools without error', async () => {
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListStudiesRequest()
+        new protos.google.cloud.aiplatform.v1.ListDeploymentResourcePoolsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListStudiesRequest',
+        '.google.cloud.aiplatform.v1.ListDeploymentResourcePoolsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Study()),
-        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Study()),
-        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Study()),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.DeploymentResourcePool()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.DeploymentResourcePool()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.DeploymentResourcePool()
+        ),
       ];
-      client.descriptors.page.listStudies.asyncIterate =
+      client.descriptors.page.listDeploymentResourcePools.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.aiplatform.v1.IStudy[] = [];
-      const iterable = client.listStudiesAsync(request);
+      const responses: protos.google.cloud.aiplatform.v1.IDeploymentResourcePool[] =
+        [];
+      const iterable = client.listDeploymentResourcePoolsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listStudies.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
+        (
+          client.descriptors.page.listDeploymentResourcePools
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert(
-        (client.descriptors.page.listStudies.asyncIterate as SinonStub)
+        (
+          client.descriptors.page.listDeploymentResourcePools
+            .asyncIterate as SinonStub
+        )
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
@@ -2341,41 +1200,47 @@ describe('v1.VizierServiceClient', () => {
       );
     });
 
-    it('uses async iteration with listStudies with error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('uses async iteration with listDeploymentResourcePools with error', async () => {
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListStudiesRequest()
+        new protos.google.cloud.aiplatform.v1.ListDeploymentResourcePoolsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListStudiesRequest',
+        '.google.cloud.aiplatform.v1.ListDeploymentResourcePoolsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listStudies.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listStudiesAsync(request);
+      client.descriptors.page.listDeploymentResourcePools.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listDeploymentResourcePoolsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.aiplatform.v1.IStudy[] = [];
+        const responses: protos.google.cloud.aiplatform.v1.IDeploymentResourcePool[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listStudies.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
+        (
+          client.descriptors.page.listDeploymentResourcePools
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert(
-        (client.descriptors.page.listStudies.asyncIterate as SinonStub)
+        (
+          client.descriptors.page.listDeploymentResourcePools
+            .asyncIterate as SinonStub
+        )
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
@@ -2384,68 +1249,87 @@ describe('v1.VizierServiceClient', () => {
     });
   });
 
-  describe('listTrials', () => {
-    it('invokes listTrials without error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+  describe('queryDeployedModels', () => {
+    it('invokes queryDeployedModels without error', async () => {
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListTrialsRequest()
+        new protos.google.cloud.aiplatform.v1.QueryDeployedModelsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListTrialsRequest',
-        ['parent']
+        '.google.cloud.aiplatform.v1.QueryDeployedModelsRequest',
+        ['deploymentResourcePool']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.deploymentResourcePool = defaultValue1;
+      const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Trial()),
-        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Trial()),
-        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Trial()),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.DeployedModel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.DeployedModel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.DeployedModel()
+        ),
       ];
-      client.innerApiCalls.listTrials = stubSimpleCall(expectedResponse);
-      const [response] = await client.listTrials(request);
+      client.innerApiCalls.queryDeployedModels =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.queryDeployedModels(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.listTrials as SinonStub
+        client.innerApiCalls.queryDeployedModels as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listTrials as SinonStub
+        client.innerApiCalls.queryDeployedModels as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listTrials without error using callback', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes queryDeployedModels without error using callback', async () => {
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListTrialsRequest()
+        new protos.google.cloud.aiplatform.v1.QueryDeployedModelsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListTrialsRequest',
-        ['parent']
+        '.google.cloud.aiplatform.v1.QueryDeployedModelsRequest',
+        ['deploymentResourcePool']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.deploymentResourcePool = defaultValue1;
+      const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Trial()),
-        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Trial()),
-        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Trial()),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.DeployedModel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.DeployedModel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.DeployedModel()
+        ),
       ];
-      client.innerApiCalls.listTrials =
+      client.innerApiCalls.queryDeployedModels =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.listTrials(
+        client.queryDeployedModels(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.ITrial[] | null
+            result?: protos.google.cloud.aiplatform.v1.IDeployedModel[] | null
           ) => {
             if (err) {
               reject(err);
@@ -2458,74 +1342,86 @@ describe('v1.VizierServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.listTrials as SinonStub
+        client.innerApiCalls.queryDeployedModels as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listTrials as SinonStub
+        client.innerApiCalls.queryDeployedModels as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listTrials with error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes queryDeployedModels with error', async () => {
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListTrialsRequest()
+        new protos.google.cloud.aiplatform.v1.QueryDeployedModelsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListTrialsRequest',
-        ['parent']
+        '.google.cloud.aiplatform.v1.QueryDeployedModelsRequest',
+        ['deploymentResourcePool']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.deploymentResourcePool = defaultValue1;
+      const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.listTrials = stubSimpleCall(
+      client.innerApiCalls.queryDeployedModels = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.listTrials(request), expectedError);
+      await assert.rejects(client.queryDeployedModels(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.listTrials as SinonStub
+        client.innerApiCalls.queryDeployedModels as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listTrials as SinonStub
+        client.innerApiCalls.queryDeployedModels as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listTrialsStream without error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes queryDeployedModelsStream without error', async () => {
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListTrialsRequest()
+        new protos.google.cloud.aiplatform.v1.QueryDeployedModelsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListTrialsRequest',
-        ['parent']
+        '.google.cloud.aiplatform.v1.QueryDeployedModelsRequest',
+        ['deploymentResourcePool']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.deploymentResourcePool = defaultValue1;
+      const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Trial()),
-        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Trial()),
-        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Trial()),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.DeployedModel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.DeployedModel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.DeployedModel()
+        ),
       ];
-      client.descriptors.page.listTrials.createStream =
+      client.descriptors.page.queryDeployedModels.createStream =
         stubPageStreamingCall(expectedResponse);
-      const stream = client.listTrialsStream(request);
+      const stream = client.queryDeployedModelsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1.Trial[] = [];
+        const responses: protos.google.cloud.aiplatform.v1.DeployedModel[] = [];
         stream.on(
           'data',
-          (response: protos.google.cloud.aiplatform.v1.Trial) => {
+          (response: protos.google.cloud.aiplatform.v1.DeployedModel) => {
             responses.push(response);
           }
         );
@@ -2539,12 +1435,12 @@ describe('v1.VizierServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listTrials.createStream as SinonStub)
+        (client.descriptors.page.queryDeployedModels.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listTrials, request)
+          .calledWith(client.innerApiCalls.queryDeployedModels, request)
       );
       assert(
-        (client.descriptors.page.listTrials.createStream as SinonStub)
+        (client.descriptors.page.queryDeployedModels.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
@@ -2552,32 +1448,33 @@ describe('v1.VizierServiceClient', () => {
       );
     });
 
-    it('invokes listTrialsStream with error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes queryDeployedModelsStream with error', async () => {
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListTrialsRequest()
+        new protos.google.cloud.aiplatform.v1.QueryDeployedModelsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListTrialsRequest',
-        ['parent']
+        '.google.cloud.aiplatform.v1.QueryDeployedModelsRequest',
+        ['deploymentResourcePool']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.deploymentResourcePool = defaultValue1;
+      const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listTrials.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listTrialsStream(request);
+      client.descriptors.page.queryDeployedModels.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.queryDeployedModelsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1.Trial[] = [];
+        const responses: protos.google.cloud.aiplatform.v1.DeployedModel[] = [];
         stream.on(
           'data',
-          (response: protos.google.cloud.aiplatform.v1.Trial) => {
+          (response: protos.google.cloud.aiplatform.v1.DeployedModel) => {
             responses.push(response);
           }
         );
@@ -2590,12 +1487,12 @@ describe('v1.VizierServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listTrials.createStream as SinonStub)
+        (client.descriptors.page.queryDeployedModels.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listTrials, request)
+          .calledWith(client.innerApiCalls.queryDeployedModels, request)
       );
       assert(
-        (client.descriptors.page.listTrials.createStream as SinonStub)
+        (client.descriptors.page.queryDeployedModels.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
@@ -2603,42 +1500,51 @@ describe('v1.VizierServiceClient', () => {
       );
     });
 
-    it('uses async iteration with listTrials without error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('uses async iteration with queryDeployedModels without error', async () => {
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListTrialsRequest()
+        new protos.google.cloud.aiplatform.v1.QueryDeployedModelsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListTrialsRequest',
-        ['parent']
+        '.google.cloud.aiplatform.v1.QueryDeployedModelsRequest',
+        ['deploymentResourcePool']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.deploymentResourcePool = defaultValue1;
+      const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Trial()),
-        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Trial()),
-        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Trial()),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.DeployedModel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.DeployedModel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.DeployedModel()
+        ),
       ];
-      client.descriptors.page.listTrials.asyncIterate =
+      client.descriptors.page.queryDeployedModels.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.aiplatform.v1.ITrial[] = [];
-      const iterable = client.listTrialsAsync(request);
+      const responses: protos.google.cloud.aiplatform.v1.IDeployedModel[] = [];
+      const iterable = client.queryDeployedModelsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listTrials.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
+        (
+          client.descriptors.page.queryDeployedModels.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert(
-        (client.descriptors.page.listTrials.asyncIterate as SinonStub)
+        (client.descriptors.page.queryDeployedModels.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
@@ -2646,41 +1552,43 @@ describe('v1.VizierServiceClient', () => {
       );
     });
 
-    it('uses async iteration with listTrials with error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('uses async iteration with queryDeployedModels with error', async () => {
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListTrialsRequest()
+        new protos.google.cloud.aiplatform.v1.QueryDeployedModelsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListTrialsRequest',
-        ['parent']
+        '.google.cloud.aiplatform.v1.QueryDeployedModelsRequest',
+        ['deploymentResourcePool']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.deploymentResourcePool = defaultValue1;
+      const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listTrials.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listTrialsAsync(request);
+      client.descriptors.page.queryDeployedModels.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.queryDeployedModelsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.aiplatform.v1.ITrial[] = [];
+        const responses: protos.google.cloud.aiplatform.v1.IDeployedModel[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listTrials.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
+        (
+          client.descriptors.page.queryDeployedModels.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert(
-        (client.descriptors.page.listTrials.asyncIterate as SinonStub)
+        (client.descriptors.page.queryDeployedModels.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
@@ -2690,10 +1598,13 @@ describe('v1.VizierServiceClient', () => {
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
@@ -2720,10 +1631,13 @@ describe('v1.VizierServiceClient', () => {
       );
     });
     it('invokes getIamPolicy without error using callback', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
@@ -2764,10 +1678,13 @@ describe('v1.VizierServiceClient', () => {
       assert((client.iamClient.getIamPolicy as SinonStub).getCall(0));
     });
     it('invokes getIamPolicy with error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
@@ -2796,10 +1713,13 @@ describe('v1.VizierServiceClient', () => {
   });
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
@@ -2826,10 +1746,13 @@ describe('v1.VizierServiceClient', () => {
       );
     });
     it('invokes setIamPolicy without error using callback', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
@@ -2870,10 +1793,13 @@ describe('v1.VizierServiceClient', () => {
       assert((client.iamClient.setIamPolicy as SinonStub).getCall(0));
     });
     it('invokes setIamPolicy with error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
@@ -2902,10 +1828,13 @@ describe('v1.VizierServiceClient', () => {
   });
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
@@ -2935,10 +1864,13 @@ describe('v1.VizierServiceClient', () => {
       );
     });
     it('invokes testIamPermissions without error using callback', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
@@ -2979,10 +1911,13 @@ describe('v1.VizierServiceClient', () => {
       assert((client.iamClient.testIamPermissions as SinonStub).getCall(0));
     });
     it('invokes testIamPermissions with error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
@@ -3014,10 +1949,13 @@ describe('v1.VizierServiceClient', () => {
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -3044,10 +1982,13 @@ describe('v1.VizierServiceClient', () => {
       );
     });
     it('invokes getLocation without error using callback', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -3088,10 +2029,13 @@ describe('v1.VizierServiceClient', () => {
       assert((client.locationsClient.getLocation as SinonStub).getCall(0));
     });
     it('invokes getLocation with error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -3123,10 +2067,13 @@ describe('v1.VizierServiceClient', () => {
   });
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
@@ -3171,10 +2118,13 @@ describe('v1.VizierServiceClient', () => {
       );
     });
     it('uses async iteration with listLocations with error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
@@ -3212,10 +2162,13 @@ describe('v1.VizierServiceClient', () => {
   });
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
@@ -3233,10 +2186,13 @@ describe('v1.VizierServiceClient', () => {
       );
     });
     it('invokes getOperation without error using callback', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -3267,10 +2223,13 @@ describe('v1.VizierServiceClient', () => {
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
     it('invokes getOperation with error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -3291,10 +2250,13 @@ describe('v1.VizierServiceClient', () => {
   });
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
@@ -3313,10 +2275,13 @@ describe('v1.VizierServiceClient', () => {
       );
     });
     it('invokes cancelOperation without error using callback', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -3347,10 +2312,13 @@ describe('v1.VizierServiceClient', () => {
       assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
     });
     it('invokes cancelOperation with error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -3371,10 +2339,13 @@ describe('v1.VizierServiceClient', () => {
   });
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
@@ -3393,10 +2364,13 @@ describe('v1.VizierServiceClient', () => {
       );
     });
     it('invokes deleteOperation without error using callback', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -3427,10 +2401,13 @@ describe('v1.VizierServiceClient', () => {
       assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
     });
     it('invokes deleteOperation with error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -3451,10 +2428,13 @@ describe('v1.VizierServiceClient', () => {
   });
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -3487,10 +2467,13 @@ describe('v1.VizierServiceClient', () => {
       );
     });
     it('uses async iteration with listOperations with error', async () => {
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
@@ -3526,10 +2509,13 @@ describe('v1.VizierServiceClient', () => {
         data_item: 'dataItemValue',
         annotation: 'annotationValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.annotationPathTemplate.render = sinon
         .stub()
@@ -3613,10 +2599,13 @@ describe('v1.VizierServiceClient', () => {
         dataset: 'datasetValue',
         annotation_spec: 'annotationSpecValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.annotationSpecPathTemplate.render = sinon
         .stub()
@@ -3690,10 +2679,13 @@ describe('v1.VizierServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         artifact: 'artifactValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.artifactPathTemplate.render = sinon
         .stub()
@@ -3765,10 +2757,13 @@ describe('v1.VizierServiceClient', () => {
         location: 'locationValue',
         batch_prediction_job: 'batchPredictionJobValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.batchPredictionJobPathTemplate.render = sinon
         .stub()
@@ -3843,10 +2838,13 @@ describe('v1.VizierServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         context: 'contextValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.contextPathTemplate.render = sinon
         .stub()
@@ -3918,10 +2916,13 @@ describe('v1.VizierServiceClient', () => {
         location: 'locationValue',
         custom_job: 'customJobValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.customJobPathTemplate.render = sinon
         .stub()
@@ -3983,10 +2984,13 @@ describe('v1.VizierServiceClient', () => {
         dataset: 'datasetValue',
         data_item: 'dataItemValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.dataItemPathTemplate.render = sinon
         .stub()
@@ -4058,10 +3062,13 @@ describe('v1.VizierServiceClient', () => {
         location: 'locationValue',
         data_labeling_job: 'dataLabelingJobValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.dataLabelingJobPathTemplate.render = sinon
         .stub()
@@ -4123,10 +3130,13 @@ describe('v1.VizierServiceClient', () => {
         location: 'locationValue',
         dataset: 'datasetValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.datasetPathTemplate.render = sinon
         .stub()
@@ -4188,10 +3198,13 @@ describe('v1.VizierServiceClient', () => {
         dataset: 'datasetValue',
         dataset_version: 'datasetVersionValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.datasetVersionPathTemplate.render = sinon
         .stub()
@@ -4264,10 +3277,13 @@ describe('v1.VizierServiceClient', () => {
         location: 'locationValue',
         deployment_resource_pool: 'deploymentResourcePoolValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.deploymentResourcePoolPathTemplate.render = sinon
         .stub()
@@ -4346,10 +3362,13 @@ describe('v1.VizierServiceClient', () => {
         featurestore: 'featurestoreValue',
         entity_type: 'entityTypeValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.entityTypePathTemplate.render = sinon
         .stub()
@@ -4422,10 +3441,13 @@ describe('v1.VizierServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         execution: 'executionValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.executionPathTemplate.render = sinon
         .stub()
@@ -4497,10 +3519,13 @@ describe('v1.VizierServiceClient', () => {
         location: 'locationValue',
         feature_group: 'featureGroupValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.featureGroupPathTemplate.render = sinon
         .stub()
@@ -4561,10 +3586,13 @@ describe('v1.VizierServiceClient', () => {
         location: 'locationValue',
         feature_online_store: 'featureOnlineStoreValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.featureOnlineStorePathTemplate.render = sinon
         .stub()
@@ -4639,10 +3667,13 @@ describe('v1.VizierServiceClient', () => {
         feature_online_store: 'featureOnlineStoreValue',
         feature_view: 'featureViewValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.featureViewPathTemplate.render = sinon
         .stub()
@@ -4716,10 +3747,13 @@ describe('v1.VizierServiceClient', () => {
         feature_online_store: 'featureOnlineStoreValue',
         feature_view: 'featureViewValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.featureViewSyncPathTemplate.render = sinon
         .stub()
@@ -4792,10 +3826,13 @@ describe('v1.VizierServiceClient', () => {
         location: 'locationValue',
         featurestore: 'featurestoreValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.featurestorePathTemplate.render = sinon
         .stub()
@@ -4856,10 +3893,13 @@ describe('v1.VizierServiceClient', () => {
         location: 'locationValue',
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.hyperparameterTuningJobPathTemplate.render = sinon
         .stub()
@@ -4937,10 +3977,13 @@ describe('v1.VizierServiceClient', () => {
         location: 'locationValue',
         index: 'indexValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.indexPathTemplate.render = sinon
         .stub()
@@ -5001,10 +4044,13 @@ describe('v1.VizierServiceClient', () => {
         location: 'locationValue',
         index_endpoint: 'indexEndpointValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.indexEndpointPathTemplate.render = sinon
         .stub()
@@ -5064,10 +4110,13 @@ describe('v1.VizierServiceClient', () => {
         project: 'projectValue',
         location: 'locationValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
@@ -5115,10 +4164,13 @@ describe('v1.VizierServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         metadata_schema: 'metadataSchemaValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.metadataSchemaPathTemplate.render = sinon
         .stub()
@@ -5192,10 +4244,13 @@ describe('v1.VizierServiceClient', () => {
         location: 'locationValue',
         metadata_store: 'metadataStoreValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.metadataStorePathTemplate.render = sinon
         .stub()
@@ -5256,10 +4311,13 @@ describe('v1.VizierServiceClient', () => {
         location: 'locationValue',
         model: 'modelValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.modelPathTemplate.render = sinon
         .stub()
@@ -5320,10 +4378,13 @@ describe('v1.VizierServiceClient', () => {
         location: 'locationValue',
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -5400,10 +4461,13 @@ describe('v1.VizierServiceClient', () => {
         model: 'modelValue',
         evaluation: 'evaluationValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.modelEvaluationPathTemplate.render = sinon
         .stub()
@@ -5477,10 +4541,13 @@ describe('v1.VizierServiceClient', () => {
         evaluation: 'evaluationValue',
         slice: 'sliceValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.modelEvaluationSlicePathTemplate.render = sinon
         .stub()
@@ -5584,10 +4651,13 @@ describe('v1.VizierServiceClient', () => {
         location: 'locationValue',
         nas_job: 'nasJobValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.nasJobPathTemplate.render = sinon
         .stub()
@@ -5649,10 +4719,13 @@ describe('v1.VizierServiceClient', () => {
         nas_job: 'nasJobValue',
         nas_trial_detail: 'nasTrialDetailValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.nasTrialDetailPathTemplate.render = sinon
         .stub()
@@ -5725,10 +4798,13 @@ describe('v1.VizierServiceClient', () => {
         location: 'locationValue',
         pipeline_job: 'pipelineJobValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.pipelineJobPathTemplate.render = sinon
         .stub()
@@ -5782,6 +4858,47 @@ describe('v1.VizierServiceClient', () => {
       });
     });
 
+    describe('project', () => {
+      const fakePath = '/rendered/path/project';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.projectPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectPath', () => {
+        const result = client.projectPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectName', () => {
+        const result = client.matchProjectFromProjectName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('projectLocationEndpoint', () => {
       const fakePath = '/rendered/path/projectLocationEndpoint';
       const expectedParameters = {
@@ -5789,10 +4906,13 @@ describe('v1.VizierServiceClient', () => {
         location: 'locationValue',
         endpoint: 'endpointValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationEndpointPathTemplate.render = sinon
         .stub()
@@ -5869,10 +4989,13 @@ describe('v1.VizierServiceClient', () => {
         feature_group: 'featureGroupValue',
         feature: 'featureValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -5972,10 +5095,13 @@ describe('v1.VizierServiceClient', () => {
         entity_type: 'entityTypeValue',
         feature: 'featureValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -6096,10 +5222,13 @@ describe('v1.VizierServiceClient', () => {
         publisher: 'publisherValue',
         model: 'modelValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationPublisherModelPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -6187,10 +5316,13 @@ describe('v1.VizierServiceClient', () => {
         publisher: 'publisherValue',
         model: 'modelValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.publisherModelPathTemplate.render = sinon
         .stub()
@@ -6241,10 +5373,13 @@ describe('v1.VizierServiceClient', () => {
         dataset: 'datasetValue',
         saved_query: 'savedQueryValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.savedQueryPathTemplate.render = sinon
         .stub()
@@ -6316,10 +5451,13 @@ describe('v1.VizierServiceClient', () => {
         location: 'locationValue',
         schedule: 'scheduleValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.schedulePathTemplate.render = sinon
         .stub()
@@ -6380,10 +5518,13 @@ describe('v1.VizierServiceClient', () => {
         location: 'locationValue',
         specialist_pool: 'specialistPoolValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.specialistPoolPathTemplate.render = sinon
         .stub()
@@ -6445,10 +5586,13 @@ describe('v1.VizierServiceClient', () => {
         location: 'locationValue',
         study: 'studyValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.studyPathTemplate.render = sinon
         .stub()
@@ -6509,10 +5653,13 @@ describe('v1.VizierServiceClient', () => {
         location: 'locationValue',
         tensorboard: 'tensorboardValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.tensorboardPathTemplate.render = sinon
         .stub()
@@ -6574,10 +5721,13 @@ describe('v1.VizierServiceClient', () => {
         tensorboard: 'tensorboardValue',
         experiment: 'experimentValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.tensorboardExperimentPathTemplate.render = sinon
         .stub()
@@ -6670,10 +5820,13 @@ describe('v1.VizierServiceClient', () => {
         experiment: 'experimentValue',
         run: 'runValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.tensorboardRunPathTemplate.render = sinon
         .stub()
@@ -6759,10 +5912,13 @@ describe('v1.VizierServiceClient', () => {
         run: 'runValue',
         time_series: 'timeSeriesValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.tensorboardTimeSeriesPathTemplate.render = sinon
         .stub()
@@ -6882,10 +6038,13 @@ describe('v1.VizierServiceClient', () => {
         location: 'locationValue',
         training_pipeline: 'trainingPipelineValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.trainingPipelinePathTemplate.render = sinon
         .stub()
@@ -6951,10 +6110,13 @@ describe('v1.VizierServiceClient', () => {
         study: 'studyValue',
         trial: 'trialValue',
       };
-      const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.trialPathTemplate.render = sinon
         .stub()

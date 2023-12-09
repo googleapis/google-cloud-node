@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(endpoint, instances) {
+function main(endpoint, model, instances, contents) {
   // [START aiplatform_v1beta1_generated_PredictionService_CountTokens_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -35,10 +35,20 @@ function main(endpoint, instances) {
    */
   // const endpoint = 'abc123'
   /**
+   *  Required. The name of the publisher model requested to serve the
+   *  prediction. Format:
+   *  `projects/{project}/locations/{location}/publishers/* /models/*`
+   */
+  // const model = 'abc123'
+  /**
    *  Required. The instances that are the input to token counting call.
    *  Schema is identical to the prediction schema of the underlying model.
    */
   // const instances = [1,2,3,4]
+  /**
+   *  Required. Input content.
+   */
+  // const contents = [1,2,3,4]
 
   // Imports the Aiplatform library
   const {PredictionServiceClient} = require('@google-cloud/aiplatform').v1beta1;
@@ -50,7 +60,9 @@ function main(endpoint, instances) {
     // Construct request
     const request = {
       endpoint,
+      model,
       instances,
+      contents,
     };
 
     // Run request
