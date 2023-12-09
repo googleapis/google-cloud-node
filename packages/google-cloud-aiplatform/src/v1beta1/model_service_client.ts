@@ -403,6 +403,9 @@ export class ModelServiceClient {
               post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/publishers/*/models/*}:getIamPolicy',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
             },
             {
@@ -416,6 +419,9 @@ export class ModelServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/publishers/*/models/*}:getIamPolicy',
             },
           ],
         },
@@ -625,6 +631,9 @@ export class ModelServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}:cancel',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}:cancel',
@@ -913,6 +922,10 @@ export class ModelServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
             },
             {
@@ -1153,6 +1166,9 @@ export class ModelServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
             },
             {
@@ -1371,6 +1387,9 @@ export class ModelServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/endpoints/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*}/operations',
@@ -1607,6 +1626,9 @@ export class ModelServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}:wait',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}:wait',
@@ -2791,10 +2813,10 @@ export class ModelServiceClient {
    *   Optional. The user-provided custom service account to use to do the model
    *   upload. If empty, [Vertex AI Service
    *   Agent](https://cloud.google.com/vertex-ai/docs/general/access-control#service-agents)
-   *   will be used. Users uploading the Model must have the
-   *   `iam.serviceAccounts.actAs` permission on this service account. Also, this
-   *   account must belong to the project specified in the `parent` field and have
-   *   all necessary read permissions.
+   *   will be used to access resources needed to upload the model. This account
+   *   must belong to the target project where the model is uploaded to, i.e., the
+   *   project specified in the `parent` field of this request and have necessary
+   *   read permissions (to Google Cloud Storage, Artifact Registry, etc.).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
