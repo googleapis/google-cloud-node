@@ -16,6 +16,8 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
+import * as v1 from './v1';
+import * as v1beta from './v1beta';
 import * as v1beta2 from './v1beta2';
 import * as v1beta3 from './v1beta3';
 
@@ -27,6 +29,8 @@ const TextServiceClient = v1beta2.TextServiceClient;
 type TextServiceClient = v1beta2.TextServiceClient;
 
 export {
+  v1,
+  v1beta,
   v1beta2,
   v1beta3,
   DiscussServiceClient,
@@ -34,6 +38,8 @@ export {
   TextServiceClient,
 };
 export default {
+  v1,
+  v1beta,
   v1beta2,
   v1beta3,
   DiscussServiceClient,
