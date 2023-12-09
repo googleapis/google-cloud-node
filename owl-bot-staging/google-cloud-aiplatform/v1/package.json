@@ -22,6 +22,7 @@
     "google aiplatform",
     "aiplatform",
     "dataset service",
+    "deployment resource pool service",
     "endpoint service",
     "feature online store admin service",
     "feature online store service",

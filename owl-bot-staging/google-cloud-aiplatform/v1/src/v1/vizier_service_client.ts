@@ -206,6 +206,9 @@ export class VizierServiceClient {
       datasetVersionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/datasetVersions/{dataset_version}'
       ),
+      deploymentResourcePoolPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}'
+      ),
       entityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}'
       ),
@@ -335,7 +338,7 @@ export class VizierServiceClient {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/ui/{name=projects/*/locations/*}',additional_bindings: [{get: '/v1/{name=projects/*/locations/*}',}],
       },{selector: 'google.cloud.location.Locations.ListLocations',get: '/ui/{name=projects/*}/locations',additional_bindings: [{get: '/v1/{name=projects/*}/locations',}],
-      },{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',post: '/v1/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',},{post: '/v1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/models/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/endpoints/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',}],
+      },{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',post: '/v1/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',},{post: '/v1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/models/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/endpoints/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/publishers/*/models/*}:getIamPolicy',}],
       },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/models/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/endpoints/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',body: '*',}],
       },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',},{post: '/v1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/models/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/endpoints/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',}],
       },{selector: 'google.longrunning.Operations.CancelOperation',post: '/ui/{name=projects/*/locations/*/operations/*}:cancel',additional_bindings: [{post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/models/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/studies/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/models/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/studies/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',}],
@@ -2870,6 +2873,55 @@ export class VizierServiceClient {
    */
   matchDatasetVersionFromDatasetVersionName(datasetVersionName: string) {
     return this.pathTemplates.datasetVersionPathTemplate.match(datasetVersionName).dataset_version;
+  }
+
+  /**
+   * Return a fully-qualified deploymentResourcePool resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} deployment_resource_pool
+   * @returns {string} Resource name string.
+   */
+  deploymentResourcePoolPath(project:string,location:string,deploymentResourcePool:string) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.render({
+      project: project,
+      location: location,
+      deployment_resource_pool: deploymentResourcePool,
+    });
+  }
+
+  /**
+   * Parse the project from DeploymentResourcePool resource.
+   *
+   * @param {string} deploymentResourcePoolName
+   *   A fully-qualified path representing DeploymentResourcePool resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDeploymentResourcePoolName(deploymentResourcePoolName: string) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(deploymentResourcePoolName).project;
+  }
+
+  /**
+   * Parse the location from DeploymentResourcePool resource.
+   *
+   * @param {string} deploymentResourcePoolName
+   *   A fully-qualified path representing DeploymentResourcePool resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDeploymentResourcePoolName(deploymentResourcePoolName: string) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(deploymentResourcePoolName).location;
+  }
+
+  /**
+   * Parse the deployment_resource_pool from DeploymentResourcePool resource.
+   *
+   * @param {string} deploymentResourcePoolName
+   *   A fully-qualified path representing DeploymentResourcePool resource.
+   * @returns {string} A string representing the deployment_resource_pool.
+   */
+  matchDeploymentResourcePoolFromDeploymentResourcePoolName(deploymentResourcePoolName: string) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(deploymentResourcePoolName).deployment_resource_pool;
   }
 
   /**

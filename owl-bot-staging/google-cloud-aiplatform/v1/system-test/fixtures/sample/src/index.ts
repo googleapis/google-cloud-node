@@ -16,10 +16,13 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {DatasetServiceClient, EndpointServiceClient, FeatureOnlineStoreAdminServiceClient, FeatureOnlineStoreServiceClient, FeatureRegistryServiceClient, FeaturestoreOnlineServingServiceClient, FeaturestoreServiceClient, IndexEndpointServiceClient, IndexServiceClient, JobServiceClient, LlmUtilityServiceClient, MatchServiceClient, MetadataServiceClient, MigrationServiceClient, ModelGardenServiceClient, ModelServiceClient, PipelineServiceClient, PredictionServiceClient, ScheduleServiceClient, SpecialistPoolServiceClient, TensorboardServiceClient, VizierServiceClient} from '@google-cloud/aiplatform';
+import {DatasetServiceClient, DeploymentResourcePoolServiceClient, EndpointServiceClient, FeatureOnlineStoreAdminServiceClient, FeatureOnlineStoreServiceClient, FeatureRegistryServiceClient, FeaturestoreOnlineServingServiceClient, FeaturestoreServiceClient, IndexEndpointServiceClient, IndexServiceClient, JobServiceClient, LlmUtilityServiceClient, MatchServiceClient, MetadataServiceClient, MigrationServiceClient, ModelGardenServiceClient, ModelServiceClient, PipelineServiceClient, PredictionServiceClient, ScheduleServiceClient, SpecialistPoolServiceClient, TensorboardServiceClient, VizierServiceClient} from '@google-cloud/aiplatform';
 
 // check that the client class type name can be used
 function doStuffWithDatasetServiceClient(client: DatasetServiceClient) {
+  client.close();
+}
+function doStuffWithDeploymentResourcePoolServiceClient(client: DeploymentResourcePoolServiceClient) {
   client.close();
 }
 function doStuffWithEndpointServiceClient(client: EndpointServiceClient) {
@@ -90,6 +93,9 @@ function main() {
   // check that the client instance can be created
   const datasetServiceClient = new DatasetServiceClient();
   doStuffWithDatasetServiceClient(datasetServiceClient);
+  // check that the client instance can be created
+  const deploymentResourcePoolServiceClient = new DeploymentResourcePoolServiceClient();
+  doStuffWithDeploymentResourcePoolServiceClient(deploymentResourcePoolServiceClient);
   // check that the client instance can be created
   const endpointServiceClient = new EndpointServiceClient();
   doStuffWithEndpointServiceClient(endpointServiceClient);

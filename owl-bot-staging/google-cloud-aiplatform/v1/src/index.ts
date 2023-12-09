@@ -19,6 +19,8 @@
 import * as v1 from './v1';
 const DatasetServiceClient = v1.DatasetServiceClient;
 type DatasetServiceClient = v1.DatasetServiceClient;
+const DeploymentResourcePoolServiceClient = v1.DeploymentResourcePoolServiceClient;
+type DeploymentResourcePoolServiceClient = v1.DeploymentResourcePoolServiceClient;
 const EndpointServiceClient = v1.EndpointServiceClient;
 type EndpointServiceClient = v1.EndpointServiceClient;
 const FeatureOnlineStoreAdminServiceClient = v1.FeatureOnlineStoreAdminServiceClient;
@@ -61,7 +63,7 @@ const TensorboardServiceClient = v1.TensorboardServiceClient;
 type TensorboardServiceClient = v1.TensorboardServiceClient;
 const VizierServiceClient = v1.VizierServiceClient;
 type VizierServiceClient = v1.VizierServiceClient;
-export {v1, DatasetServiceClient, EndpointServiceClient, FeatureOnlineStoreAdminServiceClient, FeatureOnlineStoreServiceClient, FeatureRegistryServiceClient, FeaturestoreOnlineServingServiceClient, FeaturestoreServiceClient, IndexEndpointServiceClient, IndexServiceClient, JobServiceClient, LlmUtilityServiceClient, MatchServiceClient, MetadataServiceClient, MigrationServiceClient, ModelGardenServiceClient, ModelServiceClient, PipelineServiceClient, PredictionServiceClient, ScheduleServiceClient, SpecialistPoolServiceClient, TensorboardServiceClient, VizierServiceClient};
-export default {v1, DatasetServiceClient, EndpointServiceClient, FeatureOnlineStoreAdminServiceClient, FeatureOnlineStoreServiceClient, FeatureRegistryServiceClient, FeaturestoreOnlineServingServiceClient, FeaturestoreServiceClient, IndexEndpointServiceClient, IndexServiceClient, JobServiceClient, LlmUtilityServiceClient, MatchServiceClient, MetadataServiceClient, MigrationServiceClient, ModelGardenServiceClient, ModelServiceClient, PipelineServiceClient, PredictionServiceClient, ScheduleServiceClient, SpecialistPoolServiceClient, TensorboardServiceClient, VizierServiceClient};
+export {v1, DatasetServiceClient, DeploymentResourcePoolServiceClient, EndpointServiceClient, FeatureOnlineStoreAdminServiceClient, FeatureOnlineStoreServiceClient, FeatureRegistryServiceClient, FeaturestoreOnlineServingServiceClient, FeaturestoreServiceClient, IndexEndpointServiceClient, IndexServiceClient, JobServiceClient, LlmUtilityServiceClient, MatchServiceClient, MetadataServiceClient, MigrationServiceClient, ModelGardenServiceClient, ModelServiceClient, PipelineServiceClient, PredictionServiceClient, ScheduleServiceClient, SpecialistPoolServiceClient, TensorboardServiceClient, VizierServiceClient};
+export default {v1, DatasetServiceClient, DeploymentResourcePoolServiceClient, EndpointServiceClient, FeatureOnlineStoreAdminServiceClient, FeatureOnlineStoreServiceClient, FeatureRegistryServiceClient, FeaturestoreOnlineServingServiceClient, FeaturestoreServiceClient, IndexEndpointServiceClient, IndexServiceClient, JobServiceClient, LlmUtilityServiceClient, MatchServiceClient, MetadataServiceClient, MigrationServiceClient, ModelGardenServiceClient, ModelServiceClient, PipelineServiceClient, PredictionServiceClient, ScheduleServiceClient, SpecialistPoolServiceClient, TensorboardServiceClient, VizierServiceClient};
 import * as protos from '../protos/protos';
 export {protos}
