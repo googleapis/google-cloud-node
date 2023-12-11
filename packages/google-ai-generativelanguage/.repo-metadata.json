@@ -9,7 +9,7 @@
   "repo": "googleapis/google-cloud-node",
   "distribution_name": "@google-ai/generativelanguage",
   "api_id": "generativelanguage.googleapis.com",
-  "default_version": "v1beta2",
+  "default_version": "v1beta",
   "requires_billing": true,
   "library_type": "GAPIC_AUTO",
   "api_shortname": "generativelanguage"
