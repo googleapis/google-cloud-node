@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -58,6 +58,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.AcceleratorTypeAggregatedList",
@@ -198,7 +202,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -234,6 +238,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.AddressAggregatedList",
@@ -590,7 +598,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -626,6 +634,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.AutoscalerAggregatedList",
@@ -1168,6 +1180,54 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_BackendBuckets_GetIamPolicy_async",
+            "title": "AcceleratorTypes getIamPolicy Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets the access control policy for a resource. May be empty if no such policy or resource exists.",
+            "canonical": true,
+            "file": "backend_buckets.get_iam_policy.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetIamPolicy",
+                "fullName": "google.cloud.compute.v1.BackendBuckets.GetIamPolicy",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "options_requested_policy_version",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "resource",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Policy",
+                "client": {
+                    "shortName": "BackendBucketsClient",
+                    "fullName": "google.cloud.compute.v1.BackendBucketsClient"
+                },
+                "method": {
+                    "shortName": "GetIamPolicy",
+                    "fullName": "google.cloud.compute.v1.BackendBuckets.GetIamPolicy",
+                    "service": {
+                        "shortName": "BackendBuckets",
+                        "fullName": "google.cloud.compute.v1.BackendBuckets"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_BackendBuckets_Insert_async",
             "title": "AcceleratorTypes insert Sample",
             "origin": "API_DEFINITION",
@@ -1380,6 +1440,102 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_BackendBuckets_SetIamPolicy_async",
+            "title": "AcceleratorTypes setIamPolicy Sample",
+            "origin": "API_DEFINITION",
+            "description": " Sets the access control policy on the specified resource. Replaces any existing policy.",
+            "canonical": true,
+            "file": "backend_buckets.set_iam_policy.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SetIamPolicy",
+                "fullName": "google.cloud.compute.v1.BackendBuckets.SetIamPolicy",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "global_set_policy_request_resource",
+                        "type": ".google.cloud.compute.v1.GlobalSetPolicyRequest"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "resource",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Policy",
+                "client": {
+                    "shortName": "BackendBucketsClient",
+                    "fullName": "google.cloud.compute.v1.BackendBucketsClient"
+                },
+                "method": {
+                    "shortName": "SetIamPolicy",
+                    "fullName": "google.cloud.compute.v1.BackendBuckets.SetIamPolicy",
+                    "service": {
+                        "shortName": "BackendBuckets",
+                        "fullName": "google.cloud.compute.v1.BackendBuckets"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_BackendBuckets_TestIamPermissions_async",
+            "title": "AcceleratorTypes testIamPermissions Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns permissions that a caller has on the specified resource.",
+            "canonical": true,
+            "file": "backend_buckets.test_iam_permissions.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "TestIamPermissions",
+                "fullName": "google.cloud.compute.v1.BackendBuckets.TestIamPermissions",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "resource",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "test_permissions_request_resource",
+                        "type": ".google.cloud.compute.v1.TestPermissionsRequest"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.TestPermissionsResponse",
+                "client": {
+                    "shortName": "BackendBucketsClient",
+                    "fullName": "google.cloud.compute.v1.BackendBucketsClient"
+                },
+                "method": {
+                    "shortName": "TestIamPermissions",
+                    "fullName": "google.cloud.compute.v1.BackendBuckets.TestIamPermissions",
+                    "service": {
+                        "shortName": "BackendBuckets",
+                        "fullName": "google.cloud.compute.v1.BackendBuckets"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_BackendBuckets_Update_async",
             "title": "AcceleratorTypes update Sample",
             "origin": "API_DEFINITION",
@@ -1494,7 +1650,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -1530,6 +1686,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.BackendServiceAggregatedList",
@@ -1896,6 +2056,66 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_BackendServices_ListUsable_async",
+            "title": "AcceleratorTypes listUsable Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves an aggregated list of all usable backend services in the specified project.",
+            "canonical": true,
+            "file": "backend_services.list_usable.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 75,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListUsable",
+                "fullName": "google.cloud.compute.v1.BackendServices.ListUsable",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "max_results",
+                        "type": "TYPE_UINT32"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "return_partial_success",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.BackendServiceListUsable",
+                "client": {
+                    "shortName": "BackendServicesClient",
+                    "fullName": "google.cloud.compute.v1.BackendServicesClient"
+                },
+                "method": {
+                    "shortName": "ListUsable",
+                    "fullName": "google.cloud.compute.v1.BackendServices.ListUsable",
+                    "service": {
+                        "shortName": "BackendServices",
+                        "fullName": "google.cloud.compute.v1.BackendServices"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_BackendServices_Patch_async",
             "title": "AcceleratorTypes patch Sample",
             "origin": "API_DEFINITION",
@@ -2100,6 +2320,54 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_BackendServices_TestIamPermissions_async",
+            "title": "AcceleratorTypes testIamPermissions Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns permissions that a caller has on the specified resource.",
+            "canonical": true,
+            "file": "backend_services.test_iam_permissions.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "TestIamPermissions",
+                "fullName": "google.cloud.compute.v1.BackendServices.TestIamPermissions",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "resource",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "test_permissions_request_resource",
+                        "type": ".google.cloud.compute.v1.TestPermissionsRequest"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.TestPermissionsResponse",
+                "client": {
+                    "shortName": "BackendServicesClient",
+                    "fullName": "google.cloud.compute.v1.BackendServicesClient"
+                },
+                "method": {
+                    "shortName": "TestIamPermissions",
+                    "fullName": "google.cloud.compute.v1.BackendServices.TestIamPermissions",
+                    "service": {
+                        "shortName": "BackendServices",
+                        "fullName": "google.cloud.compute.v1.BackendServices"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_BackendServices_Update_async",
             "title": "AcceleratorTypes update Sample",
             "origin": "API_DEFINITION",
@@ -2218,7 +2486,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -2254,6 +2522,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.DiskAggregatedList",
@@ -3162,7 +3434,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -3198,6 +3470,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.DiskTypeAggregatedList",
@@ -4782,7 +5058,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -4818,6 +5094,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.ForwardingRuleAggregatedList",
@@ -6250,7 +6530,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -6286,6 +6566,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.OperationAggregatedList",
@@ -6906,7 +7190,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -6942,6 +7226,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.HealthChecksAggregatedList",
@@ -7922,7 +8210,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -7958,6 +8246,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.InstanceGroupManagerAggregatedList",
@@ -9070,7 +9362,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -9106,6 +9398,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.InstanceGroupAggregatedList",
@@ -9650,7 +9946,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -9686,6 +9982,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.InstanceAggregatedList",
@@ -11304,6 +11604,62 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_Instances_SetSecurityPolicy_async",
+            "title": "AcceleratorTypes setSecurityPolicy Sample",
+            "origin": "API_DEFINITION",
+            "description": " Sets the Google Cloud Armor security policy for the specified instance. For more information, see Google Cloud Armor Overview",
+            "canonical": true,
+            "file": "instances.set_security_policy.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SetSecurityPolicy",
+                "fullName": "google.cloud.compute.v1.Instances.SetSecurityPolicy",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "instance",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "instances_set_security_policy_request_resource",
+                        "type": ".google.cloud.compute.v1.InstancesSetSecurityPolicyRequest"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "zone",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "InstancesClient",
+                    "fullName": "google.cloud.compute.v1.InstancesClient"
+                },
+                "method": {
+                    "shortName": "SetSecurityPolicy",
+                    "fullName": "google.cloud.compute.v1.Instances.SetSecurityPolicy",
+                    "service": {
+                        "shortName": "Instances",
+                        "fullName": "google.cloud.compute.v1.Instances"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_Instances_SetServiceAccount_async",
             "title": "AcceleratorTypes setServiceAccount Sample",
             "origin": "API_DEFINITION",
@@ -12102,7 +12458,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -12138,6 +12494,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.InstanceTemplateAggregatedList",
@@ -12510,7 +12870,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -12546,6 +12906,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.InterconnectAttachmentAggregatedList",
@@ -13199,7 +13563,7 @@
             "regionTag": "compute_v1_generated_Interconnects_GetDiagnostics_async",
             "title": "AcceleratorTypes getDiagnostics Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the interconnectDiagnostics for the specified Interconnect.",
+            "description": " Returns the interconnectDiagnostics for the specified Interconnect. In the event of a global outage, do not use this API to make decisions about where to redirect your network traffic. Unlike a VLAN attachment, which is regional, a Cloud Interconnect connection is a global resource. A global outage can prevent this API from functioning properly.",
             "canonical": true,
             "file": "interconnects.get_diagnostics.js",
             "language": "JAVASCRIPT",
@@ -13232,6 +13596,50 @@
                 "method": {
                     "shortName": "GetDiagnostics",
                     "fullName": "google.cloud.compute.v1.Interconnects.GetDiagnostics",
+                    "service": {
+                        "shortName": "Interconnects",
+                        "fullName": "google.cloud.compute.v1.Interconnects"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_Interconnects_GetMacsecConfig_async",
+            "title": "AcceleratorTypes getMacsecConfig Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns the interconnectMacsecConfig for the specified Interconnect.",
+            "canonical": true,
+            "file": "interconnects.get_macsec_config.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 58,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetMacsecConfig",
+                "fullName": "google.cloud.compute.v1.Interconnects.GetMacsecConfig",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "interconnect",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.InterconnectsGetMacsecConfigResponse",
+                "client": {
+                    "shortName": "InterconnectsClient",
+                    "fullName": "google.cloud.compute.v1.InterconnectsClient"
+                },
+                "method": {
+                    "shortName": "GetMacsecConfig",
+                    "fullName": "google.cloud.compute.v1.Interconnects.GetMacsecConfig",
                     "service": {
                         "shortName": "Interconnects",
                         "fullName": "google.cloud.compute.v1.Interconnects"
@@ -14242,7 +14650,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -14278,6 +14686,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.MachineTypeAggregatedList",
@@ -14418,7 +14830,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -14454,6 +14866,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.NetworkAttachmentAggregatedList",
@@ -14740,6 +15156,62 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_NetworkAttachments_Patch_async",
+            "title": "AcceleratorTypes patch Sample",
+            "origin": "API_DEFINITION",
+            "description": " Patches the specified NetworkAttachment resource with the data included in the request. This method supports PATCH semantics and uses JSON merge patch format and processing rules.",
+            "canonical": true,
+            "file": "network_attachments.patch.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Patch",
+                "fullName": "google.cloud.compute.v1.NetworkAttachments.Patch",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "network_attachment",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "network_attachment_resource",
+                        "type": ".google.cloud.compute.v1.NetworkAttachment"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "NetworkAttachmentsClient",
+                    "fullName": "google.cloud.compute.v1.NetworkAttachmentsClient"
+                },
+                "method": {
+                    "shortName": "Patch",
+                    "fullName": "google.cloud.compute.v1.NetworkAttachments.Patch",
+                    "service": {
+                        "shortName": "NetworkAttachments",
+                        "fullName": "google.cloud.compute.v1.NetworkAttachments"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_NetworkAttachments_SetIamPolicy_async",
             "title": "AcceleratorTypes setIamPolicy Sample",
             "origin": "API_DEFINITION",
@@ -14854,7 +15326,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -14890,6 +15362,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.NetworkEdgeSecurityServiceAggregatedList",
@@ -15138,7 +15614,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -15174,6 +15650,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.NetworkEndpointGroupAggregatedList",
@@ -17106,7 +17586,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -17142,6 +17622,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.NodeGroupAggregatedList",
@@ -17838,7 +18322,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -17874,6 +18358,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.NodeTemplateAggregatedList",
@@ -18274,7 +18762,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -18310,6 +18798,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.NodeTypeAggregatedList",
@@ -18450,7 +18942,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -18486,6 +18978,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.PacketMirroringAggregatedList",
@@ -19456,6 +19952,54 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_PublicAdvertisedPrefixes_Announce_async",
+            "title": "AcceleratorTypes announce Sample",
+            "origin": "API_DEFINITION",
+            "description": " Announces the specified PublicAdvertisedPrefix",
+            "canonical": true,
+            "file": "public_advertised_prefixes.announce.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Announce",
+                "fullName": "google.cloud.compute.v1.PublicAdvertisedPrefixes.Announce",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "public_advertised_prefix",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "PublicAdvertisedPrefixesClient",
+                    "fullName": "google.cloud.compute.v1.PublicAdvertisedPrefixesClient"
+                },
+                "method": {
+                    "shortName": "Announce",
+                    "fullName": "google.cloud.compute.v1.PublicAdvertisedPrefixes.Announce",
+                    "service": {
+                        "shortName": "PublicAdvertisedPrefixes",
+                        "fullName": "google.cloud.compute.v1.PublicAdvertisedPrefixes"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_PublicAdvertisedPrefixes_Delete_async",
             "title": "AcceleratorTypes delete Sample",
             "origin": "API_DEFINITION",
@@ -19708,6 +20252,54 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_PublicAdvertisedPrefixes_Withdraw_async",
+            "title": "AcceleratorTypes withdraw Sample",
+            "origin": "API_DEFINITION",
+            "description": " Withdraws the specified PublicAdvertisedPrefix",
+            "canonical": true,
+            "file": "public_advertised_prefixes.withdraw.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Withdraw",
+                "fullName": "google.cloud.compute.v1.PublicAdvertisedPrefixes.Withdraw",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "public_advertised_prefix",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "PublicAdvertisedPrefixesClient",
+                    "fullName": "google.cloud.compute.v1.PublicAdvertisedPrefixesClient"
+                },
+                "method": {
+                    "shortName": "Withdraw",
+                    "fullName": "google.cloud.compute.v1.PublicAdvertisedPrefixes.Withdraw",
+                    "service": {
+                        "shortName": "PublicAdvertisedPrefixes",
+                        "fullName": "google.cloud.compute.v1.PublicAdvertisedPrefixes"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_PublicDelegatedPrefixes_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
@@ -19718,7 +20310,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -19754,6 +20346,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.PublicDelegatedPrefixAggregatedList",
@@ -19764,6 +20360,58 @@
                 "method": {
                     "shortName": "AggregatedList",
                     "fullName": "google.cloud.compute.v1.PublicDelegatedPrefixes.AggregatedList",
+                    "service": {
+                        "shortName": "PublicDelegatedPrefixes",
+                        "fullName": "google.cloud.compute.v1.PublicDelegatedPrefixes"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_PublicDelegatedPrefixes_Announce_async",
+            "title": "AcceleratorTypes announce Sample",
+            "origin": "API_DEFINITION",
+            "description": " Announces the specified PublicDelegatedPrefix in the given region.",
+            "canonical": true,
+            "file": "public_delegated_prefixes.announce.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Announce",
+                "fullName": "google.cloud.compute.v1.PublicDelegatedPrefixes.Announce",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "public_delegated_prefix",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "PublicDelegatedPrefixesClient",
+                    "fullName": "google.cloud.compute.v1.PublicDelegatedPrefixesClient"
+                },
+                "method": {
+                    "shortName": "Announce",
+                    "fullName": "google.cloud.compute.v1.PublicDelegatedPrefixes.Announce",
                     "service": {
                         "shortName": "PublicDelegatedPrefixes",
                         "fullName": "google.cloud.compute.v1.PublicDelegatedPrefixes"
@@ -20036,6 +20684,58 @@
                 "method": {
                     "shortName": "Patch",
                     "fullName": "google.cloud.compute.v1.PublicDelegatedPrefixes.Patch",
+                    "service": {
+                        "shortName": "PublicDelegatedPrefixes",
+                        "fullName": "google.cloud.compute.v1.PublicDelegatedPrefixes"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_PublicDelegatedPrefixes_Withdraw_async",
+            "title": "AcceleratorTypes withdraw Sample",
+            "origin": "API_DEFINITION",
+            "description": " Withdraws the specified PublicDelegatedPrefix in the given region.",
+            "canonical": true,
+            "file": "public_delegated_prefixes.withdraw.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Withdraw",
+                "fullName": "google.cloud.compute.v1.PublicDelegatedPrefixes.Withdraw",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "public_delegated_prefix",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "PublicDelegatedPrefixesClient",
+                    "fullName": "google.cloud.compute.v1.PublicDelegatedPrefixesClient"
+                },
+                "method": {
+                    "shortName": "Withdraw",
+                    "fullName": "google.cloud.compute.v1.PublicDelegatedPrefixes.Withdraw",
                     "service": {
                         "shortName": "PublicDelegatedPrefixes",
                         "fullName": "google.cloud.compute.v1.PublicDelegatedPrefixes"
@@ -20692,6 +21392,70 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_RegionBackendServices_ListUsable_async",
+            "title": "AcceleratorTypes listUsable Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves an aggregated list of all usable backend services in the specified project in the given region.",
+            "canonical": true,
+            "file": "region_backend_services.list_usable.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 80,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListUsable",
+                "fullName": "google.cloud.compute.v1.RegionBackendServices.ListUsable",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "max_results",
+                        "type": "TYPE_UINT32"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "return_partial_success",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.BackendServiceListUsable",
+                "client": {
+                    "shortName": "RegionBackendServicesClient",
+                    "fullName": "google.cloud.compute.v1.RegionBackendServicesClient"
+                },
+                "method": {
+                    "shortName": "ListUsable",
+                    "fullName": "google.cloud.compute.v1.RegionBackendServices.ListUsable",
+                    "service": {
+                        "shortName": "RegionBackendServices",
+                        "fullName": "google.cloud.compute.v1.RegionBackendServices"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_RegionBackendServices_Patch_async",
             "title": "AcceleratorTypes patch Sample",
             "origin": "API_DEFINITION",
@@ -20800,6 +21564,114 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_RegionBackendServices_SetSecurityPolicy_async",
+            "title": "AcceleratorTypes setSecurityPolicy Sample",
+            "origin": "API_DEFINITION",
+            "description": " Sets the Google Cloud Armor security policy for the specified backend service. For more information, see Google Cloud Armor Overview",
+            "canonical": true,
+            "file": "region_backend_services.set_security_policy.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SetSecurityPolicy",
+                "fullName": "google.cloud.compute.v1.RegionBackendServices.SetSecurityPolicy",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "backend_service",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "security_policy_reference_resource",
+                        "type": ".google.cloud.compute.v1.SecurityPolicyReference"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "RegionBackendServicesClient",
+                    "fullName": "google.cloud.compute.v1.RegionBackendServicesClient"
+                },
+                "method": {
+                    "shortName": "SetSecurityPolicy",
+                    "fullName": "google.cloud.compute.v1.RegionBackendServices.SetSecurityPolicy",
+                    "service": {
+                        "shortName": "RegionBackendServices",
+                        "fullName": "google.cloud.compute.v1.RegionBackendServices"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_RegionBackendServices_TestIamPermissions_async",
+            "title": "AcceleratorTypes testIamPermissions Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns permissions that a caller has on the specified resource.",
+            "canonical": true,
+            "file": "region_backend_services.test_iam_permissions.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 68,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "TestIamPermissions",
+                "fullName": "google.cloud.compute.v1.RegionBackendServices.TestIamPermissions",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "resource",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "test_permissions_request_resource",
+                        "type": ".google.cloud.compute.v1.TestPermissionsRequest"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.TestPermissionsResponse",
+                "client": {
+                    "shortName": "RegionBackendServicesClient",
+                    "fullName": "google.cloud.compute.v1.RegionBackendServicesClient"
+                },
+                "method": {
+                    "shortName": "TestIamPermissions",
+                    "fullName": "google.cloud.compute.v1.RegionBackendServices.TestIamPermissions",
+                    "service": {
+                        "shortName": "RegionBackendServices",
+                        "fullName": "google.cloud.compute.v1.RegionBackendServices"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_RegionBackendServices_Update_async",
             "title": "AcceleratorTypes update Sample",
             "origin": "API_DEFINITION",
@@ -20866,7 +21738,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -20902,6 +21774,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.CommitmentAggregatedList",
@@ -24384,6 +25260,62 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_RegionNetworkEndpointGroups_AttachNetworkEndpoints_async",
+            "title": "AcceleratorTypes attachNetworkEndpoints Sample",
+            "origin": "API_DEFINITION",
+            "description": " Attach a list of network endpoints to the specified network endpoint group.",
+            "canonical": true,
+            "file": "region_network_endpoint_groups.attach_network_endpoints.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "AttachNetworkEndpoints",
+                "fullName": "google.cloud.compute.v1.RegionNetworkEndpointGroups.AttachNetworkEndpoints",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "network_endpoint_group",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region_network_endpoint_groups_attach_endpoints_request_resource",
+                        "type": ".google.cloud.compute.v1.RegionNetworkEndpointGroupsAttachEndpointsRequest"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "RegionNetworkEndpointGroupsClient",
+                    "fullName": "google.cloud.compute.v1.RegionNetworkEndpointGroupsClient"
+                },
+                "method": {
+                    "shortName": "AttachNetworkEndpoints",
+                    "fullName": "google.cloud.compute.v1.RegionNetworkEndpointGroups.AttachNetworkEndpoints",
+                    "service": {
+                        "shortName": "RegionNetworkEndpointGroups",
+                        "fullName": "google.cloud.compute.v1.RegionNetworkEndpointGroups"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_RegionNetworkEndpointGroups_Delete_async",
             "title": "AcceleratorTypes delete Sample",
             "origin": "API_DEFINITION",
@@ -24428,6 +25360,62 @@
                 "method": {
                     "shortName": "Delete",
                     "fullName": "google.cloud.compute.v1.RegionNetworkEndpointGroups.Delete",
+                    "service": {
+                        "shortName": "RegionNetworkEndpointGroups",
+                        "fullName": "google.cloud.compute.v1.RegionNetworkEndpointGroups"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_RegionNetworkEndpointGroups_DetachNetworkEndpoints_async",
+            "title": "AcceleratorTypes detachNetworkEndpoints Sample",
+            "origin": "API_DEFINITION",
+            "description": " Detach the network endpoint from the specified network endpoint group.",
+            "canonical": true,
+            "file": "region_network_endpoint_groups.detach_network_endpoints.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DetachNetworkEndpoints",
+                "fullName": "google.cloud.compute.v1.RegionNetworkEndpointGroups.DetachNetworkEndpoints",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "network_endpoint_group",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region_network_endpoint_groups_detach_endpoints_request_resource",
+                        "type": ".google.cloud.compute.v1.RegionNetworkEndpointGroupsDetachEndpointsRequest"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "RegionNetworkEndpointGroupsClient",
+                    "fullName": "google.cloud.compute.v1.RegionNetworkEndpointGroupsClient"
+                },
+                "method": {
+                    "shortName": "DetachNetworkEndpoints",
+                    "fullName": "google.cloud.compute.v1.RegionNetworkEndpointGroups.DetachNetworkEndpoints",
                     "service": {
                         "shortName": "RegionNetworkEndpointGroups",
                         "fullName": "google.cloud.compute.v1.RegionNetworkEndpointGroups"
@@ -24592,6 +25580,74 @@
                 "method": {
                     "shortName": "List",
                     "fullName": "google.cloud.compute.v1.RegionNetworkEndpointGroups.List",
+                    "service": {
+                        "shortName": "RegionNetworkEndpointGroups",
+                        "fullName": "google.cloud.compute.v1.RegionNetworkEndpointGroups"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_RegionNetworkEndpointGroups_ListNetworkEndpoints_async",
+            "title": "AcceleratorTypes listNetworkEndpoints Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists the network endpoints in the specified network endpoint group.",
+            "canonical": true,
+            "file": "region_network_endpoint_groups.list_network_endpoints.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 85,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListNetworkEndpoints",
+                "fullName": "google.cloud.compute.v1.RegionNetworkEndpointGroups.ListNetworkEndpoints",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "max_results",
+                        "type": "TYPE_UINT32"
+                    },
+                    {
+                        "name": "network_endpoint_group",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "return_partial_success",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.NetworkEndpointGroupsListNetworkEndpoints",
+                "client": {
+                    "shortName": "RegionNetworkEndpointGroupsClient",
+                    "fullName": "google.cloud.compute.v1.RegionNetworkEndpointGroupsClient"
+                },
+                "method": {
+                    "shortName": "ListNetworkEndpoints",
+                    "fullName": "google.cloud.compute.v1.RegionNetworkEndpointGroups.ListNetworkEndpoints",
                     "service": {
                         "shortName": "RegionNetworkEndpointGroups",
                         "fullName": "google.cloud.compute.v1.RegionNetworkEndpointGroups"
@@ -26060,6 +27116,62 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_RegionSecurityPolicies_AddRule_async",
+            "title": "AcceleratorTypes addRule Sample",
+            "origin": "API_DEFINITION",
+            "description": " Inserts a rule into a security policy.",
+            "canonical": true,
+            "file": "region_security_policies.add_rule.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "AddRule",
+                "fullName": "google.cloud.compute.v1.RegionSecurityPolicies.AddRule",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "security_policy",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "security_policy_rule_resource",
+                        "type": ".google.cloud.compute.v1.SecurityPolicyRule"
+                    },
+                    {
+                        "name": "validate_only",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "RegionSecurityPoliciesClient",
+                    "fullName": "google.cloud.compute.v1.RegionSecurityPoliciesClient"
+                },
+                "method": {
+                    "shortName": "AddRule",
+                    "fullName": "google.cloud.compute.v1.RegionSecurityPolicies.AddRule",
+                    "service": {
+                        "shortName": "RegionSecurityPolicies",
+                        "fullName": "google.cloud.compute.v1.RegionSecurityPolicies"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_RegionSecurityPolicies_Delete_async",
             "title": "AcceleratorTypes delete Sample",
             "origin": "API_DEFINITION",
@@ -26152,6 +27264,58 @@
                 "method": {
                     "shortName": "Get",
                     "fullName": "google.cloud.compute.v1.RegionSecurityPolicies.Get",
+                    "service": {
+                        "shortName": "RegionSecurityPolicies",
+                        "fullName": "google.cloud.compute.v1.RegionSecurityPolicies"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_RegionSecurityPolicies_GetRule_async",
+            "title": "AcceleratorTypes getRule Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a rule at the specified priority.",
+            "canonical": true,
+            "file": "region_security_policies.get_rule.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetRule",
+                "fullName": "google.cloud.compute.v1.RegionSecurityPolicies.GetRule",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "priority",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "security_policy",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.SecurityPolicyRule",
+                "client": {
+                    "shortName": "RegionSecurityPoliciesClient",
+                    "fullName": "google.cloud.compute.v1.RegionSecurityPoliciesClient"
+                },
+                "method": {
+                    "shortName": "GetRule",
+                    "fullName": "google.cloud.compute.v1.RegionSecurityPolicies.GetRule",
                     "service": {
                         "shortName": "RegionSecurityPolicies",
                         "fullName": "google.cloud.compute.v1.RegionSecurityPolicies"
@@ -26290,7 +27454,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 72,
+                    "end": 76,
                     "type": "FULL"
                 }
             ],
@@ -26318,6 +27482,10 @@
                     {
                         "name": "security_policy_resource",
                         "type": ".google.cloud.compute.v1.SecurityPolicy"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": "TYPE_STRING"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.Operation",
@@ -26328,6 +27496,122 @@
                 "method": {
                     "shortName": "Patch",
                     "fullName": "google.cloud.compute.v1.RegionSecurityPolicies.Patch",
+                    "service": {
+                        "shortName": "RegionSecurityPolicies",
+                        "fullName": "google.cloud.compute.v1.RegionSecurityPolicies"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_RegionSecurityPolicies_PatchRule_async",
+            "title": "AcceleratorTypes patchRule Sample",
+            "origin": "API_DEFINITION",
+            "description": " Patches a rule at the specified priority. To clear fields in the rule, leave the fields empty and specify them in the updateMask.",
+            "canonical": true,
+            "file": "region_security_policies.patch_rule.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 80,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "PatchRule",
+                "fullName": "google.cloud.compute.v1.RegionSecurityPolicies.PatchRule",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "priority",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "security_policy",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "security_policy_rule_resource",
+                        "type": ".google.cloud.compute.v1.SecurityPolicyRule"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "validate_only",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "RegionSecurityPoliciesClient",
+                    "fullName": "google.cloud.compute.v1.RegionSecurityPoliciesClient"
+                },
+                "method": {
+                    "shortName": "PatchRule",
+                    "fullName": "google.cloud.compute.v1.RegionSecurityPolicies.PatchRule",
+                    "service": {
+                        "shortName": "RegionSecurityPolicies",
+                        "fullName": "google.cloud.compute.v1.RegionSecurityPolicies"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_RegionSecurityPolicies_RemoveRule_async",
+            "title": "AcceleratorTypes removeRule Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a rule at the specified priority.",
+            "canonical": true,
+            "file": "region_security_policies.remove_rule.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RemoveRule",
+                "fullName": "google.cloud.compute.v1.RegionSecurityPolicies.RemoveRule",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "priority",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "security_policy",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "RegionSecurityPoliciesClient",
+                    "fullName": "google.cloud.compute.v1.RegionSecurityPoliciesClient"
+                },
+                "method": {
+                    "shortName": "RemoveRule",
+                    "fullName": "google.cloud.compute.v1.RegionSecurityPolicies.RemoveRule",
                     "service": {
                         "shortName": "RegionSecurityPolicies",
                         "fullName": "google.cloud.compute.v1.RegionSecurityPolicies"
@@ -28150,7 +29434,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -28186,6 +29470,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.ReservationAggregatedList",
@@ -28706,7 +29994,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -28742,6 +30030,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.ResourcePolicyAggregatedList",
@@ -29202,7 +30494,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -29238,6 +30530,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.RouterAggregatedList",
@@ -29348,6 +30644,58 @@
                 "method": {
                     "shortName": "Get",
                     "fullName": "google.cloud.compute.v1.Routers.Get",
+                    "service": {
+                        "shortName": "Routers",
+                        "fullName": "google.cloud.compute.v1.Routers"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_Routers_GetNatIpInfo_async",
+            "title": "AcceleratorTypes getNatIpInfo Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves runtime NAT IP information.",
+            "canonical": true,
+            "file": "routers.get_nat_ip_info.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetNatIpInfo",
+                "fullName": "google.cloud.compute.v1.Routers.GetNatIpInfo",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "nat_name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "router",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.NatIpInfoResponse",
+                "client": {
+                    "shortName": "RoutersClient",
+                    "fullName": "google.cloud.compute.v1.RoutersClient"
+                },
+                "method": {
+                    "shortName": "GetNatIpInfo",
+                    "fullName": "google.cloud.compute.v1.Routers.GetNatIpInfo",
                     "service": {
                         "shortName": "Routers",
                         "fullName": "google.cloud.compute.v1.Routers"
@@ -30018,7 +31366,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -30054,6 +31402,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.SecurityPoliciesAggregatedList",
@@ -30394,7 +31746,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],
@@ -30418,6 +31770,10 @@
                     {
                         "name": "security_policy_resource",
                         "type": ".google.cloud.compute.v1.SecurityPolicy"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": "TYPE_STRING"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.Operation",
@@ -30446,7 +31802,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 71,
+                    "end": 75,
                     "type": "FULL"
                 }
             ],
@@ -30470,6 +31826,10 @@
                     {
                         "name": "security_policy_rule_resource",
                         "type": ".google.cloud.compute.v1.SecurityPolicyRule"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": "TYPE_STRING"
                     },
                     {
                         "name": "validate_only",
@@ -30598,7 +31958,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -30634,6 +31994,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.ServiceAttachmentAggregatedList",
@@ -31472,6 +32836,98 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_SnapshotSettingsService_Get_async",
+            "title": "AcceleratorTypes get Sample",
+            "origin": "API_DEFINITION",
+            "description": " Get snapshot settings.",
+            "canonical": true,
+            "file": "snapshot_settings_service.get.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Get",
+                "fullName": "google.cloud.compute.v1.SnapshotSettingsService.Get",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.SnapshotSettings",
+                "client": {
+                    "shortName": "SnapshotSettingsServiceClient",
+                    "fullName": "google.cloud.compute.v1.SnapshotSettingsServiceClient"
+                },
+                "method": {
+                    "shortName": "Get",
+                    "fullName": "google.cloud.compute.v1.SnapshotSettingsService.Get",
+                    "service": {
+                        "shortName": "SnapshotSettingsService",
+                        "fullName": "google.cloud.compute.v1.SnapshotSettingsService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_SnapshotSettingsService_Patch_async",
+            "title": "AcceleratorTypes patch Sample",
+            "origin": "API_DEFINITION",
+            "description": " Patch snapshot settings.",
+            "canonical": true,
+            "file": "snapshot_settings_service.patch.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 66,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Patch",
+                "fullName": "google.cloud.compute.v1.SnapshotSettingsService.Patch",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "snapshot_settings_resource",
+                        "type": ".google.cloud.compute.v1.SnapshotSettings"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "SnapshotSettingsServiceClient",
+                    "fullName": "google.cloud.compute.v1.SnapshotSettingsServiceClient"
+                },
+                "method": {
+                    "shortName": "Patch",
+                    "fullName": "google.cloud.compute.v1.SnapshotSettingsService.Patch",
+                    "service": {
+                        "shortName": "SnapshotSettingsService",
+                        "fullName": "google.cloud.compute.v1.SnapshotSettingsService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_SslCertificates_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
@@ -31482,7 +32938,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -31518,6 +32974,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.SslCertificateAggregatedList",
@@ -31746,7 +33206,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -31782,6 +33242,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.SslPoliciesAggregatedList",
@@ -32122,7 +33586,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -32158,6 +33622,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.SubnetworkAggregatedList",
@@ -33042,7 +34510,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -33078,6 +34546,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.TargetHttpProxyAggregatedList",
@@ -33410,7 +34882,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -33446,6 +34918,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.TargetHttpsProxyAggregatedList",
@@ -33986,7 +35462,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -34022,6 +35498,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.TargetInstanceAggregatedList",
@@ -34256,6 +35736,62 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_TargetInstances_SetSecurityPolicy_async",
+            "title": "AcceleratorTypes setSecurityPolicy Sample",
+            "origin": "API_DEFINITION",
+            "description": " Sets the Google Cloud Armor security policy for the specified target instance. For more information, see Google Cloud Armor Overview",
+            "canonical": true,
+            "file": "target_instances.set_security_policy.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SetSecurityPolicy",
+                "fullName": "google.cloud.compute.v1.TargetInstances.SetSecurityPolicy",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "security_policy_reference_resource",
+                        "type": ".google.cloud.compute.v1.SecurityPolicyReference"
+                    },
+                    {
+                        "name": "target_instance",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "zone",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "TargetInstancesClient",
+                    "fullName": "google.cloud.compute.v1.TargetInstancesClient"
+                },
+                "method": {
+                    "shortName": "SetSecurityPolicy",
+                    "fullName": "google.cloud.compute.v1.TargetInstances.SetSecurityPolicy",
+                    "service": {
+                        "shortName": "TargetInstances",
+                        "fullName": "google.cloud.compute.v1.TargetInstances"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_TargetPools_AddHealthCheck_async",
             "title": "AcceleratorTypes addHealthCheck Sample",
             "origin": "API_DEFINITION",
@@ -34378,7 +35914,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -34414,6 +35950,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.TargetPoolAggregatedList",
@@ -34864,6 +36404,62 @@
                 "method": {
                     "shortName": "SetBackup",
                     "fullName": "google.cloud.compute.v1.TargetPools.SetBackup",
+                    "service": {
+                        "shortName": "TargetPools",
+                        "fullName": "google.cloud.compute.v1.TargetPools"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_TargetPools_SetSecurityPolicy_async",
+            "title": "AcceleratorTypes setSecurityPolicy Sample",
+            "origin": "API_DEFINITION",
+            "description": " Sets the Google Cloud Armor security policy for the specified target pool. For more information, see Google Cloud Armor Overview",
+            "canonical": true,
+            "file": "target_pools.set_security_policy.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SetSecurityPolicy",
+                "fullName": "google.cloud.compute.v1.TargetPools.SetSecurityPolicy",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "security_policy_reference_resource",
+                        "type": ".google.cloud.compute.v1.SecurityPolicyReference"
+                    },
+                    {
+                        "name": "target_pool",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "TargetPoolsClient",
+                    "fullName": "google.cloud.compute.v1.TargetPoolsClient"
+                },
+                "method": {
+                    "shortName": "SetSecurityPolicy",
+                    "fullName": "google.cloud.compute.v1.TargetPools.SetSecurityPolicy",
                     "service": {
                         "shortName": "TargetPools",
                         "fullName": "google.cloud.compute.v1.TargetPools"
@@ -35342,7 +36938,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -35378,6 +36974,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.TargetTcpProxyAggregatedList",
@@ -35710,7 +37310,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -35746,6 +37346,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.TargetVpnGatewayAggregatedList",
@@ -36046,7 +37650,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -36082,6 +37686,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.UrlMapsAggregatedList",
@@ -36514,7 +38122,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -36550,6 +38158,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.VpnGatewayAggregatedList",
@@ -36950,7 +38562,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -36986,6 +38598,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.VpnTunnelAggregatedList",

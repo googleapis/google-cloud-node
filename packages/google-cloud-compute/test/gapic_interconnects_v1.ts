@@ -680,6 +680,156 @@ describe('v1.InterconnectsClient', () => {
     });
   });
 
+  describe('getMacsecConfig', () => {
+    it('invokes getMacsecConfig without error', async () => {
+      const client = new interconnectsModule.v1.InterconnectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetMacsecConfigInterconnectRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetMacsecConfigInterconnectRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetMacsecConfigInterconnectRequest',
+        ['interconnect']
+      );
+      request.interconnect = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&interconnect=${defaultValue2}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.InterconnectsGetMacsecConfigResponse()
+      );
+      client.innerApiCalls.getMacsecConfig = stubSimpleCall(expectedResponse);
+      const [response] = await client.getMacsecConfig(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getMacsecConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getMacsecConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getMacsecConfig without error using callback', async () => {
+      const client = new interconnectsModule.v1.InterconnectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetMacsecConfigInterconnectRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetMacsecConfigInterconnectRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetMacsecConfigInterconnectRequest',
+        ['interconnect']
+      );
+      request.interconnect = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&interconnect=${defaultValue2}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.InterconnectsGetMacsecConfigResponse()
+      );
+      client.innerApiCalls.getMacsecConfig =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getMacsecConfig(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IInterconnectsGetMacsecConfigResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getMacsecConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getMacsecConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getMacsecConfig with error', async () => {
+      const client = new interconnectsModule.v1.InterconnectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetMacsecConfigInterconnectRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetMacsecConfigInterconnectRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetMacsecConfigInterconnectRequest',
+        ['interconnect']
+      );
+      request.interconnect = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&interconnect=${defaultValue2}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getMacsecConfig = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getMacsecConfig(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getMacsecConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getMacsecConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getMacsecConfig with closed client', async () => {
+      const client = new interconnectsModule.v1.InterconnectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetMacsecConfigInterconnectRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetMacsecConfigInterconnectRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetMacsecConfigInterconnectRequest',
+        ['interconnect']
+      );
+      request.interconnect = defaultValue2;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getMacsecConfig(request), expectedError);
+    });
+  });
+
   describe('insert', () => {
     it('invokes insert without error', async () => {
       const client = new interconnectsModule.v1.InterconnectsClient({

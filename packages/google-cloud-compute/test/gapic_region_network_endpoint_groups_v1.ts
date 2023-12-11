@@ -263,6 +263,195 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
     });
   });
 
+  describe('attachNetworkEndpoints', () => {
+    it('invokes attachNetworkEndpoints without error', async () => {
+      const client =
+        new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AttachNetworkEndpointsRegionNetworkEndpointGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AttachNetworkEndpointsRegionNetworkEndpointGroupRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AttachNetworkEndpointsRegionNetworkEndpointGroupRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AttachNetworkEndpointsRegionNetworkEndpointGroupRequest',
+        ['networkEndpointGroup']
+      );
+      request.networkEndpointGroup = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&network_endpoint_group=${defaultValue3}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.attachNetworkEndpoints =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.attachNetworkEndpoints(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.attachNetworkEndpoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.attachNetworkEndpoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes attachNetworkEndpoints without error using callback', async () => {
+      const client =
+        new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AttachNetworkEndpointsRegionNetworkEndpointGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AttachNetworkEndpointsRegionNetworkEndpointGroupRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AttachNetworkEndpointsRegionNetworkEndpointGroupRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AttachNetworkEndpointsRegionNetworkEndpointGroupRequest',
+        ['networkEndpointGroup']
+      );
+      request.networkEndpointGroup = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&network_endpoint_group=${defaultValue3}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.attachNetworkEndpoints =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.attachNetworkEndpoints(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.attachNetworkEndpoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.attachNetworkEndpoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes attachNetworkEndpoints with error', async () => {
+      const client =
+        new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AttachNetworkEndpointsRegionNetworkEndpointGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AttachNetworkEndpointsRegionNetworkEndpointGroupRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AttachNetworkEndpointsRegionNetworkEndpointGroupRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AttachNetworkEndpointsRegionNetworkEndpointGroupRequest',
+        ['networkEndpointGroup']
+      );
+      request.networkEndpointGroup = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&network_endpoint_group=${defaultValue3}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.attachNetworkEndpoints = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.attachNetworkEndpoints(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.attachNetworkEndpoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.attachNetworkEndpoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes attachNetworkEndpoints with closed client', async () => {
+      const client =
+        new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AttachNetworkEndpointsRegionNetworkEndpointGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AttachNetworkEndpointsRegionNetworkEndpointGroupRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AttachNetworkEndpointsRegionNetworkEndpointGroupRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AttachNetworkEndpointsRegionNetworkEndpointGroupRequest',
+        ['networkEndpointGroup']
+      );
+      request.networkEndpointGroup = defaultValue3;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.attachNetworkEndpoints(request),
+        expectedError
+      );
+    });
+  });
+
   describe('delete', () => {
     it('invokes delete without error', async () => {
       const client =
@@ -439,6 +628,195 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
+    });
+  });
+
+  describe('detachNetworkEndpoints', () => {
+    it('invokes detachNetworkEndpoints without error', async () => {
+      const client =
+        new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DetachNetworkEndpointsRegionNetworkEndpointGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DetachNetworkEndpointsRegionNetworkEndpointGroupRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DetachNetworkEndpointsRegionNetworkEndpointGroupRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DetachNetworkEndpointsRegionNetworkEndpointGroupRequest',
+        ['networkEndpointGroup']
+      );
+      request.networkEndpointGroup = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&network_endpoint_group=${defaultValue3}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.detachNetworkEndpoints =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.detachNetworkEndpoints(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.detachNetworkEndpoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.detachNetworkEndpoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes detachNetworkEndpoints without error using callback', async () => {
+      const client =
+        new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DetachNetworkEndpointsRegionNetworkEndpointGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DetachNetworkEndpointsRegionNetworkEndpointGroupRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DetachNetworkEndpointsRegionNetworkEndpointGroupRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DetachNetworkEndpointsRegionNetworkEndpointGroupRequest',
+        ['networkEndpointGroup']
+      );
+      request.networkEndpointGroup = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&network_endpoint_group=${defaultValue3}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.detachNetworkEndpoints =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.detachNetworkEndpoints(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.detachNetworkEndpoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.detachNetworkEndpoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes detachNetworkEndpoints with error', async () => {
+      const client =
+        new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DetachNetworkEndpointsRegionNetworkEndpointGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DetachNetworkEndpointsRegionNetworkEndpointGroupRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DetachNetworkEndpointsRegionNetworkEndpointGroupRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DetachNetworkEndpointsRegionNetworkEndpointGroupRequest',
+        ['networkEndpointGroup']
+      );
+      request.networkEndpointGroup = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&network_endpoint_group=${defaultValue3}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.detachNetworkEndpoints = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.detachNetworkEndpoints(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.detachNetworkEndpoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.detachNetworkEndpoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes detachNetworkEndpoints with closed client', async () => {
+      const client =
+        new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DetachNetworkEndpointsRegionNetworkEndpointGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DetachNetworkEndpointsRegionNetworkEndpointGroupRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DetachNetworkEndpointsRegionNetworkEndpointGroupRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DetachNetworkEndpointsRegionNetworkEndpointGroupRequest',
+        ['networkEndpointGroup']
+      );
+      request.networkEndpointGroup = defaultValue3;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.detachNetworkEndpoints(request),
+        expectedError
+      );
     });
   });
 
@@ -1150,6 +1528,433 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
       );
       assert(
         (client.descriptors.page.list.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('listNetworkEndpoints', () => {
+    it('invokes listNetworkEndpoints without error', async () => {
+      const client =
+        new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest',
+        ['networkEndpointGroup']
+      );
+      request.networkEndpointGroup = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&network_endpoint_group=${defaultValue3}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.NetworkEndpointWithHealthStatus()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.NetworkEndpointWithHealthStatus()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.NetworkEndpointWithHealthStatus()
+        ),
+      ];
+      client.innerApiCalls.listNetworkEndpoints =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listNetworkEndpoints(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listNetworkEndpoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listNetworkEndpoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listNetworkEndpoints without error using callback', async () => {
+      const client =
+        new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest',
+        ['networkEndpointGroup']
+      );
+      request.networkEndpointGroup = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&network_endpoint_group=${defaultValue3}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.NetworkEndpointWithHealthStatus()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.NetworkEndpointWithHealthStatus()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.NetworkEndpointWithHealthStatus()
+        ),
+      ];
+      client.innerApiCalls.listNetworkEndpoints =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listNetworkEndpoints(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.compute.v1.INetworkEndpointWithHealthStatus[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listNetworkEndpoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listNetworkEndpoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listNetworkEndpoints with error', async () => {
+      const client =
+        new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest',
+        ['networkEndpointGroup']
+      );
+      request.networkEndpointGroup = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&network_endpoint_group=${defaultValue3}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listNetworkEndpoints = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listNetworkEndpoints(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listNetworkEndpoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listNetworkEndpoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listNetworkEndpointsStream without error', async () => {
+      const client =
+        new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest',
+        ['networkEndpointGroup']
+      );
+      request.networkEndpointGroup = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&network_endpoint_group=${defaultValue3}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.NetworkEndpointWithHealthStatus()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.NetworkEndpointWithHealthStatus()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.NetworkEndpointWithHealthStatus()
+        ),
+      ];
+      client.descriptors.page.listNetworkEndpoints.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listNetworkEndpointsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.compute.v1.NetworkEndpointWithHealthStatus[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.compute.v1.NetworkEndpointWithHealthStatus
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listNetworkEndpoints.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listNetworkEndpoints, request)
+      );
+      assert(
+        (client.descriptors.page.listNetworkEndpoints.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listNetworkEndpointsStream with error', async () => {
+      const client =
+        new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest',
+        ['networkEndpointGroup']
+      );
+      request.networkEndpointGroup = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&network_endpoint_group=${defaultValue3}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listNetworkEndpoints.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listNetworkEndpointsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.compute.v1.NetworkEndpointWithHealthStatus[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.compute.v1.NetworkEndpointWithHealthStatus
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listNetworkEndpoints.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listNetworkEndpoints, request)
+      );
+      assert(
+        (client.descriptors.page.listNetworkEndpoints.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listNetworkEndpoints without error', async () => {
+      const client =
+        new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest',
+        ['networkEndpointGroup']
+      );
+      request.networkEndpointGroup = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&network_endpoint_group=${defaultValue3}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.NetworkEndpointWithHealthStatus()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.NetworkEndpointWithHealthStatus()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.NetworkEndpointWithHealthStatus()
+        ),
+      ];
+      client.descriptors.page.listNetworkEndpoints.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.compute.v1.INetworkEndpointWithHealthStatus[] =
+        [];
+      const iterable = client.listNetworkEndpointsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listNetworkEndpoints.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listNetworkEndpoints.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listNetworkEndpoints with error', async () => {
+      const client =
+        new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest',
+        ['networkEndpointGroup']
+      );
+      request.networkEndpointGroup = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&network_endpoint_group=${defaultValue3}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listNetworkEndpoints.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listNetworkEndpointsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.compute.v1.INetworkEndpointWithHealthStatus[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listNetworkEndpoints.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listNetworkEndpoints.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
