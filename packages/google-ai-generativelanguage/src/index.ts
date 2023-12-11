@@ -21,12 +21,18 @@ import * as v1beta from './v1beta';
 import * as v1beta2 from './v1beta2';
 import * as v1beta3 from './v1beta3';
 
-const DiscussServiceClient = v1beta2.DiscussServiceClient;
-type DiscussServiceClient = v1beta2.DiscussServiceClient;
-const ModelServiceClient = v1beta2.ModelServiceClient;
-type ModelServiceClient = v1beta2.ModelServiceClient;
-const TextServiceClient = v1beta2.TextServiceClient;
-type TextServiceClient = v1beta2.TextServiceClient;
+const DiscussServiceClient = v1beta.DiscussServiceClient;
+type DiscussServiceClient = v1beta.DiscussServiceClient;
+const GenerativeServiceClient = v1beta.GenerativeServiceClient;
+type GenerativeServiceClient = v1beta.GenerativeServiceClient;
+const ModelServiceClient = v1beta.ModelServiceClient;
+type ModelServiceClient = v1beta.ModelServiceClient;
+const PermissionServiceClient = v1beta.PermissionServiceClient;
+type PermissionServiceClient = v1beta.PermissionServiceClient;
+const RetrieverServiceClient = v1beta.RetrieverServiceClient;
+type RetrieverServiceClient = v1beta.RetrieverServiceClient;
+const TextServiceClient = v1beta.TextServiceClient;
+type TextServiceClient = v1beta.TextServiceClient;
 
 export {
   v1,
@@ -34,7 +40,10 @@ export {
   v1beta2,
   v1beta3,
   DiscussServiceClient,
+  GenerativeServiceClient,
   ModelServiceClient,
+  PermissionServiceClient,
+  RetrieverServiceClient,
   TextServiceClient,
 };
 export default {
@@ -43,7 +52,10 @@ export default {
   v1beta2,
   v1beta3,
   DiscussServiceClient,
+  GenerativeServiceClient,
   ModelServiceClient,
+  PermissionServiceClient,
+  RetrieverServiceClient,
   TextServiceClient,
 };
 import * as protos from '../protos/protos';
