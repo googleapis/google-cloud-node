@@ -30,7 +30,8 @@ function main(parent) {
    */
   /**
    *  Required. The parent, which owns this collection of notifications.
-   *  Must be of the form "organizations/{organization}/locations/{location}".
+   *  Must be of the form "organizations/{organization}/locations/{location}"
+   *  or "projects/{project}/locations/{location}"
    */
   // const parent = 'abc123'
   /**
