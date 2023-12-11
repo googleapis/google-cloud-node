@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [8.3.0](https://github.com/googleapis/nodejs-datastore/compare/v8.2.2...v8.3.0) (2023-12-11)
+
+
+### Features
+
+* Allow the user to set fallback to rest ([#1203](https://github.com/googleapis/nodejs-datastore/issues/1203)) ([8a1fa54](https://github.com/googleapis/nodejs-datastore/commit/8a1fa54e3873230256895c48b8b9c6889f75dd98))
+
+
+### Bug Fixes
+
+* Change tests to use new filter and use gax warn for warning just once ([#1185](https://github.com/googleapis/nodejs-datastore/issues/1185)) ([532711b](https://github.com/googleapis/nodejs-datastore/commit/532711bfd19b1a12844b02fd314f1703be4b0125))
+* **deps:** Update dependency sinon to v17 ([#1183](https://github.com/googleapis/nodejs-datastore/issues/1183)) ([52adb5e](https://github.com/googleapis/nodejs-datastore/commit/52adb5e13ddc123c2bed33df76be76760d33c06e))
+
 ## [8.2.2](https://github.com/googleapis/nodejs-datastore/compare/v8.2.1...v8.2.2) (2023-10-17)
 
 
