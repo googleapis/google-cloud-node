@@ -2080,6 +2080,16 @@ async.each(
           assert.strictEqual(entities.length, 0);
         });
       });
+      describe('using the rest fallback parameter', () => {
+        it('should make a get call using rest instead of grpc', async () => {
+          const customDatastore = new Datastore({
+            fallback: 'rest',
+          });
+          const postKey = datastore.key(['Post', 'post1']);
+          const [entity] = await customDatastore.get(postKey);
+          assert.strictEqual(entity, undefined);
+        });
+      });
     });
   }
 );
