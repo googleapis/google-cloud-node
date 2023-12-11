@@ -80,6 +80,10 @@ body: |-
 
   You may also want to see the [@google-cloud/error-reporting][@google-cloud/error-reporting] module which provides direct access to the Error Reporting API.
 
+  ### Special Payload Fields in LogEntry
+
+  There are some fields that are considered special by Google cloud logging and will be extracted into the LogEntry structure. For example, `severity`, `message` and `labels` can be extracted to LogEntry if included in the bunyan log payload. These [special JSON fields](https://cloud.google.com/logging/docs/structured-logging#special-payload-fields) will be used to set the corresponding fields in the `LogEntry`. Please be aware of these special fields to avoid unexpected logging behavior. 
+  
   ### LogEntry Labels
 
   If the bunyan log record contains a label property where all the values are strings, we automatically promote that
