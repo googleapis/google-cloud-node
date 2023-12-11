@@ -5,7 +5,8 @@
 
 ### Features
 
-* [generativelanguage] Add v1beta, adds GenerativeService and RetrievalService ([#4879](https://github.com/googleapis/google-cloud-node/issues/4879)) ([d98f897](https://github.com/googleapis/google-cloud-node/commit/d98f897acb7aa3bcb01b7494dcdfd6cdb8b861e5))
+* [generativelanguage] Add v1 and v1beta, adds GenerativeService and RetrievalService ([#4879](https://github.com/googleapis/google-cloud-node/issues/4879)) ([d98f897](https://github.com/googleapis/google-cloud-node/commit/d98f897acb7aa3bcb01b7494dcdfd6cdb8b861e5)).
+* **BREAKING CHANGE:** version v1beta is now the default version.
 
 ## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v1.0.1...generativelanguage-v1.1.0) (2023-09-20)
 
