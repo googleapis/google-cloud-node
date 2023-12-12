@@ -1387,6 +1387,9 @@ export namespace google {
 
                     /** CostProjection duration */
                     duration?: (google.protobuf.IDuration|null);
+
+                    /** CostProjection costInLocalCurrency */
+                    costInLocalCurrency?: (google.type.IMoney|null);
                 }
 
                 /** Represents a CostProjection. */
@@ -1403,6 +1406,9 @@ export namespace google {
 
                     /** CostProjection duration. */
                     public duration?: (google.protobuf.IDuration|null);
+
+                    /** CostProjection costInLocalCurrency. */
+                    public costInLocalCurrency?: (google.type.IMoney|null);
 
                     /**
                      * Creates a new CostProjection instance using the specified properties.
