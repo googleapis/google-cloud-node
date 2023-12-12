@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.2.0...data-v4.3.0) (2023-12-11)
+
+
+### Features
+
+* [analytics-data] add `CreateAudienceExport`, `QueryAudienceExport`, `GetAudienceExport`, `ListAudienceExports` methods to the Data API v1 beta ([#4878](https://github.com/googleapis/google-cloud-node/issues/4878)) ([1f9dc5a](https://github.com/googleapis/google-cloud-node/commit/1f9dc5ae6faf68324ab358b3f4f40328f62e7b64))
+
 ## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.1.0...data-v4.2.0) (2023-11-30)
 
 

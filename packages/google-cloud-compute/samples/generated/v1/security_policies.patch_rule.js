@@ -45,6 +45,10 @@ function main(project, securityPolicy, securityPolicyRuleResource) {
    */
   // const securityPolicyRuleResource = {}
   /**
+   *  Indicates fields to be cleared as part of this request.
+   */
+  // const updateMask = 'abc123'
+  /**
    *  If true, the request will not be committed.
    */
   // const validateOnly = true

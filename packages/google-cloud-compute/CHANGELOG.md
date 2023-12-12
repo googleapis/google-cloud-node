@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/compute-v4.0.1...compute-v4.1.0) (2023-12-11)
+
+
+### Features
+
+* [compute] Update Compute Engine API to revision 20231110 ([#868](https://github.com/googleapis/google-cloud-node/issues/868)) ([#4872](https://github.com/googleapis/google-cloud-node/issues/4872)) ([4a79964](https://github.com/googleapis/google-cloud-node/commit/4a799646628a37524ef64b63158220ef6ca44433))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @sendgrid/mail to v8 ([#4871](https://github.com/googleapis/google-cloud-node/issues/4871)) ([493e0bd](https://github.com/googleapis/google-cloud-node/commit/493e0bdbf8ec816861722955e3c0468f99b3c064))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/compute-v4.0.0...compute-v4.0.1) (2023-09-06)
 
 

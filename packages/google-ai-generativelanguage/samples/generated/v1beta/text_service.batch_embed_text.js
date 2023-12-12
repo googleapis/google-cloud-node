@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main() {
-  // [START serviceusage_v1_generated_ServiceUsage_EnableService_async]
+function main(model) {
+  // [START generativelanguage_v1beta_generated_TextService_BatchEmbedText_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,36 +29,42 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Name of the consumer and service to enable the service on.
-   *  The `EnableService` and `DisableService` methods currently only support
-   *  projects.
-   *  Enabling a service requires that the service is public or is shared with
-   *  the user enabling the service.
-   *  An example name would be:
-   *  `projects/123/services/serviceusage.googleapis.com` where `123` is the
-   *  project number.
+   *  Required. The name of the `Model` to use for generating the embedding.
+   *  Examples:
+   *   models/embedding-gecko-001
    */
-  // const name = 'abc123'
+  // const model = 'abc123'
+  /**
+   *  Optional. The free-form input texts that the model will turn into an
+   *  embedding. The current limit is 100 texts, over which an error will be
+   *  thrown.
+   */
+  // const texts = ['abc','def']
+  /**
+   *  Optional. Embed requests for the batch. Only one of `texts` or `requests`
+   *  can be set.
+   */
+  // const requests = [1,2,3,4]
 
-  // Imports the Serviceusage library
-  const {ServiceUsageClient} = require('@google-cloud/service-usage').v1;
+  // Imports the Generativelanguage library
+  const {TextServiceClient} = require('@google-cloud/generativelanguage').v1beta;
 
   // Instantiates a client
-  const serviceusageClient = new ServiceUsageClient();
+  const generativelanguageClient = new TextServiceClient();
 
-  async function callEnableService() {
+  async function callBatchEmbedText() {
     // Construct request
     const request = {
+      model,
     };
 
     // Run request
-    const [operation] = await serviceusageClient.enableService(request);
-    const [response] = await operation.promise();
+    const response = await generativelanguageClient.batchEmbedText(request);
     console.log(response);
   }
 
-  callEnableService();
-  // [END serviceusage_v1_generated_ServiceUsage_EnableService_async]
+  callBatchEmbedText();
+  // [END generativelanguage_v1beta_generated_TextService_BatchEmbedText_async]
 }
 
 process.on('unhandledRejection', err => {
