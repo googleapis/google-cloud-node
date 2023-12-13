@@ -3447,6 +3447,11 @@
                             "outOfDiskReport"
                           ]
                         },
+                        "_sqlNetworkArchitecture": {
+                          "oneof": [
+                            "sqlNetworkArchitecture"
+                          ]
+                        },
                         "_pscServiceAttachmentLink": {
                           "oneof": [
                             "pscServiceAttachmentLink"
@@ -3638,6 +3643,13 @@
                           "type": "string",
                           "id": 42
                         },
+                        "sqlNetworkArchitecture": {
+                          "type": "SqlNetworkArchitecture",
+                          "id": 47,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "pscServiceAttachmentLink": {
                           "type": "string",
                           "id": 48,
@@ -3772,6 +3784,13 @@
                                 "SOFT_SHUTDOWN": 2
                               }
                             }
+                          }
+                        },
+                        "SqlNetworkArchitecture": {
+                          "values": {
+                            "SQL_NETWORK_ARCHITECTURE_UNSPECIFIED": 0,
+                            "NEW_NETWORK_ARCHITECTURE": 1,
+                            "OLD_NETWORK_ARCHITECTURE": 2
                           }
                         }
                       }

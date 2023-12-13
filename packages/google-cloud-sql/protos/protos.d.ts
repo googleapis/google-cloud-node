@@ -14572,6 +14572,9 @@ export namespace google {
                     /** DatabaseInstance maintenanceVersion */
                     maintenanceVersion?: (string|null);
 
+                    /** DatabaseInstance sqlNetworkArchitecture */
+                    sqlNetworkArchitecture?: (google.cloud.sql.v1.DatabaseInstance.SqlNetworkArchitecture|keyof typeof google.cloud.sql.v1.DatabaseInstance.SqlNetworkArchitecture|null);
+
                     /** DatabaseInstance pscServiceAttachmentLink */
                     pscServiceAttachmentLink?: (string|null);
 
@@ -14702,6 +14705,9 @@ export namespace google {
                     /** DatabaseInstance maintenanceVersion. */
                     public maintenanceVersion: string;
 
+                    /** DatabaseInstance sqlNetworkArchitecture. */
+                    public sqlNetworkArchitecture?: (google.cloud.sql.v1.DatabaseInstance.SqlNetworkArchitecture|keyof typeof google.cloud.sql.v1.DatabaseInstance.SqlNetworkArchitecture|null);
+
                     /** DatabaseInstance pscServiceAttachmentLink. */
                     public pscServiceAttachmentLink?: (string|null);
 
@@ -14716,6 +14722,9 @@ export namespace google {
 
                     /** DatabaseInstance _outOfDiskReport. */
                     public _outOfDiskReport?: "outOfDiskReport";
+
+                    /** DatabaseInstance _sqlNetworkArchitecture. */
+                    public _sqlNetworkArchitecture?: "sqlNetworkArchitecture";
 
                     /** DatabaseInstance _pscServiceAttachmentLink. */
                     public _pscServiceAttachmentLink?: "pscServiceAttachmentLink";
@@ -15159,6 +15168,13 @@ export namespace google {
                             NORMAL = 1,
                             SOFT_SHUTDOWN = 2
                         }
+                    }
+
+                    /** SqlNetworkArchitecture enum. */
+                    enum SqlNetworkArchitecture {
+                        SQL_NETWORK_ARCHITECTURE_UNSPECIFIED = 0,
+                        NEW_NETWORK_ARCHITECTURE = 1,
+                        OLD_NETWORK_ARCHITECTURE = 2
                     }
                 }
 
