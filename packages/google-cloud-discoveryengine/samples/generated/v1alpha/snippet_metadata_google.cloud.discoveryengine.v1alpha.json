@@ -78,7 +78,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 101,
+                    "end": 117,
                     "type": "FULL"
                 }
             ],
@@ -114,6 +114,10 @@
                     {
                         "name": "summary_spec",
                         "type": ".google.cloud.discoveryengine.v1alpha.SearchRequest.ContentSearchSpec.SummarySpec"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
                     }
                 ],
                 "resultType": ".google.cloud.discoveryengine.v1alpha.ConverseConversationResponse",
@@ -1187,7 +1191,7 @@
             "regionTag": "discoveryengine_v1alpha_generated_EngineService_ResumeEngine_async",
             "title": "CompletionService resumeEngine Sample",
             "origin": "API_DEFINITION",
-            "description": " Resumes the training of an existing engine. Only applicable if [solution_type][] is [SOLUTION_TYPE_RECOMMENDATION][google.cloud.discoveryengine.v1alpha.SolutionType.SOLUTION_TYPE_RECOMMENDATION].",
+            "description": " Resumes the training of an existing engine. Only applicable if [SolutionType][google.cloud.discoveryengine.v1alpha.SolutionType] is [SOLUTION_TYPE_RECOMMENDATION][google.cloud.discoveryengine.v1alpha.SolutionType.SOLUTION_TYPE_RECOMMENDATION].",
             "canonical": true,
             "file": "engine_service.resume_engine.js",
             "language": "JAVASCRIPT",
@@ -1558,7 +1562,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 245,
+                    "end": 258,
                     "type": "FULL"
                 }
             ],
@@ -1597,6 +1601,10 @@
                     },
                     {
                         "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "canonical_filter",
                         "type": "TYPE_STRING"
                     },
                     {
@@ -1668,6 +1676,434 @@
             }
         },
         {
+            "regionTag": "discoveryengine_v1alpha_generated_SearchTuningService_TrainCustomModel_async",
+            "title": "CompletionService trainCustomModel Sample",
+            "origin": "API_DEFINITION",
+            "description": " Trains a custom model.",
+            "canonical": true,
+            "file": "search_tuning_service.train_custom_model.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 70,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "TrainCustomModel",
+                "fullName": "google.cloud.discoveryengine.v1alpha.SearchTuningService.TrainCustomModel",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "gcs_training_input",
+                        "type": ".google.cloud.discoveryengine.v1alpha.TrainCustomModelRequest.GcsTrainingInput"
+                    },
+                    {
+                        "name": "data_store",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "model_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "error_config",
+                        "type": ".google.cloud.discoveryengine.v1alpha.ImportErrorConfig"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "SearchTuningServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.SearchTuningServiceClient"
+                },
+                "method": {
+                    "shortName": "TrainCustomModel",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.SearchTuningService.TrainCustomModel",
+                    "service": {
+                        "shortName": "SearchTuningService",
+                        "fullName": "google.cloud.discoveryengine.v1alpha.SearchTuningService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1alpha_generated_SiteSearchEngineService_GetSiteSearchEngine_async",
+            "title": "CompletionService getSiteSearchEngine Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets the [SiteSearchEngine][google.cloud.discoveryengine.v1alpha.SiteSearchEngine].",
+            "canonical": true,
+            "file": "site_search_engine_service.get_site_search_engine.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetSiteSearchEngine",
+                "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService.GetSiteSearchEngine",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1alpha.SiteSearchEngine",
+                "client": {
+                    "shortName": "SiteSearchEngineServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "GetSiteSearchEngine",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService.GetSiteSearchEngine",
+                    "service": {
+                        "shortName": "SiteSearchEngineService",
+                        "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1alpha_generated_SiteSearchEngineService_CreateTargetSite_async",
+            "title": "CompletionService createTargetSite Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a [TargetSite][google.cloud.discoveryengine.v1alpha.TargetSite].",
+            "canonical": true,
+            "file": "site_search_engine_service.create_target_site.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateTargetSite",
+                "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService.CreateTargetSite",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "target_site",
+                        "type": ".google.cloud.discoveryengine.v1alpha.TargetSite"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "SiteSearchEngineServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateTargetSite",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService.CreateTargetSite",
+                    "service": {
+                        "shortName": "SiteSearchEngineService",
+                        "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1alpha_generated_SiteSearchEngineService_BatchCreateTargetSites_async",
+            "title": "CompletionService batchCreateTargetSites Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates [TargetSite][google.cloud.discoveryengine.v1alpha.TargetSite] in a batch.",
+            "canonical": true,
+            "file": "site_search_engine_service.batch_create_target_sites.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "BatchCreateTargetSites",
+                "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService.BatchCreateTargetSites",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "requests",
+                        "type": "TYPE_MESSAGE[]"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "SiteSearchEngineServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "BatchCreateTargetSites",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService.BatchCreateTargetSites",
+                    "service": {
+                        "shortName": "SiteSearchEngineService",
+                        "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1alpha_generated_SiteSearchEngineService_GetTargetSite_async",
+            "title": "CompletionService getTargetSite Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a [TargetSite][google.cloud.discoveryengine.v1alpha.TargetSite].",
+            "canonical": true,
+            "file": "site_search_engine_service.get_target_site.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 61,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetTargetSite",
+                "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService.GetTargetSite",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1alpha.TargetSite",
+                "client": {
+                    "shortName": "SiteSearchEngineServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "GetTargetSite",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService.GetTargetSite",
+                    "service": {
+                        "shortName": "SiteSearchEngineService",
+                        "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1alpha_generated_SiteSearchEngineService_UpdateTargetSite_async",
+            "title": "CompletionService updateTargetSite Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates a [TargetSite][google.cloud.discoveryengine.v1alpha.TargetSite].",
+            "canonical": true,
+            "file": "site_search_engine_service.update_target_site.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateTargetSite",
+                "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService.UpdateTargetSite",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "target_site",
+                        "type": ".google.cloud.discoveryengine.v1alpha.TargetSite"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "SiteSearchEngineServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateTargetSite",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService.UpdateTargetSite",
+                    "service": {
+                        "shortName": "SiteSearchEngineService",
+                        "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1alpha_generated_SiteSearchEngineService_DeleteTargetSite_async",
+            "title": "CompletionService deleteTargetSite Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a [TargetSite][google.cloud.discoveryengine.v1alpha.TargetSite].",
+            "canonical": true,
+            "file": "site_search_engine_service.delete_target_site.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteTargetSite",
+                "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService.DeleteTargetSite",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "SiteSearchEngineServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteTargetSite",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService.DeleteTargetSite",
+                    "service": {
+                        "shortName": "SiteSearchEngineService",
+                        "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1alpha_generated_SiteSearchEngineService_ListTargetSites_async",
+            "title": "CompletionService listTargetSites Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a list of [TargetSite][google.cloud.discoveryengine.v1alpha.TargetSite]s.",
+            "canonical": true,
+            "file": "site_search_engine_service.list_target_sites.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 74,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListTargetSites",
+                "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService.ListTargetSites",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1alpha.ListTargetSitesResponse",
+                "client": {
+                    "shortName": "SiteSearchEngineServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "ListTargetSites",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService.ListTargetSites",
+                    "service": {
+                        "shortName": "SiteSearchEngineService",
+                        "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1alpha_generated_SiteSearchEngineService_EnableAdvancedSiteSearch_async",
+            "title": "CompletionService enableAdvancedSiteSearch Sample",
+            "origin": "API_DEFINITION",
+            "description": " Upgrade from basic site search to advanced site search.",
+            "canonical": true,
+            "file": "site_search_engine_service.enable_advanced_site_search.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 57,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "EnableAdvancedSiteSearch",
+                "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService.EnableAdvancedSiteSearch",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "site_search_engine",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "SiteSearchEngineServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "EnableAdvancedSiteSearch",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService.EnableAdvancedSiteSearch",
+                    "service": {
+                        "shortName": "SiteSearchEngineService",
+                        "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1alpha_generated_SiteSearchEngineService_DisableAdvancedSiteSearch_async",
+            "title": "CompletionService disableAdvancedSiteSearch Sample",
+            "origin": "API_DEFINITION",
+            "description": " Downgrade from advanced site search to basic site search.",
+            "canonical": true,
+            "file": "site_search_engine_service.disable_advanced_site_search.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 57,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DisableAdvancedSiteSearch",
+                "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService.DisableAdvancedSiteSearch",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "site_search_engine",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "SiteSearchEngineServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "DisableAdvancedSiteSearch",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService.DisableAdvancedSiteSearch",
+                    "service": {
+                        "shortName": "SiteSearchEngineService",
+                        "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "discoveryengine_v1alpha_generated_SiteSearchEngineService_RecrawlUris_async",
             "title": "CompletionService recrawlUris Sample",
             "origin": "API_DEFINITION",
@@ -1704,6 +2140,94 @@
                 "method": {
                     "shortName": "RecrawlUris",
                     "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService.RecrawlUris",
+                    "service": {
+                        "shortName": "SiteSearchEngineService",
+                        "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1alpha_generated_SiteSearchEngineService_BatchVerifyTargetSites_async",
+            "title": "CompletionService batchVerifyTargetSites Sample",
+            "origin": "API_DEFINITION",
+            "description": " Verify target sites' ownership and validity. This API sends all the target sites under site search engine for verification.",
+            "canonical": true,
+            "file": "site_search_engine_service.batch_verify_target_sites.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "BatchVerifyTargetSites",
+                "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService.BatchVerifyTargetSites",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "SiteSearchEngineServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "BatchVerifyTargetSites",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService.BatchVerifyTargetSites",
+                    "service": {
+                        "shortName": "SiteSearchEngineService",
+                        "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1alpha_generated_SiteSearchEngineService_FetchDomainVerificationStatus_async",
+            "title": "CompletionService fetchDomainVerificationStatus Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns list of target sites with its domain verification status. This method can only be called under data store with BASIC_SITE_SEARCH state at the moment.",
+            "canonical": true,
+            "file": "site_search_engine_service.fetch_domain_verification_status.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "FetchDomainVerificationStatus",
+                "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService.FetchDomainVerificationStatus",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "site_search_engine",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1alpha.FetchDomainVerificationStatusResponse",
+                "client": {
+                    "shortName": "SiteSearchEngineServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "FetchDomainVerificationStatus",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService.FetchDomainVerificationStatus",
                     "service": {
                         "shortName": "SiteSearchEngineService",
                         "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService"
