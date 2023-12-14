@@ -26,6 +26,2335 @@ export namespace google {
             /** Namespace v3. */
             namespace v3 {
 
+                /** Properties of an AdaptiveMtDataset. */
+                interface IAdaptiveMtDataset {
+
+                    /** AdaptiveMtDataset name */
+                    name?: (string|null);
+
+                    /** AdaptiveMtDataset displayName */
+                    displayName?: (string|null);
+
+                    /** AdaptiveMtDataset sourceLanguageCode */
+                    sourceLanguageCode?: (string|null);
+
+                    /** AdaptiveMtDataset targetLanguageCode */
+                    targetLanguageCode?: (string|null);
+
+                    /** AdaptiveMtDataset exampleCount */
+                    exampleCount?: (number|null);
+
+                    /** AdaptiveMtDataset createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AdaptiveMtDataset updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents an AdaptiveMtDataset. */
+                class AdaptiveMtDataset implements IAdaptiveMtDataset {
+
+                    /**
+                     * Constructs a new AdaptiveMtDataset.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IAdaptiveMtDataset);
+
+                    /** AdaptiveMtDataset name. */
+                    public name: string;
+
+                    /** AdaptiveMtDataset displayName. */
+                    public displayName: string;
+
+                    /** AdaptiveMtDataset sourceLanguageCode. */
+                    public sourceLanguageCode: string;
+
+                    /** AdaptiveMtDataset targetLanguageCode. */
+                    public targetLanguageCode: string;
+
+                    /** AdaptiveMtDataset exampleCount. */
+                    public exampleCount: number;
+
+                    /** AdaptiveMtDataset createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AdaptiveMtDataset updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new AdaptiveMtDataset instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AdaptiveMtDataset instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IAdaptiveMtDataset): google.cloud.translation.v3.AdaptiveMtDataset;
+
+                    /**
+                     * Encodes the specified AdaptiveMtDataset message. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtDataset.verify|verify} messages.
+                     * @param message AdaptiveMtDataset message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IAdaptiveMtDataset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AdaptiveMtDataset message, length delimited. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtDataset.verify|verify} messages.
+                     * @param message AdaptiveMtDataset message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IAdaptiveMtDataset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AdaptiveMtDataset message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AdaptiveMtDataset
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.AdaptiveMtDataset;
+
+                    /**
+                     * Decodes an AdaptiveMtDataset message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AdaptiveMtDataset
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.AdaptiveMtDataset;
+
+                    /**
+                     * Verifies an AdaptiveMtDataset message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AdaptiveMtDataset message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AdaptiveMtDataset
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.AdaptiveMtDataset;
+
+                    /**
+                     * Creates a plain object from an AdaptiveMtDataset message. Also converts values to other types if specified.
+                     * @param message AdaptiveMtDataset
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.AdaptiveMtDataset, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AdaptiveMtDataset to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AdaptiveMtDataset
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateAdaptiveMtDatasetRequest. */
+                interface ICreateAdaptiveMtDatasetRequest {
+
+                    /** CreateAdaptiveMtDatasetRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateAdaptiveMtDatasetRequest adaptiveMtDataset */
+                    adaptiveMtDataset?: (google.cloud.translation.v3.IAdaptiveMtDataset|null);
+                }
+
+                /** Represents a CreateAdaptiveMtDatasetRequest. */
+                class CreateAdaptiveMtDatasetRequest implements ICreateAdaptiveMtDatasetRequest {
+
+                    /**
+                     * Constructs a new CreateAdaptiveMtDatasetRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.ICreateAdaptiveMtDatasetRequest);
+
+                    /** CreateAdaptiveMtDatasetRequest parent. */
+                    public parent: string;
+
+                    /** CreateAdaptiveMtDatasetRequest adaptiveMtDataset. */
+                    public adaptiveMtDataset?: (google.cloud.translation.v3.IAdaptiveMtDataset|null);
+
+                    /**
+                     * Creates a new CreateAdaptiveMtDatasetRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateAdaptiveMtDatasetRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.ICreateAdaptiveMtDatasetRequest): google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest;
+
+                    /**
+                     * Encodes the specified CreateAdaptiveMtDatasetRequest message. Does not implicitly {@link google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest.verify|verify} messages.
+                     * @param message CreateAdaptiveMtDatasetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.ICreateAdaptiveMtDatasetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateAdaptiveMtDatasetRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest.verify|verify} messages.
+                     * @param message CreateAdaptiveMtDatasetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.ICreateAdaptiveMtDatasetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateAdaptiveMtDatasetRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateAdaptiveMtDatasetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest;
+
+                    /**
+                     * Decodes a CreateAdaptiveMtDatasetRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateAdaptiveMtDatasetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest;
+
+                    /**
+                     * Verifies a CreateAdaptiveMtDatasetRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateAdaptiveMtDatasetRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateAdaptiveMtDatasetRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest;
+
+                    /**
+                     * Creates a plain object from a CreateAdaptiveMtDatasetRequest message. Also converts values to other types if specified.
+                     * @param message CreateAdaptiveMtDatasetRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateAdaptiveMtDatasetRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateAdaptiveMtDatasetRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteAdaptiveMtDatasetRequest. */
+                interface IDeleteAdaptiveMtDatasetRequest {
+
+                    /** DeleteAdaptiveMtDatasetRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteAdaptiveMtDatasetRequest. */
+                class DeleteAdaptiveMtDatasetRequest implements IDeleteAdaptiveMtDatasetRequest {
+
+                    /**
+                     * Constructs a new DeleteAdaptiveMtDatasetRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IDeleteAdaptiveMtDatasetRequest);
+
+                    /** DeleteAdaptiveMtDatasetRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteAdaptiveMtDatasetRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteAdaptiveMtDatasetRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IDeleteAdaptiveMtDatasetRequest): google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest;
+
+                    /**
+                     * Encodes the specified DeleteAdaptiveMtDatasetRequest message. Does not implicitly {@link google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest.verify|verify} messages.
+                     * @param message DeleteAdaptiveMtDatasetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IDeleteAdaptiveMtDatasetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteAdaptiveMtDatasetRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest.verify|verify} messages.
+                     * @param message DeleteAdaptiveMtDatasetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IDeleteAdaptiveMtDatasetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteAdaptiveMtDatasetRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteAdaptiveMtDatasetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest;
+
+                    /**
+                     * Decodes a DeleteAdaptiveMtDatasetRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteAdaptiveMtDatasetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest;
+
+                    /**
+                     * Verifies a DeleteAdaptiveMtDatasetRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteAdaptiveMtDatasetRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteAdaptiveMtDatasetRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteAdaptiveMtDatasetRequest message. Also converts values to other types if specified.
+                     * @param message DeleteAdaptiveMtDatasetRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteAdaptiveMtDatasetRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteAdaptiveMtDatasetRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetAdaptiveMtDatasetRequest. */
+                interface IGetAdaptiveMtDatasetRequest {
+
+                    /** GetAdaptiveMtDatasetRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetAdaptiveMtDatasetRequest. */
+                class GetAdaptiveMtDatasetRequest implements IGetAdaptiveMtDatasetRequest {
+
+                    /**
+                     * Constructs a new GetAdaptiveMtDatasetRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IGetAdaptiveMtDatasetRequest);
+
+                    /** GetAdaptiveMtDatasetRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetAdaptiveMtDatasetRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetAdaptiveMtDatasetRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IGetAdaptiveMtDatasetRequest): google.cloud.translation.v3.GetAdaptiveMtDatasetRequest;
+
+                    /**
+                     * Encodes the specified GetAdaptiveMtDatasetRequest message. Does not implicitly {@link google.cloud.translation.v3.GetAdaptiveMtDatasetRequest.verify|verify} messages.
+                     * @param message GetAdaptiveMtDatasetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IGetAdaptiveMtDatasetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetAdaptiveMtDatasetRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.GetAdaptiveMtDatasetRequest.verify|verify} messages.
+                     * @param message GetAdaptiveMtDatasetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IGetAdaptiveMtDatasetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetAdaptiveMtDatasetRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetAdaptiveMtDatasetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.GetAdaptiveMtDatasetRequest;
+
+                    /**
+                     * Decodes a GetAdaptiveMtDatasetRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetAdaptiveMtDatasetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.GetAdaptiveMtDatasetRequest;
+
+                    /**
+                     * Verifies a GetAdaptiveMtDatasetRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetAdaptiveMtDatasetRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetAdaptiveMtDatasetRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.GetAdaptiveMtDatasetRequest;
+
+                    /**
+                     * Creates a plain object from a GetAdaptiveMtDatasetRequest message. Also converts values to other types if specified.
+                     * @param message GetAdaptiveMtDatasetRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.GetAdaptiveMtDatasetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetAdaptiveMtDatasetRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetAdaptiveMtDatasetRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAdaptiveMtDatasetsRequest. */
+                interface IListAdaptiveMtDatasetsRequest {
+
+                    /** ListAdaptiveMtDatasetsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListAdaptiveMtDatasetsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAdaptiveMtDatasetsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListAdaptiveMtDatasetsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListAdaptiveMtDatasetsRequest. */
+                class ListAdaptiveMtDatasetsRequest implements IListAdaptiveMtDatasetsRequest {
+
+                    /**
+                     * Constructs a new ListAdaptiveMtDatasetsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IListAdaptiveMtDatasetsRequest);
+
+                    /** ListAdaptiveMtDatasetsRequest parent. */
+                    public parent: string;
+
+                    /** ListAdaptiveMtDatasetsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAdaptiveMtDatasetsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListAdaptiveMtDatasetsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListAdaptiveMtDatasetsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAdaptiveMtDatasetsRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IListAdaptiveMtDatasetsRequest): google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest;
+
+                    /**
+                     * Encodes the specified ListAdaptiveMtDatasetsRequest message. Does not implicitly {@link google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest.verify|verify} messages.
+                     * @param message ListAdaptiveMtDatasetsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IListAdaptiveMtDatasetsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAdaptiveMtDatasetsRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest.verify|verify} messages.
+                     * @param message ListAdaptiveMtDatasetsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IListAdaptiveMtDatasetsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAdaptiveMtDatasetsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAdaptiveMtDatasetsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest;
+
+                    /**
+                     * Decodes a ListAdaptiveMtDatasetsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAdaptiveMtDatasetsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest;
+
+                    /**
+                     * Verifies a ListAdaptiveMtDatasetsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAdaptiveMtDatasetsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAdaptiveMtDatasetsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest;
+
+                    /**
+                     * Creates a plain object from a ListAdaptiveMtDatasetsRequest message. Also converts values to other types if specified.
+                     * @param message ListAdaptiveMtDatasetsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAdaptiveMtDatasetsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAdaptiveMtDatasetsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAdaptiveMtDatasetsResponse. */
+                interface IListAdaptiveMtDatasetsResponse {
+
+                    /** ListAdaptiveMtDatasetsResponse adaptiveMtDatasets */
+                    adaptiveMtDatasets?: (google.cloud.translation.v3.IAdaptiveMtDataset[]|null);
+
+                    /** ListAdaptiveMtDatasetsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListAdaptiveMtDatasetsResponse. */
+                class ListAdaptiveMtDatasetsResponse implements IListAdaptiveMtDatasetsResponse {
+
+                    /**
+                     * Constructs a new ListAdaptiveMtDatasetsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IListAdaptiveMtDatasetsResponse);
+
+                    /** ListAdaptiveMtDatasetsResponse adaptiveMtDatasets. */
+                    public adaptiveMtDatasets: google.cloud.translation.v3.IAdaptiveMtDataset[];
+
+                    /** ListAdaptiveMtDatasetsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListAdaptiveMtDatasetsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAdaptiveMtDatasetsResponse instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IListAdaptiveMtDatasetsResponse): google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse;
+
+                    /**
+                     * Encodes the specified ListAdaptiveMtDatasetsResponse message. Does not implicitly {@link google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse.verify|verify} messages.
+                     * @param message ListAdaptiveMtDatasetsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IListAdaptiveMtDatasetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAdaptiveMtDatasetsResponse message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse.verify|verify} messages.
+                     * @param message ListAdaptiveMtDatasetsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IListAdaptiveMtDatasetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAdaptiveMtDatasetsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAdaptiveMtDatasetsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse;
+
+                    /**
+                     * Decodes a ListAdaptiveMtDatasetsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAdaptiveMtDatasetsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse;
+
+                    /**
+                     * Verifies a ListAdaptiveMtDatasetsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAdaptiveMtDatasetsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAdaptiveMtDatasetsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse;
+
+                    /**
+                     * Creates a plain object from a ListAdaptiveMtDatasetsResponse message. Also converts values to other types if specified.
+                     * @param message ListAdaptiveMtDatasetsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAdaptiveMtDatasetsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAdaptiveMtDatasetsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AdaptiveMtTranslateRequest. */
+                interface IAdaptiveMtTranslateRequest {
+
+                    /** AdaptiveMtTranslateRequest parent */
+                    parent?: (string|null);
+
+                    /** AdaptiveMtTranslateRequest dataset */
+                    dataset?: (string|null);
+
+                    /** AdaptiveMtTranslateRequest content */
+                    content?: (string[]|null);
+                }
+
+                /** Represents an AdaptiveMtTranslateRequest. */
+                class AdaptiveMtTranslateRequest implements IAdaptiveMtTranslateRequest {
+
+                    /**
+                     * Constructs a new AdaptiveMtTranslateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IAdaptiveMtTranslateRequest);
+
+                    /** AdaptiveMtTranslateRequest parent. */
+                    public parent: string;
+
+                    /** AdaptiveMtTranslateRequest dataset. */
+                    public dataset: string;
+
+                    /** AdaptiveMtTranslateRequest content. */
+                    public content: string[];
+
+                    /**
+                     * Creates a new AdaptiveMtTranslateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AdaptiveMtTranslateRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IAdaptiveMtTranslateRequest): google.cloud.translation.v3.AdaptiveMtTranslateRequest;
+
+                    /**
+                     * Encodes the specified AdaptiveMtTranslateRequest message. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtTranslateRequest.verify|verify} messages.
+                     * @param message AdaptiveMtTranslateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IAdaptiveMtTranslateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AdaptiveMtTranslateRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtTranslateRequest.verify|verify} messages.
+                     * @param message AdaptiveMtTranslateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IAdaptiveMtTranslateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AdaptiveMtTranslateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AdaptiveMtTranslateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.AdaptiveMtTranslateRequest;
+
+                    /**
+                     * Decodes an AdaptiveMtTranslateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AdaptiveMtTranslateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.AdaptiveMtTranslateRequest;
+
+                    /**
+                     * Verifies an AdaptiveMtTranslateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AdaptiveMtTranslateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AdaptiveMtTranslateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.AdaptiveMtTranslateRequest;
+
+                    /**
+                     * Creates a plain object from an AdaptiveMtTranslateRequest message. Also converts values to other types if specified.
+                     * @param message AdaptiveMtTranslateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.AdaptiveMtTranslateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AdaptiveMtTranslateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AdaptiveMtTranslateRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AdaptiveMtTranslation. */
+                interface IAdaptiveMtTranslation {
+
+                    /** AdaptiveMtTranslation translatedText */
+                    translatedText?: (string|null);
+                }
+
+                /** Represents an AdaptiveMtTranslation. */
+                class AdaptiveMtTranslation implements IAdaptiveMtTranslation {
+
+                    /**
+                     * Constructs a new AdaptiveMtTranslation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IAdaptiveMtTranslation);
+
+                    /** AdaptiveMtTranslation translatedText. */
+                    public translatedText: string;
+
+                    /**
+                     * Creates a new AdaptiveMtTranslation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AdaptiveMtTranslation instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IAdaptiveMtTranslation): google.cloud.translation.v3.AdaptiveMtTranslation;
+
+                    /**
+                     * Encodes the specified AdaptiveMtTranslation message. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtTranslation.verify|verify} messages.
+                     * @param message AdaptiveMtTranslation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IAdaptiveMtTranslation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AdaptiveMtTranslation message, length delimited. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtTranslation.verify|verify} messages.
+                     * @param message AdaptiveMtTranslation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IAdaptiveMtTranslation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AdaptiveMtTranslation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AdaptiveMtTranslation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.AdaptiveMtTranslation;
+
+                    /**
+                     * Decodes an AdaptiveMtTranslation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AdaptiveMtTranslation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.AdaptiveMtTranslation;
+
+                    /**
+                     * Verifies an AdaptiveMtTranslation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AdaptiveMtTranslation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AdaptiveMtTranslation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.AdaptiveMtTranslation;
+
+                    /**
+                     * Creates a plain object from an AdaptiveMtTranslation message. Also converts values to other types if specified.
+                     * @param message AdaptiveMtTranslation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.AdaptiveMtTranslation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AdaptiveMtTranslation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AdaptiveMtTranslation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AdaptiveMtTranslateResponse. */
+                interface IAdaptiveMtTranslateResponse {
+
+                    /** AdaptiveMtTranslateResponse translations */
+                    translations?: (google.cloud.translation.v3.IAdaptiveMtTranslation[]|null);
+
+                    /** AdaptiveMtTranslateResponse languageCode */
+                    languageCode?: (string|null);
+                }
+
+                /** Represents an AdaptiveMtTranslateResponse. */
+                class AdaptiveMtTranslateResponse implements IAdaptiveMtTranslateResponse {
+
+                    /**
+                     * Constructs a new AdaptiveMtTranslateResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IAdaptiveMtTranslateResponse);
+
+                    /** AdaptiveMtTranslateResponse translations. */
+                    public translations: google.cloud.translation.v3.IAdaptiveMtTranslation[];
+
+                    /** AdaptiveMtTranslateResponse languageCode. */
+                    public languageCode: string;
+
+                    /**
+                     * Creates a new AdaptiveMtTranslateResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AdaptiveMtTranslateResponse instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IAdaptiveMtTranslateResponse): google.cloud.translation.v3.AdaptiveMtTranslateResponse;
+
+                    /**
+                     * Encodes the specified AdaptiveMtTranslateResponse message. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtTranslateResponse.verify|verify} messages.
+                     * @param message AdaptiveMtTranslateResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IAdaptiveMtTranslateResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AdaptiveMtTranslateResponse message, length delimited. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtTranslateResponse.verify|verify} messages.
+                     * @param message AdaptiveMtTranslateResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IAdaptiveMtTranslateResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AdaptiveMtTranslateResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AdaptiveMtTranslateResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.AdaptiveMtTranslateResponse;
+
+                    /**
+                     * Decodes an AdaptiveMtTranslateResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AdaptiveMtTranslateResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.AdaptiveMtTranslateResponse;
+
+                    /**
+                     * Verifies an AdaptiveMtTranslateResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AdaptiveMtTranslateResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AdaptiveMtTranslateResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.AdaptiveMtTranslateResponse;
+
+                    /**
+                     * Creates a plain object from an AdaptiveMtTranslateResponse message. Also converts values to other types if specified.
+                     * @param message AdaptiveMtTranslateResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.AdaptiveMtTranslateResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AdaptiveMtTranslateResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AdaptiveMtTranslateResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AdaptiveMtFile. */
+                interface IAdaptiveMtFile {
+
+                    /** AdaptiveMtFile name */
+                    name?: (string|null);
+
+                    /** AdaptiveMtFile displayName */
+                    displayName?: (string|null);
+
+                    /** AdaptiveMtFile entryCount */
+                    entryCount?: (number|null);
+
+                    /** AdaptiveMtFile createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AdaptiveMtFile updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents an AdaptiveMtFile. */
+                class AdaptiveMtFile implements IAdaptiveMtFile {
+
+                    /**
+                     * Constructs a new AdaptiveMtFile.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IAdaptiveMtFile);
+
+                    /** AdaptiveMtFile name. */
+                    public name: string;
+
+                    /** AdaptiveMtFile displayName. */
+                    public displayName: string;
+
+                    /** AdaptiveMtFile entryCount. */
+                    public entryCount: number;
+
+                    /** AdaptiveMtFile createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AdaptiveMtFile updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new AdaptiveMtFile instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AdaptiveMtFile instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IAdaptiveMtFile): google.cloud.translation.v3.AdaptiveMtFile;
+
+                    /**
+                     * Encodes the specified AdaptiveMtFile message. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtFile.verify|verify} messages.
+                     * @param message AdaptiveMtFile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IAdaptiveMtFile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AdaptiveMtFile message, length delimited. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtFile.verify|verify} messages.
+                     * @param message AdaptiveMtFile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IAdaptiveMtFile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AdaptiveMtFile message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AdaptiveMtFile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.AdaptiveMtFile;
+
+                    /**
+                     * Decodes an AdaptiveMtFile message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AdaptiveMtFile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.AdaptiveMtFile;
+
+                    /**
+                     * Verifies an AdaptiveMtFile message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AdaptiveMtFile message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AdaptiveMtFile
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.AdaptiveMtFile;
+
+                    /**
+                     * Creates a plain object from an AdaptiveMtFile message. Also converts values to other types if specified.
+                     * @param message AdaptiveMtFile
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.AdaptiveMtFile, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AdaptiveMtFile to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AdaptiveMtFile
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetAdaptiveMtFileRequest. */
+                interface IGetAdaptiveMtFileRequest {
+
+                    /** GetAdaptiveMtFileRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetAdaptiveMtFileRequest. */
+                class GetAdaptiveMtFileRequest implements IGetAdaptiveMtFileRequest {
+
+                    /**
+                     * Constructs a new GetAdaptiveMtFileRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IGetAdaptiveMtFileRequest);
+
+                    /** GetAdaptiveMtFileRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetAdaptiveMtFileRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetAdaptiveMtFileRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IGetAdaptiveMtFileRequest): google.cloud.translation.v3.GetAdaptiveMtFileRequest;
+
+                    /**
+                     * Encodes the specified GetAdaptiveMtFileRequest message. Does not implicitly {@link google.cloud.translation.v3.GetAdaptiveMtFileRequest.verify|verify} messages.
+                     * @param message GetAdaptiveMtFileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IGetAdaptiveMtFileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetAdaptiveMtFileRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.GetAdaptiveMtFileRequest.verify|verify} messages.
+                     * @param message GetAdaptiveMtFileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IGetAdaptiveMtFileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetAdaptiveMtFileRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetAdaptiveMtFileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.GetAdaptiveMtFileRequest;
+
+                    /**
+                     * Decodes a GetAdaptiveMtFileRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetAdaptiveMtFileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.GetAdaptiveMtFileRequest;
+
+                    /**
+                     * Verifies a GetAdaptiveMtFileRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetAdaptiveMtFileRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetAdaptiveMtFileRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.GetAdaptiveMtFileRequest;
+
+                    /**
+                     * Creates a plain object from a GetAdaptiveMtFileRequest message. Also converts values to other types if specified.
+                     * @param message GetAdaptiveMtFileRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.GetAdaptiveMtFileRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetAdaptiveMtFileRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetAdaptiveMtFileRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteAdaptiveMtFileRequest. */
+                interface IDeleteAdaptiveMtFileRequest {
+
+                    /** DeleteAdaptiveMtFileRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteAdaptiveMtFileRequest. */
+                class DeleteAdaptiveMtFileRequest implements IDeleteAdaptiveMtFileRequest {
+
+                    /**
+                     * Constructs a new DeleteAdaptiveMtFileRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IDeleteAdaptiveMtFileRequest);
+
+                    /** DeleteAdaptiveMtFileRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteAdaptiveMtFileRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteAdaptiveMtFileRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IDeleteAdaptiveMtFileRequest): google.cloud.translation.v3.DeleteAdaptiveMtFileRequest;
+
+                    /**
+                     * Encodes the specified DeleteAdaptiveMtFileRequest message. Does not implicitly {@link google.cloud.translation.v3.DeleteAdaptiveMtFileRequest.verify|verify} messages.
+                     * @param message DeleteAdaptiveMtFileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IDeleteAdaptiveMtFileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteAdaptiveMtFileRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.DeleteAdaptiveMtFileRequest.verify|verify} messages.
+                     * @param message DeleteAdaptiveMtFileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IDeleteAdaptiveMtFileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteAdaptiveMtFileRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteAdaptiveMtFileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.DeleteAdaptiveMtFileRequest;
+
+                    /**
+                     * Decodes a DeleteAdaptiveMtFileRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteAdaptiveMtFileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.DeleteAdaptiveMtFileRequest;
+
+                    /**
+                     * Verifies a DeleteAdaptiveMtFileRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteAdaptiveMtFileRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteAdaptiveMtFileRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.DeleteAdaptiveMtFileRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteAdaptiveMtFileRequest message. Also converts values to other types if specified.
+                     * @param message DeleteAdaptiveMtFileRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.DeleteAdaptiveMtFileRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteAdaptiveMtFileRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteAdaptiveMtFileRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImportAdaptiveMtFileRequest. */
+                interface IImportAdaptiveMtFileRequest {
+
+                    /** ImportAdaptiveMtFileRequest parent */
+                    parent?: (string|null);
+
+                    /** ImportAdaptiveMtFileRequest fileInputSource */
+                    fileInputSource?: (google.cloud.translation.v3.IFileInputSource|null);
+
+                    /** ImportAdaptiveMtFileRequest gcsInputSource */
+                    gcsInputSource?: (google.cloud.translation.v3.IGcsInputSource|null);
+                }
+
+                /** Represents an ImportAdaptiveMtFileRequest. */
+                class ImportAdaptiveMtFileRequest implements IImportAdaptiveMtFileRequest {
+
+                    /**
+                     * Constructs a new ImportAdaptiveMtFileRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IImportAdaptiveMtFileRequest);
+
+                    /** ImportAdaptiveMtFileRequest parent. */
+                    public parent: string;
+
+                    /** ImportAdaptiveMtFileRequest fileInputSource. */
+                    public fileInputSource?: (google.cloud.translation.v3.IFileInputSource|null);
+
+                    /** ImportAdaptiveMtFileRequest gcsInputSource. */
+                    public gcsInputSource?: (google.cloud.translation.v3.IGcsInputSource|null);
+
+                    /** ImportAdaptiveMtFileRequest source. */
+                    public source?: ("fileInputSource"|"gcsInputSource");
+
+                    /**
+                     * Creates a new ImportAdaptiveMtFileRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportAdaptiveMtFileRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IImportAdaptiveMtFileRequest): google.cloud.translation.v3.ImportAdaptiveMtFileRequest;
+
+                    /**
+                     * Encodes the specified ImportAdaptiveMtFileRequest message. Does not implicitly {@link google.cloud.translation.v3.ImportAdaptiveMtFileRequest.verify|verify} messages.
+                     * @param message ImportAdaptiveMtFileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IImportAdaptiveMtFileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportAdaptiveMtFileRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ImportAdaptiveMtFileRequest.verify|verify} messages.
+                     * @param message ImportAdaptiveMtFileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IImportAdaptiveMtFileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportAdaptiveMtFileRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportAdaptiveMtFileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.ImportAdaptiveMtFileRequest;
+
+                    /**
+                     * Decodes an ImportAdaptiveMtFileRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportAdaptiveMtFileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.ImportAdaptiveMtFileRequest;
+
+                    /**
+                     * Verifies an ImportAdaptiveMtFileRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportAdaptiveMtFileRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportAdaptiveMtFileRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.ImportAdaptiveMtFileRequest;
+
+                    /**
+                     * Creates a plain object from an ImportAdaptiveMtFileRequest message. Also converts values to other types if specified.
+                     * @param message ImportAdaptiveMtFileRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.ImportAdaptiveMtFileRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportAdaptiveMtFileRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportAdaptiveMtFileRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImportAdaptiveMtFileResponse. */
+                interface IImportAdaptiveMtFileResponse {
+
+                    /** ImportAdaptiveMtFileResponse adaptiveMtFile */
+                    adaptiveMtFile?: (google.cloud.translation.v3.IAdaptiveMtFile|null);
+                }
+
+                /** Represents an ImportAdaptiveMtFileResponse. */
+                class ImportAdaptiveMtFileResponse implements IImportAdaptiveMtFileResponse {
+
+                    /**
+                     * Constructs a new ImportAdaptiveMtFileResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IImportAdaptiveMtFileResponse);
+
+                    /** ImportAdaptiveMtFileResponse adaptiveMtFile. */
+                    public adaptiveMtFile?: (google.cloud.translation.v3.IAdaptiveMtFile|null);
+
+                    /**
+                     * Creates a new ImportAdaptiveMtFileResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportAdaptiveMtFileResponse instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IImportAdaptiveMtFileResponse): google.cloud.translation.v3.ImportAdaptiveMtFileResponse;
+
+                    /**
+                     * Encodes the specified ImportAdaptiveMtFileResponse message. Does not implicitly {@link google.cloud.translation.v3.ImportAdaptiveMtFileResponse.verify|verify} messages.
+                     * @param message ImportAdaptiveMtFileResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IImportAdaptiveMtFileResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportAdaptiveMtFileResponse message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ImportAdaptiveMtFileResponse.verify|verify} messages.
+                     * @param message ImportAdaptiveMtFileResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IImportAdaptiveMtFileResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportAdaptiveMtFileResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportAdaptiveMtFileResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.ImportAdaptiveMtFileResponse;
+
+                    /**
+                     * Decodes an ImportAdaptiveMtFileResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportAdaptiveMtFileResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.ImportAdaptiveMtFileResponse;
+
+                    /**
+                     * Verifies an ImportAdaptiveMtFileResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportAdaptiveMtFileResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportAdaptiveMtFileResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.ImportAdaptiveMtFileResponse;
+
+                    /**
+                     * Creates a plain object from an ImportAdaptiveMtFileResponse message. Also converts values to other types if specified.
+                     * @param message ImportAdaptiveMtFileResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.ImportAdaptiveMtFileResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportAdaptiveMtFileResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportAdaptiveMtFileResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAdaptiveMtFilesRequest. */
+                interface IListAdaptiveMtFilesRequest {
+
+                    /** ListAdaptiveMtFilesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListAdaptiveMtFilesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAdaptiveMtFilesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListAdaptiveMtFilesRequest. */
+                class ListAdaptiveMtFilesRequest implements IListAdaptiveMtFilesRequest {
+
+                    /**
+                     * Constructs a new ListAdaptiveMtFilesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IListAdaptiveMtFilesRequest);
+
+                    /** ListAdaptiveMtFilesRequest parent. */
+                    public parent: string;
+
+                    /** ListAdaptiveMtFilesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAdaptiveMtFilesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListAdaptiveMtFilesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAdaptiveMtFilesRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IListAdaptiveMtFilesRequest): google.cloud.translation.v3.ListAdaptiveMtFilesRequest;
+
+                    /**
+                     * Encodes the specified ListAdaptiveMtFilesRequest message. Does not implicitly {@link google.cloud.translation.v3.ListAdaptiveMtFilesRequest.verify|verify} messages.
+                     * @param message ListAdaptiveMtFilesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IListAdaptiveMtFilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAdaptiveMtFilesRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ListAdaptiveMtFilesRequest.verify|verify} messages.
+                     * @param message ListAdaptiveMtFilesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IListAdaptiveMtFilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAdaptiveMtFilesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAdaptiveMtFilesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.ListAdaptiveMtFilesRequest;
+
+                    /**
+                     * Decodes a ListAdaptiveMtFilesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAdaptiveMtFilesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.ListAdaptiveMtFilesRequest;
+
+                    /**
+                     * Verifies a ListAdaptiveMtFilesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAdaptiveMtFilesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAdaptiveMtFilesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.ListAdaptiveMtFilesRequest;
+
+                    /**
+                     * Creates a plain object from a ListAdaptiveMtFilesRequest message. Also converts values to other types if specified.
+                     * @param message ListAdaptiveMtFilesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.ListAdaptiveMtFilesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAdaptiveMtFilesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAdaptiveMtFilesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAdaptiveMtFilesResponse. */
+                interface IListAdaptiveMtFilesResponse {
+
+                    /** ListAdaptiveMtFilesResponse adaptiveMtFiles */
+                    adaptiveMtFiles?: (google.cloud.translation.v3.IAdaptiveMtFile[]|null);
+
+                    /** ListAdaptiveMtFilesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListAdaptiveMtFilesResponse. */
+                class ListAdaptiveMtFilesResponse implements IListAdaptiveMtFilesResponse {
+
+                    /**
+                     * Constructs a new ListAdaptiveMtFilesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IListAdaptiveMtFilesResponse);
+
+                    /** ListAdaptiveMtFilesResponse adaptiveMtFiles. */
+                    public adaptiveMtFiles: google.cloud.translation.v3.IAdaptiveMtFile[];
+
+                    /** ListAdaptiveMtFilesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListAdaptiveMtFilesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAdaptiveMtFilesResponse instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IListAdaptiveMtFilesResponse): google.cloud.translation.v3.ListAdaptiveMtFilesResponse;
+
+                    /**
+                     * Encodes the specified ListAdaptiveMtFilesResponse message. Does not implicitly {@link google.cloud.translation.v3.ListAdaptiveMtFilesResponse.verify|verify} messages.
+                     * @param message ListAdaptiveMtFilesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IListAdaptiveMtFilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAdaptiveMtFilesResponse message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ListAdaptiveMtFilesResponse.verify|verify} messages.
+                     * @param message ListAdaptiveMtFilesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IListAdaptiveMtFilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAdaptiveMtFilesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAdaptiveMtFilesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.ListAdaptiveMtFilesResponse;
+
+                    /**
+                     * Decodes a ListAdaptiveMtFilesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAdaptiveMtFilesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.ListAdaptiveMtFilesResponse;
+
+                    /**
+                     * Verifies a ListAdaptiveMtFilesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAdaptiveMtFilesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAdaptiveMtFilesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.ListAdaptiveMtFilesResponse;
+
+                    /**
+                     * Creates a plain object from a ListAdaptiveMtFilesResponse message. Also converts values to other types if specified.
+                     * @param message ListAdaptiveMtFilesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.ListAdaptiveMtFilesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAdaptiveMtFilesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAdaptiveMtFilesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AdaptiveMtSentence. */
+                interface IAdaptiveMtSentence {
+
+                    /** AdaptiveMtSentence name */
+                    name?: (string|null);
+
+                    /** AdaptiveMtSentence sourceSentence */
+                    sourceSentence?: (string|null);
+
+                    /** AdaptiveMtSentence targetSentence */
+                    targetSentence?: (string|null);
+
+                    /** AdaptiveMtSentence createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AdaptiveMtSentence updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents an AdaptiveMtSentence. */
+                class AdaptiveMtSentence implements IAdaptiveMtSentence {
+
+                    /**
+                     * Constructs a new AdaptiveMtSentence.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IAdaptiveMtSentence);
+
+                    /** AdaptiveMtSentence name. */
+                    public name: string;
+
+                    /** AdaptiveMtSentence sourceSentence. */
+                    public sourceSentence: string;
+
+                    /** AdaptiveMtSentence targetSentence. */
+                    public targetSentence: string;
+
+                    /** AdaptiveMtSentence createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AdaptiveMtSentence updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new AdaptiveMtSentence instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AdaptiveMtSentence instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IAdaptiveMtSentence): google.cloud.translation.v3.AdaptiveMtSentence;
+
+                    /**
+                     * Encodes the specified AdaptiveMtSentence message. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtSentence.verify|verify} messages.
+                     * @param message AdaptiveMtSentence message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IAdaptiveMtSentence, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AdaptiveMtSentence message, length delimited. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtSentence.verify|verify} messages.
+                     * @param message AdaptiveMtSentence message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IAdaptiveMtSentence, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AdaptiveMtSentence message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AdaptiveMtSentence
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.AdaptiveMtSentence;
+
+                    /**
+                     * Decodes an AdaptiveMtSentence message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AdaptiveMtSentence
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.AdaptiveMtSentence;
+
+                    /**
+                     * Verifies an AdaptiveMtSentence message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AdaptiveMtSentence message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AdaptiveMtSentence
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.AdaptiveMtSentence;
+
+                    /**
+                     * Creates a plain object from an AdaptiveMtSentence message. Also converts values to other types if specified.
+                     * @param message AdaptiveMtSentence
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.AdaptiveMtSentence, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AdaptiveMtSentence to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AdaptiveMtSentence
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAdaptiveMtSentencesRequest. */
+                interface IListAdaptiveMtSentencesRequest {
+
+                    /** ListAdaptiveMtSentencesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListAdaptiveMtSentencesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAdaptiveMtSentencesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListAdaptiveMtSentencesRequest. */
+                class ListAdaptiveMtSentencesRequest implements IListAdaptiveMtSentencesRequest {
+
+                    /**
+                     * Constructs a new ListAdaptiveMtSentencesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IListAdaptiveMtSentencesRequest);
+
+                    /** ListAdaptiveMtSentencesRequest parent. */
+                    public parent: string;
+
+                    /** ListAdaptiveMtSentencesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAdaptiveMtSentencesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListAdaptiveMtSentencesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAdaptiveMtSentencesRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IListAdaptiveMtSentencesRequest): google.cloud.translation.v3.ListAdaptiveMtSentencesRequest;
+
+                    /**
+                     * Encodes the specified ListAdaptiveMtSentencesRequest message. Does not implicitly {@link google.cloud.translation.v3.ListAdaptiveMtSentencesRequest.verify|verify} messages.
+                     * @param message ListAdaptiveMtSentencesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IListAdaptiveMtSentencesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAdaptiveMtSentencesRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ListAdaptiveMtSentencesRequest.verify|verify} messages.
+                     * @param message ListAdaptiveMtSentencesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IListAdaptiveMtSentencesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAdaptiveMtSentencesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAdaptiveMtSentencesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.ListAdaptiveMtSentencesRequest;
+
+                    /**
+                     * Decodes a ListAdaptiveMtSentencesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAdaptiveMtSentencesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.ListAdaptiveMtSentencesRequest;
+
+                    /**
+                     * Verifies a ListAdaptiveMtSentencesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAdaptiveMtSentencesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAdaptiveMtSentencesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.ListAdaptiveMtSentencesRequest;
+
+                    /**
+                     * Creates a plain object from a ListAdaptiveMtSentencesRequest message. Also converts values to other types if specified.
+                     * @param message ListAdaptiveMtSentencesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.ListAdaptiveMtSentencesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAdaptiveMtSentencesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAdaptiveMtSentencesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAdaptiveMtSentencesResponse. */
+                interface IListAdaptiveMtSentencesResponse {
+
+                    /** ListAdaptiveMtSentencesResponse adaptiveMtSentences */
+                    adaptiveMtSentences?: (google.cloud.translation.v3.IAdaptiveMtSentence[]|null);
+
+                    /** ListAdaptiveMtSentencesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListAdaptiveMtSentencesResponse. */
+                class ListAdaptiveMtSentencesResponse implements IListAdaptiveMtSentencesResponse {
+
+                    /**
+                     * Constructs a new ListAdaptiveMtSentencesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IListAdaptiveMtSentencesResponse);
+
+                    /** ListAdaptiveMtSentencesResponse adaptiveMtSentences. */
+                    public adaptiveMtSentences: google.cloud.translation.v3.IAdaptiveMtSentence[];
+
+                    /** ListAdaptiveMtSentencesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListAdaptiveMtSentencesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAdaptiveMtSentencesResponse instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IListAdaptiveMtSentencesResponse): google.cloud.translation.v3.ListAdaptiveMtSentencesResponse;
+
+                    /**
+                     * Encodes the specified ListAdaptiveMtSentencesResponse message. Does not implicitly {@link google.cloud.translation.v3.ListAdaptiveMtSentencesResponse.verify|verify} messages.
+                     * @param message ListAdaptiveMtSentencesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IListAdaptiveMtSentencesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAdaptiveMtSentencesResponse message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ListAdaptiveMtSentencesResponse.verify|verify} messages.
+                     * @param message ListAdaptiveMtSentencesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IListAdaptiveMtSentencesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAdaptiveMtSentencesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAdaptiveMtSentencesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.ListAdaptiveMtSentencesResponse;
+
+                    /**
+                     * Decodes a ListAdaptiveMtSentencesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAdaptiveMtSentencesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.ListAdaptiveMtSentencesResponse;
+
+                    /**
+                     * Verifies a ListAdaptiveMtSentencesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAdaptiveMtSentencesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAdaptiveMtSentencesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.ListAdaptiveMtSentencesResponse;
+
+                    /**
+                     * Creates a plain object from a ListAdaptiveMtSentencesResponse message. Also converts values to other types if specified.
+                     * @param message ListAdaptiveMtSentencesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.ListAdaptiveMtSentencesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAdaptiveMtSentencesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAdaptiveMtSentencesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GcsInputSource. */
+                interface IGcsInputSource {
+
+                    /** GcsInputSource inputUri */
+                    inputUri?: (string|null);
+                }
+
+                /** Represents a GcsInputSource. */
+                class GcsInputSource implements IGcsInputSource {
+
+                    /**
+                     * Constructs a new GcsInputSource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IGcsInputSource);
+
+                    /** GcsInputSource inputUri. */
+                    public inputUri: string;
+
+                    /**
+                     * Creates a new GcsInputSource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GcsInputSource instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IGcsInputSource): google.cloud.translation.v3.GcsInputSource;
+
+                    /**
+                     * Encodes the specified GcsInputSource message. Does not implicitly {@link google.cloud.translation.v3.GcsInputSource.verify|verify} messages.
+                     * @param message GcsInputSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IGcsInputSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GcsInputSource message, length delimited. Does not implicitly {@link google.cloud.translation.v3.GcsInputSource.verify|verify} messages.
+                     * @param message GcsInputSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IGcsInputSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GcsInputSource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GcsInputSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.GcsInputSource;
+
+                    /**
+                     * Decodes a GcsInputSource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GcsInputSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.GcsInputSource;
+
+                    /**
+                     * Verifies a GcsInputSource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GcsInputSource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GcsInputSource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.GcsInputSource;
+
+                    /**
+                     * Creates a plain object from a GcsInputSource message. Also converts values to other types if specified.
+                     * @param message GcsInputSource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.GcsInputSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GcsInputSource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GcsInputSource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FileInputSource. */
+                interface IFileInputSource {
+
+                    /** FileInputSource mimeType */
+                    mimeType?: (string|null);
+
+                    /** FileInputSource content */
+                    content?: (Uint8Array|string|null);
+
+                    /** FileInputSource displayName */
+                    displayName?: (string|null);
+                }
+
+                /** Represents a FileInputSource. */
+                class FileInputSource implements IFileInputSource {
+
+                    /**
+                     * Constructs a new FileInputSource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IFileInputSource);
+
+                    /** FileInputSource mimeType. */
+                    public mimeType: string;
+
+                    /** FileInputSource content. */
+                    public content: (Uint8Array|string);
+
+                    /** FileInputSource displayName. */
+                    public displayName: string;
+
+                    /**
+                     * Creates a new FileInputSource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FileInputSource instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IFileInputSource): google.cloud.translation.v3.FileInputSource;
+
+                    /**
+                     * Encodes the specified FileInputSource message. Does not implicitly {@link google.cloud.translation.v3.FileInputSource.verify|verify} messages.
+                     * @param message FileInputSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IFileInputSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FileInputSource message, length delimited. Does not implicitly {@link google.cloud.translation.v3.FileInputSource.verify|verify} messages.
+                     * @param message FileInputSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IFileInputSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FileInputSource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FileInputSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.FileInputSource;
+
+                    /**
+                     * Decodes a FileInputSource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FileInputSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.FileInputSource;
+
+                    /**
+                     * Verifies a FileInputSource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FileInputSource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FileInputSource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.FileInputSource;
+
+                    /**
+                     * Creates a plain object from a FileInputSource message. Also converts values to other types if specified.
+                     * @param message FileInputSource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.FileInputSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FileInputSource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FileInputSource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GcsOutputDestination. */
+                interface IGcsOutputDestination {
+
+                    /** GcsOutputDestination outputUriPrefix */
+                    outputUriPrefix?: (string|null);
+                }
+
+                /** Represents a GcsOutputDestination. */
+                class GcsOutputDestination implements IGcsOutputDestination {
+
+                    /**
+                     * Constructs a new GcsOutputDestination.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IGcsOutputDestination);
+
+                    /** GcsOutputDestination outputUriPrefix. */
+                    public outputUriPrefix: string;
+
+                    /**
+                     * Creates a new GcsOutputDestination instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GcsOutputDestination instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IGcsOutputDestination): google.cloud.translation.v3.GcsOutputDestination;
+
+                    /**
+                     * Encodes the specified GcsOutputDestination message. Does not implicitly {@link google.cloud.translation.v3.GcsOutputDestination.verify|verify} messages.
+                     * @param message GcsOutputDestination message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IGcsOutputDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GcsOutputDestination message, length delimited. Does not implicitly {@link google.cloud.translation.v3.GcsOutputDestination.verify|verify} messages.
+                     * @param message GcsOutputDestination message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IGcsOutputDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GcsOutputDestination message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GcsOutputDestination
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.GcsOutputDestination;
+
+                    /**
+                     * Decodes a GcsOutputDestination message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GcsOutputDestination
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.GcsOutputDestination;
+
+                    /**
+                     * Verifies a GcsOutputDestination message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GcsOutputDestination message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GcsOutputDestination
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.GcsOutputDestination;
+
+                    /**
+                     * Creates a plain object from a GcsOutputDestination message. Also converts values to other types if specified.
+                     * @param message GcsOutputDestination
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.GcsOutputDestination, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GcsOutputDestination to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GcsOutputDestination
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents a TranslationService */
                 class TranslationService extends $protobuf.rpc.Service {
 
@@ -185,6 +2514,146 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteGlossary(request: google.cloud.translation.v3.IDeleteGlossaryRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CreateAdaptiveMtDataset.
+                     * @param request CreateAdaptiveMtDatasetRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AdaptiveMtDataset
+                     */
+                    public createAdaptiveMtDataset(request: google.cloud.translation.v3.ICreateAdaptiveMtDatasetRequest, callback: google.cloud.translation.v3.TranslationService.CreateAdaptiveMtDatasetCallback): void;
+
+                    /**
+                     * Calls CreateAdaptiveMtDataset.
+                     * @param request CreateAdaptiveMtDatasetRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createAdaptiveMtDataset(request: google.cloud.translation.v3.ICreateAdaptiveMtDatasetRequest): Promise<google.cloud.translation.v3.AdaptiveMtDataset>;
+
+                    /**
+                     * Calls DeleteAdaptiveMtDataset.
+                     * @param request DeleteAdaptiveMtDatasetRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteAdaptiveMtDataset(request: google.cloud.translation.v3.IDeleteAdaptiveMtDatasetRequest, callback: google.cloud.translation.v3.TranslationService.DeleteAdaptiveMtDatasetCallback): void;
+
+                    /**
+                     * Calls DeleteAdaptiveMtDataset.
+                     * @param request DeleteAdaptiveMtDatasetRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteAdaptiveMtDataset(request: google.cloud.translation.v3.IDeleteAdaptiveMtDatasetRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls GetAdaptiveMtDataset.
+                     * @param request GetAdaptiveMtDatasetRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AdaptiveMtDataset
+                     */
+                    public getAdaptiveMtDataset(request: google.cloud.translation.v3.IGetAdaptiveMtDatasetRequest, callback: google.cloud.translation.v3.TranslationService.GetAdaptiveMtDatasetCallback): void;
+
+                    /**
+                     * Calls GetAdaptiveMtDataset.
+                     * @param request GetAdaptiveMtDatasetRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getAdaptiveMtDataset(request: google.cloud.translation.v3.IGetAdaptiveMtDatasetRequest): Promise<google.cloud.translation.v3.AdaptiveMtDataset>;
+
+                    /**
+                     * Calls ListAdaptiveMtDatasets.
+                     * @param request ListAdaptiveMtDatasetsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAdaptiveMtDatasetsResponse
+                     */
+                    public listAdaptiveMtDatasets(request: google.cloud.translation.v3.IListAdaptiveMtDatasetsRequest, callback: google.cloud.translation.v3.TranslationService.ListAdaptiveMtDatasetsCallback): void;
+
+                    /**
+                     * Calls ListAdaptiveMtDatasets.
+                     * @param request ListAdaptiveMtDatasetsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAdaptiveMtDatasets(request: google.cloud.translation.v3.IListAdaptiveMtDatasetsRequest): Promise<google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse>;
+
+                    /**
+                     * Calls AdaptiveMtTranslate.
+                     * @param request AdaptiveMtTranslateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AdaptiveMtTranslateResponse
+                     */
+                    public adaptiveMtTranslate(request: google.cloud.translation.v3.IAdaptiveMtTranslateRequest, callback: google.cloud.translation.v3.TranslationService.AdaptiveMtTranslateCallback): void;
+
+                    /**
+                     * Calls AdaptiveMtTranslate.
+                     * @param request AdaptiveMtTranslateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public adaptiveMtTranslate(request: google.cloud.translation.v3.IAdaptiveMtTranslateRequest): Promise<google.cloud.translation.v3.AdaptiveMtTranslateResponse>;
+
+                    /**
+                     * Calls GetAdaptiveMtFile.
+                     * @param request GetAdaptiveMtFileRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AdaptiveMtFile
+                     */
+                    public getAdaptiveMtFile(request: google.cloud.translation.v3.IGetAdaptiveMtFileRequest, callback: google.cloud.translation.v3.TranslationService.GetAdaptiveMtFileCallback): void;
+
+                    /**
+                     * Calls GetAdaptiveMtFile.
+                     * @param request GetAdaptiveMtFileRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getAdaptiveMtFile(request: google.cloud.translation.v3.IGetAdaptiveMtFileRequest): Promise<google.cloud.translation.v3.AdaptiveMtFile>;
+
+                    /**
+                     * Calls DeleteAdaptiveMtFile.
+                     * @param request DeleteAdaptiveMtFileRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteAdaptiveMtFile(request: google.cloud.translation.v3.IDeleteAdaptiveMtFileRequest, callback: google.cloud.translation.v3.TranslationService.DeleteAdaptiveMtFileCallback): void;
+
+                    /**
+                     * Calls DeleteAdaptiveMtFile.
+                     * @param request DeleteAdaptiveMtFileRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteAdaptiveMtFile(request: google.cloud.translation.v3.IDeleteAdaptiveMtFileRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls ImportAdaptiveMtFile.
+                     * @param request ImportAdaptiveMtFileRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ImportAdaptiveMtFileResponse
+                     */
+                    public importAdaptiveMtFile(request: google.cloud.translation.v3.IImportAdaptiveMtFileRequest, callback: google.cloud.translation.v3.TranslationService.ImportAdaptiveMtFileCallback): void;
+
+                    /**
+                     * Calls ImportAdaptiveMtFile.
+                     * @param request ImportAdaptiveMtFileRequest message or plain object
+                     * @returns Promise
+                     */
+                    public importAdaptiveMtFile(request: google.cloud.translation.v3.IImportAdaptiveMtFileRequest): Promise<google.cloud.translation.v3.ImportAdaptiveMtFileResponse>;
+
+                    /**
+                     * Calls ListAdaptiveMtFiles.
+                     * @param request ListAdaptiveMtFilesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAdaptiveMtFilesResponse
+                     */
+                    public listAdaptiveMtFiles(request: google.cloud.translation.v3.IListAdaptiveMtFilesRequest, callback: google.cloud.translation.v3.TranslationService.ListAdaptiveMtFilesCallback): void;
+
+                    /**
+                     * Calls ListAdaptiveMtFiles.
+                     * @param request ListAdaptiveMtFilesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAdaptiveMtFiles(request: google.cloud.translation.v3.IListAdaptiveMtFilesRequest): Promise<google.cloud.translation.v3.ListAdaptiveMtFilesResponse>;
+
+                    /**
+                     * Calls ListAdaptiveMtSentences.
+                     * @param request ListAdaptiveMtSentencesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAdaptiveMtSentencesResponse
+                     */
+                    public listAdaptiveMtSentences(request: google.cloud.translation.v3.IListAdaptiveMtSentencesRequest, callback: google.cloud.translation.v3.TranslationService.ListAdaptiveMtSentencesCallback): void;
+
+                    /**
+                     * Calls ListAdaptiveMtSentences.
+                     * @param request ListAdaptiveMtSentencesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAdaptiveMtSentences(request: google.cloud.translation.v3.IListAdaptiveMtSentencesRequest): Promise<google.cloud.translation.v3.ListAdaptiveMtSentencesResponse>;
                 }
 
                 namespace TranslationService {
@@ -258,6 +2727,76 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteGlossaryCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.translation.v3.TranslationService|createAdaptiveMtDataset}.
+                     * @param error Error, if any
+                     * @param [response] AdaptiveMtDataset
+                     */
+                    type CreateAdaptiveMtDatasetCallback = (error: (Error|null), response?: google.cloud.translation.v3.AdaptiveMtDataset) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.translation.v3.TranslationService|deleteAdaptiveMtDataset}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteAdaptiveMtDatasetCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.translation.v3.TranslationService|getAdaptiveMtDataset}.
+                     * @param error Error, if any
+                     * @param [response] AdaptiveMtDataset
+                     */
+                    type GetAdaptiveMtDatasetCallback = (error: (Error|null), response?: google.cloud.translation.v3.AdaptiveMtDataset) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.translation.v3.TranslationService|listAdaptiveMtDatasets}.
+                     * @param error Error, if any
+                     * @param [response] ListAdaptiveMtDatasetsResponse
+                     */
+                    type ListAdaptiveMtDatasetsCallback = (error: (Error|null), response?: google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.translation.v3.TranslationService|adaptiveMtTranslate}.
+                     * @param error Error, if any
+                     * @param [response] AdaptiveMtTranslateResponse
+                     */
+                    type AdaptiveMtTranslateCallback = (error: (Error|null), response?: google.cloud.translation.v3.AdaptiveMtTranslateResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.translation.v3.TranslationService|getAdaptiveMtFile}.
+                     * @param error Error, if any
+                     * @param [response] AdaptiveMtFile
+                     */
+                    type GetAdaptiveMtFileCallback = (error: (Error|null), response?: google.cloud.translation.v3.AdaptiveMtFile) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.translation.v3.TranslationService|deleteAdaptiveMtFile}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteAdaptiveMtFileCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.translation.v3.TranslationService|importAdaptiveMtFile}.
+                     * @param error Error, if any
+                     * @param [response] ImportAdaptiveMtFileResponse
+                     */
+                    type ImportAdaptiveMtFileCallback = (error: (Error|null), response?: google.cloud.translation.v3.ImportAdaptiveMtFileResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.translation.v3.TranslationService|listAdaptiveMtFiles}.
+                     * @param error Error, if any
+                     * @param [response] ListAdaptiveMtFilesResponse
+                     */
+                    type ListAdaptiveMtFilesCallback = (error: (Error|null), response?: google.cloud.translation.v3.ListAdaptiveMtFilesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.translation.v3.TranslationService|listAdaptiveMtSentences}.
+                     * @param error Error, if any
+                     * @param [response] ListAdaptiveMtSentencesResponse
+                     */
+                    type ListAdaptiveMtSentencesCallback = (error: (Error|null), response?: google.cloud.translation.v3.ListAdaptiveMtSentencesResponse) => void;
                 }
 
                 /** Properties of a TranslateTextGlossaryConfig. */
@@ -9476,6 +12015,270 @@ export namespace google {
     /** Namespace api. */
     namespace api {
 
+        /** FieldBehavior enum. */
+        enum FieldBehavior {
+            FIELD_BEHAVIOR_UNSPECIFIED = 0,
+            OPTIONAL = 1,
+            REQUIRED = 2,
+            OUTPUT_ONLY = 3,
+            INPUT_ONLY = 4,
+            IMMUTABLE = 5,
+            UNORDERED_LIST = 6,
+            NON_EMPTY_DEFAULT = 7
+        }
+
+        /** Properties of a ResourceDescriptor. */
+        interface IResourceDescriptor {
+
+            /** ResourceDescriptor type */
+            type?: (string|null);
+
+            /** ResourceDescriptor pattern */
+            pattern?: (string[]|null);
+
+            /** ResourceDescriptor nameField */
+            nameField?: (string|null);
+
+            /** ResourceDescriptor history */
+            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
+
+            /** ResourceDescriptor plural */
+            plural?: (string|null);
+
+            /** ResourceDescriptor singular */
+            singular?: (string|null);
+
+            /** ResourceDescriptor style */
+            style?: (google.api.ResourceDescriptor.Style[]|null);
+        }
+
+        /** Represents a ResourceDescriptor. */
+        class ResourceDescriptor implements IResourceDescriptor {
+
+            /**
+             * Constructs a new ResourceDescriptor.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceDescriptor);
+
+            /** ResourceDescriptor type. */
+            public type: string;
+
+            /** ResourceDescriptor pattern. */
+            public pattern: string[];
+
+            /** ResourceDescriptor nameField. */
+            public nameField: string;
+
+            /** ResourceDescriptor history. */
+            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
+
+            /** ResourceDescriptor plural. */
+            public plural: string;
+
+            /** ResourceDescriptor singular. */
+            public singular: string;
+
+            /** ResourceDescriptor style. */
+            public style: google.api.ResourceDescriptor.Style[];
+
+            /**
+             * Creates a new ResourceDescriptor instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceDescriptor instance
+             */
+            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
+
+            /**
+             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
+
+            /**
+             * Verifies a ResourceDescriptor message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceDescriptor
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
+
+            /**
+             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+             * @param message ResourceDescriptor
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceDescriptor to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ResourceDescriptor
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace ResourceDescriptor {
+
+            /** History enum. */
+            enum History {
+                HISTORY_UNSPECIFIED = 0,
+                ORIGINALLY_SINGLE_PATTERN = 1,
+                FUTURE_MULTI_PATTERN = 2
+            }
+
+            /** Style enum. */
+            enum Style {
+                STYLE_UNSPECIFIED = 0,
+                DECLARATIVE_FRIENDLY = 1
+            }
+        }
+
+        /** Properties of a ResourceReference. */
+        interface IResourceReference {
+
+            /** ResourceReference type */
+            type?: (string|null);
+
+            /** ResourceReference childType */
+            childType?: (string|null);
+        }
+
+        /** Represents a ResourceReference. */
+        class ResourceReference implements IResourceReference {
+
+            /**
+             * Constructs a new ResourceReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceReference);
+
+            /** ResourceReference type. */
+            public type: string;
+
+            /** ResourceReference childType. */
+            public childType: string;
+
+            /**
+             * Creates a new ResourceReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceReference instance
+             */
+            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
+
+            /**
+             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
+
+            /**
+             * Verifies a ResourceReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
+
+            /**
+             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+             * @param message ResourceReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ResourceReference
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of a Http. */
         interface IHttp {
 
@@ -11276,270 +14079,6 @@ export namespace google {
             BETA = 3,
             GA = 4,
             DEPRECATED = 5
-        }
-
-        /** FieldBehavior enum. */
-        enum FieldBehavior {
-            FIELD_BEHAVIOR_UNSPECIFIED = 0,
-            OPTIONAL = 1,
-            REQUIRED = 2,
-            OUTPUT_ONLY = 3,
-            INPUT_ONLY = 4,
-            IMMUTABLE = 5,
-            UNORDERED_LIST = 6,
-            NON_EMPTY_DEFAULT = 7
-        }
-
-        /** Properties of a ResourceDescriptor. */
-        interface IResourceDescriptor {
-
-            /** ResourceDescriptor type */
-            type?: (string|null);
-
-            /** ResourceDescriptor pattern */
-            pattern?: (string[]|null);
-
-            /** ResourceDescriptor nameField */
-            nameField?: (string|null);
-
-            /** ResourceDescriptor history */
-            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
-
-            /** ResourceDescriptor plural */
-            plural?: (string|null);
-
-            /** ResourceDescriptor singular */
-            singular?: (string|null);
-
-            /** ResourceDescriptor style */
-            style?: (google.api.ResourceDescriptor.Style[]|null);
-        }
-
-        /** Represents a ResourceDescriptor. */
-        class ResourceDescriptor implements IResourceDescriptor {
-
-            /**
-             * Constructs a new ResourceDescriptor.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceDescriptor);
-
-            /** ResourceDescriptor type. */
-            public type: string;
-
-            /** ResourceDescriptor pattern. */
-            public pattern: string[];
-
-            /** ResourceDescriptor nameField. */
-            public nameField: string;
-
-            /** ResourceDescriptor history. */
-            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
-
-            /** ResourceDescriptor plural. */
-            public plural: string;
-
-            /** ResourceDescriptor singular. */
-            public singular: string;
-
-            /** ResourceDescriptor style. */
-            public style: google.api.ResourceDescriptor.Style[];
-
-            /**
-             * Creates a new ResourceDescriptor instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceDescriptor instance
-             */
-            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
-
-            /**
-             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
-
-            /**
-             * Verifies a ResourceDescriptor message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceDescriptor
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
-
-            /**
-             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-             * @param message ResourceDescriptor
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceDescriptor to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for ResourceDescriptor
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        namespace ResourceDescriptor {
-
-            /** History enum. */
-            enum History {
-                HISTORY_UNSPECIFIED = 0,
-                ORIGINALLY_SINGLE_PATTERN = 1,
-                FUTURE_MULTI_PATTERN = 2
-            }
-
-            /** Style enum. */
-            enum Style {
-                STYLE_UNSPECIFIED = 0,
-                DECLARATIVE_FRIENDLY = 1
-            }
-        }
-
-        /** Properties of a ResourceReference. */
-        interface IResourceReference {
-
-            /** ResourceReference type */
-            type?: (string|null);
-
-            /** ResourceReference childType */
-            childType?: (string|null);
-        }
-
-        /** Represents a ResourceReference. */
-        class ResourceReference implements IResourceReference {
-
-            /**
-             * Constructs a new ResourceReference.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceReference);
-
-            /** ResourceReference type. */
-            public type: string;
-
-            /** ResourceReference childType. */
-            public childType: string;
-
-            /**
-             * Creates a new ResourceReference instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceReference instance
-             */
-            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
-
-            /**
-             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
-
-            /**
-             * Verifies a ResourceReference message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceReference
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
-
-            /**
-             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-             * @param message ResourceReference
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceReference to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for ResourceReference
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 
@@ -14943,6 +17482,109 @@ export namespace google {
             }
         }
 
+        /** Properties of a Timestamp. */
+        interface ITimestamp {
+
+            /** Timestamp seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Timestamp nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Timestamp. */
+        class Timestamp implements ITimestamp {
+
+            /**
+             * Constructs a new Timestamp.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.ITimestamp);
+
+            /** Timestamp seconds. */
+            public seconds: (number|Long|string);
+
+            /** Timestamp nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Timestamp instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Timestamp instance
+             */
+            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
+
+            /**
+             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
+
+            /**
+             * Verifies a Timestamp message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Timestamp
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
+
+            /**
+             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+             * @param message Timestamp
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Timestamp to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Timestamp
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of a Duration. */
         interface IDuration {
 
@@ -15234,109 +17876,6 @@ export namespace google {
 
             /**
              * Gets the default type url for Empty
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a Timestamp. */
-        interface ITimestamp {
-
-            /** Timestamp seconds */
-            seconds?: (number|Long|string|null);
-
-            /** Timestamp nanos */
-            nanos?: (number|null);
-        }
-
-        /** Represents a Timestamp. */
-        class Timestamp implements ITimestamp {
-
-            /**
-             * Constructs a new Timestamp.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.ITimestamp);
-
-            /** Timestamp seconds. */
-            public seconds: (number|Long|string);
-
-            /** Timestamp nanos. */
-            public nanos: number;
-
-            /**
-             * Creates a new Timestamp instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Timestamp instance
-             */
-            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
-
-            /**
-             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
-
-            /**
-             * Verifies a Timestamp message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Timestamp
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
-
-            /**
-             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-             * @param message Timestamp
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Timestamp to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Timestamp
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
