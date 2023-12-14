@@ -1507,14 +1507,16 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
                           }
                         },
                         "destinationParent": {
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "*"
                           }
                         },
                         "view": {
