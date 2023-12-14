@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main() {
-  // [START serviceusage_v1_generated_ServiceUsage_DisableService_async]
+function main(name) {
+  // [START generativelanguage_v1beta_generated_ModelService_GetModel_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,45 +29,31 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Name of the consumer and service to disable the service on.
-   *  The enable and disable methods currently only support projects.
-   *  An example name would be:
-   *  `projects/123/services/serviceusage.googleapis.com` where `123` is the
-   *  project number.
+   *  Required. The resource name of the model.
+   *  This name should match a model name returned by the `ListModels` method.
+   *  Format: `models/{model}`
    */
   // const name = 'abc123'
-  /**
-   *  Indicates if services that are enabled and which depend on this service
-   *  should also be disabled. If not set, an error will be generated if any
-   *  enabled services depend on the service to be disabled. When set, the
-   *  service, and any enabled services that depend on it, will be disabled
-   *  together.
-   */
-  // const disableDependentServices = true
-  /**
-   *  Defines the behavior for checking service usage when disabling a service.
-   */
-  // const checkIfServiceHasUsage = {}
 
-  // Imports the Serviceusage library
-  const {ServiceUsageClient} = require('@google-cloud/service-usage').v1;
+  // Imports the Generativelanguage library
+  const {ModelServiceClient} = require('@google-cloud/generativelanguage').v1beta;
 
   // Instantiates a client
-  const serviceusageClient = new ServiceUsageClient();
+  const generativelanguageClient = new ModelServiceClient();
 
-  async function callDisableService() {
+  async function callGetModel() {
     // Construct request
     const request = {
+      name,
     };
 
     // Run request
-    const [operation] = await serviceusageClient.disableService(request);
-    const [response] = await operation.promise();
+    const response = await generativelanguageClient.getModel(request);
     console.log(response);
   }
 
-  callDisableService();
-  // [END serviceusage_v1_generated_ServiceUsage_DisableService_async]
+  callGetModel();
+  // [END generativelanguage_v1beta_generated_ModelService_GetModel_async]
 }
 
 process.on('unhandledRejection', err => {

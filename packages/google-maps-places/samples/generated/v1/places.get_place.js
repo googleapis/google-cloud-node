@@ -29,8 +29,9 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. A place_id returned in a Place (with "places/" prefix), or
-   *  equivalently the name in the same Place. Format: places/<place_id>.
+   *  Required. A place ID returned in a Place (with "places/" prefix), or
+   *  equivalently the name in the same Place. Format:
+   *  `places/{place_id}`.
    */
   // const name = 'abc123'
   /**
@@ -46,7 +47,7 @@ function main(name) {
    *  details, like region-specific place name, if available. The parameter can
    *  affect results based on applicable law.
    *  For more information, see
-   *  http://www.unicode.org/reports/tr35/#unicode_region_subtag.
+   *  https://www.unicode.org/cldr/charts/latest/supplemental/territory_language_information.html.
    *  Note that 3-digit region codes are not currently supported.
    */
   // const regionCode = 'abc123'

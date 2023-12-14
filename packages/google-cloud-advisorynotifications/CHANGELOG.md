@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/advisorynotifications-v1.0.1...advisorynotifications-v1.1.0) (2023-12-11)
+
+
+### Features
+
+* [advisorynotifications] adding project level methods to advisorynotifications.googleapis.com ([#4874](https://github.com/googleapis/google-cloud-node/issues/4874)) ([49f2918](https://github.com/googleapis/google-cloud-node/commit/49f2918a9634f9f5ac109c2058621a76b604ffcf))
+
 ## [1.0.1](https://github.com/googleapis/google-cloud-node/compare/advisorynotifications-v1.0.0...advisorynotifications-v1.0.1) (2023-09-06)
 
 

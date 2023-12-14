@@ -172,6 +172,8 @@ const ServiceAttachmentsClient = v1.ServiceAttachmentsClient;
 type ServiceAttachmentsClient = v1.ServiceAttachmentsClient;
 const SnapshotsClient = v1.SnapshotsClient;
 type SnapshotsClient = v1.SnapshotsClient;
+const SnapshotSettingsServiceClient = v1.SnapshotSettingsServiceClient;
+type SnapshotSettingsServiceClient = v1.SnapshotSettingsServiceClient;
 const SslCertificatesClient = v1.SslCertificatesClient;
 type SslCertificatesClient = v1.SslCertificatesClient;
 const SslPoliciesClient = v1.SslPoliciesClient;
@@ -282,6 +284,7 @@ export {
   SecurityPoliciesClient,
   ServiceAttachmentsClient,
   SnapshotsClient,
+  SnapshotSettingsServiceClient,
   SslCertificatesClient,
   SslPoliciesClient,
   SubnetworksClient,
@@ -376,6 +379,7 @@ export default {
   SecurityPoliciesClient,
   ServiceAttachmentsClient,
   SnapshotsClient,
+  SnapshotSettingsServiceClient,
   SslCertificatesClient,
   SslPoliciesClient,
   SubnetworksClient,

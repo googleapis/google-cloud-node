@@ -33,10 +33,13 @@
   * [Backend_buckets.delete](#backend_buckets.delete)
   * [Backend_buckets.delete_signed_url_key](#backend_buckets.delete_signed_url_key)
   * [Backend_buckets.get](#backend_buckets.get)
+  * [Backend_buckets.get_iam_policy](#backend_buckets.get_iam_policy)
   * [Backend_buckets.insert](#backend_buckets.insert)
   * [Backend_buckets.list](#backend_buckets.list)
   * [Backend_buckets.patch](#backend_buckets.patch)
   * [Backend_buckets.set_edge_security_policy](#backend_buckets.set_edge_security_policy)
+  * [Backend_buckets.set_iam_policy](#backend_buckets.set_iam_policy)
+  * [Backend_buckets.test_iam_permissions](#backend_buckets.test_iam_permissions)
   * [Backend_buckets.update](#backend_buckets.update)
   * [Backend_services.add_signed_url_key](#backend_services.add_signed_url_key)
   * [Backend_services.aggregated_list](#backend_services.aggregated_list)
@@ -47,10 +50,12 @@
   * [Backend_services.get_iam_policy](#backend_services.get_iam_policy)
   * [Backend_services.insert](#backend_services.insert)
   * [Backend_services.list](#backend_services.list)
+  * [Backend_services.list_usable](#backend_services.list_usable)
   * [Backend_services.patch](#backend_services.patch)
   * [Backend_services.set_edge_security_policy](#backend_services.set_edge_security_policy)
   * [Backend_services.set_iam_policy](#backend_services.set_iam_policy)
   * [Backend_services.set_security_policy](#backend_services.set_security_policy)
+  * [Backend_services.test_iam_permissions](#backend_services.test_iam_permissions)
   * [Backend_services.update](#backend_services.update)
   * [Disk_types.aggregated_list](#disk_types.aggregated_list)
   * [Disk_types.get](#disk_types.get)
@@ -232,6 +237,7 @@
   * [Instances.set_min_cpu_platform](#instances.set_min_cpu_platform)
   * [Instances.set_name](#instances.set_name)
   * [Instances.set_scheduling](#instances.set_scheduling)
+  * [Instances.set_security_policy](#instances.set_security_policy)
   * [Instances.set_service_account](#instances.set_service_account)
   * [Instances.set_shielded_instance_integrity_policy](#instances.set_shielded_instance_integrity_policy)
   * [Instances.set_tags](#instances.set_tags)
@@ -260,6 +266,7 @@
   * [Interconnects.delete](#interconnects.delete)
   * [Interconnects.get](#interconnects.get)
   * [Interconnects.get_diagnostics](#interconnects.get_diagnostics)
+  * [Interconnects.get_macsec_config](#interconnects.get_macsec_config)
   * [Interconnects.insert](#interconnects.insert)
   * [Interconnects.list](#interconnects.list)
   * [Interconnects.patch](#interconnects.patch)
@@ -289,6 +296,7 @@
   * [Network_attachments.get_iam_policy](#network_attachments.get_iam_policy)
   * [Network_attachments.insert](#network_attachments.insert)
   * [Network_attachments.list](#network_attachments.list)
+  * [Network_attachments.patch](#network_attachments.patch)
   * [Network_attachments.set_iam_policy](#network_attachments.set_iam_policy)
   * [Network_attachments.test_iam_permissions](#network_attachments.test_iam_permissions)
   * [Network_edge_security_services.aggregated_list](#network_edge_security_services.aggregated_list)
@@ -377,17 +385,21 @@
   * [Projects.set_common_instance_metadata](#projects.set_common_instance_metadata)
   * [Projects.set_default_network_tier](#projects.set_default_network_tier)
   * [Projects.set_usage_export_bucket](#projects.set_usage_export_bucket)
+  * [Public_advertised_prefixes.announce](#public_advertised_prefixes.announce)
   * [Public_advertised_prefixes.delete](#public_advertised_prefixes.delete)
   * [Public_advertised_prefixes.get](#public_advertised_prefixes.get)
   * [Public_advertised_prefixes.insert](#public_advertised_prefixes.insert)
   * [Public_advertised_prefixes.list](#public_advertised_prefixes.list)
   * [Public_advertised_prefixes.patch](#public_advertised_prefixes.patch)
+  * [Public_advertised_prefixes.withdraw](#public_advertised_prefixes.withdraw)
   * [Public_delegated_prefixes.aggregated_list](#public_delegated_prefixes.aggregated_list)
+  * [Public_delegated_prefixes.announce](#public_delegated_prefixes.announce)
   * [Public_delegated_prefixes.delete](#public_delegated_prefixes.delete)
   * [Public_delegated_prefixes.get](#public_delegated_prefixes.get)
   * [Public_delegated_prefixes.insert](#public_delegated_prefixes.insert)
   * [Public_delegated_prefixes.list](#public_delegated_prefixes.list)
   * [Public_delegated_prefixes.patch](#public_delegated_prefixes.patch)
+  * [Public_delegated_prefixes.withdraw](#public_delegated_prefixes.withdraw)
   * [Region_autoscalers.delete](#region_autoscalers.delete)
   * [Region_autoscalers.get](#region_autoscalers.get)
   * [Region_autoscalers.insert](#region_autoscalers.insert)
@@ -400,8 +412,11 @@
   * [Region_backend_services.get_iam_policy](#region_backend_services.get_iam_policy)
   * [Region_backend_services.insert](#region_backend_services.insert)
   * [Region_backend_services.list](#region_backend_services.list)
+  * [Region_backend_services.list_usable](#region_backend_services.list_usable)
   * [Region_backend_services.patch](#region_backend_services.patch)
   * [Region_backend_services.set_iam_policy](#region_backend_services.set_iam_policy)
+  * [Region_backend_services.set_security_policy](#region_backend_services.set_security_policy)
+  * [Region_backend_services.test_iam_permissions](#region_backend_services.test_iam_permissions)
   * [Region_backend_services.update](#region_backend_services.update)
   * [Region_commitments.aggregated_list](#region_commitments.aggregated_list)
   * [Region_commitments.get](#region_commitments.get)
@@ -466,10 +481,13 @@
   * [Region_instance_templates.insert](#region_instance_templates.insert)
   * [Region_instance_templates.list](#region_instance_templates.list)
   * [Region_instances.bulk_insert](#region_instances.bulk_insert)
+  * [Region_network_endpoint_groups.attach_network_endpoints](#region_network_endpoint_groups.attach_network_endpoints)
   * [Region_network_endpoint_groups.delete](#region_network_endpoint_groups.delete)
+  * [Region_network_endpoint_groups.detach_network_endpoints](#region_network_endpoint_groups.detach_network_endpoints)
   * [Region_network_endpoint_groups.get](#region_network_endpoint_groups.get)
   * [Region_network_endpoint_groups.insert](#region_network_endpoint_groups.insert)
   * [Region_network_endpoint_groups.list](#region_network_endpoint_groups.list)
+  * [Region_network_endpoint_groups.list_network_endpoints](#region_network_endpoint_groups.list_network_endpoints)
   * [Region_network_firewall_policies.add_association](#region_network_firewall_policies.add_association)
   * [Region_network_firewall_policies.add_rule](#region_network_firewall_policies.add_rule)
   * [Region_network_firewall_policies.clone_rules](#region_network_firewall_policies.clone_rules)
@@ -495,11 +513,15 @@
   * [Region_operations.get](#region_operations.get)
   * [Region_operations.list](#region_operations.list)
   * [Region_operations.wait](#region_operations.wait)
+  * [Region_security_policies.add_rule](#region_security_policies.add_rule)
   * [Region_security_policies.delete](#region_security_policies.delete)
   * [Region_security_policies.get](#region_security_policies.get)
+  * [Region_security_policies.get_rule](#region_security_policies.get_rule)
   * [Region_security_policies.insert](#region_security_policies.insert)
   * [Region_security_policies.list](#region_security_policies.list)
   * [Region_security_policies.patch](#region_security_policies.patch)
+  * [Region_security_policies.patch_rule](#region_security_policies.patch_rule)
+  * [Region_security_policies.remove_rule](#region_security_policies.remove_rule)
   * [Region_ssl_certificates.delete](#region_ssl_certificates.delete)
   * [Region_ssl_certificates.get](#region_ssl_certificates.get)
   * [Region_ssl_certificates.insert](#region_ssl_certificates.insert)
@@ -557,6 +579,7 @@
   * [Routers.aggregated_list](#routers.aggregated_list)
   * [Routers.delete](#routers.delete)
   * [Routers.get](#routers.get)
+  * [Routers.get_nat_ip_info](#routers.get_nat_ip_info)
   * [Routers.get_nat_mapping_info](#routers.get_nat_mapping_info)
   * [Routers.get_router_status](#routers.get_router_status)
   * [Routers.insert](#routers.insert)
@@ -589,6 +612,8 @@
   * [Service_attachments.patch](#service_attachments.patch)
   * [Service_attachments.set_iam_policy](#service_attachments.set_iam_policy)
   * [Service_attachments.test_iam_permissions](#service_attachments.test_iam_permissions)
+  * [Snapshot_settings_service.get](#snapshot_settings_service.get)
+  * [Snapshot_settings_service.patch](#snapshot_settings_service.patch)
   * [Snapshots.delete](#snapshots.delete)
   * [Snapshots.get](#snapshots.get)
   * [Snapshots.get_iam_policy](#snapshots.get_iam_policy)
@@ -649,6 +674,7 @@
   * [Target_instances.get](#target_instances.get)
   * [Target_instances.insert](#target_instances.insert)
   * [Target_instances.list](#target_instances.list)
+  * [Target_instances.set_security_policy](#target_instances.set_security_policy)
   * [Target_pools.add_health_check](#target_pools.add_health_check)
   * [Target_pools.add_instance](#target_pools.add_instance)
   * [Target_pools.aggregated_list](#target_pools.aggregated_list)
@@ -660,6 +686,7 @@
   * [Target_pools.remove_health_check](#target_pools.remove_health_check)
   * [Target_pools.remove_instance](#target_pools.remove_instance)
   * [Target_pools.set_backup](#target_pools.set_backup)
+  * [Target_pools.set_security_policy](#target_pools.set_security_policy)
   * [Target_ssl_proxies.delete](#target_ssl_proxies.delete)
   * [Target_ssl_proxies.get](#target_ssl_proxies.get)
   * [Target_ssl_proxies.insert](#target_ssl_proxies.insert)
@@ -1091,6 +1118,23 @@ __Usage:__
 
 
 
+### Backend_buckets.get_iam_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/backend_buckets.get_iam_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/backend_buckets.get_iam_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/backend_buckets.get_iam_policy.js`
+
+
+-----
+
+
+
+
 ### Backend_buckets.insert
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/backend_buckets.insert.js).
@@ -1152,6 +1196,40 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/backend_buckets.set_edge_security_policy.js`
+
+
+-----
+
+
+
+
+### Backend_buckets.set_iam_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/backend_buckets.set_iam_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/backend_buckets.set_iam_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/backend_buckets.set_iam_policy.js`
+
+
+-----
+
+
+
+
+### Backend_buckets.test_iam_permissions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/backend_buckets.test_iam_permissions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/backend_buckets.test_iam_permissions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/backend_buckets.test_iam_permissions.js`
 
 
 -----
@@ -1329,6 +1407,23 @@ __Usage:__
 
 
 
+### Backend_services.list_usable
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/backend_services.list_usable.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/backend_services.list_usable.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/backend_services.list_usable.js`
+
+
+-----
+
+
+
+
 ### Backend_services.patch
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/backend_services.patch.js).
@@ -1390,6 +1485,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/backend_services.set_security_policy.js`
+
+
+-----
+
+
+
+
+### Backend_services.test_iam_permissions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/backend_services.test_iam_permissions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/backend_services.test_iam_permissions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/backend_services.test_iam_permissions.js`
 
 
 -----
@@ -4474,6 +4586,23 @@ __Usage:__
 
 
 
+### Instances.set_security_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/instances.set_security_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/instances.set_security_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/instances.set_security_policy.js`
+
+
+-----
+
+
+
+
 ### Instances.set_service_account
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/instances.set_service_account.js).
@@ -4943,6 +5072,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/interconnects.get_diagnostics.js`
+
+
+-----
+
+
+
+
+### Interconnects.get_macsec_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/interconnects.get_macsec_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/interconnects.get_macsec_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/interconnects.get_macsec_config.js`
 
 
 -----
@@ -5436,6 +5582,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/network_attachments.list.js`
+
+
+-----
+
+
+
+
+### Network_attachments.patch
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/network_attachments.patch.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/network_attachments.patch.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/network_attachments.patch.js`
 
 
 -----
@@ -6939,6 +7102,23 @@ __Usage:__
 
 
 
+### Public_advertised_prefixes.announce
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/public_advertised_prefixes.announce.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/public_advertised_prefixes.announce.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/public_advertised_prefixes.announce.js`
+
+
+-----
+
+
+
+
 ### Public_advertised_prefixes.delete
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/public_advertised_prefixes.delete.js).
@@ -7024,6 +7204,23 @@ __Usage:__
 
 
 
+### Public_advertised_prefixes.withdraw
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/public_advertised_prefixes.withdraw.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/public_advertised_prefixes.withdraw.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/public_advertised_prefixes.withdraw.js`
+
+
+-----
+
+
+
+
 ### Public_delegated_prefixes.aggregated_list
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/public_delegated_prefixes.aggregated_list.js).
@@ -7034,6 +7231,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/public_delegated_prefixes.aggregated_list.js`
+
+
+-----
+
+
+
+
+### Public_delegated_prefixes.announce
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/public_delegated_prefixes.announce.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/public_delegated_prefixes.announce.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/public_delegated_prefixes.announce.js`
 
 
 -----
@@ -7119,6 +7333,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/public_delegated_prefixes.patch.js`
+
+
+-----
+
+
+
+
+### Public_delegated_prefixes.withdraw
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/public_delegated_prefixes.withdraw.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/public_delegated_prefixes.withdraw.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/public_delegated_prefixes.withdraw.js`
 
 
 -----
@@ -7330,6 +7561,23 @@ __Usage:__
 
 
 
+### Region_backend_services.list_usable
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_backend_services.list_usable.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/region_backend_services.list_usable.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/region_backend_services.list_usable.js`
+
+
+-----
+
+
+
+
 ### Region_backend_services.patch
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_backend_services.patch.js).
@@ -7357,6 +7605,40 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/region_backend_services.set_iam_policy.js`
+
+
+-----
+
+
+
+
+### Region_backend_services.set_security_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_backend_services.set_security_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/region_backend_services.set_security_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/region_backend_services.set_security_policy.js`
+
+
+-----
+
+
+
+
+### Region_backend_services.test_iam_permissions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_backend_services.test_iam_permissions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/region_backend_services.test_iam_permissions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/region_backend_services.test_iam_permissions.js`
 
 
 -----
@@ -8452,6 +8734,23 @@ __Usage:__
 
 
 
+### Region_network_endpoint_groups.attach_network_endpoints
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_network_endpoint_groups.attach_network_endpoints.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/region_network_endpoint_groups.attach_network_endpoints.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/region_network_endpoint_groups.attach_network_endpoints.js`
+
+
+-----
+
+
+
+
 ### Region_network_endpoint_groups.delete
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_network_endpoint_groups.delete.js).
@@ -8462,6 +8761,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/region_network_endpoint_groups.delete.js`
+
+
+-----
+
+
+
+
+### Region_network_endpoint_groups.detach_network_endpoints
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_network_endpoint_groups.detach_network_endpoints.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/region_network_endpoint_groups.detach_network_endpoints.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/region_network_endpoint_groups.detach_network_endpoints.js`
 
 
 -----
@@ -8513,6 +8829,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/region_network_endpoint_groups.list.js`
+
+
+-----
+
+
+
+
+### Region_network_endpoint_groups.list_network_endpoints
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_network_endpoint_groups.list_network_endpoints.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/region_network_endpoint_groups.list_network_endpoints.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/region_network_endpoint_groups.list_network_endpoints.js`
 
 
 -----
@@ -8945,6 +9278,23 @@ __Usage:__
 
 
 
+### Region_security_policies.add_rule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_security_policies.add_rule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/region_security_policies.add_rule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/region_security_policies.add_rule.js`
+
+
+-----
+
+
+
+
 ### Region_security_policies.delete
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_security_policies.delete.js).
@@ -8972,6 +9322,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/region_security_policies.get.js`
+
+
+-----
+
+
+
+
+### Region_security_policies.get_rule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_security_policies.get_rule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/region_security_policies.get_rule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/region_security_policies.get_rule.js`
 
 
 -----
@@ -9023,6 +9390,40 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/region_security_policies.patch.js`
+
+
+-----
+
+
+
+
+### Region_security_policies.patch_rule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_security_policies.patch_rule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/region_security_policies.patch_rule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/region_security_policies.patch_rule.js`
+
+
+-----
+
+
+
+
+### Region_security_policies.remove_rule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_security_policies.remove_rule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/region_security_policies.remove_rule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/region_security_policies.remove_rule.js`
 
 
 -----
@@ -9999,6 +10400,23 @@ __Usage:__
 
 
 
+### Routers.get_nat_ip_info
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/routers.get_nat_ip_info.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/routers.get_nat_ip_info.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/routers.get_nat_ip_info.js`
+
+
+-----
+
+
+
+
 ### Routers.get_nat_mapping_info
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/routers.get_nat_mapping_info.js).
@@ -10536,6 +10954,40 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/service_attachments.test_iam_permissions.js`
+
+
+-----
+
+
+
+
+### Snapshot_settings_service.get
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/snapshot_settings_service.get.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/snapshot_settings_service.get.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/snapshot_settings_service.get.js`
+
+
+-----
+
+
+
+
+### Snapshot_settings_service.patch
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/snapshot_settings_service.patch.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/snapshot_settings_service.patch.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/snapshot_settings_service.patch.js`
 
 
 -----
@@ -11563,6 +12015,23 @@ __Usage:__
 
 
 
+### Target_instances.set_security_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/target_instances.set_security_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/target_instances.set_security_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/target_instances.set_security_policy.js`
+
+
+-----
+
+
+
+
 ### Target_pools.add_health_check
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/target_pools.add_health_check.js).
@@ -11743,6 +12212,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/target_pools.set_backup.js`
+
+
+-----
+
+
+
+
+### Target_pools.set_security_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/target_pools.set_security_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/target_pools.set_security_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/target_pools.set_security_policy.js`
 
 
 -----

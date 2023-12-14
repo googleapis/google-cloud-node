@@ -113,6 +113,8 @@ function main() {
   const securityPoliciesClient = new compute.SecurityPoliciesClient();
   const serviceAttachmentsClient = new compute.ServiceAttachmentsClient();
   const snapshotsClient = new compute.SnapshotsClient();
+  const snapshotSettingsServiceClient =
+    new compute.SnapshotSettingsServiceClient();
   const sslCertificatesClient = new compute.SslCertificatesClient();
   const sslPoliciesClient = new compute.SslPoliciesClient();
   const subnetworksClient = new compute.SubnetworksClient();

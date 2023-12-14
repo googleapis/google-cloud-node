@@ -1423,6 +1423,355 @@ describe('v1.RegionBackendServicesClient', () => {
     });
   });
 
+  describe('setSecurityPolicy', () => {
+    it('invokes setSecurityPolicy without error', async () => {
+      const client =
+        new regionbackendservicesModule.v1.RegionBackendServicesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetSecurityPolicyRegionBackendServiceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetSecurityPolicyRegionBackendServiceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetSecurityPolicyRegionBackendServiceRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetSecurityPolicyRegionBackendServiceRequest',
+        ['backendService']
+      );
+      request.backendService = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&backend_service=${defaultValue3}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.setSecurityPolicy = stubSimpleCall(expectedResponse);
+      const [response] = await client.setSecurityPolicy(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.setSecurityPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setSecurityPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes setSecurityPolicy without error using callback', async () => {
+      const client =
+        new regionbackendservicesModule.v1.RegionBackendServicesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetSecurityPolicyRegionBackendServiceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetSecurityPolicyRegionBackendServiceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetSecurityPolicyRegionBackendServiceRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetSecurityPolicyRegionBackendServiceRequest',
+        ['backendService']
+      );
+      request.backendService = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&backend_service=${defaultValue3}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.setSecurityPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.setSecurityPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.setSecurityPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setSecurityPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes setSecurityPolicy with error', async () => {
+      const client =
+        new regionbackendservicesModule.v1.RegionBackendServicesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetSecurityPolicyRegionBackendServiceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetSecurityPolicyRegionBackendServiceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetSecurityPolicyRegionBackendServiceRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetSecurityPolicyRegionBackendServiceRequest',
+        ['backendService']
+      );
+      request.backendService = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&backend_service=${defaultValue3}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.setSecurityPolicy = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.setSecurityPolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.setSecurityPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setSecurityPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes setSecurityPolicy with closed client', async () => {
+      const client =
+        new regionbackendservicesModule.v1.RegionBackendServicesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetSecurityPolicyRegionBackendServiceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetSecurityPolicyRegionBackendServiceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetSecurityPolicyRegionBackendServiceRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetSecurityPolicyRegionBackendServiceRequest',
+        ['backendService']
+      );
+      request.backendService = defaultValue3;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setSecurityPolicy(request), expectedError);
+    });
+  });
+
+  describe('testIamPermissions', () => {
+    it('invokes testIamPermissions without error', async () => {
+      const client =
+        new regionbackendservicesModule.v1.RegionBackendServicesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.TestIamPermissionsRegionBackendServiceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.TestIamPermissionsRegionBackendServiceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.TestIamPermissionsRegionBackendServiceRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.TestIamPermissionsRegionBackendServiceRequest',
+        ['resource']
+      );
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.TestPermissionsResponse()
+      );
+      client.innerApiCalls.testIamPermissions =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.testIamPermissions(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes testIamPermissions without error using callback', async () => {
+      const client =
+        new regionbackendservicesModule.v1.RegionBackendServicesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.TestIamPermissionsRegionBackendServiceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.TestIamPermissionsRegionBackendServiceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.TestIamPermissionsRegionBackendServiceRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.TestIamPermissionsRegionBackendServiceRequest',
+        ['resource']
+      );
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.TestPermissionsResponse()
+      );
+      client.innerApiCalls.testIamPermissions =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.testIamPermissions(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.ITestPermissionsResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes testIamPermissions with error', async () => {
+      const client =
+        new regionbackendservicesModule.v1.RegionBackendServicesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.TestIamPermissionsRegionBackendServiceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.TestIamPermissionsRegionBackendServiceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.TestIamPermissionsRegionBackendServiceRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.TestIamPermissionsRegionBackendServiceRequest',
+        ['resource']
+      );
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&resource=${defaultValue3}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.testIamPermissions = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.testIamPermissions(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes testIamPermissions with closed client', async () => {
+      const client =
+        new regionbackendservicesModule.v1.RegionBackendServicesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.TestIamPermissionsRegionBackendServiceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.TestIamPermissionsRegionBackendServiceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.TestIamPermissionsRegionBackendServiceRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.TestIamPermissionsRegionBackendServiceRequest',
+        ['resource']
+      );
+      request.resource = defaultValue3;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.testIamPermissions(request), expectedError);
+    });
+  });
+
   describe('update', () => {
     it('invokes update without error', async () => {
       const client =
@@ -1948,6 +2297,377 @@ describe('v1.RegionBackendServicesClient', () => {
       );
       assert(
         (client.descriptors.page.list.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('listUsable', () => {
+    it('invokes listUsable without error', async () => {
+      const client =
+        new regionbackendservicesModule.v1.RegionBackendServicesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListUsableRegionBackendServicesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListUsableRegionBackendServicesRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListUsableRegionBackendServicesRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.BackendService()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.BackendService()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.BackendService()
+        ),
+      ];
+      client.innerApiCalls.listUsable = stubSimpleCall(expectedResponse);
+      const [response] = await client.listUsable(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listUsable as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listUsable as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listUsable without error using callback', async () => {
+      const client =
+        new regionbackendservicesModule.v1.RegionBackendServicesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListUsableRegionBackendServicesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListUsableRegionBackendServicesRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListUsableRegionBackendServicesRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.BackendService()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.BackendService()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.BackendService()
+        ),
+      ];
+      client.innerApiCalls.listUsable =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listUsable(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IBackendService[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listUsable as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listUsable as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listUsable with error', async () => {
+      const client =
+        new regionbackendservicesModule.v1.RegionBackendServicesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListUsableRegionBackendServicesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListUsableRegionBackendServicesRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListUsableRegionBackendServicesRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listUsable = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listUsable(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listUsable as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listUsable as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listUsableStream without error', async () => {
+      const client =
+        new regionbackendservicesModule.v1.RegionBackendServicesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListUsableRegionBackendServicesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListUsableRegionBackendServicesRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListUsableRegionBackendServicesRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.BackendService()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.BackendService()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.BackendService()
+        ),
+      ];
+      client.descriptors.page.listUsable.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listUsableStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.compute.v1.BackendService[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.compute.v1.BackendService) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listUsable.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listUsable, request)
+      );
+      assert(
+        (client.descriptors.page.listUsable.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listUsableStream with error', async () => {
+      const client =
+        new regionbackendservicesModule.v1.RegionBackendServicesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListUsableRegionBackendServicesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListUsableRegionBackendServicesRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListUsableRegionBackendServicesRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listUsable.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.listUsableStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.compute.v1.BackendService[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.compute.v1.BackendService) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listUsable.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listUsable, request)
+      );
+      assert(
+        (client.descriptors.page.listUsable.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listUsable without error', async () => {
+      const client =
+        new regionbackendservicesModule.v1.RegionBackendServicesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListUsableRegionBackendServicesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListUsableRegionBackendServicesRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListUsableRegionBackendServicesRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.BackendService()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.BackendService()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.BackendService()
+        ),
+      ];
+      client.descriptors.page.listUsable.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.compute.v1.IBackendService[] = [];
+      const iterable = client.listUsableAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (client.descriptors.page.listUsable.asyncIterate as SinonStub).getCall(
+          0
+        ).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listUsable.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listUsable with error', async () => {
+      const client =
+        new regionbackendservicesModule.v1.RegionBackendServicesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListUsableRegionBackendServicesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListUsableRegionBackendServicesRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListUsableRegionBackendServicesRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listUsable.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
+      const iterable = client.listUsableAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.compute.v1.IBackendService[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (client.descriptors.page.listUsable.asyncIterate as SinonStub).getCall(
+          0
+        ).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listUsable.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams

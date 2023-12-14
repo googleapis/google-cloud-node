@@ -1037,8 +1037,8 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('location', () => {
-      const fakePath = '/rendered/path/location';
+    describe('organizationLocation', () => {
+      const fakePath = '/rendered/path/organizationLocation';
       const expectedParameters = {
         organization: 'organizationValue',
         location: 'locationValue',
@@ -1051,49 +1051,60 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
           }
         );
       client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
+      client.pathTemplates.organizationLocationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
+      client.pathTemplates.organizationLocationPathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
 
-      it('locationPath', () => {
-        const result = client.locationPath(
+      it('organizationLocationPath', () => {
+        const result = client.organizationLocationPath(
           'organizationValue',
           'locationValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
+          (
+            client.pathTemplates.organizationLocationPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
-      it('matchOrganizationFromLocationName', () => {
-        const result = client.matchOrganizationFromLocationName(fakePath);
+      it('matchOrganizationFromOrganizationLocationName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationLocationName(fakePath);
         assert.strictEqual(result, 'organizationValue');
         assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+          (
+            client.pathTemplates.organizationLocationPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
+      it('matchLocationFromOrganizationLocationName', () => {
+        const result =
+          client.matchLocationFromOrganizationLocationName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+          (
+            client.pathTemplates.organizationLocationPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
     });
 
-    describe('notification', () => {
-      const fakePath = '/rendered/path/notification';
+    describe('organizationLocationNotification', () => {
+      const fakePath = '/rendered/path/organizationLocationNotification';
       const expectedParameters = {
         organization: 'organizationValue',
         location: 'locationValue',
@@ -1107,62 +1118,83 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
           }
         );
       client.initialize();
-      client.pathTemplates.notificationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.notificationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.organizationLocationNotificationPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationLocationNotificationPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
-      it('notificationPath', () => {
-        const result = client.notificationPath(
+      it('organizationLocationNotificationPath', () => {
+        const result = client.organizationLocationNotificationPath(
           'organizationValue',
           'locationValue',
           'notificationValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.notificationPathTemplate.render as SinonStub)
+          (
+            client.pathTemplates.organizationLocationNotificationPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
-      it('matchOrganizationFromNotificationName', () => {
-        const result = client.matchOrganizationFromNotificationName(fakePath);
+      it('matchOrganizationFromOrganizationLocationNotificationName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationLocationNotificationName(
+            fakePath
+          );
         assert.strictEqual(result, 'organizationValue');
         assert(
-          (client.pathTemplates.notificationPathTemplate.match as SinonStub)
+          (
+            client.pathTemplates.organizationLocationNotificationPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchLocationFromNotificationName', () => {
-        const result = client.matchLocationFromNotificationName(fakePath);
+      it('matchLocationFromOrganizationLocationNotificationName', () => {
+        const result =
+          client.matchLocationFromOrganizationLocationNotificationName(
+            fakePath
+          );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.notificationPathTemplate.match as SinonStub)
+          (
+            client.pathTemplates.organizationLocationNotificationPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchNotificationFromNotificationName', () => {
-        const result = client.matchNotificationFromNotificationName(fakePath);
+      it('matchNotificationFromOrganizationLocationNotificationName', () => {
+        const result =
+          client.matchNotificationFromOrganizationLocationNotificationName(
+            fakePath
+          );
         assert.strictEqual(result, 'notificationValue');
         assert(
-          (client.pathTemplates.notificationPathTemplate.match as SinonStub)
+          (
+            client.pathTemplates.organizationLocationNotificationPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
     });
 
-    describe('organization', () => {
-      const fakePath = '/rendered/path/organization';
+    describe('projectLocationNotification', () => {
+      const fakePath = '/rendered/path/projectLocationNotification';
       const expectedParameters = {
-        organization: 'organizationValue',
+        project: 'projectValue',
+        location: 'locationValue',
+        notification: 'notificationValue',
       };
       const client =
         new advisorynotificationsserviceModule.v1.AdvisoryNotificationsServiceClient(
@@ -1172,28 +1204,66 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
           }
         );
       client.initialize();
-      client.pathTemplates.organizationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationPathTemplate.match = sinon
+      client.pathTemplates.projectLocationNotificationPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationNotificationPathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
 
-      it('organizationPath', () => {
-        const result = client.organizationPath('organizationValue');
+      it('projectLocationNotificationPath', () => {
+        const result = client.projectLocationNotificationPath(
+          'projectValue',
+          'locationValue',
+          'notificationValue'
+        );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.organizationPathTemplate.render as SinonStub)
+          (
+            client.pathTemplates.projectLocationNotificationPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
-      it('matchOrganizationFromOrganizationName', () => {
-        const result = client.matchOrganizationFromOrganizationName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
+      it('matchProjectFromProjectLocationNotificationName', () => {
+        const result =
+          client.matchProjectFromProjectLocationNotificationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.organizationPathTemplate.match as SinonStub)
+          (
+            client.pathTemplates.projectLocationNotificationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationNotificationName', () => {
+        const result =
+          client.matchLocationFromProjectLocationNotificationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationNotificationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNotificationFromProjectLocationNotificationName', () => {
+        const result =
+          client.matchNotificationFromProjectLocationNotificationName(fakePath);
+        assert.strictEqual(result, 'notificationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationNotificationPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

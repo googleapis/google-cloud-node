@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.9.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.8.0...aiplatform-v3.9.0) (2023-12-11)
+
+
+### Features
+
+* Add data_stats to Model ([#4866](https://github.com/googleapis/google-cloud-node/issues/4866)) ([e7614ad](https://github.com/googleapis/google-cloud-node/commit/e7614ad5cb26d4828ac3cbc81d94bc7a9ea0a26c))
+
 ## [3.8.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.7.0...aiplatform-v3.8.0) (2023-11-30)
 
 
