@@ -22874,7 +22874,8 @@ export namespace google {
                         ACCESS_POLICY_UPDATE = 14,
                         GOVERNANCE_RULE_MATCHED_RESOURCES = 15,
                         GOVERNANCE_RULE_SEARCH_LIMIT_EXCEEDS = 16,
-                        GOVERNANCE_RULE_ERRORS = 17
+                        GOVERNANCE_RULE_ERRORS = 17,
+                        GOVERNANCE_RULE_PROCESSING = 18
                     }
                 }
 
