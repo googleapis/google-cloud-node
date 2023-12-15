@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main() {
-  // [START serviceusage_v1beta1_generated_ServiceUsage_EnableService_async]
+function main(name) {
+  // [START generativelanguage_v1beta_generated_RetrieverService_DeleteChunk_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,36 +29,30 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Name of the consumer and service to enable the service on.
-   *  The `EnableService` and `DisableService` methods currently only support
-   *  projects.
-   *  Enabling a service requires that the service is public or is shared with
-   *  the user enabling the service.
-   *  An example name would be:
-   *  `projects/123/services/serviceusage.googleapis.com`
-   *  where `123` is the project number (not project ID).
+   *  Required. The resource name of the `Chunk` to delete.
+   *  Example: `corpora/my-corpus-123/documents/the-doc-abc/chunks/some-chunk`
    */
   // const name = 'abc123'
 
-  // Imports the Serviceusage library
-  const {ServiceUsageClient} = require('@google-cloud/service-usage').v1beta1;
+  // Imports the Generativelanguage library
+  const {RetrieverServiceClient} = require('@google-cloud/generativelanguage').v1beta;
 
   // Instantiates a client
-  const serviceusageClient = new ServiceUsageClient();
+  const generativelanguageClient = new RetrieverServiceClient();
 
-  async function callEnableService() {
+  async function callDeleteChunk() {
     // Construct request
     const request = {
+      name,
     };
 
     // Run request
-    const [operation] = await serviceusageClient.enableService(request);
-    const [response] = await operation.promise();
+    const response = await generativelanguageClient.deleteChunk(request);
     console.log(response);
   }
 
-  callEnableService();
-  // [END serviceusage_v1beta1_generated_ServiceUsage_EnableService_async]
+  callDeleteChunk();
+  // [END generativelanguage_v1beta_generated_RetrieverService_DeleteChunk_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -250,6 +250,177 @@ describe('v1.RegionSecurityPoliciesClient', () => {
     });
   });
 
+  describe('addRule', () => {
+    it('invokes addRule without error', async () => {
+      const client =
+        new regionsecuritypoliciesModule.v1.RegionSecurityPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AddRuleRegionSecurityPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddRuleRegionSecurityPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddRuleRegionSecurityPolicyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddRuleRegionSecurityPolicyRequest',
+        ['securityPolicy']
+      );
+      request.securityPolicy = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.addRule = stubSimpleCall(expectedResponse);
+      const [response] = await client.addRule(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (client.innerApiCalls.addRule as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addRule without error using callback', async () => {
+      const client =
+        new regionsecuritypoliciesModule.v1.RegionSecurityPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AddRuleRegionSecurityPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddRuleRegionSecurityPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddRuleRegionSecurityPolicyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddRuleRegionSecurityPolicyRequest',
+        ['securityPolicy']
+      );
+      request.securityPolicy = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.addRule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.addRule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (client.innerApiCalls.addRule as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addRule with error', async () => {
+      const client =
+        new regionsecuritypoliciesModule.v1.RegionSecurityPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AddRuleRegionSecurityPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddRuleRegionSecurityPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddRuleRegionSecurityPolicyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddRuleRegionSecurityPolicyRequest',
+        ['securityPolicy']
+      );
+      request.securityPolicy = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.addRule = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.addRule(request), expectedError);
+      const actualRequest = (client.innerApiCalls.addRule as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addRule with closed client', async () => {
+      const client =
+        new regionsecuritypoliciesModule.v1.RegionSecurityPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AddRuleRegionSecurityPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddRuleRegionSecurityPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddRuleRegionSecurityPolicyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddRuleRegionSecurityPolicyRequest',
+        ['securityPolicy']
+      );
+      request.securityPolicy = defaultValue3;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.addRule(request), expectedError);
+    });
+  });
+
   describe('delete', () => {
     it('invokes delete without error', async () => {
       const client =
@@ -588,6 +759,177 @@ describe('v1.RegionSecurityPoliciesClient', () => {
     });
   });
 
+  describe('getRule', () => {
+    it('invokes getRule without error', async () => {
+      const client =
+        new regionsecuritypoliciesModule.v1.RegionSecurityPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetRuleRegionSecurityPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRuleRegionSecurityPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRuleRegionSecurityPolicyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRuleRegionSecurityPolicyRequest',
+        ['securityPolicy']
+      );
+      request.securityPolicy = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SecurityPolicyRule()
+      );
+      client.innerApiCalls.getRule = stubSimpleCall(expectedResponse);
+      const [response] = await client.getRule(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (client.innerApiCalls.getRule as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getRule without error using callback', async () => {
+      const client =
+        new regionsecuritypoliciesModule.v1.RegionSecurityPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetRuleRegionSecurityPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRuleRegionSecurityPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRuleRegionSecurityPolicyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRuleRegionSecurityPolicyRequest',
+        ['securityPolicy']
+      );
+      request.securityPolicy = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SecurityPolicyRule()
+      );
+      client.innerApiCalls.getRule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getRule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.ISecurityPolicyRule | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (client.innerApiCalls.getRule as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getRule with error', async () => {
+      const client =
+        new regionsecuritypoliciesModule.v1.RegionSecurityPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetRuleRegionSecurityPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRuleRegionSecurityPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRuleRegionSecurityPolicyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRuleRegionSecurityPolicyRequest',
+        ['securityPolicy']
+      );
+      request.securityPolicy = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getRule = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.getRule(request), expectedError);
+      const actualRequest = (client.innerApiCalls.getRule as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getRule with closed client', async () => {
+      const client =
+        new regionsecuritypoliciesModule.v1.RegionSecurityPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetRuleRegionSecurityPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRuleRegionSecurityPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRuleRegionSecurityPolicyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRuleRegionSecurityPolicyRequest',
+        ['securityPolicy']
+      );
+      request.securityPolicy = defaultValue3;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getRule(request), expectedError);
+    });
+  });
+
   describe('insert', () => {
     it('invokes insert without error', async () => {
       const client =
@@ -903,6 +1245,351 @@ describe('v1.RegionSecurityPoliciesClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
+    });
+  });
+
+  describe('patchRule', () => {
+    it('invokes patchRule without error', async () => {
+      const client =
+        new regionsecuritypoliciesModule.v1.RegionSecurityPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchRuleRegionSecurityPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRuleRegionSecurityPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRuleRegionSecurityPolicyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRuleRegionSecurityPolicyRequest',
+        ['securityPolicy']
+      );
+      request.securityPolicy = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.patchRule = stubSimpleCall(expectedResponse);
+      const [response] = await client.patchRule(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.patchRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.patchRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes patchRule without error using callback', async () => {
+      const client =
+        new regionsecuritypoliciesModule.v1.RegionSecurityPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchRuleRegionSecurityPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRuleRegionSecurityPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRuleRegionSecurityPolicyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRuleRegionSecurityPolicyRequest',
+        ['securityPolicy']
+      );
+      request.securityPolicy = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.patchRule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.patchRule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.patchRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.patchRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes patchRule with error', async () => {
+      const client =
+        new regionsecuritypoliciesModule.v1.RegionSecurityPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchRuleRegionSecurityPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRuleRegionSecurityPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRuleRegionSecurityPolicyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRuleRegionSecurityPolicyRequest',
+        ['securityPolicy']
+      );
+      request.securityPolicy = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.patchRule = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.patchRule(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.patchRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.patchRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes patchRule with closed client', async () => {
+      const client =
+        new regionsecuritypoliciesModule.v1.RegionSecurityPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchRuleRegionSecurityPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRuleRegionSecurityPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRuleRegionSecurityPolicyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRuleRegionSecurityPolicyRequest',
+        ['securityPolicy']
+      );
+      request.securityPolicy = defaultValue3;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.patchRule(request), expectedError);
+    });
+  });
+
+  describe('removeRule', () => {
+    it('invokes removeRule without error', async () => {
+      const client =
+        new regionsecuritypoliciesModule.v1.RegionSecurityPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.RemoveRuleRegionSecurityPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemoveRuleRegionSecurityPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemoveRuleRegionSecurityPolicyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemoveRuleRegionSecurityPolicyRequest',
+        ['securityPolicy']
+      );
+      request.securityPolicy = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.removeRule = stubSimpleCall(expectedResponse);
+      const [response] = await client.removeRule(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.removeRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes removeRule without error using callback', async () => {
+      const client =
+        new regionsecuritypoliciesModule.v1.RegionSecurityPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.RemoveRuleRegionSecurityPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemoveRuleRegionSecurityPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemoveRuleRegionSecurityPolicyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemoveRuleRegionSecurityPolicyRequest',
+        ['securityPolicy']
+      );
+      request.securityPolicy = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.removeRule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.removeRule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.removeRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes removeRule with error', async () => {
+      const client =
+        new regionsecuritypoliciesModule.v1.RegionSecurityPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.RemoveRuleRegionSecurityPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemoveRuleRegionSecurityPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemoveRuleRegionSecurityPolicyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemoveRuleRegionSecurityPolicyRequest',
+        ['securityPolicy']
+      );
+      request.securityPolicy = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&security_policy=${defaultValue3}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.removeRule = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.removeRule(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.removeRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes removeRule with closed client', async () => {
+      const client =
+        new regionsecuritypoliciesModule.v1.RegionSecurityPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.RemoveRuleRegionSecurityPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemoveRuleRegionSecurityPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemoveRuleRegionSecurityPolicyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemoveRuleRegionSecurityPolicyRequest',
+        ['securityPolicy']
+      );
+      request.securityPolicy = defaultValue3;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.removeRule(request), expectedError);
     });
   });
 

@@ -4,6 +4,118 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "17cd1021fdc31e8077456a7f0f822287877f4f61",
+          "message": "Update dependency p-queue to v8",
+          "issues": [
+            "4877"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "8.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "0ff70ca6-c0cd-4eed-aa31-4570fb7e0f24",
+      "createTime": "2023-12-11T21:58:07.215Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "493e0bdbf8ec816861722955e3c0468f99b3c064",
+          "message": "Update dependency @sendgrid/mail to v8",
+          "issues": [
+            "4871"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "feat",
+          "sha": "4a799646628a37524ef64b63158220ef6ca44433",
+          "message": "[compute] Update Compute Engine API to revision 20231110 (#868)",
+          "issues": [
+            "4872"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "6836eb13-af93-4265-97d4-d21edcc6cc26",
+      "createTime": "2023-12-11T21:58:07.206Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e7614ad5cb26d4828ac3cbc81d94bc7a9ea0a26c",
+          "message": "Add data_stats to Model",
+          "issues": [
+            "4866"
+          ]
+        }
+      ],
+      "version": "3.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "d12f5a56-74cc-4161-8d6f-7d157942f1a2",
+      "createTime": "2023-12-11T21:58:07.196Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "49f2918a9634f9f5ac109c2058621a76b604ffcf",
+          "message": "[advisorynotifications] adding project level methods to advisorynotifications.googleapis.com",
+          "issues": [
+            "4874"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/advisorynotifications",
+      "id": "bd077f87-d72d-4e01-9b24-6405091c1a8e",
+      "createTime": "2023-12-11T21:58:07.185Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1f9dc5ae6faf68324ab358b3f4f40328f62e7b64",
+          "message": "[analytics-data] add `CreateAudienceExport`, `QueryAudienceExport`, `GetAudienceExport`, `ListAudienceExports` methods to the Data API v1 beta",
+          "issues": [
+            "4878"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/data",
+      "id": "09fd3ba3-2d84-490c-a362-cd6d44311348",
+      "createTime": "2023-12-11T21:58:07.175Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d98f897acb7aa3bcb01b7494dcdfd6cdb8b861e5",
+          "message": "[generativelanguage] Add v1beta, adds GenerativeService and RetrievalService",
+          "issues": [
+            "4879"
+          ]
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ai/generativelanguage",
+      "id": "c483f460-2f5b-4862-8f41-30ed144f6ebb",
+      "createTime": "2023-12-11T21:58:07.158Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "e543064da874ff4f907d51b470bab56190859df7",
           "message": "Add initial files for google.shopping.merchant.inventories.v1beta",
@@ -20514,5 +20626,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-12-05T18:42:54.154Z"
+  "updateTime": "2023-12-11T21:58:07.215Z"
 }

@@ -717,6 +717,176 @@ describe('v1.TargetInstancesClient', () => {
     });
   });
 
+  describe('setSecurityPolicy', () => {
+    it('invokes setSecurityPolicy without error', async () => {
+      const client = new targetinstancesModule.v1.TargetInstancesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetSecurityPolicyTargetInstanceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetSecurityPolicyTargetInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetSecurityPolicyTargetInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetSecurityPolicyTargetInstanceRequest',
+        ['targetInstance']
+      );
+      request.targetInstance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&target_instance=${defaultValue3}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.setSecurityPolicy = stubSimpleCall(expectedResponse);
+      const [response] = await client.setSecurityPolicy(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.setSecurityPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setSecurityPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes setSecurityPolicy without error using callback', async () => {
+      const client = new targetinstancesModule.v1.TargetInstancesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetSecurityPolicyTargetInstanceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetSecurityPolicyTargetInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetSecurityPolicyTargetInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetSecurityPolicyTargetInstanceRequest',
+        ['targetInstance']
+      );
+      request.targetInstance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&target_instance=${defaultValue3}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.setSecurityPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.setSecurityPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.setSecurityPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setSecurityPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes setSecurityPolicy with error', async () => {
+      const client = new targetinstancesModule.v1.TargetInstancesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetSecurityPolicyTargetInstanceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetSecurityPolicyTargetInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetSecurityPolicyTargetInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetSecurityPolicyTargetInstanceRequest',
+        ['targetInstance']
+      );
+      request.targetInstance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&target_instance=${defaultValue3}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.setSecurityPolicy = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.setSecurityPolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.setSecurityPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setSecurityPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes setSecurityPolicy with closed client', async () => {
+      const client = new targetinstancesModule.v1.TargetInstancesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetSecurityPolicyTargetInstanceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetSecurityPolicyTargetInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetSecurityPolicyTargetInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetSecurityPolicyTargetInstanceRequest',
+        ['targetInstance']
+      );
+      request.targetInstance = defaultValue3;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setSecurityPolicy(request), expectedError);
+    });
+  });
+
   describe('aggregatedList', () => {
     it('uses async iteration with aggregatedList without error', async () => {
       const client = new targetinstancesModule.v1.TargetInstancesClient({

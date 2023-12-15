@@ -16,7 +16,7 @@
                     "php_namespace": "Google\\Cloud\\AdvisoryNotifications\\V1",
                     "ruby_package": "Google::Cloud::AdvisoryNotifications::V1",
                     "(google.api.resource_definition).type": "advisorynotifications.googleapis.com/Location",
-                    "(google.api.resource_definition).pattern": "organizations/{organization}/locations/{location}"
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}"
                   },
                   "nested": {
                     "AdvisoryNotificationsService": {
@@ -30,12 +30,16 @@
                           "responseType": "ListNotificationsResponse",
                           "options": {
                             "(google.api.http).get": "/v1/{parent=organizations/*/locations/*}/notifications",
+                            "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*/locations/*}/notifications",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1/{parent=organizations/*/locations/*}/notifications"
+                                "get": "/v1/{parent=organizations/*/locations/*}/notifications",
+                                "additional_bindings": {
+                                  "get": "/v1/{parent=projects/*/locations/*}/notifications"
+                                }
                               }
                             },
                             {
@@ -48,12 +52,16 @@
                           "responseType": "Notification",
                           "options": {
                             "(google.api.http).get": "/v1/{name=organizations/*/locations/*/notifications/*}",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/locations/*/notifications/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1/{name=organizations/*/locations/*/notifications/*}"
+                                "get": "/v1/{name=organizations/*/locations/*/notifications/*}",
+                                "additional_bindings": {
+                                  "get": "/v1/{name=projects/*/locations/*/notifications/*}"
+                                }
                               }
                             },
                             {
@@ -128,7 +136,7 @@
                     "Notification": {
                       "options": {
                         "(google.api.resource).type": "advisorynotifications.googleapis.com/Notification",
-                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/notifications/{notification}",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/notifications/{notification}",
                         "(google.api.resource).plural": "notifications",
                         "(google.api.resource).singular": "notification"
                       },

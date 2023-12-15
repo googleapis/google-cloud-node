@@ -47,7 +47,7 @@ function main(textQuery) {
    *  details, like region-specific place name, if available. The parameter can
    *  affect results based on applicable law.
    *  For more information, see
-   *  http://www.unicode.org/reports/tr35/#unicode_region_subtag.
+   *  https://www.unicode.org/cldr/charts/latest/supplemental/territory_language_information.html.
    *  Note that 3-digit region codes are not currently supported.
    */
   // const regionCode = 'abc123'
@@ -57,29 +57,28 @@ function main(textQuery) {
   // const rankPreference = {}
   /**
    *  The requested place type. Full list of types supported:
-   *  https://developers.google.com/places/supported_types. Only support one
-   *  included type.
+   *  https://developers.google.com/maps/documentation/places/web-service/place-types.
+   *  Only support one included type.
    */
   // const includedType = 'abc123'
   /**
-   *  Used to restrict the search to places that are open at a specific time.
-   *  open_now marks if a business is currently open.
+   *  Used to restrict the search to places that are currently open.  The default
+   *  is false.
    */
   // const openNow = true
   /**
    *  Filter out results whose average user rating is strictly less than this
-   *  limit. A valid value must be an float between 0 and 5 (inclusively) at a
-   *  0.5 cadence i.e. 0, 0.5, 1.0, ... , 5.0  inclusively. This is to keep
-   *  parity with LocalRefinement_UserRating. The input rating will round up to
-   *  the nearest 0.5(ceiling). For instance, a rating of 0.6 will eliminate all
-   *  results with a less than 1.0 rating.
+   *  limit. A valid value must be a float between 0 and 5 (inclusively) at a
+   *  0.5 cadence i.e. 0, 0.5, 1.0, ... , 5.0  inclusively. The input rating
+   *  will round up to the nearest 0.5(ceiling). For instance, a rating of 0.6
+   *  will eliminate all results with a less than 1.0 rating.
    */
   // const minRating = 1234
   /**
    *  Maximum number of results to return. It must be between 1 and 20,
-   *  inclusively. If the number is unset, it falls back to the upper limit. If
-   *  the number is set to negative or exceeds the upper limit, an
-   *  INVALID_ARGUMENT error is returned.
+   *  inclusively. The default is 20.  If the number is unset, it falls back to
+   *  the upper limit. If the number is set to negative or exceeds the upper
+   *  limit, an INVALID_ARGUMENT error is returned.
    */
   // const maxResultCount = 1234
   /**

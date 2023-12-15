@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main() {
-  // [START serviceusage_v1beta1_generated_ServiceUsage_DisableService_async]
+function main(name) {
+  // [START generativelanguage_v1beta_generated_RetrieverService_GetCorpus_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,33 +29,30 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Name of the consumer and service to disable the service on.
-   *  The enable and disable methods currently only support projects.
-   *  An example name would be:
-   *  `projects/123/services/serviceusage.googleapis.com`
-   *  where `123` is the project number (not project ID).
+   *  Required. The name of the `Corpus`.
+   *  Example: `corpora/my-corpus-123`
    */
   // const name = 'abc123'
 
-  // Imports the Serviceusage library
-  const {ServiceUsageClient} = require('@google-cloud/service-usage').v1beta1;
+  // Imports the Generativelanguage library
+  const {RetrieverServiceClient} = require('@google-cloud/generativelanguage').v1beta;
 
   // Instantiates a client
-  const serviceusageClient = new ServiceUsageClient();
+  const generativelanguageClient = new RetrieverServiceClient();
 
-  async function callDisableService() {
+  async function callGetCorpus() {
     // Construct request
     const request = {
+      name,
     };
 
     // Run request
-    const [operation] = await serviceusageClient.disableService(request);
-    const [response] = await operation.promise();
+    const response = await generativelanguageClient.getCorpus(request);
     console.log(response);
   }
 
-  callDisableService();
-  // [END serviceusage_v1beta1_generated_ServiceUsage_DisableService_async]
+  callGetCorpus();
+  // [END generativelanguage_v1beta_generated_RetrieverService_GetCorpus_async]
 }
 
 process.on('unhandledRejection', err => {
