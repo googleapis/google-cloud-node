@@ -46,6 +46,8 @@ function main(azureNodePool, updateMask) {
    *   *   `autoscaling.min_node_count`.
    *   *   `autoscaling.max_node_count`.
    *   *   `config.ssh_config.authorized_key`.
+   *   *   `management.auto_repair`.
+   *   *   `management`.
    */
   // const updateMask = {}
 

@@ -158,6 +158,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "proxyConfig": {
+                          "type": "AttachedProxyConfig",
+                          "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "binaryAuthorization": {
+                          "type": "BinaryAuthorization",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -181,7 +195,15 @@
                           "type": "AttachedClusterUser",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "adminGroups": {
+                          "rule": "repeated",
+                          "type": "AttachedClusterGroup",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -189,6 +211,17 @@
                     "AttachedClusterUser": {
                       "fields": {
                         "username": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "AttachedClusterGroup": {
+                      "fields": {
+                        "group": {
                           "type": "string",
                           "id": 1,
                           "options": {
@@ -242,6 +275,66 @@
                         "message": {
                           "type": "string",
                           "id": 1
+                        }
+                      }
+                    },
+                    "AttachedProxyConfig": {
+                      "fields": {
+                        "kubernetesSecret": {
+                          "type": "KubernetesSecret",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "KubernetesSecret": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "namespace": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "Jwk": {
+                      "fields": {
+                        "kty": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "alg": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "use": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "kid": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "n": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "e": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "x": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "y": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "crv": {
+                          "type": "string",
+                          "id": 9
                         }
                       }
                     },
@@ -417,6 +510,23 @@
                         "enabled": {
                           "type": "bool",
                           "id": 1
+                        }
+                      }
+                    },
+                    "BinaryAuthorization": {
+                      "fields": {
+                        "evaluationMode": {
+                          "type": "EvaluationMode",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "EvaluationMode": {
+                          "values": {
+                            "EVALUATION_MODE_UNSPECIFIED": 0,
+                            "DISABLED": 1,
+                            "PROJECT_SINGLETON_POLICY_ENFORCE": 2
+                          }
                         }
                       }
                     },
@@ -607,6 +717,22 @@
                               "(google.api.method_signature)": "parent,attached_cluster_id"
                             }
                           ]
+                        },
+                        "GenerateAttachedClusterAgentToken": {
+                          "requestType": "GenerateAttachedClusterAgentTokenRequest",
+                          "responseType": "GenerateAttachedClusterAgentTokenResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{attached_cluster=projects/*/locations/*/attachedClusters/*}:generateAttachedClusterAgentToken",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{attached_cluster=projects/*/locations/*/attachedClusters/*}:generateAttachedClusterAgentToken",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -632,6 +758,13 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "proxyConfig": {
+                          "type": "AttachedProxyConfig",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -707,6 +840,13 @@
                           "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "proxyConfig": {
+                          "type": "AttachedProxyConfig",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -815,6 +955,90 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "gkemulticloud.googleapis.com/AttachedServerConfig"
                           }
+                        }
+                      }
+                    },
+                    "GenerateAttachedClusterAgentTokenRequest": {
+                      "fields": {
+                        "attachedCluster": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gkemulticloud.googleapis.com/AttachedCluster"
+                          }
+                        },
+                        "subjectToken": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "subjectTokenType": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "grantType": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "audience": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "scope": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "requestedTokenType": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "options": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GenerateAttachedClusterAgentTokenResponse": {
+                      "fields": {
+                        "accessToken": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "expiresIn": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "tokenType": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -956,6 +1180,13 @@
                         "monitoringConfig": {
                           "type": "MonitoringConfig",
                           "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "binaryAuthorization": {
+                          "type": "BinaryAuthorization",
+                          "id": 22,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -1105,7 +1336,15 @@
                           "type": "AwsClusterUser",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "adminGroups": {
+                          "rule": "repeated",
+                          "type": "AwsClusterGroup",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -1113,6 +1352,17 @@
                     "AwsClusterUser": {
                       "fields": {
                         "username": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "AwsClusterGroup": {
+                      "fields": {
+                        "group": {
                           "type": "string",
                           "id": 1,
                           "options": {
@@ -1151,6 +1401,13 @@
                         "iops": {
                           "type": "int32",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "throughput": {
+                          "type": "int32",
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -1196,6 +1453,13 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "perNodePoolSgRulesDisabled": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -1299,6 +1563,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "management": {
+                          "type": "AwsNodeManagement",
+                          "id": 30,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "updateSettings": {
+                          "type": "UpdateSettings",
+                          "id": 32,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -1311,6 +1589,46 @@
                             "STOPPING": 4,
                             "ERROR": 5,
                             "DEGRADED": 6
+                          }
+                        }
+                      }
+                    },
+                    "UpdateSettings": {
+                      "fields": {
+                        "surgeSettings": {
+                          "type": "SurgeSettings",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SurgeSettings": {
+                      "fields": {
+                        "maxSurge": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "maxUnavailable": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "AwsNodeManagement": {
+                      "fields": {
+                        "autoRepair": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -1411,6 +1729,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "spotConfig": {
+                          "type": "SpotConfig",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1429,6 +1754,52 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        }
+                      }
+                    },
+                    "AwsOpenIdConfig": {
+                      "fields": {
+                        "issuer": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "jwksUri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "responseTypesSupported": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        },
+                        "subjectTypesSupported": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "idTokenSigningAlgValuesSupported": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5
+                        },
+                        "claimsSupported": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6
+                        },
+                        "grantTypes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "AwsJsonWebKeys": {
+                      "fields": {
+                        "keys": {
+                          "rule": "repeated",
+                          "type": "Jwk",
+                          "id": 1
                         }
                       }
                     },
@@ -1459,6 +1830,34 @@
                         "version": {
                           "type": "string",
                           "id": 1
+                        },
+                        "enabled": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "endOfLife": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "endOfLifeDate": {
+                          "type": "google.type.Date",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "releaseDate": {
+                          "type": "google.type.Date",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1532,6 +1931,18 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SpotConfig": {
+                      "fields": {
+                        "instanceTypes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -1676,6 +2087,22 @@
                             }
                           ]
                         },
+                        "GenerateAwsClusterAgentToken": {
+                          "requestType": "GenerateAwsClusterAgentTokenRequest",
+                          "responseType": "GenerateAwsClusterAgentTokenResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{aws_cluster=projects/*/locations/*/awsClusters/*}:generateAwsClusterAgentToken",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{aws_cluster=projects/*/locations/*/awsClusters/*}:generateAwsClusterAgentToken",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
                         "GenerateAwsAccessToken": {
                           "requestType": "GenerateAwsAccessTokenRequest",
                           "responseType": "GenerateAwsAccessTokenResponse",
@@ -1746,6 +2173,34 @@
                             }
                           ]
                         },
+                        "RollbackAwsNodePoolUpdate": {
+                          "requestType": "RollbackAwsNodePoolUpdateRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/awsClusters/*/awsNodePools/*}:rollback",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "AwsNodePool",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/awsClusters/*/awsNodePools/*}:rollback",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "AwsNodePool",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "GetAwsNodePool": {
                           "requestType": "GetAwsNodePoolRequest",
                           "responseType": "AwsNodePool",
@@ -1804,6 +2259,34 @@
                               "(google.longrunning.operation_info)": {
                                 "response_type": "google.protobuf.Empty",
                                 "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetAwsOpenIdConfig": {
+                          "requestType": "GetAwsOpenIdConfigRequest",
+                          "responseType": "AwsOpenIdConfig",
+                          "options": {
+                            "(google.api.http).get": "/v1/{aws_cluster=projects/*/locations/*/awsClusters/*}/.well-known/openid-configuration"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{aws_cluster=projects/*/locations/*/awsClusters/*}/.well-known/openid-configuration"
+                              }
+                            }
+                          ]
+                        },
+                        "GetAwsJsonWebKeys": {
+                          "requestType": "GetAwsJsonWebKeysRequest",
+                          "responseType": "AwsJsonWebKeys",
+                          "options": {
+                            "(google.api.http).get": "/v1/{aws_cluster=projects/*/locations/*/awsClusters/*}/jwks"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{aws_cluster=projects/*/locations/*/awsClusters/*}/jwks"
                               }
                             }
                           ]
@@ -1943,6 +2426,13 @@
                           "type": "bool",
                           "id": 3
                         },
+                        "ignoreErrors": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "etag": {
                           "type": "string",
                           "id": 4
@@ -1997,6 +2487,25 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "RollbackAwsNodePoolUpdateRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gkemulticloud.googleapis.com/AwsNodePool"
+                          }
+                        },
+                        "respectPdb": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -2064,9 +2573,40 @@
                           "type": "bool",
                           "id": 3
                         },
+                        "ignoreErrors": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "etag": {
                           "type": "string",
                           "id": 4
+                        }
+                      }
+                    },
+                    "GetAwsOpenIdConfigRequest": {
+                      "fields": {
+                        "awsCluster": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gkemulticloud.googleapis.com/AwsCluster"
+                          }
+                        }
+                      }
+                    },
+                    "GetAwsJsonWebKeysRequest": {
+                      "fields": {
+                        "awsCluster": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gkemulticloud.googleapis.com/AwsCluster"
+                          }
                         }
                       }
                     },
@@ -2109,6 +2649,97 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        }
+                      }
+                    },
+                    "GenerateAwsClusterAgentTokenRequest": {
+                      "fields": {
+                        "awsCluster": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gkemulticloud.googleapis.com/AwsCluster"
+                          }
+                        },
+                        "subjectToken": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "subjectTokenType": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "nodePoolId": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "grantType": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "audience": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "scope": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "requestedTokenType": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "options": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GenerateAwsClusterAgentTokenResponse": {
+                      "fields": {
+                        "accessToken": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "expiresIn": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "tokenType": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -2567,7 +3198,15 @@
                           "type": "AzureClusterUser",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "adminGroups": {
+                          "rule": "repeated",
+                          "type": "AzureClusterGroup",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -2593,6 +3232,17 @@
                     "AzureClusterUser": {
                       "fields": {
                         "username": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "AzureClusterGroup": {
+                      "fields": {
+                        "group": {
                           "type": "string",
                           "id": 1,
                           "options": {
@@ -2707,6 +3357,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "management": {
+                          "type": "AzureNodeManagement",
+                          "id": 30,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -2719,6 +3376,17 @@
                             "STOPPING": 4,
                             "ERROR": 5,
                             "DEGRADED": 6
+                          }
+                        }
+                      }
+                    },
+                    "AzureNodeManagement": {
+                      "fields": {
+                        "autoRepair": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -2811,6 +3479,52 @@
                         }
                       }
                     },
+                    "AzureOpenIdConfig": {
+                      "fields": {
+                        "issuer": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "jwksUri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "responseTypesSupported": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        },
+                        "subjectTypesSupported": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "idTokenSigningAlgValuesSupported": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5
+                        },
+                        "claimsSupported": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6
+                        },
+                        "grantTypes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "AzureJsonWebKeys": {
+                      "fields": {
+                        "keys": {
+                          "rule": "repeated",
+                          "type": "Jwk",
+                          "id": 1
+                        }
+                      }
+                    },
                     "AzureServerConfig": {
                       "options": {
                         "(google.api.resource).type": "gkemulticloud.googleapis.com/AzureServerConfig",
@@ -2838,6 +3552,34 @@
                         "version": {
                           "type": "string",
                           "id": 1
+                        },
+                        "enabled": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "endOfLife": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "endOfLifeDate": {
+                          "type": "google.type.Date",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "releaseDate": {
+                          "type": "google.type.Date",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -3100,6 +3842,22 @@
                             }
                           ]
                         },
+                        "GenerateAzureClusterAgentToken": {
+                          "requestType": "GenerateAzureClusterAgentTokenRequest",
+                          "responseType": "GenerateAzureClusterAgentTokenResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{azure_cluster=projects/*/locations/*/azureClusters/*}:generateAzureClusterAgentToken",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{azure_cluster=projects/*/locations/*/azureClusters/*}:generateAzureClusterAgentToken",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
                         "GenerateAzureAccessToken": {
                           "requestType": "GenerateAzureAccessTokenRequest",
                           "responseType": "GenerateAzureAccessTokenResponse",
@@ -3229,6 +3987,42 @@
                                 "response_type": "google.protobuf.Empty",
                                 "metadata_type": "OperationMetadata"
                               }
+                            }
+                          ]
+                        },
+                        "GetAzureOpenIdConfig": {
+                          "requestType": "GetAzureOpenIdConfigRequest",
+                          "responseType": "AzureOpenIdConfig",
+                          "options": {
+                            "(google.api.http).get": "/v1/{azure_cluster=projects/*/locations/*/azureClusters/*}/.well-known/openid-configuration",
+                            "(google.api.method_signature)": "azure_cluster"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{azure_cluster=projects/*/locations/*/azureClusters/*}/.well-known/openid-configuration"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "azure_cluster"
+                            }
+                          ]
+                        },
+                        "GetAzureJsonWebKeys": {
+                          "requestType": "GetAzureJsonWebKeysRequest",
+                          "responseType": "AzureJsonWebKeys",
+                          "options": {
+                            "(google.api.http).get": "/v1/{azure_cluster=projects/*/locations/*/azureClusters/*}/jwks",
+                            "(google.api.method_signature)": "azure_cluster"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{azure_cluster=projects/*/locations/*/azureClusters/*}/jwks"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "azure_cluster"
                             }
                           ]
                         },
@@ -3494,6 +4288,30 @@
                         }
                       }
                     },
+                    "GetAzureOpenIdConfigRequest": {
+                      "fields": {
+                        "azureCluster": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gkemulticloud.googleapis.com/AzureCluster"
+                          }
+                        }
+                      }
+                    },
+                    "GetAzureJsonWebKeysRequest": {
+                      "fields": {
+                        "azureCluster": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gkemulticloud.googleapis.com/AzureCluster"
+                          }
+                        }
+                      }
+                    },
                     "GetAzureServerConfigRequest": {
                       "fields": {
                         "name": {
@@ -3628,6 +4446,97 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        }
+                      }
+                    },
+                    "GenerateAzureClusterAgentTokenRequest": {
+                      "fields": {
+                        "azureCluster": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gkemulticloud.googleapis.com/AzureCluster"
+                          }
+                        },
+                        "subjectToken": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "subjectTokenType": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "nodePoolId": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "grantType": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "audience": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "scope": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "requestedTokenType": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "options": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GenerateAzureClusterAgentTokenResponse": {
+                      "fields": {
+                        "accessToken": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "expiresIn": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "tokenType": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     }
@@ -5359,6 +6268,34 @@
                 "details": {
                   "rule": "repeated",
                   "type": "google.protobuf.Any",
+                  "id": 3
+                }
+              }
+            }
+          }
+        },
+        "type": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/type/date;date",
+            "java_multiple_files": true,
+            "java_outer_classname": "DateProto",
+            "java_package": "com.google.type",
+            "objc_class_prefix": "GTP"
+          },
+          "nested": {
+            "Date": {
+              "fields": {
+                "year": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "month": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "day": {
+                  "type": "int32",
                   "id": 3
                 }
               }

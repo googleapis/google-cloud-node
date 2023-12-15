@@ -48,6 +48,7 @@ function main(awsNodePool, updateMask) {
    *   *   `config.config_encryption.kms_key_arn`.
    *   *   `config.security_group_ids`.
    *   *   `config.root_volume.iops`.
+   *   *   `config.root_volume.throughput`.
    *   *   `config.root_volume.kms_key_arn`.
    *   *   `config.root_volume.volume_type`.
    *   *   `config.root_volume.size_gib`.
@@ -63,6 +64,13 @@ function main(awsNodePool, updateMask) {
    *   *   `config.autoscaling_metrics_collection`.
    *   *   `config.autoscaling_metrics_collection.granularity`.
    *   *   `config.autoscaling_metrics_collection.metrics`.
+   *   *   `config.instance_type`.
+   *   *   `management.auto_repair`.
+   *   *   `management`.
+   *   *   `update_settings`.
+   *   *   `update_settings.surge_settings`.
+   *   *   `update_settings.surge_settings.max_surge`.
+   *   *   `update_settings.surge_settings.max_unavailable`.
    */
   // const updateMask = {}
 
