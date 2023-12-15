@@ -6242,6 +6242,10 @@
                           "rule": "repeated",
                           "type": "SearchKnowledgeAnswer",
                           "id": 2
+                        },
+                        "rewrittenQuery": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -6270,7 +6274,8 @@
                           "values": {
                             "ANSWER_TYPE_UNSPECIFIED": 0,
                             "FAQ": 1,
-                            "GENERATIVE": 2
+                            "GENERATIVE": 2,
+                            "INTENT": 3
                           }
                         },
                         "AnswerSource": {
@@ -6733,6 +6738,13 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
+                            "enableConversationAugmentedQuery": {
+                              "type": "bool",
+                              "id": 16,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "suggestionTriggerSettings": {
                               "type": "SuggestionTriggerSettings",
                               "id": 10
@@ -6798,6 +6810,13 @@
                             "contextFilterSettings": {
                               "type": "ContextFilterSettings",
                               "id": 7
+                            },
+                            "sections": {
+                              "type": "Sections",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -6873,6 +6892,28 @@
                                 "dropIvrMessages": {
                                   "type": "bool",
                                   "id": 3
+                                }
+                              }
+                            },
+                            "Sections": {
+                              "fields": {
+                                "sectionTypes": {
+                                  "rule": "repeated",
+                                  "type": "SectionType",
+                                  "id": 1
+                                }
+                              },
+                              "nested": {
+                                "SectionType": {
+                                  "values": {
+                                    "SECTION_TYPE_UNSPECIFIED": 0,
+                                    "SITUATION": 1,
+                                    "ACTION": 2,
+                                    "RESOLUTION": 3,
+                                    "REASON_FOR_CANCELLATION": 4,
+                                    "CUSTOMER_SATISFACTION": 5,
+                                    "ENTITIES": 6
+                                  }
                                 }
                               }
                             }
