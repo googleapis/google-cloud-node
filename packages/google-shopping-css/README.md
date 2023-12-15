@@ -107,7 +107,7 @@ async function callListChildAccounts() {
   // Run request
   const iterable = await cssClient.listChildAccountsAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
