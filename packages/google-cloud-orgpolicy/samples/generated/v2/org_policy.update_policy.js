@@ -29,7 +29,7 @@ function main(policy) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. `Policy` to update.
+   *  Required. Policy to update.
    */
   // const policy = {}
   /**

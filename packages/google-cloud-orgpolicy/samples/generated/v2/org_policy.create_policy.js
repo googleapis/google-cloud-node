@@ -29,8 +29,8 @@ function main(parent, policy) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The Cloud resource that will parent the new Policy. Must be in
-   *  one of the following forms:
+   *  Required. The Google Cloud resource that will parent the new policy. Must
+   *  be in one of the following forms:
    *  * `projects/{project_number}`
    *  * `projects/{project_id}`
    *  * `folders/{folder_id}`
@@ -38,7 +38,7 @@ function main(parent, policy) {
    */
   // const parent = 'abc123'
   /**
-   *  Required. `Policy` to create.
+   *  Required. Policy to create.
    */
   // const policy = {}
 
