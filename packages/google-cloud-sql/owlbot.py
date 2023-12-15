@@ -19,44 +19,43 @@ import synthtool.languages.node_mono_repo as node
 from synthtool import shell
 
 node.owlbot_main(relative_dir="packages/google-cloud-sql", staging_excludes=["system-test/fixtures/sample/src/index.js", "system-test/fixtures/sample/src/index.ts"])
-s.replace("packages/google-cloud-sql/src/*/sql_backup_runs_service_client.ts", "id: request.id ?? ''", "id: request.id?.toString() ?? ''") 
-s.replace("packages/google-cloud-sql/src/*/index.ts", "export {SqlAvailableDatabaseVersionsServiceClient} from './sql_available_database_versions_service_client';", "")
-s.replace("packages/google-cloud-sql/src/*/index.ts", "export {SqlEventsServiceClient} from './sql_events_service_client';", "")
-s.replace("packages/google-cloud-sql/src/*/index.ts", "export {SqlIamPoliciesServiceClient} from './sql_iam_policies_service_client';", "")
-s.replace("packages/google-cloud-sql/src/*/index.ts", "export {SqlInstanceNamesServiceClient} from './sql_instance_names_service_client';", "")
-s.replace("packages/google-cloud-sql/src/*/index.ts", "export {SqlRegionsServiceClient} from './sql_regions_service_client';", "")
+s.replace("packages/google-cloud-sql/src/*/sql_backup_runs_service_client.ts", "id: request\.id ?? ''", "id: request\.id?\.toString() ?? ''") 
+s.replace("packages/google-cloud-sql/src/*/index.ts", "export \{SqlAvailableDatabaseVersionsServiceClient\} from './sql_available_database_versions_service_client';", "")
+s.replace("packages/google-cloud-sql/src/*/index.ts", "export \{SqlEventsServiceClient\} from './sql_events_service_client';", "")
+s.replace("packages/google-cloud-sql/src/*/index.ts", "export \{SqlIamPoliciesServiceClient\} from './sql_iam_policies_service_client';", "")
+s.replace("packages/google-cloud-sql/src/*/index.ts", "export \{SqlInstanceNamesServiceClient\} from './sql_instance_names_service_client';", "")
+s.replace("packages/google-cloud-sql/src/*/index.ts", "export \{SqlRegionsServiceClient\} from './sql_regions_service_client';", "")
 s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.js", """const sqlAvailableDatabaseVersionsServiceClient = 
           new sql.SqlAvailableDatabaseVersionsServiceClient();""", "")
-s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.js", "const sqlEventsServiceClient = new sql.SqlEventsServiceClient();", "")
-s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.js", "const sqlIamPoliciesServiceClient = new sql.SqlIamPoliciesServiceClient();", "")
-s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.js", "const sqlInstanceNamesServiceClient = new sql.SqlInstanceNamesServiceClient();", "")
-s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.js", "const sqlRegionsServiceClient = new sql.SqlRegionsServiceClient();", "")
+s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.js", "const sqlEventsServiceClient = new sql\.SqlEventsServiceClient();", "")
+s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.js", "const sqlIamPoliciesServiceClient = new sql\.SqlIamPoliciesServiceClient();", "")
+s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.js", "const sqlInstanceNamesServiceClient = new sql\.SqlInstanceNamesServiceClient();", "")
+s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.js", "const sqlRegionsServiceClient = new sql\.SqlRegionsServiceClient();", "")
 s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", "SqlAvailableDatabaseVersionsServiceClient,", "")
 s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", "SqlEventsServiceClient,", "")
 s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", "SqlIamPoliciesServiceClient,", "")
 s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", "SqlInstanceNamesServiceClient,", "")
 s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", "SqlRegionsServiceClient,", "")
-s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", """// check that the client class type name can be used
-function doStuffWithSqlAvailableDatabaseVersionsServiceClient(
+s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", """function doStuffWithSqlAvailableDatabaseVersionsServiceClient(
   client: SqlAvailableDatabaseVersionsServiceClient
 ) {
-  client.close();
+  client\.close();
 }""", "")
 s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", """function doStuffWithSqlEventsServiceClient(client: SqlEventsServiceClient) {
-  client.close();
+  client\.close();
 }""", "")
 s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", """function doStuffWithSqlIamPoliciesServiceClient(
   client: SqlIamPoliciesServiceClient
 ) {
-  client.close();
+  client\.close();
 }""", "")
 s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", """function doStuffWithSqlInstanceNamesServiceClient(
   client: SqlInstanceNamesServiceClient
 ) {
-  client.close();
+  client\.close();
 }""", "")
 s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", """function doStuffWithSqlRegionsServiceClient(client: SqlRegionsServiceClient) {
-  client.close();
+  client\.close();
 }""", "")
 s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", """  // check that the client instance can be created
   const sqlAvailableDatabaseVersionsServiceClient =
