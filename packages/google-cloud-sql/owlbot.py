@@ -25,4 +25,51 @@ s.replace("packages/google-cloud-sql/src/*/index.ts", "export {SqlEventsServiceC
 s.replace("packages/google-cloud-sql/src/*/index.ts", "export {SqlIamPoliciesServiceClient} from './sql_iam_policies_service_client';", "")
 s.replace("packages/google-cloud-sql/src/*/index.ts", "export {SqlInstanceNamesServiceClient} from './sql_instance_names_service_client';", "")
 s.replace("packages/google-cloud-sql/src/*/index.ts", "export {SqlRegionsServiceClient} from './sql_regions_service_client';", "")
-shell.run(("rm", "-rf", "packages/google-cloud-sql/src/v1/sql_available_database_versions_service_client.ts", "packages/google-cloud-sql/src/v1/sql_available_database_versions_service_client_config.json", "packages/google-cloud-sql/src/v1/sql_available_database_versions_service_proto_list.json", "packages/google-cloud-sql/src/v1/sql_events_service_client.ts", "packages/google-cloud-sql/src/v1/sql_events_service_client_config.json", "packages/google-cloud-sql/src/v1/sql_events_service_proto_list.json", "packages/google-cloud-sql/src/v1/sql_iam_policies_service_client.ts", "packages/google-cloud-sql/src/v1/sql_iam_policies_service_client_config.json", "packages/google-cloud-sql/src/v1/sql_iam_policies_service_proto_list.json", "packages/google-cloud-sql/src/v1/sql_instance_names_service_client.ts", "packages/google-cloud-sql/src/v1/sql_instance_names_service_client_config.json", "packages/google-cloud-sql/src/v1/sql_instance_names_service_proto_list.json", "packages/google-cloud-sql/src/v1/sql_regions_service_client.ts", "packages/google-cloud-sql/src/v1/sql_regions_service_client_config.json", "packages/google-cloud-sql/src/v1/sql_regions_service_proto_list.json", "packages/google-cloud-sql/src/v1beta4/sql_iam_policies_service_client.ts", "packages/google-cloud-sql/src/v1beta4/sql_iam_policies_service_client_config.json", "packages/google-cloud-sql/src/v1beta4/sql_iam_policies_service_proto_list.json", "packages/google-cloud-sql/test/gapic_sql_available_database_versions_service_v1.ts", "packages/google-cloud-sql/test/gapic_sql_events_service_v1.ts", "packages/google-cloud-sql/test/gapic_sql_iam_policies_service_v1.ts", "packages/google-cloud-sql/test/gapic_sql_iam_policies_service_v1beta4.ts", "packages/google-cloud-sql/test/gapic_sql_instance_names_service_v1.ts", "packages/google-cloud-sql/test/gapic_sql_instance_names_service_v1.ts"), hide_output=True)
+s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.js", """const sqlAvailableDatabaseVersionsServiceClient = 
+          new sql.SqlAvailableDatabaseVersionsServiceClient();""", "")
+s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.js", "const sqlEventsServiceClient = new sql.SqlEventsServiceClient();", "")
+s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.js", "const sqlIamPoliciesServiceClient = new sql.SqlIamPoliciesServiceClient();", "")
+s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.js", "const sqlInstanceNamesServiceClient = new sql.SqlInstanceNamesServiceClient();", "")
+s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.js", "const sqlRegionsServiceClient = new sql.SqlRegionsServiceClient();", "")
+s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", "SqlAvailableDatabaseVersionsServiceClient,", "")
+s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", "SqlEventsServiceClient,", "")
+s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", "SqlIamPoliciesServiceClient,", "")
+s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", "SqlInstanceNamesServiceClient,", "")
+s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", "SqlRegionsServiceClient,", "")
+s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", """// check that the client class type name can be used
+function doStuffWithSqlAvailableDatabaseVersionsServiceClient(
+  client: SqlAvailableDatabaseVersionsServiceClient
+) {
+  client.close();
+}""", "")
+s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", """function doStuffWithSqlEventsServiceClient(client: SqlEventsServiceClient) {
+  client.close();
+}""", "")
+s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", """function doStuffWithSqlIamPoliciesServiceClient(
+  client: SqlIamPoliciesServiceClient
+) {
+  client.close();
+}""", "")
+s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", """function doStuffWithSqlInstanceNamesServiceClient(
+  client: SqlInstanceNamesServiceClient
+) {
+  client.close();
+}""", "")
+s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", """function doStuffWithSqlRegionsServiceClient(client: SqlRegionsServiceClient) {
+  client.close();
+}""", "")
+s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", """  // check that the client instance can be created
+  const sqlAvailableDatabaseVersionsServiceClient =
+    new SqlAvailableDatabaseVersionsServiceClient();
+  doStuffWithSqlAvailableDatabaseVersionsServiceClient(
+    sqlAvailableDatabaseVersionsServiceClient
+  );""", "")
+s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", """const sqlEventsServiceClient = new SqlEventsServiceClient();
+  doStuffWithSqlEventsServiceClient(sqlEventsServiceClient);""", "")
+s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", """  const sqlIamPoliciesServiceClient = new SqlIamPoliciesServiceClient();
+  doStuffWithSqlIamPoliciesServiceClient(sqlIamPoliciesServiceClient);""", "")
+s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", """const sqlInstanceNamesServiceClient = new SqlInstanceNamesServiceClient();
+  doStuffWithSqlInstanceNamesServiceClient(sqlInstanceNamesServiceClient);""", "")
+s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", """const sqlRegionsServiceClient = new SqlRegionsServiceClient();
+  doStuffWithSqlRegionsServiceClient(sqlRegionsServiceClient);""", "")
+shell.run(("rm", "-rf", "packages/google-cloud-sql/src/v1/sql_available_database_versions_service_client.ts", "packages/google-cloud-sql/src/v1/sql_available_database_versions_service_client_config.json", "packages/google-cloud-sql/src/v1/sql_available_database_versions_service_proto_list.json", "packages/google-cloud-sql/src/v1/sql_events_service_client.ts", "packages/google-cloud-sql/src/v1/sql_events_service_client_config.json", "packages/google-cloud-sql/src/v1/sql_events_service_proto_list.json", "packages/google-cloud-sql/src/v1/sql_iam_policies_service_client.ts", "packages/google-cloud-sql/src/v1/sql_iam_policies_service_client_config.json", "packages/google-cloud-sql/src/v1/sql_iam_policies_service_proto_list.json", "packages/google-cloud-sql/src/v1/sql_instance_names_service_client.ts", "packages/google-cloud-sql/src/v1/sql_instance_names_service_client_config.json", "packages/google-cloud-sql/src/v1/sql_instance_names_service_proto_list.json", "packages/google-cloud-sql/src/v1/sql_regions_service_client.ts", "packages/google-cloud-sql/src/v1/sql_regions_service_client_config.json", "packages/google-cloud-sql/src/v1/sql_regions_service_proto_list.json", "packages/google-cloud-sql/src/v1beta4/sql_iam_policies_service_client.ts", "packages/google-cloud-sql/src/v1beta4/sql_iam_policies_service_client_config.json", "packages/google-cloud-sql/src/v1beta4/sql_iam_policies_service_proto_list.json", "packages/google-cloud-sql/test/gapic_sql_available_database_versions_service_v1.ts", "packages/google-cloud-sql/test/gapic_sql_events_service_v1.ts", "packages/google-cloud-sql/test/gapic_sql_iam_policies_service_v1.ts", "packages/google-cloud-sql/test/gapic_sql_iam_policies_service_v1beta4.ts", "packages/google-cloud-sql/test/gapic_sql_instance_names_service_v1.ts", "packages/google-cloud-sql/test/gapic_sql_instance_names_service_v1.ts", "packages/google-cloud-sql/test/gapic_sql_regions_service_v1.ts"), hide_output=True)
