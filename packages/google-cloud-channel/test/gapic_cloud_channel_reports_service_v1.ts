@@ -291,6 +291,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
             projectId: 'bogus',
           }
         );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.RunReportJobRequest()
@@ -307,6 +308,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
       client.innerApiCalls.runReportJob = stubLongRunningCall(expectedResponse);
       const [operation] = await client.runReportJob(request);
       const [response] = await operation.promise();
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.runReportJob as SinonStub
@@ -326,6 +328,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
             projectId: 'bogus',
           }
         );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.RunReportJobRequest()
@@ -364,6 +367,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
         protos.google.cloud.channel.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.runReportJob as SinonStub
@@ -383,6 +387,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
             projectId: 'bogus',
           }
         );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.RunReportJobRequest()
@@ -399,6 +404,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
         expectedError
       );
       await assert.rejects(client.runReportJob(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.runReportJob as SinonStub
       ).getCall(0).args[0];
@@ -417,6 +423,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
             projectId: 'bogus',
           }
         );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.RunReportJobRequest()
@@ -435,6 +442,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
       );
       const [operation] = await client.runReportJob(request);
       await assert.rejects(operation.promise(), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.runReportJob as SinonStub
       ).getCall(0).args[0];
@@ -453,6 +461,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
             projectId: 'bogus',
           }
         );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -465,6 +474,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
       const decodedOperation = await client.checkRunReportJobProgress(
         expectedResponse.name
       );
+      assert(stub.calledOnce);
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -478,6 +488,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
             projectId: 'bogus',
           }
         );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -486,6 +497,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
         expectedError
       );
       await assert.rejects(client.checkRunReportJobProgress(''), expectedError);
+      assert(stub.calledOnce);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
@@ -499,6 +511,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
             projectId: 'bogus',
           }
         );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.FetchReportResultsRequest()
@@ -517,6 +530,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
       client.innerApiCalls.fetchReportResults =
         stubSimpleCall(expectedResponse);
       const [response] = await client.fetchReportResults(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.fetchReportResults as SinonStub
@@ -536,6 +550,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
             projectId: 'bogus',
           }
         );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.FetchReportResultsRequest()
@@ -569,6 +584,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.fetchReportResults as SinonStub
@@ -588,6 +604,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
             projectId: 'bogus',
           }
         );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.FetchReportResultsRequest()
@@ -604,6 +621,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
         expectedError
       );
       await assert.rejects(client.fetchReportResults(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.fetchReportResults as SinonStub
       ).getCall(0).args[0];
@@ -622,6 +640,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
             projectId: 'bogus',
           }
         );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.FetchReportResultsRequest()
@@ -653,6 +672,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
         });
       });
       const responses = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
         (client.descriptors.page.fetchReportResults.createStream as SinonStub)
@@ -676,6 +696,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
             projectId: 'bogus',
           }
         );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.FetchReportResultsRequest()
@@ -703,6 +724,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
         });
       });
       await assert.rejects(promise, expectedError);
+      assert(stub.calledOnce);
       assert(
         (client.descriptors.page.fetchReportResults.createStream as SinonStub)
           .getCall(0)
@@ -725,6 +747,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
             projectId: 'bogus',
           }
         );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.FetchReportResultsRequest()
@@ -747,6 +770,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
       for await (const resource of iterable) {
         responses.push(resource!);
       }
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (
@@ -771,6 +795,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
             projectId: 'bogus',
           }
         );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.FetchReportResultsRequest()
@@ -791,6 +816,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
           responses.push(resource!);
         }
       });
+      assert(stub.calledOnce);
       assert.deepStrictEqual(
         (
           client.descriptors.page.fetchReportResults.asyncIterate as SinonStub
@@ -816,6 +842,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
             projectId: 'bogus',
           }
         );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListReportsRequest()
@@ -833,6 +860,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
       ];
       client.innerApiCalls.listReports = stubSimpleCall(expectedResponse);
       const [response] = await client.listReports(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listReports as SinonStub
@@ -852,6 +880,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
             projectId: 'bogus',
           }
         );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListReportsRequest()
@@ -885,6 +914,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listReports as SinonStub
@@ -904,6 +934,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
             projectId: 'bogus',
           }
         );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListReportsRequest()
@@ -920,6 +951,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
         expectedError
       );
       await assert.rejects(client.listReports(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.listReports as SinonStub
       ).getCall(0).args[0];
@@ -938,6 +970,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
             projectId: 'bogus',
           }
         );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListReportsRequest()
@@ -969,6 +1002,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
         });
       });
       const responses = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
         (client.descriptors.page.listReports.createStream as SinonStub)
@@ -992,6 +1026,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
             projectId: 'bogus',
           }
         );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListReportsRequest()
@@ -1021,6 +1056,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
         });
       });
       await assert.rejects(promise, expectedError);
+      assert(stub.calledOnce);
       assert(
         (client.descriptors.page.listReports.createStream as SinonStub)
           .getCall(0)
@@ -1043,6 +1079,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
             projectId: 'bogus',
           }
         );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListReportsRequest()
@@ -1065,6 +1102,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
       for await (const resource of iterable) {
         responses.push(resource!);
       }
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (client.descriptors.page.listReports.asyncIterate as SinonStub).getCall(
@@ -1089,6 +1127,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
             projectId: 'bogus',
           }
         );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListReportsRequest()
@@ -1111,6 +1150,7 @@ describe('v1.CloudChannelReportsServiceClient', () => {
           responses.push(resource!);
         }
       });
+      assert(stub.calledOnce);
       assert.deepStrictEqual(
         (client.descriptors.page.listReports.asyncIterate as SinonStub).getCall(
           0
