@@ -136,14 +136,16 @@
                     "ActiveDirectory": {
                       "options": {
                         "(google.api.resource).type": "netapp.googleapis.com/ActiveDirectory",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/activeDirectories/{active_directory}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/activeDirectories/{active_directory}",
+                        "(google.api.resource).plural": "activeDirectories",
+                        "(google.api.resource).singular": "activeDirectory"
                       },
                       "fields": {
                         "name": {
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "IDENTIFIER"
                           }
                         },
                         "createTime": {
@@ -264,6 +266,626 @@
                             "IN_USE": 4,
                             "DELETING": 5,
                             "ERROR": 6
+                          }
+                        }
+                      }
+                    },
+                    "Backup": {
+                      "options": {
+                        "(google.api.resource).type": "netapp.googleapis.com/Backup",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/backupVaults/{backup_vault}/backups/{backup}",
+                        "(google.api.resource).plural": "backups",
+                        "(google.api.resource).singular": "backup"
+                      },
+                      "oneofs": {
+                        "_sourceSnapshot": {
+                          "oneof": [
+                            "sourceSnapshot"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "volumeUsageBytes": {
+                          "type": "int64",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "backupType": {
+                          "type": "Type",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "sourceVolume": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/Volume"
+                          }
+                        },
+                        "sourceSnapshot": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/Snapshot",
+                            "proto3_optional": true
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 9
+                        },
+                        "chainStorageBytes": {
+                          "type": "int64",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "CREATING": 1,
+                            "UPLOADING": 2,
+                            "READY": 3,
+                            "DELETING": 4,
+                            "ERROR": 5,
+                            "UPDATING": 6
+                          }
+                        },
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "MANUAL": 1,
+                            "SCHEDULED": 2
+                          }
+                        }
+                      }
+                    },
+                    "ListBackupsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "netapp.googleapis.com/Backup"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListBackupsResponse": {
+                      "fields": {
+                        "backups": {
+                          "rule": "repeated",
+                          "type": "Backup",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetBackupRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/Backup"
+                          }
+                        }
+                      }
+                    },
+                    "CreateBackupRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "netapp.googleapis.com/Backup"
+                          }
+                        },
+                        "backupId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "backup": {
+                          "type": "Backup",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteBackupRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/Backup"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateBackupRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "backup": {
+                          "type": "Backup",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BackupPolicy": {
+                      "options": {
+                        "(google.api.resource).type": "netapp.googleapis.com/BackupPolicy",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/backupPolicies/{backup_policy}",
+                        "(google.api.resource).plural": "backupPolicies",
+                        "(google.api.resource).singular": "backupPolicy"
+                      },
+                      "oneofs": {
+                        "_dailyBackupLimit": {
+                          "oneof": [
+                            "dailyBackupLimit"
+                          ]
+                        },
+                        "_weeklyBackupLimit": {
+                          "oneof": [
+                            "weeklyBackupLimit"
+                          ]
+                        },
+                        "_monthlyBackupLimit": {
+                          "oneof": [
+                            "monthlyBackupLimit"
+                          ]
+                        },
+                        "_description": {
+                          "oneof": [
+                            "description"
+                          ]
+                        },
+                        "_enabled": {
+                          "oneof": [
+                            "enabled"
+                          ]
+                        },
+                        "_assignedVolumeCount": {
+                          "oneof": [
+                            "assignedVolumeCount"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "dailyBackupLimit": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "weeklyBackupLimit": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "monthlyBackupLimit": {
+                          "type": "int32",
+                          "id": 4,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "enabled": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "assignedVolumeCount": {
+                          "type": "int32",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 9
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "CREATING": 1,
+                            "READY": 2,
+                            "DELETING": 3,
+                            "ERROR": 4,
+                            "UPDATING": 5
+                          }
+                        }
+                      }
+                    },
+                    "CreateBackupPolicyRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "netapp.googleapis.com/BackupPolicy"
+                          }
+                        },
+                        "backupPolicy": {
+                          "type": "BackupPolicy",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "backupPolicyId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetBackupPolicyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/BackupPolicy"
+                          }
+                        }
+                      }
+                    },
+                    "ListBackupPoliciesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "netapp.googleapis.com/BackupPolicy"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListBackupPoliciesResponse": {
+                      "fields": {
+                        "backupPolicies": {
+                          "rule": "repeated",
+                          "type": "BackupPolicy",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "UpdateBackupPolicyRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "backupPolicy": {
+                          "type": "BackupPolicy",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteBackupPolicyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/BackupPolicy"
+                          }
+                        }
+                      }
+                    },
+                    "BackupVault": {
+                      "options": {
+                        "(google.api.resource).type": "netapp.googleapis.com/BackupVault",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/backupVaults/{backup_vault}",
+                        "(google.api.resource).plural": "backupVaults",
+                        "(google.api.resource).singular": "backupVault"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "CREATING": 1,
+                            "READY": 2,
+                            "DELETING": 3,
+                            "ERROR": 4,
+                            "UPDATING": 5
+                          }
+                        }
+                      }
+                    },
+                    "GetBackupVaultRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/BackupVault"
+                          }
+                        }
+                      }
+                    },
+                    "ListBackupVaultsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "netapp.googleapis.com/BackupVault"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListBackupVaultsResponse": {
+                      "fields": {
+                        "backupVaults": {
+                          "rule": "repeated",
+                          "type": "BackupVault",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "CreateBackupVaultRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "netapp.googleapis.com/BackupVault"
+                          }
+                        },
+                        "backupVaultId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "backupVault": {
+                          "type": "BackupVault",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteBackupVaultRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/BackupVault"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateBackupVaultRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "backupVault": {
+                          "type": "BackupVault",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -1117,6 +1739,360 @@
                               }
                             }
                           ]
+                        },
+                        "CreateBackupVault": {
+                          "requestType": "CreateBackupVaultRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/backupVaults",
+                            "(google.api.http).body": "backup_vault",
+                            "(google.api.method_signature)": "parent,backup_vault,backup_vault_id",
+                            "(google.longrunning.operation_info).response_type": "BackupVault",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/backupVaults",
+                                "body": "backup_vault"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,backup_vault,backup_vault_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "BackupVault",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetBackupVault": {
+                          "requestType": "GetBackupVaultRequest",
+                          "responseType": "BackupVault",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/backupVaults/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/backupVaults/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListBackupVaults": {
+                          "requestType": "ListBackupVaultsRequest",
+                          "responseType": "ListBackupVaultsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/backupVaults",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/backupVaults"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "UpdateBackupVault": {
+                          "requestType": "UpdateBackupVaultRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{backup_vault.name=projects/*/locations/*/backupVaults/*}",
+                            "(google.api.http).body": "backup_vault",
+                            "(google.api.method_signature)": "backup_vault,update_mask",
+                            "(google.longrunning.operation_info).response_type": "BackupVault",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{backup_vault.name=projects/*/locations/*/backupVaults/*}",
+                                "body": "backup_vault"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "backup_vault,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "BackupVault",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteBackupVault": {
+                          "requestType": "DeleteBackupVaultRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/backupVaults/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/backupVaults/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "CreateBackup": {
+                          "requestType": "CreateBackupRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/backupVaults/*}/backups",
+                            "(google.api.http).body": "backup",
+                            "(google.api.method_signature)": "parent,backup,backup_id",
+                            "(google.longrunning.operation_info).response_type": "Backup",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/backupVaults/*}/backups",
+                                "body": "backup"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,backup,backup_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Backup",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetBackup": {
+                          "requestType": "GetBackupRequest",
+                          "responseType": "Backup",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/backupVaults/*/backups/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/backupVaults/*/backups/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListBackups": {
+                          "requestType": "ListBackupsRequest",
+                          "responseType": "ListBackupsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/backupVaults/*}/backups",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/backupVaults/*}/backups"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "DeleteBackup": {
+                          "requestType": "DeleteBackupRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/backupVaults/*/backups/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/backupVaults/*/backups/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateBackup": {
+                          "requestType": "UpdateBackupRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{backup.name=projects/*/locations/*/backupVaults/*/backups/*}",
+                            "(google.api.http).body": "backup",
+                            "(google.api.method_signature)": "backup,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Backup",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{backup.name=projects/*/locations/*/backupVaults/*/backups/*}",
+                                "body": "backup"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "backup,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Backup",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "CreateBackupPolicy": {
+                          "requestType": "CreateBackupPolicyRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/backupPolicies",
+                            "(google.api.http).body": "backup_policy",
+                            "(google.api.method_signature)": "parent,backup_policy,backup_policy_id",
+                            "(google.longrunning.operation_info).response_type": "BackupPolicy",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/backupPolicies",
+                                "body": "backup_policy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,backup_policy,backup_policy_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "BackupPolicy",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetBackupPolicy": {
+                          "requestType": "GetBackupPolicyRequest",
+                          "responseType": "BackupPolicy",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/backupPolicies/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/backupPolicies/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListBackupPolicies": {
+                          "requestType": "ListBackupPoliciesRequest",
+                          "responseType": "ListBackupPoliciesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/backupPolicies",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/backupPolicies"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "UpdateBackupPolicy": {
+                          "requestType": "UpdateBackupPolicyRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{backup_policy.name=projects/*/locations/*/backupPolicies/*}",
+                            "(google.api.http).body": "backup_policy",
+                            "(google.api.method_signature)": "backup_policy,update_mask",
+                            "(google.longrunning.operation_info).response_type": "BackupPolicy",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{backup_policy.name=projects/*/locations/*/backupPolicies/*}",
+                                "body": "backup_policy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "backup_policy,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "BackupPolicy",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteBackupPolicy": {
+                          "requestType": "DeleteBackupPolicyRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/backupPolicies/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/backupPolicies/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -1339,14 +2315,16 @@
                     "KmsConfig": {
                       "options": {
                         "(google.api.resource).type": "netapp.googleapis.com/KmsConfig",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/kmsConfigs/{kms_config}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/kmsConfigs/{kms_config}",
+                        "(google.api.resource).plural": "kmsConfigs",
+                        "(google.api.resource).singular": "kmsConfig"
                       },
                       "fields": {
                         "name": {
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "IDENTIFIER"
                           }
                         },
                         "cryptoKeyName": {
@@ -1525,7 +2503,9 @@
                     "Replication": {
                       "options": {
                         "(google.api.resource).type": "netapp.googleapis.com/Replication",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/volumes/{volume}/replications/{replication}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/volumes/{volume}/replications/{replication}",
+                        "(google.api.resource).plural": "replications",
+                        "(google.api.resource).singular": "replication"
                       },
                       "oneofs": {
                         "_healthy": {
@@ -1544,7 +2524,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "IDENTIFIER"
                           }
                         },
                         "state": {
@@ -1982,14 +2962,16 @@
                     "Snapshot": {
                       "options": {
                         "(google.api.resource).type": "netapp.googleapis.com/Snapshot",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/volumes/{volume}/snapshots/{snapshot}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/volumes/{volume}/snapshots/{snapshot}",
+                        "(google.api.resource).plural": "snapshots",
+                        "(google.api.resource).singular": "snapshot"
                       },
                       "fields": {
                         "name": {
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "IDENTIFIER"
                           }
                         },
                         "state": {
@@ -2161,7 +3143,9 @@
                     "StoragePool": {
                       "options": {
                         "(google.api.resource).type": "netapp.googleapis.com/StoragePool",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/storagePools/{storage_pool}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/storagePools/{storage_pool}",
+                        "(google.api.resource).plural": "storagePools",
+                        "(google.api.resource).singular": "storagePool"
                       },
                       "oneofs": {
                         "_globalAccessAllowed": {
@@ -2175,7 +3159,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "IDENTIFIER"
                           }
                         },
                         "serviceLevel": {
@@ -2277,7 +3261,7 @@
                           "type": "bool",
                           "id": 17,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL",
+                            "deprecated": true,
                             "proto3_optional": true
                           }
                         }
@@ -2495,14 +3479,23 @@
                     "Volume": {
                       "options": {
                         "(google.api.resource).type": "netapp.googleapis.com/Volume",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/volumes/{volume}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/volumes/{volume}",
+                        "(google.api.resource).plural": "volumes",
+                        "(google.api.resource).singular": "volume"
+                      },
+                      "oneofs": {
+                        "_backupConfig": {
+                          "oneof": [
+                            "backupConfig"
+                          ]
+                        }
                       },
                       "fields": {
                         "name": {
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "IDENTIFIER"
                           }
                         },
                         "state": {
@@ -2707,6 +3700,13 @@
                           "id": 29,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "backupConfig": {
+                          "type": "BackupConfig",
+                          "id": 30,
+                          "options": {
+                            "proto3_optional": true
                           }
                         },
                         "restrictedActions": {
@@ -3153,7 +4153,8 @@
                       "oneofs": {
                         "source": {
                           "oneof": [
-                            "sourceSnapshot"
+                            "sourceSnapshot",
+                            "sourceBackup"
                           ]
                         }
                       },
@@ -3161,6 +4162,46 @@
                         "sourceSnapshot": {
                           "type": "string",
                           "id": 1
+                        },
+                        "sourceBackup": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "BackupConfig": {
+                      "oneofs": {
+                        "_scheduledBackupEnabled": {
+                          "oneof": [
+                            "scheduledBackupEnabled"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "backupPolicies": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/BackupPolicy"
+                          }
+                        },
+                        "backupVault": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/BackupVault"
+                          }
+                        },
+                        "scheduledBackupEnabled": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         }
                       }
                     }

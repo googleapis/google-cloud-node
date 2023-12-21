@@ -45,6 +45,21 @@
                 "getReplication"
               ]
             },
+            "GetBackupVault": {
+              "methods": [
+                "getBackupVault"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "getBackup"
+              ]
+            },
+            "GetBackupPolicy": {
+              "methods": [
+                "getBackupPolicy"
+              ]
+            },
             "CreateStoragePool": {
               "methods": [
                 "createStoragePool"
@@ -160,6 +175,51 @@
                 "reverseReplicationDirection"
               ]
             },
+            "CreateBackupVault": {
+              "methods": [
+                "createBackupVault"
+              ]
+            },
+            "UpdateBackupVault": {
+              "methods": [
+                "updateBackupVault"
+              ]
+            },
+            "DeleteBackupVault": {
+              "methods": [
+                "deleteBackupVault"
+              ]
+            },
+            "CreateBackup": {
+              "methods": [
+                "createBackup"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "deleteBackup"
+              ]
+            },
+            "UpdateBackup": {
+              "methods": [
+                "updateBackup"
+              ]
+            },
+            "CreateBackupPolicy": {
+              "methods": [
+                "createBackupPolicy"
+              ]
+            },
+            "UpdateBackupPolicy": {
+              "methods": [
+                "updateBackupPolicy"
+              ]
+            },
+            "DeleteBackupPolicy": {
+              "methods": [
+                "deleteBackupPolicy"
+              ]
+            },
             "ListStoragePools": {
               "methods": [
                 "listStoragePools",
@@ -200,6 +260,27 @@
                 "listReplications",
                 "listReplicationsStream",
                 "listReplicationsAsync"
+              ]
+            },
+            "ListBackupVaults": {
+              "methods": [
+                "listBackupVaults",
+                "listBackupVaultsStream",
+                "listBackupVaultsAsync"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "listBackups",
+                "listBackupsStream",
+                "listBackupsAsync"
+              ]
+            },
+            "ListBackupPolicies": {
+              "methods": [
+                "listBackupPolicies",
+                "listBackupPoliciesStream",
+                "listBackupPoliciesAsync"
               ]
             }
           }
@@ -242,6 +323,21 @@
                 "getReplication"
               ]
             },
+            "GetBackupVault": {
+              "methods": [
+                "getBackupVault"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "getBackup"
+              ]
+            },
+            "GetBackupPolicy": {
+              "methods": [
+                "getBackupPolicy"
+              ]
+            },
             "CreateStoragePool": {
               "methods": [
                 "createStoragePool"
@@ -357,6 +453,51 @@
                 "reverseReplicationDirection"
               ]
             },
+            "CreateBackupVault": {
+              "methods": [
+                "createBackupVault"
+              ]
+            },
+            "UpdateBackupVault": {
+              "methods": [
+                "updateBackupVault"
+              ]
+            },
+            "DeleteBackupVault": {
+              "methods": [
+                "deleteBackupVault"
+              ]
+            },
+            "CreateBackup": {
+              "methods": [
+                "createBackup"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "deleteBackup"
+              ]
+            },
+            "UpdateBackup": {
+              "methods": [
+                "updateBackup"
+              ]
+            },
+            "CreateBackupPolicy": {
+              "methods": [
+                "createBackupPolicy"
+              ]
+            },
+            "UpdateBackupPolicy": {
+              "methods": [
+                "updateBackupPolicy"
+              ]
+            },
+            "DeleteBackupPolicy": {
+              "methods": [
+                "deleteBackupPolicy"
+              ]
+            },
             "ListStoragePools": {
               "methods": [
                 "listStoragePools",
@@ -397,6 +538,27 @@
                 "listReplications",
                 "listReplicationsStream",
                 "listReplicationsAsync"
+              ]
+            },
+            "ListBackupVaults": {
+              "methods": [
+                "listBackupVaults",
+                "listBackupVaultsStream",
+                "listBackupVaultsAsync"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "listBackups",
+                "listBackupsStream",
+                "listBackupsAsync"
+              ]
+            },
+            "ListBackupPolicies": {
+              "methods": [
+                "listBackupPolicies",
+                "listBackupPoliciesStream",
+                "listBackupPoliciesAsync"
               ]
             }
           }
