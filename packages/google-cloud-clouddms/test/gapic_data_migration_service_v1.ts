@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1652,9 +1652,8 @@ describe('v1.DataMigrationServiceClient', () => {
       );
       client.innerApiCalls.describeConversionWorkspaceRevisions =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.describeConversionWorkspaceRevisions(
-        request
-      );
+      const [response] =
+        await client.describeConversionWorkspaceRevisions(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.describeConversionWorkspaceRevisions as SinonStub
