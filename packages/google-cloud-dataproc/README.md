@@ -143,9 +143,8 @@ function main(projectId, region, clusterName, jobFilePath) {
       clusterName: clusterName,
     };
 
-    const [deleteOperation] = await clusterClient.deleteCluster(
-      deleteClusterReq
-    );
+    const [deleteOperation] =
+      await clusterClient.deleteCluster(deleteClusterReq);
     await deleteOperation.promise();
 
     // Output a success message
