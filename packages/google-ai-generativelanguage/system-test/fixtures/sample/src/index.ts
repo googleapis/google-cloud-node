@@ -18,15 +18,27 @@
 
 import {
   DiscussServiceClient,
+  GenerativeServiceClient,
   ModelServiceClient,
+  PermissionServiceClient,
+  RetrieverServiceClient,
   TextServiceClient,
-} from '@google-ai/generativelanguage';
+} from '@google-cloud/generativelanguage';
 
 // check that the client class type name can be used
 function doStuffWithDiscussServiceClient(client: DiscussServiceClient) {
   client.close();
 }
+function doStuffWithGenerativeServiceClient(client: GenerativeServiceClient) {
+  client.close();
+}
 function doStuffWithModelServiceClient(client: ModelServiceClient) {
+  client.close();
+}
+function doStuffWithPermissionServiceClient(client: PermissionServiceClient) {
+  client.close();
+}
+function doStuffWithRetrieverServiceClient(client: RetrieverServiceClient) {
   client.close();
 }
 function doStuffWithTextServiceClient(client: TextServiceClient) {
@@ -38,8 +50,17 @@ function main() {
   const discussServiceClient = new DiscussServiceClient();
   doStuffWithDiscussServiceClient(discussServiceClient);
   // check that the client instance can be created
+  const generativeServiceClient = new GenerativeServiceClient();
+  doStuffWithGenerativeServiceClient(generativeServiceClient);
+  // check that the client instance can be created
   const modelServiceClient = new ModelServiceClient();
   doStuffWithModelServiceClient(modelServiceClient);
+  // check that the client instance can be created
+  const permissionServiceClient = new PermissionServiceClient();
+  doStuffWithPermissionServiceClient(permissionServiceClient);
+  // check that the client instance can be created
+  const retrieverServiceClient = new RetrieverServiceClient();
+  doStuffWithRetrieverServiceClient(retrieverServiceClient);
   // check that the client instance can be created
   const textServiceClient = new TextServiceClient();
   doStuffWithTextServiceClient(textServiceClient);

@@ -17,11 +17,17 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const generativelanguage = require('@google-ai/generativelanguage');
+const generativelanguage = require('@google-cloud/generativelanguage');
 
 function main() {
   const discussServiceClient = new generativelanguage.DiscussServiceClient();
+  const generativeServiceClient =
+    new generativelanguage.GenerativeServiceClient();
   const modelServiceClient = new generativelanguage.ModelServiceClient();
+  const permissionServiceClient =
+    new generativelanguage.PermissionServiceClient();
+  const retrieverServiceClient =
+    new generativelanguage.RetrieverServiceClient();
   const textServiceClient = new generativelanguage.TextServiceClient();
 }
 
