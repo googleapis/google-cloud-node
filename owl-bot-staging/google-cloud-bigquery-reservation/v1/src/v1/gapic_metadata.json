@@ -1,0 +1,253 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.bigquery.reservation.v1",
+  "libraryPackage": "@google-cloud/bigquery-reservation",
+  "services": {
+    "ReservationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ReservationServiceClient",
+          "rpcs": {
+            "CreateReservation": {
+              "methods": [
+                "createReservation"
+              ]
+            },
+            "GetReservation": {
+              "methods": [
+                "getReservation"
+              ]
+            },
+            "DeleteReservation": {
+              "methods": [
+                "deleteReservation"
+              ]
+            },
+            "UpdateReservation": {
+              "methods": [
+                "updateReservation"
+              ]
+            },
+            "CreateCapacityCommitment": {
+              "methods": [
+                "createCapacityCommitment"
+              ]
+            },
+            "GetCapacityCommitment": {
+              "methods": [
+                "getCapacityCommitment"
+              ]
+            },
+            "DeleteCapacityCommitment": {
+              "methods": [
+                "deleteCapacityCommitment"
+              ]
+            },
+            "UpdateCapacityCommitment": {
+              "methods": [
+                "updateCapacityCommitment"
+              ]
+            },
+            "SplitCapacityCommitment": {
+              "methods": [
+                "splitCapacityCommitment"
+              ]
+            },
+            "MergeCapacityCommitments": {
+              "methods": [
+                "mergeCapacityCommitments"
+              ]
+            },
+            "CreateAssignment": {
+              "methods": [
+                "createAssignment"
+              ]
+            },
+            "DeleteAssignment": {
+              "methods": [
+                "deleteAssignment"
+              ]
+            },
+            "MoveAssignment": {
+              "methods": [
+                "moveAssignment"
+              ]
+            },
+            "UpdateAssignment": {
+              "methods": [
+                "updateAssignment"
+              ]
+            },
+            "GetBiReservation": {
+              "methods": [
+                "getBiReservation"
+              ]
+            },
+            "UpdateBiReservation": {
+              "methods": [
+                "updateBiReservation"
+              ]
+            },
+            "ListReservations": {
+              "methods": [
+                "listReservations",
+                "listReservationsStream",
+                "listReservationsAsync"
+              ]
+            },
+            "ListCapacityCommitments": {
+              "methods": [
+                "listCapacityCommitments",
+                "listCapacityCommitmentsStream",
+                "listCapacityCommitmentsAsync"
+              ]
+            },
+            "ListAssignments": {
+              "methods": [
+                "listAssignments",
+                "listAssignmentsStream",
+                "listAssignmentsAsync"
+              ]
+            },
+            "SearchAssignments": {
+              "methods": [
+                "searchAssignments",
+                "searchAssignmentsStream",
+                "searchAssignmentsAsync"
+              ]
+            },
+            "SearchAllAssignments": {
+              "methods": [
+                "searchAllAssignments",
+                "searchAllAssignmentsStream",
+                "searchAllAssignmentsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ReservationServiceClient",
+          "rpcs": {
+            "CreateReservation": {
+              "methods": [
+                "createReservation"
+              ]
+            },
+            "GetReservation": {
+              "methods": [
+                "getReservation"
+              ]
+            },
+            "DeleteReservation": {
+              "methods": [
+                "deleteReservation"
+              ]
+            },
+            "UpdateReservation": {
+              "methods": [
+                "updateReservation"
+              ]
+            },
+            "CreateCapacityCommitment": {
+              "methods": [
+                "createCapacityCommitment"
+              ]
+            },
+            "GetCapacityCommitment": {
+              "methods": [
+                "getCapacityCommitment"
+              ]
+            },
+            "DeleteCapacityCommitment": {
+              "methods": [
+                "deleteCapacityCommitment"
+              ]
+            },
+            "UpdateCapacityCommitment": {
+              "methods": [
+                "updateCapacityCommitment"
+              ]
+            },
+            "SplitCapacityCommitment": {
+              "methods": [
+                "splitCapacityCommitment"
+              ]
+            },
+            "MergeCapacityCommitments": {
+              "methods": [
+                "mergeCapacityCommitments"
+              ]
+            },
+            "CreateAssignment": {
+              "methods": [
+                "createAssignment"
+              ]
+            },
+            "DeleteAssignment": {
+              "methods": [
+                "deleteAssignment"
+              ]
+            },
+            "MoveAssignment": {
+              "methods": [
+                "moveAssignment"
+              ]
+            },
+            "UpdateAssignment": {
+              "methods": [
+                "updateAssignment"
+              ]
+            },
+            "GetBiReservation": {
+              "methods": [
+                "getBiReservation"
+              ]
+            },
+            "UpdateBiReservation": {
+              "methods": [
+                "updateBiReservation"
+              ]
+            },
+            "ListReservations": {
+              "methods": [
+                "listReservations",
+                "listReservationsStream",
+                "listReservationsAsync"
+              ]
+            },
+            "ListCapacityCommitments": {
+              "methods": [
+                "listCapacityCommitments",
+                "listCapacityCommitmentsStream",
+                "listCapacityCommitmentsAsync"
+              ]
+            },
+            "ListAssignments": {
+              "methods": [
+                "listAssignments",
+                "listAssignmentsStream",
+                "listAssignmentsAsync"
+              ]
+            },
+            "SearchAssignments": {
+              "methods": [
+                "searchAssignments",
+                "searchAssignmentsStream",
+                "searchAssignmentsAsync"
+              ]
+            },
+            "SearchAllAssignments": {
+              "methods": [
+                "searchAllAssignments",
+                "searchAllAssignmentsStream",
+                "searchAllAssignmentsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
