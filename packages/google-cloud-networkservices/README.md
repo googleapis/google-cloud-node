@@ -94,9 +94,8 @@ async function callListEndpointPolicies() {
   };
 
   // Run request
-  const iterable = await networkservicesClient.listEndpointPoliciesAsync(
-    request
-  );
+  const iterable =
+    await networkservicesClient.listEndpointPoliciesAsync(request);
   for await (const response of iterable) {
     console.log(response);
   }
