@@ -1,0 +1,5 @@
+[
+  "../../protos/google/cloud/notebooks/v1beta1/environment.proto",
+  "../../protos/google/cloud/notebooks/v1beta1/instance.proto",
+  "../../protos/google/cloud/notebooks/v1beta1/service.proto"
+]
