@@ -179,6 +179,12 @@ export class CloudCatalogClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      billingAccountPathTemplate: new this._gaxModule.PathTemplate(
+        'billingAccounts/{billing_account}'
+      ),
+      organizationBillingAccountPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/billingAccounts/{billing_account}'
+      ),
       projectBillingInfoPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/billingInfo'
       ),
@@ -755,6 +761,75 @@ export class CloudCatalogClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified billingAccount resource name string.
+   *
+   * @param {string} billing_account
+   * @returns {string} Resource name string.
+   */
+  billingAccountPath(billingAccount: string) {
+    return this.pathTemplates.billingAccountPathTemplate.render({
+      billing_account: billingAccount,
+    });
+  }
+
+  /**
+   * Parse the billing_account from BillingAccount resource.
+   *
+   * @param {string} billingAccountName
+   *   A fully-qualified path representing billing_account resource.
+   * @returns {string} A string representing the billing_account.
+   */
+  matchBillingAccountFromBillingAccountName(billingAccountName: string) {
+    return this.pathTemplates.billingAccountPathTemplate.match(
+      billingAccountName
+    ).billing_account;
+  }
+
+  /**
+   * Return a fully-qualified organizationBillingAccount resource name string.
+   *
+   * @param {string} organization
+   * @param {string} billing_account
+   * @returns {string} Resource name string.
+   */
+  organizationBillingAccountPath(organization: string, billingAccount: string) {
+    return this.pathTemplates.organizationBillingAccountPathTemplate.render({
+      organization: organization,
+      billing_account: billingAccount,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationBillingAccount resource.
+   *
+   * @param {string} organizationBillingAccountName
+   *   A fully-qualified path representing organization_billing_account resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationBillingAccountName(
+    organizationBillingAccountName: string
+  ) {
+    return this.pathTemplates.organizationBillingAccountPathTemplate.match(
+      organizationBillingAccountName
+    ).organization;
+  }
+
+  /**
+   * Parse the billing_account from OrganizationBillingAccount resource.
+   *
+   * @param {string} organizationBillingAccountName
+   *   A fully-qualified path representing organization_billing_account resource.
+   * @returns {string} A string representing the billing_account.
+   */
+  matchBillingAccountFromOrganizationBillingAccountName(
+    organizationBillingAccountName: string
+  ) {
+    return this.pathTemplates.organizationBillingAccountPathTemplate.match(
+      organizationBillingAccountName
+    ).billing_account;
+  }
 
   /**
    * Return a fully-qualified projectBillingInfo resource name string.
