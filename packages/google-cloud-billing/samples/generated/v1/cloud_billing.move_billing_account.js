@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(billingAccount) {
-  // [START cloudbilling_v1_generated_CloudBilling_CreateBillingAccount_async]
+function main(name, destinationParent) {
+  // [START cloudbilling_v1_generated_CloudBilling_MoveBillingAccount_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,21 +29,18 @@ function main(billingAccount) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The billing account resource to create.
-   *  Currently CreateBillingAccount only supports subaccount creation, so
-   *  any created billing accounts must be under a provided parent billing
-   *  account.
+   *  Required. The resource name of the billing account to move.
+   *  Must be of the form `billingAccounts/{billing_account_id}`.
+   *  The specified billing account cannot be a subaccount, since a subaccount
+   *  always belongs to the same organization as its parent account.
    */
-  // const billingAccount = {}
+  // const name = 'abc123'
   /**
-   *  Optional. The parent to create a billing account from.
-   *  Format:
-   *    - `organizations/{organization_id}`, for example,
-   *      `organizations/12345678`
-   *    - `billingAccounts/{billing_account_id}`, for example,
-   *       `billingAccounts/012345-567890-ABCDEF`
+   *  Required. The resource name of the Organization to reparent
+   *  the billing account under.
+   *  Must be of the form `organizations/{organization_id}`.
    */
-  // const parent = 'abc123'
+  // const destinationParent = 'abc123'
 
   // Imports the Billing library
   const {CloudBillingClient} = require('@google-cloud/billing').v1;
@@ -51,19 +48,20 @@ function main(billingAccount) {
   // Instantiates a client
   const billingClient = new CloudBillingClient();
 
-  async function callCreateBillingAccount() {
+  async function callMoveBillingAccount() {
     // Construct request
     const request = {
-      billingAccount,
+      name,
+      destinationParent,
     };
 
     // Run request
-    const response = await billingClient.createBillingAccount(request);
+    const response = await billingClient.moveBillingAccount(request);
     console.log(response);
   }
 
-  callCreateBillingAccount();
-  // [END cloudbilling_v1_generated_CloudBilling_CreateBillingAccount_async]
+  callMoveBillingAccount();
+  // [END cloudbilling_v1_generated_CloudBilling_MoveBillingAccount_async]
 }
 
 process.on('unhandledRejection', err => {
