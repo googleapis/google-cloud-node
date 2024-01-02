@@ -254,6 +254,7 @@
                           "type": "ReportedUsage",
                           "id": 3,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
@@ -286,22 +287,22 @@
                           "requestType": "SynthesizeLongAudioRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
-                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/voices/*}:SynthesizeLongAudio",
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}:synthesizeLongAudio",
                             "(google.api.http).body": "*",
-                            "(google.longrunning.operation_info).response_type": "SynthesizeLongAudioResponse",
-                            "(google.longrunning.operation_info).metadata_type": "SynthesizeLongAudioMetadata"
+                            "(google.longrunning.operation_info).response_type": "google.cloud.texttospeech.v1.SynthesizeLongAudioResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "post": "/v1/{parent=projects/*/locations/*/voices/*}:SynthesizeLongAudio",
+                                "post": "/v1/{parent=projects/*/locations/*}:synthesizeLongAudio",
                                 "body": "*"
                               }
                             },
                             {
                               "(google.longrunning.operation_info)": {
-                                "response_type": "SynthesizeLongAudioResponse",
-                                "metadata_type": "SynthesizeLongAudioMetadata"
+                                "response_type": "google.cloud.texttospeech.v1.SynthesizeLongAudioResponse",
+                                "metadata_type": "google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata"
                               }
                             }
                           ]
@@ -355,7 +356,10 @@
                         },
                         "lastUpdateTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "progressPercentage": {
                           "type": "double",

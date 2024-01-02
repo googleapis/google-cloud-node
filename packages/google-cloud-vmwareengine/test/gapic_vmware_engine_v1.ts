@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -8221,9 +8221,8 @@ describe('v1.VmwareEngineClient', () => {
       ];
       client.innerApiCalls.listPrivateConnectionPeeringRoutes =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.listPrivateConnectionPeeringRoutes(
-        request
-      );
+      const [response] =
+        await client.listPrivateConnectionPeeringRoutes(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listPrivateConnectionPeeringRoutes as SinonStub
