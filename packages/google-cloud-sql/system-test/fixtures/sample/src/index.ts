@@ -48,7 +48,6 @@ function doStuffWithSqlFlagsServiceClient(client: SqlFlagsServiceClient) {
   client.close();
 }
 
-
 function doStuffWithSqlInstancesServiceClient(
   client: SqlInstancesServiceClient
 ) {
@@ -82,14 +81,14 @@ function main() {
   const sqlDatabasesServiceClient = new SqlDatabasesServiceClient();
   doStuffWithSqlDatabasesServiceClient(sqlDatabasesServiceClient);
   // check that the client instance can be created
-  
+
   // check that the client instance can be created
   const sqlFlagsServiceClient = new SqlFlagsServiceClient();
   doStuffWithSqlFlagsServiceClient(sqlFlagsServiceClient);
   // check that the client instance can be created
-  
+
   // check that the client instance can be created
-  
+
   // check that the client instance can be created
   const sqlInstancesServiceClient = new SqlInstancesServiceClient();
   doStuffWithSqlInstancesServiceClient(sqlInstancesServiceClient);
@@ -97,7 +96,7 @@ function main() {
   const sqlOperationsServiceClient = new SqlOperationsServiceClient();
   doStuffWithSqlOperationsServiceClient(sqlOperationsServiceClient);
   // check that the client instance can be created
-  
+
   // check that the client instance can be created
   const sqlSslCertsServiceClient = new SqlSslCertsServiceClient();
   doStuffWithSqlSslCertsServiceClient(sqlSslCertsServiceClient);
