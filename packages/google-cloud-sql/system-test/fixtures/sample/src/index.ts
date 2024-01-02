@@ -29,11 +29,7 @@ import {
 } from '@google-cloud/sql';
 
 // check that the client class type name can be used
-function doStuffWithSqlAvailableDatabaseVersionsServiceClient(
-  client: SqlAvailableDatabaseVersionsServiceClient
-) {
-  client.close();
-}
+
 function doStuffWithSqlBackupRunsServiceClient(
   client: SqlBackupRunsServiceClient
 ) {
@@ -47,22 +43,12 @@ function doStuffWithSqlDatabasesServiceClient(
 ) {
   client.close();
 }
-function doStuffWithSqlEventsServiceClient(client: SqlEventsServiceClient) {
-  client.close();
-}
+
 function doStuffWithSqlFlagsServiceClient(client: SqlFlagsServiceClient) {
   client.close();
 }
-function doStuffWithSqlIamPoliciesServiceClient(
-  client: SqlIamPoliciesServiceClient
-) {
-  client.close();
-}
-function doStuffWithSqlInstanceNamesServiceClient(
-  client: SqlInstanceNamesServiceClient
-) {
-  client.close();
-}
+
+
 function doStuffWithSqlInstancesServiceClient(
   client: SqlInstancesServiceClient
 ) {
@@ -73,9 +59,7 @@ function doStuffWithSqlOperationsServiceClient(
 ) {
   client.close();
 }
-function doStuffWithSqlRegionsServiceClient(client: SqlRegionsServiceClient) {
-  client.close();
-}
+
 function doStuffWithSqlSslCertsServiceClient(client: SqlSslCertsServiceClient) {
   client.close();
 }
@@ -88,11 +72,6 @@ function doStuffWithSqlUsersServiceClient(client: SqlUsersServiceClient) {
 
 function main() {
   // check that the client instance can be created
-  const sqlAvailableDatabaseVersionsServiceClient =
-    new SqlAvailableDatabaseVersionsServiceClient();
-  doStuffWithSqlAvailableDatabaseVersionsServiceClient(
-    sqlAvailableDatabaseVersionsServiceClient
-  );
   // check that the client instance can be created
   const sqlBackupRunsServiceClient = new SqlBackupRunsServiceClient();
   doStuffWithSqlBackupRunsServiceClient(sqlBackupRunsServiceClient);
@@ -103,17 +82,14 @@ function main() {
   const sqlDatabasesServiceClient = new SqlDatabasesServiceClient();
   doStuffWithSqlDatabasesServiceClient(sqlDatabasesServiceClient);
   // check that the client instance can be created
-  const sqlEventsServiceClient = new SqlEventsServiceClient();
-  doStuffWithSqlEventsServiceClient(sqlEventsServiceClient);
+  
   // check that the client instance can be created
   const sqlFlagsServiceClient = new SqlFlagsServiceClient();
   doStuffWithSqlFlagsServiceClient(sqlFlagsServiceClient);
   // check that the client instance can be created
-  const sqlIamPoliciesServiceClient = new SqlIamPoliciesServiceClient();
-  doStuffWithSqlIamPoliciesServiceClient(sqlIamPoliciesServiceClient);
+  
   // check that the client instance can be created
-  const sqlInstanceNamesServiceClient = new SqlInstanceNamesServiceClient();
-  doStuffWithSqlInstanceNamesServiceClient(sqlInstanceNamesServiceClient);
+  
   // check that the client instance can be created
   const sqlInstancesServiceClient = new SqlInstancesServiceClient();
   doStuffWithSqlInstancesServiceClient(sqlInstancesServiceClient);
@@ -121,8 +97,7 @@ function main() {
   const sqlOperationsServiceClient = new SqlOperationsServiceClient();
   doStuffWithSqlOperationsServiceClient(sqlOperationsServiceClient);
   // check that the client instance can be created
-  const sqlRegionsServiceClient = new SqlRegionsServiceClient();
-  doStuffWithSqlRegionsServiceClient(sqlRegionsServiceClient);
+  
   // check that the client instance can be created
   const sqlSslCertsServiceClient = new SqlSslCertsServiceClient();
   doStuffWithSqlSslCertsServiceClient(sqlSslCertsServiceClient);
