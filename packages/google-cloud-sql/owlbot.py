@@ -25,8 +25,8 @@ s.replace("packages/google-cloud-sql/src/*/index.ts", r"export {SqlEventsService
 s.replace("packages/google-cloud-sql/src/*/index.ts", r"export {SqlIamPoliciesServiceClient} from '\.\/sql_iam_policies_service_client';", "")
 s.replace("packages/google-cloud-sql/src/*/index.ts", r"export {SqlInstanceNamesServiceClient} from '\.\/sql_instance_names_service_client';", "")
 s.replace("packages/google-cloud-sql/src/*/index.ts", r"export {SqlRegionsServiceClient} from '\.\/sql_regions_service_client';", "")
-s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.js", r"""const sqlAvailableDatabaseVersionsServiceClient = 
-          new sql\.SqlAvailableDatabaseVersionsServiceClient\(\);""", "")
+s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.js", r"""const sqlAvailableDatabaseVersionsServiceClient =
+    new sql\.SqlAvailableDatabaseVersionsServiceClient\(\);""", "")
 s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.js", r"const sqlEventsServiceClient = new sql\.SqlEventsServiceClient\(\);", "")
 s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.js", r"const sqlIamPoliciesServiceClient = new sql\.SqlIamPoliciesServiceClient\(\);", "")
 s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.js", r"const sqlInstanceNamesServiceClient = new sql\.SqlInstanceNamesServiceClient\(\);", "")
@@ -47,11 +47,11 @@ s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", 
 s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", r"""function doStuffWithSqlIamPoliciesServiceClient\(
   client: SqlIamPoliciesServiceClient
 \) {
-  client\.close();
+  client\.close\(\);
 }""", "")
-s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", r"""function doStuffWithSqlInstanceNamesServiceClient(
+s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", r"""function doStuffWithSqlInstanceNamesServiceClient\(
   client: SqlInstanceNamesServiceClient
-) {
+\) {
   client\.close\(\);
 }""", "")
 s.replace("packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts", r"""function doStuffWithSqlRegionsServiceClient\(client: SqlRegionsServiceClient\) {
