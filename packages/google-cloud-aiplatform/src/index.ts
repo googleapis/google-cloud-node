@@ -67,8 +67,10 @@ const FeatureRegistryServiceClient = v1.FeatureRegistryServiceClient;
 type FeatureRegistryServiceClient = v1.FeatureRegistryServiceClient;
 const LlmUtilityServiceClient = v1.LlmUtilityServiceClient;
 type LlmUtilityServiceClient = v1.LlmUtilityServiceClient;
-const DeploymentResourcePoolServiceClient = v1.DeploymentResourcePoolServiceClient;
-type DeploymentResourcePoolServiceClient = v1.DeploymentResourcePoolServiceClient;
+const DeploymentResourcePoolServiceClient =
+  v1.DeploymentResourcePoolServiceClient;
+type DeploymentResourcePoolServiceClient =
+  v1.DeploymentResourcePoolServiceClient;
 export {
   v1beta1,
   v1,
