@@ -20,7 +20,15 @@
         }
       },
       "methods": {
+        "AttachNetworkEndpoints": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "Delete": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DetachNetworkEndpoints": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
@@ -33,6 +41,10 @@
           "retry_params_name": "default"
         },
         "List": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListNetworkEndpoints": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

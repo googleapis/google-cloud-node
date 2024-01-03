@@ -250,6 +250,157 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
     });
   });
 
+  describe('announce', () => {
+    it('invokes announce without error', async () => {
+      const client =
+        new publicadvertisedprefixesModule.v1.PublicAdvertisedPrefixesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AnnouncePublicAdvertisedPrefixeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AnnouncePublicAdvertisedPrefixeRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AnnouncePublicAdvertisedPrefixeRequest',
+        ['publicAdvertisedPrefix']
+      );
+      request.publicAdvertisedPrefix = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&public_advertised_prefix=${defaultValue2}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.announce = stubSimpleCall(expectedResponse);
+      const [response] = await client.announce(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.announce as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.announce as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes announce without error using callback', async () => {
+      const client =
+        new publicadvertisedprefixesModule.v1.PublicAdvertisedPrefixesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AnnouncePublicAdvertisedPrefixeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AnnouncePublicAdvertisedPrefixeRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AnnouncePublicAdvertisedPrefixeRequest',
+        ['publicAdvertisedPrefix']
+      );
+      request.publicAdvertisedPrefix = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&public_advertised_prefix=${defaultValue2}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.announce =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.announce(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.announce as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.announce as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes announce with error', async () => {
+      const client =
+        new publicadvertisedprefixesModule.v1.PublicAdvertisedPrefixesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AnnouncePublicAdvertisedPrefixeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AnnouncePublicAdvertisedPrefixeRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AnnouncePublicAdvertisedPrefixeRequest',
+        ['publicAdvertisedPrefix']
+      );
+      request.publicAdvertisedPrefix = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&public_advertised_prefix=${defaultValue2}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.announce = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.announce(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.announce as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.announce as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes announce with closed client', async () => {
+      const client =
+        new publicadvertisedprefixesModule.v1.PublicAdvertisedPrefixesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AnnouncePublicAdvertisedPrefixeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AnnouncePublicAdvertisedPrefixeRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AnnouncePublicAdvertisedPrefixeRequest',
+        ['publicAdvertisedPrefix']
+      );
+      request.publicAdvertisedPrefix = defaultValue2;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.announce(request), expectedError);
+    });
+  });
+
   describe('delete', () => {
     it('invokes delete without error', async () => {
       const client =
@@ -823,6 +974,157 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
+    });
+  });
+
+  describe('withdraw', () => {
+    it('invokes withdraw without error', async () => {
+      const client =
+        new publicadvertisedprefixesModule.v1.PublicAdvertisedPrefixesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.WithdrawPublicAdvertisedPrefixeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.WithdrawPublicAdvertisedPrefixeRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.WithdrawPublicAdvertisedPrefixeRequest',
+        ['publicAdvertisedPrefix']
+      );
+      request.publicAdvertisedPrefix = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&public_advertised_prefix=${defaultValue2}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.withdraw = stubSimpleCall(expectedResponse);
+      const [response] = await client.withdraw(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.withdraw as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.withdraw as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes withdraw without error using callback', async () => {
+      const client =
+        new publicadvertisedprefixesModule.v1.PublicAdvertisedPrefixesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.WithdrawPublicAdvertisedPrefixeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.WithdrawPublicAdvertisedPrefixeRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.WithdrawPublicAdvertisedPrefixeRequest',
+        ['publicAdvertisedPrefix']
+      );
+      request.publicAdvertisedPrefix = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&public_advertised_prefix=${defaultValue2}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.withdraw =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.withdraw(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.withdraw as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.withdraw as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes withdraw with error', async () => {
+      const client =
+        new publicadvertisedprefixesModule.v1.PublicAdvertisedPrefixesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.WithdrawPublicAdvertisedPrefixeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.WithdrawPublicAdvertisedPrefixeRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.WithdrawPublicAdvertisedPrefixeRequest',
+        ['publicAdvertisedPrefix']
+      );
+      request.publicAdvertisedPrefix = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&public_advertised_prefix=${defaultValue2}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.withdraw = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.withdraw(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.withdraw as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.withdraw as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes withdraw with closed client', async () => {
+      const client =
+        new publicadvertisedprefixesModule.v1.PublicAdvertisedPrefixesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.WithdrawPublicAdvertisedPrefixeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.WithdrawPublicAdvertisedPrefixeRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.WithdrawPublicAdvertisedPrefixeRequest',
+        ['publicAdvertisedPrefix']
+      );
+      request.publicAdvertisedPrefix = defaultValue2;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.withdraw(request), expectedError);
     });
   });
 

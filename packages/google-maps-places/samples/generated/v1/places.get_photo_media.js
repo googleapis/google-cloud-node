@@ -29,9 +29,12 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of a photo. It is returned in Place's
-   *  photos.name field. Format:
-   *  places/<place_id>/photos/<photo_reference>/media.
+   *  Required. The resource name of a photo media in the format:
+   *  `places/{place_id}/photos/{photo_reference}/media`.
+   *  The resource name of a photo as returned in a Place object's `photos.name`
+   *  field comes with the format
+   *  `places/{place_id}/photos/{photo_reference}`. You need to append `/media`
+   *  at the end of the photo resource to get the photo media resource name.
    */
   // const name = 'abc123'
   /**
@@ -64,7 +67,7 @@ function main(name) {
    *  Optional. If set, skip the default HTTP redirect behavior and render a text
    *  format (for example, in JSON format for HTTP use case) response. If not
    *  set, an HTTP redirect will be issued to redirect the call to the image
-   *  midea. This option is ignored for non-HTTP requests.
+   *  media. This option is ignored for non-HTTP requests.
    */
   // const skipHttpRedirect = true
 

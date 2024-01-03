@@ -178,14 +178,15 @@ export class AdvisoryNotificationsServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      locationPathTemplate: new this._gaxModule.PathTemplate(
+      organizationLocationPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/locations/{location}'
       ),
-      notificationPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/notifications/{notification}'
-      ),
-      organizationPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}'
+      organizationLocationNotificationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/notifications/{notification}'
+        ),
+      projectLocationNotificationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/notifications/{notification}'
       ),
       settingsPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/locations/{location}/settings'
@@ -349,7 +350,8 @@ export class AdvisoryNotificationsServiceClient {
    * @param {string} request.name
    *   Required. A name of the notification to retrieve.
    *   Format:
-   *   organizations/{organization}/locations/{location}/notifications/{notification}.
+   *   organizations/{organization}/locations/{location}/notifications/{notification}
+   *   or projects/{projects}/locations/{location}/notifications/{notification}.
    * @param {string} request.languageCode
    *   ISO code for requested localization language. If unset, will be
    *   interpereted as "en". If the requested language is valid, but not supported
@@ -647,7 +649,8 @@ export class AdvisoryNotificationsServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent, which owns this collection of notifications.
-   *   Must be of the form "organizations/{organization}/locations/{location}".
+   *   Must be of the form "organizations/{organization}/locations/{location}"
+   *   or "projects/{project}/locations/{location}"
    * @param {number} request.pageSize
    *   The maximum number of notifications to return. The service may return
    *   fewer than this value. If unspecified or equal to 0, at most 50
@@ -759,7 +762,8 @@ export class AdvisoryNotificationsServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent, which owns this collection of notifications.
-   *   Must be of the form "organizations/{organization}/locations/{location}".
+   *   Must be of the form "organizations/{organization}/locations/{location}"
+   *   or "projects/{project}/locations/{location}"
    * @param {number} request.pageSize
    *   The maximum number of notifications to return. The service may return
    *   fewer than this value. If unspecified or equal to 0, at most 50
@@ -819,7 +823,8 @@ export class AdvisoryNotificationsServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent, which owns this collection of notifications.
-   *   Must be of the form "organizations/{organization}/locations/{location}".
+   *   Must be of the form "organizations/{organization}/locations/{location}"
+   *   or "projects/{project}/locations/{location}"
    * @param {number} request.pageSize
    *   The maximum number of notifications to return. The service may return
    *   fewer than this value. If unspecified or equal to 0, at most 50
@@ -876,120 +881,177 @@ export class AdvisoryNotificationsServiceClient {
   // --------------------
 
   /**
-   * Return a fully-qualified location resource name string.
+   * Return a fully-qualified organizationLocation resource name string.
    *
    * @param {string} organization
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(organization: string, location: string) {
-    return this.pathTemplates.locationPathTemplate.render({
+  organizationLocationPath(organization: string, location: string) {
+    return this.pathTemplates.organizationLocationPathTemplate.render({
       organization: organization,
       location: location,
     });
   }
 
   /**
-   * Parse the organization from Location resource.
+   * Parse the organization from OrganizationLocation resource.
    *
-   * @param {string} locationName
-   *   A fully-qualified path representing Location resource.
+   * @param {string} organizationLocationName
+   *   A fully-qualified path representing organization_location resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromLocationName(locationName: string) {
-    return this.pathTemplates.locationPathTemplate.match(locationName)
-      .organization;
+  matchOrganizationFromOrganizationLocationName(
+    organizationLocationName: string
+  ) {
+    return this.pathTemplates.organizationLocationPathTemplate.match(
+      organizationLocationName
+    ).organization;
   }
 
   /**
-   * Parse the location from Location resource.
+   * Parse the location from OrganizationLocation resource.
    *
-   * @param {string} locationName
-   *   A fully-qualified path representing Location resource.
+   * @param {string} organizationLocationName
+   *   A fully-qualified path representing organization_location resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromLocationName(locationName: string) {
-    return this.pathTemplates.locationPathTemplate.match(locationName).location;
+  matchLocationFromOrganizationLocationName(organizationLocationName: string) {
+    return this.pathTemplates.organizationLocationPathTemplate.match(
+      organizationLocationName
+    ).location;
   }
 
   /**
-   * Return a fully-qualified notification resource name string.
+   * Return a fully-qualified organizationLocationNotification resource name string.
    *
    * @param {string} organization
    * @param {string} location
    * @param {string} notification
    * @returns {string} Resource name string.
    */
-  notificationPath(
+  organizationLocationNotificationPath(
     organization: string,
     location: string,
     notification: string
   ) {
-    return this.pathTemplates.notificationPathTemplate.render({
-      organization: organization,
+    return this.pathTemplates.organizationLocationNotificationPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        notification: notification,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationNotification resource.
+   *
+   * @param {string} organizationLocationNotificationName
+   *   A fully-qualified path representing organization_location_notification resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationNotificationName(
+    organizationLocationNotificationName: string
+  ) {
+    return this.pathTemplates.organizationLocationNotificationPathTemplate.match(
+      organizationLocationNotificationName
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationNotification resource.
+   *
+   * @param {string} organizationLocationNotificationName
+   *   A fully-qualified path representing organization_location_notification resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationNotificationName(
+    organizationLocationNotificationName: string
+  ) {
+    return this.pathTemplates.organizationLocationNotificationPathTemplate.match(
+      organizationLocationNotificationName
+    ).location;
+  }
+
+  /**
+   * Parse the notification from OrganizationLocationNotification resource.
+   *
+   * @param {string} organizationLocationNotificationName
+   *   A fully-qualified path representing organization_location_notification resource.
+   * @returns {string} A string representing the notification.
+   */
+  matchNotificationFromOrganizationLocationNotificationName(
+    organizationLocationNotificationName: string
+  ) {
+    return this.pathTemplates.organizationLocationNotificationPathTemplate.match(
+      organizationLocationNotificationName
+    ).notification;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationNotification resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} notification
+   * @returns {string} Resource name string.
+   */
+  projectLocationNotificationPath(
+    project: string,
+    location: string,
+    notification: string
+  ) {
+    return this.pathTemplates.projectLocationNotificationPathTemplate.render({
+      project: project,
       location: location,
       notification: notification,
     });
   }
 
   /**
-   * Parse the organization from Notification resource.
+   * Parse the project from ProjectLocationNotification resource.
    *
-   * @param {string} notificationName
-   *   A fully-qualified path representing Notification resource.
-   * @returns {string} A string representing the organization.
+   * @param {string} projectLocationNotificationName
+   *   A fully-qualified path representing project_location_notification resource.
+   * @returns {string} A string representing the project.
    */
-  matchOrganizationFromNotificationName(notificationName: string) {
-    return this.pathTemplates.notificationPathTemplate.match(notificationName)
-      .organization;
+  matchProjectFromProjectLocationNotificationName(
+    projectLocationNotificationName: string
+  ) {
+    return this.pathTemplates.projectLocationNotificationPathTemplate.match(
+      projectLocationNotificationName
+    ).project;
   }
 
   /**
-   * Parse the location from Notification resource.
+   * Parse the location from ProjectLocationNotification resource.
    *
-   * @param {string} notificationName
-   *   A fully-qualified path representing Notification resource.
+   * @param {string} projectLocationNotificationName
+   *   A fully-qualified path representing project_location_notification resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromNotificationName(notificationName: string) {
-    return this.pathTemplates.notificationPathTemplate.match(notificationName)
-      .location;
+  matchLocationFromProjectLocationNotificationName(
+    projectLocationNotificationName: string
+  ) {
+    return this.pathTemplates.projectLocationNotificationPathTemplate.match(
+      projectLocationNotificationName
+    ).location;
   }
 
   /**
-   * Parse the notification from Notification resource.
+   * Parse the notification from ProjectLocationNotification resource.
    *
-   * @param {string} notificationName
-   *   A fully-qualified path representing Notification resource.
+   * @param {string} projectLocationNotificationName
+   *   A fully-qualified path representing project_location_notification resource.
    * @returns {string} A string representing the notification.
    */
-  matchNotificationFromNotificationName(notificationName: string) {
-    return this.pathTemplates.notificationPathTemplate.match(notificationName)
-      .notification;
-  }
-
-  /**
-   * Return a fully-qualified organization resource name string.
-   *
-   * @param {string} organization
-   * @returns {string} Resource name string.
-   */
-  organizationPath(organization: string) {
-    return this.pathTemplates.organizationPathTemplate.render({
-      organization: organization,
-    });
-  }
-
-  /**
-   * Parse the organization from Organization resource.
-   *
-   * @param {string} organizationName
-   *   A fully-qualified path representing Organization resource.
-   * @returns {string} A string representing the organization.
-   */
-  matchOrganizationFromOrganizationName(organizationName: string) {
-    return this.pathTemplates.organizationPathTemplate.match(organizationName)
-      .organization;
+  matchNotificationFromProjectLocationNotificationName(
+    projectLocationNotificationName: string
+  ) {
+    return this.pathTemplates.projectLocationNotificationPathTemplate.match(
+      projectLocationNotificationName
+    ).notification;
   }
 
   /**

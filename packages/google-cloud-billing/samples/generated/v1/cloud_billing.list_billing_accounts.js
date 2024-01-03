@@ -44,10 +44,20 @@ function main() {
    *  This only supports filtering for
    *  subaccounts (https://cloud.google.com/billing/docs/concepts) under a
    *  single provided parent billing account.
-   *  (e.g. "master_billing_account=billingAccounts/012345-678901-ABCDEF").
+   *  (for example,
+   *  `master_billing_account=billingAccounts/012345-678901-ABCDEF`).
    *  Boolean algebra and other fields are not currently supported.
    */
   // const filter = 'abc123'
+  /**
+   *  Optional. The parent resource to list billing accounts from.
+   *  Format:
+   *    - `organizations/{organization_id}`, for example,
+   *      `organizations/12345678`
+   *    - `billingAccounts/{billing_account_id}`, for example,
+   *      `billingAccounts/012345-567890-ABCDEF`
+   */
+  // const parent = 'abc123'
 
   // Imports the Billing library
   const {CloudBillingClient} = require('@google-cloud/billing').v1;

@@ -235,11 +235,15 @@ export class RegionSecurityPoliciesClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const regionSecurityPoliciesStubMethods = [
+      'addRule',
       'delete',
       'get',
+      'getRule',
       'insert',
       'list',
       'patch',
+      'patchRule',
+      'removeRule',
     ];
     for (const methodName of regionSecurityPoliciesStubMethods) {
       const callPromise = this.regionSecurityPoliciesStub.then(
@@ -326,6 +330,131 @@ export class RegionSecurityPoliciesClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Inserts a rule into a security policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region scoping this request.
+   * @param {string} request.securityPolicy
+   *   Name of the security policy to update.
+   * @param {google.cloud.compute.v1.SecurityPolicyRule} request.securityPolicyRuleResource
+   *   The body resource for this request
+   * @param {boolean} request.validateOnly
+   *   If true, the request will not be committed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1/region_security_policies.add_rule.js</caption>
+   * region_tag:compute_v1_generated_RegionSecurityPolicies_AddRule_async
+   */
+  addRule(
+    request?: protos.google.cloud.compute.v1.IAddRuleRegionSecurityPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  addRule(
+    request: protos.google.cloud.compute.v1.IAddRuleRegionSecurityPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IAddRuleRegionSecurityPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  addRule(
+    request: protos.google.cloud.compute.v1.IAddRuleRegionSecurityPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IAddRuleRegionSecurityPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  addRule(
+    request?: protos.google.cloud.compute.v1.IAddRuleRegionSecurityPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IAddRuleRegionSecurityPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IAddRuleRegionSecurityPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        security_policy: request.securityPolicy ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls
+      .addRule(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
+  }
   /**
    * Deletes the specified policy.
    *
@@ -552,6 +681,110 @@ export class RegionSecurityPoliciesClient {
     return this.innerApiCalls.get(request, options, callback);
   }
   /**
+   * Gets a rule at the specified priority.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.priority
+   *   The priority of the rule to get from the security policy.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region scoping this request.
+   * @param {string} request.securityPolicy
+   *   Name of the security policy to which the queried rule belongs.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.SecurityPolicyRule|SecurityPolicyRule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/region_security_policies.get_rule.js</caption>
+   * region_tag:compute_v1_generated_RegionSecurityPolicies_GetRule_async
+   */
+  getRule(
+    request?: protos.google.cloud.compute.v1.IGetRuleRegionSecurityPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.ISecurityPolicyRule,
+      (
+        | protos.google.cloud.compute.v1.IGetRuleRegionSecurityPolicyRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getRule(
+    request: protos.google.cloud.compute.v1.IGetRuleRegionSecurityPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.ISecurityPolicyRule,
+      | protos.google.cloud.compute.v1.IGetRuleRegionSecurityPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getRule(
+    request: protos.google.cloud.compute.v1.IGetRuleRegionSecurityPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.ISecurityPolicyRule,
+      | protos.google.cloud.compute.v1.IGetRuleRegionSecurityPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getRule(
+    request?: protos.google.cloud.compute.v1.IGetRuleRegionSecurityPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.ISecurityPolicyRule,
+          | protos.google.cloud.compute.v1.IGetRuleRegionSecurityPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.ISecurityPolicyRule,
+      | protos.google.cloud.compute.v1.IGetRuleRegionSecurityPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.ISecurityPolicyRule,
+      (
+        | protos.google.cloud.compute.v1.IGetRuleRegionSecurityPolicyRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        security_policy: request.securityPolicy ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getRule(request, options, callback);
+  }
+  /**
    * Creates a new policy in the specified project using the data included in the request.
    *
    * @param {Object} request
@@ -690,6 +923,8 @@ export class RegionSecurityPoliciesClient {
    *   Name of the security policy to update.
    * @param {google.cloud.compute.v1.SecurityPolicy} request.securityPolicyResource
    *   The body resource for this request
+   * @param {string} request.updateMask
+   *   Indicates fields to be cleared as part of this request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -800,6 +1035,258 @@ export class RegionSecurityPoliciesClient {
         }
       );
   }
+  /**
+   * Patches a rule at the specified priority. To clear fields in the rule, leave the fields empty and specify them in the updateMask.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.priority
+   *   The priority of the rule to patch.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region scoping this request.
+   * @param {string} request.securityPolicy
+   *   Name of the security policy to update.
+   * @param {google.cloud.compute.v1.SecurityPolicyRule} request.securityPolicyRuleResource
+   *   The body resource for this request
+   * @param {string} request.updateMask
+   *   Indicates fields to be cleared as part of this request.
+   * @param {boolean} request.validateOnly
+   *   If true, the request will not be committed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1/region_security_policies.patch_rule.js</caption>
+   * region_tag:compute_v1_generated_RegionSecurityPolicies_PatchRule_async
+   */
+  patchRule(
+    request?: protos.google.cloud.compute.v1.IPatchRuleRegionSecurityPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  patchRule(
+    request: protos.google.cloud.compute.v1.IPatchRuleRegionSecurityPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IPatchRuleRegionSecurityPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  patchRule(
+    request: protos.google.cloud.compute.v1.IPatchRuleRegionSecurityPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IPatchRuleRegionSecurityPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  patchRule(
+    request?: protos.google.cloud.compute.v1.IPatchRuleRegionSecurityPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IPatchRuleRegionSecurityPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IPatchRuleRegionSecurityPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        security_policy: request.securityPolicy ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls
+      .patchRule(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
+  }
+  /**
+   * Deletes a rule at the specified priority.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.priority
+   *   The priority of the rule to remove from the security policy.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region scoping this request.
+   * @param {string} request.securityPolicy
+   *   Name of the security policy to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1/region_security_policies.remove_rule.js</caption>
+   * region_tag:compute_v1_generated_RegionSecurityPolicies_RemoveRule_async
+   */
+  removeRule(
+    request?: protos.google.cloud.compute.v1.IRemoveRuleRegionSecurityPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  removeRule(
+    request: protos.google.cloud.compute.v1.IRemoveRuleRegionSecurityPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IRemoveRuleRegionSecurityPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  removeRule(
+    request: protos.google.cloud.compute.v1.IRemoveRuleRegionSecurityPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IRemoveRuleRegionSecurityPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  removeRule(
+    request?: protos.google.cloud.compute.v1.IRemoveRuleRegionSecurityPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IRemoveRuleRegionSecurityPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IRemoveRuleRegionSecurityPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        security_policy: request.securityPolicy ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls
+      .removeRule(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
+  }
 
   /**
    * List all the policies that have been configured for the specified project and region.
@@ -807,7 +1294,7 @@ export class RegionSecurityPoliciesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`.
+   *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
    * @param {number} request.maxResults
    *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
    * @param {string} request.orderBy
@@ -905,7 +1392,7 @@ export class RegionSecurityPoliciesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`.
+   *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
    * @param {number} request.maxResults
    *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
    * @param {string} request.orderBy
@@ -959,7 +1446,7 @@ export class RegionSecurityPoliciesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`.
+   *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
    * @param {number} request.maxResults
    *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
    * @param {string} request.orderBy
