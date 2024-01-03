@@ -30,6 +30,11 @@
   * [Dataset_service.restore_dataset_version](#dataset_service.restore_dataset_version)
   * [Dataset_service.search_data_items](#dataset_service.search_data_items)
   * [Dataset_service.update_dataset](#dataset_service.update_dataset)
+  * [Deployment_resource_pool_service.create_deployment_resource_pool](#deployment_resource_pool_service.create_deployment_resource_pool)
+  * [Deployment_resource_pool_service.delete_deployment_resource_pool](#deployment_resource_pool_service.delete_deployment_resource_pool)
+  * [Deployment_resource_pool_service.get_deployment_resource_pool](#deployment_resource_pool_service.get_deployment_resource_pool)
+  * [Deployment_resource_pool_service.list_deployment_resource_pools](#deployment_resource_pool_service.list_deployment_resource_pools)
+  * [Deployment_resource_pool_service.query_deployed_models](#deployment_resource_pool_service.query_deployed_models)
   * [Endpoint_service.create_endpoint](#endpoint_service.create_endpoint)
   * [Endpoint_service.delete_endpoint](#endpoint_service.delete_endpoint)
   * [Endpoint_service.deploy_model](#endpoint_service.deploy_model)
@@ -209,6 +214,7 @@
   * [Prediction_service.predict](#prediction_service.predict)
   * [Prediction_service.raw_predict](#prediction_service.raw_predict)
   * [Prediction_service.server_streaming_predict](#prediction_service.server_streaming_predict)
+  * [Prediction_service.stream_generate_content](#prediction_service.stream_generate_content)
   * [Prediction_service.streaming_predict](#prediction_service.streaming_predict)
   * [Prediction_service.streaming_raw_predict](#prediction_service.streaming_raw_predict)
   * [Schedule_service.create_schedule](#schedule_service.create_schedule)
@@ -478,6 +484,7 @@
   * [Prediction_service.predict](#prediction_service.predict)
   * [Prediction_service.raw_predict](#prediction_service.raw_predict)
   * [Prediction_service.server_streaming_predict](#prediction_service.server_streaming_predict)
+  * [Prediction_service.stream_generate_content](#prediction_service.stream_generate_content)
   * [Prediction_service.streaming_predict](#prediction_service.streaming_predict)
   * [Prediction_service.streaming_raw_predict](#prediction_service.streaming_raw_predict)
   * [Schedule_service.create_schedule](#schedule_service.create_schedule)
@@ -853,6 +860,91 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.update_dataset.js`
+
+
+-----
+
+
+
+
+### Deployment_resource_pool_service.create_deployment_resource_pool
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.create_deployment_resource_pool.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.create_deployment_resource_pool.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.create_deployment_resource_pool.js`
+
+
+-----
+
+
+
+
+### Deployment_resource_pool_service.delete_deployment_resource_pool
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.delete_deployment_resource_pool.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.delete_deployment_resource_pool.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.delete_deployment_resource_pool.js`
+
+
+-----
+
+
+
+
+### Deployment_resource_pool_service.get_deployment_resource_pool
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.get_deployment_resource_pool.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.get_deployment_resource_pool.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.get_deployment_resource_pool.js`
+
+
+-----
+
+
+
+
+### Deployment_resource_pool_service.list_deployment_resource_pools
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.list_deployment_resource_pools.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.list_deployment_resource_pools.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.list_deployment_resource_pools.js`
+
+
+-----
+
+
+
+
+### Deployment_resource_pool_service.query_deployed_models
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.query_deployed_models.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.query_deployed_models.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.query_deployed_models.js`
 
 
 -----
@@ -3896,6 +3988,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.server_streaming_predict.js`
+
+
+-----
+
+
+
+
+### Prediction_service.stream_generate_content
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.stream_generate_content.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.stream_generate_content.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.stream_generate_content.js`
 
 
 -----
@@ -8469,6 +8578,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.server_streaming_predict.js`
+
+
+-----
+
+
+
+
+### Prediction_service.stream_generate_content
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.stream_generate_content.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.stream_generate_content.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.stream_generate_content.js`
 
 
 -----

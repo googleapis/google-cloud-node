@@ -403,6 +403,9 @@ export class FeatureOnlineStoreAdminServiceClient {
               post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/publishers/*/models/*}:getIamPolicy',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
             },
             {
@@ -416,6 +419,9 @@ export class FeatureOnlineStoreAdminServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/publishers/*/models/*}:getIamPolicy',
             },
           ],
         },
@@ -625,6 +631,9 @@ export class FeatureOnlineStoreAdminServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}:cancel',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}:cancel',
@@ -913,6 +922,10 @@ export class FeatureOnlineStoreAdminServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
             },
             {
@@ -1153,6 +1166,9 @@ export class FeatureOnlineStoreAdminServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
             },
             {
@@ -1371,6 +1387,9 @@ export class FeatureOnlineStoreAdminServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/endpoints/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*}/operations',
@@ -1607,6 +1626,9 @@ export class FeatureOnlineStoreAdminServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}:wait',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}:wait',

@@ -1157,6 +1157,137 @@ describe('v1beta1.PredictionServiceClient', () => {
     });
   });
 
+  describe('streamGenerateContent', () => {
+    it('invokes streamGenerateContent without error', async () => {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.GenerateContentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GenerateContentRequest',
+        ['model']
+      );
+      request.model = defaultValue1;
+      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.GenerateContentResponse()
+      );
+      client.innerApiCalls.streamGenerateContent =
+        stubServerStreamingCall(expectedResponse);
+      const stream = client.streamGenerateContent(request);
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.aiplatform.v1beta1.GenerateContentResponse
+          ) => {
+            resolve(response);
+          }
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.streamGenerateContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.streamGenerateContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes streamGenerateContent with error', async () => {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.GenerateContentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GenerateContentRequest',
+        ['model']
+      );
+      request.model = defaultValue1;
+      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.streamGenerateContent = stubServerStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.streamGenerateContent(request);
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.aiplatform.v1beta1.GenerateContentResponse
+          ) => {
+            resolve(response);
+          }
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      const actualRequest = (
+        client.innerApiCalls.streamGenerateContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.streamGenerateContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes streamGenerateContent with closed client', async () => {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.GenerateContentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GenerateContentRequest',
+        ['model']
+      );
+      request.model = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      const stream = client.streamGenerateContent(request, {
+        retryRequestOptions: {noResponseRetries: 0},
+      });
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.aiplatform.v1beta1.GenerateContentResponse
+          ) => {
+            resolve(response);
+          }
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+    });
+  });
+
   describe('streamingPredict', () => {
     it('invokes streamingPredict without error', async () => {
       const client =
