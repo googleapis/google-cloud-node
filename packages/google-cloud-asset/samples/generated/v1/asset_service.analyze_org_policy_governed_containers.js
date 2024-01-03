@@ -43,12 +43,16 @@ function main(scope, constraint) {
    */
   // const constraint = 'abc123'
   /**
-   *  The expression to filter the governed containers in result.
-   *  The only supported field is `parent`, and the only supported operator is
-   *  `=`.
-   *  Example:
-   *  parent="//cloudresourcemanager.googleapis.com/folders/001" will return all
-   *  containers under "folders/001".
+   *  The expression to filter
+   *  AnalyzeOrgPolicyGovernedContainersResponse.governed_containers google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.governed_containers.
+   *  Filtering is currently available for bare literal values and the following
+   *  fields:
+   *  * parent
+   *  * consolidated_policy.rules.enforce
+   *  When filtering by a specific field, the only supported operator is `=`.
+   *  For example, filtering by
+   *  parent="//cloudresourcemanager.googleapis.com/folders/001"
+   *  will return all the containers under "folders/001".
    */
   // const filter = 'abc123'
   /**
