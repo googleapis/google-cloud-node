@@ -343,6 +343,10 @@ export class PredictionServiceClient {
         this._gaxModule.StreamType.BIDI_STREAMING,
         !!opts.fallback
       ),
+      streamGenerateContent: new this._gaxModule.StreamDescriptor(
+        this._gaxModule.StreamType.SERVER_STREAMING,
+        !!opts.fallback
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -405,6 +409,7 @@ export class PredictionServiceClient {
       'streamingRawPredict',
       'explain',
       'countTokens',
+      'streamGenerateContent',
     ];
     for (const methodName of predictionServiceStubMethods) {
       const callPromise = this.predictionServiceStub.then(
@@ -1069,9 +1074,15 @@ export class PredictionServiceClient {
    *   Required. The name of the Endpoint requested to perform token counting.
    *   Format:
    *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
+   * @param {string} request.model
+   *   Required. The name of the publisher model requested to serve the
+   *   prediction. Format:
+   *   `projects/{project}/locations/{location}/publishers/* /models/*`
    * @param {number[]} request.instances
    *   Required. The instances that are the input to token counting call.
    *   Schema is identical to the prediction schema of the underlying model.
+   * @param {number[]} request.contents
+   *   Required. Input content.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1232,6 +1243,59 @@ export class PredictionServiceClient {
   streamingRawPredict(options?: CallOptions): gax.CancellableStream {
     this.initialize();
     return this.innerApiCalls.streamingRawPredict(null, options);
+  }
+
+  /**
+   * Generate content with multimodal inputs with streaming support.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.model
+   *   Required. The name of the publisher model requested to serve the
+   *   prediction. Format:
+   *   `projects/{project}/locations/{location}/publishers/* /models/*`
+   * @param {number[]} request.contents
+   *   Required. The content of the current conversation with the model.
+   *
+   *   For single-turn queries, this is a single instance. For multi-turn queries,
+   *   this is a repeated field that contains conversation history + latest
+   *   request.
+   * @param {number[]} [request.tools]
+   *   Optional. A list of `Tools` the model may use to generate the next
+   *   response.
+   *
+   *   A `Tool` is a piece of code that enables the system to interact with
+   *   external systems to perform an action, or set of actions, outside of
+   *   knowledge and scope of the model. The only supported tool is currently
+   *   `Function`
+   * @param {number[]} [request.safetySettings]
+   *   Optional. Per request settings for blocking unsafe content.
+   *   Enforced on GenerateContentResponse.candidates.
+   * @param {google.cloud.aiplatform.v1beta1.GenerationConfig} [request.generationConfig]
+   *   Optional. Generation config.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits {@link protos.google.cloud.aiplatform.v1beta1.GenerateContentResponse|GenerateContentResponse} on 'data' event.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/prediction_service.stream_generate_content.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_PredictionService_StreamGenerateContent_async
+   */
+  streamGenerateContent(
+    request?: protos.google.cloud.aiplatform.v1beta1.IGenerateContentRequest,
+    options?: CallOptions
+  ): gax.CancellableStream {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        model: request.model ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.streamGenerateContent(request, options);
   }
 
   /**

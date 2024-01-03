@@ -40,7 +40,7 @@ function main(analysisQuery) {
    *  If both `analysis_query` and `saved_analysis_query` are provided, they
    *  will be merged together with the `saved_analysis_query` as base and
    *  the `analysis_query` as overrides. For more details of the merge behavior,
-   *  please refer to the
+   *  refer to the
    *  MergeFrom (https://developers.google.com/protocol-buffers/docs/reference/cpp/google.protobuf.message#Message.MergeFrom.details)
    *  page.
    *  Note that you cannot override primitive fields with default value, such as
