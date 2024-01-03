@@ -18,7 +18,7 @@ import synthtool as s
 import synthtool.languages.node_mono_repo as node
 from synthtool import shell
 
-node.owlbot_main(relative_dir="packages/google-cloud-sql", staging_excludes=["system-test/fixtures/sample/src/index.js", "system-test/fixtures/sample/src/index.ts"])
+node.owlbot_main(relative_dir="packages/google-cloud-sql", staging_excludes=["system-test/fixtures/sample/src/index.js", "system-test/fixtures/sample/src/index.ts", "package.json"], templates_excludes=["system-test/fixtures/sample/src/index.js", "system-test/fixtures/sample/src/index.ts", "package.json"])
 s.replace("packages/google-cloud-sql/src/*/sql_backup_runs_service_client.ts", r"id: request\.id \?\? ''", "id: request.id?.toString() ?? ''") 
 s.replace("packages/google-cloud-sql/src/*/index.ts", r"export {SqlAvailableDatabaseVersionsServiceClient} from '\.\/sql_available_database_versions_service_client';", "")
 s.replace("packages/google-cloud-sql/src/*/index.ts", r"export {SqlEventsServiceClient} from '\.\/sql_events_service_client';", "")
