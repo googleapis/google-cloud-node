@@ -117,7 +117,7 @@ async function callListQuotaPreferences() {
   // Run request
   const iterable = await cloudquotasClient.listQuotaPreferencesAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
