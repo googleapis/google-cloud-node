@@ -2492,10 +2492,17 @@ export class RecaptchaEnterpriseServiceClient {
    *   Required. The name of the project to search related account group
    *   memberships from. Specify the project name in the following format:
    *   `projects/{project}`.
+   * @param {string} [request.accountId]
+   *   Optional. The unique stable account identifier used to search connections.
+   *   The identifier should correspond to an `account_id` provided in a previous
+   *   `CreateAssessment` or `AnnotateAssessment` call. Either hashed_account_id
+   *   or account_id must be set, but not both.
    * @param {Buffer} [request.hashedAccountId]
-   *   Optional. The unique stable hashed user identifier used to search
-   *   connections. The identifier should correspond to a `hashed_account_id`
-   *   provided in a previous `CreateAssessment` or `AnnotateAssessment` call.
+   *   Optional. Deprecated: use `account_id` instead.
+   *   The unique stable hashed account identifier used to search connections. The
+   *   identifier should correspond to a `hashed_account_id` provided in a
+   *   previous `CreateAssessment` or `AnnotateAssessment` call. Either
+   *   hashed_account_id or account_id must be set, but not both.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of groups to return. The service might return
    *   fewer than this value. If unspecified, at most 50 groups are returned. The
@@ -2607,10 +2614,17 @@ export class RecaptchaEnterpriseServiceClient {
    *   Required. The name of the project to search related account group
    *   memberships from. Specify the project name in the following format:
    *   `projects/{project}`.
+   * @param {string} [request.accountId]
+   *   Optional. The unique stable account identifier used to search connections.
+   *   The identifier should correspond to an `account_id` provided in a previous
+   *   `CreateAssessment` or `AnnotateAssessment` call. Either hashed_account_id
+   *   or account_id must be set, but not both.
    * @param {Buffer} [request.hashedAccountId]
-   *   Optional. The unique stable hashed user identifier used to search
-   *   connections. The identifier should correspond to a `hashed_account_id`
-   *   provided in a previous `CreateAssessment` or `AnnotateAssessment` call.
+   *   Optional. Deprecated: use `account_id` instead.
+   *   The unique stable hashed account identifier used to search connections. The
+   *   identifier should correspond to a `hashed_account_id` provided in a
+   *   previous `CreateAssessment` or `AnnotateAssessment` call. Either
+   *   hashed_account_id or account_id must be set, but not both.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of groups to return. The service might return
    *   fewer than this value. If unspecified, at most 50 groups are returned. The
@@ -2667,10 +2681,17 @@ export class RecaptchaEnterpriseServiceClient {
    *   Required. The name of the project to search related account group
    *   memberships from. Specify the project name in the following format:
    *   `projects/{project}`.
+   * @param {string} [request.accountId]
+   *   Optional. The unique stable account identifier used to search connections.
+   *   The identifier should correspond to an `account_id` provided in a previous
+   *   `CreateAssessment` or `AnnotateAssessment` call. Either hashed_account_id
+   *   or account_id must be set, but not both.
    * @param {Buffer} [request.hashedAccountId]
-   *   Optional. The unique stable hashed user identifier used to search
-   *   connections. The identifier should correspond to a `hashed_account_id`
-   *   provided in a previous `CreateAssessment` or `AnnotateAssessment` call.
+   *   Optional. Deprecated: use `account_id` instead.
+   *   The unique stable hashed account identifier used to search connections. The
+   *   identifier should correspond to a `hashed_account_id` provided in a
+   *   previous `CreateAssessment` or `AnnotateAssessment` call. Either
+   *   hashed_account_id or account_id must be set, but not both.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of groups to return. The service might return
    *   fewer than this value. If unspecified, at most 50 groups are returned. The
