@@ -67,7 +67,10 @@ const FeatureRegistryServiceClient = v1.FeatureRegistryServiceClient;
 type FeatureRegistryServiceClient = v1.FeatureRegistryServiceClient;
 const LlmUtilityServiceClient = v1.LlmUtilityServiceClient;
 type LlmUtilityServiceClient = v1.LlmUtilityServiceClient;
-
+const DeploymentResourcePoolServiceClient =
+  v1.DeploymentResourcePoolServiceClient;
+type DeploymentResourcePoolServiceClient =
+  v1.DeploymentResourcePoolServiceClient;
 export {
   v1beta1,
   v1,
@@ -93,6 +96,7 @@ export {
   FeatureOnlineStoreServiceClient,
   FeatureRegistryServiceClient,
   LlmUtilityServiceClient,
+  DeploymentResourcePoolServiceClient,
 };
 export default {
   v1beta1,
@@ -119,6 +123,7 @@ export default {
   FeatureOnlineStoreServiceClient,
   FeatureRegistryServiceClient,
   LlmUtilityServiceClient,
+  DeploymentResourcePoolServiceClient,
 };
 import * as protos from '../protos/protos';
 export {protos};

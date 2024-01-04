@@ -58,6 +58,10 @@ function main(parent, attachedClusterId, platformVersion) {
    *  GetAttachedServerConfig google.cloud.gkemulticloud.v1.AttachedClusters.GetAttachedServerConfig.
    */
   // const platformVersion = 'abc123'
+  /**
+   *  Optional. Proxy configuration for outbound HTTP(S) traffic.
+   */
+  // const proxyConfig = {}
 
   // Imports the Gkemulticloud library
   const {AttachedClustersClient} = require('@google-cloud/gkemulticloud').v1;

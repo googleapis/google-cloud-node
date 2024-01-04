@@ -2707,24 +2707,6 @@
                             }
                           ]
                         },
-                        "DeleteSubpropertyEventFilter": {
-                          "requestType": "DeleteSubpropertyEventFilterRequest",
-                          "responseType": "google.protobuf.Empty",
-                          "options": {
-                            "(google.api.http).delete": "/v1alpha/{name=properties/*/subpropertyEventFilters/*}",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "delete": "/v1alpha/{name=properties/*/subpropertyEventFilters/*}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
                         "CreateSubpropertyEventFilter": {
                           "requestType": "CreateSubpropertyEventFilterRequest",
                           "responseType": "SubpropertyEventFilter",
@@ -2742,6 +2724,80 @@
                             },
                             {
                               "(google.api.method_signature)": "parent,subproperty_event_filter"
+                            }
+                          ]
+                        },
+                        "GetSubpropertyEventFilter": {
+                          "requestType": "GetSubpropertyEventFilterRequest",
+                          "responseType": "SubpropertyEventFilter",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/subpropertyEventFilters/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/subpropertyEventFilters/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListSubpropertyEventFilters": {
+                          "requestType": "ListSubpropertyEventFiltersRequest",
+                          "responseType": "ListSubpropertyEventFiltersResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{parent=properties/*}/subpropertyEventFilters",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=properties/*}/subpropertyEventFilters"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "UpdateSubpropertyEventFilter": {
+                          "requestType": "UpdateSubpropertyEventFilterRequest",
+                          "responseType": "SubpropertyEventFilter",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha/{subproperty_event_filter.name=properties/*/subpropertyEventFilters/*}",
+                            "(google.api.http).body": "subproperty_event_filter",
+                            "(google.api.method_signature)": "subproperty_event_filter,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{subproperty_event_filter.name=properties/*/subpropertyEventFilters/*}",
+                                "body": "subproperty_event_filter"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "subproperty_event_filter,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteSubpropertyEventFilter": {
+                          "requestType": "DeleteSubpropertyEventFilterRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1alpha/{name=properties/*/subpropertyEventFilters/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=properties/*/subpropertyEventFilters/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
                             }
                           ]
                         }
@@ -7416,6 +7472,13 @@
                         "(google.api.resource).type": "analyticsadmin.googleapis.com/ConversionEvent",
                         "(google.api.resource).pattern": "properties/{property}/conversionEvents/{conversion_event}"
                       },
+                      "oneofs": {
+                        "_defaultConversionValue": {
+                          "oneof": [
+                            "defaultConversionValue"
+                          ]
+                        }
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -7458,9 +7521,47 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "defaultConversionValue": {
+                          "type": "DefaultConversionValue",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
+                        "DefaultConversionValue": {
+                          "oneofs": {
+                            "_value": {
+                              "oneof": [
+                                "value"
+                              ]
+                            },
+                            "_currencyCode": {
+                              "oneof": [
+                                "currencyCode"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "value": {
+                              "type": "double",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "currencyCode": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
                         "ConversionCountingMethod": {
                           "values": {
                             "CONVERSION_COUNTING_METHOD_UNSPECIFIED": 0,
@@ -7742,10 +7843,6 @@
                             "REPORTING_ATTRIBUTION_MODEL_UNSPECIFIED": 0,
                             "PAID_AND_ORGANIC_CHANNELS_DATA_DRIVEN": 1,
                             "PAID_AND_ORGANIC_CHANNELS_LAST_CLICK": 2,
-                            "PAID_AND_ORGANIC_CHANNELS_FIRST_CLICK": 3,
-                            "PAID_AND_ORGANIC_CHANNELS_LINEAR": 4,
-                            "PAID_AND_ORGANIC_CHANNELS_POSITION_BASED": 5,
-                            "PAID_AND_ORGANIC_CHANNELS_TIME_DECAY": 6,
                             "GOOGLE_PAID_CHANNELS_LAST_CLICK": 7
                           }
                         },

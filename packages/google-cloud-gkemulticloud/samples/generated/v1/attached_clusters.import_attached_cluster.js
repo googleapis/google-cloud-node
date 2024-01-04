@@ -57,6 +57,10 @@ function main(parent, fleetMembership, platformVersion, distribution) {
    *  Supported values: "eks", "aks".
    */
   // const distribution = 'abc123'
+  /**
+   *  Optional. Proxy configuration for outbound HTTP(S) traffic.
+   */
+  // const proxyConfig = {}
 
   // Imports the Gkemulticloud library
   const {AttachedClustersClient} = require('@google-cloud/gkemulticloud').v1;

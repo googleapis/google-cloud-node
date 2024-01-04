@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1387,6 +1387,9 @@ export namespace google {
 
                     /** CostProjection duration */
                     duration?: (google.protobuf.IDuration|null);
+
+                    /** CostProjection costInLocalCurrency */
+                    costInLocalCurrency?: (google.type.IMoney|null);
                 }
 
                 /** Represents a CostProjection. */
@@ -1403,6 +1406,9 @@ export namespace google {
 
                     /** CostProjection duration. */
                     public duration?: (google.protobuf.IDuration|null);
+
+                    /** CostProjection costInLocalCurrency. */
+                    public costInLocalCurrency?: (google.type.IMoney|null);
 
                     /**
                      * Creates a new CostProjection instance using the specified properties.

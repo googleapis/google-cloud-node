@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -65,6 +65,5408 @@
                      * @namespace
                      */
                     var v3 = {};
+    
+                    v3.AdaptiveMtDataset = (function() {
+    
+                        /**
+                         * Properties of an AdaptiveMtDataset.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IAdaptiveMtDataset
+                         * @property {string|null} [name] AdaptiveMtDataset name
+                         * @property {string|null} [displayName] AdaptiveMtDataset displayName
+                         * @property {string|null} [sourceLanguageCode] AdaptiveMtDataset sourceLanguageCode
+                         * @property {string|null} [targetLanguageCode] AdaptiveMtDataset targetLanguageCode
+                         * @property {number|null} [exampleCount] AdaptiveMtDataset exampleCount
+                         * @property {google.protobuf.ITimestamp|null} [createTime] AdaptiveMtDataset createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] AdaptiveMtDataset updateTime
+                         */
+    
+                        /**
+                         * Constructs a new AdaptiveMtDataset.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents an AdaptiveMtDataset.
+                         * @implements IAdaptiveMtDataset
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IAdaptiveMtDataset=} [properties] Properties to set
+                         */
+                        function AdaptiveMtDataset(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AdaptiveMtDataset name.
+                         * @member {string} name
+                         * @memberof google.cloud.translation.v3.AdaptiveMtDataset
+                         * @instance
+                         */
+                        AdaptiveMtDataset.prototype.name = "";
+    
+                        /**
+                         * AdaptiveMtDataset displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.translation.v3.AdaptiveMtDataset
+                         * @instance
+                         */
+                        AdaptiveMtDataset.prototype.displayName = "";
+    
+                        /**
+                         * AdaptiveMtDataset sourceLanguageCode.
+                         * @member {string} sourceLanguageCode
+                         * @memberof google.cloud.translation.v3.AdaptiveMtDataset
+                         * @instance
+                         */
+                        AdaptiveMtDataset.prototype.sourceLanguageCode = "";
+    
+                        /**
+                         * AdaptiveMtDataset targetLanguageCode.
+                         * @member {string} targetLanguageCode
+                         * @memberof google.cloud.translation.v3.AdaptiveMtDataset
+                         * @instance
+                         */
+                        AdaptiveMtDataset.prototype.targetLanguageCode = "";
+    
+                        /**
+                         * AdaptiveMtDataset exampleCount.
+                         * @member {number} exampleCount
+                         * @memberof google.cloud.translation.v3.AdaptiveMtDataset
+                         * @instance
+                         */
+                        AdaptiveMtDataset.prototype.exampleCount = 0;
+    
+                        /**
+                         * AdaptiveMtDataset createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.translation.v3.AdaptiveMtDataset
+                         * @instance
+                         */
+                        AdaptiveMtDataset.prototype.createTime = null;
+    
+                        /**
+                         * AdaptiveMtDataset updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.translation.v3.AdaptiveMtDataset
+                         * @instance
+                         */
+                        AdaptiveMtDataset.prototype.updateTime = null;
+    
+                        /**
+                         * Creates a new AdaptiveMtDataset instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.AdaptiveMtDataset
+                         * @static
+                         * @param {google.cloud.translation.v3.IAdaptiveMtDataset=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.AdaptiveMtDataset} AdaptiveMtDataset instance
+                         */
+                        AdaptiveMtDataset.create = function create(properties) {
+                            return new AdaptiveMtDataset(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AdaptiveMtDataset message. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtDataset.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.AdaptiveMtDataset
+                         * @static
+                         * @param {google.cloud.translation.v3.IAdaptiveMtDataset} message AdaptiveMtDataset message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdaptiveMtDataset.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.sourceLanguageCode != null && Object.hasOwnProperty.call(message, "sourceLanguageCode"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.sourceLanguageCode);
+                            if (message.targetLanguageCode != null && Object.hasOwnProperty.call(message, "targetLanguageCode"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.targetLanguageCode);
+                            if (message.exampleCount != null && Object.hasOwnProperty.call(message, "exampleCount"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.exampleCount);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AdaptiveMtDataset message, length delimited. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtDataset.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.AdaptiveMtDataset
+                         * @static
+                         * @param {google.cloud.translation.v3.IAdaptiveMtDataset} message AdaptiveMtDataset message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdaptiveMtDataset.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AdaptiveMtDataset message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.AdaptiveMtDataset
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.AdaptiveMtDataset} AdaptiveMtDataset
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdaptiveMtDataset.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.AdaptiveMtDataset();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.sourceLanguageCode = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.targetLanguageCode = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.exampleCount = reader.int32();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AdaptiveMtDataset message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.AdaptiveMtDataset
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.AdaptiveMtDataset} AdaptiveMtDataset
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdaptiveMtDataset.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AdaptiveMtDataset message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.AdaptiveMtDataset
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AdaptiveMtDataset.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.sourceLanguageCode != null && message.hasOwnProperty("sourceLanguageCode"))
+                                if (!$util.isString(message.sourceLanguageCode))
+                                    return "sourceLanguageCode: string expected";
+                            if (message.targetLanguageCode != null && message.hasOwnProperty("targetLanguageCode"))
+                                if (!$util.isString(message.targetLanguageCode))
+                                    return "targetLanguageCode: string expected";
+                            if (message.exampleCount != null && message.hasOwnProperty("exampleCount"))
+                                if (!$util.isInteger(message.exampleCount))
+                                    return "exampleCount: integer expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AdaptiveMtDataset message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.AdaptiveMtDataset
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.AdaptiveMtDataset} AdaptiveMtDataset
+                         */
+                        AdaptiveMtDataset.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.AdaptiveMtDataset)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.AdaptiveMtDataset();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.sourceLanguageCode != null)
+                                message.sourceLanguageCode = String(object.sourceLanguageCode);
+                            if (object.targetLanguageCode != null)
+                                message.targetLanguageCode = String(object.targetLanguageCode);
+                            if (object.exampleCount != null)
+                                message.exampleCount = object.exampleCount | 0;
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.AdaptiveMtDataset.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.AdaptiveMtDataset.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AdaptiveMtDataset message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.AdaptiveMtDataset
+                         * @static
+                         * @param {google.cloud.translation.v3.AdaptiveMtDataset} message AdaptiveMtDataset
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AdaptiveMtDataset.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.displayName = "";
+                                object.sourceLanguageCode = "";
+                                object.targetLanguageCode = "";
+                                object.exampleCount = 0;
+                                object.createTime = null;
+                                object.updateTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.sourceLanguageCode != null && message.hasOwnProperty("sourceLanguageCode"))
+                                object.sourceLanguageCode = message.sourceLanguageCode;
+                            if (message.targetLanguageCode != null && message.hasOwnProperty("targetLanguageCode"))
+                                object.targetLanguageCode = message.targetLanguageCode;
+                            if (message.exampleCount != null && message.hasOwnProperty("exampleCount"))
+                                object.exampleCount = message.exampleCount;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AdaptiveMtDataset to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.AdaptiveMtDataset
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AdaptiveMtDataset.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AdaptiveMtDataset
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.AdaptiveMtDataset
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AdaptiveMtDataset.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.AdaptiveMtDataset";
+                        };
+    
+                        return AdaptiveMtDataset;
+                    })();
+    
+                    v3.CreateAdaptiveMtDatasetRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateAdaptiveMtDatasetRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @interface ICreateAdaptiveMtDatasetRequest
+                         * @property {string|null} [parent] CreateAdaptiveMtDatasetRequest parent
+                         * @property {google.cloud.translation.v3.IAdaptiveMtDataset|null} [adaptiveMtDataset] CreateAdaptiveMtDatasetRequest adaptiveMtDataset
+                         */
+    
+                        /**
+                         * Constructs a new CreateAdaptiveMtDatasetRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a CreateAdaptiveMtDatasetRequest.
+                         * @implements ICreateAdaptiveMtDatasetRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3.ICreateAdaptiveMtDatasetRequest=} [properties] Properties to set
+                         */
+                        function CreateAdaptiveMtDatasetRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateAdaptiveMtDatasetRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest
+                         * @instance
+                         */
+                        CreateAdaptiveMtDatasetRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateAdaptiveMtDatasetRequest adaptiveMtDataset.
+                         * @member {google.cloud.translation.v3.IAdaptiveMtDataset|null|undefined} adaptiveMtDataset
+                         * @memberof google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest
+                         * @instance
+                         */
+                        CreateAdaptiveMtDatasetRequest.prototype.adaptiveMtDataset = null;
+    
+                        /**
+                         * Creates a new CreateAdaptiveMtDatasetRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.ICreateAdaptiveMtDatasetRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest} CreateAdaptiveMtDatasetRequest instance
+                         */
+                        CreateAdaptiveMtDatasetRequest.create = function create(properties) {
+                            return new CreateAdaptiveMtDatasetRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateAdaptiveMtDatasetRequest message. Does not implicitly {@link google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.ICreateAdaptiveMtDatasetRequest} message CreateAdaptiveMtDatasetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateAdaptiveMtDatasetRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.adaptiveMtDataset != null && Object.hasOwnProperty.call(message, "adaptiveMtDataset"))
+                                $root.google.cloud.translation.v3.AdaptiveMtDataset.encode(message.adaptiveMtDataset, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateAdaptiveMtDatasetRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.ICreateAdaptiveMtDatasetRequest} message CreateAdaptiveMtDatasetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateAdaptiveMtDatasetRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateAdaptiveMtDatasetRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest} CreateAdaptiveMtDatasetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateAdaptiveMtDatasetRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.adaptiveMtDataset = $root.google.cloud.translation.v3.AdaptiveMtDataset.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateAdaptiveMtDatasetRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest} CreateAdaptiveMtDatasetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateAdaptiveMtDatasetRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateAdaptiveMtDatasetRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateAdaptiveMtDatasetRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.adaptiveMtDataset != null && message.hasOwnProperty("adaptiveMtDataset")) {
+                                var error = $root.google.cloud.translation.v3.AdaptiveMtDataset.verify(message.adaptiveMtDataset);
+                                if (error)
+                                    return "adaptiveMtDataset." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateAdaptiveMtDatasetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest} CreateAdaptiveMtDatasetRequest
+                         */
+                        CreateAdaptiveMtDatasetRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.adaptiveMtDataset != null) {
+                                if (typeof object.adaptiveMtDataset !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest.adaptiveMtDataset: object expected");
+                                message.adaptiveMtDataset = $root.google.cloud.translation.v3.AdaptiveMtDataset.fromObject(object.adaptiveMtDataset);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateAdaptiveMtDatasetRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest} message CreateAdaptiveMtDatasetRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateAdaptiveMtDatasetRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.adaptiveMtDataset = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.adaptiveMtDataset != null && message.hasOwnProperty("adaptiveMtDataset"))
+                                object.adaptiveMtDataset = $root.google.cloud.translation.v3.AdaptiveMtDataset.toObject(message.adaptiveMtDataset, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateAdaptiveMtDatasetRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateAdaptiveMtDatasetRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateAdaptiveMtDatasetRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateAdaptiveMtDatasetRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest";
+                        };
+    
+                        return CreateAdaptiveMtDatasetRequest;
+                    })();
+    
+                    v3.DeleteAdaptiveMtDatasetRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteAdaptiveMtDatasetRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IDeleteAdaptiveMtDatasetRequest
+                         * @property {string|null} [name] DeleteAdaptiveMtDatasetRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteAdaptiveMtDatasetRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a DeleteAdaptiveMtDatasetRequest.
+                         * @implements IDeleteAdaptiveMtDatasetRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IDeleteAdaptiveMtDatasetRequest=} [properties] Properties to set
+                         */
+                        function DeleteAdaptiveMtDatasetRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteAdaptiveMtDatasetRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest
+                         * @instance
+                         */
+                        DeleteAdaptiveMtDatasetRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteAdaptiveMtDatasetRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IDeleteAdaptiveMtDatasetRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest} DeleteAdaptiveMtDatasetRequest instance
+                         */
+                        DeleteAdaptiveMtDatasetRequest.create = function create(properties) {
+                            return new DeleteAdaptiveMtDatasetRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteAdaptiveMtDatasetRequest message. Does not implicitly {@link google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IDeleteAdaptiveMtDatasetRequest} message DeleteAdaptiveMtDatasetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteAdaptiveMtDatasetRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteAdaptiveMtDatasetRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IDeleteAdaptiveMtDatasetRequest} message DeleteAdaptiveMtDatasetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteAdaptiveMtDatasetRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteAdaptiveMtDatasetRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest} DeleteAdaptiveMtDatasetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteAdaptiveMtDatasetRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteAdaptiveMtDatasetRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest} DeleteAdaptiveMtDatasetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteAdaptiveMtDatasetRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteAdaptiveMtDatasetRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteAdaptiveMtDatasetRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteAdaptiveMtDatasetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest} DeleteAdaptiveMtDatasetRequest
+                         */
+                        DeleteAdaptiveMtDatasetRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteAdaptiveMtDatasetRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest} message DeleteAdaptiveMtDatasetRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteAdaptiveMtDatasetRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteAdaptiveMtDatasetRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteAdaptiveMtDatasetRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteAdaptiveMtDatasetRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteAdaptiveMtDatasetRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest";
+                        };
+    
+                        return DeleteAdaptiveMtDatasetRequest;
+                    })();
+    
+                    v3.GetAdaptiveMtDatasetRequest = (function() {
+    
+                        /**
+                         * Properties of a GetAdaptiveMtDatasetRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IGetAdaptiveMtDatasetRequest
+                         * @property {string|null} [name] GetAdaptiveMtDatasetRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetAdaptiveMtDatasetRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a GetAdaptiveMtDatasetRequest.
+                         * @implements IGetAdaptiveMtDatasetRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IGetAdaptiveMtDatasetRequest=} [properties] Properties to set
+                         */
+                        function GetAdaptiveMtDatasetRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetAdaptiveMtDatasetRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.translation.v3.GetAdaptiveMtDatasetRequest
+                         * @instance
+                         */
+                        GetAdaptiveMtDatasetRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetAdaptiveMtDatasetRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.GetAdaptiveMtDatasetRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IGetAdaptiveMtDatasetRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.GetAdaptiveMtDatasetRequest} GetAdaptiveMtDatasetRequest instance
+                         */
+                        GetAdaptiveMtDatasetRequest.create = function create(properties) {
+                            return new GetAdaptiveMtDatasetRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetAdaptiveMtDatasetRequest message. Does not implicitly {@link google.cloud.translation.v3.GetAdaptiveMtDatasetRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.GetAdaptiveMtDatasetRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IGetAdaptiveMtDatasetRequest} message GetAdaptiveMtDatasetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetAdaptiveMtDatasetRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetAdaptiveMtDatasetRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.GetAdaptiveMtDatasetRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.GetAdaptiveMtDatasetRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IGetAdaptiveMtDatasetRequest} message GetAdaptiveMtDatasetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetAdaptiveMtDatasetRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetAdaptiveMtDatasetRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.GetAdaptiveMtDatasetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.GetAdaptiveMtDatasetRequest} GetAdaptiveMtDatasetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetAdaptiveMtDatasetRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.GetAdaptiveMtDatasetRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetAdaptiveMtDatasetRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.GetAdaptiveMtDatasetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.GetAdaptiveMtDatasetRequest} GetAdaptiveMtDatasetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetAdaptiveMtDatasetRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetAdaptiveMtDatasetRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.GetAdaptiveMtDatasetRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetAdaptiveMtDatasetRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetAdaptiveMtDatasetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.GetAdaptiveMtDatasetRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.GetAdaptiveMtDatasetRequest} GetAdaptiveMtDatasetRequest
+                         */
+                        GetAdaptiveMtDatasetRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.GetAdaptiveMtDatasetRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.GetAdaptiveMtDatasetRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetAdaptiveMtDatasetRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.GetAdaptiveMtDatasetRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.GetAdaptiveMtDatasetRequest} message GetAdaptiveMtDatasetRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetAdaptiveMtDatasetRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetAdaptiveMtDatasetRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.GetAdaptiveMtDatasetRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetAdaptiveMtDatasetRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetAdaptiveMtDatasetRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.GetAdaptiveMtDatasetRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetAdaptiveMtDatasetRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.GetAdaptiveMtDatasetRequest";
+                        };
+    
+                        return GetAdaptiveMtDatasetRequest;
+                    })();
+    
+                    v3.ListAdaptiveMtDatasetsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListAdaptiveMtDatasetsRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IListAdaptiveMtDatasetsRequest
+                         * @property {string|null} [parent] ListAdaptiveMtDatasetsRequest parent
+                         * @property {number|null} [pageSize] ListAdaptiveMtDatasetsRequest pageSize
+                         * @property {string|null} [pageToken] ListAdaptiveMtDatasetsRequest pageToken
+                         * @property {string|null} [filter] ListAdaptiveMtDatasetsRequest filter
+                         */
+    
+                        /**
+                         * Constructs a new ListAdaptiveMtDatasetsRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a ListAdaptiveMtDatasetsRequest.
+                         * @implements IListAdaptiveMtDatasetsRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IListAdaptiveMtDatasetsRequest=} [properties] Properties to set
+                         */
+                        function ListAdaptiveMtDatasetsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAdaptiveMtDatasetsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest
+                         * @instance
+                         */
+                        ListAdaptiveMtDatasetsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListAdaptiveMtDatasetsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest
+                         * @instance
+                         */
+                        ListAdaptiveMtDatasetsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListAdaptiveMtDatasetsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest
+                         * @instance
+                         */
+                        ListAdaptiveMtDatasetsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListAdaptiveMtDatasetsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest
+                         * @instance
+                         */
+                        ListAdaptiveMtDatasetsRequest.prototype.filter = "";
+    
+                        /**
+                         * Creates a new ListAdaptiveMtDatasetsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IListAdaptiveMtDatasetsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest} ListAdaptiveMtDatasetsRequest instance
+                         */
+                        ListAdaptiveMtDatasetsRequest.create = function create(properties) {
+                            return new ListAdaptiveMtDatasetsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAdaptiveMtDatasetsRequest message. Does not implicitly {@link google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IListAdaptiveMtDatasetsRequest} message ListAdaptiveMtDatasetsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAdaptiveMtDatasetsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAdaptiveMtDatasetsRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IListAdaptiveMtDatasetsRequest} message ListAdaptiveMtDatasetsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAdaptiveMtDatasetsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAdaptiveMtDatasetsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest} ListAdaptiveMtDatasetsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAdaptiveMtDatasetsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAdaptiveMtDatasetsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest} ListAdaptiveMtDatasetsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAdaptiveMtDatasetsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAdaptiveMtDatasetsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAdaptiveMtDatasetsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAdaptiveMtDatasetsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest} ListAdaptiveMtDatasetsRequest
+                         */
+                        ListAdaptiveMtDatasetsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAdaptiveMtDatasetsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest} message ListAdaptiveMtDatasetsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAdaptiveMtDatasetsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAdaptiveMtDatasetsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAdaptiveMtDatasetsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListAdaptiveMtDatasetsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListAdaptiveMtDatasetsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest";
+                        };
+    
+                        return ListAdaptiveMtDatasetsRequest;
+                    })();
+    
+                    v3.ListAdaptiveMtDatasetsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListAdaptiveMtDatasetsResponse.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IListAdaptiveMtDatasetsResponse
+                         * @property {Array.<google.cloud.translation.v3.IAdaptiveMtDataset>|null} [adaptiveMtDatasets] ListAdaptiveMtDatasetsResponse adaptiveMtDatasets
+                         * @property {string|null} [nextPageToken] ListAdaptiveMtDatasetsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListAdaptiveMtDatasetsResponse.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a ListAdaptiveMtDatasetsResponse.
+                         * @implements IListAdaptiveMtDatasetsResponse
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IListAdaptiveMtDatasetsResponse=} [properties] Properties to set
+                         */
+                        function ListAdaptiveMtDatasetsResponse(properties) {
+                            this.adaptiveMtDatasets = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAdaptiveMtDatasetsResponse adaptiveMtDatasets.
+                         * @member {Array.<google.cloud.translation.v3.IAdaptiveMtDataset>} adaptiveMtDatasets
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse
+                         * @instance
+                         */
+                        ListAdaptiveMtDatasetsResponse.prototype.adaptiveMtDatasets = $util.emptyArray;
+    
+                        /**
+                         * ListAdaptiveMtDatasetsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse
+                         * @instance
+                         */
+                        ListAdaptiveMtDatasetsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListAdaptiveMtDatasetsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IListAdaptiveMtDatasetsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse} ListAdaptiveMtDatasetsResponse instance
+                         */
+                        ListAdaptiveMtDatasetsResponse.create = function create(properties) {
+                            return new ListAdaptiveMtDatasetsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAdaptiveMtDatasetsResponse message. Does not implicitly {@link google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IListAdaptiveMtDatasetsResponse} message ListAdaptiveMtDatasetsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAdaptiveMtDatasetsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.adaptiveMtDatasets != null && message.adaptiveMtDatasets.length)
+                                for (var i = 0; i < message.adaptiveMtDatasets.length; ++i)
+                                    $root.google.cloud.translation.v3.AdaptiveMtDataset.encode(message.adaptiveMtDatasets[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAdaptiveMtDatasetsResponse message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IListAdaptiveMtDatasetsResponse} message ListAdaptiveMtDatasetsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAdaptiveMtDatasetsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAdaptiveMtDatasetsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse} ListAdaptiveMtDatasetsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAdaptiveMtDatasetsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.adaptiveMtDatasets && message.adaptiveMtDatasets.length))
+                                            message.adaptiveMtDatasets = [];
+                                        message.adaptiveMtDatasets.push($root.google.cloud.translation.v3.AdaptiveMtDataset.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAdaptiveMtDatasetsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse} ListAdaptiveMtDatasetsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAdaptiveMtDatasetsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAdaptiveMtDatasetsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAdaptiveMtDatasetsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.adaptiveMtDatasets != null && message.hasOwnProperty("adaptiveMtDatasets")) {
+                                if (!Array.isArray(message.adaptiveMtDatasets))
+                                    return "adaptiveMtDatasets: array expected";
+                                for (var i = 0; i < message.adaptiveMtDatasets.length; ++i) {
+                                    var error = $root.google.cloud.translation.v3.AdaptiveMtDataset.verify(message.adaptiveMtDatasets[i]);
+                                    if (error)
+                                        return "adaptiveMtDatasets." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAdaptiveMtDatasetsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse} ListAdaptiveMtDatasetsResponse
+                         */
+                        ListAdaptiveMtDatasetsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse();
+                            if (object.adaptiveMtDatasets) {
+                                if (!Array.isArray(object.adaptiveMtDatasets))
+                                    throw TypeError(".google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse.adaptiveMtDatasets: array expected");
+                                message.adaptiveMtDatasets = [];
+                                for (var i = 0; i < object.adaptiveMtDatasets.length; ++i) {
+                                    if (typeof object.adaptiveMtDatasets[i] !== "object")
+                                        throw TypeError(".google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse.adaptiveMtDatasets: object expected");
+                                    message.adaptiveMtDatasets[i] = $root.google.cloud.translation.v3.AdaptiveMtDataset.fromObject(object.adaptiveMtDatasets[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAdaptiveMtDatasetsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse} message ListAdaptiveMtDatasetsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAdaptiveMtDatasetsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.adaptiveMtDatasets = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.adaptiveMtDatasets && message.adaptiveMtDatasets.length) {
+                                object.adaptiveMtDatasets = [];
+                                for (var j = 0; j < message.adaptiveMtDatasets.length; ++j)
+                                    object.adaptiveMtDatasets[j] = $root.google.cloud.translation.v3.AdaptiveMtDataset.toObject(message.adaptiveMtDatasets[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAdaptiveMtDatasetsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAdaptiveMtDatasetsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListAdaptiveMtDatasetsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListAdaptiveMtDatasetsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse";
+                        };
+    
+                        return ListAdaptiveMtDatasetsResponse;
+                    })();
+    
+                    v3.AdaptiveMtTranslateRequest = (function() {
+    
+                        /**
+                         * Properties of an AdaptiveMtTranslateRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IAdaptiveMtTranslateRequest
+                         * @property {string|null} [parent] AdaptiveMtTranslateRequest parent
+                         * @property {string|null} [dataset] AdaptiveMtTranslateRequest dataset
+                         * @property {Array.<string>|null} [content] AdaptiveMtTranslateRequest content
+                         */
+    
+                        /**
+                         * Constructs a new AdaptiveMtTranslateRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents an AdaptiveMtTranslateRequest.
+                         * @implements IAdaptiveMtTranslateRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IAdaptiveMtTranslateRequest=} [properties] Properties to set
+                         */
+                        function AdaptiveMtTranslateRequest(properties) {
+                            this.content = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AdaptiveMtTranslateRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
+                         * @instance
+                         */
+                        AdaptiveMtTranslateRequest.prototype.parent = "";
+    
+                        /**
+                         * AdaptiveMtTranslateRequest dataset.
+                         * @member {string} dataset
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
+                         * @instance
+                         */
+                        AdaptiveMtTranslateRequest.prototype.dataset = "";
+    
+                        /**
+                         * AdaptiveMtTranslateRequest content.
+                         * @member {Array.<string>} content
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
+                         * @instance
+                         */
+                        AdaptiveMtTranslateRequest.prototype.content = $util.emptyArray;
+    
+                        /**
+                         * Creates a new AdaptiveMtTranslateRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IAdaptiveMtTranslateRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.AdaptiveMtTranslateRequest} AdaptiveMtTranslateRequest instance
+                         */
+                        AdaptiveMtTranslateRequest.create = function create(properties) {
+                            return new AdaptiveMtTranslateRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AdaptiveMtTranslateRequest message. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtTranslateRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IAdaptiveMtTranslateRequest} message AdaptiveMtTranslateRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdaptiveMtTranslateRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.dataset != null && Object.hasOwnProperty.call(message, "dataset"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.dataset);
+                            if (message.content != null && message.content.length)
+                                for (var i = 0; i < message.content.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.content[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AdaptiveMtTranslateRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtTranslateRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IAdaptiveMtTranslateRequest} message AdaptiveMtTranslateRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdaptiveMtTranslateRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AdaptiveMtTranslateRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.AdaptiveMtTranslateRequest} AdaptiveMtTranslateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdaptiveMtTranslateRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.dataset = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.content && message.content.length))
+                                            message.content = [];
+                                        message.content.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AdaptiveMtTranslateRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.AdaptiveMtTranslateRequest} AdaptiveMtTranslateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdaptiveMtTranslateRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AdaptiveMtTranslateRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AdaptiveMtTranslateRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.dataset != null && message.hasOwnProperty("dataset"))
+                                if (!$util.isString(message.dataset))
+                                    return "dataset: string expected";
+                            if (message.content != null && message.hasOwnProperty("content")) {
+                                if (!Array.isArray(message.content))
+                                    return "content: array expected";
+                                for (var i = 0; i < message.content.length; ++i)
+                                    if (!$util.isString(message.content[i]))
+                                        return "content: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AdaptiveMtTranslateRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.AdaptiveMtTranslateRequest} AdaptiveMtTranslateRequest
+                         */
+                        AdaptiveMtTranslateRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.dataset != null)
+                                message.dataset = String(object.dataset);
+                            if (object.content) {
+                                if (!Array.isArray(object.content))
+                                    throw TypeError(".google.cloud.translation.v3.AdaptiveMtTranslateRequest.content: array expected");
+                                message.content = [];
+                                for (var i = 0; i < object.content.length; ++i)
+                                    message.content[i] = String(object.content[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AdaptiveMtTranslateRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.AdaptiveMtTranslateRequest} message AdaptiveMtTranslateRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AdaptiveMtTranslateRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.content = [];
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.dataset = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.dataset != null && message.hasOwnProperty("dataset"))
+                                object.dataset = message.dataset;
+                            if (message.content && message.content.length) {
+                                object.content = [];
+                                for (var j = 0; j < message.content.length; ++j)
+                                    object.content[j] = message.content[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AdaptiveMtTranslateRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AdaptiveMtTranslateRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AdaptiveMtTranslateRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AdaptiveMtTranslateRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.AdaptiveMtTranslateRequest";
+                        };
+    
+                        return AdaptiveMtTranslateRequest;
+                    })();
+    
+                    v3.AdaptiveMtTranslation = (function() {
+    
+                        /**
+                         * Properties of an AdaptiveMtTranslation.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IAdaptiveMtTranslation
+                         * @property {string|null} [translatedText] AdaptiveMtTranslation translatedText
+                         */
+    
+                        /**
+                         * Constructs a new AdaptiveMtTranslation.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents an AdaptiveMtTranslation.
+                         * @implements IAdaptiveMtTranslation
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IAdaptiveMtTranslation=} [properties] Properties to set
+                         */
+                        function AdaptiveMtTranslation(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AdaptiveMtTranslation translatedText.
+                         * @member {string} translatedText
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslation
+                         * @instance
+                         */
+                        AdaptiveMtTranslation.prototype.translatedText = "";
+    
+                        /**
+                         * Creates a new AdaptiveMtTranslation instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslation
+                         * @static
+                         * @param {google.cloud.translation.v3.IAdaptiveMtTranslation=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.AdaptiveMtTranslation} AdaptiveMtTranslation instance
+                         */
+                        AdaptiveMtTranslation.create = function create(properties) {
+                            return new AdaptiveMtTranslation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AdaptiveMtTranslation message. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtTranslation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslation
+                         * @static
+                         * @param {google.cloud.translation.v3.IAdaptiveMtTranslation} message AdaptiveMtTranslation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdaptiveMtTranslation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.translatedText != null && Object.hasOwnProperty.call(message, "translatedText"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.translatedText);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AdaptiveMtTranslation message, length delimited. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtTranslation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslation
+                         * @static
+                         * @param {google.cloud.translation.v3.IAdaptiveMtTranslation} message AdaptiveMtTranslation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdaptiveMtTranslation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AdaptiveMtTranslation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.AdaptiveMtTranslation} AdaptiveMtTranslation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdaptiveMtTranslation.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.AdaptiveMtTranslation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.translatedText = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AdaptiveMtTranslation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.AdaptiveMtTranslation} AdaptiveMtTranslation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdaptiveMtTranslation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AdaptiveMtTranslation message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AdaptiveMtTranslation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.translatedText != null && message.hasOwnProperty("translatedText"))
+                                if (!$util.isString(message.translatedText))
+                                    return "translatedText: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AdaptiveMtTranslation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.AdaptiveMtTranslation} AdaptiveMtTranslation
+                         */
+                        AdaptiveMtTranslation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.AdaptiveMtTranslation)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.AdaptiveMtTranslation();
+                            if (object.translatedText != null)
+                                message.translatedText = String(object.translatedText);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AdaptiveMtTranslation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslation
+                         * @static
+                         * @param {google.cloud.translation.v3.AdaptiveMtTranslation} message AdaptiveMtTranslation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AdaptiveMtTranslation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.translatedText = "";
+                            if (message.translatedText != null && message.hasOwnProperty("translatedText"))
+                                object.translatedText = message.translatedText;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AdaptiveMtTranslation to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AdaptiveMtTranslation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AdaptiveMtTranslation
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslation
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AdaptiveMtTranslation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.AdaptiveMtTranslation";
+                        };
+    
+                        return AdaptiveMtTranslation;
+                    })();
+    
+                    v3.AdaptiveMtTranslateResponse = (function() {
+    
+                        /**
+                         * Properties of an AdaptiveMtTranslateResponse.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IAdaptiveMtTranslateResponse
+                         * @property {Array.<google.cloud.translation.v3.IAdaptiveMtTranslation>|null} [translations] AdaptiveMtTranslateResponse translations
+                         * @property {string|null} [languageCode] AdaptiveMtTranslateResponse languageCode
+                         */
+    
+                        /**
+                         * Constructs a new AdaptiveMtTranslateResponse.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents an AdaptiveMtTranslateResponse.
+                         * @implements IAdaptiveMtTranslateResponse
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IAdaptiveMtTranslateResponse=} [properties] Properties to set
+                         */
+                        function AdaptiveMtTranslateResponse(properties) {
+                            this.translations = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AdaptiveMtTranslateResponse translations.
+                         * @member {Array.<google.cloud.translation.v3.IAdaptiveMtTranslation>} translations
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateResponse
+                         * @instance
+                         */
+                        AdaptiveMtTranslateResponse.prototype.translations = $util.emptyArray;
+    
+                        /**
+                         * AdaptiveMtTranslateResponse languageCode.
+                         * @member {string} languageCode
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateResponse
+                         * @instance
+                         */
+                        AdaptiveMtTranslateResponse.prototype.languageCode = "";
+    
+                        /**
+                         * Creates a new AdaptiveMtTranslateResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IAdaptiveMtTranslateResponse=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.AdaptiveMtTranslateResponse} AdaptiveMtTranslateResponse instance
+                         */
+                        AdaptiveMtTranslateResponse.create = function create(properties) {
+                            return new AdaptiveMtTranslateResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AdaptiveMtTranslateResponse message. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtTranslateResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IAdaptiveMtTranslateResponse} message AdaptiveMtTranslateResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdaptiveMtTranslateResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.translations != null && message.translations.length)
+                                for (var i = 0; i < message.translations.length; ++i)
+                                    $root.google.cloud.translation.v3.AdaptiveMtTranslation.encode(message.translations[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.languageCode);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AdaptiveMtTranslateResponse message, length delimited. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtTranslateResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IAdaptiveMtTranslateResponse} message AdaptiveMtTranslateResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdaptiveMtTranslateResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AdaptiveMtTranslateResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.AdaptiveMtTranslateResponse} AdaptiveMtTranslateResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdaptiveMtTranslateResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.AdaptiveMtTranslateResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.translations && message.translations.length))
+                                            message.translations = [];
+                                        message.translations.push($root.google.cloud.translation.v3.AdaptiveMtTranslation.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.languageCode = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AdaptiveMtTranslateResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.AdaptiveMtTranslateResponse} AdaptiveMtTranslateResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdaptiveMtTranslateResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AdaptiveMtTranslateResponse message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AdaptiveMtTranslateResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.translations != null && message.hasOwnProperty("translations")) {
+                                if (!Array.isArray(message.translations))
+                                    return "translations: array expected";
+                                for (var i = 0; i < message.translations.length; ++i) {
+                                    var error = $root.google.cloud.translation.v3.AdaptiveMtTranslation.verify(message.translations[i]);
+                                    if (error)
+                                        return "translations." + error;
+                                }
+                            }
+                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                if (!$util.isString(message.languageCode))
+                                    return "languageCode: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AdaptiveMtTranslateResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.AdaptiveMtTranslateResponse} AdaptiveMtTranslateResponse
+                         */
+                        AdaptiveMtTranslateResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.AdaptiveMtTranslateResponse)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.AdaptiveMtTranslateResponse();
+                            if (object.translations) {
+                                if (!Array.isArray(object.translations))
+                                    throw TypeError(".google.cloud.translation.v3.AdaptiveMtTranslateResponse.translations: array expected");
+                                message.translations = [];
+                                for (var i = 0; i < object.translations.length; ++i) {
+                                    if (typeof object.translations[i] !== "object")
+                                        throw TypeError(".google.cloud.translation.v3.AdaptiveMtTranslateResponse.translations: object expected");
+                                    message.translations[i] = $root.google.cloud.translation.v3.AdaptiveMtTranslation.fromObject(object.translations[i]);
+                                }
+                            }
+                            if (object.languageCode != null)
+                                message.languageCode = String(object.languageCode);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AdaptiveMtTranslateResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.AdaptiveMtTranslateResponse} message AdaptiveMtTranslateResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AdaptiveMtTranslateResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.translations = [];
+                            if (options.defaults)
+                                object.languageCode = "";
+                            if (message.translations && message.translations.length) {
+                                object.translations = [];
+                                for (var j = 0; j < message.translations.length; ++j)
+                                    object.translations[j] = $root.google.cloud.translation.v3.AdaptiveMtTranslation.toObject(message.translations[j], options);
+                            }
+                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                object.languageCode = message.languageCode;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AdaptiveMtTranslateResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AdaptiveMtTranslateResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AdaptiveMtTranslateResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AdaptiveMtTranslateResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.AdaptiveMtTranslateResponse";
+                        };
+    
+                        return AdaptiveMtTranslateResponse;
+                    })();
+    
+                    v3.AdaptiveMtFile = (function() {
+    
+                        /**
+                         * Properties of an AdaptiveMtFile.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IAdaptiveMtFile
+                         * @property {string|null} [name] AdaptiveMtFile name
+                         * @property {string|null} [displayName] AdaptiveMtFile displayName
+                         * @property {number|null} [entryCount] AdaptiveMtFile entryCount
+                         * @property {google.protobuf.ITimestamp|null} [createTime] AdaptiveMtFile createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] AdaptiveMtFile updateTime
+                         */
+    
+                        /**
+                         * Constructs a new AdaptiveMtFile.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents an AdaptiveMtFile.
+                         * @implements IAdaptiveMtFile
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IAdaptiveMtFile=} [properties] Properties to set
+                         */
+                        function AdaptiveMtFile(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AdaptiveMtFile name.
+                         * @member {string} name
+                         * @memberof google.cloud.translation.v3.AdaptiveMtFile
+                         * @instance
+                         */
+                        AdaptiveMtFile.prototype.name = "";
+    
+                        /**
+                         * AdaptiveMtFile displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.translation.v3.AdaptiveMtFile
+                         * @instance
+                         */
+                        AdaptiveMtFile.prototype.displayName = "";
+    
+                        /**
+                         * AdaptiveMtFile entryCount.
+                         * @member {number} entryCount
+                         * @memberof google.cloud.translation.v3.AdaptiveMtFile
+                         * @instance
+                         */
+                        AdaptiveMtFile.prototype.entryCount = 0;
+    
+                        /**
+                         * AdaptiveMtFile createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.translation.v3.AdaptiveMtFile
+                         * @instance
+                         */
+                        AdaptiveMtFile.prototype.createTime = null;
+    
+                        /**
+                         * AdaptiveMtFile updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.translation.v3.AdaptiveMtFile
+                         * @instance
+                         */
+                        AdaptiveMtFile.prototype.updateTime = null;
+    
+                        /**
+                         * Creates a new AdaptiveMtFile instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.AdaptiveMtFile
+                         * @static
+                         * @param {google.cloud.translation.v3.IAdaptiveMtFile=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.AdaptiveMtFile} AdaptiveMtFile instance
+                         */
+                        AdaptiveMtFile.create = function create(properties) {
+                            return new AdaptiveMtFile(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AdaptiveMtFile message. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtFile.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.AdaptiveMtFile
+                         * @static
+                         * @param {google.cloud.translation.v3.IAdaptiveMtFile} message AdaptiveMtFile message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdaptiveMtFile.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.entryCount != null && Object.hasOwnProperty.call(message, "entryCount"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.entryCount);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AdaptiveMtFile message, length delimited. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtFile.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.AdaptiveMtFile
+                         * @static
+                         * @param {google.cloud.translation.v3.IAdaptiveMtFile} message AdaptiveMtFile message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdaptiveMtFile.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AdaptiveMtFile message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.AdaptiveMtFile
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.AdaptiveMtFile} AdaptiveMtFile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdaptiveMtFile.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.AdaptiveMtFile();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.entryCount = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AdaptiveMtFile message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.AdaptiveMtFile
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.AdaptiveMtFile} AdaptiveMtFile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdaptiveMtFile.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AdaptiveMtFile message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.AdaptiveMtFile
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AdaptiveMtFile.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.entryCount != null && message.hasOwnProperty("entryCount"))
+                                if (!$util.isInteger(message.entryCount))
+                                    return "entryCount: integer expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AdaptiveMtFile message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.AdaptiveMtFile
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.AdaptiveMtFile} AdaptiveMtFile
+                         */
+                        AdaptiveMtFile.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.AdaptiveMtFile)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.AdaptiveMtFile();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.entryCount != null)
+                                message.entryCount = object.entryCount | 0;
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.AdaptiveMtFile.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.AdaptiveMtFile.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AdaptiveMtFile message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.AdaptiveMtFile
+                         * @static
+                         * @param {google.cloud.translation.v3.AdaptiveMtFile} message AdaptiveMtFile
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AdaptiveMtFile.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.displayName = "";
+                                object.entryCount = 0;
+                                object.createTime = null;
+                                object.updateTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.entryCount != null && message.hasOwnProperty("entryCount"))
+                                object.entryCount = message.entryCount;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AdaptiveMtFile to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.AdaptiveMtFile
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AdaptiveMtFile.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AdaptiveMtFile
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.AdaptiveMtFile
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AdaptiveMtFile.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.AdaptiveMtFile";
+                        };
+    
+                        return AdaptiveMtFile;
+                    })();
+    
+                    v3.GetAdaptiveMtFileRequest = (function() {
+    
+                        /**
+                         * Properties of a GetAdaptiveMtFileRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IGetAdaptiveMtFileRequest
+                         * @property {string|null} [name] GetAdaptiveMtFileRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetAdaptiveMtFileRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a GetAdaptiveMtFileRequest.
+                         * @implements IGetAdaptiveMtFileRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IGetAdaptiveMtFileRequest=} [properties] Properties to set
+                         */
+                        function GetAdaptiveMtFileRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetAdaptiveMtFileRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.translation.v3.GetAdaptiveMtFileRequest
+                         * @instance
+                         */
+                        GetAdaptiveMtFileRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetAdaptiveMtFileRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.GetAdaptiveMtFileRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IGetAdaptiveMtFileRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.GetAdaptiveMtFileRequest} GetAdaptiveMtFileRequest instance
+                         */
+                        GetAdaptiveMtFileRequest.create = function create(properties) {
+                            return new GetAdaptiveMtFileRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetAdaptiveMtFileRequest message. Does not implicitly {@link google.cloud.translation.v3.GetAdaptiveMtFileRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.GetAdaptiveMtFileRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IGetAdaptiveMtFileRequest} message GetAdaptiveMtFileRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetAdaptiveMtFileRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetAdaptiveMtFileRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.GetAdaptiveMtFileRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.GetAdaptiveMtFileRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IGetAdaptiveMtFileRequest} message GetAdaptiveMtFileRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetAdaptiveMtFileRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetAdaptiveMtFileRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.GetAdaptiveMtFileRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.GetAdaptiveMtFileRequest} GetAdaptiveMtFileRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetAdaptiveMtFileRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.GetAdaptiveMtFileRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetAdaptiveMtFileRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.GetAdaptiveMtFileRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.GetAdaptiveMtFileRequest} GetAdaptiveMtFileRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetAdaptiveMtFileRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetAdaptiveMtFileRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.GetAdaptiveMtFileRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetAdaptiveMtFileRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetAdaptiveMtFileRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.GetAdaptiveMtFileRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.GetAdaptiveMtFileRequest} GetAdaptiveMtFileRequest
+                         */
+                        GetAdaptiveMtFileRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.GetAdaptiveMtFileRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.GetAdaptiveMtFileRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetAdaptiveMtFileRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.GetAdaptiveMtFileRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.GetAdaptiveMtFileRequest} message GetAdaptiveMtFileRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetAdaptiveMtFileRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetAdaptiveMtFileRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.GetAdaptiveMtFileRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetAdaptiveMtFileRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetAdaptiveMtFileRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.GetAdaptiveMtFileRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetAdaptiveMtFileRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.GetAdaptiveMtFileRequest";
+                        };
+    
+                        return GetAdaptiveMtFileRequest;
+                    })();
+    
+                    v3.DeleteAdaptiveMtFileRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteAdaptiveMtFileRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IDeleteAdaptiveMtFileRequest
+                         * @property {string|null} [name] DeleteAdaptiveMtFileRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteAdaptiveMtFileRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a DeleteAdaptiveMtFileRequest.
+                         * @implements IDeleteAdaptiveMtFileRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IDeleteAdaptiveMtFileRequest=} [properties] Properties to set
+                         */
+                        function DeleteAdaptiveMtFileRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteAdaptiveMtFileRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.translation.v3.DeleteAdaptiveMtFileRequest
+                         * @instance
+                         */
+                        DeleteAdaptiveMtFileRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteAdaptiveMtFileRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.DeleteAdaptiveMtFileRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IDeleteAdaptiveMtFileRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.DeleteAdaptiveMtFileRequest} DeleteAdaptiveMtFileRequest instance
+                         */
+                        DeleteAdaptiveMtFileRequest.create = function create(properties) {
+                            return new DeleteAdaptiveMtFileRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteAdaptiveMtFileRequest message. Does not implicitly {@link google.cloud.translation.v3.DeleteAdaptiveMtFileRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.DeleteAdaptiveMtFileRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IDeleteAdaptiveMtFileRequest} message DeleteAdaptiveMtFileRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteAdaptiveMtFileRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteAdaptiveMtFileRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.DeleteAdaptiveMtFileRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.DeleteAdaptiveMtFileRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IDeleteAdaptiveMtFileRequest} message DeleteAdaptiveMtFileRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteAdaptiveMtFileRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteAdaptiveMtFileRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.DeleteAdaptiveMtFileRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.DeleteAdaptiveMtFileRequest} DeleteAdaptiveMtFileRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteAdaptiveMtFileRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.DeleteAdaptiveMtFileRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteAdaptiveMtFileRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.DeleteAdaptiveMtFileRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.DeleteAdaptiveMtFileRequest} DeleteAdaptiveMtFileRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteAdaptiveMtFileRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteAdaptiveMtFileRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.DeleteAdaptiveMtFileRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteAdaptiveMtFileRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteAdaptiveMtFileRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.DeleteAdaptiveMtFileRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.DeleteAdaptiveMtFileRequest} DeleteAdaptiveMtFileRequest
+                         */
+                        DeleteAdaptiveMtFileRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.DeleteAdaptiveMtFileRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.DeleteAdaptiveMtFileRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteAdaptiveMtFileRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.DeleteAdaptiveMtFileRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.DeleteAdaptiveMtFileRequest} message DeleteAdaptiveMtFileRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteAdaptiveMtFileRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteAdaptiveMtFileRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.DeleteAdaptiveMtFileRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteAdaptiveMtFileRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteAdaptiveMtFileRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.DeleteAdaptiveMtFileRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteAdaptiveMtFileRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.DeleteAdaptiveMtFileRequest";
+                        };
+    
+                        return DeleteAdaptiveMtFileRequest;
+                    })();
+    
+                    v3.ImportAdaptiveMtFileRequest = (function() {
+    
+                        /**
+                         * Properties of an ImportAdaptiveMtFileRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IImportAdaptiveMtFileRequest
+                         * @property {string|null} [parent] ImportAdaptiveMtFileRequest parent
+                         * @property {google.cloud.translation.v3.IFileInputSource|null} [fileInputSource] ImportAdaptiveMtFileRequest fileInputSource
+                         * @property {google.cloud.translation.v3.IGcsInputSource|null} [gcsInputSource] ImportAdaptiveMtFileRequest gcsInputSource
+                         */
+    
+                        /**
+                         * Constructs a new ImportAdaptiveMtFileRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents an ImportAdaptiveMtFileRequest.
+                         * @implements IImportAdaptiveMtFileRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IImportAdaptiveMtFileRequest=} [properties] Properties to set
+                         */
+                        function ImportAdaptiveMtFileRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ImportAdaptiveMtFileRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.translation.v3.ImportAdaptiveMtFileRequest
+                         * @instance
+                         */
+                        ImportAdaptiveMtFileRequest.prototype.parent = "";
+    
+                        /**
+                         * ImportAdaptiveMtFileRequest fileInputSource.
+                         * @member {google.cloud.translation.v3.IFileInputSource|null|undefined} fileInputSource
+                         * @memberof google.cloud.translation.v3.ImportAdaptiveMtFileRequest
+                         * @instance
+                         */
+                        ImportAdaptiveMtFileRequest.prototype.fileInputSource = null;
+    
+                        /**
+                         * ImportAdaptiveMtFileRequest gcsInputSource.
+                         * @member {google.cloud.translation.v3.IGcsInputSource|null|undefined} gcsInputSource
+                         * @memberof google.cloud.translation.v3.ImportAdaptiveMtFileRequest
+                         * @instance
+                         */
+                        ImportAdaptiveMtFileRequest.prototype.gcsInputSource = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ImportAdaptiveMtFileRequest source.
+                         * @member {"fileInputSource"|"gcsInputSource"|undefined} source
+                         * @memberof google.cloud.translation.v3.ImportAdaptiveMtFileRequest
+                         * @instance
+                         */
+                        Object.defineProperty(ImportAdaptiveMtFileRequest.prototype, "source", {
+                            get: $util.oneOfGetter($oneOfFields = ["fileInputSource", "gcsInputSource"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ImportAdaptiveMtFileRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.ImportAdaptiveMtFileRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IImportAdaptiveMtFileRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.ImportAdaptiveMtFileRequest} ImportAdaptiveMtFileRequest instance
+                         */
+                        ImportAdaptiveMtFileRequest.create = function create(properties) {
+                            return new ImportAdaptiveMtFileRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ImportAdaptiveMtFileRequest message. Does not implicitly {@link google.cloud.translation.v3.ImportAdaptiveMtFileRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.ImportAdaptiveMtFileRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IImportAdaptiveMtFileRequest} message ImportAdaptiveMtFileRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportAdaptiveMtFileRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.fileInputSource != null && Object.hasOwnProperty.call(message, "fileInputSource"))
+                                $root.google.cloud.translation.v3.FileInputSource.encode(message.fileInputSource, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.gcsInputSource != null && Object.hasOwnProperty.call(message, "gcsInputSource"))
+                                $root.google.cloud.translation.v3.GcsInputSource.encode(message.gcsInputSource, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ImportAdaptiveMtFileRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ImportAdaptiveMtFileRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.ImportAdaptiveMtFileRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IImportAdaptiveMtFileRequest} message ImportAdaptiveMtFileRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportAdaptiveMtFileRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ImportAdaptiveMtFileRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.ImportAdaptiveMtFileRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.ImportAdaptiveMtFileRequest} ImportAdaptiveMtFileRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportAdaptiveMtFileRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.ImportAdaptiveMtFileRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.fileInputSource = $root.google.cloud.translation.v3.FileInputSource.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.gcsInputSource = $root.google.cloud.translation.v3.GcsInputSource.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ImportAdaptiveMtFileRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.ImportAdaptiveMtFileRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.ImportAdaptiveMtFileRequest} ImportAdaptiveMtFileRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportAdaptiveMtFileRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ImportAdaptiveMtFileRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.ImportAdaptiveMtFileRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ImportAdaptiveMtFileRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.fileInputSource != null && message.hasOwnProperty("fileInputSource")) {
+                                properties.source = 1;
+                                {
+                                    var error = $root.google.cloud.translation.v3.FileInputSource.verify(message.fileInputSource);
+                                    if (error)
+                                        return "fileInputSource." + error;
+                                }
+                            }
+                            if (message.gcsInputSource != null && message.hasOwnProperty("gcsInputSource")) {
+                                if (properties.source === 1)
+                                    return "source: multiple values";
+                                properties.source = 1;
+                                {
+                                    var error = $root.google.cloud.translation.v3.GcsInputSource.verify(message.gcsInputSource);
+                                    if (error)
+                                        return "gcsInputSource." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ImportAdaptiveMtFileRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.ImportAdaptiveMtFileRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.ImportAdaptiveMtFileRequest} ImportAdaptiveMtFileRequest
+                         */
+                        ImportAdaptiveMtFileRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.ImportAdaptiveMtFileRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.ImportAdaptiveMtFileRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.fileInputSource != null) {
+                                if (typeof object.fileInputSource !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.ImportAdaptiveMtFileRequest.fileInputSource: object expected");
+                                message.fileInputSource = $root.google.cloud.translation.v3.FileInputSource.fromObject(object.fileInputSource);
+                            }
+                            if (object.gcsInputSource != null) {
+                                if (typeof object.gcsInputSource !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.ImportAdaptiveMtFileRequest.gcsInputSource: object expected");
+                                message.gcsInputSource = $root.google.cloud.translation.v3.GcsInputSource.fromObject(object.gcsInputSource);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ImportAdaptiveMtFileRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.ImportAdaptiveMtFileRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.ImportAdaptiveMtFileRequest} message ImportAdaptiveMtFileRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ImportAdaptiveMtFileRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.parent = "";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.fileInputSource != null && message.hasOwnProperty("fileInputSource")) {
+                                object.fileInputSource = $root.google.cloud.translation.v3.FileInputSource.toObject(message.fileInputSource, options);
+                                if (options.oneofs)
+                                    object.source = "fileInputSource";
+                            }
+                            if (message.gcsInputSource != null && message.hasOwnProperty("gcsInputSource")) {
+                                object.gcsInputSource = $root.google.cloud.translation.v3.GcsInputSource.toObject(message.gcsInputSource, options);
+                                if (options.oneofs)
+                                    object.source = "gcsInputSource";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ImportAdaptiveMtFileRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.ImportAdaptiveMtFileRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ImportAdaptiveMtFileRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ImportAdaptiveMtFileRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.ImportAdaptiveMtFileRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ImportAdaptiveMtFileRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.ImportAdaptiveMtFileRequest";
+                        };
+    
+                        return ImportAdaptiveMtFileRequest;
+                    })();
+    
+                    v3.ImportAdaptiveMtFileResponse = (function() {
+    
+                        /**
+                         * Properties of an ImportAdaptiveMtFileResponse.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IImportAdaptiveMtFileResponse
+                         * @property {google.cloud.translation.v3.IAdaptiveMtFile|null} [adaptiveMtFile] ImportAdaptiveMtFileResponse adaptiveMtFile
+                         */
+    
+                        /**
+                         * Constructs a new ImportAdaptiveMtFileResponse.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents an ImportAdaptiveMtFileResponse.
+                         * @implements IImportAdaptiveMtFileResponse
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IImportAdaptiveMtFileResponse=} [properties] Properties to set
+                         */
+                        function ImportAdaptiveMtFileResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ImportAdaptiveMtFileResponse adaptiveMtFile.
+                         * @member {google.cloud.translation.v3.IAdaptiveMtFile|null|undefined} adaptiveMtFile
+                         * @memberof google.cloud.translation.v3.ImportAdaptiveMtFileResponse
+                         * @instance
+                         */
+                        ImportAdaptiveMtFileResponse.prototype.adaptiveMtFile = null;
+    
+                        /**
+                         * Creates a new ImportAdaptiveMtFileResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.ImportAdaptiveMtFileResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IImportAdaptiveMtFileResponse=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.ImportAdaptiveMtFileResponse} ImportAdaptiveMtFileResponse instance
+                         */
+                        ImportAdaptiveMtFileResponse.create = function create(properties) {
+                            return new ImportAdaptiveMtFileResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ImportAdaptiveMtFileResponse message. Does not implicitly {@link google.cloud.translation.v3.ImportAdaptiveMtFileResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.ImportAdaptiveMtFileResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IImportAdaptiveMtFileResponse} message ImportAdaptiveMtFileResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportAdaptiveMtFileResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.adaptiveMtFile != null && Object.hasOwnProperty.call(message, "adaptiveMtFile"))
+                                $root.google.cloud.translation.v3.AdaptiveMtFile.encode(message.adaptiveMtFile, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ImportAdaptiveMtFileResponse message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ImportAdaptiveMtFileResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.ImportAdaptiveMtFileResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IImportAdaptiveMtFileResponse} message ImportAdaptiveMtFileResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportAdaptiveMtFileResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ImportAdaptiveMtFileResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.ImportAdaptiveMtFileResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.ImportAdaptiveMtFileResponse} ImportAdaptiveMtFileResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportAdaptiveMtFileResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.ImportAdaptiveMtFileResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.adaptiveMtFile = $root.google.cloud.translation.v3.AdaptiveMtFile.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ImportAdaptiveMtFileResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.ImportAdaptiveMtFileResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.ImportAdaptiveMtFileResponse} ImportAdaptiveMtFileResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportAdaptiveMtFileResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ImportAdaptiveMtFileResponse message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.ImportAdaptiveMtFileResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ImportAdaptiveMtFileResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.adaptiveMtFile != null && message.hasOwnProperty("adaptiveMtFile")) {
+                                var error = $root.google.cloud.translation.v3.AdaptiveMtFile.verify(message.adaptiveMtFile);
+                                if (error)
+                                    return "adaptiveMtFile." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ImportAdaptiveMtFileResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.ImportAdaptiveMtFileResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.ImportAdaptiveMtFileResponse} ImportAdaptiveMtFileResponse
+                         */
+                        ImportAdaptiveMtFileResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.ImportAdaptiveMtFileResponse)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.ImportAdaptiveMtFileResponse();
+                            if (object.adaptiveMtFile != null) {
+                                if (typeof object.adaptiveMtFile !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.ImportAdaptiveMtFileResponse.adaptiveMtFile: object expected");
+                                message.adaptiveMtFile = $root.google.cloud.translation.v3.AdaptiveMtFile.fromObject(object.adaptiveMtFile);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ImportAdaptiveMtFileResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.ImportAdaptiveMtFileResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.ImportAdaptiveMtFileResponse} message ImportAdaptiveMtFileResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ImportAdaptiveMtFileResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.adaptiveMtFile = null;
+                            if (message.adaptiveMtFile != null && message.hasOwnProperty("adaptiveMtFile"))
+                                object.adaptiveMtFile = $root.google.cloud.translation.v3.AdaptiveMtFile.toObject(message.adaptiveMtFile, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ImportAdaptiveMtFileResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.ImportAdaptiveMtFileResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ImportAdaptiveMtFileResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ImportAdaptiveMtFileResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.ImportAdaptiveMtFileResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ImportAdaptiveMtFileResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.ImportAdaptiveMtFileResponse";
+                        };
+    
+                        return ImportAdaptiveMtFileResponse;
+                    })();
+    
+                    v3.ListAdaptiveMtFilesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListAdaptiveMtFilesRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IListAdaptiveMtFilesRequest
+                         * @property {string|null} [parent] ListAdaptiveMtFilesRequest parent
+                         * @property {number|null} [pageSize] ListAdaptiveMtFilesRequest pageSize
+                         * @property {string|null} [pageToken] ListAdaptiveMtFilesRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListAdaptiveMtFilesRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a ListAdaptiveMtFilesRequest.
+                         * @implements IListAdaptiveMtFilesRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IListAdaptiveMtFilesRequest=} [properties] Properties to set
+                         */
+                        function ListAdaptiveMtFilesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAdaptiveMtFilesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtFilesRequest
+                         * @instance
+                         */
+                        ListAdaptiveMtFilesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListAdaptiveMtFilesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtFilesRequest
+                         * @instance
+                         */
+                        ListAdaptiveMtFilesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListAdaptiveMtFilesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtFilesRequest
+                         * @instance
+                         */
+                        ListAdaptiveMtFilesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListAdaptiveMtFilesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtFilesRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IListAdaptiveMtFilesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.ListAdaptiveMtFilesRequest} ListAdaptiveMtFilesRequest instance
+                         */
+                        ListAdaptiveMtFilesRequest.create = function create(properties) {
+                            return new ListAdaptiveMtFilesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAdaptiveMtFilesRequest message. Does not implicitly {@link google.cloud.translation.v3.ListAdaptiveMtFilesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtFilesRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IListAdaptiveMtFilesRequest} message ListAdaptiveMtFilesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAdaptiveMtFilesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAdaptiveMtFilesRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ListAdaptiveMtFilesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtFilesRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IListAdaptiveMtFilesRequest} message ListAdaptiveMtFilesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAdaptiveMtFilesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAdaptiveMtFilesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtFilesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.ListAdaptiveMtFilesRequest} ListAdaptiveMtFilesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAdaptiveMtFilesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.ListAdaptiveMtFilesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAdaptiveMtFilesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtFilesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.ListAdaptiveMtFilesRequest} ListAdaptiveMtFilesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAdaptiveMtFilesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAdaptiveMtFilesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtFilesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAdaptiveMtFilesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAdaptiveMtFilesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtFilesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.ListAdaptiveMtFilesRequest} ListAdaptiveMtFilesRequest
+                         */
+                        ListAdaptiveMtFilesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.ListAdaptiveMtFilesRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.ListAdaptiveMtFilesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAdaptiveMtFilesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtFilesRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.ListAdaptiveMtFilesRequest} message ListAdaptiveMtFilesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAdaptiveMtFilesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAdaptiveMtFilesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtFilesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAdaptiveMtFilesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListAdaptiveMtFilesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtFilesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListAdaptiveMtFilesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.ListAdaptiveMtFilesRequest";
+                        };
+    
+                        return ListAdaptiveMtFilesRequest;
+                    })();
+    
+                    v3.ListAdaptiveMtFilesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListAdaptiveMtFilesResponse.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IListAdaptiveMtFilesResponse
+                         * @property {Array.<google.cloud.translation.v3.IAdaptiveMtFile>|null} [adaptiveMtFiles] ListAdaptiveMtFilesResponse adaptiveMtFiles
+                         * @property {string|null} [nextPageToken] ListAdaptiveMtFilesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListAdaptiveMtFilesResponse.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a ListAdaptiveMtFilesResponse.
+                         * @implements IListAdaptiveMtFilesResponse
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IListAdaptiveMtFilesResponse=} [properties] Properties to set
+                         */
+                        function ListAdaptiveMtFilesResponse(properties) {
+                            this.adaptiveMtFiles = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAdaptiveMtFilesResponse adaptiveMtFiles.
+                         * @member {Array.<google.cloud.translation.v3.IAdaptiveMtFile>} adaptiveMtFiles
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtFilesResponse
+                         * @instance
+                         */
+                        ListAdaptiveMtFilesResponse.prototype.adaptiveMtFiles = $util.emptyArray;
+    
+                        /**
+                         * ListAdaptiveMtFilesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtFilesResponse
+                         * @instance
+                         */
+                        ListAdaptiveMtFilesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListAdaptiveMtFilesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtFilesResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IListAdaptiveMtFilesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.ListAdaptiveMtFilesResponse} ListAdaptiveMtFilesResponse instance
+                         */
+                        ListAdaptiveMtFilesResponse.create = function create(properties) {
+                            return new ListAdaptiveMtFilesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAdaptiveMtFilesResponse message. Does not implicitly {@link google.cloud.translation.v3.ListAdaptiveMtFilesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtFilesResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IListAdaptiveMtFilesResponse} message ListAdaptiveMtFilesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAdaptiveMtFilesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.adaptiveMtFiles != null && message.adaptiveMtFiles.length)
+                                for (var i = 0; i < message.adaptiveMtFiles.length; ++i)
+                                    $root.google.cloud.translation.v3.AdaptiveMtFile.encode(message.adaptiveMtFiles[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAdaptiveMtFilesResponse message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ListAdaptiveMtFilesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtFilesResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IListAdaptiveMtFilesResponse} message ListAdaptiveMtFilesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAdaptiveMtFilesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAdaptiveMtFilesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtFilesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.ListAdaptiveMtFilesResponse} ListAdaptiveMtFilesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAdaptiveMtFilesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.ListAdaptiveMtFilesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.adaptiveMtFiles && message.adaptiveMtFiles.length))
+                                            message.adaptiveMtFiles = [];
+                                        message.adaptiveMtFiles.push($root.google.cloud.translation.v3.AdaptiveMtFile.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAdaptiveMtFilesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtFilesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.ListAdaptiveMtFilesResponse} ListAdaptiveMtFilesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAdaptiveMtFilesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAdaptiveMtFilesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtFilesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAdaptiveMtFilesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.adaptiveMtFiles != null && message.hasOwnProperty("adaptiveMtFiles")) {
+                                if (!Array.isArray(message.adaptiveMtFiles))
+                                    return "adaptiveMtFiles: array expected";
+                                for (var i = 0; i < message.adaptiveMtFiles.length; ++i) {
+                                    var error = $root.google.cloud.translation.v3.AdaptiveMtFile.verify(message.adaptiveMtFiles[i]);
+                                    if (error)
+                                        return "adaptiveMtFiles." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAdaptiveMtFilesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtFilesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.ListAdaptiveMtFilesResponse} ListAdaptiveMtFilesResponse
+                         */
+                        ListAdaptiveMtFilesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.ListAdaptiveMtFilesResponse)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.ListAdaptiveMtFilesResponse();
+                            if (object.adaptiveMtFiles) {
+                                if (!Array.isArray(object.adaptiveMtFiles))
+                                    throw TypeError(".google.cloud.translation.v3.ListAdaptiveMtFilesResponse.adaptiveMtFiles: array expected");
+                                message.adaptiveMtFiles = [];
+                                for (var i = 0; i < object.adaptiveMtFiles.length; ++i) {
+                                    if (typeof object.adaptiveMtFiles[i] !== "object")
+                                        throw TypeError(".google.cloud.translation.v3.ListAdaptiveMtFilesResponse.adaptiveMtFiles: object expected");
+                                    message.adaptiveMtFiles[i] = $root.google.cloud.translation.v3.AdaptiveMtFile.fromObject(object.adaptiveMtFiles[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAdaptiveMtFilesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtFilesResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.ListAdaptiveMtFilesResponse} message ListAdaptiveMtFilesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAdaptiveMtFilesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.adaptiveMtFiles = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.adaptiveMtFiles && message.adaptiveMtFiles.length) {
+                                object.adaptiveMtFiles = [];
+                                for (var j = 0; j < message.adaptiveMtFiles.length; ++j)
+                                    object.adaptiveMtFiles[j] = $root.google.cloud.translation.v3.AdaptiveMtFile.toObject(message.adaptiveMtFiles[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAdaptiveMtFilesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtFilesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAdaptiveMtFilesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListAdaptiveMtFilesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtFilesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListAdaptiveMtFilesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.ListAdaptiveMtFilesResponse";
+                        };
+    
+                        return ListAdaptiveMtFilesResponse;
+                    })();
+    
+                    v3.AdaptiveMtSentence = (function() {
+    
+                        /**
+                         * Properties of an AdaptiveMtSentence.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IAdaptiveMtSentence
+                         * @property {string|null} [name] AdaptiveMtSentence name
+                         * @property {string|null} [sourceSentence] AdaptiveMtSentence sourceSentence
+                         * @property {string|null} [targetSentence] AdaptiveMtSentence targetSentence
+                         * @property {google.protobuf.ITimestamp|null} [createTime] AdaptiveMtSentence createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] AdaptiveMtSentence updateTime
+                         */
+    
+                        /**
+                         * Constructs a new AdaptiveMtSentence.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents an AdaptiveMtSentence.
+                         * @implements IAdaptiveMtSentence
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IAdaptiveMtSentence=} [properties] Properties to set
+                         */
+                        function AdaptiveMtSentence(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AdaptiveMtSentence name.
+                         * @member {string} name
+                         * @memberof google.cloud.translation.v3.AdaptiveMtSentence
+                         * @instance
+                         */
+                        AdaptiveMtSentence.prototype.name = "";
+    
+                        /**
+                         * AdaptiveMtSentence sourceSentence.
+                         * @member {string} sourceSentence
+                         * @memberof google.cloud.translation.v3.AdaptiveMtSentence
+                         * @instance
+                         */
+                        AdaptiveMtSentence.prototype.sourceSentence = "";
+    
+                        /**
+                         * AdaptiveMtSentence targetSentence.
+                         * @member {string} targetSentence
+                         * @memberof google.cloud.translation.v3.AdaptiveMtSentence
+                         * @instance
+                         */
+                        AdaptiveMtSentence.prototype.targetSentence = "";
+    
+                        /**
+                         * AdaptiveMtSentence createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.translation.v3.AdaptiveMtSentence
+                         * @instance
+                         */
+                        AdaptiveMtSentence.prototype.createTime = null;
+    
+                        /**
+                         * AdaptiveMtSentence updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.translation.v3.AdaptiveMtSentence
+                         * @instance
+                         */
+                        AdaptiveMtSentence.prototype.updateTime = null;
+    
+                        /**
+                         * Creates a new AdaptiveMtSentence instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.AdaptiveMtSentence
+                         * @static
+                         * @param {google.cloud.translation.v3.IAdaptiveMtSentence=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.AdaptiveMtSentence} AdaptiveMtSentence instance
+                         */
+                        AdaptiveMtSentence.create = function create(properties) {
+                            return new AdaptiveMtSentence(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AdaptiveMtSentence message. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtSentence.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.AdaptiveMtSentence
+                         * @static
+                         * @param {google.cloud.translation.v3.IAdaptiveMtSentence} message AdaptiveMtSentence message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdaptiveMtSentence.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.sourceSentence != null && Object.hasOwnProperty.call(message, "sourceSentence"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.sourceSentence);
+                            if (message.targetSentence != null && Object.hasOwnProperty.call(message, "targetSentence"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.targetSentence);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AdaptiveMtSentence message, length delimited. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtSentence.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.AdaptiveMtSentence
+                         * @static
+                         * @param {google.cloud.translation.v3.IAdaptiveMtSentence} message AdaptiveMtSentence message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdaptiveMtSentence.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AdaptiveMtSentence message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.AdaptiveMtSentence
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.AdaptiveMtSentence} AdaptiveMtSentence
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdaptiveMtSentence.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.AdaptiveMtSentence();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.sourceSentence = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.targetSentence = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AdaptiveMtSentence message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.AdaptiveMtSentence
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.AdaptiveMtSentence} AdaptiveMtSentence
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdaptiveMtSentence.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AdaptiveMtSentence message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.AdaptiveMtSentence
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AdaptiveMtSentence.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.sourceSentence != null && message.hasOwnProperty("sourceSentence"))
+                                if (!$util.isString(message.sourceSentence))
+                                    return "sourceSentence: string expected";
+                            if (message.targetSentence != null && message.hasOwnProperty("targetSentence"))
+                                if (!$util.isString(message.targetSentence))
+                                    return "targetSentence: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AdaptiveMtSentence message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.AdaptiveMtSentence
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.AdaptiveMtSentence} AdaptiveMtSentence
+                         */
+                        AdaptiveMtSentence.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.AdaptiveMtSentence)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.AdaptiveMtSentence();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.sourceSentence != null)
+                                message.sourceSentence = String(object.sourceSentence);
+                            if (object.targetSentence != null)
+                                message.targetSentence = String(object.targetSentence);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.AdaptiveMtSentence.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.AdaptiveMtSentence.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AdaptiveMtSentence message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.AdaptiveMtSentence
+                         * @static
+                         * @param {google.cloud.translation.v3.AdaptiveMtSentence} message AdaptiveMtSentence
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AdaptiveMtSentence.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.sourceSentence = "";
+                                object.targetSentence = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.sourceSentence != null && message.hasOwnProperty("sourceSentence"))
+                                object.sourceSentence = message.sourceSentence;
+                            if (message.targetSentence != null && message.hasOwnProperty("targetSentence"))
+                                object.targetSentence = message.targetSentence;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AdaptiveMtSentence to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.AdaptiveMtSentence
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AdaptiveMtSentence.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AdaptiveMtSentence
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.AdaptiveMtSentence
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AdaptiveMtSentence.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.AdaptiveMtSentence";
+                        };
+    
+                        return AdaptiveMtSentence;
+                    })();
+    
+                    v3.ListAdaptiveMtSentencesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListAdaptiveMtSentencesRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IListAdaptiveMtSentencesRequest
+                         * @property {string|null} [parent] ListAdaptiveMtSentencesRequest parent
+                         * @property {number|null} [pageSize] ListAdaptiveMtSentencesRequest pageSize
+                         * @property {string|null} [pageToken] ListAdaptiveMtSentencesRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListAdaptiveMtSentencesRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a ListAdaptiveMtSentencesRequest.
+                         * @implements IListAdaptiveMtSentencesRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IListAdaptiveMtSentencesRequest=} [properties] Properties to set
+                         */
+                        function ListAdaptiveMtSentencesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAdaptiveMtSentencesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtSentencesRequest
+                         * @instance
+                         */
+                        ListAdaptiveMtSentencesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListAdaptiveMtSentencesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtSentencesRequest
+                         * @instance
+                         */
+                        ListAdaptiveMtSentencesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListAdaptiveMtSentencesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtSentencesRequest
+                         * @instance
+                         */
+                        ListAdaptiveMtSentencesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListAdaptiveMtSentencesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtSentencesRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IListAdaptiveMtSentencesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.ListAdaptiveMtSentencesRequest} ListAdaptiveMtSentencesRequest instance
+                         */
+                        ListAdaptiveMtSentencesRequest.create = function create(properties) {
+                            return new ListAdaptiveMtSentencesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAdaptiveMtSentencesRequest message. Does not implicitly {@link google.cloud.translation.v3.ListAdaptiveMtSentencesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtSentencesRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IListAdaptiveMtSentencesRequest} message ListAdaptiveMtSentencesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAdaptiveMtSentencesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAdaptiveMtSentencesRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ListAdaptiveMtSentencesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtSentencesRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IListAdaptiveMtSentencesRequest} message ListAdaptiveMtSentencesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAdaptiveMtSentencesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAdaptiveMtSentencesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtSentencesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.ListAdaptiveMtSentencesRequest} ListAdaptiveMtSentencesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAdaptiveMtSentencesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.ListAdaptiveMtSentencesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAdaptiveMtSentencesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtSentencesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.ListAdaptiveMtSentencesRequest} ListAdaptiveMtSentencesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAdaptiveMtSentencesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAdaptiveMtSentencesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtSentencesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAdaptiveMtSentencesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAdaptiveMtSentencesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtSentencesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.ListAdaptiveMtSentencesRequest} ListAdaptiveMtSentencesRequest
+                         */
+                        ListAdaptiveMtSentencesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.ListAdaptiveMtSentencesRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.ListAdaptiveMtSentencesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAdaptiveMtSentencesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtSentencesRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.ListAdaptiveMtSentencesRequest} message ListAdaptiveMtSentencesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAdaptiveMtSentencesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAdaptiveMtSentencesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtSentencesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAdaptiveMtSentencesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListAdaptiveMtSentencesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtSentencesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListAdaptiveMtSentencesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.ListAdaptiveMtSentencesRequest";
+                        };
+    
+                        return ListAdaptiveMtSentencesRequest;
+                    })();
+    
+                    v3.ListAdaptiveMtSentencesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListAdaptiveMtSentencesResponse.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IListAdaptiveMtSentencesResponse
+                         * @property {Array.<google.cloud.translation.v3.IAdaptiveMtSentence>|null} [adaptiveMtSentences] ListAdaptiveMtSentencesResponse adaptiveMtSentences
+                         * @property {string|null} [nextPageToken] ListAdaptiveMtSentencesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListAdaptiveMtSentencesResponse.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a ListAdaptiveMtSentencesResponse.
+                         * @implements IListAdaptiveMtSentencesResponse
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IListAdaptiveMtSentencesResponse=} [properties] Properties to set
+                         */
+                        function ListAdaptiveMtSentencesResponse(properties) {
+                            this.adaptiveMtSentences = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAdaptiveMtSentencesResponse adaptiveMtSentences.
+                         * @member {Array.<google.cloud.translation.v3.IAdaptiveMtSentence>} adaptiveMtSentences
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtSentencesResponse
+                         * @instance
+                         */
+                        ListAdaptiveMtSentencesResponse.prototype.adaptiveMtSentences = $util.emptyArray;
+    
+                        /**
+                         * ListAdaptiveMtSentencesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtSentencesResponse
+                         * @instance
+                         */
+                        ListAdaptiveMtSentencesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListAdaptiveMtSentencesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtSentencesResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IListAdaptiveMtSentencesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.ListAdaptiveMtSentencesResponse} ListAdaptiveMtSentencesResponse instance
+                         */
+                        ListAdaptiveMtSentencesResponse.create = function create(properties) {
+                            return new ListAdaptiveMtSentencesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAdaptiveMtSentencesResponse message. Does not implicitly {@link google.cloud.translation.v3.ListAdaptiveMtSentencesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtSentencesResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IListAdaptiveMtSentencesResponse} message ListAdaptiveMtSentencesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAdaptiveMtSentencesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.adaptiveMtSentences != null && message.adaptiveMtSentences.length)
+                                for (var i = 0; i < message.adaptiveMtSentences.length; ++i)
+                                    $root.google.cloud.translation.v3.AdaptiveMtSentence.encode(message.adaptiveMtSentences[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAdaptiveMtSentencesResponse message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ListAdaptiveMtSentencesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtSentencesResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IListAdaptiveMtSentencesResponse} message ListAdaptiveMtSentencesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAdaptiveMtSentencesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAdaptiveMtSentencesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtSentencesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.ListAdaptiveMtSentencesResponse} ListAdaptiveMtSentencesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAdaptiveMtSentencesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.ListAdaptiveMtSentencesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.adaptiveMtSentences && message.adaptiveMtSentences.length))
+                                            message.adaptiveMtSentences = [];
+                                        message.adaptiveMtSentences.push($root.google.cloud.translation.v3.AdaptiveMtSentence.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAdaptiveMtSentencesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtSentencesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.ListAdaptiveMtSentencesResponse} ListAdaptiveMtSentencesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAdaptiveMtSentencesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAdaptiveMtSentencesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtSentencesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAdaptiveMtSentencesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.adaptiveMtSentences != null && message.hasOwnProperty("adaptiveMtSentences")) {
+                                if (!Array.isArray(message.adaptiveMtSentences))
+                                    return "adaptiveMtSentences: array expected";
+                                for (var i = 0; i < message.adaptiveMtSentences.length; ++i) {
+                                    var error = $root.google.cloud.translation.v3.AdaptiveMtSentence.verify(message.adaptiveMtSentences[i]);
+                                    if (error)
+                                        return "adaptiveMtSentences." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAdaptiveMtSentencesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtSentencesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.ListAdaptiveMtSentencesResponse} ListAdaptiveMtSentencesResponse
+                         */
+                        ListAdaptiveMtSentencesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.ListAdaptiveMtSentencesResponse)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.ListAdaptiveMtSentencesResponse();
+                            if (object.adaptiveMtSentences) {
+                                if (!Array.isArray(object.adaptiveMtSentences))
+                                    throw TypeError(".google.cloud.translation.v3.ListAdaptiveMtSentencesResponse.adaptiveMtSentences: array expected");
+                                message.adaptiveMtSentences = [];
+                                for (var i = 0; i < object.adaptiveMtSentences.length; ++i) {
+                                    if (typeof object.adaptiveMtSentences[i] !== "object")
+                                        throw TypeError(".google.cloud.translation.v3.ListAdaptiveMtSentencesResponse.adaptiveMtSentences: object expected");
+                                    message.adaptiveMtSentences[i] = $root.google.cloud.translation.v3.AdaptiveMtSentence.fromObject(object.adaptiveMtSentences[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAdaptiveMtSentencesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtSentencesResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.ListAdaptiveMtSentencesResponse} message ListAdaptiveMtSentencesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAdaptiveMtSentencesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.adaptiveMtSentences = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.adaptiveMtSentences && message.adaptiveMtSentences.length) {
+                                object.adaptiveMtSentences = [];
+                                for (var j = 0; j < message.adaptiveMtSentences.length; ++j)
+                                    object.adaptiveMtSentences[j] = $root.google.cloud.translation.v3.AdaptiveMtSentence.toObject(message.adaptiveMtSentences[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAdaptiveMtSentencesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtSentencesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAdaptiveMtSentencesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListAdaptiveMtSentencesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.ListAdaptiveMtSentencesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListAdaptiveMtSentencesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.ListAdaptiveMtSentencesResponse";
+                        };
+    
+                        return ListAdaptiveMtSentencesResponse;
+                    })();
+    
+                    v3.GcsInputSource = (function() {
+    
+                        /**
+                         * Properties of a GcsInputSource.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IGcsInputSource
+                         * @property {string|null} [inputUri] GcsInputSource inputUri
+                         */
+    
+                        /**
+                         * Constructs a new GcsInputSource.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a GcsInputSource.
+                         * @implements IGcsInputSource
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IGcsInputSource=} [properties] Properties to set
+                         */
+                        function GcsInputSource(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GcsInputSource inputUri.
+                         * @member {string} inputUri
+                         * @memberof google.cloud.translation.v3.GcsInputSource
+                         * @instance
+                         */
+                        GcsInputSource.prototype.inputUri = "";
+    
+                        /**
+                         * Creates a new GcsInputSource instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.GcsInputSource
+                         * @static
+                         * @param {google.cloud.translation.v3.IGcsInputSource=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.GcsInputSource} GcsInputSource instance
+                         */
+                        GcsInputSource.create = function create(properties) {
+                            return new GcsInputSource(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GcsInputSource message. Does not implicitly {@link google.cloud.translation.v3.GcsInputSource.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.GcsInputSource
+                         * @static
+                         * @param {google.cloud.translation.v3.IGcsInputSource} message GcsInputSource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GcsInputSource.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.inputUri != null && Object.hasOwnProperty.call(message, "inputUri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.inputUri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GcsInputSource message, length delimited. Does not implicitly {@link google.cloud.translation.v3.GcsInputSource.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.GcsInputSource
+                         * @static
+                         * @param {google.cloud.translation.v3.IGcsInputSource} message GcsInputSource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GcsInputSource.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GcsInputSource message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.GcsInputSource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.GcsInputSource} GcsInputSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GcsInputSource.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.GcsInputSource();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.inputUri = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GcsInputSource message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.GcsInputSource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.GcsInputSource} GcsInputSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GcsInputSource.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GcsInputSource message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.GcsInputSource
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GcsInputSource.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.inputUri != null && message.hasOwnProperty("inputUri"))
+                                if (!$util.isString(message.inputUri))
+                                    return "inputUri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GcsInputSource message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.GcsInputSource
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.GcsInputSource} GcsInputSource
+                         */
+                        GcsInputSource.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.GcsInputSource)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.GcsInputSource();
+                            if (object.inputUri != null)
+                                message.inputUri = String(object.inputUri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GcsInputSource message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.GcsInputSource
+                         * @static
+                         * @param {google.cloud.translation.v3.GcsInputSource} message GcsInputSource
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GcsInputSource.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.inputUri = "";
+                            if (message.inputUri != null && message.hasOwnProperty("inputUri"))
+                                object.inputUri = message.inputUri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GcsInputSource to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.GcsInputSource
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GcsInputSource.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GcsInputSource
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.GcsInputSource
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GcsInputSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.GcsInputSource";
+                        };
+    
+                        return GcsInputSource;
+                    })();
+    
+                    v3.FileInputSource = (function() {
+    
+                        /**
+                         * Properties of a FileInputSource.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IFileInputSource
+                         * @property {string|null} [mimeType] FileInputSource mimeType
+                         * @property {Uint8Array|null} [content] FileInputSource content
+                         * @property {string|null} [displayName] FileInputSource displayName
+                         */
+    
+                        /**
+                         * Constructs a new FileInputSource.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a FileInputSource.
+                         * @implements IFileInputSource
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IFileInputSource=} [properties] Properties to set
+                         */
+                        function FileInputSource(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FileInputSource mimeType.
+                         * @member {string} mimeType
+                         * @memberof google.cloud.translation.v3.FileInputSource
+                         * @instance
+                         */
+                        FileInputSource.prototype.mimeType = "";
+    
+                        /**
+                         * FileInputSource content.
+                         * @member {Uint8Array} content
+                         * @memberof google.cloud.translation.v3.FileInputSource
+                         * @instance
+                         */
+                        FileInputSource.prototype.content = $util.newBuffer([]);
+    
+                        /**
+                         * FileInputSource displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.translation.v3.FileInputSource
+                         * @instance
+                         */
+                        FileInputSource.prototype.displayName = "";
+    
+                        /**
+                         * Creates a new FileInputSource instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.FileInputSource
+                         * @static
+                         * @param {google.cloud.translation.v3.IFileInputSource=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.FileInputSource} FileInputSource instance
+                         */
+                        FileInputSource.create = function create(properties) {
+                            return new FileInputSource(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FileInputSource message. Does not implicitly {@link google.cloud.translation.v3.FileInputSource.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.FileInputSource
+                         * @static
+                         * @param {google.cloud.translation.v3.IFileInputSource} message FileInputSource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FileInputSource.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.mimeType != null && Object.hasOwnProperty.call(message, "mimeType"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.mimeType);
+                            if (message.content != null && Object.hasOwnProperty.call(message, "content"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.content);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.displayName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FileInputSource message, length delimited. Does not implicitly {@link google.cloud.translation.v3.FileInputSource.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.FileInputSource
+                         * @static
+                         * @param {google.cloud.translation.v3.IFileInputSource} message FileInputSource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FileInputSource.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FileInputSource message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.FileInputSource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.FileInputSource} FileInputSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FileInputSource.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.FileInputSource();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.mimeType = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.content = reader.bytes();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FileInputSource message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.FileInputSource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.FileInputSource} FileInputSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FileInputSource.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FileInputSource message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.FileInputSource
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FileInputSource.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                if (!$util.isString(message.mimeType))
+                                    return "mimeType: string expected";
+                            if (message.content != null && message.hasOwnProperty("content"))
+                                if (!(message.content && typeof message.content.length === "number" || $util.isString(message.content)))
+                                    return "content: buffer expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FileInputSource message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.FileInputSource
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.FileInputSource} FileInputSource
+                         */
+                        FileInputSource.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.FileInputSource)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.FileInputSource();
+                            if (object.mimeType != null)
+                                message.mimeType = String(object.mimeType);
+                            if (object.content != null)
+                                if (typeof object.content === "string")
+                                    $util.base64.decode(object.content, message.content = $util.newBuffer($util.base64.length(object.content)), 0);
+                                else if (object.content.length >= 0)
+                                    message.content = object.content;
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FileInputSource message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.FileInputSource
+                         * @static
+                         * @param {google.cloud.translation.v3.FileInputSource} message FileInputSource
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FileInputSource.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.mimeType = "";
+                                if (options.bytes === String)
+                                    object.content = "";
+                                else {
+                                    object.content = [];
+                                    if (options.bytes !== Array)
+                                        object.content = $util.newBuffer(object.content);
+                                }
+                                object.displayName = "";
+                            }
+                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                object.mimeType = message.mimeType;
+                            if (message.content != null && message.hasOwnProperty("content"))
+                                object.content = options.bytes === String ? $util.base64.encode(message.content, 0, message.content.length) : options.bytes === Array ? Array.prototype.slice.call(message.content) : message.content;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FileInputSource to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.FileInputSource
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FileInputSource.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FileInputSource
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.FileInputSource
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FileInputSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.FileInputSource";
+                        };
+    
+                        return FileInputSource;
+                    })();
+    
+                    v3.GcsOutputDestination = (function() {
+    
+                        /**
+                         * Properties of a GcsOutputDestination.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IGcsOutputDestination
+                         * @property {string|null} [outputUriPrefix] GcsOutputDestination outputUriPrefix
+                         */
+    
+                        /**
+                         * Constructs a new GcsOutputDestination.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a GcsOutputDestination.
+                         * @implements IGcsOutputDestination
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IGcsOutputDestination=} [properties] Properties to set
+                         */
+                        function GcsOutputDestination(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GcsOutputDestination outputUriPrefix.
+                         * @member {string} outputUriPrefix
+                         * @memberof google.cloud.translation.v3.GcsOutputDestination
+                         * @instance
+                         */
+                        GcsOutputDestination.prototype.outputUriPrefix = "";
+    
+                        /**
+                         * Creates a new GcsOutputDestination instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.GcsOutputDestination
+                         * @static
+                         * @param {google.cloud.translation.v3.IGcsOutputDestination=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.GcsOutputDestination} GcsOutputDestination instance
+                         */
+                        GcsOutputDestination.create = function create(properties) {
+                            return new GcsOutputDestination(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GcsOutputDestination message. Does not implicitly {@link google.cloud.translation.v3.GcsOutputDestination.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.GcsOutputDestination
+                         * @static
+                         * @param {google.cloud.translation.v3.IGcsOutputDestination} message GcsOutputDestination message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GcsOutputDestination.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.outputUriPrefix != null && Object.hasOwnProperty.call(message, "outputUriPrefix"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.outputUriPrefix);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GcsOutputDestination message, length delimited. Does not implicitly {@link google.cloud.translation.v3.GcsOutputDestination.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.GcsOutputDestination
+                         * @static
+                         * @param {google.cloud.translation.v3.IGcsOutputDestination} message GcsOutputDestination message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GcsOutputDestination.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GcsOutputDestination message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.GcsOutputDestination
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.GcsOutputDestination} GcsOutputDestination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GcsOutputDestination.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.GcsOutputDestination();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.outputUriPrefix = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GcsOutputDestination message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.GcsOutputDestination
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.GcsOutputDestination} GcsOutputDestination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GcsOutputDestination.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GcsOutputDestination message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.GcsOutputDestination
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GcsOutputDestination.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.outputUriPrefix != null && message.hasOwnProperty("outputUriPrefix"))
+                                if (!$util.isString(message.outputUriPrefix))
+                                    return "outputUriPrefix: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GcsOutputDestination message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.GcsOutputDestination
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.GcsOutputDestination} GcsOutputDestination
+                         */
+                        GcsOutputDestination.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.GcsOutputDestination)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.GcsOutputDestination();
+                            if (object.outputUriPrefix != null)
+                                message.outputUriPrefix = String(object.outputUriPrefix);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GcsOutputDestination message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.GcsOutputDestination
+                         * @static
+                         * @param {google.cloud.translation.v3.GcsOutputDestination} message GcsOutputDestination
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GcsOutputDestination.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.outputUriPrefix = "";
+                            if (message.outputUriPrefix != null && message.hasOwnProperty("outputUriPrefix"))
+                                object.outputUriPrefix = message.outputUriPrefix;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GcsOutputDestination to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.GcsOutputDestination
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GcsOutputDestination.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GcsOutputDestination
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.GcsOutputDestination
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GcsOutputDestination.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.GcsOutputDestination";
+                        };
+    
+                        return GcsOutputDestination;
+                    })();
     
                     v3.TranslationService = (function() {
     
@@ -425,6 +5827,336 @@
                          * @instance
                          * @param {google.cloud.translation.v3.IDeleteGlossaryRequest} request DeleteGlossaryRequest message or plain object
                          * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.translation.v3.TranslationService|createAdaptiveMtDataset}.
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @typedef CreateAdaptiveMtDatasetCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.translation.v3.AdaptiveMtDataset} [response] AdaptiveMtDataset
+                         */
+    
+                        /**
+                         * Calls CreateAdaptiveMtDataset.
+                         * @function createAdaptiveMtDataset
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.ICreateAdaptiveMtDatasetRequest} request CreateAdaptiveMtDatasetRequest message or plain object
+                         * @param {google.cloud.translation.v3.TranslationService.CreateAdaptiveMtDatasetCallback} callback Node-style callback called with the error, if any, and AdaptiveMtDataset
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.createAdaptiveMtDataset = function createAdaptiveMtDataset(request, callback) {
+                            return this.rpcCall(createAdaptiveMtDataset, $root.google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest, $root.google.cloud.translation.v3.AdaptiveMtDataset, request, callback);
+                        }, "name", { value: "CreateAdaptiveMtDataset" });
+    
+                        /**
+                         * Calls CreateAdaptiveMtDataset.
+                         * @function createAdaptiveMtDataset
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.ICreateAdaptiveMtDatasetRequest} request CreateAdaptiveMtDatasetRequest message or plain object
+                         * @returns {Promise<google.cloud.translation.v3.AdaptiveMtDataset>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.translation.v3.TranslationService|deleteAdaptiveMtDataset}.
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @typedef DeleteAdaptiveMtDatasetCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteAdaptiveMtDataset.
+                         * @function deleteAdaptiveMtDataset
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IDeleteAdaptiveMtDatasetRequest} request DeleteAdaptiveMtDatasetRequest message or plain object
+                         * @param {google.cloud.translation.v3.TranslationService.DeleteAdaptiveMtDatasetCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.deleteAdaptiveMtDataset = function deleteAdaptiveMtDataset(request, callback) {
+                            return this.rpcCall(deleteAdaptiveMtDataset, $root.google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteAdaptiveMtDataset" });
+    
+                        /**
+                         * Calls DeleteAdaptiveMtDataset.
+                         * @function deleteAdaptiveMtDataset
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IDeleteAdaptiveMtDatasetRequest} request DeleteAdaptiveMtDatasetRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.translation.v3.TranslationService|getAdaptiveMtDataset}.
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @typedef GetAdaptiveMtDatasetCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.translation.v3.AdaptiveMtDataset} [response] AdaptiveMtDataset
+                         */
+    
+                        /**
+                         * Calls GetAdaptiveMtDataset.
+                         * @function getAdaptiveMtDataset
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IGetAdaptiveMtDatasetRequest} request GetAdaptiveMtDatasetRequest message or plain object
+                         * @param {google.cloud.translation.v3.TranslationService.GetAdaptiveMtDatasetCallback} callback Node-style callback called with the error, if any, and AdaptiveMtDataset
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.getAdaptiveMtDataset = function getAdaptiveMtDataset(request, callback) {
+                            return this.rpcCall(getAdaptiveMtDataset, $root.google.cloud.translation.v3.GetAdaptiveMtDatasetRequest, $root.google.cloud.translation.v3.AdaptiveMtDataset, request, callback);
+                        }, "name", { value: "GetAdaptiveMtDataset" });
+    
+                        /**
+                         * Calls GetAdaptiveMtDataset.
+                         * @function getAdaptiveMtDataset
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IGetAdaptiveMtDatasetRequest} request GetAdaptiveMtDatasetRequest message or plain object
+                         * @returns {Promise<google.cloud.translation.v3.AdaptiveMtDataset>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.translation.v3.TranslationService|listAdaptiveMtDatasets}.
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @typedef ListAdaptiveMtDatasetsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse} [response] ListAdaptiveMtDatasetsResponse
+                         */
+    
+                        /**
+                         * Calls ListAdaptiveMtDatasets.
+                         * @function listAdaptiveMtDatasets
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IListAdaptiveMtDatasetsRequest} request ListAdaptiveMtDatasetsRequest message or plain object
+                         * @param {google.cloud.translation.v3.TranslationService.ListAdaptiveMtDatasetsCallback} callback Node-style callback called with the error, if any, and ListAdaptiveMtDatasetsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.listAdaptiveMtDatasets = function listAdaptiveMtDatasets(request, callback) {
+                            return this.rpcCall(listAdaptiveMtDatasets, $root.google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest, $root.google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse, request, callback);
+                        }, "name", { value: "ListAdaptiveMtDatasets" });
+    
+                        /**
+                         * Calls ListAdaptiveMtDatasets.
+                         * @function listAdaptiveMtDatasets
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IListAdaptiveMtDatasetsRequest} request ListAdaptiveMtDatasetsRequest message or plain object
+                         * @returns {Promise<google.cloud.translation.v3.ListAdaptiveMtDatasetsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.translation.v3.TranslationService|adaptiveMtTranslate}.
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @typedef AdaptiveMtTranslateCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.translation.v3.AdaptiveMtTranslateResponse} [response] AdaptiveMtTranslateResponse
+                         */
+    
+                        /**
+                         * Calls AdaptiveMtTranslate.
+                         * @function adaptiveMtTranslate
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IAdaptiveMtTranslateRequest} request AdaptiveMtTranslateRequest message or plain object
+                         * @param {google.cloud.translation.v3.TranslationService.AdaptiveMtTranslateCallback} callback Node-style callback called with the error, if any, and AdaptiveMtTranslateResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.adaptiveMtTranslate = function adaptiveMtTranslate(request, callback) {
+                            return this.rpcCall(adaptiveMtTranslate, $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest, $root.google.cloud.translation.v3.AdaptiveMtTranslateResponse, request, callback);
+                        }, "name", { value: "AdaptiveMtTranslate" });
+    
+                        /**
+                         * Calls AdaptiveMtTranslate.
+                         * @function adaptiveMtTranslate
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IAdaptiveMtTranslateRequest} request AdaptiveMtTranslateRequest message or plain object
+                         * @returns {Promise<google.cloud.translation.v3.AdaptiveMtTranslateResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.translation.v3.TranslationService|getAdaptiveMtFile}.
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @typedef GetAdaptiveMtFileCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.translation.v3.AdaptiveMtFile} [response] AdaptiveMtFile
+                         */
+    
+                        /**
+                         * Calls GetAdaptiveMtFile.
+                         * @function getAdaptiveMtFile
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IGetAdaptiveMtFileRequest} request GetAdaptiveMtFileRequest message or plain object
+                         * @param {google.cloud.translation.v3.TranslationService.GetAdaptiveMtFileCallback} callback Node-style callback called with the error, if any, and AdaptiveMtFile
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.getAdaptiveMtFile = function getAdaptiveMtFile(request, callback) {
+                            return this.rpcCall(getAdaptiveMtFile, $root.google.cloud.translation.v3.GetAdaptiveMtFileRequest, $root.google.cloud.translation.v3.AdaptiveMtFile, request, callback);
+                        }, "name", { value: "GetAdaptiveMtFile" });
+    
+                        /**
+                         * Calls GetAdaptiveMtFile.
+                         * @function getAdaptiveMtFile
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IGetAdaptiveMtFileRequest} request GetAdaptiveMtFileRequest message or plain object
+                         * @returns {Promise<google.cloud.translation.v3.AdaptiveMtFile>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.translation.v3.TranslationService|deleteAdaptiveMtFile}.
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @typedef DeleteAdaptiveMtFileCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteAdaptiveMtFile.
+                         * @function deleteAdaptiveMtFile
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IDeleteAdaptiveMtFileRequest} request DeleteAdaptiveMtFileRequest message or plain object
+                         * @param {google.cloud.translation.v3.TranslationService.DeleteAdaptiveMtFileCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.deleteAdaptiveMtFile = function deleteAdaptiveMtFile(request, callback) {
+                            return this.rpcCall(deleteAdaptiveMtFile, $root.google.cloud.translation.v3.DeleteAdaptiveMtFileRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteAdaptiveMtFile" });
+    
+                        /**
+                         * Calls DeleteAdaptiveMtFile.
+                         * @function deleteAdaptiveMtFile
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IDeleteAdaptiveMtFileRequest} request DeleteAdaptiveMtFileRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.translation.v3.TranslationService|importAdaptiveMtFile}.
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @typedef ImportAdaptiveMtFileCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.translation.v3.ImportAdaptiveMtFileResponse} [response] ImportAdaptiveMtFileResponse
+                         */
+    
+                        /**
+                         * Calls ImportAdaptiveMtFile.
+                         * @function importAdaptiveMtFile
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IImportAdaptiveMtFileRequest} request ImportAdaptiveMtFileRequest message or plain object
+                         * @param {google.cloud.translation.v3.TranslationService.ImportAdaptiveMtFileCallback} callback Node-style callback called with the error, if any, and ImportAdaptiveMtFileResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.importAdaptiveMtFile = function importAdaptiveMtFile(request, callback) {
+                            return this.rpcCall(importAdaptiveMtFile, $root.google.cloud.translation.v3.ImportAdaptiveMtFileRequest, $root.google.cloud.translation.v3.ImportAdaptiveMtFileResponse, request, callback);
+                        }, "name", { value: "ImportAdaptiveMtFile" });
+    
+                        /**
+                         * Calls ImportAdaptiveMtFile.
+                         * @function importAdaptiveMtFile
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IImportAdaptiveMtFileRequest} request ImportAdaptiveMtFileRequest message or plain object
+                         * @returns {Promise<google.cloud.translation.v3.ImportAdaptiveMtFileResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.translation.v3.TranslationService|listAdaptiveMtFiles}.
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @typedef ListAdaptiveMtFilesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.translation.v3.ListAdaptiveMtFilesResponse} [response] ListAdaptiveMtFilesResponse
+                         */
+    
+                        /**
+                         * Calls ListAdaptiveMtFiles.
+                         * @function listAdaptiveMtFiles
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IListAdaptiveMtFilesRequest} request ListAdaptiveMtFilesRequest message or plain object
+                         * @param {google.cloud.translation.v3.TranslationService.ListAdaptiveMtFilesCallback} callback Node-style callback called with the error, if any, and ListAdaptiveMtFilesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.listAdaptiveMtFiles = function listAdaptiveMtFiles(request, callback) {
+                            return this.rpcCall(listAdaptiveMtFiles, $root.google.cloud.translation.v3.ListAdaptiveMtFilesRequest, $root.google.cloud.translation.v3.ListAdaptiveMtFilesResponse, request, callback);
+                        }, "name", { value: "ListAdaptiveMtFiles" });
+    
+                        /**
+                         * Calls ListAdaptiveMtFiles.
+                         * @function listAdaptiveMtFiles
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IListAdaptiveMtFilesRequest} request ListAdaptiveMtFilesRequest message or plain object
+                         * @returns {Promise<google.cloud.translation.v3.ListAdaptiveMtFilesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.translation.v3.TranslationService|listAdaptiveMtSentences}.
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @typedef ListAdaptiveMtSentencesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.translation.v3.ListAdaptiveMtSentencesResponse} [response] ListAdaptiveMtSentencesResponse
+                         */
+    
+                        /**
+                         * Calls ListAdaptiveMtSentences.
+                         * @function listAdaptiveMtSentences
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IListAdaptiveMtSentencesRequest} request ListAdaptiveMtSentencesRequest message or plain object
+                         * @param {google.cloud.translation.v3.TranslationService.ListAdaptiveMtSentencesCallback} callback Node-style callback called with the error, if any, and ListAdaptiveMtSentencesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.listAdaptiveMtSentences = function listAdaptiveMtSentences(request, callback) {
+                            return this.rpcCall(listAdaptiveMtSentences, $root.google.cloud.translation.v3.ListAdaptiveMtSentencesRequest, $root.google.cloud.translation.v3.ListAdaptiveMtSentencesResponse, request, callback);
+                        }, "name", { value: "ListAdaptiveMtSentences" });
+    
+                        /**
+                         * Calls ListAdaptiveMtSentences.
+                         * @function listAdaptiveMtSentences
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IListAdaptiveMtSentencesRequest} request ListAdaptiveMtSentencesRequest message or plain object
+                         * @returns {Promise<google.cloud.translation.v3.ListAdaptiveMtSentencesResponse>} Promise
                          * @variation 2
                          */
     
@@ -24423,6 +30155,716 @@
              */
             var api = {};
     
+            /**
+             * FieldBehavior enum.
+             * @name google.api.FieldBehavior
+             * @enum {number}
+             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
+             * @property {number} OPTIONAL=1 OPTIONAL value
+             * @property {number} REQUIRED=2 REQUIRED value
+             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
+             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
+             * @property {number} IMMUTABLE=5 IMMUTABLE value
+             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
+             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
+             */
+            api.FieldBehavior = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "OPTIONAL"] = 1;
+                values[valuesById[2] = "REQUIRED"] = 2;
+                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
+                values[valuesById[4] = "INPUT_ONLY"] = 4;
+                values[valuesById[5] = "IMMUTABLE"] = 5;
+                values[valuesById[6] = "UNORDERED_LIST"] = 6;
+                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
+                return values;
+            })();
+    
+            api.ResourceDescriptor = (function() {
+    
+                /**
+                 * Properties of a ResourceDescriptor.
+                 * @memberof google.api
+                 * @interface IResourceDescriptor
+                 * @property {string|null} [type] ResourceDescriptor type
+                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
+                 * @property {string|null} [nameField] ResourceDescriptor nameField
+                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
+                 * @property {string|null} [plural] ResourceDescriptor plural
+                 * @property {string|null} [singular] ResourceDescriptor singular
+                 * @property {Array.<google.api.ResourceDescriptor.Style>|null} [style] ResourceDescriptor style
+                 */
+    
+                /**
+                 * Constructs a new ResourceDescriptor.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceDescriptor.
+                 * @implements IResourceDescriptor
+                 * @constructor
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 */
+                function ResourceDescriptor(properties) {
+                    this.pattern = [];
+                    this.style = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceDescriptor type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.type = "";
+    
+                /**
+                 * ResourceDescriptor pattern.
+                 * @member {Array.<string>} pattern
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.pattern = $util.emptyArray;
+    
+                /**
+                 * ResourceDescriptor nameField.
+                 * @member {string} nameField
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.nameField = "";
+    
+                /**
+                 * ResourceDescriptor history.
+                 * @member {google.api.ResourceDescriptor.History} history
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.history = 0;
+    
+                /**
+                 * ResourceDescriptor plural.
+                 * @member {string} plural
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.plural = "";
+    
+                /**
+                 * ResourceDescriptor singular.
+                 * @member {string} singular
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.singular = "";
+    
+                /**
+                 * ResourceDescriptor style.
+                 * @member {Array.<google.api.ResourceDescriptor.Style>} style
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.style = $util.emptyArray;
+    
+                /**
+                 * Creates a new ResourceDescriptor instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
+                 */
+                ResourceDescriptor.create = function create(properties) {
+                    return new ResourceDescriptor(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.pattern != null && message.pattern.length)
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
+                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
+                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
+                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
+                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
+                    if (message.style != null && message.style.length) {
+                        writer.uint32(/* id 10, wireType 2 =*/82).fork();
+                        for (var i = 0; i < message.style.length; ++i)
+                            writer.int32(message.style[i]);
+                        writer.ldelim();
+                    }
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.pattern && message.pattern.length))
+                                    message.pattern = [];
+                                message.pattern.push(reader.string());
+                                break;
+                            }
+                        case 3: {
+                                message.nameField = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.history = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.plural = reader.string();
+                                break;
+                            }
+                        case 6: {
+                                message.singular = reader.string();
+                                break;
+                            }
+                        case 10: {
+                                if (!(message.style && message.style.length))
+                                    message.style = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.style.push(reader.int32());
+                                } else
+                                    message.style.push(reader.int32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceDescriptor message.
+                 * @function verify
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceDescriptor.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
+                        if (!Array.isArray(message.pattern))
+                            return "pattern: array expected";
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            if (!$util.isString(message.pattern[i]))
+                                return "pattern: string[] expected";
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        if (!$util.isString(message.nameField))
+                            return "nameField: string expected";
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        switch (message.history) {
+                        default:
+                            return "history: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        if (!$util.isString(message.plural))
+                            return "plural: string expected";
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        if (!$util.isString(message.singular))
+                            return "singular: string expected";
+                    if (message.style != null && message.hasOwnProperty("style")) {
+                        if (!Array.isArray(message.style))
+                            return "style: array expected";
+                        for (var i = 0; i < message.style.length; ++i)
+                            switch (message.style[i]) {
+                            default:
+                                return "style: enum value[] expected";
+                            case 0:
+                            case 1:
+                                break;
+                            }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 */
+                ResourceDescriptor.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceDescriptor)
+                        return object;
+                    var message = new $root.google.api.ResourceDescriptor();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.pattern) {
+                        if (!Array.isArray(object.pattern))
+                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
+                        message.pattern = [];
+                        for (var i = 0; i < object.pattern.length; ++i)
+                            message.pattern[i] = String(object.pattern[i]);
+                    }
+                    if (object.nameField != null)
+                        message.nameField = String(object.nameField);
+                    switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
+                    case "HISTORY_UNSPECIFIED":
+                    case 0:
+                        message.history = 0;
+                        break;
+                    case "ORIGINALLY_SINGLE_PATTERN":
+                    case 1:
+                        message.history = 1;
+                        break;
+                    case "FUTURE_MULTI_PATTERN":
+                    case 2:
+                        message.history = 2;
+                        break;
+                    }
+                    if (object.plural != null)
+                        message.plural = String(object.plural);
+                    if (object.singular != null)
+                        message.singular = String(object.singular);
+                    if (object.style) {
+                        if (!Array.isArray(object.style))
+                            throw TypeError(".google.api.ResourceDescriptor.style: array expected");
+                        message.style = [];
+                        for (var i = 0; i < object.style.length; ++i)
+                            switch (object.style[i]) {
+                            default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
+                            case "STYLE_UNSPECIFIED":
+                            case 0:
+                                message.style[i] = 0;
+                                break;
+                            case "DECLARATIVE_FRIENDLY":
+                            case 1:
+                                message.style[i] = 1;
+                                break;
+                            }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceDescriptor.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.pattern = [];
+                        object.style = [];
+                    }
+                    if (options.defaults) {
+                        object.type = "";
+                        object.nameField = "";
+                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
+                        object.plural = "";
+                        object.singular = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.pattern && message.pattern.length) {
+                        object.pattern = [];
+                        for (var j = 0; j < message.pattern.length; ++j)
+                            object.pattern[j] = message.pattern[j];
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        object.nameField = message.nameField;
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        object.plural = message.plural;
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        object.singular = message.singular;
+                    if (message.style && message.style.length) {
+                        object.style = [];
+                        for (var j = 0; j < message.style.length; ++j)
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceDescriptor to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceDescriptor.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ResourceDescriptor
+                 * @function getTypeUrl
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ResourceDescriptor.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.ResourceDescriptor";
+                };
+    
+                /**
+                 * History enum.
+                 * @name google.api.ResourceDescriptor.History
+                 * @enum {number}
+                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
+                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
+                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
+                 */
+                ResourceDescriptor.History = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
+                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
+                    return values;
+                })();
+    
+                /**
+                 * Style enum.
+                 * @name google.api.ResourceDescriptor.Style
+                 * @enum {number}
+                 * @property {number} STYLE_UNSPECIFIED=0 STYLE_UNSPECIFIED value
+                 * @property {number} DECLARATIVE_FRIENDLY=1 DECLARATIVE_FRIENDLY value
+                 */
+                ResourceDescriptor.Style = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "STYLE_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "DECLARATIVE_FRIENDLY"] = 1;
+                    return values;
+                })();
+    
+                return ResourceDescriptor;
+            })();
+    
+            api.ResourceReference = (function() {
+    
+                /**
+                 * Properties of a ResourceReference.
+                 * @memberof google.api
+                 * @interface IResourceReference
+                 * @property {string|null} [type] ResourceReference type
+                 * @property {string|null} [childType] ResourceReference childType
+                 */
+    
+                /**
+                 * Constructs a new ResourceReference.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceReference.
+                 * @implements IResourceReference
+                 * @constructor
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 */
+                function ResourceReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceReference type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.type = "";
+    
+                /**
+                 * ResourceReference childType.
+                 * @member {string} childType
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.childType = "";
+    
+                /**
+                 * Creates a new ResourceReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 * @returns {google.api.ResourceReference} ResourceReference instance
+                 */
+                ResourceReference.create = function create(properties) {
+                    return new ResourceReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.childType = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceReference message.
+                 * @function verify
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        if (!$util.isString(message.childType))
+                            return "childType: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 */
+                ResourceReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceReference)
+                        return object;
+                    var message = new $root.google.api.ResourceReference();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.childType != null)
+                        message.childType = String(object.childType);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.ResourceReference} message ResourceReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type = "";
+                        object.childType = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        object.childType = message.childType;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ResourceReference
+                 * @function getTypeUrl
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ResourceReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.ResourceReference";
+                };
+    
+                return ResourceReference;
+            })();
+    
             api.Http = (function() {
     
                 /**
@@ -28993,716 +35435,6 @@
                 values[valuesById[4] = "GA"] = 4;
                 values[valuesById[5] = "DEPRECATED"] = 5;
                 return values;
-            })();
-    
-            /**
-             * FieldBehavior enum.
-             * @name google.api.FieldBehavior
-             * @enum {number}
-             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
-             * @property {number} OPTIONAL=1 OPTIONAL value
-             * @property {number} REQUIRED=2 REQUIRED value
-             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
-             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
-             * @property {number} IMMUTABLE=5 IMMUTABLE value
-             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
-             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
-             */
-            api.FieldBehavior = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
-                values[valuesById[1] = "OPTIONAL"] = 1;
-                values[valuesById[2] = "REQUIRED"] = 2;
-                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
-                values[valuesById[4] = "INPUT_ONLY"] = 4;
-                values[valuesById[5] = "IMMUTABLE"] = 5;
-                values[valuesById[6] = "UNORDERED_LIST"] = 6;
-                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
-                return values;
-            })();
-    
-            api.ResourceDescriptor = (function() {
-    
-                /**
-                 * Properties of a ResourceDescriptor.
-                 * @memberof google.api
-                 * @interface IResourceDescriptor
-                 * @property {string|null} [type] ResourceDescriptor type
-                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
-                 * @property {string|null} [nameField] ResourceDescriptor nameField
-                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
-                 * @property {string|null} [plural] ResourceDescriptor plural
-                 * @property {string|null} [singular] ResourceDescriptor singular
-                 * @property {Array.<google.api.ResourceDescriptor.Style>|null} [style] ResourceDescriptor style
-                 */
-    
-                /**
-                 * Constructs a new ResourceDescriptor.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceDescriptor.
-                 * @implements IResourceDescriptor
-                 * @constructor
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 */
-                function ResourceDescriptor(properties) {
-                    this.pattern = [];
-                    this.style = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceDescriptor type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.type = "";
-    
-                /**
-                 * ResourceDescriptor pattern.
-                 * @member {Array.<string>} pattern
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.pattern = $util.emptyArray;
-    
-                /**
-                 * ResourceDescriptor nameField.
-                 * @member {string} nameField
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.nameField = "";
-    
-                /**
-                 * ResourceDescriptor history.
-                 * @member {google.api.ResourceDescriptor.History} history
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.history = 0;
-    
-                /**
-                 * ResourceDescriptor plural.
-                 * @member {string} plural
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.plural = "";
-    
-                /**
-                 * ResourceDescriptor singular.
-                 * @member {string} singular
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.singular = "";
-    
-                /**
-                 * ResourceDescriptor style.
-                 * @member {Array.<google.api.ResourceDescriptor.Style>} style
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.style = $util.emptyArray;
-    
-                /**
-                 * Creates a new ResourceDescriptor instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
-                 */
-                ResourceDescriptor.create = function create(properties) {
-                    return new ResourceDescriptor(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.pattern != null && message.pattern.length)
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
-                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
-                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
-                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
-                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
-                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
-                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
-                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
-                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
-                    if (message.style != null && message.style.length) {
-                        writer.uint32(/* id 10, wireType 2 =*/82).fork();
-                        for (var i = 0; i < message.style.length; ++i)
-                            writer.int32(message.style[i]);
-                        writer.ldelim();
-                    }
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.type = reader.string();
-                                break;
-                            }
-                        case 2: {
-                                if (!(message.pattern && message.pattern.length))
-                                    message.pattern = [];
-                                message.pattern.push(reader.string());
-                                break;
-                            }
-                        case 3: {
-                                message.nameField = reader.string();
-                                break;
-                            }
-                        case 4: {
-                                message.history = reader.int32();
-                                break;
-                            }
-                        case 5: {
-                                message.plural = reader.string();
-                                break;
-                            }
-                        case 6: {
-                                message.singular = reader.string();
-                                break;
-                            }
-                        case 10: {
-                                if (!(message.style && message.style.length))
-                                    message.style = [];
-                                if ((tag & 7) === 2) {
-                                    var end2 = reader.uint32() + reader.pos;
-                                    while (reader.pos < end2)
-                                        message.style.push(reader.int32());
-                                } else
-                                    message.style.push(reader.int32());
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceDescriptor message.
-                 * @function verify
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceDescriptor.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
-                        if (!Array.isArray(message.pattern))
-                            return "pattern: array expected";
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            if (!$util.isString(message.pattern[i]))
-                                return "pattern: string[] expected";
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        if (!$util.isString(message.nameField))
-                            return "nameField: string expected";
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        switch (message.history) {
-                        default:
-                            return "history: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        if (!$util.isString(message.plural))
-                            return "plural: string expected";
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        if (!$util.isString(message.singular))
-                            return "singular: string expected";
-                    if (message.style != null && message.hasOwnProperty("style")) {
-                        if (!Array.isArray(message.style))
-                            return "style: array expected";
-                        for (var i = 0; i < message.style.length; ++i)
-                            switch (message.style[i]) {
-                            default:
-                                return "style: enum value[] expected";
-                            case 0:
-                            case 1:
-                                break;
-                            }
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 */
-                ResourceDescriptor.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ResourceDescriptor)
-                        return object;
-                    var message = new $root.google.api.ResourceDescriptor();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.pattern) {
-                        if (!Array.isArray(object.pattern))
-                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
-                        message.pattern = [];
-                        for (var i = 0; i < object.pattern.length; ++i)
-                            message.pattern[i] = String(object.pattern[i]);
-                    }
-                    if (object.nameField != null)
-                        message.nameField = String(object.nameField);
-                    switch (object.history) {
-                    default:
-                        if (typeof object.history === "number") {
-                            message.history = object.history;
-                            break;
-                        }
-                        break;
-                    case "HISTORY_UNSPECIFIED":
-                    case 0:
-                        message.history = 0;
-                        break;
-                    case "ORIGINALLY_SINGLE_PATTERN":
-                    case 1:
-                        message.history = 1;
-                        break;
-                    case "FUTURE_MULTI_PATTERN":
-                    case 2:
-                        message.history = 2;
-                        break;
-                    }
-                    if (object.plural != null)
-                        message.plural = String(object.plural);
-                    if (object.singular != null)
-                        message.singular = String(object.singular);
-                    if (object.style) {
-                        if (!Array.isArray(object.style))
-                            throw TypeError(".google.api.ResourceDescriptor.style: array expected");
-                        message.style = [];
-                        for (var i = 0; i < object.style.length; ++i)
-                            switch (object.style[i]) {
-                            default:
-                                if (typeof object.style[i] === "number") {
-                                    message.style[i] = object.style[i];
-                                    break;
-                                }
-                            case "STYLE_UNSPECIFIED":
-                            case 0:
-                                message.style[i] = 0;
-                                break;
-                            case "DECLARATIVE_FRIENDLY":
-                            case 1:
-                                message.style[i] = 1;
-                                break;
-                            }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceDescriptor.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults) {
-                        object.pattern = [];
-                        object.style = [];
-                    }
-                    if (options.defaults) {
-                        object.type = "";
-                        object.nameField = "";
-                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
-                        object.plural = "";
-                        object.singular = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.pattern && message.pattern.length) {
-                        object.pattern = [];
-                        for (var j = 0; j < message.pattern.length; ++j)
-                            object.pattern[j] = message.pattern[j];
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        object.nameField = message.nameField;
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        object.plural = message.plural;
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        object.singular = message.singular;
-                    if (message.style && message.style.length) {
-                        object.style = [];
-                        for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceDescriptor to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceDescriptor.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for ResourceDescriptor
-                 * @function getTypeUrl
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                ResourceDescriptor.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.api.ResourceDescriptor";
-                };
-    
-                /**
-                 * History enum.
-                 * @name google.api.ResourceDescriptor.History
-                 * @enum {number}
-                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
-                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
-                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
-                 */
-                ResourceDescriptor.History = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
-                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
-                    return values;
-                })();
-    
-                /**
-                 * Style enum.
-                 * @name google.api.ResourceDescriptor.Style
-                 * @enum {number}
-                 * @property {number} STYLE_UNSPECIFIED=0 STYLE_UNSPECIFIED value
-                 * @property {number} DECLARATIVE_FRIENDLY=1 DECLARATIVE_FRIENDLY value
-                 */
-                ResourceDescriptor.Style = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "STYLE_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "DECLARATIVE_FRIENDLY"] = 1;
-                    return values;
-                })();
-    
-                return ResourceDescriptor;
-            })();
-    
-            api.ResourceReference = (function() {
-    
-                /**
-                 * Properties of a ResourceReference.
-                 * @memberof google.api
-                 * @interface IResourceReference
-                 * @property {string|null} [type] ResourceReference type
-                 * @property {string|null} [childType] ResourceReference childType
-                 */
-    
-                /**
-                 * Constructs a new ResourceReference.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceReference.
-                 * @implements IResourceReference
-                 * @constructor
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 */
-                function ResourceReference(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceReference type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.type = "";
-    
-                /**
-                 * ResourceReference childType.
-                 * @member {string} childType
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.childType = "";
-    
-                /**
-                 * Creates a new ResourceReference instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 * @returns {google.api.ResourceReference} ResourceReference instance
-                 */
-                ResourceReference.create = function create(properties) {
-                    return new ResourceReference(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.type = reader.string();
-                                break;
-                            }
-                        case 2: {
-                                message.childType = reader.string();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceReference message.
-                 * @function verify
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceReference.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        if (!$util.isString(message.childType))
-                            return "childType: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 */
-                ResourceReference.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ResourceReference)
-                        return object;
-                    var message = new $root.google.api.ResourceReference();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.childType != null)
-                        message.childType = String(object.childType);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.ResourceReference} message ResourceReference
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceReference.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.type = "";
-                        object.childType = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        object.childType = message.childType;
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceReference to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceReference.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for ResourceReference
-                 * @function getTypeUrl
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                ResourceReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.api.ResourceReference";
-                };
-    
-                return ResourceReference;
             })();
     
             return api;
@@ -39361,6 +45093,247 @@
                 return GeneratedCodeInfo;
             })();
     
+            protobuf.Timestamp = (function() {
+    
+                /**
+                 * Properties of a Timestamp.
+                 * @memberof google.protobuf
+                 * @interface ITimestamp
+                 * @property {number|Long|null} [seconds] Timestamp seconds
+                 * @property {number|null} [nanos] Timestamp nanos
+                 */
+    
+                /**
+                 * Constructs a new Timestamp.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a Timestamp.
+                 * @implements ITimestamp
+                 * @constructor
+                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+                 */
+                function Timestamp(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Timestamp seconds.
+                 * @member {number|Long} seconds
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 */
+                Timestamp.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                /**
+                 * Timestamp nanos.
+                 * @member {number} nanos
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 */
+                Timestamp.prototype.nanos = 0;
+    
+                /**
+                 * Creates a new Timestamp instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+                 * @returns {google.protobuf.Timestamp} Timestamp instance
+                 */
+                Timestamp.create = function create(properties) {
+                    return new Timestamp(properties);
+                };
+    
+                /**
+                 * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Timestamp.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Timestamp message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Timestamp.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.seconds = reader.int64();
+                                break;
+                            }
+                        case 2: {
+                                message.nanos = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Timestamp.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Timestamp message.
+                 * @function verify
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Timestamp.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
+                            return "seconds: integer|Long expected";
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        if (!$util.isInteger(message.nanos))
+                            return "nanos: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 */
+                Timestamp.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Timestamp)
+                        return object;
+                    var message = new $root.google.protobuf.Timestamp();
+                    if (object.seconds != null)
+                        if ($util.Long)
+                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
+                        else if (typeof object.seconds === "string")
+                            message.seconds = parseInt(object.seconds, 10);
+                        else if (typeof object.seconds === "number")
+                            message.seconds = object.seconds;
+                        else if (typeof object.seconds === "object")
+                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
+                    if (object.nanos != null)
+                        message.nanos = object.nanos | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.Timestamp} message Timestamp
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Timestamp.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, false);
+                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.seconds = options.longs === String ? "0" : 0;
+                        object.nanos = 0;
+                    }
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (typeof message.seconds === "number")
+                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
+                        else
+                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        object.nanos = message.nanos;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Timestamp to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Timestamp.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Timestamp
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Timestamp.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Timestamp";
+                };
+    
+                return Timestamp;
+            })();
+    
             protobuf.Duration = (function() {
     
                 /**
@@ -40011,247 +45984,6 @@
                 };
     
                 return Empty;
-            })();
-    
-            protobuf.Timestamp = (function() {
-    
-                /**
-                 * Properties of a Timestamp.
-                 * @memberof google.protobuf
-                 * @interface ITimestamp
-                 * @property {number|Long|null} [seconds] Timestamp seconds
-                 * @property {number|null} [nanos] Timestamp nanos
-                 */
-    
-                /**
-                 * Constructs a new Timestamp.
-                 * @memberof google.protobuf
-                 * @classdesc Represents a Timestamp.
-                 * @implements ITimestamp
-                 * @constructor
-                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
-                 */
-                function Timestamp(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Timestamp seconds.
-                 * @member {number|Long} seconds
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 */
-                Timestamp.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                /**
-                 * Timestamp nanos.
-                 * @member {number} nanos
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 */
-                Timestamp.prototype.nanos = 0;
-    
-                /**
-                 * Creates a new Timestamp instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
-                 * @returns {google.protobuf.Timestamp} Timestamp instance
-                 */
-                Timestamp.create = function create(properties) {
-                    return new Timestamp(properties);
-                };
-    
-                /**
-                 * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Timestamp.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
-                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Timestamp message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Timestamp.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.seconds = reader.int64();
-                                break;
-                            }
-                        case 2: {
-                                message.nanos = reader.int32();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Timestamp.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Timestamp message.
-                 * @function verify
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Timestamp.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
-                            return "seconds: integer|Long expected";
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        if (!$util.isInteger(message.nanos))
-                            return "nanos: integer expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 */
-                Timestamp.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Timestamp)
-                        return object;
-                    var message = new $root.google.protobuf.Timestamp();
-                    if (object.seconds != null)
-                        if ($util.Long)
-                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
-                        else if (typeof object.seconds === "string")
-                            message.seconds = parseInt(object.seconds, 10);
-                        else if (typeof object.seconds === "number")
-                            message.seconds = object.seconds;
-                        else if (typeof object.seconds === "object")
-                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
-                    if (object.nanos != null)
-                        message.nanos = object.nanos | 0;
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.Timestamp} message Timestamp
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Timestamp.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        if ($util.Long) {
-                            var long = new $util.Long(0, 0, false);
-                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                        } else
-                            object.seconds = options.longs === String ? "0" : 0;
-                        object.nanos = 0;
-                    }
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (typeof message.seconds === "number")
-                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
-                        else
-                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        object.nanos = message.nanos;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Timestamp to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Timestamp.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for Timestamp
-                 * @function getTypeUrl
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                Timestamp.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.protobuf.Timestamp";
-                };
-    
-                return Timestamp;
             })();
     
             return protobuf;
