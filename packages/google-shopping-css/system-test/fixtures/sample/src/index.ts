@@ -21,7 +21,7 @@ import {
   AccountsServiceClient,
   CssProductInputsServiceClient,
   CssProductsServiceClient,
-} from '@google-cloud/css';
+} from '@google-shopping/css';
 
 // check that the client class type name can be used
 function doStuffWithAccountLabelsServiceClient(

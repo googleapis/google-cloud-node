@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const css = require('@google-cloud/css');
+const css = require('@google-shopping/css');
 
 function main() {
   const accountLabelsServiceClient = new css.AccountLabelsServiceClient();
