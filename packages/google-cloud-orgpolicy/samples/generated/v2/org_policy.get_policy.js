@@ -29,8 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name of the policy. See `Policy` for naming
-   *  requirements.
+   *  Required. Resource name of the policy. See
+   *  Policy google.cloud.orgpolicy.v2.Policy  for naming requirements.
    */
   // const name = 'abc123'
 

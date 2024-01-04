@@ -1170,6 +1170,393 @@ describe('v1.NetAppClient', () => {
     });
   });
 
+  describe('getBackupVault', () => {
+    it('invokes getBackupVault without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.GetBackupVaultRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.GetBackupVaultRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.BackupVault()
+      );
+      client.innerApiCalls.getBackupVault = stubSimpleCall(expectedResponse);
+      const [response] = await client.getBackupVault(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getBackupVault as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBackupVault as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getBackupVault without error using callback', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.GetBackupVaultRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.GetBackupVaultRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.BackupVault()
+      );
+      client.innerApiCalls.getBackupVault =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getBackupVault(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.netapp.v1.IBackupVault | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getBackupVault as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBackupVault as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getBackupVault with error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.GetBackupVaultRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.GetBackupVaultRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getBackupVault = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getBackupVault(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getBackupVault as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBackupVault as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getBackupVault with closed client', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.GetBackupVaultRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.GetBackupVaultRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getBackupVault(request), expectedError);
+    });
+  });
+
+  describe('getBackup', () => {
+    it('invokes getBackup without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.GetBackupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.GetBackupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.Backup()
+      );
+      client.innerApiCalls.getBackup = stubSimpleCall(expectedResponse);
+      const [response] = await client.getBackup(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getBackup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBackup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getBackup without error using callback', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.GetBackupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.GetBackupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.Backup()
+      );
+      client.innerApiCalls.getBackup =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getBackup(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.netapp.v1.IBackup | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getBackup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBackup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getBackup with error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.GetBackupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.GetBackupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getBackup = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.getBackup(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getBackup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBackup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getBackup with closed client', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.GetBackupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.GetBackupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getBackup(request), expectedError);
+    });
+  });
+
+  describe('getBackupPolicy', () => {
+    it('invokes getBackupPolicy without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.GetBackupPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.GetBackupPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.BackupPolicy()
+      );
+      client.innerApiCalls.getBackupPolicy = stubSimpleCall(expectedResponse);
+      const [response] = await client.getBackupPolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getBackupPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBackupPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getBackupPolicy without error using callback', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.GetBackupPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.GetBackupPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.BackupPolicy()
+      );
+      client.innerApiCalls.getBackupPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getBackupPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.netapp.v1.IBackupPolicy | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getBackupPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBackupPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getBackupPolicy with error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.GetBackupPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.GetBackupPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getBackupPolicy = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getBackupPolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getBackupPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBackupPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getBackupPolicy with closed client', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.GetBackupPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.GetBackupPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getBackupPolicy(request), expectedError);
+    });
+  });
+
   describe('createStoragePool', () => {
     it('invokes createStoragePool without error', async () => {
       const client = new netappModule.v1.NetAppClient({
@@ -5653,6 +6040,1752 @@ describe('v1.NetAppClient', () => {
     });
   });
 
+  describe('createBackupVault', () => {
+    it('invokes createBackupVault without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.CreateBackupVaultRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.CreateBackupVaultRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createBackupVault =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createBackupVault(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createBackupVault as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createBackupVault as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createBackupVault without error using callback', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.CreateBackupVaultRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.CreateBackupVaultRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createBackupVault =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createBackupVault(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.netapp.v1.IBackupVault,
+              protos.google.cloud.netapp.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.netapp.v1.IBackupVault,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createBackupVault as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createBackupVault as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createBackupVault with call error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.CreateBackupVaultRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.CreateBackupVaultRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createBackupVault = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createBackupVault(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createBackupVault as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createBackupVault as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createBackupVault with LRO error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.CreateBackupVaultRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.CreateBackupVaultRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createBackupVault = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createBackupVault(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createBackupVault as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createBackupVault as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateBackupVaultProgress without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateBackupVaultProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateBackupVaultProgress with error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateBackupVaultProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateBackupVault', () => {
+    it('invokes updateBackupVault without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.UpdateBackupVaultRequest()
+      );
+      request.backupVault ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.UpdateBackupVaultRequest',
+        ['backupVault', 'name']
+      );
+      request.backupVault.name = defaultValue1;
+      const expectedHeaderRequestParams = `backup_vault.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateBackupVault =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateBackupVault(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateBackupVault as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateBackupVault as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateBackupVault without error using callback', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.UpdateBackupVaultRequest()
+      );
+      request.backupVault ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.UpdateBackupVaultRequest',
+        ['backupVault', 'name']
+      );
+      request.backupVault.name = defaultValue1;
+      const expectedHeaderRequestParams = `backup_vault.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateBackupVault =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateBackupVault(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.netapp.v1.IBackupVault,
+              protos.google.cloud.netapp.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.netapp.v1.IBackupVault,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateBackupVault as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateBackupVault as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateBackupVault with call error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.UpdateBackupVaultRequest()
+      );
+      request.backupVault ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.UpdateBackupVaultRequest',
+        ['backupVault', 'name']
+      );
+      request.backupVault.name = defaultValue1;
+      const expectedHeaderRequestParams = `backup_vault.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateBackupVault = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateBackupVault(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateBackupVault as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateBackupVault as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateBackupVault with LRO error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.UpdateBackupVaultRequest()
+      );
+      request.backupVault ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.UpdateBackupVaultRequest',
+        ['backupVault', 'name']
+      );
+      request.backupVault.name = defaultValue1;
+      const expectedHeaderRequestParams = `backup_vault.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateBackupVault = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updateBackupVault(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateBackupVault as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateBackupVault as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateBackupVaultProgress without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateBackupVaultProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateBackupVaultProgress with error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateBackupVaultProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteBackupVault', () => {
+    it('invokes deleteBackupVault without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.DeleteBackupVaultRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.DeleteBackupVaultRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteBackupVault =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteBackupVault(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteBackupVault as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteBackupVault as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteBackupVault without error using callback', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.DeleteBackupVaultRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.DeleteBackupVaultRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteBackupVault =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteBackupVault(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.netapp.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteBackupVault as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteBackupVault as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteBackupVault with call error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.DeleteBackupVaultRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.DeleteBackupVaultRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteBackupVault = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteBackupVault(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteBackupVault as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteBackupVault as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteBackupVault with LRO error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.DeleteBackupVaultRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.DeleteBackupVaultRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteBackupVault = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteBackupVault(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteBackupVault as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteBackupVault as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteBackupVaultProgress without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteBackupVaultProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteBackupVaultProgress with error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteBackupVaultProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('createBackup', () => {
+    it('invokes createBackup without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.CreateBackupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.CreateBackupRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createBackup = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createBackup(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createBackup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createBackup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createBackup without error using callback', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.CreateBackupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.CreateBackupRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createBackup =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createBackup(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.netapp.v1.IBackup,
+              protos.google.cloud.netapp.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.netapp.v1.IBackup,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createBackup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createBackup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createBackup with call error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.CreateBackupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.CreateBackupRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createBackup = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createBackup(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createBackup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createBackup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createBackup with LRO error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.CreateBackupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.CreateBackupRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createBackup = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createBackup(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createBackup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createBackup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateBackupProgress without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateBackupProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateBackupProgress with error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkCreateBackupProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteBackup', () => {
+    it('invokes deleteBackup without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.DeleteBackupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.DeleteBackupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteBackup = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteBackup(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteBackup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteBackup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteBackup without error using callback', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.DeleteBackupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.DeleteBackupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteBackup =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteBackup(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.netapp.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteBackup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteBackup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteBackup with call error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.DeleteBackupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.DeleteBackupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteBackup = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteBackup(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteBackup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteBackup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteBackup with LRO error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.DeleteBackupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.DeleteBackupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteBackup = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteBackup(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteBackup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteBackup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteBackupProgress without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteBackupProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteBackupProgress with error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkDeleteBackupProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateBackup', () => {
+    it('invokes updateBackup without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.UpdateBackupRequest()
+      );
+      request.backup ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.UpdateBackupRequest',
+        ['backup', 'name']
+      );
+      request.backup.name = defaultValue1;
+      const expectedHeaderRequestParams = `backup.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateBackup = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateBackup(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateBackup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateBackup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateBackup without error using callback', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.UpdateBackupRequest()
+      );
+      request.backup ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.UpdateBackupRequest',
+        ['backup', 'name']
+      );
+      request.backup.name = defaultValue1;
+      const expectedHeaderRequestParams = `backup.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateBackup =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateBackup(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.netapp.v1.IBackup,
+              protos.google.cloud.netapp.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.netapp.v1.IBackup,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateBackup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateBackup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateBackup with call error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.UpdateBackupRequest()
+      );
+      request.backup ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.UpdateBackupRequest',
+        ['backup', 'name']
+      );
+      request.backup.name = defaultValue1;
+      const expectedHeaderRequestParams = `backup.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateBackup = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateBackup(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateBackup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateBackup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateBackup with LRO error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.UpdateBackupRequest()
+      );
+      request.backup ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.UpdateBackupRequest',
+        ['backup', 'name']
+      );
+      request.backup.name = defaultValue1;
+      const expectedHeaderRequestParams = `backup.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateBackup = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updateBackup(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateBackup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateBackup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateBackupProgress without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateBackupProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateBackupProgress with error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkUpdateBackupProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('createBackupPolicy', () => {
+    it('invokes createBackupPolicy without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.CreateBackupPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.CreateBackupPolicyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createBackupPolicy =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createBackupPolicy(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createBackupPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createBackupPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createBackupPolicy without error using callback', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.CreateBackupPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.CreateBackupPolicyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createBackupPolicy =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createBackupPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.netapp.v1.IBackupPolicy,
+              protos.google.cloud.netapp.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.netapp.v1.IBackupPolicy,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createBackupPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createBackupPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createBackupPolicy with call error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.CreateBackupPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.CreateBackupPolicyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createBackupPolicy = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createBackupPolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createBackupPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createBackupPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createBackupPolicy with LRO error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.CreateBackupPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.CreateBackupPolicyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createBackupPolicy = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createBackupPolicy(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createBackupPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createBackupPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateBackupPolicyProgress without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateBackupPolicyProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateBackupPolicyProgress with error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateBackupPolicyProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateBackupPolicy', () => {
+    it('invokes updateBackupPolicy without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.UpdateBackupPolicyRequest()
+      );
+      request.backupPolicy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.UpdateBackupPolicyRequest',
+        ['backupPolicy', 'name']
+      );
+      request.backupPolicy.name = defaultValue1;
+      const expectedHeaderRequestParams = `backup_policy.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateBackupPolicy =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateBackupPolicy(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateBackupPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateBackupPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateBackupPolicy without error using callback', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.UpdateBackupPolicyRequest()
+      );
+      request.backupPolicy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.UpdateBackupPolicyRequest',
+        ['backupPolicy', 'name']
+      );
+      request.backupPolicy.name = defaultValue1;
+      const expectedHeaderRequestParams = `backup_policy.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateBackupPolicy =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateBackupPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.netapp.v1.IBackupPolicy,
+              protos.google.cloud.netapp.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.netapp.v1.IBackupPolicy,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateBackupPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateBackupPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateBackupPolicy with call error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.UpdateBackupPolicyRequest()
+      );
+      request.backupPolicy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.UpdateBackupPolicyRequest',
+        ['backupPolicy', 'name']
+      );
+      request.backupPolicy.name = defaultValue1;
+      const expectedHeaderRequestParams = `backup_policy.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateBackupPolicy = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateBackupPolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateBackupPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateBackupPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateBackupPolicy with LRO error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.UpdateBackupPolicyRequest()
+      );
+      request.backupPolicy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.UpdateBackupPolicyRequest',
+        ['backupPolicy', 'name']
+      );
+      request.backupPolicy.name = defaultValue1;
+      const expectedHeaderRequestParams = `backup_policy.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateBackupPolicy = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updateBackupPolicy(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateBackupPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateBackupPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateBackupPolicyProgress without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateBackupPolicyProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateBackupPolicyProgress with error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateBackupPolicyProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteBackupPolicy', () => {
+    it('invokes deleteBackupPolicy without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.DeleteBackupPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.DeleteBackupPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteBackupPolicy =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteBackupPolicy(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteBackupPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteBackupPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteBackupPolicy without error using callback', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.DeleteBackupPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.DeleteBackupPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteBackupPolicy =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteBackupPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.netapp.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteBackupPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteBackupPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteBackupPolicy with call error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.DeleteBackupPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.DeleteBackupPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteBackupPolicy = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteBackupPolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteBackupPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteBackupPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteBackupPolicy with LRO error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.DeleteBackupPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.DeleteBackupPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteBackupPolicy = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteBackupPolicy(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteBackupPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteBackupPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteBackupPolicyProgress without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteBackupPolicyProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteBackupPolicyProgress with error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteBackupPolicyProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('listStoragePools', () => {
     it('invokes listStoragePools without error', async () => {
       const client = new netappModule.v1.NetAppClient({
@@ -7504,6 +9637,908 @@ describe('v1.NetAppClient', () => {
       );
     });
   });
+
+  describe('listBackupVaults', () => {
+    it('invokes listBackupVaults without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.ListBackupVaultsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.ListBackupVaultsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.netapp.v1.BackupVault()),
+        generateSampleMessage(new protos.google.cloud.netapp.v1.BackupVault()),
+        generateSampleMessage(new protos.google.cloud.netapp.v1.BackupVault()),
+      ];
+      client.innerApiCalls.listBackupVaults = stubSimpleCall(expectedResponse);
+      const [response] = await client.listBackupVaults(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listBackupVaults as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBackupVaults as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listBackupVaults without error using callback', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.ListBackupVaultsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.ListBackupVaultsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.netapp.v1.BackupVault()),
+        generateSampleMessage(new protos.google.cloud.netapp.v1.BackupVault()),
+        generateSampleMessage(new protos.google.cloud.netapp.v1.BackupVault()),
+      ];
+      client.innerApiCalls.listBackupVaults =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listBackupVaults(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.netapp.v1.IBackupVault[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listBackupVaults as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBackupVaults as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listBackupVaults with error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.ListBackupVaultsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.ListBackupVaultsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listBackupVaults = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listBackupVaults(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listBackupVaults as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBackupVaults as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listBackupVaultsStream without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.ListBackupVaultsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.ListBackupVaultsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.netapp.v1.BackupVault()),
+        generateSampleMessage(new protos.google.cloud.netapp.v1.BackupVault()),
+        generateSampleMessage(new protos.google.cloud.netapp.v1.BackupVault()),
+      ];
+      client.descriptors.page.listBackupVaults.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listBackupVaultsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.netapp.v1.BackupVault[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.netapp.v1.BackupVault) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listBackupVaults.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listBackupVaults, request)
+      );
+      assert(
+        (client.descriptors.page.listBackupVaults.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listBackupVaultsStream with error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.ListBackupVaultsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.ListBackupVaultsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listBackupVaults.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listBackupVaultsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.netapp.v1.BackupVault[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.netapp.v1.BackupVault) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listBackupVaults.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listBackupVaults, request)
+      );
+      assert(
+        (client.descriptors.page.listBackupVaults.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listBackupVaults without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.ListBackupVaultsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.ListBackupVaultsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.netapp.v1.BackupVault()),
+        generateSampleMessage(new protos.google.cloud.netapp.v1.BackupVault()),
+        generateSampleMessage(new protos.google.cloud.netapp.v1.BackupVault()),
+      ];
+      client.descriptors.page.listBackupVaults.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.netapp.v1.IBackupVault[] = [];
+      const iterable = client.listBackupVaultsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listBackupVaults.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listBackupVaults.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listBackupVaults with error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.ListBackupVaultsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.ListBackupVaultsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listBackupVaults.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listBackupVaultsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.netapp.v1.IBackupVault[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listBackupVaults.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listBackupVaults.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('listBackups', () => {
+    it('invokes listBackups without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.ListBackupsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.ListBackupsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.netapp.v1.Backup()),
+        generateSampleMessage(new protos.google.cloud.netapp.v1.Backup()),
+        generateSampleMessage(new protos.google.cloud.netapp.v1.Backup()),
+      ];
+      client.innerApiCalls.listBackups = stubSimpleCall(expectedResponse);
+      const [response] = await client.listBackups(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listBackups as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBackups as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listBackups without error using callback', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.ListBackupsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.ListBackupsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.netapp.v1.Backup()),
+        generateSampleMessage(new protos.google.cloud.netapp.v1.Backup()),
+        generateSampleMessage(new protos.google.cloud.netapp.v1.Backup()),
+      ];
+      client.innerApiCalls.listBackups =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listBackups(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.netapp.v1.IBackup[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listBackups as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBackups as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listBackups with error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.ListBackupsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.ListBackupsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listBackups = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listBackups(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listBackups as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBackups as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listBackupsStream without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.ListBackupsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.ListBackupsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.netapp.v1.Backup()),
+        generateSampleMessage(new protos.google.cloud.netapp.v1.Backup()),
+        generateSampleMessage(new protos.google.cloud.netapp.v1.Backup()),
+      ];
+      client.descriptors.page.listBackups.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listBackupsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.netapp.v1.Backup[] = [];
+        stream.on('data', (response: protos.google.cloud.netapp.v1.Backup) => {
+          responses.push(response);
+        });
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listBackups.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listBackups, request)
+      );
+      assert(
+        (client.descriptors.page.listBackups.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listBackupsStream with error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.ListBackupsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.ListBackupsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listBackups.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.listBackupsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.netapp.v1.Backup[] = [];
+        stream.on('data', (response: protos.google.cloud.netapp.v1.Backup) => {
+          responses.push(response);
+        });
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listBackups.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listBackups, request)
+      );
+      assert(
+        (client.descriptors.page.listBackups.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listBackups without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.ListBackupsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.ListBackupsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.netapp.v1.Backup()),
+        generateSampleMessage(new protos.google.cloud.netapp.v1.Backup()),
+        generateSampleMessage(new protos.google.cloud.netapp.v1.Backup()),
+      ];
+      client.descriptors.page.listBackups.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.netapp.v1.IBackup[] = [];
+      const iterable = client.listBackupsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (client.descriptors.page.listBackups.asyncIterate as SinonStub).getCall(
+          0
+        ).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listBackups.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listBackups with error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.ListBackupsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.ListBackupsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listBackups.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
+      const iterable = client.listBackupsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.netapp.v1.IBackup[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (client.descriptors.page.listBackups.asyncIterate as SinonStub).getCall(
+          0
+        ).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listBackups.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('listBackupPolicies', () => {
+    it('invokes listBackupPolicies without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.ListBackupPoliciesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.ListBackupPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.netapp.v1.BackupPolicy()),
+        generateSampleMessage(new protos.google.cloud.netapp.v1.BackupPolicy()),
+        generateSampleMessage(new protos.google.cloud.netapp.v1.BackupPolicy()),
+      ];
+      client.innerApiCalls.listBackupPolicies =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listBackupPolicies(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listBackupPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBackupPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listBackupPolicies without error using callback', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.ListBackupPoliciesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.ListBackupPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.netapp.v1.BackupPolicy()),
+        generateSampleMessage(new protos.google.cloud.netapp.v1.BackupPolicy()),
+        generateSampleMessage(new protos.google.cloud.netapp.v1.BackupPolicy()),
+      ];
+      client.innerApiCalls.listBackupPolicies =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listBackupPolicies(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.netapp.v1.IBackupPolicy[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listBackupPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBackupPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listBackupPolicies with error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.ListBackupPoliciesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.ListBackupPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listBackupPolicies = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listBackupPolicies(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listBackupPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBackupPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listBackupPoliciesStream without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.ListBackupPoliciesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.ListBackupPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.netapp.v1.BackupPolicy()),
+        generateSampleMessage(new protos.google.cloud.netapp.v1.BackupPolicy()),
+        generateSampleMessage(new protos.google.cloud.netapp.v1.BackupPolicy()),
+      ];
+      client.descriptors.page.listBackupPolicies.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listBackupPoliciesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.netapp.v1.BackupPolicy[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.netapp.v1.BackupPolicy) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listBackupPolicies.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listBackupPolicies, request)
+      );
+      assert(
+        (client.descriptors.page.listBackupPolicies.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listBackupPoliciesStream with error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.ListBackupPoliciesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.ListBackupPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listBackupPolicies.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listBackupPoliciesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.netapp.v1.BackupPolicy[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.netapp.v1.BackupPolicy) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listBackupPolicies.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listBackupPolicies, request)
+      );
+      assert(
+        (client.descriptors.page.listBackupPolicies.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listBackupPolicies without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.ListBackupPoliciesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.ListBackupPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.netapp.v1.BackupPolicy()),
+        generateSampleMessage(new protos.google.cloud.netapp.v1.BackupPolicy()),
+        generateSampleMessage(new protos.google.cloud.netapp.v1.BackupPolicy()),
+      ];
+      client.descriptors.page.listBackupPolicies.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.netapp.v1.IBackupPolicy[] = [];
+      const iterable = client.listBackupPoliciesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listBackupPolicies.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listBackupPolicies.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listBackupPolicies with error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.ListBackupPoliciesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.ListBackupPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listBackupPolicies.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listBackupPoliciesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.netapp.v1.IBackupPolicy[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listBackupPolicies.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listBackupPolicies.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new netappModule.v1.NetAppClient({
@@ -8068,6 +11103,210 @@ describe('v1.NetAppClient', () => {
         assert.strictEqual(result, 'activeDirectoryValue');
         assert(
           (client.pathTemplates.activeDirectoryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('backup', () => {
+      const fakePath = '/rendered/path/backup';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        backup_vault: 'backupVaultValue',
+        backup: 'backupValue',
+      };
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.backupPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.backupPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('backupPath', () => {
+        const result = client.backupPath(
+          'projectValue',
+          'locationValue',
+          'backupVaultValue',
+          'backupValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.backupPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromBackupName', () => {
+        const result = client.matchProjectFromBackupName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.backupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromBackupName', () => {
+        const result = client.matchLocationFromBackupName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.backupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchBackupVaultFromBackupName', () => {
+        const result = client.matchBackupVaultFromBackupName(fakePath);
+        assert.strictEqual(result, 'backupVaultValue');
+        assert(
+          (client.pathTemplates.backupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchBackupFromBackupName', () => {
+        const result = client.matchBackupFromBackupName(fakePath);
+        assert.strictEqual(result, 'backupValue');
+        assert(
+          (client.pathTemplates.backupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('backupPolicy', () => {
+      const fakePath = '/rendered/path/backupPolicy';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        backup_policy: 'backupPolicyValue',
+      };
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.backupPolicyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.backupPolicyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('backupPolicyPath', () => {
+        const result = client.backupPolicyPath(
+          'projectValue',
+          'locationValue',
+          'backupPolicyValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.backupPolicyPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromBackupPolicyName', () => {
+        const result = client.matchProjectFromBackupPolicyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.backupPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromBackupPolicyName', () => {
+        const result = client.matchLocationFromBackupPolicyName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.backupPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchBackupPolicyFromBackupPolicyName', () => {
+        const result = client.matchBackupPolicyFromBackupPolicyName(fakePath);
+        assert.strictEqual(result, 'backupPolicyValue');
+        assert(
+          (client.pathTemplates.backupPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('backupVault', () => {
+      const fakePath = '/rendered/path/backupVault';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        backup_vault: 'backupVaultValue',
+      };
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.backupVaultPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.backupVaultPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('backupVaultPath', () => {
+        const result = client.backupVaultPath(
+          'projectValue',
+          'locationValue',
+          'backupVaultValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.backupVaultPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromBackupVaultName', () => {
+        const result = client.matchProjectFromBackupVaultName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.backupVaultPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromBackupVaultName', () => {
+        const result = client.matchLocationFromBackupVaultName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.backupVaultPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchBackupVaultFromBackupVaultName', () => {
+        const result = client.matchBackupVaultFromBackupVaultName(fakePath);
+        assert.strictEqual(result, 'backupVaultValue');
+        assert(
+          (client.pathTemplates.backupVaultPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

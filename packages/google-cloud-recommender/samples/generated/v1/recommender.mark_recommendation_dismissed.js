@@ -29,7 +29,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Name of the recommendation.
+   *  Required. Name of the recommendation.
    */
   // const name = 'abc123'
   /**

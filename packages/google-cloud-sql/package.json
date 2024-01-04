@@ -1,12 +1,13 @@
 {
   "name": "@google-cloud/sql",
   "version": "0.3.0",
-  "description": "Cloud SQL Admin API client for Node.js",
+  "description": "Sql client for Node.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/googleapis/google-cloud-node.git",
     "directory": "packages/google-cloud-sql"
   },
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-sql",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "main": "build/src/index.js",
@@ -14,7 +15,6 @@
     "build/src",
     "build/protos"
   ],
-  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-sql",
   "keywords": [
     "google apis client",
     "google api client",
@@ -45,15 +45,16 @@
     "prelint": "cd samples; npm link ../; npm i"
   },
   "dependencies": {
-    "google-gax": "^3.5.8"
+    "google-gax": "^4.0.5"
   },
   "devDependencies": {
-    "@types/mocha": "^9.0.0",
-    "@types/node": "^20.0.0",
-    "@types/sinon": "^17.0.0",
-    "c8": "^7.3.5",
-    "gts": "^5.0.1",
-    "jsdoc": "^4.0.0",
+    "@types/mocha": "^10.0.2",
+    "@types/node": "^18.11.18",
+    "@types/sinon": "^10.0.19",
+    "c8": "^8.0.1",
+    "gapic-tools": "^0.2.0",
+    "gts": "5.2.0",
+    "jsdoc": "^4.0.2",
     "jsdoc-fresh": "^3.0.0",
     "jsdoc-region-tag": "^3.0.0",
     "long": "^5.2.3",
@@ -68,6 +69,6 @@
     "webpack-cli": "^5.0.0"
   },
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=v14"
   }
 }

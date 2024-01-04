@@ -4116,9 +4116,8 @@ describe('v1.AssetServiceClient', () => {
       ];
       client.innerApiCalls.analyzeOrgPolicyGovernedContainers =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.analyzeOrgPolicyGovernedContainers(
-        request
-      );
+      const [response] =
+        await client.analyzeOrgPolicyGovernedContainers(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.analyzeOrgPolicyGovernedContainers as SinonStub

@@ -16,4 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+export {ExportServiceClient} from './export_service_client';
 export {ProfilerServiceClient} from './profiler_service_client';

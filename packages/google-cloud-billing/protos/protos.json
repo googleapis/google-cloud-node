@@ -12,6 +12,8 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "CloudCatalogProto",
                     "java_package": "com.google.cloud.billing.v1",
+                    "(google.api.resource_definition).type": "cloudresourcemanager.googleapis.com/Organization",
+                    "(google.api.resource_definition).pattern": "organizations/{organization}",
                     "csharp_namespace": "Google.Cloud.Billing.V1",
                     "objc_class_prefix": "CLDCTLG"
                   },
@@ -45,16 +47,28 @@
                           "responseType": "ListBillingAccountsResponse",
                           "options": {
                             "(google.api.http).get": "/v1/billingAccounts",
-                            "(google.api.method_signature)": ""
+                            "(google.api.http).additional_bindings.get": "/v1/{parent=billingAccounts/*}/subAccounts",
+                            "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1/billingAccounts"
+                                "get": "/v1/billingAccounts",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{parent=organizations/*}/billingAccounts"
+                                  },
+                                  {
+                                    "get": "/v1/{parent=billingAccounts/*}/subAccounts"
+                                  }
+                                ]
                               }
                             },
                             {
                               "(google.api.method_signature)": ""
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
                             }
                           ]
                         },
@@ -84,17 +98,32 @@
                           "options": {
                             "(google.api.http).post": "/v1/billingAccounts",
                             "(google.api.http).body": "billing_account",
-                            "(google.api.method_signature)": "billing_account"
+                            "(google.api.http).additional_bindings.post": "/v1/{parent=billingAccounts/*}/subAccounts",
+                            "(google.api.http).additional_bindings.body": "billing_account",
+                            "(google.api.method_signature)": "billing_account,parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1/billingAccounts",
-                                "body": "billing_account"
+                                "body": "billing_account",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1/{parent=organizations/*}/billingAccounts",
+                                    "body": "billing_account"
+                                  },
+                                  {
+                                    "post": "/v1/{parent=billingAccounts/*}/subAccounts",
+                                    "body": "billing_account"
+                                  }
+                                ]
                               }
                             },
                             {
                               "(google.api.method_signature)": "billing_account"
+                            },
+                            {
+                              "(google.api.method_signature)": "billing_account,parent"
                             }
                           ]
                         },
@@ -211,10 +240,36 @@
                               "(google.api.method_signature)": "resource,permissions"
                             }
                           ]
+                        },
+                        "MoveBillingAccount": {
+                          "requestType": "MoveBillingAccountRequest",
+                          "responseType": "BillingAccount",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=billingAccounts/*}:move",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.get": "/v1/{destination_parent=organizations/*}/{name=billingAccounts/*}:move"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=billingAccounts/*}:move",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "get": "/v1/{destination_parent=organizations/*}/{name=billingAccounts/*}:move"
+                                }
+                              }
+                            }
+                          ]
                         }
                       }
                     },
                     "BillingAccount": {
+                      "options": {
+                        "(google.api.resource).type": "cloudbilling.googleapis.com/BillingAccount",
+                        "(google.api.resource).pattern": "organizations/{organization}/billingAccounts/{billing_account}",
+                        "(google.api.resource).plural": "billingAccounts",
+                        "(google.api.resource).singular": "billingAccount"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -238,6 +293,13 @@
                         "masterBillingAccount": {
                           "type": "string",
                           "id": 4
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -299,6 +361,13 @@
                         "filter": {
                           "type": "string",
                           "id": 3
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -322,6 +391,13 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -406,6 +482,26 @@
                         "projectBillingInfo": {
                           "type": "ProjectBillingInfo",
                           "id": 2
+                        }
+                      }
+                    },
+                    "MoveBillingAccountRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudbilling.googleapis.com/BillingAccount"
+                          }
+                        },
+                        "destinationParent": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Organization"
+                          }
                         }
                       }
                     },

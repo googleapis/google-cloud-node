@@ -15,6 +15,8 @@
   "../../protos/google/cloud/discoveryengine/v1alpha/schema.proto",
   "../../protos/google/cloud/discoveryengine/v1alpha/schema_service.proto",
   "../../protos/google/cloud/discoveryengine/v1alpha/search_service.proto",
+  "../../protos/google/cloud/discoveryengine/v1alpha/search_tuning_service.proto",
+  "../../protos/google/cloud/discoveryengine/v1alpha/site_search_engine.proto",
   "../../protos/google/cloud/discoveryengine/v1alpha/site_search_engine_service.proto",
   "../../protos/google/cloud/discoveryengine/v1alpha/user_event.proto",
   "../../protos/google/cloud/discoveryengine/v1alpha/user_event_service.proto"

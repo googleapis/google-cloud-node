@@ -1,5 +1,8 @@
 [
   "../../protos/google/cloud/netapp/v1/active_directory.proto",
+  "../../protos/google/cloud/netapp/v1/backup.proto",
+  "../../protos/google/cloud/netapp/v1/backup_policy.proto",
+  "../../protos/google/cloud/netapp/v1/backup_vault.proto",
   "../../protos/google/cloud/netapp/v1/cloud_netapp_service.proto",
   "../../protos/google/cloud/netapp/v1/common.proto",
   "../../protos/google/cloud/netapp/v1/kms.proto",

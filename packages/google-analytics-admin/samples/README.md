@@ -105,6 +105,7 @@
   * [Analytics_admin_service.get_rollup_property_source_link](#analytics_admin_service.get_rollup_property_source_link)
   * [Analytics_admin_service.get_s_k_ad_network_conversion_value_schema](#analytics_admin_service.get_s_k_ad_network_conversion_value_schema)
   * [Analytics_admin_service.get_search_ads360_link](#analytics_admin_service.get_search_ads360_link)
+  * [Analytics_admin_service.get_subproperty_event_filter](#analytics_admin_service.get_subproperty_event_filter)
   * [Analytics_admin_service.get_user_link](#analytics_admin_service.get_user_link)
   * [Analytics_admin_service.get_web_data_stream](#analytics_admin_service.get_web_data_stream)
   * [Analytics_admin_service.list_access_bindings](#analytics_admin_service.list_access_bindings)
@@ -132,6 +133,7 @@
   * [Analytics_admin_service.list_rollup_property_source_links](#analytics_admin_service.list_rollup_property_source_links)
   * [Analytics_admin_service.list_s_k_ad_network_conversion_value_schemas](#analytics_admin_service.list_s_k_ad_network_conversion_value_schemas)
   * [Analytics_admin_service.list_search_ads360_links](#analytics_admin_service.list_search_ads360_links)
+  * [Analytics_admin_service.list_subproperty_event_filters](#analytics_admin_service.list_subproperty_event_filters)
   * [Analytics_admin_service.list_user_links](#analytics_admin_service.list_user_links)
   * [Analytics_admin_service.list_web_data_streams](#analytics_admin_service.list_web_data_streams)
   * [Analytics_admin_service.provision_account_ticket](#analytics_admin_service.provision_account_ticket)
@@ -161,6 +163,7 @@
   * [Analytics_admin_service.update_property](#analytics_admin_service.update_property)
   * [Analytics_admin_service.update_s_k_ad_network_conversion_value_schema](#analytics_admin_service.update_s_k_ad_network_conversion_value_schema)
   * [Analytics_admin_service.update_search_ads360_link](#analytics_admin_service.update_search_ads360_link)
+  * [Analytics_admin_service.update_subproperty_event_filter](#analytics_admin_service.update_subproperty_event_filter)
   * [Analytics_admin_service.update_user_link](#analytics_admin_service.update_user_link)
   * [Analytics_admin_service.update_web_data_stream](#analytics_admin_service.update_web_data_stream)
   * [Analytics_admin_service.acknowledge_user_data_collection](#analytics_admin_service.acknowledge_user_data_collection)
@@ -1810,6 +1813,23 @@ __Usage:__
 
 
 
+### Analytics_admin_service.get_subproperty_event_filter
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.get_subproperty_event_filter.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.get_subproperty_event_filter.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.get_subproperty_event_filter.js`
+
+
+-----
+
+
+
+
 ### Analytics_admin_service.get_user_link
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.get_user_link.js).
@@ -2262,6 +2282,23 @@ __Usage:__
 
 
 `node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.list_search_ads360_links.js`
+
+
+-----
+
+
+
+
+### Analytics_admin_service.list_subproperty_event_filters
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.list_subproperty_event_filters.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.list_subproperty_event_filters.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.list_subproperty_event_filters.js`
 
 
 -----
@@ -2755,6 +2792,23 @@ __Usage:__
 
 
 `node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.update_search_ads360_link.js`
+
+
+-----
+
+
+
+
+### Analytics_admin_service.update_subproperty_event_filter
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.update_subproperty_event_filter.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.update_subproperty_event_filter.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.update_subproperty_event_filter.js`
 
 
 -----

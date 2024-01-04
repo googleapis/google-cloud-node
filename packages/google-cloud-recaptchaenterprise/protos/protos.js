@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18704,6 +18704,7 @@
                          * @memberof google.cloud.recaptchaenterprise.v1
                          * @interface ISearchRelatedAccountGroupMembershipsRequest
                          * @property {string|null} [project] SearchRelatedAccountGroupMembershipsRequest project
+                         * @property {string|null} [accountId] SearchRelatedAccountGroupMembershipsRequest accountId
                          * @property {Uint8Array|null} [hashedAccountId] SearchRelatedAccountGroupMembershipsRequest hashedAccountId
                          * @property {number|null} [pageSize] SearchRelatedAccountGroupMembershipsRequest pageSize
                          * @property {string|null} [pageToken] SearchRelatedAccountGroupMembershipsRequest pageToken
@@ -18731,6 +18732,14 @@
                          * @instance
                          */
                         SearchRelatedAccountGroupMembershipsRequest.prototype.project = "";
+    
+                        /**
+                         * SearchRelatedAccountGroupMembershipsRequest accountId.
+                         * @member {string} accountId
+                         * @memberof google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest
+                         * @instance
+                         */
+                        SearchRelatedAccountGroupMembershipsRequest.prototype.accountId = "";
     
                         /**
                          * SearchRelatedAccountGroupMembershipsRequest hashedAccountId.
@@ -18788,6 +18797,8 @@
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
                             if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageToken);
+                            if (message.accountId != null && Object.hasOwnProperty.call(message, "accountId"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.accountId);
                             return writer;
                         };
     
@@ -18824,6 +18835,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.project = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.accountId = reader.string();
                                         break;
                                     }
                                 case 2: {
@@ -18876,6 +18891,9 @@
                             if (message.project != null && message.hasOwnProperty("project"))
                                 if (!$util.isString(message.project))
                                     return "project: string expected";
+                            if (message.accountId != null && message.hasOwnProperty("accountId"))
+                                if (!$util.isString(message.accountId))
+                                    return "accountId: string expected";
                             if (message.hashedAccountId != null && message.hasOwnProperty("hashedAccountId"))
                                 if (!(message.hashedAccountId && typeof message.hashedAccountId.length === "number" || $util.isString(message.hashedAccountId)))
                                     return "hashedAccountId: buffer expected";
@@ -18902,6 +18920,8 @@
                             var message = new $root.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest();
                             if (object.project != null)
                                 message.project = String(object.project);
+                            if (object.accountId != null)
+                                message.accountId = String(object.accountId);
                             if (object.hashedAccountId != null)
                                 if (typeof object.hashedAccountId === "string")
                                     $util.base64.decode(object.hashedAccountId, message.hashedAccountId = $util.newBuffer($util.base64.length(object.hashedAccountId)), 0);
@@ -18938,6 +18958,7 @@
                                 }
                                 object.pageSize = 0;
                                 object.pageToken = "";
+                                object.accountId = "";
                             }
                             if (message.project != null && message.hasOwnProperty("project"))
                                 object.project = message.project;
@@ -18947,6 +18968,8 @@
                                 object.pageSize = message.pageSize;
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 object.pageToken = message.pageToken;
+                            if (message.accountId != null && message.hasOwnProperty("accountId"))
+                                object.accountId = message.accountId;
                             return object;
                         };
     
@@ -19234,6 +19257,7 @@
                          * @memberof google.cloud.recaptchaenterprise.v1
                          * @interface IRelatedAccountGroupMembership
                          * @property {string|null} [name] RelatedAccountGroupMembership name
+                         * @property {string|null} [accountId] RelatedAccountGroupMembership accountId
                          * @property {Uint8Array|null} [hashedAccountId] RelatedAccountGroupMembership hashedAccountId
                          */
     
@@ -19259,6 +19283,14 @@
                          * @instance
                          */
                         RelatedAccountGroupMembership.prototype.name = "";
+    
+                        /**
+                         * RelatedAccountGroupMembership accountId.
+                         * @member {string} accountId
+                         * @memberof google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership
+                         * @instance
+                         */
+                        RelatedAccountGroupMembership.prototype.accountId = "";
     
                         /**
                          * RelatedAccountGroupMembership hashedAccountId.
@@ -19296,6 +19328,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                             if (message.hashedAccountId != null && Object.hasOwnProperty.call(message, "hashedAccountId"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.hashedAccountId);
+                            if (message.accountId != null && Object.hasOwnProperty.call(message, "accountId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.accountId);
                             return writer;
                         };
     
@@ -19332,6 +19366,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.accountId = reader.string();
                                         break;
                                     }
                                 case 2: {
@@ -19376,6 +19414,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.accountId != null && message.hasOwnProperty("accountId"))
+                                if (!$util.isString(message.accountId))
+                                    return "accountId: string expected";
                             if (message.hashedAccountId != null && message.hasOwnProperty("hashedAccountId"))
                                 if (!(message.hashedAccountId && typeof message.hashedAccountId.length === "number" || $util.isString(message.hashedAccountId)))
                                     return "hashedAccountId: buffer expected";
@@ -19396,6 +19437,8 @@
                             var message = new $root.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.accountId != null)
+                                message.accountId = String(object.accountId);
                             if (object.hashedAccountId != null)
                                 if (typeof object.hashedAccountId === "string")
                                     $util.base64.decode(object.hashedAccountId, message.hashedAccountId = $util.newBuffer($util.base64.length(object.hashedAccountId)), 0);
@@ -19426,11 +19469,14 @@
                                     if (options.bytes !== Array)
                                         object.hashedAccountId = $util.newBuffer(object.hashedAccountId);
                                 }
+                                object.accountId = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.hashedAccountId != null && message.hasOwnProperty("hashedAccountId"))
                                 object.hashedAccountId = options.bytes === String ? $util.base64.encode(message.hashedAccountId, 0, message.hashedAccountId.length) : options.bytes === Array ? Array.prototype.slice.call(message.hashedAccountId) : message.hashedAccountId;
+                            if (message.accountId != null && message.hasOwnProperty("accountId"))
+                                object.accountId = message.accountId;
                             return object;
                         };
     

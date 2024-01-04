@@ -69,7 +69,19 @@
   * [Schema_service.list_schemas](#schema_service.list_schemas)
   * [Schema_service.update_schema](#schema_service.update_schema)
   * [Search_service.search](#search_service.search)
+  * [Search_tuning_service.train_custom_model](#search_tuning_service.train_custom_model)
+  * [Site_search_engine_service.batch_create_target_sites](#site_search_engine_service.batch_create_target_sites)
+  * [Site_search_engine_service.batch_verify_target_sites](#site_search_engine_service.batch_verify_target_sites)
+  * [Site_search_engine_service.create_target_site](#site_search_engine_service.create_target_site)
+  * [Site_search_engine_service.delete_target_site](#site_search_engine_service.delete_target_site)
+  * [Site_search_engine_service.disable_advanced_site_search](#site_search_engine_service.disable_advanced_site_search)
+  * [Site_search_engine_service.enable_advanced_site_search](#site_search_engine_service.enable_advanced_site_search)
+  * [Site_search_engine_service.fetch_domain_verification_status](#site_search_engine_service.fetch_domain_verification_status)
+  * [Site_search_engine_service.get_site_search_engine](#site_search_engine_service.get_site_search_engine)
+  * [Site_search_engine_service.get_target_site](#site_search_engine_service.get_target_site)
+  * [Site_search_engine_service.list_target_sites](#site_search_engine_service.list_target_sites)
   * [Site_search_engine_service.recrawl_uris](#site_search_engine_service.recrawl_uris)
+  * [Site_search_engine_service.update_target_site](#site_search_engine_service.update_target_site)
   * [User_event_service.collect_user_event](#user_event_service.collect_user_event)
   * [User_event_service.import_user_events](#user_event_service.import_user_events)
   * [User_event_service.purge_user_events](#user_event_service.purge_user_events)
@@ -1084,6 +1096,193 @@ __Usage:__
 
 
 
+### Search_tuning_service.train_custom_model
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/search_tuning_service.train_custom_model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/search_tuning_service.train_custom_model.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1alpha/search_tuning_service.train_custom_model.js`
+
+
+-----
+
+
+
+
+### Site_search_engine_service.batch_create_target_sites
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.batch_create_target_sites.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.batch_create_target_sites.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.batch_create_target_sites.js`
+
+
+-----
+
+
+
+
+### Site_search_engine_service.batch_verify_target_sites
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.batch_verify_target_sites.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.batch_verify_target_sites.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.batch_verify_target_sites.js`
+
+
+-----
+
+
+
+
+### Site_search_engine_service.create_target_site
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.create_target_site.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.create_target_site.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.create_target_site.js`
+
+
+-----
+
+
+
+
+### Site_search_engine_service.delete_target_site
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.delete_target_site.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.delete_target_site.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.delete_target_site.js`
+
+
+-----
+
+
+
+
+### Site_search_engine_service.disable_advanced_site_search
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.disable_advanced_site_search.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.disable_advanced_site_search.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.disable_advanced_site_search.js`
+
+
+-----
+
+
+
+
+### Site_search_engine_service.enable_advanced_site_search
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.enable_advanced_site_search.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.enable_advanced_site_search.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.enable_advanced_site_search.js`
+
+
+-----
+
+
+
+
+### Site_search_engine_service.fetch_domain_verification_status
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.fetch_domain_verification_status.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.fetch_domain_verification_status.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.fetch_domain_verification_status.js`
+
+
+-----
+
+
+
+
+### Site_search_engine_service.get_site_search_engine
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.get_site_search_engine.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.get_site_search_engine.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.get_site_search_engine.js`
+
+
+-----
+
+
+
+
+### Site_search_engine_service.get_target_site
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.get_target_site.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.get_target_site.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.get_target_site.js`
+
+
+-----
+
+
+
+
+### Site_search_engine_service.list_target_sites
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.list_target_sites.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.list_target_sites.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.list_target_sites.js`
+
+
+-----
+
+
+
+
 ### Site_search_engine_service.recrawl_uris
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.recrawl_uris.js).
@@ -1094,6 +1293,23 @@ __Usage:__
 
 
 `node packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.recrawl_uris.js`
+
+
+-----
+
+
+
+
+### Site_search_engine_service.update_target_site
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.update_target_site.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.update_target_site.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.update_target_site.js`
 
 
 -----

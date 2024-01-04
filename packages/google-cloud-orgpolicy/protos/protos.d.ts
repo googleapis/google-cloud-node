@@ -46,6 +46,9 @@ export namespace google {
 
                     /** Constraint booleanConstraint */
                     booleanConstraint?: (google.cloud.orgpolicy.v2.Constraint.IBooleanConstraint|null);
+
+                    /** Constraint supportsDryRun */
+                    supportsDryRun?: (boolean|null);
                 }
 
                 /** Represents a Constraint. */
@@ -74,6 +77,9 @@ export namespace google {
 
                     /** Constraint booleanConstraint. */
                     public booleanConstraint?: (google.cloud.orgpolicy.v2.Constraint.IBooleanConstraint|null);
+
+                    /** Constraint supportsDryRun. */
+                    public supportsDryRun: boolean;
 
                     /** Constraint constraintType. */
                     public constraintType?: ("listConstraint"|"booleanConstraint");
@@ -360,6 +366,163 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a CustomConstraint. */
+                interface ICustomConstraint {
+
+                    /** CustomConstraint name */
+                    name?: (string|null);
+
+                    /** CustomConstraint resourceTypes */
+                    resourceTypes?: (string[]|null);
+
+                    /** CustomConstraint methodTypes */
+                    methodTypes?: (google.cloud.orgpolicy.v2.CustomConstraint.MethodType[]|null);
+
+                    /** CustomConstraint condition */
+                    condition?: (string|null);
+
+                    /** CustomConstraint actionType */
+                    actionType?: (google.cloud.orgpolicy.v2.CustomConstraint.ActionType|keyof typeof google.cloud.orgpolicy.v2.CustomConstraint.ActionType|null);
+
+                    /** CustomConstraint displayName */
+                    displayName?: (string|null);
+
+                    /** CustomConstraint description */
+                    description?: (string|null);
+
+                    /** CustomConstraint updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a CustomConstraint. */
+                class CustomConstraint implements ICustomConstraint {
+
+                    /**
+                     * Constructs a new CustomConstraint.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.orgpolicy.v2.ICustomConstraint);
+
+                    /** CustomConstraint name. */
+                    public name: string;
+
+                    /** CustomConstraint resourceTypes. */
+                    public resourceTypes: string[];
+
+                    /** CustomConstraint methodTypes. */
+                    public methodTypes: google.cloud.orgpolicy.v2.CustomConstraint.MethodType[];
+
+                    /** CustomConstraint condition. */
+                    public condition: string;
+
+                    /** CustomConstraint actionType. */
+                    public actionType: (google.cloud.orgpolicy.v2.CustomConstraint.ActionType|keyof typeof google.cloud.orgpolicy.v2.CustomConstraint.ActionType);
+
+                    /** CustomConstraint displayName. */
+                    public displayName: string;
+
+                    /** CustomConstraint description. */
+                    public description: string;
+
+                    /** CustomConstraint updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new CustomConstraint instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CustomConstraint instance
+                     */
+                    public static create(properties?: google.cloud.orgpolicy.v2.ICustomConstraint): google.cloud.orgpolicy.v2.CustomConstraint;
+
+                    /**
+                     * Encodes the specified CustomConstraint message. Does not implicitly {@link google.cloud.orgpolicy.v2.CustomConstraint.verify|verify} messages.
+                     * @param message CustomConstraint message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.orgpolicy.v2.ICustomConstraint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CustomConstraint message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.CustomConstraint.verify|verify} messages.
+                     * @param message CustomConstraint message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.orgpolicy.v2.ICustomConstraint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CustomConstraint message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CustomConstraint
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.CustomConstraint;
+
+                    /**
+                     * Decodes a CustomConstraint message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CustomConstraint
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.CustomConstraint;
+
+                    /**
+                     * Verifies a CustomConstraint message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CustomConstraint message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CustomConstraint
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.CustomConstraint;
+
+                    /**
+                     * Creates a plain object from a CustomConstraint message. Also converts values to other types if specified.
+                     * @param message CustomConstraint
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.orgpolicy.v2.CustomConstraint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CustomConstraint to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CustomConstraint
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace CustomConstraint {
+
+                    /** MethodType enum. */
+                    enum MethodType {
+                        METHOD_TYPE_UNSPECIFIED = 0,
+                        CREATE = 1,
+                        UPDATE = 2,
+                        DELETE = 3
+                    }
+
+                    /** ActionType enum. */
+                    enum ActionType {
+                        ACTION_TYPE_UNSPECIFIED = 0,
+                        ALLOW = 1,
+                        DENY = 2
+                    }
+                }
+
                 /** Represents an OrgPolicy */
                 class OrgPolicy extends $protobuf.rpc.Service {
 
@@ -477,6 +640,76 @@ export namespace google {
                      * @returns Promise
                      */
                     public deletePolicy(request: google.cloud.orgpolicy.v2.IDeletePolicyRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls CreateCustomConstraint.
+                     * @param request CreateCustomConstraintRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and CustomConstraint
+                     */
+                    public createCustomConstraint(request: google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest, callback: google.cloud.orgpolicy.v2.OrgPolicy.CreateCustomConstraintCallback): void;
+
+                    /**
+                     * Calls CreateCustomConstraint.
+                     * @param request CreateCustomConstraintRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createCustomConstraint(request: google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest): Promise<google.cloud.orgpolicy.v2.CustomConstraint>;
+
+                    /**
+                     * Calls UpdateCustomConstraint.
+                     * @param request UpdateCustomConstraintRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and CustomConstraint
+                     */
+                    public updateCustomConstraint(request: google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest, callback: google.cloud.orgpolicy.v2.OrgPolicy.UpdateCustomConstraintCallback): void;
+
+                    /**
+                     * Calls UpdateCustomConstraint.
+                     * @param request UpdateCustomConstraintRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateCustomConstraint(request: google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest): Promise<google.cloud.orgpolicy.v2.CustomConstraint>;
+
+                    /**
+                     * Calls GetCustomConstraint.
+                     * @param request GetCustomConstraintRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and CustomConstraint
+                     */
+                    public getCustomConstraint(request: google.cloud.orgpolicy.v2.IGetCustomConstraintRequest, callback: google.cloud.orgpolicy.v2.OrgPolicy.GetCustomConstraintCallback): void;
+
+                    /**
+                     * Calls GetCustomConstraint.
+                     * @param request GetCustomConstraintRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getCustomConstraint(request: google.cloud.orgpolicy.v2.IGetCustomConstraintRequest): Promise<google.cloud.orgpolicy.v2.CustomConstraint>;
+
+                    /**
+                     * Calls ListCustomConstraints.
+                     * @param request ListCustomConstraintsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListCustomConstraintsResponse
+                     */
+                    public listCustomConstraints(request: google.cloud.orgpolicy.v2.IListCustomConstraintsRequest, callback: google.cloud.orgpolicy.v2.OrgPolicy.ListCustomConstraintsCallback): void;
+
+                    /**
+                     * Calls ListCustomConstraints.
+                     * @param request ListCustomConstraintsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listCustomConstraints(request: google.cloud.orgpolicy.v2.IListCustomConstraintsRequest): Promise<google.cloud.orgpolicy.v2.ListCustomConstraintsResponse>;
+
+                    /**
+                     * Calls DeleteCustomConstraint.
+                     * @param request DeleteCustomConstraintRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteCustomConstraint(request: google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest, callback: google.cloud.orgpolicy.v2.OrgPolicy.DeleteCustomConstraintCallback): void;
+
+                    /**
+                     * Calls DeleteCustomConstraint.
+                     * @param request DeleteCustomConstraintRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteCustomConstraint(request: google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest): Promise<google.protobuf.Empty>;
                 }
 
                 namespace OrgPolicy {
@@ -529,6 +762,41 @@ export namespace google {
                      * @param [response] Empty
                      */
                     type DeletePolicyCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.orgpolicy.v2.OrgPolicy|createCustomConstraint}.
+                     * @param error Error, if any
+                     * @param [response] CustomConstraint
+                     */
+                    type CreateCustomConstraintCallback = (error: (Error|null), response?: google.cloud.orgpolicy.v2.CustomConstraint) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.orgpolicy.v2.OrgPolicy|updateCustomConstraint}.
+                     * @param error Error, if any
+                     * @param [response] CustomConstraint
+                     */
+                    type UpdateCustomConstraintCallback = (error: (Error|null), response?: google.cloud.orgpolicy.v2.CustomConstraint) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.orgpolicy.v2.OrgPolicy|getCustomConstraint}.
+                     * @param error Error, if any
+                     * @param [response] CustomConstraint
+                     */
+                    type GetCustomConstraintCallback = (error: (Error|null), response?: google.cloud.orgpolicy.v2.CustomConstraint) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.orgpolicy.v2.OrgPolicy|listCustomConstraints}.
+                     * @param error Error, if any
+                     * @param [response] ListCustomConstraintsResponse
+                     */
+                    type ListCustomConstraintsCallback = (error: (Error|null), response?: google.cloud.orgpolicy.v2.ListCustomConstraintsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.orgpolicy.v2.OrgPolicy|deleteCustomConstraint}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteCustomConstraintCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
                 }
 
                 /** Properties of a Policy. */
@@ -545,6 +813,9 @@ export namespace google {
 
                     /** Policy dryRunSpec */
                     dryRunSpec?: (google.cloud.orgpolicy.v2.IPolicySpec|null);
+
+                    /** Policy etag */
+                    etag?: (string|null);
                 }
 
                 /** Represents a Policy. */
@@ -567,6 +838,9 @@ export namespace google {
 
                     /** Policy dryRunSpec. */
                     public dryRunSpec?: (google.cloud.orgpolicy.v2.IPolicySpec|null);
+
+                    /** Policy etag. */
+                    public etag: string;
 
                     /**
                      * Creates a new Policy instance using the specified properties.
@@ -1932,6 +2206,9 @@ export namespace google {
 
                     /** DeletePolicyRequest name */
                     name?: (string|null);
+
+                    /** DeletePolicyRequest etag */
+                    etag?: (string|null);
                 }
 
                 /** Represents a DeletePolicyRequest. */
@@ -1945,6 +2222,9 @@ export namespace google {
 
                     /** DeletePolicyRequest name. */
                     public name: string;
+
+                    /** DeletePolicyRequest etag. */
+                    public etag: string;
 
                     /**
                      * Creates a new DeletePolicyRequest instance using the specified properties.
@@ -2018,6 +2298,612 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DeletePolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateCustomConstraintRequest. */
+                interface ICreateCustomConstraintRequest {
+
+                    /** CreateCustomConstraintRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateCustomConstraintRequest customConstraint */
+                    customConstraint?: (google.cloud.orgpolicy.v2.ICustomConstraint|null);
+                }
+
+                /** Represents a CreateCustomConstraintRequest. */
+                class CreateCustomConstraintRequest implements ICreateCustomConstraintRequest {
+
+                    /**
+                     * Constructs a new CreateCustomConstraintRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest);
+
+                    /** CreateCustomConstraintRequest parent. */
+                    public parent: string;
+
+                    /** CreateCustomConstraintRequest customConstraint. */
+                    public customConstraint?: (google.cloud.orgpolicy.v2.ICustomConstraint|null);
+
+                    /**
+                     * Creates a new CreateCustomConstraintRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateCustomConstraintRequest instance
+                     */
+                    public static create(properties?: google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest): google.cloud.orgpolicy.v2.CreateCustomConstraintRequest;
+
+                    /**
+                     * Encodes the specified CreateCustomConstraintRequest message. Does not implicitly {@link google.cloud.orgpolicy.v2.CreateCustomConstraintRequest.verify|verify} messages.
+                     * @param message CreateCustomConstraintRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateCustomConstraintRequest message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.CreateCustomConstraintRequest.verify|verify} messages.
+                     * @param message CreateCustomConstraintRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateCustomConstraintRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateCustomConstraintRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.CreateCustomConstraintRequest;
+
+                    /**
+                     * Decodes a CreateCustomConstraintRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateCustomConstraintRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.CreateCustomConstraintRequest;
+
+                    /**
+                     * Verifies a CreateCustomConstraintRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateCustomConstraintRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateCustomConstraintRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.CreateCustomConstraintRequest;
+
+                    /**
+                     * Creates a plain object from a CreateCustomConstraintRequest message. Also converts values to other types if specified.
+                     * @param message CreateCustomConstraintRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.orgpolicy.v2.CreateCustomConstraintRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateCustomConstraintRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateCustomConstraintRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetCustomConstraintRequest. */
+                interface IGetCustomConstraintRequest {
+
+                    /** GetCustomConstraintRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetCustomConstraintRequest. */
+                class GetCustomConstraintRequest implements IGetCustomConstraintRequest {
+
+                    /**
+                     * Constructs a new GetCustomConstraintRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.orgpolicy.v2.IGetCustomConstraintRequest);
+
+                    /** GetCustomConstraintRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetCustomConstraintRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetCustomConstraintRequest instance
+                     */
+                    public static create(properties?: google.cloud.orgpolicy.v2.IGetCustomConstraintRequest): google.cloud.orgpolicy.v2.GetCustomConstraintRequest;
+
+                    /**
+                     * Encodes the specified GetCustomConstraintRequest message. Does not implicitly {@link google.cloud.orgpolicy.v2.GetCustomConstraintRequest.verify|verify} messages.
+                     * @param message GetCustomConstraintRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.orgpolicy.v2.IGetCustomConstraintRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetCustomConstraintRequest message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.GetCustomConstraintRequest.verify|verify} messages.
+                     * @param message GetCustomConstraintRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.orgpolicy.v2.IGetCustomConstraintRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetCustomConstraintRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetCustomConstraintRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.GetCustomConstraintRequest;
+
+                    /**
+                     * Decodes a GetCustomConstraintRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetCustomConstraintRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.GetCustomConstraintRequest;
+
+                    /**
+                     * Verifies a GetCustomConstraintRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetCustomConstraintRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetCustomConstraintRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.GetCustomConstraintRequest;
+
+                    /**
+                     * Creates a plain object from a GetCustomConstraintRequest message. Also converts values to other types if specified.
+                     * @param message GetCustomConstraintRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.orgpolicy.v2.GetCustomConstraintRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetCustomConstraintRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetCustomConstraintRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListCustomConstraintsRequest. */
+                interface IListCustomConstraintsRequest {
+
+                    /** ListCustomConstraintsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListCustomConstraintsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListCustomConstraintsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListCustomConstraintsRequest. */
+                class ListCustomConstraintsRequest implements IListCustomConstraintsRequest {
+
+                    /**
+                     * Constructs a new ListCustomConstraintsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.orgpolicy.v2.IListCustomConstraintsRequest);
+
+                    /** ListCustomConstraintsRequest parent. */
+                    public parent: string;
+
+                    /** ListCustomConstraintsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListCustomConstraintsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListCustomConstraintsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListCustomConstraintsRequest instance
+                     */
+                    public static create(properties?: google.cloud.orgpolicy.v2.IListCustomConstraintsRequest): google.cloud.orgpolicy.v2.ListCustomConstraintsRequest;
+
+                    /**
+                     * Encodes the specified ListCustomConstraintsRequest message. Does not implicitly {@link google.cloud.orgpolicy.v2.ListCustomConstraintsRequest.verify|verify} messages.
+                     * @param message ListCustomConstraintsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.orgpolicy.v2.IListCustomConstraintsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListCustomConstraintsRequest message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.ListCustomConstraintsRequest.verify|verify} messages.
+                     * @param message ListCustomConstraintsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.orgpolicy.v2.IListCustomConstraintsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListCustomConstraintsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListCustomConstraintsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.ListCustomConstraintsRequest;
+
+                    /**
+                     * Decodes a ListCustomConstraintsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListCustomConstraintsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.ListCustomConstraintsRequest;
+
+                    /**
+                     * Verifies a ListCustomConstraintsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListCustomConstraintsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListCustomConstraintsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.ListCustomConstraintsRequest;
+
+                    /**
+                     * Creates a plain object from a ListCustomConstraintsRequest message. Also converts values to other types if specified.
+                     * @param message ListCustomConstraintsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.orgpolicy.v2.ListCustomConstraintsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListCustomConstraintsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListCustomConstraintsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListCustomConstraintsResponse. */
+                interface IListCustomConstraintsResponse {
+
+                    /** ListCustomConstraintsResponse customConstraints */
+                    customConstraints?: (google.cloud.orgpolicy.v2.ICustomConstraint[]|null);
+
+                    /** ListCustomConstraintsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListCustomConstraintsResponse. */
+                class ListCustomConstraintsResponse implements IListCustomConstraintsResponse {
+
+                    /**
+                     * Constructs a new ListCustomConstraintsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.orgpolicy.v2.IListCustomConstraintsResponse);
+
+                    /** ListCustomConstraintsResponse customConstraints. */
+                    public customConstraints: google.cloud.orgpolicy.v2.ICustomConstraint[];
+
+                    /** ListCustomConstraintsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListCustomConstraintsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListCustomConstraintsResponse instance
+                     */
+                    public static create(properties?: google.cloud.orgpolicy.v2.IListCustomConstraintsResponse): google.cloud.orgpolicy.v2.ListCustomConstraintsResponse;
+
+                    /**
+                     * Encodes the specified ListCustomConstraintsResponse message. Does not implicitly {@link google.cloud.orgpolicy.v2.ListCustomConstraintsResponse.verify|verify} messages.
+                     * @param message ListCustomConstraintsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.orgpolicy.v2.IListCustomConstraintsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListCustomConstraintsResponse message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.ListCustomConstraintsResponse.verify|verify} messages.
+                     * @param message ListCustomConstraintsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.orgpolicy.v2.IListCustomConstraintsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListCustomConstraintsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListCustomConstraintsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.ListCustomConstraintsResponse;
+
+                    /**
+                     * Decodes a ListCustomConstraintsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListCustomConstraintsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.ListCustomConstraintsResponse;
+
+                    /**
+                     * Verifies a ListCustomConstraintsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListCustomConstraintsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListCustomConstraintsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.ListCustomConstraintsResponse;
+
+                    /**
+                     * Creates a plain object from a ListCustomConstraintsResponse message. Also converts values to other types if specified.
+                     * @param message ListCustomConstraintsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.orgpolicy.v2.ListCustomConstraintsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListCustomConstraintsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListCustomConstraintsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateCustomConstraintRequest. */
+                interface IUpdateCustomConstraintRequest {
+
+                    /** UpdateCustomConstraintRequest customConstraint */
+                    customConstraint?: (google.cloud.orgpolicy.v2.ICustomConstraint|null);
+                }
+
+                /** Represents an UpdateCustomConstraintRequest. */
+                class UpdateCustomConstraintRequest implements IUpdateCustomConstraintRequest {
+
+                    /**
+                     * Constructs a new UpdateCustomConstraintRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest);
+
+                    /** UpdateCustomConstraintRequest customConstraint. */
+                    public customConstraint?: (google.cloud.orgpolicy.v2.ICustomConstraint|null);
+
+                    /**
+                     * Creates a new UpdateCustomConstraintRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateCustomConstraintRequest instance
+                     */
+                    public static create(properties?: google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest): google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest;
+
+                    /**
+                     * Encodes the specified UpdateCustomConstraintRequest message. Does not implicitly {@link google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest.verify|verify} messages.
+                     * @param message UpdateCustomConstraintRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateCustomConstraintRequest message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest.verify|verify} messages.
+                     * @param message UpdateCustomConstraintRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateCustomConstraintRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateCustomConstraintRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest;
+
+                    /**
+                     * Decodes an UpdateCustomConstraintRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateCustomConstraintRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest;
+
+                    /**
+                     * Verifies an UpdateCustomConstraintRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateCustomConstraintRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateCustomConstraintRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateCustomConstraintRequest message. Also converts values to other types if specified.
+                     * @param message UpdateCustomConstraintRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateCustomConstraintRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateCustomConstraintRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteCustomConstraintRequest. */
+                interface IDeleteCustomConstraintRequest {
+
+                    /** DeleteCustomConstraintRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteCustomConstraintRequest. */
+                class DeleteCustomConstraintRequest implements IDeleteCustomConstraintRequest {
+
+                    /**
+                     * Constructs a new DeleteCustomConstraintRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest);
+
+                    /** DeleteCustomConstraintRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteCustomConstraintRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteCustomConstraintRequest instance
+                     */
+                    public static create(properties?: google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest): google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest;
+
+                    /**
+                     * Encodes the specified DeleteCustomConstraintRequest message. Does not implicitly {@link google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest.verify|verify} messages.
+                     * @param message DeleteCustomConstraintRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteCustomConstraintRequest message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest.verify|verify} messages.
+                     * @param message DeleteCustomConstraintRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteCustomConstraintRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteCustomConstraintRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest;
+
+                    /**
+                     * Decodes a DeleteCustomConstraintRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteCustomConstraintRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest;
+
+                    /**
+                     * Verifies a DeleteCustomConstraintRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteCustomConstraintRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteCustomConstraintRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteCustomConstraintRequest message. Also converts values to other types if specified.
+                     * @param message DeleteCustomConstraintRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteCustomConstraintRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteCustomConstraintRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

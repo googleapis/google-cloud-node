@@ -1507,14 +1507,16 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
                           }
                         },
                         "destinationParent": {
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "*"
                           }
                         },
                         "view": {
@@ -3277,7 +3279,7 @@
                 },
                 "v1p2beta1": {
                   "options": {
-                    "csharp_namespace": "Google.Cloud.Asset.v1p2beta1",
+                    "csharp_namespace": "Google.Cloud.Asset.V1P2Beta1",
                     "go_package": "cloud.google.com/go/asset/apiv1p2beta1/assetpb;assetpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "AssetProto",
@@ -3385,6 +3387,27 @@
                               "(google.api.method_signature)": "name"
                             }
                           ]
+                        }
+                      }
+                    },
+                    "ExportAssetsResponse": {
+                      "fields": {
+                        "readTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "outputConfig": {
+                          "type": "OutputConfig",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "BatchGetAssetsHistoryResponse": {
+                      "fields": {
+                        "assets": {
+                          "rule": "repeated",
+                          "type": "TemporalAsset",
+                          "id": 1
                         }
                       }
                     },
@@ -3505,6 +3528,13 @@
                         }
                       }
                     },
+                    "ContentType": {
+                      "values": {
+                        "CONTENT_TYPE_UNSPECIFIED": 0,
+                        "RESOURCE": 1,
+                        "IAM_POLICY": 2
+                      }
+                    },
                     "PubsubDestination": {
                       "fields": {
                         "topic": {
@@ -3565,13 +3595,6 @@
                         }
                       }
                     },
-                    "ContentType": {
-                      "values": {
-                        "CONTENT_TYPE_UNSPECIFIED": 0,
-                        "RESOURCE": 1,
-                        "IAM_POLICY": 2
-                      }
-                    },
                     "TemporalAsset": {
                       "fields": {
                         "window": {
@@ -3601,6 +3624,19 @@
                       }
                     },
                     "Asset": {
+                      "options": {
+                        "(google.api.resource).type": "cloudasset.googleapis.com/Asset",
+                        "(google.api.resource).pattern": "*"
+                      },
+                      "oneofs": {
+                        "accessContextPolicy": {
+                          "oneof": [
+                            "accessPolicy",
+                            "accessLevel",
+                            "servicePerimeter"
+                          ]
+                        }
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -3622,6 +3658,23 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 6
+                        },
+                        "accessPolicy": {
+                          "type": "google.identity.accesscontextmanager.v1.AccessPolicy",
+                          "id": 7
+                        },
+                        "accessLevel": {
+                          "type": "google.identity.accesscontextmanager.v1.AccessLevel",
+                          "id": 8
+                        },
+                        "servicePerimeter": {
+                          "type": "google.identity.accesscontextmanager.v1.ServicePerimeter",
+                          "id": 9
+                        },
+                        "orgPolicy": {
+                          "rule": "repeated",
+                          "type": "google.cloud.orgpolicy.v1.Policy",
+                          "id": 10
                         }
                       }
                     },
@@ -6800,7 +6853,7 @@
               "options": {
                 "cc_enable_arenas": true,
                 "csharp_namespace": "Google.Cloud.Iam.V1",
-                "go_package": "google.golang.org/genproto/googleapis/iam/v1;iam",
+                "go_package": "cloud.google.com/go/iam/apiv1/iampb;iampb",
                 "java_multiple_files": true,
                 "java_outer_classname": "PolicyProto",
                 "java_package": "com.google.iam.v1",

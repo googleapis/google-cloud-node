@@ -548,9 +548,8 @@ describe('v1.AttachedClustersClient', () => {
       );
       client.innerApiCalls.generateAttachedClusterInstallManifest =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.generateAttachedClusterInstallManifest(
-        request
-      );
+      const [response] =
+        await client.generateAttachedClusterInstallManifest(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.generateAttachedClusterInstallManifest as SinonStub
@@ -659,6 +658,144 @@ describe('v1.AttachedClustersClient', () => {
       client.close();
       await assert.rejects(
         client.generateAttachedClusterInstallManifest(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('generateAttachedClusterAgentToken', () => {
+    it('invokes generateAttachedClusterAgentToken without error', async () => {
+      const client = new attachedclustersModule.v1.AttachedClustersClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gkemulticloud.v1.GenerateAttachedClusterAgentTokenRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GenerateAttachedClusterAgentTokenRequest',
+        ['attachedCluster']
+      );
+      request.attachedCluster = defaultValue1;
+      const expectedHeaderRequestParams = `attached_cluster=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.gkemulticloud.v1.GenerateAttachedClusterAgentTokenResponse()
+      );
+      client.innerApiCalls.generateAttachedClusterAgentToken =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.generateAttachedClusterAgentToken(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.generateAttachedClusterAgentToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generateAttachedClusterAgentToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes generateAttachedClusterAgentToken without error using callback', async () => {
+      const client = new attachedclustersModule.v1.AttachedClustersClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gkemulticloud.v1.GenerateAttachedClusterAgentTokenRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GenerateAttachedClusterAgentTokenRequest',
+        ['attachedCluster']
+      );
+      request.attachedCluster = defaultValue1;
+      const expectedHeaderRequestParams = `attached_cluster=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.gkemulticloud.v1.GenerateAttachedClusterAgentTokenResponse()
+      );
+      client.innerApiCalls.generateAttachedClusterAgentToken =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.generateAttachedClusterAgentToken(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.generateAttachedClusterAgentToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generateAttachedClusterAgentToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes generateAttachedClusterAgentToken with error', async () => {
+      const client = new attachedclustersModule.v1.AttachedClustersClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gkemulticloud.v1.GenerateAttachedClusterAgentTokenRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GenerateAttachedClusterAgentTokenRequest',
+        ['attachedCluster']
+      );
+      request.attachedCluster = defaultValue1;
+      const expectedHeaderRequestParams = `attached_cluster=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.generateAttachedClusterAgentToken = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.generateAttachedClusterAgentToken(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.generateAttachedClusterAgentToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generateAttachedClusterAgentToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes generateAttachedClusterAgentToken with closed client', async () => {
+      const client = new attachedclustersModule.v1.AttachedClustersClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gkemulticloud.v1.GenerateAttachedClusterAgentTokenRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GenerateAttachedClusterAgentTokenRequest',
+        ['attachedCluster']
+      );
+      request.attachedCluster = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.generateAttachedClusterAgentToken(request),
         expectedError
       );
     });
