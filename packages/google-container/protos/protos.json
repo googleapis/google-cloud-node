@@ -9869,7 +9869,8 @@
                   "oneofs": {
                     "rolloutPolicy": {
                       "oneof": [
-                        "standardRolloutPolicy"
+                        "standardRolloutPolicy",
+                        "autoscaledRolloutPolicy"
                       ]
                     },
                     "_nodePoolSoakDuration": {
@@ -9882,6 +9883,10 @@
                     "standardRolloutPolicy": {
                       "type": "StandardRolloutPolicy",
                       "id": 1
+                    },
+                    "autoscaledRolloutPolicy": {
+                      "type": "AutoscaledRolloutPolicy",
+                      "id": 3
                     },
                     "nodePoolSoakDuration": {
                       "type": "google.protobuf.Duration",
@@ -9923,6 +9928,9 @@
                           }
                         }
                       }
+                    },
+                    "AutoscaledRolloutPolicy": {
+                      "fields": {}
                     }
                   }
                 },

@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34324,6 +34324,9 @@ export namespace google {
                 /** BlueGreenSettings standardRolloutPolicy */
                 standardRolloutPolicy?: (google.container.v1beta1.BlueGreenSettings.IStandardRolloutPolicy|null);
 
+                /** BlueGreenSettings autoscaledRolloutPolicy */
+                autoscaledRolloutPolicy?: (google.container.v1beta1.BlueGreenSettings.IAutoscaledRolloutPolicy|null);
+
                 /** BlueGreenSettings nodePoolSoakDuration */
                 nodePoolSoakDuration?: (google.protobuf.IDuration|null);
             }
@@ -34340,11 +34343,14 @@ export namespace google {
                 /** BlueGreenSettings standardRolloutPolicy. */
                 public standardRolloutPolicy?: (google.container.v1beta1.BlueGreenSettings.IStandardRolloutPolicy|null);
 
+                /** BlueGreenSettings autoscaledRolloutPolicy. */
+                public autoscaledRolloutPolicy?: (google.container.v1beta1.BlueGreenSettings.IAutoscaledRolloutPolicy|null);
+
                 /** BlueGreenSettings nodePoolSoakDuration. */
                 public nodePoolSoakDuration?: (google.protobuf.IDuration|null);
 
                 /** BlueGreenSettings rolloutPolicy. */
-                public rolloutPolicy?: "standardRolloutPolicy";
+                public rolloutPolicy?: ("standardRolloutPolicy"|"autoscaledRolloutPolicy");
 
                 /** BlueGreenSettings _nodePoolSoakDuration. */
                 public _nodePoolSoakDuration?: "nodePoolSoakDuration";
@@ -34538,6 +34544,97 @@ export namespace google {
 
                     /**
                      * Gets the default type url for StandardRolloutPolicy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AutoscaledRolloutPolicy. */
+                interface IAutoscaledRolloutPolicy {
+                }
+
+                /** Represents an AutoscaledRolloutPolicy. */
+                class AutoscaledRolloutPolicy implements IAutoscaledRolloutPolicy {
+
+                    /**
+                     * Constructs a new AutoscaledRolloutPolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.container.v1beta1.BlueGreenSettings.IAutoscaledRolloutPolicy);
+
+                    /**
+                     * Creates a new AutoscaledRolloutPolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AutoscaledRolloutPolicy instance
+                     */
+                    public static create(properties?: google.container.v1beta1.BlueGreenSettings.IAutoscaledRolloutPolicy): google.container.v1beta1.BlueGreenSettings.AutoscaledRolloutPolicy;
+
+                    /**
+                     * Encodes the specified AutoscaledRolloutPolicy message. Does not implicitly {@link google.container.v1beta1.BlueGreenSettings.AutoscaledRolloutPolicy.verify|verify} messages.
+                     * @param message AutoscaledRolloutPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.container.v1beta1.BlueGreenSettings.IAutoscaledRolloutPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AutoscaledRolloutPolicy message, length delimited. Does not implicitly {@link google.container.v1beta1.BlueGreenSettings.AutoscaledRolloutPolicy.verify|verify} messages.
+                     * @param message AutoscaledRolloutPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.container.v1beta1.BlueGreenSettings.IAutoscaledRolloutPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AutoscaledRolloutPolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AutoscaledRolloutPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.BlueGreenSettings.AutoscaledRolloutPolicy;
+
+                    /**
+                     * Decodes an AutoscaledRolloutPolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AutoscaledRolloutPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.BlueGreenSettings.AutoscaledRolloutPolicy;
+
+                    /**
+                     * Verifies an AutoscaledRolloutPolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AutoscaledRolloutPolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AutoscaledRolloutPolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.container.v1beta1.BlueGreenSettings.AutoscaledRolloutPolicy;
+
+                    /**
+                     * Creates a plain object from an AutoscaledRolloutPolicy message. Also converts values to other types if specified.
+                     * @param message AutoscaledRolloutPolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.container.v1beta1.BlueGreenSettings.AutoscaledRolloutPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AutoscaledRolloutPolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AutoscaledRolloutPolicy
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

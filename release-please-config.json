@@ -160,7 +160,8 @@
     "packages/google-cloud-edgenetwork": {},
     "packages/google-shopping-merchant-reports": {},
     "packages/google-shopping-merchant-inventories": {},
-    "packages/google-shopping-css": {}
+    "packages/google-shopping-css": {},
+    "packages/google-api-cloudquotas": {}
   },
   "plugins": [
     {
