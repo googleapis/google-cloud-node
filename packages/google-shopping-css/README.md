@@ -93,7 +93,7 @@ npm install @google-shopping/css
 // const pageToken = 'abc123'
 
 // Imports the Css library
-const {AccountsServiceClient} = require('@google-cloud/css').v1;
+const {AccountsServiceClient} = require('@google-shopping/css').v1;
 
 // Instantiates a client
 const cssClient = new AccountsServiceClient();
