@@ -9906,7 +9906,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 61,
+                    "end": 73,
                     "type": "FULL"
                 }
             ],
@@ -9920,7 +9920,15 @@
                         "type": "TYPE_STRING"
                     },
                     {
+                        "name": "model",
+                        "type": "TYPE_STRING"
+                    },
+                    {
                         "name": "instances",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "contents",
                         "type": "TYPE_MESSAGE[]"
                     }
                 ],
@@ -9932,6 +9940,62 @@
                 "method": {
                     "shortName": "CountTokens",
                     "fullName": "google.cloud.aiplatform.v1beta1.PredictionService.CountTokens",
+                    "service": {
+                        "shortName": "PredictionService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.PredictionService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_PredictionService_StreamGenerateContent_async",
+            "title": "DatasetService streamGenerateContent Sample",
+            "origin": "API_DEFINITION",
+            "description": " Generate content with multimodal inputs with streaming support.",
+            "canonical": true,
+            "file": "prediction_service.stream_generate_content.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 83,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "StreamGenerateContent",
+                "fullName": "google.cloud.aiplatform.v1beta1.PredictionService.StreamGenerateContent",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "model",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "contents",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "tools",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "safety_settings",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "generation_config",
+                        "type": ".google.cloud.aiplatform.v1beta1.GenerationConfig"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.GenerateContentResponse",
+                "client": {
+                    "shortName": "PredictionServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PredictionServiceClient"
+                },
+                "method": {
+                    "shortName": "StreamGenerateContent",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PredictionService.StreamGenerateContent",
                     "service": {
                         "shortName": "PredictionService",
                         "fullName": "google.cloud.aiplatform.v1beta1.PredictionService"

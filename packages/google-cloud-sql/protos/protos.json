@@ -314,7 +314,9 @@
                           "values": {
                             "SQL_API_WARNING_CODE_UNSPECIFIED": 0,
                             "REGION_UNREACHABLE": 1,
-                            "MAX_RESULTS_EXCEEDS_LIMIT": 2
+                            "MAX_RESULTS_EXCEEDS_LIMIT": 2,
+                            "COMPROMISED_CREDENTIALS": 3,
+                            "INTERNAL_STATE_FAILURE": 4
                           }
                         }
                       }
@@ -1087,6 +1089,10 @@
                           "type": "OperationErrors",
                           "id": 8
                         },
+                        "apiWarning": {
+                          "type": "ApiWarning",
+                          "id": 19
+                        },
                         "operationType": {
                           "type": "SqlOperationType",
                           "id": 9
@@ -1245,6 +1251,10 @@
                         "enablePasswordPolicy": {
                           "type": "google.protobuf.BoolValue",
                           "id": 6
+                        },
+                        "disallowCompromisedCredentials": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 7
                         }
                       },
                       "nested": {
@@ -1645,7 +1655,8 @@
                       "values": {
                         "SQL_UPDATE_TRACK_UNSPECIFIED": 0,
                         "canary": 1,
-                        "stable": 2
+                        "stable": 2,
+                        "week5": 3
                       }
                     },
                     "SqlConnectService": {
@@ -3436,6 +3447,11 @@
                             "outOfDiskReport"
                           ]
                         },
+                        "_sqlNetworkArchitecture": {
+                          "oneof": [
+                            "sqlNetworkArchitecture"
+                          ]
+                        },
                         "_pscServiceAttachmentLink": {
                           "oneof": [
                             "pscServiceAttachmentLink"
@@ -3627,6 +3643,13 @@
                           "type": "string",
                           "id": 42
                         },
+                        "sqlNetworkArchitecture": {
+                          "type": "SqlNetworkArchitecture",
+                          "id": 47,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "pscServiceAttachmentLink": {
                           "type": "string",
                           "id": 48,
@@ -3761,6 +3784,13 @@
                                 "SOFT_SHUTDOWN": 2
                               }
                             }
+                          }
+                        },
+                        "SqlNetworkArchitecture": {
+                          "values": {
+                            "SQL_NETWORK_ARCHITECTURE_UNSPECIFIED": 0,
+                            "NEW_NETWORK_ARCHITECTURE": 1,
+                            "OLD_NETWORK_ARCHITECTURE": 2
                           }
                         }
                       }
@@ -6438,7 +6468,9 @@
                           "values": {
                             "SQL_API_WARNING_CODE_UNSPECIFIED": 0,
                             "REGION_UNREACHABLE": 1,
-                            "MAX_RESULTS_EXCEEDS_LIMIT": 2
+                            "MAX_RESULTS_EXCEEDS_LIMIT": 2,
+                            "COMPROMISED_CREDENTIALS": 3,
+                            "INTERNAL_STATE_FAILURE": 4
                           }
                         }
                       }
@@ -6774,6 +6806,11 @@
                             "outOfDiskReport"
                           ]
                         },
+                        "_sqlNetworkArchitecture": {
+                          "oneof": [
+                            "sqlNetworkArchitecture"
+                          ]
+                        },
                         "_pscServiceAttachmentLink": {
                           "oneof": [
                             "pscServiceAttachmentLink"
@@ -6965,6 +7002,13 @@
                           "type": "string",
                           "id": 42
                         },
+                        "sqlNetworkArchitecture": {
+                          "type": "SqlNetworkArchitecture",
+                          "id": 47,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "pscServiceAttachmentLink": {
                           "type": "string",
                           "id": 48,
@@ -7099,6 +7143,13 @@
                                 "SOFT_SHUTDOWN": 2
                               }
                             }
+                          }
+                        },
+                        "SqlNetworkArchitecture": {
+                          "values": {
+                            "SQL_NETWORK_ARCHITECTURE_UNSPECIFIED": 0,
+                            "NEW_NETWORK_ARCHITECTURE": 1,
+                            "OLD_NETWORK_ARCHITECTURE": 2
                           }
                         }
                       }
@@ -7738,7 +7789,9 @@
                             "UNSUPPORTED_DATABASE_SETTINGS": 33,
                             "MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE": 34,
                             "LOCAL_INFILE_OFF": 35,
-                            "TURN_ON_PITR_AFTER_PROMOTE": 36
+                            "TURN_ON_PITR_AFTER_PROMOTE": 36,
+                            "INCOMPATIBLE_DATABASE_MINOR_VERSION": 37,
+                            "SOURCE_MAX_SUBSCRIPTIONS": 38
                           }
                         }
                       }
@@ -8071,6 +8124,10 @@
                           "type": "OperationErrors",
                           "id": 8
                         },
+                        "apiWarning": {
+                          "type": "ApiWarning",
+                          "id": 19
+                        },
                         "operationType": {
                           "type": "SqlOperationType",
                           "id": 9
@@ -8229,6 +8286,10 @@
                         "enablePasswordPolicy": {
                           "type": "google.protobuf.BoolValue",
                           "id": 6
+                        },
+                        "disallowCompromisedCredentials": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 7
                         }
                       },
                       "nested": {
@@ -8844,7 +8905,8 @@
                       "values": {
                         "SQL_UPDATE_TRACK_UNSPECIFIED": 0,
                         "canary": 1,
-                        "stable": 2
+                        "stable": 2,
+                        "week5": 3
                       }
                     },
                     "SqlFlagType": {

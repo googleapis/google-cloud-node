@@ -185,6 +185,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public testIamPermissions(request: google.iam.v1.ITestIamPermissionsRequest): Promise<google.iam.v1.TestIamPermissionsResponse>;
+
+                    /**
+                     * Calls MoveBillingAccount.
+                     * @param request MoveBillingAccountRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BillingAccount
+                     */
+                    public moveBillingAccount(request: google.cloud.billing.v1.IMoveBillingAccountRequest, callback: google.cloud.billing.v1.CloudBilling.MoveBillingAccountCallback): void;
+
+                    /**
+                     * Calls MoveBillingAccount.
+                     * @param request MoveBillingAccountRequest message or plain object
+                     * @returns Promise
+                     */
+                    public moveBillingAccount(request: google.cloud.billing.v1.IMoveBillingAccountRequest): Promise<google.cloud.billing.v1.BillingAccount>;
                 }
 
                 namespace CloudBilling {
@@ -258,6 +272,13 @@ export namespace google {
                      * @param [response] TestIamPermissionsResponse
                      */
                     type TestIamPermissionsCallback = (error: (Error|null), response?: google.iam.v1.TestIamPermissionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.billing.v1.CloudBilling|moveBillingAccount}.
+                     * @param error Error, if any
+                     * @param [response] BillingAccount
+                     */
+                    type MoveBillingAccountCallback = (error: (Error|null), response?: google.cloud.billing.v1.BillingAccount) => void;
                 }
 
                 /** Properties of a BillingAccount. */
@@ -274,6 +295,9 @@ export namespace google {
 
                     /** BillingAccount masterBillingAccount */
                     masterBillingAccount?: (string|null);
+
+                    /** BillingAccount parent */
+                    parent?: (string|null);
                 }
 
                 /** Represents a BillingAccount. */
@@ -296,6 +320,9 @@ export namespace google {
 
                     /** BillingAccount masterBillingAccount. */
                     public masterBillingAccount: string;
+
+                    /** BillingAccount parent. */
+                    public parent: string;
 
                     /**
                      * Creates a new BillingAccount instance using the specified properties.
@@ -598,6 +625,9 @@ export namespace google {
 
                     /** ListBillingAccountsRequest filter */
                     filter?: (string|null);
+
+                    /** ListBillingAccountsRequest parent */
+                    parent?: (string|null);
                 }
 
                 /** Represents a ListBillingAccountsRequest. */
@@ -617,6 +647,9 @@ export namespace google {
 
                     /** ListBillingAccountsRequest filter. */
                     public filter: string;
+
+                    /** ListBillingAccountsRequest parent. */
+                    public parent: string;
 
                     /**
                      * Creates a new ListBillingAccountsRequest instance using the specified properties.
@@ -804,6 +837,9 @@ export namespace google {
 
                     /** CreateBillingAccountRequest billingAccount */
                     billingAccount?: (google.cloud.billing.v1.IBillingAccount|null);
+
+                    /** CreateBillingAccountRequest parent */
+                    parent?: (string|null);
                 }
 
                 /** Represents a CreateBillingAccountRequest. */
@@ -817,6 +853,9 @@ export namespace google {
 
                     /** CreateBillingAccountRequest billingAccount. */
                     public billingAccount?: (google.cloud.billing.v1.IBillingAccount|null);
+
+                    /** CreateBillingAccountRequest parent. */
+                    public parent: string;
 
                     /**
                      * Creates a new CreateBillingAccountRequest instance using the specified properties.
@@ -1411,6 +1450,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for UpdateProjectBillingInfoRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MoveBillingAccountRequest. */
+                interface IMoveBillingAccountRequest {
+
+                    /** MoveBillingAccountRequest name */
+                    name?: (string|null);
+
+                    /** MoveBillingAccountRequest destinationParent */
+                    destinationParent?: (string|null);
+                }
+
+                /** Represents a MoveBillingAccountRequest. */
+                class MoveBillingAccountRequest implements IMoveBillingAccountRequest {
+
+                    /**
+                     * Constructs a new MoveBillingAccountRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.billing.v1.IMoveBillingAccountRequest);
+
+                    /** MoveBillingAccountRequest name. */
+                    public name: string;
+
+                    /** MoveBillingAccountRequest destinationParent. */
+                    public destinationParent: string;
+
+                    /**
+                     * Creates a new MoveBillingAccountRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MoveBillingAccountRequest instance
+                     */
+                    public static create(properties?: google.cloud.billing.v1.IMoveBillingAccountRequest): google.cloud.billing.v1.MoveBillingAccountRequest;
+
+                    /**
+                     * Encodes the specified MoveBillingAccountRequest message. Does not implicitly {@link google.cloud.billing.v1.MoveBillingAccountRequest.verify|verify} messages.
+                     * @param message MoveBillingAccountRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.billing.v1.IMoveBillingAccountRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MoveBillingAccountRequest message, length delimited. Does not implicitly {@link google.cloud.billing.v1.MoveBillingAccountRequest.verify|verify} messages.
+                     * @param message MoveBillingAccountRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.billing.v1.IMoveBillingAccountRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MoveBillingAccountRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MoveBillingAccountRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.billing.v1.MoveBillingAccountRequest;
+
+                    /**
+                     * Decodes a MoveBillingAccountRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MoveBillingAccountRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.billing.v1.MoveBillingAccountRequest;
+
+                    /**
+                     * Verifies a MoveBillingAccountRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MoveBillingAccountRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MoveBillingAccountRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.billing.v1.MoveBillingAccountRequest;
+
+                    /**
+                     * Creates a plain object from a MoveBillingAccountRequest message. Also converts values to other types if specified.
+                     * @param message MoveBillingAccountRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.billing.v1.MoveBillingAccountRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MoveBillingAccountRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MoveBillingAccountRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
