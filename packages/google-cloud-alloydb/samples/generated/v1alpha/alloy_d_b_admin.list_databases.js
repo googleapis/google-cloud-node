@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@
 'use strict';
 
 function main(parent) {
-  // [START alloydb_v1beta_generated_AlloyDBAdmin_ListBackups_async]
+  // [START alloydb_v1alpha_generated_AlloyDBAdmin_ListDatabases_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,48 +29,49 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Parent value for ListBackupsRequest
+   *  Required. Parent value for ListDatabasesRequest.
    */
   // const parent = 'abc123'
   /**
-   *  Requested page size. Server may return fewer items than requested.
-   *  If unspecified, server will pick an appropriate default.
+   *  Optional. The maximum number of databases to return. The service may return
+   *  fewer than this value. If unspecified, an appropriate number of databases
+   *  will be returned. The max value will be 2000, values above max will be
+   *  coerced to max.
    */
   // const pageSize = 1234
   /**
-   *  A token identifying a page of results the server should return.
+   *  Optional. A page token, received from a previous `ListDatabases` call.
+   *  This should be provided to retrieve the subsequent page.
+   *  This field is currently not supported, its value will be ignored if passed.
    */
   // const pageToken = 'abc123'
   /**
-   *  Filtering results
+   *  Optional. Filtering results.
+   *  This field is currently not supported, its value will be ignored if passed.
    */
   // const filter = 'abc123'
-  /**
-   *  Hint for how to order the results
-   */
-  // const orderBy = 'abc123'
 
   // Imports the Alloydb library
-  const {AlloyDBAdminClient} = require('@google-cloud/alloydb').v1beta;
+  const {AlloyDBAdminClient} = require('@google-cloud/alloydb').v1alpha;
 
   // Instantiates a client
   const alloydbClient = new AlloyDBAdminClient();
 
-  async function callListBackups() {
+  async function callListDatabases() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = await alloydbClient.listBackupsAsync(request);
+    const iterable = await alloydbClient.listDatabasesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
   }
 
-  callListBackups();
-  // [END alloydb_v1beta_generated_AlloyDBAdmin_ListBackups_async]
+  callListDatabases();
+  // [END alloydb_v1alpha_generated_AlloyDBAdmin_ListDatabases_async]
 }
 
 process.on('unhandledRejection', err => {
