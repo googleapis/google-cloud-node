@@ -372,6 +372,7 @@ export class AttachedClustersClient {
       'deleteAttachedCluster',
       'getAttachedServerConfig',
       'generateAttachedClusterInstallManifest',
+      'generateAttachedClusterAgentToken',
     ];
     for (const methodName of attachedClustersStubMethods) {
       const callPromise = this.attachedClustersStub.then(
@@ -708,6 +709,8 @@ export class AttachedClustersClient {
    *   You can list all supported versions on a given Google Cloud region by
    *   calling
    *   {@link protos.google.cloud.gkemulticloud.v1.AttachedClusters.GetAttachedServerConfig|GetAttachedServerConfig}.
+   * @param {google.cloud.gkemulticloud.v1.AttachedProxyConfig} [request.proxyConfig]
+   *   Optional. Proxy configuration for outbound HTTP(S) traffic.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -796,6 +799,122 @@ export class AttachedClustersClient {
       });
     this.initialize();
     return this.innerApiCalls.generateAttachedClusterInstallManifest(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Generates an access token for a cluster agent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.attachedCluster
+   *   Required.
+   * @param {string} request.subjectToken
+   *   Required.
+   * @param {string} request.subjectTokenType
+   *   Required.
+   * @param {string} request.version
+   *   Required.
+   * @param {string} [request.grantType]
+   *   Optional.
+   * @param {string} [request.audience]
+   *   Optional.
+   * @param {string} [request.scope]
+   *   Optional.
+   * @param {string} [request.requestedTokenType]
+   *   Optional.
+   * @param {string} [request.options]
+   *   Optional.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.GenerateAttachedClusterAgentTokenResponse|GenerateAttachedClusterAgentTokenResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/attached_clusters.generate_attached_cluster_agent_token.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AttachedClusters_GenerateAttachedClusterAgentToken_async
+   */
+  generateAttachedClusterAgentToken(
+    request?: protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenResponse,
+      (
+        | protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  generateAttachedClusterAgentToken(
+    request: protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenResponse,
+      | protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  generateAttachedClusterAgentToken(
+    request: protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest,
+    callback: Callback<
+      protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenResponse,
+      | protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  generateAttachedClusterAgentToken(
+    request?: protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenResponse,
+          | protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenResponse,
+      | protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenResponse,
+      (
+        | protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        attached_cluster: request.attachedCluster ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.generateAttachedClusterAgentToken(
       request,
       options,
       callback
@@ -984,12 +1103,16 @@ export class AttachedClustersClient {
    *   fields from
    *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster}:
    *
-   *    *   `description`.
    *    *   `annotations`.
-   *    *   `platform_version`.
+   *    *   `authorization.admin_groups`.
    *    *   `authorization.admin_users`.
+   *    *   `binary_authorization.evaluation_mode`.
+   *    *   `description`.
    *    *   `logging_config.component_config.enable_components`.
    *    *   `monitoring_config.managed_prometheus_config.enabled`.
+   *    *   `platform_version`.
+   *    *   `proxy_config.kubernetes_secret.name`.
+   *    *   `proxy_config.kubernetes_secret.namespace`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1156,6 +1279,8 @@ export class AttachedClustersClient {
    *   Required. The Kubernetes distribution of the underlying attached cluster.
    *
    *   Supported values: ["eks", "aks"].
+   * @param {google.cloud.gkemulticloud.v1.AttachedProxyConfig} [request.proxyConfig]
+   *   Optional. Proxy configuration for outbound HTTP(S) traffic.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

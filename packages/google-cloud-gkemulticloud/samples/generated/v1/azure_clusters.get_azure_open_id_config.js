@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(azureNodePool, updateMask) {
-  // [START gkemulticloud_v1_generated_AzureClusters_UpdateAzureNodePool_async]
+function main(azureCluster) {
+  // [START gkemulticloud_v1_generated_AzureClusters_GetAzureOpenIdConfig_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,27 +29,11 @@ function main(azureNodePool, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The AzureNodePool google.cloud.gkemulticloud.v1.AzureNodePool 
-   *  resource to update.
+   *  Required. The AzureCluster, which owns the OIDC discovery document.
+   *  Format:
+   *  projects/<project-id>/locations/<region>/azureClusters/<cluster-id>
    */
-  // const azureNodePool = {}
-  /**
-   *  If set, only validate the request, but don't actually update the node pool.
-   */
-  // const validateOnly = true
-  /**
-   *  Required. Mask of fields to update. At least one path must be supplied in
-   *  this field. The elements of the repeated paths field can only include these
-   *  fields from AzureNodePool google.cloud.gkemulticloud.v1.AzureNodePool:
-   *   *.  `annotations`.
-   *   *   `version`.
-   *   *   `autoscaling.min_node_count`.
-   *   *   `autoscaling.max_node_count`.
-   *   *   `config.ssh_config.authorized_key`.
-   *   *   `management.auto_repair`.
-   *   *   `management`.
-   */
-  // const updateMask = {}
+  // const azureCluster = 'abc123'
 
   // Imports the Gkemulticloud library
   const {AzureClustersClient} = require('@google-cloud/gkemulticloud').v1;
@@ -57,21 +41,19 @@ function main(azureNodePool, updateMask) {
   // Instantiates a client
   const gkemulticloudClient = new AzureClustersClient();
 
-  async function callUpdateAzureNodePool() {
+  async function callGetAzureOpenIdConfig() {
     // Construct request
     const request = {
-      azureNodePool,
-      updateMask,
+      azureCluster,
     };
 
     // Run request
-    const [operation] = await gkemulticloudClient.updateAzureNodePool(request);
-    const [response] = await operation.promise();
+    const response = await gkemulticloudClient.getAzureOpenIdConfig(request);
     console.log(response);
   }
 
-  callUpdateAzureNodePool();
-  // [END gkemulticloud_v1_generated_AzureClusters_UpdateAzureNodePool_async]
+  callGetAzureOpenIdConfig();
+  // [END gkemulticloud_v1_generated_AzureClusters_GetAzureOpenIdConfig_async]
 }
 
 process.on('unhandledRejection', err => {

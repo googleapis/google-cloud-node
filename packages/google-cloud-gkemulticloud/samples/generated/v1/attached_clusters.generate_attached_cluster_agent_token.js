@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(attachedCluster, updateMask) {
-  // [START gkemulticloud_v1_generated_AttachedClusters_UpdateAttachedCluster_async]
+function main(attachedCluster, subjectToken, subjectTokenType, version) {
+  // [START gkemulticloud_v1_generated_AttachedClusters_GenerateAttachedClusterAgentToken_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,32 +29,41 @@ function main(attachedCluster, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The
-   *  AttachedCluster google.cloud.gkemulticloud.v1.AttachedCluster  resource
-   *  to update.
+   *  Required.
    */
-  // const attachedCluster = {}
+  // const attachedCluster = 'abc123'
   /**
-   *  If set, only validate the request, but do not actually update the cluster.
+   *  Required.
    */
-  // const validateOnly = true
+  // const subjectToken = 'abc123'
   /**
-   *  Required. Mask of fields to update. At least one path must be supplied in
-   *  this field. The elements of the repeated paths field can only include these
-   *  fields from
-   *  AttachedCluster google.cloud.gkemulticloud.v1.AttachedCluster:
-   *   *   `annotations`.
-   *   *   `authorization.admin_groups`.
-   *   *   `authorization.admin_users`.
-   *   *   `binary_authorization.evaluation_mode`.
-   *   *   `description`.
-   *   *   `logging_config.component_config.enable_components`.
-   *   *   `monitoring_config.managed_prometheus_config.enabled`.
-   *   *   `platform_version`.
-   *   *   `proxy_config.kubernetes_secret.name`.
-   *   *   `proxy_config.kubernetes_secret.namespace`.
+   *  Required.
    */
-  // const updateMask = {}
+  // const subjectTokenType = 'abc123'
+  /**
+   *  Required.
+   */
+  // const version = 'abc123'
+  /**
+   *  Optional.
+   */
+  // const grantType = 'abc123'
+  /**
+   *  Optional.
+   */
+  // const audience = 'abc123'
+  /**
+   *  Optional.
+   */
+  // const scope = 'abc123'
+  /**
+   *  Optional.
+   */
+  // const requestedTokenType = 'abc123'
+  /**
+   *  Optional.
+   */
+  // const options = 'abc123'
 
   // Imports the Gkemulticloud library
   const {AttachedClustersClient} = require('@google-cloud/gkemulticloud').v1;
@@ -62,21 +71,22 @@ function main(attachedCluster, updateMask) {
   // Instantiates a client
   const gkemulticloudClient = new AttachedClustersClient();
 
-  async function callUpdateAttachedCluster() {
+  async function callGenerateAttachedClusterAgentToken() {
     // Construct request
     const request = {
       attachedCluster,
-      updateMask,
+      subjectToken,
+      subjectTokenType,
+      version,
     };
 
     // Run request
-    const [operation] = await gkemulticloudClient.updateAttachedCluster(request);
-    const [response] = await operation.promise();
+    const response = await gkemulticloudClient.generateAttachedClusterAgentToken(request);
     console.log(response);
   }
 
-  callUpdateAttachedCluster();
-  // [END gkemulticloud_v1_generated_AttachedClusters_UpdateAttachedCluster_async]
+  callGenerateAttachedClusterAgentToken();
+  // [END gkemulticloud_v1_generated_AttachedClusters_GenerateAttachedClusterAgentToken_async]
 }
 
 process.on('unhandledRejection', err => {

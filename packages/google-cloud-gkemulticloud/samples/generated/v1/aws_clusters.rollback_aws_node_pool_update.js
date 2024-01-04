@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, azureNodePool, azureNodePoolId) {
-  // [START gkemulticloud_v1_generated_AzureClusters_CreateAzureNodePool_async]
+function main(name) {
+  // [START gkemulticloud_v1_generated_AwsClusters_RollbackAwsNodePoolUpdate_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,57 +29,41 @@ function main(parent, azureNodePool, azureNodePoolId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The AzureCluster google.cloud.gkemulticloud.v1.AzureCluster 
-   *  resource where this node pool will be created.
-   *  `AzureCluster` names are formatted as
-   *  `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
+   *  Required. The name of the
+   *  AwsNodePool google.cloud.gkemulticloud.v1.AwsNodePool  resource to
+   *  rollback.
+   *  `AwsNodePool` names are formatted as
+   *  `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>/awsNodePools/<node-pool-id>`.
    *  See Resource Names (https://cloud.google.com/apis/design/resource_names)
    *  for more details on Google Cloud resource names.
    */
-  // const parent = 'abc123'
+  // const name = 'abc123'
   /**
-   *  Required. The specification of the
-   *  AzureNodePool google.cloud.gkemulticloud.v1.AzureNodePool  to create.
+   *  Optional. Option for rollback to ignore the PodDisruptionBudget when
+   *  draining the node pool nodes. Default value is false.
    */
-  // const azureNodePool = {}
-  /**
-   *  Required. A client provided ID the resource. Must be unique within the
-   *  parent resource.
-   *  The provided ID will be part of the
-   *  AzureNodePool google.cloud.gkemulticloud.v1.AzureNodePool  resource name
-   *  formatted as
-   *  `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>/azureNodePools/<node-pool-id>`.
-   *  Valid characters are `/[a-z][0-9]-/`. Cannot be longer than 63 characters.
-   */
-  // const azureNodePoolId = 'abc123'
-  /**
-   *  If set, only validate the request, but do not actually create the node
-   *  pool.
-   */
-  // const validateOnly = true
+  // const respectPdb = true
 
   // Imports the Gkemulticloud library
-  const {AzureClustersClient} = require('@google-cloud/gkemulticloud').v1;
+  const {AwsClustersClient} = require('@google-cloud/gkemulticloud').v1;
 
   // Instantiates a client
-  const gkemulticloudClient = new AzureClustersClient();
+  const gkemulticloudClient = new AwsClustersClient();
 
-  async function callCreateAzureNodePool() {
+  async function callRollbackAwsNodePoolUpdate() {
     // Construct request
     const request = {
-      parent,
-      azureNodePool,
-      azureNodePoolId,
+      name,
     };
 
     // Run request
-    const [operation] = await gkemulticloudClient.createAzureNodePool(request);
+    const [operation] = await gkemulticloudClient.rollbackAwsNodePoolUpdate(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callCreateAzureNodePool();
-  // [END gkemulticloud_v1_generated_AzureClusters_CreateAzureNodePool_async]
+  callRollbackAwsNodePoolUpdate();
+  // [END gkemulticloud_v1_generated_AwsClusters_RollbackAwsNodePoolUpdate_async]
 }
 
 process.on('unhandledRejection', err => {
