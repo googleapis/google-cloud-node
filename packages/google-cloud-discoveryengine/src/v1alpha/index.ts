@@ -24,5 +24,6 @@ export {EngineServiceClient} from './engine_service_client';
 export {RecommendationServiceClient} from './recommendation_service_client';
 export {SchemaServiceClient} from './schema_service_client';
 export {SearchServiceClient} from './search_service_client';
+export {SearchTuningServiceClient} from './search_tuning_service_client';
 export {SiteSearchEngineServiceClient} from './site_search_engine_service_client';
 export {UserEventServiceClient} from './user_event_service_client';
