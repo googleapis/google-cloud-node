@@ -180,6 +180,15 @@ export class TranslationServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      adaptiveMtDatasetPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/adaptiveMtDatasets/{dataset}'
+      ),
+      adaptiveMtFilePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/adaptiveMtDatasets/{dataset}/adaptiveMtFiles/{file}'
+      ),
+      adaptiveMtSentencePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/adaptiveMtDatasets/{dataset}/adaptiveMtFiles/{file}/adaptiveMtSentences/{sentence}'
+      ),
       glossaryPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/glossaries/{glossary}'
       ),
@@ -196,6 +205,21 @@ export class TranslationServiceClient {
         'pageToken',
         'nextPageToken',
         'glossaries'
+      ),
+      listAdaptiveMtDatasets: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'adaptiveMtDatasets'
+      ),
+      listAdaptiveMtFiles: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'adaptiveMtFiles'
+      ),
+      listAdaptiveMtSentences: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'adaptiveMtSentences'
       ),
     };
 
@@ -357,6 +381,16 @@ export class TranslationServiceClient {
       'listGlossaries',
       'getGlossary',
       'deleteGlossary',
+      'createAdaptiveMtDataset',
+      'deleteAdaptiveMtDataset',
+      'getAdaptiveMtDataset',
+      'listAdaptiveMtDatasets',
+      'adaptiveMtTranslate',
+      'getAdaptiveMtFile',
+      'deleteAdaptiveMtFile',
+      'importAdaptiveMtFile',
+      'listAdaptiveMtFiles',
+      'listAdaptiveMtSentences',
     ];
     for (const methodName of translationServiceStubMethods) {
       const callPromise = this.translationServiceStub.then(
@@ -1095,6 +1129,702 @@ export class TranslationServiceClient {
     this.initialize();
     return this.innerApiCalls.getGlossary(request, options, callback);
   }
+  /**
+   * Creates an Adaptive MT dataset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the parent project. In form of
+   *   `projects/{project-number-or-id}/locations/{location-id}`
+   * @param {google.cloud.translation.v3.AdaptiveMtDataset} request.adaptiveMtDataset
+   *   Required. The AdaptiveMtDataset to be created.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.translation.v3.AdaptiveMtDataset|AdaptiveMtDataset}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.create_adaptive_mt_dataset.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_CreateAdaptiveMtDataset_async
+   */
+  createAdaptiveMtDataset(
+    request?: protos.google.cloud.translation.v3.ICreateAdaptiveMtDatasetRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IAdaptiveMtDataset,
+      (
+        | protos.google.cloud.translation.v3.ICreateAdaptiveMtDatasetRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createAdaptiveMtDataset(
+    request: protos.google.cloud.translation.v3.ICreateAdaptiveMtDatasetRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.translation.v3.IAdaptiveMtDataset,
+      | protos.google.cloud.translation.v3.ICreateAdaptiveMtDatasetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createAdaptiveMtDataset(
+    request: protos.google.cloud.translation.v3.ICreateAdaptiveMtDatasetRequest,
+    callback: Callback<
+      protos.google.cloud.translation.v3.IAdaptiveMtDataset,
+      | protos.google.cloud.translation.v3.ICreateAdaptiveMtDatasetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createAdaptiveMtDataset(
+    request?: protos.google.cloud.translation.v3.ICreateAdaptiveMtDatasetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.translation.v3.IAdaptiveMtDataset,
+          | protos.google.cloud.translation.v3.ICreateAdaptiveMtDatasetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.translation.v3.IAdaptiveMtDataset,
+      | protos.google.cloud.translation.v3.ICreateAdaptiveMtDatasetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IAdaptiveMtDataset,
+      (
+        | protos.google.cloud.translation.v3.ICreateAdaptiveMtDatasetRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createAdaptiveMtDataset(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Deletes an Adaptive MT dataset, including all its entries and associated
+   * metadata.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the dataset. In the form of
+   *   `projects/{project-number-or-id}/locations/{location-id}/adaptiveMtDatasets/{adaptive-mt-dataset-id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.delete_adaptive_mt_dataset.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_DeleteAdaptiveMtDataset_async
+   */
+  deleteAdaptiveMtDataset(
+    request?: protos.google.cloud.translation.v3.IDeleteAdaptiveMtDatasetRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.translation.v3.IDeleteAdaptiveMtDatasetRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  deleteAdaptiveMtDataset(
+    request: protos.google.cloud.translation.v3.IDeleteAdaptiveMtDatasetRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.translation.v3.IDeleteAdaptiveMtDatasetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteAdaptiveMtDataset(
+    request: protos.google.cloud.translation.v3.IDeleteAdaptiveMtDatasetRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.translation.v3.IDeleteAdaptiveMtDatasetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteAdaptiveMtDataset(
+    request?: protos.google.cloud.translation.v3.IDeleteAdaptiveMtDatasetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.translation.v3.IDeleteAdaptiveMtDatasetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.translation.v3.IDeleteAdaptiveMtDatasetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.translation.v3.IDeleteAdaptiveMtDatasetRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteAdaptiveMtDataset(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Gets the Adaptive MT dataset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the dataset. In the form of
+   *   `projects/{project-number-or-id}/locations/{location-id}/adaptiveMtDatasets/{adaptive-mt-dataset-id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.translation.v3.AdaptiveMtDataset|AdaptiveMtDataset}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.get_adaptive_mt_dataset.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_GetAdaptiveMtDataset_async
+   */
+  getAdaptiveMtDataset(
+    request?: protos.google.cloud.translation.v3.IGetAdaptiveMtDatasetRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IAdaptiveMtDataset,
+      (
+        | protos.google.cloud.translation.v3.IGetAdaptiveMtDatasetRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getAdaptiveMtDataset(
+    request: protos.google.cloud.translation.v3.IGetAdaptiveMtDatasetRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.translation.v3.IAdaptiveMtDataset,
+      | protos.google.cloud.translation.v3.IGetAdaptiveMtDatasetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getAdaptiveMtDataset(
+    request: protos.google.cloud.translation.v3.IGetAdaptiveMtDatasetRequest,
+    callback: Callback<
+      protos.google.cloud.translation.v3.IAdaptiveMtDataset,
+      | protos.google.cloud.translation.v3.IGetAdaptiveMtDatasetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getAdaptiveMtDataset(
+    request?: protos.google.cloud.translation.v3.IGetAdaptiveMtDatasetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.translation.v3.IAdaptiveMtDataset,
+          | protos.google.cloud.translation.v3.IGetAdaptiveMtDatasetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.translation.v3.IAdaptiveMtDataset,
+      | protos.google.cloud.translation.v3.IGetAdaptiveMtDatasetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IAdaptiveMtDataset,
+      (
+        | protos.google.cloud.translation.v3.IGetAdaptiveMtDatasetRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getAdaptiveMtDataset(request, options, callback);
+  }
+  /**
+   * Translate text using Adaptive MT.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Location to make a regional call.
+   *
+   *   Format: `projects/{project-number-or-id}/locations/{location-id}`.
+   * @param {string} request.dataset
+   *   Required. The resource name for the dataset to use for adaptive MT.
+   *   `projects/{project}/locations/{location-id}/adaptiveMtDatasets/{dataset}`
+   * @param {string[]} request.content
+   *   Required. The content of the input in string format.
+   *   For now only one sentence per request is supported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.translation.v3.AdaptiveMtTranslateResponse|AdaptiveMtTranslateResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.adaptive_mt_translate.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_AdaptiveMtTranslate_async
+   */
+  adaptiveMtTranslate(
+    request?: protos.google.cloud.translation.v3.IAdaptiveMtTranslateRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IAdaptiveMtTranslateResponse,
+      (
+        | protos.google.cloud.translation.v3.IAdaptiveMtTranslateRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  adaptiveMtTranslate(
+    request: protos.google.cloud.translation.v3.IAdaptiveMtTranslateRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.translation.v3.IAdaptiveMtTranslateResponse,
+      | protos.google.cloud.translation.v3.IAdaptiveMtTranslateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  adaptiveMtTranslate(
+    request: protos.google.cloud.translation.v3.IAdaptiveMtTranslateRequest,
+    callback: Callback<
+      protos.google.cloud.translation.v3.IAdaptiveMtTranslateResponse,
+      | protos.google.cloud.translation.v3.IAdaptiveMtTranslateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  adaptiveMtTranslate(
+    request?: protos.google.cloud.translation.v3.IAdaptiveMtTranslateRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.translation.v3.IAdaptiveMtTranslateResponse,
+          | protos.google.cloud.translation.v3.IAdaptiveMtTranslateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.translation.v3.IAdaptiveMtTranslateResponse,
+      | protos.google.cloud.translation.v3.IAdaptiveMtTranslateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IAdaptiveMtTranslateResponse,
+      (
+        | protos.google.cloud.translation.v3.IAdaptiveMtTranslateRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.adaptiveMtTranslate(request, options, callback);
+  }
+  /**
+   * Gets and AdaptiveMtFile
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the file, in form of
+   *   `projects/{project-number-or-id}/locations/{location_id}/adaptiveMtDatasets/{dataset}/adaptiveMtFiles/{file}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.translation.v3.AdaptiveMtFile|AdaptiveMtFile}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.get_adaptive_mt_file.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_GetAdaptiveMtFile_async
+   */
+  getAdaptiveMtFile(
+    request?: protos.google.cloud.translation.v3.IGetAdaptiveMtFileRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IAdaptiveMtFile,
+      protos.google.cloud.translation.v3.IGetAdaptiveMtFileRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getAdaptiveMtFile(
+    request: protos.google.cloud.translation.v3.IGetAdaptiveMtFileRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.translation.v3.IAdaptiveMtFile,
+      | protos.google.cloud.translation.v3.IGetAdaptiveMtFileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getAdaptiveMtFile(
+    request: protos.google.cloud.translation.v3.IGetAdaptiveMtFileRequest,
+    callback: Callback<
+      protos.google.cloud.translation.v3.IAdaptiveMtFile,
+      | protos.google.cloud.translation.v3.IGetAdaptiveMtFileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getAdaptiveMtFile(
+    request?: protos.google.cloud.translation.v3.IGetAdaptiveMtFileRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.translation.v3.IAdaptiveMtFile,
+          | protos.google.cloud.translation.v3.IGetAdaptiveMtFileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.translation.v3.IAdaptiveMtFile,
+      | protos.google.cloud.translation.v3.IGetAdaptiveMtFileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IAdaptiveMtFile,
+      protos.google.cloud.translation.v3.IGetAdaptiveMtFileRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getAdaptiveMtFile(request, options, callback);
+  }
+  /**
+   * Deletes an AdaptiveMtFile along with its sentences.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the file to delete, in form of
+   *   `projects/{project-number-or-id}/locations/{location_id}/adaptiveMtDatasets/{dataset}/adaptiveMtFiles/{file}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.delete_adaptive_mt_file.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_DeleteAdaptiveMtFile_async
+   */
+  deleteAdaptiveMtFile(
+    request?: protos.google.cloud.translation.v3.IDeleteAdaptiveMtFileRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.translation.v3.IDeleteAdaptiveMtFileRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  deleteAdaptiveMtFile(
+    request: protos.google.cloud.translation.v3.IDeleteAdaptiveMtFileRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.translation.v3.IDeleteAdaptiveMtFileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteAdaptiveMtFile(
+    request: protos.google.cloud.translation.v3.IDeleteAdaptiveMtFileRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.translation.v3.IDeleteAdaptiveMtFileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteAdaptiveMtFile(
+    request?: protos.google.cloud.translation.v3.IDeleteAdaptiveMtFileRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.translation.v3.IDeleteAdaptiveMtFileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.translation.v3.IDeleteAdaptiveMtFileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.translation.v3.IDeleteAdaptiveMtFileRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteAdaptiveMtFile(request, options, callback);
+  }
+  /**
+   * Imports an AdaptiveMtFile and adds all of its sentences into the
+   * AdaptiveMtDataset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the file, in form of
+   *   `projects/{project-number-or-id}/locations/{location_id}/adaptiveMtDatasets/{dataset}`
+   * @param {google.cloud.translation.v3.FileInputSource} request.fileInputSource
+   *   Inline file source.
+   * @param {google.cloud.translation.v3.GcsInputSource} request.gcsInputSource
+   *   Google Cloud Storage file source.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.translation.v3.ImportAdaptiveMtFileResponse|ImportAdaptiveMtFileResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.import_adaptive_mt_file.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_ImportAdaptiveMtFile_async
+   */
+  importAdaptiveMtFile(
+    request?: protos.google.cloud.translation.v3.IImportAdaptiveMtFileRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IImportAdaptiveMtFileResponse,
+      (
+        | protos.google.cloud.translation.v3.IImportAdaptiveMtFileRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  importAdaptiveMtFile(
+    request: protos.google.cloud.translation.v3.IImportAdaptiveMtFileRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.translation.v3.IImportAdaptiveMtFileResponse,
+      | protos.google.cloud.translation.v3.IImportAdaptiveMtFileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importAdaptiveMtFile(
+    request: protos.google.cloud.translation.v3.IImportAdaptiveMtFileRequest,
+    callback: Callback<
+      protos.google.cloud.translation.v3.IImportAdaptiveMtFileResponse,
+      | protos.google.cloud.translation.v3.IImportAdaptiveMtFileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importAdaptiveMtFile(
+    request?: protos.google.cloud.translation.v3.IImportAdaptiveMtFileRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.translation.v3.IImportAdaptiveMtFileResponse,
+          | protos.google.cloud.translation.v3.IImportAdaptiveMtFileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.translation.v3.IImportAdaptiveMtFileResponse,
+      | protos.google.cloud.translation.v3.IImportAdaptiveMtFileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IImportAdaptiveMtFileResponse,
+      (
+        | protos.google.cloud.translation.v3.IImportAdaptiveMtFileRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.importAdaptiveMtFile(request, options, callback);
+  }
 
   /**
    * Translates a large volume of text in asynchronous batch mode.
@@ -1344,9 +2074,9 @@ export class TranslationServiceClient {
    * @param {number[]} [request.glossaries]
    *   Optional. Glossaries to be applied. It's keyed by target language code.
    * @param {number[]} [request.formatConversions]
-   *   Optional. File format conversion map to be applied to all input files.
-   *   Map's key is the original mime_type. Map's value is the target mime_type of
-   *   translated documents.
+   *   Optional. The file format conversion map that is applied to all input
+   *   files. The map key is the original mime_type. The map value is the target
+   *   mime_type of translated documents.
    *
    *   Supported file format conversion includes:
    *   - `application/pdf` to
@@ -2026,9 +2756,862 @@ export class TranslationServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.translation.v3.IGlossary>;
   }
+  /**
+   * Lists all Adaptive MT datasets for which the caller has read permission.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the project from which to list the Adaptive
+   *   MT datasets. `projects/{project-number-or-id}/locations/{location-id}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. The server may return fewer results than
+   *   requested. If unspecified, the server picks an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   *   Typically, this is the value of
+   *   ListAdaptiveMtDatasetsResponse.next_page_token returned from the
+   *   previous call to `ListAdaptiveMtDatasets` method. The first page is
+   *   returned if `page_token`is empty or missing.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request.
+   *   Filter is not supported yet.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.translation.v3.AdaptiveMtDataset|AdaptiveMtDataset}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAdaptiveMtDatasetsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAdaptiveMtDatasets(
+    request?: protos.google.cloud.translation.v3.IListAdaptiveMtDatasetsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IAdaptiveMtDataset[],
+      protos.google.cloud.translation.v3.IListAdaptiveMtDatasetsRequest | null,
+      protos.google.cloud.translation.v3.IListAdaptiveMtDatasetsResponse,
+    ]
+  >;
+  listAdaptiveMtDatasets(
+    request: protos.google.cloud.translation.v3.IListAdaptiveMtDatasetsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.translation.v3.IListAdaptiveMtDatasetsRequest,
+      | protos.google.cloud.translation.v3.IListAdaptiveMtDatasetsResponse
+      | null
+      | undefined,
+      protos.google.cloud.translation.v3.IAdaptiveMtDataset
+    >
+  ): void;
+  listAdaptiveMtDatasets(
+    request: protos.google.cloud.translation.v3.IListAdaptiveMtDatasetsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.translation.v3.IListAdaptiveMtDatasetsRequest,
+      | protos.google.cloud.translation.v3.IListAdaptiveMtDatasetsResponse
+      | null
+      | undefined,
+      protos.google.cloud.translation.v3.IAdaptiveMtDataset
+    >
+  ): void;
+  listAdaptiveMtDatasets(
+    request?: protos.google.cloud.translation.v3.IListAdaptiveMtDatasetsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.translation.v3.IListAdaptiveMtDatasetsRequest,
+          | protos.google.cloud.translation.v3.IListAdaptiveMtDatasetsResponse
+          | null
+          | undefined,
+          protos.google.cloud.translation.v3.IAdaptiveMtDataset
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.translation.v3.IListAdaptiveMtDatasetsRequest,
+      | protos.google.cloud.translation.v3.IListAdaptiveMtDatasetsResponse
+      | null
+      | undefined,
+      protos.google.cloud.translation.v3.IAdaptiveMtDataset
+    >
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IAdaptiveMtDataset[],
+      protos.google.cloud.translation.v3.IListAdaptiveMtDatasetsRequest | null,
+      protos.google.cloud.translation.v3.IListAdaptiveMtDatasetsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listAdaptiveMtDatasets(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the project from which to list the Adaptive
+   *   MT datasets. `projects/{project-number-or-id}/locations/{location-id}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. The server may return fewer results than
+   *   requested. If unspecified, the server picks an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   *   Typically, this is the value of
+   *   ListAdaptiveMtDatasetsResponse.next_page_token returned from the
+   *   previous call to `ListAdaptiveMtDatasets` method. The first page is
+   *   returned if `page_token`is empty or missing.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request.
+   *   Filter is not supported yet.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.translation.v3.AdaptiveMtDataset|AdaptiveMtDataset} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAdaptiveMtDatasetsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAdaptiveMtDatasetsStream(
+    request?: protos.google.cloud.translation.v3.IListAdaptiveMtDatasetsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAdaptiveMtDatasets'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listAdaptiveMtDatasets.createStream(
+      this.innerApiCalls.listAdaptiveMtDatasets as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listAdaptiveMtDatasets`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the project from which to list the Adaptive
+   *   MT datasets. `projects/{project-number-or-id}/locations/{location-id}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. The server may return fewer results than
+   *   requested. If unspecified, the server picks an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   *   Typically, this is the value of
+   *   ListAdaptiveMtDatasetsResponse.next_page_token returned from the
+   *   previous call to `ListAdaptiveMtDatasets` method. The first page is
+   *   returned if `page_token`is empty or missing.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request.
+   *   Filter is not supported yet.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.translation.v3.AdaptiveMtDataset|AdaptiveMtDataset}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.list_adaptive_mt_datasets.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_ListAdaptiveMtDatasets_async
+   */
+  listAdaptiveMtDatasetsAsync(
+    request?: protos.google.cloud.translation.v3.IListAdaptiveMtDatasetsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.translation.v3.IAdaptiveMtDataset> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAdaptiveMtDatasets'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listAdaptiveMtDatasets.asyncIterate(
+      this.innerApiCalls['listAdaptiveMtDatasets'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.translation.v3.IAdaptiveMtDataset>;
+  }
+  /**
+   * Lists all AdaptiveMtFiles associated to an AdaptiveMtDataset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the project from which to list the Adaptive
+   *   MT files.
+   *   `projects/{project}/locations/{location}/adaptiveMtDatasets/{dataset}`
+   * @param {number} [request.pageSize]
+   *   Optional.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   *   Typically, this is the value of
+   *   ListAdaptiveMtFilesResponse.next_page_token returned from the
+   *   previous call to `ListAdaptiveMtFiles` method. The first page is
+   *   returned if `page_token`is empty or missing.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.translation.v3.AdaptiveMtFile|AdaptiveMtFile}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAdaptiveMtFilesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAdaptiveMtFiles(
+    request?: protos.google.cloud.translation.v3.IListAdaptiveMtFilesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IAdaptiveMtFile[],
+      protos.google.cloud.translation.v3.IListAdaptiveMtFilesRequest | null,
+      protos.google.cloud.translation.v3.IListAdaptiveMtFilesResponse,
+    ]
+  >;
+  listAdaptiveMtFiles(
+    request: protos.google.cloud.translation.v3.IListAdaptiveMtFilesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.translation.v3.IListAdaptiveMtFilesRequest,
+      | protos.google.cloud.translation.v3.IListAdaptiveMtFilesResponse
+      | null
+      | undefined,
+      protos.google.cloud.translation.v3.IAdaptiveMtFile
+    >
+  ): void;
+  listAdaptiveMtFiles(
+    request: protos.google.cloud.translation.v3.IListAdaptiveMtFilesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.translation.v3.IListAdaptiveMtFilesRequest,
+      | protos.google.cloud.translation.v3.IListAdaptiveMtFilesResponse
+      | null
+      | undefined,
+      protos.google.cloud.translation.v3.IAdaptiveMtFile
+    >
+  ): void;
+  listAdaptiveMtFiles(
+    request?: protos.google.cloud.translation.v3.IListAdaptiveMtFilesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.translation.v3.IListAdaptiveMtFilesRequest,
+          | protos.google.cloud.translation.v3.IListAdaptiveMtFilesResponse
+          | null
+          | undefined,
+          protos.google.cloud.translation.v3.IAdaptiveMtFile
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.translation.v3.IListAdaptiveMtFilesRequest,
+      | protos.google.cloud.translation.v3.IListAdaptiveMtFilesResponse
+      | null
+      | undefined,
+      protos.google.cloud.translation.v3.IAdaptiveMtFile
+    >
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IAdaptiveMtFile[],
+      protos.google.cloud.translation.v3.IListAdaptiveMtFilesRequest | null,
+      protos.google.cloud.translation.v3.IListAdaptiveMtFilesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listAdaptiveMtFiles(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the project from which to list the Adaptive
+   *   MT files.
+   *   `projects/{project}/locations/{location}/adaptiveMtDatasets/{dataset}`
+   * @param {number} [request.pageSize]
+   *   Optional.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   *   Typically, this is the value of
+   *   ListAdaptiveMtFilesResponse.next_page_token returned from the
+   *   previous call to `ListAdaptiveMtFiles` method. The first page is
+   *   returned if `page_token`is empty or missing.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.translation.v3.AdaptiveMtFile|AdaptiveMtFile} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAdaptiveMtFilesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAdaptiveMtFilesStream(
+    request?: protos.google.cloud.translation.v3.IListAdaptiveMtFilesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAdaptiveMtFiles'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listAdaptiveMtFiles.createStream(
+      this.innerApiCalls.listAdaptiveMtFiles as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listAdaptiveMtFiles`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the project from which to list the Adaptive
+   *   MT files.
+   *   `projects/{project}/locations/{location}/adaptiveMtDatasets/{dataset}`
+   * @param {number} [request.pageSize]
+   *   Optional.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   *   Typically, this is the value of
+   *   ListAdaptiveMtFilesResponse.next_page_token returned from the
+   *   previous call to `ListAdaptiveMtFiles` method. The first page is
+   *   returned if `page_token`is empty or missing.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.translation.v3.AdaptiveMtFile|AdaptiveMtFile}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.list_adaptive_mt_files.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_ListAdaptiveMtFiles_async
+   */
+  listAdaptiveMtFilesAsync(
+    request?: protos.google.cloud.translation.v3.IListAdaptiveMtFilesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.translation.v3.IAdaptiveMtFile> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAdaptiveMtFiles'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listAdaptiveMtFiles.asyncIterate(
+      this.innerApiCalls['listAdaptiveMtFiles'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.translation.v3.IAdaptiveMtFile>;
+  }
+  /**
+   * Lists all AdaptiveMtSentences under a given file/dataset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the project from which to list the Adaptive
+   *   MT files. The following format lists all sentences under a file.
+   *   `projects/{project}/locations/{location}/adaptiveMtDatasets/{dataset}/adaptiveMtFiles/{file}`
+   *   The following format lists all sentences within a dataset.
+   *   `projects/{project}/locations/{location}/adaptiveMtDatasets/{dataset}`
+   * @param {number} request.pageSize
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   *   Typically, this is the value of
+   *   ListAdaptiveMtSentencesRequest.next_page_token returned from the
+   *   previous call to `ListTranslationMemories` method. The first page is
+   *   returned if `page_token` is empty or missing.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.translation.v3.AdaptiveMtSentence|AdaptiveMtSentence}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAdaptiveMtSentencesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAdaptiveMtSentences(
+    request?: protos.google.cloud.translation.v3.IListAdaptiveMtSentencesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IAdaptiveMtSentence[],
+      protos.google.cloud.translation.v3.IListAdaptiveMtSentencesRequest | null,
+      protos.google.cloud.translation.v3.IListAdaptiveMtSentencesResponse,
+    ]
+  >;
+  listAdaptiveMtSentences(
+    request: protos.google.cloud.translation.v3.IListAdaptiveMtSentencesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.translation.v3.IListAdaptiveMtSentencesRequest,
+      | protos.google.cloud.translation.v3.IListAdaptiveMtSentencesResponse
+      | null
+      | undefined,
+      protos.google.cloud.translation.v3.IAdaptiveMtSentence
+    >
+  ): void;
+  listAdaptiveMtSentences(
+    request: protos.google.cloud.translation.v3.IListAdaptiveMtSentencesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.translation.v3.IListAdaptiveMtSentencesRequest,
+      | protos.google.cloud.translation.v3.IListAdaptiveMtSentencesResponse
+      | null
+      | undefined,
+      protos.google.cloud.translation.v3.IAdaptiveMtSentence
+    >
+  ): void;
+  listAdaptiveMtSentences(
+    request?: protos.google.cloud.translation.v3.IListAdaptiveMtSentencesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.translation.v3.IListAdaptiveMtSentencesRequest,
+          | protos.google.cloud.translation.v3.IListAdaptiveMtSentencesResponse
+          | null
+          | undefined,
+          protos.google.cloud.translation.v3.IAdaptiveMtSentence
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.translation.v3.IListAdaptiveMtSentencesRequest,
+      | protos.google.cloud.translation.v3.IListAdaptiveMtSentencesResponse
+      | null
+      | undefined,
+      protos.google.cloud.translation.v3.IAdaptiveMtSentence
+    >
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IAdaptiveMtSentence[],
+      protos.google.cloud.translation.v3.IListAdaptiveMtSentencesRequest | null,
+      protos.google.cloud.translation.v3.IListAdaptiveMtSentencesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listAdaptiveMtSentences(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the project from which to list the Adaptive
+   *   MT files. The following format lists all sentences under a file.
+   *   `projects/{project}/locations/{location}/adaptiveMtDatasets/{dataset}/adaptiveMtFiles/{file}`
+   *   The following format lists all sentences within a dataset.
+   *   `projects/{project}/locations/{location}/adaptiveMtDatasets/{dataset}`
+   * @param {number} request.pageSize
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   *   Typically, this is the value of
+   *   ListAdaptiveMtSentencesRequest.next_page_token returned from the
+   *   previous call to `ListTranslationMemories` method. The first page is
+   *   returned if `page_token` is empty or missing.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.translation.v3.AdaptiveMtSentence|AdaptiveMtSentence} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAdaptiveMtSentencesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAdaptiveMtSentencesStream(
+    request?: protos.google.cloud.translation.v3.IListAdaptiveMtSentencesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAdaptiveMtSentences'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listAdaptiveMtSentences.createStream(
+      this.innerApiCalls.listAdaptiveMtSentences as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listAdaptiveMtSentences`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the project from which to list the Adaptive
+   *   MT files. The following format lists all sentences under a file.
+   *   `projects/{project}/locations/{location}/adaptiveMtDatasets/{dataset}/adaptiveMtFiles/{file}`
+   *   The following format lists all sentences within a dataset.
+   *   `projects/{project}/locations/{location}/adaptiveMtDatasets/{dataset}`
+   * @param {number} request.pageSize
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   *   Typically, this is the value of
+   *   ListAdaptiveMtSentencesRequest.next_page_token returned from the
+   *   previous call to `ListTranslationMemories` method. The first page is
+   *   returned if `page_token` is empty or missing.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.translation.v3.AdaptiveMtSentence|AdaptiveMtSentence}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.list_adaptive_mt_sentences.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_ListAdaptiveMtSentences_async
+   */
+  listAdaptiveMtSentencesAsync(
+    request?: protos.google.cloud.translation.v3.IListAdaptiveMtSentencesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.translation.v3.IAdaptiveMtSentence> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAdaptiveMtSentences'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listAdaptiveMtSentences.asyncIterate(
+      this.innerApiCalls['listAdaptiveMtSentences'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.translation.v3.IAdaptiveMtSentence>;
+  }
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified adaptiveMtDataset resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} dataset
+   * @returns {string} Resource name string.
+   */
+  adaptiveMtDatasetPath(project: string, location: string, dataset: string) {
+    return this.pathTemplates.adaptiveMtDatasetPathTemplate.render({
+      project: project,
+      location: location,
+      dataset: dataset,
+    });
+  }
+
+  /**
+   * Parse the project from AdaptiveMtDataset resource.
+   *
+   * @param {string} adaptiveMtDatasetName
+   *   A fully-qualified path representing AdaptiveMtDataset resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAdaptiveMtDatasetName(adaptiveMtDatasetName: string) {
+    return this.pathTemplates.adaptiveMtDatasetPathTemplate.match(
+      adaptiveMtDatasetName
+    ).project;
+  }
+
+  /**
+   * Parse the location from AdaptiveMtDataset resource.
+   *
+   * @param {string} adaptiveMtDatasetName
+   *   A fully-qualified path representing AdaptiveMtDataset resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAdaptiveMtDatasetName(adaptiveMtDatasetName: string) {
+    return this.pathTemplates.adaptiveMtDatasetPathTemplate.match(
+      adaptiveMtDatasetName
+    ).location;
+  }
+
+  /**
+   * Parse the dataset from AdaptiveMtDataset resource.
+   *
+   * @param {string} adaptiveMtDatasetName
+   *   A fully-qualified path representing AdaptiveMtDataset resource.
+   * @returns {string} A string representing the dataset.
+   */
+  matchDatasetFromAdaptiveMtDatasetName(adaptiveMtDatasetName: string) {
+    return this.pathTemplates.adaptiveMtDatasetPathTemplate.match(
+      adaptiveMtDatasetName
+    ).dataset;
+  }
+
+  /**
+   * Return a fully-qualified adaptiveMtFile resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} dataset
+   * @param {string} file
+   * @returns {string} Resource name string.
+   */
+  adaptiveMtFilePath(
+    project: string,
+    location: string,
+    dataset: string,
+    file: string
+  ) {
+    return this.pathTemplates.adaptiveMtFilePathTemplate.render({
+      project: project,
+      location: location,
+      dataset: dataset,
+      file: file,
+    });
+  }
+
+  /**
+   * Parse the project from AdaptiveMtFile resource.
+   *
+   * @param {string} adaptiveMtFileName
+   *   A fully-qualified path representing AdaptiveMtFile resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAdaptiveMtFileName(adaptiveMtFileName: string) {
+    return this.pathTemplates.adaptiveMtFilePathTemplate.match(
+      adaptiveMtFileName
+    ).project;
+  }
+
+  /**
+   * Parse the location from AdaptiveMtFile resource.
+   *
+   * @param {string} adaptiveMtFileName
+   *   A fully-qualified path representing AdaptiveMtFile resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAdaptiveMtFileName(adaptiveMtFileName: string) {
+    return this.pathTemplates.adaptiveMtFilePathTemplate.match(
+      adaptiveMtFileName
+    ).location;
+  }
+
+  /**
+   * Parse the dataset from AdaptiveMtFile resource.
+   *
+   * @param {string} adaptiveMtFileName
+   *   A fully-qualified path representing AdaptiveMtFile resource.
+   * @returns {string} A string representing the dataset.
+   */
+  matchDatasetFromAdaptiveMtFileName(adaptiveMtFileName: string) {
+    return this.pathTemplates.adaptiveMtFilePathTemplate.match(
+      adaptiveMtFileName
+    ).dataset;
+  }
+
+  /**
+   * Parse the file from AdaptiveMtFile resource.
+   *
+   * @param {string} adaptiveMtFileName
+   *   A fully-qualified path representing AdaptiveMtFile resource.
+   * @returns {string} A string representing the file.
+   */
+  matchFileFromAdaptiveMtFileName(adaptiveMtFileName: string) {
+    return this.pathTemplates.adaptiveMtFilePathTemplate.match(
+      adaptiveMtFileName
+    ).file;
+  }
+
+  /**
+   * Return a fully-qualified adaptiveMtSentence resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} dataset
+   * @param {string} file
+   * @param {string} sentence
+   * @returns {string} Resource name string.
+   */
+  adaptiveMtSentencePath(
+    project: string,
+    location: string,
+    dataset: string,
+    file: string,
+    sentence: string
+  ) {
+    return this.pathTemplates.adaptiveMtSentencePathTemplate.render({
+      project: project,
+      location: location,
+      dataset: dataset,
+      file: file,
+      sentence: sentence,
+    });
+  }
+
+  /**
+   * Parse the project from AdaptiveMtSentence resource.
+   *
+   * @param {string} adaptiveMtSentenceName
+   *   A fully-qualified path representing AdaptiveMtSentence resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAdaptiveMtSentenceName(adaptiveMtSentenceName: string) {
+    return this.pathTemplates.adaptiveMtSentencePathTemplate.match(
+      adaptiveMtSentenceName
+    ).project;
+  }
+
+  /**
+   * Parse the location from AdaptiveMtSentence resource.
+   *
+   * @param {string} adaptiveMtSentenceName
+   *   A fully-qualified path representing AdaptiveMtSentence resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAdaptiveMtSentenceName(adaptiveMtSentenceName: string) {
+    return this.pathTemplates.adaptiveMtSentencePathTemplate.match(
+      adaptiveMtSentenceName
+    ).location;
+  }
+
+  /**
+   * Parse the dataset from AdaptiveMtSentence resource.
+   *
+   * @param {string} adaptiveMtSentenceName
+   *   A fully-qualified path representing AdaptiveMtSentence resource.
+   * @returns {string} A string representing the dataset.
+   */
+  matchDatasetFromAdaptiveMtSentenceName(adaptiveMtSentenceName: string) {
+    return this.pathTemplates.adaptiveMtSentencePathTemplate.match(
+      adaptiveMtSentenceName
+    ).dataset;
+  }
+
+  /**
+   * Parse the file from AdaptiveMtSentence resource.
+   *
+   * @param {string} adaptiveMtSentenceName
+   *   A fully-qualified path representing AdaptiveMtSentence resource.
+   * @returns {string} A string representing the file.
+   */
+  matchFileFromAdaptiveMtSentenceName(adaptiveMtSentenceName: string) {
+    return this.pathTemplates.adaptiveMtSentencePathTemplate.match(
+      adaptiveMtSentenceName
+    ).file;
+  }
+
+  /**
+   * Parse the sentence from AdaptiveMtSentence resource.
+   *
+   * @param {string} adaptiveMtSentenceName
+   *   A fully-qualified path representing AdaptiveMtSentence resource.
+   * @returns {string} A string representing the sentence.
+   */
+  matchSentenceFromAdaptiveMtSentenceName(adaptiveMtSentenceName: string) {
+    return this.pathTemplates.adaptiveMtSentencePathTemplate.match(
+      adaptiveMtSentenceName
+    ).sentence;
+  }
 
   /**
    * Return a fully-qualified glossary resource name string.

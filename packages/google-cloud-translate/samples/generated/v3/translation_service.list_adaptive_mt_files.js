@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, glossary) {
-  // [START translate_v3beta1_generated_TranslationService_CreateGlossary_async]
+function main(parent) {
+  // [START translate_v3_generated_TranslationService_ListAdaptiveMtFiles_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,35 +29,45 @@ function main(parent, glossary) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The project name.
+   *  Required. The resource name of the project from which to list the Adaptive
+   *  MT files.
+   *  `projects/{project}/locations/{location}/adaptiveMtDatasets/{dataset}`
    */
   // const parent = 'abc123'
   /**
-   *  Required. The glossary to create.
+   *  Optional.
    */
-  // const glossary = {}
+  // const pageSize = 1234
+  /**
+   *  Optional. A token identifying a page of results the server should return.
+   *  Typically, this is the value of
+   *  ListAdaptiveMtFilesResponse.next_page_token returned from the
+   *  previous call to `ListAdaptiveMtFiles` method. The first page is
+   *  returned if `page_token`is empty or missing.
+   */
+  // const pageToken = 'abc123'
 
   // Imports the Translation library
-  const {TranslationServiceClient} = require('@google-cloud/translate').v3beta1;
+  const {TranslationServiceClient} = require('@google-cloud/translate').v3;
 
   // Instantiates a client
   const translationClient = new TranslationServiceClient();
 
-  async function callCreateGlossary() {
+  async function callListAdaptiveMtFiles() {
     // Construct request
     const request = {
       parent,
-      glossary,
     };
 
     // Run request
-    const [operation] = await translationClient.createGlossary(request);
-    const [response] = await operation.promise();
-    console.log(response);
+    const iterable = await translationClient.listAdaptiveMtFilesAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callCreateGlossary();
-  // [END translate_v3beta1_generated_TranslationService_CreateGlossary_async]
+  callListAdaptiveMtFiles();
+  // [END translate_v3_generated_TranslationService_ListAdaptiveMtFiles_async]
 }
 
 process.on('unhandledRejection', err => {

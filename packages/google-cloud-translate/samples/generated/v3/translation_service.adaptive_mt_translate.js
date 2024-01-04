@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, glossary) {
-  // [START translate_v3beta1_generated_TranslationService_CreateGlossary_async]
+function main(parent, dataset, content) {
+  // [START translate_v3_generated_TranslationService_AdaptiveMtTranslate_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,35 +29,42 @@ function main(parent, glossary) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The project name.
+   *  Required. Location to make a regional call.
+   *  Format: `projects/{project-number-or-id}/locations/{location-id}`.
    */
   // const parent = 'abc123'
   /**
-   *  Required. The glossary to create.
+   *  Required. The resource name for the dataset to use for adaptive MT.
+   *  `projects/{project}/locations/{location-id}/adaptiveMtDatasets/{dataset}`
    */
-  // const glossary = {}
+  // const dataset = 'abc123'
+  /**
+   *  Required. The content of the input in string format.
+   *  For now only one sentence per request is supported.
+   */
+  // const content = ['abc','def']
 
   // Imports the Translation library
-  const {TranslationServiceClient} = require('@google-cloud/translate').v3beta1;
+  const {TranslationServiceClient} = require('@google-cloud/translate').v3;
 
   // Instantiates a client
   const translationClient = new TranslationServiceClient();
 
-  async function callCreateGlossary() {
+  async function callAdaptiveMtTranslate() {
     // Construct request
     const request = {
       parent,
-      glossary,
+      dataset,
+      content,
     };
 
     // Run request
-    const [operation] = await translationClient.createGlossary(request);
-    const [response] = await operation.promise();
+    const response = await translationClient.adaptiveMtTranslate(request);
     console.log(response);
   }
 
-  callCreateGlossary();
-  // [END translate_v3beta1_generated_TranslationService_CreateGlossary_async]
+  callAdaptiveMtTranslate();
+  // [END translate_v3_generated_TranslationService_AdaptiveMtTranslate_async]
 }
 
 process.on('unhandledRejection', err => {

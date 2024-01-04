@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, glossary) {
-  // [START translate_v3beta1_generated_TranslationService_CreateGlossary_async]
+function main(parent, adaptiveMtDataset) {
+  // [START translate_v3_generated_TranslationService_CreateAdaptiveMtDataset_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,35 +29,35 @@ function main(parent, glossary) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The project name.
+   *  Required. Name of the parent project. In form of
+   *  `projects/{project-number-or-id}/locations/{location-id}`
    */
   // const parent = 'abc123'
   /**
-   *  Required. The glossary to create.
+   *  Required. The AdaptiveMtDataset to be created.
    */
-  // const glossary = {}
+  // const adaptiveMtDataset = {}
 
   // Imports the Translation library
-  const {TranslationServiceClient} = require('@google-cloud/translate').v3beta1;
+  const {TranslationServiceClient} = require('@google-cloud/translate').v3;
 
   // Instantiates a client
   const translationClient = new TranslationServiceClient();
 
-  async function callCreateGlossary() {
+  async function callCreateAdaptiveMtDataset() {
     // Construct request
     const request = {
       parent,
-      glossary,
+      adaptiveMtDataset,
     };
 
     // Run request
-    const [operation] = await translationClient.createGlossary(request);
-    const [response] = await operation.promise();
+    const response = await translationClient.createAdaptiveMtDataset(request);
     console.log(response);
   }
 
-  callCreateGlossary();
-  // [END translate_v3beta1_generated_TranslationService_CreateGlossary_async]
+  callCreateAdaptiveMtDataset();
+  // [END translate_v3_generated_TranslationService_CreateAdaptiveMtDataset_async]
 }
 
 process.on('unhandledRejection', err => {
