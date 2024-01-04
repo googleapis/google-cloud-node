@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(azureNodePool, updateMask) {
-  // [START gkemulticloud_v1_generated_AzureClusters_UpdateAzureNodePool_async]
+function main(awsCluster) {
+  // [START gkemulticloud_v1_generated_AwsClusters_GetAwsJsonWebKeys_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,49 +29,31 @@ function main(azureNodePool, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The AzureNodePool google.cloud.gkemulticloud.v1.AzureNodePool 
-   *  resource to update.
+   *  Required. The AwsCluster, which owns the JsonWebKeys.
+   *  Format:
+   *  projects/{project}/locations/{location}/awsClusters/{cluster}
    */
-  // const azureNodePool = {}
-  /**
-   *  If set, only validate the request, but don't actually update the node pool.
-   */
-  // const validateOnly = true
-  /**
-   *  Required. Mask of fields to update. At least one path must be supplied in
-   *  this field. The elements of the repeated paths field can only include these
-   *  fields from AzureNodePool google.cloud.gkemulticloud.v1.AzureNodePool:
-   *   *.  `annotations`.
-   *   *   `version`.
-   *   *   `autoscaling.min_node_count`.
-   *   *   `autoscaling.max_node_count`.
-   *   *   `config.ssh_config.authorized_key`.
-   *   *   `management.auto_repair`.
-   *   *   `management`.
-   */
-  // const updateMask = {}
+  // const awsCluster = 'abc123'
 
   // Imports the Gkemulticloud library
-  const {AzureClustersClient} = require('@google-cloud/gkemulticloud').v1;
+  const {AwsClustersClient} = require('@google-cloud/gkemulticloud').v1;
 
   // Instantiates a client
-  const gkemulticloudClient = new AzureClustersClient();
+  const gkemulticloudClient = new AwsClustersClient();
 
-  async function callUpdateAzureNodePool() {
+  async function callGetAwsJsonWebKeys() {
     // Construct request
     const request = {
-      azureNodePool,
-      updateMask,
+      awsCluster,
     };
 
     // Run request
-    const [operation] = await gkemulticloudClient.updateAzureNodePool(request);
-    const [response] = await operation.promise();
+    const response = await gkemulticloudClient.getAwsJsonWebKeys(request);
     console.log(response);
   }
 
-  callUpdateAzureNodePool();
-  // [END gkemulticloud_v1_generated_AzureClusters_UpdateAzureNodePool_async]
+  callGetAwsJsonWebKeys();
+  // [END gkemulticloud_v1_generated_AwsClusters_GetAwsJsonWebKeys_async]
 }
 
 process.on('unhandledRejection', err => {

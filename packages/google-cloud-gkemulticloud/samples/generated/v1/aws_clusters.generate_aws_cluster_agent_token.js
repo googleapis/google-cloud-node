@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(azureNodePool, updateMask) {
-  // [START gkemulticloud_v1_generated_AzureClusters_UpdateAzureNodePool_async]
+function main(awsCluster, subjectToken, subjectTokenType, version) {
+  // [START gkemulticloud_v1_generated_AwsClusters_GenerateAwsClusterAgentToken_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,49 +29,68 @@ function main(azureNodePool, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The AzureNodePool google.cloud.gkemulticloud.v1.AzureNodePool 
-   *  resource to update.
+   *  Required.
    */
-  // const azureNodePool = {}
+  // const awsCluster = 'abc123'
   /**
-   *  If set, only validate the request, but don't actually update the node pool.
+   *  Required.
    */
-  // const validateOnly = true
+  // const subjectToken = 'abc123'
   /**
-   *  Required. Mask of fields to update. At least one path must be supplied in
-   *  this field. The elements of the repeated paths field can only include these
-   *  fields from AzureNodePool google.cloud.gkemulticloud.v1.AzureNodePool:
-   *   *.  `annotations`.
-   *   *   `version`.
-   *   *   `autoscaling.min_node_count`.
-   *   *   `autoscaling.max_node_count`.
-   *   *   `config.ssh_config.authorized_key`.
-   *   *   `management.auto_repair`.
-   *   *   `management`.
+   *  Required.
    */
-  // const updateMask = {}
+  // const subjectTokenType = 'abc123'
+  /**
+   *  Required.
+   */
+  // const version = 'abc123'
+  /**
+   *  Optional.
+   */
+  // const nodePoolId = 'abc123'
+  /**
+   *  Optional.
+   */
+  // const grantType = 'abc123'
+  /**
+   *  Optional.
+   */
+  // const audience = 'abc123'
+  /**
+   *  Optional.
+   */
+  // const scope = 'abc123'
+  /**
+   *  Optional.
+   */
+  // const requestedTokenType = 'abc123'
+  /**
+   *  Optional.
+   */
+  // const options = 'abc123'
 
   // Imports the Gkemulticloud library
-  const {AzureClustersClient} = require('@google-cloud/gkemulticloud').v1;
+  const {AwsClustersClient} = require('@google-cloud/gkemulticloud').v1;
 
   // Instantiates a client
-  const gkemulticloudClient = new AzureClustersClient();
+  const gkemulticloudClient = new AwsClustersClient();
 
-  async function callUpdateAzureNodePool() {
+  async function callGenerateAwsClusterAgentToken() {
     // Construct request
     const request = {
-      azureNodePool,
-      updateMask,
+      awsCluster,
+      subjectToken,
+      subjectTokenType,
+      version,
     };
 
     // Run request
-    const [operation] = await gkemulticloudClient.updateAzureNodePool(request);
-    const [response] = await operation.promise();
+    const response = await gkemulticloudClient.generateAwsClusterAgentToken(request);
     console.log(response);
   }
 
-  callUpdateAzureNodePool();
-  // [END gkemulticloud_v1_generated_AzureClusters_UpdateAzureNodePool_async]
+  callGenerateAwsClusterAgentToken();
+  // [END gkemulticloud_v1_generated_AwsClusters_GenerateAwsClusterAgentToken_async]
 }
 
 process.on('unhandledRejection', err => {
