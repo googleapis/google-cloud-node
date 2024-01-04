@@ -877,6 +877,552 @@ describe('v2.OrgPolicyClient', () => {
     });
   });
 
+  describe('createCustomConstraint', () => {
+    it('invokes createCustomConstraint without error', async () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.CreateCustomConstraintRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.CreateCustomConstraintRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.CustomConstraint()
+      );
+      client.innerApiCalls.createCustomConstraint =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createCustomConstraint(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createCustomConstraint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCustomConstraint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createCustomConstraint without error using callback', async () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.CreateCustomConstraintRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.CreateCustomConstraintRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.CustomConstraint()
+      );
+      client.innerApiCalls.createCustomConstraint =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createCustomConstraint(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.orgpolicy.v2.ICustomConstraint | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createCustomConstraint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCustomConstraint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createCustomConstraint with error', async () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.CreateCustomConstraintRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.CreateCustomConstraintRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createCustomConstraint = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.createCustomConstraint(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.createCustomConstraint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCustomConstraint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createCustomConstraint with closed client', async () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.CreateCustomConstraintRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.CreateCustomConstraintRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createCustomConstraint(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('updateCustomConstraint', () => {
+    it('invokes updateCustomConstraint without error', async () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest()
+      );
+      request.customConstraint ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest',
+        ['customConstraint', 'name']
+      );
+      request.customConstraint.name = defaultValue1;
+      const expectedHeaderRequestParams = `custom_constraint.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.CustomConstraint()
+      );
+      client.innerApiCalls.updateCustomConstraint =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateCustomConstraint(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateCustomConstraint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCustomConstraint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateCustomConstraint without error using callback', async () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest()
+      );
+      request.customConstraint ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest',
+        ['customConstraint', 'name']
+      );
+      request.customConstraint.name = defaultValue1;
+      const expectedHeaderRequestParams = `custom_constraint.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.CustomConstraint()
+      );
+      client.innerApiCalls.updateCustomConstraint =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateCustomConstraint(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.orgpolicy.v2.ICustomConstraint | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateCustomConstraint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCustomConstraint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateCustomConstraint with error', async () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest()
+      );
+      request.customConstraint ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest',
+        ['customConstraint', 'name']
+      );
+      request.customConstraint.name = defaultValue1;
+      const expectedHeaderRequestParams = `custom_constraint.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateCustomConstraint = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateCustomConstraint(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateCustomConstraint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCustomConstraint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateCustomConstraint with closed client', async () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest()
+      );
+      request.customConstraint ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest',
+        ['customConstraint', 'name']
+      );
+      request.customConstraint.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateCustomConstraint(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('getCustomConstraint', () => {
+    it('invokes getCustomConstraint without error', async () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.GetCustomConstraintRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.GetCustomConstraintRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.CustomConstraint()
+      );
+      client.innerApiCalls.getCustomConstraint =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getCustomConstraint(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getCustomConstraint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCustomConstraint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getCustomConstraint without error using callback', async () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.GetCustomConstraintRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.GetCustomConstraintRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.CustomConstraint()
+      );
+      client.innerApiCalls.getCustomConstraint =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getCustomConstraint(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.orgpolicy.v2.ICustomConstraint | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getCustomConstraint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCustomConstraint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getCustomConstraint with error', async () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.GetCustomConstraintRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.GetCustomConstraintRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getCustomConstraint = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getCustomConstraint(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getCustomConstraint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCustomConstraint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getCustomConstraint with closed client', async () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.GetCustomConstraintRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.GetCustomConstraintRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getCustomConstraint(request), expectedError);
+    });
+  });
+
+  describe('deleteCustomConstraint', () => {
+    it('invokes deleteCustomConstraint without error', async () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteCustomConstraint =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteCustomConstraint(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteCustomConstraint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCustomConstraint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteCustomConstraint without error using callback', async () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteCustomConstraint =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteCustomConstraint(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteCustomConstraint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCustomConstraint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteCustomConstraint with error', async () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteCustomConstraint = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.deleteCustomConstraint(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCustomConstraint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCustomConstraint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteCustomConstraint with closed client', async () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deleteCustomConstraint(request),
+        expectedError
+      );
+    });
+  });
+
   describe('listConstraints', () => {
     it('invokes listConstraints without error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
@@ -1505,7 +2051,417 @@ describe('v2.OrgPolicyClient', () => {
     });
   });
 
+  describe('listCustomConstraints', () => {
+    it('invokes listCustomConstraints without error', async () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.ListCustomConstraintsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.ListCustomConstraintsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.orgpolicy.v2.CustomConstraint()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.orgpolicy.v2.CustomConstraint()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.orgpolicy.v2.CustomConstraint()
+        ),
+      ];
+      client.innerApiCalls.listCustomConstraints =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listCustomConstraints(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listCustomConstraints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCustomConstraints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listCustomConstraints without error using callback', async () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.ListCustomConstraintsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.ListCustomConstraintsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.orgpolicy.v2.CustomConstraint()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.orgpolicy.v2.CustomConstraint()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.orgpolicy.v2.CustomConstraint()
+        ),
+      ];
+      client.innerApiCalls.listCustomConstraints =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listCustomConstraints(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.orgpolicy.v2.ICustomConstraint[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listCustomConstraints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCustomConstraints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listCustomConstraints with error', async () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.ListCustomConstraintsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.ListCustomConstraintsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listCustomConstraints = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listCustomConstraints(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.listCustomConstraints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCustomConstraints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listCustomConstraintsStream without error', async () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.ListCustomConstraintsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.ListCustomConstraintsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.orgpolicy.v2.CustomConstraint()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.orgpolicy.v2.CustomConstraint()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.orgpolicy.v2.CustomConstraint()
+        ),
+      ];
+      client.descriptors.page.listCustomConstraints.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listCustomConstraintsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.orgpolicy.v2.CustomConstraint[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.orgpolicy.v2.CustomConstraint) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listCustomConstraints
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listCustomConstraints, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listCustomConstraints
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listCustomConstraintsStream with error', async () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.ListCustomConstraintsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.ListCustomConstraintsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listCustomConstraints.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listCustomConstraintsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.orgpolicy.v2.CustomConstraint[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.orgpolicy.v2.CustomConstraint) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listCustomConstraints
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listCustomConstraints, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listCustomConstraints
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listCustomConstraints without error', async () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.ListCustomConstraintsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.ListCustomConstraintsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.orgpolicy.v2.CustomConstraint()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.orgpolicy.v2.CustomConstraint()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.orgpolicy.v2.CustomConstraint()
+        ),
+      ];
+      client.descriptors.page.listCustomConstraints.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.orgpolicy.v2.ICustomConstraint[] =
+        [];
+      const iterable = client.listCustomConstraintsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listCustomConstraints
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listCustomConstraints
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listCustomConstraints with error', async () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.ListCustomConstraintsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.ListCustomConstraintsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listCustomConstraints.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listCustomConstraintsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.orgpolicy.v2.ICustomConstraint[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listCustomConstraints
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listCustomConstraints
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
   describe('Path templates', () => {
+    describe('customConstraint', () => {
+      const fakePath = '/rendered/path/customConstraint';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        custom_constraint: 'customConstraintValue',
+      };
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.customConstraintPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.customConstraintPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('customConstraintPath', () => {
+        const result = client.customConstraintPath(
+          'organizationValue',
+          'customConstraintValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.customConstraintPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromCustomConstraintName', () => {
+        const result =
+          client.matchOrganizationFromCustomConstraintName(fakePath);
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (client.pathTemplates.customConstraintPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCustomConstraintFromCustomConstraintName', () => {
+        const result =
+          client.matchCustomConstraintFromCustomConstraintName(fakePath);
+        assert.strictEqual(result, 'customConstraintValue');
+        assert(
+          (client.pathTemplates.customConstraintPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('folderConstraint', () => {
       const fakePath = '/rendered/path/folderConstraint';
       const expectedParameters = {
@@ -1604,6 +2560,44 @@ describe('v2.OrgPolicyClient', () => {
         assert.strictEqual(result, 'policyValue');
         assert(
           (client.pathTemplates.folderPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('organization', () => {
+      const fakePath = '/rendered/path/organization';
+      const expectedParameters = {
+        organization: 'organizationValue',
+      };
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.organizationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.organizationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('organizationPath', () => {
+        const result = client.organizationPath('organizationValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.organizationPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationName', () => {
+        const result = client.matchOrganizationFromOrganizationName(fakePath);
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (client.pathTemplates.organizationPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

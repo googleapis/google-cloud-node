@@ -35,6 +35,26 @@
                 "deletePolicy"
               ]
             },
+            "CreateCustomConstraint": {
+              "methods": [
+                "createCustomConstraint"
+              ]
+            },
+            "UpdateCustomConstraint": {
+              "methods": [
+                "updateCustomConstraint"
+              ]
+            },
+            "GetCustomConstraint": {
+              "methods": [
+                "getCustomConstraint"
+              ]
+            },
+            "DeleteCustomConstraint": {
+              "methods": [
+                "deleteCustomConstraint"
+              ]
+            },
             "ListConstraints": {
               "methods": [
                 "listConstraints",
@@ -47,6 +67,13 @@
                 "listPolicies",
                 "listPoliciesStream",
                 "listPoliciesAsync"
+              ]
+            },
+            "ListCustomConstraints": {
+              "methods": [
+                "listCustomConstraints",
+                "listCustomConstraintsStream",
+                "listCustomConstraintsAsync"
               ]
             }
           }
@@ -79,6 +106,26 @@
                 "deletePolicy"
               ]
             },
+            "CreateCustomConstraint": {
+              "methods": [
+                "createCustomConstraint"
+              ]
+            },
+            "UpdateCustomConstraint": {
+              "methods": [
+                "updateCustomConstraint"
+              ]
+            },
+            "GetCustomConstraint": {
+              "methods": [
+                "getCustomConstraint"
+              ]
+            },
+            "DeleteCustomConstraint": {
+              "methods": [
+                "deleteCustomConstraint"
+              ]
+            },
             "ListConstraints": {
               "methods": [
                 "listConstraints",
@@ -91,6 +138,13 @@
                 "listPolicies",
                 "listPoliciesStream",
                 "listPoliciesAsync"
+              ]
+            },
+            "ListCustomConstraints": {
+              "methods": [
+                "listCustomConstraints",
+                "listCustomConstraintsStream",
+                "listCustomConstraintsAsync"
               ]
             }
           }

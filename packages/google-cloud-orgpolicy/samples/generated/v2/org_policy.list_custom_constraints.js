@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START orgpolicy_v2_generated_OrgPolicy_DeletePolicy_async]
+function main(parent) {
+  // [START orgpolicy_v2_generated_OrgPolicy_ListCustomConstraints_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,16 +29,23 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the policy to delete.
-   *  See the policy entry for naming rules.
+   *  Required. The target Google Cloud resource that parents the set of custom
+   *  constraints that will be returned from this call. Must be in one of the
+   *  following forms:
+   *  * `organizations/{organization_id}`
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
   /**
-   *  Optional. The current etag of policy. If an etag is provided and does not
-   *  match the current etag of the policy, deletion will be blocked and an
-   *  ABORTED error will be returned.
+   *  Size of the pages to be returned. This is currently unsupported and will
+   *  be ignored. The server may at any point start using this field to limit
+   *  page size.
    */
-  // const etag = 'abc123'
+  // const pageSize = 1234
+  /**
+   *  Page token used to retrieve the next page. This is currently unsupported
+   *  and will be ignored. The server may at any point start using this field.
+   */
+  // const pageToken = 'abc123'
 
   // Imports the Orgpolicy library
   const {OrgPolicyClient} = require('@google-cloud/org-policy').v2;
@@ -46,19 +53,21 @@ function main(name) {
   // Instantiates a client
   const orgpolicyClient = new OrgPolicyClient();
 
-  async function callDeletePolicy() {
+  async function callListCustomConstraints() {
     // Construct request
     const request = {
-      name,
+      parent,
     };
 
     // Run request
-    const response = await orgpolicyClient.deletePolicy(request);
-    console.log(response);
+    const iterable = await orgpolicyClient.listCustomConstraintsAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callDeletePolicy();
-  // [END orgpolicy_v2_generated_OrgPolicy_DeletePolicy_async]
+  callListCustomConstraints();
+  // [END orgpolicy_v2_generated_OrgPolicy_ListCustomConstraints_async]
 }
 
 process.on('unhandledRejection', err => {

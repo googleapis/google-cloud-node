@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START orgpolicy_v2_generated_OrgPolicy_DeletePolicy_async]
+  // [START orgpolicy_v2_generated_OrgPolicy_DeleteCustomConstraint_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,16 +29,10 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the policy to delete.
-   *  See the policy entry for naming rules.
+   *  Required. Name of the custom constraint to delete.
+   *  See the custom constraint entry for naming rules.
    */
   // const name = 'abc123'
-  /**
-   *  Optional. The current etag of policy. If an etag is provided and does not
-   *  match the current etag of the policy, deletion will be blocked and an
-   *  ABORTED error will be returned.
-   */
-  // const etag = 'abc123'
 
   // Imports the Orgpolicy library
   const {OrgPolicyClient} = require('@google-cloud/org-policy').v2;
@@ -46,19 +40,19 @@ function main(name) {
   // Instantiates a client
   const orgpolicyClient = new OrgPolicyClient();
 
-  async function callDeletePolicy() {
+  async function callDeleteCustomConstraint() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const response = await orgpolicyClient.deletePolicy(request);
+    const response = await orgpolicyClient.deleteCustomConstraint(request);
     console.log(response);
   }
 
-  callDeletePolicy();
-  // [END orgpolicy_v2_generated_OrgPolicy_DeletePolicy_async]
+  callDeleteCustomConstraint();
+  // [END orgpolicy_v2_generated_OrgPolicy_DeleteCustomConstraint_async]
 }
 
 process.on('unhandledRejection', err => {
