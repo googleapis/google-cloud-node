@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@
     var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
     
     // Exported root namespace
-    var $root = $protobuf.roots._google_cloud_css_protos || ($protobuf.roots._google_cloud_css_protos = {});
+    var $root = $protobuf.roots._google_shopping_css_protos || ($protobuf.roots._google_shopping_css_protos = {});
     
     $root.google = (function() {
     
