@@ -20,6 +20,7 @@
 const cloudprofiler = require('@google-cloud/cloudprofiler');
 
 function main() {
+  const exportServiceClient = new cloudprofiler.ExportServiceClient();
   const profilerServiceClient = new cloudprofiler.ProfilerServiceClient();
 }
 

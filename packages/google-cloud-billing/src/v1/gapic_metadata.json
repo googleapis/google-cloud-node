@@ -50,6 +50,11 @@
                 "testIamPermissions"
               ]
             },
+            "MoveBillingAccount": {
+              "methods": [
+                "moveBillingAccount"
+              ]
+            },
             "ListBillingAccounts": {
               "methods": [
                 "listBillingAccounts",
@@ -107,6 +112,11 @@
             "TestIamPermissions": {
               "methods": [
                 "testIamPermissions"
+              ]
+            },
+            "MoveBillingAccount": {
+              "methods": [
+                "moveBillingAccount"
               ]
             },
             "ListBillingAccounts": {

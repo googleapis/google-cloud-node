@@ -396,6 +396,11 @@ export class AnalyticsAdminServiceClient {
         'nextPageToken',
         'rollupPropertySourceLinks'
       ),
+      listSubpropertyEventFilters: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'subpropertyEventFilters'
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -575,8 +580,11 @@ export class AnalyticsAdminServiceClient {
       'createRollupPropertySourceLink',
       'deleteRollupPropertySourceLink',
       'createSubproperty',
-      'deleteSubpropertyEventFilter',
       'createSubpropertyEventFilter',
+      'getSubpropertyEventFilter',
+      'listSubpropertyEventFilters',
+      'updateSubpropertyEventFilter',
+      'deleteSubpropertyEventFilter',
     ];
     for (const methodName of analyticsAdminServiceStubMethods) {
       const callPromise = this.analyticsAdminServiceStub.then(
@@ -6959,8 +6967,10 @@ export class AnalyticsAdminServiceClient {
    * records of each time a user reads Google Analytics reporting data. Access
    * records are retained for up to 2 years.
    *
-   * Data Access Reports can be requested for a property. The property must be
-   * in Google Analytics 360. This method is only available to Administrators.
+   * Data Access Reports can be requested for a property. Reports may be
+   * requested for any property, but dimensions that aren't related to quota can
+   * only be requested on Google Analytics 360 properties. This method is only
+   * available to Administrators.
    *
    * These data access records include GA4 UI Reporting, GA4 UI Explorations,
    * GA4 Data API, and other products like Firebase & Admob that can retrieve
@@ -11063,109 +11073,6 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.createSubproperty(request, options, callback);
   }
   /**
-   * Deletes a subproperty event filter.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the subproperty event filter to delete.
-   *   Format:
-   *   properties/property_id/subpropertyEventFilters/subproperty_event_filter
-   *   Example: properties/123/subpropertyEventFilters/456
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.delete_subproperty_event_filter.js</caption>
-   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteSubpropertyEventFilter_async
-   */
-  deleteSubpropertyEventFilter(
-    request?: protos.google.analytics.admin.v1alpha.IDeleteSubpropertyEventFilterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.analytics.admin.v1alpha.IDeleteSubpropertyEventFilterRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  deleteSubpropertyEventFilter(
-    request: protos.google.analytics.admin.v1alpha.IDeleteSubpropertyEventFilterRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.analytics.admin.v1alpha.IDeleteSubpropertyEventFilterRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteSubpropertyEventFilter(
-    request: protos.google.analytics.admin.v1alpha.IDeleteSubpropertyEventFilterRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.analytics.admin.v1alpha.IDeleteSubpropertyEventFilterRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteSubpropertyEventFilter(
-    request?: protos.google.analytics.admin.v1alpha.IDeleteSubpropertyEventFilterRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.analytics.admin.v1alpha.IDeleteSubpropertyEventFilterRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.analytics.admin.v1alpha.IDeleteSubpropertyEventFilterRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.analytics.admin.v1alpha.IDeleteSubpropertyEventFilterRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.deleteSubpropertyEventFilter(
-      request,
-      options,
-      callback
-    );
-  }
-  /**
    * Creates a subproperty Event Filter.
    *
    * @param {Object} request
@@ -11263,6 +11170,318 @@ export class AnalyticsAdminServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.createSubpropertyEventFilter(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Lookup for a single subproperty Event Filter.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the subproperty event filter to lookup.
+   *   Format:
+   *   properties/property_id/subpropertyEventFilters/subproperty_event_filter
+   *   Example: properties/123/subpropertyEventFilters/456
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.SubpropertyEventFilter|SubpropertyEventFilter}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_subproperty_event_filter.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetSubpropertyEventFilter_async
+   */
+  getSubpropertyEventFilter(
+    request?: protos.google.analytics.admin.v1alpha.IGetSubpropertyEventFilterRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter,
+      (
+        | protos.google.analytics.admin.v1alpha.IGetSubpropertyEventFilterRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getSubpropertyEventFilter(
+    request: protos.google.analytics.admin.v1alpha.IGetSubpropertyEventFilterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter,
+      | protos.google.analytics.admin.v1alpha.IGetSubpropertyEventFilterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getSubpropertyEventFilter(
+    request: protos.google.analytics.admin.v1alpha.IGetSubpropertyEventFilterRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter,
+      | protos.google.analytics.admin.v1alpha.IGetSubpropertyEventFilterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getSubpropertyEventFilter(
+    request?: protos.google.analytics.admin.v1alpha.IGetSubpropertyEventFilterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter,
+          | protos.google.analytics.admin.v1alpha.IGetSubpropertyEventFilterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter,
+      | protos.google.analytics.admin.v1alpha.IGetSubpropertyEventFilterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter,
+      (
+        | protos.google.analytics.admin.v1alpha.IGetSubpropertyEventFilterRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getSubpropertyEventFilter(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Updates a subproperty Event Filter.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.analytics.admin.v1alpha.SubpropertyEventFilter} request.subpropertyEventFilter
+   *   Required. The subproperty event filter to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to update. Field names must be in snake case
+   *   (for example, "field_to_update"). Omitted fields will not be updated. To
+   *   replace the entire entity, use one path with the string "*" to match all
+   *   fields.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.SubpropertyEventFilter|SubpropertyEventFilter}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_subproperty_event_filter.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateSubpropertyEventFilter_async
+   */
+  updateSubpropertyEventFilter(
+    request?: protos.google.analytics.admin.v1alpha.IUpdateSubpropertyEventFilterRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateSubpropertyEventFilterRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateSubpropertyEventFilter(
+    request: protos.google.analytics.admin.v1alpha.IUpdateSubpropertyEventFilterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter,
+      | protos.google.analytics.admin.v1alpha.IUpdateSubpropertyEventFilterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSubpropertyEventFilter(
+    request: protos.google.analytics.admin.v1alpha.IUpdateSubpropertyEventFilterRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter,
+      | protos.google.analytics.admin.v1alpha.IUpdateSubpropertyEventFilterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSubpropertyEventFilter(
+    request?: protos.google.analytics.admin.v1alpha.IUpdateSubpropertyEventFilterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter,
+          | protos.google.analytics.admin.v1alpha.IUpdateSubpropertyEventFilterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter,
+      | protos.google.analytics.admin.v1alpha.IUpdateSubpropertyEventFilterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateSubpropertyEventFilterRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'subproperty_event_filter.name':
+          request.subpropertyEventFilter!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateSubpropertyEventFilter(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Deletes a subproperty event filter.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the subproperty event filter to delete.
+   *   Format:
+   *   properties/property_id/subpropertyEventFilters/subproperty_event_filter
+   *   Example: properties/123/subpropertyEventFilters/456
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.delete_subproperty_event_filter.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteSubpropertyEventFilter_async
+   */
+  deleteSubpropertyEventFilter(
+    request?: protos.google.analytics.admin.v1alpha.IDeleteSubpropertyEventFilterRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.analytics.admin.v1alpha.IDeleteSubpropertyEventFilterRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  deleteSubpropertyEventFilter(
+    request: protos.google.analytics.admin.v1alpha.IDeleteSubpropertyEventFilterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteSubpropertyEventFilterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteSubpropertyEventFilter(
+    request: protos.google.analytics.admin.v1alpha.IDeleteSubpropertyEventFilterRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteSubpropertyEventFilterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteSubpropertyEventFilter(
+    request?: protos.google.analytics.admin.v1alpha.IDeleteSubpropertyEventFilterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteSubpropertyEventFilterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteSubpropertyEventFilterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.analytics.admin.v1alpha.IDeleteSubpropertyEventFilterRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteSubpropertyEventFilter(
       request,
       options,
       callback
@@ -16145,6 +16364,223 @@ export class AnalyticsAdminServiceClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IRollupPropertySourceLink>;
+  }
+  /**
+   * List all subproperty Event Filters on a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the ordinary property.
+   *   Format: properties/property_id
+   *   Example: properties/123
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of resources to return. The service may return
+   *   fewer than this value, even if there are additional pages. If unspecified,
+   *   at most 50 resources will be returned. The maximum value is 200; (higher
+   *   values will be coerced to the maximum)
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListSubpropertyEventFilters` call. Provide this to retrieve the subsequent
+   *   page. When paginating, all other parameters provided to
+   *   `ListSubpropertyEventFilters` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.analytics.admin.v1alpha.SubpropertyEventFilter|SubpropertyEventFilter}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listSubpropertyEventFiltersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listSubpropertyEventFilters(
+    request?: protos.google.analytics.admin.v1alpha.IListSubpropertyEventFiltersRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter[],
+      protos.google.analytics.admin.v1alpha.IListSubpropertyEventFiltersRequest | null,
+      protos.google.analytics.admin.v1alpha.IListSubpropertyEventFiltersResponse,
+    ]
+  >;
+  listSubpropertyEventFilters(
+    request: protos.google.analytics.admin.v1alpha.IListSubpropertyEventFiltersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListSubpropertyEventFiltersRequest,
+      | protos.google.analytics.admin.v1alpha.IListSubpropertyEventFiltersResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter
+    >
+  ): void;
+  listSubpropertyEventFilters(
+    request: protos.google.analytics.admin.v1alpha.IListSubpropertyEventFiltersRequest,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListSubpropertyEventFiltersRequest,
+      | protos.google.analytics.admin.v1alpha.IListSubpropertyEventFiltersResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter
+    >
+  ): void;
+  listSubpropertyEventFilters(
+    request?: protos.google.analytics.admin.v1alpha.IListSubpropertyEventFiltersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListSubpropertyEventFiltersRequest,
+          | protos.google.analytics.admin.v1alpha.IListSubpropertyEventFiltersResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter
+        >,
+    callback?: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListSubpropertyEventFiltersRequest,
+      | protos.google.analytics.admin.v1alpha.IListSubpropertyEventFiltersResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter[],
+      protos.google.analytics.admin.v1alpha.IListSubpropertyEventFiltersRequest | null,
+      protos.google.analytics.admin.v1alpha.IListSubpropertyEventFiltersResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listSubpropertyEventFilters(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the ordinary property.
+   *   Format: properties/property_id
+   *   Example: properties/123
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of resources to return. The service may return
+   *   fewer than this value, even if there are additional pages. If unspecified,
+   *   at most 50 resources will be returned. The maximum value is 200; (higher
+   *   values will be coerced to the maximum)
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListSubpropertyEventFilters` call. Provide this to retrieve the subsequent
+   *   page. When paginating, all other parameters provided to
+   *   `ListSubpropertyEventFilters` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.analytics.admin.v1alpha.SubpropertyEventFilter|SubpropertyEventFilter} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listSubpropertyEventFiltersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listSubpropertyEventFiltersStream(
+    request?: protos.google.analytics.admin.v1alpha.IListSubpropertyEventFiltersRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listSubpropertyEventFilters'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listSubpropertyEventFilters.createStream(
+      this.innerApiCalls.listSubpropertyEventFilters as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listSubpropertyEventFilters`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the ordinary property.
+   *   Format: properties/property_id
+   *   Example: properties/123
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of resources to return. The service may return
+   *   fewer than this value, even if there are additional pages. If unspecified,
+   *   at most 50 resources will be returned. The maximum value is 200; (higher
+   *   values will be coerced to the maximum)
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListSubpropertyEventFilters` call. Provide this to retrieve the subsequent
+   *   page. When paginating, all other parameters provided to
+   *   `ListSubpropertyEventFilters` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.analytics.admin.v1alpha.SubpropertyEventFilter|SubpropertyEventFilter}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_subproperty_event_filters.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListSubpropertyEventFilters_async
+   */
+  listSubpropertyEventFiltersAsync(
+    request?: protos.google.analytics.admin.v1alpha.IListSubpropertyEventFiltersRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listSubpropertyEventFilters'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listSubpropertyEventFilters.asyncIterate(
+      this.innerApiCalls['listSubpropertyEventFilters'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter>;
   }
   // --------------------
   // -- Path templates --

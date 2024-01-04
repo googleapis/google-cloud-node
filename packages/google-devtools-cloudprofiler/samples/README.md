@@ -12,6 +12,7 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Export_service.list_profiles](#export_service.list_profiles)
   * [Profiler_service.create_offline_profile](#profiler_service.create_offline_profile)
   * [Profiler_service.create_profile](#profiler_service.create_profile)
   * [Profiler_service.update_profile](#profiler_service.update_profile)
@@ -29,6 +30,23 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Export_service.list_profiles
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudprofiler/samples/generated/v2/export_service.list_profiles.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudprofiler/samples/generated/v2/export_service.list_profiles.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-devtools-cloudprofiler/samples/generated/v2/export_service.list_profiles.js`
+
+
+-----
+
 
 
 

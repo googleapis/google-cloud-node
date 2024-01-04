@@ -916,6 +916,934 @@ describe('v3.TranslationServiceClient', () => {
     });
   });
 
+  describe('createAdaptiveMtDataset', () => {
+    it('invokes createAdaptiveMtDataset without error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.translation.v3.AdaptiveMtDataset()
+      );
+      client.innerApiCalls.createAdaptiveMtDataset =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createAdaptiveMtDataset(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAdaptiveMtDataset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAdaptiveMtDataset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAdaptiveMtDataset without error using callback', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.translation.v3.AdaptiveMtDataset()
+      );
+      client.innerApiCalls.createAdaptiveMtDataset =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createAdaptiveMtDataset(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.translation.v3.IAdaptiveMtDataset | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAdaptiveMtDataset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAdaptiveMtDataset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAdaptiveMtDataset with error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createAdaptiveMtDataset = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.createAdaptiveMtDataset(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.createAdaptiveMtDataset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAdaptiveMtDataset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAdaptiveMtDataset with closed client', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.CreateAdaptiveMtDatasetRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createAdaptiveMtDataset(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('deleteAdaptiveMtDataset', () => {
+    it('invokes deleteAdaptiveMtDataset without error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteAdaptiveMtDataset =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteAdaptiveMtDataset(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteAdaptiveMtDataset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAdaptiveMtDataset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAdaptiveMtDataset without error using callback', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteAdaptiveMtDataset =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteAdaptiveMtDataset(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteAdaptiveMtDataset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAdaptiveMtDataset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAdaptiveMtDataset with error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteAdaptiveMtDataset = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.deleteAdaptiveMtDataset(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAdaptiveMtDataset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAdaptiveMtDataset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAdaptiveMtDataset with closed client', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.DeleteAdaptiveMtDatasetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deleteAdaptiveMtDataset(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('getAdaptiveMtDataset', () => {
+    it('invokes getAdaptiveMtDataset without error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.GetAdaptiveMtDatasetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.GetAdaptiveMtDatasetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.translation.v3.AdaptiveMtDataset()
+      );
+      client.innerApiCalls.getAdaptiveMtDataset =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getAdaptiveMtDataset(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAdaptiveMtDataset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAdaptiveMtDataset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAdaptiveMtDataset without error using callback', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.GetAdaptiveMtDatasetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.GetAdaptiveMtDatasetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.translation.v3.AdaptiveMtDataset()
+      );
+      client.innerApiCalls.getAdaptiveMtDataset =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getAdaptiveMtDataset(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.translation.v3.IAdaptiveMtDataset | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAdaptiveMtDataset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAdaptiveMtDataset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAdaptiveMtDataset with error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.GetAdaptiveMtDatasetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.GetAdaptiveMtDatasetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getAdaptiveMtDataset = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getAdaptiveMtDataset(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getAdaptiveMtDataset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAdaptiveMtDataset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAdaptiveMtDataset with closed client', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.GetAdaptiveMtDatasetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.GetAdaptiveMtDatasetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getAdaptiveMtDataset(request), expectedError);
+    });
+  });
+
+  describe('adaptiveMtTranslate', () => {
+    it('invokes adaptiveMtTranslate without error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.AdaptiveMtTranslateRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.AdaptiveMtTranslateRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.translation.v3.AdaptiveMtTranslateResponse()
+      );
+      client.innerApiCalls.adaptiveMtTranslate =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.adaptiveMtTranslate(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.adaptiveMtTranslate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.adaptiveMtTranslate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes adaptiveMtTranslate without error using callback', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.AdaptiveMtTranslateRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.AdaptiveMtTranslateRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.translation.v3.AdaptiveMtTranslateResponse()
+      );
+      client.innerApiCalls.adaptiveMtTranslate =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.adaptiveMtTranslate(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.translation.v3.IAdaptiveMtTranslateResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.adaptiveMtTranslate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.adaptiveMtTranslate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes adaptiveMtTranslate with error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.AdaptiveMtTranslateRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.AdaptiveMtTranslateRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.adaptiveMtTranslate = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.adaptiveMtTranslate(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.adaptiveMtTranslate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.adaptiveMtTranslate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes adaptiveMtTranslate with closed client', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.AdaptiveMtTranslateRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.AdaptiveMtTranslateRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.adaptiveMtTranslate(request), expectedError);
+    });
+  });
+
+  describe('getAdaptiveMtFile', () => {
+    it('invokes getAdaptiveMtFile without error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.GetAdaptiveMtFileRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.GetAdaptiveMtFileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.translation.v3.AdaptiveMtFile()
+      );
+      client.innerApiCalls.getAdaptiveMtFile = stubSimpleCall(expectedResponse);
+      const [response] = await client.getAdaptiveMtFile(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAdaptiveMtFile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAdaptiveMtFile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAdaptiveMtFile without error using callback', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.GetAdaptiveMtFileRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.GetAdaptiveMtFileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.translation.v3.AdaptiveMtFile()
+      );
+      client.innerApiCalls.getAdaptiveMtFile =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getAdaptiveMtFile(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.translation.v3.IAdaptiveMtFile | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAdaptiveMtFile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAdaptiveMtFile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAdaptiveMtFile with error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.GetAdaptiveMtFileRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.GetAdaptiveMtFileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getAdaptiveMtFile = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getAdaptiveMtFile(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getAdaptiveMtFile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAdaptiveMtFile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAdaptiveMtFile with closed client', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.GetAdaptiveMtFileRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.GetAdaptiveMtFileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getAdaptiveMtFile(request), expectedError);
+    });
+  });
+
+  describe('deleteAdaptiveMtFile', () => {
+    it('invokes deleteAdaptiveMtFile without error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.DeleteAdaptiveMtFileRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.DeleteAdaptiveMtFileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteAdaptiveMtFile =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteAdaptiveMtFile(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteAdaptiveMtFile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAdaptiveMtFile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAdaptiveMtFile without error using callback', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.DeleteAdaptiveMtFileRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.DeleteAdaptiveMtFileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteAdaptiveMtFile =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteAdaptiveMtFile(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteAdaptiveMtFile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAdaptiveMtFile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAdaptiveMtFile with error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.DeleteAdaptiveMtFileRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.DeleteAdaptiveMtFileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteAdaptiveMtFile = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteAdaptiveMtFile(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteAdaptiveMtFile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAdaptiveMtFile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAdaptiveMtFile with closed client', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.DeleteAdaptiveMtFileRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.DeleteAdaptiveMtFileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteAdaptiveMtFile(request), expectedError);
+    });
+  });
+
+  describe('importAdaptiveMtFile', () => {
+    it('invokes importAdaptiveMtFile without error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.ImportAdaptiveMtFileRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.ImportAdaptiveMtFileRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.translation.v3.ImportAdaptiveMtFileResponse()
+      );
+      client.innerApiCalls.importAdaptiveMtFile =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.importAdaptiveMtFile(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.importAdaptiveMtFile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importAdaptiveMtFile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes importAdaptiveMtFile without error using callback', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.ImportAdaptiveMtFileRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.ImportAdaptiveMtFileRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.translation.v3.ImportAdaptiveMtFileResponse()
+      );
+      client.innerApiCalls.importAdaptiveMtFile =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.importAdaptiveMtFile(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.translation.v3.IImportAdaptiveMtFileResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.importAdaptiveMtFile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importAdaptiveMtFile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes importAdaptiveMtFile with error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.ImportAdaptiveMtFileRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.ImportAdaptiveMtFileRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.importAdaptiveMtFile = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.importAdaptiveMtFile(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.importAdaptiveMtFile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importAdaptiveMtFile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes importAdaptiveMtFile with closed client', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.ImportAdaptiveMtFileRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.ImportAdaptiveMtFileRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.importAdaptiveMtFile(request), expectedError);
+    });
+  });
+
   describe('batchTranslateText', () => {
     it('invokes batchTranslateText without error', async () => {
       const client = new translationserviceModule.v3.TranslationServiceClient({
@@ -2020,7 +2948,1305 @@ describe('v3.TranslationServiceClient', () => {
     });
   });
 
+  describe('listAdaptiveMtDatasets', () => {
+    it('invokes listAdaptiveMtDatasets without error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtDataset()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtDataset()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtDataset()
+        ),
+      ];
+      client.innerApiCalls.listAdaptiveMtDatasets =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listAdaptiveMtDatasets(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAdaptiveMtDatasets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAdaptiveMtDatasets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAdaptiveMtDatasets without error using callback', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtDataset()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtDataset()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtDataset()
+        ),
+      ];
+      client.innerApiCalls.listAdaptiveMtDatasets =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listAdaptiveMtDatasets(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.translation.v3.IAdaptiveMtDataset[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAdaptiveMtDatasets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAdaptiveMtDatasets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAdaptiveMtDatasets with error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listAdaptiveMtDatasets = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listAdaptiveMtDatasets(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.listAdaptiveMtDatasets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAdaptiveMtDatasets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAdaptiveMtDatasetsStream without error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtDataset()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtDataset()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtDataset()
+        ),
+      ];
+      client.descriptors.page.listAdaptiveMtDatasets.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listAdaptiveMtDatasetsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.translation.v3.AdaptiveMtDataset[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.translation.v3.AdaptiveMtDataset) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listAdaptiveMtDatasets
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAdaptiveMtDatasets, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listAdaptiveMtDatasets
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listAdaptiveMtDatasetsStream with error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAdaptiveMtDatasets.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listAdaptiveMtDatasetsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.translation.v3.AdaptiveMtDataset[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.translation.v3.AdaptiveMtDataset) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listAdaptiveMtDatasets
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAdaptiveMtDatasets, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listAdaptiveMtDatasets
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listAdaptiveMtDatasets without error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtDataset()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtDataset()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtDataset()
+        ),
+      ];
+      client.descriptors.page.listAdaptiveMtDatasets.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.translation.v3.IAdaptiveMtDataset[] =
+        [];
+      const iterable = client.listAdaptiveMtDatasetsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAdaptiveMtDatasets
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listAdaptiveMtDatasets
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listAdaptiveMtDatasets with error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.ListAdaptiveMtDatasetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAdaptiveMtDatasets.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listAdaptiveMtDatasetsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.translation.v3.IAdaptiveMtDataset[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAdaptiveMtDatasets
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listAdaptiveMtDatasets
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('listAdaptiveMtFiles', () => {
+    it('invokes listAdaptiveMtFiles without error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.ListAdaptiveMtFilesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.ListAdaptiveMtFilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtFile()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtFile()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtFile()
+        ),
+      ];
+      client.innerApiCalls.listAdaptiveMtFiles =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listAdaptiveMtFiles(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAdaptiveMtFiles as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAdaptiveMtFiles as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAdaptiveMtFiles without error using callback', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.ListAdaptiveMtFilesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.ListAdaptiveMtFilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtFile()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtFile()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtFile()
+        ),
+      ];
+      client.innerApiCalls.listAdaptiveMtFiles =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listAdaptiveMtFiles(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.translation.v3.IAdaptiveMtFile[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAdaptiveMtFiles as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAdaptiveMtFiles as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAdaptiveMtFiles with error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.ListAdaptiveMtFilesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.ListAdaptiveMtFilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listAdaptiveMtFiles = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listAdaptiveMtFiles(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listAdaptiveMtFiles as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAdaptiveMtFiles as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAdaptiveMtFilesStream without error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.ListAdaptiveMtFilesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.ListAdaptiveMtFilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtFile()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtFile()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtFile()
+        ),
+      ];
+      client.descriptors.page.listAdaptiveMtFiles.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listAdaptiveMtFilesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.translation.v3.AdaptiveMtFile[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.translation.v3.AdaptiveMtFile) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listAdaptiveMtFiles.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAdaptiveMtFiles, request)
+      );
+      assert(
+        (client.descriptors.page.listAdaptiveMtFiles.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listAdaptiveMtFilesStream with error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.ListAdaptiveMtFilesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.ListAdaptiveMtFilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAdaptiveMtFiles.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listAdaptiveMtFilesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.translation.v3.AdaptiveMtFile[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.translation.v3.AdaptiveMtFile) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listAdaptiveMtFiles.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAdaptiveMtFiles, request)
+      );
+      assert(
+        (client.descriptors.page.listAdaptiveMtFiles.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listAdaptiveMtFiles without error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.ListAdaptiveMtFilesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.ListAdaptiveMtFilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtFile()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtFile()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtFile()
+        ),
+      ];
+      client.descriptors.page.listAdaptiveMtFiles.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.translation.v3.IAdaptiveMtFile[] =
+        [];
+      const iterable = client.listAdaptiveMtFilesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAdaptiveMtFiles.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listAdaptiveMtFiles.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listAdaptiveMtFiles with error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.ListAdaptiveMtFilesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.ListAdaptiveMtFilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAdaptiveMtFiles.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listAdaptiveMtFilesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.translation.v3.IAdaptiveMtFile[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAdaptiveMtFiles.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listAdaptiveMtFiles.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('listAdaptiveMtSentences', () => {
+    it('invokes listAdaptiveMtSentences without error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.ListAdaptiveMtSentencesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.ListAdaptiveMtSentencesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtSentence()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtSentence()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtSentence()
+        ),
+      ];
+      client.innerApiCalls.listAdaptiveMtSentences =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listAdaptiveMtSentences(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAdaptiveMtSentences as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAdaptiveMtSentences as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAdaptiveMtSentences without error using callback', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.ListAdaptiveMtSentencesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.ListAdaptiveMtSentencesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtSentence()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtSentence()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtSentence()
+        ),
+      ];
+      client.innerApiCalls.listAdaptiveMtSentences =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listAdaptiveMtSentences(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.translation.v3.IAdaptiveMtSentence[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAdaptiveMtSentences as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAdaptiveMtSentences as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAdaptiveMtSentences with error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.ListAdaptiveMtSentencesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.ListAdaptiveMtSentencesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listAdaptiveMtSentences = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listAdaptiveMtSentences(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.listAdaptiveMtSentences as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAdaptiveMtSentences as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAdaptiveMtSentencesStream without error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.ListAdaptiveMtSentencesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.ListAdaptiveMtSentencesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtSentence()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtSentence()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtSentence()
+        ),
+      ];
+      client.descriptors.page.listAdaptiveMtSentences.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listAdaptiveMtSentencesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.translation.v3.AdaptiveMtSentence[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.translation.v3.AdaptiveMtSentence) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listAdaptiveMtSentences
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAdaptiveMtSentences, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listAdaptiveMtSentences
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listAdaptiveMtSentencesStream with error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.ListAdaptiveMtSentencesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.ListAdaptiveMtSentencesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAdaptiveMtSentences.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listAdaptiveMtSentencesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.translation.v3.AdaptiveMtSentence[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.translation.v3.AdaptiveMtSentence) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listAdaptiveMtSentences
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAdaptiveMtSentences, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listAdaptiveMtSentences
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listAdaptiveMtSentences without error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.ListAdaptiveMtSentencesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.ListAdaptiveMtSentencesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtSentence()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtSentence()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.translation.v3.AdaptiveMtSentence()
+        ),
+      ];
+      client.descriptors.page.listAdaptiveMtSentences.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.translation.v3.IAdaptiveMtSentence[] =
+        [];
+      const iterable = client.listAdaptiveMtSentencesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAdaptiveMtSentences
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listAdaptiveMtSentences
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listAdaptiveMtSentences with error', async () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.translation.v3.ListAdaptiveMtSentencesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.translation.v3.ListAdaptiveMtSentencesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAdaptiveMtSentences.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listAdaptiveMtSentencesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.translation.v3.IAdaptiveMtSentence[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAdaptiveMtSentences
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listAdaptiveMtSentences
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
   describe('Path templates', () => {
+    describe('adaptiveMtDataset', () => {
+      const fakePath = '/rendered/path/adaptiveMtDataset';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        dataset: 'datasetValue',
+      };
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.adaptiveMtDatasetPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.adaptiveMtDatasetPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('adaptiveMtDatasetPath', () => {
+        const result = client.adaptiveMtDatasetPath(
+          'projectValue',
+          'locationValue',
+          'datasetValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.adaptiveMtDatasetPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromAdaptiveMtDatasetName', () => {
+        const result = client.matchProjectFromAdaptiveMtDatasetName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.adaptiveMtDatasetPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromAdaptiveMtDatasetName', () => {
+        const result = client.matchLocationFromAdaptiveMtDatasetName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.adaptiveMtDatasetPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDatasetFromAdaptiveMtDatasetName', () => {
+        const result = client.matchDatasetFromAdaptiveMtDatasetName(fakePath);
+        assert.strictEqual(result, 'datasetValue');
+        assert(
+          (
+            client.pathTemplates.adaptiveMtDatasetPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('adaptiveMtFile', () => {
+      const fakePath = '/rendered/path/adaptiveMtFile';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        dataset: 'datasetValue',
+        file: 'fileValue',
+      };
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.adaptiveMtFilePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.adaptiveMtFilePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('adaptiveMtFilePath', () => {
+        const result = client.adaptiveMtFilePath(
+          'projectValue',
+          'locationValue',
+          'datasetValue',
+          'fileValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.adaptiveMtFilePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromAdaptiveMtFileName', () => {
+        const result = client.matchProjectFromAdaptiveMtFileName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.adaptiveMtFilePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromAdaptiveMtFileName', () => {
+        const result = client.matchLocationFromAdaptiveMtFileName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.adaptiveMtFilePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDatasetFromAdaptiveMtFileName', () => {
+        const result = client.matchDatasetFromAdaptiveMtFileName(fakePath);
+        assert.strictEqual(result, 'datasetValue');
+        assert(
+          (client.pathTemplates.adaptiveMtFilePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFileFromAdaptiveMtFileName', () => {
+        const result = client.matchFileFromAdaptiveMtFileName(fakePath);
+        assert.strictEqual(result, 'fileValue');
+        assert(
+          (client.pathTemplates.adaptiveMtFilePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('adaptiveMtSentence', () => {
+      const fakePath = '/rendered/path/adaptiveMtSentence';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        dataset: 'datasetValue',
+        file: 'fileValue',
+        sentence: 'sentenceValue',
+      };
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.adaptiveMtSentencePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.adaptiveMtSentencePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('adaptiveMtSentencePath', () => {
+        const result = client.adaptiveMtSentencePath(
+          'projectValue',
+          'locationValue',
+          'datasetValue',
+          'fileValue',
+          'sentenceValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.adaptiveMtSentencePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromAdaptiveMtSentenceName', () => {
+        const result = client.matchProjectFromAdaptiveMtSentenceName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.adaptiveMtSentencePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromAdaptiveMtSentenceName', () => {
+        const result = client.matchLocationFromAdaptiveMtSentenceName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.adaptiveMtSentencePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDatasetFromAdaptiveMtSentenceName', () => {
+        const result = client.matchDatasetFromAdaptiveMtSentenceName(fakePath);
+        assert.strictEqual(result, 'datasetValue');
+        assert(
+          (
+            client.pathTemplates.adaptiveMtSentencePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFileFromAdaptiveMtSentenceName', () => {
+        const result = client.matchFileFromAdaptiveMtSentenceName(fakePath);
+        assert.strictEqual(result, 'fileValue');
+        assert(
+          (
+            client.pathTemplates.adaptiveMtSentencePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSentenceFromAdaptiveMtSentenceName', () => {
+        const result = client.matchSentenceFromAdaptiveMtSentenceName(fakePath);
+        assert.strictEqual(result, 'sentenceValue');
+        assert(
+          (
+            client.pathTemplates.adaptiveMtSentencePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('glossary', () => {
       const fakePath = '/rendered/path/glossary';
       const expectedParameters = {

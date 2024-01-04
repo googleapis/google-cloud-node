@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -3829,6 +3829,7 @@
                          * @interface ICostProjection
                          * @property {google.type.IMoney|null} [cost] CostProjection cost
                          * @property {google.protobuf.IDuration|null} [duration] CostProjection duration
+                         * @property {google.type.IMoney|null} [costInLocalCurrency] CostProjection costInLocalCurrency
                          */
     
                         /**
@@ -3863,6 +3864,14 @@
                         CostProjection.prototype.duration = null;
     
                         /**
+                         * CostProjection costInLocalCurrency.
+                         * @member {google.type.IMoney|null|undefined} costInLocalCurrency
+                         * @memberof google.cloud.recommender.v1.CostProjection
+                         * @instance
+                         */
+                        CostProjection.prototype.costInLocalCurrency = null;
+    
+                        /**
                          * Creates a new CostProjection instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.recommender.v1.CostProjection
@@ -3890,6 +3899,8 @@
                                 $root.google.type.Money.encode(message.cost, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.duration != null && Object.hasOwnProperty.call(message, "duration"))
                                 $root.google.protobuf.Duration.encode(message.duration, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.costInLocalCurrency != null && Object.hasOwnProperty.call(message, "costInLocalCurrency"))
+                                $root.google.type.Money.encode(message.costInLocalCurrency, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -3930,6 +3941,10 @@
                                     }
                                 case 2: {
                                         message.duration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.costInLocalCurrency = $root.google.type.Money.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -3977,6 +3992,11 @@
                                 if (error)
                                     return "duration." + error;
                             }
+                            if (message.costInLocalCurrency != null && message.hasOwnProperty("costInLocalCurrency")) {
+                                var error = $root.google.type.Money.verify(message.costInLocalCurrency);
+                                if (error)
+                                    return "costInLocalCurrency." + error;
+                            }
                             return null;
                         };
     
@@ -4002,6 +4022,11 @@
                                     throw TypeError(".google.cloud.recommender.v1.CostProjection.duration: object expected");
                                 message.duration = $root.google.protobuf.Duration.fromObject(object.duration);
                             }
+                            if (object.costInLocalCurrency != null) {
+                                if (typeof object.costInLocalCurrency !== "object")
+                                    throw TypeError(".google.cloud.recommender.v1.CostProjection.costInLocalCurrency: object expected");
+                                message.costInLocalCurrency = $root.google.type.Money.fromObject(object.costInLocalCurrency);
+                            }
                             return message;
                         };
     
@@ -4021,11 +4046,14 @@
                             if (options.defaults) {
                                 object.cost = null;
                                 object.duration = null;
+                                object.costInLocalCurrency = null;
                             }
                             if (message.cost != null && message.hasOwnProperty("cost"))
                                 object.cost = $root.google.type.Money.toObject(message.cost, options);
                             if (message.duration != null && message.hasOwnProperty("duration"))
                                 object.duration = $root.google.protobuf.Duration.toObject(message.duration, options);
+                            if (message.costInLocalCurrency != null && message.hasOwnProperty("costInLocalCurrency"))
+                                object.costInLocalCurrency = $root.google.type.Money.toObject(message.costInLocalCurrency, options);
                             return object;
                         };
     
