@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, dataStream) {
-  // [START analyticsadmin_v1beta_generated_AnalyticsAdminService_CreateDataStream_async]
+function main(subpropertyEventFilter, updateMask) {
+  // [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateSubpropertyEventFilter_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,34 +29,37 @@ function main(parent, dataStream) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Example format: properties/1234
+   *  Required. The subproperty event filter to update.
    */
-  // const parent = 'abc123'
+  // const subpropertyEventFilter = {}
   /**
-   *  Required. The DataStream to create.
+   *  Required. The list of fields to update. Field names must be in snake case
+   *  (for example, "field_to_update"). Omitted fields will not be updated. To
+   *  replace the entire entity, use one path with the string "*" to match all
+   *  fields.
    */
-  // const dataStream = {}
+  // const updateMask = {}
 
   // Imports the Admin library
-  const {AnalyticsAdminServiceClient} = require('@google-cloud/admin').v1beta;
+  const {AnalyticsAdminServiceClient} = require('@google-analytics/admin').v1alpha;
 
   // Instantiates a client
   const adminClient = new AnalyticsAdminServiceClient();
 
-  async function callCreateDataStream() {
+  async function callUpdateSubpropertyEventFilter() {
     // Construct request
     const request = {
-      parent,
-      dataStream,
+      subpropertyEventFilter,
+      updateMask,
     };
 
     // Run request
-    const response = await adminClient.createDataStream(request);
+    const response = await adminClient.updateSubpropertyEventFilter(request);
     console.log(response);
   }
 
-  callCreateDataStream();
-  // [END analyticsadmin_v1beta_generated_AnalyticsAdminService_CreateDataStream_async]
+  callUpdateSubpropertyEventFilter();
+  // [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateSubpropertyEventFilter_async]
 }
 
 process.on('unhandledRejection', err => {
