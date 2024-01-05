@@ -2915,9 +2915,8 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       client.innerApiCalls.getSkAdNetworkConversionValueSchema =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.getSKAdNetworkConversionValueSchema(
-        request
-      );
+      const [response] =
+        await client.getSKAdNetworkConversionValueSchema(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.getSkAdNetworkConversionValueSchema as SinonStub
@@ -3058,9 +3057,8 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       client.innerApiCalls.createSkAdNetworkConversionValueSchema =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.createSKAdNetworkConversionValueSchema(
-        request
-      );
+      const [response] =
+        await client.createSKAdNetworkConversionValueSchema(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.createSkAdNetworkConversionValueSchema as SinonStub
@@ -3199,9 +3197,8 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       client.innerApiCalls.deleteSkAdNetworkConversionValueSchema =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteSKAdNetworkConversionValueSchema(
-        request
-      );
+      const [response] =
+        await client.deleteSKAdNetworkConversionValueSchema(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.deleteSkAdNetworkConversionValueSchema as SinonStub
@@ -3341,9 +3338,8 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       client.innerApiCalls.updateSkAdNetworkConversionValueSchema =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.updateSKAdNetworkConversionValueSchema(
-        request
-      );
+      const [response] =
+        await client.updateSKAdNetworkConversionValueSchema(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.updateSkAdNetworkConversionValueSchema as SinonStub
@@ -4474,9 +4470,8 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       client.innerApiCalls.createDisplayVideo360AdvertiserLink =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.createDisplayVideo360AdvertiserLink(
-        request
-      );
+      const [response] =
+        await client.createDisplayVideo360AdvertiserLink(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.createDisplayVideo360AdvertiserLink as SinonStub
@@ -4617,9 +4612,8 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       client.innerApiCalls.deleteDisplayVideo360AdvertiserLink =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteDisplayVideo360AdvertiserLink(
-        request
-      );
+      const [response] =
+        await client.deleteDisplayVideo360AdvertiserLink(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.deleteDisplayVideo360AdvertiserLink as SinonStub
@@ -4761,9 +4755,8 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       client.innerApiCalls.updateDisplayVideo360AdvertiserLink =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.updateDisplayVideo360AdvertiserLink(
-        request
-      );
+      const [response] =
+        await client.updateDisplayVideo360AdvertiserLink(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.updateDisplayVideo360AdvertiserLink as SinonStub
@@ -4907,9 +4900,8 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       client.innerApiCalls.getDisplayVideo360AdvertiserLinkProposal =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.getDisplayVideo360AdvertiserLinkProposal(
-        request
-      );
+      const [response] =
+        await client.getDisplayVideo360AdvertiserLinkProposal(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls
@@ -11297,9 +11289,8 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       client.innerApiCalls.setAutomatedGa4ConfigurationOptOut =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.setAutomatedGa4ConfigurationOptOut(
-        request
-      );
+      const [response] =
+        await client.setAutomatedGa4ConfigurationOptOut(request);
       assert.deepStrictEqual(response, expectedResponse);
     });
 
@@ -11393,9 +11384,8 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       client.innerApiCalls.fetchAutomatedGa4ConfigurationOptOut =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.fetchAutomatedGa4ConfigurationOptOut(
-        request
-      );
+      const [response] =
+        await client.fetchAutomatedGa4ConfigurationOptOut(request);
       assert.deepStrictEqual(response, expectedResponse);
     });
 
@@ -11769,9 +11759,8 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       client.innerApiCalls.updateEnhancedMeasurementSettings =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.updateEnhancedMeasurementSettings(
-        request
-      );
+      const [response] =
+        await client.updateEnhancedMeasurementSettings(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.updateEnhancedMeasurementSettings as SinonStub
@@ -14117,147 +14106,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
     });
   });
 
-  describe('deleteSubpropertyEventFilter', () => {
-    it('invokes deleteSubpropertyEventFilter without error', async () => {
-      const client =
-        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.admin.v1alpha.DeleteSubpropertyEventFilterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.analytics.admin.v1alpha.DeleteSubpropertyEventFilterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteSubpropertyEventFilter =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteSubpropertyEventFilter(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteSubpropertyEventFilter as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSubpropertyEventFilter as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteSubpropertyEventFilter without error using callback', async () => {
-      const client =
-        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.admin.v1alpha.DeleteSubpropertyEventFilterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.analytics.admin.v1alpha.DeleteSubpropertyEventFilterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteSubpropertyEventFilter =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteSubpropertyEventFilter(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteSubpropertyEventFilter as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSubpropertyEventFilter as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteSubpropertyEventFilter with error', async () => {
-      const client =
-        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.admin.v1alpha.DeleteSubpropertyEventFilterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.analytics.admin.v1alpha.DeleteSubpropertyEventFilterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteSubpropertyEventFilter = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.deleteSubpropertyEventFilter(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.deleteSubpropertyEventFilter as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSubpropertyEventFilter as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteSubpropertyEventFilter with closed client', async () => {
-      const client =
-        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.admin.v1alpha.DeleteSubpropertyEventFilterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.analytics.admin.v1alpha.DeleteSubpropertyEventFilterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(
-        client.deleteSubpropertyEventFilter(request),
-        expectedError
-      );
-    });
-  });
-
   describe('createSubpropertyEventFilter', () => {
     it('invokes createSubpropertyEventFilter without error', async () => {
       const client =
@@ -14394,6 +14242,433 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       client.close();
       await assert.rejects(
         client.createSubpropertyEventFilter(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('getSubpropertyEventFilter', () => {
+    it('invokes getSubpropertyEventFilter without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetSubpropertyEventFilterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetSubpropertyEventFilterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SubpropertyEventFilter()
+      );
+      client.innerApiCalls.getSubpropertyEventFilter =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getSubpropertyEventFilter(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getSubpropertyEventFilter as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSubpropertyEventFilter as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSubpropertyEventFilter without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetSubpropertyEventFilterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetSubpropertyEventFilterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SubpropertyEventFilter()
+      );
+      client.innerApiCalls.getSubpropertyEventFilter =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getSubpropertyEventFilter(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getSubpropertyEventFilter as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSubpropertyEventFilter as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSubpropertyEventFilter with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetSubpropertyEventFilterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetSubpropertyEventFilterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getSubpropertyEventFilter = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getSubpropertyEventFilter(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.getSubpropertyEventFilter as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSubpropertyEventFilter as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSubpropertyEventFilter with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetSubpropertyEventFilterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetSubpropertyEventFilterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getSubpropertyEventFilter(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('updateSubpropertyEventFilter', () => {
+    it('invokes updateSubpropertyEventFilter without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateSubpropertyEventFilterRequest()
+      );
+      request.subpropertyEventFilter ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateSubpropertyEventFilterRequest',
+        ['subpropertyEventFilter', 'name']
+      );
+      request.subpropertyEventFilter.name = defaultValue1;
+      const expectedHeaderRequestParams = `subproperty_event_filter.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SubpropertyEventFilter()
+      );
+      client.innerApiCalls.updateSubpropertyEventFilter =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateSubpropertyEventFilter(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateSubpropertyEventFilter as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSubpropertyEventFilter as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSubpropertyEventFilter without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateSubpropertyEventFilterRequest()
+      );
+      request.subpropertyEventFilter ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateSubpropertyEventFilterRequest',
+        ['subpropertyEventFilter', 'name']
+      );
+      request.subpropertyEventFilter.name = defaultValue1;
+      const expectedHeaderRequestParams = `subproperty_event_filter.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SubpropertyEventFilter()
+      );
+      client.innerApiCalls.updateSubpropertyEventFilter =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateSubpropertyEventFilter(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateSubpropertyEventFilter as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSubpropertyEventFilter as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSubpropertyEventFilter with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateSubpropertyEventFilterRequest()
+      );
+      request.subpropertyEventFilter ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateSubpropertyEventFilterRequest',
+        ['subpropertyEventFilter', 'name']
+      );
+      request.subpropertyEventFilter.name = defaultValue1;
+      const expectedHeaderRequestParams = `subproperty_event_filter.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateSubpropertyEventFilter = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateSubpropertyEventFilter(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateSubpropertyEventFilter as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSubpropertyEventFilter as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSubpropertyEventFilter with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateSubpropertyEventFilterRequest()
+      );
+      request.subpropertyEventFilter ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateSubpropertyEventFilterRequest',
+        ['subpropertyEventFilter', 'name']
+      );
+      request.subpropertyEventFilter.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateSubpropertyEventFilter(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('deleteSubpropertyEventFilter', () => {
+    it('invokes deleteSubpropertyEventFilter without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteSubpropertyEventFilterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.DeleteSubpropertyEventFilterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteSubpropertyEventFilter =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteSubpropertyEventFilter(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteSubpropertyEventFilter as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSubpropertyEventFilter as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteSubpropertyEventFilter without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteSubpropertyEventFilterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.DeleteSubpropertyEventFilterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteSubpropertyEventFilter =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteSubpropertyEventFilter(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteSubpropertyEventFilter as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSubpropertyEventFilter as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteSubpropertyEventFilter with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteSubpropertyEventFilterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.DeleteSubpropertyEventFilterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteSubpropertyEventFilter = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.deleteSubpropertyEventFilter(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteSubpropertyEventFilter as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSubpropertyEventFilter as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteSubpropertyEventFilter with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteSubpropertyEventFilterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.DeleteSubpropertyEventFilterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deleteSubpropertyEventFilter(request),
         expectedError
       );
     });
@@ -16201,9 +16476,8 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       ];
       client.innerApiCalls.listSkAdNetworkConversionValueSchemas =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.listSKAdNetworkConversionValueSchemas(
-        request
-      );
+      const [response] =
+        await client.listSKAdNetworkConversionValueSchemas(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listSkAdNetworkConversionValueSchemas as SinonStub
@@ -17282,9 +17556,8 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       ];
       client.innerApiCalls.listDisplayVideo360AdvertiserLinks =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.listDisplayVideo360AdvertiserLinks(
-        request
-      );
+      const [response] =
+        await client.listDisplayVideo360AdvertiserLinks(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listDisplayVideo360AdvertiserLinks as SinonStub
@@ -22108,6 +22381,372 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (
           client.descriptors.page.listRollupPropertySourceLinks
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('listSubpropertyEventFilters', () => {
+    it('invokes listSubpropertyEventFilters without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListSubpropertyEventFiltersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListSubpropertyEventFiltersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SubpropertyEventFilter()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SubpropertyEventFilter()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SubpropertyEventFilter()
+        ),
+      ];
+      client.innerApiCalls.listSubpropertyEventFilters =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listSubpropertyEventFilters(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listSubpropertyEventFilters as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSubpropertyEventFilters as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSubpropertyEventFilters without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListSubpropertyEventFiltersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListSubpropertyEventFiltersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SubpropertyEventFilter()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SubpropertyEventFilter()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SubpropertyEventFilter()
+        ),
+      ];
+      client.innerApiCalls.listSubpropertyEventFilters =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listSubpropertyEventFilters(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listSubpropertyEventFilters as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSubpropertyEventFilters as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSubpropertyEventFilters with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListSubpropertyEventFiltersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListSubpropertyEventFiltersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listSubpropertyEventFilters = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listSubpropertyEventFilters(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.listSubpropertyEventFilters as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSubpropertyEventFilters as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSubpropertyEventFiltersStream without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListSubpropertyEventFiltersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListSubpropertyEventFiltersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SubpropertyEventFilter()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SubpropertyEventFilter()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SubpropertyEventFilter()
+        ),
+      ];
+      client.descriptors.page.listSubpropertyEventFilters.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listSubpropertyEventFiltersStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.admin.v1alpha.SubpropertyEventFilter[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.analytics.admin.v1alpha.SubpropertyEventFilter
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listSubpropertyEventFilters
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listSubpropertyEventFilters, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listSubpropertyEventFilters
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listSubpropertyEventFiltersStream with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListSubpropertyEventFiltersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListSubpropertyEventFiltersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listSubpropertyEventFilters.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listSubpropertyEventFiltersStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.admin.v1alpha.SubpropertyEventFilter[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.analytics.admin.v1alpha.SubpropertyEventFilter
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listSubpropertyEventFilters
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listSubpropertyEventFilters, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listSubpropertyEventFilters
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listSubpropertyEventFilters without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListSubpropertyEventFiltersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListSubpropertyEventFiltersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SubpropertyEventFilter()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SubpropertyEventFilter()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SubpropertyEventFilter()
+        ),
+      ];
+      client.descriptors.page.listSubpropertyEventFilters.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter[] =
+        [];
+      const iterable = client.listSubpropertyEventFiltersAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listSubpropertyEventFilters
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listSubpropertyEventFilters
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listSubpropertyEventFilters with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListSubpropertyEventFiltersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListSubpropertyEventFiltersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listSubpropertyEventFilters.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listSubpropertyEventFiltersAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listSubpropertyEventFilters
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listSubpropertyEventFilters
             .asyncIterate as SinonStub
         )
           .getCall(0)

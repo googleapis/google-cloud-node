@@ -78,6 +78,7 @@
                          * @property {google.cloud.orgpolicy.v2.Constraint.ConstraintDefault|null} [constraintDefault] Constraint constraintDefault
                          * @property {google.cloud.orgpolicy.v2.Constraint.IListConstraint|null} [listConstraint] Constraint listConstraint
                          * @property {google.cloud.orgpolicy.v2.Constraint.IBooleanConstraint|null} [booleanConstraint] Constraint booleanConstraint
+                         * @property {boolean|null} [supportsDryRun] Constraint supportsDryRun
                          */
     
                         /**
@@ -143,6 +144,14 @@
                          */
                         Constraint.prototype.booleanConstraint = null;
     
+                        /**
+                         * Constraint supportsDryRun.
+                         * @member {boolean} supportsDryRun
+                         * @memberof google.cloud.orgpolicy.v2.Constraint
+                         * @instance
+                         */
+                        Constraint.prototype.supportsDryRun = false;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -193,6 +202,8 @@
                                 $root.google.cloud.orgpolicy.v2.Constraint.ListConstraint.encode(message.listConstraint, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.booleanConstraint != null && Object.hasOwnProperty.call(message, "booleanConstraint"))
                                 $root.google.cloud.orgpolicy.v2.Constraint.BooleanConstraint.encode(message.booleanConstraint, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.supportsDryRun != null && Object.hasOwnProperty.call(message, "supportsDryRun"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.supportsDryRun);
                             return writer;
                         };
     
@@ -249,6 +260,10 @@
                                     }
                                 case 6: {
                                         message.booleanConstraint = $root.google.cloud.orgpolicy.v2.Constraint.BooleanConstraint.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.supportsDryRun = reader.bool();
                                         break;
                                     }
                                 default:
@@ -323,6 +338,9 @@
                                         return "booleanConstraint." + error;
                                 }
                             }
+                            if (message.supportsDryRun != null && message.hasOwnProperty("supportsDryRun"))
+                                if (typeof message.supportsDryRun !== "boolean")
+                                    return "supportsDryRun: boolean expected";
                             return null;
                         };
     
@@ -374,6 +392,8 @@
                                     throw TypeError(".google.cloud.orgpolicy.v2.Constraint.booleanConstraint: object expected");
                                 message.booleanConstraint = $root.google.cloud.orgpolicy.v2.Constraint.BooleanConstraint.fromObject(object.booleanConstraint);
                             }
+                            if (object.supportsDryRun != null)
+                                message.supportsDryRun = Boolean(object.supportsDryRun);
                             return message;
                         };
     
@@ -395,6 +415,7 @@
                                 object.displayName = "";
                                 object.description = "";
                                 object.constraintDefault = options.enums === String ? "CONSTRAINT_DEFAULT_UNSPECIFIED" : 0;
+                                object.supportsDryRun = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -414,6 +435,8 @@
                                 if (options.oneofs)
                                     object.constraintType = "booleanConstraint";
                             }
+                            if (message.supportsDryRun != null && message.hasOwnProperty("supportsDryRun"))
+                                object.supportsDryRun = message.supportsDryRun;
                             return object;
                         };
     
@@ -864,6 +887,505 @@
                         return Constraint;
                     })();
     
+                    v2.CustomConstraint = (function() {
+    
+                        /**
+                         * Properties of a CustomConstraint.
+                         * @memberof google.cloud.orgpolicy.v2
+                         * @interface ICustomConstraint
+                         * @property {string|null} [name] CustomConstraint name
+                         * @property {Array.<string>|null} [resourceTypes] CustomConstraint resourceTypes
+                         * @property {Array.<google.cloud.orgpolicy.v2.CustomConstraint.MethodType>|null} [methodTypes] CustomConstraint methodTypes
+                         * @property {string|null} [condition] CustomConstraint condition
+                         * @property {google.cloud.orgpolicy.v2.CustomConstraint.ActionType|null} [actionType] CustomConstraint actionType
+                         * @property {string|null} [displayName] CustomConstraint displayName
+                         * @property {string|null} [description] CustomConstraint description
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] CustomConstraint updateTime
+                         */
+    
+                        /**
+                         * Constructs a new CustomConstraint.
+                         * @memberof google.cloud.orgpolicy.v2
+                         * @classdesc Represents a CustomConstraint.
+                         * @implements ICustomConstraint
+                         * @constructor
+                         * @param {google.cloud.orgpolicy.v2.ICustomConstraint=} [properties] Properties to set
+                         */
+                        function CustomConstraint(properties) {
+                            this.resourceTypes = [];
+                            this.methodTypes = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CustomConstraint name.
+                         * @member {string} name
+                         * @memberof google.cloud.orgpolicy.v2.CustomConstraint
+                         * @instance
+                         */
+                        CustomConstraint.prototype.name = "";
+    
+                        /**
+                         * CustomConstraint resourceTypes.
+                         * @member {Array.<string>} resourceTypes
+                         * @memberof google.cloud.orgpolicy.v2.CustomConstraint
+                         * @instance
+                         */
+                        CustomConstraint.prototype.resourceTypes = $util.emptyArray;
+    
+                        /**
+                         * CustomConstraint methodTypes.
+                         * @member {Array.<google.cloud.orgpolicy.v2.CustomConstraint.MethodType>} methodTypes
+                         * @memberof google.cloud.orgpolicy.v2.CustomConstraint
+                         * @instance
+                         */
+                        CustomConstraint.prototype.methodTypes = $util.emptyArray;
+    
+                        /**
+                         * CustomConstraint condition.
+                         * @member {string} condition
+                         * @memberof google.cloud.orgpolicy.v2.CustomConstraint
+                         * @instance
+                         */
+                        CustomConstraint.prototype.condition = "";
+    
+                        /**
+                         * CustomConstraint actionType.
+                         * @member {google.cloud.orgpolicy.v2.CustomConstraint.ActionType} actionType
+                         * @memberof google.cloud.orgpolicy.v2.CustomConstraint
+                         * @instance
+                         */
+                        CustomConstraint.prototype.actionType = 0;
+    
+                        /**
+                         * CustomConstraint displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.orgpolicy.v2.CustomConstraint
+                         * @instance
+                         */
+                        CustomConstraint.prototype.displayName = "";
+    
+                        /**
+                         * CustomConstraint description.
+                         * @member {string} description
+                         * @memberof google.cloud.orgpolicy.v2.CustomConstraint
+                         * @instance
+                         */
+                        CustomConstraint.prototype.description = "";
+    
+                        /**
+                         * CustomConstraint updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.orgpolicy.v2.CustomConstraint
+                         * @instance
+                         */
+                        CustomConstraint.prototype.updateTime = null;
+    
+                        /**
+                         * Creates a new CustomConstraint instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.orgpolicy.v2.CustomConstraint
+                         * @static
+                         * @param {google.cloud.orgpolicy.v2.ICustomConstraint=} [properties] Properties to set
+                         * @returns {google.cloud.orgpolicy.v2.CustomConstraint} CustomConstraint instance
+                         */
+                        CustomConstraint.create = function create(properties) {
+                            return new CustomConstraint(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CustomConstraint message. Does not implicitly {@link google.cloud.orgpolicy.v2.CustomConstraint.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.orgpolicy.v2.CustomConstraint
+                         * @static
+                         * @param {google.cloud.orgpolicy.v2.ICustomConstraint} message CustomConstraint message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomConstraint.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.resourceTypes != null && message.resourceTypes.length)
+                                for (var i = 0; i < message.resourceTypes.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.resourceTypes[i]);
+                            if (message.methodTypes != null && message.methodTypes.length) {
+                                writer.uint32(/* id 3, wireType 2 =*/26).fork();
+                                for (var i = 0; i < message.methodTypes.length; ++i)
+                                    writer.int32(message.methodTypes[i]);
+                                writer.ldelim();
+                            }
+                            if (message.condition != null && Object.hasOwnProperty.call(message, "condition"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.condition);
+                            if (message.actionType != null && Object.hasOwnProperty.call(message, "actionType"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.actionType);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.displayName);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.description);
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CustomConstraint message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.CustomConstraint.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.orgpolicy.v2.CustomConstraint
+                         * @static
+                         * @param {google.cloud.orgpolicy.v2.ICustomConstraint} message CustomConstraint message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomConstraint.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CustomConstraint message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.orgpolicy.v2.CustomConstraint
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.orgpolicy.v2.CustomConstraint} CustomConstraint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomConstraint.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orgpolicy.v2.CustomConstraint();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.resourceTypes && message.resourceTypes.length))
+                                            message.resourceTypes = [];
+                                        message.resourceTypes.push(reader.string());
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.methodTypes && message.methodTypes.length))
+                                            message.methodTypes = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.methodTypes.push(reader.int32());
+                                        } else
+                                            message.methodTypes.push(reader.int32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.condition = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.actionType = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CustomConstraint message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.orgpolicy.v2.CustomConstraint
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.orgpolicy.v2.CustomConstraint} CustomConstraint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomConstraint.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CustomConstraint message.
+                         * @function verify
+                         * @memberof google.cloud.orgpolicy.v2.CustomConstraint
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CustomConstraint.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.resourceTypes != null && message.hasOwnProperty("resourceTypes")) {
+                                if (!Array.isArray(message.resourceTypes))
+                                    return "resourceTypes: array expected";
+                                for (var i = 0; i < message.resourceTypes.length; ++i)
+                                    if (!$util.isString(message.resourceTypes[i]))
+                                        return "resourceTypes: string[] expected";
+                            }
+                            if (message.methodTypes != null && message.hasOwnProperty("methodTypes")) {
+                                if (!Array.isArray(message.methodTypes))
+                                    return "methodTypes: array expected";
+                                for (var i = 0; i < message.methodTypes.length; ++i)
+                                    switch (message.methodTypes[i]) {
+                                    default:
+                                        return "methodTypes: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                            }
+                            if (message.condition != null && message.hasOwnProperty("condition"))
+                                if (!$util.isString(message.condition))
+                                    return "condition: string expected";
+                            if (message.actionType != null && message.hasOwnProperty("actionType"))
+                                switch (message.actionType) {
+                                default:
+                                    return "actionType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CustomConstraint message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.orgpolicy.v2.CustomConstraint
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.orgpolicy.v2.CustomConstraint} CustomConstraint
+                         */
+                        CustomConstraint.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.orgpolicy.v2.CustomConstraint)
+                                return object;
+                            var message = new $root.google.cloud.orgpolicy.v2.CustomConstraint();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.resourceTypes) {
+                                if (!Array.isArray(object.resourceTypes))
+                                    throw TypeError(".google.cloud.orgpolicy.v2.CustomConstraint.resourceTypes: array expected");
+                                message.resourceTypes = [];
+                                for (var i = 0; i < object.resourceTypes.length; ++i)
+                                    message.resourceTypes[i] = String(object.resourceTypes[i]);
+                            }
+                            if (object.methodTypes) {
+                                if (!Array.isArray(object.methodTypes))
+                                    throw TypeError(".google.cloud.orgpolicy.v2.CustomConstraint.methodTypes: array expected");
+                                message.methodTypes = [];
+                                for (var i = 0; i < object.methodTypes.length; ++i)
+                                    switch (object.methodTypes[i]) {
+                                    default:
+                                        if (typeof object.methodTypes[i] === "number") {
+                                            message.methodTypes[i] = object.methodTypes[i];
+                                            break;
+                                        }
+                                    case "METHOD_TYPE_UNSPECIFIED":
+                                    case 0:
+                                        message.methodTypes[i] = 0;
+                                        break;
+                                    case "CREATE":
+                                    case 1:
+                                        message.methodTypes[i] = 1;
+                                        break;
+                                    case "UPDATE":
+                                    case 2:
+                                        message.methodTypes[i] = 2;
+                                        break;
+                                    case "DELETE":
+                                    case 3:
+                                        message.methodTypes[i] = 3;
+                                        break;
+                                    }
+                            }
+                            if (object.condition != null)
+                                message.condition = String(object.condition);
+                            switch (object.actionType) {
+                            default:
+                                if (typeof object.actionType === "number") {
+                                    message.actionType = object.actionType;
+                                    break;
+                                }
+                                break;
+                            case "ACTION_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.actionType = 0;
+                                break;
+                            case "ALLOW":
+                            case 1:
+                                message.actionType = 1;
+                                break;
+                            case "DENY":
+                            case 2:
+                                message.actionType = 2;
+                                break;
+                            }
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.orgpolicy.v2.CustomConstraint.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CustomConstraint message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.orgpolicy.v2.CustomConstraint
+                         * @static
+                         * @param {google.cloud.orgpolicy.v2.CustomConstraint} message CustomConstraint
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CustomConstraint.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.resourceTypes = [];
+                                object.methodTypes = [];
+                            }
+                            if (options.defaults) {
+                                object.name = "";
+                                object.condition = "";
+                                object.actionType = options.enums === String ? "ACTION_TYPE_UNSPECIFIED" : 0;
+                                object.displayName = "";
+                                object.description = "";
+                                object.updateTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.resourceTypes && message.resourceTypes.length) {
+                                object.resourceTypes = [];
+                                for (var j = 0; j < message.resourceTypes.length; ++j)
+                                    object.resourceTypes[j] = message.resourceTypes[j];
+                            }
+                            if (message.methodTypes && message.methodTypes.length) {
+                                object.methodTypes = [];
+                                for (var j = 0; j < message.methodTypes.length; ++j)
+                                    object.methodTypes[j] = options.enums === String ? $root.google.cloud.orgpolicy.v2.CustomConstraint.MethodType[message.methodTypes[j]] === undefined ? message.methodTypes[j] : $root.google.cloud.orgpolicy.v2.CustomConstraint.MethodType[message.methodTypes[j]] : message.methodTypes[j];
+                            }
+                            if (message.condition != null && message.hasOwnProperty("condition"))
+                                object.condition = message.condition;
+                            if (message.actionType != null && message.hasOwnProperty("actionType"))
+                                object.actionType = options.enums === String ? $root.google.cloud.orgpolicy.v2.CustomConstraint.ActionType[message.actionType] === undefined ? message.actionType : $root.google.cloud.orgpolicy.v2.CustomConstraint.ActionType[message.actionType] : message.actionType;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CustomConstraint to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.orgpolicy.v2.CustomConstraint
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CustomConstraint.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CustomConstraint
+                         * @function getTypeUrl
+                         * @memberof google.cloud.orgpolicy.v2.CustomConstraint
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CustomConstraint.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.orgpolicy.v2.CustomConstraint";
+                        };
+    
+                        /**
+                         * MethodType enum.
+                         * @name google.cloud.orgpolicy.v2.CustomConstraint.MethodType
+                         * @enum {number}
+                         * @property {number} METHOD_TYPE_UNSPECIFIED=0 METHOD_TYPE_UNSPECIFIED value
+                         * @property {number} CREATE=1 CREATE value
+                         * @property {number} UPDATE=2 UPDATE value
+                         * @property {number} DELETE=3 DELETE value
+                         */
+                        CustomConstraint.MethodType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "METHOD_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CREATE"] = 1;
+                            values[valuesById[2] = "UPDATE"] = 2;
+                            values[valuesById[3] = "DELETE"] = 3;
+                            return values;
+                        })();
+    
+                        /**
+                         * ActionType enum.
+                         * @name google.cloud.orgpolicy.v2.CustomConstraint.ActionType
+                         * @enum {number}
+                         * @property {number} ACTION_TYPE_UNSPECIFIED=0 ACTION_TYPE_UNSPECIFIED value
+                         * @property {number} ALLOW=1 ALLOW value
+                         * @property {number} DENY=2 DENY value
+                         */
+                        CustomConstraint.ActionType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ACTION_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ALLOW"] = 1;
+                            values[valuesById[2] = "DENY"] = 2;
+                            return values;
+                        })();
+    
+                        return CustomConstraint;
+                    })();
+    
                     v2.OrgPolicy = (function() {
     
                         /**
@@ -1127,6 +1649,171 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.orgpolicy.v2.OrgPolicy|createCustomConstraint}.
+                         * @memberof google.cloud.orgpolicy.v2.OrgPolicy
+                         * @typedef CreateCustomConstraintCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.orgpolicy.v2.CustomConstraint} [response] CustomConstraint
+                         */
+    
+                        /**
+                         * Calls CreateCustomConstraint.
+                         * @function createCustomConstraint
+                         * @memberof google.cloud.orgpolicy.v2.OrgPolicy
+                         * @instance
+                         * @param {google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest} request CreateCustomConstraintRequest message or plain object
+                         * @param {google.cloud.orgpolicy.v2.OrgPolicy.CreateCustomConstraintCallback} callback Node-style callback called with the error, if any, and CustomConstraint
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OrgPolicy.prototype.createCustomConstraint = function createCustomConstraint(request, callback) {
+                            return this.rpcCall(createCustomConstraint, $root.google.cloud.orgpolicy.v2.CreateCustomConstraintRequest, $root.google.cloud.orgpolicy.v2.CustomConstraint, request, callback);
+                        }, "name", { value: "CreateCustomConstraint" });
+    
+                        /**
+                         * Calls CreateCustomConstraint.
+                         * @function createCustomConstraint
+                         * @memberof google.cloud.orgpolicy.v2.OrgPolicy
+                         * @instance
+                         * @param {google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest} request CreateCustomConstraintRequest message or plain object
+                         * @returns {Promise<google.cloud.orgpolicy.v2.CustomConstraint>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.orgpolicy.v2.OrgPolicy|updateCustomConstraint}.
+                         * @memberof google.cloud.orgpolicy.v2.OrgPolicy
+                         * @typedef UpdateCustomConstraintCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.orgpolicy.v2.CustomConstraint} [response] CustomConstraint
+                         */
+    
+                        /**
+                         * Calls UpdateCustomConstraint.
+                         * @function updateCustomConstraint
+                         * @memberof google.cloud.orgpolicy.v2.OrgPolicy
+                         * @instance
+                         * @param {google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest} request UpdateCustomConstraintRequest message or plain object
+                         * @param {google.cloud.orgpolicy.v2.OrgPolicy.UpdateCustomConstraintCallback} callback Node-style callback called with the error, if any, and CustomConstraint
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OrgPolicy.prototype.updateCustomConstraint = function updateCustomConstraint(request, callback) {
+                            return this.rpcCall(updateCustomConstraint, $root.google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest, $root.google.cloud.orgpolicy.v2.CustomConstraint, request, callback);
+                        }, "name", { value: "UpdateCustomConstraint" });
+    
+                        /**
+                         * Calls UpdateCustomConstraint.
+                         * @function updateCustomConstraint
+                         * @memberof google.cloud.orgpolicy.v2.OrgPolicy
+                         * @instance
+                         * @param {google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest} request UpdateCustomConstraintRequest message or plain object
+                         * @returns {Promise<google.cloud.orgpolicy.v2.CustomConstraint>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.orgpolicy.v2.OrgPolicy|getCustomConstraint}.
+                         * @memberof google.cloud.orgpolicy.v2.OrgPolicy
+                         * @typedef GetCustomConstraintCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.orgpolicy.v2.CustomConstraint} [response] CustomConstraint
+                         */
+    
+                        /**
+                         * Calls GetCustomConstraint.
+                         * @function getCustomConstraint
+                         * @memberof google.cloud.orgpolicy.v2.OrgPolicy
+                         * @instance
+                         * @param {google.cloud.orgpolicy.v2.IGetCustomConstraintRequest} request GetCustomConstraintRequest message or plain object
+                         * @param {google.cloud.orgpolicy.v2.OrgPolicy.GetCustomConstraintCallback} callback Node-style callback called with the error, if any, and CustomConstraint
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OrgPolicy.prototype.getCustomConstraint = function getCustomConstraint(request, callback) {
+                            return this.rpcCall(getCustomConstraint, $root.google.cloud.orgpolicy.v2.GetCustomConstraintRequest, $root.google.cloud.orgpolicy.v2.CustomConstraint, request, callback);
+                        }, "name", { value: "GetCustomConstraint" });
+    
+                        /**
+                         * Calls GetCustomConstraint.
+                         * @function getCustomConstraint
+                         * @memberof google.cloud.orgpolicy.v2.OrgPolicy
+                         * @instance
+                         * @param {google.cloud.orgpolicy.v2.IGetCustomConstraintRequest} request GetCustomConstraintRequest message or plain object
+                         * @returns {Promise<google.cloud.orgpolicy.v2.CustomConstraint>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.orgpolicy.v2.OrgPolicy|listCustomConstraints}.
+                         * @memberof google.cloud.orgpolicy.v2.OrgPolicy
+                         * @typedef ListCustomConstraintsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.orgpolicy.v2.ListCustomConstraintsResponse} [response] ListCustomConstraintsResponse
+                         */
+    
+                        /**
+                         * Calls ListCustomConstraints.
+                         * @function listCustomConstraints
+                         * @memberof google.cloud.orgpolicy.v2.OrgPolicy
+                         * @instance
+                         * @param {google.cloud.orgpolicy.v2.IListCustomConstraintsRequest} request ListCustomConstraintsRequest message or plain object
+                         * @param {google.cloud.orgpolicy.v2.OrgPolicy.ListCustomConstraintsCallback} callback Node-style callback called with the error, if any, and ListCustomConstraintsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OrgPolicy.prototype.listCustomConstraints = function listCustomConstraints(request, callback) {
+                            return this.rpcCall(listCustomConstraints, $root.google.cloud.orgpolicy.v2.ListCustomConstraintsRequest, $root.google.cloud.orgpolicy.v2.ListCustomConstraintsResponse, request, callback);
+                        }, "name", { value: "ListCustomConstraints" });
+    
+                        /**
+                         * Calls ListCustomConstraints.
+                         * @function listCustomConstraints
+                         * @memberof google.cloud.orgpolicy.v2.OrgPolicy
+                         * @instance
+                         * @param {google.cloud.orgpolicy.v2.IListCustomConstraintsRequest} request ListCustomConstraintsRequest message or plain object
+                         * @returns {Promise<google.cloud.orgpolicy.v2.ListCustomConstraintsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.orgpolicy.v2.OrgPolicy|deleteCustomConstraint}.
+                         * @memberof google.cloud.orgpolicy.v2.OrgPolicy
+                         * @typedef DeleteCustomConstraintCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteCustomConstraint.
+                         * @function deleteCustomConstraint
+                         * @memberof google.cloud.orgpolicy.v2.OrgPolicy
+                         * @instance
+                         * @param {google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest} request DeleteCustomConstraintRequest message or plain object
+                         * @param {google.cloud.orgpolicy.v2.OrgPolicy.DeleteCustomConstraintCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OrgPolicy.prototype.deleteCustomConstraint = function deleteCustomConstraint(request, callback) {
+                            return this.rpcCall(deleteCustomConstraint, $root.google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteCustomConstraint" });
+    
+                        /**
+                         * Calls DeleteCustomConstraint.
+                         * @function deleteCustomConstraint
+                         * @memberof google.cloud.orgpolicy.v2.OrgPolicy
+                         * @instance
+                         * @param {google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest} request DeleteCustomConstraintRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
                         return OrgPolicy;
                     })();
     
@@ -1140,6 +1827,7 @@
                          * @property {google.cloud.orgpolicy.v2.IPolicySpec|null} [spec] Policy spec
                          * @property {google.cloud.orgpolicy.v2.IAlternatePolicySpec|null} [alternate] Policy alternate
                          * @property {google.cloud.orgpolicy.v2.IPolicySpec|null} [dryRunSpec] Policy dryRunSpec
+                         * @property {string|null} [etag] Policy etag
                          */
     
                         /**
@@ -1190,6 +1878,14 @@
                         Policy.prototype.dryRunSpec = null;
     
                         /**
+                         * Policy etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.orgpolicy.v2.Policy
+                         * @instance
+                         */
+                        Policy.prototype.etag = "";
+    
+                        /**
                          * Creates a new Policy instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.orgpolicy.v2.Policy
@@ -1221,6 +1917,8 @@
                                 $root.google.cloud.orgpolicy.v2.AlternatePolicySpec.encode(message.alternate, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.dryRunSpec != null && Object.hasOwnProperty.call(message, "dryRunSpec"))
                                 $root.google.cloud.orgpolicy.v2.PolicySpec.encode(message.dryRunSpec, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.etag);
                             return writer;
                         };
     
@@ -1269,6 +1967,10 @@
                                     }
                                 case 4: {
                                         message.dryRunSpec = $root.google.cloud.orgpolicy.v2.PolicySpec.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.etag = reader.string();
                                         break;
                                     }
                                 default:
@@ -1324,6 +2026,9 @@
                                 if (error)
                                     return "dryRunSpec." + error;
                             }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
                             return null;
                         };
     
@@ -1356,6 +2061,8 @@
                                     throw TypeError(".google.cloud.orgpolicy.v2.Policy.dryRunSpec: object expected");
                                 message.dryRunSpec = $root.google.cloud.orgpolicy.v2.PolicySpec.fromObject(object.dryRunSpec);
                             }
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
                             return message;
                         };
     
@@ -1377,6 +2084,7 @@
                                 object.spec = null;
                                 object.alternate = null;
                                 object.dryRunSpec = null;
+                                object.etag = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1386,6 +2094,8 @@
                                 object.alternate = $root.google.cloud.orgpolicy.v2.AlternatePolicySpec.toObject(message.alternate, options);
                             if (message.dryRunSpec != null && message.hasOwnProperty("dryRunSpec"))
                                 object.dryRunSpec = $root.google.cloud.orgpolicy.v2.PolicySpec.toObject(message.dryRunSpec, options);
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
                             return object;
                         };
     
@@ -4453,6 +5163,7 @@
                          * @memberof google.cloud.orgpolicy.v2
                          * @interface IDeletePolicyRequest
                          * @property {string|null} [name] DeletePolicyRequest name
+                         * @property {string|null} [etag] DeletePolicyRequest etag
                          */
     
                         /**
@@ -4477,6 +5188,14 @@
                          * @instance
                          */
                         DeletePolicyRequest.prototype.name = "";
+    
+                        /**
+                         * DeletePolicyRequest etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.orgpolicy.v2.DeletePolicyRequest
+                         * @instance
+                         */
+                        DeletePolicyRequest.prototype.etag = "";
     
                         /**
                          * Creates a new DeletePolicyRequest instance using the specified properties.
@@ -4504,6 +5223,8 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.etag);
                             return writer;
                         };
     
@@ -4540,6 +5261,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.etag = reader.string();
                                         break;
                                     }
                                 default:
@@ -4580,6 +5305,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
                             return null;
                         };
     
@@ -4597,6 +5325,8 @@
                             var message = new $root.google.cloud.orgpolicy.v2.DeletePolicyRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
                             return message;
                         };
     
@@ -4613,10 +5343,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.etag = "";
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
                             return object;
                         };
     
@@ -4647,6 +5381,1350 @@
                         };
     
                         return DeletePolicyRequest;
+                    })();
+    
+                    v2.CreateCustomConstraintRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateCustomConstraintRequest.
+                         * @memberof google.cloud.orgpolicy.v2
+                         * @interface ICreateCustomConstraintRequest
+                         * @property {string|null} [parent] CreateCustomConstraintRequest parent
+                         * @property {google.cloud.orgpolicy.v2.ICustomConstraint|null} [customConstraint] CreateCustomConstraintRequest customConstraint
+                         */
+    
+                        /**
+                         * Constructs a new CreateCustomConstraintRequest.
+                         * @memberof google.cloud.orgpolicy.v2
+                         * @classdesc Represents a CreateCustomConstraintRequest.
+                         * @implements ICreateCustomConstraintRequest
+                         * @constructor
+                         * @param {google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest=} [properties] Properties to set
+                         */
+                        function CreateCustomConstraintRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateCustomConstraintRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.orgpolicy.v2.CreateCustomConstraintRequest
+                         * @instance
+                         */
+                        CreateCustomConstraintRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateCustomConstraintRequest customConstraint.
+                         * @member {google.cloud.orgpolicy.v2.ICustomConstraint|null|undefined} customConstraint
+                         * @memberof google.cloud.orgpolicy.v2.CreateCustomConstraintRequest
+                         * @instance
+                         */
+                        CreateCustomConstraintRequest.prototype.customConstraint = null;
+    
+                        /**
+                         * Creates a new CreateCustomConstraintRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.orgpolicy.v2.CreateCustomConstraintRequest
+                         * @static
+                         * @param {google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest=} [properties] Properties to set
+                         * @returns {google.cloud.orgpolicy.v2.CreateCustomConstraintRequest} CreateCustomConstraintRequest instance
+                         */
+                        CreateCustomConstraintRequest.create = function create(properties) {
+                            return new CreateCustomConstraintRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateCustomConstraintRequest message. Does not implicitly {@link google.cloud.orgpolicy.v2.CreateCustomConstraintRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.orgpolicy.v2.CreateCustomConstraintRequest
+                         * @static
+                         * @param {google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest} message CreateCustomConstraintRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateCustomConstraintRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.customConstraint != null && Object.hasOwnProperty.call(message, "customConstraint"))
+                                $root.google.cloud.orgpolicy.v2.CustomConstraint.encode(message.customConstraint, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateCustomConstraintRequest message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.CreateCustomConstraintRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.orgpolicy.v2.CreateCustomConstraintRequest
+                         * @static
+                         * @param {google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest} message CreateCustomConstraintRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateCustomConstraintRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateCustomConstraintRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.orgpolicy.v2.CreateCustomConstraintRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.orgpolicy.v2.CreateCustomConstraintRequest} CreateCustomConstraintRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateCustomConstraintRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orgpolicy.v2.CreateCustomConstraintRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.customConstraint = $root.google.cloud.orgpolicy.v2.CustomConstraint.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateCustomConstraintRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.orgpolicy.v2.CreateCustomConstraintRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.orgpolicy.v2.CreateCustomConstraintRequest} CreateCustomConstraintRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateCustomConstraintRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateCustomConstraintRequest message.
+                         * @function verify
+                         * @memberof google.cloud.orgpolicy.v2.CreateCustomConstraintRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateCustomConstraintRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.customConstraint != null && message.hasOwnProperty("customConstraint")) {
+                                var error = $root.google.cloud.orgpolicy.v2.CustomConstraint.verify(message.customConstraint);
+                                if (error)
+                                    return "customConstraint." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateCustomConstraintRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.orgpolicy.v2.CreateCustomConstraintRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.orgpolicy.v2.CreateCustomConstraintRequest} CreateCustomConstraintRequest
+                         */
+                        CreateCustomConstraintRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.orgpolicy.v2.CreateCustomConstraintRequest)
+                                return object;
+                            var message = new $root.google.cloud.orgpolicy.v2.CreateCustomConstraintRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.customConstraint != null) {
+                                if (typeof object.customConstraint !== "object")
+                                    throw TypeError(".google.cloud.orgpolicy.v2.CreateCustomConstraintRequest.customConstraint: object expected");
+                                message.customConstraint = $root.google.cloud.orgpolicy.v2.CustomConstraint.fromObject(object.customConstraint);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateCustomConstraintRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.orgpolicy.v2.CreateCustomConstraintRequest
+                         * @static
+                         * @param {google.cloud.orgpolicy.v2.CreateCustomConstraintRequest} message CreateCustomConstraintRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateCustomConstraintRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.customConstraint = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.customConstraint != null && message.hasOwnProperty("customConstraint"))
+                                object.customConstraint = $root.google.cloud.orgpolicy.v2.CustomConstraint.toObject(message.customConstraint, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateCustomConstraintRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.orgpolicy.v2.CreateCustomConstraintRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateCustomConstraintRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateCustomConstraintRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.orgpolicy.v2.CreateCustomConstraintRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateCustomConstraintRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.orgpolicy.v2.CreateCustomConstraintRequest";
+                        };
+    
+                        return CreateCustomConstraintRequest;
+                    })();
+    
+                    v2.GetCustomConstraintRequest = (function() {
+    
+                        /**
+                         * Properties of a GetCustomConstraintRequest.
+                         * @memberof google.cloud.orgpolicy.v2
+                         * @interface IGetCustomConstraintRequest
+                         * @property {string|null} [name] GetCustomConstraintRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetCustomConstraintRequest.
+                         * @memberof google.cloud.orgpolicy.v2
+                         * @classdesc Represents a GetCustomConstraintRequest.
+                         * @implements IGetCustomConstraintRequest
+                         * @constructor
+                         * @param {google.cloud.orgpolicy.v2.IGetCustomConstraintRequest=} [properties] Properties to set
+                         */
+                        function GetCustomConstraintRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetCustomConstraintRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.orgpolicy.v2.GetCustomConstraintRequest
+                         * @instance
+                         */
+                        GetCustomConstraintRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetCustomConstraintRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.orgpolicy.v2.GetCustomConstraintRequest
+                         * @static
+                         * @param {google.cloud.orgpolicy.v2.IGetCustomConstraintRequest=} [properties] Properties to set
+                         * @returns {google.cloud.orgpolicy.v2.GetCustomConstraintRequest} GetCustomConstraintRequest instance
+                         */
+                        GetCustomConstraintRequest.create = function create(properties) {
+                            return new GetCustomConstraintRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetCustomConstraintRequest message. Does not implicitly {@link google.cloud.orgpolicy.v2.GetCustomConstraintRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.orgpolicy.v2.GetCustomConstraintRequest
+                         * @static
+                         * @param {google.cloud.orgpolicy.v2.IGetCustomConstraintRequest} message GetCustomConstraintRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetCustomConstraintRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetCustomConstraintRequest message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.GetCustomConstraintRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.orgpolicy.v2.GetCustomConstraintRequest
+                         * @static
+                         * @param {google.cloud.orgpolicy.v2.IGetCustomConstraintRequest} message GetCustomConstraintRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetCustomConstraintRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetCustomConstraintRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.orgpolicy.v2.GetCustomConstraintRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.orgpolicy.v2.GetCustomConstraintRequest} GetCustomConstraintRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetCustomConstraintRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orgpolicy.v2.GetCustomConstraintRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetCustomConstraintRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.orgpolicy.v2.GetCustomConstraintRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.orgpolicy.v2.GetCustomConstraintRequest} GetCustomConstraintRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetCustomConstraintRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetCustomConstraintRequest message.
+                         * @function verify
+                         * @memberof google.cloud.orgpolicy.v2.GetCustomConstraintRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetCustomConstraintRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetCustomConstraintRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.orgpolicy.v2.GetCustomConstraintRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.orgpolicy.v2.GetCustomConstraintRequest} GetCustomConstraintRequest
+                         */
+                        GetCustomConstraintRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.orgpolicy.v2.GetCustomConstraintRequest)
+                                return object;
+                            var message = new $root.google.cloud.orgpolicy.v2.GetCustomConstraintRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetCustomConstraintRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.orgpolicy.v2.GetCustomConstraintRequest
+                         * @static
+                         * @param {google.cloud.orgpolicy.v2.GetCustomConstraintRequest} message GetCustomConstraintRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetCustomConstraintRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetCustomConstraintRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.orgpolicy.v2.GetCustomConstraintRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetCustomConstraintRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetCustomConstraintRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.orgpolicy.v2.GetCustomConstraintRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetCustomConstraintRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.orgpolicy.v2.GetCustomConstraintRequest";
+                        };
+    
+                        return GetCustomConstraintRequest;
+                    })();
+    
+                    v2.ListCustomConstraintsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListCustomConstraintsRequest.
+                         * @memberof google.cloud.orgpolicy.v2
+                         * @interface IListCustomConstraintsRequest
+                         * @property {string|null} [parent] ListCustomConstraintsRequest parent
+                         * @property {number|null} [pageSize] ListCustomConstraintsRequest pageSize
+                         * @property {string|null} [pageToken] ListCustomConstraintsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListCustomConstraintsRequest.
+                         * @memberof google.cloud.orgpolicy.v2
+                         * @classdesc Represents a ListCustomConstraintsRequest.
+                         * @implements IListCustomConstraintsRequest
+                         * @constructor
+                         * @param {google.cloud.orgpolicy.v2.IListCustomConstraintsRequest=} [properties] Properties to set
+                         */
+                        function ListCustomConstraintsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListCustomConstraintsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.orgpolicy.v2.ListCustomConstraintsRequest
+                         * @instance
+                         */
+                        ListCustomConstraintsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListCustomConstraintsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.orgpolicy.v2.ListCustomConstraintsRequest
+                         * @instance
+                         */
+                        ListCustomConstraintsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListCustomConstraintsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.orgpolicy.v2.ListCustomConstraintsRequest
+                         * @instance
+                         */
+                        ListCustomConstraintsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListCustomConstraintsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.orgpolicy.v2.ListCustomConstraintsRequest
+                         * @static
+                         * @param {google.cloud.orgpolicy.v2.IListCustomConstraintsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.orgpolicy.v2.ListCustomConstraintsRequest} ListCustomConstraintsRequest instance
+                         */
+                        ListCustomConstraintsRequest.create = function create(properties) {
+                            return new ListCustomConstraintsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListCustomConstraintsRequest message. Does not implicitly {@link google.cloud.orgpolicy.v2.ListCustomConstraintsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.orgpolicy.v2.ListCustomConstraintsRequest
+                         * @static
+                         * @param {google.cloud.orgpolicy.v2.IListCustomConstraintsRequest} message ListCustomConstraintsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCustomConstraintsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListCustomConstraintsRequest message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.ListCustomConstraintsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.orgpolicy.v2.ListCustomConstraintsRequest
+                         * @static
+                         * @param {google.cloud.orgpolicy.v2.IListCustomConstraintsRequest} message ListCustomConstraintsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCustomConstraintsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListCustomConstraintsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.orgpolicy.v2.ListCustomConstraintsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.orgpolicy.v2.ListCustomConstraintsRequest} ListCustomConstraintsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCustomConstraintsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orgpolicy.v2.ListCustomConstraintsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListCustomConstraintsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.orgpolicy.v2.ListCustomConstraintsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.orgpolicy.v2.ListCustomConstraintsRequest} ListCustomConstraintsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCustomConstraintsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListCustomConstraintsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.orgpolicy.v2.ListCustomConstraintsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListCustomConstraintsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListCustomConstraintsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.orgpolicy.v2.ListCustomConstraintsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.orgpolicy.v2.ListCustomConstraintsRequest} ListCustomConstraintsRequest
+                         */
+                        ListCustomConstraintsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.orgpolicy.v2.ListCustomConstraintsRequest)
+                                return object;
+                            var message = new $root.google.cloud.orgpolicy.v2.ListCustomConstraintsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListCustomConstraintsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.orgpolicy.v2.ListCustomConstraintsRequest
+                         * @static
+                         * @param {google.cloud.orgpolicy.v2.ListCustomConstraintsRequest} message ListCustomConstraintsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListCustomConstraintsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListCustomConstraintsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.orgpolicy.v2.ListCustomConstraintsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListCustomConstraintsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListCustomConstraintsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.orgpolicy.v2.ListCustomConstraintsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListCustomConstraintsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.orgpolicy.v2.ListCustomConstraintsRequest";
+                        };
+    
+                        return ListCustomConstraintsRequest;
+                    })();
+    
+                    v2.ListCustomConstraintsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListCustomConstraintsResponse.
+                         * @memberof google.cloud.orgpolicy.v2
+                         * @interface IListCustomConstraintsResponse
+                         * @property {Array.<google.cloud.orgpolicy.v2.ICustomConstraint>|null} [customConstraints] ListCustomConstraintsResponse customConstraints
+                         * @property {string|null} [nextPageToken] ListCustomConstraintsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListCustomConstraintsResponse.
+                         * @memberof google.cloud.orgpolicy.v2
+                         * @classdesc Represents a ListCustomConstraintsResponse.
+                         * @implements IListCustomConstraintsResponse
+                         * @constructor
+                         * @param {google.cloud.orgpolicy.v2.IListCustomConstraintsResponse=} [properties] Properties to set
+                         */
+                        function ListCustomConstraintsResponse(properties) {
+                            this.customConstraints = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListCustomConstraintsResponse customConstraints.
+                         * @member {Array.<google.cloud.orgpolicy.v2.ICustomConstraint>} customConstraints
+                         * @memberof google.cloud.orgpolicy.v2.ListCustomConstraintsResponse
+                         * @instance
+                         */
+                        ListCustomConstraintsResponse.prototype.customConstraints = $util.emptyArray;
+    
+                        /**
+                         * ListCustomConstraintsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.orgpolicy.v2.ListCustomConstraintsResponse
+                         * @instance
+                         */
+                        ListCustomConstraintsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListCustomConstraintsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.orgpolicy.v2.ListCustomConstraintsResponse
+                         * @static
+                         * @param {google.cloud.orgpolicy.v2.IListCustomConstraintsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.orgpolicy.v2.ListCustomConstraintsResponse} ListCustomConstraintsResponse instance
+                         */
+                        ListCustomConstraintsResponse.create = function create(properties) {
+                            return new ListCustomConstraintsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListCustomConstraintsResponse message. Does not implicitly {@link google.cloud.orgpolicy.v2.ListCustomConstraintsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.orgpolicy.v2.ListCustomConstraintsResponse
+                         * @static
+                         * @param {google.cloud.orgpolicy.v2.IListCustomConstraintsResponse} message ListCustomConstraintsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCustomConstraintsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.customConstraints != null && message.customConstraints.length)
+                                for (var i = 0; i < message.customConstraints.length; ++i)
+                                    $root.google.cloud.orgpolicy.v2.CustomConstraint.encode(message.customConstraints[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListCustomConstraintsResponse message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.ListCustomConstraintsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.orgpolicy.v2.ListCustomConstraintsResponse
+                         * @static
+                         * @param {google.cloud.orgpolicy.v2.IListCustomConstraintsResponse} message ListCustomConstraintsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCustomConstraintsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListCustomConstraintsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.orgpolicy.v2.ListCustomConstraintsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.orgpolicy.v2.ListCustomConstraintsResponse} ListCustomConstraintsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCustomConstraintsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orgpolicy.v2.ListCustomConstraintsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.customConstraints && message.customConstraints.length))
+                                            message.customConstraints = [];
+                                        message.customConstraints.push($root.google.cloud.orgpolicy.v2.CustomConstraint.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListCustomConstraintsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.orgpolicy.v2.ListCustomConstraintsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.orgpolicy.v2.ListCustomConstraintsResponse} ListCustomConstraintsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCustomConstraintsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListCustomConstraintsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.orgpolicy.v2.ListCustomConstraintsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListCustomConstraintsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.customConstraints != null && message.hasOwnProperty("customConstraints")) {
+                                if (!Array.isArray(message.customConstraints))
+                                    return "customConstraints: array expected";
+                                for (var i = 0; i < message.customConstraints.length; ++i) {
+                                    var error = $root.google.cloud.orgpolicy.v2.CustomConstraint.verify(message.customConstraints[i]);
+                                    if (error)
+                                        return "customConstraints." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListCustomConstraintsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.orgpolicy.v2.ListCustomConstraintsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.orgpolicy.v2.ListCustomConstraintsResponse} ListCustomConstraintsResponse
+                         */
+                        ListCustomConstraintsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.orgpolicy.v2.ListCustomConstraintsResponse)
+                                return object;
+                            var message = new $root.google.cloud.orgpolicy.v2.ListCustomConstraintsResponse();
+                            if (object.customConstraints) {
+                                if (!Array.isArray(object.customConstraints))
+                                    throw TypeError(".google.cloud.orgpolicy.v2.ListCustomConstraintsResponse.customConstraints: array expected");
+                                message.customConstraints = [];
+                                for (var i = 0; i < object.customConstraints.length; ++i) {
+                                    if (typeof object.customConstraints[i] !== "object")
+                                        throw TypeError(".google.cloud.orgpolicy.v2.ListCustomConstraintsResponse.customConstraints: object expected");
+                                    message.customConstraints[i] = $root.google.cloud.orgpolicy.v2.CustomConstraint.fromObject(object.customConstraints[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListCustomConstraintsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.orgpolicy.v2.ListCustomConstraintsResponse
+                         * @static
+                         * @param {google.cloud.orgpolicy.v2.ListCustomConstraintsResponse} message ListCustomConstraintsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListCustomConstraintsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.customConstraints = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.customConstraints && message.customConstraints.length) {
+                                object.customConstraints = [];
+                                for (var j = 0; j < message.customConstraints.length; ++j)
+                                    object.customConstraints[j] = $root.google.cloud.orgpolicy.v2.CustomConstraint.toObject(message.customConstraints[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListCustomConstraintsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.orgpolicy.v2.ListCustomConstraintsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListCustomConstraintsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListCustomConstraintsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.orgpolicy.v2.ListCustomConstraintsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListCustomConstraintsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.orgpolicy.v2.ListCustomConstraintsResponse";
+                        };
+    
+                        return ListCustomConstraintsResponse;
+                    })();
+    
+                    v2.UpdateCustomConstraintRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateCustomConstraintRequest.
+                         * @memberof google.cloud.orgpolicy.v2
+                         * @interface IUpdateCustomConstraintRequest
+                         * @property {google.cloud.orgpolicy.v2.ICustomConstraint|null} [customConstraint] UpdateCustomConstraintRequest customConstraint
+                         */
+    
+                        /**
+                         * Constructs a new UpdateCustomConstraintRequest.
+                         * @memberof google.cloud.orgpolicy.v2
+                         * @classdesc Represents an UpdateCustomConstraintRequest.
+                         * @implements IUpdateCustomConstraintRequest
+                         * @constructor
+                         * @param {google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest=} [properties] Properties to set
+                         */
+                        function UpdateCustomConstraintRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateCustomConstraintRequest customConstraint.
+                         * @member {google.cloud.orgpolicy.v2.ICustomConstraint|null|undefined} customConstraint
+                         * @memberof google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest
+                         * @instance
+                         */
+                        UpdateCustomConstraintRequest.prototype.customConstraint = null;
+    
+                        /**
+                         * Creates a new UpdateCustomConstraintRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest
+                         * @static
+                         * @param {google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest=} [properties] Properties to set
+                         * @returns {google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest} UpdateCustomConstraintRequest instance
+                         */
+                        UpdateCustomConstraintRequest.create = function create(properties) {
+                            return new UpdateCustomConstraintRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateCustomConstraintRequest message. Does not implicitly {@link google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest
+                         * @static
+                         * @param {google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest} message UpdateCustomConstraintRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateCustomConstraintRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.customConstraint != null && Object.hasOwnProperty.call(message, "customConstraint"))
+                                $root.google.cloud.orgpolicy.v2.CustomConstraint.encode(message.customConstraint, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateCustomConstraintRequest message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest
+                         * @static
+                         * @param {google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest} message UpdateCustomConstraintRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateCustomConstraintRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateCustomConstraintRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest} UpdateCustomConstraintRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateCustomConstraintRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.customConstraint = $root.google.cloud.orgpolicy.v2.CustomConstraint.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateCustomConstraintRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest} UpdateCustomConstraintRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateCustomConstraintRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateCustomConstraintRequest message.
+                         * @function verify
+                         * @memberof google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateCustomConstraintRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.customConstraint != null && message.hasOwnProperty("customConstraint")) {
+                                var error = $root.google.cloud.orgpolicy.v2.CustomConstraint.verify(message.customConstraint);
+                                if (error)
+                                    return "customConstraint." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateCustomConstraintRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest} UpdateCustomConstraintRequest
+                         */
+                        UpdateCustomConstraintRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest)
+                                return object;
+                            var message = new $root.google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest();
+                            if (object.customConstraint != null) {
+                                if (typeof object.customConstraint !== "object")
+                                    throw TypeError(".google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest.customConstraint: object expected");
+                                message.customConstraint = $root.google.cloud.orgpolicy.v2.CustomConstraint.fromObject(object.customConstraint);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateCustomConstraintRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest
+                         * @static
+                         * @param {google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest} message UpdateCustomConstraintRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateCustomConstraintRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.customConstraint = null;
+                            if (message.customConstraint != null && message.hasOwnProperty("customConstraint"))
+                                object.customConstraint = $root.google.cloud.orgpolicy.v2.CustomConstraint.toObject(message.customConstraint, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateCustomConstraintRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateCustomConstraintRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateCustomConstraintRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateCustomConstraintRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest";
+                        };
+    
+                        return UpdateCustomConstraintRequest;
+                    })();
+    
+                    v2.DeleteCustomConstraintRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteCustomConstraintRequest.
+                         * @memberof google.cloud.orgpolicy.v2
+                         * @interface IDeleteCustomConstraintRequest
+                         * @property {string|null} [name] DeleteCustomConstraintRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteCustomConstraintRequest.
+                         * @memberof google.cloud.orgpolicy.v2
+                         * @classdesc Represents a DeleteCustomConstraintRequest.
+                         * @implements IDeleteCustomConstraintRequest
+                         * @constructor
+                         * @param {google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest=} [properties] Properties to set
+                         */
+                        function DeleteCustomConstraintRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteCustomConstraintRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest
+                         * @instance
+                         */
+                        DeleteCustomConstraintRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteCustomConstraintRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest
+                         * @static
+                         * @param {google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest=} [properties] Properties to set
+                         * @returns {google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest} DeleteCustomConstraintRequest instance
+                         */
+                        DeleteCustomConstraintRequest.create = function create(properties) {
+                            return new DeleteCustomConstraintRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteCustomConstraintRequest message. Does not implicitly {@link google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest
+                         * @static
+                         * @param {google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest} message DeleteCustomConstraintRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteCustomConstraintRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteCustomConstraintRequest message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest
+                         * @static
+                         * @param {google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest} message DeleteCustomConstraintRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteCustomConstraintRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteCustomConstraintRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest} DeleteCustomConstraintRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteCustomConstraintRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteCustomConstraintRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest} DeleteCustomConstraintRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteCustomConstraintRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteCustomConstraintRequest message.
+                         * @function verify
+                         * @memberof google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteCustomConstraintRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteCustomConstraintRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest} DeleteCustomConstraintRequest
+                         */
+                        DeleteCustomConstraintRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest)
+                                return object;
+                            var message = new $root.google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteCustomConstraintRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest
+                         * @static
+                         * @param {google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest} message DeleteCustomConstraintRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteCustomConstraintRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteCustomConstraintRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteCustomConstraintRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteCustomConstraintRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteCustomConstraintRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest";
+                        };
+    
+                        return DeleteCustomConstraintRequest;
                     })();
     
                     return v2;

@@ -18,6 +18,7 @@
 
 import {
   DatasetServiceClient,
+  DeploymentResourcePoolServiceClient,
   EndpointServiceClient,
   FeatureOnlineStoreAdminServiceClient,
   FeatureOnlineStoreServiceClient,
@@ -43,6 +44,11 @@ import {
 
 // check that the client class type name can be used
 function doStuffWithDatasetServiceClient(client: DatasetServiceClient) {
+  client.close();
+}
+function doStuffWithDeploymentResourcePoolServiceClient(
+  client: DeploymentResourcePoolServiceClient
+) {
   client.close();
 }
 function doStuffWithEndpointServiceClient(client: EndpointServiceClient) {
@@ -127,6 +133,12 @@ function main() {
   // check that the client instance can be created
   const datasetServiceClient = new DatasetServiceClient();
   doStuffWithDatasetServiceClient(datasetServiceClient);
+  // check that the client instance can be created
+  const deploymentResourcePoolServiceClient =
+    new DeploymentResourcePoolServiceClient();
+  doStuffWithDeploymentResourcePoolServiceClient(
+    deploymentResourcePoolServiceClient
+  );
   // check that the client instance can be created
   const endpointServiceClient = new EndpointServiceClient();
   doStuffWithEndpointServiceClient(endpointServiceClient);

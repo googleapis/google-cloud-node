@@ -653,7 +653,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "IDENTIFIER"
                           }
                         },
                         "event": {
@@ -1702,7 +1702,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
                         },
                         "displayName": {
                           "type": "string",
@@ -2059,7 +2062,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
                         },
                         "description": {
                           "type": "string",
@@ -2180,10 +2186,18 @@
                             "(google.api.resource_reference).child_type": "recaptchaenterprise.googleapis.com/RelatedAccountGroupMembership"
                           }
                         },
+                        "accountId": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "hashedAccountId": {
                           "type": "bytes",
                           "id": 2,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
@@ -2230,9 +2244,16 @@
                             "(google.api.resource_reference).type": "recaptchaenterprise.googleapis.com/RelatedAccountGroupMembership"
                           }
                         },
+                        "accountId": {
+                          "type": "string",
+                          "id": 4
+                        },
                         "hashedAccountId": {
                           "type": "bytes",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "deprecated": true
+                          }
                         }
                       }
                     },

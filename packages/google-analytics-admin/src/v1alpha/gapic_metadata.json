@@ -525,14 +525,24 @@
                 "createSubproperty"
               ]
             },
-            "DeleteSubpropertyEventFilter": {
-              "methods": [
-                "deleteSubpropertyEventFilter"
-              ]
-            },
             "CreateSubpropertyEventFilter": {
               "methods": [
                 "createSubpropertyEventFilter"
+              ]
+            },
+            "GetSubpropertyEventFilter": {
+              "methods": [
+                "getSubpropertyEventFilter"
+              ]
+            },
+            "UpdateSubpropertyEventFilter": {
+              "methods": [
+                "updateSubpropertyEventFilter"
+              ]
+            },
+            "DeleteSubpropertyEventFilter": {
+              "methods": [
+                "deleteSubpropertyEventFilter"
               ]
             },
             "ListAccounts": {
@@ -694,6 +704,13 @@
                 "listRollupPropertySourceLinks",
                 "listRollupPropertySourceLinksStream",
                 "listRollupPropertySourceLinksAsync"
+              ]
+            },
+            "ListSubpropertyEventFilters": {
+              "methods": [
+                "listSubpropertyEventFilters",
+                "listSubpropertyEventFiltersStream",
+                "listSubpropertyEventFiltersAsync"
               ]
             }
           }
@@ -1216,14 +1233,24 @@
                 "createSubproperty"
               ]
             },
-            "DeleteSubpropertyEventFilter": {
-              "methods": [
-                "deleteSubpropertyEventFilter"
-              ]
-            },
             "CreateSubpropertyEventFilter": {
               "methods": [
                 "createSubpropertyEventFilter"
+              ]
+            },
+            "GetSubpropertyEventFilter": {
+              "methods": [
+                "getSubpropertyEventFilter"
+              ]
+            },
+            "UpdateSubpropertyEventFilter": {
+              "methods": [
+                "updateSubpropertyEventFilter"
+              ]
+            },
+            "DeleteSubpropertyEventFilter": {
+              "methods": [
+                "deleteSubpropertyEventFilter"
               ]
             },
             "ListAccounts": {
@@ -1385,6 +1412,13 @@
                 "listRollupPropertySourceLinks",
                 "listRollupPropertySourceLinksStream",
                 "listRollupPropertySourceLinksAsync"
+              ]
+            },
+            "ListSubpropertyEventFilters": {
+              "methods": [
+                "listSubpropertyEventFilters",
+                "listSubpropertyEventFiltersStream",
+                "listSubpropertyEventFiltersAsync"
               ]
             }
           }

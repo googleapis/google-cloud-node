@@ -354,6 +354,10 @@
                         "duration": {
                           "type": "google.protobuf.Duration",
                           "id": 2
+                        },
+                        "costInLocalCurrency": {
+                          "type": "google.type.Money",
+                          "id": 3
                         }
                       }
                     },

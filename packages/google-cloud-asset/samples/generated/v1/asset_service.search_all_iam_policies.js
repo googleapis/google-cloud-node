@@ -103,7 +103,7 @@ function main(scope) {
    *  Optional. A list of asset types that the IAM policies are attached to. If
    *  empty, it will search the IAM policies that are attached to all the
    *  searchable asset
-   *  types (https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
+   *  types (https://cloud.google.com/asset-inventory/docs/supported-asset-types).
    *  Regular expressions are also supported. For example:
    *  * "compute.googleapis.com.*" snapshots IAM policies attached to asset type
    *  starts with "compute.googleapis.com".
