@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -57,6 +57,12 @@ function main(projectId) {
    *  The GQL query to run. This query must be an aggregation query.
    */
   // const gqlQuery = {}
+  /**
+   *  Optional. The mode in which the query request is processed. This field is
+   *  optional, and when not provided, it defaults to `NORMAL` mode where no
+   *  additional statistics will be returned with the query results.
+   */
+  // const mode = {}
 
   // Imports the Datastore library
   const {DatastoreClient} = require('@google-cloud/datastore').v1;
