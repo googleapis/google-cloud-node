@@ -23,7 +23,7 @@ import {
   PermissionServiceClient,
   RetrieverServiceClient,
   TextServiceClient,
-} from '@google-cloud/generativelanguage';
+} from '@google-ai/generativelanguage';
 
 // check that the client class type name can be used
 function doStuffWithDiscussServiceClient(client: DiscussServiceClient) {
