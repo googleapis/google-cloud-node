@@ -613,7 +613,7 @@
                 "csharp_namespace": "Google.Cloud.Datastore.V1",
                 "go_package": "google.golang.org/genproto/googleapis/datastore/v1;datastore",
                 "java_multiple_files": true,
-                "java_outer_classname": "DatastoreProto",
+                "java_outer_classname": "QueryProfileProto",
                 "java_package": "com.google.datastore.v1",
                 "php_namespace": "Google\\Cloud\\Datastore\\V1",
                 "ruby_package": "Google::Cloud::Datastore::V1"
@@ -1525,6 +1525,13 @@
                     "gqlQuery": {
                       "type": "GqlQuery",
                       "id": 7
+                    },
+                    "mode": {
+                      "type": "QueryMode",
+                      "id": 11,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -1541,6 +1548,10 @@
                     "transaction": {
                       "type": "bytes",
                       "id": 5
+                    },
+                    "stats": {
+                      "type": "ResultSetStats",
+                      "id": 6
                     }
                   }
                 },
@@ -1580,6 +1591,13 @@
                     "gqlQuery": {
                       "type": "GqlQuery",
                       "id": 7
+                    },
+                    "mode": {
+                      "type": "QueryMode",
+                      "id": 10,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -1596,6 +1614,10 @@
                     "transaction": {
                       "type": "bytes",
                       "id": 5
+                    },
+                    "stats": {
+                      "type": "ResultSetStats",
+                      "id": 6
                     }
                   }
                 },
@@ -1917,6 +1939,33 @@
                           "id": 1
                         }
                       }
+                    }
+                  }
+                },
+                "QueryMode": {
+                  "values": {
+                    "NORMAL": 0,
+                    "PLAN": 1,
+                    "PROFILE": 2
+                  }
+                },
+                "QueryPlan": {
+                  "fields": {
+                    "planInfo": {
+                      "type": "google.protobuf.Struct",
+                      "id": 1
+                    }
+                  }
+                },
+                "ResultSetStats": {
+                  "fields": {
+                    "queryPlan": {
+                      "type": "QueryPlan",
+                      "id": 1
+                    },
+                    "queryStats": {
+                      "type": "google.protobuf.Struct",
+                      "id": 2
                     }
                   }
                 }

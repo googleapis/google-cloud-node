@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -5802,6 +5802,9 @@ export namespace google {
 
                 /** RunQueryRequest gqlQuery */
                 gqlQuery?: (google.datastore.v1.IGqlQuery|null);
+
+                /** RunQueryRequest mode */
+                mode?: (google.datastore.v1.QueryMode|keyof typeof google.datastore.v1.QueryMode|null);
             }
 
             /** Represents a RunQueryRequest. */
@@ -5830,6 +5833,9 @@ export namespace google {
 
                 /** RunQueryRequest gqlQuery. */
                 public gqlQuery?: (google.datastore.v1.IGqlQuery|null);
+
+                /** RunQueryRequest mode. */
+                public mode: (google.datastore.v1.QueryMode|keyof typeof google.datastore.v1.QueryMode);
 
                 /** RunQueryRequest queryType. */
                 public queryType?: ("query"|"gqlQuery");
@@ -5923,6 +5929,9 @@ export namespace google {
 
                 /** RunQueryResponse transaction */
                 transaction?: (Uint8Array|string|null);
+
+                /** RunQueryResponse stats */
+                stats?: (google.datastore.v1.IResultSetStats|null);
             }
 
             /** Represents a RunQueryResponse. */
@@ -5942,6 +5951,9 @@ export namespace google {
 
                 /** RunQueryResponse transaction. */
                 public transaction: (Uint8Array|string);
+
+                /** RunQueryResponse stats. */
+                public stats?: (google.datastore.v1.IResultSetStats|null);
 
                 /**
                  * Creates a new RunQueryResponse instance using the specified properties.
@@ -6041,6 +6053,9 @@ export namespace google {
 
                 /** RunAggregationQueryRequest gqlQuery */
                 gqlQuery?: (google.datastore.v1.IGqlQuery|null);
+
+                /** RunAggregationQueryRequest mode */
+                mode?: (google.datastore.v1.QueryMode|keyof typeof google.datastore.v1.QueryMode|null);
             }
 
             /** Represents a RunAggregationQueryRequest. */
@@ -6069,6 +6084,9 @@ export namespace google {
 
                 /** RunAggregationQueryRequest gqlQuery. */
                 public gqlQuery?: (google.datastore.v1.IGqlQuery|null);
+
+                /** RunAggregationQueryRequest mode. */
+                public mode: (google.datastore.v1.QueryMode|keyof typeof google.datastore.v1.QueryMode);
 
                 /** RunAggregationQueryRequest queryType. */
                 public queryType?: ("aggregationQuery"|"gqlQuery");
@@ -6162,6 +6180,9 @@ export namespace google {
 
                 /** RunAggregationQueryResponse transaction */
                 transaction?: (Uint8Array|string|null);
+
+                /** RunAggregationQueryResponse stats */
+                stats?: (google.datastore.v1.IResultSetStats|null);
             }
 
             /** Represents a RunAggregationQueryResponse. */
@@ -6181,6 +6202,9 @@ export namespace google {
 
                 /** RunAggregationQueryResponse transaction. */
                 public transaction: (Uint8Array|string);
+
+                /** RunAggregationQueryResponse stats. */
+                public stats?: (google.datastore.v1.IResultSetStats|null);
 
                 /**
                  * Creates a new RunAggregationQueryResponse instance using the specified properties.
@@ -8004,6 +8028,213 @@ export namespace google {
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
+            }
+
+            /** QueryMode enum. */
+            enum QueryMode {
+                NORMAL = 0,
+                PLAN = 1,
+                PROFILE = 2
+            }
+
+            /** Properties of a QueryPlan. */
+            interface IQueryPlan {
+
+                /** QueryPlan planInfo */
+                planInfo?: (google.protobuf.IStruct|null);
+            }
+
+            /** Represents a QueryPlan. */
+            class QueryPlan implements IQueryPlan {
+
+                /**
+                 * Constructs a new QueryPlan.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.datastore.v1.IQueryPlan);
+
+                /** QueryPlan planInfo. */
+                public planInfo?: (google.protobuf.IStruct|null);
+
+                /**
+                 * Creates a new QueryPlan instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns QueryPlan instance
+                 */
+                public static create(properties?: google.datastore.v1.IQueryPlan): google.datastore.v1.QueryPlan;
+
+                /**
+                 * Encodes the specified QueryPlan message. Does not implicitly {@link google.datastore.v1.QueryPlan.verify|verify} messages.
+                 * @param message QueryPlan message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.datastore.v1.IQueryPlan, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryPlan message, length delimited. Does not implicitly {@link google.datastore.v1.QueryPlan.verify|verify} messages.
+                 * @param message QueryPlan message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.datastore.v1.IQueryPlan, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryPlan message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryPlan
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.datastore.v1.QueryPlan;
+
+                /**
+                 * Decodes a QueryPlan message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryPlan
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.datastore.v1.QueryPlan;
+
+                /**
+                 * Verifies a QueryPlan message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryPlan message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryPlan
+                 */
+                public static fromObject(object: { [k: string]: any }): google.datastore.v1.QueryPlan;
+
+                /**
+                 * Creates a plain object from a QueryPlan message. Also converts values to other types if specified.
+                 * @param message QueryPlan
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.datastore.v1.QueryPlan, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryPlan to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for QueryPlan
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ResultSetStats. */
+            interface IResultSetStats {
+
+                /** ResultSetStats queryPlan */
+                queryPlan?: (google.datastore.v1.IQueryPlan|null);
+
+                /** ResultSetStats queryStats */
+                queryStats?: (google.protobuf.IStruct|null);
+            }
+
+            /** Represents a ResultSetStats. */
+            class ResultSetStats implements IResultSetStats {
+
+                /**
+                 * Constructs a new ResultSetStats.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.datastore.v1.IResultSetStats);
+
+                /** ResultSetStats queryPlan. */
+                public queryPlan?: (google.datastore.v1.IQueryPlan|null);
+
+                /** ResultSetStats queryStats. */
+                public queryStats?: (google.protobuf.IStruct|null);
+
+                /**
+                 * Creates a new ResultSetStats instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ResultSetStats instance
+                 */
+                public static create(properties?: google.datastore.v1.IResultSetStats): google.datastore.v1.ResultSetStats;
+
+                /**
+                 * Encodes the specified ResultSetStats message. Does not implicitly {@link google.datastore.v1.ResultSetStats.verify|verify} messages.
+                 * @param message ResultSetStats message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.datastore.v1.IResultSetStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ResultSetStats message, length delimited. Does not implicitly {@link google.datastore.v1.ResultSetStats.verify|verify} messages.
+                 * @param message ResultSetStats message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.datastore.v1.IResultSetStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ResultSetStats message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ResultSetStats
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.datastore.v1.ResultSetStats;
+
+                /**
+                 * Decodes a ResultSetStats message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ResultSetStats
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.datastore.v1.ResultSetStats;
+
+                /**
+                 * Verifies a ResultSetStats message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ResultSetStats message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ResultSetStats
+                 */
+                public static fromObject(object: { [k: string]: any }): google.datastore.v1.ResultSetStats;
+
+                /**
+                 * Creates a plain object from a ResultSetStats message. Also converts values to other types if specified.
+                 * @param message ResultSetStats
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.datastore.v1.ResultSetStats, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ResultSetStats to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ResultSetStats
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
     }
