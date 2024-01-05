@@ -43,7 +43,7 @@ module.exports = {
     copyright: 'Copyright 2023 Google LLC',
     includeDate: false,
     sourceFiles: false,
-    systemName: '@google-cloud/generativelanguage',
+    systemName: '@google-ai/generativelanguage',
     theme: 'lumen',
     default: {
       outputSourceFiles: false
