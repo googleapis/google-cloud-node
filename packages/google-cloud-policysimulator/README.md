@@ -101,9 +101,8 @@ async function callListReplayResults() {
   };
 
   // Run request
-  const iterable = await policysimulatorClient.listReplayResultsAsync(
-    request
-  );
+  const iterable =
+    await policysimulatorClient.listReplayResultsAsync(request);
   for await (const response of iterable) {
     console.log(response);
   }
