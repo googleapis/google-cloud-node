@@ -2547,6 +2547,7 @@
                          * @property {string|null} [parent] ImportSshPublicKeyRequest parent
                          * @property {google.cloud.oslogin.common.ISshPublicKey|null} [sshPublicKey] ImportSshPublicKeyRequest sshPublicKey
                          * @property {string|null} [projectId] ImportSshPublicKeyRequest projectId
+                         * @property {Array.<string>|null} [regions] ImportSshPublicKeyRequest regions
                          */
     
                         /**
@@ -2558,6 +2559,7 @@
                          * @param {google.cloud.oslogin.v1.IImportSshPublicKeyRequest=} [properties] Properties to set
                          */
                         function ImportSshPublicKeyRequest(properties) {
+                            this.regions = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -2589,6 +2591,14 @@
                         ImportSshPublicKeyRequest.prototype.projectId = "";
     
                         /**
+                         * ImportSshPublicKeyRequest regions.
+                         * @member {Array.<string>} regions
+                         * @memberof google.cloud.oslogin.v1.ImportSshPublicKeyRequest
+                         * @instance
+                         */
+                        ImportSshPublicKeyRequest.prototype.regions = $util.emptyArray;
+    
+                        /**
                          * Creates a new ImportSshPublicKeyRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.oslogin.v1.ImportSshPublicKeyRequest
@@ -2618,6 +2628,9 @@
                                 $root.google.cloud.oslogin.common.SshPublicKey.encode(message.sshPublicKey, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.projectId);
+                            if (message.regions != null && message.regions.length)
+                                for (var i = 0; i < message.regions.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.regions[i]);
                             return writer;
                         };
     
@@ -2662,6 +2675,12 @@
                                     }
                                 case 3: {
                                         message.projectId = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.regions && message.regions.length))
+                                            message.regions = [];
+                                        message.regions.push(reader.string());
                                         break;
                                     }
                                 default:
@@ -2710,6 +2729,13 @@
                             if (message.projectId != null && message.hasOwnProperty("projectId"))
                                 if (!$util.isString(message.projectId))
                                     return "projectId: string expected";
+                            if (message.regions != null && message.hasOwnProperty("regions")) {
+                                if (!Array.isArray(message.regions))
+                                    return "regions: array expected";
+                                for (var i = 0; i < message.regions.length; ++i)
+                                    if (!$util.isString(message.regions[i]))
+                                        return "regions: string[] expected";
+                            }
                             return null;
                         };
     
@@ -2734,6 +2760,13 @@
                             }
                             if (object.projectId != null)
                                 message.projectId = String(object.projectId);
+                            if (object.regions) {
+                                if (!Array.isArray(object.regions))
+                                    throw TypeError(".google.cloud.oslogin.v1.ImportSshPublicKeyRequest.regions: array expected");
+                                message.regions = [];
+                                for (var i = 0; i < object.regions.length; ++i)
+                                    message.regions[i] = String(object.regions[i]);
+                            }
                             return message;
                         };
     
@@ -2750,6 +2783,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.regions = [];
                             if (options.defaults) {
                                 object.parent = "";
                                 object.sshPublicKey = null;
@@ -2761,6 +2796,11 @@
                                 object.sshPublicKey = $root.google.cloud.oslogin.common.SshPublicKey.toObject(message.sshPublicKey, options);
                             if (message.projectId != null && message.hasOwnProperty("projectId"))
                                 object.projectId = message.projectId;
+                            if (message.regions && message.regions.length) {
+                                object.regions = [];
+                                for (var j = 0; j < message.regions.length; ++j)
+                                    object.regions[j] = message.regions[j];
+                            }
                             return object;
                         };
     

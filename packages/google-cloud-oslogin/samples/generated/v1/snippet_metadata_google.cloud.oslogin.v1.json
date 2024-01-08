@@ -234,7 +234,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 61,
+                    "end": 67,
                     "type": "FULL"
                 }
             ],
@@ -254,6 +254,10 @@
                     {
                         "name": "project_id",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "regions",
+                        "type": "TYPE_STRING[]"
                     }
                 ],
                 "resultType": ".google.cloud.oslogin.v1.ImportSshPublicKeyResponse",

@@ -1103,6 +1103,9 @@ export namespace google {
 
                     /** ImportSshPublicKeyRequest projectId */
                     projectId?: (string|null);
+
+                    /** ImportSshPublicKeyRequest regions */
+                    regions?: (string[]|null);
                 }
 
                 /** Represents an ImportSshPublicKeyRequest. */
@@ -1122,6 +1125,9 @@ export namespace google {
 
                     /** ImportSshPublicKeyRequest projectId. */
                     public projectId: string;
+
+                    /** ImportSshPublicKeyRequest regions. */
+                    public regions: string[];
 
                     /**
                      * Creates a new ImportSshPublicKeyRequest instance using the specified properties.
