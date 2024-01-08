@@ -69,6 +69,46 @@
           "timeout_millis": 600000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
+        },
+        "CreateAdaptiveMtDataset": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteAdaptiveMtDataset": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetAdaptiveMtDataset": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListAdaptiveMtDatasets": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "AdaptiveMtTranslate": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetAdaptiveMtFile": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteAdaptiveMtFile": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ImportAdaptiveMtFile": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListAdaptiveMtFiles": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListAdaptiveMtSentences": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }

@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1157,7 +1157,9 @@ export namespace google {
                     enum SqlApiWarningCode {
                         SQL_API_WARNING_CODE_UNSPECIFIED = 0,
                         REGION_UNREACHABLE = 1,
-                        MAX_RESULTS_EXCEEDS_LIMIT = 2
+                        MAX_RESULTS_EXCEEDS_LIMIT = 2,
+                        COMPROMISED_CREDENTIALS = 3,
+                        INTERNAL_STATE_FAILURE = 4
                     }
                 }
 
@@ -4846,6 +4848,9 @@ export namespace google {
                     /** Operation error */
                     error?: (google.cloud.sql.v1.IOperationErrors|null);
 
+                    /** Operation apiWarning */
+                    apiWarning?: (google.cloud.sql.v1.IApiWarning|null);
+
                     /** Operation operationType */
                     operationType?: (google.cloud.sql.v1.Operation.SqlOperationType|keyof typeof google.cloud.sql.v1.Operation.SqlOperationType|null);
 
@@ -4903,6 +4908,9 @@ export namespace google {
 
                     /** Operation error. */
                     public error?: (google.cloud.sql.v1.IOperationErrors|null);
+
+                    /** Operation apiWarning. */
+                    public apiWarning?: (google.cloud.sql.v1.IApiWarning|null);
 
                     /** Operation operationType. */
                     public operationType: (google.cloud.sql.v1.Operation.SqlOperationType|keyof typeof google.cloud.sql.v1.Operation.SqlOperationType);
@@ -5292,6 +5300,9 @@ export namespace google {
 
                     /** PasswordValidationPolicy enablePasswordPolicy */
                     enablePasswordPolicy?: (google.protobuf.IBoolValue|null);
+
+                    /** PasswordValidationPolicy disallowCompromisedCredentials */
+                    disallowCompromisedCredentials?: (google.protobuf.IBoolValue|null);
                 }
 
                 /** Represents a PasswordValidationPolicy. */
@@ -5320,6 +5331,9 @@ export namespace google {
 
                     /** PasswordValidationPolicy enablePasswordPolicy. */
                     public enablePasswordPolicy?: (google.protobuf.IBoolValue|null);
+
+                    /** PasswordValidationPolicy disallowCompromisedCredentials. */
+                    public disallowCompromisedCredentials?: (google.protobuf.IBoolValue|null);
 
                     /**
                      * Creates a new PasswordValidationPolicy instance using the specified properties.
@@ -6467,7 +6481,8 @@ export namespace google {
                 enum SqlUpdateTrack {
                     SQL_UPDATE_TRACK_UNSPECIFIED = 0,
                     canary = 1,
-                    stable = 2
+                    stable = 2,
+                    week5 = 3
                 }
 
                 /** Represents a SqlConnectService */
@@ -14557,6 +14572,9 @@ export namespace google {
                     /** DatabaseInstance maintenanceVersion */
                     maintenanceVersion?: (string|null);
 
+                    /** DatabaseInstance sqlNetworkArchitecture */
+                    sqlNetworkArchitecture?: (google.cloud.sql.v1.DatabaseInstance.SqlNetworkArchitecture|keyof typeof google.cloud.sql.v1.DatabaseInstance.SqlNetworkArchitecture|null);
+
                     /** DatabaseInstance pscServiceAttachmentLink */
                     pscServiceAttachmentLink?: (string|null);
 
@@ -14687,6 +14705,9 @@ export namespace google {
                     /** DatabaseInstance maintenanceVersion. */
                     public maintenanceVersion: string;
 
+                    /** DatabaseInstance sqlNetworkArchitecture. */
+                    public sqlNetworkArchitecture?: (google.cloud.sql.v1.DatabaseInstance.SqlNetworkArchitecture|keyof typeof google.cloud.sql.v1.DatabaseInstance.SqlNetworkArchitecture|null);
+
                     /** DatabaseInstance pscServiceAttachmentLink. */
                     public pscServiceAttachmentLink?: (string|null);
 
@@ -14701,6 +14722,9 @@ export namespace google {
 
                     /** DatabaseInstance _outOfDiskReport. */
                     public _outOfDiskReport?: "outOfDiskReport";
+
+                    /** DatabaseInstance _sqlNetworkArchitecture. */
+                    public _sqlNetworkArchitecture?: "sqlNetworkArchitecture";
 
                     /** DatabaseInstance _pscServiceAttachmentLink. */
                     public _pscServiceAttachmentLink?: "pscServiceAttachmentLink";
@@ -15144,6 +15168,13 @@ export namespace google {
                             NORMAL = 1,
                             SOFT_SHUTDOWN = 2
                         }
+                    }
+
+                    /** SqlNetworkArchitecture enum. */
+                    enum SqlNetworkArchitecture {
+                        SQL_NETWORK_ARCHITECTURE_UNSPECIFIED = 0,
+                        NEW_NETWORK_ARCHITECTURE = 1,
+                        OLD_NETWORK_ARCHITECTURE = 2
                     }
                 }
 
@@ -26572,7 +26603,9 @@ export namespace google {
                     enum SqlApiWarningCode {
                         SQL_API_WARNING_CODE_UNSPECIFIED = 0,
                         REGION_UNREACHABLE = 1,
-                        MAX_RESULTS_EXCEEDS_LIMIT = 2
+                        MAX_RESULTS_EXCEEDS_LIMIT = 2,
+                        COMPROMISED_CREDENTIALS = 3,
+                        INTERNAL_STATE_FAILURE = 4
                     }
                 }
 
@@ -28166,6 +28199,9 @@ export namespace google {
                     /** DatabaseInstance maintenanceVersion */
                     maintenanceVersion?: (string|null);
 
+                    /** DatabaseInstance sqlNetworkArchitecture */
+                    sqlNetworkArchitecture?: (google.cloud.sql.v1beta4.DatabaseInstance.SqlNetworkArchitecture|keyof typeof google.cloud.sql.v1beta4.DatabaseInstance.SqlNetworkArchitecture|null);
+
                     /** DatabaseInstance pscServiceAttachmentLink */
                     pscServiceAttachmentLink?: (string|null);
 
@@ -28296,6 +28332,9 @@ export namespace google {
                     /** DatabaseInstance maintenanceVersion. */
                     public maintenanceVersion: string;
 
+                    /** DatabaseInstance sqlNetworkArchitecture. */
+                    public sqlNetworkArchitecture?: (google.cloud.sql.v1beta4.DatabaseInstance.SqlNetworkArchitecture|keyof typeof google.cloud.sql.v1beta4.DatabaseInstance.SqlNetworkArchitecture|null);
+
                     /** DatabaseInstance pscServiceAttachmentLink. */
                     public pscServiceAttachmentLink?: (string|null);
 
@@ -28310,6 +28349,9 @@ export namespace google {
 
                     /** DatabaseInstance _outOfDiskReport. */
                     public _outOfDiskReport?: "outOfDiskReport";
+
+                    /** DatabaseInstance _sqlNetworkArchitecture. */
+                    public _sqlNetworkArchitecture?: "sqlNetworkArchitecture";
 
                     /** DatabaseInstance _pscServiceAttachmentLink. */
                     public _pscServiceAttachmentLink?: "pscServiceAttachmentLink";
@@ -28753,6 +28795,13 @@ export namespace google {
                             NORMAL = 1,
                             SOFT_SHUTDOWN = 2
                         }
+                    }
+
+                    /** SqlNetworkArchitecture enum. */
+                    enum SqlNetworkArchitecture {
+                        SQL_NETWORK_ARCHITECTURE_UNSPECIFIED = 0,
+                        NEW_NETWORK_ARCHITECTURE = 1,
+                        OLD_NETWORK_ARCHITECTURE = 2
                     }
                 }
 
@@ -32445,7 +32494,9 @@ export namespace google {
                         UNSUPPORTED_DATABASE_SETTINGS = 33,
                         MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE = 34,
                         LOCAL_INFILE_OFF = 35,
-                        TURN_ON_PITR_AFTER_PROMOTE = 36
+                        TURN_ON_PITR_AFTER_PROMOTE = 36,
+                        INCOMPATIBLE_DATABASE_MINOR_VERSION = 37,
+                        SOURCE_MAX_SUBSCRIPTIONS = 38
                     }
                 }
 
@@ -33812,6 +33863,9 @@ export namespace google {
                     /** Operation error */
                     error?: (google.cloud.sql.v1beta4.IOperationErrors|null);
 
+                    /** Operation apiWarning */
+                    apiWarning?: (google.cloud.sql.v1beta4.IApiWarning|null);
+
                     /** Operation operationType */
                     operationType?: (google.cloud.sql.v1beta4.Operation.SqlOperationType|keyof typeof google.cloud.sql.v1beta4.Operation.SqlOperationType|null);
 
@@ -33869,6 +33923,9 @@ export namespace google {
 
                     /** Operation error. */
                     public error?: (google.cloud.sql.v1beta4.IOperationErrors|null);
+
+                    /** Operation apiWarning. */
+                    public apiWarning?: (google.cloud.sql.v1beta4.IApiWarning|null);
 
                     /** Operation operationType. */
                     public operationType: (google.cloud.sql.v1beta4.Operation.SqlOperationType|keyof typeof google.cloud.sql.v1beta4.Operation.SqlOperationType);
@@ -34258,6 +34315,9 @@ export namespace google {
 
                     /** PasswordValidationPolicy enablePasswordPolicy */
                     enablePasswordPolicy?: (google.protobuf.IBoolValue|null);
+
+                    /** PasswordValidationPolicy disallowCompromisedCredentials */
+                    disallowCompromisedCredentials?: (google.protobuf.IBoolValue|null);
                 }
 
                 /** Represents a PasswordValidationPolicy. */
@@ -34286,6 +34346,9 @@ export namespace google {
 
                     /** PasswordValidationPolicy enablePasswordPolicy. */
                     public enablePasswordPolicy?: (google.protobuf.IBoolValue|null);
+
+                    /** PasswordValidationPolicy disallowCompromisedCredentials. */
+                    public disallowCompromisedCredentials?: (google.protobuf.IBoolValue|null);
 
                     /**
                      * Creates a new PasswordValidationPolicy instance using the specified properties.
@@ -36652,7 +36715,8 @@ export namespace google {
                 enum SqlUpdateTrack {
                     SQL_UPDATE_TRACK_UNSPECIFIED = 0,
                     canary = 1,
-                    stable = 2
+                    stable = 2,
+                    week5 = 3
                 }
 
                 /** SqlFlagType enum. */

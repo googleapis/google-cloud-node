@@ -219,6 +219,9 @@ export class ModelServiceClient {
       datasetVersionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/datasetVersions/{dataset_version}'
       ),
+      deploymentResourcePoolPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}'
+      ),
       entityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}'
       ),
@@ -401,6 +404,9 @@ export class ModelServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/publishers/*/models/*}:getIamPolicy',
             },
           ],
         },
@@ -2600,10 +2606,10 @@ export class ModelServiceClient {
    *   Optional. The user-provided custom service account to use to do the model
    *   upload. If empty, [Vertex AI Service
    *   Agent](https://cloud.google.com/vertex-ai/docs/general/access-control#service-agents)
-   *   will be used. Users uploading the Model must have the
-   *   `iam.serviceAccounts.actAs` permission on this service account. Also, this
-   *   account must belong to the project specified in the `parent` field and have
-   *   all necessary read permissions.
+   *   will be used to access resources needed to upload the model. This account
+   *   must belong to the target project where the model is uploaded to, i.e., the
+   *   project specified in the `parent` field of this request and have necessary
+   *   read permissions (to Google Cloud Storage, Artifact Registry, etc.).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5524,6 +5530,71 @@ export class ModelServiceClient {
     return this.pathTemplates.datasetVersionPathTemplate.match(
       datasetVersionName
     ).dataset_version;
+  }
+
+  /**
+   * Return a fully-qualified deploymentResourcePool resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} deployment_resource_pool
+   * @returns {string} Resource name string.
+   */
+  deploymentResourcePoolPath(
+    project: string,
+    location: string,
+    deploymentResourcePool: string
+  ) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.render({
+      project: project,
+      location: location,
+      deployment_resource_pool: deploymentResourcePool,
+    });
+  }
+
+  /**
+   * Parse the project from DeploymentResourcePool resource.
+   *
+   * @param {string} deploymentResourcePoolName
+   *   A fully-qualified path representing DeploymentResourcePool resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDeploymentResourcePoolName(
+    deploymentResourcePoolName: string
+  ) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(
+      deploymentResourcePoolName
+    ).project;
+  }
+
+  /**
+   * Parse the location from DeploymentResourcePool resource.
+   *
+   * @param {string} deploymentResourcePoolName
+   *   A fully-qualified path representing DeploymentResourcePool resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDeploymentResourcePoolName(
+    deploymentResourcePoolName: string
+  ) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(
+      deploymentResourcePoolName
+    ).location;
+  }
+
+  /**
+   * Parse the deployment_resource_pool from DeploymentResourcePool resource.
+   *
+   * @param {string} deploymentResourcePoolName
+   *   A fully-qualified path representing DeploymentResourcePool resource.
+   * @returns {string} A string representing the deployment_resource_pool.
+   */
+  matchDeploymentResourcePoolFromDeploymentResourcePoolName(
+    deploymentResourcePoolName: string
+  ) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(
+      deploymentResourcePoolName
+    ).deployment_resource_pool;
   }
 
   /**

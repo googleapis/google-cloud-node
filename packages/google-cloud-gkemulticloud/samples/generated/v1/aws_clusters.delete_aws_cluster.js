@@ -50,6 +50,13 @@ function main(name) {
    */
   // const allowMissing = true
   /**
+   *  Optional. If set to true, the deletion of
+   *  AwsCluster google.cloud.gkemulticloud.v1.AwsCluster  resource will
+   *  succeed even if errors occur during deleting in cluster resources. Using
+   *  this parameter may result in orphaned resources in the cluster.
+   */
+  // const ignoreErrors = true
+  /**
    *  The current etag of the
    *  AwsCluster google.cloud.gkemulticloud.v1.AwsCluster.
    *  Allows clients to perform deletions through optimistic concurrency control.

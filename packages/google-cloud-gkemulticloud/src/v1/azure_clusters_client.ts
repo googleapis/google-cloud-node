@@ -418,12 +418,15 @@ export class AzureClustersClient {
       'getAzureCluster',
       'listAzureClusters',
       'deleteAzureCluster',
+      'generateAzureClusterAgentToken',
       'generateAzureAccessToken',
       'createAzureNodePool',
       'updateAzureNodePool',
       'getAzureNodePool',
       'listAzureNodePools',
       'deleteAzureNodePool',
+      'getAzureOpenIdConfig',
+      'getAzureJsonWebKeys',
       'getAzureServerConfig',
     ];
     for (const methodName of azureClustersStubMethods) {
@@ -711,6 +714,124 @@ export class AzureClustersClient {
     return this.innerApiCalls.getAzureCluster(request, options, callback);
   }
   /**
+   * Generates an access token for a cluster agent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.azureCluster
+   *   Required.
+   * @param {string} request.subjectToken
+   *   Required.
+   * @param {string} request.subjectTokenType
+   *   Required.
+   * @param {string} request.version
+   *   Required.
+   * @param {string} [request.nodePoolId]
+   *   Optional.
+   * @param {string} [request.grantType]
+   *   Optional.
+   * @param {string} [request.audience]
+   *   Optional.
+   * @param {string} [request.scope]
+   *   Optional.
+   * @param {string} [request.requestedTokenType]
+   *   Optional.
+   * @param {string} [request.options]
+   *   Optional.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.GenerateAzureClusterAgentTokenResponse|GenerateAzureClusterAgentTokenResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/azure_clusters.generate_azure_cluster_agent_token.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AzureClusters_GenerateAzureClusterAgentToken_async
+   */
+  generateAzureClusterAgentToken(
+    request?: protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenResponse,
+      (
+        | protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  generateAzureClusterAgentToken(
+    request: protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenResponse,
+      | protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  generateAzureClusterAgentToken(
+    request: protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest,
+    callback: Callback<
+      protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenResponse,
+      | protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  generateAzureClusterAgentToken(
+    request?: protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenResponse,
+          | protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenResponse,
+      | protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenResponse,
+      (
+        | protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        azure_cluster: request.azureCluster ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.generateAzureClusterAgentToken(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
    * Generates a short-lived access token to authenticate to a given
    * {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource.
    *
@@ -722,7 +843,7 @@ export class AzureClustersClient {
    *   authenticate to.
    *
    *   `AzureCluster` names are formatted as
-   *   `projects/<project-id>/locations/<region>/AzureClusters/<cluster-id>`.
+   *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
    *
    *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
    *   for more details on Google Cloud resource names.
@@ -917,6 +1038,207 @@ export class AzureClustersClient {
       });
     this.initialize();
     return this.innerApiCalls.getAzureNodePool(request, options, callback);
+  }
+  /**
+   * Gets the OIDC discovery document for the cluster.
+   * See the
+   * [OpenID Connect Discovery 1.0
+   * specification](https://openid.net/specs/openid-connect-discovery-1_0.html)
+   * for details.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.azureCluster
+   *   Required. The AzureCluster, which owns the OIDC discovery document.
+   *   Format:
+   *   projects/<project-id>/locations/<region>/azureClusters/<cluster-id>
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AzureOpenIdConfig|AzureOpenIdConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/azure_clusters.get_azure_open_id_config.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AzureClusters_GetAzureOpenIdConfig_async
+   */
+  getAzureOpenIdConfig(
+    request?: protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IAzureOpenIdConfig,
+      (
+        | protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getAzureOpenIdConfig(
+    request: protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.gkemulticloud.v1.IAzureOpenIdConfig,
+      | protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getAzureOpenIdConfig(
+    request: protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest,
+    callback: Callback<
+      protos.google.cloud.gkemulticloud.v1.IAzureOpenIdConfig,
+      | protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getAzureOpenIdConfig(
+    request?: protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IAzureOpenIdConfig,
+          | protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.gkemulticloud.v1.IAzureOpenIdConfig,
+      | protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IAzureOpenIdConfig,
+      (
+        | protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        azure_cluster: request.azureCluster ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getAzureOpenIdConfig(request, options, callback);
+  }
+  /**
+   * Gets the public component of the cluster signing keys in
+   * JSON Web Key format.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.azureCluster
+   *   Required. The AzureCluster, which owns the JsonWebKeys.
+   *   Format:
+   *   projects/<project-id>/locations/<region>/azureClusters/<cluster-id>
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AzureJsonWebKeys|AzureJsonWebKeys}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/azure_clusters.get_azure_json_web_keys.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AzureClusters_GetAzureJsonWebKeys_async
+   */
+  getAzureJsonWebKeys(
+    request?: protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IAzureJsonWebKeys,
+      (
+        | protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getAzureJsonWebKeys(
+    request: protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.gkemulticloud.v1.IAzureJsonWebKeys,
+      | protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getAzureJsonWebKeys(
+    request: protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest,
+    callback: Callback<
+      protos.google.cloud.gkemulticloud.v1.IAzureJsonWebKeys,
+      | protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getAzureJsonWebKeys(
+    request?: protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IAzureJsonWebKeys,
+          | protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.gkemulticloud.v1.IAzureJsonWebKeys,
+      | protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IAzureJsonWebKeys,
+      (
+        | protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        azure_cluster: request.azureCluster ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getAzureJsonWebKeys(request, options, callback);
   }
   /**
    * Returns information, such as supported Azure regions and Kubernetes
@@ -1536,6 +1858,7 @@ export class AzureClustersClient {
    *    *   `control_plane.vm_size`.
    *    *   `annotations`.
    *    *   `authorization.admin_users`.
+   *    *   `authorization.admin_groups`.
    *    *   `control_plane.root_volume.size_gib`.
    *    *   `azure_services_authentication`.
    *    *   `azure_services_authentication.tenant_id`.
@@ -1858,7 +2181,8 @@ export class AzureClustersClient {
    *   Required. The {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}
    *   resource where this node pool will be created.
    *
-   *   Location names are formatted as `projects/<project-id>/locations/<region>`.
+   *   `AzureCluster` names are formatted as
+   *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
    *
    *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
    *   for more details on Google Cloud resource names.
@@ -2027,6 +2351,8 @@ export class AzureClustersClient {
    *    *   `autoscaling.min_node_count`.
    *    *   `autoscaling.max_node_count`.
    *    *   `config.ssh_config.authorized_key`.
+   *    *   `management.auto_repair`.
+   *    *   `management`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

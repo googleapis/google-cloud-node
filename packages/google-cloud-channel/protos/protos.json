@@ -1169,6 +1169,7 @@
                     },
                     "CloudChannelReportsService": {
                       "options": {
+                        "deprecated": true,
                         "(google.api.default_host)": "cloudchannel.googleapis.com",
                         "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/apps.reports.usage.readonly"
                       },
@@ -1177,12 +1178,16 @@
                           "requestType": "RunReportJobRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).post": "/v1/{name=accounts/*/reports/*}:run",
                             "(google.api.http).body": "*",
                             "(google.longrunning.operation_info).response_type": "RunReportJobResponse",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
                           },
                           "parsedOptions": [
+                            {
+                              "deprecated": true
+                            },
                             {
                               "(google.api.http)": {
                                 "post": "/v1/{name=accounts/*/reports/*}:run",
@@ -1201,11 +1206,15 @@
                           "requestType": "FetchReportResultsRequest",
                           "responseType": "FetchReportResultsResponse",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).post": "/v1/{report_job=accounts/*/reportJobs/*}:fetchReportResults",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "report_job"
                           },
                           "parsedOptions": [
+                            {
+                              "deprecated": true
+                            },
                             {
                               "(google.api.http)": {
                                 "post": "/v1/{report_job=accounts/*/reportJobs/*}:fetchReportResults",
@@ -1221,10 +1230,14 @@
                           "requestType": "ListReportsRequest",
                           "responseType": "ListReportsResponse",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).get": "/v1/{parent=accounts/*}/reports",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
+                            {
+                              "deprecated": true
+                            },
                             {
                               "(google.api.http)": {
                                 "get": "/v1/{parent=accounts/*}/reports"
@@ -1238,6 +1251,9 @@
                       }
                     },
                     "RunReportJobRequest": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -1271,6 +1287,9 @@
                       }
                     },
                     "RunReportJobResponse": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "reportJob": {
                           "type": "ReportJob",
@@ -1283,6 +1302,9 @@
                       }
                     },
                     "FetchReportResultsRequest": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "reportJob": {
                           "type": "string",
@@ -1317,6 +1339,9 @@
                       }
                     },
                     "FetchReportResultsResponse": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "reportMetadata": {
                           "type": "ReportResultsMetadata",
@@ -1334,6 +1359,9 @@
                       }
                     },
                     "ListReportsRequest": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "parent": {
                           "type": "string",
@@ -1366,6 +1394,9 @@
                       }
                     },
                     "ListReportsResponse": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "reports": {
                           "rule": "repeated",
@@ -1380,6 +1411,7 @@
                     },
                     "ReportJob": {
                       "options": {
+                        "deprecated": true,
                         "(google.api.resource).type": "cloudchannel.googleapis.com/ReportJob",
                         "(google.api.resource).pattern": "accounts/{account}/reportJobs/{report_job}"
                       },
@@ -1398,6 +1430,9 @@
                       }
                     },
                     "ReportResultsMetadata": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "report": {
                           "type": "Report",
@@ -1418,6 +1453,9 @@
                       }
                     },
                     "Column": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "columnId": {
                           "type": "string",
@@ -1447,6 +1485,9 @@
                       }
                     },
                     "DateRange": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "usageStartDateTime": {
                           "type": "google.type.DateTime",
@@ -1467,6 +1508,9 @@
                       }
                     },
                     "Row": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "values": {
                           "rule": "repeated",
@@ -1480,6 +1524,9 @@
                       }
                     },
                     "ReportValue": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "oneofs": {
                         "value": {
                           "oneof": [
@@ -1520,6 +1567,9 @@
                       }
                     },
                     "ReportStatus": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "state": {
                           "type": "State",
@@ -1548,6 +1598,7 @@
                     },
                     "Report": {
                       "options": {
+                        "deprecated": true,
                         "(google.api.resource).type": "cloudchannel.googleapis.com/Report",
                         "(google.api.resource).pattern": "accounts/{account}/reports/{report}"
                       },

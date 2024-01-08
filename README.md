@@ -177,6 +177,7 @@ applications that interact with individual Google Cloud services:
 | [Storage Insights API](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-storageinsights) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/storageinsights)](https://npm.im/@google-cloud/storageinsights) |
 | [Support API](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-support) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/support)](https://npm.im/@google-cloud/support) |
 | [Trace](https://github.com/googleapis/cloud-trace-nodejs) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/trace-agent)](https://npm.im/@google-cloud/trace-agent) |
+| [Vertex AI](https://github.com/googleapis/nodejs-vertexai) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/vertexai)](https://npm.im/@google-cloud/vertexai) |
 | [Workstations API](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-workstations) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/workstations)](https://npm.im/@google-cloud/workstations) |
 
 
