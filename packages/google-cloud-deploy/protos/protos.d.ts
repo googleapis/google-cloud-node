@@ -2610,6 +2610,9 @@ export namespace google {
 
                         /** GatewayServiceMesh routeUpdateWaitTime */
                         routeUpdateWaitTime?: (google.protobuf.IDuration|null);
+
+                        /** GatewayServiceMesh stableCutbackDuration */
+                        stableCutbackDuration?: (google.protobuf.IDuration|null);
                     }
 
                     /** Represents a GatewayServiceMesh. */
@@ -2632,6 +2635,9 @@ export namespace google {
 
                         /** GatewayServiceMesh routeUpdateWaitTime. */
                         public routeUpdateWaitTime?: (google.protobuf.IDuration|null);
+
+                        /** GatewayServiceMesh stableCutbackDuration. */
+                        public stableCutbackDuration?: (google.protobuf.IDuration|null);
 
                         /**
                          * Creates a new GatewayServiceMesh instance using the specified properties.
@@ -18251,6 +18257,9 @@ export namespace google {
                     /** DeliveryPipelineNotificationEvent message */
                     message?: (string|null);
 
+                    /** DeliveryPipelineNotificationEvent pipelineUid */
+                    pipelineUid?: (string|null);
+
                     /** DeliveryPipelineNotificationEvent deliveryPipeline */
                     deliveryPipeline?: (string|null);
 
@@ -18269,6 +18278,9 @@ export namespace google {
 
                     /** DeliveryPipelineNotificationEvent message. */
                     public message: string;
+
+                    /** DeliveryPipelineNotificationEvent pipelineUid. */
+                    public pipelineUid: string;
 
                     /** DeliveryPipelineNotificationEvent deliveryPipeline. */
                     public deliveryPipeline: string;
@@ -18369,8 +18381,14 @@ export namespace google {
                     /** JobRunNotificationEvent releaseUid */
                     releaseUid?: (string|null);
 
+                    /** JobRunNotificationEvent release */
+                    release?: (string|null);
+
                     /** JobRunNotificationEvent rolloutUid */
                     rolloutUid?: (string|null);
+
+                    /** JobRunNotificationEvent rollout */
+                    rollout?: (string|null);
 
                     /** JobRunNotificationEvent targetId */
                     targetId?: (string|null);
@@ -18400,8 +18418,14 @@ export namespace google {
                     /** JobRunNotificationEvent releaseUid. */
                     public releaseUid: string;
 
+                    /** JobRunNotificationEvent release. */
+                    public release: string;
+
                     /** JobRunNotificationEvent rolloutUid. */
                     public rolloutUid: string;
+
+                    /** JobRunNotificationEvent rollout. */
+                    public rollout: string;
 
                     /** JobRunNotificationEvent targetId. */
                     public targetId: string;
@@ -18493,6 +18517,12 @@ export namespace google {
                     /** ReleaseNotificationEvent message */
                     message?: (string|null);
 
+                    /** ReleaseNotificationEvent pipelineUid */
+                    pipelineUid?: (string|null);
+
+                    /** ReleaseNotificationEvent releaseUid */
+                    releaseUid?: (string|null);
+
                     /** ReleaseNotificationEvent release */
                     release?: (string|null);
 
@@ -18511,6 +18541,12 @@ export namespace google {
 
                     /** ReleaseNotificationEvent message. */
                     public message: string;
+
+                    /** ReleaseNotificationEvent pipelineUid. */
+                    public pipelineUid: string;
+
+                    /** ReleaseNotificationEvent releaseUid. */
+                    public releaseUid: string;
 
                     /** ReleaseNotificationEvent release. */
                     public release: string;
@@ -18602,8 +18638,14 @@ export namespace google {
                     /** ReleaseRenderEvent message */
                     message?: (string|null);
 
+                    /** ReleaseRenderEvent pipelineUid */
+                    pipelineUid?: (string|null);
+
                     /** ReleaseRenderEvent release */
                     release?: (string|null);
+
+                    /** ReleaseRenderEvent type */
+                    type?: (google.cloud.deploy.v1.Type|keyof typeof google.cloud.deploy.v1.Type|null);
 
                     /** ReleaseRenderEvent releaseRenderState */
                     releaseRenderState?: (google.cloud.deploy.v1.Release.RenderState|keyof typeof google.cloud.deploy.v1.Release.RenderState|null);
@@ -18621,8 +18663,14 @@ export namespace google {
                     /** ReleaseRenderEvent message. */
                     public message: string;
 
+                    /** ReleaseRenderEvent pipelineUid. */
+                    public pipelineUid: string;
+
                     /** ReleaseRenderEvent release. */
                     public release: string;
+
+                    /** ReleaseRenderEvent type. */
+                    public type: (google.cloud.deploy.v1.Type|keyof typeof google.cloud.deploy.v1.Type);
 
                     /** ReleaseRenderEvent releaseRenderState. */
                     public releaseRenderState: (google.cloud.deploy.v1.Release.RenderState|keyof typeof google.cloud.deploy.v1.Release.RenderState);
@@ -18717,14 +18765,20 @@ export namespace google {
                     /** RolloutNotificationEvent releaseUid */
                     releaseUid?: (string|null);
 
+                    /** RolloutNotificationEvent release */
+                    release?: (string|null);
+
+                    /** RolloutNotificationEvent rolloutUid */
+                    rolloutUid?: (string|null);
+
                     /** RolloutNotificationEvent rollout */
                     rollout?: (string|null);
 
-                    /** RolloutNotificationEvent type */
-                    type?: (google.cloud.deploy.v1.Type|keyof typeof google.cloud.deploy.v1.Type|null);
-
                     /** RolloutNotificationEvent targetId */
                     targetId?: (string|null);
+
+                    /** RolloutNotificationEvent type */
+                    type?: (google.cloud.deploy.v1.Type|keyof typeof google.cloud.deploy.v1.Type|null);
                 }
 
                 /** Represents a RolloutNotificationEvent. */
@@ -18745,14 +18799,20 @@ export namespace google {
                     /** RolloutNotificationEvent releaseUid. */
                     public releaseUid: string;
 
+                    /** RolloutNotificationEvent release. */
+                    public release: string;
+
+                    /** RolloutNotificationEvent rolloutUid. */
+                    public rolloutUid: string;
+
                     /** RolloutNotificationEvent rollout. */
                     public rollout: string;
 
-                    /** RolloutNotificationEvent type. */
-                    public type: (google.cloud.deploy.v1.Type|keyof typeof google.cloud.deploy.v1.Type);
-
                     /** RolloutNotificationEvent targetId. */
                     public targetId: string;
+
+                    /** RolloutNotificationEvent type. */
+                    public type: (google.cloud.deploy.v1.Type|keyof typeof google.cloud.deploy.v1.Type);
 
                     /**
                      * Creates a new RolloutNotificationEvent instance using the specified properties.
@@ -18835,11 +18895,17 @@ export namespace google {
                 /** Properties of a RolloutUpdateEvent. */
                 interface IRolloutUpdateEvent {
 
+                    /** RolloutUpdateEvent message */
+                    message?: (string|null);
+
                     /** RolloutUpdateEvent pipelineUid */
                     pipelineUid?: (string|null);
 
                     /** RolloutUpdateEvent releaseUid */
                     releaseUid?: (string|null);
+
+                    /** RolloutUpdateEvent release */
+                    release?: (string|null);
 
                     /** RolloutUpdateEvent rollout */
                     rollout?: (string|null);
@@ -18847,14 +18913,11 @@ export namespace google {
                     /** RolloutUpdateEvent targetId */
                     targetId?: (string|null);
 
-                    /** RolloutUpdateEvent rolloutUpdateType */
-                    rolloutUpdateType?: (google.cloud.deploy.v1.RolloutUpdateEvent.RolloutUpdateType|keyof typeof google.cloud.deploy.v1.RolloutUpdateEvent.RolloutUpdateType|null);
-
-                    /** RolloutUpdateEvent message */
-                    message?: (string|null);
-
                     /** RolloutUpdateEvent type */
                     type?: (google.cloud.deploy.v1.Type|keyof typeof google.cloud.deploy.v1.Type|null);
+
+                    /** RolloutUpdateEvent rolloutUpdateType */
+                    rolloutUpdateType?: (google.cloud.deploy.v1.RolloutUpdateEvent.RolloutUpdateType|keyof typeof google.cloud.deploy.v1.RolloutUpdateEvent.RolloutUpdateType|null);
                 }
 
                 /** Represents a RolloutUpdateEvent. */
@@ -18866,11 +18929,17 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.deploy.v1.IRolloutUpdateEvent);
 
+                    /** RolloutUpdateEvent message. */
+                    public message: string;
+
                     /** RolloutUpdateEvent pipelineUid. */
                     public pipelineUid: string;
 
                     /** RolloutUpdateEvent releaseUid. */
                     public releaseUid: string;
+
+                    /** RolloutUpdateEvent release. */
+                    public release: string;
 
                     /** RolloutUpdateEvent rollout. */
                     public rollout: string;
@@ -18878,14 +18947,11 @@ export namespace google {
                     /** RolloutUpdateEvent targetId. */
                     public targetId: string;
 
-                    /** RolloutUpdateEvent rolloutUpdateType. */
-                    public rolloutUpdateType: (google.cloud.deploy.v1.RolloutUpdateEvent.RolloutUpdateType|keyof typeof google.cloud.deploy.v1.RolloutUpdateEvent.RolloutUpdateType);
-
-                    /** RolloutUpdateEvent message. */
-                    public message: string;
-
                     /** RolloutUpdateEvent type. */
                     public type: (google.cloud.deploy.v1.Type|keyof typeof google.cloud.deploy.v1.Type);
+
+                    /** RolloutUpdateEvent rolloutUpdateType. */
+                    public rolloutUpdateType: (google.cloud.deploy.v1.RolloutUpdateEvent.RolloutUpdateType|keyof typeof google.cloud.deploy.v1.RolloutUpdateEvent.RolloutUpdateType);
 
                     /**
                      * Creates a new RolloutUpdateEvent instance using the specified properties.
