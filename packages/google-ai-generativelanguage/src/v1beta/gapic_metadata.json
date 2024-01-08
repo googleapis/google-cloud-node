@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.ai.generativelanguage.v1beta",
-  "libraryPackage": "@google-cloud/generativelanguage",
+  "libraryPackage": "@google-ai/generativelanguage",
   "services": {
     "DiscussService": {
       "clients": {
