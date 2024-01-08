@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,11 +17,17 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const generativelanguage = require('@google-ai/generativelanguage');
+const generativelanguage = require('@google-cloud/generativelanguage');
 
 function main() {
   const discussServiceClient = new generativelanguage.DiscussServiceClient();
+  const generativeServiceClient =
+    new generativelanguage.GenerativeServiceClient();
   const modelServiceClient = new generativelanguage.ModelServiceClient();
+  const permissionServiceClient =
+    new generativelanguage.PermissionServiceClient();
+  const retrieverServiceClient =
+    new generativelanguage.RetrieverServiceClient();
   const textServiceClient = new generativelanguage.TextServiceClient();
 }
 
