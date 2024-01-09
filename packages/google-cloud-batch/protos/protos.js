@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20193,6 +20193,7 @@
                          * @property {Object.<string,string>|null} [labels] AllocationPolicy labels
                          * @property {google.cloud.batch.v1alpha.AllocationPolicy.INetworkPolicy|null} [network] AllocationPolicy network
                          * @property {google.cloud.batch.v1alpha.AllocationPolicy.IPlacementPolicy|null} [placement] AllocationPolicy placement
+                         * @property {Array.<string>|null} [tags] AllocationPolicy tags
                          */
     
                         /**
@@ -20208,6 +20209,7 @@
                             this.instanceTemplates = [];
                             this.provisioningModels = [];
                             this.labels = {};
+                            this.tags = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -20295,6 +20297,14 @@
                         AllocationPolicy.prototype.placement = null;
     
                         /**
+                         * AllocationPolicy tags.
+                         * @member {Array.<string>} tags
+                         * @memberof google.cloud.batch.v1alpha.AllocationPolicy
+                         * @instance
+                         */
+                        AllocationPolicy.prototype.tags = $util.emptyArray;
+    
+                        /**
                          * Creates a new AllocationPolicy instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.batch.v1alpha.AllocationPolicy
@@ -20345,6 +20355,9 @@
                                 $root.google.cloud.batch.v1alpha.ServiceAccount.encode(message.serviceAccount, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             if (message.placement != null && Object.hasOwnProperty.call(message, "placement"))
                                 $root.google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy.encode(message.placement, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.tags != null && message.tags.length)
+                                for (var i = 0; i < message.tags.length; ++i)
+                                    writer.uint32(/* id 11, wireType 2 =*/90).string(message.tags[i]);
                             return writer;
                         };
     
@@ -20449,6 +20462,12 @@
                                         message.placement = $root.google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 11: {
+                                        if (!(message.tags && message.tags.length))
+                                            message.tags = [];
+                                        message.tags.push(reader.string());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -20550,6 +20569,13 @@
                                 if (error)
                                     return "placement." + error;
                             }
+                            if (message.tags != null && message.hasOwnProperty("tags")) {
+                                if (!Array.isArray(message.tags))
+                                    return "tags: array expected";
+                                for (var i = 0; i < message.tags.length; ++i)
+                                    if (!$util.isString(message.tags[i]))
+                                        return "tags: string[] expected";
+                            }
                             return null;
                         };
     
@@ -20645,6 +20671,13 @@
                                     throw TypeError(".google.cloud.batch.v1alpha.AllocationPolicy.placement: object expected");
                                 message.placement = $root.google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy.fromObject(object.placement);
                             }
+                            if (object.tags) {
+                                if (!Array.isArray(object.tags))
+                                    throw TypeError(".google.cloud.batch.v1alpha.AllocationPolicy.tags: array expected");
+                                message.tags = [];
+                                for (var i = 0; i < object.tags.length; ++i)
+                                    message.tags[i] = String(object.tags[i]);
+                            }
                             return message;
                         };
     
@@ -20665,6 +20698,7 @@
                                 object.instanceTemplates = [];
                                 object.provisioningModels = [];
                                 object.instances = [];
+                                object.tags = [];
                             }
                             if (options.objects || options.defaults)
                                 object.labels = {};
@@ -20709,6 +20743,11 @@
                                 object.serviceAccount = $root.google.cloud.batch.v1alpha.ServiceAccount.toObject(message.serviceAccount, options);
                             if (message.placement != null && message.hasOwnProperty("placement"))
                                 object.placement = $root.google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy.toObject(message.placement, options);
+                            if (message.tags && message.tags.length) {
+                                object.tags = [];
+                                for (var j = 0; j < message.tags.length; ++j)
+                                    object.tags[j] = message.tags[j];
+                            }
                             return object;
                         };
     
@@ -23392,6 +23431,7 @@
                          * @property {boolean|null} [requireHostsFile] TaskGroup requireHostsFile
                          * @property {boolean|null} [permissiveSsh] TaskGroup permissiveSsh
                          * @property {boolean|null} [enableOslogin] TaskGroup enableOslogin
+                         * @property {boolean|null} [runAsNonRoot] TaskGroup runAsNonRoot
                          */
     
                         /**
@@ -23508,6 +23548,14 @@
                         TaskGroup.prototype.enableOslogin = false;
     
                         /**
+                         * TaskGroup runAsNonRoot.
+                         * @member {boolean} runAsNonRoot
+                         * @memberof google.cloud.batch.v1alpha.TaskGroup
+                         * @instance
+                         */
+                        TaskGroup.prototype.runAsNonRoot = false;
+    
+                        /**
                          * Creates a new TaskGroup instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.batch.v1alpha.TaskGroup
@@ -23557,6 +23605,8 @@
                                 writer.uint32(/* id 12, wireType 0 =*/96).bool(message.permissiveSsh);
                             if (message.enableOslogin != null && Object.hasOwnProperty.call(message, "enableOslogin"))
                                 writer.uint32(/* id 13, wireType 0 =*/104).bool(message.enableOslogin);
+                            if (message.runAsNonRoot != null && Object.hasOwnProperty.call(message, "runAsNonRoot"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).bool(message.runAsNonRoot);
                             return writer;
                         };
     
@@ -23660,6 +23710,10 @@
                                         message.enableOslogin = reader.bool();
                                         break;
                                     }
+                                case 14: {
+                                        message.runAsNonRoot = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -23752,6 +23806,9 @@
                             if (message.enableOslogin != null && message.hasOwnProperty("enableOslogin"))
                                 if (typeof message.enableOslogin !== "boolean")
                                     return "enableOslogin: boolean expected";
+                            if (message.runAsNonRoot != null && message.hasOwnProperty("runAsNonRoot"))
+                                if (typeof message.runAsNonRoot !== "boolean")
+                                    return "runAsNonRoot: boolean expected";
                             return null;
                         };
     
@@ -23849,6 +23906,8 @@
                                 message.permissiveSsh = Boolean(object.permissiveSsh);
                             if (object.enableOslogin != null)
                                 message.enableOslogin = Boolean(object.enableOslogin);
+                            if (object.runAsNonRoot != null)
+                                message.runAsNonRoot = Boolean(object.runAsNonRoot);
                             return message;
                         };
     
@@ -23892,6 +23951,7 @@
                                 object.requireHostsFile = false;
                                 object.permissiveSsh = false;
                                 object.enableOslogin = false;
+                                object.runAsNonRoot = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -23933,6 +23993,8 @@
                                 object.permissiveSsh = message.permissiveSsh;
                             if (message.enableOslogin != null && message.hasOwnProperty("enableOslogin"))
                                 object.enableOslogin = message.enableOslogin;
+                            if (message.runAsNonRoot != null && message.hasOwnProperty("runAsNonRoot"))
+                                object.runAsNonRoot = message.runAsNonRoot;
                             return object;
                         };
     

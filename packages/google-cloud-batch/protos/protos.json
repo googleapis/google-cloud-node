@@ -1936,6 +1936,14 @@
                         "placement": {
                           "type": "PlacementPolicy",
                           "id": 10
+                        },
+                        "tags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -2212,6 +2220,14 @@
                         "enableOslogin": {
                           "type": "bool",
                           "id": 13,
+                          "options": {
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "runAsNonRoot": {
+                          "type": "bool",
+                          "id": 14,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
