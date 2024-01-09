@@ -2253,6 +2253,9 @@ export namespace google {
 
                     /** ImportSshPublicKeyRequest view */
                     view?: (google.cloud.oslogin.v1beta.LoginProfileView|keyof typeof google.cloud.oslogin.v1beta.LoginProfileView|null);
+
+                    /** ImportSshPublicKeyRequest regions */
+                    regions?: (string[]|null);
                 }
 
                 /** Represents an ImportSshPublicKeyRequest. */
@@ -2275,6 +2278,9 @@ export namespace google {
 
                     /** ImportSshPublicKeyRequest view. */
                     public view: (google.cloud.oslogin.v1beta.LoginProfileView|keyof typeof google.cloud.oslogin.v1beta.LoginProfileView);
+
+                    /** ImportSshPublicKeyRequest regions. */
+                    public regions: string[];
 
                     /**
                      * Creates a new ImportSshPublicKeyRequest instance using the specified properties.
