@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [8.4.0](https://github.com/googleapis/nodejs-datastore/compare/v8.3.0...v8.4.0) (2024-01-09)
+
+
+### Features
+
+* Add new types QueryMode, QueryPlan, ResultSetStats ([#1216](https://github.com/googleapis/nodejs-datastore/issues/1216)) ([49c1462](https://github.com/googleapis/nodejs-datastore/commit/49c14626271c45473d73b07cda39a288017f1432))
+
 ## [8.3.0](https://github.com/googleapis/nodejs-datastore/compare/v8.2.2...v8.3.0) (2023-12-11)
 
 
