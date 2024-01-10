@@ -16188,7 +16188,8 @@ export namespace google {
                         LOCAL_INFILE_OFF = 35,
                         TURN_ON_PITR_AFTER_PROMOTE = 36,
                         INCOMPATIBLE_DATABASE_MINOR_VERSION = 37,
-                        SOURCE_MAX_SUBSCRIPTIONS = 38
+                        SOURCE_MAX_SUBSCRIPTIONS = 38,
+                        UNABLE_TO_VERIFY_DEFINERS = 39
                     }
                 }
 
