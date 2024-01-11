@@ -17,7 +17,7 @@
     "@google-cloud/containeranalysis": "^5.1.1"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
+    "chai": "^5.0.0",
     "mocha": "^8.0.0",
     "uuid": "^9.0.0"
   }

@@ -17,7 +17,7 @@
     "@grpc/grpc-js": "^1.0.0"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
+    "chai": "^5.0.0",
     "mocha": "^8.0.0"
   }
 }
