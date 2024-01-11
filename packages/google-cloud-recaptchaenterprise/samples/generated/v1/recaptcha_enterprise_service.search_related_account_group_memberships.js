@@ -35,11 +35,12 @@ function main(project) {
    */
   // const project = 'my-project'
   /**
-   *  Optional. The unique stable hashed user identifier used to search
-   *  connections. The identifier should correspond to a `hashed_account_id`
-   *  provided in a previous `CreateAssessment` or `AnnotateAssessment` call.
+   *  Optional. The unique stable account identifier used to search connections.
+   *  The identifier should correspond to an `account_id` provided in a previous
+   *  `CreateAssessment` or `AnnotateAssessment` call. Either hashed_account_id
+   *  or account_id must be set, but not both.
    */
-  // const hashedAccountId = Buffer.from('string')
+  // const accountId = 'abc123'
   /**
    *  Optional. The maximum number of groups to return. The service might return
    *  fewer than this value. If unspecified, at most 50 groups are returned. The

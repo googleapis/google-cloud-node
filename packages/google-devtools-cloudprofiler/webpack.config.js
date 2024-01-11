@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'ProfilerService',
-    filename: './profiler-service.js',
+    library: 'ExportService',
+    filename: './export-service.js',
   },
   node: {
     child_process: 'empty',

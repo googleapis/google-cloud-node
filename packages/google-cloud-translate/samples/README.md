@@ -12,13 +12,23 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Translation_service.adaptive_mt_translate](#translation_service.adaptive_mt_translate)
   * [Translation_service.batch_translate_document](#translation_service.batch_translate_document)
   * [Translation_service.batch_translate_text](#translation_service.batch_translate_text)
+  * [Translation_service.create_adaptive_mt_dataset](#translation_service.create_adaptive_mt_dataset)
   * [Translation_service.create_glossary](#translation_service.create_glossary)
+  * [Translation_service.delete_adaptive_mt_dataset](#translation_service.delete_adaptive_mt_dataset)
+  * [Translation_service.delete_adaptive_mt_file](#translation_service.delete_adaptive_mt_file)
   * [Translation_service.delete_glossary](#translation_service.delete_glossary)
   * [Translation_service.detect_language](#translation_service.detect_language)
+  * [Translation_service.get_adaptive_mt_dataset](#translation_service.get_adaptive_mt_dataset)
+  * [Translation_service.get_adaptive_mt_file](#translation_service.get_adaptive_mt_file)
   * [Translation_service.get_glossary](#translation_service.get_glossary)
   * [Translation_service.get_supported_languages](#translation_service.get_supported_languages)
+  * [Translation_service.import_adaptive_mt_file](#translation_service.import_adaptive_mt_file)
+  * [Translation_service.list_adaptive_mt_datasets](#translation_service.list_adaptive_mt_datasets)
+  * [Translation_service.list_adaptive_mt_files](#translation_service.list_adaptive_mt_files)
+  * [Translation_service.list_adaptive_mt_sentences](#translation_service.list_adaptive_mt_sentences)
   * [Translation_service.list_glossaries](#translation_service.list_glossaries)
   * [Translation_service.translate_document](#translation_service.translate_document)
   * [Translation_service.translate_text](#translation_service.translate_text)
@@ -46,6 +56,23 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Translation_service.adaptive_mt_translate
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.adaptive_mt_translate.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.adaptive_mt_translate.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-translate/samples/generated/v3/translation_service.adaptive_mt_translate.js`
+
+
+-----
+
 
 
 
@@ -83,6 +110,23 @@ __Usage:__
 
 
 
+### Translation_service.create_adaptive_mt_dataset
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.create_adaptive_mt_dataset.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.create_adaptive_mt_dataset.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-translate/samples/generated/v3/translation_service.create_adaptive_mt_dataset.js`
+
+
+-----
+
+
+
+
 ### Translation_service.create_glossary
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.create_glossary.js).
@@ -93,6 +137,40 @@ __Usage:__
 
 
 `node packages/google-cloud-translate/samples/generated/v3/translation_service.create_glossary.js`
+
+
+-----
+
+
+
+
+### Translation_service.delete_adaptive_mt_dataset
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.delete_adaptive_mt_dataset.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.delete_adaptive_mt_dataset.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-translate/samples/generated/v3/translation_service.delete_adaptive_mt_dataset.js`
+
+
+-----
+
+
+
+
+### Translation_service.delete_adaptive_mt_file
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.delete_adaptive_mt_file.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.delete_adaptive_mt_file.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-translate/samples/generated/v3/translation_service.delete_adaptive_mt_file.js`
 
 
 -----
@@ -134,6 +212,40 @@ __Usage:__
 
 
 
+### Translation_service.get_adaptive_mt_dataset
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.get_adaptive_mt_dataset.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.get_adaptive_mt_dataset.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-translate/samples/generated/v3/translation_service.get_adaptive_mt_dataset.js`
+
+
+-----
+
+
+
+
+### Translation_service.get_adaptive_mt_file
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.get_adaptive_mt_file.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.get_adaptive_mt_file.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-translate/samples/generated/v3/translation_service.get_adaptive_mt_file.js`
+
+
+-----
+
+
+
+
 ### Translation_service.get_glossary
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.get_glossary.js).
@@ -161,6 +273,74 @@ __Usage:__
 
 
 `node packages/google-cloud-translate/samples/generated/v3/translation_service.get_supported_languages.js`
+
+
+-----
+
+
+
+
+### Translation_service.import_adaptive_mt_file
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.import_adaptive_mt_file.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.import_adaptive_mt_file.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-translate/samples/generated/v3/translation_service.import_adaptive_mt_file.js`
+
+
+-----
+
+
+
+
+### Translation_service.list_adaptive_mt_datasets
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.list_adaptive_mt_datasets.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.list_adaptive_mt_datasets.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-translate/samples/generated/v3/translation_service.list_adaptive_mt_datasets.js`
+
+
+-----
+
+
+
+
+### Translation_service.list_adaptive_mt_files
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.list_adaptive_mt_files.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.list_adaptive_mt_files.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-translate/samples/generated/v3/translation_service.list_adaptive_mt_files.js`
+
+
+-----
+
+
+
+
+### Translation_service.list_adaptive_mt_sentences
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.list_adaptive_mt_sentences.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.list_adaptive_mt_sentences.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-translate/samples/generated/v3/translation_service.list_adaptive_mt_sentences.js`
 
 
 -----

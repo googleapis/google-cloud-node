@@ -221,6 +221,9 @@ export class FeatureRegistryServiceClient {
       datasetVersionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/datasetVersions/{dataset_version}'
       ),
+      deploymentResourcePoolPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}'
+      ),
       entityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}'
       ),
@@ -396,6 +399,9 @@ export class FeatureRegistryServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/publishers/*/models/*}:getIamPolicy',
             },
           ],
         },
@@ -3157,7 +3163,7 @@ export class FeatureRegistryServiceClient {
    *
    *   When paginating, all other parameters provided to
    *   {@link protos.google.cloud.aiplatform.v1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures}
-   *   or or
+   *   or
    *   {@link protos.google.cloud.aiplatform.v1.FeatureRegistryService.ListFeatures|FeatureRegistryService.ListFeatures}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
@@ -3311,7 +3317,7 @@ export class FeatureRegistryServiceClient {
    *
    *   When paginating, all other parameters provided to
    *   {@link protos.google.cloud.aiplatform.v1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures}
-   *   or or
+   *   or
    *   {@link protos.google.cloud.aiplatform.v1.FeatureRegistryService.ListFeatures|FeatureRegistryService.ListFeatures}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
@@ -3413,7 +3419,7 @@ export class FeatureRegistryServiceClient {
    *
    *   When paginating, all other parameters provided to
    *   {@link protos.google.cloud.aiplatform.v1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures}
-   *   or or
+   *   or
    *   {@link protos.google.cloud.aiplatform.v1.FeatureRegistryService.ListFeatures|FeatureRegistryService.ListFeatures}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
@@ -4522,6 +4528,71 @@ export class FeatureRegistryServiceClient {
     return this.pathTemplates.datasetVersionPathTemplate.match(
       datasetVersionName
     ).dataset_version;
+  }
+
+  /**
+   * Return a fully-qualified deploymentResourcePool resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} deployment_resource_pool
+   * @returns {string} Resource name string.
+   */
+  deploymentResourcePoolPath(
+    project: string,
+    location: string,
+    deploymentResourcePool: string
+  ) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.render({
+      project: project,
+      location: location,
+      deployment_resource_pool: deploymentResourcePool,
+    });
+  }
+
+  /**
+   * Parse the project from DeploymentResourcePool resource.
+   *
+   * @param {string} deploymentResourcePoolName
+   *   A fully-qualified path representing DeploymentResourcePool resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDeploymentResourcePoolName(
+    deploymentResourcePoolName: string
+  ) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(
+      deploymentResourcePoolName
+    ).project;
+  }
+
+  /**
+   * Parse the location from DeploymentResourcePool resource.
+   *
+   * @param {string} deploymentResourcePoolName
+   *   A fully-qualified path representing DeploymentResourcePool resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDeploymentResourcePoolName(
+    deploymentResourcePoolName: string
+  ) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(
+      deploymentResourcePoolName
+    ).location;
+  }
+
+  /**
+   * Parse the deployment_resource_pool from DeploymentResourcePool resource.
+   *
+   * @param {string} deploymentResourcePoolName
+   *   A fully-qualified path representing DeploymentResourcePool resource.
+   * @returns {string} A string representing the deployment_resource_pool.
+   */
+  matchDeploymentResourcePoolFromDeploymentResourcePoolName(
+    deploymentResourcePoolName: string
+  ) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(
+      deploymentResourcePoolName
+    ).deployment_resource_pool;
   }
 
   /**

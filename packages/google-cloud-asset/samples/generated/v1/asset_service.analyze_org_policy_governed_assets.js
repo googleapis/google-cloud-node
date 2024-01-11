@@ -43,16 +43,31 @@ function main(scope, constraint) {
    */
   // const constraint = 'abc123'
   /**
-   *  The expression to filter the governed assets in result. The only supported
-   *  fields for governed resources are `governed_resource.project` and
-   *  `governed_resource.folders`. The only supported fields for governed iam
-   *  policies are `governed_iam_policy.project` and
-   *  `governed_iam_policy.folders`. The only supported operator is `=`.
-   *  Example 1: governed_resource.project="projects/12345678" filter will return
-   *  all governed resources under projects/12345678 including the project
-   *  ifself, if applicable.
-   *  Example 2: governed_iam_policy.folders="folders/12345678" filter will
-   *  return all governed iam policies under folders/12345678, if applicable.
+   *  The expression to filter
+   *  AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets.
+   *  For governed resources, filtering is currently available for bare literal
+   *  values and the following fields:
+   *  * governed_resource.project
+   *  * governed_resource.folders
+   *  * consolidated_policy.rules.enforce
+   *  When filtering by `governed_resource.project` or
+   *  `consolidated_policy.rules.enforce`, the only supported operator is `=`.
+   *  When filtering by `governed_resource.folders`, the supported operators
+   *  are `=` and `:`.
+   *  For example, filtering by `governed_resource.project="projects/12345678"`
+   *  will return all the governed resources under "projects/12345678",
+   *  including the project itself if applicable.
+   *  For governed IAM policies, filtering is currently available for bare
+   *  literal values and the following fields:
+   *  * governed_iam_policy.project
+   *  * governed_iam_policy.folders
+   *  * consolidated_policy.rules.enforce
+   *  When filtering by `governed_iam_policy.project` or
+   *  `consolidated_policy.rules.enforce`, the only supported operator is `=`.
+   *  When filtering by `governed_iam_policy.folders`, the supported operators
+   *  are `=` and `:`.
+   *  For example, filtering by `governed_iam_policy.folders:"folders/12345678"`
+   *  will return all the governed IAM policies under "folders/001".
    */
   // const filter = 'abc123'
   /**

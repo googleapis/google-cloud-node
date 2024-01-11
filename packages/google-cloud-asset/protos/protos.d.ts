@@ -13913,6 +13913,206 @@ export namespace google {
                     type DeleteFeedCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
                 }
 
+                /** Properties of an ExportAssetsResponse. */
+                interface IExportAssetsResponse {
+
+                    /** ExportAssetsResponse readTime */
+                    readTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExportAssetsResponse outputConfig */
+                    outputConfig?: (google.cloud.asset.v1p2beta1.IOutputConfig|null);
+                }
+
+                /** Represents an ExportAssetsResponse. */
+                class ExportAssetsResponse implements IExportAssetsResponse {
+
+                    /**
+                     * Constructs a new ExportAssetsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1p2beta1.IExportAssetsResponse);
+
+                    /** ExportAssetsResponse readTime. */
+                    public readTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExportAssetsResponse outputConfig. */
+                    public outputConfig?: (google.cloud.asset.v1p2beta1.IOutputConfig|null);
+
+                    /**
+                     * Creates a new ExportAssetsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportAssetsResponse instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1p2beta1.IExportAssetsResponse): google.cloud.asset.v1p2beta1.ExportAssetsResponse;
+
+                    /**
+                     * Encodes the specified ExportAssetsResponse message. Does not implicitly {@link google.cloud.asset.v1p2beta1.ExportAssetsResponse.verify|verify} messages.
+                     * @param message ExportAssetsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1p2beta1.IExportAssetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportAssetsResponse message, length delimited. Does not implicitly {@link google.cloud.asset.v1p2beta1.ExportAssetsResponse.verify|verify} messages.
+                     * @param message ExportAssetsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1p2beta1.IExportAssetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportAssetsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportAssetsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1p2beta1.ExportAssetsResponse;
+
+                    /**
+                     * Decodes an ExportAssetsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportAssetsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1p2beta1.ExportAssetsResponse;
+
+                    /**
+                     * Verifies an ExportAssetsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportAssetsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportAssetsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1p2beta1.ExportAssetsResponse;
+
+                    /**
+                     * Creates a plain object from an ExportAssetsResponse message. Also converts values to other types if specified.
+                     * @param message ExportAssetsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1p2beta1.ExportAssetsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportAssetsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportAssetsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchGetAssetsHistoryResponse. */
+                interface IBatchGetAssetsHistoryResponse {
+
+                    /** BatchGetAssetsHistoryResponse assets */
+                    assets?: (google.cloud.asset.v1p2beta1.ITemporalAsset[]|null);
+                }
+
+                /** Represents a BatchGetAssetsHistoryResponse. */
+                class BatchGetAssetsHistoryResponse implements IBatchGetAssetsHistoryResponse {
+
+                    /**
+                     * Constructs a new BatchGetAssetsHistoryResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1p2beta1.IBatchGetAssetsHistoryResponse);
+
+                    /** BatchGetAssetsHistoryResponse assets. */
+                    public assets: google.cloud.asset.v1p2beta1.ITemporalAsset[];
+
+                    /**
+                     * Creates a new BatchGetAssetsHistoryResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchGetAssetsHistoryResponse instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1p2beta1.IBatchGetAssetsHistoryResponse): google.cloud.asset.v1p2beta1.BatchGetAssetsHistoryResponse;
+
+                    /**
+                     * Encodes the specified BatchGetAssetsHistoryResponse message. Does not implicitly {@link google.cloud.asset.v1p2beta1.BatchGetAssetsHistoryResponse.verify|verify} messages.
+                     * @param message BatchGetAssetsHistoryResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1p2beta1.IBatchGetAssetsHistoryResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchGetAssetsHistoryResponse message, length delimited. Does not implicitly {@link google.cloud.asset.v1p2beta1.BatchGetAssetsHistoryResponse.verify|verify} messages.
+                     * @param message BatchGetAssetsHistoryResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1p2beta1.IBatchGetAssetsHistoryResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchGetAssetsHistoryResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchGetAssetsHistoryResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1p2beta1.BatchGetAssetsHistoryResponse;
+
+                    /**
+                     * Decodes a BatchGetAssetsHistoryResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchGetAssetsHistoryResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1p2beta1.BatchGetAssetsHistoryResponse;
+
+                    /**
+                     * Verifies a BatchGetAssetsHistoryResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchGetAssetsHistoryResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchGetAssetsHistoryResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1p2beta1.BatchGetAssetsHistoryResponse;
+
+                    /**
+                     * Creates a plain object from a BatchGetAssetsHistoryResponse message. Also converts values to other types if specified.
+                     * @param message BatchGetAssetsHistoryResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1p2beta1.BatchGetAssetsHistoryResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchGetAssetsHistoryResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchGetAssetsHistoryResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a CreateFeedRequest. */
                 interface ICreateFeedRequest {
 
@@ -14713,6 +14913,13 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** ContentType enum. */
+                enum ContentType {
+                    CONTENT_TYPE_UNSPECIFIED = 0,
+                    RESOURCE = 1,
+                    IAM_POLICY = 2
+                }
+
                 /** Properties of a PubsubDestination. */
                 interface IPubsubDestination {
 
@@ -15031,13 +15238,6 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** ContentType enum. */
-                enum ContentType {
-                    CONTENT_TYPE_UNSPECIFIED = 0,
-                    RESOURCE = 1,
-                    IAM_POLICY = 2
-                }
-
                 /** Properties of a TemporalAsset. */
                 interface ITemporalAsset {
 
@@ -15267,6 +15467,18 @@ export namespace google {
 
                     /** Asset ancestors */
                     ancestors?: (string[]|null);
+
+                    /** Asset accessPolicy */
+                    accessPolicy?: (google.identity.accesscontextmanager.v1.IAccessPolicy|null);
+
+                    /** Asset accessLevel */
+                    accessLevel?: (google.identity.accesscontextmanager.v1.IAccessLevel|null);
+
+                    /** Asset servicePerimeter */
+                    servicePerimeter?: (google.identity.accesscontextmanager.v1.IServicePerimeter|null);
+
+                    /** Asset orgPolicy */
+                    orgPolicy?: (google.cloud.orgpolicy.v1.IPolicy[]|null);
                 }
 
                 /** Represents an Asset. */
@@ -15292,6 +15504,21 @@ export namespace google {
 
                     /** Asset ancestors. */
                     public ancestors: string[];
+
+                    /** Asset accessPolicy. */
+                    public accessPolicy?: (google.identity.accesscontextmanager.v1.IAccessPolicy|null);
+
+                    /** Asset accessLevel. */
+                    public accessLevel?: (google.identity.accesscontextmanager.v1.IAccessLevel|null);
+
+                    /** Asset servicePerimeter. */
+                    public servicePerimeter?: (google.identity.accesscontextmanager.v1.IServicePerimeter|null);
+
+                    /** Asset orgPolicy. */
+                    public orgPolicy: google.cloud.orgpolicy.v1.IPolicy[];
+
+                    /** Asset accessContextPolicy. */
+                    public accessContextPolicy?: ("accessPolicy"|"accessLevel"|"servicePerimeter");
 
                     /**
                      * Creates a new Asset instance using the specified properties.

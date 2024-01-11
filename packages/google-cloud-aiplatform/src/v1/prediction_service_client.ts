@@ -214,6 +214,9 @@ export class PredictionServiceClient {
       datasetVersionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/datasetVersions/{dataset_version}'
       ),
+      deploymentResourcePoolPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}'
+      ),
       entityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}'
       ),
@@ -337,6 +340,10 @@ export class PredictionServiceClient {
         this._gaxModule.StreamType.BIDI_STREAMING,
         !!opts.fallback
       ),
+      streamGenerateContent: new this._gaxModule.StreamDescriptor(
+        this._gaxModule.StreamType.SERVER_STREAMING,
+        !!opts.fallback
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -397,6 +404,7 @@ export class PredictionServiceClient {
       'serverStreamingPredict',
       'streamingRawPredict',
       'explain',
+      'streamGenerateContent',
     ];
     for (const methodName of predictionServiceStubMethods) {
       const callPromise = this.predictionServiceStub.then(
@@ -1103,6 +1111,59 @@ export class PredictionServiceClient {
   streamingRawPredict(options?: CallOptions): gax.CancellableStream {
     this.initialize();
     return this.innerApiCalls.streamingRawPredict(null, options);
+  }
+
+  /**
+   * Generate content with multimodal inputs with streaming support.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.model
+   *   Required. The name of the publisher model requested to serve the
+   *   prediction. Format:
+   *   `projects/{project}/locations/{location}/publishers/* /models/*`
+   * @param {number[]} request.contents
+   *   Required. The content of the current conversation with the model.
+   *
+   *   For single-turn queries, this is a single instance. For multi-turn queries,
+   *   this is a repeated field that contains conversation history + latest
+   *   request.
+   * @param {number[]} [request.tools]
+   *   Optional. A list of `Tools` the model may use to generate the next
+   *   response.
+   *
+   *   A `Tool` is a piece of code that enables the system to interact with
+   *   external systems to perform an action, or set of actions, outside of
+   *   knowledge and scope of the model. The only supported tool is currently
+   *   `Function`
+   * @param {number[]} [request.safetySettings]
+   *   Optional. Per request settings for blocking unsafe content.
+   *   Enforced on GenerateContentResponse.candidates.
+   * @param {google.cloud.aiplatform.v1.GenerationConfig} [request.generationConfig]
+   *   Optional. Generation config.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits {@link protos.google.cloud.aiplatform.v1.GenerateContentResponse|GenerateContentResponse} on 'data' event.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/prediction_service.stream_generate_content.js</caption>
+   * region_tag:aiplatform_v1_generated_PredictionService_StreamGenerateContent_async
+   */
+  streamGenerateContent(
+    request?: protos.google.cloud.aiplatform.v1.IGenerateContentRequest,
+    options?: CallOptions
+  ): gax.CancellableStream {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        model: request.model ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.streamGenerateContent(request, options);
   }
 
   /**
@@ -1984,6 +2045,71 @@ export class PredictionServiceClient {
     return this.pathTemplates.datasetVersionPathTemplate.match(
       datasetVersionName
     ).dataset_version;
+  }
+
+  /**
+   * Return a fully-qualified deploymentResourcePool resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} deployment_resource_pool
+   * @returns {string} Resource name string.
+   */
+  deploymentResourcePoolPath(
+    project: string,
+    location: string,
+    deploymentResourcePool: string
+  ) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.render({
+      project: project,
+      location: location,
+      deployment_resource_pool: deploymentResourcePool,
+    });
+  }
+
+  /**
+   * Parse the project from DeploymentResourcePool resource.
+   *
+   * @param {string} deploymentResourcePoolName
+   *   A fully-qualified path representing DeploymentResourcePool resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDeploymentResourcePoolName(
+    deploymentResourcePoolName: string
+  ) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(
+      deploymentResourcePoolName
+    ).project;
+  }
+
+  /**
+   * Parse the location from DeploymentResourcePool resource.
+   *
+   * @param {string} deploymentResourcePoolName
+   *   A fully-qualified path representing DeploymentResourcePool resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDeploymentResourcePoolName(
+    deploymentResourcePoolName: string
+  ) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(
+      deploymentResourcePoolName
+    ).location;
+  }
+
+  /**
+   * Parse the deployment_resource_pool from DeploymentResourcePool resource.
+   *
+   * @param {string} deploymentResourcePoolName
+   *   A fully-qualified path representing DeploymentResourcePool resource.
+   * @returns {string} A string representing the deployment_resource_pool.
+   */
+  matchDeploymentResourcePoolFromDeploymentResourcePoolName(
+    deploymentResourcePoolName: string
+  ) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(
+      deploymentResourcePoolName
+    ).deployment_resource_pool;
   }
 
   /**

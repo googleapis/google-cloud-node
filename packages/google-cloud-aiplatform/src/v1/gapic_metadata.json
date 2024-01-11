@@ -223,6 +223,78 @@
         }
       }
     },
+    "DeploymentResourcePoolService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DeploymentResourcePoolServiceClient",
+          "rpcs": {
+            "GetDeploymentResourcePool": {
+              "methods": [
+                "getDeploymentResourcePool"
+              ]
+            },
+            "CreateDeploymentResourcePool": {
+              "methods": [
+                "createDeploymentResourcePool"
+              ]
+            },
+            "DeleteDeploymentResourcePool": {
+              "methods": [
+                "deleteDeploymentResourcePool"
+              ]
+            },
+            "ListDeploymentResourcePools": {
+              "methods": [
+                "listDeploymentResourcePools",
+                "listDeploymentResourcePoolsStream",
+                "listDeploymentResourcePoolsAsync"
+              ]
+            },
+            "QueryDeployedModels": {
+              "methods": [
+                "queryDeployedModels",
+                "queryDeployedModelsStream",
+                "queryDeployedModelsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DeploymentResourcePoolServiceClient",
+          "rpcs": {
+            "GetDeploymentResourcePool": {
+              "methods": [
+                "getDeploymentResourcePool"
+              ]
+            },
+            "CreateDeploymentResourcePool": {
+              "methods": [
+                "createDeploymentResourcePool"
+              ]
+            },
+            "DeleteDeploymentResourcePool": {
+              "methods": [
+                "deleteDeploymentResourcePool"
+              ]
+            },
+            "ListDeploymentResourcePools": {
+              "methods": [
+                "listDeploymentResourcePools",
+                "listDeploymentResourcePoolsStream",
+                "listDeploymentResourcePoolsAsync"
+              ]
+            },
+            "QueryDeployedModels": {
+              "methods": [
+                "queryDeployedModels",
+                "queryDeployedModelsStream",
+                "queryDeployedModelsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "EndpointService": {
       "clients": {
         "grpc": {
@@ -2343,6 +2415,11 @@
             "StreamingRawPredict": {
               "methods": [
                 "streamingRawPredict"
+              ]
+            },
+            "StreamGenerateContent": {
+              "methods": [
+                "streamGenerateContent"
               ]
             }
           }

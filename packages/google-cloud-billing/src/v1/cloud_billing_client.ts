@@ -181,6 +181,12 @@ export class CloudBillingClient {
       billingAccountPathTemplate: new this._gaxModule.PathTemplate(
         'billingAccounts/{billing_account}'
       ),
+      organizationPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}'
+      ),
+      organizationBillingAccountPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/billingAccounts/{billing_account}'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -271,6 +277,7 @@ export class CloudBillingClient {
       'getIamPolicy',
       'setIamPolicy',
       'testIamPermissions',
+      'moveBillingAccount',
     ];
     for (const methodName of cloudBillingStubMethods) {
       const callPromise = this.cloudBillingStub.then(
@@ -576,6 +583,13 @@ export class CloudBillingClient {
    *   Currently CreateBillingAccount only supports subaccount creation, so
    *   any created billing accounts must be under a provided parent billing
    *   account.
+   * @param {string} [request.parent]
+   *   Optional. The parent to create a billing account from.
+   *   Format:
+   *     - `organizations/{organization_id}`, for example,
+   *       `organizations/12345678`
+   *     - `billingAccounts/{billing_account_id}`, for example,
+   *        `billingAccounts/012345-567890-ABCDEF`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -652,6 +666,10 @@ export class CloudBillingClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     this.initialize();
     return this.innerApiCalls.createBillingAccount(request, options, callback);
   }
@@ -764,7 +782,8 @@ export class CloudBillingClient {
    * account, even if the charge occurred before the new billing account was
    * assigned to the project.
    *
-   * The current authenticated user must have ownership privileges for both the
+   * The current authenticated user must have ownership privileges for both
+   * the
    * [project](https://cloud.google.com/docs/permissions-overview#h.bgs0oxofvnoo
    * ) and the [billing
    * account](https://cloud.google.com/billing/docs/how-to/billing-access).
@@ -1163,6 +1182,104 @@ export class CloudBillingClient {
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);
   }
+  /**
+   * Changes which parent organization a billing account belongs to.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the billing account to move.
+   *   Must be of the form `billingAccounts/{billing_account_id}`.
+   *   The specified billing account cannot be a subaccount, since a subaccount
+   *   always belongs to the same organization as its parent account.
+   * @param {string} request.destinationParent
+   *   Required. The resource name of the Organization to reparent
+   *   the billing account under.
+   *   Must be of the form `organizations/{organization_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.billing.v1.BillingAccount|BillingAccount}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_billing.move_billing_account.js</caption>
+   * region_tag:cloudbilling_v1_generated_CloudBilling_MoveBillingAccount_async
+   */
+  moveBillingAccount(
+    request?: protos.google.cloud.billing.v1.IMoveBillingAccountRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.billing.v1.IBillingAccount,
+      protos.google.cloud.billing.v1.IMoveBillingAccountRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  moveBillingAccount(
+    request: protos.google.cloud.billing.v1.IMoveBillingAccountRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.billing.v1.IBillingAccount,
+      | protos.google.cloud.billing.v1.IMoveBillingAccountRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  moveBillingAccount(
+    request: protos.google.cloud.billing.v1.IMoveBillingAccountRequest,
+    callback: Callback<
+      protos.google.cloud.billing.v1.IBillingAccount,
+      | protos.google.cloud.billing.v1.IMoveBillingAccountRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  moveBillingAccount(
+    request?: protos.google.cloud.billing.v1.IMoveBillingAccountRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.billing.v1.IBillingAccount,
+          | protos.google.cloud.billing.v1.IMoveBillingAccountRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.billing.v1.IBillingAccount,
+      | protos.google.cloud.billing.v1.IMoveBillingAccountRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.billing.v1.IBillingAccount,
+      protos.google.cloud.billing.v1.IMoveBillingAccountRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+        destination_parent: request.destinationParent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.moveBillingAccount(request, options, callback);
+  }
 
   /**
    * Lists the billing accounts that the current authenticated user has
@@ -1183,8 +1300,16 @@ export class CloudBillingClient {
    *   This only supports filtering for
    *   [subaccounts](https://cloud.google.com/billing/docs/concepts) under a
    *   single provided parent billing account.
-   *   (e.g. "master_billing_account=billingAccounts/012345-678901-ABCDEF").
+   *   (for example,
+   *   `master_billing_account=billingAccounts/012345-678901-ABCDEF`).
    *   Boolean algebra and other fields are not currently supported.
+   * @param {string} [request.parent]
+   *   Optional. The parent resource to list billing accounts from.
+   *   Format:
+   *     - `organizations/{organization_id}`, for example,
+   *       `organizations/12345678`
+   *     - `billingAccounts/{billing_account_id}`, for example,
+   *       `billingAccounts/012345-567890-ABCDEF`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1264,6 +1389,10 @@ export class CloudBillingClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     this.initialize();
     return this.innerApiCalls.listBillingAccounts(request, options, callback);
   }
@@ -1284,8 +1413,16 @@ export class CloudBillingClient {
    *   This only supports filtering for
    *   [subaccounts](https://cloud.google.com/billing/docs/concepts) under a
    *   single provided parent billing account.
-   *   (e.g. "master_billing_account=billingAccounts/012345-678901-ABCDEF").
+   *   (for example,
+   *   `master_billing_account=billingAccounts/012345-678901-ABCDEF`).
    *   Boolean algebra and other fields are not currently supported.
+   * @param {string} [request.parent]
+   *   Optional. The parent resource to list billing accounts from.
+   *   Format:
+   *     - `organizations/{organization_id}`, for example,
+   *       `organizations/12345678`
+   *     - `billingAccounts/{billing_account_id}`, for example,
+   *       `billingAccounts/012345-567890-ABCDEF`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1305,6 +1442,10 @@ export class CloudBillingClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listBillingAccounts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -1333,8 +1474,16 @@ export class CloudBillingClient {
    *   This only supports filtering for
    *   [subaccounts](https://cloud.google.com/billing/docs/concepts) under a
    *   single provided parent billing account.
-   *   (e.g. "master_billing_account=billingAccounts/012345-678901-ABCDEF").
+   *   (for example,
+   *   `master_billing_account=billingAccounts/012345-678901-ABCDEF`).
    *   Boolean algebra and other fields are not currently supported.
+   * @param {string} [request.parent]
+   *   Optional. The parent resource to list billing accounts from.
+   *   Format:
+   *     - `organizations/{organization_id}`, for example,
+   *       `organizations/12345678`
+   *     - `billingAccounts/{billing_account_id}`, for example,
+   *       `billingAccounts/012345-567890-ABCDEF`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1355,6 +1504,10 @@ export class CloudBillingClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listBillingAccounts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -1592,12 +1745,80 @@ export class CloudBillingClient {
    * Parse the billing_account from BillingAccount resource.
    *
    * @param {string} billingAccountName
-   *   A fully-qualified path representing BillingAccount resource.
+   *   A fully-qualified path representing billing_account resource.
    * @returns {string} A string representing the billing_account.
    */
   matchBillingAccountFromBillingAccountName(billingAccountName: string) {
     return this.pathTemplates.billingAccountPathTemplate.match(
       billingAccountName
+    ).billing_account;
+  }
+
+  /**
+   * Return a fully-qualified organization resource name string.
+   *
+   * @param {string} organization
+   * @returns {string} Resource name string.
+   */
+  organizationPath(organization: string) {
+    return this.pathTemplates.organizationPathTemplate.render({
+      organization: organization,
+    });
+  }
+
+  /**
+   * Parse the organization from Organization resource.
+   *
+   * @param {string} organizationName
+   *   A fully-qualified path representing Organization resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationName(organizationName: string) {
+    return this.pathTemplates.organizationPathTemplate.match(organizationName)
+      .organization;
+  }
+
+  /**
+   * Return a fully-qualified organizationBillingAccount resource name string.
+   *
+   * @param {string} organization
+   * @param {string} billing_account
+   * @returns {string} Resource name string.
+   */
+  organizationBillingAccountPath(organization: string, billingAccount: string) {
+    return this.pathTemplates.organizationBillingAccountPathTemplate.render({
+      organization: organization,
+      billing_account: billingAccount,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationBillingAccount resource.
+   *
+   * @param {string} organizationBillingAccountName
+   *   A fully-qualified path representing organization_billing_account resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationBillingAccountName(
+    organizationBillingAccountName: string
+  ) {
+    return this.pathTemplates.organizationBillingAccountPathTemplate.match(
+      organizationBillingAccountName
+    ).organization;
+  }
+
+  /**
+   * Parse the billing_account from OrganizationBillingAccount resource.
+   *
+   * @param {string} organizationBillingAccountName
+   *   A fully-qualified path representing organization_billing_account resource.
+   * @returns {string} A string representing the billing_account.
+   */
+  matchBillingAccountFromOrganizationBillingAccountName(
+    organizationBillingAccountName: string
+  ) {
+    return this.pathTemplates.organizationBillingAccountPathTemplate.match(
+      organizationBillingAccountName
     ).billing_account;
   }
 

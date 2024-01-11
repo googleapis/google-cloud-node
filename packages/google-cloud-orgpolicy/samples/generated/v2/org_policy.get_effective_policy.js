@@ -29,7 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The effective policy to compute. See `Policy` for naming rules.
+   *  Required. The effective policy to compute. See
+   *  Policy google.cloud.orgpolicy.v2.Policy  for naming requirements.
    */
   // const name = 'abc123'
 

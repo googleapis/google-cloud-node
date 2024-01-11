@@ -35,6 +35,41 @@
                 "getGlossary"
               ]
             },
+            "CreateAdaptiveMtDataset": {
+              "methods": [
+                "createAdaptiveMtDataset"
+              ]
+            },
+            "DeleteAdaptiveMtDataset": {
+              "methods": [
+                "deleteAdaptiveMtDataset"
+              ]
+            },
+            "GetAdaptiveMtDataset": {
+              "methods": [
+                "getAdaptiveMtDataset"
+              ]
+            },
+            "AdaptiveMtTranslate": {
+              "methods": [
+                "adaptiveMtTranslate"
+              ]
+            },
+            "GetAdaptiveMtFile": {
+              "methods": [
+                "getAdaptiveMtFile"
+              ]
+            },
+            "DeleteAdaptiveMtFile": {
+              "methods": [
+                "deleteAdaptiveMtFile"
+              ]
+            },
+            "ImportAdaptiveMtFile": {
+              "methods": [
+                "importAdaptiveMtFile"
+              ]
+            },
             "BatchTranslateText": {
               "methods": [
                 "batchTranslateText"
@@ -60,6 +95,27 @@
                 "listGlossaries",
                 "listGlossariesStream",
                 "listGlossariesAsync"
+              ]
+            },
+            "ListAdaptiveMtDatasets": {
+              "methods": [
+                "listAdaptiveMtDatasets",
+                "listAdaptiveMtDatasetsStream",
+                "listAdaptiveMtDatasetsAsync"
+              ]
+            },
+            "ListAdaptiveMtFiles": {
+              "methods": [
+                "listAdaptiveMtFiles",
+                "listAdaptiveMtFilesStream",
+                "listAdaptiveMtFilesAsync"
+              ]
+            },
+            "ListAdaptiveMtSentences": {
+              "methods": [
+                "listAdaptiveMtSentences",
+                "listAdaptiveMtSentencesStream",
+                "listAdaptiveMtSentencesAsync"
               ]
             }
           }
@@ -92,6 +148,41 @@
                 "getGlossary"
               ]
             },
+            "CreateAdaptiveMtDataset": {
+              "methods": [
+                "createAdaptiveMtDataset"
+              ]
+            },
+            "DeleteAdaptiveMtDataset": {
+              "methods": [
+                "deleteAdaptiveMtDataset"
+              ]
+            },
+            "GetAdaptiveMtDataset": {
+              "methods": [
+                "getAdaptiveMtDataset"
+              ]
+            },
+            "AdaptiveMtTranslate": {
+              "methods": [
+                "adaptiveMtTranslate"
+              ]
+            },
+            "GetAdaptiveMtFile": {
+              "methods": [
+                "getAdaptiveMtFile"
+              ]
+            },
+            "DeleteAdaptiveMtFile": {
+              "methods": [
+                "deleteAdaptiveMtFile"
+              ]
+            },
+            "ImportAdaptiveMtFile": {
+              "methods": [
+                "importAdaptiveMtFile"
+              ]
+            },
             "BatchTranslateText": {
               "methods": [
                 "batchTranslateText"
@@ -117,6 +208,27 @@
                 "listGlossaries",
                 "listGlossariesStream",
                 "listGlossariesAsync"
+              ]
+            },
+            "ListAdaptiveMtDatasets": {
+              "methods": [
+                "listAdaptiveMtDatasets",
+                "listAdaptiveMtDatasetsStream",
+                "listAdaptiveMtDatasetsAsync"
+              ]
+            },
+            "ListAdaptiveMtFiles": {
+              "methods": [
+                "listAdaptiveMtFiles",
+                "listAdaptiveMtFilesStream",
+                "listAdaptiveMtFilesAsync"
+              ]
+            },
+            "ListAdaptiveMtSentences": {
+              "methods": [
+                "listAdaptiveMtSentences",
+                "listAdaptiveMtSentencesStream",
+                "listAdaptiveMtSentencesAsync"
               ]
             }
           }
