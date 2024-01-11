@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -5940,6 +5940,7 @@
                              * @property {string|null} [service] GatewayServiceMesh service
                              * @property {string|null} [deployment] GatewayServiceMesh deployment
                              * @property {google.protobuf.IDuration|null} [routeUpdateWaitTime] GatewayServiceMesh routeUpdateWaitTime
+                             * @property {google.protobuf.IDuration|null} [stableCutbackDuration] GatewayServiceMesh stableCutbackDuration
                              */
     
                             /**
@@ -5990,6 +5991,14 @@
                             GatewayServiceMesh.prototype.routeUpdateWaitTime = null;
     
                             /**
+                             * GatewayServiceMesh stableCutbackDuration.
+                             * @member {google.protobuf.IDuration|null|undefined} stableCutbackDuration
+                             * @memberof google.cloud.deploy.v1.KubernetesConfig.GatewayServiceMesh
+                             * @instance
+                             */
+                            GatewayServiceMesh.prototype.stableCutbackDuration = null;
+    
+                            /**
                              * Creates a new GatewayServiceMesh instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.deploy.v1.KubernetesConfig.GatewayServiceMesh
@@ -6021,6 +6030,8 @@
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.deployment);
                                 if (message.routeUpdateWaitTime != null && Object.hasOwnProperty.call(message, "routeUpdateWaitTime"))
                                     $root.google.protobuf.Duration.encode(message.routeUpdateWaitTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.stableCutbackDuration != null && Object.hasOwnProperty.call(message, "stableCutbackDuration"))
+                                    $root.google.protobuf.Duration.encode(message.stableCutbackDuration, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                                 return writer;
                             };
     
@@ -6069,6 +6080,10 @@
                                         }
                                     case 4: {
                                             message.routeUpdateWaitTime = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.stableCutbackDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -6120,6 +6135,11 @@
                                     if (error)
                                         return "routeUpdateWaitTime." + error;
                                 }
+                                if (message.stableCutbackDuration != null && message.hasOwnProperty("stableCutbackDuration")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.stableCutbackDuration);
+                                    if (error)
+                                        return "stableCutbackDuration." + error;
+                                }
                                 return null;
                             };
     
@@ -6146,6 +6166,11 @@
                                         throw TypeError(".google.cloud.deploy.v1.KubernetesConfig.GatewayServiceMesh.routeUpdateWaitTime: object expected");
                                     message.routeUpdateWaitTime = $root.google.protobuf.Duration.fromObject(object.routeUpdateWaitTime);
                                 }
+                                if (object.stableCutbackDuration != null) {
+                                    if (typeof object.stableCutbackDuration !== "object")
+                                        throw TypeError(".google.cloud.deploy.v1.KubernetesConfig.GatewayServiceMesh.stableCutbackDuration: object expected");
+                                    message.stableCutbackDuration = $root.google.protobuf.Duration.fromObject(object.stableCutbackDuration);
+                                }
                                 return message;
                             };
     
@@ -6167,6 +6192,7 @@
                                     object.service = "";
                                     object.deployment = "";
                                     object.routeUpdateWaitTime = null;
+                                    object.stableCutbackDuration = null;
                                 }
                                 if (message.httpRoute != null && message.hasOwnProperty("httpRoute"))
                                     object.httpRoute = message.httpRoute;
@@ -6176,6 +6202,8 @@
                                     object.deployment = message.deployment;
                                 if (message.routeUpdateWaitTime != null && message.hasOwnProperty("routeUpdateWaitTime"))
                                     object.routeUpdateWaitTime = $root.google.protobuf.Duration.toObject(message.routeUpdateWaitTime, options);
+                                if (message.stableCutbackDuration != null && message.hasOwnProperty("stableCutbackDuration"))
+                                    object.stableCutbackDuration = $root.google.protobuf.Duration.toObject(message.stableCutbackDuration, options);
                                 return object;
                             };
     
@@ -45598,6 +45626,7 @@
                          * @memberof google.cloud.deploy.v1
                          * @interface IDeliveryPipelineNotificationEvent
                          * @property {string|null} [message] DeliveryPipelineNotificationEvent message
+                         * @property {string|null} [pipelineUid] DeliveryPipelineNotificationEvent pipelineUid
                          * @property {string|null} [deliveryPipeline] DeliveryPipelineNotificationEvent deliveryPipeline
                          * @property {google.cloud.deploy.v1.Type|null} [type] DeliveryPipelineNotificationEvent type
                          */
@@ -45624,6 +45653,14 @@
                          * @instance
                          */
                         DeliveryPipelineNotificationEvent.prototype.message = "";
+    
+                        /**
+                         * DeliveryPipelineNotificationEvent pipelineUid.
+                         * @member {string} pipelineUid
+                         * @memberof google.cloud.deploy.v1.DeliveryPipelineNotificationEvent
+                         * @instance
+                         */
+                        DeliveryPipelineNotificationEvent.prototype.pipelineUid = "";
     
                         /**
                          * DeliveryPipelineNotificationEvent deliveryPipeline.
@@ -45671,6 +45708,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.deliveryPipeline);
                             if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.type);
+                            if (message.pipelineUid != null && Object.hasOwnProperty.call(message, "pipelineUid"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.pipelineUid);
                             return writer;
                         };
     
@@ -45707,6 +45746,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.message = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.pipelineUid = reader.string();
                                         break;
                                     }
                                 case 2: {
@@ -45755,6 +45798,9 @@
                             if (message.message != null && message.hasOwnProperty("message"))
                                 if (!$util.isString(message.message))
                                     return "message: string expected";
+                            if (message.pipelineUid != null && message.hasOwnProperty("pipelineUid"))
+                                if (!$util.isString(message.pipelineUid))
+                                    return "pipelineUid: string expected";
                             if (message.deliveryPipeline != null && message.hasOwnProperty("deliveryPipeline"))
                                 if (!$util.isString(message.deliveryPipeline))
                                     return "deliveryPipeline: string expected";
@@ -45789,6 +45835,8 @@
                             var message = new $root.google.cloud.deploy.v1.DeliveryPipelineNotificationEvent();
                             if (object.message != null)
                                 message.message = String(object.message);
+                            if (object.pipelineUid != null)
+                                message.pipelineUid = String(object.pipelineUid);
                             if (object.deliveryPipeline != null)
                                 message.deliveryPipeline = String(object.deliveryPipeline);
                             switch (object.type) {
@@ -45851,6 +45899,7 @@
                                 object.message = "";
                                 object.deliveryPipeline = "";
                                 object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                object.pipelineUid = "";
                             }
                             if (message.message != null && message.hasOwnProperty("message"))
                                 object.message = message.message;
@@ -45858,6 +45907,8 @@
                                 object.deliveryPipeline = message.deliveryPipeline;
                             if (message.type != null && message.hasOwnProperty("type"))
                                 object.type = options.enums === String ? $root.google.cloud.deploy.v1.Type[message.type] === undefined ? message.type : $root.google.cloud.deploy.v1.Type[message.type] : message.type;
+                            if (message.pipelineUid != null && message.hasOwnProperty("pipelineUid"))
+                                object.pipelineUid = message.pipelineUid;
                             return object;
                         };
     
@@ -45900,7 +45951,9 @@
                          * @property {string|null} [jobRun] JobRunNotificationEvent jobRun
                          * @property {string|null} [pipelineUid] JobRunNotificationEvent pipelineUid
                          * @property {string|null} [releaseUid] JobRunNotificationEvent releaseUid
+                         * @property {string|null} [release] JobRunNotificationEvent release
                          * @property {string|null} [rolloutUid] JobRunNotificationEvent rolloutUid
+                         * @property {string|null} [rollout] JobRunNotificationEvent rollout
                          * @property {string|null} [targetId] JobRunNotificationEvent targetId
                          * @property {google.cloud.deploy.v1.Type|null} [type] JobRunNotificationEvent type
                          */
@@ -45953,12 +46006,28 @@
                         JobRunNotificationEvent.prototype.releaseUid = "";
     
                         /**
+                         * JobRunNotificationEvent release.
+                         * @member {string} release
+                         * @memberof google.cloud.deploy.v1.JobRunNotificationEvent
+                         * @instance
+                         */
+                        JobRunNotificationEvent.prototype.release = "";
+    
+                        /**
                          * JobRunNotificationEvent rolloutUid.
                          * @member {string} rolloutUid
                          * @memberof google.cloud.deploy.v1.JobRunNotificationEvent
                          * @instance
                          */
                         JobRunNotificationEvent.prototype.rolloutUid = "";
+    
+                        /**
+                         * JobRunNotificationEvent rollout.
+                         * @member {string} rollout
+                         * @memberof google.cloud.deploy.v1.JobRunNotificationEvent
+                         * @instance
+                         */
+                        JobRunNotificationEvent.prototype.rollout = "";
     
                         /**
                          * JobRunNotificationEvent targetId.
@@ -46014,6 +46083,10 @@
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.targetId);
                             if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                                 writer.uint32(/* id 7, wireType 0 =*/56).int32(message.type);
+                            if (message.release != null && Object.hasOwnProperty.call(message, "release"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.release);
+                            if (message.rollout != null && Object.hasOwnProperty.call(message, "rollout"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.rollout);
                             return writer;
                         };
     
@@ -46064,8 +46137,16 @@
                                         message.releaseUid = reader.string();
                                         break;
                                     }
+                                case 8: {
+                                        message.release = reader.string();
+                                        break;
+                                    }
                                 case 5: {
                                         message.rolloutUid = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.rollout = reader.string();
                                         break;
                                     }
                                 case 6: {
@@ -46123,9 +46204,15 @@
                             if (message.releaseUid != null && message.hasOwnProperty("releaseUid"))
                                 if (!$util.isString(message.releaseUid))
                                     return "releaseUid: string expected";
+                            if (message.release != null && message.hasOwnProperty("release"))
+                                if (!$util.isString(message.release))
+                                    return "release: string expected";
                             if (message.rolloutUid != null && message.hasOwnProperty("rolloutUid"))
                                 if (!$util.isString(message.rolloutUid))
                                     return "rolloutUid: string expected";
+                            if (message.rollout != null && message.hasOwnProperty("rollout"))
+                                if (!$util.isString(message.rollout))
+                                    return "rollout: string expected";
                             if (message.targetId != null && message.hasOwnProperty("targetId"))
                                 if (!$util.isString(message.targetId))
                                     return "targetId: string expected";
@@ -46166,8 +46253,12 @@
                                 message.pipelineUid = String(object.pipelineUid);
                             if (object.releaseUid != null)
                                 message.releaseUid = String(object.releaseUid);
+                            if (object.release != null)
+                                message.release = String(object.release);
                             if (object.rolloutUid != null)
                                 message.rolloutUid = String(object.rolloutUid);
+                            if (object.rollout != null)
+                                message.rollout = String(object.rollout);
                             if (object.targetId != null)
                                 message.targetId = String(object.targetId);
                             switch (object.type) {
@@ -46234,6 +46325,8 @@
                                 object.rolloutUid = "";
                                 object.targetId = "";
                                 object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                object.release = "";
+                                object.rollout = "";
                             }
                             if (message.message != null && message.hasOwnProperty("message"))
                                 object.message = message.message;
@@ -46249,6 +46342,10 @@
                                 object.targetId = message.targetId;
                             if (message.type != null && message.hasOwnProperty("type"))
                                 object.type = options.enums === String ? $root.google.cloud.deploy.v1.Type[message.type] === undefined ? message.type : $root.google.cloud.deploy.v1.Type[message.type] : message.type;
+                            if (message.release != null && message.hasOwnProperty("release"))
+                                object.release = message.release;
+                            if (message.rollout != null && message.hasOwnProperty("rollout"))
+                                object.rollout = message.rollout;
                             return object;
                         };
     
@@ -46288,6 +46385,8 @@
                          * @memberof google.cloud.deploy.v1
                          * @interface IReleaseNotificationEvent
                          * @property {string|null} [message] ReleaseNotificationEvent message
+                         * @property {string|null} [pipelineUid] ReleaseNotificationEvent pipelineUid
+                         * @property {string|null} [releaseUid] ReleaseNotificationEvent releaseUid
                          * @property {string|null} [release] ReleaseNotificationEvent release
                          * @property {google.cloud.deploy.v1.Type|null} [type] ReleaseNotificationEvent type
                          */
@@ -46314,6 +46413,22 @@
                          * @instance
                          */
                         ReleaseNotificationEvent.prototype.message = "";
+    
+                        /**
+                         * ReleaseNotificationEvent pipelineUid.
+                         * @member {string} pipelineUid
+                         * @memberof google.cloud.deploy.v1.ReleaseNotificationEvent
+                         * @instance
+                         */
+                        ReleaseNotificationEvent.prototype.pipelineUid = "";
+    
+                        /**
+                         * ReleaseNotificationEvent releaseUid.
+                         * @member {string} releaseUid
+                         * @memberof google.cloud.deploy.v1.ReleaseNotificationEvent
+                         * @instance
+                         */
+                        ReleaseNotificationEvent.prototype.releaseUid = "";
     
                         /**
                          * ReleaseNotificationEvent release.
@@ -46361,6 +46476,10 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.release);
                             if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.type);
+                            if (message.pipelineUid != null && Object.hasOwnProperty.call(message, "pipelineUid"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.pipelineUid);
+                            if (message.releaseUid != null && Object.hasOwnProperty.call(message, "releaseUid"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.releaseUid);
                             return writer;
                         };
     
@@ -46397,6 +46516,14 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.message = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.pipelineUid = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.releaseUid = reader.string();
                                         break;
                                     }
                                 case 2: {
@@ -46445,6 +46572,12 @@
                             if (message.message != null && message.hasOwnProperty("message"))
                                 if (!$util.isString(message.message))
                                     return "message: string expected";
+                            if (message.pipelineUid != null && message.hasOwnProperty("pipelineUid"))
+                                if (!$util.isString(message.pipelineUid))
+                                    return "pipelineUid: string expected";
+                            if (message.releaseUid != null && message.hasOwnProperty("releaseUid"))
+                                if (!$util.isString(message.releaseUid))
+                                    return "releaseUid: string expected";
                             if (message.release != null && message.hasOwnProperty("release"))
                                 if (!$util.isString(message.release))
                                     return "release: string expected";
@@ -46479,6 +46612,10 @@
                             var message = new $root.google.cloud.deploy.v1.ReleaseNotificationEvent();
                             if (object.message != null)
                                 message.message = String(object.message);
+                            if (object.pipelineUid != null)
+                                message.pipelineUid = String(object.pipelineUid);
+                            if (object.releaseUid != null)
+                                message.releaseUid = String(object.releaseUid);
                             if (object.release != null)
                                 message.release = String(object.release);
                             switch (object.type) {
@@ -46541,6 +46678,8 @@
                                 object.message = "";
                                 object.release = "";
                                 object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                object.pipelineUid = "";
+                                object.releaseUid = "";
                             }
                             if (message.message != null && message.hasOwnProperty("message"))
                                 object.message = message.message;
@@ -46548,6 +46687,10 @@
                                 object.release = message.release;
                             if (message.type != null && message.hasOwnProperty("type"))
                                 object.type = options.enums === String ? $root.google.cloud.deploy.v1.Type[message.type] === undefined ? message.type : $root.google.cloud.deploy.v1.Type[message.type] : message.type;
+                            if (message.pipelineUid != null && message.hasOwnProperty("pipelineUid"))
+                                object.pipelineUid = message.pipelineUid;
+                            if (message.releaseUid != null && message.hasOwnProperty("releaseUid"))
+                                object.releaseUid = message.releaseUid;
                             return object;
                         };
     
@@ -46587,7 +46730,9 @@
                          * @memberof google.cloud.deploy.v1
                          * @interface IReleaseRenderEvent
                          * @property {string|null} [message] ReleaseRenderEvent message
+                         * @property {string|null} [pipelineUid] ReleaseRenderEvent pipelineUid
                          * @property {string|null} [release] ReleaseRenderEvent release
+                         * @property {google.cloud.deploy.v1.Type|null} [type] ReleaseRenderEvent type
                          * @property {google.cloud.deploy.v1.Release.RenderState|null} [releaseRenderState] ReleaseRenderEvent releaseRenderState
                          */
     
@@ -46615,12 +46760,28 @@
                         ReleaseRenderEvent.prototype.message = "";
     
                         /**
+                         * ReleaseRenderEvent pipelineUid.
+                         * @member {string} pipelineUid
+                         * @memberof google.cloud.deploy.v1.ReleaseRenderEvent
+                         * @instance
+                         */
+                        ReleaseRenderEvent.prototype.pipelineUid = "";
+    
+                        /**
                          * ReleaseRenderEvent release.
                          * @member {string} release
                          * @memberof google.cloud.deploy.v1.ReleaseRenderEvent
                          * @instance
                          */
                         ReleaseRenderEvent.prototype.release = "";
+    
+                        /**
+                         * ReleaseRenderEvent type.
+                         * @member {google.cloud.deploy.v1.Type} type
+                         * @memberof google.cloud.deploy.v1.ReleaseRenderEvent
+                         * @instance
+                         */
+                        ReleaseRenderEvent.prototype.type = 0;
     
                         /**
                          * ReleaseRenderEvent releaseRenderState.
@@ -46660,6 +46821,10 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.release);
                             if (message.releaseRenderState != null && Object.hasOwnProperty.call(message, "releaseRenderState"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.releaseRenderState);
+                            if (message.pipelineUid != null && Object.hasOwnProperty.call(message, "pipelineUid"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.pipelineUid);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.type);
                             return writer;
                         };
     
@@ -46698,8 +46863,16 @@
                                         message.message = reader.string();
                                         break;
                                     }
+                                case 4: {
+                                        message.pipelineUid = reader.string();
+                                        break;
+                                    }
                                 case 2: {
                                         message.release = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.type = reader.int32();
                                         break;
                                     }
                                 case 3: {
@@ -46744,9 +46917,26 @@
                             if (message.message != null && message.hasOwnProperty("message"))
                                 if (!$util.isString(message.message))
                                     return "message: string expected";
+                            if (message.pipelineUid != null && message.hasOwnProperty("pipelineUid"))
+                                if (!$util.isString(message.pipelineUid))
+                                    return "pipelineUid: string expected";
                             if (message.release != null && message.hasOwnProperty("release"))
                                 if (!$util.isString(message.release))
                                     return "release: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 2:
+                                    break;
+                                }
                             if (message.releaseRenderState != null && message.hasOwnProperty("releaseRenderState"))
                                 switch (message.releaseRenderState) {
                                 default:
@@ -46774,8 +46964,50 @@
                             var message = new $root.google.cloud.deploy.v1.ReleaseRenderEvent();
                             if (object.message != null)
                                 message.message = String(object.message);
+                            if (object.pipelineUid != null)
+                                message.pipelineUid = String(object.pipelineUid);
                             if (object.release != null)
                                 message.release = String(object.release);
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "TYPE_PUBSUB_NOTIFICATION_FAILURE":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "TYPE_RESOURCE_STATE_CHANGE":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            case "TYPE_PROCESS_ABORTED":
+                            case 4:
+                                message.type = 4;
+                                break;
+                            case "TYPE_RESTRICTION_VIOLATED":
+                            case 5:
+                                message.type = 5;
+                                break;
+                            case "TYPE_RESOURCE_DELETED":
+                            case 6:
+                                message.type = 6;
+                                break;
+                            case "TYPE_ROLLOUT_UPDATE":
+                            case 7:
+                                message.type = 7;
+                                break;
+                            case "TYPE_RENDER_STATUES_CHANGE":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            }
                             switch (object.releaseRenderState) {
                             default:
                                 if (typeof object.releaseRenderState === "number") {
@@ -46820,6 +47052,8 @@
                                 object.message = "";
                                 object.release = "";
                                 object.releaseRenderState = options.enums === String ? "RENDER_STATE_UNSPECIFIED" : 0;
+                                object.pipelineUid = "";
+                                object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
                             }
                             if (message.message != null && message.hasOwnProperty("message"))
                                 object.message = message.message;
@@ -46827,6 +47061,10 @@
                                 object.release = message.release;
                             if (message.releaseRenderState != null && message.hasOwnProperty("releaseRenderState"))
                                 object.releaseRenderState = options.enums === String ? $root.google.cloud.deploy.v1.Release.RenderState[message.releaseRenderState] === undefined ? message.releaseRenderState : $root.google.cloud.deploy.v1.Release.RenderState[message.releaseRenderState] : message.releaseRenderState;
+                            if (message.pipelineUid != null && message.hasOwnProperty("pipelineUid"))
+                                object.pipelineUid = message.pipelineUid;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.deploy.v1.Type[message.type] === undefined ? message.type : $root.google.cloud.deploy.v1.Type[message.type] : message.type;
                             return object;
                         };
     
@@ -46868,9 +47106,11 @@
                          * @property {string|null} [message] RolloutNotificationEvent message
                          * @property {string|null} [pipelineUid] RolloutNotificationEvent pipelineUid
                          * @property {string|null} [releaseUid] RolloutNotificationEvent releaseUid
+                         * @property {string|null} [release] RolloutNotificationEvent release
+                         * @property {string|null} [rolloutUid] RolloutNotificationEvent rolloutUid
                          * @property {string|null} [rollout] RolloutNotificationEvent rollout
-                         * @property {google.cloud.deploy.v1.Type|null} [type] RolloutNotificationEvent type
                          * @property {string|null} [targetId] RolloutNotificationEvent targetId
+                         * @property {google.cloud.deploy.v1.Type|null} [type] RolloutNotificationEvent type
                          */
     
                         /**
@@ -46913,6 +47153,22 @@
                         RolloutNotificationEvent.prototype.releaseUid = "";
     
                         /**
+                         * RolloutNotificationEvent release.
+                         * @member {string} release
+                         * @memberof google.cloud.deploy.v1.RolloutNotificationEvent
+                         * @instance
+                         */
+                        RolloutNotificationEvent.prototype.release = "";
+    
+                        /**
+                         * RolloutNotificationEvent rolloutUid.
+                         * @member {string} rolloutUid
+                         * @memberof google.cloud.deploy.v1.RolloutNotificationEvent
+                         * @instance
+                         */
+                        RolloutNotificationEvent.prototype.rolloutUid = "";
+    
+                        /**
                          * RolloutNotificationEvent rollout.
                          * @member {string} rollout
                          * @memberof google.cloud.deploy.v1.RolloutNotificationEvent
@@ -46921,20 +47177,20 @@
                         RolloutNotificationEvent.prototype.rollout = "";
     
                         /**
-                         * RolloutNotificationEvent type.
-                         * @member {google.cloud.deploy.v1.Type} type
-                         * @memberof google.cloud.deploy.v1.RolloutNotificationEvent
-                         * @instance
-                         */
-                        RolloutNotificationEvent.prototype.type = 0;
-    
-                        /**
                          * RolloutNotificationEvent targetId.
                          * @member {string} targetId
                          * @memberof google.cloud.deploy.v1.RolloutNotificationEvent
                          * @instance
                          */
                         RolloutNotificationEvent.prototype.targetId = "";
+    
+                        /**
+                         * RolloutNotificationEvent type.
+                         * @member {google.cloud.deploy.v1.Type} type
+                         * @memberof google.cloud.deploy.v1.RolloutNotificationEvent
+                         * @instance
+                         */
+                        RolloutNotificationEvent.prototype.type = 0;
     
                         /**
                          * Creates a new RolloutNotificationEvent instance using the specified properties.
@@ -46972,6 +47228,10 @@
                                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.type);
                             if (message.targetId != null && Object.hasOwnProperty.call(message, "targetId"))
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.targetId);
+                            if (message.release != null && Object.hasOwnProperty.call(message, "release"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.release);
+                            if (message.rolloutUid != null && Object.hasOwnProperty.call(message, "rolloutUid"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.rolloutUid);
                             return writer;
                         };
     
@@ -47018,16 +47278,24 @@
                                         message.releaseUid = reader.string();
                                         break;
                                     }
+                                case 7: {
+                                        message.release = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.rolloutUid = reader.string();
+                                        break;
+                                    }
                                 case 4: {
                                         message.rollout = reader.string();
                                         break;
                                     }
-                                case 5: {
-                                        message.type = reader.int32();
-                                        break;
-                                    }
                                 case 6: {
                                         message.targetId = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.type = reader.int32();
                                         break;
                                     }
                                 default:
@@ -47074,9 +47342,18 @@
                             if (message.releaseUid != null && message.hasOwnProperty("releaseUid"))
                                 if (!$util.isString(message.releaseUid))
                                     return "releaseUid: string expected";
+                            if (message.release != null && message.hasOwnProperty("release"))
+                                if (!$util.isString(message.release))
+                                    return "release: string expected";
+                            if (message.rolloutUid != null && message.hasOwnProperty("rolloutUid"))
+                                if (!$util.isString(message.rolloutUid))
+                                    return "rolloutUid: string expected";
                             if (message.rollout != null && message.hasOwnProperty("rollout"))
                                 if (!$util.isString(message.rollout))
                                     return "rollout: string expected";
+                            if (message.targetId != null && message.hasOwnProperty("targetId"))
+                                if (!$util.isString(message.targetId))
+                                    return "targetId: string expected";
                             if (message.type != null && message.hasOwnProperty("type"))
                                 switch (message.type) {
                                 default:
@@ -47091,9 +47368,6 @@
                                 case 2:
                                     break;
                                 }
-                            if (message.targetId != null && message.hasOwnProperty("targetId"))
-                                if (!$util.isString(message.targetId))
-                                    return "targetId: string expected";
                             return null;
                         };
     
@@ -47115,8 +47389,14 @@
                                 message.pipelineUid = String(object.pipelineUid);
                             if (object.releaseUid != null)
                                 message.releaseUid = String(object.releaseUid);
+                            if (object.release != null)
+                                message.release = String(object.release);
+                            if (object.rolloutUid != null)
+                                message.rolloutUid = String(object.rolloutUid);
                             if (object.rollout != null)
                                 message.rollout = String(object.rollout);
+                            if (object.targetId != null)
+                                message.targetId = String(object.targetId);
                             switch (object.type) {
                             default:
                                 if (typeof object.type === "number") {
@@ -47157,8 +47437,6 @@
                                 message.type = 2;
                                 break;
                             }
-                            if (object.targetId != null)
-                                message.targetId = String(object.targetId);
                             return message;
                         };
     
@@ -47182,6 +47460,8 @@
                                 object.rollout = "";
                                 object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
                                 object.targetId = "";
+                                object.release = "";
+                                object.rolloutUid = "";
                             }
                             if (message.message != null && message.hasOwnProperty("message"))
                                 object.message = message.message;
@@ -47195,6 +47475,10 @@
                                 object.type = options.enums === String ? $root.google.cloud.deploy.v1.Type[message.type] === undefined ? message.type : $root.google.cloud.deploy.v1.Type[message.type] : message.type;
                             if (message.targetId != null && message.hasOwnProperty("targetId"))
                                 object.targetId = message.targetId;
+                            if (message.release != null && message.hasOwnProperty("release"))
+                                object.release = message.release;
+                            if (message.rolloutUid != null && message.hasOwnProperty("rolloutUid"))
+                                object.rolloutUid = message.rolloutUid;
                             return object;
                         };
     
@@ -47233,13 +47517,14 @@
                          * Properties of a RolloutUpdateEvent.
                          * @memberof google.cloud.deploy.v1
                          * @interface IRolloutUpdateEvent
+                         * @property {string|null} [message] RolloutUpdateEvent message
                          * @property {string|null} [pipelineUid] RolloutUpdateEvent pipelineUid
                          * @property {string|null} [releaseUid] RolloutUpdateEvent releaseUid
+                         * @property {string|null} [release] RolloutUpdateEvent release
                          * @property {string|null} [rollout] RolloutUpdateEvent rollout
                          * @property {string|null} [targetId] RolloutUpdateEvent targetId
-                         * @property {google.cloud.deploy.v1.RolloutUpdateEvent.RolloutUpdateType|null} [rolloutUpdateType] RolloutUpdateEvent rolloutUpdateType
-                         * @property {string|null} [message] RolloutUpdateEvent message
                          * @property {google.cloud.deploy.v1.Type|null} [type] RolloutUpdateEvent type
+                         * @property {google.cloud.deploy.v1.RolloutUpdateEvent.RolloutUpdateType|null} [rolloutUpdateType] RolloutUpdateEvent rolloutUpdateType
                          */
     
                         /**
@@ -47258,6 +47543,14 @@
                         }
     
                         /**
+                         * RolloutUpdateEvent message.
+                         * @member {string} message
+                         * @memberof google.cloud.deploy.v1.RolloutUpdateEvent
+                         * @instance
+                         */
+                        RolloutUpdateEvent.prototype.message = "";
+    
+                        /**
                          * RolloutUpdateEvent pipelineUid.
                          * @member {string} pipelineUid
                          * @memberof google.cloud.deploy.v1.RolloutUpdateEvent
@@ -47272,6 +47565,14 @@
                          * @instance
                          */
                         RolloutUpdateEvent.prototype.releaseUid = "";
+    
+                        /**
+                         * RolloutUpdateEvent release.
+                         * @member {string} release
+                         * @memberof google.cloud.deploy.v1.RolloutUpdateEvent
+                         * @instance
+                         */
+                        RolloutUpdateEvent.prototype.release = "";
     
                         /**
                          * RolloutUpdateEvent rollout.
@@ -47290,28 +47591,20 @@
                         RolloutUpdateEvent.prototype.targetId = "";
     
                         /**
-                         * RolloutUpdateEvent rolloutUpdateType.
-                         * @member {google.cloud.deploy.v1.RolloutUpdateEvent.RolloutUpdateType} rolloutUpdateType
-                         * @memberof google.cloud.deploy.v1.RolloutUpdateEvent
-                         * @instance
-                         */
-                        RolloutUpdateEvent.prototype.rolloutUpdateType = 0;
-    
-                        /**
-                         * RolloutUpdateEvent message.
-                         * @member {string} message
-                         * @memberof google.cloud.deploy.v1.RolloutUpdateEvent
-                         * @instance
-                         */
-                        RolloutUpdateEvent.prototype.message = "";
-    
-                        /**
                          * RolloutUpdateEvent type.
                          * @member {google.cloud.deploy.v1.Type} type
                          * @memberof google.cloud.deploy.v1.RolloutUpdateEvent
                          * @instance
                          */
                         RolloutUpdateEvent.prototype.type = 0;
+    
+                        /**
+                         * RolloutUpdateEvent rolloutUpdateType.
+                         * @member {google.cloud.deploy.v1.RolloutUpdateEvent.RolloutUpdateType} rolloutUpdateType
+                         * @memberof google.cloud.deploy.v1.RolloutUpdateEvent
+                         * @instance
+                         */
+                        RolloutUpdateEvent.prototype.rolloutUpdateType = 0;
     
                         /**
                          * Creates a new RolloutUpdateEvent instance using the specified properties.
@@ -47351,6 +47644,8 @@
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.message);
                             if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                                 writer.uint32(/* id 7, wireType 0 =*/56).int32(message.type);
+                            if (message.release != null && Object.hasOwnProperty.call(message, "release"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.release);
                             return writer;
                         };
     
@@ -47385,12 +47680,20 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 6: {
+                                        message.message = reader.string();
+                                        break;
+                                    }
                                 case 1: {
                                         message.pipelineUid = reader.string();
                                         break;
                                     }
                                 case 2: {
                                         message.releaseUid = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.release = reader.string();
                                         break;
                                     }
                                 case 3: {
@@ -47401,16 +47704,12 @@
                                         message.targetId = reader.string();
                                         break;
                                     }
-                                case 5: {
-                                        message.rolloutUpdateType = reader.int32();
-                                        break;
-                                    }
-                                case 6: {
-                                        message.message = reader.string();
-                                        break;
-                                    }
                                 case 7: {
                                         message.type = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.rolloutUpdateType = reader.int32();
                                         break;
                                     }
                                 default:
@@ -47448,18 +47747,38 @@
                         RolloutUpdateEvent.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (message.message != null && message.hasOwnProperty("message"))
+                                if (!$util.isString(message.message))
+                                    return "message: string expected";
                             if (message.pipelineUid != null && message.hasOwnProperty("pipelineUid"))
                                 if (!$util.isString(message.pipelineUid))
                                     return "pipelineUid: string expected";
                             if (message.releaseUid != null && message.hasOwnProperty("releaseUid"))
                                 if (!$util.isString(message.releaseUid))
                                     return "releaseUid: string expected";
+                            if (message.release != null && message.hasOwnProperty("release"))
+                                if (!$util.isString(message.release))
+                                    return "release: string expected";
                             if (message.rollout != null && message.hasOwnProperty("rollout"))
                                 if (!$util.isString(message.rollout))
                                     return "rollout: string expected";
                             if (message.targetId != null && message.hasOwnProperty("targetId"))
                                 if (!$util.isString(message.targetId))
                                     return "targetId: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 2:
+                                    break;
+                                }
                             if (message.rolloutUpdateType != null && message.hasOwnProperty("rolloutUpdateType"))
                                 switch (message.rolloutUpdateType) {
                                 default:
@@ -47480,23 +47799,6 @@
                                 case 13:
                                     break;
                                 }
-                            if (message.message != null && message.hasOwnProperty("message"))
-                                if (!$util.isString(message.message))
-                                    return "message: string expected";
-                            if (message.type != null && message.hasOwnProperty("type"))
-                                switch (message.type) {
-                                default:
-                                    return "type: enum value expected";
-                                case 0:
-                                case 1:
-                                case 3:
-                                case 4:
-                                case 5:
-                                case 6:
-                                case 7:
-                                case 2:
-                                    break;
-                                }
                             return null;
                         };
     
@@ -47512,14 +47814,58 @@
                             if (object instanceof $root.google.cloud.deploy.v1.RolloutUpdateEvent)
                                 return object;
                             var message = new $root.google.cloud.deploy.v1.RolloutUpdateEvent();
+                            if (object.message != null)
+                                message.message = String(object.message);
                             if (object.pipelineUid != null)
                                 message.pipelineUid = String(object.pipelineUid);
                             if (object.releaseUid != null)
                                 message.releaseUid = String(object.releaseUid);
+                            if (object.release != null)
+                                message.release = String(object.release);
                             if (object.rollout != null)
                                 message.rollout = String(object.rollout);
                             if (object.targetId != null)
                                 message.targetId = String(object.targetId);
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "TYPE_PUBSUB_NOTIFICATION_FAILURE":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "TYPE_RESOURCE_STATE_CHANGE":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            case "TYPE_PROCESS_ABORTED":
+                            case 4:
+                                message.type = 4;
+                                break;
+                            case "TYPE_RESTRICTION_VIOLATED":
+                            case 5:
+                                message.type = 5;
+                                break;
+                            case "TYPE_RESOURCE_DELETED":
+                            case 6:
+                                message.type = 6;
+                                break;
+                            case "TYPE_ROLLOUT_UPDATE":
+                            case 7:
+                                message.type = 7;
+                                break;
+                            case "TYPE_RENDER_STATUES_CHANGE":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            }
                             switch (object.rolloutUpdateType) {
                             default:
                                 if (typeof object.rolloutUpdateType === "number") {
@@ -47584,48 +47930,6 @@
                                 message.rolloutUpdateType = 13;
                                 break;
                             }
-                            if (object.message != null)
-                                message.message = String(object.message);
-                            switch (object.type) {
-                            default:
-                                if (typeof object.type === "number") {
-                                    message.type = object.type;
-                                    break;
-                                }
-                                break;
-                            case "TYPE_UNSPECIFIED":
-                            case 0:
-                                message.type = 0;
-                                break;
-                            case "TYPE_PUBSUB_NOTIFICATION_FAILURE":
-                            case 1:
-                                message.type = 1;
-                                break;
-                            case "TYPE_RESOURCE_STATE_CHANGE":
-                            case 3:
-                                message.type = 3;
-                                break;
-                            case "TYPE_PROCESS_ABORTED":
-                            case 4:
-                                message.type = 4;
-                                break;
-                            case "TYPE_RESTRICTION_VIOLATED":
-                            case 5:
-                                message.type = 5;
-                                break;
-                            case "TYPE_RESOURCE_DELETED":
-                            case 6:
-                                message.type = 6;
-                                break;
-                            case "TYPE_ROLLOUT_UPDATE":
-                            case 7:
-                                message.type = 7;
-                                break;
-                            case "TYPE_RENDER_STATUES_CHANGE":
-                            case 2:
-                                message.type = 2;
-                                break;
-                            }
                             return message;
                         };
     
@@ -47650,6 +47954,7 @@
                                 object.rolloutUpdateType = options.enums === String ? "ROLLOUT_UPDATE_TYPE_UNSPECIFIED" : 0;
                                 object.message = "";
                                 object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                object.release = "";
                             }
                             if (message.pipelineUid != null && message.hasOwnProperty("pipelineUid"))
                                 object.pipelineUid = message.pipelineUid;
@@ -47665,6 +47970,8 @@
                                 object.message = message.message;
                             if (message.type != null && message.hasOwnProperty("type"))
                                 object.type = options.enums === String ? $root.google.cloud.deploy.v1.Type[message.type] === undefined ? message.type : $root.google.cloud.deploy.v1.Type[message.type] : message.type;
+                            if (message.release != null && message.hasOwnProperty("release"))
+                                object.release = message.release;
                             return object;
                         };
     
