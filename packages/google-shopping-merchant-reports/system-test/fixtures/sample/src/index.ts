@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {ReportServiceClient} from '@google-cloud/reports';
+import {ReportServiceClient} from '@google-shopping/reports';
 
 // check that the client class type name can be used
 function doStuffWithReportServiceClient(client: ReportServiceClient) {
