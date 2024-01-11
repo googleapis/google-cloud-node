@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/gkemulticloud-v1.0.1...gkemulticloud-v1.1.0) (2024-01-05)
+
+
+### Features
+
+* [gkemulticloud] added proxy support for Attached Clusters ([#4894](https://github.com/googleapis/google-cloud-node/issues/4894)) ([c7b70b4](https://github.com/googleapis/google-cloud-node/commit/c7b70b42c4a5023414c10b7a4075c94f0675fa32))
+
 ## [1.0.1](https://github.com/googleapis/google-cloud-node/compare/gkemulticloud-v1.0.0...gkemulticloud-v1.0.1) (2023-09-06)
 
 

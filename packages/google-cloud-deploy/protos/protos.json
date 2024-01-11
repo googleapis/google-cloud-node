@@ -1323,6 +1323,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "stableCutbackDuration": {
+                              "type": "google.protobuf.Duration",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -5462,6 +5469,10 @@
                           "type": "string",
                           "id": 1
                         },
+                        "pipelineUid": {
+                          "type": "string",
+                          "id": 4
+                        },
                         "deliveryPipeline": {
                           "type": "string",
                           "id": 2
@@ -5490,9 +5501,17 @@
                           "type": "string",
                           "id": 4
                         },
+                        "release": {
+                          "type": "string",
+                          "id": 8
+                        },
                         "rolloutUid": {
                           "type": "string",
                           "id": 5
+                        },
+                        "rollout": {
+                          "type": "string",
+                          "id": 9
                         },
                         "targetId": {
                           "type": "string",
@@ -5510,6 +5529,14 @@
                           "type": "string",
                           "id": 1
                         },
+                        "pipelineUid": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "releaseUid": {
+                          "type": "string",
+                          "id": 5
+                        },
                         "release": {
                           "type": "string",
                           "id": 2
@@ -5526,9 +5553,17 @@
                           "type": "string",
                           "id": 1
                         },
+                        "pipelineUid": {
+                          "type": "string",
+                          "id": 4
+                        },
                         "release": {
                           "type": "string",
                           "id": 2
+                        },
+                        "type": {
+                          "type": "Type",
+                          "id": 5
                         },
                         "releaseRenderState": {
                           "type": "Release.RenderState",
@@ -5550,22 +5585,34 @@
                           "type": "string",
                           "id": 3
                         },
+                        "release": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "rolloutUid": {
+                          "type": "string",
+                          "id": 8
+                        },
                         "rollout": {
                           "type": "string",
                           "id": 4
                         },
-                        "type": {
-                          "type": "Type",
-                          "id": 5
-                        },
                         "targetId": {
                           "type": "string",
                           "id": 6
+                        },
+                        "type": {
+                          "type": "Type",
+                          "id": 5
                         }
                       }
                     },
                     "RolloutUpdateEvent": {
                       "fields": {
+                        "message": {
+                          "type": "string",
+                          "id": 6
+                        },
                         "pipelineUid": {
                           "type": "string",
                           "id": 1
@@ -5573,6 +5620,10 @@
                         "releaseUid": {
                           "type": "string",
                           "id": 2
+                        },
+                        "release": {
+                          "type": "string",
+                          "id": 8
                         },
                         "rollout": {
                           "type": "string",
@@ -5582,17 +5633,13 @@
                           "type": "string",
                           "id": 4
                         },
-                        "rolloutUpdateType": {
-                          "type": "RolloutUpdateType",
-                          "id": 5
-                        },
-                        "message": {
-                          "type": "string",
-                          "id": 6
-                        },
                         "type": {
                           "type": "Type",
                           "id": 7
+                        },
+                        "rolloutUpdateType": {
+                          "type": "RolloutUpdateType",
+                          "id": 5
                         }
                       },
                       "nested": {

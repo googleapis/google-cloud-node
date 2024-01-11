@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [5.4.1](https://github.com/googleapis/google-cloud-node/compare/container-v5.4.0...container-v5.4.1) (2024-01-05)
+
+
+### Bug Fixes
+
+* [container] correct long audio synthesis HTTP binding ([#4899](https://github.com/googleapis/google-cloud-node/issues/4899)) ([effadd9](https://github.com/googleapis/google-cloud-node/commit/effadd9e74c5d807c8c76a2d67f46e19df517a2d))
+
 ## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.3.0...container-v5.4.0) (2023-11-03)
 
 

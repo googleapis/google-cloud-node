@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/asset-v5.1.0...asset-v5.2.0) (2024-01-05)
+
+
+### Features
+
+* [asset] added new resource references to fields in AnalyzeMoveRequest ([#4881](https://github.com/googleapis/google-cloud-node/issues/4881)) ([3013057](https://github.com/googleapis/google-cloud-node/commit/301305708389288ad361f7ef5a7d239d94a61a9f))
+
 ## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/asset-v5.0.2...asset-v5.1.0) (2023-10-18)
 
 
