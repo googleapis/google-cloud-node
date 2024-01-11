@@ -3051,6 +3051,7 @@
     "api_id": "aiplatform.googleapis.com",
     "api_shortname": "aiplatform",
     "library_type": "GAPIC_MANUAL",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/vertexai/latest",
     "linkToRepoHomepage": "https://github.com/googleapis/nodejs-vertexai"
   },
   {
