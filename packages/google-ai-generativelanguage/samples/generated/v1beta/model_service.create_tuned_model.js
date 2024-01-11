@@ -41,7 +41,7 @@ function main(tunedModel) {
   // const tunedModel = {}
 
   // Imports the Generativelanguage library
-  const {ModelServiceClient} = require('@google-cloud/generativelanguage').v1beta;
+  const {ModelServiceClient} = require('@google-ai/generativelanguage').v1beta;
 
   // Instantiates a client
   const generativelanguageClient = new ModelServiceClient();

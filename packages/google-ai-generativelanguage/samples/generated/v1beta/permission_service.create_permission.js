@@ -41,7 +41,7 @@ function main(parent, permission) {
   // const permission = {}
 
   // Imports the Generativelanguage library
-  const {PermissionServiceClient} = require('@google-cloud/generativelanguage').v1beta;
+  const {PermissionServiceClient} = require('@google-ai/generativelanguage').v1beta;
 
   // Instantiates a client
   const generativelanguageClient = new PermissionServiceClient();

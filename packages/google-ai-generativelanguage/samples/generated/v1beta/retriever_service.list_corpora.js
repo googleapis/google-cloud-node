@@ -45,7 +45,7 @@ function main() {
   // const pageToken = 'abc123'
 
   // Imports the Generativelanguage library
-  const {RetrieverServiceClient} = require('@google-cloud/generativelanguage').v1beta;
+  const {RetrieverServiceClient} = require('@google-ai/generativelanguage').v1beta;
 
   // Instantiates a client
   const generativelanguageClient = new RetrieverServiceClient();

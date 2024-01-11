@@ -42,7 +42,7 @@ function main(model, requests) {
   // const requests = [1,2,3,4]
 
   // Imports the Generativelanguage library
-  const {GenerativeServiceClient} = require('@google-cloud/generativelanguage').v1beta;
+  const {GenerativeServiceClient} = require('@google-ai/generativelanguage').v1beta;
 
   // Instantiates a client
   const generativelanguageClient = new GenerativeServiceClient();

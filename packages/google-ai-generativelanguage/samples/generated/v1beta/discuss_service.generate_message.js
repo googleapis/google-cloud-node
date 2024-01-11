@@ -70,7 +70,7 @@ function main(model, prompt) {
   // const topK = 1234
 
   // Imports the Generativelanguage library
-  const {DiscussServiceClient} = require('@google-cloud/generativelanguage').v1beta;
+  const {DiscussServiceClient} = require('@google-ai/generativelanguage').v1beta;
 
   // Instantiates a client
   const generativelanguageClient = new DiscussServiceClient();

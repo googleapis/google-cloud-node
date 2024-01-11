@@ -41,7 +41,7 @@ function main(model, prompt) {
   // const prompt = {}
 
   // Imports the Generativelanguage library
-  const {TextServiceClient} = require('@google-cloud/generativelanguage').v1beta;
+  const {TextServiceClient} = require('@google-ai/generativelanguage').v1beta;
 
   // Instantiates a client
   const generativelanguageClient = new TextServiceClient();

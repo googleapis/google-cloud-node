@@ -40,7 +40,7 @@ function main(name, emailAddress) {
   // const emailAddress = 'abc123'
 
   // Imports the Generativelanguage library
-  const {PermissionServiceClient} = require('@google-cloud/generativelanguage').v1beta;
+  const {PermissionServiceClient} = require('@google-ai/generativelanguage').v1beta;
 
   // Instantiates a client
   const generativelanguageClient = new PermissionServiceClient();
