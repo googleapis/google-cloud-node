@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/sql",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Sql client for Node.js",
   "repository": {
     "type": "git",
@@ -49,10 +49,11 @@
   },
   "devDependencies": {
     "@types/mocha": "^10.0.2",
-    "@types/node": "^18.11.18",
-    "@types/sinon": "^10.0.19",
+    "@types/node": "^20.0.0",
+    "@types/sinon": "^17.0.0",
     "c8": "^8.0.1",
     "gapic-tools": "^0.2.0",
+    "c8": "^8.0.1",
     "gts": "5.2.0",
     "jsdoc": "^4.0.2",
     "jsdoc-fresh": "^3.0.0",

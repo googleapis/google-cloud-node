@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.1.0...netapp-v0.2.0) (2024-01-05)
+
+
+### Features
+
+* [netapp] Enable Backup, Backup Vault, and Backup Policy ([#4902](https://github.com/googleapis/google-cloud-node/issues/4902)) ([9acd314](https://github.com/googleapis/google-cloud-node/commit/9acd314c35e778b3fb54675dbacadd76f699eaf7))
+
 ## 0.1.0 (2023-09-08)
 
 

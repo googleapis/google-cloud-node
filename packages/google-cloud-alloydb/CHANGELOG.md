@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.4.0...alloydb-v1.4.1) (2024-01-05)
+
+
+### Bug Fixes
+
+* [alloydb] correct long audio synthesis HTTP binding ([#4898](https://github.com/googleapis/google-cloud-node/issues/4898)) ([b1e76e9](https://github.com/googleapis/google-cloud-node/commit/b1e76e9e52831d1c786918a99a4d96c74d8141f5))
+
 ## [1.4.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.3.0...alloydb-v1.4.0) (2023-11-03)
 
 

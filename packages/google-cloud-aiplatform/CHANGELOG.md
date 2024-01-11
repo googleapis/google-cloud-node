@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.10.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.9.0...aiplatform-v3.10.0) (2024-01-05)
+
+
+### Features
+
+* Add Content ([#4880](https://github.com/googleapis/google-cloud-node/issues/4880)) ([d74d48d](https://github.com/googleapis/google-cloud-node/commit/d74d48dbdd24391c9777d06d306a64b15bead998))
+
 ## [3.9.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.8.0...aiplatform-v3.9.0) (2023-12-11)
 
 
